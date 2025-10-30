@@ -1,0 +1,1963 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MiHi Photo Booth - Premium Event Experiences Nationwide</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <style>
+        /* Custom styles for modern luxury design */
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #1a202c;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Hero video styles */
+        /* Reset main element margins */
+        main {
+            margin: 0;
+            padding: 0;
+        }
+
+        .hero-video-container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin-top: 0;
+        }
+
+        .hero-video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+            filter: brightness(0.4);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Gradient overlays */
+        .gradient-overlay {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.9) 0%, rgba(118, 75, 162, 0.9) 100%);
+        }
+
+        /* Custom animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-fade-in-up {
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        /* Floating animation */
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        /* Gradient animation */
+        @keyframes gradient-xy {
+
+            0%,
+            100% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+        }
+
+        .animate-gradient-xy {
+            background-size: 200% 200%;
+            animation: gradient-xy 15s ease infinite;
+        }
+
+        /* Smooth scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f8fafc;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 10px;
+            border: 2px solid #f8fafc;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, #5a67d8 0%, #6a3f92 100%);
+        }
+
+        /* Focus styles for accessibility */
+        *:focus-visible {
+            outline: 3px solid #667eea;
+            outline-offset: 3px;
+            border-radius: 4px;
+        }
+
+        /* Smooth focus transitions */
+        a,
+        button,
+        input,
+        textarea,
+        select {
+            transition: all 0.2s ease;
+        }
+
+        /* Improved text selection */
+        ::selection {
+            background-color: #667eea;
+            color: white;
+        }
+
+        ::-moz-selection {
+            background-color: #667eea;
+            color: white;
+        }
+
+        /* Hover effects */
+        .hover-lift {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .hover-lift:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Glass morphism effect */
+        .glass {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        /* Custom button styles */
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        /* Section spacing */
+        .section-padding {
+            padding: 5rem 0;
+        }
+
+        @media (min-width: 768px) {
+            .section-padding {
+                padding: 8rem 0;
+            }
+        }
+
+        /* Premium gradient backgrounds */
+        .bg-premium-gradient {
+            background: linear-gradient(135deg, #f6f8fc 0%, #eef2f7 100%);
+        }
+
+        .bg-dark-gradient {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+        }
+
+        /* Card hover effects with scale */
+        .card-premium {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .card-premium:hover {
+            transform: translateY(-12px) scale(1.02);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+
+        /* Decorative elements */
+        .section-badge {
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 50px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+
+        /* Diagonal section dividers */
+        .diagonal-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 100px;
+            background: inherit;
+            transform: skewY(-2deg);
+            transform-origin: top left;
+        }
+
+        /* Loading skeleton animation */
+        @keyframes shimmer {
+            0% {
+                background-position: -1000px 0;
+            }
+
+            100% {
+                background-position: 1000px 0;
+            }
+        }
+
+        .skeleton {
+            animation: shimmer 2s infinite linear;
+            background: linear-gradient(to right, #f0f0f0 8%, #e0e0e0 18%, #f0f0f0 33%);
+            background-size: 1000px 100%;
+        }
+
+        /* Improved link styles */
+        a {
+            position: relative;
+        }
+
+        /* Better image loading */
+        img {
+            transition: opacity 0.3s ease;
+        }
+
+        img[loading="lazy"] {
+            opacity: 0;
+        }
+
+        img.loaded {
+            opacity: 1;
+        }
+
+        /* Accessibility - Reduced motion */
+        @media (prefers-reduced-motion: reduce) {
+
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        /* Better button states */
+        button:disabled,
+        a.disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+
+        /* Improved card shadows */
+        .card-shadow {
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        .card-shadow:hover {
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+    </style>
+</head>
+
+<body id="top" class="bg-white">
+
+    <!-- Scroll Progress Bar -->
+    <div id="scroll-progress"
+        class="fixed top-0 left-0 h-1 bg-gradient-to-r from-purple-600 to-blue-600 z-50 transition-all duration-300"
+        style="width: 0%;"></div>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top"
+        class="fixed bottom-8 right-8 bg-gradient-to-r from-purple-600 to-blue-600 text-white p-4 rounded-full shadow-2xl opacity-0 pointer-events-none transition-all duration-300 hover:scale-110 hover:shadow-3xl focus:ring-4 focus:ring-purple-300 z-40"
+        aria-label="Back to top">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+        </svg>
+    </button>
+
+    <!-- Navigation will be loaded by navigation.js -->
+
+    <main>
+
+        <!-- Hero Section -->
+        <section class="hero-video-container" aria-label="Hero section with video background">
+            <video
+                src="https://video.wixstatic.com/video/a92b01_3ae72da263134829b183c67d279d8b42/720p/mp4/file.mp4?fbclid=IwY2xjawNqU_ZleHRuA2FlbQIxMABicmlkETFGeTJmdGlpVDBFeGxjOFJuAR5cU4SVXgqgTW_PVUPT0bh2aH85DKOxH1XAE47qrNGk_AVvAOlObgMqKBBwFQ_aem_GxYWn5MtOzzbmIMpFDcnhw"
+                class="hero-video" autoplay muted loop playsinline
+                aria-label="Background video showcasing photo booth experiences">
+                <source
+                    src="https://video.wixstatic.com/video/a92b01_3ae72da263134829b183c67d279d8b42/720p/mp4/file.mp4?fbclid=IwY2xjawNqU_ZleHRuA2FlbQIxMABicmlkETFGeTJmdGlpVDBFeGxjOFJuAR5cU4SVXgqgTW_PVUPT0bh2aH85DKOxH1XAE47qrNGk_AVvAOlObgMqKBBwFQ_aem_GxYWn5MtOzzbmIMpFDcnhw"
+                    type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+
+            <div class="hero-content h-full flex flex-col justify-center items-center text-center text-white p-6">
+                <div class="animate-fade-in-up">
+                    <div class="max-w-4xl mx-auto px-4">
+
+                        <!-- Main Heading -->
+                        <h1 class="text-xl md:text-2xl font-light leading-tight tracking-wider mb-4 md:mb-6 uppercase text-center"
+                            style="text-shadow: 2px 2px 8px rgba(0,0,0,0.7);">
+                            TRANSFORM YOUR EVENT WITH OUR TOP-TIER
+                            <br>
+                            <span class="text-4xl md:text-7xl font-black tracking-tight">PHOTO BOOTH RENTALS</span>
+                        </h1>
+
+                        <!-- Subtitle -->
+                        <p class="text-base md:text-lg font-normal mb-8 md:mb-10 max-w-3xl mx-auto text-center leading-relaxed"
+                            style="text-shadow: 1px 1px 4px rgba(0,0,0,0.7);">
+                            We offer unforgettable Denver Photo Booth Rentals along with a wide-range of Event
+                            Entertainment options for any celebration or event nationally.
+                        </p>
+                    </div>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <a href="#products"
+                            class="btn-primary text-white px-8 py-4 rounded-full text-lg font-semibold shadow-xl hover:scale-105 hover:shadow-2xl transition-all duration-300 transform focus:ring-4 focus:ring-purple-300"
+                            aria-label="Explore our photo booth services">
+                            Explore Our Services
+                        </a>
+                        <a href="#contact"
+                            class="glass text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-white/30 hover:scale-105 transition-all duration-300 transform focus:ring-4 focus:ring-white/50"
+                            aria-label="Get a quote for your event">
+                            Get Your Quote
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Trusted Brands Section -->
+        <section class="bg-gray-50 py-12" aria-label="Trusted brands">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-8">
+                    <h3 class="text-sm font-semibold text-gray-500 uppercase tracking-widest">
+                        Trusted by Leading Brands Nationwide
+                    </h3>
+                </div>
+                <div class="flex flex-wrap justify-center items-center gap-8 lg:gap-12 opacity-60">
+                    <div
+                        class="h-12 w-32 bg-gray-200 rounded flex items-center justify-center hover:bg-gray-300 hover:scale-110 hover:opacity-100 transition-all duration-300 transform cursor-pointer">
+                        <span class="text-gray-500 font-semibold">Brand 1</span>
+                    </div>
+                    <div
+                        class="h-12 w-32 bg-gray-200 rounded flex items-center justify-center hover:bg-gray-300 hover:scale-110 hover:opacity-100 transition-all duration-300 transform cursor-pointer">
+                        <span class="text-gray-500 font-semibold">Brand 2</span>
+                    </div>
+                    <div
+                        class="h-12 w-32 bg-gray-200 rounded flex items-center justify-center hover:bg-gray-300 hover:scale-110 hover:opacity-100 transition-all duration-300 transform cursor-pointer">
+                        <span class="text-gray-500 font-semibold">Brand 3</span>
+                    </div>
+                    <div
+                        class="h-12 w-32 bg-gray-200 rounded flex items-center justify-center hover:bg-gray-300 hover:scale-110 hover:opacity-100 transition-all duration-300 transform cursor-pointer">
+                        <span class="text-gray-500 font-semibold">Brand 4</span>
+                    </div>
+                    <div
+                        class="h-12 w-32 bg-gray-200 rounded flex items-center justify-center hover:bg-gray-300 hover:scale-110 hover:opacity-100 transition-all duration-300 transform cursor-pointer">
+                        <span class="text-gray-500 font-semibold">Brand 5</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interactive Brochure Section -->
+        <section id="online-brochure"
+            class="relative section-padding bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 overflow-hidden"
+            aria-labelledby="brochure-heading">
+            <!-- Decorative background elements -->
+            <div class="absolute inset-0 overflow-hidden pointer-events-none">
+                <div
+                    class="absolute -top-40 -right-40 w-80 h-80 bg-purple-300 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse">
+                </div>
+                <div class="absolute -bottom-40 -left-40 w-80 h-80 bg-indigo-300 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse"
+                    style="animation-delay: 2s;"></div>
+            </div>
+
+            <div class="container mx-auto px-6 relative z-10">
+                <!-- Section Header -->
+                <div class="text-center mb-16 space-y-4">
+                    <span
+                        class="section-badge bg-gradient-to-r from-indigo-600 to-purple-600 inline-block animate-fade-in-up">📖 Interactive Pricing Experience</span>
+                    <h2 id="brochure-heading" class="text-4xl md:text-6xl font-bold text-gray-900 mb-6 leading-tight">
+                        Explore Our Pricing Guide
+                    </h2>
+                    <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                        Flip through our interactive 3D Pricing Guide for transparent, up-to-date rates and exclusive package details!
+                    </p>
+                    <!-- Visual separator -->
+                    <div class="flex items-center justify-center gap-2 pt-4">
+                        <div class="h-1 w-12 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-full"></div>
+                        <div class="h-1 w-1 bg-indigo-600 rounded-full"></div>
+                        <div class="h-1 w-1 bg-purple-600 rounded-full"></div>
+                    </div>
+                </div>
+
+                <!-- Main Content Grid -->
+                <div class="grid lg:grid-cols-2 gap-12 items-center">
+                    <!-- Left: Visual Preview (same structure as before) -->
+                    <div class="order-2 lg:order-1">
+                        <div class="relative group">
+                            <div class="relative bg-white rounded-3xl shadow-2xl overflow-hidden hover:shadow-3xl transition-all duration-500 transform hover:scale-105">
+                                <div class="aspect-[4/3] bg-gradient-to-br from-gray-50 via-gray-100 to-gray-50 flex items-center justify-center p-8 relative overflow-hidden">
+                                    <div class="absolute inset-0 opacity-30" style="background-image: repeating-linear-gradient(45deg, transparent, transparent 2px, rgba(0,0,0,0.03) 2px, rgba(0,0,0,0.03) 4px);"></div>
+                                    <div class="absolute inset-0 bg-gradient-to-br from-white/50 via-transparent to-gray-900/20 pointer-events-none"></div>
+                                    <div class="relative w-full h-full flex items-center justify-center">
+                                        <div class="relative w-5/6 h-5/6 transform group-hover:scale-105 group-hover:-translate-y-2 transition-all duration-700" style="transform-style: preserve-3d; perspective: 1000px;">
+                                            <div class="absolute -right-2 top-0 bottom-0 w-16 bg-gradient-to-l from-black/20 to-transparent blur-sm skew-y-12 transform group-hover:scale-110"></div>
+                                            <div class="absolute inset-0 bg-gradient-to-br from-white/20 via-transparent to-transparent rounded-lg pointer-events-none"></div>
+                                            <div class="relative w-full h-full shadow-2xl rounded-lg overflow-hidden" style="box-shadow: 0 20px 60px rgba(0,0,0,0.3), 0 0 20px rgba(0,0,0,0.1);">
+                                                <img src="flipbookthumb.png" alt="Digital Brochure Preview" class="w-full h-full object-contain">
+                                                <div class="absolute inset-0 bg-gradient-to-br from-white/40 via-transparent to-transparent pointer-events-none"></div>
+                                                <div class="absolute bottom-0 left-0 right-0 h-1/3 bg-gradient-to-b from-transparent to-black/10"></div>
+                                            </div>
+                                            <div class="absolute -top-2 -left-2 w-8 h-8 bg-white/50 rounded-br-full shadow-lg"></div>
+                                            <div class="absolute -top-2 -right-2 w-8 h-8 bg-white/50 rounded-bl-full shadow-lg"></div>
+                                        </div>
+                                    </div>
+                                    <div class="absolute -inset-4 bg-gradient-to-r from-gray-900/10 via-gray-900/20 to-gray-900/10 blur-3xl group-hover:blur-2xl transition-all duration-700 rounded-full"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right: Content & CTA (mirrors product section text layout) -->
+                    <div class="order-1 lg:order-2">
+                        <div class="inline-block bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-4 py-2 rounded-full text-sm font-bold mb-6">
+                            Pricing Guide
+                        </div>
+                        <h3 class="text-4xl md:text-5xl font-bold mb-6">
+                            Explore Our Pricing Guide
+                        </h3>
+                        <p class="text-xl text-gray-600 mb-8 leading-relaxed">
+                            Flip through our interactive 3D Pricing Guide for transparent, up-to-date rates and exclusive package details!
+                        </p>
+                        <div class="space-y-4 mb-8">
+                            <div class="flex items-start gap-3">
+                                <div class="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0 mt-1">
+                                    <svg class="w-4 h-4 text-green-600" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                                </div>
+                                <div>
+                                    <p class="font-semibold text-gray-900">Transparent, Up-to-Date Pricing</p>
+                                    <p class="text-gray-600">All options, bundles, and add-ons—clearly presented for stress-free planning.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0 mt-1">
+                                    <svg class="w-4 h-4 text-green-600" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                                </div>
+                                <div>
+                                    <p class="font-semibold text-gray-900">Realistic 3D Page Flipping</p>
+                                    <p class="text-gray-600">True-to-life interaction with elegant visuals on every device.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0 mt-1">
+                                    <svg class="w-4 h-4 text-green-600" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                                </div>
+                                <div>
+                                    <p class="font-semibold text-gray-900">Browse on Any Device</p>
+                                    <p class="text-gray-600">Desktop, tablet, or phone—get the info you need anywhere.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex flex-col sm:flex-row gap-4">
+                            <button onclick="openBrochureModal()" class="group inline-flex items-center justify-center bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-8 py-4 rounded-full font-bold text-lg shadow-xl hover:shadow-2xl hover:from-indigo-700 hover:to-purple-700 transition-all duration-300 transform hover:scale-105 hover:-translate-y-1 focus:ring-4 focus:ring-purple-300" aria-label="Open interactive brochure">
+                                <svg class="w-6 h-6 mr-2 group-hover:rotate-12 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+                                Open Brochure
+                                <svg class="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+                            </button>
+                            <a href="flipbook/examples/example-assets/books/test.pdf" download class="inline-flex items-center justify-center border-2 border-indigo-600 text-indigo-600 px-6 py-2 rounded-md font-bold text-base hover:bg-indigo-600 hover:text-white hover:scale-105 hover:-translate-y-1 transition-all duration-300 transform focus:ring-2 focus:ring-indigo-300" aria-label="Download Pricing Guide PDF">
+                                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2m-6 0V4m0 12l-4-4m4 4l4-4"/></svg>
+                                Download Pricing Guide PDF
+                            </a>
+                        </div>
+                        <div class="flex flex-wrap items-center gap-6 pt-6 border-t border-gray-200">
+                            <div class="flex items-center gap-2 text-gray-600"><svg class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg><span class="text-sm font-medium">Mobile Friendly</span></div>
+                            <div class="flex items-center gap-2 text-gray-600"><svg class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg><span class="text-sm font-medium">No Download Required</span></div>
+                            <div class="flex items-center gap-2 text-gray-600"><svg class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg><span class="text-sm font-medium">Always Updated</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Products Section -->
+        <section id="products" class="section-padding bg-white" aria-labelledby="products-heading">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-20 space-y-4">
+                    <span class="section-badge inline-block animate-fade-in-up">What We Offer</span>
+                    <h2 id="products-heading" class="text-4xl md:text-6xl font-bold text-gray-900 mb-6 leading-tight">
+                        Transform Your Event
+                    </h2>
+                    <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                        From AI-powered experiences to classic elegance, we bring the perfect entertainment to every
+                        celebration
+                    </p>
+                    <!-- Visual separator -->
+                    <div class="flex items-center justify-center gap-2 pt-4">
+                        <div class="h-1 w-12 bg-gradient-to-r from-purple-600 to-blue-600 rounded-full"></div>
+                        <div class="h-1 w-1 bg-purple-600 rounded-full"></div>
+                        <div class="h-1 w-1 bg-blue-600 rounded-full"></div>
+                    </div>
+                </div>
+
+                <!-- Featured Service - Split Screen Layout -->
+                <div id="photo-booths" class="mb-24">
+                    <div class="grid lg:grid-cols-2 gap-12 items-center mb-20">
+                        <div class="order-2 lg:order-1">
+                            <div
+                                class="inline-block bg-gradient-to-r from-purple-600 to-blue-600 text-white px-4 py-2 rounded-full text-sm font-bold mb-6">
+                                🔥 Most Popular
+                            </div>
+                            <h3 class="text-4xl md:text-5xl font-bold mb-6">
+                                AI Photo Booth
+                            </h3>
+                            <p class="text-xl text-gray-600 mb-8 leading-relaxed">
+                                Transform into anyone or anything with cutting-edge AI technology. Your guests will
+                                become superheroes, celebrities, or fantasy characters in seconds.
+                            </p>
+                            <div class="space-y-4 mb-8">
+                                <div class="flex items-start gap-3">
+                                    <div
+                                        class="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0 mt-1">
+                                        <svg class="w-4 h-4 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd"
+                                                d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                                clip-rule="evenodd"></path>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <p class="font-semibold text-gray-900">Instant AI Generation</p>
+                                        <p class="text-gray-600">Results in under 30 seconds</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start gap-3">
+                                    <div
+                                        class="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0 mt-1">
+                                        <svg class="w-4 h-4 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd"
+                                                d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                                clip-rule="evenodd"></path>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <p class="font-semibold text-gray-900">Unlimited Styles</p>
+                                        <p class="text-gray-600">50+ character themes available</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start gap-3">
+                                    <div
+                                        class="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0 mt-1">
+                                        <svg class="w-4 h-4 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd"
+                                                d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                                clip-rule="evenodd"></path>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <p class="font-semibold text-gray-900">Share Instantly</p>
+                                        <p class="text-gray-600">Text, email, or QR code delivery</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex flex-col sm:flex-row gap-4">
+                                <a href="services/photobooth/ai-photo-booth.html"
+                                    class="inline-flex items-center justify-center bg-gradient-to-r from-purple-600 to-blue-600 text-white px-8 py-4 rounded-full font-semibold hover:shadow-2xl hover:from-purple-700 hover:to-blue-700 transition-all duration-300 transform hover:scale-105 hover:-translate-y-1 focus:ring-4 focus:ring-purple-300"
+                                    aria-label="Learn more about AI Photo Booth">
+                                    Learn More
+                                    <svg class="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none"
+                                        stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                                    </svg>
+                                </a>
+                                <a href="#contact"
+                                    class="inline-flex items-center justify-center border-2 border-gray-900 text-gray-900 px-8 py-4 rounded-full font-semibold hover:bg-gray-900 hover:text-white hover:scale-105 hover:-translate-y-1 transition-all duration-300 transform focus:ring-4 focus:ring-gray-300"
+                                    aria-label="Get a quote for AI Photo Booth">
+                                    Get Quote
+                                </a>
+                            </div>
+                        </div>
+                        <div class="order-1 lg:order-2 relative">
+                            <div class="relative rounded-3xl overflow-hidden shadow-2xl">
+                                <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                                    alt="AI Photo Booth with guests transforming into characters"
+                                    class="w-full h-[500px] object-cover" loading="lazy">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+                            </div>
+                            <!-- Floating stat cards -->
+                            <div
+                                class="absolute -bottom-6 -left-6 bg-white rounded-2xl shadow-xl p-6 max-w-[200px] hover:shadow-2xl hover:scale-110 transition-all duration-300 transform cursor-pointer">
+                                <div class="text-4xl font-bold text-purple-600 mb-1">10k+</div>
+                                <div class="text-sm text-gray-600">AI Photos Created</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Other Photo Booths - Horizontal Scroll -->
+                    <div class="mb-12 relative overflow-visible">
+                        <div class="flex items-center justify-between mb-8">
+                            <h4 class="text-2xl md:text-3xl font-bold">More Photo Booth Options</h4>
+                            <div class="hidden md:flex items-center gap-2 text-sm text-gray-500">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M7 16l-4-4m0 0l4-4m-4 4h18"></path>
+                                </svg>
+                                <span>Scroll to explore</span>
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                                </svg>
+                            </div>
+                        </div>
+                        <!-- Scroll container with custom scrollbar -->
+                        <div class="overflow-x-auto -mx-6 px-6" style="scrollbar-width: thin;">
+                            <div class="flex gap-6 py-8 snap-x snap-mandatory">
+                                <!-- Green Screen -->
+                                <div class="flex-shrink-0 w-80 snap-start">
+                                    <div
+                                        class="group bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl p-6 h-full border border-green-100 hover:shadow-xl hover:scale-105 hover:border-green-300 transition-all duration-300 transform cursor-pointer">
+                                        <div
+                                            class="w-12 h-12 bg-green-500 rounded-xl flex items-center justify-center mb-4 group-hover:rotate-12 transition-transform">
+                                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor"
+                                                viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z">
+                                                </path>
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                            </svg>
+                                        </div>
+                                        <h5 class="text-xl font-bold mb-2">Green Screen</h5>
+                                        <p class="text-gray-600 mb-4">Transport guests anywhere with custom backgrounds
+                                        </p>
+                                        <a href="services/photobooth/green-screen.html"
+                                            class="text-green-600 font-semibold hover:text-green-700 inline-flex items-center group transition-all"
+                                            aria-label="Learn more about Green Screen photo booth">
+                                            Explore <svg
+                                                class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform"
+                                                fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                                aria-hidden="true">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M9 5l7 7-7 7"></path>
+                                            </svg>
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <!-- 360 Video -->
+                                <div class="flex-shrink-0 w-80 snap-start">
+                                    <div
+                                        class="group bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-6 h-full border border-blue-100 hover:shadow-xl hover:scale-105 hover:border-blue-300 transition-all duration-300 transform cursor-pointer">
+                                        <div
+                                            class="w-12 h-12 bg-blue-500 rounded-xl flex items-center justify-center mb-4 group-hover:rotate-12 transition-transform">
+                                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor"
+                                                viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z">
+                                                </path>
+                                            </svg>
+                                        </div>
+                                        <h5 class="text-xl font-bold mb-2">360° Video Booth</h5>
+                                        <p class="text-gray-600 mb-4">Epic slow-motion videos from every angle</p>
+                                        <a href="services/videobooth/360-video-booth.html"
+                                            class="text-blue-600 font-semibold hover:text-blue-700 inline-flex items-center group transition-all"
+                                            aria-label="Learn more about 360 Video Booth">
+                                            Explore <svg
+                                                class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform"
+                                                fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                                aria-hidden="true">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M9 5l7 7-7 7"></path>
+                                            </svg>
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <!-- Mosaic -->
+                                <div class="flex-shrink-0 w-80 snap-start">
+                                    <div
+                                        class="group bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl p-6 h-full border border-purple-100 hover:shadow-xl hover:scale-105 hover:border-purple-300 transition-all duration-300 transform cursor-pointer">
+                                        <div
+                                            class="w-12 h-12 bg-purple-500 rounded-xl flex items-center justify-center mb-4 group-hover:rotate-12 transition-transform">
+                                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor"
+                                                viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z">
+                                                </path>
+                                            </svg>
+                                        </div>
+                                        <h5 class="text-xl font-bold mb-2">Mosaic Wall</h5>
+                                        <p class="text-gray-600 mb-4">Build your event story photo by photo</p>
+                                        <a href="services/photobooth/mosaic-wall.html"
+                                            class="text-purple-600 font-semibold hover:text-purple-700 inline-flex items-center group transition-all"
+                                            aria-label="Learn more about Mosaic Wall">
+                                            Explore <svg
+                                                class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform"
+                                                fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                                aria-hidden="true">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M9 5l7 7-7 7"></path>
+                                            </svg>
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <!-- Roaming -->
+                                <div class="flex-shrink-0 w-80 snap-start">
+                                    <div
+                                        class="group bg-gradient-to-br from-orange-50 to-red-50 rounded-2xl p-6 h-full border border-orange-100 hover:shadow-xl hover:scale-105 hover:border-orange-300 transition-all duration-300 transform cursor-pointer">
+                                        <div
+                                            class="w-12 h-12 bg-orange-500 rounded-xl flex items-center justify-center mb-4 group-hover:rotate-12 transition-transform">
+                                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor"
+                                                viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                                            </svg>
+                                        </div>
+                                        <h5 class="text-xl font-bold mb-2">Roaming Booth</h5>
+                                        <p class="text-gray-600 mb-4">The party comes to your guests</p>
+                                        <a href="services/photobooth/roaming-booth.html"
+                                            class="text-orange-600 font-semibold hover:text-orange-700 inline-flex items-center group transition-all"
+                                            aria-label="Learn more about Roaming Booth">
+                                            Explore <svg
+                                                class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform"
+                                                fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                                aria-hidden="true">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M9 5l7 7-7 7"></path>
+                                            </svg>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Scroll hint for mobile -->
+                        <div class="flex md:hidden justify-center mt-4 text-xs text-gray-400">
+                            <span class="flex items-center gap-1">
+                                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M7 16l-4-4m0 0l4-4m-4 4h18"></path>
+                                </svg>
+                                Swipe to see more
+                                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                                </svg>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--Video Booths Section - Premium Split Layout -->
+        <section id="video-booths" class="section-padding bg-gradient-to-br from-slate-50 to-gray-100">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16 space-y-4">
+                    <span class="section-badge bg-gradient-to-r from-red-600 to-pink-600 inline-block">Video
+                        Experiences</span>
+                    <h2 class="text-4xl md:text-6xl font-bold text-gray-900 mb-6 leading-tight">
+                        Cinematic Video Moments
+                    </h2>
+                    <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                        Create share-worthy videos that capture the energy and emotion of your event
+                    </p>
+                    <!-- Visual separator -->
+                    <div class="flex items-center justify-center gap-2 pt-4">
+                        <div class="h-1 w-12 bg-gradient-to-r from-red-600 to-pink-600 rounded-full"></div>
+                        <div class="h-1 w-1 bg-red-600 rounded-full"></div>
+                        <div class="h-1 w-1 bg-pink-600 rounded-full"></div>
+                    </div>
+                </div>
+
+                <!-- Featured 360 Video - Large Hero -->
+                <div class="grid lg:grid-cols-2 gap-12 items-center mb-20">
+                    <div class="relative rounded-3xl overflow-hidden shadow-2xl group">
+                        <img src="https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                            alt="360 Video Booth"
+                            class="w-full h-[500px] object-cover transform group-hover:scale-105 transition duration-700">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
+                        <div class="absolute bottom-0 left-0 p-10 text-white">
+                            <div class="inline-block bg-red-600 px-4 py-2 rounded-full text-sm font-bold mb-4">🎬
+                                Signature Experience</div>
+                            <h3 class="text-4xl md:text-5xl font-bold mb-4">360° Video Booth</h3>
+                            <p class="text-lg text-white/90 mb-6 max-w-md">Watch as the camera rotates around you in
+                                stunning slow motion, capturing epic moments from every angle</p>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="space-y-6">
+                            <div class="flex gap-4">
+                                <div
+                                    class="w-12 h-12 bg-gradient-to-br from-red-500 to-pink-500 rounded-xl flex items-center justify-center flex-shrink-0">
+                                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z">
+                                        </path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h4 class="text-xl font-bold mb-2">Full 360° Rotation</h4>
+                                    <p class="text-gray-600">Cameras capture you from all angles in cinematic slow
+                                        motion</p>
+                                </div>
+                            </div>
+                            <div class="flex gap-4">
+                                <div
+                                    class="w-12 h-12 bg-gradient-to-br from-blue-500 to-indigo-500 rounded-xl flex items-center justify-center flex-shrink-0">
+                                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z">
+                                        </path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h4 class="text-xl font-bold mb-2">Instant Sharing</h4>
+                                    <p class="text-gray-600">Videos delivered instantly via text, email, or QR code</p>
+                                </div>
+                            </div>
+                            <div class="flex gap-4">
+                                <div
+                                    class="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl flex items-center justify-center flex-shrink-0">
+                                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01">
+                                        </path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h4 class="text-xl font-bold mb-2">Custom Branding</h4>
+                                    <p class="text-gray-600">Add your logo, music, and effects to every video</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-8">
+                            <a href="services/videobooth/360-video-booth.html"
+                                class="inline-flex items-center bg-gradient-to-r from-red-600 to-pink-600 text-white px-8 py-4 rounded-full font-bold hover:shadow-2xl hover:from-red-700 hover:to-pink-700 transition-all duration-300 transform hover:scale-105 hover:-translate-y-1">
+                                Explore 360° Experience
+                                <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Other Video Booths - Premium Grid -->
+                <div class="grid md:grid-cols-2 gap-8">
+                    <!-- Bullet Time Array -->
+                    <div
+                        class="group relative bg-gradient-to-br from-gray-900 to-gray-800 rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 transform cursor-pointer">
+                        <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                            alt="Bullet Time Array"
+                            class="absolute inset-0 w-full h-full object-cover opacity-30 group-hover:opacity-40 transition">
+                        <div class="relative p-10 min-h-[400px] flex flex-col justify-end text-white">
+                            <div
+                                class="inline-block self-start bg-green-500 px-4 py-2 rounded-full text-sm font-bold mb-4">
+                                ⚡ Matrix-Style</div>
+                            <h3 class="text-3xl font-bold mb-3">Bullet-Time Array</h3>
+                            <p class="text-white/90 mb-6">Freeze time with multiple cameras capturing the iconic Matrix
+                                slow-motion effect</p>
+                            <a href="services/videobooth/bullet-time-array.html"
+                                class="inline-flex items-center text-white font-bold hover:text-green-400 transition">
+                                Discover More
+                                <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- GlamBot Video -->
+                    <div
+                        class="group bg-white rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 transform cursor-pointer">
+                        <div class="aspect-video overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                                alt="GlamBot Video"
+                                class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                        </div>
+                        <div class="p-8">
+                            <div
+                                class="inline-block bg-gradient-to-r from-amber-400 to-orange-500 text-white px-3 py-1 rounded-full text-sm font-bold mb-4">
+                                ✨ Red Carpet Style</div>
+                            <h3 class="text-3xl font-bold mb-3">GlamBot Video</h3>
+                            <p class="text-gray-600 mb-6">Automated camera on a robotic arm creates stunning cinematic
+                                slow-motion videos</p>
+                            <a href="services/videobooth/glambot-video.html"
+                                class="inline-flex items-center text-orange-600 font-bold hover:text-orange-700 transition">
+                                See It In Action
+                                <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Additional Services - Premium Masonry Layout -->
+        <section id="additional-services" class="section-padding bg-white">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12 space-y-4">
+                    <h4 class="text-3xl md:text-4xl font-bold mb-4 leading-tight">Complete Your Experience</h4>
+                    <p class="text-gray-600 text-lg max-w-2xl mx-auto">Professional services to elevate every moment</p>
+                    <!-- Visual separator -->
+                    <div class="flex items-center justify-center gap-2 pt-2">
+                        <div class="h-1 w-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full"></div>
+                    </div>
+                </div>
+
+                <!-- Premium Grid Layout with varied heights -->
+                <div class="grid grid-cols-12 gap-6">
+                    <!-- Event Photography - Wide Card -->
+                    <div class="col-span-12 lg:col-span-8">
+                        <div
+                            class="group relative bg-gradient-to-r from-blue-600 to-purple-600 rounded-3xl overflow-hidden shadow-2xl hover:shadow-3xl hover:scale-105 transition-all duration-300 transform h-full cursor-pointer">
+                            <img src="https://images.unsplash.com/photo-1606800052052-a08af7148866?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
+                                alt="Event Photography"
+                                class="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:opacity-50 transition">
+                            <div class="relative p-10 md:p-12 flex flex-col justify-end min-h-[400px] text-white">
+                                <div
+                                    class="inline-block self-start bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-bold mb-4">
+                                    📸 Professional Coverage</div>
+                                <h3 class="text-4xl md:text-5xl font-bold mb-4">Event Photography</h3>
+                                <p class="text-xl text-white/90 mb-6 max-w-2xl">Capture every precious moment with our
+                                    professional photographers who blend seamlessly into your event</p>
+                                <a href="services/experiences/event-photography.html"
+                                    class="inline-flex items-center bg-white text-blue-600 px-8 py-4 rounded-full font-bold hover:bg-gray-100 hover:scale-110 hover:shadow-xl transition-all duration-300 transform w-fit">
+                                    View Portfolio
+                                    <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SketchBot - Tall Card -->
+                    <div class="col-span-12 md:col-span-6 lg:col-span-4">
+                        <div
+                            class="group bg-gradient-to-br from-indigo-50 to-purple-50 rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 transform h-full border border-indigo-100 cursor-pointer">
+                            <div class="aspect-square overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                                    alt="SketchBot"
+                                    class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                            </div>
+                            <div class="p-6">
+                                <div
+                                    class="inline-block bg-gradient-to-r from-indigo-500 to-purple-500 text-white px-3 py-1 rounded-full text-sm font-bold mb-3">
+                                    🤖 AI Artist</div>
+                                <h3 class="text-2xl font-bold mb-3">SketchBot</h3>
+                                <p class="text-gray-700 mb-4">Watch our robot artist create unique sketches of your
+                                    guests in real-time</p>
+                                <a href="services/experiences/sketchbot.html"
+                                    class="inline-flex items-center text-indigo-600 font-bold hover:text-indigo-700 transition">
+                                    See Magic
+                                    <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M9 5l7 7-7 7"></path>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Cookie Printer -->
+                    <div class="col-span-12 md:col-span-6 lg:col-span-4">
+                        <div
+                            class="group bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl hover:scale-105 hover:-translate-y-2 transition-all duration-300 transform h-full border border-gray-100 cursor-pointer">
+                            <div
+                                class="w-16 h-16 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 transform">
+                                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7">
+                                    </path>
+                                </svg>
+                            </div>
+                            <h4 class="text-xl font-bold mb-2">Cookie Printer</h4>
+                            <p class="text-gray-600 mb-4">Edible memories! Print guest photos directly onto delicious
+                                cookies</p>
+                            <a href="services/experiences/cookie-printer.html"
+                                class="inline-flex items-center text-orange-600 font-semibold hover:text-orange-700 transition">
+                                Taste This <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9 5l7 7-7 7"></path>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Pose Cards -->
+                    <div class="col-span-12 md:col-span-6 lg:col-span-4">
+                        <div
+                            class="group bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl hover:scale-105 hover:-translate-y-2 transition-all duration-300 transform h-full border border-gray-100 cursor-pointer">
+                            <div
+                                class="w-16 h-16 bg-gradient-to-br from-pink-400 to-rose-500 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 transform">
+                                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z">
+                                    </path>
+                                </svg>
+                            </div>
+                            <h4 class="text-xl font-bold mb-2">Signature Pose Cards</h4>
+                            <p class="text-gray-600 mb-4">Never run out of pose ideas with our fun flashcard collection
+                            </p>
+                            <a href="services/experiences/pose-cards.html"
+                                class="inline-flex items-center text-pink-600 font-semibold hover:text-pink-700 transition">
+                                Strike a Pose <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9 5l7 7-7 7"></path>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Lux Photography - Small Featured -->
+                    <div class="col-span-12 lg:col-span-4">
+                        <div
+                            class="group bg-gradient-to-br from-amber-50 to-yellow-50 rounded-3xl p-8 shadow-lg hover:shadow-xl hover:scale-105 hover:-translate-y-2 transition-all duration-300 transform h-full border border-amber-100 cursor-pointer">
+                            <div
+                                class="w-16 h-16 bg-gradient-to-br from-amber-500 to-yellow-500 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 transform">
+                                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z">
+                                    </path>
+                                </svg>
+                            </div>
+                            <h4 class="text-2xl font-bold mb-3">Lux Photography</h4>
+                            <p class="text-gray-700 mb-6 leading-relaxed">Elevated photography booth experience with
+                                luxury lighting and premium finishes</p>
+                            <a href="services/experiences/lux-photography.html"
+                                class="inline-flex items-center text-amber-600 font-semibold hover:text-amber-700 transition">
+                                Discover Lux <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9 5l7 7-7 7"></path>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Event Types Section -->
+        <section id="event-types" class="section-padding bg-gray-50">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16 space-y-4">
+                    <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight">
+                        Perfect for Every Occasion
+                    </h2>
+                    <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                        From intimate celebrations to grand corporate events, we tailor our services to your unique
+                        vision
+                    </p>
+                    <!-- Visual separator -->
+                    <div class="flex items-center justify-center gap-2 pt-4">
+                        <div class="h-1 w-12 bg-gray-900 rounded-full"></div>
+                    </div>
+                </div>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Wedding Events -->
+                    <div class="group relative rounded-2xl overflow-hidden shadow-xl hover-lift">
+                        <img src="https://images.unsplash.com/photo-1519741497674-611481863552?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                            alt="Wedding Events"
+                            class="h-80 w-full object-cover transform group-hover:scale-110 transition duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+                        <div class="absolute bottom-6 left-6">
+                            <h3 class="text-2xl font-bold text-white mb-2">Wedding Events</h3>
+                            <p class="text-white/90">Make your special day one to remember with our elegant photo booth
+                                experiences.</p>
+                        </div>
+                    </div>
+
+                    <!-- Corporate Events -->
+                    <div class="group relative rounded-2xl overflow-hidden shadow-xl hover-lift">
+                        <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                            alt="Corporate Events"
+                            class="h-80 w-full object-cover transform group-hover:scale-110 transition duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+                        <div class="absolute bottom-6 left-6">
+                            <h3 class="text-2xl font-bold text-white mb-2">Corporate Events</h3>
+                            <p class="text-white/90">Let us create a fully branded experience for your corporate event.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Social Events -->
+                    <div class="group relative rounded-2xl overflow-hidden shadow-xl hover-lift">
+                        <img src="https://images.unsplash.com/photo-1530103862676-de8c9debad1d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                            alt="Social Events"
+                            class="h-80 w-full object-cover transform group-hover:scale-110 transition duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+                        <div class="absolute bottom-6 left-6">
+                            <h3 class="text-2xl font-bold text-white mb-2">Social Events</h3>
+                            <p class="text-white/90">Birthday Parties, Mitzvahs, and more - we make every celebration
+                                special.</p>
+                        </div>
+                    </div>
+
+                    <!-- Trade Show Services -->
+                    <div class="group relative rounded-2xl overflow-hidden shadow-xl hover-lift">
+                        <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                            alt="Trade Show Services"
+                            class="h-80 w-full object-cover transform group-hover:scale-110 transition duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+                        <div class="absolute bottom-6 left-6">
+                            <h3 class="text-2xl font-bold text-white mb-2">Trade Show Services</h3>
+                            <p class="text-white/90">Your event's story, built tile-by-tile with guest photos.</p>
+                        </div>
+                    </div>
+
+                    <!-- Holiday Parties -->
+                    <div class="group relative rounded-2xl overflow-hidden shadow-xl hover-lift">
+                        <img src="https://images.unsplash.com/photo-1512389142860-9c449e58a543?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                            alt="Holiday Parties"
+                            class="h-80 w-full object-cover transform group-hover:scale-110 transition duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+                        <div class="absolute bottom-6 left-6">
+                            <h3 class="text-2xl font-bold text-white mb-2">Holiday Parties</h3>
+                            <p class="text-white/90">Make your holiday party come to life with our curated sets.</p>
+                        </div>
+                    </div>
+
+                    <!-- Casino Parties -->
+                    <div class="group relative rounded-2xl overflow-hidden shadow-xl hover-lift">
+                        <img src="https://images.unsplash.com/photo-1596838132731-3301c3fd4317?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                            alt="Casino Parties"
+                            class="h-80 w-full object-cover transform group-hover:scale-110 transition duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+                        <div class="absolute bottom-6 left-6">
+                            <h3 class="text-2xl font-bold text-white mb-2">Casino Parties</h3>
+                            <p class="text-white/90">Professional tables, dealers, and full casino experiences.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Rentals Section -->
+        <section id="rentals" class="section-padding bg-white">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16 space-y-4">
+                    <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight">
+                        Complete Event Solutions
+                    </h2>
+                    <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                        From AV services to interactive games, we provide everything you need for a complete event
+                        experience
+                    </p>
+                    <!-- Visual separator -->
+                    <div class="flex items-center justify-center gap-2 pt-4">
+                        <div class="h-1 w-12 bg-gray-900 rounded-full"></div>
+                    </div>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-8">
+                    <!-- AV Services -->
+                    <div
+                        class="bg-white rounded-2xl shadow-xl p-8 hover-lift hover:bg-gradient-to-br hover:from-white hover:to-blue-50 transition-all duration-300 cursor-pointer">
+                        <div
+                            class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-blue-200 transition-all duration-300 transform">
+                            <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z">
+                                </path>
+                            </svg>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4">AV Services</h3>
+                        <ul class="space-y-3 text-gray-600">
+                            <li>• Audio Services - Professional sound systems</li>
+                            <li>• Visual Services - Dynamic screens and visuals</li>
+                            <li>• Lighting Services - Transform your space</li>
+                            <li>• Custom Signage - Branded signs</li>
+                            <li>• Event Stages - Professional setups</li>
+                        </ul>
+                    </div>
+
+                    <!-- Event Decor -->
+                    <div
+                        class="bg-white rounded-2xl shadow-xl p-8 hover-lift hover:bg-gradient-to-br hover:from-white hover:to-purple-50 transition-all duration-300 cursor-pointer">
+                        <div
+                            class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-purple-200 transition-all duration-300 transform">
+                            <svg class="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z">
+                                </path>
+                            </svg>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4">Event Decor</h3>
+                        <ul class="space-y-3 text-gray-600">
+                            <li>• Special Effects - Sparktacular displays</li>
+                            <li>• Lighting Decor - Air Balloon Lights</li>
+                            <li>• Event Decor - Ceiling Fabric designs</li>
+                            <li>• Lounge Furniture Sets</li>
+                            <li>• Shimmer Walls & Marquee Letters</li>
+                        </ul>
+                    </div>
+
+                    <!-- Game Rentals -->
+                    <div
+                        class="bg-white rounded-2xl shadow-xl p-8 hover-lift hover:bg-gradient-to-br hover:from-white hover:to-green-50 transition-all duration-300 cursor-pointer">
+                        <div
+                            class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-green-200 transition-all duration-300 transform">
+                            <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M14.828 14.828a4 4 0 01-5.656 0M9 10h1m4 0h1m-6 4h1m4 0h1m-6-8h8a2 2 0 012 2v8a2 2 0 01-2 2H8a2 2 0 01-2-2V6a2 2 0 012-2z">
+                                </path>
+                            </svg>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4">Game Rentals</h3>
+                        <ul class="space-y-3 text-gray-600">
+                            <li>• Claw Machine - A crowd pleaser</li>
+                            <li>• Stick Drop Reaction Game</li>
+                            <li>• VR Headset Rentals</li>
+                            <li>• Money Booth - Grab floating cash</li>
+                            <li>• Interactive Gaming Experiences</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Galleries Section -->
+        <section id="galleries" class="section-padding bg-gray-50">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16 space-y-4">
+                    <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight">
+                        Explore Our Work
+                    </h2>
+                    <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                        Discover our portfolio of successful events and creative installations
+                    </p>
+                    <!-- Visual separator -->
+                    <div class="flex items-center justify-center gap-2 pt-4">
+                        <div class="h-1 w-12 bg-gray-900 rounded-full"></div>
+                    </div>
+                </div>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Our Work -->
+                    <div class="group relative rounded-2xl overflow-hidden shadow-xl hover-lift">
+                        <img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                            alt="Our Work"
+                            class="h-64 w-full object-cover transform group-hover:scale-110 transition duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+                        <div class="absolute bottom-6 left-6">
+                            <h3 class="text-2xl font-bold text-white mb-2">Our Work</h3>
+                            <p class="text-white/90">View a collection of our work</p>
+                        </div>
+                    </div>
+
+                    <!-- Our Services -->
+                    <div class="group relative rounded-2xl overflow-hidden shadow-xl hover-lift">
+                        <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                            alt="Our Services"
+                            class="h-64 w-full object-cover transform group-hover:scale-110 transition duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+                        <div class="absolute bottom-6 left-6">
+                            <h3 class="text-2xl font-bold text-white mb-2">Our Services</h3>
+                            <p class="text-white/90">Check out all of the services we offer for events</p>
+                        </div>
+                    </div>
+
+                    <!-- Our Booths -->
+                    <div class="group relative rounded-2xl overflow-hidden shadow-xl hover-lift">
+                        <img src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                            alt="Our Booths"
+                            class="h-64 w-full object-cover transform group-hover:scale-110 transition duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+                        <div class="absolute bottom-6 left-6">
+                            <h3 class="text-2xl font-bold text-white mb-2">Our Booths</h3>
+                            <p class="text-white/90">See all of our Photo Booths</p>
+                        </div>
+                    </div>
+
+                    <!-- Our Props -->
+                    <div class="group relative rounded-2xl overflow-hidden shadow-xl hover-lift">
+                        <img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                            alt="Our Props"
+                            class="h-64 w-full object-cover transform group-hover:scale-110 transition duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+                        <div class="absolute bottom-6 left-6">
+                            <h3 class="text-2xl font-bold text-white mb-2">Our Props</h3>
+                            <p class="text-white/90">Take a look at our prop collection</p>
+                        </div>
+                    </div>
+
+                    <!-- Our Themes -->
+                    <div class="group relative rounded-2xl overflow-hidden shadow-xl hover-lift">
+                        <img src="https://static.wixstatic.com/media/a92b01_e71f1bec989740f6a5407ad773411ad7~mv2.jpg/v1/fill/w_626,h_350,fp_0.54_0.29,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/1O4A5815.jpg?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                            alt="Our Themes"
+                            class="h-64 w-full object-cover transform group-hover:scale-110 transition duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+                        <div class="absolute bottom-6 left-6">
+                            <h3 class="text-2xl font-bold text-white mb-2">Our Themes</h3>
+                            <p class="text-white/90">All events themes, curated for any event</p>
+                        </div>
+                    </div>
+
+                    <!-- Our Add-Ons -->
+                    <div class="group relative rounded-2xl overflow-hidden shadow-xl hover-lift">
+                        <img src="https://images.unsplash.com/photo-1541961017774-22349e4a1262?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                            alt="Our Add-Ons"
+                            class="h-64 w-full object-cover transform group-hover:scale-110 transition duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+                        <div class="absolute bottom-6 left-6">
+                            <h3 class="text-2xl font-bold text-white mb-2">Our Add-Ons</h3>
+                            <p class="text-white/90">See what we can add-on to your next rental</p>
+                        </div>
+                    </div>
+
+                    <!-- Our Design -->
+                    <div class="group relative rounded-2xl overflow-hidden shadow-xl hover-lift">
+                        <img src="https://images.unsplash.com/photo-1520975916090-3105956dac38?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+                            alt="Our Design"
+                            class="h-64 w-full object-cover transform group-hover:scale-110 transition duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+                        <div class="absolute bottom-6 left-6">
+                            <h3 class="text-2xl font-bold text-white mb-2">Our Design</h3>
+                            <p class="text-white/90">Custom Branded Booth Wraps, Backdrops, and more</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="section-padding bg-dark-gradient text-white relative overflow-hidden">
+            <!-- Decorative elements -->
+            <div class="absolute top-0 left-0 w-full h-full opacity-10">
+                <div class="absolute top-20 right-20 w-96 h-96 bg-blue-500 rounded-full filter blur-3xl"></div>
+                <div class="absolute bottom-20 left-20 w-96 h-96 bg-purple-500 rounded-full filter blur-3xl"></div>
+            </div>
+
+            <div class="container mx-auto px-6 relative z-10">
+                <div class="text-center mb-16">
+                    <span class="section-badge">Discover More</span>
+                    <h2 class="text-4xl md:text-6xl font-bold mb-6 mt-4">
+                        About MiHi
+                    </h2>
+                    <p class="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+                        Learn about our story, team, and commitment to creating unforgettable experiences
+                    </p>
+                </div>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Read our Blogs -->
+                    <div
+                        class="group bg-white/10 backdrop-blur-lg rounded-3xl shadow-2xl p-8 hover-lift hover:bg-white/20 hover:border-white/40 transition-all duration-300 border border-white/20 cursor-pointer">
+                        <div
+                            class="w-16 h-16 bg-gradient-to-br from-blue-400 to-blue-600 rounded-2xl flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 transform">
+                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z">
+                                </path>
+                            </svg>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4">Read our Blogs</h3>
+                        <p class="text-gray-300 mb-4 leading-relaxed">Read about our events, activations, and more
+                            insights from our team.</p>
+                        <a href="about/blog.html"
+                            class="inline-flex items-center text-blue-400 font-semibold hover:text-blue-300 transition">
+                            Read More
+                            <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                            </svg>
+                        </a>
+                    </div>
+
+                    <!-- Our Locations -->
+                    <div
+                        class="group bg-white/10 backdrop-blur-lg rounded-3xl shadow-2xl p-8 hover-lift hover:bg-white/20 hover:border-white/40 transition-all duration-300 border border-white/20 cursor-pointer">
+                        <div
+                            class="w-16 h-16 bg-gradient-to-br from-green-400 to-green-600 rounded-2xl flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 transform">
+                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z">
+                                </path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4">Our Locations</h3>
+                        <p class="text-gray-300 mb-4 leading-relaxed">View all of the locations we service nationwide.
+                        </p>
+                        <a href="about/locations.html"
+                            class="inline-flex items-center text-green-400 font-semibold hover:text-green-300 transition">
+                            View Locations
+                            <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                            </svg>
+                        </a>
+                    </div>
+
+                    <!-- Case Studies -->
+                    <div
+                        class="group bg-white/10 backdrop-blur-lg rounded-3xl shadow-2xl p-8 hover-lift hover:bg-white/20 hover:border-white/40 transition-all duration-300 border border-white/20 cursor-pointer">
+                        <div
+                            class="w-16 h-16 bg-gradient-to-br from-purple-400 to-purple-600 rounded-2xl flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 transform">
+                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z">
+                                </path>
+                            </svg>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4">Case Studies</h3>
+                        <p class="text-gray-300 mb-4 leading-relaxed">Learn how our activations have helped create
+                            memorable events.</p>
+                        <a href="about/case-studies.html"
+                            class="inline-flex items-center text-purple-400 font-semibold hover:text-purple-300 transition">
+                            View Cases
+                            <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                            </svg>
+                        </a>
+                    </div>
+
+                    <!-- FAQ -->
+                    <div
+                        class="group bg-white/10 backdrop-blur-lg rounded-3xl shadow-2xl p-8 hover-lift hover:bg-white/20 hover:border-white/40 transition-all duration-300 border border-white/20 cursor-pointer">
+                        <div
+                            class="w-16 h-16 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-2xl flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 transform">
+                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
+                                </path>
+                            </svg>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4">Frequently Asked Questions</h3>
+                        <p class="text-gray-300 mb-4 leading-relaxed">View our most commonly asked questions and
+                            answers.</p>
+                        <a href="about/faq.html"
+                            class="inline-flex items-center text-yellow-400 font-semibold hover:text-yellow-300 transition">
+                            View FAQ
+                            <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                            </svg>
+                        </a>
+                    </div>
+
+                    <!-- About MiHi -->
+                    <div
+                        class="group bg-white/10 backdrop-blur-lg rounded-3xl shadow-2xl p-8 hover-lift hover:bg-white/20 hover:border-white/40 transition-all duration-300 border border-white/20 cursor-pointer">
+                        <div
+                            class="w-16 h-16 bg-gradient-to-br from-red-400 to-red-600 rounded-2xl flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 transform">
+                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z">
+                                </path>
+                            </svg>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4">About MiHi</h3>
+                        <p class="text-gray-300 mb-4 leading-relaxed">Learn about MiHi, see our hardworking team, and
+                            more.</p>
+                        <a href="about/about-mihi.html"
+                            class="inline-flex items-center text-red-400 font-semibold hover:text-red-300 transition">
+                            Learn More
+                            <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Premium Testimonials Section -->
+        <section class="relative py-20 bg-gradient-to-br from-slate-50 via-white to-blue-50 overflow-hidden">
+            <!-- Background Elements -->
+            <div class="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width=" 60" height="60" viewBox="0 0 60 60"
+                xmlns="http://www.w3.org/2000/svg" %3E%3Cg fill="none" fill-rule="evenodd" %3E%3Cg fill="%23f1f5f9"
+                fill-opacity="0.4" %3E%3Ccircle cx="30" cy="30" r="2" /%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-30">
+            </div>
+
+            <div class="container mx-auto px-6 relative z-10">
+                <!-- Section Header -->
+                <div class="text-center mb-16">
+                    <div
+                        class="inline-flex items-center gap-2 bg-white/80 backdrop-blur-sm rounded-full px-4 py-2 shadow-sm border border-white/20 mb-6 hover:bg-white hover:shadow-md hover:scale-105 transition-all duration-300 transform cursor-pointer">
+                        <svg class="w-5 h-5 text-blue-500" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd"
+                                d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9H5v2h2V9zm8 0h-2v2h2V9zM9 9h2v2H9V9z"
+                                clip-rule="evenodd" />
+                        </svg>
+                        <span class="text-sm font-medium text-gray-600">Client Testimonials</span>
+                    </div>
+
+                    <h2
+                        class="text-5xl md:text-6xl font-bold bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 bg-clip-text text-transparent mb-4">
+                        What Our Clients Say
+                    </h2>
+                    <p class="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
+                        Real feedback from real events—delivered with five-star service and unforgettable experiences.
+                    </p>
+                </div>
+
+                <!-- Premium Rating Badge -->
+                <div class="flex justify-center mb-12">
+                    <div class="relative group">
+                        <div
+                            class="absolute inset-0 bg-gradient-to-r from-yellow-400 to-orange-400 rounded-2xl blur-lg opacity-30 group-hover:opacity-50 transition-opacity duration-300">
+                        </div>
+                        <div
+                            class="relative bg-white/95 backdrop-blur-sm rounded-2xl px-6 py-5 shadow-xl border border-white/40 hover:shadow-2xl hover:scale-105 transition-all duration-300 transform cursor-default">
+                            <div class="flex items-center gap-6">
+                                <!-- Score block -->
+                                <div class="text-center">
+                                    <div class="average-rating text-5xl font-extrabold text-gray-900 leading-none">4.9</div>
+                                    <div class="flex items-center justify-center mt-1">
+                                        <div class="flex items-center text-yellow-400">
+                                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                                        </div>
+                                    </div>
+                                    <div class="text-xs font-semibold text-gray-500 uppercase tracking-wide mt-2">Out of 5</div>
+                                </div>
+
+                                <div class="h-12 w-px bg-gradient-to-b from-transparent via-gray-300 to-transparent"></div>
+
+                                <!-- Reviews count with Google badge -->
+                                <div class="flex flex-col items-start">
+                                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-gray-200 bg-white shadow-sm">
+                                        <span class="text-sm text-gray-700"><span class="total-ratings font-bold text-gray-900">156</span> reviews</span>
+                                        <span class="inline-flex items-center ml-1">
+                                            <svg class="w-4 h-4" viewBox="0 0 24 24">
+                                                <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
+                                                <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
+                                                <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
+                                                <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
+                                            </svg>
+                                        </span>
+                                    </div>
+                                    <span class="text-xs text-gray-500 mt-2">Verified via Google</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Premium Reviews Grid -->
+                <div class="overflow-hidden">
+                    <div id="google-reviews" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 auto-rows-fr gap-6">
+                        <!-- Reviews will be loaded here by JavaScript -->
+                        <div class="text-center py-8">
+                            <div class="animate-pulse space-y-4">
+                                <div class="h-4 bg-gray-200 rounded w-3/4 mx-auto"></div>
+                                <div class="h-4 bg-gray-200 rounded w-1/2 mx-auto"></div>
+                                <div class="h-4 bg-gray-200 rounded w-5/6 mx-auto"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- See more Google reviews CTA -->
+                    <div class="flex justify-center mt-10">
+                        <a href="https://share.google/Lzz3qfpiTqTQY32t5" target="_blank" rel="noopener noreferrer"
+                           class="inline-flex items-center gap-2 px-5 py-3 rounded-full border border-gray-200 bg-white text-gray-800 shadow-sm hover:shadow-md hover:scale-[1.02] transition-all duration-300">
+                            <span class="inline-flex items-center justify-center w-5 h-5 rounded-sm overflow-hidden">
+                                <svg class="w-5 h-5" viewBox="0 0 24 24">
+                                    <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
+                                    <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
+                                    <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
+                                    <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
+                                </svg>
+                            </span>
+                            <span class="font-semibold">See more Google reviews</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <script src="assets/js/google-reviews.js"></script>
+
+        <!-- Final CTA Section -->
+        <section id="contact" class="relative bg-gradient-to-r from-blue-600 to-purple-600 text-white overflow-hidden">
+            <!-- Animated background elements -->
+            <div class="absolute inset-0 opacity-10">
+                <div class="absolute top-20 left-20 w-72 h-72 bg-white rounded-full filter blur-3xl animate-pulse">
+                </div>
+                <div class="absolute bottom-20 right-20 w-96 h-96 bg-white rounded-full filter blur-3xl animate-pulse"
+                    style="animation-delay: 1s;"></div>
+            </div>
+
+            <div class="container mx-auto px-6 py-20 md:py-32 text-center relative z-10">
+                <div class="max-w-4xl mx-auto space-y-6">
+                    <div
+                        class="inline-block bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-bold mb-4">
+                        ✨ Let's Get Started
+                    </div>
+                    <h2 class="text-4xl md:text-6xl font-extrabold mb-6 leading-tight">
+                        Ready to Create Magic?
+                    </h2>
+                    <p class="text-xl md:text-2xl font-light max-w-3xl mx-auto mb-10 leading-relaxed">
+                        Tell us about your event and our team will create a custom, no-obligation quote to make it
+                        unforgettable.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <a href="#"
+                            class="bg-white text-blue-600 px-10 py-4 rounded-full text-lg font-bold shadow-xl hover:bg-gray-100 hover:shadow-2xl transition-all duration-300 transform hover:scale-110 hover:-translate-y-1 focus:ring-4 focus:ring-white"
+                            aria-label="Get a custom quote">
+                            Get My Quote
+                        </a>
+                        <a href="tel:+1234567890"
+                            class="glass text-white px-10 py-4 rounded-full text-lg font-bold hover:bg-white/30 hover:scale-110 hover:-translate-y-1 transition-all duration-300 transform border-2 border-white/30 focus:ring-4 focus:ring-white/50"
+                            aria-label="Call to book now">
+                            📞 Book Us Now!
+                        </a>
+                    </div>
+                    <!-- Trust indicators -->
+                    <div class="flex flex-wrap items-center justify-center gap-8 mt-12 text-white/90">
+                        <div class="flex items-center gap-2">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd"
+                                    d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                    clip-rule="evenodd"></path>
+                            </svg>
+                            <span class="text-sm font-medium">Trusted by 1000+ Events</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                <path
+                                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
+                                </path>
+                            </svg>
+                            <span class="text-sm font-medium">4.9 Star Rating</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd"
+                                    d="M5 2a1 1 0 011 1v1h1a1 1 0 010 2H6v1a1 1 0 01-2 0V6H3a1 1 0 010-2h1V3a1 1 0 011-1zm0 10a1 1 0 011 1v1h1a1 1 0 110 2H6v1a1 1 0 11-2 0v-1H3a1 1 0 110-2h1v-1a1 1 0 011-1zM12 2a1 1 0 01.967.744L14.146 7.2 17.5 9.134a1 1 0 010 1.732l-3.354 1.935-1.18 4.455a1 1 0 01-1.933 0L9.854 12.8 6.5 10.866a1 1 0 010-1.732l3.354-1.935 1.18-4.455A1 1 0 0112 2z"
+                                    clip-rule="evenodd"></path>
+                            </svg>
+                            <span class="text-sm font-medium">Premium Service</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- JavaScript for smooth scrolling and interactions -->
+    <script src="assets/components/footer.js"></script>
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Scroll Progress Bar
+        const scrollProgress = document.getElementById('scroll-progress');
+        window.addEventListener('scroll', function () {
+            const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (window.scrollY / windowHeight) * 100;
+            scrollProgress.style.width = scrolled + '%';
+
+            // Add scroll effect to header
+            const header = document.querySelector('header');
+            if (header) {
+                if (window.scrollY > 100) {
+                    header.classList.add('bg-white/98', 'shadow-md');
+                } else {
+                    header.classList.remove('bg-white/98', 'shadow-md');
+                }
+            }
+        });
+
+        // Back to Top Button
+        const backToTopButton = document.getElementById('back-to-top');
+        window.addEventListener('scroll', function () {
+            if (window.scrollY > 500) {
+                backToTopButton.classList.remove('opacity-0', 'pointer-events-none');
+                backToTopButton.classList.add('opacity-100');
+            } else {
+                backToTopButton.classList.add('opacity-0', 'pointer-events-none');
+                backToTopButton.classList.remove('opacity-100');
+            }
+        });
+
+        backToTopButton.addEventListener('click', function () {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Lazy load images
+        const images = document.querySelectorAll('img[loading="lazy"]');
+        const imageObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+                    img.classList.add('loaded');
+                    observer.unobserve(img);
+                }
+            });
+        });
+
+        images.forEach(img => {
+            imageObserver.observe(img);
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-fade-in-up');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        // Observe all sections
+        document.querySelectorAll('section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Add keyboard navigation improvements
+        document.addEventListener('keydown', function (e) {
+            // Press 'Escape' to close any modals or return to top
+            if (e.key === 'Escape') {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        });
+
+        // Improve form validation feedback (if forms exist)
+        const forms = document.querySelectorAll('form');
+        forms.forEach(form => {
+            form.addEventListener('submit', function (e) {
+                const inputs = form.querySelectorAll('input[required], textarea[required]');
+                let isValid = true;
+
+                inputs.forEach(input => {
+                    if (!input.value.trim()) {
+                        isValid = false;
+                        input.classList.add('border-red-500', 'shake');
+                        setTimeout(() => input.classList.remove('shake'), 500);
+                    } else {
+                        input.classList.remove('border-red-500');
+                    }
+                });
+
+                if (!isValid) {
+                    e.preventDefault();
+                }
+            });
+        });
+
+        // Performance: Debounce scroll events
+        let scrollTimeout;
+        window.addEventListener('scroll', function () {
+            if (scrollTimeout) {
+                window.cancelAnimationFrame(scrollTimeout);
+            }
+            scrollTimeout = window.requestAnimationFrame(function () {
+                // Scroll-based animations here
+            });
+        }, { passive: true });
+    </script>
+
+    <!-- Brochure Modal -->
+    <div id="brochureModal" class="fixed inset-0 z-[9999] hidden overflow-y-auto bg-transparent"
+        aria-labelledby="modal-title" role="dialog" aria-modal="true">
+        <!-- Background overlay with 60% opacity -->
+        <div class="fixed inset-0 bg-black/60 transition-opacity duration-300" onclick="closeBrochureModal()"></div>
+
+        <!-- Modal panel -->
+        <div class="flex min-h-screen items-start justify-center p-0 bg-transparent">
+            <div class="relative w-full h-screen bg-transparent">
+                <!-- Close button -->
+                <button onclick="closeBrochureModal()"
+                    class="fixed top-4 right-4 z-[10001] bg-white/90 hover:bg-white text-gray-800 rounded-full p-2 shadow-lg transition-all duration-200 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-900"
+                    aria-label="Close brochure">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
+                        </path>
+                    </svg>
+                </button>
+
+                <!-- Brochure iframe container with transparent background -->
+                <div class="relative w-full h-full bg-transparent overflow-hidden">
+                    <div class="w-full h-full">
+                        <iframe id="brochureIframe" class="w-full h-full border-0"
+                            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; background: transparent;"
+                            allowfullscreen loading="eager" sandbox="allow-scripts allow-same-origin"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Brochure Modal Functions
+        function openBrochureModal() {
+            const modal = document.getElementById('brochureModal');
+            const iframe = document.getElementById('brochureIframe');
+            const modalContent = modal.querySelector('.relative');
+
+            // Reset iframe source first to ensure clean state
+            iframe.src = 'about:blank';
+
+            // Show modal first to calculate dimensions
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+
+            // Reset and prepare the modal
+            modalContent.style.opacity = '0';
+            modalContent.style.transform = 'translateY(10px)';
+
+            // Set iframe source after a small delay to ensure modal is visible
+            setTimeout(() => {
+                // Add a timestamp to prevent caching issues
+                const timestamp = new Date().getTime();
+                iframe.src = 'flipbook/examples/test.html?t=' + timestamp;
+
+                // Force focus to the iframe for better keyboard navigation
+                setTimeout(() => iframe.focus(), 100);
+
+                // Animate in
+                setTimeout(() => {
+                    modalContent.style.transition = 'opacity 0.3s ease-out, transform 0.3s ease-out';
+                    modalContent.style.opacity = '1';
+                    modalContent.style.transform = 'translateY(0)';
+                }, 50);
+            }, 10);
+        }
+
+        function closeBrochureModal() {
+            const modal = document.getElementById('brochureModal');
+            const iframe = document.getElementById('brochureIframe');
+            const modalContent = modal.querySelector('.relative');
+
+            // Animate out
+            modalContent.style.transition = 'opacity 0.2s ease-in, transform 0.2s ease-in';
+            modalContent.style.opacity = '0';
+            modalContent.style.transform = 'translateY(20px)';
+
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                document.body.style.overflow = '';
+
+                // Clear iframe source to stop any animations/scripts
+                iframe.src = 'about:blank';
+            }, 200);
+        }
+
+        // Close modal on Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                const modal = document.getElementById('brochureModal');
+                if (!modal.classList.contains('hidden')) {
+                    closeBrochureModal();
+                }
+            }
+        });
+
+        // Prevent modal content clicks from closing modal
+        document.getElementById('brochureModal')?.querySelector('.relative.w-full')?.addEventListener('click', (e) => {
+            e.stopPropagation();
+        });
+    </script>
+
+    <!-- Load Navigation Component -->
+    <script src="assets/components/navigation.js"></script>
+
+</body>
+
+</html>

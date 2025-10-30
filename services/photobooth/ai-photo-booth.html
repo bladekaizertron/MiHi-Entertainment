@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Photo Booth - MiHi Photo Booth</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #1a202c;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .section-padding {
+            padding: 5rem 0;
+        }
+
+        @media (min-width: 768px) {
+            .section-padding {
+                padding: 8rem 0;
+            }
+        }
+
+        /* Animated gradient background */
+        @keyframes gradient-shift {
+
+            0%,
+            100% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+        }
+
+        .animated-gradient {
+            background: linear-gradient(-45deg, #667eea, #764ba2, #f093fb, #4facfe);
+            background-size: 400% 400%;
+            animation: gradient-shift 15s ease infinite;
+        }
+
+        /* Floating particles */
+        .particle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: float 20s infinite linear;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+            }
+
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+            }
+        }
+
+        .particle:nth-child(1) {
+            width: 80px;
+            height: 80px;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .particle:nth-child(2) {
+            width: 50px;
+            height: 50px;
+            left: 20%;
+            animation-delay: -2s;
+            animation-duration: 15s;
+        }
+
+        .particle:nth-child(3) {
+            width: 100px;
+            height: 100px;
+            left: 30%;
+            animation-delay: -4s;
+            animation-duration: 18s;
+        }
+
+        .particle:nth-child(4) {
+            width: 60px;
+            height: 60px;
+            left: 40%;
+            animation-delay: -1s;
+            animation-duration: 16s;
+        }
+
+        .particle:nth-child(5) {
+            width: 90px;
+            height: 90px;
+            left: 50%;
+            animation-delay: -3s;
+            animation-duration: 20s;
+        }
+
+        .particle:nth-child(6) {
+            width: 70px;
+            height: 70px;
+            left: 60%;
+            animation-delay: -2.5s;
+            animation-duration: 17s;
+        }
+
+        .particle:nth-child(7) {
+            width: 80px;
+            height: 80px;
+            left: 70%;
+            animation-delay: -5s;
+            animation-duration: 19s;
+        }
+
+        .particle:nth-child(8) {
+            width: 50px;
+            height: 50px;
+            left: 80%;
+            animation-delay: -3.5s;
+            animation-duration: 14s;
+        }
+
+        .particle:nth-child(9) {
+            width: 100px;
+            height: 100px;
+            left: 90%;
+            animation-delay: -1.5s;
+            animation-duration: 21s;
+        }
+
+        /* Glass morphism effect */
+        .glass {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        /* Floating animation for CTA */
+        @keyframes float-up {
+
+            0%,
+            100% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .float-animation {
+            animation: float-up 3s ease-in-out infinite;
+        }
+
+        /* Pulse effect for highlights */
+        @keyframes pulse-glow {
+
+            0%,
+            100% {
+                box-shadow: 0 0 20px rgba(102, 126, 234, 0.5);
+            }
+
+            50% {
+                box-shadow: 0 0 40px rgba(102, 126, 234, 0.8);
+            }
+        }
+
+        .pulse-glow {
+            animation: pulse-glow 2s ease-in-out infinite;
+        }
+
+        /* Hero image overlay */
+        .hero-overlay {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.9), rgba(118, 75, 162, 0.9));
+        }
+
+        /* Scroll indicator */
+        @keyframes bounce {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(10px);
+            }
+        }
+
+        .scroll-indicator {
+            animation: bounce 2s infinite;
+        }
+        
+        /* Masonry Grid Styles */
+        .masonry-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-auto-rows: 10px;
+            grid-auto-flow: dense;
+            gap: 1rem;
+        }
+        
+        @media (min-width: 768px) {
+            .masonry-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        
+        @media (min-width: 1024px) {
+            .masonry-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+        
+        .masonry-item {
+            grid-row-end: span 20;
+        }
+        
+        .masonry-item.row-span-2 {
+            grid-row-end: span 40;
+        }
+        
+        .masonry-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        
+        /* Grid with Hover Reveal Styles */
+        .hover-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+        
+        @media (min-width: 768px) {
+            .hover-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        
+        @media (min-width: 1024px) {
+            .hover-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+        
+        .grid-item {
+            position: relative;
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            aspect-ratio: 1/1;
+            transition: all 0.3s ease;
+        }
+        
+        .grid-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .grid-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: all 0.3s ease;
+        }
+        
+        .grid-item:hover img {
+            transform: scale(1.05);
+        }
+        
+        .overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent 60%);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 1.5rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .grid-item:hover .overlay {
+            opacity: 1;
+        }
+        
+        .caption {
+            color: white;
+            font-weight: 600;
+            font-size: 1rem;
+            margin-bottom: 0.25rem;
+        }
+        
+        .details {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.875rem;
+        }
+        
+        /* Grid with Enhanced Pop-out Hover Effects */
+        .hover-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+        
+        @media (min-width: 768px) {
+            .hover-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        
+        @media (min-width: 1024px) {
+            .hover-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+        
+        .grid-item {
+            position: relative;
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            aspect-ratio: 1/1;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 1;
+        }
+        
+        .grid-item:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 20px 30px rgba(0, 0, 0, 0.2);
+            z-index: 10;
+        }
+        
+        .grid-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        .grid-item:hover img {
+            transform: scale(1.1);
+        }
+        
+        .overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent 60%);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 1.5rem;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+        
+        .grid-item:hover .overlay {
+            opacity: 1;
+        }
+        
+        .caption {
+            color: white;
+            font-weight: 700;
+            font-size: 1.125rem;
+            margin-bottom: 0.25rem;
+            transform: translateY(10px);
+            transition: transform 0.3s ease 0.1s;
+        }
+        
+        .grid-item:hover .caption {
+            transform: translateY(0);
+        }
+        
+        .details {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.875rem;
+            transform: translateY(10px);
+            transition: transform 0.3s ease 0.15s;
+        }
+        
+        .grid-item:hover .details {
+            transform: translateY(0);
+        }
+    </style>
+</head>
+
+<body class="bg-white">
+
+    <!-- Navigation will be loaded here by navigation.js -->
+    <script src="../../assets/components/navigation.js"></script>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="relative h-screen flex items-center justify-center overflow-hidden text-white">
+            <div class="absolute inset-0 overflow-hidden">
+                <div id="zoom-bg" class="w-full h-full bg-cover bg-center transition-transform duration-1000 ease-out" style="background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('../../assets/images/aiphotohero.jpg'); transform: scale(1.2);"></div>
+            </div>
+
+
+            <div class="relative z-10 container mx-auto px-6 text-center">
+                <div class="max-w-5xl mx-auto">
+                    <!-- Badge -->
+                    <div class="flex justify-center mb-6">
+                        <div class="glass px-6 py-2 rounded-full text-sm font-semibold inline-block text-white">
+                            ✨ Powered by AI Technology
+                        </div>
+                    </div>
+
+                    <!-- Main Heading with Animation -->
+                    <div class="text-center mb-8">
+                        <h1 class="text-4xl md:text-7xl font-black tracking-tight mb-4 leading-tight text-white">
+                            National <span class="inline-block text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500 font-black animate-bounce [animation-duration:1.2s] hover:animate-none hover:scale-110 hover:rotate-2 transition-all duration-300">AI</span> Photo Booth Rentals
+                        </h1>
+                        <div class="w-32 h-1 bg-white mx-auto mt-4 rounded-full"></div>
+                    </div>
+
+                    <!-- Subheading -->
+                    <p class="text-base md:text-lg font-normal mb-8 text-center opacity-95 max-w-5xl mx-auto leading-relaxed">
+                        Revolutionize your brand activation with AI photo booth tech that instantly turns guests into stunning, shareable branded artwork.
+                    </p>
+
+                    <!-- CTA Buttons -->
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
+                        <a href="../../index.html#contact"
+                            class="float-animation inline-block bg-white text-blue-600 px-10 py-5 rounded-full text-xl font-bold hover:shadow-2xl transition-all duration-300 transform hover:scale-105 pulse-glow">
+                            Book Now →
+                        </a>
+                        <a href="#features"
+                            class="inline-block glass px-10 py-5 rounded-full text-xl font-semibold hover:shadow-2xl transition-all duration-300 border-2 border-white">
+                            Learn More
+                        </a>
+                    </div>
+
+                    <!-- Scroll Indicator -->
+                    <div class="text-center scroll-indicator">
+                        <p class="text-sm opacity-75 mb-2">Scroll to explore</p>
+                        <svg class="w-6 h-6 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                        </svg>
+                    </div>
+                </div>
+
+                <!-- Decorative elements -->
+                <div class="absolute top-20 left-10 w-32 h-32 bg-purple-400 rounded-full blur-3xl opacity-20"></div>
+                <div class="absolute bottom-20 right-10 w-40 h-40 bg-blue-400 rounded-full blur-3xl opacity-20"></div>
+            </div>
+        </section>
+
+        <!-- AI Photo Booth Rentals Section -->
+        <section id="ai-photo-booth-rentals" class="py-20 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="max-w-6xl mx-auto">
+                    <div class="text-center mb-16">
+                        <div class="relative mb-16">
+                            <div class="absolute inset-0 flex items-center">
+                                <div class="w-full border-t border-gray-200"></div>
+                            </div>
+                            <div class="relative flex justify-center">
+                                <span class="px-6 bg-white text-2xl md:text-3xl font-light tracking-[0.5em] text-center text-gray-700 uppercase">
+                                    Custom AI-Generated
+                                </span>
+                            </div>
+                        </div>
+                        <h2 class="text-5xl md:text-6xl font-bold mb-8 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                            AI Photo Booth Rentals
+                        </h2>
+                        <div class="max-w-15xl mx-auto px-4">
+                            <p class="text-lg md:text-xl text-gray-700 leading-relaxed mb-6">
+                                While everyone else is running basic photo ops, you'll be transforming reality itself. Our AI photo experience turns ordinary booth visits into mind-bending transformations. One click, and your guests become living art that stops social feeds dead in their tracks.
+                            </p>
+                            <p class="text-lg md:text-xl text-gray-700 leading-relaxed mb-12">
+                                Welcome to the future of impossible possibilities. Available nationwide, our AI Photo Booth is perfect for corporate activations, themed parties, experiential marketing, and social events looking to make an impact. Customize every element, from branded outputs to unique AI photos, and create content that's fun, engaging, and shareable in seconds.
+                            </p>
+                            <!-- Artistic Collage Premium 13-Photo Gallery with Click-to-Top -->
+                            <div class="relative w-full h-[680px] md:h-[900px] lg:h-[1100px] mt-16 flex items-center justify-center overflow-visible select-none" id="premium-collage">
+                                <!-- Images with unique IDs for scripting -->
+                                <img id="collage-1" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?fit=crop&w=500&q=80" class="premium-photo absolute border-8 border-white shadow-xl rounded-2xl transition-all duration-700 cursor-pointer" alt="Red Carpet" loading="lazy">
+                                <img id="collage-2" src="https://images.unsplash.com/photo-1543269865-cbf427effbad?fit=crop&w=500&q=80" class="premium-photo absolute border-8 border-white shadow-lg rounded-xl transition-all duration-700 cursor-pointer" alt="AI Fantasy" loading="lazy">
+                                <img id="collage-3" src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?fit=crop&w=500&q=80" class="premium-photo absolute border-8 border-white shadow-2xl rounded-3xl transition-all duration-700 cursor-pointer" alt="Superheroes" loading="lazy">
+                                <img id="collage-4" src="https://images.unsplash.com/photo-1551650975-87deedd944c3?fit=crop&w=500&q=80" class="premium-photo absolute border-8 border-white shadow-xl rounded-2xl transition-all duration-700 cursor-pointer" alt="Art Filters" loading="lazy">
+                                <img id="collage-5" src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?fit=crop&w=650&q=80" class="premium-photo absolute border-8 border-white shadow-2xl rounded-xl transition-all duration-700 cursor-pointer" alt="Vintage" loading="lazy">
+                                <img id="collage-6" src="https://images.unsplash.com/photo-1543269664-56d93c1b41a6?fit=crop&w=500&q=80" class="premium-photo absolute border-8 border-white shadow-lg rounded-xl transition-all duration-700 cursor-pointer" alt="Sci-Fi" loading="lazy">
+                                <img id="collage-7" src="https://images.unsplash.com/photo-1552058544-f2b08422138a?fit=crop&w=500&q=80" class="premium-photo absolute border-8 border-white shadow-xl rounded-2xl transition-all duration-700 cursor-pointer" alt="Cartoon Fun" loading="lazy">
+                                <img id="collage-8" src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=500&q=80" class="premium-photo absolute border-8 border-white shadow-xl rounded-2xl transition-all duration-700 cursor-pointer" alt="Group Glam" loading="lazy">
+                                <img id="collage-9" src="https://images.unsplash.com/photo-1454023492550-5696f8ff10e1?fit=crop&w=500&q=80" class="premium-photo absolute border-8 border-white shadow-lg rounded-xl transition-all duration-700 cursor-pointer" alt="Bold Colors" loading="lazy">
+                                <img id="collage-10" src="https://images.unsplash.com/photo-1465101046530-73398c7f28ca?fit=crop&w=500&q=80" class="premium-photo absolute border-8 border-white shadow-2xl rounded-2xl transition-all duration-700 cursor-pointer" alt="Candid Laughter" loading="lazy">
+                                <img id="collage-11" src="https://images.unsplash.com/photo-1470770841072-f978cf4d019e?fit=crop&w=500&q=80" class="premium-photo absolute border-8 border-white shadow-lg rounded-xl transition-all duration-700 cursor-pointer" alt="Party Vibes" loading="lazy">
+                                <img id="collage-12" src="https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?fit=crop&w=500&q=80" class="premium-photo absolute border-8 border-white shadow-lg rounded-xl transition-all duration-700 cursor-pointer" alt="Close-Ups" loading="lazy">
+                                <img id="collage-13" src="https://images.unsplash.com/photo-1504681869696-c5175d7b7b72?fit=crop&w=500&q=80" class="premium-photo absolute border-8 border-white shadow-lg rounded-xl transition-all duration-700 cursor-pointer" alt="Mosaic" loading="lazy">
+                            </div>
+                            <script>
+                              // Larger, overlapping, click-to-front collage
+                              const collagePositions = [
+                                {left:'13%',top:'2%',w:300,z:10,rot:-10},
+                                {left:'3%',top:'30%',w:270,z:20,rot:2},
+                                {left:'63%',top:'9%',w:340,z:22,rot:8},
+                                {left:'50%',top:'10%',w:380,z:26,rot:3},
+                                {left:'33%',top:'30%',w:440,z:36,rot:-2},
+                                {left:'10%',top:'64%',w:250,z:20,rot:7},
+                                {left:'48%',top:'62%',w:270,z:30,rot:-3},
+                                {left:'70%',top:'25%',w:300,z:28,rot:16},
+                                {left:'24%',top:'68%',w:270,z:13,rot:-14},
+                                {left:'58%',top:'73%',w:320,z:19,rot:11},
+                                {left:'74%',top:'62%',w:235,z:25,rot:5},
+                                {left:'45%',top:'75%',w:180,z:18,rot:-4},
+                                {left:'81%',top:'40%',w:210,z:15,rot:-8}
+                              ];
+                              const imgObjs = Array.from({length: 13}, (_, i) => document.getElementById(`collage-${i+1}`));
+                              let zBase = 40;
+                              function layoutCollage() {
+                                // Lay out photos by collagePositions
+                                collagePositions.forEach((d, i) => {
+                                  const img = imgObjs[i];
+                                  img.style.left = d.left;
+                                  img.style.top = d.top;
+                                  img.style.width = d.w+"px";
+                                  img.style.zIndex = d.z;
+                                  img.style.transform = `rotate(${d.rot}deg) scale(1)`;
+                                  img.dataset.zbase = d.z;
+                                });
+                              }
+                              // Bring to front (and scale up) on click
+                              imgObjs.forEach(img => {
+                                img.addEventListener('click', () => {
+                                  // bump z all down, reset transforms
+                                  imgObjs.forEach(i => {
+                                    i.style.zIndex = i.dataset.zbase;
+                                    i.style.transform = i.style.transform.replace(' scale(1.15)','').replace(' scale(1.12)','').replace(' scale(1.1)','') + ' scale(1)';
+                                  });
+                                  // bring clicked img to top
+                                  img.style.zIndex = zBase + 10;
+                                  img.style.transform = img.style.transform.replace(' scale(1)','') + ' scale(1.15)';
+                                });
+                              });
+                              document.addEventListener('DOMContentLoaded', layoutCollage);
+                            </script>
+                            <!-- End of 13-photo grid -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- What is an AI Photo Booth? Section (two-column) -->
+        <section class="py-20 bg-gradient-to-r from-indigo-50 via-white to-purple-50">
+            <div class="container mx-auto px-6">
+                <div class="flex flex-col md:flex-row items-center gap-12">
+                    <div class="md:w-1/2 mb-10 md:mb-0">
+                        <h2 class="text-4xl md:text-5xl font-bold mb-6 text-indigo-900">What is an AI Photo Booth?</h2>
+                        <p class="text-xl text-gray-700 mb-5">When artificial intelligence meets creative direction. Every photo becomes an artistic masterpiece, every guest becomes a storytelling opportunity, and every activation becomes an endless stream of shareable content.</p>
+                        <ul class="list-disc pl-6 text-indigo-800 font-medium space-y-2">
+                            <li>Real-Time Image Transformation</li>
+                            <li>Custom Branded Art Styles</li>
+                            <li>Instant Social Media Delivery</li>
+                            <li>Multiple Style Variations Per Photo</li>
+                            <li>AI-Powered Quality Enhancement</li>
+                            <li>Touch Screen Interface</li>
+                            <li>Live-Preview Capabilities</li>
+                            <li>High-Resolution Output</li>
+                            <li>Custom Digital Backgrounds</li>
+                            <li>Personalized Photo Galleries</li>
+                            <li>Animated AI Effects</li>
+                            <li>Event-Specific Branded Frames</li>
+                            <li>Branded Email And Text Templates</li>
+                        </ul>
+                    </div>
+                    <div class="md:w-1/2 flex justify-center">
+                        <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?fit=crop&w=700&q=80" alt="AI Photo Booth Demo" class="rounded-2xl shadow-2xl w-full max-w-md object-cover" loading="lazy">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Branded AI Photo Marketing Experiences (two-column) -->
+        <section class="py-20 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="flex flex-col md:flex-row items-center gap-12">
+                    <div class="md:w-1/2 mb-10 md:mb-0">
+                        <h2 class="text-4xl md:text-5xl font-bold mb-6 text-purple-700">Branded AI Photo Marketing Experiences</h2>
+                        <p class="mb-5 text-xl text-gray-700">Transformation is the new currency of engagement. Our AI-powered photo experiences turn guests into custom avatars, digital art, or branded characters, making your brand part of their story. Every photo is a shareable masterpiece, spreading your message across social media with every post.</p>
+                        <h3 class="text-lg font-semibold mb-3 text-purple-700">Customize your AI Photo Booth with:</h3>
+                        <ul class="list-disc pl-6 text-purple-700 space-y-2">
+                            <li>Custom AI-Generated Filters And Art Styles</li>
+                            <li>Branded Photo Overlays</li>
+                            <li>Interactive Branded Microsites</li>
+                            <li>Custom Digital Backgrounds</li>
+                            <li>Personalized Photo Galleries</li>
+                            <li>Animated AI Effects</li>
+                            <li>Event-Specific Branded Frames</li>
+                            <li>Branded Email And Text Templates</li>
+                        </ul>
+                    </div>
+                    <div class="md:w-1/2 flex justify-center">
+                        <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=700&q=80" alt="AI Marketing Experience" class="rounded-2xl shadow-2xl w-full max-w-md object-cover" loading="lazy">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- How It Works -->
+        <section class="section-padding bg-gradient-to-b from-gray-50 to-white">
+            <div class="container mx-auto px-6">
+                <div class="max-w-5xl mx-auto">
+                    <div class="text-center mb-16">
+                        <h2 class="text-5xl font-bold mb-4">How It Works</h2>
+                        <p class="text-xl text-gray-600">Simple. Fast. Amazing results in just 4 steps</p>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div
+                            class="group flex items-start gap-6 p-6 rounded-2xl bg-white hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+                            <div
+                                class="flex-shrink-0 w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-700 text-white rounded-2xl flex items-center justify-center font-bold text-2xl shadow-lg">
+                                1
+                            </div>
+                            <div>
+                                <h3 class="text-2xl font-bold mb-2">Strike a Pose</h3>
+                                <p class="text-gray-600 leading-relaxed">Step up to our AI Photo Booth and get ready for
+                                    your
+                                    close-up. Our professional setup ensures perfect lighting every time.</p>
+                            </div>
+                        </div>
+
+                        <div
+                            class="group flex items-start gap-6 p-6 rounded-2xl bg-white hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+                            <div
+                                class="flex-shrink-0 w-16 h-16 bg-gradient-to-br from-purple-500 to-purple-700 text-white rounded-2xl flex items-center justify-center font-bold text-2xl shadow-lg">
+                                2
+                            </div>
+                            <div>
+                                <h3 class="text-2xl font-bold mb-2">Choose Your Style</h3>
+                                <p class="text-gray-600 leading-relaxed">Select from our curated collection of AI styles
+                                    - from
+                                    superhero transformations to artistic masterpieces.</p>
+                            </div>
+                        </div>
+
+                        <div
+                            class="group flex items-start gap-6 p-6 rounded-2xl bg-white hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+                            <div
+                                class="flex-shrink-0 w-16 h-16 bg-gradient-to-br from-pink-500 to-pink-700 text-white rounded-2xl flex items-center justify-center font-bold text-2xl shadow-lg">
+                                3
+                            </div>
+                            <div>
+                                <h3 class="text-2xl font-bold mb-2">Watch the Magic</h3>
+                                <p class="text-gray-600 leading-relaxed">Our AI technology transforms your photo in
+                                    seconds,
+                                    creating stunning, unique characters tailored to your chosen style.</p>
+                            </div>
+                        </div>
+
+                        <div
+                            class="group flex items-start gap-6 p-6 rounded-2xl bg-white hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+                            <div
+                                class="flex-shrink-0 w-16 h-16 bg-gradient-to-br from-indigo-500 to-indigo-700 text-white rounded-2xl flex items-center justify-center font-bold text-2xl shadow-lg">
+                                4
+                            </div>
+                            <div>
+                                <h3 class="text-2xl font-bold mb-2">Share & Enjoy</h3>
+                                <p class="text-gray-600 leading-relaxed">Receive your AI-generated masterpiece instantly
+                                    and
+                                    share it on social media or take home a printed copy.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Perfect For Section -->
+        <section class="section-padding bg-gradient-to-b from-gray-50 via-white to-gray-50">
+            <div class="container mx-auto px-6">
+                <div class="max-w-6xl mx-auto">
+                    <div class="text-center mb-16">
+                        <h2 class="text-5xl font-bold mb-4">Perfect For Every Occasion</h2>
+                        <p class="text-xl text-gray-600">Transform any event into an unforgettable experience</p>
+                    </div>
+
+                    <div class="grid md:grid-cols-3 gap-8">
+                        <div
+                            class="group text-center p-8 rounded-3xl bg-white hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border-2 border-gray-100">
+                            <div class="text-7xl mb-6 group-hover:scale-110 transition-transform duration-300">🎉</div>
+                            <h3 class="text-2xl font-bold mb-3">Corporate Events</h3>
+                            <p class="text-gray-600 leading-relaxed">Engage employees and clients with cutting-edge AI
+                                technology that
+                                creates memorable branded experiences.</p>
+                        </div>
+
+                        <div
+                            class="group text-center p-8 rounded-3xl bg-white hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border-2 border-gray-100">
+                            <div class="text-7xl mb-6 group-hover:scale-110 transition-transform duration-300">💍</div>
+                            <h3 class="text-2xl font-bold mb-3">Weddings</h3>
+                            <p class="text-gray-600 leading-relaxed">Give your guests a unique keepsake with
+                                AI-generated fantasy
+                                portraits in themed styles.</p>
+                        </div>
+
+                        <div
+                            class="group text-center p-8 rounded-3xl bg-white hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border-2 border-gray-100">
+                            <div class="text-7xl mb-6 group-hover:scale-110 transition-transform duration-300">🎪</div>
+                            <h3 class="text-2xl font-bold mb-3">Trade Shows</h3>
+                            <p class="text-gray-600 leading-relaxed">Draw crowds to your booth with this innovative
+                                technology that
+                                generates social media buzz.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="relative section-padding animated-gradient text-white overflow-hidden">
+            <!-- Decorative blobs -->
+            <div class="absolute top-0 left-0 w-96 h-96 bg-purple-500 rounded-full filter blur-3xl opacity-20"></div>
+            <div class="absolute bottom-0 right-0 w-96 h-96 bg-blue-500 rounded-full filter blur-3xl opacity-20"></div>
+
+            <div class="relative z-10 container mx-auto px-6 text-center">
+                <h2 class="text-5xl md:text-6xl font-bold mb-6">Ready to Add AI Magic to Your Event?</h2>
+                <p class="text-xl md:text-2xl mb-10 max-w-3xl mx-auto opacity-95 leading-relaxed">Contact us today to
+                    book our AI Photo Booth and
+                    give your guests an unforgettable experience.</p>
+
+                <div class="flex flex-col sm:flex-row gap-6 justify-center items-center">
+                    <a href="../../index.html#contact"
+                        class="inline-block bg-white text-blue-600 px-12 py-6 rounded-full text-xl font-bold hover:shadow-2xl transition-all duration-300 transform hover:scale-105 shadow-lg">
+                        Get Your Free Quote →
+                    </a>
+                    <a href="tel:+1234567890"
+                        class="inline-block glass px-12 py-6 rounded-full text-xl font-semibold hover:shadow-2xl transition-all duration-300 border-2 border-white backdrop-blur-lg">
+                        📞 Call Now
+                    </a>
+                </div>
+            </div>
+        </section>
+
+                <!-- View More Button -->
+                <div class="text-center mt-12">
+                    <button class="px-8 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-full font-medium hover:opacity-90 transition-opacity shadow-lg hover:shadow-xl">
+                        View More Creations
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="../../assets/components/footer.js"></script>
+
+    <script>
+        // Zoom out effect on scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            const zoomBg = document.getElementById('zoom-bg');
+            const heroSection = document.querySelector('section.relative');
+            
+            function updateZoom() {
+                const scrollPosition = window.scrollY;
+                const heroHeight = heroSection.offsetHeight;
+                const maxScroll = Math.min(scrollPosition, heroHeight);
+                const scale = 1.2 - (maxScroll / heroHeight * 0.2); // Reduce scale from 1.2 to 1.0
+                zoomBg.style.transform = `scale(${scale})`;
+            }
+
+            // Initial call to set the initial state
+            updateZoom();
+            
+            // Update on scroll
+            window.addEventListener('scroll', updateZoom);
+            
+            // Update on window resize
+            window.addEventListener('resize', updateZoom);
+        });
+    </script>
+</body>
+</html>

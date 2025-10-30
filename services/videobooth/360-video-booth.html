@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>360 Video Booth - MiHi Photo Booth</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #1a202c;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .section-padding {
+            padding: 5rem 0;
+        }
+
+        @media (min-width: 768px) {
+            .section-padding {
+                padding: 8rem 0;
+            }
+        }
+
+        /* Animated gradient background */
+        @keyframes gradient-shift {
+
+            0%,
+            100% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+        }
+
+        .animated-gradient-blue {
+            background: linear-gradient(-45deg, #6366f1, #3b82f6, #2563eb, #1d4ed8);
+            background-size: 400% 400%;
+            animation: gradient-shift 15s ease infinite;
+        }
+
+        /* Floating particles */
+        .particle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: float 20s infinite linear;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+            }
+
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+            }
+        }
+
+        .particle:nth-child(1) {
+            width: 80px;
+            height: 80px;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .particle:nth-child(2) {
+            width: 50px;
+            height: 50px;
+            left: 20%;
+            animation-delay: -2s;
+            animation-duration: 15s;
+        }
+
+        .particle:nth-child(3) {
+            width: 100px;
+            height: 100px;
+            left: 30%;
+            animation-delay: -4s;
+            animation-duration: 18s;
+        }
+
+        .particle:nth-child(4) {
+            width: 60px;
+            height: 60px;
+            left: 40%;
+            animation-delay: -1s;
+            animation-duration: 16s;
+        }
+
+        .particle:nth-child(5) {
+            width: 90px;
+            height: 90px;
+            left: 50%;
+            animation-delay: -3s;
+            animation-duration: 20s;
+        }
+
+        .particle:nth-child(6) {
+            width: 70px;
+            height: 70px;
+            left: 60%;
+            animation-delay: -2.5s;
+            animation-duration: 17s;
+        }
+
+        .particle:nth-child(7) {
+            width: 80px;
+            height: 80px;
+            left: 70%;
+            animation-delay: -5s;
+            animation-duration: 19s;
+        }
+
+        .particle:nth-child(8) {
+            width: 50px;
+            height: 50px;
+            left: 80%;
+            animation-delay: -3.5s;
+            animation-duration: 14s;
+        }
+
+        .particle:nth-child(9) {
+            width: 100px;
+            height: 100px;
+            left: 90%;
+            animation-delay: -1.5s;
+            animation-duration: 21s;
+        }
+
+        /* Glass morphism effect */
+        .glass {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        /* Floating animation for CTA */
+        @keyframes float-up {
+
+            0%,
+            100% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .float-animation {
+            animation: float-up 3s ease-in-out infinite;
+        }
+
+        /* Pulse effect for highlights */
+        @keyframes pulse-glow {
+
+            0%,
+            100% {
+                box-shadow: 0 0 20px rgba(99, 102, 241, 0.5);
+            }
+
+            50% {
+                box-shadow: 0 0 40px rgba(99, 102, 241, 0.8);
+            }
+        }
+
+        .pulse-glow-blue {
+            animation: pulse-glow 2s ease-in-out infinite;
+        }
+
+        /* Scroll indicator */
+        @keyframes bounce {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(10px);
+            }
+        }
+
+        .scroll-indicator {
+            animation: bounce 2s infinite;
+        }
+    </style>
+</head>
+
+<body class="bg-white">
+    <script src="../../assets/components/navigation.js"></script>
+    <main>
+        <!-- Hero Section -->
+        <section class="relative animated-gradient-blue text-white py-32 overflow-hidden">
+            <!-- Animated particles -->
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+
+            <!-- Hero content with background image -->
+            <div class="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-20"
+                style="background-image: url('https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80');">
+            </div>
+
+            <div class="relative z-10 container mx-auto px-6">
+                <div class="max-w-5xl mx-auto">
+                    <!-- Badge -->
+                    <div class="flex justify-center mb-6">
+                        <div class="glass px-6 py-2 rounded-full text-sm font-semibold inline-block">
+                            🎥 360° Video Experience
+                        </div>
+                    </div>
+
+                    <!-- Main Heading with Animation -->
+                    <div class="text-center mb-8">
+                        <h1 class="text-6xl md:text-8xl font-bold mb-4 leading-tight">
+                            360° <span class="inline-block animate-pulse">Video</span> Booth
+                        </h1>
+                        <div class="w-32 h-1 bg-white mx-auto mt-4 rounded-full"></div>
+                    </div>
+
+                    <!-- Subheading -->
+                    <p class="text-2xl md:text-3xl mb-8 text-center opacity-95 max-w-3xl mx-auto leading-relaxed">
+                        Epic, shareable videos from every angle
+                    </p>
+
+                    <!-- Key Features Pills -->
+                    <div class="flex flex-wrap justify-center gap-4 mb-10">
+                        <div class="glass px-6 py-3 rounded-full backdrop-blur-lg">
+                            🎬 360° Coverage
+                        </div>
+                        <div class="glass px-6 py-3 rounded-full backdrop-blur-lg">
+                            📱 Social Ready
+                        </div>
+                        <div class="glass px-6 py-3 rounded-full backdrop-blur-lg">
+                            ✨ Custom Overlays
+                        </div>
+                    </div>
+
+                    <!-- CTA Buttons -->
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
+                        <a href="../../index.html#contact"
+                            class="float-animation inline-block bg-white text-blue-600 px-10 py-5 rounded-full text-xl font-bold hover:shadow-2xl transition-all duration-300 transform hover:scale-105 pulse-glow-blue">
+                            Book Now →
+                        </a>
+                        <a href="#features"
+                            class="inline-block glass px-10 py-5 rounded-full text-xl font-semibold hover:shadow-2xl transition-all duration-300 border-2 border-white">
+                            Learn More
+                        </a>
+                    </div>
+
+                    <!-- Scroll Indicator -->
+                    <div class="text-center scroll-indicator">
+                        <p class="text-sm opacity-75 mb-2">Scroll to explore</p>
+                        <svg class="w-6 h-6 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                        </svg>
+                    </div>
+                </div>
+
+                <!-- Decorative elements -->
+                <div class="absolute top-20 left-10 w-32 h-32 bg-blue-400 rounded-full blur-3xl opacity-20"></div>
+                <div class="absolute bottom-20 right-10 w-40 h-40 bg-indigo-400 rounded-full blur-3xl opacity-20"></div>
+            </div>
+        </section>
+        <!-- Features Section -->
+        <section id="features" class="section-padding bg-gradient-to-b from-white to-gray-50">
+            <div class="container mx-auto px-6">
+                <div class="max-w-6xl mx-auto">
+                    <div class="text-center mb-16">
+                        <h2 class="text-5xl font-bold mb-4">Capture Every Angle</h2>
+                        <p class="text-xl text-gray-600 max-w-2xl mx-auto">Cinematic slow-motion videos from every
+                            perspective</p>
+                    </div>
+
+                    <div class="grid md:grid-cols-3 gap-8 mb-16">
+                        <div
+                            class="group text-center p-8 rounded-3xl bg-white hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border-2 border-gray-100">
+                            <div
+                                class="w-20 h-20 bg-gradient-to-br from-indigo-400 to-indigo-600 rounded-2xl flex items-center justify-center mx-auto mb-6 transform group-hover:rotate-6 transition-transform">
+                                <span class="text-4xl">🎬</span>
+                            </div>
+                            <h3 class="text-2xl font-bold mb-3">360° Coverage</h3>
+                            <p class="text-gray-600 leading-relaxed">Camera rotates around guests creating cinematic
+                                slow-motion videos.</p>
+                        </div>
+
+                        <div
+                            class="group text-center p-8 rounded-3xl bg-white hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border-2 border-gray-100">
+                            <div
+                                class="w-20 h-20 bg-gradient-to-br from-blue-400 to-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-6 transform group-hover:rotate-6 transition-transform">
+                                <span class="text-4xl">📱</span>
+                            </div>
+                            <h3 class="text-2xl font-bold mb-3">Social Media Ready</h3>
+                            <p class="text-gray-600 leading-relaxed">Perfect format for Instagram, TikTok, and other
+                                social platforms.</p>
+                        </div>
+
+                        <div
+                            class="group text-center p-8 rounded-3xl bg-white hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border-2 border-gray-100">
+                            <div
+                                class="w-20 h-20 bg-gradient-to-br from-purple-400 to-purple-600 rounded-2xl flex items-center justify-center mx-auto mb-6 transform group-hover:rotate-6 transition-transform">
+                                <span class="text-4xl">✨</span>
+                            </div>
+                            <h3 class="text-2xl font-bold mb-3">Custom Overlays</h3>
+                            <p class="text-gray-600 leading-relaxed">Add your branding, music, and special effects to
+                                videos.</p>
+                        </div>
+                    </div>
+
+                    <!-- Image Gallery -->
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div
+                            class="group relative rounded-3xl overflow-hidden shadow-2xl transform hover:scale-105 transition-all duration-300">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent z-10"></div>
+                            <img src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                                alt="360 video booth setup" class="w-full h-96 object-cover">
+                            <div class="absolute bottom-6 left-6 right-6 z-20">
+                                <h4 class="text-white text-2xl font-bold mb-2">360° Experience</h4>
+                                <p class="text-white/90">Capture every angle in stunning detail</p>
+                            </div>
+                        </div>
+                        <div
+                            class="group relative rounded-3xl overflow-hidden shadow-2xl transform hover:scale-105 transition-all duration-300">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent z-10"></div>
+                            <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                                alt="Video production" class="w-full h-96 object-cover">
+                            <div class="absolute bottom-6 left-6 right-6 z-20">
+                                <h4 class="text-white text-2xl font-bold mb-2">Cinematic Quality</h4>
+                                <p class="text-white/90">Professional slow-motion videos</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- CTA Section -->
+        <section class="relative section-padding animated-gradient-blue text-white overflow-hidden">
+            <!-- Decorative blobs -->
+            <div class="absolute top-0 left-0 w-96 h-96 bg-indigo-500 rounded-full filter blur-3xl opacity-20"></div>
+            <div class="absolute bottom-0 right-0 w-96 h-96 bg-blue-500 rounded-full filter blur-3xl opacity-20"></div>
+
+            <div class="relative z-10 container mx-auto px-6 text-center">
+                <h2 class="text-5xl md:text-6xl font-bold mb-6">Create Viral-Worthy Content</h2>
+                <p class="text-xl md:text-2xl mb-10 max-w-3xl mx-auto opacity-95 leading-relaxed">Give your guests the
+                    VIP treatment with our 360 video experience.</p>
+
+                <div class="flex flex-col sm:flex-row gap-6 justify-center items-center">
+                    <a href="../../index.html#contact"
+                        class="inline-block bg-white text-blue-600 px-12 py-6 rounded-full text-xl font-bold hover:shadow-2xl transition-all duration-300 transform hover:scale-105 shadow-lg">
+                        Get Your Free Quote →
+                    </a>
+                    <a href="tel:+1234567890"
+                        class="inline-block glass px-12 py-6 rounded-full text-xl font-semibold hover:shadow-2xl transition-all duration-300 border-2 border-white backdrop-blur-lg">
+                        📞 Call Now
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+    <script src="../../assets/components/footer.js"></script>
+</body>
+
+</html>

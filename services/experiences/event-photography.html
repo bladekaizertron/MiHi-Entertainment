@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Photography - MiHi Photo Booth</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; color: #1a202c; }
+        h1, h2, h3, h4, h5, h6 { font-family: 'Playfair Display', serif; }
+        
+        /* Animated gradient background */
+        @keyframes gradient-shift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        
+        .animated-gradient {
+            background: linear-gradient(-45deg, #667eea, #764ba2, #f093fb, #4facfe);
+            background-size: 400% 400%;
+            animation: gradient-shift 15s ease infinite;
+        }
+        
+        /* Floating particles */
+        .particle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: float 20s infinite linear;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(100vh) rotate(0deg); }
+            100% { transform: translateY(-100vh) rotate(360deg); }
+        }
+        
+        .particle:nth-child(1) { width: 80px; height: 80px; left: 10%; animation-delay: 0s; }
+        .particle:nth-child(2) { width: 50px; height: 50px; left: 20%; animation-delay: -2s; animation-duration: 15s; }
+        .particle:nth-child(3) { width: 100px; height: 100px; left: 30%; animation-delay: -4s; animation-duration: 18s; }
+        .particle:nth-child(4) { width: 60px; height: 60px; left: 40%; animation-delay: -1s; animation-duration: 16s; }
+        .particle:nth-child(5) { width: 90px; height: 90px; left: 50%; animation-delay: -3s; animation-duration: 20s; }
+        .particle:nth-child(6) { width: 70px; height: 70px; left: 60%; animation-delay: -2.5s; animation-duration: 17s; }
+        .particle:nth-child(7) { width: 80px; height: 80px; left: 70%; animation-delay: -5s; animation-duration: 19s; }
+        .particle:nth-child(8) { width: 50px; height: 50px; left: 80%; animation-delay: -3.5s; animation-duration: 14s; }
+        .particle:nth-child(9) { width: 100px; height: 100px; left: 90%; animation-delay: -1.5s; animation-duration: 21s; }
+        
+        /* Glass morphism effect */
+        .glass {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        /* Floating animation for CTA */
+        @keyframes float-up {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .float-animation {
+            animation: float-up 3s ease-in-out infinite;
+        }
+        
+        /* Pulse effect for highlights */
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(102, 126, 234, 0.5); }
+            50% { box-shadow: 0 0 40px rgba(102, 126, 234, 0.8); }
+        }
+        
+        .pulse-glow {
+            animation: pulse-glow 2s ease-in-out infinite;
+        }
+        
+        /* Hero image overlay */
+        .hero-overlay {
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.9) 0%, rgba(30, 41, 59, 0.7) 100%);
+        }
+        
+        /* Scroll indicator */
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(10px); }
+        }
+        
+        .scroll-indicator {
+            animation: bounce 2s infinite;
+        }
+        
+        /* Custom button styles */
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
+        
+        .btn-primary::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+        }
+        
+        .btn-primary:hover::after {
+            left: 100%;
+        }
+        
+        /* Section spacing */
+        .section-padding { padding: 5rem 0; }
+        @media (min-width: 768px) { .section-padding { padding: 8rem 0; } }
+        
+        /* Card hover effects */
+        .feature-card {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            border: 2px solid #f1f5f9;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+        
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+        
+        .feature-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        /* Decorative elements */
+        .section-badge {
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 50px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body class="bg-white">
+    <script src="../../assets/components/navigation.js"></script>
+    <main>
+        <!-- Hero Section -->
+        <section class="relative animated-gradient text-white py-32 overflow-hidden">
+            <!-- Animated particles -->
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            
+            <!-- Hero content with background image -->
+            <div class="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-20"
+                style="background-image: url('https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80');">
+            </div>
+            
+            <div class="relative z-10 container mx-auto px-6">
+                <div class="max-w-5xl mx-auto">
+                    <!-- Badge -->
+                    <div class="flex justify-center mb-6">
+                        <div class="glass px-6 py-2 rounded-full text-sm font-semibold inline-block">
+                            📸 Professional Photography
+                        </div>
+                    </div>
+                    
+                    <!-- Main Heading with Animation -->
+                    <div class="text-center mb-8">
+                        <h1 class="text-5xl md:text-7xl font-bold mb-4 leading-tight">
+                            Event <span class="inline-block">Photography</span>
+                        </h1>
+                        <div class="w-32 h-1 bg-white mx-auto mt-4 rounded-full"></div>
+                    </div>
+                    
+                    <!-- Subheading -->
+                    <p class="text-2xl md:text-3xl mb-8 text-center opacity-95 max-w-3xl mx-auto leading-relaxed">
+                        Professional coverage of every moment that matters
+                    </p>
+                    
+                    <!-- Key Features Pills -->
+                    <div class="flex flex-wrap justify-center gap-4 mb-10">
+                        <div class="glass px-6 py-3 rounded-full backdrop-blur-lg">
+                            📷 High-Quality Images
+                        </div>
+                        <div class="glass px-6 py-3 rounded-full backdrop-blur-lg">
+                            ⚡ Fast Delivery
+                        </div>
+                        <div class="glass px-6 py-3 rounded-full backdrop-blur-lg">
+                            👥 Professional Team
+                        </div>
+                    </div>
+                    
+                    <!-- CTA Buttons -->
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
+                        <a href="../../index.html#contact"
+                            class="float-animation inline-block bg-white text-blue-600 px-10 py-5 rounded-full text-xl font-bold hover:shadow-2xl transition-all duration-300 transform hover:scale-105 pulse-glow">
+                            Book Now →
+                        </a>
+                        <a href="#features"
+                            class="inline-block glass px-10 py-5 rounded-full text-xl font-semibold hover:shadow-2xl transition-all duration-300 border-2 border-white">
+                            Learn More
+                        </a>
+                    </div>
+                    
+                    <!-- Scroll Indicator -->
+                    <div class="text-center scroll-indicator">
+                        <p class="text-sm opacity-75 mb-2">Scroll to explore</p>
+                        <svg class="w-6 h-6 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                        </svg>
+                    </div>
+                </div>
+                
+                <!-- Decorative elements -->
+                <div class="absolute top-20 left-10 w-32 h-32 bg-purple-400 rounded-full blur-3xl opacity-20"></div>
+                <div class="absolute bottom-20 right-10 w-40 h-40 bg-blue-400 rounded-full blur-3xl opacity-20"></div>
+            </div>
+        </section>
+        
+        <!-- Features Section -->
+        <section id="features" class="section-padding bg-gradient-to-b from-white to-gray-50">
+            <div class="container mx-auto px-6">
+                <div class="max-w-6xl mx-auto">
+                    <div class="text-center mb-16">
+                        <div class="section-badge">Our Services</div>
+                        <h2 class="text-4xl md:text-5xl font-bold mb-4">Capture Every Special Moment</h2>
+                        <p class="text-xl text-gray-600 max-w-2xl mx-auto">Professional event photography services to preserve your memories forever</p>
+                    </div>
+                    
+                    <div class="grid md:grid-cols-3 gap-8 mb-16">
+                        <div class="feature-card text-center p-8 rounded-3xl bg-white">
+                            <div class="w-20 h-20 bg-gradient-to-br from-teal-500 to-cyan-600 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                                <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                                </svg>
+                            </div>
+                            <h3 class="text-2xl font-bold mb-3">Professional Team</h3>
+                            <p class="text-gray-600 leading-relaxed">Experienced photographers who know how to capture the perfect shot and work seamlessly with your event timeline.</p>
+                        </div>
+                        
+                        <div class="feature-card text-center p-8 rounded-3xl bg-white">
+                            <div class="w-20 h-20 bg-gradient-to-br from-teal-500 to-cyan-600 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                                <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                                </svg>
+                            </div>
+                            <h3 class="text-2xl font-bold mb-3">High-Quality Images</h3>
+                            <p class="text-gray-600 leading-relaxed">Professional-grade equipment ensures stunning, high-resolution photos with perfect lighting and composition.</p>
+                        </div>
+                        
+                        <div class="feature-card text-center p-8 rounded-3xl bg-white">
+                            <div class="w-20 h-20 bg-gradient-to-br from-teal-500 to-cyan-600 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                                <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                            </div>
+                            <h3 class="text-2xl font-bold mb-3">Fast Delivery</h3>
+                            <p class="text-gray-600 leading-relaxed">Receive your edited photos quickly after your event with both digital and print options available.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Image Gallery -->
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div class="group relative rounded-3xl overflow-hidden shadow-2xl transform hover:scale-105 transition-all duration-300">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent z-10"></div>
+                            <img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" 
+                                alt="Event photography in action" class="w-full h-96 object-cover">
+                            <div class="absolute bottom-6 left-6 right-6 z-20">
+                                <h4 class="text-white text-2xl font-bold mb-2">Professional Coverage</h4>
+                                <p class="text-white/90">Capturing every important moment of your event</p>
+                            </div>
+                        </div>
+                        <div class="group relative rounded-3xl overflow-hidden shadow-2xl transform hover:scale-105 transition-all duration-300">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent z-10"></div>
+                            <img src="https://images.unsplash.com/photo-1543269865-cbf427effbad?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" 
+                                alt="Candid event moments" class="w-full h-96 object-cover">
+                            <div class="absolute bottom-6 left-6 right-6 z-20">
+                                <h4 class="text-white text-2xl font-bold mb-2">Candid Moments</h4>
+                                <p class="text-white/90">Authentic emotions and spontaneous reactions</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- CTA Section -->
+        <section class="relative section-padding animated-gradient text-white overflow-hidden">
+            <!-- Decorative blobs -->
+            <div class="absolute top-0 left-0 w-96 h-96 bg-purple-500 rounded-full filter blur-3xl opacity-20"></div>
+            <div class="absolute bottom-0 right-0 w-96 h-96 bg-blue-500 rounded-full filter blur-3xl opacity-20"></div>
+            
+            <div class="relative z-10 container mx-auto px-6 text-center">
+                <h2 class="text-4xl md:text-5xl font-bold mb-6">Preserve Your Memories</h2>
+                <p class="text-xl md:text-2xl mb-10 max-w-3xl mx-auto opacity-95 leading-relaxed">
+                    Professional event photography to remember your special day forever with stunning visuals that capture the emotion and atmosphere.
+                </p>
+                
+                <div class="flex flex-col sm:flex-row gap-6 justify-center items-center">
+                    <a href="../../index.html#contact"
+                        class="inline-block bg-white text-blue-600 px-12 py-6 rounded-full text-xl font-bold hover:shadow-2xl transition-all duration-300 transform hover:scale-105 shadow-lg">
+                        Get Your Free Quote →
+                    </a>
+                    <a href="tel:+1234567890"
+                        class="inline-block glass px-12 py-6 rounded-full text-xl font-semibold hover:shadow-2xl transition-all duration-300 border-2 border-white backdrop-blur-lg">
+                        📞 Call Now
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+    <script src="../../assets/components/footer.js"></script>
+</body>
+</html>
