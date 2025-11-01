@@ -2,21 +2,12 @@
 // This script will load the same navigation on all pages
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Determine the correct path prefix based on current page location
-    const currentPath = window.location.pathname;
-    let pathPrefix = '../';
-    let assetsPrefix = '../assets/';
-    
-    // If we're in the root directory
-    if (currentPath.endsWith('index.html') || currentPath.endsWith('/')) {
-        pathPrefix = '';
-        assetsPrefix = 'assets/';
-    }
-    // If we're in a nested directory (services/, events/, rentals/ subdirectories)
-    else if (currentPath.includes('services/') || currentPath.includes('events/') || currentPath.includes('rentals/')) {
-        pathPrefix = '../../';
-        assetsPrefix = '../../assets/';
-    }
+    // Determine the correct path prefix based on the current page's depth
+    const path = window.location.pathname;
+    const isRoot = path.endsWith('/') || path.endsWith('index.html');
+    const depth = isRoot ? 0 : path.split('/').length - 2;
+    const pathPrefix = '../'.repeat(depth);
+    const assetsPrefix = `${pathPrefix}assets/`;
 
     const navigationHTML = `
     <header class="bg-white shadow-lg sticky top-0 z-50">
