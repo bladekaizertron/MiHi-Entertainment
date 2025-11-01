@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wedding Photo Booth Services - MiHi Entertainment</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Inter', sans-serif; color: #1a202c; }
         h1, h2, h3, h4, h5, h6 { font-family: 'Playfair Display', serif; }
@@ -13,6 +13,542 @@
         .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4); }
         .section-padding { padding: 5rem 0; }
         .hero-gradient { background: linear-gradient(135deg, rgba(102, 126, 234, 0.5) 0%, rgba(118, 75, 162, 0.5) 100%); }
+        
+        .letter {
+            display: inline-block;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: letterFadeIn 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+            font-family: 'Great Vibes', cursive;
+            font-weight: 400;
+            font-size: 1.15em;
+            position: relative;
+            top: 0.1em;
+            letter-spacing: 1px;
+        }
+        
+        @keyframes letterFadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .fade-in {
+            opacity: 0;
+            animation: fadeIn 1s ease-out forwards;
+            animation-delay: 1.5s;
+        }
+        
+        @keyframes fadeIn {
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .animate-fade-in {
+            animation: fadeIn 1s ease-out forwards;
+        }
+        
+        /* Elegant white button styles */
+        .btn-elegant {
+            background-color: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            font-family: 'Playfair Display', serif;
+            letter-spacing: 0.05em;
+        }
+        
+        .btn-elegant:hover {
+            background-color: rgba(255, 255, 255, 0.25);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.25);
+        }
+        
+        /* Logo styling */
+        .featured-logo {
+            max-height: 80px;
+            width: auto;
+            opacity: 0.7;
+            transition: all 0.3s ease;
+            filter: grayscale(100%);
+        }
+        
+        .featured-logo:hover {
+            opacity: 1;
+            transform: scale(1.05);
+            filter: grayscale(0%);
+        }
+        
+        /* Featured section title styling */
+        .featured-title {
+            font-family: 'Great Vibes', cursive;
+            font-style: italic;
+            font-weight: 400;
+            letter-spacing: 0.03em;
+            color: #4a5568;
+        }
+        
+        /* Decorative elements for wedding theme */
+        .decorative-divider {
+            position: relative;
+            height: 1px;
+            background: linear-gradient(to right, transparent, #e2e8f0, transparent);
+            width: 60%;
+            margin: 2rem auto;
+        }
+        
+        .decorative-divider::before {
+            content: "✦";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 0 1rem;
+            color: #a0aec0;
+            font-size: 1.2rem;
+        }
+        
+        /* Background image section */
+        .bg-image-section {
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            min-height: 28vh;
+            position: relative;
+            border-top: 1px solid #e2e8f0;
+            border-bottom: 1px solid #e2e8f0;
+            margin-top: 2rem;
+        }
+        
+        .bg-image-overlay {
+            position: absolute;
+            inset: 0;
+            background-color: rgba(0, 0, 0, 0.8); /* 80% darkness */
+        }
+        
+        /* Elegant cursive text styling */
+        .elegant-text {
+            font-family: 'Great Vibes', cursive;
+            font-style: italic;
+            font-weight: 400;
+            color: white;
+            font-size: 2rem;
+            text-align: center;
+            position: relative;
+            z-index: 10;
+            text-shadow: 
+                0 0 5px rgba(255, 255, 255, 0.5),
+                0 0 10px rgba(255, 255, 255, 0.3),
+                0 0 15px rgba(255, 255, 255, 0.2);
+            animation: shimmer 3s infinite;
+        }
+        
+        @keyframes shimmer {
+            0% {
+                text-shadow: 
+                    0 0 5px rgba(255, 255, 255, 0.5),
+                    0 0 10px rgba(255, 255, 255, 0.3),
+                    0 0 15px rgba(255, 255, 255, 0.2);
+            }
+            50% {
+                text-shadow: 
+                    0 0 10px rgba(255, 255, 255, 0.8),
+                    0 0 20px rgba(255, 255, 255, 0.6),
+                    0 0 30px rgba(255, 255, 255, 0.4);
+            }
+            100% {
+                text-shadow: 
+                    0 0 5px rgba(255, 255, 255, 0.5),
+                    0 0 10px rgba(255, 255, 255, 0.3),
+                    0 0 15px rgba(255, 255, 255, 0.2);
+            }
+        }
+        
+        /* Dove decorative elements */
+        .dove-decoration {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 10;
+            opacity: 0.7;
+            width: 40px;
+            height: 40px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+        
+        .dove-left {
+            left: 5%;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M50,15c-5,15-10,30-15,45c-5-5-10-10-15-15c10-5,20-10,30-15c10,5,20,10,30,15c-5,5-10,10-15,15c-5-15-10-30-15-45z" fill="white"/></svg>');
+        }
+        
+        .dove-right {
+            right: 5%;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M50,15c-5,15-10,30-15,45c-5-5-10-10-15-15c10-5,20-10,30-15c10,5,20,10,30,15c-5,5-10,10-15,15c-5-15-10-30-15-45z" fill="white"/></svg>');
+            transform: translateY(-50%) scaleX(-1);
+        }
+        
+        /* New section styles */
+        .elegant-section {
+            background-color: #000;
+            border-radius: 40px;
+            min-height: 400px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            margin: 2rem auto;
+            max-width: 1200px;
+            width: 90%;
+        }
+        
+        .top-text {
+            font-family: 'Playfair Display', serif;
+            color: white;
+            font-size: 1.5rem;
+            letter-spacing: 0.1em;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .main-text {
+            font-family: 'Great Vibes', cursive;
+            color: white;
+            font-size: 4rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            transition-delay: 0.2s;
+        }
+        
+        .quote-button {
+            background-color: white;
+            color: black;
+            font-weight: bold;
+            padding: 1rem 2rem;
+            border-radius: 30px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            letter-spacing: 0.05em;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            transition-delay: 0.4s;
+        }
+        
+        .animate-text {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .quote-button:hover {
+            background-color: #000;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(255, 255, 255, 0.3);
+        }
+        
+        /* Product detail section */
+        .product-detail-section {
+            background-color: #f8fafc;
+            border-radius: 20px;
+            padding: 0 2rem;
+            margin: 0 auto 2rem auto;
+            max-width: 1200px;
+            width: 90%;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out, padding 0.5s ease-out;
+        }
+        
+        .product-detail-section.expanded {
+            max-height: 2000px;
+            padding: 2rem;
+        }
+        
+        .product-image {
+            border-radius: 1rem;
+            object-fit: cover;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .product-heading {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .product-subheading {
+            font-family: 'Great Vibes', cursive;
+            font-size: 1.5rem;
+            color: #4a5568;
+            margin-bottom: 1.5rem;
+        }
+        
+        .product-button {
+            background-color: #000;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.375rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .product-button:hover {
+            background-color: white;
+            color: #000;
+            border: 1px solid #000;
+            transform: translateY(-2px);
+        }
+        
+        /* Interactive Brochure Section Styles */
+        .brochure-section {
+            background: linear-gradient(135deg, #f0f4f8 0%, #e6e9f0 100%);
+        }
+        
+        .brochure-badge {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            display: inline-block;
+        }
+        
+        .brochure-preview {
+            position: relative;
+            background: white;
+            border-radius: 1.5rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .brochure-preview:hover {
+            transform: scale(1.02);
+            box-shadow: 0 35px 60px -15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .brochure-preview::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: repeating-linear-gradient(45deg, transparent, transparent 2px, rgba(0,0,0,0.03) 2px, rgba(0,0,0,0.03) 4px);
+            pointer-events: none;
+        }
+        
+        .brochure-image {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .brochure-preview:hover .brochure-image {
+            transform: scale(1.05);
+        }
+        
+        .brochure-check-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+        
+        .brochure-check-icon {
+            flex-shrink: 0;
+            width: 1.5rem;
+            height: 1.5rem;
+            border-radius: 50%;
+            background: #10b981;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .brochure-check-text {
+            font-weight: 600;
+            color: #1f2937;
+        }
+        
+        .brochure-check-description {
+            color: #6b7280;
+            margin-top: 0.25rem;
+        }
+        
+        .brochure-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 9999px;
+            font-weight: 700;
+            font-size: 1.125rem;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: none;
+            cursor: pointer;
+        }
+        
+        .brochure-button:hover {
+            transform: scale(1.05) translateY(-2px);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+        
+        .brochure-download-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid #667eea;
+            color: #667eea;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.375rem;
+            font-weight: 700;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-decoration: none;
+        }
+        
+        .brochure-download-button:hover {
+            background: #667eea;
+            color: white;
+            transform: scale(1.05) translateY(-2px);
+        }
+        
+        .brochure-tag {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #6b7280;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+        
+        .brochure-tag-icon {
+            color: #10b981;
+            width: 1.25rem;
+            height: 1.25rem;
+        }
+        
+        /* Brochure Modal Styles */
+        .brochure-modal {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            display: none;
+            overflow: hidden;
+            background-color: rgba(0, 0, 0, 0.6);
+        }
+        
+        .brochure-modal.show {
+            display: block;
+        }
+        
+        .brochure-modal-content {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            background: transparent;
+        }
+        
+        .brochure-close-button {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            z-index: 10001;
+            background: rgba(255, 255, 255, 0.9);
+            color: #1f2937;
+            border-radius: 50%;
+            padding: 0.5rem;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+        
+        .brochure-close-button:hover {
+            background: white;
+            transform: scale(1.1);
+        }
+        
+        .brochure-iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+            background: transparent;
+        }
+        
+        /* Responsive text sizing */
+        @media (min-width: 768px) {
+            .elegant-text {
+                font-size: 2.5rem;
+            }
+            
+            .main-text {
+                font-size: 5rem;
+            }
+        }
+        
+        @media (min-width: 1024px) {
+            .elegant-text {
+                font-size: 3rem;
+            }
+            
+            .main-text {
+                font-size: 6rem;
+            }
+        }
+        
+        @media (max-width: 767px) {
+            .elegant-section {
+                border-radius: 20px;
+                min-height: 300px;
+                width: 95%;
+            }
+            
+            .top-text {
+                font-size: 1.2rem;
+            }
+            
+            .main-text {
+                font-size: 3rem;
+                margin-bottom: 1.5rem;
+            }
+            
+            .quote-button {
+                padding: 0.8rem 1.5rem;
+                font-size: 0.9rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -20,56 +556,1083 @@
     <div id="nav-placeholder"></div>
 
     <!-- Hero Section -->
-    <section class="relative h-[60vh] flex items-center justify-center overflow-hidden">
-        <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1519741497674-611481863552?w=1600');"></div>
-        <div class="absolute inset-0 hero-gradient"></div>
-        <div class="relative z-10 text-center text-white px-6">
-            <h1 class="text-5xl md:text-6xl font-bold mb-4">Wedding Photo Booth</h1>
-            <p class="text-xl md:text-2xl mb-8">Make Your Special Day Unforgettable</p>
-            <a href="#contact" class="btn-primary text-white px-8 py-4 rounded-full text-lg font-semibold inline-block">Get a Quote</a>
+    <section class="relative min-h-[50vh] flex items-center justify-center overflow-hidden py-12">
+        <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('../assets/images/wedimg/herowedding.png');"></div>
+        <div class="absolute inset-0 bg-black bg-opacity-50"></div>
+        <div class="relative z-10 text-center text-white px-2 w-full">
+            <div class="max-w-3xl mx-auto">
+                <div class="mb-4">
+                    <h1 class="text-5xl md:text-7xl lg:text-8xl font-thin tracking-widest leading-none" style="font-family: 'Playfair Display', serif; letter-spacing: 0.1em; line-height: 0.9;" id="wedding-text">
+                        Wedding
+                    </h1>
+                    <script>
+                        document.addEventListener('DOMContentLoaded', function() {
+                            const text = 'Wedding';
+                            const element = document.getElementById('wedding-text');
+                            element.innerHTML = ''; // Clear the text
+                            
+                            // Split the text into letters and wrap each in a span
+                            text.split('').forEach((char, index) => {
+                                const span = document.createElement('span');
+                                span.textContent = char === ' ' ? '\u00A0' : char;
+                                span.className = 'letter';
+                                // Stagger the animation for each letter
+                                span.style.animationDelay = `${index * 0.1}s`;
+                                element.appendChild(span);
+                            });
+                        });
+                    </script>
+                    <h2 class="text-xl md:text-4xl lg:text-5xl font-light tracking-widest mt-2 fade-in" style="font-family: 'Playfair Display', serif; letter-spacing: 0.15em;">Photo Booth</h2>
+                </div>
+                <div class="h-px w-16 bg-white mx-auto my-4"></div>
+                <p class="max-w-3xl mx-auto text-sm md:text-base leading-relaxed mb-4 px-0 font-light text-gray-100 tracking-wide">
+                    <span class="text-5xl float-left font-['Great_Vibes'] font-normal mr-2 -mt-1">F</span>orever and always. This is your big day. It has to be perfect. Just the two of you. And all of your family and friends are invited! There's nothing more beautiful than the love that lasts forever—except a digital wedding photo booth. Really.
+                </p>
+
+                <!-- Contact Us Button -->
+                <div class="mt-6 mb-8">
+                    <a href="#contact" class="btn-elegant px-8 py-3 rounded-full text-lg font-medium inline-block transition duration-300 transform hover:scale-105">
+                        Contact Us
+                    </a>
+                </div>
+
+                <!-- Location Text -->
+                <div class="text-center opacity-90 animate-fade-in" style="animation-delay: 1.5s; animation-fill-mode: forwards;">
+                    <div class="h-px w-12 bg-white mx-auto mb-2"></div>
+                    <p class="text-white text-opacity-80 tracking-widest text-xs font-light" style="letter-spacing: 0.15em;">
+                        SERVICING DENVER, COLORADO, AND NATIONWIDE WEDDING CELEBRATIONS
+                    </p>
+                </div>
+                
+            </div>
         </div>
     </section>
 
-    <!-- Content Section -->
-    <section class="section-padding bg-white">
+    <!-- Interactive Brochure Section -->
+    <section class="section-padding brochure-section">
         <div class="container mx-auto px-6">
-            <div class="max-w-4xl mx-auto">
-                <h2 class="text-4xl font-bold mb-6 text-center">Perfect for Your Wedding Day</h2>
-                <p class="text-lg text-gray-700 mb-8 text-center">Create lasting memories with our premium photo booth experiences designed specifically for weddings.</p>
-                
-                <div class="grid md:grid-cols-2 gap-8 mt-12">
-                    <div class="bg-gray-50 p-6 rounded-lg">
-                        <h3 class="text-2xl font-semibold mb-4">📸 Instant Memories</h3>
-                        <p class="text-gray-700">High-quality prints delivered instantly for your guests to take home as favors.</p>
+            <!-- Section Header -->
+            <div class="text-center mb-16 space-y-4">
+                <span class="brochure-badge">📖 Wedding Planning Guide</span>
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight">
+                    Your Wedding Experience Awaits
+                </h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                    Discover our exclusive wedding packages and create unforgettable memories for your special day
+                </p>
+                <!-- Visual separator -->
+                <div class="flex items-center justify-center gap-2 pt-4">
+                    <div class="h-1 w-12 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-full"></div>
+                    <div class="h-1 w-1 bg-indigo-600 rounded-full"></div>
+                    <div class="h-1 w-1 bg-purple-600 rounded-full"></div>
+                </div>
+            </div>
+
+            <!-- Main Content Grid -->
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <!-- Left: Visual Preview -->
+                <div class="order-2 lg:order-1">
+                    <div class="relative group">
+                        <div class="brochure-preview">
+                            <div class="aspect-[4/3] bg-gradient-to-br from-gray-50 via-gray-100 to-gray-50 flex items-center justify-center p-8 relative overflow-hidden">
+                                <div class="absolute inset-0" style="background-image: repeating-linear-gradient(45deg, transparent, transparent 2px, rgba(0,0,0,0.03) 2px, rgba(0,0,0,0.03) 4px);"></div>
+                                <div class="absolute inset-0 bg-gradient-to-br from-white/50 via-transparent to-gray-900/20 pointer-events-none"></div>
+                                <div class="relative w-full h-full flex items-center justify-center">
+                                    <div class="relative w-5/6 h-5/6 transform group-hover:scale-105 group-hover:-translate-y-2 transition-all duration-700" style="transform-style: preserve-3d; perspective: 1000px;">
+                                        <div class="absolute -right-2 top-0 bottom-0 w-16 bg-gradient-to-l from-black/20 to-transparent blur-sm skew-y-12 transform group-hover:scale-110"></div>
+                                        <div class="absolute inset-0 bg-gradient-to-br from-white/20 via-transparent to-transparent rounded-lg pointer-events-none"></div>
+                                        <div class="relative w-full h-full shadow-2xl rounded-lg overflow-hidden" style="box-shadow: 0 20px 60px rgba(0,0,0,0.3), 0 0 20px rgba(0,0,0,0.1);">
+                                            <img src="../assets/images/wedimg/flipbookwedthumb.png" alt="Wedding Brochure Preview" class="brochure-image">
+                                            <div class="absolute inset-0 bg-gradient-to-br from-white/40 via-transparent to-transparent pointer-events-none"></div>
+                                            <div class="absolute bottom-0 left-0 right-0 h-1/3 bg-gradient-to-b from-transparent to-black/10"></div>
+                                        </div>
+                                        <div class="absolute -top-2 -left-2 w-8 h-8 bg-white/50 rounded-br-full shadow-lg"></div>
+                                        <div class="absolute -top-2 -right-2 w-8 h-8 bg-white/50 rounded-bl-full shadow-lg"></div>
+                                    </div>
+                                </div>
+                                <div class="absolute -inset-4 bg-gradient-to-r from-gray-900/10 via-gray-900/20 to-gray-900/10 blur-3xl group-hover:blur-2xl transition-all duration-700 rounded-full"></div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="bg-gray-50 p-6 rounded-lg">
-                        <h3 class="text-2xl font-semibold mb-4">🎨 Custom Branding</h3>
-                        <p class="text-gray-700">Personalized photo templates with your names, wedding date, and custom designs.</p>
+                </div>
+
+                <!-- Right: Content & CTA -->
+                <div class="order-1 lg:order-2">
+                    <div class="inline-block bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-4 py-2 rounded-full text-sm font-bold mb-6">
+                        Wedding Packages
                     </div>
-                    <div class="bg-gray-50 p-6 rounded-lg">
-                        <h3 class="text-2xl font-semibold mb-4">💍 Props & Backdrops</h3>
-                        <p class="text-gray-700">Elegant props and backdrops that match your wedding theme perfectly.</p>
+                    <h3 class="text-4xl md:text-5xl font-bold mb-6">
+                        Plan Your Perfect Wedding
+                    </h3>
+                    <p class="text-xl text-gray-600 mb-8 leading-relaxed">
+                        Explore our curated wedding packages designed to capture every precious moment of your special day
+                    </p>
+                    <div class="space-y-4 mb-8">
+                        <div class="brochure-check-item">
+                            <div class="brochure-check-icon">
+                                <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                            </div>
+                            <div>
+                                <p class="brochure-check-text">Elegant Wedding Packages</p>
+                                <p class="brochure-check-description">Customizable options tailored for your wedding theme and style</p>
+                            </div>
+                        </div>
+                        <div class="brochure-check-item">
+                            <div class="brochure-check-icon">
+                                <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                            </div>
+                            <div>
+                                <p class="brochure-check-text">Premium Wedding Add-Ons</p>
+                                <p class="brochure-check-description">Enhance your experience with custom backdrops, props, and more</p>
+                            </div>
+                        </div>
+                        <div class="brochure-check-item">
+                            <div class="brochure-check-icon">
+                                <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                            </div>
+                            <div>
+                                <p class="brochure-check-text">Instant Digital Gallery</p>
+                                <p class="brochure-check-description">Share memories instantly with guests via text, email, or QR code</p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="bg-gray-50 p-6 rounded-lg">
-                        <h3 class="text-2xl font-semibold mb-4">📱 Digital Sharing</h3>
-                        <p class="text-gray-700">Instant digital delivery via email, SMS, and social media sharing.</p>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <button onclick="openBrochureModal()" class="brochure-button" aria-label="View wedding packages">
+                            <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+                            View Packages
+                            <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+                        </button>
+                        <a href="../flipbook/examples/example-assets/books/test.pdf" download class="brochure-download-button" aria-label="Download Wedding Package PDF">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2m-6 0V4m0 12l-4-4m4 4l4-4"/></svg>
+                            Download PDF
+                        </a>
+                    </div>
+                    <div class="flex flex-wrap items-center gap-6 pt-6 border-t border-gray-200">
+                        <div class="brochure-tag"><svg class="brochure-tag-icon" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg><span class="text-sm font-medium">Wedding Focused</span></div>
+                        <div class="brochure-tag"><svg class="brochure-tag-icon" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg><span class="text-sm font-medium">Customizable</span></div>
+                        <div class="brochure-tag"><svg class="brochure-tag-icon" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg><span class="text-sm font-medium">Instant Sharing</span></div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- CTA Section -->
-    <section class="section-padding bg-gradient-to-r from-purple-600 to-indigo-600 text-white">
-        <div class="container mx-auto px-6 text-center">
-            <h2 class="text-4xl font-bold mb-6">Ready to Book Your Wedding Photo Booth?</h2>
-            <p class="text-xl mb-8">Contact us today for a custom quote</p>
-            <a href="#contact" class="bg-white text-purple-600 px-8 py-4 rounded-full text-lg font-semibold inline-block hover:bg-gray-100 transition">Contact Us</a>
+    <!-- Featured In Section -->
+    <section class="section-padding bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl md:text-5xl font-normal text-center mb-8 featured-title">
+                We've Been Featured In
+            </h2>
+            
+            <div class="decorative-divider"></div>
+            
+            <div class="flex flex-wrap justify-center items-center gap-12 md:gap-20 mt-10">
+                <div class="flex flex-col items-center">
+                    <img src="../assets/images/wedimg/coloradologo.png" alt="Colorado Logo" class="featured-logo mb-2">
+                    <div class="h-px w-8 bg-gray-300 mt-4"></div>
+                </div>
+                <div class="flex flex-col items-center">
+                    <img src="../assets/images/wedimg/rockymlogo.png" alt="Rocky Mountain Logo" class="featured-logo mb-2">
+                    <div class="h-px w-8 bg-gray-300 mt-4"></div>
+                </div>
+                <div class="flex flex-col items-center">
+                    <img src="../assets/images/wedimg/theknotlogo.png" alt="The Knot Logo" class="featured-logo mb-2">
+                    <div class="h-px w-8 bg-gray-300 mt-4"></div>
+                </div>
+                <div class="flex flex-col items-center">
+                    <img src="../assets/images/wedimg/weddingwirelogo.png" alt="Wedding Wire Logo" class="featured-logo mb-2">
+                    <div class="h-px w-8 bg-gray-300 mt-4"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- New Background Image Section -->
+    <section class="bg-image-section" style="background-image: url('../assets/images/wedimg/weddingimg1.jpg');">
+        <div class="bg-image-overlay"></div>
+        <div class="dove-decoration dove-left"></div>
+        <div class="dove-decoration dove-right"></div>
+        <div class="relative z-10 flex items-center justify-center h-full w-full px-2" style="padding-top: 1rem;">
+            <p class="elegant-text px-0 text-center leading-tight max-w-3xl mx-auto">
+                Premium Photo Booth Experiences for couples who want their memories as stunning as their wedding day.
+            </p>
+        </div>
+    </section>
+
+    <!-- New Elegant Section -->
+    <section class="bg-gray-100 py-12">
+        <div class="elegant-section" id="elegant-section">
+            <p class="top-text">OUR STUNNING</p>
+            <h2 class="main-text">Wedding Products</h2>
+            <button class="quote-button" onclick="toggleProductDetail()">View</button>
+        </div>
+    </section>
+
+    <!-- Product Detail Section (Hidden by default) -->
+    <section class="product-detail-section" id="product-detail-section">
+        <div class="container mx-auto px-6">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <!-- Left: Image -->
+                <div>
+                    <img src="../assets/images/wedimg/product1.jpg" alt="B&W Luxe Wedding Photography Booth" class="product-image">
+                </div>
+                
+                <!-- Right: Text Content -->
+                <div>
+                    <h2 class="product-heading">B&W LUXE WEDDING</h2>
+                    <h3 class="product-subheading">Photography Booth</h3>
+                    <button class="product-button">VIEW PRODUCT</button>
+                </div>
+            </div>
+        </div>
+        <div class="container mx-auto px-6 mt-12">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <!-- Left: Text Content (Right-aligned) -->
+                <div class="text-right">
+                    <h2 class="product-heading">B&W KARDASHIAN</h2>
+                    <h3 class="product-subheading">Photography Booth</h3>
+                    <button class="product-button">VIEW PRODUCT</button>
+                </div>
+                
+                <!-- Right: Image -->
+                <div>
+                    <img src="../assets/images/wedimg/kardashian.jpg" alt="B&W Kardashian Photography Booth" class="product-image">
+                </div>
+            </div>
+        </div>
+        <div class="container mx-auto px-6">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <!-- Left: Image -->
+                <div>
+                    <img src="../assets/images/wedimg/product3.jpg" alt="B&W Luxe Wedding Photography Booth" class="product-image">
+                </div>
+                
+                <!-- Right: Text Content -->
+                <div>
+                    <h2 class="product-heading">B&W LUXE 360</h2>
+                    <h3 class="product-subheading">Photography Booth</h3>
+                    <button class="product-button">VIEW PRODUCT</button>
+                </div>
+            </div>
+        </div>
+        <div class="container mx-auto px-6 mt-12">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <!-- Left: Text Content (Right-aligned) -->
+                <div class="text-right">
+                    <h2 class="product-heading">OUR CLASSIC</h2>
+                    <h3 class="product-subheading">Photography Booth</h3>
+                    <button class="product-button">VIEW PRODUCT</button>
+                </div>
+                
+                <!-- Right: Image -->
+                <div>
+                    <img src="../assets/images/wedimg/product4.jpg" alt="B&W Kardashian Photography Booth" class="product-image">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Brochure Modal -->
+    <div id="brochureModal" class="brochure-modal" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+        <div class="brochure-modal-content">
+            <!-- Close button -->
+            <button onclick="closeBrochureModal()" class="brochure-close-button" aria-label="Close brochure">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+
+            <!-- Brochure iframe container -->
+            <iframe id="brochureIframe" class="brochure-iframe" allowfullscreen loading="eager" sandbox="allow-scripts allow-same-origin"></iframe>
+        </div>
+    </div>
+
+    <!-- New Signature Section -->
+    <section class="py-12 bg-white">
+        <div class="max-w-[1200px] w-[90%] mx-auto rounded-3xl bg-[#0a0a0a] text-white py-16 px-8" id="custom-section">
+            <div class="text-center">
+                <h3 class="font-serif text-base uppercase tracking-wider mb-4 custom-top-text">OUR CUSTOM</h3>
+                <h2 class="font-['Great_Vibes'] text-6xl md:text-8xl mb-8 custom-main-text">Photo Booth Types</h2>
+                <p class="font-sans text-lg md:text-xl max-w-3xl mx-auto leading-relaxed custom-paragraph">
+                    Our Premium Booth Types offer an upgraded experience to complement your wedding style and add a touch of luxury to every celebration.
+                </p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Product Showcase Grid -->
+    <section class="py-16 bg-white">
+        <div class="max-w-[1200px] w-[90%] mx-auto">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-10">
+                <!-- Product Item 1 -->
+                <div class="text-center">
+                    <div class="flex justify-center mb-6">
+                        <img src="../assets/images/wedimg/ins1.png" alt="Vintage Photo Booth" class="w-40 h-40 rounded-full border-2 border-black bg-white object-cover transition-transform duration-300 hover:scale-105">
+                    </div>
+                    <h3 class="font-bold uppercase text-xl mb-2">VINTAGE</h3>
+                    <p class="text-base mb-6 tracking-widest">PHOTO BOOTH</p>
+                    <button class="bg-black text-white rounded-full px-6 py-3 text-base font-medium transition-colors duration-300 hover:bg-gray-900">VIEW PRODUCT</button>
+                </div>
+                
+                <!-- Product Item 2 -->
+                <div class="text-center">
+                    <div class="flex justify-center mb-6">
+                        <img src="../assets/images/wedimg/ins2.png" alt="Rustic Photo Booth" class="w-40 h-40 rounded-full border-2 border-black bg-white object-cover transition-transform duration-300 hover:scale-105">
+                    </div>
+                    <h3 class="font-bold uppercase text-xl mb-2">RUSTIC</h3>
+                    <p class="text-base mb-6 tracking-widest">PHOTO BOOTH</p>
+                    <button class="bg-black text-white rounded-full px-6 py-3 text-base font-medium transition-colors duration-300 hover:bg-gray-900">VIEW PRODUCT</button>
+                </div>
+                
+                <!-- Product Item 3 -->
+                <div class="text-center">
+                    <div class="flex justify-center mb-6">
+                        <img src="../assets/images/wedimg/ins3.png" alt="Guitar Photo Booth" class="w-40 h-40 rounded-full border-2 border-black bg-white object-cover transition-transform duration-300 hover:scale-105">
+                    </div>
+                    <h3 class="font-bold uppercase text-xl mb-2">GUITAR</h3>
+                    <p class="text-base mb-6 tracking-widest">PHOTO BOOTH</p>
+                    <button class="bg-black text-white rounded-full px-6 py-3 text-base font-medium transition-colors duration-300 hover:bg-gray-900">VIEW PRODUCT</button>
+                </div>
+                
+                <!-- Product Item 4 -->
+                <div class="text-center">
+                    <div class="flex justify-center mb-6">
+                        <img src="../assets/images/wedimg/ins4.png" alt="Groovy Photo Booth" class="w-40 h-40 rounded-full border-2 border-black bg-white object-cover transition-transform duration-300 hover:scale-105">
+                    </div>
+                    <h3 class="font-bold uppercase text-xl mb-2">GROOVY</h3>
+                    <p class="text-base mb-6 tracking-widest">PHOTO BOOTH</p>
+                    <button class="bg-black text-white rounded-full px-6 py-3 text-base font-medium transition-colors duration-300 hover:bg-gray-900">VIEW PRODUCT</button>
+                </div>
+                
+                <!-- Product Item 5 -->
+                <div class="text-center">
+                    <div class="flex justify-center mb-6">
+                        <img src="../assets/images/wedimg/ins5.png" alt="Tigerwood Photo Booth" class="w-40 h-40 rounded-full border-2 border-black bg-white object-cover transition-transform duration-300 hover:scale-105">
+                    </div>
+                    <h3 class="font-bold uppercase text-xl mb-2">TIGERWOOD</h3>
+                    <p class="text-base mb-6 tracking-widest">PHOTO BOOTH</p>
+                    <button class="bg-black text-white rounded-full px-6 py-3 text-base font-medium transition-colors duration-300 hover:bg-gray-900">VIEW PRODUCT</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- New Signature Section -->
+    <section class="py-12 bg-white">
+        <div class="max-w-[1200px] w-[90%] mx-auto rounded-3xl bg-[#0a0a0a] text-white py-12 px-6" id="signature-section">
+            <div class="text-center space-y-4">
+                <h3 class="font-serif text-lg uppercase tracking-wider signature-top-text">OUR SIGNATURE</h3>
+                <h2 class="font-['Great_Vibes'] text-8xl md:text-8xl italic signature-main-text">Pose Flashcards</h2>
+                <p class="font-sans text-base md:text-lg max-w-2xl mx-auto signature-paragraph">
+                    Our Signature Pose Flashcards help groups quickly choose the perfect pose, matching each guest's personality for custom, fun photo moments at any event.
+                </p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Image Carousel Section -->
+    <section class="py-12 bg-white">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="relative rounded-xl overflow-hidden" id="carousel">
+                <!-- Carousel Container -->
+                <div class="relative h-96 md:h-[500px] w-full">
+                    <!-- Slides -->
+                    <div class="absolute inset-0 transition-opacity duration-1000 ease-in-out" id="slide1">
+                        <img src="../assets/images/wedimg/pose1.jpg" alt="Pose Flashcard 1" class="w-full h-full object-cover">
+                    </div>
+                    <div class="absolute inset-0 transition-opacity duration-1000 ease-in-out opacity-0" id="slide2">
+                        <img src="../assets/images/wedimg/pose2.png" alt="Pose Flashcard 2" class="w-full h-full object-cover">
+                    </div>
+                    
+                    <!-- Navigation Arrows -->
+                    <button id="prevBtn" class="absolute left-4 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-30 text-white p-2 rounded-full hover:bg-opacity-50 transition-all duration-300">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                        </svg>
+                    </button>
+                    <button id="nextBtn" class="absolute right-4 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-30 text-white p-2 rounded-full hover:bg-opacity-50 transition-all duration-300">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                        </svg>
+                    </button>
+                    
+                    <!-- Dot Indicators -->
+                    <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
+                        <button class="w-3 h-3 rounded-full bg-white bg-opacity-50 hover:bg-opacity-100 transition-all duration-300" data-slide="0"></button>
+                        <button class="w-3 h-3 rounded-full bg-white bg-opacity-100 transition-all duration-300" data-slide="1"></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- New Elegant Text Banner Section -->
+    <section class="py-12 bg-white">
+        <div class="max-w-[2000px] w-[90%] mx-auto rounded-xl overflow-hidden">
+            <div class="relative min-h-[80vh]">
+                <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('../assets/images/wedimg/formbg.jpg');"></div>
+                <div class="relative flex flex-col items-center justify-center text-center space-y-4 py-16">
+                    <div>
+                        <p class="font-['Great_Vibes'] text-5xl md:text-20xl italic text-white" style="text-shadow: 0 2px 4px rgba(0,0,0,0.5);">Experience a Grand and</p>
+                        <h2 class="font-bold text-4xl md:text-6xl tracking-tight uppercase text-white" style="text-shadow: 0 2px 4px rgba(0,0,0,0.5);">EXTRAVAGANT WEDDING</h2>
+                        <p class="font-sans text-white text-base md:text-lg leading-relaxed max-w-3xl mx-auto" style="text-shadow: 0 1px 2px rgba(0,0,0,0.5);">
+                            Make your wedding day one to remember with MiHi Entertainment! Capture your day in style with any of our premium photo booths.
+                        </p>
+                    </div>
+                    
+                    <!-- Elegant Wedding Form -->
+                    <div class="w-full max-w-3xl mt-12 px-4">
+                        <div class="bg-white bg-opacity-90 rounded-2xl shadow-xl p-6 md:p-8 backdrop-blur-sm border border-pink-100">
+                            <div class="text-center mb-8">
+                                <h2 class="font-['Great_Vibes'] text-4xl text-pink-600 mb-2">Begin Your Journey</h2>
+                                <p class="text-gray-600">Let's plan your perfect wedding experience</p>
+                            </div>
+                            
+                            <form target="_top" method="post" action="https://planning.mihiphotobooth.com/request_information.asp" onSubmit="return submitIt(this);" name="reqinfoform">
+                                <input type='hidden' name='checkdate' value=''>
+                                <input type='hidden' name='djidnumber' value='25077'>
+                                <input type='hidden' name='action' value='add_information_request'>
+                                
+                                <!-- Progress Bar -->
+                                <div class="mb-8">
+                                    <div class="flex justify-between relative">
+                                        <div class="absolute top-1/2 left-0 right-0 h-1 bg-pink-100 -z-10 transform -translate-y-1/2"></div>
+                                        <div id="progress-bar" class="absolute top-1/2 left-0 h-1 bg-pink-400 -z-10 transform -translate-y-1/2 transition-all duration-300" style="width: 33%"></div>
+                                        <div class="flex flex-col items-center">
+                                            <div class="w-8 h-8 rounded-full bg-pink-400 text-white flex items-center justify-center text-sm font-bold">1</div>
+                                            <span class="text-xs mt-2 text-gray-600">Personal</span>
+                                        </div>
+                                        <div class="flex flex-col items-center">
+                                            <div class="w-8 h-8 rounded-full bg-pink-100 text-pink-400 flex items-center justify-center text-sm font-bold">2</div>
+                                            <span class="text-xs mt-2 text-gray-600">Event</span>
+                                        </div>
+                                        <div class="flex flex-col items-center">
+                                            <div class="w-8 h-8 rounded-full bg-pink-100 text-pink-400 flex items-center justify-center text-sm font-bold">3</div>
+                                            <span class="text-xs mt-2 text-gray-600">Services</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Form Steps -->
+                                <div class="space-y-6">
+                                    <!-- Step 1: Personal Information -->
+                                    <div id="step-1" class="form-step">
+                                        <h3 class="text-xl font-semibold text-gray-800 mb-6 transition-opacity duration-300">Your Information</h3>
+                                        
+                                        <!-- Name Fields -->
+                                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4 transition-all duration-300">
+                                            <div>
+                                                <label for="first_name" class="block text-sm font-medium text-gray-700 mb-1 transition-opacity duration-300">First Name*</label>
+                                                <input type="text" id="first_name" name="first_name" required class="w-full px-4 py-3 border border-pink-200 rounded-lg focus:ring-2 focus:ring-pink-300 focus:border-pink-300 transition duration-200 bg-pink-50">
+                                            </div>
+                                            <div>
+                                                <label for="last_name" class="block text-sm font-medium text-gray-700 mb-1 transition-opacity duration-300">Last Name*</label>
+                                                <input type="text" id="last_name" name="last_name" required class="w-full px-4 py-3 border border-pink-200 rounded-lg focus:ring-2 focus:ring-pink-300 focus:border-pink-300 transition duration-200 bg-pink-50">
+                                            </div>
+                                        </div>
+                                        
+                                        <!-- Contact Information -->
+                                        <div class="mb-4 transition-all duration-300">
+                                            <label for="email" class="block text-sm font-medium text-gray-700 mb-1 transition-opacity duration-300">Email Address*</label>
+                                            <input type="email" id="email" name="email" required class="w-full px-4 py-3 border border-pink-200 rounded-lg focus:ring-2 focus:ring-pink-300 focus:border-pink-300 transition duration-200 bg-pink-50">
+                                        </div>
+                                        
+                                        <div class="transition-all duration-300">
+                                            <label for="telephone" class="block text-sm font-medium text-gray-700 mb-1 transition-opacity duration-300">Phone Number*</label>
+                                            <input type="tel" id="telephone" name="telephone" required class="w-full px-4 py-3 border border-pink-200 rounded-lg focus:ring-2 focus:ring-pink-300 focus:border-pink-300 transition duration-200 bg-pink-50">
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Step 2: Event Details -->
+                                    <div id="step-2" class="form-step hidden">
+                                        <h3 class="text-xl font-semibold text-gray-800 mb-6 transition-opacity duration-300">Wedding Details</h3>
+                                        
+                                        <!-- Event Date -->
+                                        <div class="mb-4 transition-all duration-300">
+                                            <label class="block text-sm font-medium text-gray-700 mb-1 transition-opacity duration-300">Wedding Date*</label>
+                                            <div class="grid grid-cols-3 gap-3 transition-all duration-300">
+                                                <select name="month" class="px-4 py-3 border border-pink-200 rounded-lg focus:ring-2 focus:ring-pink-300 focus:border-pink-300 transition duration-200 bg-pink-50">
+                                                    <option value="43">Month</option>
+                                                    <option value="1">January (1)</option>
+                                                    <option value="2">February (2)</option>
+                                                    <option value="3">March (3)</option>
+                                                    <option value="4">April (4)</option>
+                                                    <option value="5">May (5)</option>
+                                                    <option value="6">June (6)</option>
+                                                    <option value="7">July (7)</option>
+                                                    <option value="8">August (8)</option>
+                                                    <option value="9">September (9)</option>
+                                                    <option value="10">October (10)</option>
+                                                    <option value="11">November (11)</option>
+                                                    <option value="12">December (12)</option>
+                                                </select>
+                                                
+                                                <select name="day" class="px-4 py-3 border border-pink-200 rounded-lg focus:ring-2 focus:ring-pink-300 focus:border-pink-300 transition duration-200 bg-pink-50">
+                                                    <option value="43">Day</option>
+                                                    <option value="1">1</option>
+                                                    <option value="2">2</option>
+                                                    <option value="3">3</option>
+                                                    <option value="4">4</option>
+                                                    <option value="5">5</option>
+                                                    <option value="6">6</option>
+                                                    <option value="7">7</option>
+                                                    <option value="8">8</option>
+                                                    <option value="9">9</option>
+                                                    <option value="10">10</option>
+                                                    <option value="11">11</option>
+                                                    <option value="12">12</option>
+                                                    <option value="13">13</option>
+                                                    <option value="14">14</option>
+                                                    <option value="15">15</option>
+                                                    <option value="16">16</option>
+                                                    <option value="17">17</option>
+                                                    <option value="18">18</option>
+                                                    <option value="19">19</option>
+                                                    <option value="20">20</option>
+                                                    <option value="21">21</option>
+                                                    <option value="22">22</option>
+                                                    <option value="23">23</option>
+                                                    <option value="24">24</option>
+                                                    <option value="25">25</option>
+                                                    <option value="26">26</option>
+                                                    <option value="27">27</option>
+                                                    <option value="28">28</option>
+                                                    <option value="29">29</option>
+                                                    <option value="30">30</option>
+                                                    <option value="31">31</option>
+                                                </select>
+                                                
+                                                <select name="year" class="px-4 py-3 border border-pink-200 rounded-lg focus:ring-2 focus:ring-pink-300 focus:border-pink-300 transition duration-200 bg-pink-50">
+                                                    <option value="43">Year</option>
+                                                    <option value="2022">2022</option>
+                                                    <option value="2023">2023</option>
+                                                    <option value="2024">2024</option>
+                                                    <option value="2025" selected>2025</option>
+                                                    <option value="2026">2026</option>
+                                                    <option value="2027">2027</option>
+                                                    <option value="2028">2028</option>
+                                                    <option value="2029">2029</option>
+                                                    <option value="2030">2030</option>
+                                                    <option value="2031">2031</option>
+                                                    <option value="2032">2032</option>
+                                                    <option value="2033">2033</option>
+                                                    <option value="2034">2034</option>
+                                                    <option value="2035">2035</option>
+                                                    <option value="2036">2036</option>
+                                                    <option value="2037">2037</option>
+                                                    <option value="2038">2038</option>
+                                                    <option value="2039">2039</option>
+                                                    <option value="2040">2040</option>
+                                                    <option value="2041">2041</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        
+                                        <!-- Venue -->
+                                        <div class="mb-4 transition-all duration-300">
+                                            <label for="venue" class="block text-sm font-medium text-gray-700 mb-1 transition-opacity duration-300">Wedding Venue*</label>
+                                            <input type="text" id="venue" name="venue" required class="w-full px-4 py-3 border border-pink-200 rounded-lg focus:ring-2 focus:ring-pink-300 focus:border-pink-300 transition duration-200 bg-pink-50">
+                                        </div>
+                                        
+                                        <!-- Budget -->
+                                        <div class="mb-4 transition-all duration-300">
+                                            <label for="budget" class="block text-sm font-medium text-gray-700 mb-1 transition-opacity duration-300">Budget Range*</label>
+                                            <select id="budget" name="budget" required class="w-full px-4 py-3 border border-pink-200 rounded-lg focus:ring-2 focus:ring-pink-300 focus:border-pink-300 transition duration-200 bg-pink-50">
+                                                <option value="">Select Budget Range</option>
+                                                <option value="$0 - $1,000">$0 - $1,000</option>
+                                                <option value="$1,000 - $2,000">$1,000 - $2,000</option>
+                                                <option value="$2,000 - $3,000">$2,000 - $3,000</option>
+                                                <option value="$3,000 - $5,000">$3,000 - $5,000</option>
+                                                <option value="$5,000 - $7,500">$5,000 - $7,500</option>
+                                                <option value="$7,500 - $10,000">$7,500 - $10,000</option>
+                                                <option value="$10,000+">$10,000+</option>
+                                            </select>
+                                        </div>
+                                        
+                                        <!-- Event Type -->
+                                        <div class="transition-all duration-300">
+                                            <label for="event_type" class="block text-sm font-medium text-gray-700 mb-1 transition-opacity duration-300">Event Type*</label>
+                                            <select id="event_type" name="event_type" required class="w-full px-4 py-3 border border-pink-200 rounded-lg focus:ring-2 focus:ring-pink-300 focus:border-pink-300 transition duration-200 bg-pink-50">
+                                                <option value="">Select Event Type</option>
+                                                <option value="Wedding">Wedding</option>
+                                                <option value="Corporate Event">Corporate Event</option>
+                                                <option value="Birthday Party">Birthday Party</option>
+                                                <option value="Anniversary">Anniversary</option>
+                                                <option value="Graduation">Graduation</option>
+                                                <option value="Holiday Party">Holiday Party</option>
+                                                <option value="Other">Other</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Step 3: Services and Additional Info -->
+                                    <div id="step-3" class="form-step hidden">
+                                        <h3 class="text-xl font-semibold text-gray-800 mb-6 transition-opacity duration-300">Services & Details</h3>
+                                        
+                                        <!-- Services Checkboxes -->
+                                        <div class="mb-6 transition-all duration-300">
+                                            <label class="block text-sm font-medium text-gray-700 mb-1 transition-opacity duration-300">Services You're Interested In*</label>
+                                            <div class="space-y-3 mt-2 transition-all duration-300">
+                                                <div class="flex items-center transition-all duration-300">
+                                                    <input type="checkbox" id="photo_booth" name="services" value="Photo Booth" class="h-5 w-5 text-pink-600 border-pink-300 rounded focus:ring-pink-500">
+                                                    <label for="photo_booth" class="ml-3 text-sm text-gray-700 transition-opacity duration-300">Photo Booth</label>
+                                                </div>
+                                                <div class="flex items-center transition-all duration-300">
+                                                    <input type="checkbox" id="video_booth" name="services" value="Video Booth" class="h-5 w-5 text-pink-600 border-pink-300 rounded focus:ring-pink-500">
+                                                    <label for="video_booth" class="ml-3 text-sm text-gray-700 transition-opacity duration-300">Video Booth</label>
+                                                </div>
+                                                <div class="flex items-center transition-all duration-300">
+                                                    <input type="checkbox" id="ai_photo" name="services" value="AI Photo Booth" class="h-5 w-5 text-pink-600 border-pink-300 rounded focus:ring-pink-500">
+                                                    <label for="ai_photo" class="ml-3 text-sm text-gray-700 transition-opacity duration-300">AI Photo Booth</label>
+                                                </div>
+                                                <div class="flex items-center transition-all duration-300">
+                                                    <input type="checkbox" id="green_screen" name="services" value="Green Screen Booth" class="h-5 w-5 text-pink-600 border-pink-300 rounded focus:ring-pink-500">
+                                                    <label for="green_screen" class="ml-3 text-sm text-gray-700 transition-opacity duration-300">Green Screen Booth</label>
+                                                </div>
+                                                <div class="flex items-center transition-all duration-300">
+                                                    <input type="checkbox" id="rosie_robot" name="services" value="Rosie Robot" class="h-5 w-5 text-pink-600 border-pink-300 rounded focus:ring-pink-500">
+                                                    <label for="rosie_robot" class="ml-3 text-sm text-gray-700 transition-opacity duration-300">Rosie Robot</label>
+                                                </div>
+                                                <div class="flex items-center transition-all duration-300">
+                                                    <input type="checkbox" id="glambot" name="services" value="Glambot Video Booth" class="h-5 w-5 text-pink-600 border-pink-300 rounded focus:ring-pink-500">
+                                                    <label for="glambot" class="ml-3 text-sm text-gray-700 transition-opacity duration-300">Glambot Video Booth</label>
+                                                </div>
+                                                <div class="flex items-center transition-all duration-300">
+                                                    <input type="checkbox" id="bullet_time" name="services" value="Bullet Time Array" class="h-5 w-5 text-pink-600 border-pink-300 rounded focus:ring-pink-500">
+                                                    <label for="bullet_time" class="ml-3 text-sm text-gray-700 transition-opacity duration-300">Bullet Time Array</label>
+                                                </div>
+                                                <div class="flex items-center transition-all duration-300">
+                                                    <input type="checkbox" id="cookie_printer" name="services" value="Cookie Printer" class="h-5 w-5 text-pink-600 border-pink-300 rounded focus:ring-pink-500">
+                                                    <label for="cookie_printer" class="ml-3 text-sm text-gray-700 transition-opacity duration-300">Cookie Printer</label>
+                                                </div>
+                                                <div class="flex items-center transition-all duration-300">
+                                                    <input type="checkbox" id="sketchbot" name="services" value="Sketchbot" class="h-5 w-5 text-pink-600 border-pink-300 rounded focus:ring-pink-500">
+                                                    <label for="sketchbot" class="ml-3 text-sm text-gray-700 transition-opacity duration-300">Sketchbot</label>
+                                                </div>
+                                                <div class="flex items-center transition-all duration-300">
+                                                    <input type="checkbox" id="pose_cards" name="services" value="Pose Cards" class="h-5 w-5 text-pink-600 border-pink-300 rounded focus:ring-pink-500">
+                                                    <label for="pose_cards" class="ml-3 text-sm text-gray-700 transition-opacity duration-300">Pose Cards</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <!-- How did you hear about us -->
+                                        <div class="mb-4 transition-all duration-300">
+                                            <label for="hear_about" class="block text-sm font-medium text-gray-700 mb-1 transition-opacity duration-300">How did you hear about us?*</label>
+                                            <select id="hear_about" name="hear_about" required class="w-full px-4 py-3 border border-pink-200 rounded-lg focus:ring-2 focus:ring-pink-300 focus:border-pink-300 transition duration-200 bg-pink-50">
+                                                <option value="">Select an option</option>
+                                                <option value="Google Search">Google Search</option>
+                                                <option value="Social Media">Social Media</option>
+                                                <option value="Friend/Family Referral">Friend/Family Referral</option>
+                                                <option value="Wedding Vendor">Wedding Vendor</option>
+                                                <option value="Wedding Fair/Show">Wedding Fair/Show</option>
+                                                <option value="Online Advertisement">Online Advertisement</option>
+                                                <option value="Print Advertisement">Print Advertisement</option>
+                                                <option value="Other">Other</option>
+                                            </select>
+                                        </div>
+                                        
+                                        <!-- Event Details -->
+                                        <div class="mb-6 transition-all duration-300">
+                                            <label for="event_details" class="block text-sm font-medium text-gray-700 mb-1 transition-opacity duration-300">Special Requests</label>
+                                            <textarea id="event_details" name="event_details" rows="4" class="w-full px-4 py-3 border border-pink-200 rounded-lg focus:ring-2 focus:ring-pink-300 focus:border-pink-300 transition duration-200 bg-pink-50"></textarea>
+                                        </div>
+                                        
+                                        <!-- Privacy Checkbox -->
+                                        <div class="pt-4 transition-all duration-300">
+                                            <div class="flex items-start transition-all duration-300">
+                                                <div class="flex items-center h-5 transition-all duration-300">
+                                                    <input id="privacy" name="privacy" type="checkbox" required class="h-5 w-5 text-pink-600 border-pink-300 rounded focus:ring-pink-500">
+                                                </div>
+                                                <div class="ml-3 text-sm transition-all duration-300">
+                                                    <label for="privacy" class="text-gray-700 transition-opacity duration-300">I agree to the <a href="#" class="text-pink-600 hover:text-pink-800">Privacy Policy</a> and <a href="#" class="text-pink-600 hover:text-pink-800">Terms of Service</a>*</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Navigation Buttons -->
+                                    <div class="flex justify-between pt-6 transition-all duration-300">
+                                        <button type="button" id="prev-btn" class="hidden bg-pink-100 text-pink-700 py-3 px-6 rounded-lg font-medium hover:bg-pink-200 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-2 transition duration-200">
+                                            Previous
+                                        </button>
+                                        <button type="button" id="next-btn" class="bg-pink-600 text-white py-3 px-6 rounded-lg font-medium hover:bg-pink-700 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-2 transition duration-200 ml-auto">
+                                            Next
+                                        </button>
+                                        <button type="submit" id="submit-btn" class="hidden bg-gradient-to-r from-pink-600 to-purple-600 text-white py-3 px-6 rounded-lg font-medium hover:from-pink-700 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-2 transition duration-200">
+                                            Submit Request
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Brochure Modal -->
+    <div id="brochureModal" class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center hidden">
+        <div class="relative w-full max-w-4xl h-full max-h-[90vh]">
+            <iframe id="brochureIframe" class="w-full h-full" src="about:blank"></iframe>
+            <button id="closeBrochureModal" class="absolute top-4 right-4 bg-white rounded-full p-2 text-gray-600 hover:text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition duration-200">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- New Blank Section -->
+    <section class="py-12 bg-white">
+        <div class="max-w-[1200px] w-[90%] mx-auto">
+            <!-- Add your content here -->
         </div>
     </section>
 
     <!-- Load Shared Navigation -->
     <script src="../assets/components/navigation.js"></script>
     <script src="../assets/components/footer.js"></script>
+    
+    <script>
+        // Carousel functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Carousel elements
+            const slides = [document.getElementById('slide1'), document.getElementById('slide2')];
+            const dots = document.querySelectorAll('[data-slide]');
+            const carouselPrevBtn = document.getElementById('prevBtn');
+            const carouselNextBtn = document.getElementById('nextBtn');
+            let currentSlide = 0;
+            let carouselInterval;
+            let isHovering = false;
+            
+            // Function to show a specific slide
+            function showSlide(index) {
+                // Hide all slides
+                slides.forEach(slide => slide.classList.add('opacity-0'));
+                
+                // Show the selected slide
+                slides[index].classList.remove('opacity-0');
+                
+                // Update dot indicators
+                dots.forEach((dot, i) => {
+                    if (i === index) {
+                        dot.classList.remove('bg-opacity-50');
+                        dot.classList.add('bg-opacity-100');
+                    } else {
+                        dot.classList.remove('bg-opacity-100');
+                        dot.classList.add('bg-opacity-50');
+                    }
+                });
+                
+                currentSlide = index;
+            }
+            
+            // Function to go to next slide
+            function nextSlide() {
+                const nextIndex = (currentSlide + 1) % slides.length;
+                showSlide(nextIndex);
+            }
+            
+            // Function to go to previous slide
+            function prevSlide() {
+                const prevIndex = (currentSlide - 1 + slides.length) % slides.length;
+                showSlide(prevIndex);
+            }
+            
+            // Start auto-slide
+            function startAutoSlide() {
+                carouselInterval = setInterval(nextSlide, 4000);
+            }
+            
+            // Stop auto-slide
+            function stopAutoSlide() {
+                clearInterval(carouselInterval);
+            }
+            
+            // Event listeners for navigation buttons
+            carouselNextBtn.addEventListener('click', () => {
+                nextSlide();
+                if (!isHovering) {
+                    stopAutoSlide();
+                    startAutoSlide();
+                }
+            });
+            
+            carouselPrevBtn.addEventListener('click', () => {
+                prevSlide();
+                if (!isHovering) {
+                    stopAutoSlide();
+                    startAutoSlide();
+                }
+            });
+            
+            // Event listeners for dot indicators
+            dots.forEach((dot, index) => {
+                dot.addEventListener('click', () => {
+                    showSlide(index);
+                    if (!isHovering) {
+                        stopAutoSlide();
+                        startAutoSlide();
+                    }
+                });
+            });
+            
+            // Pause on hover
+            const carousel = document.getElementById('carousel');
+            carousel.addEventListener('mouseenter', () => {
+                isHovering = true;
+                stopAutoSlide();
+            });
+            
+            carousel.addEventListener('mouseleave', () => {
+                isHovering = false;
+                startAutoSlide();
+            });
+            
+            // Initialize carousel
+            startAutoSlide();
+            
+            // Scroll-triggered animation
+            const elegantSection = document.getElementById('elegant-section');
+            const topText = document.querySelector('.top-text');
+            const mainText = document.querySelector('.main-text');
+            const quoteButton = document.querySelector('.quote-button');
+            
+            // Signature section elements
+            const signatureSection = document.getElementById('signature-section');
+            const signatureTopText = document.querySelector('.signature-top-text');
+            const signatureMainText = document.querySelector('.signature-main-text');
+            const signatureParagraph = document.querySelector('.signature-paragraph');
+            
+            // Custom section elements
+            const customSection = document.getElementById('custom-section');
+            const customTopText = document.querySelector('.custom-top-text');
+            const customMainText = document.querySelector('.custom-main-text');
+            const customParagraph = document.querySelector('.custom-paragraph');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // Elegant section animations
+                        if (entry.target.id === 'elegant-section') {
+                            setTimeout(() => {
+                                topText.classList.add('animate-text');
+                            }, 100);
+                            
+                            setTimeout(() => {
+                                mainText.classList.add('animate-text');
+                            }, 300);
+                            
+                            setTimeout(() => {
+                                quoteButton.classList.add('animate-text');
+                            }, 500);
+                        }
+                        
+                        // Signature section animations
+                        if (entry.target.id === 'signature-section') {
+                            setTimeout(() => {
+                                signatureTopText.classList.add('animate-text');
+                            }, 100);
+                            
+                            setTimeout(() => {
+                                signatureMainText.classList.add('animate-text');
+                            }, 300);
+                            
+                            setTimeout(() => {
+                                signatureParagraph.classList.add('animate-text');
+                            }, 500);
+                        }
+                        
+                        // Custom section animations
+                        if (entry.target.id === 'custom-section') {
+                            setTimeout(() => {
+                                customTopText.classList.add('animate-text');
+                            }, 100);
+                            
+                            setTimeout(() => {
+                                customMainText.classList.add('animate-text');
+                            }, 300);
+                            
+                            setTimeout(() => {
+                                customParagraph.classList.add('animate-text');
+                            }, 500);
+                        }
+                        
+                        // Stop observing after animation is triggered
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.3, // Trigger when 30% of the section is visible
+                rootMargin: '0px 0px -50px 0px' // Trigger slightly before element is fully in view
+            });
+            
+            observer.observe(elegantSection);
+            observer.observe(signatureSection);
+            observer.observe(customSection);
+            
+            // Form pagination functionality with smooth transitions
+            const formSteps = document.querySelectorAll('.form-step');
+            const formPrevBtn = document.getElementById('prev-btn');
+            const formNextBtn = document.getElementById('next-btn');
+            const submitBtn = document.getElementById('submit-btn');
+            const progressBar = document.getElementById('progress-bar');
+            let currentStep = 0;
+            
+            // Update form step visibility with smooth transitions
+            function updateFormStep() {
+                // Hide all steps with fade out
+                formSteps.forEach(step => {
+                    if (!step.classList.contains('hidden')) {
+                        // Add fade out effect
+                        const elements = step.querySelectorAll('*');
+                        elements.forEach(el => {
+                            if (el.classList.contains('transition-opacity') || el.classList.contains('transition-all')) {
+                                el.style.opacity = '0';
+                            }
+                        });
+                    }
+                });
+                
+                // After fade out, switch steps and fade in
+                setTimeout(() => {
+                    // Hide all steps
+                    formSteps.forEach(step => step.classList.add('hidden'));
+                    
+                    // Show current step
+                    formSteps[currentStep].classList.remove('hidden');
+                    
+                    // Trigger fade in
+                    const elements = formSteps[currentStep].querySelectorAll('*');
+                    elements.forEach(el => {
+                        if (el.classList.contains('transition-opacity') || el.classList.contains('transition-all')) {
+                            // Reset opacity for fade in
+                            el.style.opacity = '';
+                        }
+                    });
+                    
+                    // Update progress bar
+                    const progressPercentage = ((currentStep + 1) / formSteps.length) * 100;
+                    progressBar.style.width = `${progressPercentage}%`;
+                    
+                    // Update button visibility
+                    if (currentStep === 0) {
+                        formPrevBtn.classList.add('hidden');
+                    } else {
+                        formPrevBtn.classList.remove('hidden');
+                    }
+                    
+                    if (currentStep === formSteps.length - 1) {
+                        formNextBtn.classList.add('hidden');
+                        submitBtn.classList.remove('hidden');
+                    } else {
+                        formNextBtn.classList.remove('hidden');
+                        submitBtn.classList.add('hidden');
+                    }
+                    
+                    // Update step indicators
+                    document.querySelectorAll('.flex.flex-col.items-center').forEach((indicator, index) => {
+                        const circle = indicator.querySelector('div');
+                        const text = indicator.querySelector('span');
+                        if (index === currentStep) {
+                            circle.classList.remove('bg-gray-200', 'text-gray-500');
+                            circle.classList.add('bg-blue-600', 'text-white');
+                        } else if (index < currentStep) {
+                            circle.classList.remove('bg-gray-200', 'text-gray-500');
+                            circle.classList.add('bg-green-600', 'text-white');
+                        } else {
+                            circle.classList.remove('bg-blue-600', 'text-white', 'bg-green-600');
+                            circle.classList.add('bg-gray-200', 'text-gray-500');
+                        }
+                    });
+                }, 150); // Match the transition duration
+            }
+            
+            // Next button event
+            formNextBtn.addEventListener('click', () => {
+                if (currentStep < formSteps.length - 1) {
+                    currentStep++;
+                    updateFormStep();
+                }
+            });
+            
+            // Previous button event
+            formPrevBtn.addEventListener('click', () => {
+                if (currentStep > 0) {
+                    currentStep--;
+                    updateFormStep();
+                }
+            });
+            
+            // Initialize form
+            updateFormStep();
+        });
+        
+        // Toggle product detail section with smooth dropdown effect and scroll to products
+        function toggleProductDetail() {
+            const productDetailSection = document.getElementById('product-detail-section');
+            const wasExpanded = productDetailSection.classList.contains('expanded');
+            
+            // Toggle the expanded class
+            productDetailSection.classList.toggle('expanded');
+            
+            // If we're expanding, scroll to the product section
+            if (!wasExpanded) {
+                // Wait a bit for the expansion to start, then scroll
+                setTimeout(() => {
+                    productDetailSection.scrollIntoView({ 
+                        behavior: 'smooth', 
+                        block: 'start'
+                    });
+                }, 100);
+            }
+        }
+        
+        // Brochure Modal Functions
+        function openBrochureModal() {
+            const modal = document.getElementById('brochureModal');
+            const iframe = document.getElementById('brochureIframe');
+            
+            // Reset iframe source first to ensure clean state
+            iframe.src = 'about:blank';
+            
+            // Show modal
+            modal.classList.add('show');
+            document.body.style.overflow = 'hidden';
+            
+            // Set iframe source after a small delay to ensure modal is visible
+            setTimeout(() => {
+                // Add a timestamp to prevent caching issues
+                const timestamp = new Date().getTime();
+                iframe.src = '../flipbook/examples/wed.html?t=' + timestamp;
+                
+                // Force focus to the iframe for better keyboard navigation
+                setTimeout(() => iframe.focus(), 100);
+            }, 10);
+        }
+        
+        function closeBrochureModal() {
+            const modal = document.getElementById('brochureModal');
+            const iframe = document.getElementById('brochureIframe');
+            
+            modal.classList.remove('show');
+            document.body.style.overflow = '';
+            
+            // Clear iframe source to stop any animations/scripts
+            iframe.src = 'about:blank';
+        }
+        
+        // Close modal on Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                const modal = document.getElementById('brochureModal');
+                if (modal.classList.contains('show')) {
+                    closeBrochureModal();
+                }
+            }
+        });
+    </script>
 </body>
 </html>
