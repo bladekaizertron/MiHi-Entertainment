@@ -118,66 +118,57 @@ document.addEventListener('DOMContentLoaded', function() {
         reviews.forEach(review => {
             const isLiked = likedReviews.includes(review.id);
             const reviewElement = document.createElement('div');
-            reviewElement.className = 'group relative bg-white/80 backdrop-blur-sm p-6 rounded-2xl shadow-lg border border-white/20 hover:shadow-xl hover:scale-[1.02] transition-all duration-300 cursor-pointer';
+            reviewElement.className = 'bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow duration-300';
             reviewElement.setAttribute('data-review-id', review.id);
-            reviewElement.onclick = () => window.open(review.google_review_url, '_blank', 'noopener,noreferrer');
             reviewElement.innerHTML = `
-                <div class="absolute inset-0 bg-gradient-to-br from-blue-50/30 via-transparent to-purple-50/30 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                <div class="relative flex flex-col h-full">
-                    <!-- Star Rating with enhanced styling -->
+                <div class="flex flex-col h-full">
+                    <!-- Author Info -->
                     <div class="flex items-center mb-4">
-                        <div class="text-yellow-400 text-lg drop-shadow-sm">${getStarRating(review.rating)}</div>
-                        <div class="ml-2 w-1 h-1 bg-gray-300 rounded-full"></div>
-                        <span class="ml-2 text-xs font-medium text-gray-500 uppercase tracking-wide">Verified</span>
-                    </div>
-                    
-                    <!-- Review Text with premium typography -->
-                    <div class="relative mb-6 flex-grow">
-                        <div class="absolute -top-2 -left-2 text-4xl text-gray-100 font-serif leading-none select-none">"</div>
-                        <p class="text-gray-700 text-sm leading-relaxed font-medium relative z-10 pl-3">${review.text}</p>
-                        <div class="absolute -bottom-2 -right-2 text-4xl text-gray-100 font-serif leading-none select-none">"</div>
-                    </div>
-                    
-                    <!-- Author and Like Section -->
-                    <div class="flex items-center justify-between pt-4 border-t border-gray-100/60">
-                        <div class="flex items-center">
-                            <div class="relative">
-                                <div class="absolute inset-0 bg-gradient-to-br from-blue-400 to-purple-500 rounded-full blur-sm opacity-20"></div>
-                                <img src="${review.profile_photo_url}" 
-                                     alt="${review.author_name}" 
-                                     class="relative w-10 h-10 rounded-full object-cover border-2 border-white shadow-md">
-                                <div class="absolute -bottom-1 -right-1 w-4 h-4 bg-white rounded-full flex items-center justify-center shadow-sm border border-gray-100">
-                                    <svg class="w-2.5 h-2.5" viewBox="0 0 24 24">
-                                        <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
-                                        <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
-                                        <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
-                                        <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
-                                    </svg>
-                                </div>
-                            </div>
-                            <div class="ml-3">
-                                <div class="flex items-center">
-                                    <h4 class="font-semibold text-gray-900 text-sm">${review.author_name}</h4>
-                                    <svg class="w-3 h-3 ml-1 text-blue-500" fill="currentColor" viewBox="0 0 20 20">
-                                        <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-                                    </svg>
-                                </div>
-                                <p class="text-xs text-gray-500 font-medium">${formatDate(review.time * 1000)}</p>
-                            </div>
+                        <div class="w-10 h-10 bg-[#0050ff] rounded-full flex items-center justify-center flex-shrink-0">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                            </svg>
                         </div>
-                        
-                        <!-- Premium Like Button -->
-                        <button class="like-button group/like relative flex items-center space-x-1 px-3 py-2 rounded-full transition-all duration-300 ${isLiked ? 'bg-gradient-to-r from-red-50 to-pink-50 border border-red-200' : 'bg-gray-50/80 border border-gray-200/60 hover:bg-gradient-to-r hover:from-gray-50 hover:to-gray-100'}" 
-                                onclick="event.stopPropagation(); toggleLike('${review.id}')">
-                            <div class="relative">
-                                <svg class="w-4 h-4 transition-all duration-300 ${isLiked ? 'text-red-500 scale-110' : 'text-gray-400 group-hover/like:text-red-400 group-hover/like:scale-110'}" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"/>
-                                </svg>
-                                ${isLiked ? '<div class="absolute inset-0 bg-red-200 rounded-full blur-sm opacity-50"></div>' : ''}
-                            </div>
-                            <span class="like-count text-xs font-semibold ${isLiked ? 'text-red-600' : 'text-gray-600'}">${review.likes}</span>
-                        </button>
+                        <div class="ml-3">
+                            <h4 class="text-gray-900 font-semibold text-sm">${review.author_name}</h4>
+                        </div>
                     </div>
+                    
+                    <!-- Star Rating -->
+                    <div class="flex items-center mb-4">
+                        <div class="flex items-center text-yellow-400">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                            </svg>
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                            </svg>
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                            </svg>
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                            </svg>
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                            </svg>
+                        </div>
+                    </div>
+                    
+                    <!-- Review Text -->
+                    <p class="text-gray-600 text-sm leading-relaxed mb-6 italic flex-grow">${review.text}</p>
+                    
+                    <!-- Google Review Link -->
+                    <a href="${review.google_review_url}" target="_blank" rel="noopener noreferrer" 
+                       class="inline-flex items-center gap-2 text-sm text-gray-600 hover:text-[#0050ff] transition-colors mt-auto">
+                        <svg class="w-4 h-4" viewBox="0 0 24 24">
+                            <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                            <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                            <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+                            <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+                        </svg>
+                        <span>Google Review</span>
+                    </a>
                 </div>
             `;
             reviewsContainer.appendChild(reviewElement);

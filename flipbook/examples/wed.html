@@ -27,6 +27,24 @@
       background: transparent !important;
       background-color: transparent !important;
     }
+    
+    /* Disable flipbook loading animations */
+    ._df_container,
+    ._df_book,
+    .df_container,
+    #df_manual_book,
+    ._df_container *,
+    ._df_book *,
+    .df_container *,
+    #df_manual_book * {
+      animation: none !important;
+      transition: none !important;
+    }
+    
+    /* Initially hide the flipbook to prevent animation */
+    #df_manual_book {
+      visibility: hidden;
+    }
   </style>
 </head>
 
@@ -46,6 +64,35 @@
   <script src="../components/js/libs/jquery.min.js" type="text/javascript"></script>
   <!-- Flipbook main Js file -->
   <script src="../components/js/dflip.min.js" type="text/javascript"></script>
+  <script>
+    // Wait for flipbook to load, then show it instantly
+    $(document).ready(function() {
+      // Use jQuery to check if flipbook is initialized
+      var checkFlipbook = setInterval(function() {
+        var flipbook = $('#df_manual_book').find('._df_container');
+        if (flipbook.length > 0) {
+          clearInterval(checkFlipbook);
+          document.getElementById('df_manual_book').style.visibility = 'visible';
+          
+          // Notify parent window that flipbook is loaded
+          if (window.parent && window.parent !== window) {
+            window.parent.postMessage('flipbookLoaded', '*');
+          }
+        }
+      }, 100);
+      
+      // Timeout safety after 2 seconds
+      setTimeout(function() {
+        clearInterval(checkFlipbook);
+        document.getElementById('df_manual_book').style.visibility = 'visible';
+        
+        // Notify parent window that flipbook is loaded
+        if (window.parent && window.parent !== window) {
+          window.parent.postMessage('flipbookLoaded', '*');
+        }
+      }, 2000);
+    });
+  </script>
 
 </body>
 
