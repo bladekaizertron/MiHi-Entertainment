@@ -259,7 +259,7 @@
         document.body.style.overflow = 'hidden';
 
         const timestamp = new Date().getTime();
-        iframe.src = 'flipbook/books/test.html?t=' + timestamp;
+        iframe.src = 'flipbook/examples/test.html?t=' + timestamp;
 
         setTimeout(() => iframe.focus(), 100);
     };
