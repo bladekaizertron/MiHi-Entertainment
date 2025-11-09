@@ -3,68 +3,650 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Professional corporate event photo booth services by MiHi Entertainment. Elevate your corporate gatherings with our premium photo experiences.">
     <title>Corporate Events Photo Booth - MiHi Entertainment</title>
+    <link rel="preload" as="image" href="../assets/images/crporate/hero.jpg">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Inter', sans-serif; color: #1a202c; }
-        h1, h2, h3, h4, h5, h6 { font-family: 'Playfair Display', serif; }
-        .btn-primary { background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%); transition: all 0.3s ease; }
-        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(0, 80, 255, 0.4); }
-        .section-padding { padding: 5rem 0; }
-        .hero-gradient { background: linear-gradient(135deg, rgba(0, 80, 255, 0.5) 0%, rgba(0, 64, 217, 0.5) 100%); }
+        @keyframes glitch {
+            0% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(-2px, -2px); }
+            60% { transform: translate(2px, 2px); }
+            80% { transform: translate(2px, -2px); }
+            100% { transform: translate(0); }
+        }
+        
+        @keyframes gradientFlow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .ai-text {
+            position: relative;
+            display: inline-block;
+            animation: glitch 0.5s infinite;
+        }
+        
+        .ai-text::before,
+        .ai-text::after {
+            content: 'AI';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.8;
+        }
+        
+        .ai-text::before {
+            color: #00f7ff;
+            z-index: -1;
+            animation: glitch 0.3s infinite;
+        }
+        
+        .ai-text::after {
+            color: #ff00ff;
+            z-index: -2;
+            animation: glitch 0.4s infinite reverse;
+        }
+        
+        .ai-gradient {
+            background: linear-gradient(-45deg, #00f7ff, #4e00ff, #ff00ff, #ff7b00);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: gradientFlow 8s ease infinite;
+        }
+        
+        body { 
+            font-family: 'Inter', sans-serif; 
+            color: #1a202c;
+            line-height: 1.6;
+            font-weight: 400;
+        }
+        
+        h1, h2, h3, h4, h5, h6 { 
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            line-height: 1.2;
+        }
+        
+        .btn-primary { 
+            background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%); 
+            transition: all 0.3s ease; 
+        }
+        
+        .btn-primary:hover { 
+            transform: translateY(-2px); 
+            box-shadow: 0 10px 25px rgba(0, 80, 255, 0.4); 
+        }
+        
+        .section-padding { 
+            padding: 5rem 0; 
+        }
+        
+        /* Corporate Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .animate-fade-in-up {
+            animation: fadeInUp 0.8s ease-out forwards;
+            opacity: 0;
+        }
+        
+        .animate-delay-100 { animation-delay: 0.1s; }
+        .animate-delay-200 { animation-delay: 0.2s; }
+        .animate-delay-300 { animation-delay: 0.3s; }
+        .animate-delay-400 { animation-delay: 0.4s; }
+        
+        /* Custom styles */
+        .corporate-heading {
+            font-weight: 600;
+            letter-spacing: -0.5px;
+            line-height: 1.1;
+        }
+        
+        .corporate-subheading {
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+        
+        .corporate-text {
+            font-family: 'Inter', sans-serif;
+            font-weight: 400;
+            line-height: 1.7;
+        }
+        
+        .corporate-location {
+            font-family: 'Inter', sans-serif;
+            font-weight: 500;
+            letter-spacing: 1px;
+        }
+        
+        /* Prevent flash of grey */
+        .hero-section {
+            background-color: #111827; /* A dark color that matches the overlay */
+        }
+        
+        .hero-bg {
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+        
+        .hero-bg.loaded {
+            opacity: 1;
+        }
     </style>
 </head>
 <body>
     <div id="nav-placeholder"></div>
 
-    <section class="relative h-[60vh] flex items-center justify-center overflow-hidden">
-        <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1511578314322-379afb476865?w=1600');"></div>
-        <div class="absolute inset-0 hero-gradient"></div>
-        <div class="relative z-10 text-center text-white px-6">
-            <h1 class="text-5xl md:text-6xl font-bold mb-4">Corporate Events</h1>
-            <p class="text-xl md:text-2xl mb-8">Elevate Your Brand Experience</p>
-            <a href="#contact" class="btn-primary text-white px-8 py-4 rounded-full text-lg font-semibold inline-block">Request Demo</a>
+    <!-- Hero Section -->
+    <section class="relative min-h-[40vh] flex items-center justify-center overflow-hidden py-8 hero-section">
+        <img 
+            src="../assets/images/crporate/hero.jpg" 
+            alt="Corporate event with professional photo booth setup"
+            class="absolute inset-0 w-full h-full object-cover hero-bg"
+            onload="console.log('Image loaded'); this.classList.add('loaded')"
+            onerror="console.error('Error loading image:', this.src)">
+        <div class="absolute inset-0 bg-black bg-opacity-70"></div>     
+        <div class="relative z-10 text-center text-white px-4 w-full">
+            <div class="max-w-3xl mx-auto">
+                <div class="mb-2">
+                    <p class="max-w-3xl mx-auto text-sm md:text-base leading-tight mb-2 px-0 text-gray-100 tracking-[0.2em] animate-fade-in-up animate-delay-200 corporate-text">
+                    TRANSFORM YOUR NEXT
+                    </p>
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-semibold leading-tight tracking-tight animate-fade-in-up corporate-heading">
+                        Corporate
+                    </h1>
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-semibold leading-tight tracking-tight animate-fade-in-up corporate-heading">
+                        Events
+                    </h1>
+                </div>
+                
+                <div class="h-px w-12 bg-white mx-auto my-3 animate-fade-in-up animate-delay-200"></div>
+                
+                <p class="max-w-3xl mx-auto text-sm md:text-base leading-relaxed mb-4 px-0 text-gray-100 tracking-normal animate-fade-in-up animate-delay-200 corporate-text">
+                    Take your corporate event to the next level with custom-branded photo activations that will engage your target audience in a whole new way.
+                </p>
+                <div class="mt-8 mb-8 animate-fade-in-up animate-delay-300">
+                    <a 
+                        href="#contact" 
+                        class="bg-[#001845] text-white hover:bg-[#002855] px-10 py-3 rounded-sm text-sm font-semibold tracking-wide uppercase inline-block transform transition-all duration-200 hover:shadow-lg hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-[#001845]"
+                        aria-label="Contact us for corporate events">
+                        Contact Us
+                    </a>
+                </div>
+
+                <div class="text-center opacity-90 animate-fade-in-up animate-delay-400">
+                    <div class="h-px w-12 bg-white/70 mx-auto mb-3 transition-all duration-500"></div>
+                    <p class="text-white/80 tracking-wider text-xs font-medium uppercase corporate-location">
+                        SERVICING DENVER, COLORADO, AND NATIONWIDE CORPORATE EVENTS
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Trusted Brands Section -->
+    <div id="trusted-brands-container" class="py-12 bg-gray-50"></div>
+    
+    <!-- Corporate Gallery Section -->
+    <section class="py-16 bg-white">
+      <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 gallery-container justify-items-center">
+          <!-- Item 1 -->
+          <div class="gallery-item overflow-hidden rounded-xl shadow-md bg-white">
+            <div class="relative group">
+              <img 
+                src="https://images.unsplash.com/photo-1521737451536-00a86f630f3f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                alt="Conference Keynote" 
+                class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-105"
+              >
+              <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+                <div class="transform translate-y-6 group-hover:translate-y-0 transition-transform duration-300">
+                  <h3 class="text-white text-xl font-semibold mb-1">Conference Keynote</h3>
+                  <p class="text-gray-200 text-sm mb-4">Engaging audiences with high-impact presentations</p>
+                  <a href="#" class="inline-block text-white text-sm font-medium bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-md transition-colors duration-300">
+                    View More
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Item 2 -->
+          <div class="gallery-item overflow-hidden rounded-xl shadow-md bg-white">
+            <div class="relative group">
+              <img 
+                src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                alt="Media Activation" 
+                class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-105"
+              >
+              <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+                <div class="transform translate-y-6 group-hover:translate-y-0 transition-transform duration-300">
+                  <h3 class="text-white text-xl font-semibold mb-1">Media Activation</h3>
+                  <p class="text-gray-200 text-sm mb-4">Capturing professional interviews and on-site moments</p>
+                  <a href="#" class="inline-block text-white text-sm font-medium bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-md transition-colors duration-300">
+                    View More
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Item 3 -->
+          <div class="gallery-item overflow-hidden rounded-xl shadow-md bg-white">
+            <div class="relative group">
+              <img 
+                src="https://images.unsplash.com/photo-1531058020387-3be344556be6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                alt="Team Experience" 
+                class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-105"
+              >
+              <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+                <div class="transform translate-y-6 group-hover:translate-y-0 transition-transform duration-300">
+                  <h3 class="text-white text-xl font-semibold mb-1">Team Experience</h3>
+                  <p class="text-gray-200 text-sm mb-4">Behind-the-scenes collaboration and innovation</p>
+                  <a href="#" class="inline-block text-white text-sm font-medium bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-md transition-colors duration-300">
+                    View More
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Item 4 -->
+          <div class="gallery-item overflow-hidden rounded-xl shadow-md bg-white">
+            <div class="relative group">
+              <img 
+                src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                alt="Client Engagement" 
+                class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-105"
+              >
+              <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+                <div class="transform translate-y-6 group-hover:translate-y-0 transition-transform duration-300">
+                  <h3 class="text-white text-xl font-semibold mb-1">Client Engagement</h3>
+                  <p class="text-gray-200 text-sm mb-4">Personalized brand experiences that inspire connection</p>
+                  <a href="#" class="inline-block text-white text-sm font-medium bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-md transition-colors duration-300">
+                    View More
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tradeshow Activations Card -->
+          <div class="gallery-item feature-card bg-gradient-to-br from-amber-50 to-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-500 hover:-translate-y-1 col-span-full lg:col-span-4 w-full max-w-4xl">
+            <!-- Label -->
+            <div class="text-center mb-4">
+              <span class="text-navy blue-600 text-xs font-semibold tracking-widest uppercase">ROI INCREASING</span>
+            </div>
+            
+            <!-- Headline -->
+            <h3 class="text-2xl md:text-3xl font-bold text-gray-900 text-center mb-6 uppercase tracking-tight">CORPORATE ACTIVATIONS</h3>
+            
+            <!-- Content -->
+            <div class="space-y-4 mb-8 text-gray-700">
+              <p>We specialize in high-impact brand activations that bring your corporate event to life.</p>
+              <p>From immersive experiences like Disney’s Haunted Mansion at Essence Fest to custom-branded moments with Pure Storage, MiHi Entertainment delivers seamless event integration, polished execution, and unforgettable guest engagement.</p>
+              <p>Whether you need tailored branding or full-scale activations, our team ensures your brand stands out in every detail.</p>
+            </div>
+            
+            <!-- Buttons -->
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+              <a href="#" class="px-6 py-3 bg-[#001845] hover:bg-[#002855] text-white font-medium rounded-lg text-center transition-all duration-300 transform hover:scale-105 hover:shadow-lg">
+                Contact Us Now
+              </a>
+              <a href="#" class="px-6 py-3 border-2 border-gray-300 hover:border-red-600 text-gray-700 hover:text-red-600 font-medium rounded-lg text-center transition-all duration-300 transform hover:scale-105">
+                Schedule a Call
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  
+    <!-- Product Detail Section (Hidden by default) -->
+    <section class="product-detail-section mb-16" id="product-detail-section">
+        <div class="container mx-auto px-6">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <!-- Left: Image -->
+                <div>
+                    <img src="../assets/images/crporate/pd1.jpg" alt="B&W Luxe Wedding Photography Booth" class="product-image">
+                </div>
+                
+                <!-- Right: Text Content -->
+                <div>
+                    <h2 class="text-7xl md:text-8xl font-black mb-4 text-navy-800">360°</h2>
+                    <h3 class="text-2xl md:text-3xl font-semibold text-gray-700 uppercase tracking-wider mb-4 border-b-2 border-navy-800 pb-2 inline-block">360° Video Experience</h3>
+                    <p class="text-gray-700 leading-relaxed mb-4 text-base">
+                        Our 360 Booth delivers a dynamic brand activation where guests create full-motion videos surrounded by custom-branded platforms, backdrops, and overlays, perfect for high-energy corporate events.
+                    </p>
+                    <button class="w-full sm:w-auto px-8 py-3 bg-white text-navy-800 border border-navy-800 hover:bg-gray-50 font-semibold rounded-md transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-navy-500 focus:ring-offset-2 shadow-sm hover:shadow-md text-center">
+                        EXPLORE 360° →
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="container mx-auto px-6 mt-12">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <!-- Left: Text Content (Right-aligned) -->
+                <div class="text-right">
+                    <h2 class="text-6xl md:text-7xl font-bold mb-4 tracking-normal"><span class="ai-text"><span class="ai-gradient">AI</span></span></h2>
+                    <h3 class="text-2xl md:text-3xl font-semibold text-gray-700 uppercase tracking-wider mb-4 border-b-2 border-navy-800 pb-2 inline-block">PHOTO BOOTH</h3>
+                    <p class="text-gray-700 leading-relaxed mb-4 text-base">
+                        Our AI Booth transforms guest photos into fully custom, branded AI-generated images designed to match your campaign or theme, offering an interactive brand activation for corporate events.
+                    </p>
+                     <button class="w-full sm:w-auto px-8 py-3 bg-white text-navy-800 border border-navy-800 hover:bg-gray-50 font-semibold rounded-md transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-navy-500 focus:ring-offset-2 shadow-sm hover:shadow-md text-center">
+                        VIEW PRODUCT →
+                    </button>
+                </div>
+                
+                <!-- Right: Image -->
+                <div>
+                    <img src="../assets/images/crporate/pd2.jpg" alt="B&W Kardashian Photography Booth" class="product-image">
+                </div>
+            </div>
+        </div>
+        <div class="container mx-auto px-6">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <!-- Left: Image -->
+                <div>
+                    <img src="../assets/images/crporate/pd3.jpg" alt="B&W Luxe Wedding Photography Booth" class="product-image">
+                </div>
+                
+                <!-- Right: Text Content -->
+                <div>
+                    <h2 class="text-7xl md:text-7xl font-black mb-4 text-navy-800">GLAMBOT</h2>
+                    <h3 class="text-2xl md:text-3xl font-semibold text-gray-700 uppercase tracking-wider mb-4 border-b-2 border-navy-800 pb-2 inline-block">Video Booth</h3>
+                    <p class="text-gray-700 leading-relaxed mb-4 text-base">
+                        Capture cinematic slow-motion videos with our GlamBot, a red carpet-style activation that adds star power and customizable branding to any corporate experience.
+                    </p>
+                    <button class="w-full sm:w-auto px-8 py-3 bg-white text-navy-800 border border-navy-800 hover:bg-gray-50 font-semibold rounded-md transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-navy-500 focus:ring-offset-2 shadow-sm hover:shadow-md text-center">
+                        VIEW PRODUCT →
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="container mx-auto px-6 mt-12">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <!-- Left: Text Content (Right-aligned) -->
+                <div class="text-right">
+                    <h2 class="text-7xl md:text-6xl font-black mb-4 text-navy-800">OUR CLASSIC</h2>
+                    <h3 class="text-2xl md:text-3xl font-semibold text-gray-700 uppercase tracking-wider mb-4 border-b-2 border-navy-800 pb-2 inline-block">PHOTO BOOTH</h3>
+                    <p class="text-gray-700 leading-relaxed mb-4 text-base">
+                        Our modern Photo Booth creates high-quality branded content with custom overlays, interactive sharing options, and sleek setups that align seamlessly with corporate branding.
+                    </p>
+                     <button class="w-full sm:w-auto px-8 py-3 bg-white text-navy-800 border border-navy-800 hover:bg-gray-50 font-semibold rounded-md transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-navy-500 focus:ring-offset-2 shadow-sm hover:shadow-md text-center">
+                        VIEW PRODUCT →
+                    </button>
+                </div>
+                
+                <!-- Right: Image -->
+                <div>
+                    <img src="../assets/images/crporate/pd4.jpg" alt="B&W Kardashian Photography Booth" class="product-image">
+                </div>
+            </div>
         </div>
     </section>
 
-    <section class="section-padding bg-white">
-        <div class="container mx-auto px-6">
-            <div class="max-w-4xl mx-auto">
-                <h2 class="text-4xl font-bold mb-6 text-center">Professional Photo Booth Solutions</h2>
-                <p class="text-lg text-gray-700 mb-8 text-center">Boost engagement and brand awareness at your corporate events.</p>
-                
-                <div class="grid md:grid-cols-2 gap-8 mt-12">
-                    <div class="bg-gray-50 p-6 rounded-lg">
-                        <h3 class="text-2xl font-semibold mb-4">🏢 Brand Integration</h3>
-                        <p class="text-gray-700">Custom branded overlays, logos, and messaging on every photo.</p>
+    <!-- Brand Focus Section -->
+    <section class="py-20 bg-[#0a1e4a] relative overflow-hidden">
+        <!-- Decorative Pattern -->
+        <div class="absolute inset-0 opacity-30">
+            <div class="absolute inset-0" style="background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgdmlld0JveD0iMCAwIDYwIDYwIj48cGF0dGVybiBpZD0icGF0dGVybiIgd2lkdGg9IjYwIiBoZWlnaHQ9IjYwIiBwYXR0ZXJuVW5pdHM9InVzZXJTcGFjZU9uVXNlIiBwYXR0ZXJuVHJhbnNmb3JtPSJyb3RhdGUoNDUpIHNjYWxlKDAuNSkiPjxyZWN0IHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgZmlsbD0iIzAwMCIvPjxwYXRoIGQ9Ik0zMCAxMHYxMEg0MHYxMEgzMHYxMEgyMFYzMEgxMFYyMGgxMFYxMGgxMHoiIGZpbGw9IiNmZmYiIGZpbGwtb3BhY2l0eT0iMC4xIi8+PC9wYXR0ZXJuPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjcGF0dGVybikiLz48L3N2Zz4=');"></div>
+        </div>
+        
+        <div class="container mx-auto px-6 relative z-10">
+            <!-- Section Header -->
+            <div class="text-center max-w-4xl mx-auto mb-16">
+                <style>
+    @keyframes attentionPulse {
+        0%, 100% { 
+            text-shadow: 0 0 0px rgba(255, 255, 255, 0.7);
+            color: white;
+        }
+        50% { 
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.9);
+            color: #ccd64a;
+        }
+    }
+    .attention-text {
+        animation: attentionPulse 3s ease-in-out infinite;
+        display: inline-block;
+        padding: 0 2px;
+    }
+</style>
+
+<h2 class="text-4xl md:text-5xl font-black text-white mb-4">
+    MAKE YOUR BRAND THE CENTER OF <span class="attention-text">ATTENTION</span>
+</h2>
+                <p class="text-blue-200 text-lg md:text-xl mt-6">Custom brand activations that connect and captivate</p>
+            </div>
+
+            <!-- Cards Grid -->
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Card 1 -->
+                <div class="group relative bg-white rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 overflow-hidden">
+                    <div class="absolute inset-0 bg-gradient-to-br from-blue-500 to-cyan-400 opacity-0 group-hover:opacity-5 transition-opacity duration-500"></div>
+                    <div class="relative z-10">
+                        <div class="w-16 h-16 bg-gradient-to-r from-blue-600 to-cyan-500 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 overflow-hidden">
+                            <img src="../assets/images/crporate/icon1.png" alt="Booth Wraps Icon" class="w-10 h-10 object-contain">
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-3">CUSTOM BRANDED BOOTH WRAPS</h3>
+                        <p class="text-gray-600 leading-relaxed">Transform any space with our premium, high-resolution booth wraps that showcase your brand's identity with stunning visuals and crisp details.</p>
                     </div>
-                    <div class="bg-gray-50 p-6 rounded-lg">
-                        <h3 class="text-2xl font-semibold mb-4">📊 Data Collection</h3>
-                        <p class="text-gray-700">Capture leads and analytics with optional email collection.</p>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="group relative bg-white rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 overflow-hidden">
+                    <div class="absolute inset-0 bg-gradient-to-br from-blue-500 to-cyan-400 opacity-0 group-hover:opacity-5 transition-opacity duration-500"></div>
+                    <div class="relative z-10">
+                        <div class="w-16 h-16 bg-gradient-to-r from-blue-600 to-cyan-500 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 overflow-hidden">
+                            <img src="../assets/images/crporate/icon2.png" alt="Backdrops Icon" class="w-10 h-10 object-contain">
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-3">CUSTOM BRANDED BACKDROPS</h3>
+                        <p class="text-gray-600 leading-relaxed">Create immersive brand experiences with our custom backdrops, designed to make your photo activations stand out and be remembered.</p>
                     </div>
-                    <div class="bg-gray-50 p-6 rounded-lg">
-                        <h3 class="text-2xl font-semibold mb-4">🎯 Social Media Boost</h3>
-                        <p class="text-gray-700">Increase reach with instant social sharing and custom hashtags.</p>
-                    </div>
-                    <div class="bg-gray-50 p-6 rounded-lg">
-                        <h3 class="text-2xl font-semibold mb-4">👔 Professional Staff</h3>
-                        <p class="text-gray-700">Experienced attendants ensure smooth operation throughout your event.</p>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="group relative bg-white rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 overflow-hidden">
+                    <div class="absolute inset-0 bg-gradient-to-br from-blue-500 to-cyan-400 opacity-0 group-hover:opacity-5 transition-opacity duration-500"></div>
+                    <div class="relative z-10">
+                        <div class="w-16 h-16 bg-gradient-to-r from-blue-600 to-cyan-500 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 overflow-hidden">
+                            <img src="../assets/images/crporate/icon3.png" alt="Brand Activations Icon" class="w-10 h-10 object-contain">
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-3">CUSTOM BRANDED ACTIVATIONS</h3>
+                        <p class="text-gray-600 leading-relaxed">Engage your audience with unique, interactive brand activations that create lasting impressions and drive meaningful connections.</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="section-padding bg-gradient-to-r from-[#0050ff] to-[#0050ff] text-white">
-        <div class="container mx-auto px-6 text-center">
-            <h2 class="text-4xl font-bold mb-6">Ready to Impress Your Clients?</h2>
-            <p class="text-xl mb-8">Get a custom corporate package quote</p>
-            <a href="#contact" class="bg-white text-[#0050ff] px-8 py-4 rounded-full text-lg font-semibold inline-block hover:bg-gray-100 transition">Contact Us</a>
+    <!-- Featured Attractions Gallery -->
+    <section class="py-16 relative overflow-hidden" style="background: white">
+        <!-- Decorative elements -->
+        <div class="absolute inset-0 opacity-10" style="background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxkZWZzPjxwYXR0ZXJuIGlkPSJwYXR0ZXJuIiB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiIHBhdHRlcm5UcmFuc2Zvcm09InJvdGF0ZSg0NSkiPjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjA1KSIvPjwvcGF0dGVybj48L2RlZnM+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNwYXR0ZXJuKSIvPjwvc3ZnPg==');"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <!-- Section Header -->
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Featured Attractions</h2>
+                <div class="w-24 h-1 bg-blue-600 mx-auto mb-6"></div>
+                <p class="text-gray-600 max-w-2xl mx-auto text-lg">Experience our cutting-edge photo experiences that blend technology and creativity</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
+                <!-- First Card -->
+                <div class="group relative rounded-2xl overflow-hidden shadow-2xl transform transition-all duration-500 hover:-translate-y-2">
+                    <div class="relative h-96 md:h-[500px] overflow-hidden">
+                        <img src="../assets/images/trdshows/fc1.jpg" alt="AI SketchBot transforming a photo into a sketch" 
+                             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-6">
+                            <div class="transform translate-y-8 group-hover:translate-y-0 transition-transform duration-500">
+                                <p class="text-white mb-4">Looking for a brand activation that turns heads? SketchBot creates live, robotic portraits of your guests, delivering a tech-forward experience that sparks conversation and engagement. With custom branding across the robot, sketch paper, and display, it’s a one-of-a-kind moment perfect for corporate events.</p>
+                                <button class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-full font-medium transition-colors duration-300">
+                                    Learn More
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="absolute top-6 right-6">
+                        <span class="bg-blue-600 text-white px-5 py-2 rounded-full text-sm font-bold shadow-lg transform transition-all duration-300 group-hover:scale-110 inline-flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 4v16M17 4v16M3 8h4m10 0h4M3 12h18M3 16h4m10 0h4M4 20h16a1 1 0 001-1V5a1 1 0 00-1-1H4a1 1 0 00-1 1v14a1 1 0 001 1z" />
+                            </svg>
+                            SKETCHBOT
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Second Card -->
+                <div class="group relative rounded-2xl overflow-hidden shadow-2xl transform transition-all duration-500 hover:-translate-y-2">
+                    <div class="relative h-96 md:h-[500px] overflow-hidden">
+                        <img src="../assets/images/trdshows/fc2.jpg" alt="Edible image printer creating custom cookies" 
+                             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-6">
+                            <div class="transform translate-y-8 group-hover:translate-y-0 transition-transform duration-500">
+                                <p class="text-gray-200 mb-4">Serve up branding with a side of sweetness! Our Cookie Printer brings your logo or campaign visuals to life on edible cookies, giving guests a deliciously interactive brand activation. Ideal for corporate events, every detail, from the design to the packaging, is fully customizable for maximum impact.</p>
+                                <button class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-full font-medium transition-colors duration-300">
+                                    Learn More
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="absolute top-6 right-6">
+                        <span class="bg-blue-600 text-white px-5 py-2 rounded-full text-sm font-bold shadow-lg transform transition-all duration-300 group-hover:scale-110 inline-flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 15.546c-.523 0-1.046.151-1.5.454a2.704 2.704 0 01-3 0 2.704 2.704 0 00-3 0 2.704 2.704 0 01-3 0 2.704 2.704 0 00-3 0 2.701 2.701 0 00-1.5-.454M9 6v2m3-2v2m3-2v2M9 3h.01M12 3h.01M15 3h.01M21 21v-7a2 2 0 00-2-2H5a2 2 0 00-2 2v7h18zm-3-9v-2a2 2 0 00-2-2H8a2 2 0 00-2 2v2h12z" />
+                            </svg>
+                            COOKIE PRINTER
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Full-width Image Section -->
+    <section class="relative h-96 md:h-[500px] overflow-hidden mb-1">
+        <div class="absolute inset-0">
+            <img src="../assets/images/crporate/sec1.jpeg" 
+                 alt="Corporate event setup with modern lighting and staging"
+                 class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-black/60"></div>
+        </div>
+        <div class="relative h-full flex items-center">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center w-full">
+                <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
+                    LET'S TALK AV PRODUCTION
+                </h2>
+                <p class="text-xl text-white/90 max-w-9xl mx-auto mb-8">
+                    Make your corporate event unforgettable with MiHi Entertainment’s AV production services. Our team of experts will work with you to create a stunning audiovisual experience that will captivate your audience and leave a lasting impression.
+                </p>
+                <p class="text-xl text-white/90 max-w-9xl mx-auto mb-8">
+                    From state-of-the-art sound systems and custom lighting designs to live video streaming and interactive displays, we’ll bring your vision to life in ways you never thought possible. Our satisfied clients rave about the impact our AV production has had on their corporate events, from increased engagement and excitement to higher attendance and revenue. Don’t settle for mediocrity - let us help you take your corporate event to the next level. Contact us today to schedule a consultation.
+                </p>
+                <style>
+                    @keyframes pulse {
+                        0% { transform: scale(1); }
+                        50% { transform: scale(1.03); }
+                        100% { transform: scale(1); }
+                    }
+                    .pulse-button {
+                        animation: pulse 3s infinite;
+                    }
+                    .pulse-button:hover {
+                        animation: none;
+                        transform: translateY(-2px);
+                        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+                    }
+                </style>
+                <button class="pulse-button bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-10 py-4 rounded-full font-semibold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl">
+                    View Our AV Production Page
+                </button>
+            </div>
         </div>
     </section>
 
+    <!-- Load Trusted Brands Component -->
+    <script src="../assets/components/trusted-brands-corporate.js"></script>
+    <!-- Load Back to Top Component -->
+    <script src="../assets/components/back-to-top.js"></script>
     <script src="../assets/components/navigation.js"></script>
     <script src="../assets/components/footer.js"></script>
+    
+    <script>
+    // Intersection Observer for scroll animations
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate-fade-up');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    // Add animation classes with delay
+    document.addEventListener('DOMContentLoaded', () => {
+      const galleryItems = document.querySelectorAll('.gallery-item, .feature-card');
+      galleryItems.forEach((item, index) => {
+        item.style.opacity = '0';
+        item.style.transform = 'translateY(20px)';
+        item.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
+        item.style.transitionDelay = `${index * 0.1}s`;
+        observer.observe(item);
+      });
+    });
+    </script>
+    
+    <style>
+    /* Gallery Item Animations */
+    .gallery-item {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+
+    .gallery-item.animate-fade-up {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .animate-fade-up {
+      animation: fadeInUp 0.6s ease-out forwards;
+    }
+    </style>
+
 </body>
 </html>
