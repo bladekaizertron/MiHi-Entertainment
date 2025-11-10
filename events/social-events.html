@@ -873,6 +873,53 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // Navigation and other initialization code can go here
+            
+            // Confetti effect on page load
+            function triggerConfetti() {
+                const duration = 3 * 1000; // 3 seconds
+                const animationEnd = Date.now() + duration;
+                const defaults = { 
+                    startVelocity: 30, 
+                    spread: 360, 
+                    ticks: 60, 
+                    zIndex: 0,
+                    particleCount: 50,
+                    origin: { y: 0.6 }
+                };
+
+                function randomInRange(min, max) {
+                    return Math.random() * (max - min) + min;
+                }
+
+                const interval = setInterval(function() {
+                    const timeLeft = animationEnd - Date.now();
+
+                    if (timeLeft <= 0) {
+                        return clearInterval(interval);
+                    }
+
+                    const particleCount = 50 * (timeLeft / duration);
+                    
+                    // Random confetti from the left
+                    confetti({
+                        ...defaults,
+                        particleCount,
+                        origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 },
+                        angle: randomInRange(55, 125)
+                    });
+                    
+                    // Random confetti from the right
+                    confetti({
+                        ...defaults,
+                        particleCount,
+                        origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 },
+                        angle: randomInRange(55, 125)
+                    });
+                }, 250);
+            }
+
+            // Start confetti after a short delay
+            setTimeout(triggerConfetti, 1000);
         });
 
         // Brochure Modal Functions
