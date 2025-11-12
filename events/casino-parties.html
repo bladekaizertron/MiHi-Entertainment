@@ -538,13 +538,26 @@
         }
         .floating-chip {
             position: fixed;
-            top: 45%;
-            left: calc(env(safe-area-inset-left, 0px) + 0.25rem);
-            transform: translateY(-50%);
+            top: 6rem;
+            left: -3rem;
+            transform: none;
             width: clamp(180px, 22vw, 320px);
             height: clamp(180px, 22vw, 320px);
             pointer-events: none;
-            z-index: 40;
+            z-index: 30;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .floating-pcard {
+            position: fixed;
+            top: 6rem;
+            right: -2rem;
+            transform: none;
+            width: clamp(180px, 22vw, 320px);
+            height: clamp(180px, 22vw, 320px);
+            pointer-events: none;
+            z-index: 30;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -575,14 +588,68 @@
             transform-style: preserve-3d;
             transform-origin: center;
             will-change: transform;
-            filter: drop-shadow(0 35px 45px rgba(6, 11, 26, 0.65));
+            filter: drop-shadow(0 15px 25px rgba(6, 11, 26, 0.5));
             transition: transform 0.18s ease-out;
+        }
+        @media (max-width: 768px) {
+            .floating-chip {
+                top: 1.5rem;
+                left: 0;
+                width: clamp(180px, 22vw, 320px);
+                height: clamp(180px, 22vw, 320px);
+            }
+            .floating-pcard {
+                top: 1.5rem;
+                right: 0;
+                width: clamp(180px, 22vw, 320px);
+                height: clamp(180px, 22vw, 320px);
+            }
+            .floating-chip-image {
+                filter: drop-shadow(0 10px 20px rgba(6, 11, 26, 0.4));
+            }
         }
         @media (prefers-reduced-motion: reduce) {
             .floating-chip-inner {
                 animation: none;
             }
             .floating-chip-image {
+                transition: none;
+            }
+        }
+        .floating-pcard-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            animation: chip-float 7s ease-in-out infinite;
+            transform-style: preserve-3d;
+            will-change: transform;
+        }
+        .floating-pcard-inner::after {
+            content: '';
+            position: absolute;
+            inset: 18% 10%;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(242, 207, 207, 0.28), transparent 70%);
+            filter: blur(12px);
+            z-index: 0;
+        }
+        .floating-pcard-image {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            transform-style: preserve-3d;
+            transform-origin: center;
+            will-change: transform;
+            filter: drop-shadow(0 15px 25px rgba(6, 11, 26, 0.5));
+            transition: transform 0.18s ease-out;
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .floating-pcard-inner {
+                animation: none;
+            }
+            .floating-pcard-image {
                 transition: none;
             }
         }
@@ -831,6 +898,7 @@
             padding: clamp(1.75rem, 3vw, 2.5rem);
             font-family: 'Merriweather', serif;
             pointer-events: none;
+            z-index: 1;
         }
         .article-card-content h1 {
             font-weight: 900;
@@ -853,6 +921,11 @@
         .article-card-flap {
             width: 100%;
             height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 2;
+            pointer-events: none;
         }
         .article-card-flap::before,
         .article-card-flap::after {
@@ -860,25 +933,66 @@
             content: "";
             height: 100%;
             width: 50%;
-            background: url("https://pbs.twimg.com/profile_images/1347260174176710658/2GfSZ1i__400x400.jpg") #064e3b;
-            background-repeat: no-repeat;
-            transition: transform 1s ease;
-            border-top: 1px solid rgba(250, 204, 21, 0.25);
-            border-bottom: 1px solid rgba(250, 204, 21, 0.25);
+            background-image: 
+                linear-gradient(180deg, 
+                    rgba(255, 255, 255, 0.08) 0%, 
+                    transparent 25%, 
+                    transparent 75%, 
+                    rgba(0, 0, 0, 0.25) 100%),
+                linear-gradient(135deg, rgba(0, 0, 0, 0.15) 0%, rgba(0, 0, 0, 0.05) 50%, rgba(0, 0, 0, 0.15) 100%),
+                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23noiseFilter)' opacity='0.12'/%3E%3C/svg%3E"),
+                url('../assets/images/casino/ptable.jpg');
+            background-size: 100% 100%, 100% 100%, 40px 40px, 200% 100%;
+            background-repeat: no-repeat, no-repeat, repeat, no-repeat;
+            background-blend-mode: overlay, overlay, normal, normal;
+            transition: transform 1s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 1s ease, filter 1s ease;
+            border-top: 2px solid rgba(250, 204, 21, 0.45);
+            border-bottom: 2px solid rgba(250, 204, 21, 0.45);
+            box-shadow: 
+                inset 0 0 35px rgba(0, 0, 0, 0.35),
+                inset 0 0 70px rgba(0, 0, 0, 0.18),
+                0 5px 25px rgba(0, 0, 0, 0.45),
+                0 10px 50px rgba(0, 0, 0, 0.35);
+            filter: brightness(0.92) contrast(1.15) saturate(1.1);
+            backdrop-filter: blur(0.5px);
         }
         .article-card-flap::before {
-            background-position: 100px center;
             left: 0;
+            background-position: center, center, 0 0, left center;
+            border-right: 4px solid rgba(250, 204, 21, 0.6);
+            box-shadow: 
+                inset 0 0 35px rgba(0, 0, 0, 0.35),
+                inset 0 0 70px rgba(0, 0, 0, 0.18),
+                0 5px 25px rgba(0, 0, 0, 0.45),
+                0 10px 50px rgba(0, 0, 0, 0.35),
+                inset -3px 0 15px rgba(250, 204, 21, 0.15),
+                inset 3px 0 0 rgba(250, 204, 21, 0.2);
         }
         .article-card-flap::after {
-            background-position: -200px center;
             right: 0;
+            background-position: center, center, 0 0, right center;
+            border-left: 4px solid rgba(250, 204, 21, 0.6);
+            box-shadow: 
+                inset 0 0 35px rgba(0, 0, 0, 0.35),
+                inset 0 0 70px rgba(0, 0, 0, 0.18),
+                0 5px 25px rgba(0, 0, 0, 0.45),
+                0 10px 50px rgba(0, 0, 0, 0.35),
+                inset 3px 0 15px rgba(250, 204, 21, 0.15),
+                inset -3px 0 0 rgba(250, 204, 21, 0.2);
         }
         .article-card:hover .article-card-flap::before {
             transform: translateX(-460px);
+            filter: brightness(1.05) contrast(0.95) saturate(0.9);
+            box-shadow: 
+                inset 0 0 15px rgba(0, 0, 0, 0.15),
+                0 2px 10px rgba(0, 0, 0, 0.25);
         }
         .article-card:hover .article-card-flap::after {
             transform: translateX(460px);
+            filter: brightness(1.05) contrast(0.95) saturate(0.9);
+            box-shadow: 
+                inset 0 0 15px rgba(0, 0, 0, 0.15),
+                0 2px 10px rgba(0, 0, 0, 0.25);
         }
         @media (max-width: 768px) {
             .article-card {
@@ -890,15 +1004,16 @@
                 transform: none;
                 padding: 1.5rem;
             }
-            .article-card-flap::before,
+            .article-card-flap::before {
+                background-position: center, center, 0 0, left center;
+            }
             .article-card-flap::after {
-                background-position: center;
-                filter: blur(2px);
-                opacity: 0.6;
+                background-position: center, center, 0 0, right center;
             }
             .article-card:hover .article-card-flap::before,
             .article-card:hover .article-card-flap::after {
                 transform: none;
+                filter: brightness(0.92) contrast(1.15) saturate(1.1);
             }
         }
     </style>
@@ -911,6 +1026,14 @@
                 src="../assets/images/casino/chip.png" 
                 alt="" 
                 class="floating-chip-image">
+        </div>
+    </div>
+    <div class="floating-pcard" aria-hidden="true">
+        <div class="floating-pcard-inner">
+            <img 
+                src="../assets/images/casino/pcard.png" 
+                alt="" 
+                class="floating-pcard-image">
         </div>
     </div>
 
@@ -1152,7 +1275,9 @@
     <script>
         (() => {
             const chip = document.querySelector('.floating-chip-image');
-            if (!chip) {
+            const pcard = document.querySelector('.floating-pcard-image');
+            
+            if (!chip && !pcard) {
                 return;
             }
 
@@ -1160,10 +1285,11 @@
 
             let ticking = false;
 
-            const updateChipTransform = () => {
-                ticking = false;
+            const updateTransform = (element) => {
+                if (!element) return;
+                
                 if (prefersReducedMotion.matches) {
-                    chip.style.transform = 'none';
+                    element.style.transform = 'none';
                     return;
                 }
                 const scrollTop = window.scrollY || window.pageYOffset;
@@ -1178,7 +1304,13 @@
                 const rotateZ = Math.sin(rotationCycles * Math.PI * 2) * 6;
                 const translateY = Math.sin(scrollTop * 0.003) * 25;
 
-                chip.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) rotateZ(${rotateZ}deg) translateY(${translateY}px)`;
+                element.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) rotateZ(${rotateZ}deg) translateY(${translateY}px)`;
+            };
+
+            const updateChipTransform = () => {
+                ticking = false;
+                updateTransform(chip);
+                updateTransform(pcard);
             };
 
             const onScroll = () => {
