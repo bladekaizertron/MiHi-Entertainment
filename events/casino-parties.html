@@ -1224,7 +1224,7 @@
         
         /* Interactive Brochure Section Styles - Casino Theme */
         .brochure-section {
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            background: radial-gradient(circle, rgba(15, 23, 42, 1) 0%, rgba(0, 0, 0, 0.5) 200%);
             position: relative;
             overflow: hidden;
         }
@@ -1237,6 +1237,18 @@
                 radial-gradient(circle at 20% 50%, rgba(250, 204, 21, 0.1) 0%, transparent 50%),
                 radial-gradient(circle at 80% 80%, rgba(217, 119, 6, 0.1) 0%, transparent 50%);
             pointer-events: none;
+        }
+        
+        #brochure-webgl-canvas {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0;
         }
         
         .brochure-badge {
@@ -1492,6 +1504,7 @@
 
     <!-- Interactive Brochure Section -->
     <section class="py-12 md:py-16 brochure-section">
+        <canvas id="brochure-webgl-canvas"></canvas>
         <div class="container mx-auto px-6 relative z-10">
             <!-- Section Header -->
             <div class="text-center mb-8 space-y-2">
@@ -2296,6 +2309,36 @@
                 if (modal.classList.contains('show')) {
                     closeBrochureModal();
                 }
+            }
+        });
+        
+    </script>
+    
+    <!-- Hexagonal Grid Background Script -->
+    <script type="module">
+        import Grid1Background from 'https://cdn.jsdelivr.net/npm/threejs-components@0.0.16/build/backgrounds/grid1.cdn.min.js';
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            const canvas = document.getElementById('brochure-webgl-canvas');
+            if (!canvas) return;
+            
+            try {
+                const bg = Grid1Background(canvas);
+                
+                // Set casino-themed colors (gold/yellow tones)
+                if (bg && bg.grid) {
+                    bg.grid.setColors([0xfacc15, 0xd97706, 0x92400e]);
+                    if (bg.grid.light1) {
+                        bg.grid.light1.color.set(0xfacc15);
+                        bg.grid.light1.intensity = 800;
+                    }
+                    if (bg.grid.light2) {
+                        bg.grid.light2.color.set(0xd97706);
+                        bg.grid.light2.intensity = 300;
+                    }
+                }
+            } catch (error) {
+                console.warn('Could not load hexagonal grid background:', error);
             }
         });
     </script>
