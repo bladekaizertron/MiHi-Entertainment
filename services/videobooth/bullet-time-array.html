@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>National Bullet Time Booth Rentals - Matrix-Style Effects | MiHi Entertainment</title>
+    <meta name="description" content="Create mind-bending frozen time photos with a professional multi-camera array that captures stunning 180-degree Matrix-style moments. Available nationwide.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        body { 
+            font-family: 'Inter', sans-serif; 
+            color: #1a202c; 
+            overflow-x: hidden;
+        }
+        h1, h2, h3, h4, h5, h6 { 
+            font-family: 'Playfair Display', serif; 
+        }
+        
+        /* Button Styles */
+        .btn-primary { 
+            background: linear-gradient(135deg, #dc2626 0%, #ea580c 100%);
+            transition: all 0.3s ease; 
+        }
+        .btn-primary:hover { 
+            transform: translateY(-2px); 
+            box-shadow: 0 20px 40px rgba(220, 38, 38, 0.5);
+        }
+        
+        /* Gradient Backgrounds */
+        .gradient-hero {
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a0505 50%, #2d0a0a 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        .gradient-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 20% 50%, rgba(220, 38, 38, 0.15) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 50%, rgba(234, 88, 12, 0.15) 0%, transparent 50%);
+            animation: pulse 8s ease-in-out infinite;
+        }
+        
+        .gradient-dark {
+            background: linear-gradient(135deg, #1a0505 0%, #0a0a0a 100%);
+        }
+        
+        .gradient-card {
+            background: linear-gradient(135deg, rgba(220, 38, 38, 0.05) 0%, rgba(234, 88, 12, 0.05) 100%);
+            border: 1px solid rgba(220, 38, 38, 0.1);
+        }
+        
+        /* Animations */
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes matrixRain {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100%); }
+        }
+        
+        .animate-fade-in-up {
+            animation: fadeInUp 1s ease-out;
+        }
+        
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        /* Feature Cards */
+        .feature-card {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.02) 100%);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 60px rgba(220, 38, 38, 0.3);
+            border-color: rgba(220, 38, 38, 0.3);
+        }
+        
+        /* Package Cards */
+        .package-card {
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .package-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(220, 38, 38, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+        
+        .package-card:hover::before {
+            left: 100%;
+        }
+        
+        .package-card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 25px 50px rgba(220, 38, 38, 0.3);
+        }
+        
+        .package-recommended {
+            border: 2px solid #dc2626;
+            box-shadow: 0 0 30px rgba(220, 38, 38, 0.3);
+        }
+        
+        /* Tech Specs Grid */
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        /* Icon Styles */
+        .icon-wrapper {
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, #dc2626 0%, #ea580c 100%);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            box-shadow: 0 10px 30px rgba(220, 38, 38, 0.3);
+        }
+        
+        /* Section Padding */
+        .section-padding { 
+            padding: 5rem 0; 
+        }
+        
+        @media (min-width: 768px) { 
+            .section-padding { 
+                padding: 8rem 0; 
+            } 
+        }
+        
+        /* Glowing Text Effect */
+        .glow-text {
+            text-shadow: 0 0 20px rgba(220, 38, 38, 0.5),
+                         0 0 40px rgba(234, 88, 12, 0.3);
+        }
+        
+        /* Premium Badge */
+        .premium-badge {
+            background: linear-gradient(135deg, #dc2626 0%, #ea580c 100%);
+            padding: 0.5rem 1.5rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            display: inline-block;
+            box-shadow: 0 4px 20px rgba(220, 38, 38, 0.4);
+        }
+    </style>
+</head>
+<body class="bg-black text-white">
+    <script src="../../assets/components/navigation.js"></script>
+    
+    <main>
+        <!-- Hero Section -->
+        <section class="gradient-hero relative min-h-screen flex items-center justify-center text-white py-20 md:py-32">
+            <div class="container mx-auto px-4 sm:px-6 relative z-10">
+                <div class="max-w-5xl mx-auto text-center animate-fade-in-up">
+                    <span class="premium-badge mb-6">Epic Freeze-Frame Experience</span>
+                    <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black mb-6 leading-tight glow-text">
+                        National Bullet Time<br>Booth Rentals
+                    </h1>
+                    <p class="text-lg sm:text-xl md:text-2xl mb-8 text-gray-300 max-w-3xl mx-auto leading-relaxed">
+                        Create mind-bending frozen time photos with a professional multi-camera array that captures stunning 180-degree Matrix-style moments.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                        <a href="../../index.html#contact" 
+                           class="btn-primary text-white px-8 py-4 rounded-full text-lg font-bold hover:scale-105 transition-all duration-300 shadow-2xl w-full sm:w-auto">
+                            Book Your Bullet Time Booth
+                        </a>
+                        <a href="#packages" 
+                           class="bg-white/10 backdrop-blur-lg text-white px-8 py-4 rounded-full text-lg font-bold hover:bg-white/20 transition-all duration-300 border border-white/20 w-full sm:w-auto">
+                            View Packages
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Main Description Section -->
+        <section class="section-padding bg-gradient-to-b from-black to-gray-900">
+            <div class="container mx-auto px-4 sm:px-6">
+                <div class="max-w-6xl mx-auto">
+                    <div class="text-center mb-16">
+                        <h2 class="text-3xl sm:text-4xl md:text-5xl font-black mb-6 glow-text">
+                            EPIC FREEZE-FRAME,<br>MULTI-CAMERA EFFECTS
+                        </h2>
+                        <div class="w-24 h-1 bg-gradient-to-r from-red-600 to-orange-600 mx-auto mb-8"></div>
+                    </div>
+                    
+                    <div class="bg-white/5 backdrop-blur-lg rounded-3xl p-8 md:p-12 border border-white/10">
+                        <h3 class="text-2xl md:text-3xl font-bold mb-6 text-center">BULLET TIME PHOTO BOOTH RENTALS</h3>
+                        <p class="text-lg text-gray-300 leading-relaxed mb-6">
+                            Capture jaw-dropping, Matrix-style freeze-frame effects with our Bullet Time Booth! Using multiple cameras firing in perfect sync, this activation creates stunning 3D motion shots that make guests feel like they've stepped into a blockbuster movie. With customizable branding, VFX overlays, and instant playback, it's an experience like no other.
+                        </p>
+                        <p class="text-lg text-gray-300 leading-relaxed">
+                            Available nationwide, our Bullet Time Booth is a showstopper for high-end brand activations, product launches, concerts, and VIP events. Whether you're making a statement at a fashion show or leveling up your corporate event, this booth delivers high-impact, slow-motion content that demands attention.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- What is Bullet Time Section -->
+        <section class="section-padding gradient-dark">
+            <div class="container mx-auto px-4 sm:px-6">
+                <div class="max-w-6xl mx-auto">
+                    <h2 class="text-3xl sm:text-4xl md:text-5xl font-black text-center mb-12 glow-text">
+                        What is a Bullet Time Array Booth
+                    </h2>
+                    <div class="bg-white/5 backdrop-blur-lg rounded-3xl p-8 md:p-12 border border-white/10 mb-12">
+                        <p class="text-lg text-gray-300 leading-relaxed">
+                            This isn't just a camera trick—it's multi-angle, freeze-frame magic. Using 7 to 30 cameras firing in perfect sync, our Bullet Time Booth captures gravity-defying, cinematic motion shots with military-grade precision. The result? Mind-bending, Matrix-style visuals that turn every guest into an action star.
+                        </p>
+                    </div>
+
+                    <!-- Core Features Grid -->
+                    <h3 class="text-2xl md:text-3xl font-bold text-center mb-10">Bullet-Time Array Booth Features</h3>
+                    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                        <div class="feature-card rounded-2xl p-6 text-center">
+                            <div class="icon-wrapper">
+                                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                </svg>
+                            </div>
+                            <h4 class="text-lg font-bold mb-2">Professional DSLR Camera Array</h4>
+                        </div>
+                        
+                        <div class="feature-card rounded-2xl p-6 text-center">
+                            <div class="icon-wrapper">
+                                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                                </svg>
+                            </div>
+                            <h4 class="text-lg font-bold mb-2">Zero Lag Synchronization</h4>
+                        </div>
+                        
+                        <div class="feature-card rounded-2xl p-6 text-center">
+                            <div class="icon-wrapper">
+                                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                                </svg>
+                            </div>
+                            <h4 class="text-lg font-bold mb-2">Instant Matrix-Style Video</h4>
+                        </div>
+                        
+                        <div class="feature-card rounded-2xl p-6 text-center">
+                            <div class="icon-wrapper">
+                                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path>
+                                </svg>
+                            </div>
+                            <h4 class="text-lg font-bold mb-2">Mid-Air Moment Capture</h4>
+                        </div>
+                        
+                        <div class="feature-card rounded-2xl p-6 text-center">
+                            <div class="icon-wrapper">
+                                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                                </svg>
+                            </div>
+                            <h4 class="text-lg font-bold mb-2">Multi-Angle Photo Burst</h4>
+                        </div>
+                        
+                        <div class="feature-card rounded-2xl p-6 text-center">
+                            <div class="icon-wrapper">
+                                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                                </svg>
+                            </div>
+                            <h4 class="text-lg font-bold mb-2">Studio-Quality Lighting</h4>
+                        </div>
+                        
+                        <div class="feature-card rounded-2xl p-6 text-center">
+                            <div class="icon-wrapper">
+                                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                                </svg>
+                            </div>
+                            <h4 class="text-lg font-bold mb-2">Real-Time Preview System</h4>
+                        </div>
+                        
+                        <div class="feature-card rounded-2xl p-6 text-center">
+                            <div class="icon-wrapper">
+                                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path>
+                                </svg>
+                            </div>
+                            <h4 class="text-lg font-bold mb-2">Lenticular Printing Capabilities</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Branded Experiences Section -->
+        <section class="section-padding bg-gradient-to-b from-gray-900 to-black">
+            <div class="container mx-auto px-4 sm:px-6">
+                <div class="max-w-6xl mx-auto">
+                    <h2 class="text-3xl sm:text-4xl md:text-5xl font-black text-center mb-12 glow-text">
+                        Branded Bullet Time Array Booth Experiences
+                    </h2>
+                    
+                    <div class="bg-white/5 backdrop-blur-lg rounded-3xl p-8 md:p-12 border border-white/10 mb-12">
+                        <p class="text-xl text-gray-300 leading-relaxed text-center mb-8">
+                            Freeze time and create moments that defy physics. Our Bullet Time Booth captures gravity-defying content that makes your brand stand out. From extreme sports to fashion campaigns, every frame is a shareable spectacle that keeps audiences engaged.
+                        </p>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                        <div class="gradient-card rounded-2xl p-6 hover:scale-105 transition-transform duration-300">
+                            <div class="text-red-500 mb-4">
+                                <svg class="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path>
+                                </svg>
+                            </div>
+                            <h4 class="text-lg font-bold mb-2 text-center">Branded 3D Freeze-Frame Effects</h4>
+                        </div>
+
+                        <div class="gradient-card rounded-2xl p-6 hover:scale-105 transition-transform duration-300">
+                            <div class="text-orange-500 mb-4">
+                                <svg class="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                                </svg>
+                            </div>
+                            <h4 class="text-lg font-bold mb-2 text-center">Custom Background Replacements</h4>
+                        </div>
+
+                        <div class="gradient-card rounded-2xl p-6 hover:scale-105 transition-transform duration-300">
+                            <div class="text-red-500 mb-4">
+                                <svg class="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                                </svg>
+                            </div>
+                            <h4 class="text-lg font-bold mb-2 text-center">Branded Motion Graphics</h4>
+                        </div>
+
+                        <div class="gradient-card rounded-2xl p-6 hover:scale-105 transition-transform duration-300">
+                            <div class="text-orange-500 mb-4">
+                                <svg class="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path>
+                                </svg>
+                            </div>
+                            <h4 class="text-lg font-bold mb-2 text-center">Personalized Overlays And Logo Placements</h4>
+                        </div>
+
+                        <div class="gradient-card rounded-2xl p-6 hover:scale-105 transition-transform duration-300">
+                            <div class="text-red-500 mb-4">
+                                <svg class="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+                                </svg>
+                            </div>
+                            <h4 class="text-lg font-bold mb-2 text-center">Interactive Touchscreen Start Options</h4>
+                        </div>
+
+                        <div class="gradient-card rounded-2xl p-6 hover:scale-105 transition-transform duration-300">
+                            <div class="text-orange-500 mb-4">
+                                <svg class="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 20l4-16m2 16l4-16M6 9h14M4 15h14"></path>
+                                </svg>
+                            </div>
+                            <h4 class="text-lg font-bold mb-2 text-center">Branded Social Media Hashtags</h4>
+                        </div>
+
+                        <div class="gradient-card rounded-2xl p-6 hover:scale-105 transition-transform duration-300">
+                            <div class="text-red-500 mb-4">
+                                <svg class="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                                </svg>
+                            </div>
+                            <h4 class="text-lg font-bold mb-2 text-center">LED Lighting Synced To Brand Colors</h4>
+                        </div>
+
+                        <div class="gradient-card rounded-2xl p-6 hover:scale-105 transition-transform duration-300">
+                            <div class="text-orange-500 mb-4">
+                                <svg class="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"></path>
+                                </svg>
+                            </div>
+                            <h4 class="text-lg font-bold mb-2 text-center">Instant Sharing Microsite</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Packages Section -->
+        <section id="packages" class="section-padding gradient-dark">
+            <div class="container mx-auto px-4 sm:px-6">
+                <div class="max-w-7xl mx-auto">
+                    <h2 class="text-3xl sm:text-4xl md:text-5xl font-black text-center mb-6 glow-text">
+                        Sample Bullet Time Booth Packages
+                    </h2>
+                    <p class="text-xl text-gray-400 text-center mb-16 max-w-3xl mx-auto">
+                        Freeze time with the perfect package for your event
+                    </p>
+
+                    <div class="grid lg:grid-cols-3 gap-8">
+                        <!-- Basic Package -->
+                        <div class="package-card bg-white/5 backdrop-blur-lg rounded-3xl p-8 border border-white/10">
+                            <div class="text-center mb-8">
+                                <h3 class="text-2xl font-bold mb-2">Basic Package</h3>
+                                <p class="text-gray-400">Perfect for smaller events</p>
+                            </div>
+                            
+                            <ul class="space-y-4 mb-8">
+                                <li class="flex items-start gap-3">
+                                    <svg class="w-6 h-6 text-red-500 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <span>Up To 3 Hours of Service</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <svg class="w-6 h-6 text-red-500 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <span>Engaging Attendant</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <svg class="w-6 h-6 text-red-500 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <span>7-Camera Setup</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <svg class="w-6 h-6 text-red-500 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <span>12x10' Black Backdrop</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <svg class="w-6 h-6 text-red-500 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <span>Signature Pose Flashcards</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <svg class="w-6 h-6 text-red-500 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <span>Supplemental Studio Lighting</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <svg class="w-6 h-6 text-red-500 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <span>Digital Sharing</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <svg class="w-6 h-6 text-red-500 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <span>Post-Event Online Gallery</span>
+                                </li>
+                            </ul>
+                            
+                            <a href="../../index.html#contact" 
+                               class="block text-center bg-white/10 hover:bg-white/20 text-white px-6 py-4 rounded-full font-bold transition-all duration-300 border border-white/20">
+                                Get Quote
+                            </a>
+                        </div>
+
+                        <!-- Recommended Package -->
+                        <div class="package-card package-recommended bg-gradient-to-br from-red-900/30 to-orange-900/30 backdrop-blur-lg rounded-3xl p-8 transform lg:scale-105">
+                            <div class="text-center mb-8">
+                                <span class="premium-badge mb-4">Most Popular</span>
+                                <h3 class="text-2xl font-bold mb-2 mt-4">Recommended Package</h3>
+                                <p class="text-gray-300">Best value for most events</p>
+                            </div>
+                            
+                            <ul class="space-y-4 mb-8">
+                                <li class="flex items-start gap-3">
+                                    <svg class="w-6 h-6 text-orange-500 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <span><strong>Up To 4 Hours</strong> of Service</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <svg class="w-6 h-6 text-orange-500 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <span><strong>Two</strong> Engaging Attendants</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <svg class="w-6 h-6 text-orange-500 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <span>7-Camera Setup</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <svg class="w-6 h-6 text-orange-500 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <span><strong>Onsite Printing</strong> w/ Unlimited Prints</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <svg class="w-6 h-6 text-orange-500 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <span><strong>12x10' Custom Backdrop</strong></span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <svg class="w-6 h-6 text-orange-500 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <span>Signature Pose Flashcards</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <svg class="w-6 h-6 text-orange-500 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <span>Supplemental Studio Lighting</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <svg class="w-6 h-6 text-orange-500 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <span><strong>Live-Action Props</strong> (Confetti, Money, or Bubbles)</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <svg class="w-6 h-6 text-orange-500 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <span>Digital Sharing</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <svg class="w-6 h-6 text-orange-500 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <span>Post-Event Online Gallery</span>
+                                </li>
+                            </ul>
+                            
+                            <a href="../../index.html#contact" 
+                               class="block text-center btn-primary text-white px-6 py-4 rounded-full font-bold transition-all duration-300 shadow-xl">
+                                Get Started
+                            </a>
+                        </div>
+
+                        <!-- Brand Activation Package -->
+                        <div class="package-card bg-white/5 backdrop-blur-lg rounded-3xl p-8 border border-white/10">
+                            <div class="text-center mb-8">
+                                <h3 class="text-2xl font-bold mb-2">Brand Activation Package</h3>
+                                <p class="text-gray-400">Ultimate experience</p>
+                            </div>
+                            
+                            <ul class="space-y-4 mb-8">
+                                <li class="flex items-start gap-3">
+                                    <svg class="w-6 h-6 text-red-500 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <span><strong>Up To 8 Hours</strong> of Service</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <svg class="w-6 h-6 text-red-500 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <span>Two Engaging Attendants</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <svg class="w-6 h-6 text-red-500 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <span>7-Camera Setup</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <svg class="w-6 h-6 text-red-500 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <span>Onsite Printing w/ Unlimited Prints</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <svg class="w-6 h-6 text-red-500 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <span>12x10' Custom Backdrop</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <svg class="w-6 h-6 text-red-500 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <span>Signature Pose Flashcards</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <svg class="w-6 h-6 text-red-500 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <span>Supplemental Studio Lighting</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <svg class="w-6 h-6 text-red-500 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <span>Live-Action Props (Confetti, Money, or Bubbles)</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <svg class="w-6 h-6 text-red-500 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <span>Digital Sharing</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <svg class="w-6 h-6 text-red-500 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <span>Post-Event Online Gallery</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <svg class="w-6 h-6 text-red-500 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <span><strong>Slideshow on 75" Screen</strong></span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <svg class="w-6 h-6 text-red-500 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <span><strong>Branded Setup</strong></span>
+                                </li>
+                            </ul>
+                            
+                            <a href="../../index.html#contact" 
+                               class="block text-center bg-white/10 hover:bg-white/20 text-white px-6 py-4 rounded-full font-bold transition-all duration-300 border border-white/20">
+                                Contact Us
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Additional Options Section -->
+        <section class="section-padding bg-gradient-to-b from-black to-gray-900">
+            <div class="container mx-auto px-4 sm:px-6">
+                <div class="max-w-6xl mx-auto">
+                    <h2 class="text-3xl sm:text-4xl md:text-5xl font-black text-center mb-16 glow-text">
+                        Additional Options
+                    </h2>
+
+                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <div class="gradient-card rounded-2xl p-8 hover:scale-105 transition-all duration-300">
+                            <div class="icon-wrapper mb-6">
+                                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path>
+                                </svg>
+                            </div>
+                            <h3 class="text-xl font-bold mb-3">Branded Booth Wrap</h3>
+                            <p class="text-gray-400">Wrap your booth in a fully branded design to create a seamless and immersive experience.</p>
+                        </div>
+
+                        <div class="gradient-card rounded-2xl p-8 hover:scale-105 transition-all duration-300">
+                            <div class="icon-wrapper mb-6">
+                                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path>
+                                </svg>
+                            </div>
+                            <h3 class="text-xl font-bold mb-3">2.5"x3.5" - 6"x8" Printing</h3>
+                            <p class="text-gray-400">Offer guests high-quality prints in various sizes, from 2.5"x3.5" to 6"x8", for a perfect keepsake.</p>
+                        </div>
+
+                        <div class="gradient-card rounded-2xl p-8 hover:scale-105 transition-all duration-300">
+                            <div class="icon-wrapper mb-6">
+                                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                                </svg>
+                            </div>
+                            <h3 class="text-xl font-bold mb-3">Set Creation</h3>
+                            <p class="text-gray-400">Bring immersive experiences to life with fully designed and built event sets.</p>
+                        </div>
+
+                        <div class="gradient-card rounded-2xl p-8 hover:scale-105 transition-all duration-300">
+                            <div class="icon-wrapper mb-6">
+                                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                                </svg>
+                            </div>
+                            <h3 class="text-xl font-bold mb-3">Custom Backdrop Options</h3>
+                            <p class="text-gray-400">Customize your photo booth backdrop with a variety of options to match any event theme.</p>
+                        </div>
+
+                        <div class="gradient-card rounded-2xl p-8 hover:scale-105 transition-all duration-300">
+                            <div class="icon-wrapper mb-6">
+                                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                                </svg>
+                            </div>
+                            <h3 class="text-xl font-bold mb-3">42-75" Slideshow</h3>
+                            <p class="text-gray-400">Engage guests with a dynamic slideshow display on a 42"-75" screen, perfect for branding and highlights.</p>
+                        </div>
+
+                        <div class="gradient-card rounded-2xl p-8 hover:scale-105 transition-all duration-300">
+                            <div class="icon-wrapper mb-6">
+                                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+                                </svg>
+                            </div>
+                            <h3 class="text-xl font-bold mb-3">180° - 360° Degree Setup</h3>
+                            <p class="text-gray-400">Expand your Bullet Time Booth past the standard view for even more dramatic effects.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Technical Specifications -->
+        <section class="section-padding gradient-dark">
+            <div class="container mx-auto px-4 sm:px-6">
+                <div class="max-w-6xl mx-auto">
+                    <h2 class="text-3xl sm:text-4xl md:text-5xl font-black text-center mb-16 glow-text">
+                        Bullet Time Array<br>Technical Specifications
+                    </h2>
+
+                    <div class="tech-grid">
+                        <div class="bg-white/5 backdrop-blur-lg rounded-2xl p-6 border border-white/10">
+                            <h4 class="text-lg font-bold mb-2 text-red-400">Footprint:</h4>
+                            <p class="text-gray-300">20' x 15' minimum</p>
+                        </div>
+
+                        <div class="bg-white/5 backdrop-blur-lg rounded-2xl p-6 border border-white/10">
+                            <h4 class="text-lg font-bold mb-2 text-orange-400">Power:</h4>
+                            <p class="text-gray-300">Two 20-amp circuits</p>
+                        </div>
+
+                        <div class="bg-white/5 backdrop-blur-lg rounded-2xl p-6 border border-white/10">
+                            <h4 class="text-lg font-bold mb-2 text-red-400">Setup Time:</h4>
+                            <p class="text-gray-300">120-180 minutes</p>
+                        </div>
+
+                        <div class="bg-white/5 backdrop-blur-lg rounded-2xl p-6 border border-white/10">
+                            <h4 class="text-lg font-bold mb-2 text-orange-400">Captures Per Hour:</h4>
+                            <p class="text-gray-300">40-50 sequences</p>
+                        </div>
+
+                        <div class="bg-white/5 backdrop-blur-lg rounded-2xl p-6 border border-white/10">
+                            <h4 class="text-lg font-bold mb-2 text-red-400">Internet:</h4>
+                            <p class="text-gray-300">Hardwired preferred</p>
+                        </div>
+
+                        <div class="bg-white/5 backdrop-blur-lg rounded-2xl p-6 border border-white/10">
+                            <h4 class="text-lg font-bold mb-2 text-orange-400">Group Size:</h4>
+                            <p class="text-gray-300">Up to 4 people</p>
+                        </div>
+
+                        <div class="bg-white/5 backdrop-blur-lg rounded-2xl p-6 border border-white/10">
+                            <h4 class="text-lg font-bold mb-2 text-red-400">Content Delivery:</h4>
+                            <p class="text-gray-300">Instant sharing</p>
+                        </div>
+
+                        <div class="bg-white/5 backdrop-blur-lg rounded-2xl p-6 border border-white/10">
+                            <h4 class="text-lg font-bold mb-2 text-orange-400">Backup System:</h4>
+                            <p class="text-gray-300">Redundant storage</p>
+                        </div>
+
+                        <div class="bg-white/5 backdrop-blur-lg rounded-2xl p-6 border border-white/10">
+                            <h4 class="text-lg font-bold mb-2 text-red-400">Environment:</h4>
+                            <p class="text-gray-300">Indoor use only</p>
+                        </div>
+
+                        <div class="bg-white/5 backdrop-blur-lg rounded-2xl p-6 border border-white/10">
+                            <h4 class="text-lg font-bold mb-2 text-orange-400">Support:</h4>
+                            <p class="text-gray-300">Two tech operators included</p>
+                        </div>
+
+                        <div class="bg-white/5 backdrop-blur-lg rounded-2xl p-6 border border-white/10">
+                            <h4 class="text-lg font-bold mb-2 text-red-400">Duration:</h4>
+                            <p class="text-gray-300">2-8 hours standard</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="section-padding bg-gradient-to-br from-red-600 via-orange-600 to-red-700 text-white relative overflow-hidden">
+            <div class="absolute inset-0 bg-black/20"></div>
+            <div class="container mx-auto px-4 sm:px-6 text-center relative z-10">
+                <h2 class="text-3xl sm:text-4xl md:text-5xl font-black mb-6 animate-fade-in-up">
+                    Freeze Time at Your Event
+                </h2>
+                <p class="text-xl mb-8 max-w-2xl mx-auto">
+                    Create unforgettable Hollywood-style moments that defy physics and captivate your guests.
+                </p>
+                <a href="../../index.html#contact" 
+                   class="inline-block bg-white text-red-600 px-10 py-5 rounded-full text-lg font-bold hover:scale-110 hover:shadow-2xl transition-all duration-300">
+                    Get Your Free Quote
+                </a>
+            </div>
+        </section>
+
+        <!-- Related Products -->
+        <section class="section-padding bg-black">
+            <div class="container mx-auto px-4 sm:px-6">
+                <div class="max-w-6xl mx-auto">
+                    <h2 class="text-3xl sm:text-4xl font-black text-center mb-12 glow-text">
+                        Discover Our Related Products
+                    </h2>
+                    
+                    <div class="grid md:grid-cols-3 gap-8">
+                        <a href="./360-video-booth.html" 
+                           class="group bg-white/5 backdrop-blur-lg rounded-2xl overflow-hidden border border-white/10 hover:border-red-500/50 transition-all duration-300 hover:scale-105">
+                            <div class="aspect-video bg-gradient-to-br from-red-900/30 to-orange-900/30 flex items-center justify-center">
+                                <svg class="w-20 h-20 text-red-400 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+                                </svg>
+                            </div>
+                            <div class="p-6">
+                                <h3 class="text-xl font-bold mb-2 group-hover:text-red-400 transition-colors">360 Booth Rentals</h3>
+                                <p class="text-gray-400">Experience dynamic 360-degree video capture</p>
+                            </div>
+                        </a>
+
+                        <a href="../photobooth/mosaic-photo-booth.html" 
+                           class="group bg-white/5 backdrop-blur-lg rounded-2xl overflow-hidden border border-white/10 hover:border-orange-500/50 transition-all duration-300 hover:scale-105">
+                            <div class="aspect-video bg-gradient-to-br from-orange-900/30 to-red-900/30 flex items-center justify-center">
+                                <svg class="w-20 h-20 text-orange-400 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h4a1 1 0 011 1v7a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM14 5a1 1 0 011-1h4a1 1 0 011 1v7a1 1 0 01-1 1h-4a1 1 0 01-1-1V5zM4 16a1 1 0 011-1h4a1 1 0 011 1v3a1 1 0 01-1 1H5a1 1 0 01-1-1v-3zM14 16a1 1 0 011-1h4a1 1 0 011 1v3a1 1 0 01-1 1h-4a1 1 0 01-1-1v-3z"></path>
+                                </svg>
+                            </div>
+                            <div class="p-6">
+                                <h3 class="text-xl font-bold mb-2 group-hover:text-orange-400 transition-colors">Photo Mosaic Wall</h3>
+                                <p class="text-gray-400">Build stunning mosaic displays from guest photos</p>
+                            </div>
+                        </a>
+
+                        <a href="../../events/corporate-events.html" 
+                           class="group bg-white/5 backdrop-blur-lg rounded-2xl overflow-hidden border border-white/10 hover:border-red-500/50 transition-all duration-300 hover:scale-105">
+                            <div class="aspect-video bg-gradient-to-br from-red-900/30 to-orange-900/30 flex items-center justify-center">
+                                <svg class="w-20 h-20 text-red-400 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                                </svg>
+                            </div>
+                            <div class="p-6">
+                                <h3 class="text-xl font-bold mb-2 group-hover:text-red-400 transition-colors">Corporate Events</h3>
+                                <p class="text-gray-400">Premium entertainment for corporate functions</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="../../assets/components/footer.js"></script>
+</body>
+</html>

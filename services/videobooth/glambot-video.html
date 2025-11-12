@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>National GlamBot Booth Rentals - Hollywood-Style Slow-Motion | MiHi Entertainment</title>
+    <meta name="description" content="Create viral-worthy moments with the same ultra slow-motion technology from the Met Gala. Professional GlamBot rentals for luxury events, galas, and brand activations nationwide.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        body { 
+            font-family: 'Inter', sans-serif; 
+            color: #1a202c; 
+            overflow-x: hidden;
+        }
+        h1, h2, h3, h4, h5, h6 { 
+            font-family: 'Playfair Display', serif; 
+        }
+        
+        /* Button Styles */
+        .btn-primary { 
+            background: linear-gradient(135deg, #d946ef 0%, #ec4899 100%);
+            transition: all 0.3s ease; 
+        }
+        .btn-primary:hover { 
+            transform: translateY(-2px); 
+            box-shadow: 0 20px 40px rgba(236, 72, 153, 0.5);
+        }
+        
+        /* Gradient Backgrounds */
+        .gradient-hero {
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a0b1a 50%, #2d0a26 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        .gradient-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 20% 50%, rgba(217, 70, 239, 0.15) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 50%, rgba(236, 72, 153, 0.15) 0%, transparent 50%);
+            animation: pulse 8s ease-in-out infinite;
+        }
+        
+        .gradient-dark {
+            background: linear-gradient(135deg, #1a0b1a 0%, #0a0a0a 100%);
+        }
+        
+        .gradient-card {
+            background: linear-gradient(135deg, rgba(217, 70, 239, 0.05) 0%, rgba(236, 72, 153, 0.05) 100%);
+            border: 1px solid rgba(217, 70, 239, 0.1);
+        }
+        
+        /* Animations */
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .animate-fade-in-up {
+            animation: fadeInUp 1s ease-out;
+        }
+        
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        /* Feature Cards */
+        .feature-card {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.02) 100%);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 60px rgba(217, 70, 239, 0.3);
+            border-color: rgba(217, 70, 239, 0.3);
+        }
+        
+        /* Package Cards */
+        .package-card {
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .package-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(217, 70, 239, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+        
+        .package-card:hover::before {
+            left: 100%;
+        }
+        
+        .package-card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 25px 50px rgba(217, 70, 239, 0.3);
+        }
+        
+        .package-recommended {
+            border: 2px solid #ec4899;
+            box-shadow: 0 0 30px rgba(236, 72, 153, 0.3);
+        }
+        
+        /* Tech Specs Grid */
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        /* Icon Styles */
+        .icon-wrapper {
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, #d946ef 0%, #ec4899 100%);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            box-shadow: 0 10px 30px rgba(217, 70, 239, 0.3);
+        }
+        
+        /* Section Padding */
+        .section-padding { 
+            padding: 5rem 0; 
+        }
+        
+        @media (min-width: 768px) { 
+            .section-padding { 
+                padding: 8rem 0; 
+            } 
+        }
+        
+        /* Glowing Text Effect */
+        .glow-text {
+            text-shadow: 0 0 20px rgba(217, 70, 239, 0.5),
+                         0 0 40px rgba(236, 72, 153, 0.3);
+        }
+        
+        /* Premium Badge */
+        .premium-badge {
+            background: linear-gradient(135deg, #d946ef 0%, #ec4899 100%);
+            padding: 0.5rem 1.5rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            display: inline-block;
+            box-shadow: 0 4px 20px rgba(217, 70, 239, 0.4);
+        }
+    </style>
+</head>
+<body class="bg-black text-white">
+    <script src="../../assets/components/navigation.js"></script>
+    
+    <main>
+        <!-- Hero Section -->
+        <section class="gradient-hero relative min-h-screen flex items-center justify-center text-white py-20 md:py-32">
+            <div class="container mx-auto px-4 sm:px-6 relative z-10">
+                <div class="max-w-5xl mx-auto text-center animate-fade-in-up">
+                    <span class="premium-badge mb-6">Hollywood-Style Experience</span>
+                    <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black mb-6 leading-tight glow-text">
+                        National GlamBot<br>Booth Rentals
+                    </h1>
+                    <p class="text-lg sm:text-xl md:text-2xl mb-8 text-gray-300 max-w-3xl mx-auto leading-relaxed">
+                        Create viral-worthy moments with the same ultra slow-motion technology that made the Met Gala's red carpet coverage break the internet.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                        <a href="../../index.html#contact" 
+                           class="btn-primary text-white px-8 py-4 rounded-full text-lg font-bold hover:scale-105 transition-all duration-300 shadow-2xl w-full sm:w-auto">
+                            Book Your GlamBot Now
+                        </a>
+                        <a href="#packages" 
+                           class="bg-white/10 backdrop-blur-lg text-white px-8 py-4 rounded-full text-lg font-bold hover:bg-white/20 transition-all duration-300 border border-white/20 w-full sm:w-auto">
+                            View Packages
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Main Description Section -->
+        <section class="section-padding bg-gradient-to-b from-black to-gray-900">
+            <div class="container mx-auto px-4 sm:px-6">
+                <div class="max-w-6xl mx-auto">
+                    <div class="text-center mb-16">
+                        <h2 class="text-3xl sm:text-4xl md:text-5xl font-black mb-6 glow-text">
+                            HOLLYWOOD-STYLE, CINEMATIC<br>SLOW-MO VIDEOS
+                        </h2>
+                        <div class="w-24 h-1 bg-gradient-to-r from-fuchsia-500 to-pink-500 mx-auto mb-8"></div>
+                    </div>
+                    
+                    <div class="bg-white/5 backdrop-blur-lg rounded-3xl p-8 md:p-12 border border-white/10">
+                        <h3 class="text-2xl md:text-3xl font-bold mb-6 text-center">GLAMBOT PHOTO BOOTH RENTALS</h3>
+                        <p class="text-lg text-gray-300 leading-relaxed mb-6">
+                            Red carpets aren't just for Hollywood—bring the A-list experience to your event with our GlamBot Booth! Capturing high-speed, slow-motion cinematic shots, this booth makes every guest feel like a celebrity at an awards show. With robotic precision and ultra-HD video, it delivers jaw-dropping, ultra-smooth slow-motion content that looks straight out of a blockbuster film.
+                        </p>
+                        <p class="text-lg text-gray-300 leading-relaxed">
+                            Available nationwide, our GlamBot Booth is a must-have for luxury events, galas, fashion shows, corporate parties, and high-end brand activations. Customize it with branded outros, unique backdrops, and dramatic lighting effects to make every clip feel red-carpet ready.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- What is a GlamBot Section -->
+        <section class="section-padding gradient-dark">
+            <div class="container mx-auto px-4 sm:px-6">
+                <div class="max-w-6xl mx-auto">
+                    <h2 class="text-3xl sm:text-4xl md:text-5xl font-black text-center mb-12 glow-text">
+                        What is a GlamBot Photo Booth?
+                    </h2>
+                    <div class="bg-white/5 backdrop-blur-lg rounded-3xl p-8 md:p-12 border border-white/10 mb-12">
+                        <p class="text-lg text-gray-300 leading-relaxed">
+                            This isn't just a slow-motion booth—it's a high-tech cinematic experience. Powered by a precision robotic arm and an ultra-high-quality camera, the GlamBot captures stunning, dynamic motion shots with unmatched clarity. While it's capable of slow-motion capture, we take it further by adding cinematic effects, dramatic zooms, and pro-level editing to create scroll-stopping, Hollywood-style content that looks straight off the red carpet.
+                        </p>
+                    </div>
+
+                    <!-- Core Features Grid -->
+                    <h3 class="text-2xl md:text-3xl font-bold text-center mb-10">Core GlamBot Features</h3>
+                    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                        <div class="feature-card rounded-2xl p-6 text-center">
+                            <div class="icon-wrapper">
+                                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                                </svg>
+                            </div>
+                            <h4 class="text-lg font-bold mb-2">Precision Robotic Movement</h4>
+                        </div>
+                        
+                        <div class="feature-card rounded-2xl p-6 text-center">
+                            <div class="icon-wrapper">
+                                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                            </div>
+                            <h4 class="text-lg font-bold mb-2">Slow-Motion Capture</h4>
+                        </div>
+                        
+                        <div class="feature-card rounded-2xl p-6 text-center">
+                            <div class="icon-wrapper">
+                                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"></path>
+                                </svg>
+                            </div>
+                            <h4 class="text-lg font-bold mb-2">Real-Time Color Grading</h4>
+                        </div>
+                        
+                        <div class="feature-card rounded-2xl p-6 text-center">
+                            <div class="icon-wrapper">
+                                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"></path>
+                                </svg>
+                            </div>
+                            <h4 class="text-lg font-bold mb-2">Instant Social Delivery</h4>
+                        </div>
+                        
+                        <div class="feature-card rounded-2xl p-6 text-center">
+                            <div class="icon-wrapper">
+                                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                                </svg>
+                            </div>
+                            <h4 class="text-lg font-bold mb-2">4K Video Resolution</h4>
+                        </div>
+                        
+                        <div class="feature-card rounded-2xl p-6 text-center">
+                            <div class="icon-wrapper">
+                                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                                </svg>
+                            </div>
+                            <h4 class="text-lg font-bold mb-2">Live Preview Screens</h4>
+                        </div>
+                        
+                        <div class="feature-card rounded-2xl p-6 text-center">
+                            <div class="icon-wrapper">
+                                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"></path>
+                                </svg>
+                            </div>
+                            <h4 class="text-lg font-bold mb-2">Wind Effect System Options</h4>
+                        </div>
+                        
+                        <div class="feature-card rounded-2xl p-6 text-center">
+                            <div class="icon-wrapper">
+                                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path>
+                                </svg>
+                            </div>
+                            <h4 class="text-lg font-bold mb-2">Fog Machine Integration</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Branded Experiences Section -->
+        <section class="section-padding bg-gradient-to-b from-gray-900 to-black">
+            <div class="container mx-auto px-4 sm:px-6">
+                <div class="max-w-6xl mx-auto">
+                    <h2 class="text-3xl sm:text-4xl md:text-5xl font-black text-center mb-12 glow-text">
+                        Branded GlamBot Photo Booth Experiences
+                    </h2>
+                    
+                    <div class="bg-white/5 backdrop-blur-lg rounded-3xl p-8 md:p-12 border border-white/10 mb-12">
+                        <p class="text-xl text-gray-300 leading-relaxed text-center mb-8">
+                            Give guests their red carpet moment. Our GlamBot Booth captures every twirl, hair flip, and dramatic motion in stunning slow motion. Every clip is a high-fashion, cinematic masterpiece designed to dominate social feeds.
+                        </p>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                        <div class="gradient-card rounded-2xl p-6 hover:scale-105 transition-transform duration-300">
+                            <div class="text-fuchsia-500 mb-4">
+                                <svg class="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                                </svg>
+                            </div>
+                            <h4 class="text-lg font-bold mb-2 text-center">Cinematic Slow-Motion Capture</h4>
+                        </div>
+
+                        <div class="gradient-card rounded-2xl p-6 hover:scale-105 transition-transform duration-300">
+                            <div class="text-pink-500 mb-4">
+                                <svg class="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                                </svg>
+                            </div>
+                            <h4 class="text-lg font-bold mb-2 text-center">Custom Video Overlay Graphics</h4>
+                        </div>
+
+                        <div class="gradient-card rounded-2xl p-6 hover:scale-105 transition-transform duration-300">
+                            <div class="text-fuchsia-500 mb-4">
+                                <svg class="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path>
+                                </svg>
+                            </div>
+                            <h4 class="text-lg font-bold mb-2 text-center">Branded Social Sharing Microsite</h4>
+                        </div>
+
+                        <div class="gradient-card rounded-2xl p-6 hover:scale-105 transition-transform duration-300">
+                            <div class="text-pink-500 mb-4">
+                                <svg class="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+                                </svg>
+                            </div>
+                            <h4 class="text-lg font-bold mb-2 text-center">Interactive Touchscreen Start Menu</h4>
+                        </div>
+
+                        <div class="gradient-card rounded-2xl p-6 hover:scale-105 transition-transform duration-300">
+                            <div class="text-fuchsia-500 mb-4">
+                                <svg class="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                                </svg>
+                            </div>
+                            <h4 class="text-lg font-bold mb-2 text-center">LED Lighting Customized To Brand Colors</h4>
+                        </div>
+
+                        <div class="gradient-card rounded-2xl p-6 hover:scale-105 transition-transform duration-300">
+                            <div class="text-pink-500 mb-4">
+                                <svg class="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                                </svg>
+                            </div>
+                            <h4 class="text-lg font-bold mb-2 text-center">Branded Step-And-Repeat Backdrop</h4>
+                        </div>
+
+                        <div class="gradient-card rounded-2xl p-6 hover:scale-105 transition-transform duration-300">
+                            <div class="text-fuchsia-500 mb-4">
+                                <svg class="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 20l4-16m2 16l4-16M6 9h14M4 15h14"></path>
+                                </svg>
+                            </div>
+                            <h4 class="text-lg font-bold mb-2 text-center">Custom Event Hashtags For Sharing</h4>
+                        </div>
+
+                        <div class="gradient-card rounded-2xl p-6 hover:scale-105 transition-transform duration-300">
+                            <div class="text-pink-500 mb-4">
+                                <svg class="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                                </svg>
+                            </div>
+                            <h4 class="text-lg font-bold mb-2 text-center">Personalized Branded Email Templates</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Packages Section -->
+        <section id="packages" class="section-padding gradient-dark">
+            <div class="container mx-auto px-4 sm:px-6">
+                <div class="max-w-7xl mx-auto">
+                    <h2 class="text-3xl sm:text-4xl md:text-5xl font-black text-center mb-6 glow-text">
+                        Sample GlamBot Booth Packages
+                    </h2>
+                    <p class="text-xl text-gray-400 text-center mb-16 max-w-3xl mx-auto">
+                        Choose the perfect package for your red carpet moment
+                    </p>
+
+                    <div class="grid lg:grid-cols-3 gap-8">
+                        <!-- Basic Package -->
+                        <div class="package-card bg-white/5 backdrop-blur-lg rounded-3xl p-8 border border-white/10">
+                            <div class="text-center mb-8">
+                                <h3 class="text-2xl font-bold mb-2">Basic Package</h3>
+                                <p class="text-gray-400">Perfect for smaller gatherings</p>
+                            </div>
+                            
+                            <ul class="space-y-4 mb-8">
+                                <li class="flex items-start gap-3">
+                                    <svg class="w-6 h-6 text-fuchsia-500 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <span>Up To 3 Hours of Service</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <svg class="w-6 h-6 text-fuchsia-500 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <span>On-Site Director</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <svg class="w-6 h-6 text-fuchsia-500 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <span>1 On-Site Host</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <svg class="w-6 h-6 text-fuchsia-500 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <span>Logo on Videos</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <svg class="w-6 h-6 text-fuchsia-500 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <span>Text and Email Sharing</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <svg class="w-6 h-6 text-fuchsia-500 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <span>Venue as Backdrop</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <svg class="w-6 h-6 text-fuchsia-500 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <span>4'x12' Red Carpet</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <svg class="w-6 h-6 text-fuchsia-500 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <span>LED Video Lighting Set</span>
+                                </li>
+                            </ul>
+                            
+                            <a href="../../index.html#contact" 
+                               class="block text-center bg-white/10 hover:bg-white/20 text-white px-6 py-4 rounded-full font-bold transition-all duration-300 border border-white/20">
+                                Get Quote
+                            </a>
+                        </div>
+
+                        <!-- Recommended Package -->
+                        <div class="package-card package-recommended bg-gradient-to-br from-fuchsia-900/30 to-pink-900/30 backdrop-blur-lg rounded-3xl p-8 transform lg:scale-105">
+                            <div class="text-center mb-8">
+                                <span class="premium-badge mb-4">Most Popular</span>
+                                <h3 class="text-2xl font-bold mb-2 mt-4">Recommended Package</h3>
+                                <p class="text-gray-300">Best value for premium events</p>
+                            </div>
+                            
+                            <ul class="space-y-4 mb-8">
+                                <li class="flex items-start gap-3">
+                                    <svg class="w-6 h-6 text-pink-500 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <span><strong>Up To 4 Hours</strong> of Service</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <svg class="w-6 h-6 text-pink-500 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <span>1 On-Site Director</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <svg class="w-6 h-6 text-pink-500 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <span>1 On-Site Host</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <svg class="w-6 h-6 text-pink-500 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <span>Logo on Videos</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <svg class="w-6 h-6 text-pink-500 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <span>Text and Email Sharing</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <svg class="w-6 h-6 text-pink-500 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <span><strong>Live-Action Props</strong> (Confetti, Money, or Bubbles)</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <svg class="w-6 h-6 text-pink-500 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <span><strong>Black 12x12' Curved Backdrop</strong></span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <svg class="w-6 h-6 text-pink-500 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <span>4'x12' Red Carpet</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <svg class="w-6 h-6 text-pink-500 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <span><strong>Live Video Streaming</strong> to Event Screens</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <svg class="w-6 h-6 text-pink-500 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <span>LED Video Lighting Set</span>
+                                </li>
+                            </ul>
+                            
+                            <a href="../../index.html#contact" 
+                               class="block text-center btn-primary text-white px-6 py-4 rounded-full font-bold transition-all duration-300 shadow-xl">
+                                Get Started
+                            </a>
+                        </div>
+
+                        <!-- Brand Activation Package -->
+                        <div class="package-card bg-white/5 backdrop-blur-lg rounded-3xl p-8 border border-white/10">
+                            <div class="text-center mb-8">
+                                <h3 class="text-2xl font-bold mb-2">Brand Activation Package</h3>
+                                <p class="text-gray-400">Complete luxury experience</p>
+                            </div>
+                            
+                            <ul class="space-y-4 mb-8">
+                                <li class="flex items-start gap-3">
+                                    <svg class="w-6 h-6 text-fuchsia-500 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <span><strong>Up To 6 Hours</strong> of Service</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <svg class="w-6 h-6 text-fuchsia-500 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <span>On-Site Director</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <svg class="w-6 h-6 text-fuchsia-500 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <span>1 On-Site Host</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <svg class="w-6 h-6 text-fuchsia-500 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <span>Logo on Videos</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <svg class="w-6 h-6 text-fuchsia-500 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <span>Text and Email Sharing</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <svg class="w-6 h-6 text-fuchsia-500 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <span>Live-Action Props (Confetti, Money, or Bubbles)</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <svg class="w-6 h-6 text-fuchsia-500 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <span><strong>Custom 12x12' Curved Backdrop</strong></span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <svg class="w-6 h-6 text-fuchsia-500 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <span><strong>Custom Intro/Outro Video</strong></span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <svg class="w-6 h-6 text-fuchsia-500 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <span><strong>Enhanced Branding</strong> (Email/Text/Microsite)</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <svg class="w-6 h-6 text-fuchsia-500 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <span>4'x12' Red Carpet</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <svg class="w-6 h-6 text-fuchsia-500 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <span>Live Video Streaming to Event Screens</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <svg class="w-6 h-6 text-fuchsia-500 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <span>LED Video Lighting Set</span>
+                                </li>
+                            </ul>
+                            
+                            <a href="../../index.html#contact" 
+                               class="block text-center bg-white/10 hover:bg-white/20 text-white px-6 py-4 rounded-full font-bold transition-all duration-300 border border-white/20">
+                                Contact Us
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Additional Options Section -->
+        <section class="section-padding bg-gradient-to-b from-black to-gray-900">
+            <div class="container mx-auto px-4 sm:px-6">
+                <div class="max-w-6xl mx-auto">
+                    <h2 class="text-3xl sm:text-4xl md:text-5xl font-black text-center mb-16 glow-text">
+                        Additional Options
+                    </h2>
+
+                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <div class="gradient-card rounded-2xl p-8 hover:scale-105 transition-all duration-300">
+                            <div class="icon-wrapper mb-6">
+                                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                                </svg>
+                            </div>
+                            <h3 class="text-xl font-bold mb-3">Branded Videos</h3>
+                            <p class="text-gray-400">Create fully branded videos with custom overlays, intros, and outros for a polished and professional look.</p>
+                        </div>
+
+                        <div class="gradient-card rounded-2xl p-8 hover:scale-105 transition-all duration-300">
+                            <div class="icon-wrapper mb-6">
+                                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"></path>
+                                </svg>
+                            </div>
+                            <h3 class="text-xl font-bold mb-3">Magazine Cover Set</h3>
+                            <p class="text-gray-400">Give guests the ultimate star treatment with a Magazine Cover Set designed for high-fashion photos.</p>
+                        </div>
+
+                        <div class="gradient-card rounded-2xl p-8 hover:scale-105 transition-all duration-300">
+                            <div class="icon-wrapper mb-6">
+                                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                                </svg>
+                            </div>
+                            <h3 class="text-xl font-bold mb-3">LED Backdrop Wall</h3>
+                            <p class="text-gray-400">Enhance the atmosphere with an LED backdrop wall that adds depth and vibrance to your space.</p>
+                        </div>
+
+                        <div class="gradient-card rounded-2xl p-8 hover:scale-105 transition-all duration-300">
+                            <div class="icon-wrapper mb-6">
+                                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                                </svg>
+                            </div>
+                            <h3 class="text-xl font-bold mb-3">Step and Repeat Wall</h3>
+                            <p class="text-gray-400">Give guests a red carpet experience with a step and repeat wall featuring event or brand logos.</p>
+                        </div>
+
+                        <div class="gradient-card rounded-2xl p-8 hover:scale-105 transition-all duration-300">
+                            <div class="icon-wrapper mb-6">
+                                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                                </svg>
+                            </div>
+                            <h3 class="text-xl font-bold mb-3">Runway Configuration</h3>
+                            <p class="text-gray-400">Transform your space with a professional runway configuration for fashion shows or red carpet moments.</p>
+                        </div>
+
+                        <div class="gradient-card rounded-2xl p-8 hover:scale-105 transition-all duration-300">
+                            <div class="icon-wrapper mb-6">
+                                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path>
+                                </svg>
+                            </div>
+                            <h3 class="text-xl font-bold mb-3">Red Carpet Setup</h3>
+                            <p class="text-gray-400">Give your guests the VIP treatment with a full red carpet setup, complete with stanchions and velvet ropes.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Technical Specifications -->
+        <section class="section-padding gradient-dark">
+            <div class="container mx-auto px-4 sm:px-6">
+                <div class="max-w-6xl mx-auto">
+                    <h2 class="text-3xl sm:text-4xl md:text-5xl font-black text-center mb-16 glow-text">
+                        GlamBot Booth<br>Technical Specifications
+                    </h2>
+
+                    <div class="tech-grid">
+                        <div class="bg-white/5 backdrop-blur-lg rounded-2xl p-6 border border-white/10">
+                            <h4 class="text-lg font-bold mb-2 text-fuchsia-400">Space Required:</h4>
+                            <p class="text-gray-300">15' x 20' Minimum</p>
+                        </div>
+
+                        <div class="bg-white/5 backdrop-blur-lg rounded-2xl p-6 border border-white/10">
+                            <h4 class="text-lg font-bold mb-2 text-pink-400">Power Needs:</h4>
+                            <p class="text-gray-300">20-amp Circuit Setup</p>
+                        </div>
+
+                        <div class="bg-white/5 backdrop-blur-lg rounded-2xl p-6 border border-white/10">
+                            <h4 class="text-lg font-bold mb-2 text-fuchsia-400">Duration:</h4>
+                            <p class="text-gray-300">90-120 Minutes</p>
+                        </div>
+
+                        <div class="bg-white/5 backdrop-blur-lg rounded-2xl p-6 border border-white/10">
+                            <h4 class="text-lg font-bold mb-2 text-pink-400">Capture Rate:</h4>
+                            <p class="text-gray-300">30-40 Videos/hr</p>
+                        </div>
+
+                        <div class="bg-white/5 backdrop-blur-lg rounded-2xl p-6 border border-white/10">
+                            <h4 class="text-lg font-bold mb-2 text-fuchsia-400">Internet:</h4>
+                            <p class="text-gray-300">Hardwired Preferred</p>
+                        </div>
+
+                        <div class="bg-white/5 backdrop-blur-lg rounded-2xl p-6 border border-white/10">
+                            <h4 class="text-lg font-bold mb-2 text-pink-400">Subject Capacity:</h4>
+                            <p class="text-gray-300">Solo or Pairs</p>
+                        </div>
+
+                        <div class="bg-white/5 backdrop-blur-lg rounded-2xl p-6 border border-white/10">
+                            <h4 class="text-lg font-bold mb-2 text-fuchsia-400">Content Delivery:</h4>
+                            <p class="text-gray-300">Instant social share</p>
+                        </div>
+
+                        <div class="bg-white/5 backdrop-blur-lg rounded-2xl p-6 border border-white/10">
+                            <h4 class="text-lg font-bold mb-2 text-pink-400">Backup Systems:</h4>
+                            <p class="text-gray-300">Redundant storage</p>
+                        </div>
+
+                        <div class="bg-white/5 backdrop-blur-lg rounded-2xl p-6 border border-white/10">
+                            <h4 class="text-lg font-bold mb-2 text-fuchsia-400">Environment:</h4>
+                            <p class="text-gray-300">Indoor use only</p>
+                        </div>
+
+                        <div class="bg-white/5 backdrop-blur-lg rounded-2xl p-6 border border-white/10">
+                            <h4 class="text-lg font-bold mb-2 text-pink-400">Staff:</h4>
+                            <p class="text-gray-300">Two operators included</p>
+                        </div>
+
+                        <div class="bg-white/5 backdrop-blur-lg rounded-2xl p-6 border border-white/10">
+                            <h4 class="text-lg font-bold mb-2 text-fuchsia-400">Standard Duration:</h4>
+                            <p class="text-gray-300">2-8 hours</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="section-padding bg-gradient-to-br from-fuchsia-600 via-pink-600 to-rose-600 text-white relative overflow-hidden">
+            <div class="absolute inset-0 bg-black/20"></div>
+            <div class="container mx-auto px-4 sm:px-6 text-center relative z-10">
+                <h2 class="text-3xl sm:text-4xl md:text-5xl font-black mb-6 animate-fade-in-up">
+                    Roll Out the Red Carpet
+                </h2>
+                <p class="text-xl mb-8 max-w-2xl mx-auto">
+                    Give your guests the celebrity experience they deserve with our Hollywood-style GlamBot.
+                </p>
+                <a href="../../index.html#contact" 
+                   class="inline-block bg-white text-fuchsia-600 px-10 py-5 rounded-full text-lg font-bold hover:scale-110 hover:shadow-2xl transition-all duration-300">
+                    Get Your Free Quote
+                </a>
+            </div>
+        </section>
+
+        <!-- Related Products -->
+        <section class="section-padding bg-black">
+            <div class="container mx-auto px-4 sm:px-6">
+                <div class="max-w-6xl mx-auto">
+                    <h2 class="text-3xl sm:text-4xl font-black text-center mb-12 glow-text">
+                        Discover Our Related Products
+                    </h2>
+                    
+                    <div class="grid md:grid-cols-3 gap-8">
+                        <a href="../../events/corporate-events.html" 
+                           class="group bg-white/5 backdrop-blur-lg rounded-2xl overflow-hidden border border-white/10 hover:border-fuchsia-500/50 transition-all duration-300 hover:scale-105">
+                            <div class="aspect-video bg-gradient-to-br from-fuchsia-900/30 to-pink-900/30 flex items-center justify-center">
+                                <svg class="w-20 h-20 text-fuchsia-400 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                                </svg>
+                            </div>
+                            <div class="p-6">
+                                <h3 class="text-xl font-bold mb-2 group-hover:text-fuchsia-400 transition-colors">Corporate Events</h3>
+                                <p class="text-gray-400">Premium entertainment solutions for corporate functions</p>
+                            </div>
+                        </a>
+
+                        <a href="../../events/wedding-events.html" 
+                           class="group bg-white/5 backdrop-blur-lg rounded-2xl overflow-hidden border border-white/10 hover:border-pink-500/50 transition-all duration-300 hover:scale-105">
+                            <div class="aspect-video bg-gradient-to-br from-pink-900/30 to-rose-900/30 flex items-center justify-center">
+                                <svg class="w-20 h-20 text-pink-400 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                                </svg>
+                            </div>
+                            <div class="p-6">
+                                <h3 class="text-xl font-bold mb-2 group-hover:text-pink-400 transition-colors">Weddings</h3>
+                                <p class="text-gray-400">Make your special day unforgettable with glamorous moments</p>
+                            </div>
+                        </a>
+
+                        <a href="./360-video-booth.html" 
+                           class="group bg-white/5 backdrop-blur-lg rounded-2xl overflow-hidden border border-white/10 hover:border-fuchsia-500/50 transition-all duration-300 hover:scale-105">
+                            <div class="aspect-video bg-gradient-to-br from-fuchsia-900/30 to-pink-900/30 flex items-center justify-center">
+                                <svg class="w-20 h-20 text-fuchsia-400 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                                </svg>
+                            </div>
+                            <div class="p-6">
+                                <h3 class="text-xl font-bold mb-2 group-hover:text-fuchsia-400 transition-colors">360 Booth Rentals</h3>
+                                <p class="text-gray-400">Experience dynamic 360-degree video capture</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="../../assets/components/footer.js"></script>
+</body>
+</html>

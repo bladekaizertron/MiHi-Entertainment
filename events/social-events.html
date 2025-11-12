@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Professional social event photo booth services by MiHi Entertainment. Make your celebrations memorable with our fun photo experiences.">
+    <title>Social Events Photo Booth - MiHi Entertainment</title>
+    <link rel="preload" as="image" href="../assets/images/social/hero.jpg">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Fredoka+One&display=swap" rel="stylesheet">
+    <style>
+        /* Protect navigation button from page-specific styles - must override Tailwind utilities */
+        header .btn-primary,
+        header nav .btn-primary,
+        header a.btn-primary,
+        header nav a.btn-primary,
+        header a.btn-primary.text-white,
+        header nav a.btn-primary.text-white {
+            background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%) !important;
+            background-color: #0050ff !important;
+            background-image: linear-gradient(135deg, #0050ff 0%, #0040d9 100%) !important;
+            color: #ffffff !important;
+            transition: all 0.3s ease !important;
+            border: none !important;
+        }
+        
+        header .btn-primary:hover,
+        header nav .btn-primary:hover,
+        header a.btn-primary:hover,
+        header nav a.btn-primary:hover,
+        header a.btn-primary.text-white:hover,
+        header nav a.btn-primary.text-white:hover {
+            background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%) !important;
+            background-color: #0050ff !important;
+            background-image: linear-gradient(135deg, #0050ff 0%, #0040d9 100%) !important;
+            color: #ffffff !important;
+            transform: translateY(-2px) !important;
+            box-shadow: 0 10px 25px rgba(0, 80, 255, 0.4) !important;
+        }
+        
+        /* Brochure Modal Styles */
+        .brochure-modal {
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            z-index: 1000;
+            display: none;
+            overflow: hidden;
+            background-color: rgba(0, 0, 0, 0.6);
+        }
+       
+        .brochure-modal.show {
+            display: block;
+        }
+       
+        .brochure-modal-content {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .brochure-close-button {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            z-index: 10;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 50%;
+            padding: 0.5rem;
+            color: #4b5563;
+            transition: all 0.2s ease;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        .brochure-close-button:hover {
+            background-color: #ffffff;
+            color: #1f2937;
+            transform: rotate(90deg);
+        }
+
+        .brochure-close-button:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.5);
+        }
+
+        .brochure-iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 0.75rem;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            background-color: transparent;
+        }
+
+        /* Animation for the loading spinner */
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .animate-spin {
+            animation: spin 1s linear infinite;
+        }
+
+        /* Card Carousel Styles */
+        @keyframes glitch {
+            0% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(-2px, -2px); }
+            60% { transform: translate(2px, 2px); }
+            80% { transform: translate(2px, -2px); }
+            100% { transform: translate(0); }
+        }
+        
+        @keyframes gradientFlow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .ai-text {
+            position: relative;
+            display: inline-block;
+            animation: glitch 0.5s infinite;
+        }
+        
+        .ai-text::before,
+        .ai-text::after {
+            content: 'AI';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.8;
+        }
+        
+        .ai-text::before {
+            color: #00f7ff;
+            z-index: -1;
+            animation: glitch 0.3s infinite;
+        }
+        
+        .ai-text::after {
+            color: #ff00ff;
+            z-index: -2;
+            animation: glitch 0.3s infinite reverse;
+        }
+        
+        .animate-fade-in-up {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+        
+        .animate-delay-200 {
+            animation-delay: 0.2s;
+        }
+        
+        .animate-delay-300 {
+            animation-delay: 0.3s;
+        }
+        
+        .animate-delay-400 {
+            animation-delay: 0.4s;
+        }
+        
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes bounceIn {
+            0%, 20%, 40%, 60%, 80%, 100% {animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);}
+            0% {
+                opacity: 0;
+                transform: scale3d(0.3, 0.3, 0.3);
+            }
+            20% {
+                transform: scale3d(1.1, 1.1, 1.1);
+            }
+            40% {
+                transform: scale3d(0.9, 0.9, 0.9);
+            }
+            60% {
+                opacity: 1;
+                transform: scale3d(1.03, 1.03, 1.03);
+            }
+            80% {
+                transform: scale3d(0.97, 0.97, 0.97);
+            }
+            100% {
+                opacity: 1;
+                transform: scale3d(1, 1, 1);
+            }
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        @keyframes gradient-x {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .animate-gradient-x {
+            background-size: 200% auto;
+            animation: gradient-x 8s ease infinite;
+        }
+        
+        .hero-section {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-bg {
+            transition: transform 0.3s ease-out;
+            will-change: transform;
+        }
+        
+        .hero-section:hover .hero-bg {
+            transform: scale(1.03);
+        }
+        
+        .social-heading {
+            font-family: 'Fredoka One', cursive;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.25rem;
+            text-transform: uppercase;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            display: inline-block;
+            animation: bounceIn 1s both;
+            transform-origin: center bottom;
+        }
+        
+        .social-heading:first-child {
+            animation-delay: 0.2s;
+        }
+        
+        .social-heading:last-child {
+            animation-delay: 0.4s;
+            margin-bottom: 0.5rem;
+        }
+        
+        .social-heading:hover {
+            animation: pulse 1s infinite;
+            color: #ffd700;
+            cursor: default;
+        }
+        
+        .social-text {
+            font-family: 'Poppins', sans-serif;
+            letter-spacing: 0.15em;
+            font-weight: 600;
+            text-transform: uppercase;
+            color: #ff6b6b;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .social-text:hover {
+            color: #ff8e8e;
+            transform: scale(1.02);
+        }
+        
+        .social-location {
+            font-family: 'Poppins', sans-serif;
+            letter-spacing: 0.1em;
+            color: #fff;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+        
+        .attention-text {
+            position: relative;
+            display: inline-block;
+            color: #00f7ff;
+            text-shadow: 0 0 10px rgba(0, 247, 255, 0.5);
+        }
+        
+        .attention-text::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, #00f7ff, #ff00ff);
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.3s ease;
+        }
+        
+        .hover\:animate-underline:hover .attention-text::after {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+        
+        .loaded {
+            opacity: 1;
+            transition: opacity 0.5s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+    <div id="nav-placeholder"></div>
+
+    <!-- Hero Section -->
+    <section class="relative min-h-[70vh] flex items-center justify-center overflow-hidden py-8 hero-section">
+        <img 
+            src="../assets/images/social/hero.jpg" 
+            alt="Fun social event with photo booth setup"
+            class="absolute inset-0 w-full h-full object-cover hero-bg"
+            onload="console.log('Image loaded'); this.classList.add('loaded')"
+            onerror="console.error('Error loading image:', this.src)">
+        <div class="absolute inset-0 bg-black bg-opacity-70"></div>     
+        <div class="relative z-10 text-center text-white px-4 w-full">
+            <div class="max-w-3xl mx-auto">
+                <div class="mb-2">
+                    <h1 class="text-5xl md:text-6xl lg:text-7xl leading-tight tracking-tight social-heading">
+                        Social
+                    </h1>
+                    <h1 class="text-5xl md:text-6xl lg:text-7xl leading-tight tracking-tight social-heading">
+                        Events
+                    </h1>
+                    <p class="max-w-10xl mx-auto text-sm md:text-2xl leading-tight mb-2 px-0 tracking-[0.1em] animate-fade-in-up animate-delay-200 social-text">
+                    PHOTO BOOTH RENTALS
+                    </p>
+                </div>
+                
+                <div class="h-px w-12 bg-white mx-auto my-3 animate-fade-in-up animate-delay-200"></div>
+                
+                <p class="max-w-3xl mx-auto text-base md:text-lg leading-relaxed mb-4 px-0 text-white tracking-normal animate-fade-in-up animate-delay-200 font-medium">
+                    From mitzvahs to birthday parties and more, our social events create fun, memorable experiences to celebrate life’s special moments.
+                </p>
+                <div class="mt-8 mb-8 animate-fade-in-up animate-delay-300">
+                    <a 
+                        href="#contact" 
+                        class="bg-gradient-to-r from-pink-500 to-yellow-500 text-white hover:from-pink-600 hover:to-yellow-600 px-10 py-3 rounded-full text-sm font-bold tracking-wide uppercase inline-block transform transition-all duration-200 hover:shadow-lg hover:scale-105 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-pink-500 shadow-lg"
+                        aria-label="Contact us for social events">
+                        Book Now
+                    </a>
+                </div>
+
+                <div class="text-center opacity-90 animate-fade-in-up animate-delay-400">
+                    <div class="h-px w-12 bg-white/70 mx-auto mb-3 transition-all duration-500"></div>
+                    <p class="text-white/90 tracking-wider text-sm font-medium uppercase social-location">
+                        SERVICING DENVER, COLORADO, AND SURROUNDING AREAS
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+<!-- 2nd Section -->
+    <section class="py-8 md:py-10 bg-white relative overflow-hidden mb-0">
+        <!-- Colorful Background Pattern -->
+        <div class="absolute inset-0 opacity-40">
+            <div class="absolute inset-0" style="background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgdmlld0JveD0iMCAwIDYwIDYwIj48cGF0dGVybiBpZD0icGF0dGVybiIgd2lkdGg9IjYwIiBoZWlnaHQ9IjYwIiBwYXR0ZXJuVW5pdHM9InVzZXJTcGFjZU9uVXNlIiBwYXR0ZXJuVHJhbnNmb3JtPSJyb3RhdGUoNDUpIHNjYWxlKDAuNSkiPjxyZWN0IHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgZmlsbD0iI2ZmZiIvPjxwYXRoIGQ9Ik0zMCAxMHYxMEg0MHYxMEgzMHYxMEgyMFYzMEgxMFYyMGgxMFYxMGgxMHoiIGZpbGw9IiNmMDBmIiBmaWxsLW9wYWNpdHk9IjAuMiIvPjxwYXRoIGQ9Ik0zMCAxMHYxMEg0MHYxMEgzMHYxMEgyMFYzMEgxMFYyMGgxMFYxMGgxMHoiIGZpbGw9IiMwMGZmZiIgZmlsbC1vcGFjaXR5PSIwLjIiIHRyYW5zZm9ybT0icm90YXRlKDkwKSIvPjxwYXRoIGQ9Ik0zMCAxMHYxMEg0MHYxMEgzMHYxMEgyMFYzMEgxMFYyMGgxMFYxMGgxMHoiIGZpbGw9IiNmZmYwMDAiIGZpbGwtb3BhY2l0eT0iMC4yIiB0cmFuc2Zvcm09InJvdGF0ZSgxODApIi8+PHBhdGggZD0iTTMwIDEwdjEwSDQwdjEwSDMwdjEwSDIwVjMwSDEwVjIwaDEwVjEwaDEweiIgZmlsbD0iIzAwZmYwMCIgZmlsbC1vcGFjaXR5PSIwLjIiIHRyYW5zZm9ybT0icm90YXRlKDI3MCkiLz48L3BhdHRlcm4+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNwYXR0ZXJuKSIvPjwvc3ZnPg==');"></div>
+        </div>
+        <div id="confetti-canvas" class="absolute inset-0 pointer-events-none"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+            <h2 class="text-xl md:text-2xl font-bold tracking-wide uppercase text-gray-800 mb-5">
+                <span class="relative inline-block">
+                    <span class="relative z-10">PICTURE PERFECT FUN FOR</span>
+                    <span class="absolute bottom-0 left-0 w-full h-1.5 bg-yellow-300 opacity-50 -rotate-1 transform scale-x-110"></span>
+                </span>
+            </h2>
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-center">
+                <span id="celebration-text" class="bg-clip-text text-transparent bg-gradient-to-r from-pink-500 via-yellow-400 to-pink-500 animate-gradient-x cursor-pointer hover:opacity-90 transition-opacity duration-200">
+                    EVERY CELEBRATION
+                </span>
+            </h1>
+            <div class="mt-8">
+                <p class="text-lg md:text-xl leading-relaxed text-gray-700 text-center animate-fade-in-up animate-delay-300">
+                    Whether you're blowing out birthday candles, celebrating a mitzvah, or throwing the holiday bash of the year, our Social Photo Booths bring energy, style, and non-stop entertainment to your event. With sleek setups, custom overlays, and instant sharing capabilities, we're here to make your celebration <span class="font-semibold text-gray-900">truly memorable</span>.
+                </p>
+
+                <!-- Card Carousel -->
+                <div class="mt-12 mb-2 relative group">
+                    <h3 class="text-2xl font-bold text-center mb-8 text-gray-800">Our Social Event Gallery</h3>
+                    
+                    <!-- Auto-scrolling Cards Container -->
+                    <div class="relative">
+                        <div class="overflow-hidden py-4">
+                            <div id="cards-container" class="flex gap-6">
+                                <!-- Cards will be inserted here by JavaScript -->
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <p class="text-center text-sm text-gray-500 mt-6">Hover to pause the carousel</p>
+                </div>
+                
+                <!-- Card Carousel Styles -->
+                <style>
+                    .card {
+                        flex: 0 0 calc(100% - 1rem);
+                        min-width: 220px;
+                        max-width: 280px;
+                        height: 240px;
+                        border-radius: 0.5rem;
+                        overflow: hidden;
+                        transition: all 0.3s ease;
+                        position: relative;
+                        background: white;
+                        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+                        padding: 0;
+                    }
+                    
+                    .card-image {
+                        width: 100%;
+                        height: 180px;
+                        object-fit: cover;
+                        object-position: center;
+                        display: block;
+                        transition: transform 0.3s ease;
+                    }
+                    
+                    .card:nth-child(even) {
+                        transform: rotate(1deg);
+                    }
+                    
+                    .card:hover {
+                        transform: translateY(-4px);
+                        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+                    }
+                    
+                    .card:nth-child(even) {
+                        transform: rotate(1deg);
+                    }
+                    
+                    .card:nth-child(even):hover {
+                        transform: rotate(1deg) translateY(-4px);
+                    }
+                    
+                    @media (min-width: 640px) {
+                        .card {
+                            flex: 0 0 calc(50% - 1rem);
+                        }
+                    }
+                    
+                    @media (min-width: 1024px) {
+                        .card {
+                            flex: 0 0 calc(33.333% - 1.5rem);
+                        }
+                    }
+                    
+                    .card:hover {
+                        transform: translateY(-5px);
+                        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+                    }
+                    
+                    .card-image {
+                        height: 300px; /* Increased from 220px */
+                        width: 100%;
+                        object-fit: cover;
+                        transition: transform 0.5s ease;
+                    }
+                    
+                    .card:hover .card-image {
+                        transform: scale(1.03);
+                    }
+                    
+                    .card-content {
+                        padding: 0.75rem 1rem;
+                        background: white;
+                        border-top: 1px solid #f0f0f0;
+                    }
+                    
+                    .card-title {
+                        font-weight: 600;
+                        color: #333;
+                        margin: 0;
+                        font-size: 0.875rem;
+                        line-height: 1.2;
+                        white-space: nowrap;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                    }
+                    
+                    .card-text {
+                        display: none; /* Hide the description in the main content */
+                    }
+                    
+                    .card-overlay {
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        right: 0;
+                        bottom: 0;
+                        background: rgba(0, 0, 0, 0.8);
+                        padding: 1.5rem 1.25rem;
+                        color: white;
+                        opacity: 0;
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: center;
+                        transition: opacity 0.3s ease;
+                    }
+                    
+                    .card-overlay h4 {
+                        font-size: 1.25rem;
+                        margin-bottom: 0.75rem;
+                    }
+                    
+                    .card-overlay p {
+                        font-size: 0.875rem;
+                        line-height: 1.5;
+                        margin: 0;
+                    }
+                    
+                    .card:hover .card-overlay {
+                        opacity: 1;
+                    }
+                    
+                    .card-button {
+                        position: absolute;
+                        top: 1rem;
+                        right: 1rem;
+                        background: rgba(255, 255, 255, 0.15);
+                        backdrop-filter: blur(5px);
+                        -webkit-backdrop-filter: blur(5px);
+                        color: white;
+                        padding: 0.5rem 0.75rem;
+                        border-radius: 4px;
+                        font-size: 0.7rem;
+                        font-weight: 600;
+                        text-transform: uppercase;
+                        letter-spacing: 0.5px;
+                        border: 1px solid rgba(255, 255, 255, 0.3);
+                        cursor: pointer;
+                        transition: all 0.3s ease;
+                        z-index: 10;
+                    }
+                    
+                    .card-button:hover {
+                        background: rgba(255, 255, 255, 0.25);
+                        transform: translateY(-1px);
+                        backdrop-filter: blur(8px);
+                        -webkit-backdrop-filter: blur(8px);
+                    }
+                    
+                    .card-button:active {
+                        transform: translateY(0);
+                        background: rgba(255, 255, 255, 0.1);
+                    }
+                </style>
+                
+                <!-- Auto-scrolling Cards Script -->
+                <script>
+                    document.addEventListener('DOMContentLoaded', function() {
+                        const cardsData = [
+                            { 
+                                image: '../assets/images/social/imc1.jpg', 
+                                title: 'Birthday Parties', 
+                                description: 'From sweet sixteens to 60th soirées, our booths keep guests smiling, snapping, and sharing. Add custom props or a themed overlay to match the party vibe.',
+                                badge: 'Lets Party'
+                            },
+                            { 
+                                image: '../assets/images/social/imc2.jpg',
+                                title: 'BAR/BAT Mitzvahs', 
+                                description: 'Our interactive booths are perfect for Mitzvahs. Kids, teens, and adults love the instant prints and digital keepsakes, plus, we can personalize everything to match your theme.',
+                                badge: 'Mazel Tov'
+                            },
+                            { 
+                                image: '../assets/images/social/imc3.jpg', 
+                                title: 'Graduation Parties', 
+                                description: 'Cap off the achievement with a photo booth that turns tassels into timeless memories. From school logos to class mottos, every detail can be customized.',
+                                badge: 'Lets Celebrate'
+                            },
+                            { 
+                                image: '../assets/images/social/imc4.jpg', 
+                                title: 'Holiday Parties', 
+                                description: 'Bring the festive cheer with holiday-themed booths and backdrops—from company Christmas parties to cozy winter gatherings. Add a little snow (or glitter) to the memories.',
+                                badge: 'Book the Cheer'
+                            },
+                            { 
+                                image: '../assets/images/social/imc5.png', 
+                                title: 'Christmas Parties', 
+                                description: 'Go full North Pole with Christmas-themed sets, overlays, and props. Great for friends, families, or even Santa meet-and-greets!',
+                                badge: 'Snap with Santa'
+                            },
+                            { 
+                                image: '../assets/images/social/imc6.jpeg', 
+                                title: 'Thanksgiving Parties', 
+                                description: 'Whether it’s a family gathering or a Friendsgiving feast, our booths capture those cozy fall vibes with seasonal props and festive frames.',
+                                badge: 'Feast and Pose'
+                            },
+                            { 
+                                image: '../assets/images/social/imc7.jpeg', 
+                                title: 'Anniversaries', 
+                                description: 'Whether it’s one year or fifty, every love story deserves the spotlight. Our booths help you toast to your time together with timeless designs and shareable keepsakes.',
+                                badge: 'Lets Make a Toast'
+                            },
+                            { 
+                                image: '../assets/images/social/imc8.jpg', 
+                                title: 'Non-profit Events', 
+                                description: 'From galas to fundraising dinners, our booths add engagement and fun while keeping your mission front and center. Customize the experience to reflect your cause.',
+                                badge: 'Capture Impact'
+                            },
+                            { 
+                                image: '../assets/images/social/imc9.jpg', 
+                                title: '4th of July Parties', 
+                                description: 'Celebrate Independence Day with patriotic props and festive overlays. From backyard BBQs to community block parties, our booths are the spark your event needs.',
+                                badge: 'Sparkle and Snap'
+                            }
+                        ];
+                        
+                        const cardsContainer = document.getElementById('cards-container');
+                        let scrollPosition = 0;
+                        let scrollSpeed = 0.8; // pixels per frame
+                        let animationId;
+                        let isPaused = false;
+                        
+                        // Duplicate cards for infinite scrolling
+                        const duplicatedCards = [...cardsData, ...cardsData, ...cardsData];
+                        
+                        // Create cards
+                        function createCards() {
+                            cardsContainer.innerHTML = ''; // Clear existing cards
+                            
+                            duplicatedCards.forEach((card, index) => {
+                                const cardElement = document.createElement('div');
+                                cardElement.className = 'card group flex-shrink-0';
+                                cardElement.innerHTML = `
+                                    <div class="relative overflow-hidden">
+                                        <img src="${card.image}" alt="${card.title}" class="card-image">
+                                        <button class="card-button">${card.badge}</button>
+                                        <div class="card-overlay">
+                                            <h4 class="font-semibold text-white">${card.title}</h4>
+                                            <p class="text-sm text-gray-200">${card.description}</p>
+                                        </div>
+                                    </div>
+                                    <div class="card-content">
+                                        <h4 class="card-title">${card.title}</h4>
+                                    </div>
+                                `;
+                                cardsContainer.appendChild(cardElement);
+                            });
+                            
+                            // Set initial position to the middle of the duplicated cards
+                            const card = document.querySelector('.card');
+                            const cardWidth = card.offsetWidth + 24; // 24px gap
+                            scrollPosition = (cardsData.length * cardWidth);
+                            updateCarousel();
+                        }
+                        
+                        function updateCarousel() {
+                            const card = document.querySelector('.card');
+                            if (!card) return;
+                            
+                            const cardWidth = card.offsetWidth + 24; // 24px gap
+                            const containerWidth = cardsData.length * cardWidth;
+                            
+                            // Reset position when reaching the end of the duplicated cards
+                            if (scrollPosition >= (duplicatedCards.length - 3) * cardWidth) {
+                                scrollPosition = cardsData.length * cardWidth;
+                            } else if (scrollPosition <= 0) {
+                                scrollPosition = (duplicatedCards.length - cardsData.length - 3) * cardWidth;
+                            }
+                            
+                            // Apply the transform
+                            cardsContainer.style.transform = `translateX(-${scrollPosition}px)`;
+                            
+                            // Continue the animation
+                            if (!isPaused) {
+                                scrollPosition += scrollSpeed;
+                            }
+                            
+                            animationId = requestAnimationFrame(updateCarousel);
+                        }
+                        
+                        // Handle window resize
+                        let resizeTimer;
+                        window.addEventListener('resize', () => {
+                            clearTimeout(resizeTimer);
+                            resizeTimer = setTimeout(() => {
+                                cancelAnimationFrame(animationId);
+                                createCards();
+                                animationId = requestAnimationFrame(updateCarousel);
+                            }, 250);
+                        });
+                        
+                        // Pause on hover
+                        const carousel = document.querySelector('.group');
+                        carousel.addEventListener('mouseenter', () => {
+                            isPaused = true;
+                        });
+                        
+                        carousel.addEventListener('mouseleave', () => {
+                            isPaused = false;
+                        });
+                        
+                        // Initialize
+                        createCards();
+                        animationId = requestAnimationFrame(updateCarousel);
+                    });
+                </script>
+            </div>
+        </div>
+    </section>
+    <!-- Interactive Brochure Section - Festive Social Theme -->
+    <section class="py-12 bg-gradient-to-b from-purple-50 to-pink-50 relative overflow-hidden">
+        <!-- Decorative Elements -->
+        <div class="absolute inset-0 opacity-20">
+            <div class="absolute top-10 left-1/4 w-32 h-32 bg-pink-400 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-blob"></div>
+            <div class="absolute top-20 right-1/4 w-40 h-40 bg-yellow-300 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-blob animation-delay-2000"></div>
+            <div class="absolute bottom-10 left-1/3 w-36 h-36 bg-blue-400 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-blob animation-delay-4000"></div>
+        </div>
+        
+        <div class="max-w-6xl mx-auto px-6 sm:px-8 relative z-10">
+            <!-- Section Header -->
+            <div class="text-center pb-12 pt-6">
+                <span class="inline-block bg-gradient-to-r from-pink-500 to-purple-600 text-white text-sm font-bold px-6 py-1.5 rounded-full mb-6 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-300">
+                    🎉 Social Events Guide 🎊
+                </span>
+                <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-500 mb-6 leading-[1.1] px-2 pb-2.5">
+                    Let's Celebrate Together!
+                </h2>
+                <p class="text-base sm:text-lg md:text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed font-medium px-2">
+                    Discover our <span class="text-pink-600 font-bold">vibrant social event packages</span> and create unforgettable moments that will be the talk of the town!
+                </p>
+                
+                <!-- Animated Confetti Separator -->
+                <div class="flex items-center justify-center gap-3 mt-8 px-2">
+                    <div class="h-1.5 w-12 sm:w-16 bg-gradient-to-r from-yellow-400 to-pink-500 rounded-full transform rotate-1"></div>
+                    <div class="flex space-x-1">
+                        <span class="text-yellow-500">✦</span>
+                        <span class="text-pink-500">✧</span>
+                        <span class="text-purple-500">✦</span>
+                    </div>
+                    <div class="h-1.5 w-12 sm:w-16 bg-gradient-to-r from-pink-500 to-purple-500 rounded-full transform -rotate-1"></div>
+                </div>
+            </div>
+
+            <!-- Main Content Grid -->
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <!-- Left: Visual Preview -->
+                <div class="order-2 lg:order-1">
+                    <div class="relative group">
+                        <div class="brochure-preview">
+                            <div class="aspect-[4/3] bg-gradient-to-br from-gray-50 via-gray-100 to-gray-50 flex items-center justify-center p-8 relative overflow-hidden rounded-xl">
+                                <div class="absolute inset-0" style="background-image: repeating-linear-gradient(45deg, transparent, transparent 2px, rgba(0,0,0,0.03) 2px, rgba(0,0,0,0.03) 4px);"></div>
+                                <div class="absolute inset-0 bg-gradient-to-br from-white/50 via-transparent to-gray-900/20 pointer-events-none"></div>
+                                <div class="relative w-full h-full flex items-center justify-center">
+                                    <div class="relative w-5/6 h-5/6 transform group-hover:scale-105 group-hover:-translate-y-2 transition-all duration-700" style="transform-style: preserve-3d; perspective: 1000px;">
+                                        <div class="absolute -right-2 top-0 bottom-0 w-16 bg-gradient-to-l from-blue-500/20 to-transparent blur-sm skew-y-12 transform group-hover:scale-110"></div>
+                                        <div class="absolute inset-0 bg-gradient-to-br from-white/20 via-transparent to-transparent rounded-lg pointer-events-none"></div>
+                                        <div class="relative w-full h-full shadow-2xl rounded-lg overflow-hidden" style="box-shadow: 0 20px 60px rgba(0,0,0,0.15), 0 0 20px rgba(0,0,0,0.05);">
+                                            <img src="../assets/images/social/socialthumb.png" alt="Social Events Brochure Preview" class="w-full h-full object-cover">
+                                            <div class="absolute inset-0 bg-gradient-to-br from-white/40 via-transparent to-transparent pointer-events-none"></div>
+                                            <div class="absolute bottom-0 left-0 right-0 h-1/3 bg-gradient-to-t from-black/30 to-transparent"></div>
+                                        </div>
+                                        <div class="absolute -top-2 -left-2 w-8 h-8 bg-white/50 rounded-br-full shadow-lg"></div>
+                                        <div class="absolute -top-2 -right-2 w-8 h-8 bg-white/50 rounded-bl-full shadow-lg"></div>
+                                    </div>
+                                </div>
+                                <div class="absolute -inset-4 bg-gradient-to-r from-blue-500/10 via-purple-500/20 to-blue-500/10 blur-3xl group-hover:blur-2xl transition-all duration-700 rounded-full"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Content & CTA -->
+                <div class="order-1 lg:order-2">
+                    <div class="inline-block bg-gradient-to-r from-blue-500 to-purple-600 text-white px-4 py-2 rounded-full text-sm font-bold mb-6 shadow-lg">
+                        Social Event Packages
+                    </div>
+                    <h3 class="text-4xl md:text-5xl font-bold mb-6 text-gray-900">
+                        Make Your Event Unforgettable
+                    </h3>
+                    <p class="text-xl text-gray-600 mb-8 leading-relaxed">
+                        Explore our curated social event packages designed to bring fun and excitement to any gathering
+                    </p>
+                    <div class="space-y-4 mb-8">
+                        <div class="flex items-start space-x-4">
+                            <div class="flex-shrink-0 mt-1">
+                                <div class="w-6 h-6 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center">
+                                    <svg class="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div>
+                                <p class="font-medium text-gray-900">Versatile Event Solutions</p>
+                                <p class="text-gray-600 text-sm">Perfect for birthdays, anniversaries, and all social gatherings</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <div class="flex-shrink-0 mt-1">
+                                <div class="w-6 h-6 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center">
+                                    <svg class="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div>
+                                <p class="font-medium text-gray-900">Interactive Experiences</p>
+                                <p class="text-gray-600 text-sm">Engage your guests with fun photo opportunities and instant sharing</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <div class="flex-shrink-0 mt-1">
+                                <div class="w-6 h-6 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center">
+                                    <svg class="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div>
+                                <p class="font-medium text-gray-900">Custom Branding</p>
+                                <p class="text-gray-600 text-sm">Personalize with your event theme, colors, and branding</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <button onclick="openBrochureModal()" class="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" aria-label="View social event packages">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                            </svg>
+                            View Packages
+                            <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                            </svg>
+                        </button>
+                        <a href="../flipbook/examples/example-assets/books/social.pdf" download class="inline-flex items-center justify-center px-6 py-3 border border-gray-300 text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                            </svg>
+                            Download PDF
+                        </a>
+                    </div>
+                    <div class="flex flex-wrap items-center gap-6 pt-6 border-t border-gray-200 mt-8">
+                        <div class="flex items-center text-sm font-medium text-gray-600">
+                            <svg class="w-4 h-4 mr-2 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                            </svg>
+                            <span>Perfect for Any Occasion</span>
+                        </div>
+                        <div class="flex items-center text-sm font-medium text-gray-600">
+                            <svg class="w-4 h-4 mr-2 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                            </svg>
+                            <span>Easy to Customize</span>
+                        </div>
+                        <div class="flex items-center text-sm font-medium text-gray-600">
+                            <svg class="w-4 h-4 mr-2 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                            </svg>
+                            <span>Instant Sharing</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Brochure Modal -->
+    <div id="brochureModal" class="brochure-modal" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+        <div class="brochure-modal-content">
+            <!-- Close button -->
+            <button onclick="closeBrochureModal()" class="brochure-close-button" aria-label="Close brochure">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+
+            <!-- Loading Spinner -->
+            <div id="brochureLoader" class="fixed inset-0 flex items-center justify-center z-[10000]" style="background-color: rgba(0, 0, 0, 0.6);">
+                <div class="text-center">
+                    <div class="inline-block relative w-16 h-16">
+                        <div class="absolute inset-0 rounded-full border-4" style="border-color: rgba(255, 255, 255, 0.3);"></div>
+                        <div class="absolute inset-0 rounded-full border-4 border-transparent animate-spin" style="border-top-color: white;"></div>
+                    </div>
+                    <p class="mt-4 text-white text-lg font-medium">Loading Brochure...</p>
+                </div>
+            </div>
+
+            <!-- Brochure iframe container -->
+            <iframe id="brochureIframe" class="brochure-iframe" allowfullscreen loading="eager" sandbox="allow-scripts allow-same-origin"></iframe>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Navigation and other initialization code can go here
+            
+            // Confetti effect on page load
+            function triggerConfetti() {
+                const duration = 3 * 1000; // 3 seconds
+                const animationEnd = Date.now() + duration;
+                const defaults = { 
+                    startVelocity: 30, 
+                    spread: 360, 
+                    ticks: 60, 
+                    zIndex: 0,
+                    particleCount: 50,
+                    origin: { y: 0.6 }
+                };
+
+                function randomInRange(min, max) {
+                    return Math.random() * (max - min) + min;
+                }
+
+                const interval = setInterval(function() {
+                    const timeLeft = animationEnd - Date.now();
+
+                    if (timeLeft <= 0) {
+                        return clearInterval(interval);
+                    }
+
+                    const particleCount = 50 * (timeLeft / duration);
+                    
+                    // Random confetti from the left
+                    confetti({
+                        ...defaults,
+                        particleCount,
+                        origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 },
+                        angle: randomInRange(55, 125)
+                    });
+                    
+                    // Random confetti from the right
+                    confetti({
+                        ...defaults,
+                        particleCount,
+                        origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 },
+                        angle: randomInRange(55, 125)
+                    });
+                }, 250);
+            }
+
+            // Start confetti after a short delay
+            setTimeout(triggerConfetti, 1000);
+        });
+
+        // Brochure Modal Functions
+        function openBrochureModal() {
+            const modal = document.getElementById('brochureModal');
+            const iframe = document.getElementById('brochureIframe');
+            const loader = document.getElementById('brochureLoader');
+            
+            // Show modal and loader immediately
+            modal.classList.add('show');
+            if (loader) loader.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+            
+            // Add a timestamp to prevent caching issues
+            const timestamp = new Date().getTime();
+            iframe.src = '../flipbook/examples/socevent.html?t=' + timestamp;
+            
+            // Force focus to the iframe for better keyboard navigation
+            setTimeout(() => iframe.focus(), 100);
+        }
+        
+        function closeBrochureModal() {
+            const modal = document.getElementById('brochureModal');
+            const iframe = document.getElementById('brochureIframe');
+            const loader = document.getElementById('brochureLoader');
+            
+            modal.classList.remove('show');
+            if (loader) loader.style.display = 'none';
+            document.body.style.overflow = '';
+            
+            // Clear iframe source to stop any animations/scripts
+            iframe.src = 'about:blank';
+        }
+        
+        // Listen for flipbook loaded message from iframe
+        window.addEventListener('message', function(event) {
+            if (event.data === 'flipbookLoaded') {
+                const loader = document.getElementById('brochureLoader');
+                if (loader) {
+                    loader.style.display = 'none';
+                }
+            }
+        });
+        
+        // Close on Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                const modal = document.getElementById('brochureModal');
+                if (modal.classList.contains('show')) {
+                    closeBrochureModal();
+                }
+            }
+        });
+
+        // Close modal when clicking outside the content
+        document.addEventListener('click', function(event) {
+            const modal = document.getElementById('brochureModal');
+            const modalContent = document.querySelector('.brochure-modal-content');
+            if (event.target === modal) {
+                closeBrochureModal();
+            }
+        });
+    </script>
+
+    <script src="../assets/components/navigation.js"></script>
+    <script src="../assets/components/footer.js"></script>
+</body>
+</html>

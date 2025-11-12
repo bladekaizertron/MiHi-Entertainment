@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Graffiti Wall Photo Booth Rentals - Interactive Digital Art | MiHi Entertainment</title>
+    <meta name="description" content="Let guests unleash their creativity with an interactive digital graffiti wall that turns any photo into a unique, spray-painted masterpiece. Available nationwide.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        body { 
+            font-family: 'Inter', sans-serif; 
+            color: #1a202c; 
+            overflow-x: hidden;
+        }
+        h1, h2, h3, h4, h5, h6 { 
+            font-family: 'Playfair Display', serif; 
+        }
+        
+        /* Button Styles */
+        .btn-primary { 
+            background: linear-gradient(135deg, #f97316 0%, #ec4899 100%);
+            transition: all 0.3s ease; 
+        }
+        .btn-primary:hover { 
+            transform: translateY(-2px); 
+            box-shadow: 0 20px 40px rgba(249, 115, 22, 0.5);
+        }
+        
+        /* Gradient Backgrounds */
+        .gradient-hero {
+            background: linear-gradient(135deg, #1a0a0f 0%, #2d0a1a 50%, #1a0520 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        .gradient-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 20% 50%, rgba(249, 115, 22, 0.15) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 50%, rgba(236, 72, 153, 0.15) 0%, transparent 50%);
+            animation: pulse 8s ease-in-out infinite;
+        }
+        
+        .gradient-dark {
+            background: linear-gradient(135deg, #2d0a1a 0%, #1a0a0f 100%);
+        }
+        
+        .gradient-card {
+            background: linear-gradient(135deg, rgba(249, 115, 22, 0.05) 0%, rgba(236, 72, 153, 0.05) 100%);
+            border: 1px solid rgba(249, 115, 22, 0.1);
+        }
+        
+        /* Animations */
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes spray {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(1.1) rotate(10deg); }
+        }
+        
+        .animate-fade-in-up {
+            animation: fadeInUp 1s ease-out;
+        }
+        
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .animate-spray {
+            animation: spray 3s ease-in-out infinite;
+        }
+        
+        /* Feature Cards */
+        .feature-card {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.02) 100%);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 60px rgba(249, 115, 22, 0.3);
+            border-color: rgba(249, 115, 22, 0.3);
+        }
+        
+        /* Package Cards */
+        .package-card {
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .package-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(249, 115, 22, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+        
+        .package-card:hover::before {
+            left: 100%;
+        }
+        
+        .package-card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 25px 50px rgba(249, 115, 22, 0.3);
+        }
+        
+        .package-recommended {
+            border: 2px solid #f97316;
+            box-shadow: 0 0 30px rgba(249, 115, 22, 0.3);
+        }
+        
+        /* Tech Specs Grid */
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        /* Icon Styles */
+        .icon-wrapper {
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, #f97316 0%, #ec4899 100%);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            box-shadow: 0 10px 30px rgba(249, 115, 22, 0.3);
+        }
+        
+        /* Section Padding */
+        .section-padding { 
+            padding: 5rem 0; 
+        }
+        
+        @media (min-width: 768px) { 
+            .section-padding { 
+                padding: 8rem 0; 
+            } 
+        }
+        
+        /* Glowing Text Effect */
+        .glow-text {
+            text-shadow: 0 0 20px rgba(249, 115, 22, 0.5),
+                         0 0 40px rgba(236, 72, 153, 0.3);
+        }
+        
+        /* Premium Badge */
+        .premium-badge {
+            background: linear-gradient(135deg, #f97316 0%, #ec4899 100%);
+            padding: 0.5rem 1.5rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            display: inline-block;
+            box-shadow: 0 4px 20px rgba(249, 115, 22, 0.4);
+        }
+    </style>
+</head>
+<body class="bg-black text-white">
+    <script src="../../assets/components/navigation.js"></script>
+    
+    <main>
+        <!-- Hero Section -->
+        <section class="gradient-hero relative min-h-screen flex items-center justify-center text-white py-20 md:py-32">
+            <div class="container mx-auto px-4 sm:px-6 relative z-10">
+                <div class="max-w-5xl mx-auto text-center animate-fade-in-up">
+                    <span class="premium-badge mb-6">Interactive Digital Art</span>
+                    <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black mb-6 leading-tight glow-text">
+                        Graffiti Wall<br>Photo Booth Rentals
+                    </h1>
+                    <p class="text-lg sm:text-xl md:text-2xl mb-8 text-gray-300 max-w-3xl mx-auto leading-relaxed">
+                        Let guests unleash their creativity with an interactive digital graffiti wall that turns any photo into a unique, spray-painted masterpiece.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                        <a href="../../index.html#contact" 
+                           class="btn-primary text-white px-8 py-4 rounded-full text-lg font-bold hover:scale-105 transition-all duration-300 shadow-2xl w-full sm:w-auto">
+                            Book Your Graffiti Wall
+                        </a>
+                        <a href="#packages" 
+                           class="bg-white/10 backdrop-blur-lg text-white px-8 py-4 rounded-full text-lg font-bold hover:bg-white/20 transition-all duration-300 border border-white/20 w-full sm:w-auto">
+                            View Packages
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Main Description Section -->
+        <section class="section-padding bg-gradient-to-b from-black to-gray-900">
+            <div class="container mx-auto px-4 sm:px-6">
+                <div class="max-w-6xl mx-auto">
+                    <div class="text-center mb-16">
+                        <h2 class="text-3xl sm:text-4xl md:text-5xl font-black mb-6 glow-text">
+                            INTERACTIVE DIGITAL<br>SPRAY PAINTING EXPERIENCE
+                        </h2>
+                        <div class="w-24 h-1 bg-gradient-to-r from-orange-500 to-pink-500 mx-auto mb-8"></div>
+                    </div>
+                    
+                    <div class="bg-white/5 backdrop-blur-lg rounded-3xl p-8 md:p-12 border border-white/10">
+                        <h3 class="text-2xl md:text-3xl font-bold mb-6 text-center">GRAFFITI WALL PHOTO BOOTH RENTALS</h3>
+                        <p class="text-lg text-gray-300 leading-relaxed mb-6">
+                            Ditch the ordinary and let creativity take over with our Graffiti Wall Photo Booth! Guests can snap a photo and then digitally "spray paint" their masterpiece using our interactive technology. With customizable colors, brushes, and branding, it's a modern twist on classic street art.
+                        </p>
+                        <p class="text-lg text-gray-300 leading-relaxed">
+                            Ideal for brand activations, festivals, product launches, and interactive experiences, this booth is available nationwide to bring an engaging, hands-on activity to any event. Guests leave with a one-of-a-kind, printed or digital keepsake, making this activation an unforgettable part of your event.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- What is Graffiti Wall Section -->
+        <section class="section-padding gradient-dark">
+            <div class="container mx-auto px-4 sm:px-6">
+                <div class="max-w-6xl mx-auto">
+                    <h2 class="text-3xl sm:text-4xl md:text-5xl font-black text-center mb-12 glow-text">
+                        What is a Graffiti Wall Photo Booth?
+                    </h2>
+                    <div class="bg-white/5 backdrop-blur-lg rounded-3xl p-8 md:p-12 border border-white/10 mb-12">
+                        <p class="text-lg text-gray-300 leading-relaxed">
+                            Motion-sensing digital spray cans, real-time artistic effects, and professional-grade cameras that turn every creation into instantly shareable branded content.
+                        </p>
+                    </div>
+
+                    <!-- Core Features Grid -->
+                    <h3 class="text-2xl md:text-3xl font-bold text-center mb-10">Core Graffiti Wall Features</h3>
+                    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                        <div class="feature-card rounded-2xl p-6 text-center">
+                            <div class="icon-wrapper">
+                                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path>
+                                </svg>
+                            </div>
+                            <h4 class="text-lg font-bold mb-2">Motion-Tracking Spray Cans</h4>
+                        </div>
+                        
+                        <div class="feature-card rounded-2xl p-6 text-center">
+                            <div class="icon-wrapper">
+                                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"></path>
+                                </svg>
+                            </div>
+                            <h4 class="text-lg font-bold mb-2">Real-Time Digital Effects</h4>
+                        </div>
+                        
+                        <div class="feature-card rounded-2xl p-6 text-center">
+                            <div class="icon-wrapper">
+                                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"></path>
+                                </svg>
+                            </div>
+                            <h4 class="text-lg font-bold mb-2">Instant Social Sharing</h4>
+                        </div>
+                        
+                        <div class="feature-card rounded-2xl p-6 text-center">
+                            <div class="icon-wrapper">
+                                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path>
+                                </svg>
+                            </div>
+                            <h4 class="text-lg font-bold mb-2">Custom Brand Templates</h4>
+                        </div>
+                        
+                        <div class="feature-card rounded-2xl p-6 text-center">
+                            <div class="icon-wrapper">
+                                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                                </svg>
+                            </div>
+                            <h4 class="text-lg font-bold mb-2">Live Preview Screen</h4>
+                        </div>
+                        
+                        <div class="feature-card rounded-2xl p-6 text-center">
+                            <div class="icon-wrapper">
+                                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                                </svg>
+                            </div>
+                            <h4 class="text-lg font-bold mb-2">Green Screen Capability</h4>
+                        </div>
+                        
+                        <div class="feature-card rounded-2xl p-6 text-center">
+                            <div class="icon-wrapper">
+                                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+                                </svg>
+                            </div>
+                            <h4 class="text-lg font-bold mb-2">Digital Props Library</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Branded Experiences Section -->
+        <section class="section-padding bg-gradient-to-b from-gray-900 to-black">
+            <div class="container mx-auto px-4 sm:px-6">
+                <div class="max-w-6xl mx-auto">
+                    <h2 class="text-3xl sm:text-4xl md:text-5xl font-black text-center mb-12 glow-text">
+                        Branded Digital Graffiti Wall Experiences
+                    </h2>
+                    
+                    <div class="bg-white/5 backdrop-blur-lg rounded-3xl p-8 md:p-12 border border-white/10 mb-12">
+                        <p class="text-xl text-gray-300 leading-relaxed text-center mb-8">
+                            Turn guests into digital artists. Our Graffiti Wall lets attendees create and share custom artwork while embedding your brand in every masterpiece. It's an interactive activation that turns engagement into shareable content.
+                        </p>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                        <div class="gradient-card rounded-2xl p-6 hover:scale-105 transition-transform duration-300">
+                            <div class="text-orange-500 mb-4">
+                                <svg class="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"></path>
+                                </svg>
+                            </div>
+                            <h4 class="text-lg font-bold mb-2 text-center">Digital Spray Paint Tools With Branded Colors</h4>
+                        </div>
+
+                        <div class="gradient-card rounded-2xl p-6 hover:scale-105 transition-transform duration-300">
+                            <div class="text-pink-500 mb-4">
+                                <svg class="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path>
+                                </svg>
+                            </div>
+                            <h4 class="text-lg font-bold mb-2 text-center">Custom Stencils Featuring Your Logo Or Product</h4>
+                        </div>
+
+                        <div class="gradient-card rounded-2xl p-6 hover:scale-105 transition-transform duration-300">
+                            <div class="text-orange-500 mb-4">
+                                <svg class="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+                                </svg>
+                            </div>
+                            <h4 class="text-lg font-bold mb-2 text-center">Interactive Touchscreen Graffiti Effects</h4>
+                        </div>
+
+                        <div class="gradient-card rounded-2xl p-6 hover:scale-105 transition-transform duration-300">
+                            <div class="text-pink-500 mb-4">
+                                <svg class="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                                </svg>
+                            </div>
+                            <h4 class="text-lg font-bold mb-2 text-center">Live Event Projection Of Guest Creations</h4>
+                        </div>
+
+                        <div class="gradient-card rounded-2xl p-6 hover:scale-105 transition-transform duration-300">
+                            <div class="text-orange-500 mb-4">
+                                <svg class="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                                </svg>
+                            </div>
+                            <h4 class="text-lg font-bold mb-2 text-center">Branded Email And Text Sharing</h4>
+                        </div>
+
+                        <div class="gradient-card rounded-2xl p-6 hover:scale-105 transition-transform duration-300">
+                            <div class="text-pink-500 mb-4">
+                                <svg class="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                                </svg>
+                            </div>
+                            <h4 class="text-lg font-bold mb-2 text-center">Instant Digital Downloads For Attendees</h4>
+                        </div>
+
+                        <div class="gradient-card rounded-2xl p-6 hover:scale-105 transition-transform duration-300">
+                            <div class="text-orange-500 mb-4">
+                                <svg class="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"></path>
+                                </svg>
+                            </div>
+                            <h4 class="text-lg font-bold mb-2 text-center">Social Media-Ready Image Exports</h4>
+                        </div>
+
+                        <div class="gradient-card rounded-2xl p-6 hover:scale-105 transition-transform duration-300">
+                            <div class="text-pink-500 mb-4">
+                                <svg class="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                                </svg>
+                            </div>
+                            <h4 class="text-lg font-bold mb-2 text-center">Custom Event Backgrounds</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Packages Section -->
+        <section id="packages" class="section-padding gradient-dark">
+            <div class="container mx-auto px-4 sm:px-6">
+                <div class="max-w-7xl mx-auto">
+                    <h2 class="text-3xl sm:text-4xl md:text-5xl font-black text-center mb-6 glow-text">
+                        Sample Graffiti Wall Booth Packages
+                    </h2>
+                    <p class="text-xl text-gray-400 text-center mb-16 max-w-3xl mx-auto">
+                        Unleash creativity with the perfect package for your event
+                    </p>
+
+                    <div class="grid lg:grid-cols-3 gap-8">
+                        <!-- Basic Package -->
+                        <div class="package-card bg-white/5 backdrop-blur-lg rounded-3xl p-8 border border-white/10">
+                            <div class="text-center mb-8">
+                                <h3 class="text-2xl font-bold mb-2">Basic Package</h3>
+                                <p class="text-gray-400">Perfect for smaller events</p>
+                            </div>
+                            
+                            <ul class="space-y-4 mb-8">
+                                <li class="flex items-start gap-3">
+                                    <svg class="w-6 h-6 text-orange-500 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <span>Up To 3 Hours of Service</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <svg class="w-6 h-6 text-orange-500 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <span>Engaging Attendant</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <svg class="w-6 h-6 text-orange-500 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <span>Graffiti Wall Booth</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <svg class="w-6 h-6 text-orange-500 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <span>Digital Spray Cans</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <svg class="w-6 h-6 text-orange-500 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <span>Onsite Printing</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <svg class="w-6 h-6 text-orange-500 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <span>Print Layout: Look Book</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <svg class="w-6 h-6 text-orange-500 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <span>Digital Sharing</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <svg class="w-6 h-6 text-orange-500 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <span>Post-Event Online Gallery</span>
+                                </li>
+                            </ul>
+                            
+                            <a href="../../index.html#contact" 
+                               class="block text-center bg-white/10 hover:bg-white/20 text-white px-6 py-4 rounded-full font-bold transition-all duration-300 border border-white/20">
+                                Get Quote
+                            </a>
+                        </div>
+
+                        <!-- Recommended Package -->
+                        <div class="package-card package-recommended bg-gradient-to-br from-orange-900/30 to-pink-900/30 backdrop-blur-lg rounded-3xl p-8 transform lg:scale-105">
+                            <div class="text-center mb-8">
+                                <span class="premium-badge mb-4">Most Popular</span>
+                                <h3 class="text-2xl font-bold mb-2 mt-4">Recommended Package</h3>
+                                <p class="text-gray-300">Best value for most events</p>
+                            </div>
+                            
+                            <ul class="space-y-4 mb-8">
+                                <li class="flex items-start gap-3">
+                                    <svg class="w-6 h-6 text-pink-500 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <span><strong>Up To 4 Hours</strong> of Service</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <svg class="w-6 h-6 text-pink-500 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <span>Engaging Attendant</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <svg class="w-6 h-6 text-pink-500 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <span>Graffiti Wall Booth</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <svg class="w-6 h-6 text-pink-500 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <span>Digital Spray Cans</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <svg class="w-6 h-6 text-pink-500 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <span><strong>Digital Stamps, Stencils, and Filters</strong></span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <svg class="w-6 h-6 text-pink-500 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <span>Onsite Printing</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <svg class="w-6 h-6 text-pink-500 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <span><strong>Choice of 2X6 & 4X6 Prints</strong></span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <svg class="w-6 h-6 text-pink-500 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <span><strong>Print Layout: Custom Design/Logo Branding</strong></span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <svg class="w-6 h-6 text-pink-500 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <span>Digital Sharing</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <svg class="w-6 h-6 text-pink-500 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <span>Online Gallery Post Event</span>
+                                </li>
+                            </ul>
+                            
+                            <a href="../../index.html#contact" 
+                               class="block text-center btn-primary text-white px-6 py-4 rounded-full font-bold transition-all duration-300 shadow-xl">
+                                Get Started
+                            </a>
+                        </div>
+
+                        <!-- Brand Activation Package -->
+                        <div class="package-card bg-white/5 backdrop-blur-lg rounded-3xl p-8 border border-white/10">
+                            <div class="text-center mb-8">
+                                <h3 class="text-2xl font-bold mb-2">Brand Activation Package</h3>
+                                <p class="text-gray-400">Ultimate creative experience</p>
+                            </div>
+                            
+                            <ul class="space-y-4 mb-8">
+                                <li class="flex items-start gap-3">
+                                    <svg class="w-6 h-6 text-orange-500 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <span><strong>Up To 6 Hours</strong> of Service</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <svg class="w-6 h-6 text-orange-500 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <span><strong>Two</strong> Engaging Attendants</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <svg class="w-6 h-6 text-orange-500 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <span>Graffiti Wall Booth</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <svg class="w-6 h-6 text-orange-500 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <span>Digital Spray Cans</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <svg class="w-6 h-6 text-orange-500 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <span><strong>Branded Digital Stamps, Stencils, and Filters</strong></span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <svg class="w-6 h-6 text-orange-500 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <span><strong>Custom Booth Wrap</strong></span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <svg class="w-6 h-6 text-orange-500 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <span>Onsite Printing</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <svg class="w-6 h-6 text-orange-500 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <span><strong>Choice of All Print Sizes</strong> (2x6, 4x6, 8x10)</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <svg class="w-6 h-6 text-orange-500 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <span>Print Layout: Custom Design/Logo Branding</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <svg class="w-6 h-6 text-orange-500 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <span>Digital Sharing with Brand Integration</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <svg class="w-6 h-6 text-orange-500 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <span>Post-Event Online Gallery with Custom Branding</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <svg class="w-6 h-6 text-orange-500 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <span><strong>Live Photo/Video Streaming to Event Screens</strong></span>
+                                </li>
+                            </ul>
+                            
+                            <a href="../../index.html#contact" 
+                               class="block text-center bg-white/10 hover:bg-white/20 text-white px-6 py-4 rounded-full font-bold transition-all duration-300 border border-white/20">
+                                Contact Us
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Additional Options Section -->
+        <section class="section-padding bg-gradient-to-b from-black to-gray-900">
+            <div class="container mx-auto px-4 sm:px-6">
+                <div class="max-w-6xl mx-auto">
+                    <h2 class="text-3xl sm:text-4xl md:text-5xl font-black text-center mb-16 glow-text">
+                        Additional Options
+                    </h2>
+
+                    <div class="grid md:grid-cols-3 gap-8">
+                        <div class="gradient-card rounded-2xl p-8 hover:scale-105 transition-all duration-300">
+                            <div class="icon-wrapper mb-6">
+                                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                                </svg>
+                            </div>
+                            <h3 class="text-xl font-bold mb-3">Brand Colored Uplighting</h3>
+                            <p class="text-gray-400">Match the uplighting to your brand's colors for a fully customized event aesthetic.</p>
+                        </div>
+
+                        <div class="gradient-card rounded-2xl p-8 hover:scale-105 transition-all duration-300">
+                            <div class="icon-wrapper mb-6">
+                                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                                </svg>
+                            </div>
+                            <h3 class="text-xl font-bold mb-3">Share Statistics</h3>
+                            <p class="text-gray-400">Track and analyze social sharing statistics to measure guest engagement and brand reach.</p>
+                        </div>
+
+                        <div class="gradient-card rounded-2xl p-8 hover:scale-105 transition-all duration-300">
+                            <div class="icon-wrapper mb-6">
+                                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h4a1 1 0 011 1v7a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM14 5a1 1 0 011-1h4a1 1 0 011 1v7a1 1 0 01-1 1h-4a1 1 0 01-1-1V5zM4 16a1 1 0 011-1h4a1 1 0 011 1v3a1 1 0 01-1 1H5a1 1 0 01-1-1v-3zM14 16a1 1 0 011-1h4a1 1 0 011 1v3a1 1 0 01-1 1h-4a1 1 0 01-1-1v-3z"></path>
+                                </svg>
+                            </div>
+                            <h3 class="text-xl font-bold mb-3">Custom Branded Wall</h3>
+                            <p class="text-gray-400">Showcase your brand in style with a custom-designed branded wall that makes a statement.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Technical Specifications -->
+        <section class="section-padding gradient-dark">
+            <div class="container mx-auto px-4 sm:px-6">
+                <div class="max-w-6xl mx-auto">
+                    <h2 class="text-3xl sm:text-4xl md:text-5xl font-black text-center mb-16 glow-text">
+                        Graffiti Wall<br>Technical Specifications
+                    </h2>
+
+                    <div class="tech-grid">
+                        <div class="bg-white/5 backdrop-blur-lg rounded-2xl p-6 border border-white/10">
+                            <h4 class="text-lg font-bold mb-2 text-orange-400">Space Required:</h4>
+                            <p class="text-gray-300">8' x 11' minimum</p>
+                        </div>
+
+                        <div class="bg-white/5 backdrop-blur-lg rounded-2xl p-6 border border-white/10">
+                            <h4 class="text-lg font-bold mb-2 text-pink-400">Power Needs:</h4>
+                            <p class="text-gray-300">One 20-amp circuit</p>
+                        </div>
+
+                        <div class="bg-white/5 backdrop-blur-lg rounded-2xl p-6 border border-white/10">
+                            <h4 class="text-lg font-bold mb-2 text-orange-400">Setup Duration:</h4>
+                            <p class="text-gray-300">90-150 minutes</p>
+                        </div>
+
+                        <div class="bg-white/5 backdrop-blur-lg rounded-2xl p-6 border border-white/10">
+                            <h4 class="text-lg font-bold mb-2 text-pink-400">Average Engagement:</h4>
+                            <p class="text-gray-300">3-5 minutes per person</p>
+                        </div>
+
+                        <div class="bg-white/5 backdrop-blur-lg rounded-2xl p-6 border border-white/10">
+                            <h4 class="text-lg font-bold mb-2 text-orange-400">Internet:</h4>
+                            <p class="text-gray-300">Wi-Fi or hardwired</p>
+                        </div>
+
+                        <div class="bg-white/5 backdrop-blur-lg rounded-2xl p-6 border border-white/10">
+                            <h4 class="text-lg font-bold mb-2 text-pink-400">Group Size:</h4>
+                            <p class="text-gray-300">1-3 people at once</p>
+                        </div>
+
+                        <div class="bg-white/5 backdrop-blur-lg rounded-2xl p-6 border border-white/10">
+                            <h4 class="text-lg font-bold mb-2 text-orange-400">Content Delivery:</h4>
+                            <p class="text-gray-300">Instant email/social</p>
+                        </div>
+
+                        <div class="bg-white/5 backdrop-blur-lg rounded-2xl p-6 border border-white/10">
+                            <h4 class="text-lg font-bold mb-2 text-pink-400">Lead Capture:</h4>
+                            <p class="text-gray-300">Built-in System</p>
+                        </div>
+
+                        <div class="bg-white/5 backdrop-blur-lg rounded-2xl p-6 border border-white/10">
+                            <h4 class="text-lg font-bold mb-2 text-orange-400">Environment:</h4>
+                            <p class="text-gray-300">Indoor Use</p>
+                        </div>
+
+                        <div class="bg-white/5 backdrop-blur-lg rounded-2xl p-6 border border-white/10">
+                            <h4 class="text-lg font-bold mb-2 text-pink-400">Staff:</h4>
+                            <p class="text-gray-300">One Operator Included</p>
+                        </div>
+
+                        <div class="bg-white/5 backdrop-blur-lg rounded-2xl p-6 border border-white/10">
+                            <h4 class="text-lg font-bold mb-2 text-orange-400">Standard Duration:</h4>
+                            <p class="text-gray-300">Full show hours</p>
+                        </div>
+
+                        <div class="bg-white/5 backdrop-blur-lg rounded-2xl p-6 border border-white/10">
+                            <h4 class="text-lg font-bold mb-2 text-pink-400">Data Collection:</h4>
+                            <p class="text-gray-300">Real-time analytics</p>
+                        </div>
+
+                        <div class="bg-white/5 backdrop-blur-lg rounded-2xl p-6 border border-white/10">
+                            <h4 class="text-lg font-bold mb-2 text-orange-400">Weight:</h4>
+                            <p class="text-gray-300">75lbs</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="section-padding bg-gradient-to-br from-orange-600 via-pink-600 to-orange-700 text-white relative overflow-hidden">
+            <div class="absolute inset-0 bg-black/20"></div>
+            <div class="container mx-auto px-4 sm:px-6 text-center relative z-10">
+                <h2 class="text-3xl sm:text-4xl md:text-5xl font-black mb-6 animate-fade-in-up">
+                    Unleash Creativity at Your Event
+                </h2>
+                <p class="text-xl mb-8 max-w-2xl mx-auto">
+                    Turn guests into digital artists with our interactive Graffiti Wall Photo Booth.
+                </p>
+                <a href="../../index.html#contact" 
+                   class="inline-block bg-white text-orange-600 px-10 py-5 rounded-full text-lg font-bold hover:scale-110 hover:shadow-2xl transition-all duration-300">
+                    Get Your Free Quote
+                </a>
+            </div>
+        </section>
+
+        <!-- Related Products -->
+        <section class="section-padding bg-black">
+            <div class="container mx-auto px-4 sm:px-6">
+                <div class="max-w-6xl mx-auto">
+                    <h2 class="text-3xl sm:text-4xl font-black text-center mb-12 glow-text">
+                        Discover Our Related Products
+                    </h2>
+                    
+                    <div class="grid md:grid-cols-3 gap-8">
+                        <a href="../../events/corporate-events.html" 
+                           class="group bg-white/5 backdrop-blur-lg rounded-2xl overflow-hidden border border-white/10 hover:border-orange-500/50 transition-all duration-300 hover:scale-105">
+                            <div class="aspect-video bg-gradient-to-br from-orange-900/30 to-pink-900/30 flex items-center justify-center">
+                                <svg class="w-20 h-20 text-orange-400 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                                </svg>
+                            </div>
+                            <div class="p-6">
+                                <h3 class="text-xl font-bold mb-2 group-hover:text-orange-400 transition-colors">Corporate Events</h3>
+                                <p class="text-gray-400">Engage employees and clients with creative activations</p>
+                            </div>
+                        </a>
+
+                        <a href="../../events/tradeshow-events.html" 
+                           class="group bg-white/5 backdrop-blur-lg rounded-2xl overflow-hidden border border-white/10 hover:border-pink-500/50 transition-all duration-300 hover:scale-105">
+                            <div class="aspect-video bg-gradient-to-br from-pink-900/30 to-orange-900/30 flex items-center justify-center">
+                                <svg class="w-20 h-20 text-pink-400 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                                </svg>
+                            </div>
+                            <div class="p-6">
+                                <h3 class="text-xl font-bold mb-2 group-hover:text-pink-400 transition-colors">Trade Shows</h3>
+                                <p class="text-gray-400">Drive booth traffic with interactive experiences</p>
+                            </div>
+                        </a>
+
+                        <a href="../../services/av-services.html" 
+                           class="group bg-white/5 backdrop-blur-lg rounded-2xl overflow-hidden border border-white/10 hover:border-orange-500/50 transition-all duration-300 hover:scale-105">
+                            <div class="aspect-video bg-gradient-to-br from-orange-900/30 to-pink-900/30 flex items-center justify-center">
+                                <svg class="w-20 h-20 text-orange-400 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                                </svg>
+                            </div>
+                            <div class="p-6">
+                                <h3 class="text-xl font-bold mb-2 group-hover:text-orange-400 transition-colors">A/V Services</h3>
+                                <p class="text-gray-400">Complete audiovisual solutions for any event</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="../../assets/components/footer.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,1682 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wedding Photo Booth Services - MiHi Entertainment</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #1a202c;
+            background-color: #ffffff;
+        }
+        h1, h2, h3, h4, h5, h6 { font-family: 'Playfair Display', serif; }
+        .btn-primary { background-color: #1a202c; transition: all 0.3s ease; }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15); }
+        .section-padding { padding: 5rem 0; }
+        .hero-gradient { background: linear-gradient(135deg, rgba(212, 175, 55, 0.3) 0%, rgba(244, 208, 63, 0.3) 100%); }
+        
+        .letter {
+            display: inline-block;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: letterFadeIn 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+            font-family: 'Great Vibes', cursive;
+            font-weight: 400;
+            font-size: 1.15em;
+            position: relative;
+            top: 0.1em;
+            letter-spacing: 1px;
+        }
+        
+        @keyframes letterFadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .fade-in {
+            opacity: 0;
+            animation: fadeIn 1s ease-out forwards;
+            animation-delay: 1.5s;
+        }
+        
+        @keyframes fadeIn {
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .animate-fade-in {
+            animation: fadeIn 1s ease-out forwards;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Elegant white button styles */
+        .btn-elegant {
+            background-color: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            font-family: 'Playfair Display', serif;
+            letter-spacing: 0.05em;
+        }
+        
+        .btn-elegant:hover {
+            background-color: rgba(255, 255, 255, 0.25);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.25);
+        }
+        
+        /* Logo styling */
+        /* Legacy featured-logo styles (kept for backwards compatibility) */
+        .featured-logo {
+            max-height: 80px;
+            width: auto;
+            opacity: 0.7;
+            transition: all 0.3s ease;
+            filter: grayscale(100%);
+        }
+        
+        .featured-logo:hover {
+            opacity: 1;
+            transform: scale(1.05);
+            filter: grayscale(0%);
+        }
+        
+        /* Enhanced Featured Section Styles */
+        .featured-logo-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem 1rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .featured-logo-wrapper:hover {
+            transform: translateY(-5px);
+        }
+        
+        .featured-logo-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+        }
+        
+        .featured-logo-enhanced {
+            max-height: 90px;
+            max-width: 100%;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            opacity: 0.7;
+            filter: grayscale(100%);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+        }
+        
+        .featured-logo-wrapper:hover .featured-logo-enhanced {
+            opacity: 1;
+            filter: grayscale(0%);
+            transform: scale(1.08);
+        }
+        
+        .featured-logo-line {
+            width: 40px;
+            height: 1px;
+            background: linear-gradient(to right, transparent, #d4af37, transparent);
+            margin-top: 1.5rem;
+            transition: all 0.4s ease;
+            border-radius: 2px;
+        }
+
+        .featured-logo-wrapper:hover .featured-logo-line {
+            width: 60px;
+        }
+        
+        /* Featured section title styling */
+        .featured-title {
+            font-family: 'Great Vibes', cursive;
+            font-style: italic;
+            font-weight: 400;
+            letter-spacing: 0.03em;
+            color: #4a5568;
+        }
+        
+        /* Decorative elements for wedding theme */
+        .decorative-divider {
+            position: relative;
+            height: 1px;
+            background: linear-gradient(to right, transparent, #e2e8f0, transparent);
+            width: 60%;
+            margin: 2rem auto;
+        }
+
+        .decorative-divider::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 6px;
+            height: 6px;
+            background: #d4af37;
+            border-radius: 50%;
+        }
+
+        
+        /* Background image section - Legacy (kept for backwards compatibility) */
+        .bg-image-section {
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+            min-height: 28vh;
+            position: relative;
+            border-top: 1px solid #e2e8f0;
+            border-bottom: 1px solid #e2e8f0;
+            margin-top: 2rem;
+        }
+        
+        .bg-image-overlay {
+            position: absolute;
+            inset: 0;
+            background-color: rgba(0, 0, 0, 0.8); /* 80% darkness */
+        }
+        
+        /* Premium Background Section Styles */
+        .premium-bg-section {
+            position: relative;
+            min-height: 60vh;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            margin: 4rem 0;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+        
+        @media (max-width: 768px) {
+            .premium-bg-section {
+                background-attachment: scroll;
+                min-height: 50vh;
+                margin: 2rem 0;
+            }
+        }
+        
+        .premium-bg-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                135deg,
+                rgba(0, 0, 0, 0.7) 0%,
+                rgba(0, 0, 0, 0.5) 50%,
+                rgba(0, 0, 0, 0.7) 100%
+            );
+            z-index: 1;
+        }
+        
+        /* Premium Corner Decorations */
+        .premium-corner-decoration {
+            position: absolute;
+            width: 120px;
+            height: 120px;
+            z-index: 2;
+            opacity: 0.15;
+        }
+        
+        .premium-corner-top-left,
+        .premium-corner-top-right,
+        .premium-corner-bottom-left,
+        .premium-corner-bottom-right {
+            border: 2px solid #d4af37;
+        }
+        
+        .premium-corner-top-left {
+            top: 2rem;
+            left: 2rem;
+            border-right: none;
+            border-bottom: none;
+            border-top-left-radius: 1rem;
+        }
+        
+        .premium-corner-top-right {
+            top: 2rem;
+            right: 2rem;
+            border-left: none;
+            border-bottom: none;
+            border-top-right-radius: 1rem;
+        }
+        
+        .premium-corner-bottom-left {
+            bottom: 2rem;
+            left: 2rem;
+            border-right: none;
+            border-top: none;
+            border-bottom-left-radius: 1rem;
+        }
+        
+        .premium-corner-bottom-right {
+            bottom: 2rem;
+            right: 2rem;
+            border-left: none;
+            border-top: none;
+            border-bottom-right-radius: 1rem;
+        }
+        
+        /* Floating Decorative Elements */
+        .premium-floating-element {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: #d4af37;
+            border-radius: 50%;
+            opacity: 0.3;
+            z-index: 2;
+            animation: float-premium 6s ease-in-out infinite;
+        }
+        
+        .premium-floating-1 {
+            top: 20%;
+            left: 15%;
+            animation-delay: 0s;
+        }
+        
+        .premium-floating-2 {
+            top: 60%;
+            right: 20%;
+            animation-delay: 2s;
+        }
+        
+        .premium-floating-3 {
+            bottom: 25%;
+            left: 25%;
+            animation-delay: 4s;
+        }
+        
+        @keyframes float-premium {
+            0%, 100% {
+                transform: translateY(0px) translateX(0px);
+                opacity: 0.4;
+            }
+            50% {
+                transform: translateY(-20px) translateX(10px);
+                opacity: 0.7;
+            }
+        }
+        
+        /* Premium Content Wrapper */
+        .premium-content-wrapper {
+            position: relative;
+            z-index: 10;
+            width: 100%;
+            max-width: 900px;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+        
+        .premium-text-container {
+            position: relative;
+        }
+        
+        /* Premium Badge */
+        .premium-text-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 2rem;
+            background: rgba(212, 175, 55, 0.15);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 50px;
+            margin-bottom: 2rem;
+            backdrop-filter: blur(10px);
+            animation: fadeInUp 0.8s ease-out;
+        }
+        
+        .premium-icon {
+            width: 18px;
+            height: 18px;
+            color: #d4af37;
+        }
+        
+        .premium-badge-text {
+            font-size: 0.875rem;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: #d4af37;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        /* Premium Main Text */
+        .premium-main-text {
+            font-family: 'Great Vibes', cursive;
+            font-size: 4rem;
+            font-weight: 400;
+            font-style: italic;
+            color: #ffffff;
+            margin-bottom: 1.5rem;
+            line-height: 1.3;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            animation: fadeInUp 1s ease-out 0.2s both;
+            letter-spacing: 0.02em;
+        }
+        
+        @media (max-width: 768px) {
+            .premium-main-text {
+                font-size: 2.5rem;
+            }
+        }
+        
+        /* Premium Divider Line */
+        .premium-divider-line {
+            width: 80px;
+            height: 2px;
+            background: linear-gradient(to right, transparent, #d4af37, transparent);
+            margin: 2rem auto;
+            position: relative;
+            animation: fadeInUp 1s ease-out 0.4s both;
+        }
+        
+        
+        /* Premium Subtext */
+        .premium-subtext {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.25rem;
+            font-style: italic;
+            color: rgba(255, 255, 255, 0.95);
+            line-height: 1.8;
+            max-width: 700px;
+            margin: 0 auto;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+            animation: fadeInUp 1s ease-out 0.6s both;
+        }
+        
+        @media (max-width: 768px) {
+            .premium-subtext {
+                font-size: 1rem;
+            }
+        }
+        
+        /* Premium Swirl Decoration */
+        .premium-swirl-decoration {
+            position: absolute;
+            bottom: -60px;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0.2;
+            z-index: 1;
+            animation: rotate-premium 20s linear infinite;
+        }
+        
+        @keyframes rotate-premium {
+            from {
+                transform: translateX(-50%) rotate(0deg);
+            }
+            to {
+                transform: translateX(-50%) rotate(360deg);
+            }
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Uniform Font Styling After Hero Section - Match Hero Section Fonts */
+        /* Hero Section uses: Playfair Display for headings, Inter for body */
+        /* Apply same fonts to all sections after hero with first letter cursive */
+        
+        /* All headings after hero section - use Playfair Display with first letter cursive */
+        section ~ section h1,
+        section ~ section h2,
+        section ~ section h3,
+        section ~ section h4,
+        section ~ section h5,
+        section ~ section h6 {
+            font-family: 'Playfair Display', serif !important;
+        }
+        
+        /* First letter of headings in cursive (Great Vibes) */
+        section ~ section h1::first-letter,
+        section ~ section h2::first-letter,
+        section ~ section h3::first-letter,
+        section ~ section h4::first-letter,
+        section ~ section h5::first-letter,
+        section ~ section h6::first-letter {
+            font-family: 'Great Vibes', cursive !important;
+            font-size: 1.2em;
+            font-weight: 400;
+            display: inline-block;
+            line-height: 0.9;
+            margin-right: 0.05em;
+            vertical-align: baseline;
+        }
+        
+        /* Featured title with first letter cursive */
+        .featured-title {
+            font-family: 'Playfair Display', serif !important;
+        }
+        
+        .featured-title::first-letter {
+            font-family: 'Great Vibes', cursive !important;
+            font-size: 1.2em;
+            font-weight: 400;
+            display: inline-block;
+            line-height: 0.9;
+            margin-right: 0.05em;
+            vertical-align: baseline;
+        }
+        
+        /* All body text after hero section - use Inter (same as hero) */
+        section ~ section p,
+        section ~ section span:not(.premium-badge-text):not(.featured-logo-wrapper *),
+        section ~ section .brochure-check-text,
+        section ~ section .brochure-check-description,
+        section ~ section div:not(.premium-text-badge):not(.premium-content-wrapper *) {
+            font-family: 'Inter', sans-serif !important;
+        }
+        
+        /* Elegant cursive text styling */
+        .elegant-text {
+            font-family: 'Great Vibes', cursive;
+            font-style: italic;
+            font-weight: 400;
+            color: white;
+            font-size: 2rem;
+            text-align: center;
+            position: relative;
+            z-index: 10;
+            text-shadow: 
+                0 0 5px rgba(255, 255, 255, 0.5),
+                0 0 10px rgba(255, 255, 255, 0.3),
+                0 0 15px rgba(255, 255, 255, 0.2);
+            animation: shimmer 3s infinite;
+        }
+        
+        @keyframes shimmer {
+            0% {
+                text-shadow: 
+                    0 0 5px rgba(255, 255, 255, 0.5),
+                    0 0 10px rgba(255, 255, 255, 0.3),
+                    0 0 15px rgba(255, 255, 255, 0.2);
+            }
+            50% {
+                text-shadow: 
+                    0 0 10px rgba(255, 255, 255, 0.8),
+                    0 0 20px rgba(255, 255, 255, 0.6),
+                    0 0 30px rgba(255, 255, 255, 0.4);
+            }
+            100% {
+                text-shadow: 
+                    0 0 5px rgba(255, 255, 255, 0.5),
+                    0 0 10px rgba(255, 255, 255, 0.3),
+                    0 0 15px rgba(255, 255, 255, 0.2);
+            }
+        }
+        
+        /* Dove decorative elements */
+        .dove-decoration {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 10;
+            opacity: 0.7;
+            width: 40px;
+            height: 40px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+        
+        .dove-left {
+            left: 5%;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M50,15c-5,15-10,30-15,45c-5-5-10-10-15-15c10-5,20-10,30-15c10,5,20,10,30,15c-5,5-10,10-15,15c-5-15-10-30-15-45z" fill="white"/></svg>');
+        }
+        
+        .dove-right {
+            right: 5%;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M50,15c-5,15-10,30-15,45c-5-5-10-10-15-15c10-5,20-10,30-15c10,5,20,10,30,15c-5,5-10,10-15,15c-5-15-10-30-15-45z" fill="white"/></svg>');
+            transform: translateY(-50%) scaleX(-1);
+        }
+        
+        /* New section styles */
+        .elegant-section {
+            background-color: #000;
+            border-radius: 40px;
+            min-height: 400px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            margin: 2rem auto;
+            max-width: 1200px;
+            width: 90%;
+        }
+        
+        .top-text {
+            font-family: 'Playfair Display', serif;
+            color: white;
+            font-size: 1.5rem;
+            letter-spacing: 0.1em;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .main-text {
+            font-family: 'Great Vibes', cursive;
+            color: white;
+            font-size: 4rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            transition-delay: 0.2s;
+        }
+        
+        .quote-button {
+            background-color: white;
+            color: black;
+            font-weight: bold;
+            padding: 1rem 2rem;
+            border-radius: 30px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            letter-spacing: 0.05em;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            transition-delay: 0.4s;
+        }
+        
+        .animate-text {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .quote-button:hover {
+            background-color: #000;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(255, 255, 255, 0.3);
+        }
+        
+        /* Product detail section */
+        .product-detail-section {
+            background-color: #f8fafc;
+            border-radius: 20px;
+            padding: 0 2rem;
+            margin: 0 auto 2rem auto;
+            max-width: 1200px;
+            width: 90%;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out, padding 0.5s ease-out;
+        }
+        
+        .product-detail-section.expanded {
+            max-height: 2000px;
+            padding: 2rem;
+        }
+        
+        .product-image {
+            border-radius: 1rem;
+            object-fit: cover;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .product-heading {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .product-subheading {
+            font-family: 'Great Vibes', cursive;
+            font-size: 1.5rem;
+            color: #4a5568;
+            margin-bottom: 1.5rem;
+        }
+        
+        .product-button {
+            background-color: #000;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.375rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .product-button:hover {
+            background-color: white;
+            color: #000;
+            border: 1px solid #000;
+            transform: translateY(-2px);
+        }
+        
+        /* Interactive Brochure Section Styles */
+        .brochure-section {
+            background: linear-gradient(135deg, #faf8f3 0%, #f5f1e8 100%);
+        }
+        
+        .brochure-badge {
+            background: linear-gradient(135deg, #d4af37 0%, #f4d03f 100%);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            display: inline-block;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+        }
+        
+        .brochure-preview {
+            position: relative;
+            background: white;
+            border-radius: 1.5rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .brochure-preview:hover {
+            transform: scale(1.02);
+            box-shadow: 0 35px 60px -15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .brochure-preview::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: repeating-linear-gradient(45deg, transparent, transparent 2px, rgba(0,0,0,0.03) 2px, rgba(0,0,0,0.03) 4px);
+            pointer-events: none;
+        }
+        
+        .brochure-image {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .brochure-preview:hover .brochure-image {
+            transform: scale(1.05);
+        }
+        
+        .brochure-check-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+        
+        .brochure-check-icon {
+            flex-shrink: 0;
+            width: 1.5rem;
+            height: 1.5rem;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #d4af37 0%, #f4d03f 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .brochure-check-text {
+            font-weight: 600;
+            color: #1f2937;
+        }
+        
+        .brochure-check-description {
+            color: #6b7280;
+            margin-top: 0.25rem;
+        }
+        
+        .brochure-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #d4af37 0%, #f4d03f 100%);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 9999px;
+            font-weight: 700;
+            font-size: 1.125rem;
+            box-shadow: 0 20px 25px -5px rgba(212, 175, 55, 0.3);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: none;
+            cursor: pointer;
+        }
+        
+        .brochure-button:hover {
+            transform: scale(1.05) translateY(-2px);
+            box-shadow: 0 25px 50px -12px rgba(212, 175, 55, 0.4);
+            background: linear-gradient(135deg, #c19b26 0%, #e6c834 100%);
+        }
+        
+        .brochure-download-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid #d4af37;
+            color: #d4af37;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.375rem;
+            font-weight: 700;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-decoration: none;
+        }
+        
+        .brochure-download-button:hover {
+            background: linear-gradient(135deg, #d4af37 0%, #f4d03f 100%);
+            color: white;
+            transform: scale(1.05) translateY(-2px);
+        }
+        
+        .brochure-tag {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #6b7280;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+        
+        .brochure-tag-icon {
+            color: #10b981;
+            width: 1.25rem;
+            height: 1.25rem;
+        }
+        
+        /* Brochure Modal Styles */
+        .brochure-modal {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            display: none;
+            overflow: hidden;
+            background-color: rgba(0, 0, 0, 0.6);
+        }
+        
+        .brochure-modal.show {
+            display: block;
+        }
+        
+        .brochure-modal-content {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            background: transparent;
+        }
+        
+        .brochure-close-button {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            z-index: 10001;
+            background: rgba(255, 255, 255, 0.9);
+            color: #1f2937;
+            border-radius: 50%;
+            padding: 0.5rem;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+        
+        .brochure-close-button:hover {
+            background: white;
+            transform: scale(1.1);
+        }
+        
+        .brochure-iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+            background: transparent;
+        }
+        
+        #brochureLoader {
+            display: none;
+        }
+        
+        /* Responsive text sizing */
+        @media (min-width: 768px) {
+            .elegant-text {
+                font-size: 2.5rem;
+            }
+            
+            .main-text {
+                font-size: 5rem;
+            }
+        }
+        
+        @media (min-width: 1024px) {
+            .elegant-text {
+                font-size: 3rem;
+            }
+            
+            .main-text {
+                font-size: 6rem;
+            }
+        }
+        
+        @media (max-width: 767px) {
+            .elegant-section {
+                border-radius: 20px;
+                min-height: 300px;
+                width: 95%;
+            }
+            
+            .top-text {
+                font-size: 1.2rem;
+            }
+            
+            .main-text {
+                font-size: 3rem;
+                margin-bottom: 1.5rem;
+            }
+            
+            .quote-button {
+                padding: 0.8rem 1.5rem;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation will be loaded here -->
+    <div id="nav-placeholder"></div>
+
+    <!-- Hero Section -->
+    <section class="relative min-h-[50vh] flex items-center justify-center overflow-hidden py-12">
+        <div class="absolute inset-0 bg-center bg-no-repeat" style="background-image: url('../assets/images/wedimg/hero-wedding.webp'); background-size: 115%;"></div>
+        <div class="absolute inset-0 bg-black bg-opacity-50"></div>
+        <div class="relative z-10 text-center text-white px-2 w-full">
+            <div class="max-w-3xl mx-auto">
+                <div class="mb-4">
+                    <h1 class="text-5xl md:text-7xl lg:text-8xl font-thin tracking-widest leading-none" style="font-family: 'Playfair Display', serif; letter-spacing: 0.1em; line-height: 0.9;" id="wedding-text">
+                        Wedding
+                    </h1>
+                    <script>
+                        document.addEventListener('DOMContentLoaded', function() {
+                            const text = 'Wedding';
+                            const element = document.getElementById('wedding-text');
+                            element.innerHTML = ''; // Clear the text
+                            
+                            // Split the text into letters and wrap each in a span
+                            text.split('').forEach((char, index) => {
+                                const span = document.createElement('span');
+                                span.textContent = char === ' ' ? '\u00A0' : char;
+                                span.className = 'letter';
+                                // Stagger the animation for each letter
+                                span.style.animationDelay = `${index * 0.1}s`;
+                                element.appendChild(span);
+                            });
+                        });
+                    </script>
+                    <h2 class="text-xl md:text-4xl lg:text-5xl font-light tracking-widest mt-2 fade-in" style="font-family: 'Playfair Display', serif; letter-spacing: 0.15em;">Photo Booth</h2>
+                </div>
+                <div class="h-px w-16 bg-white mx-auto my-4"></div>
+                <p class="max-w-3xl mx-auto text-sm md:text-base leading-relaxed mb-4 px-0 font-light text-gray-100 tracking-wide">
+                    <span class="text-5xl float-left font-['Great_Vibes'] font-normal mr-2 -mt-1">F</span>orever and always. This is your big day. It has to be perfect. Just the two of you. And all of your family and friends are invited! There's nothing more beautiful than the love that lasts forever—except a digital wedding photo booth. Really.
+                </p>
+
+                <!-- Contact Us Button -->
+                <div class="mt-6 mb-8">
+                    <a href="#contact" class="btn-elegant px-8 py-3 rounded-full text-lg font-medium inline-block transition duration-300 transform hover:scale-105">
+                        Contact Us
+                    </a>
+                </div>
+
+                <!-- Location Text -->
+                <div class="text-center opacity-90 animate-fade-in" style="animation-delay: 1.5s; animation-fill-mode: forwards;">
+                    <div class="h-px w-12 bg-white mx-auto mb-2"></div>
+                    <p class="text-white text-opacity-80 tracking-widest text-xs font-light" style="letter-spacing: 0.15em;">
+                        SERVICING DENVER, COLORADO, AND NATIONWIDE WEDDING CELEBRATIONS
+                    </p>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Brochure Section -->
+    <section class="section-padding brochure-section">
+        <div class="container mx-auto px-6">
+            <!-- Section Header -->
+            <div class="text-center mb-16 space-y-4">
+                <span class="brochure-badge">📖 Wedding Planning Guide</span>
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight">
+                    Your Wedding Experience Awaits
+                </h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                    Discover our exclusive wedding packages and create unforgettable memories for your special day
+                </p>
+                <!-- Visual separator -->
+                <div class="flex items-center justify-center gap-2 pt-4">
+                    <div class="h-1 w-12 bg-gradient-to-r from-amber-300 via-yellow-400 to-amber-300 rounded-full"></div>
+                    <div class="h-1 w-1 bg-amber-400 rounded-full"></div>
+                    <div class="h-1 w-1 bg-yellow-400 rounded-full"></div>
+                </div>
+            </div>
+
+            <!-- Main Content Grid -->
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <!-- Left: Visual Preview -->
+                <div class="order-2 lg:order-1">
+                    <div class="relative group">
+                        <div class="brochure-preview">
+                            <div class="aspect-[4/3] bg-gradient-to-br from-gray-50 via-gray-100 to-gray-50 flex items-center justify-center p-8 relative overflow-hidden">
+                                <div class="absolute inset-0" style="background-image: repeating-linear-gradient(45deg, transparent, transparent 2px, rgba(0,0,0,0.03) 2px, rgba(0,0,0,0.03) 4px);"></div>
+                                <div class="absolute inset-0 bg-gradient-to-br from-white/50 via-transparent to-gray-900/20 pointer-events-none"></div>
+                                <div class="relative w-full h-full flex items-center justify-center">
+                                    <div class="relative w-5/6 h-5/6 transform group-hover:scale-105 group-hover:-translate-y-2 transition-all duration-700" style="transform-style: preserve-3d; perspective: 1000px;">
+                                        <div class="absolute -right-2 top-0 bottom-0 w-16 bg-gradient-to-l from-black/20 to-transparent blur-sm skew-y-12 transform group-hover:scale-110"></div>
+                                        <div class="absolute inset-0 bg-gradient-to-br from-white/20 via-transparent to-transparent rounded-lg pointer-events-none"></div>
+                                        <div class="relative w-full h-full shadow-2xl rounded-lg overflow-hidden" style="box-shadow: 0 20px 60px rgba(0,0,0,0.3), 0 0 20px rgba(0,0,0,0.1);">
+                                            <img src="../assets/images/wedimg/flipbookwedthumb.png" alt="Wedding Brochure Preview" class="brochure-image">
+                                            <div class="absolute inset-0 bg-gradient-to-br from-white/40 via-transparent to-transparent pointer-events-none"></div>
+                                            <div class="absolute bottom-0 left-0 right-0 h-1/3 bg-gradient-to-b from-transparent to-black/10"></div>
+                                        </div>
+                                        <div class="absolute -top-2 -left-2 w-8 h-8 bg-white/50 rounded-br-full shadow-lg"></div>
+                                        <div class="absolute -top-2 -right-2 w-8 h-8 bg-white/50 rounded-bl-full shadow-lg"></div>
+                                    </div>
+                                </div>
+                                <div class="absolute -inset-4 bg-gradient-to-r from-gray-900/10 via-gray-900/20 to-gray-900/10 blur-3xl group-hover:blur-2xl transition-all duration-700 rounded-full"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Content & CTA -->
+                <div class="order-1 lg:order-2">
+                    <div class="inline-block bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-500 text-white px-4 py-2 rounded-full text-sm font-bold mb-6 shadow-lg">
+                        Wedding Packages
+                    </div>
+                    <h3 class="text-4xl md:text-5xl font-bold mb-6">
+                        Plan Your Perfect Wedding
+                    </h3>
+                    <p class="text-xl text-gray-600 mb-8 leading-relaxed">
+                        Explore our curated wedding packages designed to capture every precious moment of your special day
+                    </p>
+                    <div class="space-y-4 mb-8">
+                        <div class="brochure-check-item">
+                            <div class="brochure-check-icon">
+                                <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                            </div>
+                            <div>
+                                <p class="brochure-check-text">Elegant Wedding Packages</p>
+                                <p class="brochure-check-description">Customizable options tailored for your wedding theme and style</p>
+                            </div>
+                        </div>
+                        <div class="brochure-check-item">
+                            <div class="brochure-check-icon">
+                                <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                            </div>
+                            <div>
+                                <p class="brochure-check-text">Premium Wedding Add-Ons</p>
+                                <p class="brochure-check-description">Enhance your experience with custom backdrops, props, and more</p>
+                            </div>
+                        </div>
+                        <div class="brochure-check-item">
+                            <div class="brochure-check-icon">
+                                <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                            </div>
+                            <div>
+                                <p class="brochure-check-text">Instant Digital Gallery</p>
+                                <p class="brochure-check-description">Share memories instantly with guests via text, email, or QR code</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <button onclick="openBrochureModal()" class="brochure-button" aria-label="View wedding packages">
+                            <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+                            View Packages
+                            <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+                        </button>
+                        <a href="../flipbook/examples/example-assets/books/test.pdf" download class="brochure-download-button" aria-label="Download Wedding Package PDF">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2m-6 0V4m0 12l-4-4m4 4l4-4"/></svg>
+                            Download PDF
+                        </a>
+                    </div>
+                    <div class="flex flex-wrap items-center gap-6 pt-6 border-t border-gray-200">
+                        <div class="brochure-tag"><svg class="brochure-tag-icon" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg><span class="text-sm font-medium">Wedding Focused</span></div>
+                        <div class="brochure-tag"><svg class="brochure-tag-icon" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg><span class="text-sm font-medium">Customizable</span></div>
+                        <div class="brochure-tag"><svg class="brochure-tag-icon" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg><span class="text-sm font-medium">Instant Sharing</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+ <!-- Premium Background Image Section -->
+    <section class="premium-bg-section" style="background-image: url('../assets/images/wedimg/weddingimg1.jpg');">
+        <div class="premium-bg-overlay"></div>
+        
+        <!-- Decorative Corner Elements -->
+        <div class="premium-corner-decoration premium-corner-top-left"></div>
+        <div class="premium-corner-decoration premium-corner-top-right"></div>
+        <div class="premium-corner-decoration premium-corner-bottom-left"></div>
+        <div class="premium-corner-decoration premium-corner-bottom-right"></div>
+        
+        <!-- Floating Decorative Elements -->
+        <div class="premium-floating-element premium-floating-1"></div>
+        <div class="premium-floating-element premium-floating-2"></div>
+        <div class="premium-floating-element premium-floating-3"></div>
+        
+        <!-- Content Container -->
+        <div class="premium-content-wrapper">
+            <div class="premium-text-container">
+                <div class="premium-text-badge">
+                    <svg class="premium-icon" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                    </svg>
+                    <span class="premium-badge-text">Excellence</span>
+                </div>
+                
+                <h2 class="premium-main-text">
+                    Premium Photo Booth Experiences
+                </h2>
+                
+                <div class="premium-divider-line"></div>
+                
+                <p class="premium-subtext">
+                    For couples who want their memories as stunning as their wedding day
+                </p>
+                
+                <!-- Decorative Swirl -->
+                <div class="premium-swirl-decoration">
+                    <svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M60 20C40 30 30 50 40 60C50 70 70 70 80 60C90 50 100 30 80 20C70 10 50 10 40 20C30 30 20 50 30 60C40 70 60 70 70 60"
+                              stroke="rgba(212, 175, 55, 0.2)" stroke-width="2" fill="none" stroke-linecap="round"/>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured In Section -->
+    <section class="section-padding bg-gray-50">
+            <!-- Elegant Header -->
+            <div class="text-center mb-12 max-w-3xl mx-auto">
+                <p class="text-sm uppercase tracking-widest text-gray-500 mb-4 font-medium" style="letter-spacing: 0.15em;">
+                    Recognition
+                </p>
+                <h2 class="text-4xl md:text-5xl font-normal mb-4 featured-title" style="font-size: 3.5rem; color: #4a5568;">
+                    We've Been Featured In
+                </h2>
+                <p class="text-lg text-gray-600 leading-relaxed italic">
+                    Trusted by couples and recognized by the industry's most respected platforms
+                </p>
+            </div>
+            
+            <!-- Decorative Divider -->
+            <div class="decorative-divider mb-12"></div>
+            
+            <!-- Logos Grid -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 max-w-6xl mx-auto">
+                <div class="featured-logo-wrapper group">
+                    <div class="featured-logo-container">
+                        <img src="../assets/images/wedimg/coloradologo.png" alt="Colorado Logo" class="featured-logo-enhanced">
+                        <div class="featured-logo-line"></div>
+                    </div>
+                </div>
+                <div class="featured-logo-wrapper group">
+                    <div class="featured-logo-container">
+                        <img src="../assets/images/wedimg/rockymlogo.png" alt="Rocky Mountain Logo" class="featured-logo-enhanced">
+                        <div class="featured-logo-line"></div>
+                    </div>
+                </div>
+                <div class="featured-logo-wrapper group">
+                    <div class="featured-logo-container">
+                        <img src="../assets/images/wedimg/theknotlogo.png" alt="The Knot Logo" class="featured-logo-enhanced">
+                        <div class="featured-logo-line"></div>
+                    </div>
+                </div>
+                <div class="featured-logo-wrapper group">
+                    <div class="featured-logo-container">
+                        <img src="../assets/images/wedimg/weddingwirelogo.png" alt="Wedding Wire Logo" class="featured-logo-enhanced">
+                        <div class="featured-logo-line"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+   
+
+    <!-- New Elegant Section -->
+    <section class="relative py-24 md:py-32 overflow-hidden" style="background-image: url('../assets/images/wedimg/weddingimg1.jpg'); background-size: cover; background-position: center;">
+        <div class="absolute inset-0" style="background: linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.9) 100%);"></div>
+        <div class="relative z-10 container mx-auto px-6 text-center">
+            <div class="elegant-section" id="elegant-section" style="background-color: transparent;">
+                <p class="top-text text-white tracking-widest opacity-90" style="font-family: 'Playfair Display', serif; letter-spacing: 0.3em; text-shadow: 0 2px 4px rgba(0,0,0,0.3);">OUR STUNNING</p>
+                <h2 class="main-text text-white" style="font-family: 'Great Vibes', cursive; text-shadow: 0 4px 8px rgba(0,0,0,0.5);">Wedding Products</h2>
+                <button class="quote-button" onclick="toggleProductDetail()" style="box-shadow: 0 4px 15px rgba(0,0,0,0.2);">View</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Product Detail Section (Hidden by default) -->
+    <section class="product-detail-section" id="product-detail-section">
+        <div class="container mx-auto px-6">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <!-- Left: Image -->
+                <div>
+                    <img src="../assets/images/wedimg/product1.jpg" alt="B&W Luxe Wedding Photography Booth" class="product-image">
+                </div>
+                
+                <!-- Right: Text Content -->
+                <div>
+                    <h2 class="product-heading">B&W LUXE WEDDING</h2>
+                    <h3 class="product-subheading">Photography Booth</h3>
+                    <button class="product-button">VIEW PRODUCT</button>
+                </div>
+            </div>
+        </div>
+        <div class="container mx-auto px-6 mt-12">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <!-- Left: Text Content (Right-aligned) -->
+                <div class="text-right">
+                    <h2 class="product-heading">B&W KARDASHIAN</h2>
+                    <h3 class="product-subheading">Photography Booth</h3>
+                    <button class="product-button">VIEW PRODUCT</button>
+                </div>
+                
+                <!-- Right: Image -->
+                <div>
+                    <img src="../assets/images/wedimg/kardashian.jpg" alt="B&W Kardashian Photography Booth" class="product-image">
+                </div>
+            </div>
+        </div>
+        <div class="container mx-auto px-6">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <!-- Left: Image -->
+                <div>
+                    <img src="../assets/images/wedimg/product3.jpg" alt="B&W Luxe Wedding Photography Booth" class="product-image">
+                </div>
+                
+                <!-- Right: Text Content -->
+                <div>
+                    <h2 class="product-heading">B&W LUXE 360</h2>
+                    <h3 class="product-subheading">Photography Booth</h3>
+                    <button class="product-button">VIEW PRODUCT</button>
+                </div>
+            </div>
+        </div>
+        <div class="container mx-auto px-6 mt-12">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <!-- Left: Text Content (Right-aligned) -->
+                <div class="text-right">
+                    <h2 class="product-heading">OUR CLASSIC</h2>
+                    <h3 class="product-subheading">Photography Booth</h3>
+                    <button class="product-button">VIEW PRODUCT</button>
+                </div>
+                
+                <!-- Right: Image -->
+                <div>
+                    <img src="../assets/images/wedimg/product4.jpg" alt="B&W Kardashian Photography Booth" class="product-image">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Brochure Modal -->
+    <div id="brochureModal" class="brochure-modal" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+        <div class="brochure-modal-content">
+            <!-- Close button -->
+            <button onclick="closeBrochureModal()" class="brochure-close-button" aria-label="Close brochure">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+
+            <!-- Loading Spinner -->
+            <div id="brochureLoader" class="fixed inset-0 flex items-center justify-center z-[10000]" style="background-color: rgba(0, 0, 0, 0.6);">
+                <div class="text-center">
+                    <div class="inline-block relative w-16 h-16">
+                        <div class="absolute inset-0 rounded-full border-4" style="border-color: rgba(255, 255, 255, 0.3);"></div>
+                        <div class="absolute inset-0 rounded-full border-4 border-transparent animate-spin" style="border-top-color: white;"></div>
+                    </div>
+                    <p class="mt-4 text-white text-lg font-medium">Loading Brochure...</p>
+                </div>
+            </div>
+
+            <!-- Brochure iframe container -->
+            <iframe id="brochureIframe" class="brochure-iframe" allowfullscreen loading="eager" sandbox="allow-scripts allow-same-origin"></iframe>
+        </div>
+    </div>
+
+    <!-- New Signature Section -->
+    <section class="relative py-24 md:py-32 overflow-hidden" style="background-image: url('../assets/images/wedimg/weddingimg1.jpg'); background-size: cover; background-position: center;">
+        <div class="absolute inset-0" style="background: linear-gradient(to bottom, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.92) 100%);"></div>
+        <div class="relative z-10 container mx-auto px-6 text-center">
+            <div class="elegant-section" id="custom-section" style="background-color: transparent;">
+                <p class="top-text text-white tracking-widest opacity-90" style="font-family: 'Playfair Display', serif; letter-spacing: 0.3em; text-shadow: 0 2px 4px rgba(0,0,0,0.3);">OUR CUSTOM</p>
+                <h2 class="text-white" style="font-family: 'Great Vibes', cursive; text-shadow: 0 6px 12px rgba(0, 0, 0, 0.9); font-size: 6.5rem; margin-bottom: 2.5rem; font-weight: 400; line-height: 1.2;">Photo Booth Types</h2>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Product Showcase Grid -->
+    <section class="py-16 bg-white">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-10">
+                <!-- Product Item 1 -->
+                <div class="text-center">
+                    <div class="flex justify-center mb-6">
+                        <img src="../assets/images/wedimg/ins1.png" alt="Vintage Photo Booth" class="w-40 h-40 rounded-full border-2 border-black bg-white object-cover transition-transform duration-300 hover:scale-105">
+                    </div>
+                    <h3 class="font-bold uppercase text-xl mb-2">VINTAGE</h3>
+                    <p class="text-base mb-6 tracking-widest">PHOTO BOOTH</p>
+                    <button class="bg-black text-white rounded-full px-6 py-3 text-base font-medium transition-colors duration-300 hover:bg-gray-900">VIEW PRODUCT</button>
+                </div>
+                
+                <!-- Product Item 2 -->
+                <div class="text-center">
+                    <div class="flex justify-center mb-6">
+                        <img src="../assets/images/wedimg/ins2.png" alt="Rustic Photo Booth" class="w-40 h-40 rounded-full border-2 border-black bg-white object-cover transition-transform duration-300 hover:scale-105">
+                    </div>
+                    <h3 class="font-bold uppercase text-xl mb-2">RUSTIC</h3>
+                    <p class="text-base mb-6 tracking-widest">PHOTO BOOTH</p>
+                    <button class="bg-black text-white rounded-full px-6 py-3 text-base font-medium transition-colors duration-300 hover:bg-gray-900">VIEW PRODUCT</button>
+                </div>
+                
+                <!-- Product Item 3 -->
+                <div class="text-center">
+                    <div class="flex justify-center mb-6">
+                        <img src="../assets/images/wedimg/ins3.png" alt="Guitar Photo Booth" class="w-40 h-40 rounded-full border-2 border-black bg-white object-cover transition-transform duration-300 hover:scale-105">
+                    </div>
+                    <h3 class="font-bold uppercase text-xl mb-2">GUITAR</h3>
+                    <p class="text-base mb-6 tracking-widest">PHOTO BOOTH</p>
+                    <button class="bg-black text-white rounded-full px-6 py-3 text-base font-medium transition-colors duration-300 hover:bg-gray-900">VIEW PRODUCT</button>
+                </div>
+                
+                <!-- Product Item 4 -->
+                <div class="text-center">
+                    <div class="flex justify-center mb-6">
+                        <img src="../assets/images/wedimg/ins4.png" alt="Groovy Photo Booth" class="w-40 h-40 rounded-full border-2 border-black bg-white object-cover transition-transform duration-300 hover:scale-105">
+                    </div>
+                    <h3 class="font-bold uppercase text-xl mb-2">GROOVY</h3>
+                    <p class="text-base mb-6 tracking-widest">PHOTO BOOTH</p>
+                    <button class="bg-black text-white rounded-full px-6 py-3 text-base font-medium transition-colors duration-300 hover:bg-gray-900">VIEW PRODUCT</button>
+                </div>
+                
+                <!-- Product Item 5 -->
+                <div class="text-center">
+                    <div class="flex justify-center mb-6">
+                        <img src="../assets/images/wedimg/ins5.png" alt="Tigerwood Photo Booth" class="w-40 h-40 rounded-full border-2 border-black bg-white object-cover transition-transform duration-300 hover:scale-105">
+                    </div>
+                    <h3 class="font-bold uppercase text-xl mb-2">TIGERWOOD</h3>
+                    <p class="text-base mb-6 tracking-widest">PHOTO BOOTH</p>
+                    <button class="bg-black text-white rounded-full px-6 py-3 text-base font-medium transition-colors duration-300 hover:bg-gray-900">VIEW PRODUCT</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- New Signature Section -->
+    <section class="relative py-24 md:py-32 overflow-hidden" style="background-image: url('../assets/images/wedimg/weddingimg1.jpg'); background-size: cover; background-position: center;">
+        <div class="absolute inset-0" style="background: linear-gradient(to bottom, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.92) 100%);"></div>
+        <div class="relative z-10 container mx-auto px-6 text-center">
+            <div class="elegant-section" id="signature-section" style="background-color: transparent;">
+                <p class="text-white tracking-widest" style="font-family: 'Playfair Display', serif; letter-spacing: 0.3em; text-shadow: 0 2px 8px rgba(0,0,0,0.8); font-size: 0.875rem; font-weight: 400; margin-bottom: 1.5rem;">OUR SIGNATURE</p>
+                <h2 class="text-white" style="font-family: 'Great Vibes', cursive; text-shadow: 0 6px 12px rgba(0, 0, 0, 0.9); font-size: 6.5rem; margin-bottom: 2.5rem; font-weight: 400; line-height: 1.2;">Pose Flashcards</h2>
+                <a href="#pose-flashcards" class="inline-block px-12 py-3 bg-white text-black font-medium rounded-full hover:bg-opacity-90 transition-all duration-300 shadow-lg" style="font-family: 'Playfair Display', serif; letter-spacing: 0.1em; text-transform: uppercase; font-size: 0.875rem;">VIEW</a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Pose Flashcards Gallery -->
+    <section class="py-12 bg-white">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- First Pose Flashcard -->
+                <div class="relative rounded-xl overflow-hidden shadow-lg">
+                    <img src="../assets/images/wedimg/pose2.png" alt="Pose Flashcard 1" class="w-full h-96 md:h-[500px] object-cover hover:scale-105 transition-transform duration-300">
+                </div>
+                <!-- Second Pose Flashcard -->
+                <div class="relative rounded-xl overflow-hidden shadow-lg">
+                    <img src="../assets/images/wedimg/pose1.jpg" alt="Pose Flashcard 2" class="w-full h-96 md:h-[500px] object-cover hover:scale-105 transition-transform duration-300">
+                </div>
+            </div>
+        </div>
+    </section>
+
+     <!-- CTA Section -->
+        <section class="relative py-24 md:py-32 overflow-hidden" style="background-image: url('../assets/images/wedimg/weddingimg1.jpg'); background-size: cover; background-position: center;">
+            <div class="absolute inset-0" style="background: linear-gradient(to bottom, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.92) 100%);"></div>
+
+            <div class="relative z-10 container mx-auto px-6 text-center">
+                <p class="text-white tracking-widest mb-6" style="font-family: 'Playfair Display', serif; letter-spacing: 0.3em; text-shadow: 0 2px 8px rgba(0,0,0,0.8); font-size: 0.875rem; font-weight: 400;">MAKE YOUR DAY UNFORGETTABLE</p>
+                <h2 class="text-white mb-8" style="font-family: 'Great Vibes', cursive; text-shadow: 0 6px 12px rgba(0, 0, 0, 0.9); font-size: 5rem; font-weight: 400; line-height: 1.3;">Ready to Create Magical Memories?</h2>
+                <p class="text-white mb-12 max-w-2xl mx-auto" style="font-family: 'Playfair Display', serif; text-shadow: 0 2px 8px rgba(0,0,0,0.8); font-size: 1.125rem; line-height: 1.8; opacity: 0.95;">
+                    Transform your special day with our elegant photo booth experiences. Create stunning, shareable memories that capture the magic of your wedding celebration.
+                </p>
+
+                <div class="flex flex-col sm:flex-row gap-6 justify-center items-center">
+                    <a href="#" class="inline-block px-12 py-4 bg-white text-black font-medium rounded-full hover:bg-opacity-90 transition-all duration-300 shadow-lg transform hover:scale-105" style="font-family: 'Playfair Display', serif; letter-spacing: 0.1em; text-transform: uppercase; font-size: 0.875rem;">
+                        GET YOUR QUOTE
+                    </a>
+                    <a href="#" class="inline-block px-12 py-4 border-2 border-white text-white font-medium rounded-full hover:bg-white hover:text-black transition-all duration-300 shadow-lg transform hover:scale-105" style="font-family: 'Playfair Display', serif; letter-spacing: 0.1em; text-transform: uppercase; font-size: 0.875rem;">
+                        BOOK NOW
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    <!-- Brochure Modal -->
+    <div id="brochureModal" class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center hidden">
+        <div class="relative w-full max-w-4xl h-full max-h-[90vh]">
+            <iframe id="brochureIframe" class="w-full h-full" src="about:blank"></iframe>
+            <button id="closeBrochureModal" class="absolute top-4 right-4 bg-white rounded-full p-2 text-gray-600 hover:text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition duration-200">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- Load Shared Navigation -->
+    <script src="../assets/components/navigation.js"></script>
+    <script src="../assets/components/footer.js"></script>
+    
+    <script>
+        // Scroll-triggered animation
+        document.addEventListener('DOMContentLoaded', function() {
+            const elegantSection = document.getElementById('elegant-section');
+            const topText = document.querySelector('.top-text');
+            const mainText = document.querySelector('.main-text');
+            const quoteButton = document.querySelector('.quote-button');
+
+            // Signature section elements
+            const signatureSection = document.getElementById('signature-section');
+            const signatureTopText = document.querySelector('.signature-top-text');
+            const signatureMainText = document.querySelector('.signature-main-text');
+            const signatureParagraph = document.querySelector('.signature-paragraph');
+
+            // Custom section elements
+            const customSection = document.getElementById('custom-section');
+            const customTopText = document.querySelector('.custom-top-text');
+            const customMainText = document.querySelector('.custom-main-text');
+            const customParagraph = document.querySelector('.custom-paragraph');
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // Elegant section animations
+                        if (entry.target.id === 'elegant-section') {
+                            setTimeout(() => {
+                                topText.classList.add('animate-text');
+                            }, 100);
+                            
+                            setTimeout(() => {
+                                mainText.classList.add('animate-text');
+                            }, 300);
+                            
+                            setTimeout(() => {
+                                quoteButton.classList.add('animate-text');
+                            }, 500);
+                        }
+                        
+                        // Signature section animations
+                        if (entry.target.id === 'signature-section') {
+                            setTimeout(() => {
+                                signatureTopText.classList.add('animate-text');
+                            }, 100);
+                            
+                            setTimeout(() => {
+                                signatureMainText.classList.add('animate-text');
+                            }, 300);
+                            
+                            setTimeout(() => {
+                                signatureParagraph.classList.add('animate-text');
+                            }, 500);
+                        }
+                        
+                        // Custom section animations
+                        if (entry.target.id === 'custom-section') {
+                            setTimeout(() => {
+                                customTopText.classList.add('animate-text');
+                            }, 100);
+                            
+                            setTimeout(() => {
+                                customMainText.classList.add('animate-text');
+                            }, 300);
+                            
+                            setTimeout(() => {
+                                customParagraph.classList.add('animate-text');
+                            }, 500);
+                        }
+                        
+                        // Stop observing after animation is triggered
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.3, // Trigger when 30% of the section is visible
+                rootMargin: '0px 0px -50px 0px' // Trigger slightly before element is fully in view
+            });
+            
+            observer.observe(elegantSection);
+            observer.observe(signatureSection);
+            observer.observe(customSection);
+        });
+
+        // Form pagination functionality with smooth transitions
+        document.addEventListener('DOMContentLoaded', function() {
+            const formSteps = document.querySelectorAll('.form-step');
+            const formPrevBtn = document.getElementById('prev-btn');
+            const formNextBtn = document.getElementById('next-btn');
+            const submitBtn = document.getElementById('submit-btn');
+            const progressBar = document.getElementById('progress-bar');
+            let currentStep = 0;
+            
+            // Update form step visibility with smooth transitions
+            function updateFormStep() {
+                // Hide all steps with fade out
+                formSteps.forEach(step => {
+                    if (!step.classList.contains('hidden')) {
+                        // Add fade out effect
+                        const elements = step.querySelectorAll('*');
+                        elements.forEach(el => {
+                            if (el.classList.contains('transition-opacity') || el.classList.contains('transition-all')) {
+                                el.style.opacity = '0';
+                            }
+                        });
+                    }
+                });
+                
+                // After fade out, switch steps and fade in
+                setTimeout(() => {
+                    // Hide all steps
+                    formSteps.forEach(step => step.classList.add('hidden'));
+                    
+                    // Show current step
+                    formSteps[currentStep].classList.remove('hidden');
+                    
+                    // Trigger fade in
+                    const elements = formSteps[currentStep].querySelectorAll('*');
+                    elements.forEach(el => {
+                        if (el.classList.contains('transition-opacity') || el.classList.contains('transition-all')) {
+                            // Reset opacity for fade in
+                            el.style.opacity = '';
+                        }
+                    });
+                    
+                    // Update progress bar
+                    const progressPercentage = ((currentStep + 1) / formSteps.length) * 100;
+                    progressBar.style.width = `${progressPercentage}%`;
+                    
+                    // Update button visibility
+                    if (currentStep === 0) {
+                        formPrevBtn.classList.add('hidden');
+                    } else {
+                        formPrevBtn.classList.remove('hidden');
+                    }
+                    
+                    if (currentStep === formSteps.length - 1) {
+                        formNextBtn.classList.add('hidden');
+                        submitBtn.classList.remove('hidden');
+                    } else {
+                        formNextBtn.classList.remove('hidden');
+                        submitBtn.classList.add('hidden');
+                    }
+                    
+                    // Update step indicators
+                    document.querySelectorAll('.flex.flex-col.items-center').forEach((indicator, index) => {
+                        const circle = indicator.querySelector('div');
+                        const text = indicator.querySelector('span');
+                        if (index === currentStep) {
+                            circle.classList.remove('bg-gray-200', 'text-gray-500');
+                            circle.classList.add('bg-[#0050ff]', 'text-white');
+                        } else if (index < currentStep) {
+                            circle.classList.remove('bg-gray-200', 'text-gray-500');
+                            circle.classList.add('bg-green-600', 'text-white');
+                        } else {
+                            circle.classList.remove('bg-[#0050ff]', 'text-white', 'bg-green-600');
+                            circle.classList.add('bg-gray-200', 'text-gray-500');
+                        }
+                    });
+                }, 150); // Match the transition duration
+            }
+            
+            // Next button event
+            formNextBtn.addEventListener('click', () => {
+                if (currentStep < formSteps.length - 1) {
+                    currentStep++;
+                    updateFormStep();
+                }
+            });
+            
+            // Previous button event
+            formPrevBtn.addEventListener('click', () => {
+                if (currentStep > 0) {
+                    currentStep--;
+                    updateFormStep();
+                }
+            });
+            
+            // Initialize form
+            updateFormStep();
+        });
+
+        // Toggle product detail section with smooth dropdown effect and scroll to products
+        function toggleProductDetail() {
+            const productDetailSection = document.getElementById('product-detail-section');
+            const wasExpanded = productDetailSection.classList.contains('expanded');
+            
+            // Toggle the expanded class
+            productDetailSection.classList.toggle('expanded');
+            
+            // If we're expanding, scroll to the product section
+            if (!wasExpanded) {
+                // Wait a bit for the expansion to start, then scroll
+                setTimeout(() => {
+                    productDetailSection.scrollIntoView({ 
+                        behavior: 'smooth', 
+                        block: 'start'
+                    });
+                }, 100);
+            }
+        }
+        
+        // Brochure Modal Functions
+        function openBrochureModal() {
+            const modal = document.getElementById('brochureModal');
+            const iframe = document.getElementById('brochureIframe');
+            const loader = document.getElementById('brochureLoader');
+            
+            // Show modal and loader immediately
+            modal.classList.add('show');
+            if (loader) loader.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+            
+                // Add a timestamp to prevent caching issues
+                const timestamp = new Date().getTime();
+                iframe.src = '../flipbook/examples/wed.html?t=' + timestamp;
+                
+                // Force focus to the iframe for better keyboard navigation
+                setTimeout(() => iframe.focus(), 100);
+        }
+        
+        function closeBrochureModal() {
+            const modal = document.getElementById('brochureModal');
+            const iframe = document.getElementById('brochureIframe');
+            const loader = document.getElementById('brochureLoader');
+            
+            modal.classList.remove('show');
+            if (loader) loader.style.display = 'none';
+            document.body.style.overflow = '';
+            
+            // Clear iframe source to stop any animations/scripts
+            iframe.src = 'about:blank';
+        }
+        
+        // Listen for flipbook loaded message from iframe
+        window.addEventListener('message', function(event) {
+            if (event.data === 'flipbookLoaded') {
+                const loader = document.getElementById('brochureLoader');
+                if (loader) {
+                    loader.style.display = 'none';
+                }
+            }
+        });
+        
+        // Close modal on Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                const modal = document.getElementById('brochureModal');
+                if (modal.classList.contains('show')) {
+                    closeBrochureModal();
+                }
+            }
+        });
+    </script>
+</body>
+</html>

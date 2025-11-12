@@ -1,0 +1,1651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trade Shows Photo Booth - MiHi Entertainment</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Inter:wght@300;400;500;600;700;800;900&family=Montserrat:wght@400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; color: #1a202c; }
+        h1, h2, h3, h4, h5, h6 { font-family: 'Playfair Display', serif; }
+        
+        /* Protect navigation button from page-specific styles - must override Tailwind utilities */
+        header .btn-primary,
+        header nav .btn-primary,
+        header a.btn-primary,
+        header nav a.btn-primary,
+        header a.btn-primary.text-white,
+        header nav a.btn-primary.text-white {
+            background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%) !important;
+            background-color: #0050ff !important;
+            background-image: linear-gradient(135deg, #0050ff 0%, #0040d9 100%) !important;
+            color: #ffffff !important;
+            transition: all 0.3s ease !important;
+            border: none !important;
+        }
+        
+        header .btn-primary:hover,
+        header nav .btn-primary:hover,
+        header a.btn-primary:hover,
+        header nav a.btn-primary:hover,
+        header a.btn-primary.text-white:hover,
+        header nav a.btn-primary.text-white:hover {
+            background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%) !important;
+            background-color: #0050ff !important;
+            background-image: linear-gradient(135deg, #0050ff 0%, #0040d9 100%) !important;
+            color: #ffffff !important;
+            transform: translateY(-2px) !important;
+            box-shadow: 0 10px 25px rgba(0, 80, 255, 0.4) !important;
+        }
+        
+        /* Apply btn-primary styles to page content (not navigation) */
+        section .btn-primary {
+            background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%);
+            transition: all 0.3s ease;
+        }
+        
+        section .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 80, 255, 0.4);
+        }
+        
+        .section-padding { padding: 5rem 0; }
+        .hero-gradient { background: linear-gradient(135deg, rgba(0, 80, 255, 0.5) 0%, rgba(0, 64, 217, 0.5) 100%); }
+        
+        /* Trade Shows Animation - Bold Slide and Scale */
+        .trade-shows-animate {
+            opacity: 0;
+            transform: translateX(-100px) scale(0.8);
+            animation: tradeShowsSlideIn 1s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+        }
+        
+        @keyframes tradeShowsSlideIn {
+            0% {
+                opacity: 0;
+                transform: translateX(-100px) scale(0.8);
+            }
+            60% {
+                opacity: 1;
+                transform: translateX(10px) scale(1.05);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(0) scale(1);
+            }
+        }
+        
+        /* Photo Booth Animation - Slide Up with Scale */
+        .photo-booth-animate {
+            opacity: 0;
+            transform: translateY(50px) scale(0.9);
+            animation: photoBoothSlideUp 1s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+            animation-delay: 0.5s;
+        }
+        
+        @keyframes photoBoothSlideUp {
+            0% {
+                opacity: 0;
+                transform: translateY(50px) scale(0.9);
+            }
+            60% {
+                opacity: 1;
+                transform: translateY(-5px) scale(1.02);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+        
+        .animate-fade-in {
+            animation: fadeIn 1s ease-out forwards;
+        }
+        
+        @keyframes fadeIn {
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Trade Show Button - Bold and Professional */
+        .btn-trade-show {
+            background-color: #ffffff;
+            color: #000000;
+            border: 2px solid #ffffff;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+        
+        .btn-trade-show:hover {
+            background-color: transparent;
+            color: #ffffff;
+            border: 2px solid #ffffff;
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 25px rgba(255, 255, 255, 0.3);
+        }
+        
+        /* Interactive Brochure Section Styles */
+        .brochure-section {
+            background: linear-gradient(135deg, #faf8f3 0%, #f5f1e8 100%);
+        }
+        
+        .brochure-badge {
+            background: linear-gradient(135deg, #8B0000 0%, #A52A2A 100%);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            display: inline-block;
+            box-shadow: 0 4px 15px rgba(139, 0, 0, 0.3);
+        }
+        
+        .brochure-preview {
+            position: relative;
+            background: white;
+            border-radius: 1.5rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .brochure-preview:hover {
+            transform: scale(1.02);
+            box-shadow: 0 35px 60px -15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .brochure-preview::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background: repeating-linear-gradient(45deg, transparent, transparent 2px, rgba(0,0,0,0.03) 2px, rgba(0,0,0,0.03) 4px);
+            pointer-events: none;
+        }
+        
+        .brochure-image {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .brochure-preview:hover .brochure-image {
+            transform: scale(1.05);
+        }
+        
+        .brochure-check-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+        
+        .brochure-check-icon {
+            flex-shrink: 0;
+            width: 1.5rem;
+            height: 1.5rem;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #8B0000 0%, #A52A2A 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .brochure-check-text {
+            font-weight: 600;
+            color: #1f2937;
+        }
+        
+        .brochure-check-description {
+            color: #6b7280;
+            margin-top: 0.25rem;
+        }
+        
+        .brochure-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #8B0000 0%, #A52A2A 100%);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 9999px;
+            font-weight: 700;
+            font-size: 1.125rem;
+            box-shadow: 0 20px 25px -5px rgba(139, 0, 0, 0.3);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: none;
+            cursor: pointer;
+        }
+        
+        .brochure-button:hover {
+            transform: scale(1.05) translateY(-2px);
+            box-shadow: 0 25px 50px -12px rgba(139, 0, 0, 0.4);
+            background: linear-gradient(135deg, #6B0000 0%, #C41E3A 100%);
+        }
+        
+        .brochure-download-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid #8B0000;
+            color: #8B0000;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.375rem;
+            font-weight: 700;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-decoration: none;
+        }
+        
+        .brochure-download-button:hover {
+            background: linear-gradient(135deg, #8B0000 0%, #A52A2A 100%);
+            color: white;
+            transform: scale(1.05) translateY(-2px);
+        }
+        
+        .brochure-tag {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #6b7280;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+        
+        .brochure-tag-icon {
+            color: #10b981;
+            width: 1.25rem;
+            height: 1.25rem;
+        }
+        
+        /* Brochure Modal Styles */
+        .brochure-modal {
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            z-index: 9999;
+            display: none;
+            overflow: hidden;
+            background-color: rgba(0, 0, 0, 0.6);
+        }
+        
+        .brochure-modal.show {
+            display: block;
+        }
+        
+        .brochure-modal-content {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            background: transparent;
+        }
+        
+        .brochure-close-button {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            z-index: 10001;
+            background: rgba(255, 255, 255, 0.9);
+            color: #1f2937;
+            border-radius: 50%;
+            padding: 0.5rem;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+        
+        .brochure-close-button:hover {
+            background: white;
+            transform: scale(1.1);
+        }
+        
+        .brochure-iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+            background: transparent;
+        }
+        
+        #brochureLoader {
+            display: none;
+        }
+        
+        /* Revolutionary Trade Show Section Styles */
+        .revolutionary-section {
+            position: relative;
+            padding: 3rem 2rem;
+            background: linear-gradient(135deg, #8B0000 0%, #A52A2A 100%);
+            overflow: hidden;
+        }
+        
+        .revolutionary-section::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                radial-gradient(circle at 1px 1px, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 30px 30px;
+            pointer-events: none;
+        }
+        
+        .revolutionary-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 30% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+        
+        .revolutionary-content {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .revolutionary-subheading {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.875rem;
+            font-weight: 600;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 0.75rem;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.8s ease-out 0.2s forwards;
+        }
+        
+        .revolutionary-divider {
+            width: 60px;
+            height: 2px;
+            background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.6), transparent);
+            margin: 0 auto 1rem;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out 0.4s forwards;
+        }
+        
+        .revolutionary-headline {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 900;
+            line-height: 1.2;
+            margin-bottom: 1.25rem;
+            background: linear-gradient(135deg, #ffffff 0%, rgba(255, 255, 255, 0.8) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            transform: translateY(30px) scale(0.95);
+            animation: fadeInUpScale 1s ease-out 0.6s forwards;
+        }
+        
+        .revolutionary-headline .highlight {
+            display: block;
+            background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 3rem;
+            margin-top: 0.2rem;
+        }
+        
+        .revolutionary-paragraph {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.05rem;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.95);
+            margin-bottom: 0.875rem;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.8s ease-out 0.8s forwards;
+        }
+        
+        .revolutionary-cta {
+            margin-top: 1.5rem;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.8s ease-out 1s forwards;
+        }
+        
+        /* Tradeshow Activations Card Styles */
+        .activations-card {
+            margin-top: 2rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease-out 1s forwards;
+        }
+        
+        .activations-card-container {
+            position: relative;
+            background: #FFFEF7;
+            border-radius: 2rem;
+            padding: 2rem;
+            backdrop-filter: blur(20px);
+            box-shadow: 
+                0 20px 60px rgba(139, 0, 0, 0.15),
+                0 0 0 1px rgba(139, 0, 0, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .activations-card-container::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(139, 0, 0, 0.05) 0%, transparent 70%);
+            animation: pulse-glow 4s ease-in-out infinite;
+        }
+        
+        .activations-card-container::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(139, 0, 0, 0.02) 0%, rgba(165, 42, 42, 0.01) 100%);
+            border-radius: 2rem;
+            pointer-events: none;
+        }
+        
+        @keyframes pulse-glow {
+            0%, 100% {
+                opacity: 0.5;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.8;
+                transform: scale(1.1);
+            }
+        }
+        
+        .activations-card-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .activations-subheading {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: rgba(139, 0, 0, 0.7);
+            margin-bottom: 0.75rem;
+        }
+        
+        .ai-heading {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 5rem;
+            font-weight: 900;
+            background: linear-gradient(90deg, #00f2fe, #4facfe);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 20px rgba(0, 242, 254, 0.3);
+            margin-bottom: 0.5rem;
+            line-height: 1;
+            letter-spacing: 0.1em;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .ai-heading::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -5px;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, #00f2fe, #4facfe);
+            transform: scaleX(0);
+            transform-origin: right;
+            animation: aiUnderline 2s infinite alternate;
+        }
+        
+        @keyframes aiUnderline {
+            from { transform: scaleX(0); transform-origin: right; }
+            to { transform: scaleX(1); transform-origin: left; }
+        }
+        
+        .activations-headline {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2rem;
+            font-weight: 900;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+            color: #8B0000;
+        }
+        
+        .activations-paragraph {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: #8B0000;
+            margin-bottom: 0.875rem;
+        }
+        
+        .activations-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .activations-button {
+            flex: 1;
+            min-width: 180px;
+            padding: 1rem 2rem;
+            background: linear-gradient(90deg, #8B0000 0%, #A52A2A 100%);
+            color: #ffffff;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.875rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            border-radius: 12px;
+            text-decoration: none;
+            text-align: center;
+            box-shadow: 
+                0 4px 15px rgba(139, 0, 0, 0.3),
+                0 0 0 1px rgba(139, 0, 0, 0.2);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            transform: translateZ(0);
+        }
+        
+        .activations-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .activations-button:hover::before {
+            left: 100%;
+        }
+        
+        .activations-button:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 
+                0 8px 25px rgba(139, 0, 0, 0.5),
+                0 0 40px rgba(165, 42, 42, 0.3),
+                0 0 0 1px rgba(139, 0, 0, 0.3);
+            background: linear-gradient(90deg, #6B0000 0%, #8B0000 100%);
+        }
+        
+        .activations-button:active {
+            transform: translateY(-1px) scale(1);
+        }
+        
+        /* Animated background orbs */
+        .activations-orb {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(139, 0, 0, 0.08), transparent);
+            pointer-events: none;
+            animation: float-orb 8s ease-in-out infinite;
+        }
+        
+        .activations-orb-1 {
+            width: 200px;
+            height: 200px;
+            top: -50px;
+            right: -50px;
+            animation-delay: 0s;
+        }
+        
+        .activations-orb-2 {
+            width: 150px;
+            height: 150px;
+            bottom: -30px;
+            left: -30px;
+            animation-delay: 2s;
+        }
+        
+        @keyframes float-orb {
+            0%, 100% {
+                transform: translate(0, 0) scale(1);
+                opacity: 0.3;
+            }
+            50% {
+                transform: translate(20px, -20px) scale(1.1);
+                opacity: 0.5;
+            }
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeInUpScale {
+            from {
+                opacity: 0;
+                transform: translateY(30px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .revolutionary-section {
+                padding: 2.5rem 1.5rem;
+            }
+            
+            .revolutionary-headline {
+                font-size: 1.5rem;
+            }
+            
+            .revolutionary-headline .highlight {
+                font-size: 1.75rem;
+            }
+            
+            .revolutionary-paragraph {
+                font-size: 0.95rem;
+            }
+            
+            .activations-card {
+                margin-top: 1.5rem;
+            }
+            
+            .activations-card-container {
+                padding: 1.5rem;
+                border-radius: 1.5rem;
+            }
+            
+            .activations-headline {
+                font-size: 1.5rem;
+                margin-bottom: 0.75rem;
+            }
+            
+            .activations-paragraph {
+                font-size: 0.9rem;
+                line-height: 1.6;
+                margin-bottom: 0.75rem;
+            }
+            
+            .activations-buttons {
+                margin-top: 1.25rem;
+                flex-direction: column;
+            }
+            
+            .activations-button {
+                width: 100%;
+                min-width: auto;
+            }
+        }
+        
+        /* Product Detail Section Styles */
+        .product-detail-section {
+            margin-top: 0.75rem;
+            margin-bottom: 0.75rem;
+            background-color: #A52A2A;
+            padding: 2rem 0;
+            width: 100%;
+            max-width: 100%;
+        }
+        
+        .product-detail-section .container {
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+            max-width: 100%;
+        }
+        
+        .product-detail-section .grid {
+            gap: 2rem;
+        }
+        
+        .product-image {
+            border-radius: 1rem;
+            object-fit: cover;
+            width: 100%;
+            height: 400px;
+            max-width: 100%;
+        }
+        
+        .product-heading {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 1.75rem;
+            margin-bottom: 0.375rem;
+            color: #ffffff;
+        }
+        
+        .testimonial-heading {
+            font-family: 'Montserrat', 'Arial Rounded MT Bold', 'Helvetica Rounded', Arial, sans-serif;
+            font-weight: 800;
+            font-size: 3rem;
+            color: #1a202c;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            position: relative;
+            display: inline-block;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .testimonial-heading::after {
+            margin-left: 0.5rem;
+            display: inline-block;
+        }
+        
+        @keyframes cameraPulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2) rotate(5deg); }
+            100% { transform: scale(1); }
+        }
+        
+        .product-heading-robotic {
+            font-family: 'Montserrat', 'Arial Black', 'Impact', sans-serif;
+            font-weight: 900;
+            font-size: 3.5rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+            color: #ffffff;
+            -webkit-text-stroke: 3px rgba(0, 0, 0, 0.3);
+            text-shadow: 
+                0 0 10px rgba(255, 255, 255, 0.5),
+                0 0 20px rgba(255, 255, 255, 0.3),
+                0 0 30px rgba(255, 255, 255, 0.2),
+                2px 2px 0px rgba(0, 0, 0, 0.6),
+                3px 3px 0px rgba(0, 0, 0, 0.4),
+                4px 4px 8px rgba(0, 0, 0, 0.5);
+            transform: perspective(500px) rotateX(5deg);
+            line-height: 1.1;
+            font-stretch: condensed;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        .product-subheading {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: rgba(255, 255, 255, 0.95);
+            letter-spacing: 0.4em;
+            text-transform: uppercase;
+            margin: 1.5rem 0;
+            padding: 0 2rem;
+            display: inline-block;
+            position: relative;
+            margin-bottom: 1rem;
+        }
+        
+        .product-button {
+            background-color: #ffffff;
+            color: #8B0000;
+            padding: 0.625rem 1.25rem;
+            border-radius: 0.375rem;
+            font-weight: 600;
+            font-size: 0.875rem;
+            transition: all 0.3s ease;
+            border: 2px solid #ffffff;
+            cursor: pointer;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .product-button:hover {
+            background-color: transparent;
+            color: #ffffff;
+            border: 2px solid #ffffff;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 255, 255, 0.3);
+        }
+        
+        /* White Background Product Section */
+        .product-detail-white {
+            background-color: #ffffff !important;
+            margin-top: 0 !important;
+            margin-bottom: 0 !important;
+        }
+        
+        .product-detail-white .product-heading {
+            color: #1a202c !important;
+        }
+        
+        .product-detail-white .product-subheading {
+            color: #4a5568 !important;
+            position: relative;
+        }
+        
+        .product-subheading::before,
+        .product-subheading::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 20px;
+            height: 1px;
+            background: currentColor;
+            opacity: 0.5;
+        }
+        
+        .product-subheading::before {
+            left: 0;
+        }
+        
+        .product-subheading::after {
+            right: 0;
+        }
+        
+        .product-detail-white .product-button {
+            background-color: #8B0000;
+            color: #ffffff;
+            border: 2px solid #8B0000;
+        }
+        
+        .product-detail-white .product-button:hover {
+            background-color: #A52A2A;
+            border: 2px solid #A52A2A;
+            color: #ffffff;
+            box-shadow: 0 4px 12px rgba(139, 0, 0, 0.3);
+        }
+        
+        /* Last Product Section - No Bottom Margin */
+        .product-detail-last {
+            margin-bottom: 0 !important;
+        }
+        
+        @media (max-width: 768px) {
+            .product-detail-section {
+                margin-top: 1rem;
+                margin-bottom: 1rem;
+            }
+            
+            .product-detail-section .grid {
+                gap: 1.5rem;
+            }
+            
+            .product-heading {
+                font-size: 1.5rem;
+            }
+            
+            .product-heading-robotic {
+                font-size: 2.5rem;
+                letter-spacing: 0.2em;
+            }
+            
+            .testimonial-heading {
+                font-size: 2.2rem;
+            }
+            
+            .product-subheading {
+                font-size: 1.25rem;
+                letter-spacing: 0.3em;
+                padding: 0 1.5rem;
+            }
+            
+            .product-image {
+                height: 300px;
+            }
+        }
+        
+        /* Engagement Section Styles */
+        .engagement-section {
+            position: relative;
+            padding: 3rem 2rem;
+            background: #FAF8F3;
+            overflow: hidden;
+        }
+        
+        .engagement-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 50% 50%, rgba(139, 0, 0, 0.05) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        
+        .engagement-content {
+            position: relative;
+            z-index: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .engagement-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .engagement-label {
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            letter-spacing: 0.4em;
+            text-transform: uppercase;
+            color: rgba(139, 0, 0, 0.7);
+            margin-bottom: 0.5rem;
+            opacity: 0;
+            transform: translateY(-20px);
+            animation: fadeInDown 0.8s ease-out 0.2s forwards;
+        }
+        
+        .engagement-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 900;
+            line-height: 1.2;
+            color: #8B0000;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            opacity: 0;
+            transform: translateY(-20px);
+            animation: fadeInDown 0.8s ease-out 0.4s forwards;
+        }
+        
+        .engagement-subtitle {
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #4a5568;
+            max-width: 800px;
+            margin: 0 auto;
+            opacity: 0;
+            transform: translateY(-20px);
+            animation: fadeInDown 0.8s ease-out 0.6s forwards;
+        }
+        
+        .engagement-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .engagement-card {
+            background: #ffffff;
+            backdrop-filter: blur(20px);
+            border-radius: 1.25rem;
+            padding: 1.75rem;
+            border: 1px solid rgba(139, 0, 0, 0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+        
+        .engagement-card:nth-child(1) {
+            animation-delay: 0.8s;
+        }
+        
+        .engagement-card:nth-child(2) {
+            animation-delay: 1s;
+        }
+        
+        .engagement-card:nth-child(3) {
+            animation-delay: 1.2s;
+        }
+        
+        .engagement-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(139, 0, 0, 0.05) 0%, transparent 100%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            pointer-events: none;
+        }
+        
+        .engagement-card:hover::before {
+            opacity: 1;
+        }
+        
+        .engagement-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(139, 0, 0, 0.15), 0 0 30px rgba(139, 0, 0, 0.1);
+            border-color: rgba(139, 0, 0, 0.3);
+        }
+        
+        .engagement-icon {
+            width: 50px;
+            height: 50px;
+            background: #8B0000;
+            border-radius: 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            transition: all 0.4s ease;
+        }
+        
+        .engagement-card:hover .engagement-icon {
+            background: #A52A2A;
+            transform: scale(1.1) rotate(5deg);
+        }
+        
+        .engagement-icon svg {
+            width: 28px;
+            height: 28px;
+            color: #8B0000;
+        }
+        
+        .engagement-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            padding: 0.5rem;
+        }
+        
+        .engagement-card-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: #8B0000;
+            margin-bottom: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .engagement-card-title::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #8B0000;
+            transition: width 0.4s ease;
+        }
+        
+        .engagement-card:hover .engagement-card-title::after {
+            width: 100%;
+        }
+        
+        .engagement-card-text {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: #4a5568;
+        }
+        
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .engagement-section {
+                padding: 2rem 1.5rem;
+            }
+            
+            .engagement-title {
+                font-size: 2rem;
+            }
+            
+            .engagement-subtitle {
+                font-size: 0.95rem;
+            }
+            
+            .engagement-cards {
+                grid-template-columns: 1fr;
+                gap: 1.25rem;
+            }
+            
+            .engagement-card {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="nav-placeholder"></div>
+
+    <!-- Hero Section -->
+    <section class="relative min-h-[50vh] flex items-center justify-center overflow-hidden py-12">
+        <div class="absolute inset-0 bg-center bg-no-repeat" style="background-image: url('../assets/images/trdshows/hero.jpg'); background-size: 115%;"></div>
+        <div class="absolute inset-0 bg-black bg-opacity-70"></div>     
+        <div class="relative z-10 text-center text-white px-2 w-full">
+            <div class="max-w-3xl mx-auto">
+                <div class="mb-4">
+                    <h1 class="text-5xl md:text-7xl lg:text-8xl font-bold tracking-widest leading-none trade-shows-animate" style="font-family: 'Montserrat', sans-serif; font-weight: 800; letter-spacing: 0.1em; line-height: 0.9;">
+                        Trade Show
+                    </h1>
+                    <h2 class="text-xl md:text-4xl lg:text-5xl font-bold tracking-widest mt-2 photo-booth-animate" style="font-family: 'Montserrat', sans-serif; font-weight: 700; letter-spacing: 0.15em;">Event</h2>
+                </div>
+                <div class="h-px w-16 bg-white mx-auto my-4"></div>
+                <p class="max-w-3xl mx-auto text-sm md:text-base leading-relaxed mb-4 px-0 font-semibold text-gray-100 tracking-wide" style="font-family: 'Montserrat', sans-serif; font-weight: 600;">
+                    Stand out on the show floor with fully branded photo activations designed to attract, engage, and leave a lasting impression on your target audience.
+                </p>
+
+                <!-- Contact Us Button -->
+                <div class="mt-6 mb-8">
+                    <a href="#contact" class="btn-trade-show px-10 py-4 rounded-lg text-base font-bold inline-block">
+                        Contact Us
+                    </a>
+                </div>
+
+                <!-- Location Text -->
+                <div class="text-center opacity-90 animate-fade-in" style="animation-delay: 1.5s; animation-fill-mode: forwards;">
+                    <div class="h-px w-12 bg-white mx-auto mb-2"></div>
+                    <p class="text-white text-opacity-80 tracking-widest text-xs font-bold" style="font-family: 'Montserrat', sans-serif; font-weight: 700; letter-spacing: 0.15em;">
+                        SERVICING DENVER, COLORADO, AND NATIONWIDE CORPORATE EVENTS
+                    </p>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Brochure Section -->
+    <section class="section-padding brochure-section">
+        <div class="container mx-auto px-6">
+            <!-- Section Header -->
+            <div class="text-center mb-16 space-y-4">
+                <span class="brochure-badge">📖 Trade Show Planning Guide</span>
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight">
+                    Your Trade Show Experience Awaits
+                </h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                    Discover our exclusive trade show packages and create unforgettable brand activations for your next event
+                </p>
+                <!-- Visual separator -->
+                <div class="flex items-center justify-center gap-2 pt-4">
+                    <div class="h-1 w-12 bg-gradient-to-r from-red-800 via-red-700 to-red-800 rounded-full"></div>
+                    <div class="h-1 w-1 bg-red-700 rounded-full"></div>
+                    <div class="h-1 w-1 bg-red-600 rounded-full"></div>
+                </div>
+            </div>
+
+            <!-- Main Content Grid -->
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <!-- Left: Visual Preview -->
+                <div class="order-2 lg:order-1">
+                    <div class="relative group">
+                        <div class="brochure-preview">
+                            <div class="aspect-[4/3] bg-gradient-to-br from-gray-50 via-gray-100 to-gray-50 flex items-center justify-center p-8 relative overflow-hidden">
+                                <div class="absolute inset-0" style="background-image: repeating-linear-gradient(45deg, transparent, transparent 2px, rgba(0,0,0,0.03) 2px, rgba(0,0,0,0.03) 4px);"></div>
+                                <div class="absolute inset-0 bg-gradient-to-br from-white/50 via-transparent to-gray-900/20 pointer-events-none"></div>
+                                <div class="relative w-full h-full flex items-center justify-center">
+                                    <div class="relative w-5/6 h-5/6 transform group-hover:scale-105 group-hover:-translate-y-2 transition-all duration-700" style="transform-style: preserve-3d; perspective: 1000px;">
+                                        <div class="absolute -right-2 top-0 bottom-0 w-16 bg-gradient-to-l from-black/20 to-transparent blur-sm skew-y-12 transform group-hover:scale-110"></div>
+                                        <div class="absolute inset-0 bg-gradient-to-br from-white/20 via-transparent to-transparent rounded-lg pointer-events-none"></div>
+                                        <div class="relative w-full h-full shadow-2xl rounded-lg overflow-hidden" style="box-shadow: 0 20px 60px rgba(0,0,0,0.3), 0 0 20px rgba(0,0,0,0.1);">
+                                            <img src="../assets/images/trdshows/trdshowthumb.png" alt="Trade Show Brochure Preview" class="brochure-image">
+                                            <div class="absolute inset-0 bg-gradient-to-br from-white/40 via-transparent to-transparent pointer-events-none"></div>
+                                            <div class="absolute bottom-0 left-0 right-0 h-1/3 bg-gradient-to-b from-transparent to-black/10"></div>
+                                        </div>
+                                        <div class="absolute -top-2 -left-2 w-8 h-8 bg-white/50 rounded-br-full shadow-lg"></div>
+                                        <div class="absolute -top-2 -right-2 w-8 h-8 bg-white/50 rounded-bl-full shadow-lg"></div>
+                                    </div>
+                                </div>
+                                <div class="absolute -inset-4 bg-gradient-to-r from-gray-900/10 via-gray-900/20 to-gray-900/10 blur-3xl group-hover:blur-2xl transition-all duration-700 rounded-full"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Content & CTA -->
+                <div class="order-1 lg:order-2">
+                    <div class="inline-block bg-gradient-to-r from-red-800 via-red-700 to-red-900 text-white px-4 py-2 rounded-full text-sm font-bold mb-6 shadow-lg">
+                        Trade Show Packages
+                    </div>
+                    <h3 class="text-4xl md:text-5xl font-bold mb-6">
+                        Plan Your Perfect Trade Show
+                    </h3>
+                    <p class="text-xl text-gray-600 mb-8 leading-relaxed">
+                        Explore our curated trade show packages designed to maximize engagement and capture leads at your next event
+                    </p>
+                    <div class="space-y-4 mb-8">
+                        <div class="brochure-check-item">
+                            <div class="brochure-check-icon">
+                                <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                            </div>
+                            <div>
+                                <p class="brochure-check-text">Professional Trade Show Packages</p>
+                                <p class="brochure-check-description">Customizable options tailored for your brand and booth theme</p>
+                            </div>
+                        </div>
+                        <div class="brochure-check-item">
+                            <div class="brochure-check-icon">
+                                <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                            </div>
+                            <div>
+                                <p class="brochure-check-text">Premium Branding Solutions</p>
+                                <p class="brochure-check-description">Enhance your presence with custom backdrops, props, and full brand integration</p>
+                            </div>
+                        </div>
+                        <div class="brochure-check-item">
+                            <div class="brochure-check-icon">
+                                <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                            </div>
+                            <div>
+                                <p class="brochure-check-text">Lead Generation & Analytics</p>
+                                <p class="brochure-check-description">Capture leads and track engagement with real-time analytics dashboard</p>
+                            </div>
+                    </div>
+                    </div>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <button onclick="openBrochureModal()" class="brochure-button" aria-label="View trade show packages">
+                            <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+                            View Packages
+                            <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+                        </button>
+                        <a href="../flipbook/examples/example-assets/books/trdshow.pdf" download class="brochure-download-button" aria-label="Download Trade Show Package PDF">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2m-6 0V4m0 12l-4-4m4 4l4-4"/></svg>
+                            Download PDF
+                        </a>
+                    </div>
+                    <div class="flex flex-wrap items-center gap-6 pt-6 border-t border-gray-200">
+                        <div class="brochure-tag"><svg class="brochure-tag-icon" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg><span class="text-sm font-medium">Trade Show Focused</span></div>
+                        <div class="brochure-tag"><svg class="brochure-tag-icon" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg><span class="text-sm font-medium">Customizable</span></div>
+                        <div class="brochure-tag"><svg class="brochure-tag-icon" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg><span class="text-sm font-medium">Lead Generation</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Revolutionary Trade Show Section -->
+    <section class="revolutionary-section">
+        <div class="revolutionary-content">
+            <p class="revolutionary-subheading">Revolutionary Trade Show Booth Ideas</p>
+            <div class="revolutionary-divider"></div>
+            <h2 class="revolutionary-headline">
+                That Drive
+                <span class="highlight">MASSIVE TRAFFIC</span>
+            </h2>
+            <p class="revolutionary-paragraph">
+                Imagine this: While other booths blend in, yours is packed with guests lining up to engage with your brand.
+            </p>
+            <p class="revolutionary-paragraph">
+                With our interactive activations, we turn standard trade show spaces into fun, immersive experiences that draw attention and create meaningful brand connections.
+            </p>
+            <div class="revolutionary-cta">
+                <div class="activations-card">
+                    <div class="activations-card-container">
+                        <div class="activations-orb activations-orb-1"></div>
+                        <div class="activations-orb activations-orb-2"></div>
+                        <div class="activations-card-content">
+                            <p class="activations-subheading">AUDIENCE ENGAGING</p>
+                            <h3 class="activations-headline">TRADESHOW ACTIVATIONS</h3>
+                            <p class="activations-paragraph">
+                                We design interactive photo booth activations that turn your tradeshow booth into the main attraction. With custom branding, immersive setups, and high-energy experiences, MiHi Entertainment helps your brand stand out and connect with attendees in a meaningful way.
+                            </p>
+                            <p class="activations-paragraph">
+                                From initial concept to on-site execution, we handle every detail to make your activation seamless and impactful. Whether you’re looking to boost foot traffic, start conversations, or simply create a moment attendees won’t forget, we’ve got the tools and creativity to make it happen.
+                            </p>
+                            <div class="activations-buttons">
+                                <a href="#contact" class="activations-button">CONTACT US NOW</a>
+                                <a href="#contact" class="activations-button">SCHEDULE A CALL</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Product Detail Sections -->
+    <section class="product-detail-section product-detail-white" id="product-detail-section">
+        <div class="container mx-auto px-6">
+            <div class="grid lg:grid-cols-2 gap-8 items-center">
+                <!-- Left: Image -->
+                <div>
+                    <img src="../assets/images/trdshows/pd1.jpg" alt="B&W Luxe Wedding Photography Booth" class="product-image">
+                </div>
+                
+                <!-- Right: Text Content -->
+                <div>
+                    <h2 class="product-heading product-heading-robotic">ROSIE</h2>
+                    <h3 class="product-subheading">The Robot</h3>
+                    <p class="engagement-subtitle">
+                        Rosie roams around, grabbing attention wherever she goes. Guests love to interact, take photos, and find out what she’s all about, making her the perfect conversation starter on any tradeshow floor.
+                    </p>
+                    <br>
+                    <button class="product-button">LEARN MORE</button>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="product-detail-section" id="product-detail-section">
+        <div class="container mx-auto px-6">
+            <div class="grid lg:grid-cols-2 gap-8 items-center">
+                <!-- Left: Text Content (Right-aligned) -->
+                <div class="text-right">
+                    <h2 class="ai-heading">AI</h2>
+                    <div style="margin-top: -1rem">
+                        <h3 class="product-subheading">TRADING CARDS</h3>
+                    </div>
+                    <p class="engagement-subtitle" style="color: #FFFDD0;">
+                        Turn guests into all-stars with our AI Trading Cards. This activation captures a photo and transforms it into a themed character card customized to your event, with powerful brand engagement.
+                    </p>
+                    <br>
+                    <button class="product-button">VIEW OUR TRADING CARDS</button>
+                </div>
+                
+                <!-- Right: Image -->
+                <div>
+                    <img src="../assets/images/trdshows/pd2.jpg" alt="B&W Kardashian Photography Booth" class="product-image">
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="product-detail-section product-detail-white" id="product-detail-section">
+        <div class="container mx-auto px-6">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <!-- Left: Image -->
+                <div>
+                    <img src="../assets/images/trdshows/pd3.jpg" alt="B&W Luxe Wedding Photography Booth" class="product-image">
+                </div>
+                
+                <!-- Right: Text Content -->
+                <div>
+                    <h2 class="testimonial-heading">TESTIMONIAL</h2>
+                    <h3 class="product-subheading">Video Booth</h3>
+                    <p class="engagement-subtitle">
+                        Rosie roams around, grabbing attention wherever she goes. Guests love to interact, take photos, and find out what she’s all about, making her the perfect conversation starter on any tradeshow floor.
+                    </p>
+                    <br>
+                    <button class="product-button">VIEW OUR TESTIMONIALS</button>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="product-detail-section product-detail-last" id="product-detail-section">
+        <div class="container mx-auto px-6">
+            <div class="grid lg:grid-cols-2 gap-8 items-center">
+                <!-- Left: Text Content (Right-aligned) -->
+                <div class="text-right">
+                    <h2 class="ai-heading">AI</h2>
+                    <div style="margin-top: -1rem">
+                        <h3 class="product-subheading">PHOTO BOOTH</h3>
+                    </div>
+                    <p class="engagement-subtitle" style="color: #FFFDD0;">
+                        The AI Photo Booth snaps a picture and transforms your guests into fully customized AI characters. It’s a fun, immersive way to engage attendees and give them a branded takeaway they will want to share.
+                    </p>
+                    <br>
+                    <button class="product-button">VIEW OUR TRADING CARDS</button>
+                </div>
+                
+                <!-- Right: Image -->
+                <div>
+                    <img src="../assets/images/trdshows/pd4.jpg" alt="B&W Kardashian Photography Booth" class="product-image">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Engagement Section -->
+    <section class="engagement-section">
+        <div class="engagement-content">
+            <div class="engagement-header">
+                <p class="engagement-label">ENGAGEMENT</p>
+                <h2 class="engagement-title">DONE THE RIGHT WAY</h2>
+                <p class="engagement-subtitle">
+                    Our tradeshow activations are designed with lead generation in mind. From built-in data capture forms to QR code scans and instant sharing options, every interaction is an opportunity to collect valuable insights. Seamlessly integrated into our photo booths, these tools help you gather attendee information while keeping the experience fun, fast, and on-brand.
+                </p>
+            </div>
+            
+            <div class="engagement-cards">
+                <!-- Lead Generation Card -->
+                <div class="engagement-card">
+                    <div class="engagement-icon">
+                        <img src="../assets/images/trdshows/logo1.png" alt="Lead Generation">
+                    </div>
+                    <h3 class="engagement-card-title">Lead Generation</h3>
+                    <p class="engagement-card-text">
+                        We generate leads by integrating your brand messaging directly into our booths, encouraging guests to interact and share their information in a natural, engaging way.
+                    </p>
+                </div>
+                
+                <!-- Data Capture Card -->
+                <div class="engagement-card">
+                    <div class="engagement-icon">
+                        <img src="../assets/images/trdshows/logo2.png" alt="Data Capture">
+                    </div>
+                    <h3 class="engagement-card-title">Data Capture</h3>
+                    <p class="engagement-card-text">
+                        Our booths collect valuable data during the event and provide you with a full report of guest interactions, entries, and engagement metrics post-event.
+                    </p>
+                </div>
+                
+                <!-- Gamification Card -->
+                <div class="engagement-card">
+                    <div class="engagement-icon">
+                        <img src="../assets/images/trdshows/logo3.png" alt="Gamification">
+                    </div>
+                    <h3 class="engagement-card-title">Gamification</h3>
+                    <p class="engagement-card-text">
+                        We can incentivize participation by incorporating prize-based experiences where guests enter their information for a chance to win, boosting engagement and retention.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Attractions Gallery -->
+    <section class="py-16 relative overflow-hidden" style="background: linear-gradient(135deg, #551d1d 0%, #d73535 100%);">
+        <!-- Decorative elements -->
+        <div class="absolute inset-0 opacity-10" style="background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxkZWZzPjxwYXR0ZXJuIGlkPSJwYXR0ZXJuIiB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiIHBhdHRlcm5UcmFuc2Zvcm09InJvdGF0ZSg0NSkiPjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjA1KSIvPjwvcGF0dGVybj48L2RlZnM+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNwYXR0ZXJuKSIvPjwvc3ZnPg==');"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <!-- Section Header -->
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Featured Attractions</h2>
+                <div class="w-24 h-1 bg-red-600 mx-auto mb-6"></div>
+                <p class="text-gray-300 max-w-2xl mx-auto text-lg">Experience our cutting-edge photo experiences that blend technology and creativity</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
+                <!-- First Card -->
+                <div class="group relative rounded-2xl overflow-hidden shadow-2xl transform transition-all duration-500 hover:-translate-y-2">
+                    <div class="relative h-96 md:h-[500px] overflow-hidden">
+                        <img src="../assets/images/trdshows/fc1.jpg" alt="AI SketchBot transforming a photo into a sketch" 
+                             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-6">
+                            <div class="transform translate-y-8 group-hover:translate-y-0 transition-transform duration-500">
+                                <p class="text-gray-300 mb-4">Make a bold first impression with our SketchBot booth, and watch as your photos come to life in a sketch right in front of you. This is a great way to add an interactive experience, wow your audience, and provide a keepsake like no other.</p>
+                                <button class="bg-red-700 hover:bg-red-600 text-white px-6 py-2 rounded-full font-medium transition-colors duration-300">
+                                    Learn More
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="absolute top-6 right-6">
+                        <span class="bg-red-700 text-white px-5 py-2 rounded-full text-sm font-bold shadow-lg transform transition-all duration-300 group-hover:scale-110 inline-flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 4v16M17 4v16M3 8h4m10 0h4M3 12h18M3 16h4m10 0h4M4 20h16a1 1 0 001-1V5a1 1 0 00-1-1H4a1 1 0 00-1 1v14a1 1 0 001 1z" />
+                            </svg>
+                            SKETCHBOT
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Second Card -->
+                <div class="group relative rounded-2xl overflow-hidden shadow-2xl transform transition-all duration-500 hover:-translate-y-2">
+                    <div class="relative h-96 md:h-[500px] overflow-hidden">
+                        <img src="../assets/images/trdshows/fc2.jpg" alt="Edible image printer creating custom cookies" 
+                             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-6">
+                            <div class="transform translate-y-8 group-hover:translate-y-0 transition-transform duration-500">
+                                <p class="text-gray-300 mb-4">Sweeten your brand activations with our cookie printer that creates edible images directly on delicious cookies. Whether it’s faces, logos, or custom designs, these tasty treats offer a unique and shareable way to connect with your audience.</p>
+                                <button class="bg-red-700 hover:bg-red-600 text-white px-6 py-2 rounded-full font-medium transition-colors duration-300">
+                                    Learn More
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="absolute top-6 right-6">
+                        <span class="bg-red-700 text-white px-5 py-2 rounded-full text-sm font-bold shadow-lg transform transition-all duration-300 group-hover:scale-110 inline-flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 15.546c-.523 0-1.046.151-1.5.454a2.704 2.704 0 01-3 0 2.704 2.704 0 00-3 0 2.704 2.704 0 01-3 0 2.704 2.704 0 00-3 0 2.701 2.701 0 00-1.5-.454M9 6v2m3-2v2m3-2v2M9 3h.01M12 3h.01M15 3h.01M21 21v-7a2 2 0 00-2-2H5a2 2 0 00-2 2v7h18zm-3-9v-2a2 2 0 00-2-2H8a2 2 0 00-2 2v2h12z" />
+                            </svg>
+                            COOKIE PRINTER
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Brochure Modal -->
+    <div id="brochureModal" class="brochure-modal" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+        <div class="brochure-modal-content">
+            <!-- Close button -->
+            <button onclick="closeBrochureModal()" class="brochure-close-button" aria-label="Close brochure">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+
+            <!-- Loading Spinner -->
+            <div id="brochureLoader" class="fixed inset-0 flex items-center justify-center z-[10000]" style="background-color: rgba(0, 0, 0, 0.6);">
+                <div class="text-center">
+                    <div class="inline-block relative w-16 h-16">
+                        <div class="absolute inset-0 rounded-full border-4" style="border-color: rgba(255, 255, 255, 0.3);"></div>
+                        <div class="absolute inset-0 rounded-full border-4 border-transparent animate-spin" style="border-top-color: white;"></div>
+                    </div>
+                    <p class="mt-4 text-white text-lg font-medium">Loading Brochure...</p>
+                </div>
+            </div>
+
+            <!-- Brochure iframe container -->
+            <iframe id="brochureIframe" class="brochure-iframe" allowfullscreen loading="eager" sandbox="allow-scripts allow-same-origin"></iframe>
+        </div>
+    </div>
+
+    <script src="../assets/components/navigation.js"></script>
+    <script src="../assets/components/footer.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Navigation and other initialization code can go here
+        });
+
+        // Brochure Modal Functions
+        function openBrochureModal() {
+            const modal = document.getElementById('brochureModal');
+            const iframe = document.getElementById('brochureIframe');
+            const loader = document.getElementById('brochureLoader');
+            
+            // Show modal and loader immediately
+            modal.classList.add('show');
+            if (loader) loader.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+            
+            // Add a timestamp to prevent caching issues
+            const timestamp = new Date().getTime();
+            iframe.src = '../flipbook/examples/trdshow.html?t=' + timestamp;
+            
+            // Force focus to the iframe for better keyboard navigation
+            setTimeout(() => iframe.focus(), 100);
+        }
+        
+        function closeBrochureModal() {
+            const modal = document.getElementById('brochureModal');
+            const iframe = document.getElementById('brochureIframe');
+            const loader = document.getElementById('brochureLoader');
+            
+            modal.classList.remove('show');
+            if (loader) loader.style.display = 'none';
+            document.body.style.overflow = '';
+            
+            // Clear iframe source to stop any animations/scripts
+            iframe.src = 'about:blank';
+        }
+        
+        // Listen for flipbook loaded message from iframe
+        window.addEventListener('message', function(event) {
+            if (event.data === 'flipbookLoaded') {
+                const loader = document.getElementById('brochureLoader');
+                if (loader) {
+                    loader.style.display = 'none';
+                }
+            }
+        });
+        
+        // Close modal on Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                const modal = document.getElementById('brochureModal');
+                if (modal.classList.contains('show')) {
+                    closeBrochureModal();
+                }
+            }
+        });
+
+        // Close modal when clicking outside the content
+        document.addEventListener('click', function(event) {
+            const modal = document.getElementById('brochureModal');
+            const modalContent = document.querySelector('.brochure-modal-content');
+            if (event.target === modal) {
+                closeBrochureModal();
+            }
+        });
+    </script>
+</body>
+</html>

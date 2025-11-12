@@ -1,0 +1,2310 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Photo Booth - MiHi Photo Booth</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        /* Apply dark theme only to main content, not navigation/footer */
+        main { 
+            background: #0a0a0f;
+            color: #ffffff; 
+        }
+        
+        /* Apply futuristic fonts only to main content headings */
+        main h1,
+        main h2,
+        main h3,
+        main h4,
+        main h5,
+        main h6 {
+            font-family: 'Orbitron', 'Playfair Display', serif;
+            font-weight: 800;
+            letter-spacing: 0.05em;
+        }
+
+        /* Minimal protection: only prevent transform from page-level hover effects */
+        header nav a:hover,
+        header nav button:hover {
+            transform: none !important;
+        }
+        
+        /* Ensure navigation buttons maintain their original blue styling */
+        header nav .btn-primary,
+        nav .btn-primary {
+            background-color: #0050ff !important;
+            background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%) !important;
+            color: white !important;
+        }
+        
+        header nav .btn-primary:hover,
+        nav .btn-primary:hover {
+            background-color: #0040d9 !important;
+            background: linear-gradient(135deg, #0040d9 0%, #0050ff 100%) !important;
+        }
+
+        .section-padding {
+            padding: 5rem 0;
+        }
+
+        @media (min-width: 768px) {
+            .section-padding {
+                padding: 8rem 0;
+            }
+        }
+
+        /* Sexy AI Animated gradient background */
+        @keyframes gradient-shift {
+            0%, 100% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+        }
+
+        .animated-gradient {
+            background: linear-gradient(-45deg, #00f0ff, #a855f7, #ec4899, #f59e0b, #00f0ff);
+            background-size: 400% 400%;
+            animation: gradient-shift 8s ease infinite;
+        }
+        
+        /* Neon Glow Effects */
+        @keyframes neon-pulse {
+            0%, 100% {
+                text-shadow: 
+                    0 0 10px #00f0ff,
+                    0 0 20px #00f0ff,
+                    0 0 30px #00f0ff,
+                    0 0 40px #a855f7,
+                    0 0 70px #a855f7,
+                    0 0 80px #a855f7;
+            }
+            50% {
+                text-shadow: 
+                    0 0 5px #00f0ff,
+                    0 0 10px #00f0ff,
+                    0 0 15px #00f0ff,
+                    0 0 20px #a855f7,
+                    0 0 35px #a855f7,
+                    0 0 40px #a855f7;
+            }
+        }
+        
+        .neon-text {
+            animation: neon-pulse 2s ease-in-out infinite;
+        }
+        
+        /* Holographic Effect */
+        @keyframes holographic {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+        
+        .holographic {
+            background: linear-gradient(
+                90deg,
+                #00f0ff 0%,
+                #a855f7 25%,
+                #ec4899 50%,
+                #f59e0b 75%,
+                #00f0ff 100%
+            );
+            background-size: 200% 100%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: holographic 3s linear infinite;
+        }
+        
+        /* Matrix Rain Effect */
+        @keyframes matrix-rain {
+            0% {
+                transform: translateY(-100%);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh);
+                opacity: 0;
+            }
+        }
+        
+        .matrix-char {
+            position: absolute;
+            color: #00ff41;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            animation: matrix-rain linear infinite;
+            text-shadow: 0 0 5px #00ff41;
+        }
+
+        /* Floating particles */
+        .particle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: float 20s infinite linear;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+            }
+
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+            }
+        }
+
+        .particle:nth-child(1) {
+            width: 80px;
+            height: 80px;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .particle:nth-child(2) {
+            width: 50px;
+            height: 50px;
+            left: 20%;
+            animation-delay: -2s;
+            animation-duration: 15s;
+        }
+
+        .particle:nth-child(3) {
+            width: 100px;
+            height: 100px;
+            left: 30%;
+            animation-delay: -4s;
+            animation-duration: 18s;
+        }
+
+        .particle:nth-child(4) {
+            width: 60px;
+            height: 60px;
+            left: 40%;
+            animation-delay: -1s;
+            animation-duration: 16s;
+        }
+
+        .particle:nth-child(5) {
+            width: 90px;
+            height: 90px;
+            left: 50%;
+            animation-delay: -3s;
+            animation-duration: 20s;
+        }
+
+        .particle:nth-child(6) {
+            width: 70px;
+            height: 70px;
+            left: 60%;
+            animation-delay: -2.5s;
+            animation-duration: 17s;
+        }
+
+        .particle:nth-child(7) {
+            width: 80px;
+            height: 80px;
+            left: 70%;
+            animation-delay: -5s;
+            animation-duration: 19s;
+        }
+
+        .particle:nth-child(8) {
+            width: 50px;
+            height: 50px;
+            left: 80%;
+            animation-delay: -3.5s;
+            animation-duration: 14s;
+        }
+
+        .particle:nth-child(9) {
+            width: 100px;
+            height: 100px;
+            left: 90%;
+            animation-delay: -1.5s;
+            animation-duration: 21s;
+        }
+
+        /* Sexy Glass morphism effect with neon borders */
+        .glass {
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 240, 255, 0.3);
+            box-shadow: 
+                0 8px 32px rgba(0, 240, 255, 0.2),
+                inset 0 0 20px rgba(168, 85, 247, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .glass:hover {
+            border-color: rgba(236, 72, 153, 0.6);
+            box-shadow: 
+                0 8px 32px rgba(236, 72, 153, 0.4),
+                inset 0 0 30px rgba(168, 85, 247, 0.2);
+            transform: translateY(-2px);
+        }
+
+        /* Floating animation for CTA */
+        @keyframes float-up {
+
+            0%,
+            100% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .float-animation {
+            animation: float-up 3s ease-in-out infinite;
+        }
+
+        /* Pulse effect for highlights */
+        @keyframes pulse-glow {
+
+            0%,
+            100% {
+                box-shadow: 0 0 20px rgba(0, 80, 255, 0.5);
+            }
+
+            50% {
+                box-shadow: 0 0 40px rgba(0, 80, 255, 0.8);
+            }
+        }
+
+        .pulse-glow {
+            animation: pulse-glow 2s ease-in-out infinite;
+        }
+
+        /* Hero image overlay */
+        .hero-overlay {
+            background: linear-gradient(135deg, rgba(0, 80, 255, 0.9), rgba(0, 64, 217, 0.9));
+        }
+
+        /* Scroll indicator */
+        @keyframes bounce {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(10px);
+            }
+        }
+
+        .scroll-indicator {
+            animation: bounce 2s infinite;
+        }
+        
+        /* AI Theme Animations */
+        @keyframes blob {
+            0% {
+                transform: translate(0px, 0px) scale(1);
+            }
+            33% {
+                transform: translate(30px, -50px) scale(1.1);
+            }
+            66% {
+                transform: translate(-20px, 20px) scale(0.9);
+            }
+            100% {
+                transform: translate(0px, 0px) scale(1);
+            }
+        }
+        
+        .animate-blob {
+            animation: blob 7s infinite;
+        }
+        
+        .animation-delay-2000 {
+            animation-delay: 2s;
+        }
+        
+        .animation-delay-4000 {
+            animation-delay: 4s;
+        }
+        
+        @keyframes gradient {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+        
+        .animate-gradient {
+            animation: gradient 3s ease infinite;
+            background-size: 200% auto;
+        }
+        
+        /* Masonry Grid Styles */
+        .masonry-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-auto-rows: 10px;
+            grid-auto-flow: dense;
+            gap: 1rem;
+        }
+        
+        @media (min-width: 768px) {
+            .masonry-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        
+        @media (min-width: 1024px) {
+            .masonry-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+        
+        .masonry-item {
+            grid-row-end: span 20;
+        }
+        
+        .masonry-item.row-span-2 {
+            grid-row-end: span 40;
+        }
+        
+        .masonry-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        
+        /* Grid with Hover Reveal Styles */
+        .hover-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+        
+        @media (min-width: 768px) {
+            .hover-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        
+        @media (min-width: 1024px) {
+            .hover-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+        
+        .grid-item {
+            position: relative;
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            aspect-ratio: 1/1;
+            transition: all 0.3s ease;
+        }
+        
+        .grid-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .grid-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: all 0.3s ease;
+        }
+        
+        .grid-item:hover img {
+            transform: scale(1.05);
+        }
+        
+        .overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent 60%);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 1.5rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .grid-item:hover .overlay {
+            opacity: 1;
+        }
+        
+        .caption {
+            color: white;
+            font-weight: 600;
+            font-size: 1rem;
+            margin-bottom: 0.25rem;
+        }
+        
+        .details {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.875rem;
+        }
+        
+        /* Grid with Enhanced Pop-out Hover Effects */
+        .hover-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+        
+        @media (min-width: 768px) {
+            .hover-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        
+        @media (min-width: 1024px) {
+            .hover-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+        
+        .grid-item {
+            position: relative;
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            aspect-ratio: 1/1;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 1;
+        }
+        
+        .grid-item:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 20px 30px rgba(0, 0, 0, 0.2);
+            z-index: 10;
+        }
+        
+        .grid-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        .grid-item:hover img {
+            transform: scale(1.1);
+        }
+        
+        .overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent 60%);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 1.5rem;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+        
+        .grid-item:hover .overlay {
+            opacity: 1;
+        }
+        
+        .caption {
+            color: white;
+            font-weight: 700;
+            font-size: 1.125rem;
+            margin-bottom: 0.25rem;
+            transform: translateY(10px);
+            transition: transform 0.3s ease 0.1s;
+        }
+        
+        .grid-item:hover .caption {
+            transform: translateY(0);
+        }
+        
+        .details {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.875rem;
+            transform: translateY(10px);
+            transition: transform 0.3s ease 0.15s;
+        }
+        
+        .grid-item:hover .details {
+            transform: translateY(0);
+        }
+
+        /* Scope button styles to main content only */
+        main .btn-primary {
+            background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%);
+            transition: all 0.3s ease;
+        }
+
+        main .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 80, 255, 0.4);
+        }
+        
+        /* Sexy AI Glow Button */
+        .ai-glow {
+            position: relative;
+            background: linear-gradient(135deg, #00f0ff 0%, #a855f7 50%, #ec4899 100%);
+            box-shadow: 
+                0 0 20px rgba(0, 240, 255, 0.5),
+                0 0 40px rgba(168, 85, 247, 0.3),
+                0 0 60px rgba(236, 72, 153, 0.2);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        .ai-glow::before {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            background: linear-gradient(135deg, #00f0ff, #a855f7, #ec4899, #f59e0b);
+            border-radius: inherit;
+            z-index: -1;
+            opacity: 0;
+            filter: blur(20px);
+            transition: opacity 0.4s ease;
+        }
+        
+        .ai-glow:hover {
+            transform: scale(1.05) translateY(-3px);
+            box-shadow: 
+                0 0 30px rgba(0, 240, 255, 0.8),
+                0 0 60px rgba(168, 85, 247, 0.5),
+                0 0 90px rgba(236, 72, 153, 0.3),
+                0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .ai-glow:hover::before {
+            opacity: 0.7;
+        }
+        
+        /* Data Stream Effect */
+        @keyframes data-stream {
+            0% {
+                transform: translateX(-100%) translateY(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateX(100vw) translateY(0);
+                opacity: 0;
+            }
+        }
+        
+        @keyframes scan {
+            0% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(600px);
+                opacity: 0;
+            }
+        }
+        
+        .data-stream {
+            position: absolute;
+            width: 2px;
+            height: 100px;
+            background: linear-gradient(to bottom, transparent, #00f0ff, transparent);
+            box-shadow: 0 0 10px #00f0ff;
+            animation: data-stream 8s linear infinite;
+        }
+    </style>
+</head>
+
+<body class="bg-white">
+
+    <!-- Navigation will be loaded here by navigation.js -->
+    <script src="../../assets/components/navigation.js"></script>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="relative h-screen flex items-center justify-center overflow-hidden text-white">
+            <!-- Animated Background -->
+            <div class="absolute inset-0 overflow-hidden">
+                <div id="zoom-bg" class="w-full h-full bg-cover bg-center transition-transform duration-1000 ease-out" style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(10, 10, 15, 0.6)), url('../../assets/images/aiphotohero.jpg'); transform: scale(1.2);"></div>
+                <!-- Animated Gradient Overlay -->
+                <div class="absolute inset-0 animated-gradient opacity-15"></div>
+                <!-- Data Streams -->
+                <div class="data-stream" style="left: 10%; animation-delay: 0s;"></div>
+                <div class="data-stream" style="left: 30%; animation-delay: 2s;"></div>
+                <div class="data-stream" style="left: 50%; animation-delay: 4s;"></div>
+                <div class="data-stream" style="left: 70%; animation-delay: 1s;"></div>
+                <div class="data-stream" style="left: 90%; animation-delay: 3s;"></div>
+            </div>
+
+            <div class="relative z-10 container mx-auto px-6 text-center">
+                <div class="max-w-5xl mx-auto">
+                    <!-- Badge -->
+                    <div class="flex justify-center mb-6">
+                        <div class="glass px-6 py-2 rounded-full text-sm font-semibold inline-block text-white neon-text">
+                            POWERED BY AI TECHNOLOGY
+                        </div>
+                    </div>
+
+                    <!-- Main Heading with Holographic Effect -->
+                    <div class="text-center mb-8">
+                        <h1 class="text-4xl md:text-7xl font-black tracking-tight mb-4 leading-tight">
+                            National <span class="holographic inline-block font-black">AI</span> Photo Booth Rentals
+                        </h1>
+                        <div class="w-32 h-1 bg-gradient-to-r from-transparent via-cyan-400 to-transparent mx-auto mt-4 rounded-full" style="box-shadow: 0 0 20px rgba(0, 240, 255, 0.8);"></div>
+                    </div>
+
+                    <!-- Subheading -->
+                    <p class="text-base md:text-xl font-normal mb-8 text-center opacity-90 max-w-5xl mx-auto leading-relaxed" style="text-shadow: 0 0 20px rgba(0, 240, 255, 0.3);">
+                        Revolutionize your brand activation with AI photo booth tech that instantly turns guests into stunning, shareable branded artwork.
+                    </p>
+
+                    <!-- AI-Powered CTA Buttons -->
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
+                        <a href="../../index.html#contact"
+                            class="ai-glow inline-block text-white px-10 py-5 rounded-full text-xl font-bold relative overflow-hidden group">
+                            <span class="relative z-10">Get Your Free Quote →</span>
+                        </a>
+                        <a href="../../index.html#contact"
+                            class="inline-block glass px-10 py-5 rounded-full text-xl font-semibold relative group">
+                            <span class="relative z-10 inline-flex items-center gap-3 text-white">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                                </svg>
+                                Book Us Now!
+                            </span>
+                        </a>
+                    </div>
+
+                    <!-- Scroll Indicator -->
+                    <div class="text-center scroll-indicator">
+                        <p class="text-sm opacity-75 mb-2" style="text-shadow: 0 0 10px rgba(0, 240, 255, 0.5);">Scroll to explore</p>
+                        <svg class="w-6 h-6 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="filter: drop-shadow(0 0 5px rgba(0, 240, 255, 0.8));">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                        </svg>
+                    </div>
+                </div>
+
+                <!-- Enhanced Decorative elements with neon glow -->
+                <div class="absolute top-20 left-10 w-32 h-32 bg-cyan-400 rounded-full blur-3xl opacity-30 animate-pulse" style="box-shadow: 0 0 60px rgba(0, 240, 255, 0.6);"></div>
+                <div class="absolute bottom-20 right-10 w-40 h-40 bg-purple-500 rounded-full blur-3xl opacity-30 animate-pulse" style="box-shadow: 0 0 80px rgba(168, 85, 247, 0.6); animation-delay: 1s;"></div>
+                <div class="absolute top-1/2 left-1/4 w-24 h-24 bg-pink-500 rounded-full blur-2xl opacity-20 animate-pulse" style="box-shadow: 0 0 50px rgba(236, 72, 153, 0.5); animation-delay: 2s;"></div>
+            </div>
+        </section>
+
+        <!-- Futuristic AI Neural Gallery -->
+        <section id="ai-photo-booth-rentals" class="relative min-h-screen bg-gradient-to-br from-black via-slate-950 to-black overflow-hidden">
+            <!-- Neural Network Background -->
+            <div class="absolute inset-0 opacity-20">
+                <svg class="absolute inset-0 w-full h-full" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <pattern id="neural-grid" x="0" y="0" width="60" height="60" patternUnits="userSpaceOnUse">
+                            <!-- Neural Nodes -->
+                            <circle cx="30" cy="30" r="2" fill="#00ffff" opacity="0.6">
+                                <animate attributeName="opacity" values="0.3;1;0.3" dur="3s" repeatCount="indefinite"/>
+                            </circle>
+                            <circle cx="15" cy="15" r="1.5" fill="#ff00ff" opacity="0.5">
+                                <animate attributeName="opacity" values="0.2;0.8;0.2" dur="2s" repeatCount="indefinite"/>
+                            </circle>
+                            <circle cx="45" cy="15" r="1.5" fill="#00ff88" opacity="0.5">
+                                <animate attributeName="opacity" values="0.4;0.9;0.4" dur="2.5s" repeatCount="indefinite"/>
+                            </circle>
+                            <circle cx="15" cy="45" r="1.5" fill="#ffff00" opacity="0.5">
+                                <animate attributeName="opacity" values="0.1;0.7;0.1" dur="1.8s" repeatCount="indefinite"/>
+                            </circle>
+                            <circle cx="45" cy="45" r="1.5" fill="#ff8800" opacity="0.5">
+                                <animate attributeName="opacity" values="0.5;1;0.5" dur="3.2s" repeatCount="indefinite"/>
+                            </circle>
+
+                            <!-- Neural Connections -->
+                            <path d="M30,30 L15,15" stroke="#00ffff" stroke-width="0.8" opacity="0.4">
+                                <animate attributeName="stroke-dasharray" values="0,50;15,35;30,20;45,5;50,0" dur="4s" repeatCount="indefinite"/>
+                            </path>
+                            <path d="M30,30 L45,15" stroke="#ff00ff" stroke-width="0.8" opacity="0.4">
+                                <animate attributeName="stroke-dasharray" values="0,50;12,38;25,25;38,12;50,0" dur="3.5s" repeatCount="indefinite"/>
+                            </path>
+                            <path d="M30,30 L15,45" stroke="#00ff88" stroke-width="0.8" opacity="0.4">
+                                <animate attributeName="stroke-dasharray" values="0,50;20,30;40,10;50,0" dur="5s" repeatCount="indefinite"/>
+                            </path>
+                            <path d="M30,30 L45,45" stroke="#ffff00" stroke-width="0.8" opacity="0.4">
+                                <animate attributeName="stroke-dasharray" values="0,50;10,40;20,30;30,20;40,10;50,0" dur="4.5s" repeatCount="indefinite"/>
+                            </path>
+                        </pattern>
+                    </defs>
+                    <rect width="100%" height="100%" fill="url(#neural-grid)"/>
+                </svg>
+            </div>
+            
+            <!-- Holographic Data Streams -->
+            <div class="absolute inset-0 overflow-hidden">
+                <!-- Binary Rain -->
+                <div class="absolute top-20 left-10 text-cyan-400 text-sm font-mono opacity-80 animate-bounce" style="animation-duration: 3s">01010101</div>
+                <div class="absolute top-40 right-20 text-purple-400 text-sm font-mono opacity-80 animate-bounce" style="animation-duration: 4s; animation-delay: 1s">11001100</div>
+                <div class="absolute bottom-32 left-1/4 text-pink-400 text-sm font-mono opacity-80 animate-bounce" style="animation-duration: 5s; animation-delay: 2s">10101010</div>
+
+                <!-- Data Particles -->
+                <div class="absolute top-1/4 left-1/5 w-2 h-2 bg-cyan-400 rounded-full animate-ping opacity-70" style="animation-duration: 2s"></div>
+                <div class="absolute top-3/4 right-1/4 w-3 h-3 border border-purple-400 rotate-45 animate-spin opacity-60" style="animation-duration: 6s"></div>
+                <div class="absolute bottom-1/4 left-3/4 w-1.5 h-1.5 bg-pink-400 rounded animate-pulse opacity-70" style="animation-duration: 3s"></div>
+            </div>
+
+            <!-- Cyberpunk Glow Effects -->
+            <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-cyan-500/8 rounded-full blur-3xl animate-pulse"></div>
+            <div class="absolute top-1/3 right-1/4 w-96 h-96 bg-purple-500/8 rounded-full blur-3xl animate-pulse" style="animation-delay: 2s"></div>
+            <div class="absolute bottom-1/4 left-1/3 w-96 h-96 bg-pink-500/8 rounded-full blur-3xl animate-pulse" style="animation-delay: 4s"></div>
+
+            <div class="container mx-auto px-6 relative z-10 min-h-screen flex items-center pt-8 md:pt-12">
+                <div class="max-w-7xl mx-auto w-full">
+
+                    <!-- Header Section -->
+                    <div class="text-center mb-16">
+                        <!-- AI Status Badge -->
+                        <div class="inline-flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-slate-900/90 via-blue-900/80 to-slate-900/90 backdrop-blur-md border border-cyan-400/40 rounded-full shadow-2xl shadow-cyan-500/30 mb-8">
+                            <div class="flex space-x-1">
+                                <div class="w-2 h-2 bg-cyan-400 rounded-full animate-pulse"></div>
+                                <div class="w-2 h-2 bg-purple-400 rounded-full animate-pulse" style="animation-delay: 0.2s"></div>
+                                <div class="w-2 h-2 bg-pink-400 rounded-full animate-pulse" style="animation-delay: 0.4s"></div>
+                            </div>
+                            <span class="text-cyan-300 text-sm font-mono font-bold">POWERED_BY_AI</span>
+                            <div class="flex space-x-1">
+                                <div class="w-2 h-2 bg-pink-400 rounded-full animate-pulse" style="animation-delay: 0.6s"></div>
+                                <div class="w-2 h-2 bg-purple-400 rounded-full animate-pulse" style="animation-delay: 0.8s"></div>
+                                <div class="w-2 h-2 bg-cyan-400 rounded-full animate-pulse" style="animation-delay: 1s"></div>
+                            </div>
+                        </div>
+
+                        <!-- Main Heading -->
+                        <h2 class="text-5xl md:text-7xl font-bold mb-6 font-mono">
+                            <span class="bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 bg-clip-text text-transparent">AI_PHOTO_BOOTH</span>
+                            <br>
+                            <span class="text-4xl md:text-5xl text-cyan-300">PHOTO_MATRIX</span>
+                        </h2>
+
+                        <!-- Neural Processing Description -->
+                        <p class="text-xl text-gray-300 leading-relaxed max-w-4xl mx-auto mb-8 font-mono">
+                            <span class="text-cyan-400">INITIATING:</span> Quantum-powered neural transformation protocols. Deep learning algorithms engage for hyper-realistic digital synthesis. <span class="text-purple-400">∞ AI Models</span> processing at <span class="text-pink-400">&lt;500ms</span> quantum speed.
+                        </p>
+                    </div>
+
+                    <!-- Futuristic Gallery Grid -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 mb-16">
+
+                        <!-- Primary Featured Image -->
+                        <div class="sm:col-span-2 md:col-span-3 lg:col-span-2 xl:col-span-3 lg:row-span-2 relative group" id="featuredVideoContainer">
+                            <div class="relative h-96 lg:h-full bg-gradient-to-br from-slate-900/80 via-blue-900/60 to-indigo-900/80 backdrop-blur-xl border border-cyan-400/40 rounded-3xl shadow-2xl shadow-cyan-500/30 overflow-hidden cursor-pointer" onclick="openVideoLightbox('../../assets/video/ai-photo-booth-1.mp4', 0)">
+                                <!-- Matrix Grid Overlay -->
+                                <div class="absolute inset-0 opacity-10 z-10">
+                                    <svg class="w-full h-full" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                                        <defs>
+                                            <pattern id="matrix-primary" x="0" y="0" width="10" height="10" patternUnits="userSpaceOnUse">
+                                                <rect width="10" height="10" fill="none" stroke="#00ffff" stroke-width="0.2" opacity="0.5"/>
+                                            </pattern>
+                                        </defs>
+                                        <rect width="100%" height="100%" fill="url(#matrix-primary)"/>
+                                    </svg>
+                                </div>
+
+                                <!-- Featured Video -->
+                                <video 
+                                    id="featuredVideo"
+                                    class="w-full h-full object-cover rounded-3xl transition-all duration-700 group-hover:scale-110" 
+                                    loop 
+                                    muted 
+                                    playsinline
+                                    preload="metadata"
+                                    poster="../../assets/video/ai-photo-booth-1.mp4?fit=crop&w=600&h=600&q=90">
+                                    <source src="../../assets/video/ai-photo-booth-1.mp4" type="video/mp4">
+                                    <!-- Fallback image if video doesn't load -->
+                                    <img src="../../assets/video/ai-photo-booth-1.mp4?fit=crop&w=600&h=600&q=90" class="w-full h-full object-cover rounded-3xl" alt="AI Neural Art" loading="lazy">
+                                </video>
+
+                                <!-- Play Icon Overlay -->
+                                <div id="playIconOverlay" class="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/10 transition-all duration-300 z-20">
+                                    <div class="w-16 h-16 bg-white/90 rounded-full flex items-center justify-center shadow-lg transform group-hover:scale-110 transition-transform">
+                                        <svg class="w-8 h-8 text-cyan-500 ml-1" fill="currentColor" viewBox="0 0 24 24">
+                                            <path d="M8 5v14l11-7z"/>
+                                        </svg>
+                                    </div>
+                                </div>
+
+                                <!-- Cyberpunk Border Frame -->
+                                <div class="absolute inset-0 rounded-3xl border-2 border-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 opacity-70 group-hover:opacity-100 transition-opacity z-10"></div>
+                                <div class="absolute inset-1 rounded-2xl border border-cyan-300/50 z-10"></div>
+                                <div class="absolute inset-2 rounded-xl border border-purple-300/40 z-10"></div>
+
+                                <!-- Neural Processing Indicator -->
+                                <div class="absolute top-4 left-4 flex space-x-1 z-30">
+                                    <div class="w-2 h-2 bg-cyan-400 rounded-full animate-ping"></div>
+                                    <div class="w-2 h-2 bg-purple-400 rounded-full animate-ping" style="animation-delay: 0.3s"></div>
+                                    <div class="w-2 h-2 bg-pink-400 rounded-full animate-ping" style="animation-delay: 0.6s"></div>
+                                </div>
+
+                                <!-- Status Display -->
+                                <div class="absolute top-4 right-4 bg-slate-900/90 backdrop-blur-sm border border-cyan-400/30 rounded-lg px-3 py-1 z-30">
+                                    <div class="text-cyan-300 text-xs font-mono">FEATURED VIDEO</div>
+                                </div>
+
+                                <!-- Processing Lines -->
+                                <div class="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-cyan-400 to-transparent animate-pulse opacity-80 z-10"></div>
+
+                                <!-- Corner Tech Accents -->
+                                <div class="absolute top-3 left-3 w-4 h-4 border-l-2 border-t-2 border-cyan-400 rounded-tl opacity-80 z-30"></div>
+                                <div class="absolute top-3 right-3 w-4 h-4 border-r-2 border-t-2 border-purple-400 rounded-tr opacity-80 z-30"></div>
+                                <div class="absolute bottom-3 left-3 w-4 h-4 border-l-2 border-b-2 border-pink-400 rounded-bl opacity-80 z-30"></div>
+                                <div class="absolute bottom-3 right-3 w-4 h-4 border-r-2 border-b-2 border-green-400 rounded-br opacity-80 z-30"></div>
+                            </div>
+                        </div>
+
+                        <!-- Secondary Images -->
+                        <div class="relative group">
+                            <div class="relative h-48 bg-gradient-to-br from-slate-900/80 via-blue-900/60 to-indigo-900/80 backdrop-blur-xl border border-purple-400/40 rounded-2xl shadow-xl shadow-purple-500/20 overflow-hidden cursor-pointer" onclick="openImageLightbox('../../assets/images/ai-photo-booth-2.webp', 1)">
+                                <img src="../../assets/images/ai-photo-booth-2.webp?fit=crop&w=300&h=300&q=90" class="w-full h-full object-cover object-top rounded-2xl transition-all duration-500 group-hover:scale-105" alt="AI Fantasy" loading="lazy">
+                                <div class="absolute inset-0 bg-gradient-to-t from-purple-500/20 to-transparent rounded-2xl"></div>
+                                <div class="absolute bottom-2 left-2 text-purple-300 text-xs font-mono">FANTASY</div>
+                            </div>
+                        </div>
+
+                        <div class="relative group">
+                            <div class="relative h-48 bg-gradient-to-br from-slate-900/80 via-blue-900/60 to-indigo-900/80 backdrop-blur-xl border border-pink-400/40 rounded-2xl shadow-xl shadow-pink-500/20 overflow-hidden cursor-pointer" onclick="openImageLightbox('../../assets/images/ai-photo-booth-3.webp', 2)">
+                                <img src="../../assets/images/ai-photo-booth-3.webp?fit=crop&w=300&h=300&q=90" class="w-full h-full object-cover object-top rounded-2xl transition-all duration-500 group-hover:scale-105" alt="Superheroes" loading="lazy">
+                                <div class="absolute inset-0 bg-gradient-to-t from-pink-500/20 to-transparent rounded-2xl"></div>
+                                <div class="absolute bottom-2 left-2 text-pink-300 text-xs font-mono">HEROES</div>
+                            </div>
+                        </div>
+
+                        <div class="relative group">
+                            <div class="relative h-48 bg-gradient-to-br from-slate-900/80 via-blue-900/60 to-indigo-900/80 backdrop-blur-xl border border-cyan-400/40 rounded-2xl shadow-xl shadow-cyan-500/20 overflow-hidden cursor-pointer" onclick="openImageLightbox('../../assets/images/ai-photo-booth-4.webp', 3)">
+                                <img src="../../assets/images/ai-photo-booth-4.webp?fit=crop&w=300&h=300&q=90" class="w-full h-full object-cover object-top rounded-2xl transition-all duration-500 group-hover:scale-105" alt="Art Filters" loading="lazy">
+                                <div class="absolute inset-0 bg-gradient-to-t from-cyan-500/20 to-transparent rounded-2xl"></div>
+                                <div class="absolute bottom-2 left-2 text-cyan-300 text-xs font-mono">FILTERS</div>
+                            </div>
+                        </div>
+
+                        <div class="relative group">
+                            <div class="relative h-48 bg-gradient-to-br from-slate-900/80 via-blue-900/60 to-indigo-900/80 backdrop-blur-xl border border-green-400/40 rounded-2xl shadow-xl shadow-green-500/20 overflow-hidden cursor-pointer" onclick="openImageLightbox('../../assets/images/ai-photo-booth-5.webp', 4)">
+                                <img src="../../assets/images/ai-photo-booth-5.webp?fit=crop&w=300&h=300&q=90" class="w-full h-full object-cover object-top rounded-2xl transition-all duration-500 group-hover:scale-105" alt="Vintage" loading="lazy">
+                                <div class="absolute inset-0 bg-gradient-to-t from-green-500/20 to-transparent rounded-2xl"></div>
+                                <div class="absolute bottom-2 left-2 text-green-300 text-xs font-mono">VINTAGE</div>
+                            </div>
+                        </div>
+
+                        <!-- Additional Gallery Images -->
+                        <div class="relative group">
+                            <div class="relative h-48 bg-gradient-to-br from-slate-900/80 via-blue-900/60 to-indigo-900/80 backdrop-blur-xl border border-yellow-400/40 rounded-2xl shadow-xl shadow-yellow-500/20 overflow-hidden cursor-pointer" onclick="openImageLightbox('../../assets/images/ai-photo-booth-6.webp', 5)">
+                                <img src="../../assets/images/ai-photo-booth-6.webp?fit=crop&w=300&h=300&q=90" class="w-full h-full object-cover object-top rounded-2xl transition-all duration-500 group-hover:scale-105" alt="Glamour" loading="lazy">
+                                <div class="absolute inset-0 bg-gradient-to-t from-yellow-500/20 to-transparent rounded-2xl"></div>
+                                <div class="absolute bottom-2 left-2 text-yellow-300 text-xs font-mono">GLAMOUR</div>
+                            </div>
+                        </div>
+
+                        <div class="relative group">
+                            <div class="relative h-48 bg-gradient-to-br from-slate-900/80 via-blue-900/60 to-indigo-900/80 backdrop-blur-xl border border-orange-400/40 rounded-2xl shadow-xl shadow-orange-500/20 overflow-hidden cursor-pointer" onclick="openImageLightbox('../../assets/images/ai-photo-booth-7.webp', 6)">
+                                <img src="../../assets/images/ai-photo-booth-7.webp?fit=crop&w=300&h=300&q=90" class="w-full h-full object-cover object-top rounded-2xl transition-all duration-500 group-hover:scale-105" alt="Heroes" loading="lazy">
+                                <div class="absolute inset-0 bg-gradient-to-t from-orange-500/20 to-transparent rounded-2xl"></div>
+                                <div class="absolute bottom-2 left-2 text-orange-300 text-xs font-mono">HEROES</div>
+                            </div>
+                        </div>
+
+                        <div class="relative group">
+                            <div class="relative h-48 bg-gradient-to-br from-slate-900/80 via-blue-900/60 to-indigo-900/80 backdrop-blur-xl border border-teal-400/40 rounded-2xl shadow-xl shadow-teal-500/20 overflow-hidden cursor-pointer" onclick="openImageLightbox('../../assets/images/ai-photo-booth-8.webp', 7)">
+                                <img src="../../assets/images/ai-photo-booth-8.webp?fit=crop&w=300&h=300&q=90" class="w-full h-full object-cover object-top rounded-2xl transition-all duration-500 group-hover:scale-105" alt="Group Sci-Fi" loading="lazy">
+                                <div class="absolute inset-0 bg-gradient-to-t from-teal-500/20 to-transparent rounded-2xl"></div>
+                                <div class="absolute bottom-2 left-2 text-teal-300 text-xs font-mono">SCI-FI</div>
+                            </div>
+                        </div>
+
+                        <div class="relative group">
+                            <div class="relative h-48 bg-gradient-to-br from-slate-900/80 via-blue-900/60 to-indigo-900/80 backdrop-blur-xl border border-indigo-400/40 rounded-2xl shadow-xl shadow-indigo-500/20 overflow-hidden cursor-pointer" onclick="openImageLightbox('../../assets/images/ai-photo-booth-9.webp', 8)">
+                                <img src="../../assets/images/ai-photo-booth-9.webp?fit=crop&w=300&h=300&q=90" class="w-full h-full object-cover object-top rounded-2xl transition-all duration-500 group-hover:scale-105" alt="Bold Colors" loading="lazy">
+                                <div class="absolute inset-0 bg-gradient-to-t from-indigo-500/20 to-transparent rounded-2xl"></div>
+                                <div class="absolute bottom-2 left-2 text-indigo-300 text-xs font-mono">BOLD</div>
+                            </div>
+                        </div>
+
+                        <div class="relative group">
+                            <div class="relative h-48 bg-gradient-to-br from-slate-900/80 via-blue-900/60 to-indigo-900/80 backdrop-blur-xl border border-red-400/40 rounded-2xl shadow-xl shadow-red-500/20 overflow-hidden cursor-pointer" onclick="openImageLightbox('../../assets/images/ai-photo-booth-10.webp', 9)">
+                                <img src="../../assets/images/ai-photo-booth-10.webp?fit=crop&w=300&h=300&q=90" class="w-full h-full object-cover object-top rounded-2xl transition-all duration-500 group-hover:scale-105" alt="Candid Laughter" loading="lazy">
+                                <div class="absolute inset-0 bg-gradient-to-t from-red-500/20 to-transparent rounded-2xl"></div>
+                                <div class="absolute bottom-2 left-2 text-red-300 text-xs font-mono">CANDID</div>
+                            </div>
+                        </div>
+
+                        <div class="relative group">
+                            <div class="relative h-48 bg-gradient-to-br from-slate-900/80 via-blue-900/60 to-indigo-900/80 backdrop-blur-xl border border-lime-400/40 rounded-2xl shadow-xl shadow-lime-500/20 overflow-hidden cursor-pointer" onclick="openImageLightbox('../../assets/images/ai-photo-booth-11.webp', 10)">
+                                <img src="../../assets/images/ai-photo-booth-11.webp?fit=crop&w=300&h=300&q=90" class="w-full h-full object-cover object-top rounded-2xl transition-all duration-500 group-hover:scale-105" alt="Vintage" loading="lazy">
+                                <div class="absolute inset-0 bg-gradient-to-t from-lime-500/20 to-transparent rounded-2xl"></div>
+                                <div class="absolute bottom-2 left-2 text-lime-300 text-xs font-mono">VINTAGE</div>
+                            </div>
+                        </div>
+
+                        <div class="relative group">
+                            <div class="relative h-48 bg-gradient-to-br from-slate-900/80 via-blue-900/60 to-indigo-900/80 backdrop-blur-xl border border-violet-400/40 rounded-2xl shadow-xl shadow-violet-500/20 overflow-hidden cursor-pointer" onclick="openImageLightbox('../../assets/images/ai-photo-booth-3.webp', 11)">
+                                <img src="../../assets/images/ai-photo-booth-3.webp?fit=crop&w=300&h=300&q=90" class="w-full h-full object-cover object-top rounded-2xl transition-all duration-500 group-hover:scale-105" alt="Close-Ups" loading="lazy">
+                                <div class="absolute inset-0 bg-gradient-to-t from-violet-500/20 to-transparent rounded-2xl"></div>
+                                <div class="absolute bottom-2 left-2 text-violet-300 text-xs font-mono">CLOSE-UP</div>
+                            </div>
+                        </div>
+
+                        <div class="relative group">
+                            <div class="relative h-48 bg-gradient-to-br from-slate-900/80 via-blue-900/60 to-indigo-900/80 backdrop-blur-xl border border-rose-400/40 rounded-2xl shadow-xl shadow-rose-500/20 overflow-hidden cursor-pointer" onclick="openImageLightbox('../../assets/images/ai-photo-booth-9.webp', 12)">
+                                <img src="../../assets/images/ai-photo-booth-9.webp?fit=crop&w=300&h=300&q=90" class="w-full h-full object-cover object-top rounded-2xl transition-all duration-500 group-hover:scale-105" alt="Mosaic" loading="lazy">
+                                <div class="absolute inset-0 bg-gradient-to-t from-rose-500/20 to-transparent rounded-2xl"></div>
+                                <div class="absolute bottom-2 left-2 text-rose-300 text-xs font-mono">MOSAIC</div>
+                            </div>
+                        </div>
+
+                        <!-- Stats Panel -->
+                        <div class="sm:col-span-2 md:col-span-3 lg:col-span-2 xl:col-span-2 relative">
+                            <div class="bg-gradient-to-br from-slate-900/90 via-blue-900/70 to-indigo-900/90 backdrop-blur-xl border border-cyan-400/40 rounded-2xl p-6 shadow-2xl shadow-cyan-500/20 h-full">
+                                <!-- Neural Stats Header -->
+                                <div class="flex items-center justify-center gap-3 mb-6">
+                                    <div class="w-3 h-3 bg-green-400 rounded-full animate-pulse shadow-lg shadow-green-400/50"></div>
+                                    <span class="text-cyan-300 font-mono text-sm">SYSTEM_METRICS</span>
+                                    <div class="flex-1 h-px bg-gradient-to-r from-cyan-400/50 to-transparent"></div>
+                                </div>
+
+                                <!-- Stats Grid -->
+                                <div class="grid grid-cols-2 gap-4">
+                            <div class="text-center">
+                                        <div class="text-3xl font-bold bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent font-mono mb-1">∞</div>
+                                        <div class="text-xs text-gray-400 font-mono">AI_STYLES</div>
+                                        <div class="text-xs text-cyan-300 font-mono">CONTINUOUS</div>
+                            </div>
+                            <div class="text-center">
+                                        <div class="text-3xl font-bold bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent font-mono mb-1">99.9%</div>
+                                        <div class="text-xs text-gray-400 font-mono">ACCURACY</div>
+                                        <div class="text-xs text-purple-300 font-mono">VISION</div>
+                            </div>
+                                    <div class="text-center">
+                                        <div class="text-3xl font-bold bg-gradient-to-r from-pink-500 to-cyan-500 bg-clip-text text-transparent font-mono mb-1">&lt;500ms</div>
+                                        <div class="text-xs text-gray-400 font-mono">PROCESSING</div>
+                                        <div class="text-xs text-pink-300 font-mono">QUANTUM</div>
+                        </div>
+                                    <div class="text-center">
+                                        <div class="text-3xl font-bold bg-gradient-to-r from-green-500 to-cyan-500 bg-clip-text text-transparent font-mono mb-1">4K</div>
+                                        <div class="text-xs text-gray-400 font-mono">RESOLUTION</div>
+                                        <div class="text-xs text-green-300 font-mono">ULTRA_HD</div>
+                            </div>
+                                </div>
+
+                                <!-- Neural Processing Indicator -->
+                                <div class="mt-6 flex justify-center">
+                                    <div class="flex space-x-2">
+                                        <div class="w-2 h-2 bg-cyan-400 rounded-full animate-ping" style="animation-duration: 1s"></div>
+                                        <div class="w-2 h-2 bg-purple-400 rounded-full animate-ping" style="animation-duration: 1.3s; animation-delay: 0.2s"></div>
+                                        <div class="w-2 h-2 bg-pink-400 rounded-full animate-ping" style="animation-duration: 1.6s; animation-delay: 0.4s"></div>
+                                        <div class="w-2 h-2 bg-green-400 rounded-full animate-ping" style="animation-duration: 1.9s; animation-delay: 0.6s"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CTA Section -->
+                    <div class="text-center">
+                        <div class="bg-gradient-to-r from-slate-900/90 via-blue-900/70 to-slate-900/90 backdrop-blur-xl border border-cyan-400/40 rounded-2xl p-8 shadow-2xl shadow-cyan-500/20 inline-block">
+                            <h3 class="text-2xl font-bold bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 bg-clip-text text-transparent font-mono mb-4">INITIATE_AI_TRANSFORMATION</h3>
+                            <p class="text-gray-300 mb-6 font-mono text-sm">Deploy quantum AI processing for your event. Unlimited transformations, instant results.</p>
+                            <button class="bg-gradient-to-r from-cyan-500 via-purple-500 to-pink-500 text-white px-8 py-4 rounded-full font-bold font-mono hover:shadow-lg hover:shadow-cyan-500/50 transition-all duration-300 transform hover:scale-105 relative overflow-hidden">
+                                <span class="relative z-10">BOOK_NOW →</span>
+                                <div class="absolute inset-0 bg-gradient-to-r from-cyan-400/20 via-purple-400/20 to-pink-400/20 animate-pulse"></div>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- What is an AI Photo Booth? Section -->
+        <section class="section-padding bg-gradient-to-br from-[#e6f0ff] via-white to-[#e6f0ff] relative overflow-hidden">
+            <!-- Decorative elements -->
+            <div class="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-[#4d9fff]/10 to-[#4d9fff]/10 rounded-full filter blur-3xl"></div>
+            <div class="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-br from-[#4d9fff]/10 to-pink-400/10 rounded-full filter blur-3xl"></div>
+            
+            <div class="container mx-auto px-6 relative z-10">
+                <div class="max-w-7xl mx-auto">
+                    <div class="grid lg:grid-cols-2 gap-12 items-center">
+                        <!-- Left Content -->
+                        <div class="space-y-8">
+                            <div>
+                                <div class="inline-flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-slate-900/90 via-blue-900/80 to-slate-900/90 backdrop-blur-md border border-cyan-400/40 rounded-full shadow-2xl shadow-cyan-500/30 mb-6">
+                                    <div class="flex space-x-1">
+                                        <div class="w-2 h-2 bg-cyan-400 rounded-full animate-pulse"></div>
+                                        <div class="w-2 h-2 bg-purple-400 rounded-full animate-pulse" style="animation-delay: 0.2s"></div>
+                                        <div class="w-2 h-2 bg-pink-400 rounded-full animate-pulse" style="animation-delay: 0.4s"></div>
+                                    </div>
+                                    <span class="text-cyan-300 text-sm font-mono font-bold">TECHNOLOGY_OVERVIEW</span>
+                                    <div class="flex space-x-1">
+                                        <div class="w-2 h-2 bg-pink-400 rounded-full animate-pulse" style="animation-delay: 0.6s"></div>
+                                        <div class="w-2 h-2 bg-purple-400 rounded-full animate-pulse" style="animation-delay: 0.8s"></div>
+                                        <div class="w-2 h-2 bg-cyan-400 rounded-full animate-pulse" style="animation-delay: 1s"></div>
+                                    </div>
+                                </div>
+                                <h2 class="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-[#0040d9] via-[#0040d9] to-pink-900 bg-clip-text text-transparent leading-tight">What is an AI Photo Booth?</h2>
+                                <p class="text-xl text-gray-700 leading-relaxed">When artificial intelligence meets creative direction. Every photo becomes an artistic masterpiece, every guest becomes a storytelling opportunity, and every activation becomes an endless stream of shareable content.</p>
+                            </div>
+
+                            <!-- Features Grid -->
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <div class="group bg-white/80 backdrop-blur-sm rounded-xl p-4 shadow-md hover:shadow-xl transition-all duration-300 border border-[#ccddff] hover:border-[#80b3ff] hover:-translate-y-1">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-10 h-10 bg-gradient-to-br from-[#e6f0ff] to-[#0050ff] rounded-lg flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+                                            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                                            </svg>
+                                        </div>
+                                        <span class="font-semibold text-gray-900">Real-Time Transformation</span>
+                                    </div>
+                                </div>
+
+                                <div class="group bg-white/80 backdrop-blur-sm rounded-xl p-4 shadow-md hover:shadow-xl transition-all duration-300 border border-[#ccddff] hover:border-[#80b3ff] hover:-translate-y-1">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-10 h-10 bg-gradient-to-br from-[#e6f0ff] to-[#0050ff] rounded-lg flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+                                            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"/>
+                                            </svg>
+                                        </div>
+                                        <span class="font-semibold text-gray-900">Custom Art Styles</span>
+                                    </div>
+                                </div>
+
+                                <div class="group bg-white/80 backdrop-blur-sm rounded-xl p-4 shadow-md hover:shadow-xl transition-all duration-300 border border-pink-100 hover:border-pink-300 hover:-translate-y-1">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-10 h-10 bg-gradient-to-br from-pink-500 to-pink-600 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+                                            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"/>
+                                            </svg>
+                                        </div>
+                                        <span class="font-semibold text-gray-900">Instant Social Delivery</span>
+                                    </div>
+                                </div>
+
+                                <div class="group bg-white/80 backdrop-blur-sm rounded-xl p-4 shadow-md hover:shadow-xl transition-all duration-300 border border-[#ccddff] hover:border-[#80b3ff] hover:-translate-y-1">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-10 h-10 bg-gradient-to-br from-[#e6f0ff] to-[#0050ff] rounded-lg flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+                                            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                                            </svg>
+                                        </div>
+                                        <span class="font-semibold text-gray-900">Multiple Style Variations</span>
+                                    </div>
+                                </div>
+
+                                <div class="group bg-white/80 backdrop-blur-sm rounded-xl p-4 shadow-md hover:shadow-xl transition-all duration-300 border border-teal-100 hover:border-teal-300 hover:-translate-y-1">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-10 h-10 bg-gradient-to-br from-teal-500 to-teal-600 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+                                            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                                            </svg>
+                                        </div>
+                                        <span class="font-semibold text-gray-900">AI Quality Enhancement</span>
+                                    </div>
+                                </div>
+
+                                <div class="group bg-white/80 backdrop-blur-sm rounded-xl p-4 shadow-md hover:shadow-xl transition-all duration-300 border border-amber-100 hover:border-amber-300 hover:-translate-y-1">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-10 h-10 bg-gradient-to-br from-amber-500 to-amber-600 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+                                            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/>
+                                            </svg>
+                                        </div>
+                                        <span class="font-semibold text-gray-900">Touch Screen Interface</span>
+                                    </div>
+                                </div>
+
+                                <div class="group bg-white/80 backdrop-blur-sm rounded-xl p-4 shadow-md hover:shadow-xl transition-all duration-300 border border-green-100 hover:border-green-300 hover:-translate-y-1">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-10 h-10 bg-gradient-to-br from-green-500 to-green-600 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+                                            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                                            </svg>
+                                        </div>
+                                        <span class="font-semibold text-gray-900">Live Preview</span>
+                                    </div>
+                                </div>
+
+                                <div class="group bg-white/80 backdrop-blur-sm rounded-xl p-4 shadow-md hover:shadow-xl transition-all duration-300 border border-rose-100 hover:border-rose-300 hover:-translate-y-1">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-10 h-10 bg-gradient-to-br from-rose-500 to-rose-600 rounded-lg flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+                                            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                                            </svg>
+                                        </div>
+                                        <span class="font-semibold text-gray-900">High-Resolution Output</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Right Image -->
+                        <div class="relative">
+                            <div class="relative rounded-3xl overflow-hidden shadow-2xl group">
+                                <img src="https://static.wixstatic.com/media/ae0dbb_21054cf520d845b895f1a31d55d5eedc~mv2.jpg?fit=crop&w=700&q=80" alt="AI Photo Booth Demo" class="w-full h-[600px] object-cover transform group-hover:scale-105 transition-transform duration-700" loading="lazy">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Branded AI Photo Marketing Experiences -->
+        <section class="section-padding bg-white relative overflow-hidden">
+            <!-- Decorative Pattern -->
+            <div class="absolute inset-0 opacity-5">
+                <div class="absolute top-0 left-0 w-full h-full" style="background-image: radial-gradient(circle at 1px 1px, rgb(168, 85, 247) 1px, transparent 0); background-size: 40px 40px;"></div>
+            </div>
+            
+            <div class="container mx-auto px-6 relative z-10">
+                <div class="max-w-7xl mx-auto">
+                    <div class="grid lg:grid-cols-2 gap-12 items-center">
+                        <!-- Left Image -->
+                        <div class="order-2 lg:order-1 relative">
+                            <div class="relative rounded-3xl overflow-hidden shadow-2xl group">
+                                <img src="https://static.wixstatic.com/media/a92b01_1db561c33acf4facb8de7798f363c8fa~mv2.jpg/v1/fill/w_1440,h_900,fp_0.50_0.50,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/AI%20Photo%20Booth%20Page%20Graphic.jpgfit=crop&w=700&q=80" alt="AI Marketing Experience" class="w-full h-[600px] object-cover transform group-hover:scale-105 transition-transform duration-700" loading="lazy">
+                            </div>
+                        </div>
+
+                        <!-- Right Content -->
+                        <div class="order-1 lg:order-2 space-y-8">
+                            <div>
+                                <div class="inline-flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-slate-900/90 via-blue-900/80 to-slate-900/90 backdrop-blur-md border border-cyan-400/40 rounded-full shadow-2xl shadow-cyan-500/30 mb-6">
+                                    <div class="flex space-x-1">
+                                        <div class="w-2 h-2 bg-cyan-400 rounded-full animate-pulse"></div>
+                                        <div class="w-2 h-2 bg-purple-400 rounded-full animate-pulse" style="animation-delay: 0.2s"></div>
+                                        <div class="w-2 h-2 bg-pink-400 rounded-full animate-pulse" style="animation-delay: 0.4s"></div>
+                                    </div>
+                                    <span class="text-cyan-300 text-sm font-mono font-bold">BRAND_ACTIVATION</span>
+                                    <div class="flex space-x-1">
+                                        <div class="w-2 h-2 bg-pink-400 rounded-full animate-pulse" style="animation-delay: 0.6s"></div>
+                                        <div class="w-2 h-2 bg-purple-400 rounded-full animate-pulse" style="animation-delay: 0.8s"></div>
+                                        <div class="w-2 h-2 bg-cyan-400 rounded-full animate-pulse" style="animation-delay: 1s"></div>
+                                    </div>
+                                </div>
+                                <h2 class="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-[#0040d9] via-pink-900 to-rose-900 bg-clip-text text-transparent leading-tight">Branded AI Photo Marketing Experiences</h2>
+                                <p class="text-xl text-gray-700 leading-relaxed mb-8">Transformation is the new currency of engagement. Our AI-powered photo experiences turn guests into custom avatars, digital art, or branded characters, making your brand part of their story. Every photo is a shareable masterpiece, spreading your message across social media with every post.</p>
+                            </div>
+
+                            <!-- Customization Options -->
+                            <div class="bg-gradient-to-br from-[#050816] via-[#0e1530] to-[#050816] rounded-3xl p-10 border border-cyan-500/40 shadow-[0_25px_60px_-12px_rgba(56,189,248,0.45)] relative overflow-hidden">
+                                <div class="absolute inset-0 opacity-35 pointer-events-none">
+                                    <div class="absolute -top-16 -left-20 w-64 h-64 bg-cyan-500/30 rounded-full blur-3xl"></div>
+                                    <div class="absolute -bottom-12 right-0 w-72 h-72 bg-purple-600/20 rounded-full blur-3xl"></div>
+                                    <div class="absolute inset-0" style="background-image: linear-gradient(rgba(56,189,248,0.12) 1px, transparent 1px), linear-gradient(90deg, rgba(168,85,247,0.12) 1px, transparent 1px); background-size: 50px 50px;"></div>
+                                </div>
+
+                                <div class="relative z-10">
+                                    <h3 class="text-3xl font-black mb-8 tracking-wider bg-gradient-to-r from-cyan-200 via-blue-200 to-purple-200 bg-clip-text text-transparent flex items-center gap-4">
+                                        <span class="flex items-center justify-center w-12 h-12 rounded-2xl bg-white/15 backdrop-blur-sm border border-cyan-300/40 shadow-[0_0_25px_rgba(56,189,248,0.45)]">
+                                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z"/></svg>
+                                        </span>
+                                    Customize Your Experience
+                                </h3>
+
+                                    <div class="grid md:grid-cols-2 gap-4">
+                                        <div class="group flex items-center gap-4 bg-white/5 border border-cyan-400/30 rounded-2xl p-4 shadow-[0_15px_30px_-15px_rgba(56,189,248,0.5)] hover:shadow-[0_25px_45px_-15px_rgba(56,189,248,0.6)] transition-all backdrop-blur-sm">
+                                            <div class="flex items-center justify-center w-3 h-3 rounded-full bg-gradient-to-r from-cyan-400 to-blue-500 shadow-[0_0_12px_rgba(56,189,248,0.8)]"></div>
+                                            <span class="text-slate-100 text-sm font-medium">Custom AI Filters & Styles</span>
+                                    </div>
+                                        <div class="group flex items-center gap-4 bg-white/5 border border-pink-400/30 rounded-2xl p-4 shadow-[0_15px_30px_-15px_rgba(236,72,153,0.45)] hover:shadow-[0_25px_45px_-15px_rgba(236,72,153,0.55)] transition-all backdrop-blur-sm">
+                                            <div class="flex items-center justify-center w-3 h-3 rounded-full bg-gradient-to-r from-pink-400 to-purple-500 shadow-[0_0_12px_rgba(236,72,153,0.8)]"></div>
+                                            <span class="text-slate-100 text-sm font-medium">Branded Photo Overlays</span>
+                                    </div>
+                                        <div class="group flex items-center gap-4 bg-white/5 border border-rose-400/30 rounded-2xl p-4 shadow-[0_15px_30px_-15px_rgba(244,63,94,0.45)] hover:shadow-[0_25px_45px_-15px_rgba(244,63,94,0.55)] transition-all backdrop-blur-sm">
+                                            <div class="flex items-center justify-center w-3 h-3 rounded-full bg-gradient-to-r from-rose-400 to-amber-500 shadow-[0_0_12px_rgba(244,63,94,0.75)]"></div>
+                                            <span class="text-slate-100 text-sm font-medium">Interactive Microsites</span>
+                                    </div>
+                                        <div class="group flex items-center gap-4 bg-white/5 border border-fuchsia-400/30 rounded-2xl p-4 shadow-[0_15px_30px_-15px_rgba(217,70,239,0.45)] hover:shadow-[0_25px_45px_-15px_rgba(217,70,239,0.55)] transition-all backdrop-blur-sm">
+                                            <div class="flex items-center justify-center w-3 h-3 rounded-full bg-gradient-to-r from-fuchsia-400 to-cyan-400 shadow-[0_0_12px_rgba(217,70,239,0.75)]"></div>
+                                            <span class="text-slate-100 text-sm font-medium">Custom Backgrounds</span>
+                                    </div>
+                                        <div class="group flex items-center gap-4 bg-white/5 border border-violet-400/30 rounded-2xl p-4 shadow-[0_15px_30px_-15px_rgba(139,92,246,0.45)] hover:shadow-[0_25px_45px_-15px_rgba(139,92,246,0.55)] transition-all backdrop-blur-sm">
+                                            <div class="flex items-center justify-center w-3 h-3 rounded-full bg-gradient-to-r from-violet-400 to-emerald-400 shadow-[0_0_12px_rgba(139,92,246,0.75)]"></div>
+                                            <span class="text-slate-100 text-sm font-medium">Personalized Galleries</span>
+                                    </div>
+                                        <div class="group flex items-center gap-4 bg-white/5 border border-cyan-400/30 rounded-2xl p-4 shadow-[0_15px_30px_-15px_rgba(56,189,248,0.5)] hover:shadow-[0_25px_45px_-15px_rgba(56,189,248,0.6)] transition-all backdrop-blur-sm">
+                                            <div class="flex items-center justify-center w-3 h-3 rounded-full bg-gradient-to-r from-cyan-400 to-blue-500 shadow-[0_0_12px_rgba(56,189,248,0.8)]"></div>
+                                            <span class="text-slate-100 text-sm font-medium">Animated AI Effects</span>
+                                    </div>
+                                        <div class="group flex items-center gap-4 bg-white/5 border border-cyan-400/30 rounded-2xl p-4 shadow-[0_15px_30px_-15px_rgba(56,189,248,0.5)] hover:shadow-[0_25px_45px_-15px_rgba(56,189,248,0.6)] transition-all backdrop-blur-sm">
+                                            <div class="flex items-center justify-center w-3 h-3 rounded-full bg-gradient-to-r from-cyan-400 to-purple-500 shadow-[0_0_12px_rgba(56,189,248,0.8)]"></div>
+                                            <span class="text-slate-100 text-sm font-medium">Event-Specific Frames</span>
+                                    </div>
+                                        <div class="group flex items-center gap-4 bg-white/5 border border-pink-400/30 rounded-2xl p-4 shadow-[0_15px_30px_-15px_rgba(236,72,153,0.5)] hover:shadow-[0_25px_45px_-15px_rgba(236,72,153,0.6)] transition-all backdrop-blur-sm">
+                                            <div class="flex items-center justify-center w-3 h-3 rounded-full bg-gradient-to-r from-pink-400 to-lime-400 shadow-[0_0_12px_rgba(236,72,153,0.8)]"></div>
+                                            <span class="text-slate-100 text-sm font-medium">Branded Email Templates</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- AI Booth Packages -->
+        <section class="section-padding relative overflow-hidden bg-gradient-to-b from-[#050816] via-[#0e1530] to-[#050816] text-white">
+            <div class="absolute inset-0 opacity-40 pointer-events-none">
+                <div class="absolute -top-32 -left-24 w-72 h-72 bg-cyan-500/30 rounded-full blur-3xl"></div>
+                <div class="absolute top-1/2 right-0 w-96 h-96 bg-purple-600/20 rounded-full blur-3xl"></div>
+                <div class="absolute bottom-[-6rem] left-1/3 w-80 h-80 bg-pink-500/20 rounded-full blur-3xl"></div>
+            </div>
+
+            <div class="relative container mx-auto px-6">
+                <div class="max-w-7xl mx-auto">
+                    <div class="text-center mb-20">
+                        <div class="inline-flex items-center gap-3 px-6 py-3 bg-white/10 backdrop-blur-lg border border-cyan-400/40 rounded-full shadow-[0_0_30px_rgba(56,189,248,0.35)] mb-6">
+                            <div class="flex space-x-1">
+                                <div class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></div>
+                                <div class="w-2 h-2 rounded-full bg-purple-400 animate-pulse" style="animation-delay: 0.2s"></div>
+                                <div class="w-2 h-2 rounded-full bg-pink-400 animate-pulse" style="animation-delay: 0.4s"></div>
+                            </div>
+                            <span class="text-cyan-200 text-sm font-mono font-bold tracking-widest">PRICING_PACKAGES</span>
+                            <div class="flex space-x-1">
+                                <div class="w-2 h-2 rounded-full bg-pink-400 animate-pulse" style="animation-delay: 0.6s"></div>
+                                <div class="w-2 h-2 rounded-full bg-purple-400 animate-pulse" style="animation-delay: 0.8s"></div>
+                                <div class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" style="animation-delay: 1s"></div>
+                            </div>
+                        </div>
+                        <h2 class="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-cyan-200 via-purple-300 to-pink-300 bg-clip-text text-transparent">AI Booth Packages</h2>
+                        <p class="text-xl text-slate-200/80 max-w-2xl mx-auto">Choose the perfect package for your event and create unforgettable memories infused with next-gen AI visuals.</p>
+                    </div>
+
+                    <div class="grid lg:grid-cols-3 gap-8 lg:gap-6">
+                        <!-- BASIC PACKAGE -->
+                        <div class="group bg-gradient-to-br from-slate-900/80 via-slate-900/60 to-slate-900/80 rounded-3xl shadow-[0_25px_50px_-12px_rgba(14,116,144,0.45)] overflow-hidden border border-cyan-400/30 hover:border-cyan-300/60 transition-all duration-500 hover:-translate-y-2">
+                            <div class="relative bg-gradient-to-br from-cyan-500/40 via-blue-600/50 to-purple-600/50 p-8 text-center overflow-hidden">
+                                <div class="absolute top-0 right-0 w-40 h-40 bg-white/10 rounded-full -mr-20 -mt-20"></div>
+                                <div class="absolute bottom-0 left-0 w-32 h-32 bg-cyan-300/10 rounded-full -ml-16 -mb-16"></div>
+                                <div class="relative z-10">
+                                    <div class="inline-flex items-center justify-center w-16 h-16 bg-white/15 rounded-2xl mb-4 backdrop-blur-sm shadow-[0_0_30px_rgba(56,189,248,0.45)]">
+                                        <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20"><path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z"/></svg>
+                                    </div>
+                                    <h3 class="text-3xl font-bold mb-2">BASIC</h3>
+                                    <p class="text-cyan-100/80 text-sm tracking-wider">Launch-ready starter</p>
+                                </div>
+                            </div>
+                            <div class="p-8">
+                                <ul class="space-y-4">
+                                    <li class="flex items-start gap-4 group/item">
+                                        <div class="flex-shrink-0 w-10 h-10 rounded-xl bg-cyan-500/20 border border-cyan-400/40 flex items-center justify-center group-hover/item:bg-cyan-500/30 transition-colors">
+                                            <svg class="w-5 h-5 text-cyan-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                                        </div>
+                                        <span class="text-slate-200/90 font-medium pt-1.5">Up to 4 hours of intelligent capture and AI styling</span>
+                                    </li>
+                                    <li class="flex items-start gap-4 group/item">
+                                        <div class="flex-shrink-0 w-10 h-10 rounded-xl bg-cyan-500/20 border border-cyan-400/40 flex items-center justify-center group-hover/item:bg-cyan-500/30 transition-colors">
+                                            <svg class="w-5 h-5 text-cyan-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zm-4 7a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+                                        </div>
+                                        <span class="text-slate-200/90 font-medium pt-1.5">AI specialist attendant guiding every guest journey</span>
+                                    </li>
+                                    <li class="flex items-start gap-4 group/item">
+                                        <div class="flex-shrink-0 w-10 h-10 rounded-xl bg-cyan-500/20 border border-cyan-400/40 flex items-center justify-center group-hover/item:bg-cyan-500/30 transition-colors">
+                                            <svg class="w-5 h-5 text-cyan-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/></svg>
+                                        </div>
+                                        <span class="text-slate-200/90 font-medium pt-1.5">Access to core AI art filters + branded overlays</span>
+                                    </li>
+                                    <li class="flex items-start gap-4 group/item">
+                                        <div class="flex-shrink-0 w-10 h-10 rounded-xl bg-cyan-500/20 border border-cyan-400/40 flex items-center justify-center group-hover/item:bg-cyan-500/30 transition-colors">
+                                            <svg class="w-5 h-5 text-cyan-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"/></svg>
+                                        </div>
+                                        <span class="text-slate-200/90 font-medium pt-1.5">Custom layout design + logo branding treatment</span>
+                                    </li>
+                                    <li class="flex items-start gap-4 group/item">
+                                        <div class="flex-shrink-0 w-10 h-10 rounded-xl bg-cyan-500/20 border border-cyan-400/40 flex items-center justify-center group-hover/item:bg-cyan-500/30 transition-colors">
+                                            <svg class="w-5 h-5 text-cyan-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"/></svg>
+                                        </div>
+                                        <span class="text-slate-200/90 font-medium pt-1.5">Digital sharing gallery with instant delivery</span>
+                                    </li>
+                                    <li class="flex items-start gap-4 group/item">
+                                        <div class="flex-shrink-0 w-10 h-10 rounded-xl bg-cyan-500/20 border border-cyan-400/40 flex items-center justify-center group-hover/item:bg-cyan-500/30 transition-colors">
+                                            <svg class="w-5 h-5 text-cyan-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                                        </div>
+                                        <span class="text-slate-200/90 font-medium pt-1.5">Post-event highlight reel + 1 AI theme</span>
+                                    </li>
+                                </ul>
+                                <button class="mt-8 w-full bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 text-white py-4 rounded-xl font-semibold shadow-[0_20px_40px_-15px_rgba(56,189,248,0.6)] hover:shadow-[0_25px_50px_-12px_rgba(56,189,248,0.65)] transition-all duration-300 transform hover:-translate-y-1">Get Started</button>
+                            </div>
+                        </div>
+
+                        <!-- RECOMMENDED PACKAGE -->
+                        <div class="relative bg-gradient-to-br from-slate-900/90 via-slate-900/70 to-slate-900/90 rounded-3xl shadow-[0_35px_60px_-15px_rgba(129,140,248,0.6)] overflow-hidden transform lg:scale-110 border-4 border-purple-500/70 hover:border-pink-500/70 transition-all duration-500 hover:-translate-y-3">
+                            <div class="absolute -top-1 -right-1 z-20">
+                                <div class="bg-gradient-to-r from-pink-500 to-purple-600 text-white px-6 py-2 text-xs font-bold rounded-bl-2xl rounded-tr-2xl shadow-xl flex items-center gap-2">
+                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                                    RECOMMENDED
+                                </div>
+                            </div>
+                            <div class="relative bg-gradient-to-br from-[#3b0764] via-[#1d1b75] to-[#072b5c] p-8 text-center overflow-hidden">
+                                <div class="absolute top-0 right-0 w-48 h-48 bg-white/10 rounded-full -mr-20 -mt-20"></div>
+                                <div class="absolute bottom-0 left-0 w-40 h-40 bg-pink-500/15 rounded-full -ml-20 -mb-20"></div>
+                                <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-gradient-to-br from-cyan-500/25 to-transparent rounded-full blur-3xl"></div>
+                                <div class="relative z-10">
+                                    <div class="inline-flex items-center justify-center w-16 h-16 bg-white/15 rounded-2xl mb-4 backdrop-blur-sm shadow-[0_0_35px_rgba(168,85,247,0.5)]">
+                                        <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                                    </div>
+                                    <h3 class="text-3xl font-bold mb-2">STANDARD</h3>
+                                    <p class="text-cyan-100/80 text-sm tracking-widest">Most requested package</p>
+                                </div>
+                            </div>
+                            <div class="p-8">
+                                <ul class="space-y-4">
+                                    <li class="flex items-start gap-4 group/item">
+                                        <div class="flex-shrink-0 w-10 h-10 rounded-xl bg-purple-500/20 border border-purple-400/40 flex items-center justify-center group-hover/item:bg-purple-500/30 transition-colors">
+                                            <svg class="w-5 h-5 text-purple-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                                        </div>
+                                        <span class="text-slate-100/90 font-medium pt-1.5">Up to 4 hours with multi-style AI render cycles</span>
+                                    </li>
+                                    <li class="flex items-start gap-4 group/item">
+                                        <div class="flex-shrink-0 w-10 h-10 rounded-xl bg-purple-500/20 border border-purple-400/40 flex items-center justify-center group-hover/item:bg-purple-500/30 transition-colors">
+                                            <svg class="w-5 h-5 text-purple-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zm-4 7a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+                                        </div>
+                                        <span class="text-slate-100/90 font-medium pt-1.5">Lead AI curator + creative technologist onsite</span>
+                                    </li>
+                                    <li class="flex items-start gap-4 group/item">
+                                        <div class="flex-shrink-0 w-10 h-10 rounded-xl bg-purple-500/20 border border-purple-400/40 flex items-center justify-center group-hover/item:bg-purple-500/30 transition-colors">
+                                            <svg class="w-5 h-5 text-purple-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/></svg>
+                                        </div>
+                                        <span class="text-slate-100/90 font-medium pt-1.5">Advanced booth styling + AI reactor lighting rig</span>
+                                    </li>
+                                    <li class="flex items-start gap-4 group/item">
+                                        <div class="flex-shrink-0 w-10 h-10 rounded-xl bg-purple-500/20 border border-purple-400/40 flex items-center justify-center group-hover/item:bg-purple-500/30 transition-colors">
+                                            <svg class="w-5 h-5 text-purple-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/></svg>
+                                        </div>
+                                        <span class="text-slate-100/90 font-medium pt-1.5">Unlimited prints in 2x6 & 4x6 with neon foil framing</span>
+                                    </li>
+                                    <li class="flex items-start gap-4 group/item">
+                                        <div class="flex-shrink-0 w-10 h-10 rounded-xl bg-purple-500/20 border border-purple-400/40 flex items-center justify-center group-hover/item:bg-purple-500/30 transition-colors">
+                                            <svg class="w-5 h-5 text-purple-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"/></svg>
+                                        </div>
+                                        <span class="text-slate-100/90 font-medium pt-1.5">Custom overlay suite with motion-reactive elements</span>
+                                    </li>
+                                    <li class="flex items-start gap-4 group/item">
+                                        <div class="flex-shrink-0 w-10 h-10 rounded-xl bg-purple-500/20 border border-purple-400/40 flex items-center justify-center group-hover/item:bg-purple-500/30 transition-colors">
+                                            <svg class="w-5 h-5 text-purple-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"/></svg>
+                                        </div>
+                                        <span class="text-slate-100/90 font-medium pt-1.5">Real-time microsite delivery & analytics dashboard</span>
+                                    </li>
+                                </ul>
+                                <button class="mt-8 w-full bg-gradient-to-r from-purple-500 via-violet-500 to-cyan-500 text-white py-4 rounded-xl font-semibold shadow-[0_30px_60px_-15px_rgba(168,85,247,0.65)] hover:shadow-[0_35px_70px_-20px_rgba(168,85,247,0.7)] transition-all duration-300 transform hover:-translate-y-1 flex items-center justify-center gap-2">
+                                    <span>Choose Recommended</span>
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- BRAND ACTIVATION PACKAGE -->
+                        <div class="group bg-gradient-to-br from-slate-900/80 via-slate-900/60 to-slate-900/80 rounded-3xl shadow-[0_30px_60px_-15px_rgba(20,184,166,0.55)] overflow-hidden border border-cyan-400/40 hover:border-teal-300/60 transition-all duration-500 hover:-translate-y-2">
+                            <div class="relative bg-gradient-to-br from-[#031b2c] via-[#053c4d] to-[#06757f] p-8 text-center overflow-hidden">
+                                <div class="absolute top-0 right-0 w-44 h-44 bg-white/10 rounded-full -mr-20 -mt-20"></div>
+                                <div class="absolute bottom-0 left-0 w-36 h-36 bg-teal-400/20 rounded-full -ml-16 -mb-16"></div>
+                                <div class="relative z-10">
+                                    <div class="inline-flex items-center justify-center w-16 h-16 bg-white/15 rounded-2xl mb-4 backdrop-blur-sm shadow-[0_0_35px_rgba(45,212,191,0.5)]">
+                                        <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd"/></svg>
+                                    </div>
+                                    <h3 class="text-3xl font-bold mb-2 uppercase tracking-wider">Brand Activation</h3>
+                                    <p class="text-teal-100/80 text-sm tracking-[0.4em]">Immersion suite</p>
+                                </div>
+                            </div>
+                            <div class="p-8">
+                                <ul class="space-y-4">
+                                    <li class="flex items-start gap-4 group/item">
+                                        <div class="flex-shrink-0 w-10 h-10 rounded-xl bg-teal-500/20 border border-teal-400/40 flex items-center justify-center group-hover/item:bg-teal-500/30 transition-colors">
+                                            <svg class="w-5 h-5 text-teal-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                                        </div>
+                                        <span class="text-slate-100/90 font-medium pt-1.5">Up to 8 hours + pre-event creative consultation</span>
+                                    </li>
+                                    <li class="flex items-start gap-4 group/item">
+                                        <div class="flex-shrink-0 w-10 h-10 rounded-xl bg-teal-500/20 border border-teal-400/40 flex items-center justify-center group-hover/item:bg-teal-500/30 transition-colors">
+                                            <svg class="w-5 h-5 text-teal-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0"/></svg>
+                                        </div>
+                                        <span class="text-slate-100/90 font-medium pt-1.5">Two directors + production assistant for VIP flow</span>
+                                    </li>
+                                    <li class="flex items-start gap-4 group/item">
+                                        <div class="flex-shrink-0 w-10 h-10 rounded-xl bg-teal-500/20 border border-teal-400/40 flex items-center justify-center group-hover/item:bg-teal-500/30 transition-colors">
+                                            <svg class="w-5 h-5 text-teal-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/></svg>
+                                        </div>
+                                        <span class="text-slate-100/90 font-medium pt-1.5">Custom scenic build, wrapped booth, branded AI UI</span>
+                                    </li>
+                                    <li class="flex items-start gap-4 group/item">
+                                        <div class="flex-shrink-0 w-10 h-10 rounded-xl bg-teal-500/20 border border-teal-400/40 flex items-center justify-center group-hover/item:bg-teal-500/30 transition-colors">
+                                            <svg class="w-5 h-5 text-teal-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"/></svg>
+                                        </div>
+                                        <span class="text-slate-100/90 font-medium pt-1.5">Live social wall, lead capture, analytics, recap video</span>
+                                    </li>
+                                    <li class="flex items-start gap-4 group/item">
+                                        <div class="flex-shrink-0 w-10 h-10 rounded-xl bg-teal-500/20 border border-teal-400/40 flex items-center justify-center group-hover/item:bg-teal-500/30 transition-colors">
+                                            <svg class="w-5 h-5 text-teal-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+                                        </div>
+                                        <span class="text-slate-100/90 font-medium pt-1.5">Live display feeds + holographic recap assets</span>
+                                    </li>
+                                    <li class="flex items-start gap-4 group/item">
+                                        <div class="flex-shrink-0 w-10 h-10 rounded-xl bg-teal-500/20 border border-teal-400/40 flex items-center justify-center group-hover/item:bg-teal-500/30 transition-colors">
+                                            <svg class="w-5 h-5 text-teal-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                                        </div>
+                                        <span class="text-slate-100/90 font-medium pt-1.5">Unlimited print sizes (2x6, 4x6, 5x7, 8x10) + folios</span>
+                                    </li>
+                                </ul>
+                                <button class="mt-8 w-full bg-gradient-to-r from-teal-500 via-cyan-500 to-blue-500 text-white py-4 rounded-xl font-semibold shadow-[0_25px_50px_-12px_rgba(45,212,191,0.6)] hover:shadow-[0_30px_60px_-18px_rgba(45,212,191,0.65)] transition-all duration-300 transform hover:-translate-y-1">Contact for Details</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Additional Options Section -->
+        <section class="section-padding bg-gradient-to-b from-white via-gray-50 to-white relative overflow-hidden">
+            <!-- Decorative background elements -->
+            <div class="absolute top-20 left-10 w-72 h-72 bg-[#4d9fff] rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-pulse"></div>
+            <div class="absolute bottom-20 right-10 w-96 h-96 bg-[#4d9fff] rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-pulse" style="animation-delay: 2s;"></div>
+            
+            <div class="container mx-auto px-6 relative z-10">
+                <div class="max-w-7xl mx-auto">
+                    
+                    <!-- Section Header -->
+                    <div class="text-center mb-20">
+                        <div class="inline-flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-slate-900/90 via-blue-900/80 to-slate-900/90 backdrop-blur-md border border-cyan-400/40 rounded-full shadow-2xl shadow-cyan-500/30 mb-6">
+                            <div class="flex space-x-1">
+                                <div class="w-2 h-2 bg-cyan-400 rounded-full animate-pulse"></div>
+                                <div class="w-2 h-2 bg-purple-400 rounded-full animate-pulse" style="animation-delay: 0.2s"></div>
+                                <div class="w-2 h-2 bg-pink-400 rounded-full animate-pulse" style="animation-delay: 0.4s"></div>
+                            </div>
+                            <span class="text-cyan-300 text-sm font-mono font-bold">ENHANCE_YOUR_EXPERIENCE</span>
+                            <div class="flex space-x-1">
+                                <div class="w-2 h-2 bg-pink-400 rounded-full animate-pulse" style="animation-delay: 0.6s"></div>
+                                <div class="w-2 h-2 bg-purple-400 rounded-full animate-pulse" style="animation-delay: 0.8s"></div>
+                                <div class="w-2 h-2 bg-cyan-400 rounded-full animate-pulse" style="animation-delay: 1s"></div>
+                            </div>
+                        </div>
+                        <h2 class="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-gray-900 via-[#0040d9] to-gray-900 bg-clip-text text-transparent">Additional Options</h2>
+                        <p class="text-xl text-gray-600 max-w-3xl mx-auto">Elevate your event with these premium add-ons designed to maximize engagement and create lasting impressions</p>
+                    </div>
+
+                    <!-- Options Grid -->
+                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <!-- AI Intelligent Quiz -->
+                        <div class="group relative bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100 hover:border-[#b3d1ff] hover:-translate-y-2">
+                            <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-[#0050ff]/10 to-[#0050ff]/10 rounded-full -mr-16 -mt-16 group-hover:scale-150 transition-transform duration-500"></div>
+                            <div class="relative z-10">
+                                <div class="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-[#0050ff] to-[#0040d9] rounded-2xl mb-6 shadow-lg group-hover:scale-110 transition-transform duration-300">
+                                    <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                                    </svg>
+                                </div>
+                                <h3 class="text-2xl font-bold mb-4 text-gray-900 group-hover:text-[#0050ff] transition-colors">AI Intelligent Quiz</h3>
+                                <p class="text-gray-600 leading-relaxed">Add on our AI Intelligent Quiz to qualify leads and provide your attendees an engaging activity.</p>
+                            </div>
+                        </div>
+
+                        <!-- Trading Card Printing -->
+                        <div class="group relative bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100 hover:border-[#b3d1ff] hover:-translate-y-2">
+                            <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-[#0050ff]/10 to-[#0050ff]/10 rounded-full -mr-16 -mt-16 group-hover:scale-150 transition-transform duration-500"></div>
+                            <div class="relative z-10">
+                                <div class="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-[#0050ff] to-[#0040d9] rounded-2xl mb-6 shadow-lg group-hover:scale-110 transition-transform duration-300">
+                                    <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+                                    </svg>
+                                </div>
+                                <h3 class="text-2xl font-bold mb-4 text-gray-900 group-hover:text-[#0050ff] transition-colors">Trading Card Printing</h3>
+                                <p class="text-gray-600 leading-relaxed">Transform event moments into collectible trading cards with customized designs.</p>
+                            </div>
+                        </div>
+
+                        <!-- Preview Monitor -->
+                        <div class="group relative bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100 hover:border-[#b3d1ff] hover:-translate-y-2">
+                            <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-[#0050ff]/10 to-cyan-500/10 rounded-full -mr-16 -mt-16 group-hover:scale-150 transition-transform duration-500"></div>
+                            <div class="relative z-10">
+                                <div class="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-[#0050ff] to-[#0040d9] rounded-2xl mb-6 shadow-lg group-hover:scale-110 transition-transform duration-300">
+                                    <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                                    </svg>
+                                </div>
+                                <h3 class="text-2xl font-bold mb-4 text-gray-900 group-hover:text-[#0050ff] transition-colors">42"-75" Preview Monitor</h3>
+                                <p class="text-gray-600 leading-relaxed">Provide a live preview on a 42"-75" monitor so guests can see themselves before capturing the perfect shot.</p>
+                            </div>
+                        </div>
+
+                        <!-- Social Media Wall -->
+                        <div class="group relative bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100 hover:border-pink-200 hover:-translate-y-2">
+                            <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-pink-500/10 to-rose-500/10 rounded-full -mr-16 -mt-16 group-hover:scale-150 transition-transform duration-500"></div>
+                            <div class="relative z-10">
+                                <div class="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-pink-500 to-rose-600 rounded-2xl mb-6 shadow-lg group-hover:scale-110 transition-transform duration-300">
+                                    <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"></path>
+                                    </svg>
+                                </div>
+                                <h3 class="text-2xl font-bold mb-4 text-gray-900 group-hover:text-pink-600 transition-colors">Social Media Wall Feature</h3>
+                                <p class="text-gray-600 leading-relaxed">Display live social media feeds and event highlights on a dynamic Social Media Wall for real-time engagement.</p>
+                            </div>
+                        </div>
+
+                        <!-- Custom Branded Backdrop -->
+                        <div class="group relative bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100 hover:border-teal-200 hover:-translate-y-2">
+                            <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-teal-500/10 to-emerald-500/10 rounded-full -mr-16 -mt-16 group-hover:scale-150 transition-transform duration-500"></div>
+                            <div class="relative z-10">
+                                <div class="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-teal-500 to-emerald-600 rounded-2xl mb-6 shadow-lg group-hover:scale-110 transition-transform duration-300">
+                                    <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                                    </svg>
+                                </div>
+                                <h3 class="text-2xl font-bold mb-4 text-gray-900 group-hover:text-teal-600 transition-colors">Custom Branded Backdrop</h3>
+                                <p class="text-gray-600 leading-relaxed">Design a stunning custom-branded backdrop that enhances event aesthetics and reinforces branding.</p>
+                            </div>
+                        </div>
+
+                        <!-- LED Color Wash Lighting -->
+                        <div class="group relative bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100 hover:border-amber-200 hover:-translate-y-2">
+                            <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-amber-500/10 to-orange-500/10 rounded-full -mr-16 -mt-16 group-hover:scale-150 transition-transform duration-500"></div>
+                            <div class="relative z-10">
+                                <div class="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-amber-500 to-orange-600 rounded-2xl mb-6 shadow-lg group-hover:scale-110 transition-transform duration-300">
+                                    <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                                    </svg>
+                                </div>
+                                <h3 class="text-2xl font-bold mb-4 text-gray-900 group-hover:text-amber-600 transition-colors">LED Color Wash Lighting</h3>
+                                <p class="text-gray-600 leading-relaxed">Transform your event space with LED color wash lighting that creates a vibrant and dynamic atmosphere.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Bottom CTA -->
+                    <div class="mt-16 text-center">
+                        <div class="inline-block bg-gradient-to-r from-[#e6f0ff] to-[#e6f0ff] rounded-3xl p-8 shadow-lg border border-[#ccddff]">
+                            <p class="text-lg text-gray-700 mb-6 max-w-2xl">Want to learn more about these options or create a custom package tailored to your event?</p>
+                            <button class="bg-gradient-to-r from-[#0050ff] to-[#0040d9] text-white px-10 py-4 rounded-xl font-semibold hover:from-[#0040d9] hover:to-[#0040d9] transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 inline-flex items-center gap-3">
+                                <span>Customize Your Experience</span>
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Technical Specifications Section -->
+        <section class="section-padding bg-gradient-to-br from-black via-slate-950 to-black relative overflow-hidden">
+            <!-- Futuristic Background Effects -->
+            <div class="absolute inset-0 opacity-20">
+                <div class="absolute top-0 left-0 w-full h-full" style="background-image: radial-gradient(circle at 1px 1px, rgba(0, 240, 255, 0.3) 1px, transparent 0); background-size: 40px 40px;"></div>
+            </div>
+            
+            <!-- Animated Glow Orbs -->
+            <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl animate-pulse"></div>
+            <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl animate-pulse" style="animation-delay: 2s;"></div>
+            
+            <div class="container mx-auto px-6 relative z-10">
+                <div class="max-w-7xl mx-auto">
+                  
+                    
+                    <!-- Section Header -->
+                    <div class="text-center mb-20">
+                        <div class="inline-flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-slate-900/90 via-blue-900/80 to-slate-900/90 backdrop-blur-md border border-cyan-400/40 rounded-full shadow-2xl shadow-cyan-500/30 mb-8">
+                            <div class="flex space-x-1">
+                                <div class="w-2 h-2 bg-cyan-400 rounded-full animate-pulse"></div>
+                                <div class="w-2 h-2 bg-purple-400 rounded-full animate-pulse" style="animation-delay: 0.2s"></div>
+                                <div class="w-2 h-2 bg-pink-400 rounded-full animate-pulse" style="animation-delay: 0.4s"></div>
+                            </div>
+                            <span class="text-cyan-300 text-sm font-mono font-bold">TECHNICAL_SPECIFICATIONS</span>
+                            <div class="flex space-x-1">
+                                <div class="w-2 h-2 bg-pink-400 rounded-full animate-pulse" style="animation-delay: 0.6s"></div>
+                                <div class="w-2 h-2 bg-purple-400 rounded-full animate-pulse" style="animation-delay: 0.8s"></div>
+                                <div class="w-2 h-2 bg-cyan-400 rounded-full animate-pulse" style="animation-delay: 1s"></div>
+                            </div>
+                        </div>
+                        <h2 class="text-5xl md:text-6xl font-bold mb-6">
+                            <span class="holographic">AI Photo Booth</span>
+                        </h2>
+                        <p class="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed" style="text-shadow: 0 0 10px rgba(0, 240, 255, 0.15);">Professional-grade equipment with cutting-edge AI technology designed for seamless event integration</p>
+                    </div>
+
+                    <!-- Main Content Grid -->
+                    <div class="grid lg:grid-cols-5 gap-8 items-start">
+                        <!-- Left Side - Specifications (3 columns) -->
+                        <div class="lg:col-span-3">
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <!-- Equipment Footprint -->
+                                <div class="group relative bg-gradient-to-br from-slate-900/80 via-slate-800/60 to-slate-900/80 backdrop-blur-xl rounded-2xl p-6 border border-cyan-400/20 hover:border-cyan-400/40 transition-all duration-300 shadow-md hover:shadow-lg hover:shadow-cyan-500/10 overflow-hidden">
+                                    <!-- Animated glow effect -->
+                                    <div class="absolute inset-0 bg-gradient-to-r from-cyan-500/0 via-cyan-500/5 to-cyan-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                                    <div class="relative z-10">
+                                    <div class="flex items-center gap-4 mb-3">
+                                            <div class="w-12 h-12 bg-gradient-to-br from-cyan-400 to-cyan-600 rounded-xl flex items-center justify-center flex-shrink-0 shadow-md shadow-cyan-500/20 group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-cyan-500/30 transition-all duration-300">
+                                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"></path>
+                                            </svg>
+                                        </div>
+                                            <h4 class="text-lg font-bold text-cyan-300">Equipment Footprint</h4>
+                                    </div>
+                                        <p class="text-gray-300 font-medium" style="text-shadow: 0 0 5px rgba(0, 240, 255, 0.1);">2.5' x 2.5' minimum</p>
+                                    </div>
+                                </div>
+
+                                <!-- Power -->
+                                <div class="group relative bg-gradient-to-br from-slate-900/80 via-slate-800/60 to-slate-900/80 backdrop-blur-xl rounded-2xl p-6 border border-purple-400/20 hover:border-purple-400/40 transition-all duration-300 shadow-md hover:shadow-lg hover:shadow-purple-500/10 overflow-hidden">
+                                    <div class="absolute inset-0 bg-gradient-to-r from-purple-500/0 via-purple-500/5 to-purple-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                                    <div class="relative z-10">
+                                    <div class="flex items-center gap-4 mb-3">
+                                            <div class="w-12 h-12 bg-gradient-to-br from-purple-400 to-purple-600 rounded-xl flex items-center justify-center flex-shrink-0 shadow-md shadow-purple-500/20 group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-purple-500/30 transition-all duration-300">
+                                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                                            </svg>
+                                        </div>
+                                            <h4 class="text-lg font-bold text-purple-300">Power</h4>
+                                    </div>
+                                        <p class="text-gray-300 font-medium" style="text-shadow: 0 0 5px rgba(168, 85, 247, 0.1);">Single 20-amp circuit</p>
+                                    </div>
+                                </div>
+
+                                <!-- Setup Time -->
+                                <div class="group relative bg-gradient-to-br from-slate-900/80 via-slate-800/60 to-slate-900/80 backdrop-blur-xl rounded-2xl p-6 border border-pink-400/20 hover:border-pink-400/40 transition-all duration-300 shadow-md hover:shadow-lg hover:shadow-pink-500/10 overflow-hidden">
+                                    <div class="absolute inset-0 bg-gradient-to-r from-pink-500/0 via-pink-500/5 to-pink-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                                    <div class="relative z-10">
+                                    <div class="flex items-center gap-4 mb-3">
+                                            <div class="w-12 h-12 bg-gradient-to-br from-pink-400 to-pink-600 rounded-xl flex items-center justify-center flex-shrink-0 shadow-md shadow-pink-500/20 group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-pink-500/30 transition-all duration-300">
+                                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                            </svg>
+                                        </div>
+                                            <h4 class="text-lg font-bold text-pink-300">Setup Time</h4>
+                                    </div>
+                                        <p class="text-gray-300 font-medium" style="text-shadow: 0 0 5px rgba(236, 72, 153, 0.1);">45-60 minutes</p>
+                                    </div>
+                                </div>
+
+                                <!-- Photos Per Hour -->
+                                <div class="group relative bg-gradient-to-br from-slate-900/80 via-slate-800/60 to-slate-900/80 backdrop-blur-xl rounded-2xl p-6 border border-cyan-400/20 hover:border-cyan-400/40 transition-all duration-300 shadow-md hover:shadow-lg hover:shadow-cyan-500/10 overflow-hidden">
+                                    <div class="absolute inset-0 bg-gradient-to-r from-cyan-500/0 via-cyan-500/5 to-cyan-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                                    <div class="relative z-10">
+                                    <div class="flex items-center gap-4 mb-3">
+                                            <div class="w-12 h-12 bg-gradient-to-br from-cyan-400 to-cyan-600 rounded-xl flex items-center justify-center flex-shrink-0 shadow-md shadow-cyan-500/20 group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-cyan-500/30 transition-all duration-300">
+                                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path>
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                            </svg>
+                                        </div>
+                                            <h4 class="text-lg font-bold text-cyan-300">Photos/Hour</h4>
+                                    </div>
+                                        <p class="text-gray-300 font-medium" style="text-shadow: 0 0 5px rgba(0, 240, 255, 0.1);">40-60 transformations</p>
+                                    </div>
+                                </div>
+
+                                <!-- Internet -->
+                                <div class="group relative bg-gradient-to-br from-slate-900/80 via-slate-800/60 to-slate-900/80 backdrop-blur-xl rounded-2xl p-6 border border-teal-400/20 hover:border-teal-400/40 transition-all duration-300 shadow-md hover:shadow-lg hover:shadow-teal-500/10 overflow-hidden">
+                                    <div class="absolute inset-0 bg-gradient-to-r from-teal-500/0 via-teal-500/5 to-teal-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                                    <div class="relative z-10">
+                                    <div class="flex items-center gap-4 mb-3">
+                                            <div class="w-12 h-12 bg-gradient-to-br from-teal-400 to-teal-600 rounded-xl flex items-center justify-center flex-shrink-0 shadow-md shadow-teal-500/20 group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-teal-500/30 transition-all duration-300">
+                                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.111 16.404a5.5 5.5 0 017.778 0M12 20h.01m-7.08-7.071c3.904-3.905 10.236-3.905 14.141 0M1.394 9.393c5.857-5.857 15.355-5.857 21.213 0"></path>
+                                            </svg>
+                                        </div>
+                                            <h4 class="text-lg font-bold text-teal-300">Internet</h4>
+                                    </div>
+                                        <p class="text-gray-300 font-medium" style="text-shadow: 0 0 5px rgba(20, 184, 166, 0.1);">Hardwired, private network, or 4G/5G</p>
+                                    </div>
+                                </div>
+
+                                <!-- Group Size -->
+                                <div class="group relative bg-gradient-to-br from-slate-900/80 via-slate-800/60 to-slate-900/80 backdrop-blur-xl rounded-2xl p-6 border border-cyan-400/20 hover:border-cyan-400/40 transition-all duration-300 shadow-md hover:shadow-lg hover:shadow-cyan-500/10 overflow-hidden">
+                                    <div class="absolute inset-0 bg-gradient-to-r from-cyan-500/0 via-cyan-500/5 to-cyan-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                                    <div class="relative z-10">
+                                    <div class="flex items-center gap-4 mb-3">
+                                            <div class="w-12 h-12 bg-gradient-to-br from-cyan-400 to-cyan-600 rounded-xl flex items-center justify-center flex-shrink-0 shadow-md shadow-cyan-500/20 group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-cyan-500/30 transition-all duration-300">
+                                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                                            </svg>
+                                        </div>
+                                            <h4 class="text-lg font-bold text-cyan-300">Group Size</h4>
+                                    </div>
+                                        <p class="text-gray-300 font-medium" style="text-shadow: 0 0 5px rgba(0, 240, 255, 0.1);">1 person per photo</p>
+                                    </div>
+                                </div>
+
+                                <!-- Content Delivery -->
+                                <div class="group relative bg-gradient-to-br from-slate-900/80 via-slate-800/60 to-slate-900/80 backdrop-blur-xl rounded-2xl p-6 border border-emerald-400/20 hover:border-emerald-400/40 transition-all duration-300 shadow-md hover:shadow-lg hover:shadow-emerald-500/10 overflow-hidden">
+                                    <div class="absolute inset-0 bg-gradient-to-r from-emerald-500/0 via-emerald-500/5 to-emerald-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                                    <div class="relative z-10">
+                                    <div class="flex items-center gap-4 mb-3">
+                                            <div class="w-12 h-12 bg-gradient-to-br from-emerald-400 to-emerald-600 rounded-xl flex items-center justify-center flex-shrink-0 shadow-md shadow-emerald-500/20 group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-emerald-500/30 transition-all duration-300">
+                                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"></path>
+                                            </svg>
+                                        </div>
+                                            <h4 class="text-lg font-bold text-emerald-300">Delivery</h4>
+                                    </div>
+                                        <p class="text-gray-300 font-medium" style="text-shadow: 0 0 5px rgba(16, 185, 129, 0.1);">Instant social sharing</p>
+                                    </div>
+                                </div>
+
+                                <!-- Backup Systems -->
+                                <div class="group relative bg-gradient-to-br from-slate-900/80 via-slate-800/60 to-slate-900/80 backdrop-blur-xl rounded-2xl p-6 border border-green-400/20 hover:border-green-400/40 transition-all duration-300 shadow-md hover:shadow-lg hover:shadow-green-500/10 overflow-hidden">
+                                    <div class="absolute inset-0 bg-gradient-to-r from-green-500/0 via-green-500/5 to-green-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                                    <div class="relative z-10">
+                                    <div class="flex items-center gap-4 mb-3">
+                                            <div class="w-12 h-12 bg-gradient-to-br from-green-400 to-green-600 rounded-xl flex items-center justify-center flex-shrink-0 shadow-md shadow-green-500/20 group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-green-500/30 transition-all duration-300">
+                                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                                            </svg>
+                                        </div>
+                                            <h4 class="text-lg font-bold text-green-300">Backup</h4>
+                                    </div>
+                                        <p class="text-gray-300 font-medium" style="text-shadow: 0 0 5px rgba(34, 197, 94, 0.1);">Local processing backup</p>
+                                    </div>
+                                </div>
+
+                                <!-- Environment -->
+                                <div class="group relative bg-gradient-to-br from-slate-900/80 via-slate-800/60 to-slate-900/80 backdrop-blur-xl rounded-2xl p-6 border border-amber-400/20 hover:border-amber-400/40 transition-all duration-300 shadow-md hover:shadow-lg hover:shadow-amber-500/10 overflow-hidden">
+                                    <div class="absolute inset-0 bg-gradient-to-r from-amber-500/0 via-amber-500/5 to-amber-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                                    <div class="relative z-10">
+                                    <div class="flex items-center gap-4 mb-3">
+                                            <div class="w-12 h-12 bg-gradient-to-br from-amber-400 to-amber-600 rounded-xl flex items-center justify-center flex-shrink-0 shadow-md shadow-amber-500/20 group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-amber-500/30 transition-all duration-300">
+                                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+                                            </svg>
+                                        </div>
+                                            <h4 class="text-lg font-bold text-amber-300">Environment</h4>
+                                    </div>
+                                        <p class="text-gray-300 font-medium" style="text-shadow: 0 0 5px rgba(245, 158, 11, 0.1);">Indoor use recommended</p>
+                                    </div>
+                                </div>
+
+                                <!-- Support -->
+                                <div class="group relative bg-gradient-to-br from-slate-900/80 via-slate-800/60 to-slate-900/80 backdrop-blur-xl rounded-2xl p-6 border border-orange-400/20 hover:border-orange-400/40 transition-all duration-300 shadow-md hover:shadow-lg hover:shadow-orange-500/10 overflow-hidden">
+                                    <div class="absolute inset-0 bg-gradient-to-r from-orange-500/0 via-orange-500/5 to-orange-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                                    <div class="relative z-10">
+                                    <div class="flex items-center gap-4 mb-3">
+                                            <div class="w-12 h-12 bg-gradient-to-br from-orange-400 to-orange-600 rounded-xl flex items-center justify-center flex-shrink-0 shadow-md shadow-orange-500/20 group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-orange-500/30 transition-all duration-300">
+                                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                                            </svg>
+                                        </div>
+                                            <h4 class="text-lg font-bold text-orange-300">Support</h4>
+                                    </div>
+                                        <p class="text-gray-300 font-medium" style="text-shadow: 0 0 5px rgba(249, 115, 22, 0.1);">Dedicated tech operator</p>
+                                    </div>
+                                </div>
+
+                                <!-- Session Duration -->
+                                <div class="group relative bg-gradient-to-br from-slate-900/80 via-slate-800/60 to-slate-900/80 backdrop-blur-xl rounded-2xl p-6 border border-rose-400/20 hover:border-rose-400/40 transition-all duration-300 shadow-md hover:shadow-lg hover:shadow-rose-500/10 overflow-hidden">
+                                    <div class="absolute inset-0 bg-gradient-to-r from-rose-500/0 via-rose-500/5 to-rose-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                                    <div class="relative z-10">
+                                    <div class="flex items-center gap-4 mb-3">
+                                            <div class="w-12 h-12 bg-gradient-to-br from-rose-400 to-rose-600 rounded-xl flex items-center justify-center flex-shrink-0 shadow-md shadow-rose-500/20 group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-rose-500/30 transition-all duration-300">
+                                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                                            </svg>
+                                        </div>
+                                            <h4 class="text-lg font-bold text-rose-300">Duration</h4>
+                                    </div>
+                                        <p class="text-gray-300 font-medium" style="text-shadow: 0 0 5px rgba(244, 63, 94, 0.1);">2-8 hours standard</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Right Side - Image (2 columns) -->
+                        <div class="lg:col-span-2">
+                            <div class="sticky top-8">
+                                <div class="relative rounded-3xl overflow-hidden shadow-xl group border border-cyan-400/20 hover:border-cyan-400/40 transition-all duration-500">
+                                    <!-- Animated Neon Border Glow -->
+                                    <div class="absolute inset-0 rounded-3xl bg-gradient-to-r from-cyan-500/10 via-purple-500/10 to-pink-500/10 opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-500 -z-10"></div>
+                                    
+                                    <!-- Image -->
+                                    <img src="../../assets/images/aiphotohero.jpg" alt="AI Photo Booth Setup" class="w-full h-[600px] object-cover group-hover:scale-105 transition-transform duration-700">
+                                    
+                                    <!-- Futuristic Gradient Overlay -->
+                                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
+                                    <div class="absolute inset-0 bg-gradient-to-br from-cyan-500/5 via-transparent to-purple-500/5"></div>
+                                    
+                                    <!-- Animated Scan Lines Effect -->
+                                    <div class="absolute inset-0 opacity-10 pointer-events-none overflow-hidden">
+                                        <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-cyan-400 to-transparent" style="animation: scan 3s linear infinite;"></div>
+                                    </div>
+                                    
+                                    <!-- Content Overlay -->
+                                    <div class="absolute bottom-0 left-0 right-0 p-8">
+                                        <div class="space-y-4">
+                                            <!-- Title -->
+                                            <div class="inline-flex items-center gap-2 bg-gradient-to-r from-slate-900/80 via-slate-800/80 to-slate-900/80 backdrop-blur-xl px-4 py-2 rounded-full border border-cyan-400/30 shadow-md shadow-cyan-500/15">
+                                                <div class="w-2 h-2 bg-cyan-400 rounded-full animate-pulse shadow-md shadow-cyan-400/50"></div>
+                                                <span class="text-cyan-300 font-semibold text-sm">Professional Grade Equipment</span>
+                                            </div>
+                                            
+                                            <!-- Stats Grid -->
+                                            <div class="grid grid-cols-3 gap-3">
+                                                <div class="group/stat relative bg-gradient-to-br from-slate-900/80 via-slate-800/60 to-slate-900/80 backdrop-blur-xl rounded-2xl p-4 border border-cyan-400/20 hover:border-cyan-400/40 transition-all duration-300 hover:shadow-lg hover:shadow-cyan-500/15 overflow-hidden">
+                                                    <div class="absolute inset-0 bg-gradient-to-r from-cyan-500/0 via-cyan-500/10 to-cyan-500/0 opacity-0 group-hover/stat:opacity-100 transition-opacity duration-500"></div>
+                                                    <div class="relative z-10">
+                                                        <div class="text-3xl font-bold text-cyan-300 mb-1">4K</div>
+                                                        <div class="text-xs text-gray-300 font-medium">Resolution</div>
+                                                </div>
+                                                </div>
+                                                <div class="group/stat relative bg-gradient-to-br from-slate-900/80 via-slate-800/60 to-slate-900/80 backdrop-blur-xl rounded-2xl p-4 border border-purple-400/20 hover:border-purple-400/40 transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/15 overflow-hidden">
+                                                    <div class="absolute inset-0 bg-gradient-to-r from-purple-500/0 via-purple-500/10 to-purple-500/0 opacity-0 group-hover/stat:opacity-100 transition-opacity duration-500"></div>
+                                                    <div class="relative z-10">
+                                                        <div class="text-3xl font-bold text-purple-300 mb-1">AI</div>
+                                                        <div class="text-xs text-gray-300 font-medium">Powered</div>
+                                                    </div>
+                                                </div>
+                                                <div class="group/stat relative bg-gradient-to-br from-slate-900/80 via-slate-800/60 to-slate-900/80 backdrop-blur-xl rounded-2xl p-4 border border-pink-400/20 hover:border-pink-400/40 transition-all duration-300 hover:shadow-lg hover:shadow-pink-500/15 overflow-hidden">
+                                                    <div class="absolute inset-0 bg-gradient-to-r from-pink-500/0 via-pink-500/10 to-pink-500/0 opacity-0 group-hover/stat:opacity-100 transition-opacity duration-500"></div>
+                                                    <div class="relative z-10">
+                                                        <div class="text-3xl font-bold text-pink-300 mb-1">60+</div>
+                                                        <div class="text-xs text-gray-300 font-medium">Per Hour</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="relative section-padding bg-gradient-to-br from-slate-50 via-blue-50 to-purple-50 overflow-hidden">
+            <!-- Animated Grid Background -->
+            <div class="absolute inset-0 opacity-30">
+                <div class="absolute inset-0" style="background-image: linear-gradient(rgba(0, 150, 255, 0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 150, 255, 0.08) 1px, transparent 1px); background-size: 50px 50px;"></div>
+            </div>
+
+            <!-- Glowing Orbs -->
+            <div class="absolute top-10 left-10 w-96 h-96 bg-cyan-300 rounded-full filter blur-3xl opacity-20 animate-pulse"></div>
+            <div class="absolute bottom-10 right-10 w-96 h-96 bg-purple-300 rounded-full filter blur-3xl opacity-20 animate-pulse" style="animation-delay: 1.5s;"></div>
+            <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-pink-200 rounded-full filter blur-3xl opacity-15 animate-pulse" style="animation-delay: 3s;"></div>
+
+            <!-- Floating Particles -->
+            <div class="absolute inset-0 overflow-hidden">
+                <div class="absolute top-20 left-[10%] w-2 h-2 bg-cyan-500 rounded-full animate-pulse"></div>
+                <div class="absolute top-40 right-[15%] w-1.5 h-1.5 bg-purple-500 rounded-full animate-pulse" style="animation-delay: 0.5s;"></div>
+                <div class="absolute bottom-32 left-[20%] w-1 h-1 bg-pink-500 rounded-full animate-pulse" style="animation-delay: 1s;"></div>
+                <div class="absolute top-60 right-[25%] w-2 h-2 bg-cyan-400 rounded-full animate-pulse" style="animation-delay: 1.5s;"></div>
+                <div class="absolute bottom-20 right-[30%] w-1.5 h-1.5 bg-purple-400 rounded-full animate-pulse" style="animation-delay: 2s;"></div>
+            </div>
+
+            <div class="relative z-10 container mx-auto px-6 text-center">
+                <!-- Badge -->
+                <div class="inline-flex items-center gap-3 px-6 py-3 bg-white/80 backdrop-blur-md border border-cyan-300 rounded-full shadow-xl shadow-cyan-500/20 mb-8">
+                    <div class="flex gap-1">
+                        <div class="w-2 h-2 bg-cyan-500 rounded-full animate-pulse"></div>
+                        <div class="w-2 h-2 bg-purple-500 rounded-full animate-pulse" style="animation-delay: 0.3s;"></div>
+                        <div class="w-2 h-2 bg-pink-500 rounded-full animate-pulse" style="animation-delay: 0.6s;"></div>
+                    </div>
+                    <span class="text-cyan-600 text-sm font-mono font-bold tracking-wider">CONTACT_US</span>
+                </div>
+
+                <!-- Heading with Gradient Effect -->
+                <h2 class="text-4xl md:text-5xl lg:text-6xl font-black mb-6 leading-tight text-gray-900" style="font-family: 'Orbitron', 'Playfair Display', serif;">
+                    Ready to Add <span class="bg-gradient-to-r from-cyan-600 via-blue-600 to-purple-600 bg-clip-text text-transparent">AI Magic</span>
+                    <br class="hidden sm:block">
+                    to Your Event?
+                </h2>
+
+                <!-- Decorative Line -->
+                <div class="flex items-center justify-center gap-3 mb-8">
+                    <div class="h-px w-24 bg-gradient-to-r from-transparent via-cyan-500 to-transparent"></div>
+                    <div class="w-2 h-2 bg-cyan-500 rounded-full animate-pulse"></div>
+                    <div class="h-px w-24 bg-gradient-to-r from-transparent via-purple-500 to-transparent"></div>
+                </div>
+
+                <p class="text-lg md:text-xl mb-12 max-w-3xl mx-auto leading-relaxed text-gray-700">
+                    Contact us today to book our AI Photo Booth and give your guests an unforgettable, futuristic experience powered by cutting-edge technology.
+                </p>
+
+                <div class="flex flex-col sm:flex-row gap-6 justify-center items-center">
+                    <!-- Primary CTA -->
+                    <a href="#" class="group relative inline-flex items-center gap-3 px-10 py-5 bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 rounded-xl text-lg font-bold text-white overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-cyan-500/40">
+                        <div class="absolute inset-0 bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                        <span class="relative z-10">Get Your Free Quote</span>
+                        <svg class="relative z-10 w-5 h-5 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                        </svg>
+                    </a>
+
+                    <!-- Secondary CTA -->
+                    <a href="#" class="group relative inline-flex items-center gap-3 px-10 py-5 bg-white/80 backdrop-blur-md border-2 border-cyan-400 rounded-xl text-lg font-semibold text-cyan-600 overflow-hidden transition-all duration-300 hover:border-cyan-500 hover:bg-white hover:shadow-xl hover:shadow-cyan-500/30">
+                        <div class="absolute inset-0 bg-gradient-to-r from-cyan-500/10 to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                        <span class="relative z-10">Book Now</span>
+                        <div class="relative z-10 w-2 h-2 bg-cyan-500 rounded-full animate-pulse"></div>
+                    </a>
+                </div>
+
+                <!-- Tech Stats -->
+                <div class="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
+                    <div class="relative group">
+                        <div class="absolute inset-0 bg-gradient-to-r from-cyan-400/30 to-blue-400/30 rounded-lg blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                        <div class="relative bg-white/80 backdrop-blur-sm border border-cyan-400/40 rounded-lg p-4 hover:border-cyan-500 hover:shadow-lg transition-all duration-300">
+                            <div class="text-3xl font-black text-cyan-600 mb-1" style="font-family: 'Orbitron', sans-serif;">AI</div>
+                            <div class="text-xs text-gray-600 uppercase tracking-wider">Powered</div>
+                        </div>
+                    </div>
+                    <div class="relative group">
+                        <div class="absolute inset-0 bg-gradient-to-r from-purple-400/30 to-pink-400/30 rounded-lg blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                        <div class="relative bg-white/80 backdrop-blur-sm border border-purple-400/40 rounded-lg p-4 hover:border-purple-500 hover:shadow-lg transition-all duration-300">
+                            <div class="text-3xl font-black text-purple-600 mb-1" style="font-family: 'Orbitron', sans-serif;">4K</div>
+                            <div class="text-xs text-gray-600 uppercase tracking-wider">Quality</div>
+                        </div>
+                    </div>
+                    <div class="relative group">
+                        <div class="absolute inset-0 bg-gradient-to-r from-blue-400/30 to-cyan-400/30 rounded-lg blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                        <div class="relative bg-white/80 backdrop-blur-sm border border-blue-400/40 rounded-lg p-4 hover:border-blue-500 hover:shadow-lg transition-all duration-300">
+                            <div class="text-3xl font-black text-blue-600 mb-1" style="font-family: 'Orbitron', sans-serif;">∞</div>
+                            <div class="text-xs text-gray-600 uppercase tracking-wider">Possibilities</div>
+                        </div>
+                    </div>
+                    <div class="relative group">
+                        <div class="absolute inset-0 bg-gradient-to-r from-pink-400/30 to-purple-400/30 rounded-lg blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                        <div class="relative bg-white/80 backdrop-blur-sm border border-pink-400/40 rounded-lg p-4 hover:border-pink-500 hover:shadow-lg transition-all duration-300">
+                            <div class="text-3xl font-black text-pink-600 mb-1" style="font-family: 'Orbitron', sans-serif;">24/7</div>
+                            <div class="text-xs text-gray-600 uppercase tracking-wider">Support</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Zoomable Image Lightbox -->
+        <div id="imageLightbox" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/95 backdrop-blur-md" onclick="closeImageLightboxOnBackdrop(event)">
+            <!-- Close Button -->
+            <button onclick="event.stopPropagation(); closeImageLightbox();" class="absolute top-4 right-4 z-[60] w-12 h-12 bg-slate-900/90 hover:bg-slate-800 text-cyan-400 rounded-full flex items-center justify-center shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-110 border border-cyan-400/40 cursor-pointer">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+
+            <!-- Navigation Arrows -->
+            <button onclick="event.stopPropagation(); navigateImage(-1);" class="absolute left-4 z-[60] w-12 h-12 bg-slate-900/90 hover:bg-slate-800 text-cyan-400 rounded-full flex items-center justify-center shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-110 border border-cyan-400/40 cursor-pointer">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                </svg>
+            </button>
+            <button onclick="event.stopPropagation(); navigateImage(1);" class="absolute right-4 z-[60] w-12 h-12 bg-slate-900/90 hover:bg-slate-800 text-cyan-400 rounded-full flex items-center justify-center shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-110 border border-cyan-400/40 cursor-pointer">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                </svg>
+            </button>
+
+            <!-- Zoom Controls -->
+            <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 z-[60] flex items-center gap-3 bg-slate-900/90 backdrop-blur-md rounded-full px-4 py-2 border border-cyan-400/40 shadow-xl" onclick="event.stopPropagation();">
+                <button onclick="event.stopPropagation(); zoomOut();" class="w-10 h-10 bg-slate-800 hover:bg-slate-700 text-cyan-400 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 cursor-pointer">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM13 10H7"></path>
+                    </svg>
+                </button>
+                <span id="zoomLevel" class="text-cyan-400 font-mono text-sm min-w-[60px] text-center">100%</span>
+                <button onclick="event.stopPropagation(); zoomIn();" class="w-10 h-10 bg-slate-800 hover:bg-slate-700 text-cyan-400 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 cursor-pointer">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"></path>
+                    </svg>
+                </button>
+                <button onclick="event.stopPropagation(); resetZoom();" class="w-10 h-10 bg-slate-800 hover:bg-slate-700 text-cyan-400 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 cursor-pointer">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Image Container -->
+            <div class="relative w-full h-full flex items-center justify-center p-4 overflow-auto" id="imageContainer" onclick="event.stopPropagation();">
+                <img id="lightboxImage" src="" alt="Full View Image" class="max-w-full max-h-full object-contain transition-transform duration-300 cursor-move select-none hidden" style="transform: scale(1);">
+                <video id="lightboxVideo" src="" controls class="max-w-full max-h-full object-contain hidden" onclick="event.stopPropagation();"></video>
+            </div>
+
+            <!-- Image Counter -->
+            <div class="absolute top-4 left-1/2 transform -translate-x-1/2 z-[60] bg-slate-900/90 backdrop-blur-md text-cyan-400 px-4 py-2 rounded-full border border-cyan-400/40 shadow-xl font-mono text-sm">
+                <span id="imageCounter">1 / 13</span>
+            </div>
+        </div>
+    </main>
+
+    <script src="../../assets/components/footer.js"></script>
+    <script src="../../assets/components/back-to-top.js"></script>
+
+    <script>
+        // Image Gallery Array
+        const galleryImages = [
+            '/assets/images/ai-photo-booth-1.webp',
+            '/assets/images/ai-photo-booth-2.webp',
+            '/assets/images/ai-photo-booth-3.webp',
+            '/assets/images/ai-photo-booth-4.webp',
+            '/assets/images/ai-photo-booth-5.webp',
+            '/assets/images/ai-photo-booth-6.webp',
+            '/assets/images/ai-photo-booth-7.webp',
+            '/assets/images/ai-photo-booth-8.webp',
+            '/assets/images/ai-photo-booth-9.webp',
+            '/assets/images/ai-photo-booth-10.webp',
+            '/assets/images/ai-photo-booth-11.webp',
+            '/assets/images/ai-photo-booth-3.webp',
+            '/assets/images/ai-photo-booth-9.webp'
+        ];
+
+        let currentImageIndex = 0;
+        let currentZoom = 1;
+        const minZoom = 0.5;
+        const maxZoom = 5;
+        const zoomStep = 0.25;
+
+        // Open lightbox
+        function openImageLightbox(imageSrc, index) {
+            currentImageIndex = index;
+            currentZoom = 1;
+            const lightbox = document.getElementById('imageLightbox');
+            const lightboxImage = document.getElementById('lightboxImage');
+            const lightboxVideo = document.getElementById('lightboxVideo');
+            const imageCounter = document.getElementById('imageCounter');
+            
+            if (!lightbox || !lightboxImage || !imageCounter) {
+                console.error('Lightbox elements not found');
+                return;
+            }
+            
+            // Hide video, show image
+            if (lightboxVideo) {
+                lightboxVideo.classList.add('hidden');
+                lightboxVideo.pause();
+                lightboxVideo.src = '';
+            }
+            lightboxImage.classList.remove('hidden');
+            
+            // Remove query parameters for full resolution
+            const cleanSrc = imageSrc.split('?')[0];
+            lightboxImage.src = cleanSrc;
+            lightboxImage.style.transform = `scale(${currentZoom})`;
+            updateZoomLevel();
+            
+            imageCounter.textContent = `${currentImageIndex + 1} / ${galleryImages.length}`;
+            
+            lightbox.classList.remove('hidden');
+            lightbox.classList.add('flex');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Open video lightbox
+        function openVideoLightbox(videoSrc, index) {
+            currentImageIndex = index;
+            currentZoom = 1;
+            const lightbox = document.getElementById('imageLightbox');
+            const lightboxImage = document.getElementById('lightboxImage');
+            const lightboxVideo = document.getElementById('lightboxVideo');
+            const imageCounter = document.getElementById('imageCounter');
+            
+            if (!lightbox || !lightboxVideo || !imageCounter) {
+                console.error('Lightbox elements not found');
+                return;
+            }
+            
+            // Hide image, show video
+            lightboxImage.classList.add('hidden');
+            if (lightboxVideo) {
+                lightboxVideo.classList.remove('hidden');
+                const cleanSrc = videoSrc.split('?')[0];
+                lightboxVideo.src = cleanSrc;
+                lightboxVideo.load();
+                // Play video (autoplay may be blocked by browser, but we try)
+                lightboxVideo.play().catch(e => {
+                    console.log('Video autoplay prevented:', e);
+                });
+            }
+            
+            imageCounter.textContent = `VIDEO / ${galleryImages.length + 1}`;
+            
+            lightbox.classList.remove('hidden');
+            lightbox.classList.add('flex');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Close lightbox
+        function closeImageLightbox() {
+            const lightbox = document.getElementById('imageLightbox');
+            const lightboxVideo = document.getElementById('lightboxVideo');
+            if (!lightbox) {
+                console.error('Lightbox not found');
+                return;
+            }
+            // Pause video if playing
+            if (lightboxVideo) {
+                lightboxVideo.pause();
+                lightboxVideo.src = '';
+            }
+            lightbox.classList.add('hidden');
+            lightbox.classList.remove('flex');
+            document.body.style.overflow = '';
+            currentZoom = 1;
+        }
+
+        // Close on backdrop click
+        function closeImageLightboxOnBackdrop(event) {
+            if (event.target === event.currentTarget) {
+                closeImageLightbox();
+            }
+        }
+
+        // Zoom functions
+        function zoomIn() {
+            if (currentZoom < maxZoom) {
+                currentZoom = Math.min(currentZoom + zoomStep, maxZoom);
+                applyZoom();
+            }
+        }
+
+        function zoomOut() {
+            if (currentZoom > minZoom) {
+                currentZoom = Math.max(currentZoom - zoomStep, minZoom);
+                applyZoom();
+            }
+        }
+
+        function resetZoom() {
+            currentZoom = 1;
+            applyZoom();
+        }
+
+        function applyZoom() {
+            const lightboxImage = document.getElementById('lightboxImage');
+            lightboxImage.style.transform = `scale(${currentZoom})`;
+            updateZoomLevel();
+        }
+
+        function updateZoomLevel() {
+            const zoomLevel = document.getElementById('zoomLevel');
+            zoomLevel.textContent = `${Math.round(currentZoom * 100)}%`;
+            }
+
+        // Navigate images
+        function navigateImage(direction) {
+            currentImageIndex += direction;
+            if (currentImageIndex < 0) {
+                currentImageIndex = galleryImages.length - 1;
+            } else if (currentImageIndex >= galleryImages.length) {
+                currentImageIndex = 0;
+            }
+            
+            const lightboxImage = document.getElementById('lightboxImage');
+            const imageCounter = document.getElementById('imageCounter');
+            
+            lightboxImage.src = galleryImages[currentImageIndex].split('?')[0];
+            imageCounter.textContent = `${currentImageIndex + 1} / ${galleryImages.length}`;
+            
+            // Reset zoom when navigating
+            currentZoom = 1;
+            applyZoom();
+        }
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', function(event) {
+            const lightbox = document.getElementById('imageLightbox');
+            if (lightbox.classList.contains('hidden')) return;
+
+            switch(event.key) {
+                case 'Escape':
+                    closeImageLightbox();
+                    break;
+                case 'ArrowLeft':
+                    navigateImage(-1);
+                    break;
+                case 'ArrowRight':
+                    navigateImage(1);
+                    break;
+                case '+':
+                case '=':
+                    event.preventDefault();
+                    zoomIn();
+                    break;
+                case '-':
+                case '_':
+                    event.preventDefault();
+                    zoomOut();
+                    break;
+                case '0':
+                    resetZoom();
+                    break;
+            }
+        });
+
+        // Mouse wheel zoom (Ctrl + Scroll)
+        document.addEventListener('DOMContentLoaded', function() {
+            const imageContainer = document.getElementById('imageContainer');
+            if (imageContainer) {
+                imageContainer.addEventListener('wheel', function(event) {
+                    const lightbox = document.getElementById('imageLightbox');
+                    if (!lightbox.classList.contains('hidden') && event.ctrlKey) {
+                        event.preventDefault();
+                        if (event.deltaY < 0) {
+                            zoomIn();
+                        } else {
+                            zoomOut();
+                        }
+                    }
+                });
+            }
+
+            // Featured video hover functionality
+            const featuredVideoContainer = document.getElementById('featuredVideoContainer');
+            const featuredVideo = document.getElementById('featuredVideo');
+            const playIconOverlay = document.getElementById('playIconOverlay');
+
+            if (featuredVideoContainer && featuredVideo) {
+                featuredVideoContainer.addEventListener('mouseenter', function() {
+                    featuredVideo.play().catch(e => {
+                        console.log('Video play prevented:', e);
+                    });
+                    if (playIconOverlay) {
+                        playIconOverlay.style.opacity = '0';
+                    }
+                });
+
+                featuredVideoContainer.addEventListener('mouseleave', function() {
+                    featuredVideo.pause();
+                    if (playIconOverlay) {
+                        playIconOverlay.style.opacity = '1';
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>
