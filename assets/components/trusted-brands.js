@@ -58,7 +58,7 @@ function renderTrustedBrands(options = {}) {
         description: options.description || 'Industry leaders trust MiHi Entertainment to deliver cutting-edge photo, video, and event experiences that captivate guests and elevate brand presence. From global corporations to top event planners, we create seamless, high-quality activations that leave a lasting impression.',
         brands: options.brands || defaultBrands,
         animationSpeed: options.animationSpeed || 30, // pixels per second
-        sectionClass: options.sectionClass || 'bg-gradient-to-b from-white via-gray-50 to-white py-20',
+        sectionClass: options.sectionClass || 'relative section-padding bg-white overflow-hidden',
         ...options
     };
 
@@ -90,20 +90,28 @@ function renderTrustedBrands(options = {}) {
     const trustedBrandsHTML = `
         <!-- Trusted Brands Section -->
         <section class="${config.sectionClass}" aria-label="Trusted brands">
-            <div class="container mx-auto px-6">
+            <!-- Ambient background elements -->
+            <div class="absolute inset-0 pointer-events-none">
+                <div class="absolute -top-40 -right-20 w-80 h-80 bg-pink-500/5 rounded-full blur-3xl"></div>
+                <div class="absolute top-1/2 -left-32 w-72 h-72 bg-purple-500/5 rounded-full blur-[110px]"></div>
+                <div class="absolute bottom-[-4rem] right-1/3 w-[28rem] h-[28rem] bg-blue-500/5 rounded-full blur-[140px]"></div>
+                <div class="absolute inset-0" style="background-image: linear-gradient(rgba(0,0,0,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.02) 1px, transparent 1px); background-size: 60px 60px;"></div>
+            </div>
+
+            <div class="relative container mx-auto px-6">
                 <!-- Premium Header -->
-                <div class="text-center mb-12 max-w-4xl mx-auto">
-                    <div class="inline-block px-6 py-2 bg-gradient-to-r from-[#0050ff] to-[#0040d9] rounded-full mb-6">
-                        <h3 class="text-sm font-bold text-white uppercase tracking-widest">
-                            ${config.badge}
-                        </h3>
+                <div class="text-center mb-12 max-w-4xl mx-auto space-y-10">
+                    <span class="inline-flex items-center gap-2 px-5 py-2 bg-gradient-to-r from-pink-500/10 via-purple-500/10 to-blue-500/10 border border-pink-500/20 rounded-full text-xs font-semibold tracking-[0.35em] uppercase text-pink-600 shadow-[0_0_20px_rgba(236,72,153,0.15)]">
+                        ${config.badge}
+                    </span>
+                    <div class="space-y-5">
+                        <h2 class="text-4xl md:text-5xl font-bold leading-tight text-gray-900">
+                            ${config.title.part1} and ${config.title.part2}
+                        </h2>
+                        <p class="text-base md:text-lg text-gray-600 leading-relaxed">
+                            ${config.description}
+                        </p>
                     </div>
-                    <h2 class="text-4xl md:text-5xl font-bold mb-6">
-                        <span class="bg-gradient-to-r from-gray-900 via-[#0050ff] to-gray-900 bg-clip-text text-transparent">${config.title.part1}</span> and <span class="bg-gradient-to-r from-[#0050ff] to-[#0040d9] bg-clip-text text-transparent">${config.title.part2}</span>
-                    </h2>
-                    <p class="text-lg text-gray-700 leading-relaxed">
-                        ${config.description}
-                    </p>
                 </div>
                 
                 <!-- Debug info -->
@@ -115,8 +123,8 @@ function renderTrustedBrands(options = {}) {
                 <!-- Scrolling Logos Container -->
                 <div class="relative overflow-hidden py-8" id="trusted-brands-scroll-container">
                     <!-- Gradient Overlays -->
-                    <div class="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-white via-gray-50/80 to-transparent z-10 pointer-events-none"></div>
-                    <div class="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-white via-gray-50/80 to-transparent z-10 pointer-events-none"></div>
+                    <div class="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-white via-white/80 to-transparent z-10 pointer-events-none"></div>
+                    <div class="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-white via-white/80 to-transparent z-10 pointer-events-none"></div>
                     
                     <!-- Scrolling Track -->
                     <div class="flex" id="trusted-brands-track">

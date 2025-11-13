@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Roaming Photo Booth Rentals by MiHi Entertainment. Bring the camera to your guests with mobile photographers capturing high-quality photos, GIFs, and Boomerangs on the go.">
+    <title>Roaming Photo Booth Rentals - MiHi Entertainment</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #1a202c;
+        }
+
+        main h1,
+        main h2,
+        main h3,
+        main h4,
+        main h5,
+        main h6 {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%);
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 80, 255, 0.4);
+        }
+
+        .section-padding {
+            padding: 5rem 0;
+        }
+
+        @media (min-width: 768px) {
+            .section-padding {
+                padding: 8rem 0;
+            }
+        }
+
+        @keyframes gradient-shift {
+            0%, 100% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+        }
+
+        .animated-gradient-blue {
+            background: linear-gradient(-45deg, #3b82f6, #1d4ed8, #1e40af, #1e3a8a);
+            background-size: 400% 400%;
+            animation: gradient-shift 15s ease infinite;
+        }
+
+        .glass {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .package-card {
+            transition: all 0.3s ease;
+        }
+
+        .package-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .package-featured {
+            border: 2px solid #3b82f6;
+            position: relative;
+        }
+
+        .package-featured::before {
+            content: 'RECOMMENDED';
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+            color: white;
+            padding: 4px 20px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes blob {
+            0%, 100% {
+                transform: translate(0px, 0px) scale(1);
+            }
+            33% {
+                transform: translate(30px, -50px) scale(1.1);
+            }
+            66% {
+                transform: translate(-20px, 20px) scale(0.9);
+            }
+        }
+
+        .animate-blob {
+            animation: blob 7s infinite;
+        }
+
+        .animation-delay-2000 {
+            animation-delay: 2s;
+        }
+
+        .animation-delay-4000 {
+            animation-delay: 4s;
+        }
+
+        .feature-icon {
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .tech-spec-card {
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            border: 1px solid #e2e8f0;
+            transition: all 0.3s ease;
+        }
+
+        .tech-spec-card:hover {
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            transform: translateY(-4px);
+        }
+    </style>
+</head>
+<body class="bg-white">
+    <div id="nav-placeholder"></div>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
+            <!-- Background Image -->
+            <div class="absolute inset-0">
+                <img src="../../assets/images/roaming-hero.jpg" alt="Roaming Photo Booth" class="w-full h-full object-cover">
+            </div>
+            <div class="absolute inset-0 bg-gradient-to-b from-black/50 via-black/40 to-black/60"></div>
+            <div class="absolute top-20 left-10 w-96 h-96 bg-blue-500/20 rounded-full blur-3xl animate-blob"></div>
+            <div class="absolute bottom-20 right-10 w-96 h-96 bg-blue-600/20 rounded-full blur-3xl animate-blob animation-delay-2000"></div>
+
+            <div class="relative z-10 container mx-auto px-6">
+                <div class="max-w-6xl mx-auto text-center">
+                    <h1 class="text-5xl md:text-7xl lg:text-8xl font-black mb-6 leading-[1.1] tracking-tight">
+                        <span class="inline-block bg-gradient-to-r from-blue-200 via-indigo-200 to-blue-300 bg-clip-text text-transparent drop-shadow-2xl">
+                            ROAMING
+                        </span>
+                        <span class="block bg-gradient-to-r from-indigo-200 via-blue-200 to-indigo-300 bg-clip-text text-transparent drop-shadow-2xl mt-2">
+                            PHOTO BOOTH
+                        </span>
+                    </h1>
+
+                    <h2 class="text-lg md:text-xl lg:text-2xl font-semibold mb-8 text-blue-100/95 drop-shadow-xl uppercase tracking-wider">
+                        Mobile Photo Experience with Instant Sharing
+                    </h2>
+
+                    <p class="text-base md:text-lg mb-12 max-w-3xl mx-auto leading-relaxed text-white/95 font-light tracking-wide drop-shadow-lg">
+                        Bring the camera straight to your guests with our Roaming Photo Booth! Our mobile photographers capture high-quality candid shots, GIFs, and boomerangs, delivering instant digital sharing without guests waiting in line.
+                    </p>
+
+                    <div class="flex flex-col sm:flex-row gap-5 justify-center items-center mb-12">
+                        <a href="../../index.html#contact"
+                            class="group relative inline-flex items-center gap-3 bg-gradient-to-r from-blue-400 to-indigo-400 text-gray-900 px-10 py-5 rounded-full text-lg font-bold shadow-2xl hover:shadow-blue-500/50 transition-all duration-500 transform hover:scale-110 hover:-translate-y-1 overflow-hidden">
+                            <span class="relative z-10">Get Your Free Quote</span>
+                            <svg class="w-5 h-5 relative z-10 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+                            </svg>
+                        </a>
+                        <a href="../../index.html#contact"
+                            class="group inline-flex items-center gap-3 px-10 py-5 rounded-full text-lg font-bold backdrop-blur-md bg-white/10 border-2 border-blue-400/50 hover:bg-white/20 hover:border-blue-400/70 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:scale-110 hover:-translate-y-1 text-white">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                            </svg>
+                            <span>Book Now</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Roaming Photo Booth Technology Section -->
+        <section class="section-padding bg-gradient-to-b from-blue-50 via-white to-blue-50 relative overflow-hidden">
+            <div class="absolute inset-0 pointer-events-none">
+                <div class="absolute -top-24 -left-24 w-96 h-96 rounded-full bg-blue-300/30 blur-3xl"></div>
+                <div class="absolute bottom-0 right-0 w-[28rem] h-[28rem] rounded-full bg-indigo-400/20 blur-3xl"></div>
+            </div>
+            <div class="container mx-auto px-6 relative z-10">
+                <div class="text-center mb-16 space-y-6">
+                    <div class="inline-flex items-center gap-3 px-6 py-2 bg-white/80 border border-blue-200 rounded-full shadow-sm">
+                        <span class="text-blue-600 text-xs font-semibold tracking-[0.3em] uppercase">Roaming Technology</span>
+                        <div class="flex gap-1">
+                            <span class="w-2 h-2 rounded-full bg-blue-400 animate-pulse"></span>
+                            <span class="w-2 h-2 rounded-full bg-indigo-400 animate-pulse" style="animation-delay: 0.2s;"></span>
+                            <span class="w-2 h-2 rounded-full bg-blue-500 animate-pulse" style="animation-delay: 0.4s;"></span>
+                        </div>
+                    </div>
+                    <h2 class="text-4xl md:text-5xl font-bold bg-gradient-to-r from-gray-900 via-blue-600 to-gray-900 bg-clip-text text-transparent">
+                        Roaming Photo Booth Technology, Photographer Quality
+                    </h2>
+                    <p class="max-w-3xl mx-auto text-lg md:text-xl text-gray-600 leading-relaxed">
+                        The future of event photography isn't stuck in a corner. Our roaming photo booth moves throughout your event, capturing high-energy moments and creating shareable content in real time.
+                    </p>
+                </div>
+
+                <!-- Features Grid -->
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+                    <div class="bg-white rounded-3xl p-8 shadow-xl hover:shadow-blue-200/60 transition-all duration-300 hover:-translate-y-2">
+                        <div class="feature-icon">
+                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 4V2a1 1 0 011-1h4a1 1 0 011 1v2m4 0H9m0 0V1m0 3h6m-6 0v3m6-3v3m0 3v6m0 0v6a2 2 0 01-2 2H9a2 2 0 01-2-2v-6m8 0H9m0 0V9m0 3h6m-6 0v3"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">Custom Event Branding Overlays</h3>
+                        <p class="text-gray-600 leading-relaxed">Personalized overlays and branding that match your event theme perfectly.</p>
+                    </div>
+
+                    <div class="bg-white rounded-3xl p-8 shadow-xl hover:shadow-blue-200/60 transition-all duration-300 hover:-translate-y-2">
+                        <div class="feature-icon">
+                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">Interactive Guest Experiences</h3>
+                        <p class="text-gray-600 leading-relaxed">Engaging interactions that create memorable moments for every guest.</p>
+                    </div>
+
+                    <div class="bg-white rounded-3xl p-8 shadow-xl hover:shadow-blue-200/60 transition-all duration-300 hover:-translate-y-2">
+                        <div class="feature-icon">
+                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2H5a2 2 0 00-2-2z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5a2 2 0 012-2h4a2 2 0 012 2v0M8 5a2 2 0 012-2h4a2 2 0 012 2v0"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">Green Screen Technology Anywhere</h3>
+                        <p class="text-gray-600 leading-relaxed">Portable green screen setup that works in any location at your event.</p>
+                    </div>
+
+                    <div class="bg-white rounded-3xl p-8 shadow-xl hover:shadow-blue-200/60 transition-all duration-300 hover:-translate-y-2">
+                        <div class="feature-icon">
+                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">Animated GIF Creation On-The-Spot</h3>
+                        <p class="text-gray-600 leading-relaxed">Create animated GIFs instantly during your event for immediate sharing.</p>
+                    </div>
+
+                    <div class="bg-white rounded-3xl p-8 shadow-xl hover:shadow-blue-200/60 transition-all duration-300 hover:-translate-y-2">
+                        <div class="feature-icon">
+                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">Red Carpet-Style Photo Moments</h3>
+                        <p class="text-gray-600 leading-relaxed">Professional lighting and styling for celebrity-worthy photo experiences.</p>
+                    </div>
+
+                    <div class="bg-white rounded-3xl p-8 shadow-xl hover:shadow-blue-200/60 transition-all duration-300 hover:-translate-y-2">
+                        <div class="feature-icon">
+                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">Luxury Event Photography</h3>
+                        <p class="text-gray-600 leading-relaxed">High-end photography services with professional equipment and techniques.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Mobile Roaming Experiences Section -->
+        <section class="section-padding bg-white">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl md:text-5xl font-bold bg-gradient-to-r from-gray-900 via-blue-600 to-gray-900 bg-clip-text text-transparent mb-6">
+                        Mobile Roaming Photo Booth Experiences
+                    </h2>
+                    <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                        Bring the photo booth to the guests. Our Roaming Booth moves throughout your event, capturing high-energy moments and creating shareable content in real time. Perfect for galas, trade shows, and festivals.
+                    </p>
+                </div>
+
+                <!-- Features List -->
+                <div class="max-w-4xl mx-auto">
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-gray-900 mb-2">Wireless Roaming Photo Capture</h3>
+                                <p class="text-gray-600">Move freely throughout your venue without being tied to one location.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-gray-900 mb-2">Branded Digital And Print Templates</h3>
+                                <p class="text-gray-600">Custom templates that match your brand perfectly for both digital and print outputs.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-gray-900 mb-2">Instant Social Media Sharing</h3>
+                                <p class="text-gray-600">Photos and GIFs ready for immediate social media sharing and posting.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-gray-900 mb-2">Live Slideshows Of Event Photos</h3>
+                                <p class="text-gray-600">Display captured moments in real-time on screens throughout your event.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Packages Section -->
+        <section class="section-padding bg-gradient-to-b from-gray-50 to-white">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl md:text-5xl font-bold bg-gradient-to-r from-gray-900 via-blue-600 to-gray-900 bg-clip-text text-transparent mb-6">
+                        Roaming Booth Packages
+                    </h2>
+                    <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                        Choose the perfect package for your event. All packages include professional photographers and instant digital sharing.
+                    </p>
+                </div>
+
+                <!-- Packages Grid -->
+                <div class="grid lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+                    <!-- Basic Package -->
+                    <div class="package-card bg-white rounded-3xl p-8 shadow-xl border border-gray-200">
+                        <div class="text-center mb-8">
+                            <h3 class="text-2xl font-bold text-gray-900 mb-2">Basic Package</h3>
+                            <div class="text-4xl font-black text-blue-600 mb-2">Up To 3 Hours</div>
+                            <p class="text-gray-600">Perfect for smaller events and gatherings</p>
+                        </div>
+
+                        <div class="space-y-4 mb-8">
+                            <div class="flex items-center gap-3">
+                                <svg class="w-5 h-5 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                </svg>
+                                <span class="text-gray-700">Engaging Attendant</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <svg class="w-5 h-5 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                </svg>
+                                <span class="text-gray-700">Ring Light Roamer Booth</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <svg class="w-5 h-5 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                </svg>
+                                <span class="text-gray-700">Supplemental Lighting</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <svg class="w-5 h-5 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                </svg>
+                                <span class="text-gray-700">Photo/Boomerang/GIF Options</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <svg class="w-5 h-5 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                </svg>
+                                <span class="text-gray-700">Print Layout: Look Book</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <svg class="w-5 h-5 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                </svg>
+                                <span class="text-gray-700">Digital Sharing</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <svg class="w-5 h-5 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                </svg>
+                                <span class="text-gray-700">Post-Event Online Gallery</span>
+                            </div>
+                        </div>
+
+                        <a href="../../index.html#contact" class="w-full btn-primary text-white py-4 rounded-full font-bold text-center block hover:shadow-xl transition-all duration-300">
+                            Get Quote
+                        </a>
+                    </div>
+
+                    <!-- Recommended Package -->
+                    <div class="package-card package-featured bg-white rounded-3xl p-8 shadow-xl border-2 border-blue-500">
+                        <div class="text-center mb-8">
+                            <h3 class="text-2xl font-bold text-gray-900 mb-2">Recommended Package</h3>
+                            <div class="text-4xl font-black text-blue-600 mb-2">Up To 4 Hours</div>
+                            <p class="text-gray-600">Most popular choice for events</p>
+                        </div>
+
+                        <div class="space-y-4 mb-8">
+                            <div class="flex items-center gap-3">
+                                <svg class="w-5 h-5 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                </svg>
+                                <span class="text-gray-700">Engaging Photographer</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <svg class="w-5 h-5 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                </svg>
+                                <span class="text-gray-700">DSLR Roamer Booth</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <svg class="w-5 h-5 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                </svg>
+                                <span class="text-gray-700">Flash Photography</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <svg class="w-5 h-5 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                </svg>
+                                <span class="text-gray-700">Print Layout: Custom Design/Logo Branding</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <svg class="w-5 h-5 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                </svg>
+                                <span class="text-gray-700">Digital Sharing</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <svg class="w-5 h-5 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                </svg>
+                                <span class="text-gray-700">Post-Event Online Gallery</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <svg class="w-5 h-5 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                </svg>
+                                <span class="text-gray-700">Slideshow on Screen</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <svg class="w-5 h-5 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                </svg>
+                                <span class="text-gray-700">Wifi Hotspot</span>
+                            </div>
+                        </div>
+
+                        <a href="../../index.html#contact" class="w-full bg-gradient-to-r from-blue-500 to-indigo-500 text-white py-4 rounded-full font-bold text-center block hover:shadow-xl transition-all duration-300 hover:from-blue-600 hover:to-indigo-600">
+                            Get Quote
+                        </a>
+                    </div>
+
+                    <!-- Brand Activation Package -->
+                    <div class="package-card bg-white rounded-3xl p-8 shadow-xl border border-gray-200">
+                        <div class="text-center mb-8">
+                            <h3 class="text-2xl font-bold text-gray-900 mb-2">Brand Activation Package</h3>
+                            <div class="text-4xl font-black text-blue-600 mb-2">Up To 6 Hours</div>
+                            <p class="text-gray-600">Complete brand experience solution</p>
+                        </div>
+
+                        <div class="space-y-4 mb-8">
+                            <div class="flex items-center gap-3">
+                                <svg class="w-5 h-5 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                </svg>
+                                <span class="text-gray-700">Two Engaging Photographers</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <svg class="w-5 h-5 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                </svg>
+                                <span class="text-gray-700">DSLR Roamer Booths</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <svg class="w-5 h-5 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                </svg>
+                                <span class="text-gray-700">Flash Photography</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <svg class="w-5 h-5 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                </svg>
+                                <span class="text-gray-700">Onsite Printing/Share Station</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <svg class="w-5 h-5 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                </svg>
+                                <span class="text-gray-700">Print Layout: Custom Design/Logo Branding</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <svg class="w-5 h-5 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                </svg>
+                                <span class="text-gray-700">Digital Sharing with Brand Integration</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <svg class="w-5 h-5 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                </svg>
+                                <span class="text-gray-700">Post-Event Online Gallery with Custom Branding</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <svg class="w-5 h-5 text-green-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                </svg>
+                                <span class="text-gray-700">Live Photo/Video Streaming to Event Screens</span>
+                            </div>
+                        </div>
+
+                        <a href="../../index.html#contact" class="w-full btn-primary text-white py-4 rounded-full font-bold text-center block hover:shadow-xl transition-all duration-300">
+                            Get Quote
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Technical Specifications Section -->
+        <section class="section-padding bg-white">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl md:text-5xl font-bold bg-gradient-to-r from-gray-900 via-blue-600 to-gray-900 bg-clip-text text-transparent mb-6">
+                        Technical Specifications
+                    </h2>
+                    <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                        Professional equipment and unlimited coverage for your event
+                    </p>
+                </div>
+
+                <!-- Tech Specs Grid -->
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+                    <div class="tech-spec-card p-6">
+                        <h3 class="text-lg font-bold text-gray-900 mb-2">Coverage Area</h3>
+                        <p class="text-gray-600">Unlimited Venue Reach</p>
+                    </div>
+
+                    <div class="tech-spec-card p-6">
+                        <h3 class="text-lg font-bold text-gray-900 mb-2">Event Duration</h3>
+                        <p class="text-gray-600">Up to 8 Hours</p>
+                    </div>
+
+                    <div class="tech-spec-card p-6">
+                        <h3 class="text-lg font-bold text-gray-900 mb-2">Photo Delivery</h3>
+                        <p class="text-gray-600">Instant to Phones, Printing Optional</p>
+                    </div>
+
+                    <div class="tech-spec-card p-6">
+                        <h3 class="text-lg font-bold text-gray-900 mb-2">Guest Capacity</h3>
+                        <p class="text-gray-600">Unlimited</p>
+                    </div>
+
+                    <div class="tech-spec-card p-6">
+                        <h3 class="text-lg font-bold text-gray-900 mb-2">Setup Time</h3>
+                        <p class="text-gray-600">30 Minutes</p>
+                    </div>
+
+                    <div class="tech-spec-card p-6">
+                        <h3 class="text-lg font-bold text-gray-900 mb-2">Staff</h3>
+                        <p class="text-gray-600">Professional Photographers</p>
+                    </div>
+
+                    <div class="tech-spec-card p-6">
+                        <h3 class="text-lg font-bold text-gray-900 mb-2">Equipment</h3>
+                        <p class="text-gray-600">DSLR or iPad</p>
+                    </div>
+
+                    <div class="tech-spec-card p-6">
+                        <h3 class="text-lg font-bold text-gray-900 mb-2">Lighting</h3>
+                        <p class="text-gray-600">Built-In Professional</p>
+                    </div>
+
+                    <div class="tech-spec-card p-6">
+                        <h3 class="text-lg font-bold text-gray-900 mb-2">Backup</h3>
+                        <p class="text-gray-600">Redundant Systems</p>
+                    </div>
+
+                    <div class="tech-spec-card p-6">
+                        <h3 class="text-lg font-bold text-gray-900 mb-2">Output</h3>
+                        <p class="text-gray-600">High-Res + Social Ready</p>
+                    </div>
+
+                    <div class="tech-spec-card p-6">
+                        <h3 class="text-lg font-bold text-gray-900 mb-2">Branding</h3>
+                        <p class="text-gray-600">Custom Integration</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact CTA Section -->
+        <section class="section-padding bg-gradient-to-r from-[#220834] via-[#1a0b44] to-[#051637] text-white">
+            <div class="container mx-auto px-6">
+                <div class="max-w-4xl mx-auto text-center">
+                    <h2 class="text-4xl md:text-6xl font-black mb-6 leading-tight">
+                        Ready to Bring the Roaming Photo Booth to Your Event?
+                    </h2>
+                    <p class="text-lg md:text-2xl text-white/85 mb-8 leading-relaxed">
+                        Contact us today to discuss how our mobile photo booth can enhance your next event.
+                    </p>
+
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <a href="../../index.html#contact" class="group inline-flex items-center justify-center px-10 py-4 rounded-full font-semibold text-lg bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 text-white shadow-[0_22px_60px_-20px_rgba(236,72,153,0.8)] hover:shadow-[0_28px_70px_-20px_rgba(59,130,246,0.7)] transition-transform duration-300 hover:-translate-y-1 focus:ring-4 focus:ring-pink-400/40" aria-label="Start photobooth design consultation">
+                            <svg class="w-6 h-6 mr-2 opacity-90 group-hover:opacity-100" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+                            Design My Booth Experience
+                            <svg class="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+                        </a>
+                        <a href="tel:7205516994" class="inline-flex items-center justify-center px-9 py-4 rounded-full font-semibold border border-white/30 text-white bg-white/5 hover:bg-white/15 hover:shadow-lg transition-all duration-300 focus:ring-2 focus:ring-white/30" aria-label="Call to book photobooth">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498A1 1 0 0121 17.72V21a2 2 0 01-2 2h-1C9.716 23 3 16.284 3 8V7a2 2 0 012-2z"/></svg>
+                            Call a Booth Producer
+                        </a>
+                    </div>
+
+                    <!-- Trust indicators -->
+                    <div class="flex flex-wrap items-center justify-center gap-6 mt-12 text-white/80 text-sm">
+                        <div class="flex items-center gap-2"><svg class="w-4 h-4 text-pink-300" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>Instant Digital Sharing</div>
+                        <div class="flex items-center gap-2"><svg class="w-4 h-4 text-purple-300" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>Professional Photographers</div>
+                        <div class="flex items-center gap-2"><svg class="w-4 h-4 text-blue-300" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>Custom Branding</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Related Products Section -->
+        <section class="section-padding bg-white">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl md:text-5xl font-bold bg-gradient-to-r from-gray-900 via-blue-600 to-gray-900 bg-clip-text text-transparent mb-6">
+                        Discover More Products
+                    </h2>
+                    <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                        Explore our complete range of photo booth solutions for your next event.
+                    </p>
+                </div>
+
+                <!-- Related Products Grid -->
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- AI Photo Booth -->
+                    <div class="group relative rounded-3xl overflow-hidden bg-white border border-gray-200/60 shadow-[0_20px_45px_-20px_rgba(59,130,246,0.15)] hover:shadow-[0_25px_55px_-20px_rgba(59,130,246,0.25)] transition-all duration-300 hover:-translate-y-1">
+                        <div class="relative h-64 overflow-hidden">
+                            <img src="../../assets/images/ai-photo-booth-home.jpg" alt="AI Photo Booth" class="h-full w-full object-cover transform group-hover:scale-110 transition duration-500">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold text-gray-900 mb-2">AI Photo Booth</h3>
+                            <p class="text-sm text-gray-600">Turn your photo into a custom AI-generated character</p>
+                        </div>
+                    </div>
+
+                    <!-- Corporate Events -->
+                    <div class="group relative rounded-3xl overflow-hidden bg-white border border-gray-200/60 shadow-[0_20px_45px_-20px_rgba(236,72,153,0.15)] hover:shadow-[0_25px_55px_-20px_rgba(236,72,153,0.25)] transition-all duration-300 hover:-translate-y-1">
+                        <div class="relative h-64 overflow-hidden">
+                            <img src="../../assets/images/corporate-events.jpg" alt="Corporate Events" class="h-full w-full object-cover transform group-hover:scale-110 transition duration-500">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold text-gray-900 mb-2">Corporate Events</h3>
+                            <p class="text-sm text-gray-600">Professional photo booths for business events</p>
+                        </div>
+                    </div>
+
+                    <!-- Trade Shows -->
+                    <div class="group relative rounded-3xl overflow-hidden bg-white border border-gray-200/60 shadow-[0_20px_45px_-20px_rgba(14,165,233,0.15)] hover:shadow-[0_25px_55px_-20px_rgba(14,165,233,0.25)] transition-all duration-300 hover:-translate-y-1">
+                        <div class="relative h-64 overflow-hidden">
+                            <img src="../../assets/images/trade-shows.jpg" alt="Trade Shows" class="h-full w-full object-cover transform group-hover:scale-110 transition duration-500">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold text-gray-900 mb-2">Trade Shows</h3>
+                            <p class="text-sm text-gray-600">Interactive photo booths for trade show engagement</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- View All Products Button -->
+                <div class="flex justify-center mt-12">
+                    <a href="../../index.html#products" class="group inline-flex items-center justify-center px-10 py-4 rounded-full font-semibold text-lg bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-white shadow-[0_22px_60px_-20px_rgba(0,80,255,0.4)] hover:shadow-[0_28px_70px_-20px_rgba(147,51,234,0.5)] transition-transform duration-300 hover:-translate-y-1 focus:ring-4 focus:ring-blue-400/40">
+                        <svg class="w-6 h-6 mr-2 opacity-90 group-hover:opacity-100" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                        </svg>
+                        View All Products
+                        <svg class="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="footer-placeholder"></div>
+
+    <!-- Load Components -->
+    <script src="../../assets/components/nav.js"></script>
+    <script src="../../assets/components/footer.js"></script>
+</body>
+</html>
