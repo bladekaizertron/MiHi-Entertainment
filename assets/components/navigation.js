@@ -213,7 +213,11 @@ document.addEventListener('DOMContentLoaded', function() {
                                     <h4 class="font-bold text-gray-900 text-sm mb-2 text-blue-600">AV Services</h4>
                                     <div class="space-y-2">
                                         <a href="${pathPrefix}rentals/av-services/audio-visual.html" class="block text-sm text-gray-700 hover:text-blue-600 transition">
-                                            <span class="font-medium">Audio & Visual</span><br>
+                                            <span class="font-medium">Audio Services</span><br>
+                                            <span class="text-xs text-gray-500">Pro sound, screens, and mixing</span>
+                                        </a>
+                                        <a href="${pathPrefix}rentals/av-services/visual-services.html" class="block text-sm text-gray-700 hover:text-blue-600 transition">
+                                            <span class="font-medium">Visual Services</span><br>
                                             <span class="text-xs text-gray-500">Pro sound, screens, and mixing</span>
                                         </a>
                                         <a href="${pathPrefix}rentals/av-services/lighting.html" class="block text-sm text-gray-700 hover:text-blue-600 transition">
