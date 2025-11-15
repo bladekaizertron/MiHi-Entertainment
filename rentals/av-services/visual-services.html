@@ -1,0 +1,2365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visual Services - MiHi Entertainment</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&family=VT323&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Audiowide&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; color: #1a202c; }
+        h1, h2, h3, h4, h5, h6 { font-family: 'Rajdhani', sans-serif; font-weight: 600; }
+        h1.av-title { 
+            font-family: 'Orbitron', sans-serif !important; 
+            font-weight: 800;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+        }
+        
+        /* Spotlight Effect for A/V PRODUCTION */
+        h3.av-title { 
+            font-family: 'Orbitron', sans-serif !important; 
+            font-weight: 700;
+            font-size: 5rem !important;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            position: relative;
+            background: transparent;
+            color: #ffffff;
+            text-align: center;
+            display: inline-block;
+        }
+        
+        @media (min-width: 800px) {
+            h3.av-title {
+                font-size: 1.25rem !important;
+            }
+        }
+        
+        @media (min-width: 990px) {
+            h3.av-title {
+                font-size: 2rem !important;
+            }
+        }
+        
+        h3.av-title:before {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(#f70000, #f89200, #f8f501, #038f00, #0168f8, #a200f7);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
+            background-size: 100% 90%;
+            line-height: inherit;
+            clip-path: ellipse(100px 100px at -2.54% -9.25%);
+            -webkit-clip-path: ellipse(100px 100px at -2.54% -9.25%);
+            animation: swing 5s infinite;
+            animation-direction: alternate;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        @keyframes swing {
+            0% {
+                -webkit-clip-path: ellipse(100px 100px at -2.54% -9.25%);
+                clip-path: ellipse(100px 100px at -2.54% -9.25%);
+            }
+            50% {
+                -webkit-clip-path: ellipse(100px 100px at 49.66% 64.36%);
+                clip-path: ellipse(100px 100px at 49.66% 64.36%);
+            }
+            100% {
+                -webkit-clip-path: ellipse(100px 100px at 102.62% -1.61%);
+                clip-path: ellipse(100px 100px at 102.62% -1.61%);
+            }
+        }
+        
+        /* Monitor Effect for Paragraph */
+        .monitor-table {
+            width: 100%;
+            max-width: 790px;
+            height: 90px;
+            margin: 0.75rem auto;
+            background: linear-gradient(135deg, #1a1a3e 0%, #2d1b4e 100%);
+            border-radius: 5px;
+            padding: 4px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5), 
+                        inset 0 1px 2px rgba(255, 255, 255, 0.1);
+        }
+        
+        .monitor-wrapper {
+            background: #050321;
+            width: 100%;
+            height: 82px;
+            border-radius: 2px;
+            box-shadow: 0px 2px 2px 2px rgba(0, 0, 0, 0.30),
+                        inset 0 0 20px rgba(0, 0, 0, 0.5);
+            padding: 2px;
+            position: relative;
+        }
+        
+        .monitor-wrapper::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 2px;
+            box-shadow: inset 0 0 30px rgba(0, 255, 255, 0.1),
+                        inset 0 0 60px rgba(138, 43, 226, 0.05);
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .monitor {
+            width: 100%;
+            height: 78px;
+            background: linear-gradient(135deg, #1e1e3f 0%, #2a1a3a 100%);
+            border-radius: 2px;
+            overflow: hidden;
+            white-space: nowrap;
+            box-shadow: inset 0px 5px 10px 2px rgba(0, 0, 0, 0.6),
+                        inset 0 0 20px rgba(0, 0, 0, 0.4);
+            position: relative;
+        }
+        
+        .monitor::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: repeating-linear-gradient(
+                0deg,
+                rgba(0, 0, 0, 0.15) 0px,
+                transparent 1px,
+                transparent 2px,
+                rgba(0, 0, 0, 0.15) 3px
+            );
+            pointer-events: none;
+            z-index: 2;
+            opacity: 0.5;
+        }
+        
+        .monitor p {
+            font-family: 'VT323', monospace;
+            font-size: 2rem;
+            position: absolute;
+            display: inline-block;
+            animation: scrollText 40s infinite linear;
+            color: #00ffcc;
+            text-shadow: 0 0 10px rgba(0, 255, 204, 0.5),
+                         0 0 20px rgba(0, 255, 204, 0.3),
+                         0 0 30px rgba(0, 255, 204, 0.2);
+            white-space: nowrap;
+            padding: 0;
+            margin: 0;
+            line-height: 1;
+            z-index: 1;
+            width: max-content;
+            top: 50%;
+            margin-top: -1rem;
+        }
+        
+        @keyframes scrollText {
+            0% {
+                left: 100%;
+            }
+            100% {
+                left: -200%;
+            }
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .monitor-table {
+                height: 75px;
+                max-width: 95%;
+                margin: 0.5rem auto;
+                padding: 3px;
+            }
+            
+            .monitor-wrapper {
+                height: 69px;
+                padding: 2px;
+            }
+            
+            .monitor {
+                height: 65px;
+            }
+            
+            .monitor p {
+                font-size: 1.5rem;
+                margin-top: -0.75rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .monitor-table {
+                height: 65px;
+                margin: 0.5rem auto;
+                padding: 3px;
+            }
+            
+            .monitor-wrapper {
+                height: 59px;
+                padding: 2px;
+            }
+            
+            .monitor {
+                height: 55px;
+            }
+            
+            .monitor p {
+                font-size: 1.2rem;
+                margin-top: -0.6rem;
+            }
+        }
+        
+        .btn-primary { background: linear-gradient(135deg, #7b11a9 0%, #6e028f 100%); transition: all 0.3s ease; }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4); }
+        
+        /* Super Button Effect - Visual Theme */
+        .super-button {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            padding: 14px 28px;
+            background: linear-gradient(145deg, #1a1a3e, #2d1b4e);
+            border: 2px solid rgba(0, 255, 204, 0.3);
+            border-radius: 100px;
+            color: #fff;
+            font-size: 16px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            overflow: hidden;
+            transition: all 0.4s ease-in-out;
+            box-shadow: 0 0 20px rgba(0, 255, 204, 0.15);
+            backdrop-filter: blur(8px);
+            z-index: 1;
+            text-decoration: none;
+            margin-top: 3rem;
+        }
+        
+        .super-button::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(from 0deg, #00ffcc, #a200f7, #0168f8, #00ffcc);
+            animation: rotateButton 4s linear infinite;
+            z-index: -2;
+        }
+        
+        .super-button::after {
+            content: "";
+            position: absolute;
+            inset: 2px;
+            background: linear-gradient(145deg, #1a1a3e, #2d1b4e);
+            border-radius: inherit;
+            z-index: -1;
+        }
+        
+        .super-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 40px rgba(0, 255, 204, 0.3),
+                        0 0 60px rgba(162, 0, 247, 0.2);
+            border-color: rgba(0, 255, 204, 0.5);
+        }
+        
+        .super-button:hover .arrow {
+            transform: translateX(6px);
+        }
+        
+        .super-button .arrow {
+            width: 22px;
+            height: 22px;
+            transition: transform 0.3s ease-in-out;
+            color: #00ffcc;
+        }
+        
+        .super-button .arrow svg {
+            width: 100%;
+            height: 100%;
+            fill: currentColor;
+        }
+        
+        @keyframes rotateButton {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+        .section-padding { padding: 5rem 0; }
+        .hero-gradient { background: linear-gradient(135deg, rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0.75) 100%); }
+
+        /* Animated Text Effect - Contact Us Now */
+        .animated-text-container {
+            width: 100%;
+            height: auto;
+            overflow: hidden;
+            margin: 1rem 0;
+        }
+        .animated-text-flex {
+            display: flex;
+            flex-wrap: nowrap;
+            justify-content: center;
+            width: 100%;
+            height: 60px;
+        }
+        .animated-text-col {
+            display: flex;
+            flex-direction: column;
+            flex-wrap: nowrap;
+            justify-content: center;
+            height: 100%;
+        }
+        .animated-text-col-7 {
+            width: calc(100% / 7);
+        }
+        .animated-text-col-5 {
+            width: calc(100% / 5);
+            top: -1px;
+            height: calc(100% + 1px);
+            position: relative;
+        }
+        .animated-centerize {
+            text-align: center;
+            display: grid;
+            justify-content: center;
+            align-content: center;
+            font-family: 'Audiowide', 'Orbitron', sans-serif;
+            font-weight: 800;
+            font-size: clamp(0.9rem, 2vw, 1.3rem);
+            color: #eee;
+        }
+        .animated-black {
+            color: #eee;
+            background: #0a0321;
+            width: 100%;
+            height: calc(100% / 3);
+        }
+        .animated-black-2 {
+            color: #eee;
+            background: #1a1a3e;
+            width: 100%;
+            height: calc(100% / 3);
+        }
+        .animated-bg-primary {
+            color: #eee;
+            background: #a200f7;
+            width: 100%;
+            height: calc(100% / 3);
+        }
+        .animated-bg-secondary {
+            background: #00ffcc;
+            color: #0a0321;
+            width: 100%;
+            height: calc(100% / 3);
+        }
+        .animated-growup {
+            animation: animated-growup 1s infinite alternate;
+        }
+        .animated-scaleme {
+            animation: animated-scaleme 1s infinite alternate;
+        }
+        .animated-delay-1 { animation-delay: 0.1s; }
+        .animated-delay-2 { animation-delay: 0.2s; }
+        .animated-delay-3 { animation-delay: 0.3s; }
+        .animated-delay-4 { animation-delay: 0.4s; }
+        .animated-delay-5 { animation-delay: 0.5s; }
+        .animated-delay-6 { animation-delay: 0.6s; }
+        .animated-delay-7 { animation-delay: 0.7s; }
+        @keyframes animated-growup {
+            from {
+                height: calc(100% / 3);
+            }
+            to {
+                height: calc(100% / 1.5);
+            }
+        }
+        @keyframes animated-scaleme {
+            from {
+                transform: scale(1);
+            }
+            to {
+                transform: scale(1.5);
+                text-shadow: 0px 2px 4px hsl(0 0% 0% / 0.5);
+            }
+        }
+
+        /* Interactive Brochure Section Styles - Visual Theme */
+        .brochure-section {
+            background: radial-gradient(circle, rgba(26, 26, 62, 0.95) 0%, rgba(10, 3, 33, 1) 100%);
+            position: relative;
+            overflow: hidden;
+            font-family: 'Rajdhani', sans-serif;
+            min-height: 92vh;
+            display: flex;
+            align-items: center;
+            padding-top: 0;
+            padding-bottom: 0;
+        }
+
+        .brochure-section .container {
+            width: 100%;
+            padding-top: 3rem;
+            padding-bottom: 3rem;
+            padding-left: clamp(1.5rem, 3vw, 3rem);
+            padding-right: clamp(1.5rem, 3vw, 3rem);
+        }
+        .brochure-header {
+            margin-bottom: 2rem !important;
+        }
+
+        .brochure-header h2 {
+            margin-bottom: 0.75rem;
+        }
+
+        .brochure-header p {
+            font-size: 1.05rem;
+        }
+
+        .content-grid {
+            gap: clamp(1.5rem, 2.5vw, 2.5rem);
+            align-items: stretch;
+        }
+
+        .feature-list {
+            gap: 0.9rem;
+            margin-bottom: 2rem;
+        }
+
+        .brochure-cta-group {
+            gap: 1rem;
+        }
+
+        .compact-tags {
+            gap: 0.75rem;
+            padding-top: 0.75rem;
+        }
+
+        .compact-tags .brochure-tag {
+            font-size: 0.8rem;
+        }
+
+        @media (max-width: 1024px) {
+            .brochure-section {
+                min-height: auto;
+                display: block;
+                padding-top: 0;
+                padding-bottom: 0;
+            }
+
+            .brochure-section .container {
+                padding-top: 2.5rem;
+                padding-bottom: 2.5rem;
+            }
+        }
+
+        .brochure-section h2 {
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .brochure-section h3,
+        .brochure-section .brochure-subtitle {
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+        }
+
+        .brochure-section p,
+        .brochure-check-text,
+        .brochure-check-description,
+        .brochure-tag {
+            font-family: 'Rajdhani', sans-serif;
+            letter-spacing: 0.02em;
+        }
+
+        .brochure-section .pill-label {
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+        }
+
+        .brochure-section::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(162, 0, 247, 0.18) 0%, transparent 45%),
+                radial-gradient(circle at 80% 50%, rgba(0, 255, 204, 0.15) 0%, transparent 45%);
+            pointer-events: none;
+        }
+
+        #brochure-webgl-canvas {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0;
+        }
+
+        .brochure-badge {
+            background: linear-gradient(135deg, #a200f7 0%, #7b11a9 100%);
+            color: #ffffff;
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.875rem;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            display: inline-block;
+            box-shadow: 0 4px 18px rgba(162, 0, 247, 0.35);
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .brochure-preview {
+            position: relative;
+            background: #0f0a1f;
+            border-radius: 1.5rem;
+            box-shadow: 0 25px 55px -15px rgba(10, 3, 33, 0.85);
+            overflow: hidden;
+            transition: transform 0.45s ease, box-shadow 0.45s ease;
+            border: 2px solid rgba(162, 0, 247, 0.35);
+        }
+
+        .brochure-preview:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 35px 60px -20px rgba(162, 0, 247, 0.5);
+            border-color: rgba(0, 255, 204, 0.6);
+        }
+
+        .brochure-preview::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: repeating-linear-gradient(45deg, transparent, transparent 2px, rgba(162, 0, 247, 0.05) 2px, rgba(162, 0, 247, 0.05) 4px);
+            opacity: 0.4;
+            pointer-events: none;
+        }
+
+        .brochure-image {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            transition: transform 0.6s ease;
+        }
+
+        .brochure-preview:hover .brochure-image {
+            transform: scale(1.03);
+        }
+
+        .brochure-check-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+        }
+
+        .brochure-check-icon {
+            flex-shrink: 0;
+            width: 1.5rem;
+            height: 1.5rem;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #a200f7 0%, #7b11a9 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .brochure-check-text {
+            font-weight: 600;
+            color: #e2e8f0;
+        }
+
+        .brochure-check-description {
+            color: #94a3b8;
+            margin-top: 0.25rem;
+        }
+
+        .brochure-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #a200f7 0%, #7b11a9 100%);
+            color: #ffffff;
+            padding: 0.85rem 1.75rem;
+            border-radius: 9999px;
+            font-weight: 700;
+            font-size: 1rem;
+            font-family: 'Orbitron', sans-serif;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 20px 35px -15px rgba(162, 0, 247, 0.65);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .brochure-button:hover {
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 30px 45px -20px rgba(162, 0, 247, 0.75);
+        }
+
+        .brochure-download-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid #a200f7;
+            color: #e2e8f0;
+            padding: 0.8rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 700;
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 0.04em;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .brochure-download-button:hover {
+            background: linear-gradient(135deg, #a200f7 0%, #7b11a9 100%);
+            color: #ffffff;
+            transform: translateY(-2px);
+        }
+
+        .brochure-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            color: #94a3b8;
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .brochure-tag-icon {
+            color: #a200f7;
+            width: 1.15rem;
+            height: 1.15rem;
+        }
+
+        .brochure-modal {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            display: none;
+            background-color: rgba(0, 0, 0, 0.85);
+            font-family: 'Rajdhani', sans-serif;
+        }
+
+        .brochure-modal.show {
+            display: block;
+        }
+
+        .brochure-modal-content {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .brochure-close-button {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(10, 3, 33, 0.9);
+            color: #a200f7;
+            border: none;
+            border-radius: 50%;
+            padding: 0.6rem;
+            cursor: pointer;
+            transition: transform 0.2s ease, background 0.2s ease;
+            box-shadow: 0 8px 20px rgba(10, 3, 33, 0.7);
+            z-index: 10001;
+            pointer-events: auto;
+        }
+
+        .brochure-close-button:hover {
+            transform: scale(1.08);
+            background: rgba(26, 26, 62, 0.95);
+        }
+
+        .brochure-iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+            background: transparent;
+        }
+
+        #brochureLoader {
+            display: none;
+        }
+        
+        /* Visual Services Animation Effect */
+        .visual-services-container {
+            width: 12em;
+            height: 1.2em;
+            font-size: 2.5rem;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 900;
+            letter-spacing: 0.15em;
+            position: relative;
+            margin: 50px auto 40px auto;
+            line-height: 1;
+            cursor: pointer;
+        }
+        
+        @media (min-width: 768px) {
+            .visual-services-container {
+                font-size: 4rem;
+                width: 16em;
+                height: 1.15em;
+                margin: 60px auto 50px auto;
+            }
+        }
+        
+        .visual-services-container div {
+            position: absolute;
+            text-transform: uppercase;
+            display: block;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 900;
+            letter-spacing: 0.25em;
+            white-space: nowrap;
+            line-height: 1;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        .visual-upper {
+            top: 0;
+            left: 50%;
+            height: 52.5%;
+            background: linear-gradient(180deg, 
+                #ffffff 0%, 
+                #e8e8e8 10%, 
+                #d0d0d0 25%, 
+                #b0b0b0 40%, 
+                #a0a0a0 50%, 
+                #b8b8b8 60%, 
+                #d0d0d0 75%, 
+                #e8e8e8 90%, 
+                #f0f0f0 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            overflow: hidden;
+            z-index: 3;
+            width: auto;
+            text-align: center;
+            transform: translateX(-50%) translateY(0) scaleX(1.3);
+            transform-origin: center;
+            will-change: transform;
+            transition: transform 0.5s ease-in-out;
+            letter-spacing: 0.25em;
+            filter: drop-shadow(0 1px 1px rgba(255, 255, 255, 0.8)) 
+                    drop-shadow(0 1px 2px rgba(0, 0, 0, 0.9)) 
+                    drop-shadow(0 2px 4px rgba(0, 0, 0, 0.7))
+                    drop-shadow(0 4px 8px rgba(0, 0, 0, 0.5))
+                    drop-shadow(0 0 8px rgba(255, 255, 255, 0.6))
+                    drop-shadow(0 0 15px rgba(200, 200, 200, 0.4));
+        }
+        
+        .visual-lower {
+            top: 0;
+            left: 50%;
+            height: 100%;
+            background: linear-gradient(180deg, 
+                transparent 52.5%, 
+                #f0f0f0 52.5%, 
+                #d8d8d8 60%, 
+                #c0c0c0 68%, 
+                #a8a8a8 75%, 
+                #989898 80%, 
+                #a8a8a8 85%, 
+                #b8b8b8 90%, 
+                #d0d0d0 95%, 
+                #e0e0e0 100%);
+            color: transparent;
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            z-index: 1;
+            width: auto;
+            text-align: center;
+            transform: translateX(-50%) translateY(0) scaleX(1.3);
+            transform-origin: center;
+            will-change: transform;
+            transition: transform 0.5s ease-in-out;
+            letter-spacing: 0.25em;
+            filter: drop-shadow(0 1px 1px rgba(255, 255, 255, 0.6)) 
+                    drop-shadow(0 1px 2px rgba(0, 0, 0, 0.9)) 
+                    drop-shadow(0 2px 4px rgba(0, 0, 0, 0.7))
+                    drop-shadow(0 4px 8px rgba(0, 0, 0, 0.5));
+        }
+        
+        .services-inside {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scaleX(1.3);
+            text-align: center;
+            z-index: 2;
+            font-size: 1.5rem;
+            color: #ffffff;
+            font-weight: 800;
+            letter-spacing: 0.2em;
+            line-height: 1;
+            width: auto;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out, text-shadow 0.5s ease-in-out, color 0.5s ease-in-out;
+            text-shadow: 
+                0 0 1px #ffffff,
+                0 0 2px #ffffff,
+                0 0 2px rgba(255, 0, 255, 0.8),
+                0 0 4px rgba(255, 0, 255, 0.6),
+                0 0 6px rgba(255, 0, 255, 0.4);
+        }
+        
+        .visual-services-container:hover .visual-upper {
+            transform: translateX(-50%) translateY(-50px) scaleX(1.3);
+        }
+        
+        .visual-services-container:hover .visual-lower {
+            transform: translateX(-50%) translateY(35px) scaleX(1.3);
+        }
+        
+        .visual-services-container:hover .services-inside {
+            opacity: 1;
+            color: #ffffff;
+            animation: neonPulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes neonPulse {
+            0%, 100% {
+                text-shadow: 
+                    0 0 1px #ffffff,
+                    0 0 2px #ffffff,
+                    0 0 2px #ff00ff,
+                    0 0 4px #ff00ff,
+                    0 0 6px #ff00ff,
+                    0 0 8px #ff00ff,
+                    0 0 12px #ff00ff,
+                    0 0 18px #ff00ff,
+                    0 0 2px rgba(255, 0, 255, 1),
+                    0 0 4px rgba(255, 0, 255, 0.9),
+                    0 0 6px rgba(255, 0, 255, 0.8),
+                    0 0 8px rgba(255, 0, 255, 0.6),
+                    0 0 12px rgba(255, 0, 255, 0.4);
+            }
+            50% {
+                text-shadow: 
+                    0 0 1px #ffffff,
+                    0 0 2px #ffffff,
+                    0 0 1px #ff00ff,
+                    0 0 2px #ff00ff,
+                    0 0 3px #ff00ff,
+                    0 0 4px #ff00ff,
+                    0 0 6px #ff00ff,
+                    0 0 10px #ff00ff,
+                    0 0 1px rgba(255, 0, 255, 1),
+                    0 0 2px rgba(255, 0, 255, 0.9),
+                    0 0 3px rgba(255, 0, 255, 0.7),
+                    0 0 4px rgba(255, 0, 255, 0.5),
+                    0 0 6px rgba(255, 0, 255, 0.3);
+            }
+        }
+        
+        @media (min-width: 768px) {
+            .services-inside {
+                font-size: 2.5rem;
+            }
+        }
+        
+        @keyframes moveUp {
+            0% {
+                transform: translateX(-50%) translateY(0) scaleX(1.3);
+            }
+            15% {
+                transform: translateX(-50%) translateY(-50px) scaleX(1.3);
+            }
+            18% {
+                transform: translateX(-50%) translateY(-50px) scaleX(1.3);
+            }
+            40% {
+                transform: translateX(-50%) translateY(0) scaleX(1.3);
+            }
+            100% {
+                transform: translateX(-50%) translateY(0) scaleX(1.3);
+            }
+        }
+        
+        @keyframes moveDown {
+            0% {
+                transform: translateX(-50%) translateY(0) scaleX(1.3);
+            }
+            15% {
+                transform: translateX(-50%) translateY(35px) scaleX(1.3);
+            }
+            18% {
+                transform: translateX(-50%) translateY(35px) scaleX(1.3);
+            }
+            40% {
+                transform: translateX(-50%) translateY(0) scaleX(1.3);
+            }
+            100% {
+                transform: translateX(-50%) translateY(0) scaleX(1.3);
+            }
+        }
+        
+        @keyframes fadeInOut {
+            0%, 100% {
+                opacity: 0;
+            }
+            15% {
+                opacity: 0;
+            }
+            17% {
+                opacity: 1;
+            }
+            28% {
+                opacity: 1;
+            }
+            32% {
+                opacity: 0;
+            }
+        }
+        
+        @keyframes glowPulse {
+            0%, 100% {
+                text-shadow: 0 0 8px rgba(168, 85, 247, 0.3);
+            }
+            17% {
+                text-shadow: 0 0 20px rgba(168, 85, 247, 0.8),
+                             0 0 35px rgba(168, 85, 247, 0.6),
+                             0 0 50px rgba(168, 85, 247, 0.4);
+            }
+            20% {
+                text-shadow: 0 0 25px rgba(168, 85, 247, 0.9),
+                             0 0 45px rgba(168, 85, 247, 0.7),
+                             0 0 65px rgba(168, 85, 247, 0.5);
+            }
+            25% {
+                text-shadow: 0 0 25px rgba(168, 85, 247, 0.9),
+                             0 0 45px rgba(168, 85, 247, 0.7),
+                             0 0 65px rgba(168, 85, 247, 0.5);
+            }
+            28% {
+                text-shadow: 0 0 20px rgba(168, 85, 247, 0.8),
+                             0 0 35px rgba(168, 85, 247, 0.6),
+                             0 0 50px rgba(168, 85, 247, 0.4);
+            }
+            32% {
+                text-shadow: 0 0 8px rgba(168, 85, 247, 0.3);
+            }
+        }
+        
+        @media (max-width: 424px) {
+            .visual-services-container {
+                font-size: 2rem;
+                width: 10em;
+                margin: 40px auto 30px auto;
+            }
+            .services-inside {
+                font-size: 1.3rem;
+            }
+            .visual-services-container:hover .visual-upper {
+                transform: translateX(-50%) translateY(-35px) scaleX(1.3);
+            }
+            .visual-services-container:hover .visual-lower {
+                transform: translateX(-50%) translateY(25px) scaleX(1.3);
+            }
+            @keyframes moveUp {
+                0% {
+                    transform: translateX(-50%) translateY(0) scaleX(1.3);
+                }
+                15% {
+                    transform: translateX(-50%) translateY(-35px) scaleX(1.3);
+                }
+                18% {
+                    transform: translateX(-50%) translateY(-35px) scaleX(1.3);
+                }
+                40% {
+                    transform: translateX(-50%) translateY(0) scaleX(1.3);
+                }
+                100% {
+                    transform: translateX(-50%) translateY(0) scaleX(1.3);
+                }
+            }
+            @keyframes moveDown {
+                0% {
+                    transform: translateX(-50%) translateY(0) scaleX(1.3);
+                }
+                15% {
+                    transform: translateX(-50%) translateY(25px) scaleX(1.3);
+                }
+                18% {
+                    transform: translateX(-50%) translateY(25px) scaleX(1.3);
+                }
+                40% {
+                    transform: translateX(-50%) translateY(0) scaleX(1.3);
+                }
+                100% {
+                    transform: translateX(-50%) translateY(0) scaleX(1.3);
+                }
+            }
+        }
+        
+        @media (max-width: 320px) {
+            .visual-services-container {
+                font-size: 1.5rem;
+                width: 8em;
+                margin: 35px auto 25px auto;
+            }
+            .services-inside {
+                font-size: 1.1rem;
+            }
+        }
+        
+        /* Film reel wrapper to span both sections */
+        .film-reel-wrapper {
+            position: relative;
+            overflow: visible;
+        }
+        
+        /* Vertical Film Reel */
+        .film-reel-container {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 100px;
+            z-index: 5;
+            pointer-events: none;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            padding-top: 0;
+        }
+        
+        .film-reel-container-left {
+            left: 0;
+        }
+        
+        .film-reel-container-right {
+            right: 0;
+        }
+        
+        /* Film Reel (Circular) */
+        .film-reel {
+            width: 80px;
+            height: 80px;
+            position: relative;
+            margin: 0 auto;
+            filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.2));
+        }
+        
+        .reel-outer {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: 
+                radial-gradient(circle at 30% 30%, rgba(100, 100, 100, 0.4), rgba(50, 50, 50, 0.6), rgba(20, 20, 20, 0.8)),
+                radial-gradient(circle at 70% 70%, rgba(60, 60, 60, 0.3), transparent 70%),
+                linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 50%, #0a0a0a 100%);
+            border: 4px solid rgba(255, 255, 255, 0.7);
+            box-shadow: 
+                inset 0 0 25px rgba(0, 0, 0, 0.9),
+                inset 0 0 15px rgba(255, 255, 255, 0.1),
+                inset -5px -5px 20px rgba(0, 0, 0, 0.8),
+                inset 5px 5px 20px rgba(255, 255, 255, 0.05),
+                0 0 15px rgba(0, 0, 0, 0.6),
+                0 4px 12px rgba(0, 0, 0, 0.5),
+                0 0 10px rgba(255, 255, 255, 0.2),
+                0 0 20px rgba(255, 255, 255, 0.1),
+                0 2px 4px rgba(0, 0, 0, 0.8);
+            position: relative;
+            animation: reelRotate 4s linear infinite;
+            overflow: hidden;
+        }
+        
+        .reel-outer::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(
+                from 0deg,
+                transparent 0deg,
+                rgba(255, 255, 255, 0.1) 45deg,
+                transparent 90deg,
+                rgba(255, 255, 255, 0.1) 135deg,
+                transparent 180deg,
+                rgba(255, 255, 255, 0.1) 225deg,
+                transparent 270deg,
+                rgba(255, 255, 255, 0.1) 315deg,
+                transparent 360deg
+            );
+            animation: reelRotate 2s linear infinite;
+            opacity: 0.6;
+        }
+        
+        .reel-outer::after {
+            content: '';
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            right: 5px;
+            bottom: 5px;
+            border-radius: 50%;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 
+                inset 0 0 10px rgba(255, 255, 255, 0.1),
+                0 0 5px rgba(255, 255, 255, 0.2);
+        }
+        
+        .reel-inner {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: 
+                radial-gradient(circle at 30% 30%, rgba(80, 80, 80, 0.5), rgba(30, 30, 30, 0.7), rgba(10, 10, 10, 0.9)),
+                radial-gradient(circle at 70% 70%, rgba(40, 40, 40, 0.4), transparent 70%),
+                linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 50%, #0a0a0a 100%);
+            border: 3px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 
+                inset 0 0 20px rgba(0, 0, 0, 1),
+                inset 0 0 10px rgba(255, 255, 255, 0.1),
+                inset -3px -3px 15px rgba(0, 0, 0, 0.9),
+                inset 3px 3px 15px rgba(255, 255, 255, 0.05),
+                0 0 8px rgba(255, 255, 255, 0.15),
+                0 1px 3px rgba(0, 0, 0, 0.9);
+        }
+        
+        .reel-inner::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.8), rgba(200, 200, 200, 0.4));
+            box-shadow: 
+                0 0 5px rgba(255, 255, 255, 0.6),
+                0 0 10px rgba(255, 255, 255, 0.3),
+                inset 0 0 3px rgba(0, 0, 0, 0.5);
+        }
+        
+        .reel-spokes {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            height: 100%;
+        }
+        
+        .reel-spoke {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 3px;
+            height: 35px;
+            background: linear-gradient(
+                to bottom,
+                rgba(255, 255, 255, 0.8) 0%,
+                rgba(255, 255, 255, 0.5) 30%,
+                rgba(200, 200, 200, 0.4) 50%,
+                rgba(255, 255, 255, 0.5) 70%,
+                rgba(255, 255, 255, 0.8) 100%
+            );
+            transform-origin: center bottom;
+            border-radius: 1px;
+            box-shadow: 
+                0 0 4px rgba(255, 255, 255, 0.4),
+                0 0 8px rgba(255, 255, 255, 0.2),
+                0 1px 3px rgba(0, 0, 0, 0.8),
+                inset 0 0 6px rgba(0, 0, 0, 0.4),
+                inset 0 0 3px rgba(255, 255, 255, 0.2);
+        }
+        
+        .reel-spoke:nth-child(1) { transform: translate(-50%, -50%) rotate(0deg); }
+        .reel-spoke:nth-child(2) { transform: translate(-50%, -50%) rotate(45deg); }
+        .reel-spoke:nth-child(3) { transform: translate(-50%, -50%) rotate(90deg); }
+        .reel-spoke:nth-child(4) { transform: translate(-50%, -50%) rotate(135deg); }
+        .reel-spoke:nth-child(5) { transform: translate(-50%, -50%) rotate(180deg); }
+        .reel-spoke:nth-child(6) { transform: translate(-50%, -50%) rotate(225deg); }
+        .reel-spoke:nth-child(7) { transform: translate(-50%, -50%) rotate(270deg); }
+        .reel-spoke:nth-child(8) { transform: translate(-50%, -50%) rotate(315deg); }
+        
+        /* Film Strip */
+        .film-strip-vertical {
+            width: 60px;
+            height: 100%;
+            margin: 0 auto;
+            background: #000;
+            position: relative;
+            border-left: 3px solid rgba(255, 255, 255, 0.4);
+            border-right: 3px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 
+                inset 0 0 10px rgba(0, 0, 0, 0.5),
+                0 0 5px rgba(0, 0, 0, 0.3),
+                0 0 10px rgba(255, 255, 255, 0.1),
+                inset 0 0 15px rgba(0, 0, 0, 0.7),
+                0 2px 4px rgba(0, 0, 0, 0.6);
+            visibility: visible;
+            opacity: 1;
+            z-index: inherit;
+        }
+        
+        .film-strip-vertical::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent 0px,
+                transparent 18px,
+                rgba(255, 255, 255, 0.2) 18px,
+                rgba(255, 255, 255, 0.2) 22px,
+                transparent 22px,
+                transparent 40px
+            );
+            background-size: 100% 40px;
+            animation: filmScroll 2s linear infinite;
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.6);
+        }
+        
+        .film-strip-vertical::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -8px;
+            width: 6px;
+            bottom: 0;
+            background: repeating-linear-gradient(
+                0deg,
+                #000 0px,
+                #000 8px,
+                rgba(255, 255, 255, 0.7) 8px,
+                rgba(255, 255, 255, 0.7) 12px,
+                #000 12px,
+                #000 20px,
+                rgba(255, 255, 255, 0.7) 20px,
+                rgba(255, 255, 255, 0.7) 24px,
+                #000 24px,
+                #000 32px,
+                rgba(255, 255, 255, 0.7) 32px,
+                rgba(255, 255, 255, 0.7) 36px,
+                #000 36px,
+                #000 40px
+            );
+            background-size: 100% 40px;
+            animation: filmScroll 2s linear infinite;
+            box-shadow: 
+                inset -2px 0 5px rgba(0, 0, 0, 0.5),
+                0 0 5px rgba(255, 255, 255, 0.15),
+                inset 0 0 8px rgba(0, 0, 0, 0.7);
+        }
+        
+        .film-strip-vertical .sprocket-right {
+            position: absolute;
+            top: 0;
+            right: -8px;
+            width: 6px;
+            bottom: 0;
+            background: repeating-linear-gradient(
+                0deg,
+                #000 0px,
+                #000 8px,
+                rgba(255, 255, 255, 0.7) 8px,
+                rgba(255, 255, 255, 0.7) 12px,
+                #000 12px,
+                #000 20px,
+                rgba(255, 255, 255, 0.7) 20px,
+                rgba(255, 255, 255, 0.7) 24px,
+                #000 24px,
+                #000 32px,
+                rgba(255, 255, 255, 0.7) 32px,
+                rgba(255, 255, 255, 0.7) 36px,
+                #000 36px,
+                #000 40px
+            );
+            background-size: 100% 40px;
+            animation: filmScroll 2s linear infinite;
+            box-shadow: 
+                inset 2px 0 5px rgba(0, 0, 0, 0.5),
+                0 0 5px rgba(255, 255, 255, 0.15),
+                inset 0 0 8px rgba(0, 0, 0, 0.7);
+        }
+        
+        @keyframes reelRotate {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+        
+        @keyframes filmScroll {
+            0% {
+                background-position: 0 0;
+            }
+            100% {
+                background-position: 0 40px;
+            }
+        }
+        
+        /* Reverse rotation for right side */
+        .film-reel-container-right .reel-outer {
+            animation: reelRotateReverse 4s linear infinite;
+        }
+        
+        .film-reel-container-right .reel-outer::before {
+            animation: reelRotateReverse 2s linear infinite;
+        }
+        
+        @keyframes reelRotateReverse {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(-360deg);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .film-reel-container {
+                width: 70px;
+            }
+            
+            .film-strip-vertical {
+                width: 45px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .film-reel-container {
+                width: 60px;
+            }
+            
+            .film-strip-vertical {
+                width: 35px;
+            }
+        }
+
+        /* Slider Section Styles */
+        .slider-section {
+            position: relative;
+            width: 100%;
+            display: block;
+        }
+        
+        .slider-section.section-padding {
+            padding: 2.5rem 0;
+        }
+        
+        .slider-full-height {
+            min-height: 60vh;
+        }
+        
+        .slider-over-hide {
+            overflow: hidden;
+        }
+        
+        .slider-padding-tb {
+            padding: 40px 0;
+        }
+        
+        .slider-section [type="radio"]:checked,
+        .slider-section [type="radio"]:not(:checked) {
+            position: absolute;
+            left: -9999px;
+        }
+        
+        .slider-section .checkbox:checked + label,
+        .slider-section .checkbox:not(:checked) + label {
+            position: relative;
+            cursor: pointer;
+            margin: 0 auto;
+            text-align: center;
+            margin-right: 6px;
+            margin-left: 6px;
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(162, 0, 247, 0.5);
+            background-size: cover;
+            background-position: center;
+            box-sizing: border-box;
+            -webkit-transition: all 0.2s ease;
+            transition: all 0.2s ease;
+            animation: border-transform 6s linear infinite alternate forwards;
+            -webkit-animation-play-state: paused;
+            -moz-animation-play-state: paused;
+            animation-play-state: paused;
+            border-radius: 50%;
+        }
+        
+        .slider-section .checkbox.scnd + label {
+            background-image: url('../../assets/images/audivis/p2.jpg');
+        }
+        
+        .slider-section .checkbox.thrd + label {
+            background-image: url('../../assets/images/audivis/p3.jpg');
+        }
+        
+        .slider-section .checkbox.foth + label {
+            background-image: url('../../assets/images/audivis/p4.jpg');
+        }
+        
+        .slider-section .checkbox.frst + label {
+            background-image: url('../../assets/images/audivis/p1.jpg');
+        }
+
+        .slider-section .checkbox:checked + label {
+            box-shadow: 0 8px 25px 0 rgba(162, 0, 247, 0.4);
+            transform: scale(1.3);
+            border-color: #a200f7;
+            -webkit-animation-play-state: running;
+            -moz-animation-play-state: running;
+            animation-play-state: running;
+        }
+        
+        @keyframes border-transform {
+            0%, 100% { border-radius: 63% 37% 54% 46% / 55% 48% 52% 45%; } 
+            14% { border-radius: 40% 60% 54% 46% / 49% 60% 40% 51%; } 
+            28% { border-radius: 54% 46% 38% 62% / 49% 70% 30% 51%; } 
+            42% { border-radius: 61% 39% 55% 45% / 61% 38% 62% 39%; } 
+            56% { border-radius: 61% 39% 67% 33% / 70% 50% 50% 30%; } 
+            70% { border-radius: 50% 50% 34% 66% / 56% 68% 32% 44%; } 
+            84% { border-radius: 46% 54% 50% 50% / 35% 61% 39% 65%; } 
+        }
+
+        .slider-height-padding {
+            padding-top: 380px;
+            position: relative;
+            max-width: 100%;
+            margin: 0 auto;
+        }
+
+        .slider-section .section {
+            position: relative;
+        }
+
+        .slider-section ul {
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: block;
+            width: 100%;
+            z-index: 100;
+            padding: 0;
+            margin: 0;
+            list-style: none;
+        }
+        
+        .slider-section ul li {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            display: block;
+            z-index: 100;
+            padding: 0;
+            margin: 0;
+            list-style: none;
+            height: 340px;
+            border: 5px solid rgba(162, 0, 247, 0.3);
+            background-size: cover;
+            background-position: center;
+            background-image: url('../../assets/images/audivis/p1.jpg');
+            border-radius: 50%;
+            box-sizing: border-box;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            font-size: 14px;
+            letter-spacing: 3px;
+            line-height: 2.7;
+            color: #ffffff;
+            writing-mode: vertical-rl;
+            opacity: 0;
+            pointer-events: none;
+            box-shadow: 0 8px 25px 0 rgba(162, 0, 247, 0.2);
+            -webkit-transition: all 0.5s ease;
+            transition: all 0.5s ease;
+        }
+        
+        .slider-section ul li span {
+            mix-blend-mode: difference;
+            text-shadow: 0 0 10px rgba(162, 0, 247, 0.8);
+        }
+        
+        .slider-section ul li:nth-child(2) {
+            background-image: url('../../assets/images/audivis/p2.jpg');
+        }
+        
+        .slider-section ul li:nth-child(3) {
+            background-image: url('../../assets/images/audivis/p3.jpg');
+        }
+        
+        .slider-section ul li:nth-child(4) {
+            background-image: url('../../assets/images/audivis/p4.jpg');
+        }
+
+        .slider-section .checkbox.frst:checked ~ ul li:nth-child(1) {
+            opacity: 1;
+            pointer-events: auto;
+            border-radius: 16px;
+            border-color: #a200f7;
+        }
+        
+        .slider-section .checkbox.scnd:checked ~ ul li:nth-child(2) {
+            opacity: 1;
+            pointer-events: auto;
+            border-radius: 16px;
+            border-color: #a200f7;
+        }
+        
+        .slider-section .checkbox.thrd:checked ~ ul li:nth-child(3) {
+            opacity: 1;
+            pointer-events: auto;
+            border-radius: 16px;
+            border-color: #a200f7;
+        }
+        
+        .slider-section .checkbox.foth:checked ~ ul li:nth-child(4) {
+            opacity: 1;
+            pointer-events: auto;
+            border-radius: 16px;
+            border-color: #a200f7;
+        }
+
+        /* Right Column Content Styling */
+        .slider-section .text-content {
+            padding-left: 0;
+        }
+        
+        @media (min-width: 1024px) {
+            .slider-section .text-content {
+                padding-left: 2rem;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .slider-section .grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .slider-section .slider-padding-tb {
+                padding: 30px 0;
+            }
+            
+            .slider-section .text-content {
+                padding-left: 0;
+                text-align: center;
+            }
+            
+            .slider-section .text-content h3,
+            .slider-section .text-content h2,
+            .slider-section .text-content p {
+                text-align: center;
+            }
+        }
+        
+        @media (max-width: 640px) {
+            .slider-section .text-content {
+                text-align: left;
+            }
+            
+            .slider-section .text-content h3,
+            .slider-section .text-content h2,
+            .slider-section .text-content p {
+                text-align: left;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .slider-height-padding {
+                padding-top: 280px;
+            }
+            
+            .slider-section ul li {
+                height: 250px;
+                font-size: 12px;
+                letter-spacing: 2px;
+            }
+            
+            .slider-full-height {
+                min-height: auto;
+            }
+        }
+
+        @media (max-width: 575px) {
+            .slider-height-padding {
+                padding-top: 200px;
+            }
+            
+            .slider-section ul li {
+                height: 180px;
+                font-size: 11px;
+            }
+        }
+
+        /* Email Button Section Styles - Visual Theme */
+        .email-button-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            width: 100%;
+            padding: 0.5rem 0;
+            font-family: 'Orbitron', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            user-select: none;
+        }
+
+        .email-button-container input {
+            display: none;
+        }
+
+        .email-button-container label {
+            cursor: pointer;
+        }
+
+        .email-button-bevel {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: 0 72px;
+            height: 80px;
+            background: #a200f7 linear-gradient(to bottom, #a200f7 50%, #7b11a9 50%);
+            border-radius: 0px;
+            box-shadow:
+                0px 15px 25px -10px rgba(0, 0, 0, 0.5),
+                inset 0px 0px 0px 0px rgba(162, 0, 247, 0),
+                inset 0px -40px 0px 0px #7b11a9;
+            font-size: 24px;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            text-align: center;
+            text-shadow:
+                0px 3px 5px #7b11a9,
+                0px 5px 10px #7b11a9,
+                0px 5px 10px #7b11a9,
+                0px 5px 10px #7b11a9,
+                0px 5px 10px #7b11a9;
+            color: #fff;
+            letter-spacing: 0.4px;
+            overflow: hidden;
+            outline: 0 !important;
+            transform: scale(1.01);
+            transition: all 0.2s ease-in-out;
+        }
+
+        .email-button-bevel:before,
+        .email-button-bevel:after {
+            content: " ";
+            width: 40px;
+            max-width: 50%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            transition: all 0.135s cubic-bezier(0.74, 0.16, 0.24, 0.92);
+            transition-delay: 0.15s;
+        }
+
+        .email-button-bevel:before {
+            left: 0;
+            background:
+                linear-gradient(45deg, transparent calc(200% / 3), rgba(162, 0, 247, 1) calc(200% / 3)),
+                linear-gradient(-45deg, rgba(123, 17, 169, 1) calc(100% / 3), transparent calc(100% / 3)),
+                linear-gradient(to right, #a200f7, #7b11a9);
+        }
+
+        .email-button-bevel:after {
+            right: 0;
+            background:
+                linear-gradient(-45deg, transparent calc(200% / 3), rgba(162, 0, 247, 1) calc(200% / 3)),
+                linear-gradient(45deg, rgba(123, 17, 169, 1) calc(100% / 3), transparent calc(100% / 3)),
+                linear-gradient(to left, #a200f7, #7b11a9);
+        }
+
+        .email-button-bevel:hover {
+            transform: scale(1.07);
+            box-shadow:
+                0px 25px 40px -5px rgba(0, 0, 0, 0.3),
+                inset 0px 0px 0px 0px rgba(162, 0, 247, 0),
+                inset 0px -40px 0px 0px #7b11a9;
+        }
+
+        #email-button:checked ~ .email-button-bevel {
+            padding: 0 30px;
+            background: rgba(162, 0, 247, 0);
+            box-shadow:
+                0px 5px 15px -5px rgba(0, 0, 0, 0.3),
+                inset 0px 0px 0px 4px #a200f7,
+                inset 0px 0px 0px 0px #7b11a9;
+            border-radius: 10px;
+            font-size: 28px;
+            font-weight: 700;
+            text-shadow:
+                0px 3px 5px rgba(123, 17, 169, 0),
+                0px 5px 10px rgba(123, 17, 169, 0),
+                0px 5px 10px rgba(123, 17, 169, 0),
+                0px 5px 10px rgba(123, 17, 169, 0),
+                0px 5px 10px rgba(123, 17, 169, 0);
+            color: #a200f7;
+            transform: scale(0.7) rotate(-6deg);
+            transition: all 0.45s cubic-bezier(0.6, -0.9, 0.39, 1.65), text-shadow 0s ease-in-out, box-shadow 0.45s cubic-bezier(0.6, -0.9, 0.39, 1.65);
+            transition-delay: 0.135s;
+        }
+
+        #email-button:checked ~ .email-button-bevel:before,
+        #email-button:checked ~ .email-button-bevel:after {
+            transition-delay: 0s;
+        }
+
+        #email-button:checked ~ .email-button-bevel:before {
+            transform: translateX(-100%);
+        }
+
+        #email-button:checked ~ .email-button-bevel:after {
+            transform: translateX(100%);
+        }
+
+        #email-button:checked ~ .email-button-text {
+            color: rgba(162, 0, 247, 0.1875);
+            transform: translateY(80px);
+        }
+
+        .email-button-text {
+            display: block;
+            margin-bottom: 10px;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 28px;
+            font-weight: 700;
+            color: #e2e8f0;
+            z-index: -1;
+            transition: all 0.45s cubic-bezier(0.74, 0.16, 0.24, 0.92);
+            transition-delay: 0.135s;
+        }
+    </style>
+</head>
+<body>
+    <div id="nav-placeholder"></div>
+
+    <div class="film-reel-wrapper">
+        <!-- Animated Film Strips - Spanning both hero and brochure sections -->
+        <div class="film-reel-container film-reel-container-left">
+            <div class="film-strip-vertical">
+                <div class="sprocket-right"></div>
+            </div>
+        </div>
+        <div class="film-reel-container film-reel-container-right">
+            <div class="film-strip-vertical">
+                <div class="sprocket-right"></div>
+            </div>
+        </div>
+
+        <section class="relative h-[90vh] min-h-[350px] max-h-[900px] flex items-center justify-center overflow-hidden">
+            <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('../../assets/images/visuals/hero.jpg'); z-index: 1;"></div>
+            <div class="absolute inset-0 hero-gradient" style="z-index: 1;"></div>
+            
+            <div class="relative z-20 text-center text-white px-6 py-8">
+            <h3 class="av-title text-2xl md:text-xl font-bold mb-2" data-text="A/V PRODUCTION">A/V PRODUCTION</h3>
+            <div class="visual-services-container">
+                <div class="visual-upper">VISUAL</div>
+                <div class="visual-lower">VISUAL</div>
+                <div class="services-inside">SERVICES</div>
+            </div>
+            <div class="monitor-table">
+                <div class="monitor-wrapper">
+                    <div class="monitor">
+                        <p>Bring your event to life with MiHi Entertainment's visual services, combining expert video solutions and innovative AV services to create a captivating and seamless experience for any occasion. • Bring your event to life with MiHi Entertainment's visual services, combining expert video solutions and innovative AV services to create a captivating and seamless experience for any occasion. • Bring your event to life with MiHi Entertainment's visual services, combining expert video solutions and innovative AV services to create a captivating and seamless experience for any occasion. •</p>
+                    </div>
+                </div>
+            </div>
+            <a href="#contact" class="super-button">
+                <span>Contact Us</span>
+                <span class="arrow">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M5 12H19M19 12L15 8M19 12L15 16" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </a>
+        </div>
+    </section>
+
+        <!-- Interactive Brochure Section -->
+        <section class="py-12 md:py-16 brochure-section relative" id="visual-brochure">
+        <canvas id="brochure-webgl-canvas" style="z-index: 1;"></canvas>
+        <div class="container mx-auto px-6 relative" style="z-index: 20;">
+            <div class="text-center mb-8 space-y-2 brochure-header">
+                <span class="brochure-badge">🎬 Visual Service Guide</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-3 leading-tight">
+                    Design Your Signature Visual Experience
+                </h2>
+                <p class="text-lg text-purple-100 max-w-3xl mx-auto leading-relaxed">
+                    Explore our immersive lighting, video walls, and visual production solutions crafted to elevate conferences, galas, concerts, and brand activations.
+                </p>
+                <div class="flex items-center justify-center gap-2 pt-2">
+                    <div class="h-1 w-12 bg-gradient-to-r from-purple-400 via-fuchsia-500 to-cyan-400 rounded-full"></div>
+                    <div class="h-1 w-1 bg-purple-400 rounded-full"></div>
+                    <div class="h-1 w-1 bg-cyan-400 rounded-full"></div>
+                </div>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-8 items-center content-grid">
+                <div class="order-2 lg:order-1">
+                    <div class="relative group">
+                        <div class="brochure-preview">
+                            <div class="aspect-[4/3] bg-gradient-to-br from-slate-900 via-purple-950 to-slate-900 flex items-center justify-center p-4 relative overflow-hidden">
+                                <div class="absolute inset-0" style="background-image: repeating-linear-gradient(45deg, transparent, transparent 2px, rgba(162, 0, 247, 0.08) 2px, rgba(162, 0, 247, 0.08) 4px);"></div>
+                                <div class="absolute inset-0 bg-gradient-to-br from-purple-400/15 via-transparent to-slate-900/40 pointer-events-none"></div>
+                                <div class="relative w-full h-full flex items-center justify-center">
+                                    <div class="relative w-5/6 h-5/6 transform group-hover:scale-105 group-hover:-translate-y-2 transition-all duration-700" style="transform-style: preserve-3d; perspective: 1000px;">
+                                        <div class="absolute -right-2 top-0 bottom-0 w-16 bg-gradient-to-l from-purple-400/25 to-transparent blur-sm skew-y-12 transform group-hover:scale-110"></div>
+                                        <div class="absolute inset-0 bg-gradient-to-br from-purple-300/20 via-transparent to-transparent rounded-lg pointer-events-none"></div>
+                                        <div class="relative w-full h-full shadow-2xl rounded-lg overflow-hidden" style="box-shadow: 0 20px 60px rgba(162, 0, 247, 0.25), 0 0 25px rgba(123, 17, 169, 0.25);">
+                                            <img src="../../assets/images/audivis/avthumb.png" alt="Visual Services Brochure Preview" class="brochure-image">
+                                            <div class="absolute inset-0 bg-gradient-to-br from-purple-400/20 via-transparent to-transparent pointer-events-none"></div>
+                                            <div class="absolute bottom-0 left-0 right-0 h-1/3 bg-gradient-to-b from-transparent to-black/30"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="absolute -inset-4 bg-gradient-to-r from-purple-400/15 via-fuchsia-500/25 to-cyan-400/15 blur-3xl group-hover:blur-2xl transition-all duration-700 rounded-full"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="order-1 lg:order-2">
+                    <div class="pill-label inline-block bg-gradient-to-r from-purple-400 via-fuchsia-500 to-cyan-400 text-slate-900 px-4 py-2 rounded-full text-sm font-bold mb-4 shadow-lg tracking-[0.2em]">
+                        Full-Service Visual Packages
+                    </div>
+                    <h3 class="brochure-subtitle text-3xl md:text-4xl font-bold mb-4 text-white">
+                        Bring Visionary Production To Life
+                    </h3>
+                    <p class="text-lg text-purple-100 mb-6 leading-relaxed">
+                        From precision video engineering to cinematic lighting and LED walls, our team designs turnkey solutions tailored to your venue, audience, and brand goals.
+                    </p>
+                    <div class="space-y-3 mb-6 feature-list">
+                        <div class="brochure-check-item">
+                            <div class="brochure-check-icon">
+                                <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                            </div>
+                            <div>
+                                <p class="brochure-check-text">Immersive Visual Packages</p>
+                                <p class="brochure-check-description">LED walls, video mapping, and projection design engineered for impact and clarity.</p>
+                            </div>
+                        </div>
+                        <div class="brochure-check-item">
+                            <div class="brochure-check-icon">
+                                <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                            </div>
+                            <div>
+                                <p class="brochure-check-text">Lighting & Visual Production</p>
+                                <p class="brochure-check-description">Pixel-mapped lighting, LED walls, and projection design for immersive stages.</p>
+                            </div>
+                        </div>
+                        <div class="brochure-check-item">
+                            <div class="brochure-check-icon">
+                                <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                            </div>
+                            <div>
+                                <p class="brochure-check-text">On-Site Engineers</p>
+                                <p class="brochure-check-description">Seasoned technicians who manage rehearsals, cues, and live show support.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex flex-col sm:flex-row gap-4 brochure-cta-group">
+                        <button onclick="openVisualBrochureModal()" class="brochure-button" aria-label="View Visual services brochure">
+                            <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+                            View Brochure
+                            <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+                        </button>
+                        <a href="../../flipbook/examples/example-assets/books/AVguide.pdf" download class="brochure-download-button" aria-label="Download Visual brochure PDF">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2m-6 0V4m0 12l-4-4m4 4l4-4"/></svg>
+                            Download PDF
+                        </a>
+                    </div>
+                    <div class="flex flex-wrap items-center gap-4 pt-4 border-t border-slate-800/70 compact-tags">
+                        <div class="brochure-tag"><svg class="brochure-tag-icon" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg><span class="text-sm font-medium">Visual Focused</span></div>
+                        <div class="brochure-tag"><svg class="brochure-tag-icon" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg><span class="text-sm font-medium">Customizable</span></div>
+                        <div class="brochure-tag"><svg class="brochure-tag-icon" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg><span class="text-sm font-medium">Nationwide Support</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+        <!-- New Section with Slider -->
+        <section class="section-padding slider-section slider-full-height slider-over-hide relative" style="background: radial-gradient(circle, rgba(26, 26, 62, 0.95) 0%, rgba(10, 3, 33, 1) 100%); padding-bottom: 0; margin-bottom: -2rem;">
+            <div class="container mx-auto px-6 relative" style="z-index: 20;">
+            <div class="grid lg:grid-cols-2 gap-6 items-center">
+                <!-- Left Side - Slider -->
+                <div class="slider-padding-tb">
+                    <div class="section mx-auto text-center slider-height-padding relative">
+                        <input class="checkbox frst" type="radio" id="slide-1" name="slider" checked/>
+                        <label for="slide-1"></label>
+                        <input class="checkbox scnd" type="radio" name="slider" id="slider-2"/>
+                        <label for="slider-2"></label>
+                        <input class="checkbox thrd" type="radio" name="slider" id="slider-3"/>
+                        <label for="slider-3"></label>
+                        <input class="checkbox foth" type="radio" name="slider" id="slider-4"/>
+                        <label for="slider-4"></label>
+                        <ul>
+                            <li>
+                                <span>VISUAL PRODUCTION</span>
+                            </li>
+                            <li>
+                                <span>LED DISPLAYS</span>
+                            </li>
+                            <li>
+                                <span>LIGHTING DESIGN</span>
+                            </li>
+                            <li>
+                                <span>VIDEO MAPPING</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- First Section with Slider -->
+                <div class="flex items-center justify-center min-h-[300px]">
+                    <div class="w-full max-w-2xl text-left space-y-2 text-content">
+                        <h3 class="text-base md:text-lg text-purple-300 font-semibold tracking-wider uppercase" style="font-family: 'Rajdhani', sans-serif; letter-spacing: 0.1em;">
+                            SHOW OFF STUNNING VISUALS WITH OUR
+                        </h3>
+                        <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight" style="font-family: 'Orbitron', sans-serif; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 800;">
+                            VISUAL EVENT SERVICES
+                        </h2>
+                        <p class="text-base md:text-lg text-purple-100 leading-normal" style="font-family: 'Rajdhani', sans-serif;">
+                            Boost your next event with MiHi Entertainment's Professional Visual Services. Our expert team ensures high-definition video quality for gatherings of all sizes, from intimate meetings to large-scale celebrations, including corporate events and conferences.
+                        </p>
+                        <p class="text-base md:text-lg text-purple-100 leading-normal mb-0" style="font-family: 'Rajdhani', sans-serif; margin-bottom: 0;">
+                            With cutting-edge equipment like LED screens and projectors, we deliver impactful visuals that captivate your audience. Our AV services are tailored to meet your event's unique needs, ensuring your message is presented with clarity and style. Trust us for event services that make your vision a reality.
+                        </p>
+                        <div style="margin-top: -1rem;">
+                            <a href="#contact" class="super-button">
+                                <span>Interested In Hearing More?</span>
+                                <span class="arrow">
+                                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M5 12H19M19 12L15 8M19 12L15 16" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Second Section with Slider -->
+        <section class="section-padding slider-section slider-full-height slider-over-hide relative" style="background: radial-gradient(circle, rgba(26, 26, 62, 0.95) 0%, rgba(10, 3, 33, 1) 100%); padding-top: 0; padding-bottom: 0; margin-top: -2rem; margin-bottom: -2rem;">
+            <div class="container mx-auto px-6 relative" style="z-index: 20;">
+            <div class="grid lg:grid-cols-2 gap-6 items-center">
+                <!-- Left Side - Content -->
+                <div class="flex items-center justify-center min-h-[300px]">
+                    <div class="w-full max-w-2xl text-right space-y-2 text-content">
+                        <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight" style="font-family: 'Orbitron', sans-serif; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 800;">
+                            EVENT PRODUCTION
+                        </h2>
+                        <p class="text-base md:text-lg text-purple-100 leading-normal" style="font-family: 'Rajdhani', sans-serif;">
+                            From pre-event, during the event, to post event..our video storytelling takes your ordinary event to that spectacular level.
+                        </p>
+                        <div style="margin-top: -1rem; display: flex; justify-content: flex-end;">
+                            <a href="#contact" class="super-button">
+                                <span>Interested In Hearing More?</span>
+                                <span class="arrow">
+                                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M5 12H19M19 12L15 8M19 12L15 16" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Right Side - Single Image -->
+                <div class="slider-padding-tb">
+                    <div class="section mx-auto text-center slider-height-padding relative">
+                        <ul>
+                            <li style="opacity: 1; pointer-events: auto; border-radius: 16px; border-color: #a200f7; background-image: url('../../assets/images/visuals/s1.jpg');">
+                                <span>VISUAL PRODUCTION</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Third Section with Slider -->
+        <section class="section-padding slider-section slider-full-height slider-over-hide relative" style="background: radial-gradient(circle, rgba(26, 26, 62, 0.95) 0%, rgba(10, 3, 33, 1) 100%); padding-top: 0; padding-bottom: 0; margin-top: -2rem; margin-bottom: 0;">
+            <div class="container mx-auto px-6 relative" style="z-index: 20;">
+            <div class="grid lg:grid-cols-2 gap-6 items-center">
+                <!-- Left Side - Single Image -->
+                <div class="slider-padding-tb">
+                    <div class="section mx-auto text-center slider-height-padding relative">
+                        <ul>
+                            <li style="opacity: 1; pointer-events: auto; border-radius: 16px; border-color: #a200f7; background-image: url('../../assets/images/visuals/s2.jpg');">
+                                <span>VISUAL PRODUCTION</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Right Side - Content -->
+                <div class="flex items-center justify-center min-h-[300px]">
+                    <div class="w-full max-w-2xl text-left space-y-2 text-content" style="padding-left: 0; padding-right: 2rem;">
+                        <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight" style="font-family: 'Orbitron', sans-serif; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 800;">
+                            TRADE SHOW
+                        </h2>
+                        <p class="text-base md:text-lg text-purple-100 leading-normal" style="font-family: 'Rajdhani', sans-serif;">
+                            Grab the attention of attendees from across the trade show floor with our expert video services.
+                        </p>
+                        <div style="margin-top: -1rem; display: flex; justify-content: flex-start;">
+                            <a href="#contact" class="super-button">
+                                <span>Interested In Hearing More?</span>
+                                <span class="arrow">
+                                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M5 12H19M19 12L15 8M19 12L15 16" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Email Button Section -->
+        <section style="background: radial-gradient(circle, rgba(26, 26, 62, 0.95) 0%, rgba(10, 3, 33, 1) 100%); padding: 0 0 0.5rem 0; min-height: auto; margin-top: -2rem;">
+            <div class="container mx-auto px-6 relative" style="z-index: 20;">
+                <div class="email-button-container">
+                    <input type="checkbox" name="button" id="email-button">
+                    <span class="email-button-text">EMAIL</span>
+                    <label class="email-button-bevel" for="email-button">OUR TEAM</label>
+                </div>
+            </div>
+        </section>
+
+        <!-- Fourth Section with Slider -->
+        <section class="section-padding slider-section slider-full-height slider-over-hide relative" style="background: radial-gradient(circle, rgba(26, 26, 62, 0.95) 0%, rgba(10, 3, 33, 1) 100%); padding-top: 0.3; padding-bottom: 0; margin-top: -2rem; margin-bottom: -2rem;">
+            <div class="container mx-auto px-6 relative" style="z-index: 20;">
+            <div class="grid lg:grid-cols-2 gap-6 items-center">
+                <!-- Left Side - Content -->
+                <div class="flex items-center justify-center min-h-[300px]">
+                    <div class="w-full max-w-2xl text-right space-y-2 text-content">
+                        <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight" style="font-family: 'Orbitron', sans-serif; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 800;">
+                            MEDIA PRODUCTION
+                        </h2>
+                        <p class="text-base md:text-lg text-purple-100 leading-normal" style="font-family: 'Rajdhani', sans-serif;">
+                            Event and meeting planners love our expert video team who excel in communicating brand through imagery.
+                        </p>
+                        <div style="margin-top: -1rem; display: flex; justify-content: flex-end;">
+                            <a href="#contact" class="super-button">
+                                <span>Interested In Hearing More?</span>
+                                <span class="arrow">
+                                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M5 12H19M19 12L15 8M19 12L15 16" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Right Side - Single Image -->
+                <div class="slider-padding-tb">
+                    <div class="section mx-auto text-center slider-height-padding relative">
+                        <ul>
+                            <li style="opacity: 1; pointer-events: auto; border-radius: 16px; border-color: #a200f7; background-image: url('../../assets/images/visuals/s3.jpg');">
+                                <span>VISUAL PRODUCTION</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Fifth Section with Slider -->
+        <section class="section-padding slider-section slider-full-height slider-over-hide relative" style="background: radial-gradient(circle, rgba(26, 26, 62, 0.95) 0%, rgba(10, 3, 33, 1) 100%); padding-top: 0; padding-bottom: 0; margin-top: -2rem; margin-bottom: 0;">
+            <div class="container mx-auto px-6 relative" style="z-index: 20;">
+            <div class="grid lg:grid-cols-2 gap-6 items-center">
+                <!-- Left Side - Single Image -->
+                <div class="slider-padding-tb">
+                    <div class="section mx-auto text-center slider-height-padding relative">
+                        <ul>
+                            <li style="opacity: 1; pointer-events: auto; border-radius: 16px; border-color: #a200f7; background-image: url('../../assets/images/visuals/s4.jpg');">
+                                <span>VISUAL PRODUCTION</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Right Side - Content -->
+                <div class="flex items-center justify-center min-h-[300px]">
+                    <div class="w-full max-w-2xl text-left space-y-2 text-content" style="padding-left: 0; padding-right: 2rem;">
+                        <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight" style="font-family: 'Orbitron', sans-serif; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 800;">
+                            PROJECTION MAPPING
+                        </h2>
+                        <p class="text-base md:text-lg text-purple-100 leading-normal" style="font-family: 'Rajdhani', sans-serif;">
+                            Transform any location into an immersive event with our video and lighting services.
+                        </p>
+                        <div style="margin-top: -1rem; display: flex; justify-content: flex-start;">
+                            <a href="#contact" class="super-button">
+                                <span>Interested In Hearing More?</span>
+                                <span class="arrow">
+                                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M5 12H19M19 12L15 8M19 12L15 16" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section style="background: radial-gradient(circle, rgba(26, 26, 62, 0.95) 0%, rgba(10, 3, 33, 1) 100%); padding-top: 0; padding-bottom: 0; margin-top: -2rem; margin-bottom: 0;">
+            <div class="container mx-auto px-6 relative" style="z-index: 20; padding-top: 3rem; padding-bottom: 3rem;">
+                <div class="max-w-2xl mx-auto text-center space-y-3">
+                    <div class="animated-text-container">
+                        <div class="animated-text-flex">
+                            <div class="animated-text-col animated-text-col-7">
+                                <div class="animated-black animated-growup animated-delay-1"></div>
+                                <div class="animated-bg-primary animated-centerize">
+                                    <span class="animated-scaleme animated-delay-1">C</span>
+                                </div>
+                                <div class="animated-black animated-growup animated-delay-1"></div>
+                            </div>
+                            <div class="animated-text-col animated-text-col-7">
+                                <div class="animated-black-2 animated-growup animated-delay-2"></div>
+                                <div class="animated-bg-secondary animated-centerize">
+                                    <span class="animated-scaleme animated-delay-2">O</span>
+                                </div>
+                                <div class="animated-black-2 animated-growup animated-delay-2"></div>
+                            </div>
+                            <div class="animated-text-col animated-text-col-7">
+                                <div class="animated-black animated-growup animated-delay-3"></div>
+                                <div class="animated-bg-primary animated-centerize">
+                                    <span class="animated-scaleme animated-delay-3">N</span>
+                                </div>
+                                <div class="animated-black animated-growup animated-delay-3"></div>
+                            </div>
+                            <div class="animated-text-col animated-text-col-7">
+                                <div class="animated-black-2 animated-growup animated-delay-4"></div>
+                                <div class="animated-bg-secondary animated-centerize">
+                                    <span class="animated-scaleme animated-delay-4">T</span>
+                                </div>
+                                <div class="animated-black-2 animated-growup animated-delay-4"></div>
+                            </div>
+                            <div class="animated-text-col animated-text-col-7">
+                                <div class="animated-black animated-growup animated-delay-5"></div>
+                                <div class="animated-bg-primary animated-centerize">
+                                    <span class="animated-scaleme animated-delay-5">A</span>
+                                </div>
+                                <div class="animated-black animated-growup animated-delay-5"></div>
+                            </div>
+                            <div class="animated-text-col animated-text-col-7">
+                                <div class="animated-black-2 animated-growup animated-delay-6"></div>
+                                <div class="animated-bg-secondary animated-centerize">
+                                    <span class="animated-scaleme animated-delay-6">C</span>
+                                </div>
+                                <div class="animated-black-2 animated-growup animated-delay-6"></div>
+                            </div>
+                            <div class="animated-text-col animated-text-col-7">
+                                <div class="animated-black animated-growup animated-delay-7"></div>
+                                <div class="animated-bg-primary animated-centerize">
+                                    <span class="animated-scaleme animated-delay-7">T</span>
+                                </div>
+                                <div class="animated-black animated-growup animated-delay-7"></div>
+                            </div>
+                        </div>
+                        <div class="animated-text-flex">
+                            <div class="animated-text-col animated-text-col-5">
+                                <div class="animated-black animated-growup animated-delay-1"></div>
+                                <div class="animated-bg-secondary animated-centerize">
+                                    <span class="animated-scaleme animated-delay-1">U</span>
+                                </div>
+                                <div class="animated-black animated-growup animated-delay-1"></div>
+                            </div>
+                            <div class="animated-text-col animated-text-col-5">
+                                <div class="animated-black-2 animated-growup animated-delay-2"></div>
+                                <div class="animated-bg-primary animated-centerize">
+                                    <span class="animated-scaleme animated-delay-2">S</span>
+                                </div>
+                                <div class="animated-black-2 animated-growup animated-delay-2"></div>
+                            </div>
+                            <div class="animated-text-col animated-text-col-5">
+                                <div class="animated-black animated-growup animated-delay-3"></div>
+                                <div class="animated-bg-secondary animated-centerize">
+                                    <span class="animated-scaleme animated-delay-3">N</span>
+                                </div>
+                                <div class="animated-black animated-growup animated-delay-3"></div>
+                            </div>
+                            <div class="animated-text-col animated-text-col-5">
+                                <div class="animated-black-2 animated-growup animated-delay-4"></div>
+                                <div class="animated-bg-primary animated-centerize">
+                                    <span class="animated-scaleme animated-delay-4">O</span>
+                                </div>
+                                <div class="animated-black-2 animated-growup animated-delay-4"></div>
+                            </div>
+                            <div class="animated-text-col animated-text-col-5">
+                                <div class="animated-black animated-growup animated-delay-5"></div>
+                                <div class="animated-bg-secondary animated-centerize">
+                                    <span class="animated-scaleme animated-delay-5">W</span>
+                                </div>
+                                <div class="animated-black animated-growup animated-delay-5"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-sm md:text-base text-purple-100 leading-normal" style="font-family: 'Rajdhani', sans-serif;">
+                        Learn more about our video services for your next event, click the button below to email us and connect with our team today.
+                    </p>
+                    <div class="flex justify-center mt-2">
+                        <a href="mailto:info@mihientertainment.com" class="super-button" style="margin-top: 0;">
+                            <span>Learn More Now</span>
+                            <span class="arrow">
+                                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M5 12H19M19 12L15 8M19 12L15 16" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Brochure Modal -->
+    <div id="brochureModal" class="brochure-modal" aria-labelledby="visual-brochure-title" role="dialog" aria-modal="true">
+        <div class="brochure-modal-content">
+            <button onclick="closeVisualBrochureModal()" class="brochure-close-button" aria-label="Close Visual brochure">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+
+            <div id="brochureLoader" class="fixed inset-0 flex items-center justify-center z-[10000]" style="background-color: rgba(10, 3, 33, 0.85);">
+                <div class="text-center">
+                    <div class="inline-block relative w-16 h-16">
+                        <div class="absolute inset-0 rounded-full border-4" style="border-color: rgba(162, 0, 247, 0.3);"></div>
+                        <div class="absolute inset-0 rounded-full border-4 border-transparent animate-spin" style="border-top-color: #a200f7;"></div>
+                    </div>
+                    <p class="mt-4 text-white text-lg font-medium">Loading Visual Guide...</p>
+                </div>
+            </div>
+
+            <iframe id="brochureIframe" class="brochure-iframe" allowfullscreen loading="eager" sandbox="allow-scripts allow-same-origin"></iframe>
+        </div>
+    </div>
+
+    <script src="../../assets/components/navigation.js"></script>
+    <script src="../../assets/components/footer.js"></script>
+    <script>
+        // Brochure Modal Functions
+        function openVisualBrochureModal() {
+            const modal = document.getElementById('brochureModal');
+            const iframe = document.getElementById('brochureIframe');
+            const loader = document.getElementById('brochureLoader');
+
+            if (!modal || !iframe) return;
+
+            modal.classList.add('show');
+            document.body.style.overflow = 'hidden';
+            if (loader) loader.style.display = 'flex';
+
+            const timestamp = new Date().getTime();
+            iframe.src = '../../flipbook/examples/audio-visual.html?t=' + timestamp;
+
+            setTimeout(() => iframe.focus(), 120);
+        }
+
+        function closeVisualBrochureModal() {
+            const modal = document.getElementById('brochureModal');
+            const iframe = document.getElementById('brochureIframe');
+            const loader = document.getElementById('brochureLoader');
+
+            if (!modal || !iframe) return;
+
+            modal.classList.remove('show');
+            document.body.style.overflow = '';
+            iframe.src = 'about:blank';
+            if (loader) loader.style.display = 'none';
+        }
+
+        window.addEventListener('message', function(event) {
+            if (event.data === 'flipbookLoaded') {
+                const loader = document.getElementById('brochureLoader');
+                if (loader) loader.style.display = 'none';
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                const modal = document.getElementById('brochureModal');
+                if (modal && modal.classList.contains('show')) {
+                    closeVisualBrochureModal();
+                }
+            }
+        });
+    </script>
+    <script type="module">
+        import Grid1Background from 'https://cdn.jsdelivr.net/npm/threejs-components@0.0.16/build/backgrounds/grid1.cdn.min.js';
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const canvas = document.getElementById('brochure-webgl-canvas');
+            if (!canvas) return;
+
+            try {
+                const bg = Grid1Background(canvas);
+                if (bg && bg.grid) {
+                    bg.grid.setColors([0xa200f7, 0x7b11a9, 0x00ffcc]);
+                    if (bg.grid.light1) {
+                        bg.grid.light1.color.set(0xa200f7);
+                        bg.grid.light1.intensity = 900;
+                    }
+                    if (bg.grid.light2) {
+                        bg.grid.light2.color.set(0x00ffcc);
+                        bg.grid.light2.intensity = 400;
+                    }
+                }
+            } catch (error) {
+                console.warn('Could not load brochure background:', error);
+            }
+        });
+    </script>
+</body>
+</html>
