@@ -2829,11 +2829,27 @@
         </div>
 
         <!-- Confetti container -->
+        <style>
+            /* Ensure confetti renders above everything in the section */
+            #casino-pre-footer #confetti-area {
+                z-index: 50;
+            }
+            #casino-pre-footer .jackpot-flash {
+                position: absolute;
+                inset: 0;
+                background: radial-gradient(circle at 50% 50%, rgba(250, 204, 21, 0.75), rgba(250, 204, 21, 0.35) 35%, rgba(255, 255, 255, 0.08) 60%, transparent 70%);
+                mix-blend-mode: screen;
+                pointer-events: none;
+                border-radius: inherit;
+                z-index: 60;
+            }
+        </style>
         <div id="confetti-area" class="pointer-events-none absolute inset-0 overflow-hidden"></div>
     </section>
     <script>
         (function () {
             // CodePen-style rolling reels
+            const FORCE_WIN = false; // odds restored
             const reelEls = [document.getElementById('cp-reel-1'), document.getElementById('cp-reel-2'), document.getElementById('cp-reel-3')];
             const spinButton = document.getElementById('spin-button');
             const messageEl = document.getElementById('slot-message');
@@ -2853,33 +2869,132 @@
 
             function runConfetti(durationMs) {
                 const start = Date.now();
-                const colors = ['#facc15', '#d97706', '#f59e0b', '#fde68a', '#ffffff'];
+                const colors = ['#facc15', '#d97706', '#f59e0b', '#fde68a', '#ffffff', '#b91c1c', '#16a34a'];
                 const interval = setInterval(() => {
                     if (Date.now() - start > durationMs) {
                         clearInterval(interval);
                         return;
                     }
-                    const piece = document.createElement('span');
+                    const piecesPerTick = 3;
+                    for (let i = 0; i < piecesPerTick; i++) {
+                        const piece = document.createElement('span');
+                        const size = Math.random() * 10 + 8; // bigger pieces
+                        const isCircle = Math.random() < 0.35;
+                        piece.style.position = 'absolute';
+                        piece.style.top = '-24px';
+                        piece.style.left = Math.random() * 100 + '%';
+                        piece.style.width = size + 'px';
+                        piece.style.height = size + 'px';
+                        piece.style.borderRadius = isCircle ? '999px' : '3px';
+                        const color = colors[Math.floor(Math.random() * colors.length)];
+                        piece.style.background = color;
+                        piece.style.border = '1px solid rgba(255, 255, 255, 0.35)';
+                        piece.style.boxShadow = '0 0 14px rgba(250,204,21,0.55)';
+                        const baseRotation = Math.random() * 360;
+                        piece.style.transform = 'rotate(' + baseRotation + 'deg)';
+                        piece.style.opacity = '0.98';
+                        const fall = 1200 + Math.random() * 1400; // longer fall
+                        const drift = (Math.random() * 140 - 70);
+                        const spinTurns = (Math.random() * 2 + 1) * (Math.random() < 0.5 ? -1 : 1);
+                        piece.animate([
+                            { transform: 'translate(0, 0) rotate(' + baseRotation + 'deg)', opacity: 1 },
+                            { transform: 'translate(' + drift + 'px, ' + (window.innerHeight + 60) + 'px) rotate(' + (baseRotation + spinTurns * 360) + 'deg)', opacity: 0.9 }
+                        ], { duration: fall, easing: 'cubic-bezier(0.22,1,0.36,1)', fill: 'forwards' });
+                        confettiArea.appendChild(piece);
+                        setTimeout(() => { piece.remove(); }, fall + 120);
+                    }
+                }, 20);
+            }
+
+            // Streamer ribbons (long tumbling strips)
+            function runStreamers(durationMs) {
+                const start = Date.now();
+                const colors = ['#facc15', '#d97706', '#b91c1c', '#16a34a', '#f59e0b'];
+                const interval = setInterval(() => {
+                    if (Date.now() - start > durationMs) {
+                        clearInterval(interval);
+                        return;
+                    }
+                    const count = 2;
+                    for (let i = 0; i < count; i++) {
+                        const ribbon = document.createElement('span');
+                        const width = Math.random() * 6 + 4;
+                        const height = Math.random() * 140 + 120;
+                        ribbon.style.position = 'absolute';
+                        ribbon.style.top = '-40px';
+                        ribbon.style.left = Math.random() * 100 + '%';
+                        ribbon.style.width = width + 'px';
+                        ribbon.style.height = height + 'px';
+                        ribbon.style.borderRadius = '6px';
+                        ribbon.style.background = colors[Math.floor(Math.random() * colors.length)];
+                        ribbon.style.boxShadow = '0 0 10px rgba(0,0,0,0.25)';
+                        ribbon.style.filter = 'brightness(1.05)';
+                        ribbon.style.transformOrigin = 'center';
+                        const duration = 1600 + Math.random() * 1200;
+                        const driftX = (Math.random() * 220 - 110);
+                        const rotY = (Math.random() * 2 + 1) * 360 * (Math.random() < 0.5 ? -1 : 1);
+                        const rotZ = (Math.random() * 1 + 0.5) * 360 * (Math.random() < 0.5 ? -1 : 1);
+                        ribbon.animate([
+                            { transform: 'translate3d(0,0,0) rotateY(0deg) rotateZ(0deg)', opacity: 1 },
+                            { transform: 'translate3d(' + driftX + 'px,' + (window.innerHeight + 140) + 'px,0) rotateY(' + rotY + 'deg) rotateZ(' + rotZ + 'deg)', opacity: 0.95 }
+                        ], { duration, easing: 'cubic-bezier(0.22,1,0.36,1)', fill: 'forwards' });
+                        confettiArea.appendChild(ribbon);
+                        setTimeout(() => ribbon.remove(), duration + 200);
+                    }
+                }, 60);
+            }
+
+            // Firework-style radial burst from a random point near top
+            function fireworkBurst(particles = 26) {
+                const centerX = (window.innerWidth * (0.2 + Math.random() * 0.6));
+                const centerY = window.innerHeight * (0.18 + Math.random() * 0.25);
+                const colors = ['#ffffff', '#fde68a', '#facc15', '#f59e0b', '#d97706'];
+                for (let i = 0; i < particles; i++) {
+                    const p = document.createElement('span');
                     const size = Math.random() * 8 + 6;
-                    piece.style.position = 'absolute';
-                    piece.style.top = '-20px';
-                    piece.style.left = Math.random() * 100 + '%';
-                    piece.style.width = size + 'px';
-                    piece.style.height = size + 'px';
-                    piece.style.borderRadius = '2px';
-                    piece.style.background = colors[Math.floor(Math.random() * colors.length)];
-                    piece.style.boxShadow = '0 0 12px rgba(250,204,21,0.4)';
-                    piece.style.transform = 'rotate(' + (Math.random() * 360) + 'deg)';
-                    piece.style.opacity = '0.95';
-                    const fall = 800 + Math.random() * 800;
-                    const drift = (Math.random() * 80 - 40);
-                    piece.animate([
-                        { transform: piece.style.transform + ' translate(0, 0)', opacity: 1 },
-                        { transform: piece.style.transform + ' translate(' + drift + 'px, ' + (window.innerHeight + 40) + 'px)', opacity: 0.8 }
-                    ], { duration: fall, easing: 'cubic-bezier(0.22,1,0.36,1)', fill: 'forwards' });
-                    confettiArea.appendChild(piece);
-                    setTimeout(() => { piece.remove(); }, fall + 100);
-                }, 40);
+                    p.style.position = 'absolute';
+                    p.style.left = centerX + 'px';
+                    p.style.top = centerY + 'px';
+                    p.style.width = size + 'px';
+                    p.style.height = size + 'px';
+                    p.style.borderRadius = '999px';
+                    p.style.background = colors[Math.floor(Math.random() * colors.length)];
+                    p.style.boxShadow = '0 0 16px rgba(250,204,21,0.7), 0 0 6px rgba(255,255,255,0.6)';
+                    const angle = (Math.PI * 2) * (i / particles) + Math.random() * 0.3;
+                    const speed = 220 + Math.random() * 180;
+                    const dx = Math.cos(angle) * speed;
+                    const dy = Math.sin(angle) * speed;
+                    const duration = 700 + Math.random() * 500;
+                    p.animate([
+                        { transform: 'translate(0,0) scale(0.6)', opacity: 1 },
+                        { transform: 'translate(' + dx + 'px,' + dy + 'px) scale(1)', opacity: 0 }
+                    ], { duration, easing: 'cubic-bezier(0.22,1,0.36,1)', fill: 'forwards' });
+                    confettiArea.appendChild(p);
+                    setTimeout(() => p.remove(), duration + 50);
+                }
+            }
+
+            // Brief golden screen flash
+            function screenFlash() {
+                const flash = document.createElement('div');
+                flash.className = 'jackpot-flash';
+                confettiArea.appendChild(flash);
+                const duration = 520;
+                flash.animate([
+                    { opacity: 0 },
+                    { opacity: 1, offset: 0.3 },
+                    { opacity: 0 }
+                ], { duration, easing: 'cubic-bezier(.35,0,.2,1)', fill: 'forwards' });
+                setTimeout(() => flash.remove(), duration + 30);
+            }
+
+            function celebrateJackpot() {
+                // Layer multiple effects for a grand feel
+                screenFlash();
+                fireworkBurst(28);
+                setTimeout(() => fireworkBurst(24), 220);
+                runConfetti(2200);
+                runStreamers(1800);
             }
 
             // Roll one reel based on CodePen implementation
@@ -2902,6 +3017,15 @@
                 });
             }
 
+            // Snap a reel so the CENTER row shows the given icon index
+            function setReelToIndex(reel, targetIndex) {
+                // The top row index that will make center row = targetIndex
+                const topIndex = (targetIndex - 1 + num_icons) % num_icons;
+                const y = topIndex * icon_height; // modulo handled by repeating background
+                reel.style.transition = 'none';
+                reel.style.backgroundPositionY = `${y}px`;
+            }
+
             function announce(text) {
                 messageEl.textContent = text;
             }
@@ -2918,10 +3042,19 @@
 
                 const deltas = await Promise.all([roll(reelEls[0], 0), roll(reelEls[1], 1), roll(reelEls[2], 2)]);
                 deltas.forEach((delta, i) => indexes[i] = (indexes[i] + delta) % num_icons);
+                if (FORCE_WIN) {
+                    indexes[0] = 1;
+                    indexes[1] = 1;
+                    indexes[2] = 1;
+                }
                 const isJackpot = iconMap[indexes[0]] === 'seven' && iconMap[indexes[1]] === 'seven' && iconMap[indexes[2]] === 'seven';
                 if (isJackpot) {
+                    // Ensure reels visibly show 7-7-7 on the center row
+                    setReelToIndex(reelEls[0], 1);
+                    setReelToIndex(reelEls[1], 1);
+                    setReelToIndex(reelEls[2], 1);
                     announce('Congrats, you are very lucky today!');
-                    runConfetti(1000);
+                    celebrateJackpot();
                     if (machine) {
                         machine.classList.add('jackpot-glow');
                         setTimeout(() => machine.classList.remove('jackpot-glow'), 1200);
