@@ -225,7 +225,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                             <span class="text-xs text-gray-500">Transform spaces with lighting</span>
                                         </a>
                                         <a href="${pathPrefix}rentals/av-services/stages.html" class="block text-sm text-gray-700 hover:text-blue-600 transition">
-                                            <span class="font-medium">Stages</span><br>
+                                            <span class="font-medium">Event Stages</span><br>
                                             <span class="text-xs text-gray-500">Professional stage setups</span>
                                         </a>
                                     </div>
