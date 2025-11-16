@@ -5,66 +5,1461 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lighting Rentals - MiHi Entertainment</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        @font-face {
+            font-family: "Liberty";
+            src: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/907368/liberty.otf');
+        }
+
         body { font-family: 'Inter', sans-serif; color: #1a202c; }
-        h1, h2, h3, h4, h5, h6 { font-family: 'Playfair Display', serif; }
+        h1, h2, h3, h4, h5, h6 { font-family: 'Rajdhani', sans-serif; font-weight: 600; }
+        h3.av-title { 
+            font-family: 'Orbitron', sans-serif !important; 
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+        
+        /* Lighting Effect Styles */
+        h1.text {
+            font-family: 'Liberty', sans-serif;
+            font-weight: 100;
+            font-size: 7rem;
+            letter-spacing: 0.1em;
+            display: flex;
+            flex-flow: row;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+            margin-top: 0.25rem !important;
+            margin-bottom: 0.25rem !important;
+        }
+        
+        h1.text .letter {
+            color: #d9fdff;
+            text-shadow: 0 0 2rem #00f0ff;
+            display: inline-block;
+        }
+        
+        h1.text .letter.letter-2 {
+            transform: translate(-0.2rem, 1rem) rotate(10deg);
+            animation: flicker 2s ease-in-out infinite alternate;
+        }
+        
+        @keyframes flicker {
+            0% {
+                opacity: 1;
+                transform: translate(-0.2rem, 1rem) rotate(10deg);
+            }
+            5% {
+                opacity: 1;
+                transform: translate(-0.2rem, 1rem) rotate(10deg);
+            }
+            5.5% {
+                opacity: 0;
+                transform: translate(-0.2rem, 1rem) rotate(10deg);
+            }
+            6% {
+                opacity: 1;
+                transform: translate(-0.2rem, 1rem) rotate(10deg);
+            }
+            6.5% {
+                opacity: 1;
+                transform: translate(-0.2rem, 1rem) rotate(10deg);
+            }
+            7% {
+                opacity: 0;
+                transform: translate(-0.2rem, 1rem) rotate(10deg);
+            }
+            8% {
+                opacity: 1;
+                transform: translate(-0.2rem, 1rem) rotate(10deg);
+            }
+            50% {
+                opacity: 1;
+                transform: translate(-0.2rem, 1rem) rotate(13deg);
+            }
+            100% {
+                opacity: 1;
+                transform: translate(-0.2rem, 1rem) rotate(10deg);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            h1.text {
+                font-size: 4rem;
+            }
+        }
+        
+        /* LED/Bulb Effect for Rentals */
+        h2.led-text {
+            color: #d9fdff;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            text-shadow: 
+                0 0 10px #00f0ff,
+                0 0 20px #00f0ff,
+                0 0 30px #00f0ff,
+                0 0 40px #00c9ff,
+                0 0 70px #00c9ff,
+                0 0 80px #00c9ff,
+                0 0 100px #0099ff,
+                0 0 150px #0099ff;
+            animation: ledPulse 2s ease-in-out infinite alternate;
+            margin-top: 0.25rem !important;
+            margin-bottom: 0.15rem !important;
+        }
+        
+        /* Increased spacing between h1, h2, h3 in hero section */
+        section h1,
+        section h2,
+        section h3 {
+            margin-top: 0;
+        }
+        
+        section h1 + h2,
+        section h2 + h3,
+        section h1 + h3 {
+            margin-top: 0.25rem;
+        }
+        
+        /* Hero section text spacing */
+        section.relative .animated-text-container {
+            margin-bottom: 0.25rem;
+        }
+        
+        section.relative p {
+            margin-top: 0.5rem;
+            margin-bottom: 0.75rem;
+        }
+        
+        /* Reduce top spacing in hero section */
+        section.relative .relative.z-10 {
+            margin-top: -5rem;
+        }
+        
+        @media (max-width: 768px) {
+            section.relative .relative.z-10 {
+                margin-top: -3rem;
+            }
+        }
+        
+        @keyframes ledPulse {
+            0% {
+                text-shadow: 
+                    0 0 10px #00f0ff,
+                    0 0 20px #00f0ff,
+                    0 0 30px #00f0ff,
+                    0 0 40px #00c9ff,
+                    0 0 70px #00c9ff,
+                    0 0 80px #00c9ff,
+                    0 0 100px #0099ff,
+                    0 0 150px #0099ff;
+            }
+            100% {
+                text-shadow: 
+                    0 0 5px #00f0ff,
+                    0 0 10px #00f0ff,
+                    0 0 15px #00f0ff,
+                    0 0 20px #00c9ff,
+                    0 0 35px #00c9ff,
+                    0 0 40px #00c9ff,
+                    0 0 50px #0099ff,
+                    0 0 75px #0099ff,
+                    0 0 100px #0099ff;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            h2.led-text {
+                font-size: 3rem;
+            }
+        }
+        
+        /* Animated SVG Text Stroke Effect */
+        /* Based on original: dash=70, gap=10, max=5, dash-space=330, offset=-400 */
+        .animated-text-container {
+            position: relative;
+            width: 100%;
+            height: 70px;
+            margin-bottom: -1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: visible;
+        }
+        
+        .animated-text-svg {
+            width: 100%;
+            height: 100%;
+            max-width: 600px;
+            overflow: visible;
+        }
+        
+        .animated-text {
+            fill: none;
+            stroke-width: 2.5;
+            stroke-linejoin: round;
+            stroke-linecap: round;
+            stroke-dasharray: 60 300;
+            stroke-dashoffset: 0;
+            animation: stroke 6s infinite linear;
+        }
+        
+        .animated-text:nth-child(2) {
+            stroke: #F2385A;
+            animation-delay: -1.2s;
+        }
+        
+        .animated-text:nth-child(3) {
+            stroke: #F5A503;
+            animation-delay: -2.4s;
+        }
+        
+        .animated-text:nth-child(4) {
+            stroke: #E9F1DF;
+            animation-delay: -3.6s;
+        }
+        
+        .animated-text:nth-child(5) {
+            stroke: #56D9CD;
+            animation-delay: -4.8s;
+        }
+        
+        .animated-text:nth-child(6) {
+            stroke: #3AA1BF;
+            animation-delay: -6s;
+        }
+        
+        @keyframes stroke {
+            0% {
+                stroke-dashoffset: 0;
+            }
+            100% {
+                stroke-dashoffset: -360;
+            }
+        }
+        
+        @media (min-width: 768px) {
+            .animated-text-container {
+                height: 80px;
+            }
+            .animated-text-svg {
+                max-width: 700px;
+            }
+            #s-text text {
+                font-size: 40px;
+            }
+        }
+        
         .btn-primary { background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%); transition: all 0.3s ease; }
-        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(0, 80, 255, 0.4); }
+        .btn-primary:hover { transform: translateY(2px); box-shadow: 0 10px 25px rgba(0, 80, 255, 0.4); }
         .section-padding { padding: 5rem 0; }
-        .hero-gradient { background: linear-gradient(135deg, rgba(0, 80, 255, 0.5) 0%, rgba(0, 64, 217, 0.5) 100%); }
+        .hero-gradient { background: linear-gradient(135deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.5) 100%); }
+        
+        /* Rainbow/Neon Button Effect - Lighting Theme Colors */
+        .rainbow-button {
+            --primary-neon: rgba(0, 240, 255, 0.9);
+            --light-neon: rgba(0, 201, 255, 0.7);
+            --pulse-neon: rgba(0, 201, 255, 0.5);
+            --bright-neon: rgba(0, 153, 255, 1);
+            --off-neon: #333;
+            
+            --neon-shadow: 0 0 7px 4px var(--light-neon), 0 0 7px 4px var(--light-neon) inset;
+            --neon-shadow-pulse: 0 0 8px 5px var(--pulse-neon), 0 0 8px 5px var(--pulse-neon) inset;
+            --neon-shadow-bright: 0 0 8px 4px var(--bright-neon), 0 0 8px 4px var(--bright-neon) inset;
+            --neon-shadow-text: 0 0 7px var(--primary-neon);
+            
+            width: auto;
+            min-width: 200px;
+            height: auto;
+            padding: 1rem 2rem;
+            color: var(--primary-neon);
+            text-shadow: var(--neon-shadow-text);
+            border: 3px solid var(--primary-neon);
+            border-radius: 5px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            text-transform: uppercase;
+            font-size: 1.125rem;
+            font-weight: bold;
+            box-shadow: var(--neon-shadow);
+            animation: flicker-button 10s linear infinite;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            margin-top: 2rem;
+        }
+        
+        .rainbow-button:hover {
+            transform: translateY(-2px);
+        }
+        
+        @keyframes flicker-button {
+            0% {
+                box-shadow: var(--neon-shadow);
+            }
+            45% {
+                box-shadow: var(--neon-shadow-pulse);
+            }
+            90% {
+                box-shadow: var(--neon-shadow);
+                border-color: var(--primary-neon);
+                color: var(--primary-neon);
+                text-shadow: var(--neon-shadow-text);
+            }
+            90.01% {
+                box-shadow: none;
+                border-color: var(--off-neon);
+                color: var(--off-neon);
+                text-shadow: none;
+            }
+            94% {
+                box-shadow: none;
+                border-color: var(--off-neon);
+            }
+            94.01% {
+                box-shadow: var(--neon-shadow);
+                border-color: var(--primary-neon);
+            }
+            95% {
+                box-shadow: var(--neon-shadow);
+                border-color: var(--primary-neon);
+            }
+            95.01% {
+                box-shadow: none;
+                border-color: var(--off-neon);
+            }
+            95.5% {
+                box-shadow: none;
+                border-color: var(--off-neon);
+            }
+            95.51% {
+                box-shadow: var(--neon-shadow);
+                border-color: var(--primary-neon);
+            }
+            96% {
+                box-shadow: var(--neon-shadow);
+                border-color: var(--primary-neon);
+            }
+            96.01% {
+                box-shadow: none;
+                border-color: var(--off-neon);
+            }
+            96.5% {
+                box-shadow: none;
+                border-color: var(--off-neon);
+            }
+            96.51% {
+                box-shadow: var(--neon-shadow-bright);
+                border-color: var(--primary-neon);
+            }
+            100% {
+                box-shadow: var(--neon-shadow);
+                border-color: var(--primary-neon);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .rainbow-button {
+                font-size: 1rem;
+                padding: 0.875rem 1.5rem;
+                min-width: 180px;
+            }
+        }
+        
+        /* Compact variant for themed rainbow button */
+        .rainbow-button.compact {
+            font-size: 0.95rem;
+            padding: 0.5rem 1rem;
+            min-width: 0;
+            margin-top: 0;
+        }
+        
+        /* Emphasized (larger) variant for themed rainbow button */
+        .rainbow-button.emphasized {
+            font-size: 1.375rem;
+            padding: 1rem 2.25rem;
+            min-width: 240px;
+            margin-top: 0.5rem;
+            letter-spacing: 0.06em;
+        }
+        @media (max-width: 768px) {
+            .rainbow-button.emphasized {
+                font-size: 1.125rem;
+                padding: 0.875rem 1.75rem;
+                min-width: 200px;
+            }
+        }
+
+        /* Interactive Brochure Section Styles - Lighting Theme */
+        .brochure-section {
+            background: radial-gradient(circle, rgba(10, 20, 40, 0.95) 0%, rgba(5, 10, 25, 1) 100%);
+            position: relative;
+            overflow: hidden;
+            font-family: 'Rajdhani', sans-serif;
+            min-height: auto;
+            display: flex;
+            align-items: center;
+            padding-top: 0;
+            padding-bottom: 0;
+        }
+        
+        /* Animated multi-color orb background (scoped to CTA and Contact sections) */
+        #cta-neon-section, #contact-neon-section { position: relative; overflow: hidden; }
+        #cta-neon-section .container, #contact-neon-section .container { position: relative; z-index: 10; }
+        #cta-neon-section .orb-field, #contact-neon-section .orb-field {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.9;
+        }
+        #cta-neon-section .shape, #contact-neon-section .shape {
+            position: absolute;
+            top: var(--y, 0%);
+            left: var(--x, 0%);
+            width: var(--w, var(--size, 24px));
+            height: var(--h, var(--size, 24px));
+            transform-origin: top;
+            border: 2px solid var(--c, #00f0ff);
+            box-shadow: 0 0 18px var(--c, #00f0ff), inset 0 0 12px var(--c, #00f0ff);
+            animation: orb-move var(--duration, 28s) linear var(--delay, 0s) infinite alternate;
+            will-change: top, left;
+        }
+        #cta-neon-section .shape.circle, #contact-neon-section .shape.circle { border-radius: 9999px; }
+        #cta-neon-section .shape.square, #contact-neon-section .shape.square { border-radius: 6px; }
+        #cta-neon-section .shape.rect, #contact-neon-section .shape.rect { border-radius: 8px; }
+        /* Color tokens */
+        #cta-neon-section .purple, #contact-neon-section .purple { --c: #241379; }
+        #cta-neon-section .medium-blue, #contact-neon-section .medium-blue { --c: #2185bf; }
+        #cta-neon-section .light-blue, #contact-neon-section .light-blue { --c: #1fbce1; }
+        #cta-neon-section .red, #contact-neon-section .red { --c: #b62f56; }
+        #cta-neon-section .orange, #contact-neon-section .orange { --c: #d5764c; }
+        #cta-neon-section .yellow, #contact-neon-section .yellow { --c: #ffd53e; }
+        #cta-neon-section .cyan, #contact-neon-section .cyan { --c: #78ffba; }
+        #cta-neon-section .light-green, #contact-neon-section .light-green { --c: #98fd85; }
+        #cta-neon-section .lime, #contact-neon-section .lime { --c: #befb46; }
+        #cta-neon-section .magenta, #contact-neon-section .magenta { --c: #6c046c; }
+        #cta-neon-section .lightish-red, #contact-neon-section .lightish-red { --c: #f04c81; }
+        #cta-neon-section .pink, #contact-neon-section .pink { --c: #ff4293; }
+        /* Motion using variables for start/mid/end positions */
+        @keyframes orb-move {
+            0% {
+                top: var(--y, 0%);
+                left: var(--x, 0%);
+            }
+            50% {
+                top: var(--y2, 50%);
+                left: var(--x2, 50%);
+            }
+            100% {
+                top: var(--y3, 80%);
+                left: var(--x3, 20%);
+            }
+        }
+
+        .brochure-section .container {
+            width: 100%;
+            padding-top: 2rem;
+            padding-bottom: 2rem;
+            padding-left: clamp(1.5rem, 3vw, 3rem);
+            padding-right: clamp(1.5rem, 3vw, 3rem);
+        }
+        .brochure-header {
+            margin-bottom: 1.25rem !important;
+        }
+
+        .brochure-header h2 {
+            margin-bottom: 0.5rem;
+        }
+
+        .brochure-header p {
+            font-size: 0.95rem;
+        }
+
+        .content-grid {
+            gap: clamp(1rem, 2vw, 1.5rem);
+            align-items: stretch;
+        }
+
+        .feature-list {
+            gap: 0.65rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .brochure-cta-group {
+            gap: 0.75rem;
+        }
+
+        .compact-tags {
+            gap: 0.5rem;
+            padding-top: 0.5rem;
+        }
+
+        .compact-tags .brochure-tag {
+            font-size: 0.75rem;
+        }
+
+        @media (max-width: 1024px) {
+            .brochure-section {
+                min-height: auto;
+                display: block;
+                padding-top: 0;
+                padding-bottom: 0;
+            }
+
+            .brochure-section .container {
+                padding-top: 1.5rem;
+                padding-bottom: 1.5rem;
+            }
+        }
+
+        .brochure-section h2 {
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .brochure-section h3,
+        .brochure-section .brochure-subtitle {
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            margin-bottom: 0.75rem;
+        }
+
+        .brochure-section p,
+        .brochure-check-text,
+        .brochure-check-description,
+        .brochure-tag {
+            font-family: 'Rajdhani', sans-serif;
+            letter-spacing: 0.02em;
+        }
+
+        .brochure-section .pill-label {
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+        }
+
+        .brochure-section::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(0, 240, 255, 0.18) 0%, transparent 45%),
+                radial-gradient(circle at 80% 50%, rgba(0, 153, 255, 0.15) 0%, transparent 45%);
+            pointer-events: none;
+        }
+
+        #brochure-webgl-canvas {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0;
+        }
+
+        .brochure-badge {
+            background: linear-gradient(135deg, #00f0ff 0%, #0099ff 100%);
+            color: #ffffff;
+            padding: 0.4rem 1.25rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            display: inline-block;
+            box-shadow: 0 4px 18px rgba(0, 240, 255, 0.35);
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .brochure-preview {
+            position: relative;
+            background: #0a0f1f;
+            border-radius: 1.5rem;
+            box-shadow: 0 25px 55px -15px rgba(5, 10, 25, 0.85);
+            overflow: hidden;
+            transition: transform 0.45s ease, box-shadow 0.45s ease;
+            border: 2px solid rgba(0, 240, 255, 0.35);
+        }
+
+        .brochure-preview:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 35px 60px -20px rgba(0, 240, 255, 0.5);
+            border-color: rgba(0, 201, 255, 0.6);
+        }
+
+        .brochure-preview::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: repeating-linear-gradient(45deg, transparent, transparent 2px, rgba(0, 240, 255, 0.05) 2px, rgba(0, 240, 255, 0.05) 4px);
+            opacity: 0.4;
+            pointer-events: none;
+        }
+
+        .brochure-image {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            transition: transform 0.6s ease;
+        }
+
+        .brochure-preview:hover .brochure-image {
+            transform: scale(1.03);
+        }
+
+        .brochure-check-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+        }
+
+        .brochure-check-icon {
+            flex-shrink: 0;
+            width: 1.25rem;
+            height: 1.25rem;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #00f0ff 0%, #0099ff 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .brochure-check-text {
+            font-weight: 600;
+            color: #e2e8f0;
+            font-size: 0.95rem;
+        }
+
+        .brochure-check-description {
+            color: #94a3b8;
+            margin-top: 0.2rem;
+            font-size: 0.85rem;
+        }
+
+        .brochure-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #00f0ff 0%, #0099ff 100%);
+            color: #ffffff;
+            padding: 0.7rem 1.5rem;
+            border-radius: 9999px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            font-family: 'Orbitron', sans-serif;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 20px 35px -15px rgba(0, 240, 255, 0.65);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .brochure-button:hover {
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 30px 45px -20px rgba(0, 240, 255, 0.75);
+        }
+
+        .brochure-download-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid #00f0ff;
+            color: #e2e8f0;
+            padding: 0.7rem 1.25rem;
+            border-radius: 0.5rem;
+            font-weight: 700;
+            font-size: 0.9rem;
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 0.04em;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .brochure-download-button:hover {
+            background: linear-gradient(135deg, #00f0ff 0%, #0099ff 100%);
+            color: #ffffff;
+            transform: translateY(-2px);
+        }
+
+        .brochure-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            color: #94a3b8;
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .brochure-tag-icon {
+            color: #00f0ff;
+            width: 1.15rem;
+            height: 1.15rem;
+        }
+
+        .brochure-modal {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            display: none;
+            background-color: rgba(0, 0, 0, 0.85);
+            font-family: 'Rajdhani', sans-serif;
+        }
+
+        .brochure-modal.show {
+            display: block;
+        }
+
+        .brochure-modal-content {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .brochure-close-button {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(5, 10, 25, 0.9);
+            color: #00f0ff;
+            border: none;
+            border-radius: 50%;
+            padding: 0.6rem;
+            cursor: pointer;
+            transition: transform 0.2s ease, background 0.2s ease;
+            box-shadow: 0 8px 20px rgba(5, 10, 25, 0.7);
+            z-index: 10001;
+            pointer-events: auto;
+        }
+
+        .brochure-close-button:hover {
+            transform: scale(1.08);
+            background: rgba(10, 20, 40, 0.95);
+        }
+
+        .brochure-iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+            background: transparent;
+        }
+
+        #brochureLoader {
+            display: none;
+        }
+
+        /* Grid Hover Effect Styles */
+        .grid-effect-container {
+            display: flex;
+            width: 100%;
+            padding: 4% 2%;
+            box-sizing: border-box;
+            height: 100%;
+            min-height: 500px;
+        }
+
+        .grid-effect-box {
+            flex: 1;
+            overflow: hidden;
+            transition: .5s;
+            margin: 0 2%;
+            box-shadow: 0 20px 30px rgba(0,0,0,.1);
+            line-height: 0;
+        }
+
+        .grid-effect-box > img {
+            width: 200%;
+            height: calc(100% - 60px);
+            object-fit: cover; 
+            transition: .5s;
+        }
+
+        .grid-effect-box > span {
+            font-size: 1.5rem;
+            display: block;
+            text-align: center;
+            height: 60px;
+            line-height: 60px;
+            color: #e2e8f0;
+            font-weight: 600;
+            font-family: 'Rajdhani', sans-serif;
+        }
+
+        .grid-effect-box:hover { 
+            flex: 1 1 50%; 
+        }
+
+        .grid-effect-box:hover > img {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Two Column Section Lighting Theme - Particle Animation */
+        .two-column-section {
+            overflow: hidden;
+        }
+
+        .particle-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .circle-container {
+            position: absolute;
+            transform: translateY(-10vh);
+            animation-iteration-count: infinite;
+            animation-timing-function: linear;
+        }
+
+        .circle-container .circle {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            mix-blend-mode: screen;
+            background-image: radial-gradient(
+                hsl(180, 100%, 80%),
+                hsl(180, 100%, 80%) 10%,
+                hsla(180, 100%, 80%, 0) 56%
+            );
+            animation: fade-frames 200ms infinite, scale-frames 2s infinite;
+        }
+
+        @keyframes fade-frames {
+            0% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.7;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        @keyframes scale-frames {
+            0% {
+                transform: scale3d(0.4, 0.4, 1);
+            }
+            50% {
+                transform: scale3d(2.2, 2.2, 1);
+            }
+            100% {
+                transform: scale3d(0.4, 0.4, 1);
+            }
+        }
+
+        .two-column-section > .container {
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Event Production Section */
+        .event-production-section {
+            overflow: hidden;
+        }
+
+        .event-production-section > .container {
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Event Production Image Zoom Hover Effect */
+        .event-production-image-wrapper {
+            overflow: hidden;
+            border-radius: 0.5rem;
+        }
+
+        .event-production-image {
+            transition: transform 0.6s ease, box-shadow 0.6s ease;
+            transform-origin: center;
+        }
+
+        .event-production-image-wrapper:hover .event-production-image {
+            transform: scale(1.1);
+            box-shadow: 0 35px 65px -20px rgba(0, 240, 255, 0.6) !important;
+        }
+
+        .left-column-button:hover {
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 30px 45px -20px rgba(0, 240, 255, 0.75);
+        }
+
+        @media (max-width: 1024px) {
+            .left-column-content {
+                text-align: center !important;
+            }
+        }
     </style>
 </head>
 <body>
     <div id="nav-placeholder"></div>
 
-    <section class="relative h-[60vh] flex items-center justify-center overflow-hidden">
-        <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=1600');"></div>
+    <!-- Hero Section -->
+    <section class="relative h-screen flex items-center justify-center overflow-hidden">
+        <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('../../assets/images/lighting/hero.jpg');"></div>
         <div class="absolute inset-0 hero-gradient"></div>
-        <div class="relative z-10 text-center text-white px-6">
-            <h1 class="text-5xl md:text-6xl font-bold mb-4">Lighting Rentals</h1>
-            <p class="text-xl md:text-2xl mb-8">Transform Spaces with Professional Lighting</p>
-            <a href="#contact" class="btn-primary text-white px-8 py-4 rounded-full text-lg font-semibold inline-block">Get a Quote</a>
+        <div class="relative z-10 text-center text-white px-6 max-w-4xl mx-auto" style="padding-top: 0; padding-bottom: 0; margin-top: -5rem;">
+            <div class="animated-text-container">
+                <svg class="animated-text-svg" viewBox="0 0 600 100" preserveAspectRatio="xMidYMid meet" style="overflow: visible;">
+                    <defs>
+                        <style>
+                            @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&display=swap');
+                            #s-text text {
+                                font-family: 'Orbitron', sans-serif;
+                                font-weight: 700;
+                                font-size: 32px;
+                                letter-spacing: 0.15em;
+                                text-transform: uppercase;
+                            }
+                        </style>
+                        <symbol id="s-text">
+                            <text text-anchor="middle" x="300" y="40" dy=".35em">A/V PRODUCTION</text>
+                        </symbol>
+                    </defs>
+                    <use class="animated-text" href="#s-text" x="0" y="0"></use>
+                    <use class="animated-text" href="#s-text" x="0" y="0"></use>
+                    <use class="animated-text" href="#s-text" x="0" y="0"></use>
+                    <use class="animated-text" href="#s-text" x="0" y="0"></use>
+                    <use class="animated-text" href="#s-text" x="0" y="0"></use>
+                </svg>
+            </div>
+            <h2 class="led-text text-5xl md:text-7xl font-bold mt-2">Event</h2>
+            <h1 class="text">
+                <span class="letter letter-1">L</span>
+                <span class="letter letter-2">I</span>
+                <span class="letter letter-3">G</span>
+                <span class="letter letter-4">H</span>
+                <span class="letter letter-1">T</span>
+                <span class="letter letter-1">I</span>
+                <span class="letter letter-1">N</span>
+                <span class="letter letter-1">G</span>
+            </h1>
+            <p class="text-xl md:text-2xl mb-3 leading-relaxed" style="margin-top: 0.5rem;">Lighting and Ambiance can make or break your event. Let us set the mood for your guests with our expert lighting services.</p>
+            <a href="#contact" class="rainbow-button">CONTACT US</a>
         </div>
     </section>
 
-    <section class="section-padding bg-white">
-        <div class="container mx-auto px-6">
-            <div class="max-w-4xl mx-auto">
-                <h2 class="text-4xl font-bold mb-6 text-center">Professional Event Lighting</h2>
-                <p class="text-lg text-gray-700 mb-8 text-center">Set the perfect mood and ambiance with our professional lighting solutions.</p>
-                
-                <div class="grid md:grid-cols-2 gap-8 mt-12">
-                    <div class="bg-gray-50 p-6 rounded-lg">
-                        <h3 class="text-2xl font-semibold mb-4">💡 Uplighting</h3>
-                        <p class="text-gray-700">LED uplighting in any color to transform walls and create ambiance.</p>
+    <!-- Interactive Brochure Section -->
+    <section class="py-6 md:py-8 brochure-section relative" id="lighting-brochure">
+        <canvas id="brochure-webgl-canvas" style="z-index: 1;"></canvas>
+        <div class="container mx-auto px-6 relative" style="z-index: 20;">
+            <div class="text-center mb-4 space-y-1 brochure-header">
+                <span class="brochure-badge">💡 Lighting Service Guide</span>
+                <h2 class="text-2xl md:text-3xl font-bold text-white mb-2 leading-tight">
+                    Design Your Signature Lighting Experience
+                </h2>
+                <p class="text-base text-cyan-100 max-w-3xl mx-auto leading-relaxed">
+                    Explore our immersive lighting solutions and professional lighting services crafted to elevate conferences, galas, concerts, and brand activations.
+                </p>
+                <div class="flex items-center justify-center gap-2 pt-1">
+                    <div class="h-1 w-12 bg-gradient-to-r from-cyan-400 via-blue-500 to-cyan-300 rounded-full"></div>
+                    <div class="h-1 w-1 bg-cyan-400 rounded-full"></div>
+                    <div class="h-1 w-1 bg-blue-400 rounded-full"></div>
+                </div>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-8 items-center content-grid">
+                <div class="order-2 lg:order-1">
+                    <div class="relative group">
+                        <div class="brochure-preview">
+                            <div class="aspect-[4/3] bg-gradient-to-br from-slate-900 via-cyan-950 to-slate-900 flex items-center justify-center p-4 relative overflow-hidden">
+                                <div class="absolute inset-0" style="background-image: repeating-linear-gradient(45deg, transparent, transparent 2px, rgba(0, 240, 255, 0.08) 2px, rgba(0, 240, 255, 0.08) 4px);"></div>
+                                <div class="absolute inset-0 bg-gradient-to-br from-cyan-400/15 via-transparent to-slate-900/40 pointer-events-none"></div>
+                                <div class="relative w-full h-full flex items-center justify-center">
+                                    <div class="relative w-5/6 h-5/6 transform group-hover:scale-105 group-hover:-translate-y-2 transition-all duration-700" style="transform-style: preserve-3d; perspective: 1000px;">
+                                        <div class="absolute -right-2 top-0 bottom-0 w-16 bg-gradient-to-l from-cyan-400/25 to-transparent blur-sm skew-y-12 transform group-hover:scale-110"></div>
+                                        <div class="absolute inset-0 bg-gradient-to-br from-cyan-300/20 via-transparent to-transparent rounded-lg pointer-events-none"></div>
+                                        <div class="relative w-full h-full shadow-2xl rounded-lg overflow-hidden" style="box-shadow: 0 20px 60px rgba(0, 240, 255, 0.25), 0 0 25px rgba(0, 153, 255, 0.25);">
+                                            <img src="../../assets/images/lighting/lightthumb.png" alt="Lighting Services Brochure Preview" class="brochure-image">
+                                            <div class="absolute inset-0 bg-gradient-to-br from-cyan-400/20 via-transparent to-transparent pointer-events-none"></div>
+                                            <div class="absolute bottom-0 left-0 right-0 h-1/3 bg-gradient-to-b from-transparent to-black/30"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="absolute -inset-4 bg-gradient-to-r from-cyan-400/15 via-blue-500/25 to-cyan-300/15 blur-3xl group-hover:blur-2xl transition-all duration-700 rounded-full"></div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="bg-gray-50 p-6 rounded-lg">
-                        <h3 class="text-2xl font-semibold mb-4">🎭 Stage Lighting</h3>
-                        <p class="text-gray-700">Professional stage lights, spotlights, and moving heads.</p>
+                </div>
+
+                <div class="order-1 lg:order-2">
+                    <div class="pill-label inline-block bg-gradient-to-r from-cyan-400 via-blue-500 to-cyan-300 text-slate-900 px-3 py-1.5 rounded-full text-xs font-bold mb-2 shadow-lg tracking-[0.2em]">
+                        Full-Service Lighting Packages
                     </div>
-                    <div class="bg-gray-50 p-6 rounded-lg">
-                        <h3 class="text-2xl font-semibold mb-4">✨ Dance Floor Lighting</h3>
-                        <p class="text-gray-700">Dynamic lighting effects to energize your dance floor.</p>
+                    <h3 class="brochure-subtitle text-2xl md:text-3xl font-bold mb-2 text-white">
+                        Bring Visionary Lighting To Life
+                    </h3>
+                    <p class="text-base text-cyan-100 mb-4 leading-relaxed">
+                        From precision lighting design to dynamic LED systems and ambient lighting, our team designs turnkey solutions tailored to your venue, audience, and brand goals.
+                    </p>
+                    <div class="space-y-2 mb-4 feature-list">
+                        <div class="brochure-check-item">
+                            <div class="brochure-check-icon">
+                                <svg class="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                            </div>
+                            <div>
+                                <p class="brochure-check-text">Immersive Lighting Packages</p>
+                                <p class="brochure-check-description">LED systems, dynamic lighting, and ambient design engineered for impact and atmosphere.</p>
+                            </div>
+                        </div>
+                        <div class="brochure-check-item">
+                            <div class="brochure-check-icon">
+                                <svg class="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                            </div>
+                            <div>
+                                <p class="brochure-check-text">Lighting & Ambiance Production</p>
+                                <p class="brochure-check-description">Pixel-mapped lighting, LED systems, and ambient design for immersive event experiences.</p>
+                            </div>
+                        </div>
+                        <div class="brochure-check-item">
+                            <div class="brochure-check-icon">
+                                <svg class="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                            </div>
+                            <div>
+                                <p class="brochure-check-text">On-Site Lighting Engineers</p>
+                                <p class="brochure-check-description">Seasoned technicians who manage setup, cues, and live event lighting support.</p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="bg-gray-50 p-6 rounded-lg">
-                        <h3 class="text-2xl font-semibold mb-4">🌟 Intelligent Lighting</h3>
-                        <p class="text-gray-700">DMX-controlled intelligent lighting systems with custom programming.</p>
+                    <div class="flex flex-col sm:flex-row gap-4 brochure-cta-group">
+                        <button onclick="openLightingBrochureModal()" class="brochure-button" aria-label="View Lighting services brochure">
+                            <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+                            View Brochure
+                            <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+                        </button>
+                        <a href="../../flipbook/examples/example-assets/books/lighting.pdf" download class="brochure-download-button" aria-label="Download Lighting brochure PDF">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2m-6 0V4m0 12l-4-4m4 4l4-4"/></svg>
+                            Download PDF
+                        </a>
+                    </div>
+                    <div class="flex flex-wrap items-center gap-4 pt-4 border-t border-slate-800/70 compact-tags">
+                        <div class="brochure-tag"><svg class="brochure-tag-icon" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg><span class="text-sm font-medium">Lighting Focused</span></div>
+                        <div class="brochure-tag"><svg class="brochure-tag-icon" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg><span class="text-sm font-medium">Customizable</span></div>
+                        <div class="brochure-tag"><svg class="brochure-tag-icon" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg><span class="text-sm font-medium">Nationwide Support</span></div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="section-padding bg-gradient-to-r from-[#0050ff] to-[#0050ff] text-white">
-        <div class="container mx-auto px-6 text-center">
-            <h2 class="text-4xl font-bold mb-6">Light Up Your Event!</h2>
-            <p class="text-xl mb-8">Transform your venue with professional lighting</p>
-            <a href="#contact" class="bg-white text-[#0050ff] px-8 py-4 rounded-full text-lg font-semibold inline-block hover:bg-gray-100 transition">Request Quote</a>
+    <!-- Two Column Section -->
+    <section class="py-8 md:py-10 two-column-section" style="background: radial-gradient(circle, rgba(10, 20, 40, 0.95) 0%, rgba(5, 10, 25, 1) 100%); position: relative; overflow: hidden;">
+        <div class="particle-container" id="particleContainer"></div>
+        <div class="container mx-auto px-6">
+            <div class="grid lg:grid-cols-2 gap-8 items-stretch">
+                <!-- Left Column -->
+                <div class="bg-transparent flex items-center justify-end">
+                    <div class="text-right max-w-lg left-column-content">
+                        <h3 class="text-base md:text-lg font-semibold text-cyan-300 mb-1" style="font-family: 'Rajdhani', sans-serif; letter-spacing: 0.05em;">
+                            ILLUMINATE YOUR SPACE WITH OUR
+                        </h3>
+                        <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-3" style="font-family: 'Orbitron', sans-serif; letter-spacing: 0.1em; text-transform: uppercase; text-shadow: 0 0 20px rgba(0, 240, 255, 0.5);">
+                            EVENT LIGHTING SERVICES
+                        </h2>
+                        <p class="text-sm md:text-base text-cyan-100 mb-2.5 leading-snug" style="font-family: 'Rajdhani', sans-serif;">
+                            MiHi Entertainment is your top choice for professional event lighting rental services, perfect for illuminating events of all types, including corporate events and corporate holiday parties. From intimate gatherings to grand celebrations, we transform spaces into captivating spectacles with our expertly designed lighting solutions.
+                        </p>
+                        <p class="text-sm md:text-base text-cyan-100 mb-2.5 leading-snug" style="font-family: 'Rajdhani', sans-serif;">
+                            Our experienced lighting designers combine technical expertise and creative passion to bring your vision to life. Whether you want a romantic glow for a wedding or dynamic lights for a high-energy corporate event, we have the skills to make it happen.
+                        </p>
+                        <p class="text-sm md:text-base text-cyan-100 mb-2.5 leading-snug" style="font-family: 'Rajdhani', sans-serif;">
+                            Our services include adaptive intelligent lighting, pinpoint pin spots, atmospheric wash lighting, and dramatic uplighting to transform any venue. We also offer custom lighting solutions like pattern projections, stage lighting for concerts or performances, uplighting rentals to set the mood, and bistro lighting for a warm, rustic feel.
+                        </p>
+                        <p class="text-sm md:text-base text-cyan-100 mb-4 leading-snug" style="font-family: 'Rajdhani', sans-serif;">
+                            We know every event is unique, so we offer a personalized approach. Our team collaborates with you to understand your needs and venue details, creating a tailored lighting plan that exceeds your expectations.
+                        </p>
+                        <button class="left-column-button text-white px-6 py-2 rounded-full font-bold text-sm transition-all duration-300" style="background: linear-gradient(135deg, #00f0ff 0%, #0099ff 100%); font-family: 'Orbitron', sans-serif; letter-spacing: 0.05em; box-shadow: 0 20px 35px -15px rgba(0, 240, 255, 0.65);">
+                            Interested in Hearing More?
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Right Column -->
+                <div class="bg-transparent h-full">
+                    <div class="grid-effect-container">
+                        <div class="grid-effect-box">
+                            <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=1000&h=800&fit=crop" alt="Stage Lighting">
+                            <span>Stage Lighting</span>
+                        </div>
+                        <div class="grid-effect-box">
+                            <img src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=1000&h=800&fit=crop" alt="LED Systems">
+                            <span>LED Systems</span>
+                        </div>
+                        <div class="grid-effect-box">
+                            <img src="https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=1000&h=800&fit=crop" alt="Event Lighting">
+                            <span>Event Lighting</span>
+                        </div>
+                        <div class="grid-effect-box">
+                            <img src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=1000&h=800&fit=crop" alt="Ambient Design">
+                            <span>Ambient Design</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
+    <!-- Event Production Section -->
+    <section class="py-8 md:py-10 event-production-section" style="background: radial-gradient(circle, rgba(10, 20, 40, 0.95) 0%, rgba(5, 10, 25, 1) 100%); position: relative; overflow: hidden;">
+        <div class="particle-container" id="particleContainer2"></div>
+        <div class="container mx-auto px-6">
+            <div class="grid lg:grid-cols-2 gap-8 items-center">
+                <!-- Left Column - Image -->
+                <div class="bg-transparent event-production-image-wrapper">
+                    <img src="../../assets/images/lighting/j1.jpg" alt="Event Production" class="event-production-image w-full h-auto rounded-lg shadow-2xl" style="box-shadow: 0 25px 55px -15px rgba(5, 10, 25, 0.85);">
+                </div>
+                
+                <!-- Right Column - Content -->
+                <div class="bg-transparent flex items-center justify-start">
+                    <div class="text-left max-w-lg event-production-content">
+                        <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-4" style="font-family: 'Orbitron', sans-serif; letter-spacing: 0.1em; text-transform: uppercase; text-shadow: 0 0 20px rgba(0, 240, 255, 0.5);">
+                            EVENT PRODUCTION
+                        </h2>
+                        <p class="text-sm md:text-base text-cyan-100 leading-relaxed" style="font-family: 'Rajdhani', sans-serif;">
+                            Event Planners and Event Designers know the perfect ambiance requires the perfect event lighting.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mirrored Two Column Layout -->
+            <div class="grid lg:grid-cols-2 gap-8 items-center mt-12">
+                <!-- Left Column - Content -->
+                <div class="bg-transparent flex items-center justify-end order-2 lg:order-1">
+                    <div class="text-right max-w-lg concerts-content">
+                        <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-4" style="font-family: 'Orbitron', sans-serif; letter-spacing: 0.1em; text-transform: uppercase; text-shadow: 0 0 20px rgba(0, 240, 255, 0.5);">
+                            CONCERTS
+                        </h2>
+                        <p class="text-sm md:text-base text-cyan-100 leading-relaxed" style="font-family: 'Rajdhani', sans-serif;">
+                            Our concert lighting products deliver dynamic, customizable effects with vibrant visuals and unforgettable ambiance.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Right Column - Image -->
+                <div class="bg-transparent order-1 lg:order-2 event-production-image-wrapper">
+                    <img src="../../assets/images/lighting/j2.jpg" alt="Concerts" class="event-production-image w-full h-auto rounded-lg shadow-2xl" style="box-shadow: 0 25px 55px -15px rgba(5, 10, 25, 0.85);">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- New Section -->
+    <section id="cta-neon-section" class="py-4 md:py-6" style="background: radial-gradient(circle, rgba(10, 20, 40, 0.95) 0%, rgba(5, 10, 25, 1) 100%); position: relative; overflow: hidden; min-height: 24vh;">
+        <div class="orb-field" aria-hidden="true">
+            <!-- 3 shapes per color (circle, square, rect) = 36 total -->
+            <!-- purple -->
+            <div class="shape circle purple" style="--size: 38px; --x: 5%; --y: 70%; --x2: 20%; --y2: 20%; --x3: 10%; --y3: 5%; --duration: 30s; --delay: 0s;"></div>
+            <div class="shape square purple" style="--size: 22px; --x: 13%; --y: 15%; --x2: 28%; --y2: 48%; --x3: 12%; --y3: 35%; --duration: 26s; --delay: 1.2s;"></div>
+            <div class="shape rect purple" style="--w: 50px; --h: 16px; --x: 3%; --y: 42%; --x2: 16%; --y2: 10%; --x3: 24%; --y3: 60%; --duration: 32s; --delay: 0.6s;"></div>
+            <!-- medium-blue -->
+            <div class="shape circle medium-blue" style="--size: 28px; --x: 18%; --y: 10%; --x2: 32%; --y2: 60%; --x3: 8%; --y3: 45%; --duration: 28s; --delay: 2s;"></div>
+            <div class="shape square medium-blue" style="--size: 18px; --x: 22%; --y: 72%; --x2: 30%; --y2: 30%; --x3: 38%; --y3: 12%; --duration: 27s; --delay: 1.1s;"></div>
+            <div class="shape rect medium-blue" style="--w: 42px; --h: 14px; --x: 34%; --y: 48%; --x2: 24%; --y2: 8%; --x3: 40%; --y3: 25%; --duration: 31s; --delay: 0.2s;"></div>
+            <!-- light-blue -->
+            <div class="shape circle light-blue" style="--size: 44px; --x: 30%; --y: 68%; --x2: 42%; --y2: 18%; --x3: 56%; --y3: 32%; --duration: 34s; --delay: 1s;"></div>
+            <div class="shape square light-blue" style="--size: 20px; --x: 36%; --y: 12%; --x2: 50%; --y2: 40%; --x3: 28%; --y3: 66%; --duration: 26s; --delay: 0.5s;"></div>
+            <div class="shape rect light-blue" style="--w: 54px; --h: 18px; --x: 26%; --y: 36%; --x2: 38%; --y2: 8%; --x3: 48%; --y3: 22%; --duration: 33s; --delay: 1.7s;"></div>
+            <!-- red -->
+            <div class="shape circle red" style="--size: 30px; --x: 45%; --y: 8%; --x2: 54%; --y2: 44%; --x3: 34%; --y3: 78%; --duration: 29s; --delay: 3s;"></div>
+            <div class="shape square red" style="--size: 24px; --x: 48%; --y: 62%; --x2: 62%; --y2: 22%; --x3: 40%; --y3: 16%; --duration: 28s; --delay: 1.5s;"></div>
+            <div class="shape rect red" style="--w: 46px; --h: 16px; --x: 38%; --y: 28%; --x2: 52%; --y2: 66%; --x3: 46%; --y3: 8%; --duration: 31s; --delay: 0.9s;"></div>
+            <!-- orange -->
+            <div class="shape circle orange" style="--size: 36px; --x: 58%; --y: 72%; --x2: 72%; --y2: 32%; --x3: 62%; --y3: 16%; --duration: 31s; --delay: 1.5s;"></div>
+            <div class="shape square orange" style="--size: 22px; --x: 64%; --y: 12%; --x2: 74%; --y2: 48%; --x3: 52%; --y3: 62%; --duration: 27s; --delay: 0.7s;"></div>
+            <div class="shape rect orange" style="--w: 50px; --h: 14px; --x: 56%; --y: 34%; --x2: 70%; --y2: 14%; --x3: 66%; --y3: 28%; --duration: 33s; --delay: 2.1s;"></div>
+            <!-- yellow -->
+            <div class="shape circle yellow" style="--size: 22px; --x: 72%; --y: 24%; --x2: 82%; --y2: 64%; --x3: 68%; --y3: 52%; --duration: 25s; --delay: 0.8s;"></div>
+            <div class="shape square yellow" style="--size: 18px; --x: 70%; --y: 74%; --x2: 84%; --y2: 28%; --x3: 76%; --y3: 14%; --duration: 26s; --delay: 1.9s;"></div>
+            <div class="shape rect yellow" style="--w: 42px; --h: 12px; --x: 62%; --y: 44%; --x2: 78%; --y2: 18%; --x3: 72%; --y3: 8%; --duration: 32s; --delay: 0.3s;"></div>
+            <!-- cyan -->
+            <div class="shape circle cyan" style="--size: 40px; --x: 84%; --y: 66%; --x2: 64%; --y2: 32%; --x3: 80%; --y3: 12%; --duration: 33s; --delay: 2.4s;"></div>
+            <div class="shape square cyan" style="--size: 24px; --x: 88%; --y: 14%; --x2: 76%; --y2: 46%; --x3: 92%; --y3: 64%; --duration: 28s; --delay: 0.4s;"></div>
+            <div class="shape rect cyan" style="--w: 56px; --h: 18px; --x: 74%; --y: 36%; --x2: 80%; --y2: 10%; --x3: 70%; --y3: 26%; --duration: 35s; --delay: 1.4s;"></div>
+            <!-- light-green -->
+            <div class="shape circle light-green" style="--size: 28px; --x: 6%; --y: 8%; --x2: 18%; --y2: 48%; --x3: 10%; --y3: 62%; --duration: 26s; --delay: 1.2s;"></div>
+            <div class="shape square light-green" style="--size: 20px; --x: 4%; --y: 26%; --x2: 16%; --y2: 54%; --x3: 8%; --y3: 70%; --duration: 29s; --delay: 0.9s;"></div>
+            <div class="shape rect light-green" style="--w: 46px; --h: 14px; --x: 14%; --y: 38%; --x2: 6%; --y2: 14%; --x3: 24%; --y3: 22%; --duration: 31s; --delay: 2.2s;"></div>
+            <!-- lime -->
+            <div class="shape circle lime" style="--size: 34px; --x: 22%; --y: 60%; --x2: 40%; --y2: 18%; --x3: 46%; --y3: 38%; --duration: 32s; --delay: 0.4s;"></div>
+            <div class="shape square lime" style="--size: 22px; --x: 20%; --y: 10%; --x2: 32%; --y2: 46%; --x3: 26%; --y3: 66%; --duration: 27s; --delay: 1.6s;"></div>
+            <div class="shape rect lime" style="--w: 52px; --h: 16px; --x: 38%; --y: 8%; --x2: 30%; --y2: 28%; --x3: 36%; --y3: 54%; --duration: 34s; --delay: 2.6s;"></div>
+            <!-- magenta -->
+            <div class="shape circle magenta" style="--size: 24px; --x: 48%; --y: 42%; --x2: 60%; --y2: 18%; --x3: 42%; --y3: 10%; --duration: 28s; --delay: 1.8s;"></div>
+            <div class="shape square magenta" style="--size: 18px; --x: 44%; --y: 70%; --x2: 56%; --y2: 34%; --x3: 50%; --y3: 20%; --duration: 26s; --delay: 0.6s;"></div>
+            <div class="shape rect magenta" style="--w: 44px; --h: 12px; --x: 52%; --y: 20%; --x2: 64%; --y2: 12%; --x3: 46%; --y3: 34%; --duration: 30s; --delay: 2.3s;"></div>
+            <!-- lightish-red -->
+            <div class="shape circle lightish-red" style="--size: 30px; --x: 66%; --y: 8%; --x2: 78%; --y2: 44%; --x3: 60%; --y3: 78%; --duration: 30s; --delay: 2.8s;"></div>
+            <div class="shape square lightish-red" style="--size: 20px; --x: 70%; --y: 66%; --x2: 76%; --y2: 24%; --x3: 64%; --y3: 16%; --duration: 27s; --delay: 1.3s;"></div>
+            <div class="shape rect lightish-red" style="--w: 48px; --h: 14px; --x: 60%; --y: 32%; --x2: 74%; --y2: 10%; --x3: 68%; --y3: 28%; --duration: 32s; --delay: 0.1s;"></div>
+            <!-- pink -->
+            <div class="shape circle pink" style="--size: 26px; --x: 88%; --y: 22%; --x2: 72%; --y2: 56%; --x3: 92%; --y3: 68%; --duration: 27s; --delay: 0.6s;"></div>
+            <div class="shape square pink" style="--size: 18px; --x: 90%; --y: 70%; --x2: 78%; --y2: 28%; --x3: 84%; --y3: 18%; --duration: 29s; --delay: 1.4s;"></div>
+            <div class="shape rect pink" style="--w: 40px; --h: 12px; --x: 76%; --y: 40%; --x2: 86%; --y2: 16%; --x3: 82%; --y3: 8%; --duration: 31s; --delay: 2s;"></div>
+        </div>
+        <div class="container mx-auto px-6">
+            <div class="w-full flex items-center justify-center">
+                <a href="mailto:info@mihientertainment.com" class="rainbow-button emphasized">Email Our Team</a>
+            </div>
+        </div>
+    </section>  
+
+    <!-- Event Production Section -->
+    <section class="py-4 md:py-6 event-production-section" style="background: radial-gradient(circle, rgba(10, 20, 40, 0.95) 0%, rgba(5, 10, 25, 1) 100%); position: relative; overflow: hidden;">
+        <div class="particle-container" id="particleContainer3"></div>
+        <div class="container mx-auto px-6">
+            <div class="grid lg:grid-cols-2 gap-6 items-center">
+                <!-- Left Column - Image -->
+                <div class="bg-transparent event-production-image-wrapper">
+                    <img src="../../assets/images/lighting/j3.jpg" alt="Event Production" class="event-production-image w-full h-auto rounded-lg shadow-2xl" style="box-shadow: 0 25px 55px -15px rgba(5, 10, 25, 0.85);">
+                </div>
+                
+                <!-- Right Column - Content -->
+                <div class="bg-transparent flex items-center justify-start">
+                    <div class="text-left max-w-lg event-production-content">
+                        <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-2" style="font-family: 'Orbitron', sans-serif; letter-spacing: 0.1em; text-transform: uppercase; text-shadow: 0 0 20px rgba(0, 240, 255, 0.5);">
+                            CORPORATE EVENTS
+                        </h2>
+                        <p class="text-sm md:text-base text-cyan-100 leading-snug" style="font-family: 'Rajdhani', sans-serif;">
+                            From custom gobo designs to neon signs, our lighting options take your event branding to the next level.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mirrored Two Column Layout -->
+            <div class="grid lg:grid-cols-2 gap-6 items-center mt-6">
+                <!-- Left Column - Content -->
+                <div class="bg-transparent flex items-center justify-end order-2 lg:order-1">
+                    <div class="text-right max-w-lg concerts-content">
+                        <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-2" style="font-family: 'Orbitron', sans-serif; letter-spacing: 0.1em; text-transform: uppercase; text-shadow: 0 0 20px rgba(0, 240, 255, 0.5);">
+                            GALAS
+                        </h2>
+                        <p class="text-sm md:text-base text-cyan-100 leading-snug" style="font-family: 'Rajdhani', sans-serif;">
+                            Whether it’s sparkling stars or snowflake gobos, we make your gala stand out for your guests.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Right Column - Image -->
+                <div class="bg-transparent order-1 lg:order-2 event-production-image-wrapper">
+                    <img src="../../assets/images/lighting/j4.jpg" alt="Concerts" class="event-production-image w-full h-auto rounded-lg shadow-2xl" style="box-shadow: 0 25px 55px -15px rgba(5, 10, 25, 0.85);">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Brochure Modal -->
+    <div id="brochureModal" class="brochure-modal" aria-labelledby="lighting-brochure-title" role="dialog" aria-modal="true">
+        <div class="brochure-modal-content">
+            <button onclick="closeLightingBrochureModal()" class="brochure-close-button" aria-label="Close Lighting brochure">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+
+            <div id="brochureLoader" class="fixed inset-0 flex items-center justify-center z-[10000]" style="background-color: rgba(5, 10, 25, 0.85);">
+                <div class="text-center">
+                    <div class="inline-block relative w-16 h-16">
+                        <div class="absolute inset-0 rounded-full border-4" style="border-color: rgba(0, 240, 255, 0.3);"></div>
+                        <div class="absolute inset-0 rounded-full border-4 border-transparent animate-spin" style="border-top-color: #00f0ff;"></div>
+                    </div>
+                    <p class="mt-4 text-white text-lg font-medium">Loading Lighting Guide...</p>
+                </div>
+            </div>
+
+            <iframe id="brochureIframe" class="brochure-iframe" allowfullscreen loading="eager" sandbox="allow-scripts allow-same-origin"></iframe>
+        </div>
+    </div>
+
     <script src="../../assets/components/navigation.js"></script>
     <script src="../../assets/components/footer.js"></script>
+    <script>
+        // Brochure Modal Functions
+        function openLightingBrochureModal() {
+            const modal = document.getElementById('brochureModal');
+            const iframe = document.getElementById('brochureIframe');
+            const loader = document.getElementById('brochureLoader');
+
+            if (!modal || !iframe) return;
+
+            modal.classList.add('show');
+            document.body.style.overflow = 'hidden';
+            if (loader) loader.style.display = 'flex';
+
+            const timestamp = new Date().getTime();
+            iframe.src = '../../flipbook/examples/light.html?t=' + timestamp;
+
+            setTimeout(() => iframe.focus(), 120);
+        }
+
+        function closeLightingBrochureModal() {
+            const modal = document.getElementById('brochureModal');
+            const iframe = document.getElementById('brochureIframe');
+            const loader = document.getElementById('brochureLoader');
+
+            if (!modal || !iframe) return;
+
+            modal.classList.remove('show');
+            document.body.style.overflow = '';
+            iframe.src = 'about:blank';
+            if (loader) loader.style.display = 'none';
+        }
+
+        window.addEventListener('message', function(event) {
+            if (event.data === 'flipbookLoaded') {
+                const loader = document.getElementById('brochureLoader');
+                if (loader) loader.style.display = 'none';
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                const modal = document.getElementById('brochureModal');
+                if (modal && modal.classList.contains('show')) {
+                    closeLightingBrochureModal();
+                }
+            }
+        });
+
+        // Particle Animation Generation
+        function createParticles(containerId) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
+
+            const particleNum = 200;
+            const particleBaseSize = 8;
+
+            for (let i = 1; i <= particleNum; i++) {
+                const circleContainer = document.createElement('div');
+                circleContainer.className = 'circle-container';
+                
+                const circleSize = Math.floor(Math.random() * particleBaseSize) + 2;
+                const startPositionY = Math.random() * 10 + 100;
+                const moveDuration = 28000 + Math.random() * 9000;
+                const animationDelay = Math.random() * 37000;
+                const circleDelay = Math.random() * 4000;
+                const startX = Math.random() * 100;
+                const endX = Math.random() * 100;
+                const endY = -startPositionY - Math.random() * 30;
+
+                circleContainer.style.width = circleSize + 'px';
+                circleContainer.style.height = circleSize + 'px';
+                const animationName = `move-frames-${containerId}-${i}`;
+                circleContainer.style.animationName = animationName;
+                circleContainer.style.animationDuration = moveDuration + 'ms';
+                circleContainer.style.animationDelay = animationDelay + 'ms';
+
+                const circle = document.createElement('div');
+                circle.className = 'circle';
+                circle.style.animationDelay = circleDelay + 'ms';
+
+                circleContainer.appendChild(circle);
+                container.appendChild(circleContainer);
+
+                // Create keyframe animation
+                const style = document.createElement('style');
+                style.textContent = `
+                    @keyframes ${animationName} {
+                        from {
+                            transform: translate3d(${startX}vw, ${startPositionY}vh, 0);
+                        }
+                        to {
+                            transform: translate3d(${endX}vw, ${endY}vh, 0);
+                        }
+                    }
+                `;
+                document.head.appendChild(style);
+            }
+        }
+
+        // Initialize particles when DOM is ready
+        function initParticles() {
+            createParticles('particleContainer');
+            createParticles('particleContainer2');
+            createParticles('particleContainer3');
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initParticles);
+        } else {
+            initParticles();
+        }
+    </script>
+    <script type="module">
+        import Grid1Background from 'https://cdn.jsdelivr.net/npm/threejs-components@0.0.16/build/backgrounds/grid1.cdn.min.js';
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const canvas = document.getElementById('brochure-webgl-canvas');
+            if (!canvas) return;
+
+            try {
+                const bg = Grid1Background(canvas);
+                if (bg && bg.grid) {
+                    bg.grid.setColors([0x00f0ff, 0x0099ff, 0x00c9ff]);
+                    if (bg.grid.light1) {
+                        bg.grid.light1.color.set(0x00f0ff);
+                        bg.grid.light1.intensity = 900;
+                    }
+                    if (bg.grid.light2) {
+                        bg.grid.light2.color.set(0x00c9ff);
+                        bg.grid.light2.intensity = 400;
+                    }
+                }
+            } catch (error) {
+                console.warn('Could not load brochure background:', error);
+            }
+        });
+    </script>
+    
+    <!-- Contact CTA Section -->
+    <section id="contact-neon-section" class="py-6 md:py-8" style="background: radial-gradient(circle, rgba(10, 20, 40, 0.95) 0%, rgba(5, 10, 25, 1) 100%); position: relative; overflow: hidden;">
+        <div class="orb-field" aria-hidden="true">
+            <!-- A lighter set of shapes for performance (12 total) -->
+            <div class="shape circle purple" style="--size: 22px; --x: 6%; --y: 70%; --x2: 18%; --y2: 28%; --x3: 10%; --y3: 8%; --duration: 28s; --delay: 0s;"></div>
+            <div class="shape square medium-blue" style="--size: 18px; --x: 18%; --y: 12%; --x2: 30%; --y2: 52%; --x3: 12%; --y3: 42%; --duration: 26s; --delay: 0.8s;"></div>
+            <div class="shape rect light-blue" style="--w: 44px; --h: 12px; --x: 26%; --y: 44%; --x2: 34%; --y2: 12%; --x3: 48%; --y3: 24%; --duration: 30s; --delay: 1.2s;"></div>
+            <div class="shape circle red" style="--size: 20px; --x: 38%; --y: 18%; --x2: 50%; --y2: 58%; --x3: 42%; --y3: 70%; --duration: 27s; --delay: 0.4s;"></div>
+            <div class="shape square orange" style="--size: 16px; --x: 52%; --y: 68%; --x2: 66%; --y2: 36%; --x3: 60%; --y3: 16%; --duration: 29s; --delay: 1.6s;"></div>
+            <div class="shape rect yellow" style="--w: 40px; --h: 12px; --x: 56%; --y: 34%; --x2: 70%; --y2: 16%; --x3: 62%; --y3: 28%; --duration: 31s; --delay: 0.6s;"></div>
+            <div class="shape circle cyan" style="--size: 22px; --x: 68%; --y: 24%; --x2: 78%; --y2: 58%; --x3: 72%; --y3: 66%; --duration: 32s; --delay: 1.1s;"></div>
+            <div class="shape square light-green" style="--size: 16px; --x: 72%; --y: 70%; --x2: 84%; --y2: 38%; --x3: 76%; --y3: 16%; --duration: 28s; --delay: 0.9s;"></div>
+            <div class="shape rect lime" style="--w: 42px; --h: 12px; --x: 74%; --y: 40%; --x2: 86%; --y2: 20%; --x3: 78%; --y3: 10%; --duration: 33s; --delay: 1.8s;"></div>
+            <div class="shape circle magenta" style="--size: 20px; --x: 82%; --y: 28%; --x2: 70%; --y2: 56%; --x3: 90%; --y3: 60%; --duration: 29s; --delay: 0.2s;"></div>
+            <div class="shape square lightish-red" style="--size: 16px; --x: 86%; --y: 62%; --x2: 76%; --y2: 30%; --x3: 82%; --y3: 18%; --duration: 27s; --delay: 1.4s;"></div>
+            <div class="shape rect pink" style="--w: 38px; --h: 12px; --x: 80%; --y: 44%; --x2: 90%; --y2: 16%; --x3: 84%; --y3: 8%; --duration: 32s; --delay: 2s;"></div>
+        </div>
+        <div class="container mx-auto px-6">
+            <div class="text-center max-w-3xl mx-auto">
+                <h2 class="text-2xl md:text-3xl font-bold text-white mb-2" style="font-family: 'Orbitron', sans-serif; letter-spacing: 0.1em; text-transform: uppercase; text-shadow: 0 0 16px rgba(0, 240, 255, 0.4);">
+                    CONTACT US NOW
+                </h2>
+                <p class="text-base md:text-lg text-cyan-100 mb-4 leading-snug" style="font-family: 'Rajdhani', sans-serif;">
+                    Learn more about our lighting services for your next event, click the button below to email us and connect with our team today.
+                </p>
+                <div class="flex items-center justify-center">
+                    <a href="mailto:info@mihientertainment.com" class="rainbow-button emphasized" aria-label="Email MiHi Entertainment">
+                        Learn More Now
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
 </body>
 </html>
