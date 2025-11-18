@@ -1,0 +1,1027 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Custom Themed Photo Booth Sets by MiHi Entertainment. When a backdrop isn't enough - fully branded, immersive photo set designs made just for you.">
+    <title>Custom Themed Photo Booth Sets - MiHi Entertainment</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #1a202c;
+        }
+
+        main h1,
+        main h2,
+        main h3,
+        main h4,
+        main h5,
+        main h6 {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%);
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 80, 255, 0.4);
+        }
+
+        .section-padding {
+            padding: 5rem 0;
+        }
+
+        @media (min-width: 768px) {
+            .section-padding {
+                padding: 8rem 0;
+            }
+        }
+
+        /* Rainbow Gradient Animation for Custom Theme */
+        @keyframes rainbow-shift {
+            0%, 100% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+        }
+
+        .animated-rainbow-gradient {
+            background: linear-gradient(-45deg, 
+                #FF6B6B, #4ECDC4, #45B7D1, #FFA07A, 
+                #98D8C8, #F7DC6F, #BB8FCE, #FF6B6B);
+            background-size: 400% 400%;
+            animation: rainbow-shift 15s ease infinite;
+        }
+
+        /* Creative Paint Splash Effect */
+        @keyframes paint-splash {
+            0%, 100% {
+                transform: scale(1) rotate(0deg);
+                opacity: 0.6;
+            }
+            50% {
+                transform: scale(1.2) rotate(180deg);
+                opacity: 0.8;
+            }
+        }
+
+        .paint-splash {
+            animation: paint-splash 8s ease-in-out infinite;
+        }
+
+        /* Colorful Glow */
+        .colorful-glow {
+            box-shadow: 
+                0 0 20px rgba(255, 107, 107, 0.4),
+                0 0 40px rgba(78, 205, 196, 0.3),
+                0 0 60px rgba(69, 183, 209, 0.2);
+        }
+
+        /* Theme Card Hover */
+        .theme-card {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .theme-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(45deg, 
+                rgba(255, 107, 107, 0.2),
+                rgba(78, 205, 196, 0.2),
+                rgba(69, 183, 209, 0.2));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .theme-card:hover::before {
+            opacity: 1;
+        }
+
+        .theme-card:hover {
+            transform: translateY(-15px) scale(1.03);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Floating Animation */
+        @keyframes float-creative {
+            0%, 100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+            33% {
+                transform: translateY(-20px) rotate(5deg);
+            }
+            66% {
+                transform: translateY(-10px) rotate(-5deg);
+            }
+        }
+
+        .float-creative {
+            animation: float-creative 6s ease-in-out infinite;
+        }
+
+        /* Brush Stroke Effect */
+        .brush-stroke {
+            position: relative;
+        }
+
+        .brush-stroke::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            right: 0;
+            height: 8px;
+            background: linear-gradient(90deg, 
+                #FF6B6B 0%, 
+                #4ECDC4 25%, 
+                #45B7D1 50%, 
+                #FFA07A 75%, 
+                #FF6B6B 100%);
+            border-radius: 4px;
+            opacity: 0.7;
+        }
+
+        /* Gradient Text with Multiple Colors */
+        .rainbow-text {
+            background: linear-gradient(90deg, 
+                #FF6B6B 0%, 
+                #4ECDC4 20%, 
+                #45B7D1 40%, 
+                #FFA07A 60%, 
+                #98D8C8 80%, 
+                #F7DC6F 100%);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: rainbow-shift 5s ease infinite;
+        }
+
+        /* Creative Button */
+        .btn-creative {
+            background: linear-gradient(135deg, #FF6B6B 0%, #4ECDC4 50%, #45B7D1 100%);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-creative::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, #45B7D1 0%, #4ECDC4 50%, #FF6B6B 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .btn-creative:hover::before {
+            opacity: 1;
+        }
+
+        .btn-creative:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(255, 107, 107, 0.4);
+        }
+
+        /* Sparkle Effect */
+        @keyframes sparkle {
+            0%, 100% {
+                opacity: 0;
+                transform: scale(0);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .sparkle {
+            animation: sparkle 2s ease-in-out infinite;
+        }
+
+        /* Set Badge */
+        .set-badge {
+            background: linear-gradient(135deg, rgba(255, 107, 107, 0.9) 0%, rgba(78, 205, 196, 0.9) 100%);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        /* Image Overlay on Hover */
+        .theme-card-image {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .theme-card-image::after {
+            content: 'VIEW DETAILS';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(255, 107, 107, 0.9), rgba(78, 205, 196, 0.9));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.25rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .theme-card:hover .theme-card-image::after {
+            opacity: 1;
+        }
+
+        /* Confetti Dots */
+        .confetti-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            position: absolute;
+            animation: float-creative 4s ease-in-out infinite;
+        }
+
+        /* Paint Brush Strokes */
+        @keyframes paint-draw {
+            0% {
+                stroke-dashoffset: 1000;
+            }
+            100% {
+                stroke-dashoffset: 0;
+            }
+        }
+
+        .paint-stroke {
+            stroke-dasharray: 1000;
+            stroke-dashoffset: 1000;
+            animation: paint-draw 3s ease forwards;
+        }
+
+        /* Artist Palette Effect */
+        .palette-spot {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            position: absolute;
+            filter: blur(20px);
+            animation: pulse-color 4s ease-in-out infinite;
+        }
+
+        @keyframes pulse-color {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 0.6;
+            }
+            50% {
+                transform: scale(1.3);
+                opacity: 0.9;
+            }
+        }
+
+        /* Sketch Lines */
+        .sketch-line {
+            position: absolute;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.2);
+            transform-origin: left;
+        }
+
+        @keyframes draw-line {
+            from {
+                transform: scaleX(0);
+            }
+            to {
+                transform: scaleX(1);
+            }
+        }
+
+        .sketch-line {
+            animation: draw-line 2s ease-out forwards;
+        }
+
+        /* 3D Card Tilt Effect */
+        .card-3d {
+            transform-style: preserve-3d;
+            perspective: 1000px;
+        }
+
+        .card-3d:hover {
+            transform: rotateY(5deg) rotateX(5deg);
+        }
+
+        /* Watercolor Background */
+        .watercolor-bg {
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(255, 107, 107, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(78, 205, 196, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(247, 220, 111, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 70% 40%, rgba(187, 143, 206, 0.3) 0%, transparent 50%);
+        }
+
+        /* Creative Border Animation */
+        @keyframes border-dance {
+            0%, 100% {
+                border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+            }
+            50% {
+                border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
+            }
+        }
+
+        .dancing-border {
+            animation: border-dance 8s ease-in-out infinite;
+        }
+
+        /* Typewriter Effect */
+        @keyframes typewriter {
+            from {
+                width: 0;
+            }
+            to {
+                width: 100%;
+            }
+        }
+
+        .typewriter {
+            overflow: hidden;
+            white-space: nowrap;
+            animation: typewriter 3s steps(40) 1s forwards;
+        }
+
+        /* Paint Splatter */
+        .paint-splatter {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle, rgba(255, 107, 107, 0.4) 0%, transparent 70%);
+            border-radius: 50%;
+            filter: blur(10px);
+        }
+
+        .paint-splatter::before,
+        .paint-splatter::after {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background: inherit;
+            border-radius: 50%;
+        }
+
+        .paint-splatter::before {
+            top: -20px;
+            left: 30px;
+        }
+
+        .paint-splatter::after {
+            bottom: -10px;
+            right: 20px;
+        }
+
+        /* Design Tool Icons Floating */
+        @keyframes tool-float {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            25% {
+                transform: translateY(-10px) rotate(5deg);
+            }
+            75% {
+                transform: translateY(-5px) rotate(-5deg);
+            }
+        }
+
+        .tool-float {
+            animation: tool-float 5s ease-in-out infinite;
+        }
+
+        /* Gradient Border */
+        .gradient-border {
+            position: relative;
+            background: white;
+            border-radius: 24px;
+        }
+
+        .gradient-border::before {
+            content: '';
+            position: absolute;
+            inset: -4px;
+            background: linear-gradient(45deg, #FF6B6B, #4ECDC4, #45B7D1, #FFA07A, #FF6B6B);
+            background-size: 300% 300%;
+            border-radius: 26px;
+            z-index: -1;
+            animation: rainbow-shift 3s ease infinite;
+        }
+
+        /* Creative Section Divider */
+        .section-divider {
+            height: 6px;
+            background: linear-gradient(90deg, 
+                #FF6B6B 0%, 
+                #4ECDC4 25%, 
+                #45B7D1 50%, 
+                #FFA07A 75%, 
+                #F7DC6F 100%);
+            background-size: 200% 200%;
+            animation: rainbow-shift 5s ease infinite;
+        }
+    </style>
+</head>
+
+<body class="bg-white">
+    <!-- Navigation -->
+    <script src="../../assets/components/navigation.js"></script>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="relative text-white overflow-hidden min-h-screen flex items-center">
+            <!-- Background Image -->
+            <div class="absolute inset-0 z-0">
+                <img src="../../assets/images/custom-sets/custom-sets-hero.webp" alt="Custom Photo Booth Sets" class="w-full h-full object-cover">
+                <!-- Light Gradient Overlay for text visibility -->
+                <div class="absolute inset-0 bg-gradient-to-br from-purple-900/40 via-pink-900/30 to-blue-900/40"></div>
+                <!-- Animated Rainbow Overlay -->
+                <div class="absolute inset-0 animated-rainbow-gradient opacity-25"></div>
+            </div>
+            
+            <!-- Artist Palette Color Spots -->
+            <div class="palette-spot bg-red-400" style="top: 15%; left: 10%; animation-delay: 0s;"></div>
+            <div class="palette-spot bg-yellow-300" style="top: 25%; left: 85%; animation-delay: 1s;"></div>
+            <div class="palette-spot bg-blue-400" style="top: 60%; left: 12%; animation-delay: 2s;"></div>
+            <div class="palette-spot bg-green-400" style="top: 75%; left: 88%; animation-delay: 3s;"></div>
+            <div class="palette-spot bg-purple-400" style="top: 40%; left: 50%; animation-delay: 4s;"></div>
+            <div class="palette-spot bg-pink-400" style="top: 85%; left: 65%; animation-delay: 5s;"></div>
+            
+            <!-- Paint Splatters -->
+            <div class="paint-splatter" style="top: 20%; right: 15%; animation-delay: 1s;"></div>
+            <div class="paint-splatter" style="bottom: 25%; left: 20%; animation-delay: 3s; background: radial-gradient(circle, rgba(78, 205, 196, 0.4) 0%, transparent 70%);"></div>
+            <div class="paint-splatter" style="top: 50%; right: 30%; animation-delay: 2s; background: radial-gradient(circle, rgba(247, 220, 111, 0.4) 0%, transparent 70%);"></div>
+            
+            <!-- Sketch Lines -->
+            <div class="sketch-line" style="top: 30%; left: 0; width: 200px; animation-delay: 0.5s;"></div>
+            <div class="sketch-line" style="top: 60%; right: 0; width: 250px; animation-delay: 1.5s;"></div>
+            <div class="sketch-line" style="bottom: 40%; left: 20%; width: 180px; animation-delay: 2.5s;"></div>
+            
+            <div class="container mx-auto px-6 py-24 relative z-10 w-full">
+                <div class="max-w-5xl mx-auto text-center">
+                    <div class="inline-block mb-8 px-8 py-3 bg-white/20 backdrop-blur-md rounded-full border-2 border-white/40 set-badge dancing-border">
+                        <span class="text-sm font-bold tracking-wider text-white flex items-center gap-2">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"></path>
+                            </svg>
+                            WHEN A BACKDROP ISN'T ENOUGH
+                        </span>
+                    </div>
+                    <h1 class="text-5xl md:text-7xl font-bold mb-6 leading-tight">
+                        <span class="inline-block" style="text-shadow: 0 0 40px rgba(255, 255, 255, 0.3);">Custom-Themed</span><br>
+                        <span class="text-white/95 inline-block" style="text-shadow: 0 0 40px rgba(255, 255, 255, 0.3);">Photo Booth Sets</span>
+                    </h1>
+                    <p class="text-xl md:text-2xl mb-8 text-white/90 max-w-3xl mx-auto leading-relaxed">
+                        Fully branded, immersive photo set designs made just for you. Transform your event with custom-built sets that bring your theme to life!
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                        <a href="#sets" class="btn-creative text-white px-10 py-4 rounded-full font-semibold shadow-2xl text-lg relative z-10">
+                            Explore Our Sets
+                        </a>
+                        <a href="#contact" class="px-10 py-4 rounded-full font-semibold border-3 border-white text-white bg-white/10 hover:bg-white hover:text-pink-600 transition-all duration-300 text-lg backdrop-blur-sm">
+                            Design Your Set
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Floating Creative Elements -->
+            <div class="absolute top-20 left-10 w-32 h-32 bg-pink-400/20 rounded-full blur-3xl float-creative" style="z-index: 1;"></div>
+            <div class="absolute bottom-20 right-10 w-40 h-40 bg-blue-400/20 rounded-full blur-3xl float-creative" style="animation-delay: 2s; z-index: 1;"></div>
+            <div class="absolute top-1/2 left-1/4 w-24 h-24 bg-yellow-400/20 rounded-full blur-2xl float-creative" style="animation-delay: 4s; z-index: 1;"></div>
+            <div class="absolute top-1/3 right-1/3 w-28 h-28 bg-green-400/20 rounded-full blur-2xl float-creative" style="animation-delay: 6s; z-index: 1;"></div>
+        </section>
+
+        <!-- Section Divider -->
+        <div class="section-divider"></div>
+
+        <!-- What We Offer Section -->
+        <section class="section-padding bg-gradient-to-br from-white via-pink-50 to-blue-50 watercolor-bg relative overflow-hidden">
+            <!-- Floating Design Tools -->
+            <div class="absolute top-20 left-10 tool-float opacity-20">
+                <svg class="w-16 h-16 text-pink-500" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"></path>
+                </svg>
+            </div>
+            <div class="absolute bottom-20 right-10 tool-float opacity-20" style="animation-delay: 2s;">
+                <svg class="w-16 h-16 text-blue-500" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M4 2a2 2 0 00-2 2v11a3 3 0 106 0V4a2 2 0 00-2-2H4zm1 14a1 1 0 100-2 1 1 0 000 2zm5-1.757l4.9-4.9a2 2 0 000-2.828L13.485 5.1a2 2 0 00-2.828 0L10 5.757v8.486zM16 18H9.071l6-6H16a2 2 0 012 2v2a2 2 0 01-2 2z"></path>
+                </svg>
+            </div>
+            
+            <div class="container mx-auto px-6 relative z-10">
+                <div class="max-w-6xl mx-auto">
+                    <div class="text-center mb-16">
+                        <div class="inline-block mb-4">
+                            <div class="flex items-center gap-3 text-pink-600">
+                                <div class="w-8 h-1 bg-pink-600 rounded"></div>
+                                <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM13 11a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path>
+                                </svg>
+                                <div class="w-8 h-1 bg-pink-600 rounded"></div>
+                            </div>
+                        </div>
+                        <h2 class="text-4xl md:text-5xl font-bold mb-6 brush-stroke inline-block pb-4">
+                            <span class="rainbow-text">Immersive Set Experiences</span>
+                        </h2>
+                        <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                            We can customize almost every aspect of your event, so why wouldn't we have a custom photo shoot set that your party guests can enjoy?
+                        </p>
+                    </div>
+
+                    <div class="grid md:grid-cols-3 gap-8 mb-16">
+                        <!-- Feature 1 -->
+                        <div class="gradient-border p-8 rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-300 text-center card-3d">
+                            <div class="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-pink-500 to-rose-500 rounded-3xl flex items-center justify-center transform hover:rotate-12 transition-transform duration-300">
+                                <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"></path>
+                                </svg>
+                            </div>
+                            <h3 class="text-xl font-bold mb-3">Fully Custom Designs</h3>
+                            <p class="text-gray-600">Every set is built from scratch to match your exact vision and theme</p>
+                        </div>
+
+                        <!-- Feature 2 -->
+                        <div class="gradient-border p-8 rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-300 text-center card-3d">
+                            <div class="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-3xl flex items-center justify-center transform hover:rotate-12 transition-transform duration-300">
+                                <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                                </svg>
+                            </div>
+                            <h3 class="text-xl font-bold mb-3">Professional Build</h3>
+                            <p class="text-gray-600">High-quality materials and expert construction for stunning results</p>
+                        </div>
+
+                        <!-- Feature 3 -->
+                        <div class="gradient-border p-8 rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-300 text-center card-3d">
+                            <div class="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-purple-500 to-pink-500 rounded-3xl flex items-center justify-center transform hover:rotate-12 transition-transform duration-300">
+                                <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10l-2 1m0 0l-2-1m2 1v2.5M20 7l-2 1m2-1l-2-1m2 1v2.5M14 4l-2-1-2 1M4 7l2-1M4 7l2 1M4 7v2.5M12 21l-2-1m2 1l2-1m-2 1v-2.5M6 18l-2-1v-2.5M18 18l2-1v-2.5"></path>
+                                </svg>
+                            </div>
+                            <h3 class="text-xl font-bold mb-3">Full Service Setup</h3>
+                            <p class="text-gray-600">We handle delivery, setup, and teardown so you can focus on your event</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Divider -->
+        <div class="section-divider"></div>
+
+        <!-- Themed Sets Gallery -->
+        <section id="sets" class="section-padding bg-white relative overflow-hidden">
+            <!-- Paint Palette Decoration -->
+            <div class="absolute top-10 right-10 w-32 h-32 opacity-10">
+                <svg fill="currentColor" viewBox="0 0 20 20" class="text-pink-500">
+                    <path fill-rule="evenodd" d="M4 2a2 2 0 00-2 2v11a3 3 0 106 0V4a2 2 0 00-2-2H4zm1 14a1 1 0 100-2 1 1 0 000 2zm5-1.757l4.9-4.9a2 2 0 000-2.828L13.485 5.1a2 2 0 00-2.828 0L10 5.757v8.486zM16 18H9.071l6-6H16a2 2 0 012 2v2a2 2 0 01-2 2z"></path>
+                </svg>
+            </div>
+            
+            <div class="container mx-auto px-6 relative z-10">
+                <div class="max-w-7xl mx-auto">
+                    <div class="text-center mb-16">
+                        <div class="inline-flex items-center gap-3 mb-6">
+                            <div class="w-3 h-3 rounded-full bg-red-400 dancing-border"></div>
+                            <div class="w-3 h-3 rounded-full bg-blue-400 dancing-border" style="animation-delay: 0.5s;"></div>
+                            <div class="w-3 h-3 rounded-full bg-yellow-400 dancing-border" style="animation-delay: 1s;"></div>
+                            <div class="w-3 h-3 rounded-full bg-green-400 dancing-border" style="animation-delay: 1.5s;"></div>
+                            <div class="w-3 h-3 rounded-full bg-purple-400 dancing-border" style="animation-delay: 2s;"></div>
+                        </div>
+                        <h2 class="text-4xl md:text-5xl font-bold mb-6 brush-stroke inline-block pb-4">
+                            Our Themed Sets
+                        </h2>
+                        <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                            Check out some of the sets we have for your themed event below. Not seeing what you're wanting? Let us know and we'll start designing!
+                        </p>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+                        <!-- Set 1: Snow Globe -->
+                        <div class="theme-card bg-white rounded-3xl shadow-2xl overflow-hidden">
+                            <div class="theme-card-image h-80 bg-gradient-to-br from-blue-100 to-white relative">
+                                <img src="../../assets/images/holiday/h3.jpg" alt="Snow Globe Set" class="w-full h-full object-cover">
+                                <div class="absolute top-4 right-4 set-badge px-4 py-2 rounded-full">
+                                    <span class="text-white font-bold text-sm">WINTER</span>
+                                </div>
+                            </div>
+                            <div class="p-6">
+                                <h3 class="text-2xl font-bold mb-3">Snow Globe Set</h3>
+                                <p class="text-gray-600">Step inside a magical winter wonderland with our enchanting snow globe themed set</p>
+                            </div>
+                        </div>
+
+                        <!-- Set 2: Ski Lift -->
+                        <div class="theme-card bg-white rounded-3xl shadow-2xl overflow-hidden">
+                            <div class="theme-card-image h-80 bg-gradient-to-br from-cyan-100 to-white relative">
+                                <img src="../../assets/images/holiday/h5.webp" alt="Ski Lift Set" class="w-full h-full object-cover">
+                                <div class="absolute top-4 right-4 set-badge px-4 py-2 rounded-full">
+                                    <span class="text-white font-bold text-sm">ALPINE</span>
+                                </div>
+                            </div>
+                            <div class="p-6">
+                                <h3 class="text-2xl font-bold mb-3">Ski Lift Set</h3>
+                                <p class="text-gray-600">Feel the mountain vibes with an authentic ski lift experience perfect for winter events</p>
+                            </div>
+                        </div>
+
+                        <!-- Set 3: White Water Raft -->
+                        <div class="theme-card bg-white rounded-3xl shadow-2xl overflow-hidden">
+                            <div class="theme-card-image h-80 bg-gradient-to-br from-teal-100 to-white relative">
+                                <img src="../../assets/images/social/imc3.jpg" alt="White Water Raft Set" class="w-full h-full object-cover">
+                                <div class="absolute top-4 right-4 set-badge px-4 py-2 rounded-full">
+                                    <span class="text-white font-bold text-sm">ADVENTURE</span>
+                                </div>
+                            </div>
+                            <div class="p-6">
+                                <h3 class="text-2xl font-bold mb-3">White Water Raft Set</h3>
+                                <p class="text-gray-600">Capture the thrill of adventure with our exciting white water rafting themed set</p>
+                            </div>
+                        </div>
+
+                        <!-- Set 4: Gatsby Themed -->
+                        <div class="theme-card bg-white rounded-3xl shadow-2xl overflow-hidden">
+                            <div class="theme-card-image h-80 bg-gradient-to-br from-amber-100 to-white relative">
+                                <img src="../../assets/images/wedimg/weddingimg1.jpg" alt="Gatsby Themed Set" class="w-full h-full object-cover">
+                                <div class="absolute top-4 right-4 set-badge px-4 py-2 rounded-full">
+                                    <span class="text-white font-bold text-sm">1920s</span>
+                                </div>
+                            </div>
+                            <div class="p-6">
+                                <h3 class="text-2xl font-bold mb-3">Gatsby Themed Set</h3>
+                                <p class="text-gray-600">Bring the roaring twenties to life with our elegant Great Gatsby inspired set</p>
+                            </div>
+                        </div>
+
+                        <!-- Set 5: Sleigh Set -->
+                        <div class="theme-card bg-white rounded-3xl shadow-2xl overflow-hidden">
+                            <div class="theme-card-image h-80 bg-gradient-to-br from-red-100 to-white relative">
+                                <img src="../../assets/images/holiday/h1.jpg" alt="Sleigh Set" class="w-full h-full object-cover">
+                                <div class="absolute top-4 right-4 set-badge px-4 py-2 rounded-full">
+                                    <span class="text-white font-bold text-sm">HOLIDAY</span>
+                                </div>
+                            </div>
+                            <div class="p-6">
+                                <h3 class="text-2xl font-bold mb-3">Sleigh Set</h3>
+                                <p class="text-gray-600">Create holiday magic with our festive sleigh set perfect for seasonal celebrations</p>
+                            </div>
+                        </div>
+
+                        <!-- Set 6: Saloon Door -->
+                        <div class="theme-card bg-white rounded-3xl shadow-2xl overflow-hidden">
+                            <div class="theme-card-image h-80 bg-gradient-to-br from-orange-100 to-white relative">
+                                <img src="../../assets/images/casino/z1.jpg" alt="Saloon Door Set" class="w-full h-full object-cover">
+                                <div class="absolute top-4 right-4 set-badge px-4 py-2 rounded-full">
+                                    <span class="text-white font-bold text-sm">WESTERN</span>
+                                </div>
+                            </div>
+                            <div class="p-6">
+                                <h3 class="text-2xl font-bold mb-3">Saloon Door Set</h3>
+                                <p class="text-gray-600">Step into the Wild West with our authentic saloon-style photo set</p>
+                            </div>
+                        </div>
+
+                        <!-- Set 7: Ski Goggle -->
+                        <div class="theme-card bg-white rounded-3xl shadow-2xl overflow-hidden">
+                            <div class="theme-card-image h-80 bg-gradient-to-br from-indigo-100 to-white relative">
+                                <img src="../../assets/images/trdshows/pd2.jpg" alt="Ski Goggle Photo Set" class="w-full h-full object-cover">
+                                <div class="absolute top-4 right-4 set-badge px-4 py-2 rounded-full">
+                                    <span class="text-white font-bold text-sm">TRADE SHOW</span>
+                                </div>
+                            </div>
+                            <div class="p-6">
+                                <h3 class="text-2xl font-bold mb-3">Ski Goggle Photo Set</h3>
+                                <p class="text-gray-600">Perfect for trade shows and branded activations with a sporty twist</p>
+                            </div>
+                        </div>
+
+                        <!-- Set 8: Corporate Branded -->
+                        <div class="theme-card bg-white rounded-3xl shadow-2xl overflow-hidden">
+                            <div class="theme-card-image h-80 bg-gradient-to-br from-purple-100 to-white relative">
+                                <img src="../../assets/images/crporate/pd3.jpg" alt="Corporate Branded Set" class="w-full h-full object-cover">
+                                <div class="absolute top-4 right-4 set-badge px-4 py-2 rounded-full">
+                                    <span class="text-white font-bold text-sm">CORPORATE</span>
+                                </div>
+                            </div>
+                            <div class="p-6">
+                                <h3 class="text-2xl font-bold mb-3">Corporate Branded Set</h3>
+                                <p class="text-gray-600">Fully customized sets that showcase your brand and corporate identity</p>
+                            </div>
+                        </div>
+
+                        <!-- Set 9: Custom Design -->
+                        <div class="theme-card bg-gradient-to-br from-pink-50 to-purple-50 rounded-3xl shadow-2xl overflow-hidden border-4 border-dashed border-pink-300">
+                            <div class="h-80 flex items-center justify-center p-12">
+                                <div class="text-center">
+                                    <div class="w-24 h-24 mx-auto mb-6 bg-gradient-to-br from-pink-500 to-purple-500 rounded-full flex items-center justify-center">
+                                        <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                                        </svg>
+                                    </div>
+                                    <h3 class="text-2xl font-bold mb-3">Your Custom Design</h3>
+                                    <p class="text-gray-600 mb-4">Don't see your theme? We'll design it!</p>
+                                    <a href="#contact" class="inline-block btn-creative text-white px-8 py-3 rounded-full font-semibold">
+                                        Start Designing
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Divider -->
+        <div class="section-divider"></div>
+
+        <!-- Process Section -->
+        <section class="section-padding bg-gradient-to-br from-purple-50 via-pink-50 to-blue-50 watercolor-bg relative overflow-hidden">
+            <!-- Creative Decoration -->
+            <div class="absolute top-1/4 left-5 w-24 h-24 opacity-10 tool-float">
+                <svg fill="currentColor" viewBox="0 0 20 20" class="text-purple-500">
+                    <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"></path>
+                </svg>
+            </div>
+            
+            <div class="container mx-auto px-6 relative z-10">
+                <div class="max-w-6xl mx-auto">
+                    <div class="text-center mb-16">
+                        <h2 class="text-4xl md:text-5xl font-bold mb-6 brush-stroke inline-block pb-4">
+                            How It <span class="rainbow-text">Works</span>
+                        </h2>
+                        <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                            From concept to completion, we make the process seamless
+                        </p>
+                    </div>
+
+                    <div class="grid md:grid-cols-4 gap-8">
+                        <!-- Step 1 -->
+                        <div class="text-center">
+                            <div class="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-pink-500 to-rose-500 rounded-full flex items-center justify-center text-white text-2xl font-bold shadow-xl colorful-glow">
+                                1
+                            </div>
+                            <h3 class="text-xl font-bold mb-3">Share Your Vision</h3>
+                            <p class="text-gray-600">Tell us about your theme, event, and creative ideas</p>
+                        </div>
+
+                        <!-- Step 2 -->
+                        <div class="text-center">
+                            <div class="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-full flex items-center justify-center text-white text-2xl font-bold shadow-xl colorful-glow">
+                                2
+                            </div>
+                            <h3 class="text-xl font-bold mb-3">Design & Approval</h3>
+                            <p class="text-gray-600">We create mockups and refine until it's perfect</p>
+                        </div>
+
+                        <!-- Step 3 -->
+                        <div class="text-center">
+                            <div class="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center text-white text-2xl font-bold shadow-xl colorful-glow">
+                                3
+                            </div>
+                            <h3 class="text-xl font-bold mb-3">Build & Prepare</h3>
+                            <p class="text-gray-600">Our team constructs your set with precision and care</p>
+                        </div>
+
+                        <!-- Step 4 -->
+                        <div class="text-center">
+                            <div class="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-green-500 to-teal-500 rounded-full flex items-center justify-center text-white text-2xl font-bold shadow-xl colorful-glow">
+                                4
+                            </div>
+                            <h3 class="text-xl font-bold mb-3">Deliver & Setup</h3>
+                            <p class="text-gray-600">We install at your venue and ensure everything is perfect</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Divider -->
+        <div class="section-divider"></div>
+
+        <!-- Features Section -->
+        <section class="section-padding bg-white relative overflow-hidden">
+            <!-- Artistic Background Elements -->
+            <div class="absolute bottom-10 left-10 w-40 h-40 opacity-5 tool-float">
+                <svg fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM13 11a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path>
+                </svg>
+            </div>
+            
+            <div class="container mx-auto px-6 relative z-10">
+                <div class="max-w-6xl mx-auto">
+                    <div class="text-center mb-16">
+                        <h2 class="text-4xl md:text-5xl font-bold mb-6 brush-stroke inline-block pb-4">
+                            Why Choose <span class="rainbow-text">Custom Sets</span>?
+                        </h2>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div class="bg-gradient-to-br from-pink-50 to-white p-8 rounded-3xl shadow-xl">
+                            <div class="flex items-start space-x-4">
+                                <div class="flex-shrink-0">
+                                    <div class="w-14 h-14 bg-gradient-to-br from-pink-500 to-rose-500 rounded-2xl flex items-center justify-center">
+                                        <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-bold mb-2">Memorable Photo Moments</h3>
+                                    <p class="text-gray-600">Create Instagram-worthy moments your guests will never forget</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-gradient-to-br from-blue-50 to-white p-8 rounded-3xl shadow-xl">
+                            <div class="flex items-start space-x-4">
+                                <div class="flex-shrink-0">
+                                    <div class="w-14 h-14 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-2xl flex items-center justify-center">
+                                        <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"></path>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-bold mb-2">Fully Branded Experience</h3>
+                                    <p class="text-gray-600">Incorporate your logo, colors, and branding throughout the set</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-gradient-to-br from-purple-50 to-white p-8 rounded-3xl shadow-xl">
+                            <div class="flex items-start space-x-4">
+                                <div class="flex-shrink-0">
+                                    <div class="w-14 h-14 bg-gradient-to-br from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center">
+                                        <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"></path>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-bold mb-2">Perfect for Any Event</h3>
+                                    <p class="text-gray-600">Corporate events, weddings, trade shows, parties, and more</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-gradient-to-br from-green-50 to-white p-8 rounded-3xl shadow-xl">
+                            <div class="flex items-start space-x-4">
+                                <div class="flex-shrink-0">
+                                    <div class="w-14 h-14 bg-gradient-to-br from-green-500 to-teal-500 rounded-2xl flex items-center justify-center">
+                                        <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-bold mb-2">Professional Quality</h3>
+                                    <p class="text-gray-600">High-end materials and expert craftsmanship guaranteed</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Divider -->
+        <div class="section-divider"></div>
+
+        <!-- CTA Section -->
+        <section class="section-padding animated-rainbow-gradient text-white relative overflow-hidden">
+            <!-- Paint Splatters -->
+            <div class="paint-splatter" style="top: 15%; left: 10%;"></div>
+            <div class="paint-splatter" style="bottom: 20%; right: 15%; background: radial-gradient(circle, rgba(78, 205, 196, 0.4) 0%, transparent 70%);"></div>
+            <div class="paint-splatter" style="top: 60%; right: 25%; background: radial-gradient(circle, rgba(247, 220, 111, 0.4) 0%, transparent 70%);"></div>
+            
+            <div class="container mx-auto px-6 relative z-10">
+                <div class="max-w-4xl mx-auto text-center">
+                    <h2 class="text-4xl md:text-5xl font-bold mb-6">
+                        Ready to Design Your Dream Set?
+                    </h2>
+                    <p class="text-xl mb-8 text-white/90 leading-relaxed">
+                        Let's bring your vision to life! Our team is ready to create a one-of-a-kind photo booth set that will wow your guests and make your event unforgettable.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <a href="#contact" class="bg-white text-pink-600 px-10 py-4 rounded-full font-semibold hover:bg-gray-100 transition-all duration-300 text-lg shadow-2xl">
+                            Start Your Design
+                        </a>
+                        <a href="tel:720-551-6994" class="border-3 border-white text-white px-10 py-4 rounded-full font-semibold bg-white/10 hover:bg-white hover:text-pink-600 transition-all duration-300 text-lg backdrop-blur-sm">
+                            Call: 720-551-6994
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Floating Elements -->
+            <div class="absolute top-10 left-10 w-32 h-32 bg-yellow-300/20 rounded-full blur-3xl float-creative"></div>
+            <div class="absolute bottom-10 right-10 w-40 h-40 bg-pink-300/20 rounded-full blur-3xl float-creative" style="animation-delay: 2s;"></div>
+            <div class="absolute top-1/2 right-1/3 w-28 h-28 bg-blue-300/20 rounded-full blur-2xl float-creative" style="animation-delay: 4s;"></div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="section-padding bg-gray-50">
+            <div class="container mx-auto px-6">
+                <div class="max-w-4xl mx-auto">
+                    <div class="text-center mb-12">
+                        <h2 class="text-4xl md:text-5xl font-bold mb-6">Let's Create Something Amazing</h2>
+                        <p class="text-xl text-gray-600">
+                            Fill out the form below and we'll get started on designing your custom set
+                        </p>
+                    </div>
+
+                    <div class="bg-white rounded-3xl shadow-2xl p-8 md:p-12">
+                        <form class="space-y-6">
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <div>
+                                    <label class="block text-sm font-semibold text-gray-700 mb-2">First Name *</label>
+                                    <input type="text" required class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-pink-500 focus:ring-2 focus:ring-pink-200 transition-all duration-300 outline-none">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-semibold text-gray-700 mb-2">Last Name *</label>
+                                    <input type="text" required class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-pink-500 focus:ring-2 focus:ring-pink-200 transition-all duration-300 outline-none">
+                                </div>
+                            </div>
+
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <div>
+                                    <label class="block text-sm font-semibold text-gray-700 mb-2">Email *</label>
+                                    <input type="email" required class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-pink-500 focus:ring-2 focus:ring-pink-200 transition-all duration-300 outline-none">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-semibold text-gray-700 mb-2">Phone *</label>
+                                    <input type="tel" required class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-pink-500 focus:ring-2 focus:ring-pink-200 transition-all duration-300 outline-none">
+                                </div>
+                            </div>
+
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <div>
+                                    <label class="block text-sm font-semibold text-gray-700 mb-2">Event Date</label>
+                                    <input type="date" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-pink-500 focus:ring-2 focus:ring-pink-200 transition-all duration-300 outline-none">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-semibold text-gray-700 mb-2">Event Type</label>
+                                    <select class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-pink-500 focus:ring-2 focus:ring-pink-200 transition-all duration-300 outline-none">
+                                        <option>Select Event Type</option>
+                                        <option>Corporate Event</option>
+                                        <option>Wedding</option>
+                                        <option>Social Event</option>
+                                        <option>Trade Show</option>
+                                        <option>Holiday Party</option>
+                                        <option>Other</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-2">Describe Your Set Idea</label>
+                                <textarea rows="5" placeholder="Tell us about your theme, colors, branding, and any specific elements you'd like..." class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-pink-500 focus:ring-2 focus:ring-pink-200 transition-all duration-300 outline-none resize-none"></textarea>
+                            </div>
+
+                            <button type="submit" class="w-full btn-creative text-white px-8 py-4 rounded-full font-semibold shadow-lg hover:shadow-xl transition-all duration-300 text-lg relative z-10">
+                                Submit Your Design Request
+                            </button>
+                        </form>
+
+                        <div class="mt-8 pt-8 border-t border-gray-200 text-center">
+                            <p class="text-gray-600 mb-4">Or reach out directly:</p>
+                            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 text-lg">
+                                <a href="tel:720-551-6994" class="text-pink-600 hover:text-pink-700 font-semibold">
+                                    📞 720-551-6994
+                                </a>
+                                <span class="hidden sm:inline text-gray-400">|</span>
+                                <a href="mailto:saras@mihientertainment.com" class="text-pink-600 hover:text-pink-700 font-semibold">
+                                    ✉️ saras@mihientertainment.com
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <script src="../../assets/components/footer.js"></script>
+    <script src="../../assets/components/back-to-top.js"></script>
+</body>
+
+</html>
+

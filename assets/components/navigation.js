@@ -59,7 +59,9 @@ document.addEventListener('DOMContentLoaded', function() {
                             <div class="grid grid-cols-3 gap-5">
                                 <!-- Photo Booths Column -->
                                 <div class="space-y-2.5">
-                                    <h4 class="font-bold text-gray-900 text-sm mb-3 text-blue-600">Photo Booths</h4>
+                                    <div class="mb-4 pb-3 border-b-2 border-blue-200">
+                                        <h4 class="font-bold text-base text-blue-600 uppercase tracking-wider">Photo Booths</h4>
+                                    </div>
                                     <a href="${pathPrefix}services/photobooth/ai-photo-booth.html" class="block text-sm text-gray-700 hover:text-blue-600 transition py-1.5 hover:bg-blue-50 rounded-md px-2 -mx-2">
                                         <span class="font-semibold block mb-0.5">AI Photo Booth</span>
                                         <span class="text-xs text-gray-500 leading-relaxed">Custom AI-generated characters in seconds</span>
@@ -88,7 +90,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                         <span class="font-semibold block mb-0.5">Virtual Photo Booth</span>
                                         <span class="text-xs text-gray-500 leading-relaxed">Snap, pose, and share—no app required, all online</span>
                                     </a>
-                                    <a href="${pathPrefix}services/photobooth/custom-photo-booth.html" class="block text-sm text-gray-700 hover:text-blue-600 transition py-1.5 hover:bg-blue-50 rounded-md px-2 -mx-2">
+                                    <a href="${pathPrefix}services/photobooth/photo-booth-sets.html" class="block text-sm text-gray-700 hover:text-blue-600 transition py-1.5 hover:bg-blue-50 rounded-md px-2 -mx-2">
                                         <span class="font-semibold block mb-0.5">Custom Photo Booth</span>
                                         <span class="text-xs text-gray-500 leading-relaxed">Fully branded, immersive photo set designs made just for you</span>
                                     </a>
@@ -97,7 +99,9 @@ document.addEventListener('DOMContentLoaded', function() {
                                 
                                 <!-- Video Booths Column -->
                                 <div class="space-y-2.5">
-                                    <h4 class="font-bold text-gray-900 text-sm mb-3 text-purple-600">Video Booths</h4>
+                                    <div class="mb-4 pb-3 border-b-2 border-purple-200">
+                                        <h4 class="font-bold text-base text-purple-600 uppercase tracking-wider">Video Booths</h4>
+                                    </div>
                                     <a href="${pathPrefix}services/videobooth/360-video-booth.html" class="block text-sm text-gray-700 hover:text-purple-600 transition py-1.5 hover:bg-purple-50 rounded-md px-2 -mx-2">
                                         <span class="font-semibold block mb-0.5">360 Video Booth</span>
                                         <span class="text-xs text-gray-500 leading-relaxed">Epic, shareable videos from every angle</span>
@@ -127,7 +131,9 @@ document.addEventListener('DOMContentLoaded', function() {
                                 
                                 <!-- Additional Experiences Column -->
                                 <div class="space-y-2.5">
-                                    <h4 class="font-bold text-gray-900 text-sm mb-3 text-green-600">Additional Experiences</h4>
+                                    <div class="mb-4 pb-3 border-b-2 border-green-200">
+                                        <h4 class="font-bold text-base text-green-600 uppercase tracking-wider">Additional Experiences</h4>
+                                    </div>
                                     <a href="${pathPrefix}services/experiences/event-photography.html" class="block text-sm text-gray-700 hover:text-green-600 transition py-1.5 hover:bg-green-50 rounded-md px-2 -mx-2">
                                         <span class="font-semibold block mb-0.5">Event Photography</span>
                                         <span class="text-xs text-gray-500 leading-relaxed">Professional coverage of every moment</span>
@@ -162,7 +168,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                         </svg>
                     </a>
-                    <div class="absolute top-full left-0 mt-2 w-80 bg-white rounded-2xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 border border-gray-100">
+                    <div class="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-[40rem] bg-white rounded-2xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 border border-gray-100">
                         <div class="p-6">
                             <div class="grid grid-cols-2 gap-4">
                                 <div class="space-y-3">
@@ -206,63 +212,63 @@ document.addEventListener('DOMContentLoaded', function() {
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                         </svg>
                     </a>
-                    <div class="absolute top-full left-0 mt-2 w-72 bg-white rounded-2xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 border border-gray-100">
+                    <div class="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-[56rem] max-h-[90vh] overflow-y-auto bg-white rounded-xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 border border-gray-200">
                         <div class="p-6">
-                            <div class="space-y-4">
-                                <div>
-                                    <h4 class="font-bold text-gray-900 text-sm mb-2 text-blue-600">AV Services</h4>
-                                    <div class="space-y-2">
-                                        <a href="${pathPrefix}rentals/av-services/audio-visual.html" class="block text-sm text-gray-700 hover:text-blue-600 transition">
-                                            <span class="font-medium">Audio Services</span><br>
-                                            <span class="text-xs text-gray-500">Pro sound, screens, and mixing</span>
-                                        </a>
-                                        <a href="${pathPrefix}rentals/av-services/visual-services.html" class="block text-sm text-gray-700 hover:text-blue-600 transition">
-                                            <span class="font-medium">Visual Services</span><br>
-                                            <span class="text-xs text-gray-500">Pro sound, screens, and mixing</span>
-                                        </a>
-                                        <a href="${pathPrefix}rentals/av-services/lighting.html" class="block text-sm text-gray-700 hover:text-blue-600 transition">
-                                            <span class="font-medium">Lighting</span><br>
-                                            <span class="text-xs text-gray-500">Transform spaces with lighting</span>
-                                        </a>
-                                        <a href="${pathPrefix}rentals/av-services/stages.html" class="block text-sm text-gray-700 hover:text-blue-600 transition">
-                                            <span class="font-medium">Event Stages</span><br>
-                                            <span class="text-xs text-gray-500">Professional stage setups</span>
-                                        </a>
+                            <div class="grid grid-cols-3 gap-5">
+                                <div class="space-y-2.5">
+                                    <div class="mb-4 pb-3 border-b-2 border-blue-200">
+                                        <h4 class="font-bold text-base text-blue-600 uppercase tracking-wider">AV Services</h4>
                                     </div>
+                                    <a href="${pathPrefix}rentals/av-services/audio-visual.html" class="block text-sm text-gray-700 hover:text-blue-600 transition py-1.5 hover:bg-blue-50 rounded-md px-2 -mx-2">
+                                        <span class="font-semibold block mb-0.5">Audio</span>
+                                        <span class="text-xs text-gray-500 leading-relaxed">Professional sound systems and audio mixing</span>
+                                    </a>
+                                    <a href="${pathPrefix}rentals/av-services/visual-services.html" class="block text-sm text-gray-700 hover:text-blue-600 transition py-1.5 hover:bg-blue-50 rounded-md px-2 -mx-2">
+                                        <span class="font-semibold block mb-0.5">Visual</span>
+                                        <span class="text-xs text-gray-500 leading-relaxed">Screens, displays, and video projection</span>
+                                    </a>
+                                    <a href="${pathPrefix}rentals/av-services/lighting.html" class="block text-sm text-gray-700 hover:text-blue-600 transition py-1.5 hover:bg-blue-50 rounded-md px-2 -mx-2">
+                                        <span class="font-semibold block mb-0.5">Lighting</span>
+                                        <span class="text-xs text-gray-500 leading-relaxed">Transform spaces with lighting</span>
+                                    </a>
+                                    <a href="${pathPrefix}rentals/av-services/stages.html" class="block text-sm text-gray-700 hover:text-blue-600 transition py-1.5 hover:bg-blue-50 rounded-md px-2 -mx-2">
+                                        <span class="font-semibold block mb-0.5">Event Stages</span>
+                                        <span class="text-xs text-gray-500 leading-relaxed">Professional stage setups</span>
+                                    </a>
                                 </div>
-                                <div>
-                                    <h4 class="font-bold text-gray-900 text-sm mb-2 text-purple-600">Event Decor</h4>
-                                    <div class="space-y-2">
-                                        <a href="${pathPrefix}rentals/event-decor/special-effects.html" class="block text-sm text-gray-700 hover:text-blue-600 transition">
-                                            <span class="font-medium">Special Effects</span><br>
-                                            <span class="text-xs text-gray-500">Sparks, snow, confetti, champagne walls</span>
-                                        </a>
-                                        <a href="${pathPrefix}rentals/event-decor/lighting-decor.html" class="block text-sm text-gray-700 hover:text-blue-600 transition">
-                                            <span class="font-medium">Lighting Decor</span><br>
-                                            <span class="text-xs text-gray-500">Chandeliers, market lights, marquee</span>
-                                        </a>
-                                        <a href="${pathPrefix}rentals/event-decor/furniture.html" class="block text-sm text-gray-700 hover:text-blue-600 transition">
-                                            <span class="font-medium">Furniture</span><br>
-                                            <span class="text-xs text-gray-500">Lounge sets, shimmer walls, drape</span>
-                                        </a>
+                                <div class="space-y-2.5">
+                                    <div class="mb-4 pb-3 border-b-2 border-purple-200">
+                                        <h4 class="font-bold text-base text-purple-600 uppercase tracking-wider">Event Decor</h4>
                                     </div>
+                                    <a href="${pathPrefix}rentals/event-decor/special-effects.html" class="block text-sm text-gray-700 hover:text-purple-600 transition py-1.5 hover:bg-purple-50 rounded-md px-2 -mx-2">
+                                        <span class="font-semibold block mb-0.5">Special Effects</span>
+                                        <span class="text-xs text-gray-500 leading-relaxed">Sparks, snow, confetti, champagne walls</span>
+                                    </a>
+                                    <a href="${pathPrefix}rentals/event-decor/lighting-decor.html" class="block text-sm text-gray-700 hover:text-purple-600 transition py-1.5 hover:bg-purple-50 rounded-md px-2 -mx-2">
+                                        <span class="font-semibold block mb-0.5">Lighting Decor</span>
+                                        <span class="text-xs text-gray-500 leading-relaxed">Chandeliers, market lights, marquee</span>
+                                    </a>
+                                    <a href="${pathPrefix}rentals/event-decor/furniture.html" class="block text-sm text-gray-700 hover:text-purple-600 transition py-1.5 hover:bg-purple-50 rounded-md px-2 -mx-2">
+                                        <span class="font-semibold block mb-0.5">Furniture</span>
+                                        <span class="text-xs text-gray-500 leading-relaxed">Lounge sets, shimmer walls, drape</span>
+                                    </a>
                                 </div>
-                                <div>
-                                    <h4 class="font-bold text-gray-900 text-sm mb-2 text-green-600">Games</h4>
-                                    <div class="space-y-2">
-                                        <a href="${pathPrefix}rentals/games/claw-machine.html" class="block text-sm text-gray-700 hover:text-blue-600 transition">
-                                            <span class="font-medium">Claw Machine</span><br>
-                                            <span class="text-xs text-gray-500">Walk up and win a prize</span>
-                                        </a>
-                                        <a href="${pathPrefix}rentals/games/vr-headsets.html" class="block text-sm text-gray-700 hover:text-blue-600 transition">
-                                            <span class="font-medium">VR Headsets</span><br>
-                                            <span class="text-xs text-gray-500">Immersive virtual experiences</span>
-                                        </a>
-                                        <a href="${pathPrefix}rentals/games/money-booth.html" class="block text-sm text-gray-700 hover:text-blue-600 transition">
-                                            <span class="font-medium">Money Booth</span><br>
-                                            <span class="text-xs text-gray-500">Grab the floating cash</span>
-                                        </a>
+                                <div class="space-y-2.5">
+                                    <div class="mb-4 pb-3 border-b-2 border-green-200">
+                                        <h4 class="font-bold text-base text-green-600 uppercase tracking-wider">Games</h4>
                                     </div>
+                                    <a href="${pathPrefix}rentals/games/claw-machine.html" class="block text-sm text-gray-700 hover:text-green-600 transition py-1.5 hover:bg-green-50 rounded-md px-2 -mx-2">
+                                        <span class="font-semibold block mb-0.5">Claw Machine</span>
+                                        <span class="text-xs text-gray-500 leading-relaxed">Walk up and win a prize</span>
+                                    </a>
+                                    <a href="${pathPrefix}rentals/games/vr-headsets.html" class="block text-sm text-gray-700 hover:text-green-600 transition py-1.5 hover:bg-green-50 rounded-md px-2 -mx-2">
+                                        <span class="font-semibold block mb-0.5">VR Headsets</span>
+                                        <span class="text-xs text-gray-500 leading-relaxed">Immersive virtual experiences</span>
+                                    </a>
+                                    <a href="${pathPrefix}rentals/games/money-booth.html" class="block text-sm text-gray-700 hover:text-green-600 transition py-1.5 hover:bg-green-50 rounded-md px-2 -mx-2">
+                                        <span class="font-semibold block mb-0.5">Money Booth</span>
+                                        <span class="text-xs text-gray-500 leading-relaxed">Grab the floating cash</span>
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -311,7 +317,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                 <h3 class="text-lg font-bold text-gray-900 mb-4">Services</h3>
                                 <div class="space-y-3">
                                     <div>
-                                        <h4 class="font-semibold text-gray-800 mb-2">Photo Booths</h4>
+                                        <h4 class="font-bold text-base text-blue-600 uppercase tracking-wider mb-3 pb-2 border-b-2 border-blue-200">Photo Booths</h4>
                                         <div class="pl-4 space-y-2">
                                             <a href="${pathPrefix}services/photobooth/ai-photo-booth.html" class="block text-sm text-gray-600 hover:text-blue-600 transition">AI Photo Booth</a>
                                             <a href="${pathPrefix}services/photobooth/green-screen-booth.html" class="block text-sm text-gray-600 hover:text-blue-600 transition">Green Screen</a>
@@ -319,7 +325,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                         </div>
                                     </div>
                                     <div>
-                                        <h4 class="font-semibold text-gray-800 mb-2">Video Booths</h4>
+                                        <h4 class="font-bold text-base text-purple-600 uppercase tracking-wider mb-3 pb-2 border-b-2 border-purple-200">Video Booths</h4>
                                         <div class="pl-4 space-y-2">
                                             <a href="${pathPrefix}services/videobooth/360-video-booth.html" class="block text-sm text-gray-600 hover:text-blue-600 transition">360 Video Booth</a>
                                             <a href="${pathPrefix}services/videobooth/bullet-time-array.html" class="block text-sm text-gray-600 hover:text-blue-600 transition">Bullet-Time Array</a>
@@ -327,7 +333,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                         </div>
                                     </div>
                                     <div>
-                                        <h4 class="font-semibold text-gray-800 mb-2">Additional Experiences</h4>
+                                        <h4 class="font-bold text-base text-green-600 uppercase tracking-wider mb-3 pb-2 border-b-2 border-green-200">Additional Experiences</h4>
                                         <div class="pl-4 space-y-2">
                                             <a href="${pathPrefix}services/experiences/event-photography.html" class="block text-sm text-gray-600 hover:text-blue-600 transition">Event Photography</a>
                                             <a href="${pathPrefix}services/experiences/sketchbot.html" class="block text-sm text-gray-600 hover:text-blue-600 transition">SketchBot</a>
