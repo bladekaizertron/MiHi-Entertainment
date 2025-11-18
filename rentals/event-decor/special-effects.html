@@ -5,73 +5,1975 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Special Effects Rentals - MiHi Entertainment</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&family=Orbitron:wght@400;500;600;700;800;900&family=Source+Sans+Pro:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
+        html, body { overflow-x: hidden; width: 100%; }
         body { font-family: 'Inter', sans-serif; color: #1a202c; }
         h1, h2, h3, h4, h5, h6 { font-family: 'Playfair Display', serif; }
+        h3 { font-size: 1.875rem; }
+        @media (min-width: 768px) {
+            h3 { font-size: 2.25rem; }
+        }
         .btn-primary { background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%); transition: all 0.3s ease; }
         .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(0, 80, 255, 0.4); }
         .section-padding { padding: 5rem 0; }
-        .hero-gradient { background: linear-gradient(135deg, rgba(0, 80, 255, 0.5) 0%, rgba(0, 64, 217, 0.5) 100%); }
+        .hero-gradient { background: linear-gradient(135deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.5) 100%); }
+        
+        .hero-section {
+            font-family: 'Orbitron', sans-serif;
+        }
+        
+        .hero-section h1 {
+            font-family: 'Orbitron', sans-serif;
+        }
+        
+        .luminance-effect {
+            background: 50% 100% / 50% 50% no-repeat
+                        radial-gradient(ellipse at bottom, #fff, transparent, transparent);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-size: 32px;
+            font-family: "Source Sans Pro", sans-serif;
+            font-weight: 600;
+            animation: reveal 3000ms ease-in-out forwards 200ms,
+                       glow 2500ms linear infinite 2000ms;
+        }
+        
+        @keyframes reveal {
+            80% {
+                letter-spacing: 8px;
+            }
+            100% {
+                background-size: 300% 300%;
+            }
+        }
+        
+        @keyframes glow {
+            40% {
+                text-shadow: 0 0 8px #fff;
+            }
+        }
+        
+        @media (min-width: 768px) {
+            .luminance-effect {
+                font-size: 36px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .luminance-effect {
+                font-size: 24px;
+            }
+        }
+        
+        @keyframes tipsy {
+          0% {
+            transform: translateX(-50%) translateY(-50%) rotate(0deg);
+          }
+          100% {
+            transform: translateX(-50%) translateY(-50%) rotate(360deg);
+          }
+        }
+        
+        .tipsy-effect {
+          color: #fffbf1;
+          text-shadow: 0 20px 25px #2e2e31, 0 40px 60px #2e2e31;
+          font-size: 60px;
+          font-weight: bold;
+          text-decoration: none;
+          letter-spacing: -3px;
+          margin: 0;
+          position: relative;
+          display: inline-block;
+        }
+        
+        .tipsy-effect:before,
+        .tipsy-effect:after {
+          content: '';
+          padding: .7em 4.1em;
+          position: absolute;
+          left: 50%;
+          width: 100%;
+          top: 50%;
+          display: block;
+          border: 12px solid #FF6A00;
+          transform: translateX(-50%) translateY(-50%) rotate(0deg);
+          animation: 10s infinite alternate ease-in-out tipsy;
+        }
+        
+        .tipsy-effect:before {
+          border-color: #FF6A00 #FF6A00 rgba(0, 0, 0, 0) rgba(0, 0, 0, 0);
+          z-index: -1;
+        }
+        
+        .tipsy-effect:after {
+          border-color: rgba(0, 0, 0, 0) rgba(0, 0, 0, 0) #FF6A00 #FF6A00;
+          box-shadow: 25px 25px 25px rgba(46, 46, 49, .8);
+        }
+        
+        @media (max-width: 768px) {
+          .tipsy-effect {
+            font-size: 40px;
+          }
+        }
+
+        /* Gooey Button Styles */
+        svg {
+            position: absolute;
+            top: -4000px;
+            left: -4000px;
+        }
+
+        #gooey-button {
+            padding: 0.625rem 1.25rem;
+            font-size: 1.25rem;
+            border: none;
+            color: #0c1016;
+            filter: url('#gooey');
+            position: relative;
+            background-color: #00FF80;
+            cursor: pointer;
+            border-radius: 9999px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        #gooey-button:focus {
+            outline: none;
+        }
+
+        #gooey-button .bubbles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+        }
+
+        #gooey-button .bubbles .bubble {
+            background-color: #00FF80;
+            border-radius: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: block;
+            z-index: -1;
+        }
+
+        #gooey-button .bubbles .bubble:nth-child(1) {
+            left: 15px;
+            width: 25px;
+            height: 25px;
+            animation: move-1 3.02s infinite;
+            animation-delay: 0.2s;
+        }
+
+        #gooey-button .bubbles .bubble:nth-child(2) {
+            left: 45px;
+            width: 25px;
+            height: 25px;
+            animation: move-2 3.04s infinite;
+            animation-delay: 0.4s;
+        }
+
+        #gooey-button .bubbles .bubble:nth-child(3) {
+            left: 25px;
+            width: 25px;
+            height: 25px;
+            animation: move-3 3.06s infinite;
+            animation-delay: 0.6s;
+        }
+
+        #gooey-button .bubbles .bubble:nth-child(4) {
+            left: 75px;
+            width: 25px;
+            height: 25px;
+            animation: move-4 3.08s infinite;
+            animation-delay: 0.8s;
+        }
+
+        #gooey-button .bubbles .bubble:nth-child(5) {
+            left: 55px;
+            width: 25px;
+            height: 25px;
+            animation: move-5 3.1s infinite;
+            animation-delay: 1s;
+        }
+
+        #gooey-button .bubbles .bubble:nth-child(6) {
+            left: 35px;
+            width: 25px;
+            height: 25px;
+            animation: move-6 3.12s infinite;
+            animation-delay: 1.2s;
+        }
+
+        #gooey-button .bubbles .bubble:nth-child(7) {
+            left: 85px;
+            width: 25px;
+            height: 25px;
+            animation: move-7 3.14s infinite;
+            animation-delay: 1.4s;
+        }
+
+        #gooey-button .bubbles .bubble:nth-child(8) {
+            left: 65px;
+            width: 25px;
+            height: 25px;
+            animation: move-8 3.16s infinite;
+            animation-delay: 1.6s;
+        }
+
+        #gooey-button .bubbles .bubble:nth-child(9) {
+            left: 30px;
+            width: 25px;
+            height: 25px;
+            animation: move-9 3.18s infinite;
+            animation-delay: 1.8s;
+        }
+
+        #gooey-button .bubbles .bubble:nth-child(10) {
+            left: 80px;
+            width: 25px;
+            height: 25px;
+            animation: move-10 3.2s infinite;
+            animation-delay: 2s;
+        }
+
+        @keyframes move-1 {
+            0% {
+                transform: translate(0, 0);
+            }
+            99% {
+                transform: translate(0, -75px);
+            }
+            100% {
+                transform: translate(0, 0);
+                opacity: 0;
+            }
+        }
+
+        @keyframes move-2 {
+            0% {
+                transform: translate(0, 0);
+            }
+            99% {
+                transform: translate(0, -95px);
+            }
+            100% {
+                transform: translate(0, 0);
+                opacity: 0;
+            }
+        }
+
+        @keyframes move-3 {
+            0% {
+                transform: translate(0, 0);
+            }
+            99% {
+                transform: translate(0, -85px);
+            }
+            100% {
+                transform: translate(0, 0);
+                opacity: 0;
+            }
+        }
+
+        @keyframes move-4 {
+            0% {
+                transform: translate(0, 0);
+            }
+            99% {
+                transform: translate(0, -105px);
+            }
+            100% {
+                transform: translate(0, 0);
+                opacity: 0;
+            }
+        }
+
+        @keyframes move-5 {
+            0% {
+                transform: translate(0, 0);
+            }
+            99% {
+                transform: translate(0, -110px);
+            }
+            100% {
+                transform: translate(0, 0);
+                opacity: 0;
+            }
+        }
+
+        @keyframes move-6 {
+            0% {
+                transform: translate(0, 0);
+            }
+            99% {
+                transform: translate(0, -90px);
+            }
+            100% {
+                transform: translate(0, 0);
+                opacity: 0;
+            }
+        }
+
+        @keyframes move-7 {
+            0% {
+                transform: translate(0, 0);
+            }
+            99% {
+                transform: translate(0, -120px);
+            }
+            100% {
+                transform: translate(0, 0);
+                opacity: 0;
+            }
+        }
+
+        @keyframes move-8 {
+            0% {
+                transform: translate(0, 0);
+            }
+            99% {
+                transform: translate(0, -100px);
+            }
+            100% {
+                transform: translate(0, 0);
+                opacity: 0;
+            }
+        }
+
+        @keyframes move-9 {
+            0% {
+                transform: translate(0, 0);
+            }
+            99% {
+                transform: translate(0, -88px);
+            }
+            100% {
+                transform: translate(0, 0);
+                opacity: 0;
+            }
+        }
+
+        @keyframes move-10 {
+            0% {
+                transform: translate(0, 0);
+            }
+            99% {
+                transform: translate(0, -115px);
+            }
+            100% {
+                transform: translate(0, 0);
+                opacity: 0;
+            }
+        }
+
+        /* Gallery Effect Styles */
+        .gallery {
+            position: relative;
+            width: 100%;
+            max-width: 100%;
+            perspective: 1000px;
+            min-height: 250px;
+            overflow: visible;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .gallery__row {
+            display: flex;
+            flex-wrap: wrap;
+            width: 100%;
+        }
+
+        .gallery__row + .gallery__row {
+            margin-top: 20px;
+        }
+
+        .gallery__row__image {
+            text-align: center;
+            overflow: visible;
+        }
+
+        .gallery-display .postcard {
+            transform: none !important;
+            cursor: pointer;
+        }
+
+        .gallery-display .postcard-transition {
+            z-index: 1;
+            transition: all 0.2s;
+        }
+
+        .postcard {
+            transform-style: preserve-3d;
+            box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+                0 6.7px 5.3px rgba(0, 0, 0, 0.048), 
+                0 12.5px 10px rgba(0, 0, 0, 0.06),
+                0 2.3px 70.9px rgba(0, 0, 0, 0.072), 
+                0 6.8px 15.4px rgba(0, 0, 0, 0.01);
+            overflow: hidden;
+            margin: auto;
+            transition: all 0.6s;
+            position: relative;
+            font-size: 18px;
+            border-radius: 4px;
+            max-width: 100%;
+        }
+
+        .postcard__front {
+            background-color: floralwhite;
+            padding: 10px;
+            height: 100%;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-sizing: border-box;
+        }
+
+        .postcard__front img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+        }
+
+        .gallery-overlay {
+            width: 100%;
+            height: 100vh;
+            position: fixed;
+            left: 0;
+            top: 0;
+            background-color: black;
+            opacity: 0.5;
+            z-index: 999;
+            display: none;
+        }
+
+        .gallery-overlay.show {
+            display: block;
+        }
+
+        /* Gradient Text Glow Effect */
+        @property --k {
+            syntax: '<number>';
+            initial-value: 0;
+            inherits: false;
+        }
+
+        .gradient-glow-text {
+            background: linear-gradient(90deg, 
+                hsl(calc(var(--k)*1turn), 95%, 65%), 
+                hsl(calc(var(--k)*1turn + 90deg), 95%, 65%)) text;
+            color: #0000;
+            filter: url(#glow);
+            animation: k 4s linear infinite;
+            text-transform: uppercase;
+        }
+
+        @keyframes k {
+            to { --k: 1; }
+        }
+
+        svg[height='0'][aria-hidden='true'] {
+            position: fixed;
+        }
+
+        /* Gradient Divider */
+        .gradient {
+            height: 20px;
+            position: relative;
+            width: 100%;
+            background: radial-gradient(ellipse farthest-side at top center, rgba(0, 0, 0, 0.08), transparent);
+        }
+
+        .gradient:before {
+            content: "";
+            display: block;
+            position: absolute;
+            top: 0px;
+            right: 0;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(to right, transparent, rgba(0, 0, 0, 0.02), rgba(0, 0, 0, 0.02), transparent);
+        }
+
+        /* Particle Background Effect */
+        #particle-container,
+        #particle-container-2,
+        #particle-container-3,
+        #particle-container-button {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0;
+        }
+
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+        }
+
+        @keyframes particle-animation-1 {
+            0% {
+                transform: translate3d(67vw, 23vh, 45px);
+            }
+            100% {
+                transform: translate3d(23vw, 67vh, 45px);
+            }
+        }
+
+        @keyframes particle-animation-2 {
+            0% {
+                transform: translate3d(34vw, 71vh, 82px);
+            }
+            100% {
+                transform: translate3d(71vw, 34vh, 82px);
+            }
+        }
+
+        @keyframes particle-animation-3 {
+            0% {
+                transform: translate3d(12vw, 45vh, 19px);
+            }
+            100% {
+                transform: translate3d(45vw, 12vh, 19px);
+            }
+        }
+
+        @keyframes particle-animation-4 {
+            0% {
+                transform: translate3d(89vw, 88vh, 67px);
+            }
+            100% {
+                transform: translate3d(88vw, 89vh, 67px);
+            }
+        }
+
+        @keyframes particle-animation-5 {
+            0% {
+                transform: translate3d(56vw, 12vh, 93px);
+            }
+            100% {
+                transform: translate3d(12vw, 56vh, 93px);
+            }
+        }
+
+        @keyframes particle-animation-6 {
+            0% {
+                transform: translate3d(23vw, 56vh, 31px);
+            }
+            100% {
+                transform: translate3d(56vw, 23vh, 31px);
+            }
+        }
+
+        @keyframes particle-animation-7 {
+            0% {
+                transform: translate3d(78vw, 34vh, 58px);
+            }
+            100% {
+                transform: translate3d(34vw, 78vh, 58px);
+            }
+        }
+
+        @keyframes particle-animation-8 {
+            0% {
+                transform: translate3d(45vw, 79vh, 74px);
+            }
+            100% {
+                transform: translate3d(79vw, 45vh, 74px);
+            }
+        }
+
+        @keyframes particle-animation-9 {
+            0% {
+                transform: translate3d(9vw, 19vh, 26px);
+            }
+            100% {
+                transform: translate3d(19vw, 9vh, 26px);
+            }
+        }
+
+        @keyframes particle-animation-10 {
+            0% {
+                transform: translate3d(91vw, 63vh, 88px);
+            }
+            100% {
+                transform: translate3d(63vw, 91vh, 88px);
+            }
+        }
+
+        @keyframes particle-animation-11 {
+            0% {
+                transform: translate3d(28vw, 41vh, 52px);
+            }
+            100% {
+                transform: translate3d(41vw, 28vh, 52px);
+            }
+        }
+
+        @keyframes particle-animation-12 {
+            0% {
+                transform: translate3d(61vw, 87vh, 37px);
+            }
+            100% {
+                transform: translate3d(87vw, 61vh, 37px);
+            }
+        }
+
+        @keyframes particle-animation-13 {
+            0% {
+                transform: translate3d(83vw, 8vh, 64px);
+            }
+            100% {
+                transform: translate3d(8vw, 83vh, 64px);
+            }
+        }
+
+        @keyframes particle-animation-14 {
+            0% {
+                transform: translate3d(17vw, 52vh, 79px);
+            }
+            100% {
+                transform: translate3d(52vw, 17vh, 79px);
+            }
+        }
+
+        @keyframes particle-animation-15 {
+            0% {
+                transform: translate3d(49vw, 76vh, 21px);
+            }
+            100% {
+                transform: translate3d(76vw, 49vh, 21px);
+            }
+        }
+
+        @keyframes particle-animation-16 {
+            0% {
+                transform: translate3d(94vw, 29vh, 96px);
+            }
+            100% {
+                transform: translate3d(29vw, 94vh, 96px);
+            }
+        }
+
+        @keyframes particle-animation-17 {
+            0% {
+                transform: translate3d(6vw, 65vh, 43px);
+            }
+            100% {
+                transform: translate3d(65vw, 6vh, 43px);
+            }
+        }
+
+        @keyframes particle-animation-18 {
+            0% {
+                transform: translate3d(72vw, 14vh, 68px);
+            }
+            100% {
+                transform: translate3d(14vw, 72vh, 68px);
+            }
+        }
+
+        @keyframes particle-animation-19 {
+            0% {
+                transform: translate3d(39vw, 58vh, 85px);
+            }
+            100% {
+                transform: translate3d(58vw, 39vh, 85px);
+            }
+        }
+
+        @keyframes particle-animation-20 {
+            0% {
+                transform: translate3d(15vw, 91vh, 29px);
+            }
+            100% {
+                transform: translate3d(91vw, 15vh, 29px);
+            }
+        }
+
+        @keyframes particle-animation-21 {
+            0% {
+                transform: translate3d(86vw, 37vh, 71px);
+            }
+            100% {
+                transform: translate3d(37vw, 86vh, 71px);
+            }
+        }
+
+        @keyframes particle-animation-22 {
+            0% {
+                transform: translate3d(53vw, 73vh, 47px);
+            }
+            100% {
+                transform: translate3d(73vw, 53vh, 47px);
+            }
+        }
+
+        @keyframes particle-animation-23 {
+            0% {
+                transform: translate3d(31vw, 16vh, 94px);
+            }
+            100% {
+                transform: translate3d(16vw, 31vh, 94px);
+            }
+        }
+
+        @keyframes particle-animation-24 {
+            0% {
+                transform: translate3d(77vw, 49vh, 33px);
+            }
+            100% {
+                transform: translate3d(49vw, 77vh, 33px);
+            }
+        }
+
+        @keyframes particle-animation-25 {
+            0% {
+                transform: translate3d(22vw, 84vh, 61px);
+            }
+            100% {
+                transform: translate3d(84vw, 22vh, 61px);
+            }
+        }
+
+        @keyframes particle-animation-26 {
+            0% {
+                transform: translate3d(65vw, 26vh, 18px);
+            }
+            100% {
+                transform: translate3d(26vw, 65vh, 18px);
+            }
+        }
+
+        @keyframes particle-animation-27 {
+            0% {
+                transform: translate3d(3vw, 62vh, 76px);
+            }
+            100% {
+                transform: translate3d(62vw, 3vh, 76px);
+            }
+        }
+
+        @keyframes particle-animation-28 {
+            0% {
+                transform: translate3d(58vw, 38vh, 54px);
+            }
+            100% {
+                transform: translate3d(38vw, 58vh, 54px);
+            }
+        }
+
+        @keyframes particle-animation-29 {
+            0% {
+                transform: translate3d(81vw, 95vh, 42px);
+            }
+            100% {
+                transform: translate3d(95vw, 81vh, 42px);
+            }
+        }
+
+        @keyframes particle-animation-30 {
+            0% {
+                transform: translate3d(44vw, 11vh, 87px);
+            }
+            100% {
+                transform: translate3d(11vw, 44vh, 87px);
+            }
+        }
+
+        .particle:nth-child(1) {
+            animation: particle-animation-1 60s infinite;
+            opacity: 0.73;
+            height: 8px;
+            width: 8px;
+            animation-delay: -0.2s;
+            background: hsl(342, 70%, 50%);
+        }
+
+        .particle:nth-child(2) {
+            animation: particle-animation-2 60s infinite;
+            opacity: 0.41;
+            height: 7px;
+            width: 7px;
+            animation-delay: -0.4s;
+            background: hsl(127, 70%, 50%);
+        }
+
+        .particle:nth-child(3) {
+            animation: particle-animation-3 60s infinite;
+            opacity: 0.95;
+            height: 9px;
+            width: 9px;
+            animation-delay: -0.6s;
+            background: hsl(258, 70%, 50%);
+        }
+
+        .particle:nth-child(4) {
+            animation: particle-animation-4 60s infinite;
+            opacity: 0.26;
+            height: 6px;
+            width: 6px;
+            animation-delay: -0.8s;
+            background: hsl(189, 70%, 50%);
+        }
+
+        .particle:nth-child(5) {
+            animation: particle-animation-5 60s infinite;
+            opacity: 0.58;
+            height: 10px;
+            width: 10px;
+            animation-delay: -1s;
+            background: hsl(63, 70%, 50%);
+        }
+
+        .particle:nth-child(6) {
+            animation: particle-animation-6 60s infinite;
+            opacity: 0.82;
+            height: 7px;
+            width: 7px;
+            animation-delay: -1.2s;
+            background: hsl(301, 70%, 50%);
+        }
+
+        .particle:nth-child(7) {
+            animation: particle-animation-7 60s infinite;
+            opacity: 0.34;
+            height: 8px;
+            width: 8px;
+            animation-delay: -1.4s;
+            background: hsl(174, 70%, 50%);
+        }
+
+        .particle:nth-child(8) {
+            animation: particle-animation-8 60s infinite;
+            opacity: 0.67;
+            height: 9px;
+            width: 9px;
+            animation-delay: -1.6s;
+            background: hsl(45, 70%, 50%);
+        }
+
+        .particle:nth-child(9) {
+            animation: particle-animation-9 60s infinite;
+            opacity: 0.19;
+            height: 6px;
+            width: 6px;
+            animation-delay: -1.8s;
+            background: hsl(213, 70%, 50%);
+        }
+
+        .particle:nth-child(10) {
+            animation: particle-animation-10 60s infinite;
+            opacity: 0.89;
+            height: 8px;
+            width: 8px;
+            animation-delay: -2s;
+            background: hsl(136, 70%, 50%);
+        }
+
+        .particle:nth-child(11) {
+            animation: particle-animation-11 60s infinite;
+            opacity: 0.52;
+            height: 7px;
+            width: 7px;
+            animation-delay: -2.2s;
+            background: hsl(287, 70%, 50%);
+        }
+
+        .particle:nth-child(12) {
+            animation: particle-animation-12 60s infinite;
+            opacity: 0.76;
+            height: 9px;
+            width: 9px;
+            animation-delay: -2.4s;
+            background: hsl(98, 70%, 50%);
+        }
+
+        .particle:nth-child(13) {
+            animation: particle-animation-13 60s infinite;
+            opacity: 0.38;
+            height: 10px;
+            width: 10px;
+            animation-delay: -2.6s;
+            background: hsl(231, 70%, 50%);
+        }
+
+        .particle:nth-child(14) {
+            animation: particle-animation-14 60s infinite;
+            opacity: 0.61;
+            height: 8px;
+            width: 8px;
+            animation-delay: -2.8s;
+            background: hsl(54, 70%, 50%);
+        }
+
+        .particle:nth-child(15) {
+            animation: particle-animation-15 60s infinite;
+            opacity: 0.84;
+            height: 6px;
+            width: 6px;
+            animation-delay: -3s;
+            background: hsl(295, 70%, 50%);
+        }
+
+        .particle:nth-child(16) {
+            animation: particle-animation-16 60s infinite;
+            opacity: 0.47;
+            height: 7px;
+            width: 7px;
+            animation-delay: -3.2s;
+            background: hsl(162, 70%, 50%);
+        }
+
+        .particle:nth-child(17) {
+            animation: particle-animation-17 60s infinite;
+            opacity: 0.29;
+            height: 9px;
+            width: 9px;
+            animation-delay: -3.4s;
+            background: hsl(39, 70%, 50%);
+        }
+
+        .particle:nth-child(18) {
+            animation: particle-animation-18 60s infinite;
+            opacity: 0.93;
+            height: 8px;
+            width: 8px;
+            animation-delay: -3.6s;
+            background: hsl(220, 70%, 50%);
+        }
+
+        .particle:nth-child(19) {
+            animation: particle-animation-19 60s infinite;
+            opacity: 0.56;
+            height: 10px;
+            width: 10px;
+            animation-delay: -3.8s;
+            background: hsl(103, 70%, 50%);
+        }
+
+        .particle:nth-child(20) {
+            animation: particle-animation-20 60s infinite;
+            opacity: 0.78;
+            height: 6px;
+            width: 6px;
+            animation-delay: -4s;
+            background: hsl(271, 70%, 50%);
+        }
+
+        .particle:nth-child(21) {
+            animation: particle-animation-21 60s infinite;
+            opacity: 0.42;
+            height: 7px;
+            width: 7px;
+            animation-delay: -4.2s;
+            background: hsl(148, 70%, 50%);
+        }
+
+        .particle:nth-child(22) {
+            animation: particle-animation-22 60s infinite;
+            opacity: 0.65;
+            height: 9px;
+            width: 9px;
+            animation-delay: -4.4s;
+            background: hsl(33, 70%, 50%);
+        }
+
+        .particle:nth-child(23) {
+            animation: particle-animation-23 60s infinite;
+            opacity: 0.88;
+            height: 8px;
+            width: 8px;
+            animation-delay: -4.6s;
+            background: hsl(207, 70%, 50%);
+        }
+
+        .particle:nth-child(24) {
+            animation: particle-animation-24 60s infinite;
+            opacity: 0.31;
+            height: 6px;
+            width: 6px;
+            animation-delay: -4.8s;
+            background: hsl(120, 70%, 50%);
+        }
+
+        .particle:nth-child(25) {
+            animation: particle-animation-25 60s infinite;
+            opacity: 0.74;
+            height: 10px;
+            width: 10px;
+            animation-delay: -5s;
+            background: hsl(279, 70%, 50%);
+        }
+
+        .particle:nth-child(26) {
+            animation: particle-animation-26 60s infinite;
+            opacity: 0.57;
+            height: 7px;
+            width: 7px;
+            animation-delay: -5.2s;
+            background: hsl(156, 70%, 50%);
+        }
+
+        .particle:nth-child(27) {
+            animation: particle-animation-27 60s infinite;
+            opacity: 0.81;
+            height: 9px;
+            width: 9px;
+            animation-delay: -5.4s;
+            background: hsl(51, 70%, 50%);
+        }
+
+        .particle:nth-child(28) {
+            animation: particle-animation-28 60s infinite;
+            opacity: 0.44;
+            height: 8px;
+            width: 8px;
+            animation-delay: -5.6s;
+            background: hsl(234, 70%, 50%);
+        }
+
+        .particle:nth-child(29) {
+            animation: particle-animation-29 60s infinite;
+            opacity: 0.97;
+            height: 6px;
+            width: 6px;
+            animation-delay: -5.8s;
+            background: hsl(115, 70%, 50%);
+        }
+
+        .particle:nth-child(30) {
+            animation: particle-animation-30 60s infinite;
+            opacity: 0.69;
+            height: 10px;
+            width: 10px;
+            animation-delay: -6s;
+            background: hsl(263, 70%, 50%);
+        }
+
+        /* Image 3D Tilt Effect */
+        .image-hover-container {
+            perspective: 25px;
+            width: 100%;
+            aspect-ratio: 1 / 1;
+        }
+
+        .image-hover-inner {
+            width: 100%;
+            height: 100%;
+            background-color: white;
+            box-shadow: 2px 2px 50px rgba(0, 0, 0, 0.2);
+            transition: transform 0.5s;
+            -webkit-transition: transform 0.5s;
+            -moz-transition: transform 0.5s;
+            -o-transition: transform 0.5s;
+            border-radius: 8px;
+            overflow: hidden;
+            display: inline-block;
+        }
+
+        .image-hover-inner img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* 3D Button Effect */
+        .button-3d-container {
+            display: flex !important;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            width: 100%;
+            position: relative;
+            z-index: 20;
+        }
+
+        .button-3d,
+        .button-3d[role="button"] {
+            -webkit-appearance: none !important;
+            appearance: none !important;
+            user-select: none;
+            display: flex !important;
+            align-items: center;
+            justify-content: center;
+            outline: none;
+            cursor: pointer;
+            width: 280px !important;
+            height: 80px !important;
+            background-image: linear-gradient(to top, #D8D9DB 0%, #fff 80%, #FDFDFD 100%) !important;
+            background-color: transparent !important;
+            border-radius: 40px !important;
+            border: 1px solid #8F9092 !important;
+            box-shadow: 0 4px 3px 1px #FCFCFC,
+                        0 6px 8px #D6D7D9,
+                        0 -4px 4px #CECFD1,
+                        0 -6px 4px #FEFEFE,
+                        inset 0 0 3px 0 #CECFD1 !important;
+            transition: all .2s ease;
+            font-family: "Source Sans Pro", sans-serif !important;
+            font-size: 18px !important;
+            font-weight: 600 !important;
+            color: #606060 !important;
+            text-shadow: 0 1px #fff;
+            margin: 0;
+            padding: 0;
+            visibility: visible !important;
+            opacity: 1 !important;
+            position: relative;
+            z-index: 100;
+        }
+
+        .button-3d::-moz-focus-inner,
+        .button-3d[role="button"]::-moz-focus-inner {
+            border: 0;
+        }
+
+        .button-3d > *,
+        .button-3d[role="button"] > * {
+            transition: transform .2s ease;
+        }
+
+        .button-3d span,
+        .button-3d[role="button"] span {
+            display: inline-block;
+            pointer-events: none;
+        }
+
+        .button-3d:hover:not([disabled]),
+        .button-3d[role="button"]:hover:not([disabled]) {
+            box-shadow: 0 4px 3px 1px #FCFCFC,
+                        0 6px 8px #D6D7D9,
+                        0 -4px 4px #CECFD1,
+                        0 -6px 4px #FEFEFE,
+                        inset 0 0 3px 3px #CECFD1;
+        }
+
+        .button-3d:hover:not([disabled]) > *,
+        .button-3d[role="button"]:hover:not([disabled]) > * {
+            transform: scale(.975);
+        }
+
+        @keyframes active {
+            from {
+                box-shadow: 0 4px 3px 1px #FCFCFC,
+                            0 6px 8px #D6D7D9,
+                            0 -4px 4px #CECFD1,
+                            0 -6px 4px #FEFEFE,
+                            inset 0 0 10px 0px rgba(0, 0, 250, .6);
+            }
+            to {
+                box-shadow: 0 4px 3px 1px #FCFCFC,
+                            0 6px 8px #D6D7D9,
+                            0 -4px 4px #CECFD1,
+                            0 -6px 4px #FEFEFE,
+                            inset 0 0 3px 3px #CECFD1;
+            }
+        }
+
+        .button-3d:focus:not(:active),
+        .button-3d[role="button"]:focus:not(:active) {
+            animation: active .9s alternate infinite;
+            outline: none;
+        }
+
+        .button-3d:active:not([disabled]),
+        .button-3d[role="button"]:active:not([disabled]) {
+            box-shadow: 0 4px 3px 1px #FCFCFC,
+                        0 6px 8px #D6D7D9,
+                        0 -4px 4px #CECFD1,
+                        0 -6px 4px #FEFEFE,
+                        inset 0 0 5px 3px #999,
+                        inset 0 0 30px #aaa;
+        }
+
+        .button-3d:active:not([disabled]) > *,
+        .button-3d[role="button"]:active:not([disabled]) > * {
+            transform: scale(.95);
+        }
+
+        .button-3d:disabled,
+        .button-3d[role="button"]:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
     </style>
 </head>
 <body>
+    <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
+        <defs>
+            <filter id="gooey">
+                <!-- in="sourceGraphic" -->
+                <feGaussianBlur in="SourceGraphic" stdDeviation="5" result="blur" />
+                <feColorMatrix in="blur" type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9" result="highContrastGraphic" />
+                <feComposite in="SourceGraphic" in2="highContrastGraphic" operator="atop" />
+            </filter>
+        </defs>
+    </svg>
+
+    <svg width="0" height="0" aria-hidden="true">
+        <defs>
+            <filter id="glow" x="-50%" y="-200%" width="200%" height="500%" primitiveUnits="objectBoundingBox">
+                <feGaussianBlur stdDeviation=".025 .2" />
+                <feColorMatrix type="saturate" values="1.3" />
+                <feBlend in="SourceGraphic" />
+            </filter>
+        </defs>
+    </svg>
+
     <div id="nav-placeholder"></div>
 
-    <section class="relative h-[60vh] flex items-center justify-center overflow-hidden">
-        <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=1600');"></div>
+    <section class="relative h-[60vh] md:h-screen flex items-center justify-center overflow-hidden">
+        <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('../../assets/images/speffect/hero.jpg');"></div>
         <div class="absolute inset-0 hero-gradient"></div>
-        <div class="relative z-10 text-center text-white px-6">
-            <h1 class="text-5xl md:text-6xl font-bold mb-4">Special Effects</h1>
-            <p class="text-xl md:text-2xl mb-8">Sparks, Snow, Confetti & Champagne Walls</p>
-            <a href="#contact" class="btn-primary text-white px-8 py-4 rounded-full text-lg font-semibold inline-block">Get a Quote</a>
+        <div class="relative z-10 text-center text-white px-6 hero-section">
+            <h3 class="luminance-effect">EVENT DECOR</h3>
+            <h1 class="tipsy-effect mb-4 font-bold">Special Effects</h1>
+            <p class="text-xl md:text-2xl mb-8 font-light">Bring the wow factor with unforgettable special effects for any event.</p>
+            <a href="#contact" id="gooey-button">
+                Contact Us
+                <span class="bubbles">
+                    <span class="bubble"></span>
+                    <span class="bubble"></span>
+                    <span class="bubble"></span>
+                    <span class="bubble"></span>
+                    <span class="bubble"></span>
+                    <span class="bubble"></span>
+                    <span class="bubble"></span>
+                    <span class="bubble"></span>
+                    <span class="bubble"></span>
+                    <span class="bubble"></span>
+                </span>
+            </a>
         </div>
     </section>
 
-    <section class="section-padding bg-white">
-        <div class="container mx-auto px-6">
-            <div class="max-w-4xl mx-auto">
-                <h2 class="text-4xl font-bold mb-6 text-center">Wow Your Guests</h2>
-                <p class="text-lg text-gray-700 mb-8 text-center">Create unforgettable moments with stunning special effects.</p>
-                
-                <div class="grid md:grid-cols-2 gap-8 mt-12">
-                    <div class="bg-gray-50 p-6 rounded-lg">
-                        <h3 class="text-2xl font-semibold mb-4">✨ Cold Spark Machines</h3>
-                        <p class="text-gray-700">Safe, indoor sparklers that create dramatic fountain effects.</p>
+    <!-- Blank 2 Column Section -->
+    <section style="padding: 3rem 0; position: relative; background: #ecf3f3;">
+        <div id="particle-container">
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+        </div>
+        <div class="container mx-auto px-6" style="position: relative; z-index: 1;">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="col-span-1 flex items-center justify-end">
+                    <div class="text-right max-w-lg">
+                        <h3 class="text-2xl md:text-3xl font-light mb-4 text-gray-700">MAKE EVERY MOMENT MAGICAL</h3>
+                        <h2 class="gradient-glow-text text-4xl md:text-5xl font-bold mb-6" style="font-weight: 900;">
+                            SPECIAL EFFECTS
+                        </h2>
+                        <p class="text-base md:text-lg mb-8 text-gray-600 leading-relaxed">
+                            Take your event to the next level with show-stopping special effects designed to amaze. From stunning Sparktacular displays to a Dry Ice Machine, Confetti Cannons, and Champagne Walls, these unique touches ensure your celebration is truly one of a kind. Perfect for creating those wow-worthy moments that guests will always remember.
+                        </p>
+                        <a href="#contact" class="btn-primary inline-block px-8 py-3 rounded-lg text-white font-semibold text-lg">
+                            Interested In Learning More?
+                        </a>
                     </div>
-                    <div class="bg-gray-50 p-6 rounded-lg">
-                        <h3 class="text-2xl font-semibold mb-4">❄️ Snow Machines</h3>
-                        <p class="text-gray-700">Realistic falling snow effects for winter wonderland themes.</p>
-                    </div>
-                    <div class="bg-gray-50 p-6 rounded-lg">
-                        <h3 class="text-2xl font-semibold mb-4">🎊 Confetti Cannons</h3>
-                        <p class="text-gray-700">Dramatic confetti blasts in custom colors for celebrations.</p>
-                    </div>
-                    <div class="bg-gray-50 p-6 rounded-lg">
-                        <h3 class="text-2xl font-semibold mb-4">🥂 Champagne Walls</h3>
-                        <p class="text-gray-700">Elegant champagne flute walls for sophisticated entrances.</p>
-                    </div>
-                    <div class="bg-gray-50 p-6 rounded-lg">
-                        <h3 class="text-2xl font-semibold mb-4">🌫️ Fog & Haze</h3>
-                        <p class="text-gray-700">Low-lying fog and atmospheric haze for dramatic effects.</p>
-                    </div>
-                    <div class="bg-gray-50 p-6 rounded-lg">
-                        <h3 class="text-2xl font-semibold mb-4">🎆 CO2 Jets</h3>
-                        <p class="text-gray-700">High-energy CO2 blasts synchronized with music.</p>
+                </div>
+                <div class="col-span-1" style="overflow: visible;">
+                    <!-- Gallery Effect -->
+                    <div class="gallery" id="gallery">
+                        <div>
+                            <div class="gallery__row" id="gallery-row">
+                                <!-- Images will be inserted here by JavaScript -->
+                            </div>
+                        </div>
+                        <div class="gallery-overlay" id="gallery-overlay"></div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="section-padding bg-gradient-to-r from-[#0050ff] to-[#0050ff] text-white">
-        <div class="container mx-auto px-6 text-center">
-            <h2 class="text-4xl font-bold mb-6">Add Magic to Your Event!</h2>
-            <p class="text-xl mb-8">Stunning special effects for unforgettable moments</p>
-            <a href="#contact" class="bg-white text-[#0050ff] px-8 py-4 rounded-full text-lg font-semibold inline-block hover:bg-gray-100 transition">Request Quote</a>
+    <!-- Blank 2 Column Section 2 -->
+    <section style="padding: 2rem 0; position: relative; background: #ecf3f3;">
+        <div id="particle-container-2">
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+        </div>
+        <div class="container mx-auto px-6" style="position: relative; z-index: 1;">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="col-span-1 flex items-center">
+                    <div class="image-hover-container w-full" id="image-container-1">
+                        <div class="image-hover-inner" id="image-inner-1">
+                            <img src="../../assets/images/speffect/i1.jpg" alt="Special Effects Image" class="w-full h-auto">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-span-1 flex items-center">
+                    <div class="max-w-lg">
+                        <h2 class="gradient-glow-text text-4xl md:text-5xl font-bold mb-6" style="font-weight: 900;">
+                            SPARKTACULAR
+                        </h2>
+                        <p class="text-base md:text-lg mb-8 text-gray-600 leading-relaxed">
+                            Add drama to your event with cold spark effects that are safe, dazzling, and unforgettable.
+                        </p>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
+    <!-- Blank 2 Column Section 3 -->
+    <section style="padding: 1rem 0; position: relative; background: #ecf3f3;">
+        <div id="particle-container-3">
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+        </div>
+        <div class="container mx-auto px-6" style="position: relative; z-index: 1;">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                <div class="col-span-1 flex items-center justify-end">
+                    <div class="max-w-lg text-right">
+                        <h2 class="gradient-glow-text text-4xl md:text-5xl font-bold mb-3" style="font-weight: 900;">
+                            DRY ICE MACHINE
+                        </h2>
+                        <p class="text-base md:text-lg mb-0 text-gray-600 leading-relaxed">
+                            Create a magical atmosphere with a Dry Ice Machine that fills your venue with low-lying fog.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-span-1 flex items-center">
+                    <div class="image-hover-container w-full" id="image-container-2">
+                        <div class="image-hover-inner" id="image-inner-2">
+                            <img src="../../assets/images/speffect/i2.jpg" alt="Dry Ice Machine">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section style="padding: 0.5rem 0; position: relative; z-index: 10; display: block !important; width: 100%; overflow: visible; box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.1), inset 0 -2px 10px rgba(0, 0, 0, 0.1);">
+        <div id="particle-container-button">
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+        </div>
+        <div class="container mx-auto px-6" style="position: relative; z-index: 10;">
+            <div class="button-3d-container">
+                <button class="button-3d" role="button" type="button">
+                    <span>Contact Us Now</span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blank 2 Column Section 2 -->
+    <section style="padding: 2rem 0; position: relative; background: #ecf3f3;">
+        <div id="particle-container-2">
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+        </div>
+        <div class="container mx-auto px-6" style="position: relative; z-index: 1;">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="col-span-1 flex items-center">
+                    <div class="image-hover-container w-full" id="image-container-3">
+                        <div class="image-hover-inner" id="image-inner-3">
+                            <img src="../../assets/images/speffect/I3.jpg" alt="Special Effects Image" class="w-full h-auto">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-span-1 flex items-center">
+                    <div class="max-w-lg">
+                        <h2 class="gradient-glow-text text-4xl md:text-5xl font-bold mb-6" style="font-weight: 900;">
+                            CONFETTI CANNON
+                        </h2>
+                        <p class="text-base md:text-lg mb-8 text-gray-600 leading-relaxed">
+                            Celebrate in style with a Confetti Cannon that delivers bursts of color and excitement.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blank 2 Column Section 3 -->
+    <section style="padding: 1rem 0; position: relative; background: #ecf3f3;">
+        <div id="particle-container-3">
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+        </div>
+        <div class="container mx-auto px-6" style="position: relative; z-index: 1;">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                <div class="col-span-1 flex items-center justify-end">
+                    <div class="max-w-lg text-right">
+                        <h2 class="gradient-glow-text text-4xl md:text-5xl font-bold mb-3" style="font-weight: 900;">
+                            CHAMAPAGNE WALL
+                        </h2>
+                        <p class="text-base md:text-lg mb-0 text-gray-600 leading-relaxed">
+                            Impress your guests with a Champagne Wall that’s both functional and a stunning decor piece.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-span-1 flex items-center">
+                    <div class="image-hover-container w-full" id="image-container-4">
+                        <div class="image-hover-inner" id="image-inner-4">
+                            <img src="../../assets/images/speffect/I4.jpg" alt="Dry Ice Machine">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section style="padding: 1.5rem 0; position: relative; z-index: 10; display: block !important; width: 100%; overflow: visible; box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.1), inset 0 -2px 10px rgba(0, 0, 0, 0.1);">
+        <div id="particle-container-button">
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+        </div>
+        <div class="container mx-auto px-6" style="position: relative; z-index: 10;">
+            <div class="button-3d-container" style="flex-direction: column; gap: 0.75rem;">
+                <h2 class="gradient-glow-text text-2xl md:text-3xl font-bold mb-2 text-center" style="font-weight: 900; margin-bottom: 0.5rem;">
+                    CONTACT US NOW
+                </h2>
+                <p class="text-sm md:text-base mb-4 text-gray-700 leading-relaxed text-center max-w-2xl mx-auto" style="margin-bottom: 0.75rem;">              
+                    Learn more about our special effects for your next event, click the button below to email us and connect with our team today.
+                </p>
+                <button class="button-3d" role="button" type="button">
+                    <span>Learn More Now</span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Gallery Effect JavaScript
+        (function() {
+            const images = [
+                "../../assets/images/speffect/hero.jpg",
+                "../../assets/images/speffect/r1.png",
+                "../../assets/images/speffect/r2.png",
+                "../../assets/images/speffect/r3.png"
+            ];
+            const columns = 2;
+            let height = 180;
+            let width = 270;
+            
+            const gallery = document.getElementById('gallery');
+            const galleryRow = document.getElementById('gallery-row');
+            const overlay = document.getElementById('gallery-overlay');
+            
+            // Calculate responsive dimensions
+            function getDimensions() {
+                if (!gallery) return { width: 270, height: 180 };
+                const containerWidth = gallery.offsetWidth || 600;
+                const padding = 40; // 20px on each side
+                const availableWidth = containerWidth - padding;
+                const maxWidth = (availableWidth - 20) / columns; // Account for gaps
+                width = Math.min(270, maxWidth);
+                height = (width / 270) * 180; // Maintain aspect ratio
+                return { width, height };
+            }
+            
+            let loaded = false;
+            let activeImage = null;
+            let show = false;
+            let rotations = {};
+            let transition = null;
+            
+            // Calculate image rows
+            const imageRows = [];
+            for (let i = 0; i < images.length; i += columns) {
+                imageRows.push(images.slice(i, i + columns));
+            }
+            
+            // Initialize gallery
+            function initGallery() {
+                imageRows.forEach((row, i) => {
+                    row.forEach((image, j) => {
+                        const imageDiv = document.createElement('div');
+                        imageDiv.className = 'gallery__row__image';
+                        imageDiv.style.width = `${100 / columns}%`;
+                        
+                        const postcard = document.createElement('div');
+                        postcard.className = 'postcard';
+                        postcard.dataset.row = i;
+                        postcard.dataset.col = j;
+                        postcard.dataset.image = image;
+                        
+                        const front = document.createElement('div');
+                        front.className = 'postcard__front';
+                        
+                        const imgContainer = document.createElement('div');
+                        const img = document.createElement('img');
+                        img.src = image;
+                        img.alt = `Gallery image ${i * columns + j + 1}`;
+                        
+                        img.addEventListener('mouseenter', showGallery);
+                        postcard.addEventListener('click', (e) => selectImage(i, j, image, postcard));
+                        
+                        imgContainer.appendChild(img);
+                        front.appendChild(imgContainer);
+                        postcard.appendChild(front);
+                        imageDiv.appendChild(postcard);
+                        galleryRow.appendChild(imageDiv);
+                    });
+                });
+                
+                // Set rotations after DOM elements are created
+                setTimeout(() => {
+                    setRotations();
+                }, 100);
+                
+                // Update on window resize
+                let resizeTimeout;
+                window.addEventListener('resize', () => {
+                    clearTimeout(resizeTimeout);
+                    resizeTimeout = setTimeout(() => {
+                        setRotations();
+                    }, 250);
+                });
+            }
+            
+            function showGallery() {
+                if (!show) {
+                    show = true;
+                    gallery.classList.add('gallery-display');
+                }
+            }
+            
+            function hideGallery() {
+                if (show && !activeImage) {
+                    setRotations();
+                    show = false;
+                    gallery.classList.remove('gallery-display');
+                }
+            }
+            
+            function selectImage(row, col, image, pc) {
+                const startHandler = () => {
+                    transition = image;
+                    pc.classList.add('postcard-transition');
+                };
+                
+                const endHandler = () => {
+                    if (!activeImage) {
+                        transition = null;
+                        pc.classList.remove('postcard-transition');
+                    }
+                };
+                
+                pc.addEventListener('transitionstart', startHandler);
+                pc.addEventListener('transitionend', endHandler);
+                
+                activeImage = image;
+                overlay.classList.add('show');
+                updatePostcardStyles();
+            }
+            
+            function getCenter(row, col) {
+                const dims = getDimensions();
+                const currentWidth = dims.width;
+                const currentHeight = dims.height;
+                
+                const rowOffset = imageRows.length / 2 - row;
+                let translateY = rowOffset * (currentHeight + 30) + rowOffset * 25;
+                if (!(imageRows.length % 2)) {
+                    if (!translateY) {
+                        translateY -= 80;
+                    } else {
+                        translateY /= 2;
+                    }
+                }
+                
+                const colOffset = Math.floor(columns / 2 - col);
+                const containerWidth = gallery.offsetWidth || 600;
+                const gap = 10;
+                let translateX = colOffset * (currentWidth + gap) + 
+                    (colOffset * (containerWidth - (currentWidth + gap) * columns)) / columns;
+                return { translateY, translateX };
+            }
+            
+            function setRotations() {
+                const dims = getDimensions();
+                const currentWidth = dims.width;
+                const currentHeight = dims.height;
+                
+                const shuffleArray = (arr) =>
+                    arr.map((a) => [Math.random(), a])
+                       .sort((a, b) => a[0] - b[0])
+                       .map((a) => a[1]);
+                
+                let indices = shuffleArray(Array.from(Array(images.length).keys()));
+                rotations = {};
+                
+                imageRows.forEach((row, i) => {
+                    row.forEach((image, j) => {
+                        const getRandom = (min, max) =>
+                            Math.floor(Math.random() * (max - min + 1) + min);
+                        
+                        const centre = getCenter(i, j);
+                        let translateY = centre.translateY;
+                        const translateYTolerance = (currentHeight + 30) * 0.25;
+                        translateY += getRandom(-translateYTolerance, translateYTolerance);
+                        
+                        let translateX = centre.translateX;
+                        const translateXTolerance = (currentWidth + 20) * 0.25;
+                        translateX += getRandom(-translateXTolerance, translateXTolerance);
+                        
+                        rotations[`${i},${j}`] = {
+                            row: translateY,
+                            col: translateX,
+                            rot: getRandom(-45, 45),
+                            zIndex: indices.splice(0, 1)[0]
+                        };
+                    });
+                });
+                
+                updatePostcardStyles();
+            }
+            
+            function updatePostcardStyles() {
+                const postcards = gallery.querySelectorAll('.postcard');
+                postcards.forEach((postcard) => {
+                    const row = parseInt(postcard.dataset.row);
+                    const col = parseInt(postcard.dataset.col);
+                    const image = postcard.dataset.image;
+                    const style = getPostcardStyle(row, col, image);
+                    
+                    postcard.style.width = style.width;
+                    postcard.style.height = style.height;
+                    postcard.style.maxWidth = style.maxWidth || '100%';
+                    postcard.style.transform = style.transform;
+                    if (style.transition) {
+                        postcard.style.transition = style.transition;
+                    }
+                    if (style.zIndex) {
+                        postcard.style.zIndex = style.zIndex;
+                    }
+                });
+            }
+            
+            function getPostcardStyle(row, col, image) {
+                const dims = getDimensions();
+                const currentWidth = dims.width;
+                const currentHeight = dims.height;
+                const centre = getCenter(row, col);
+                
+                if (activeImage === image) {
+                    return {
+                        width: `${currentWidth + 20}px`,
+                        height: `${currentHeight + 30}px`,
+                        maxWidth: '100%',
+                        transition: 'all 0.2s',
+                        transform: `translateX(${centre.translateX}px) translateY(${centre.translateY}px) translateZ(500px)`,
+                        zIndex: '1000'
+                    };
+                }
+                
+                if (rotations[`${row},${col}`]) {
+                    return {
+                        width: `${currentWidth + 20}px`,
+                        height: `${currentHeight + 30}px`,
+                        maxWidth: '100%',
+                        transform: `translateX(${rotations[`${row},${col}`].col}px) translateY(${rotations[`${row},${col}`].row}px) rotateZ(${rotations[`${row},${col}`].rot}deg)`
+                    };
+                }
+                
+                return {
+                    width: `${currentWidth + 20}px`,
+                    height: `${currentHeight + 30}px`,
+                    maxWidth: '100%'
+                };
+            }
+            
+            // Close overlay on click
+            overlay.addEventListener('click', () => {
+                activeImage = null;
+                overlay.classList.remove('show');
+                const activePostcard = gallery.querySelector('.postcard-transition');
+                if (activePostcard) {
+                    activePostcard.classList.remove('postcard-transition');
+                }
+                setRotations();
+            });
+            
+            // Hide gallery on mouse leave
+            gallery.addEventListener('mouseleave', hideGallery);
+            
+            // Initialize when DOM is ready
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', initGallery);
+            } else {
+                initGallery();
+            }
+        })();
+    </script>
+
+    <script>
+        // 3D Tilt Effect for Images
+        (function() {
+            function initTiltEffect(containerId, innerId) {
+                var container = document.getElementById(containerId);
+                var inner = document.getElementById(innerId);
+                
+                if (!container || !inner) return;
+
+                // Mouse
+                var mouse = {
+                    _x: 0,
+                    _y: 0,
+                    x: 0,
+                    y: 0,
+                    updatePosition: function(event) {
+                        var e = event || window.event;
+                        this.x = e.clientX - this._x;
+                        this.y = (e.clientY - this._y) * -1;
+                    },
+                    setOrigin: function(e) {
+                        this._x = e.offsetLeft + Math.floor(e.offsetWidth / 2);
+                        this._y = e.offsetTop + Math.floor(e.offsetHeight / 2);
+                    },
+                    show: function() {
+                        return "(" + this.x + ", " + this.y + ")";
+                    }
+                };
+
+                // Track the mouse position relative to the center of the container.
+                mouse.setOrigin(container);
+
+                //-----------------------------------------
+
+                var counter = 0;
+                var updateRate = 10;
+                var isTimeToUpdate = function() {
+                    return counter++ % updateRate === 0;
+                };
+
+                //-----------------------------------------
+
+                var onMouseEnterHandler = function(event) {
+                    update(event);
+                };
+
+                var onMouseLeaveHandler = function() {
+                    inner.style.transform = "";
+                    inner.style.webkitTransform = "";
+                    inner.style.mozTransform = "";
+                    inner.style.msTransform = "";
+                    inner.style.oTransform = "";
+                };
+
+                var onMouseMoveHandler = function(event) {
+                    if (isTimeToUpdate()) {
+                        update(event);
+                    }
+                };
+
+                //-----------------------------------------
+
+                var update = function(event) {
+                    mouse.updatePosition(event);
+                    updateTransformStyle(
+                        (mouse.y / inner.offsetHeight / 2).toFixed(2),
+                        (mouse.x / inner.offsetWidth / 2).toFixed(2)
+                    );
+                };
+
+                var updateTransformStyle = function(x, y) {
+                    var style = "rotateX(" + x + "deg) rotateY(" + y + "deg)";
+                    inner.style.transform = style;
+                    inner.style.webkitTransform = style;
+                    inner.style.mozTransform = style;
+                    inner.style.msTransform = style;
+                    inner.style.oTransform = style;
+                };
+
+                //-----------------------------------------
+
+                container.onmouseenter = onMouseEnterHandler;
+                container.onmouseleave = onMouseLeaveHandler;
+                container.onmousemove = onMouseMoveHandler;
+
+                // Update origin on resize
+                window.addEventListener('resize', function() {
+                    mouse.setOrigin(container);
+                });
+            }
+
+            // Initialize all images when DOM is ready
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', function() {
+                    initTiltEffect('image-container-1', 'image-inner-1');
+                    initTiltEffect('image-container-2', 'image-inner-2');
+                    initTiltEffect('image-container-3', 'image-inner-3');
+                    initTiltEffect('image-container-4', 'image-inner-4');
+                });
+            } else {
+                initTiltEffect('image-container-1', 'image-inner-1');
+                initTiltEffect('image-container-2', 'image-inner-2');
+                initTiltEffect('image-container-3', 'image-inner-3');
+                initTiltEffect('image-container-4', 'image-inner-4');
+            }
+        })();
+    </script>
     <script src="../../assets/components/navigation.js"></script>
     <script src="../../assets/components/footer.js"></script>
 </body>
