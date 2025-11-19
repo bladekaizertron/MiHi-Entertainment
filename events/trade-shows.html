@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trade Shows Photo Booth - MiHi Entertainment</title>
-    <link rel="icon" type="image/svg+xml" href="../assets/images/favicon.svg">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Inter:wght@300;400;500;600;700;800;900&family=Montserrat:wght@400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
@@ -123,12 +122,35 @@
             text-transform: uppercase;
         }
         
+        .btn-trade-show svg {
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
         .btn-trade-show:hover {
             background-color: transparent;
             color: #ffffff;
             border: 2px solid #ffffff;
             transform: translateY(-3px) scale(1.05);
             box-shadow: 0 8px 25px rgba(255, 255, 255, 0.3);
+        }
+        
+        .btn-trade-show:hover svg {
+            transform: translateX(5px);
+        }
+        
+        /* Phone Button Styles */
+        .btn-phone {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+        }
+        
+        .btn-phone:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 25px rgba(255, 255, 255, 0.3);
+            background-color: #ffffff;
+            color: #000000;
         }
         
         /* Interactive Brochure Section Styles */
@@ -1381,11 +1403,17 @@
 
                 <!-- CTAs -->
                 <div class="mt-4 md:mt-6 mb-6 md:mb-8 flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 md:gap-4 px-4">
-                    <a href="#contact" class="btn-trade-show px-6 sm:px-8 md:px-10 py-2.5 sm:py-3 md:py-4 rounded-lg text-xs sm:text-sm md:text-base font-bold inline-block text-center">
-                        Get a Quote
+                    <a href="#contact" class="btn-trade-show px-6 sm:px-8 md:px-10 py-2.5 sm:py-3 md:py-4 rounded-lg text-xs sm:text-sm md:text-base font-bold inline-flex items-center justify-center gap-2 hover:gap-3 transition-all">
+                        <span>Get a Quote</span>
+                        <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                        </svg>
                     </a>
-                    <a href="#experiences" class="px-6 sm:px-8 md:px-9 py-2.5 sm:py-3 md:py-4 rounded-lg text-xs sm:text-sm md:text-base font-bold inline-block border border-white/70 text-white hover:bg-white/10 transition text-center" style="font-family: 'Montserrat', sans-serif;">
-                        View Experiences
+                    <a href="tel:7205516994" class="btn-phone px-6 sm:px-8 md:px-9 py-2.5 sm:py-3 md:py-4 rounded-lg text-xs sm:text-sm md:text-base font-bold inline-flex items-center justify-center gap-2 border-2 border-white/90 text-white hover:bg-white hover:text-black transition-all text-center" style="font-family: 'Montserrat', sans-serif;">
+                        <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+                        </svg>
+                        <span>Call: (720) 551-6994</span>
                     </a>
                 </div>
 
