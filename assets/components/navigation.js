@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', function() {
         <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
             <!-- Logo -->
             <a href="${pathPrefix}index.html" class="flex items-center" aria-label="Go to home">
-                <img src="${assetsPrefix}images/logo_black.png" alt="MiHi Entertainment" class="h-12 md:h-16 w-auto" />
+                <img src="${assetsPrefix}images/logo.svg" alt="MiHi Entertainment" class="h-12 md:h-16 w-auto" />
             </a>
             
             <!-- Desktop Nav -->
@@ -302,7 +302,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     <div class="flex flex-col h-full">
                         <!-- Mobile Menu Header -->
                         <div class="flex items-center justify-between p-6 border-b border-gray-200">
-                            <img src="${assetsPrefix}images/logo_black.png" alt="MiHi Entertainment" class="h-10 w-auto" />
+                            <img src="${assetsPrefix}images/logo.svg" alt="MiHi Entertainment" class="h-10 w-auto" />
                             <button id="mobile-menu-close" class="text-gray-500 hover:text-gray-700 transition duration-300">
                                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
