@@ -102,6 +102,91 @@
             left: 80%;
         }
         
+        /* Hero Button Container */
+        .hero-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            align-items: center;
+            margin-top: 2rem;
+        }
+        
+        @media (min-width: 640px) {
+            .hero-buttons {
+                flex-direction: row;
+                justify-content: center;
+                gap: 1.5rem;
+            }
+        }
+        
+        /* Contact Us Button with Arrow */
+        .brk-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        
+        .brk-btn .arrow {
+            transition: transform 0.3s ease;
+            display: inline-block;
+            font-size: 1.5rem;
+            line-height: 1;
+            font-weight: 400;
+        }
+        
+        .brk-btn:hover .arrow {
+            transform: translateX(8px);
+        }
+        
+        /* Call Button */
+        .btn-call {
+            position: relative;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            color: #ffffff;
+            text-transform: uppercase;
+            text-decoration: none;
+            border: 0.2em solid #ffffff;
+            padding: 0.65em 1.3em;
+            font-family: "Dosis", sans-serif;
+            font-weight: 700;
+            font-size: 1.25rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            transition: all 0.3s ease;
+            border-radius: 0;
+        }
+        
+        .btn-call:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(255, 255, 255, 0.3);
+            border-color: #ffffff;
+        }
+        
+        .btn-call .phone-icon {
+            display: inline-block;
+            font-size: 1.3rem;
+            line-height: 1;
+        }
+        
+        @media (max-width: 639px) {
+            .hero-buttons {
+                width: 100%;
+            }
+            
+            .brk-btn,
+            .btn-call {
+                width: 100%;
+                max-width: 300px;
+                justify-content: center;
+                font-size: 1.1rem;
+                padding: 0.6em 1.2em;
+            }
+        }
+        
         .hero-paragraph {
             font-family: 'Montserrat', sans-serif;
             font-weight: 300;
@@ -593,7 +678,16 @@
         <div class="relative z-10 text-center text-white px-6 max-w-5xl mx-auto">
             <h1 class="loading-text">EVENT DECOR</h1>
             <p class="hero-paragraph">Stylish decor to personalize your event and bring your vision to life.</p>
-            <a href="#contact" class="brk-btn">Contact Us</a>
+            <div class="hero-buttons">
+                <a href="#contact" class="brk-btn">
+                    Contact Us
+                    <span class="arrow">→</span>
+                </a>
+                <a href="tel:+17205516994" class="btn-call">
+                    <span class="phone-icon">☎</span>
+                    Call : (720)551-6994
+                </a>
+            </div>
         </div>
     </section>
 
