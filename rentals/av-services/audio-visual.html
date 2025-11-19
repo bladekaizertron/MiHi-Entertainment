@@ -11,7 +11,70 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
     <style>
-        body { font-family: 'Inter', sans-serif; color: #1a202c; }
+        /* Mobile-first base styles */
+        * {
+            -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
+        }
+        
+        body { 
+            font-family: 'Inter', sans-serif; 
+            color: #1a202c;
+            overflow-x: hidden;
+        }
+        
+        /* Touch-friendly improvements */
+        @media (max-width: 768px) {
+            a, button {
+                min-height: 44px;
+                min-width: 44px;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+            }
+            
+            img {
+                max-width: 100%;
+                height: auto;
+            }
+            
+            /* Prevent horizontal scroll */
+            html, body {
+                max-width: 100%;
+                overflow-x: hidden;
+            }
+            
+            /* Better text rendering on mobile */
+            body {
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+                text-rendering: optimizeLegibility;
+            }
+            
+            /* Improved spacing for mobile */
+            .container {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+            
+            /* Better line heights for readability */
+            p, span, div {
+                line-height: 1.6;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            /* Extra small mobile optimizations */
+            .container {
+                padding-left: 0.75rem;
+                padding-right: 0.75rem;
+            }
+            
+            /* Ensure buttons are touch-friendly */
+            button, a.button, .btn {
+                padding: 0.75rem 1.25rem;
+                font-size: 0.9rem;
+            }
+        }
         h1, h2, h3, h4, h5, h6 { font-family: 'Playfair Display', serif; }
         h3.av-title,
         h1.av-title { 
@@ -113,6 +176,23 @@
                 font-size: 2.5rem !important;
                 letter-spacing: 0.1em !important;
             }
+            /* Hero section mobile improvements */
+            section.relative.h-screen {
+                min-height: 85vh;
+                padding: 2rem 1rem;
+            }
+            .relative.z-10.text-center {
+                padding: 1rem 0.5rem;
+            }
+            div.wall {
+                font-size: 1rem !important;
+                line-height: 1.6;
+                padding: 0 0.5rem;
+            }
+            button.contact-button {
+                margin-top: 1.5rem;
+                transform: scale(0.95);
+            }
         }
 
         @media (max-width: 480px) {
@@ -129,9 +209,20 @@
             div.wall {
                 font-size: 0.9rem !important;
                 margin: 0 0 1.5rem 0;
+                line-height: 1.5;
+                padding: 0 0.75rem;
             }
             button.contact-button {
                 margin-top: 0.5rem;
+                transform: scale(0.9);
+            }
+            /* Hero section small mobile */
+            section.relative.h-screen {
+                min-height: 80vh;
+                padding: 1.5rem 0.75rem;
+            }
+            .relative.z-10.text-center {
+                padding: 0.5rem 0.25rem;
             }
         }
 
@@ -145,6 +236,11 @@
             div.wall {
                 font-size: 0.8rem !important;
                 margin: 0 0 1rem 0;
+                line-height: 1.4;
+            }
+            /* Hero section extra small mobile */
+            section.relative.h-screen {
+                min-height: 75vh;
             }
         }
         /* 3D Button Styles */
@@ -275,7 +371,15 @@
         button.contact-button:active .button-inner {
             transform: scale(0.975);
         }
-        .section-padding { padding: 2rem 0; }
+        .section-padding { 
+            padding: 2rem 0; 
+            background: linear-gradient(135deg, #f0f7ff 0%, #e0efff 100%);
+        }
+        
+        /* Hide busy canvas animations for cleaner background */
+        .section-padding canvas {
+            display: none !important;
+        }
         .hero-gradient { background: linear-gradient(135deg, rgba(0, 80, 255, 0.5) 0%, rgba(0, 64, 217, 0.5) 100%); }
         .hero-overlay { background: rgba(0, 0, 0, 0.5); }
 
@@ -340,9 +444,42 @@
                         radial-gradient(circle at 80% 10%, rgba(14, 165, 233, 0.12), transparent 50%),
                         linear-gradient(135deg, #040b1a 0%, #0b1930 50%, #081a28 100%);
             color: #fff;
-            padding: 2.5rem 1.15rem;
+            padding: 2rem 1.5rem 4.5rem 1.5rem;
             position: relative;
-            overflow: hidden;
+            overflow: visible;
+        }
+        
+        /* Compact desktop view */
+        @media (min-width: 1025px) {
+            .keyboard-section {
+                padding: 1.5rem 1.5rem 4rem 1.5rem;
+            }
+            .keyboard-wrapper {
+                gap: 1rem;
+                padding: 0 1rem 1.25rem 1rem;
+            }
+            .keyboard-content {
+                gap: 1.25rem;
+                min-height: 180px;
+            }
+            .keyboard .key {
+                font-size: 2rem;
+                padding: 0.25rem 0.4rem;
+            }
+            .keyboard-message {
+                font-size: 1.05rem;
+                line-height: 1.35;
+                max-width: 420px;
+            }
+            .keyboard-mail {
+                width: 160px;
+                height: 160px;
+            }
+            .keyboard-mail-label {
+                transform: translate(-40px, 150px);
+                font-size: 0.75rem;
+                padding: 0.4rem 0.85rem;
+            }
         }
 
         .keyboard-particles {
@@ -399,10 +536,11 @@
             display: flex;
             flex-direction: column;
             align-items: flex-start;
-            gap: 0.75rem;
+            gap: 1.25rem;
             width: 100%;
             position: relative;
             z-index: 1;
+            padding: 0 1rem 1.5rem 1rem;
         }
 
         .keyboard-content {
@@ -410,9 +548,10 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 1.5rem;
+            gap: 1.25rem;
             flex-wrap: wrap;
-            padding-right: clamp(180px, 22vw, 240px);
+            position: relative;
+            min-height: 200px;
         }
 
         .keyboard {
@@ -422,13 +561,15 @@
             justify-content: flex-start;
             font-family: 'Orbitron', sans-serif;
             text-transform: uppercase;
+            flex-wrap: wrap;
         }
 
         .keyboard .key {
-            font-size: clamp(1.35rem, 4vw, 3rem);
+            font-size: clamp(1.35rem, 4vw, 2.5rem);
             letter-spacing: clamp(-0.2rem, -0.7vw, -0.4rem);
             display: inline-block;
             transition: transform 0.2s;
+            padding: 0.3rem 0.45rem;
         }
 
         .keyboard .key-space {
@@ -436,23 +577,20 @@
         }
 
         .keyboard-message {
-            font-size: 0.95rem;
+            font-size: clamp(0.875rem, 2vw, 1.05rem);
             line-height: 1.4;
-            max-width: 520px;
+            max-width: 450px;
             margin: 0;
             color: rgba(255, 255, 255, 0.8);
             font-family: 'Rajdhani', sans-serif;
-            letter-spacing: 0.04em;
-            flex: 1 1 320px;
+            letter-spacing: 0.03em;
+            flex: 1 1 280px;
         }
 
         .keyboard-mail {
-            position: absolute;
-            top: 30%;
-            right: clamp(15rem, 8vw, 4rem);
-            transform: translateY(-50%);
-            width: 190px;
-            height: 190px;
+            position: relative;
+            width: 170px;
+            height: 170px;
             text-decoration: none;
             display: inline-flex;
             justify-content: center;
@@ -462,40 +600,77 @@
             text-align: center;
             z-index: 2;
             animation: keyboardMailFloat 4s ease-in-out infinite;
+            flex-shrink: 0;
+            margin: 0 auto;
+        }
+        
+        @media (min-width: 1025px) {
+            .keyboard-mail {
+                width: 150px;
+                height: 150px;
+            }
         }
 
         .keyboard-mail-label {
             position: relative;
             z-index: 3;
             font-family: 'Orbitron', sans-serif;
-            font-size: 0.85rem;
+            font-size: clamp(0.75rem, 1.5vw, 0.85rem);
             letter-spacing: 0.08em;
             text-transform: uppercase;
             color: #fff;
-            background: rgba(233, 95, 85, 0.15);
-            border: 1px solid rgba(233, 95, 85, 0.5);
-            padding: 0.35rem 0.75rem;
+            background: linear-gradient(135deg, rgba(233, 95, 85, 0.9) 0%, rgba(207, 74, 67, 0.9) 100%);
+            border: 2px solid rgba(233, 95, 85, 0.8);
+            padding: 0.5rem 1rem;
             border-radius: 999px;
             text-align: center;
             white-space: nowrap;
             transform: translate(-45px, 180px);
             pointer-events: auto;
+            box-shadow: 0 4px 12px rgba(233, 95, 85, 0.3);
+            transition: all 0.3s ease;
         }
 
         .keyboard-mail:hover .keyboard-mail-label {
-            background: rgba(233, 95, 85, 0.3);
-            border-color: rgba(233, 95, 85, 0.8);
+            background: linear-gradient(135deg, rgba(233, 95, 85, 1) 0%, rgba(207, 74, 67, 1) 100%);
+            border-color: rgba(233, 95, 85, 1);
+            box-shadow: 0 6px 16px rgba(233, 95, 85, 0.4);
+            transform: translate(-45px, 180px) scale(1.05);
+        }
+        
+        @media (max-width: 768px) {
+            .keyboard-mail:hover .keyboard-mail-label {
+                transform: translate(-35px, 140px) scale(1.05);
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .keyboard-mail:hover .keyboard-mail-label {
+                transform: translate(-30px, 120px) scale(1.05);
+            }
         }
 
         @keyframes keyboardMailFloat {
-            0% {
-                transform: translateY(-50%) translateY(0);
+            0%, 100% {
+                transform: translateY(0);
             }
             50% {
-                transform: translateY(-50%) translateY(-8px);
+                transform: translateY(-8px);
             }
-            100% {
-                transform: translateY(-50%) translateY(0);
+        }
+        
+        @media (max-width: 768px) {
+            .keyboard-mail {
+                animation: keyboardMailFloatMobile 4s ease-in-out infinite;
+            }
+        }
+        
+        @keyframes keyboardMailFloatMobile {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-6px);
             }
         }
 
@@ -711,32 +886,170 @@
             box-shadow: 0 2px 0 #ff5757;
         }
 
+        @media (max-width: 1024px) {
+            .keyboard-section {
+                padding-bottom: 5.5rem;
+            }
+            .keyboard-wrapper {
+                padding: 0 1.5rem;
+                gap: 1.5rem;
+            }
+            .keyboard-content {
+                gap: 1.5rem;
+            }
+            .keyboard-mail {
+                width: 160px;
+                height: 160px;
+            }
+            .keyboard-mail-label {
+                transform: translate(-40px, 150px);
+                font-size: 0.8rem;
+                padding: 0.45rem 0.9rem;
+            }
+        }
+
         @media (max-width: 768px) {
             .keyboard-section {
-                padding: 2.25rem 0.85rem;
+                padding: 2.5rem 1rem 5rem 1rem;
+            }
+            .keyboard-wrapper {
+                padding: 0 0.5rem 1.5rem 0.5rem;
+                gap: 2rem;
+            }
+            .keyboard-content {
+                min-height: auto;
             }
             .keyboard {
                 gap: 0.2rem;
+                margin-bottom: 0;
+                justify-content: center;
+                width: 100%;
+            }
+            .keyboard .key {
+                font-size: clamp(1.2rem, 5vw, 1.8rem);
+                padding: 0.3rem 0.4rem;
             }
             .keyboard-content {
                 flex-direction: column;
-                align-items: flex-start;
-                padding-right: 0;
-            }
-            .keyboard-mail {
-                position: static;
-                transform: none;
-                animation: none;
-                margin-top: 1.25rem;
-                text-align: left;
-                width: 200px;
-                height: auto;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+                gap: 2rem;
+                padding: 0;
             }
             .keyboard-message {
-                font-size: 0.95rem;
+                font-size: clamp(0.9rem, 3vw, 1rem);
+                line-height: 1.7;
+                margin-bottom: 0;
+                text-align: center;
+                max-width: 100%;
+                flex: 1 1 100%;
+            }
+            .keyboard-mail {
+                position: relative;
+                transform: none;
+                animation: keyboardMailFloat 4s ease-in-out infinite;
+                margin: 0;
+                width: 150px;
+                height: 150px;
+            }
+            .keyboard-mail-label {
+                font-size: clamp(0.75rem, 2.5vw, 0.85rem);
+                padding: 0.6rem 1rem;
+                transform: translate(-35px, 140px);
+                white-space: normal;
+                max-width: 120px;
             }
             .keyboard-section .jux-linx {
                 flex-direction: column;
+                gap: 0.75rem;
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .keyboard-section {
+                padding: 2rem 0.75rem 4.5rem 0.75rem;
+            }
+            .keyboard-wrapper {
+                padding: 0 0.25rem 1.25rem 0.25rem;
+                gap: 1.5rem;
+            }
+            .keyboard {
+                gap: 0.15rem;
+                margin-bottom: 0;
+            }
+            .keyboard .key {
+                font-size: clamp(1rem, 6vw, 1.4rem);
+                padding: 0.25rem 0.3rem;
+            }
+            .keyboard-content {
+                gap: 1.5rem;
+            }
+            .keyboard-message {
+                font-size: clamp(0.85rem, 3.5vw, 0.95rem);
+                line-height: 1.6;
+                padding: 0 0.5rem;
+            }
+            .keyboard-mail {
+                width: 130px;
+                height: 130px;
+            }
+            .keyboard-mail-label {
+                font-size: clamp(0.7rem, 3vw, 0.8rem);
+                padding: 0.5rem 0.875rem;
+                transform: translate(-30px, 120px);
+                max-width: 110px;
+            }
+            .animated-mail {
+                height: 120px;
+                width: 160px;
+            }
+            .animated-mail .body {
+                border-width: 0 0 80px 160px;
+            }
+            .animated-mail .top-fold {
+                border-width: 40px 80px 0 80px;
+                top: 40px;
+            }
+            .animated-mail .back-fold {
+                width: 160px;
+                height: 80px;
+            }
+            .animated-mail .left-fold {
+                border-width: 40px 0 40px 80px;
+            }
+            .animated-mail .letter {
+                left: 16px;
+                width: 128px;
+                height: 48px;
+            }
+        }
+
+        @media (max-width: 375px) {
+            .keyboard-section {
+                padding: 1.75rem 0.5rem 4rem 0.5rem;
+            }
+            .keyboard-wrapper {
+                padding-bottom: 1rem;
+                gap: 1.25rem;
+            }
+            .keyboard .key {
+                font-size: clamp(0.9rem, 7vw, 1.2rem);
+            }
+            .keyboard-message {
+                font-size: 0.8rem;
+                padding: 0 0.25rem;
+            }
+            .keyboard-mail {
+                width: 120px;
+                height: 120px;
+            }
+            .keyboard-mail-label {
+                transform: translate(-28px, 110px);
+                max-width: 100px;
+                font-size: 0.7rem;
+                padding: 0.45rem 0.75rem;
             }
         }
 
@@ -752,6 +1065,101 @@
             .brochure-section .container {
                 padding-top: 2.5rem;
                 padding-bottom: 2.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .brochure-section .container {
+                padding-top: 2rem;
+                padding-bottom: 2rem;
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+            .brochure-header {
+                margin-bottom: 1.5rem !important;
+            }
+            .brochure-header h2 {
+                font-size: 1.75rem !important;
+                line-height: 1.3;
+                margin-bottom: 0.75rem;
+            }
+            .brochure-header p {
+                font-size: 0.95rem !important;
+                padding: 0 0.5rem;
+            }
+            .brochure-badge {
+                font-size: 0.75rem;
+                padding: 0.4rem 1rem;
+            }
+            .content-grid {
+                gap: 1.5rem;
+            }
+            .brochure-subtitle {
+                font-size: 1.5rem !important;
+                line-height: 1.4;
+                margin-bottom: 1rem;
+            }
+            .brochure-section p.text-lg {
+                font-size: 0.95rem !important;
+                line-height: 1.6;
+                margin-bottom: 1.25rem;
+            }
+            .feature-list {
+                gap: 0.75rem;
+                margin-bottom: 1.5rem;
+            }
+            .brochure-check-item {
+                padding: 0.75rem;
+            }
+            .brochure-check-text {
+                font-size: 0.9rem;
+            }
+            .brochure-check-description {
+                font-size: 0.8rem;
+                line-height: 1.5;
+            }
+            .brochure-cta-group {
+                flex-direction: column;
+                gap: 0.75rem;
+            }
+            .brochure-view-button,
+            .brochure-download-button {
+                width: 100%;
+                justify-content: center;
+                padding: 0.875rem 1.5rem;
+                font-size: 0.9rem;
+            }
+            .compact-tags {
+                flex-wrap: wrap;
+                gap: 0.5rem;
+            }
+            .brochure-tag {
+                font-size: 0.7rem;
+                padding: 0.4rem 0.75rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .brochure-section .container {
+                padding-top: 1.5rem;
+                padding-bottom: 1.5rem;
+                padding-left: 0.75rem;
+                padding-right: 0.75rem;
+            }
+            .brochure-header h2 {
+                font-size: 1.5rem !important;
+            }
+            .brochure-header p {
+                font-size: 0.875rem !important;
+            }
+            .brochure-subtitle {
+                font-size: 1.25rem !important;
+            }
+            .brochure-section p.text-lg {
+                font-size: 0.875rem !important;
+            }
+            .brochure-preview {
+                margin-bottom: 1rem;
             }
         }
 
@@ -1636,153 +2044,221 @@
         }
 
         @media (max-width: 768px) {
-            #tabs {
+            .section-padding {
+                padding: 1.75rem 0;
+            }
+            .section-padding .container {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+            #tabs, #tabs-mirrored {
                 margin-top: 15px;
                 padding: 0 15px;
             }
 
-            #tabs ul li a {
-                padding: 12px 5px;
+            #tabs ul li a, #tabs-mirrored ul li a {
+                padding: 14px 8px;
+                min-height: 60px;
+                display: flex;
+                align-items: center;
             }
 
-            #tabs .icon {
-                width: 40px;
-                height: 40px;
+            #tabs .icon, #tabs-mirrored .icon {
+                width: 42px;
+                height: 42px;
+                flex-shrink: 0;
             }
 
-            #tabs .addon {
+            #tabs .title, #tabs-mirrored .title {
+                font-size: 12px;
+                line-height: 1.3;
+                padding: 0 10px;
+            }
+
+            #tabs .addon, #tabs-mirrored .addon {
                 width: 85%;
                 margin-left: 60px;
-                font-size: 12px;
+                font-size: 13px;
+                line-height: 1.6;
+                padding: 12px;
             }
 
-            #tabs .browser {
-                height: 300px;
+            #tabs .addon span, #tabs-mirrored .addon span {
+                display: block;
+                margin-bottom: 10px;
             }
 
-            #tabs .btn-wrapper {
+            #tabs .browser, #tabs-mirrored .browser {
+                height: 320px;
+                margin-top: 20px;
+            }
+
+            #tabs .browser img, #tabs-mirrored .browser img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+
+            #tabs .btn-wrapper, #tabs-mirrored .btn-wrapper {
                 --width: 100%;
-                --height: 42px;
-                --padding: 5px;
+                --height: 44px;
+                --padding: 6px;
+                margin-top: 10px;
             }
 
-            #tabs .btn-txt {
-                font-size: 11px;
+            #tabs .btn-txt, #tabs-mirrored .btn-txt {
+                font-size: 12px;
                 letter-spacing: 0.5px;
+            }
+
+            #tabs .para-a, #tabs-mirrored .para-a {
+                font-size: 12px;
+                padding: 8px 16px;
+                margin-top: 8px;
+                min-height: 40px;
+                display: inline-flex;
+                align-items: center;
             }
         }
 
         @media (max-width: 480px) {
+            .section-padding {
+                padding: 1.5rem 0;
+            }
             .container.mx-auto.px-4 {
                 padding-left: 0.75rem;
                 padding-right: 0.75rem;
             }
 
-            #tabs {
+            #tabs, #tabs-mirrored {
                 margin-top: 10px;
                 padding: 0 10px;
                 min-height: auto;
             }
 
-            #tabs ul li a {
-                padding: 10px 5px;
+            #tabs ul li a, #tabs-mirrored ul li a {
+                padding: 12px 6px;
+                min-height: 56px;
             }
 
-            #tabs .icon {
-                width: 35px;
-                height: 35px;
+            #tabs .icon, #tabs-mirrored .icon {
+                width: 36px;
+                height: 36px;
             }
 
-            #tabs .block {
+            #tabs .block, #tabs-mirrored .block {
                 width: 12px;
                 height: 12px;
             }
 
-            #tabs .title {
+            #tabs .title, #tabs-mirrored .title {
                 font-size: 11px;
                 padding: 0 8px;
                 letter-spacing: 0.5px;
+                line-height: 1.3;
             }
 
-            #tabs .addon {
-                width: 80%;
-                margin-left: 50px;
-                font-size: 11px;
-                line-height: 1.4;
+            #tabs .addon, #tabs-mirrored .addon {
+                width: 82%;
+                margin-left: 52px;
+                font-size: 12px;
+                line-height: 1.5;
                 top: -15px;
+                padding: 10px;
             }
 
-            #tabs .addon span {
-                margin-bottom: 5px;
+            #tabs .addon span, #tabs-mirrored .addon span {
+                margin-bottom: 8px;
             }
 
-            #tabs .browser {
-                height: 250px;
-                margin-top: 20px;
+            #tabs .browser, #tabs-mirrored .browser {
+                height: 280px;
+                margin-top: 18px;
             }
 
-            #tabs .btn-wrapper {
-                --height: 40px;
-                --padding: 4px;
-                margin-top: 8px;
+            #tabs .btn-wrapper, #tabs-mirrored .btn-wrapper {
+                --height: 42px;
+                --padding: 5px;
+                margin-top: 10px;
             }
 
-            #tabs .btn-txt {
-                font-size: 10px;
+            #tabs .btn-txt, #tabs-mirrored .btn-txt {
+                font-size: 11px;
                 letter-spacing: 0.4px;
             }
 
-            #tabs .top-bar {
-                height: 18px;
-                line-height: 18px;
+            #tabs .top-bar, #tabs-mirrored .top-bar {
+                height: 20px;
+                line-height: 20px;
             }
 
-            #tabs #tabs-1, #tabs #tabs-2, #tabs #tabs-3 {
-                top: 18px;
-                height: calc(100% - 18px);
+            #tabs #tabs-1, #tabs #tabs-2, #tabs #tabs-3,
+            #tabs-mirrored #tabs-mirrored-1, #tabs-mirrored #tabs-mirrored-2 {
+                top: 20px;
+                height: calc(100% - 20px);
+            }
+
+            #tabs .para-a, #tabs-mirrored .para-a {
+                font-size: 11px;
+                padding: 7px 14px;
+                min-height: 38px;
             }
         }
 
         @media (max-width: 375px) {
+            .section-padding {
+                padding: 1.25rem 0;
+            }
             .container.mx-auto.px-4 {
                 padding-left: 0.5rem;
                 padding-right: 0.5rem;
             }
 
-            #tabs {
+            #tabs, #tabs-mirrored {
                 padding: 0 8px;
             }
 
-            #tabs ul li a {
-                padding: 8px 3px;
+            #tabs ul li a, #tabs-mirrored ul li a {
+                padding: 10px 4px;
+                min-height: 52px;
             }
 
-            #tabs .icon {
-                width: 30px;
-                height: 30px;
+            #tabs .icon, #tabs-mirrored .icon {
+                width: 32px;
+                height: 32px;
             }
 
-            #tabs .title {
+            #tabs .title, #tabs-mirrored .title {
                 font-size: 10px;
                 padding: 0 6px;
+                line-height: 1.2;
             }
 
-            #tabs .addon {
-                width: 75%;
-                margin-left: 45px;
+            #tabs .addon, #tabs-mirrored .addon {
+                width: 78%;
+                margin-left: 48px;
+                font-size: 11px;
+                line-height: 1.4;
+                padding: 8px;
+            }
+
+            #tabs .browser, #tabs-mirrored .browser {
+                height: 240px;
+            }
+
+            #tabs .btn-wrapper, #tabs-mirrored .btn-wrapper {
+                --height: 40px;
+                --padding: 4px;
+            }
+
+            #tabs .btn-txt, #tabs-mirrored .btn-txt {
                 font-size: 10px;
             }
 
-            #tabs .browser {
-                height: 220px;
-            }
-
-            #tabs .btn-wrapper {
-                --height: 38px;
-            }
-
-            #tabs .btn-txt {
-                font-size: 9px;
+            #tabs .para-a, #tabs-mirrored .para-a {
+                font-size: 10px;
+                padding: 6px 12px;
+                min-height: 36px;
             }
         }
 
@@ -2673,21 +3149,52 @@
         @media (max-width: 768px) {
             .email-button-wrapper {
                 flex-direction: column;
-                gap: 0.5rem;
+                gap: 0.75rem;
+                padding: 1rem;
+                margin-top: 1.5rem;
             }
 
             .email-button {
                 --button-h: 2em;
                 --button-w: calc(5 * var(--button-h));
-                font-size: 1.75em;
+                font-size: 1.5em;
+                min-height: 48px;
+            }
+
+            .email-button-text {
+                padding: 0.5rem 1rem;
             }
         }
 
         @media (max-width: 480px) {
+            .email-button-wrapper {
+                padding: 0.75rem;
+                margin-top: 1.25rem;
+            }
+
             .email-button {
                 --button-h: 1.75em;
                 --button-w: calc(4.5 * var(--button-h));
-                font-size: 1.4em;
+                font-size: 1.25em;
+                min-height: 44px;
+            }
+
+            .email-button-text {
+                padding: 0.5rem 0.875rem;
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 375px) {
+            .email-button-wrapper {
+                padding: 0.5rem;
+            }
+
+            .email-button {
+                --button-h: 1.5em;
+                --button-w: calc(4 * var(--button-h));
+                font-size: 1.1em;
+                min-height: 40px;
             }
         }
     </style>
@@ -2698,11 +3205,11 @@
     <section class="relative h-screen min-h-[100vh] flex items-center justify-center overflow-hidden">
         <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('../../assets/images/audivis/hero.jpg');"></div>
         <div class="absolute inset-0 hero-overlay"></div>
-        <div class="relative z-10 text-center text-white px-6 py-8 md:py-0">
-            <h3 class="av-title text-3xl md:text-4xl font-bold mb-4">A/V PRODUCTION</h3>
-            <h1 class="av-title text-5xl md:text-6xl font-bold mb-4">Audio Services</h1>
-            <div class="wall text-xl md:text-5xl">"Ensure a seamless and immersive experience with our comprehensive sound services, combining a cutting-edge audio technology with expert support to deliver crystal-clear sound for any event."</div>
-            <button class="contact-button" onclick="window.location.href='#contact'">
+        <div class="relative z-10 text-center text-white px-4 sm:px-6 py-8 md:py-0">
+            <h3 class="av-title text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4">A/V PRODUCTION</h3>
+            <h1 class="av-title text-4xl sm:text-5xl md:text-6xl font-bold mb-3 sm:mb-4">Audio Services</h1>
+            <div class="wall text-base sm:text-xl md:text-5xl px-2 sm:px-4">"Ensure a seamless and immersive experience with our comprehensive sound services, combining a cutting-edge audio technology with expert support to deliver crystal-clear sound for any event."</div>
+            <button class="contact-button" onclick="window.location.href='#contact'" aria-label="Contact Us">
                 <div class="button-outer">
                     <div class="button-inner">
                         <span>Contact Us</span>
@@ -2713,15 +3220,15 @@
     </section>
 
     <!-- Interactive Brochure Section -->
-    <section class="py-12 md:py-16 brochure-section" id="av-brochure">
+    <section class="py-8 sm:py-12 md:py-16 brochure-section" id="av-brochure">
         <canvas id="brochure-webgl-canvas"></canvas>
-        <div class="container mx-auto px-6 relative z-10">
-            <div class="text-center mb-8 space-y-2 brochure-header">
+        <div class="container mx-auto px-4 sm:px-6 relative z-10">
+            <div class="text-center mb-6 sm:mb-8 space-y-2 brochure-header">
                 <span class="brochure-badge">🎛️ AV Service Guide</span>
-                <h2 class="text-3xl md:text-4xl font-bold text-white mb-3 leading-tight">
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-2 sm:mb-3 leading-tight px-2">
                     Design Your Signature AV Experience
                 </h2>
-                <p class="text-lg text-blue-100 max-w-3xl mx-auto leading-relaxed">
+                <p class="text-base sm:text-lg text-blue-100 max-w-3xl mx-auto leading-relaxed px-2">
                     Explore our immersive audio, lighting, and visual production solutions crafted to elevate conferences, galas, concerts, and brand activations.
                 </p>
                 <div class="flex items-center justify-center gap-2 pt-2">
@@ -3044,7 +3551,7 @@
             </div>
             <div class="keyboard-content">
                 <p class="keyboard-message">
-                    Learn more about our audio services for your next event, click the button below to email us and connect with our team today.
+                    Learn more about our audio services for your next event. Click the button below to email us and connect with our team today.
                 </p>
                 <a class="keyboard-mail" href="mailto:info@mihientertainment.com" aria-label="Email the AV team">
                     <span class="keyboard-mail-label">Learn More Now, Click Here</span>
