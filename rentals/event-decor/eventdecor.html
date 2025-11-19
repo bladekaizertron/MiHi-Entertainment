@@ -5,74 +5,792 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Event Decor - MiHi Entertainment</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&family=Anton:wght@400&family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Dosis:700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet">
     <style>
         body { font-family: 'Inter', sans-serif; color: #1a202c; }
         h1, h2, h3, h4, h5, h6 { font-family: 'Playfair Display', serif; }
         .btn-primary { background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%); transition: all 0.3s ease; }
         .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(0, 80, 255, 0.4); }
         .section-padding { padding: 5rem 0; }
-        .hero-gradient { background: linear-gradient(135deg, rgba(0, 80, 255, 0.5) 0%, rgba(0, 64, 217, 0.5) 100%); }
+        .hero-gradient { background: linear-gradient(135deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.5) 100%); }
+        
+        /* Hero Section Typography with Shimmer Effect */
+        .loading-text {
+            place-self: center;
+            background: linear-gradient(90deg, #0050ff, #00f0ff, #0050ff) -100% / 200%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-family: 'Anton', sans-serif;
+            font-weight: 400;
+            font-size: clamp(3rem, 10vw, 8rem);
+            letter-spacing: 0.3rem;
+            text-transform: uppercase;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            animation: shimmer 2s linear infinite;
+            filter: drop-shadow(0 4px 20px rgba(0, 0, 0, 0.5)) drop-shadow(0 2px 10px rgba(0, 0, 0, 0.3));
+        }
+        
+        @media (min-width: 768px) {
+            .loading-text {
+                letter-spacing: 0.5rem;
+                font-size: clamp(4rem, 12vw, 10rem);
+            }
+        }
+        
+        @keyframes shimmer {
+            to { background-position: 100%; }
+        }
+        
+        /* Button with sliding corner effect */
+        .brk-btn {
+            position: relative;
+            background: none;
+            color: rgb(33, 155, 255);
+            text-transform: uppercase;
+            text-decoration: none;
+            border: 0.2em solid  rgb(33, 155, 255);
+            padding: 0.65em 1.3em;
+            font-family: "Dosis", sans-serif;
+            font-weight: 700;
+            font-size: 1.25rem;
+            display: inline-block;
+        }
+        
+        .brk-btn::before {
+            content: "";
+            display: block;
+            position: absolute;
+            width: 10%;
+            background: rgba(0, 0, 0, 0.5);
+            height: 0.3em;
+            right: 20%;
+            top: -0.21em;
+            transform: skewX(-45deg);
+            -webkit-transition: all 0.45s cubic-bezier(0.86, 0, 0.07, 1);
+            transition: all 0.45s cubic-bezier(0.86, 0, 0.07, 1);
+        }
+        
+        .brk-btn::after {
+            content: "";
+            display: block;
+            position: absolute;
+            width: 10%;
+            background: rgba(0, 0, 0, 0.5);
+            height: 0.3em;
+            left: 20%;
+            bottom: -0.25em;
+            transform: skewX(45deg);
+            -webkit-transition: all 0.45s cubic-bezier(0.86, 0, 0.07, 1);
+            transition: all 0.45s cubic-bezier(0.86, 0, 0.07, 1);
+        }
+        
+        .brk-btn:hover {
+            color: rgb(2, 23, 255);
+        }
+        
+        .brk-btn:hover::before {
+            right: 80%;
+        }
+        
+        .brk-btn:hover::after {
+            left: 80%;
+        }
+        
+        .hero-paragraph {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 300;
+            font-size: clamp(1rem, 2.5vw, 1.5rem);
+            letter-spacing: 0.05em;
+            line-height: 1.7;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        @media (min-width: 768px) {
+            .hero-paragraph {
+                font-size: clamp(1.125rem, 2.5vw, 1.75rem);
+            }
+        }
+        
+        /* Left Column Content Styling */
+        .content-column {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            text-align: right;
+            padding-right: 2rem;
+            padding-top: 5rem;
+        }
+        
+        @media (min-width: 768px) {
+            .content-column {
+                padding-top: 7rem;
+            }
+        }
+        
+        @media (min-width: 1024px) {
+            .content-column {
+                padding-top: 9rem;
+            }
+        }
+        
+        .content-column h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.875rem;
+            font-weight: 500;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: #6b7280;
+            margin-bottom: 0.5rem;
+        }
+        
+        .content-column h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2rem;
+            font-weight: 800;
+            letter-spacing: 0.05em;
+            color: #1a202c;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+        
+        @media (min-width: 768px) {
+            .content-column h2 {
+                font-size: 2.5rem;
+            }
+        }
+        
+        @media (min-width: 1024px) {
+            .content-column h2 {
+                font-size: 3rem;
+            }
+        }
+        
+        .content-column p {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9375rem;
+            font-weight: 300;
+            line-height: 1.6;
+            color: #4b5563;
+            margin-bottom: 0.75rem;
+        }
+        
+        .content-column .btn-content {
+            display: inline-block;
+            margin-top: 1rem;
+            padding: 12px 28px;
+            background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%);
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 50px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 0.875rem;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        
+        .content-column .btn-content:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 80, 255, 0.4);
+        }
+        
+        @media (max-width: 767px) {
+            .content-column {
+                text-align: center;
+                padding-right: 0;
+                padding-top: 3rem;
+                margin-bottom: 2rem;
+            }
+        }
+        
+        /* Image Masonry Grid */
+        .masonry-container {
+            width: 100%;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-auto-rows: 140px;
+            grid-gap: 10px;
+        }
+        
+        .masonry-large, .masonry-medium, .masonry-small {
+            display: block;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            border-radius: 10px;
+            position: relative;
+            background: #f0f0f0;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .masonry-large:hover, .masonry-medium:hover, .masonry-small:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+        
+        .masonry-large {
+            grid-row: span 2;
+        }
+        
+        .masonry-medium {
+            grid-row: span 2;
+        }
+        
+        .masonry-small {
+            grid-row: span 1;
+        }
+        
+        .masonry-container img {
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: cover;
+            transition: transform 0.5s ease, filter 0.3s ease;
+        }
+        
+        .masonry-large:hover img,
+        .masonry-medium:hover img,
+        .masonry-small:hover img {
+            transform: scale(1.1);
+            filter: brightness(1.1);
+        }
+        
+        @media screen and (max-width: 768px) {
+            .masonry-container {
+                grid-template-columns: repeat(2, 1fr);
+                grid-auto-rows: 120px;
+                grid-gap: 6px;
+            }
+            
+            .content-column h3 {
+                font-size: 0.75rem;
+                margin-bottom: 0.5rem;
+            }
+            
+            .content-column h2 {
+                font-size: 1.5rem !important;
+                margin-bottom: 0.75rem;
+            }
+            
+            .content-column p {
+                font-size: 0.875rem !important;
+                margin-bottom: 0.75rem;
+                line-height: 1.6;
+            }
+            
+            .content-column .btn-content {
+                font-size: 0.8125rem;
+                padding: 10px 24px;
+                width: 100%;
+                max-width: 280px;
+            }
+        }
+        
+        /* Image Slider Section Styles */
+        .image-slider-container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            min-height: 600px;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .image-slider-container * {
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+        
+        /* Panels */
+        .swipe {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            background: #eee;
+            overflow-x: hidden;
+        }
+        
+        .panel {
+            position: absolute;
+            width: 100%;
+            min-height: 100%;
+            top: 0;
+            left: 0;
+            padding: 0;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            transition: left 0.5s ease;
+        }
+        
+        .panel.left {
+            left: -100%;
+        }
+        
+        .panel.right {
+            left: 100%;
+        }
+        
+        .panel.active {
+            left: 0;
+        }
+        
+        /* Info */
+        .info {
+            position: absolute;
+            width: 80%;
+            max-width: 500px;
+            bottom: 20%;
+            right: 10%;
+            pointer-events: none;
+            z-index: 10;
+        }
+        
+        .inner {
+            position: relative;
+            padding: 1.66em 3em;
+            background: #FFFFFF;
+            box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+        }
+        
+        .info:before {
+            content: "";
+            position: absolute;
+            width: 65%;
+            height: 80%;
+            top: 0;
+            left: 0;
+            -webkit-transform: translate(-10px, -10px);
+            -ms-transform: translate(-10px, -10px);
+            -o-transform: translate(-10px, -10px);
+            transform: translate(-10px, -10px);
+            background: #0050ff;
+            z-index: -1;
+        }
+        
+        .info h3,
+        .info-title {
+            font-family: 'Roboto Slab', serif;
+            font-size: 1.5em;
+            line-height: 1.5em;
+            color: #1a202c;
+            letter-spacing: .01em;
+            margin-bottom: 0.5em;
+        }
+        
+        .info p,
+        .info-description {
+            font-family: 'Roboto Slab', serif;
+            font-size: 1em;
+            line-height: 1.5em;
+            color: #607D8B;
+            letter-spacing: .01em;
+        }
+        
+        .info-title,
+        .info-description {
+            transition: opacity 0.3s ease;
+        }
+        
+        .buttons {
+            position: absolute;
+            bottom: -50px;
+            right: 5%;
+            pointer-events: all;
+        }
+        
+        .buttons button {
+            transition: ease .4s;
+        }
+        
+        .btn-prev,
+        .btn-next {
+            width: 60px;
+            height: 60px;
+            margin-left: 10px;
+            border: none;
+            outline: none;
+            border-radius: 60px;
+            color: #FFFFFF;
+            background: -webkit-linear-gradient(top, #0050ff, #0040d9);
+            background: linear-gradient(to bottom, #0050ff, #0040d9);
+            box-shadow: 0px 3px 15px 2px rgba(0, 80, 255, 0.8);
+            cursor: pointer;
+            font-size: 1.5em;
+        }
+        
+        .buttons button:hover:not(:disabled) {
+            box-shadow: 0px 3px 30px 3px rgba(0, 80, 255, 0.8);
+        }
+        
+        .buttons button:disabled {
+            box-shadow: 0px 1px 5px 0px rgba(0, 80, 255, 0.8);
+            background: -webkit-linear-gradient(top, #0040d9, #0050ff);
+            background: linear-gradient(to bottom, #0040d9, #0050ff);
+            cursor: default;
+            opacity: 0.6;
+        }
+        
+        @media (max-width: 620px) {
+            .image-slider-container {
+                height: 70vh;
+                min-height: 500px;
+            }
+            
+            .info {
+                position: absolute;
+                width: 100%;
+                max-width: 100%;
+                bottom: 0;
+                right: 0;
+            }
+            
+            .inner {
+                padding: .5em 1.5em;
+                box-shadow: none;
+            }
+            
+            .info h3,
+            .info-title {
+                font-size: 1.2em;
+            }
+            
+            .info p,
+            .info-description {
+                font-size: 0.875em;
+            }
+            
+            .buttons {
+                display: none;
+            }
+        }
+        
+        /* Contact Us Now Section */
+        .contact-us-now-section {
+            padding: 3rem 0;
+            text-align: center;
+            position: relative;
+            background: #ffffff;
+        }
+        
+        .contact-us-now-section::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                repeating-linear-gradient(
+                    45deg,
+                    rgba(0, 80, 255, 0.08) 0px,
+                    rgba(0, 80, 255, 0.08) 10px,
+                    transparent 10px,
+                    transparent 20px
+                ),
+                repeating-linear-gradient(
+                    -45deg,
+                    rgba(0, 80, 255, 0.08) 0px,
+                    rgba(0, 80, 255, 0.08) 10px,
+                    transparent 10px,
+                    transparent 20px
+                );
+            opacity: 0.9;
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        .contact-us-now-section .container {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .contact-us-now-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #1a202c;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+        
+        .contact-us-now-section h2 em {
+            font-style: normal;
+            font-weight: 900;
+            color: #0050ff;
+        }
+        
+        .contact-us-now-section p {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.1rem;
+            color: #4b5563;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            line-height: 1.6;
+        }
+        
+        .contact-us-now-section .btn-learn-more {
+            display: inline-block;
+            padding: 14px 32px;
+            background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%);
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 50px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 0.9375rem;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+        }
+        
+        .contact-us-now-section .btn-learn-more:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 80, 255, 0.4);
+        }
+        
+        @media (max-width: 768px) {
+            .contact-us-now-section {
+                padding: 2rem 0;
+            }
+            
+            .contact-us-now-section h2 {
+                font-size: 1.75rem;
+            }
+            
+            .contact-us-now-section p {
+                font-size: 1rem;
+                padding: 0 1rem;
+            }
+        }
     </style>
 </head>
 <body>
     <div id="nav-placeholder"></div>
 
-    <section class="relative h-[60vh] flex items-center justify-center overflow-hidden">
-        <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1615874694520-474822394e73?w=1600');"></div>
+    <section class="relative h-[55vh] md:h-[90vh] lg:h-[90vh] flex items-center justify-center overflow-hidden">
+        <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('../../assets/images/eventdecor/hero.jpg');"></div>
         <div class="absolute inset-0 hero-gradient"></div>
-        <div class="relative z-10 text-center text-white px-6">
-            <h1 class="text-5xl md:text-6xl font-bold mb-4">Furniture Rentals</h1>
-            <p class="text-xl md:text-2xl mb-8">Lounge Sets, Shimmer Walls & Drape</p>
-            <a href="#contact" class="btn-primary text-white px-8 py-4 rounded-full text-lg font-semibold inline-block">Get a Quote</a>
+        <div class="relative z-10 text-center text-white px-6 max-w-5xl mx-auto">
+            <h1 class="loading-text">EVENT DECOR</h1>
+            <p class="hero-paragraph">Stylish decor to personalize your event and bring your vision to life.</p>
+            <a href="#contact" class="brk-btn">Contact Us</a>
         </div>
     </section>
 
-    <section class="section-padding bg-white">
+    <!-- Two Column Section -->
+    <section class="py-8 md:py-10 lg:py-12" style="background: linear-gradient(135deg, #f5f3f0 0%, #f7f5f2 50%, #fafaf8 100%);">
         <div class="container mx-auto px-6">
-            <div class="max-w-4xl mx-auto">
-                <h2 class="text-4xl font-bold mb-6 text-center">Stylish Event Furniture</h2>
-                <p class="text-lg text-gray-700 mb-8 text-center">Create comfortable and Instagram-worthy spaces with our premium furniture rentals.</p>
-                
-                <div class="grid md:grid-cols-2 gap-8 mt-12">
-                    <div class="bg-gray-50 p-6 rounded-lg">
-                        <h3 class="text-2xl font-semibold mb-4">🛋️ Lounge Furniture</h3>
-                        <p class="text-gray-700">Luxury sofas, chairs, and ottomans for VIP lounge areas.</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
+                <div class="col-span-1">
+                    <div class="content-column">
+                        <h3>STYLE YOUR SPACE YOUR WAY</h3>
+                        <h2>EVENT DECOR</h2>
+                        <p>Transform any venue into a space that reflects your unique style and theme. Whether it’s elegant Ceiling Fabric, versatile Pipe and Drape, dazzling Shimmer Walls, or cozy Lounge Furniture Sets, our event decor options are tailored to create the perfect atmosphere for your celebration.</p>
+                        <a href="#contact" class="btn-content">Interested In Hearing More?</a>
                     </div>
-                    <div class="bg-gray-50 p-6 rounded-lg">
-                        <h3 class="text-2xl font-semibold mb-4">✨ Shimmer Walls</h3>
-                        <p class="text-gray-700">Sequin and metallic backdrops for photo-worthy moments.</p>
-                    </div>
-                    <div class="bg-gray-50 p-6 rounded-lg">
-                        <h3 class="text-2xl font-semibold mb-4">🎭 Pipe & Drape</h3>
-                        <p class="text-gray-700">Customizable fabric draping in any color for room dividers.</p>
-                    </div>
-                    <div class="bg-gray-50 p-6 rounded-lg">
-                        <h3 class="text-2xl font-semibold mb-4">🪑 Cocktail Tables</h3>
-                        <p class="text-gray-700">High-top tables with custom linens for networking events.</p>
-                    </div>
-                    <div class="bg-gray-50 p-6 rounded-lg">
-                        <h3 class="text-2xl font-semibold mb-4">🌸 Floral Walls</h3>
-                        <p class="text-gray-700">Gorgeous flower walls and greenery backdrops.</p>
-                    </div>
-                    <div class="bg-gray-50 p-6 rounded-lg">
-                        <h3 class="text-2xl font-semibold mb-4">🎨 Custom Furniture</h3>
-                        <p class="text-gray-700">Unique pieces to match your event theme and branding.</p>
+                </div>
+                <div class="col-span-1">
+                    <div class='masonry-container'>
+                        <div class='masonry-large'>
+                            <img src='../../assets/images/eventdecor/grid1.png' alt='Event decor'>
+                        </div>
+                        <div class='masonry-medium'>
+                            <img src='../../assets/images/eventdecor/grid2.png' alt='Event decor'>
+                        </div>
+                        <div class='masonry-medium'>
+                            <img src='../../assets/images/eventdecor/grid3.png' alt='Event decor'>
+                        </div>
+                        <div class='masonry-large'>
+                            <img src='../../assets/images/eventdecor/grid4.png' alt='Event decor'>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="section-padding bg-gradient-to-r from-[#0050ff] to-[#0050ff] text-white">
-        <div class="container mx-auto px-6 text-center">
-            <h2 class="text-4xl font-bold mb-6">Furnish Your Dream Event!</h2>
-            <p class="text-xl mb-8">Stylish furniture and decor for memorable experiences</p>
-            <a href="#contact" class="bg-white text-[#0050ff] px-8 py-4 rounded-full text-lg font-semibold inline-block hover:bg-gray-100 transition">Request Quote</a>
+    <!-- Image Slider Section -->
+    <section class="p-0">
+        <div class="image-slider-container">
+            <!-- Panels -->
+            <div class="swipe">
+                <div class="panel active" 
+                     data-img="../../assets/images/eventdecor/ev1.jpg" 
+                     data-title="Ceiling Fabric" 
+                     data-description="Add a touch of elegance with flowing Ceiling Fabric that transforms any space into something magical"
+                     style="background-image: url('../../assets/images/eventdecor/ev1.jpg');"></div>
+                <div class="panel right" 
+                     data-img="../../assets/images/eventdecor/ev2.jpg" 
+                     data-title="Pipe and Drape"
+                     data-description="Create customized spaces or backdrops with sleek and versatile Pipe and Drape designs."
+                     style="background-image: url('../../assets/images/eventdecor/ev2.jpg');"></div>
+                <div class="panel right" 
+                     data-img="../../assets/images/eventdecor/ev3.jpg" 
+                     data-title="Shimmer Wall" 
+                     data-description="Add sparkle to your event with a Shimmer Wall that creates a glamorous photo backdrop."
+                     style="background-image: url('../../assets/images/eventdecor/ev3.jpg');"></div>
+                <div class="panel right" 
+                     data-img="../../assets/images/eventdecor/ev4.jpg" 
+                     data-title="Lounge Furniture Sets" 
+                     data-description="Make your guests feel at home with stylish Lounge Furniture that adds comfort and charm to your space."
+                     style="background-image: url('../../assets/images/eventdecor/ev4.jpg');"></div>
+            </div>
+
+            <!-- Info -->
+            <div class="info">
+                <div class="inner">
+                    <h3 class="info-title">Lounge Furniture Sets</h3>
+                    <p class="info-description">Create comfortable VIP lounge areas with our premium furniture collections. Perfect for networking and relaxation spaces.</p>
+                </div>
+                <div class="buttons">
+                    <button class="btn-prev" disabled>&larr;</button>
+                    <button class="btn-next">&rarr;</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Us Now Section -->
+    <section class="contact-us-now-section bg-white">
+        <div class="container mx-auto px-6">
+            <h2><em>CONTACT US NOW</em></h2>
+            <p>Learn more about our decor services for your next event, click the button below to send us an email and connect with us today.</p>
+            <a href="#contact" class="btn-learn-more">LEARN MORE NOW</a>
         </div>
     </section>
 
     <script src="../../assets/components/navigation.js"></script>
     <script src="../../assets/components/footer.js"></script>
+    
+    <script>
+        // Image Slider Functionality
+        (function() {
+            const swipe = document.querySelector('.swipe');
+            const panels = document.querySelectorAll('.panel');
+            const btnPrev = document.querySelector('.btn-prev');
+            const btnNext = document.querySelector('.btn-next');
+            const infoTitle = document.querySelector('.info-title');
+            const infoDescription = document.querySelector('.info-description');
+            let currentIndex = 0;
+            let touchStartX = 0;
+            let touchEndX = 0;
+            
+            function updatePanels() {
+                panels.forEach((panel, index) => {
+                    panel.classList.remove('active', 'left', 'right');
+                    if (index < currentIndex) {
+                        panel.classList.add('left');
+                    } else if (index > currentIndex) {
+                        panel.classList.add('right');
+                    } else {
+                        panel.classList.add('active');
+                    }
+                });
+                
+                // Update info content for current panel
+                const currentPanel = panels[currentIndex];
+                if (currentPanel && infoTitle && infoDescription) {
+                    const title = currentPanel.getAttribute('data-title') || '';
+                    const description = currentPanel.getAttribute('data-description') || '';
+                    
+                    // Fade out
+                    infoTitle.style.opacity = '0';
+                    infoDescription.style.opacity = '0';
+                    
+                    // Update content after brief fade
+                    setTimeout(() => {
+                        infoTitle.textContent = title;
+                        infoDescription.textContent = description;
+                        // Fade in
+                        infoTitle.style.opacity = '1';
+                        infoDescription.style.opacity = '1';
+                    }, 150);
+                }
+                
+                // Update button states
+                btnPrev.disabled = currentIndex === 0;
+                btnNext.disabled = currentIndex === panels.length - 1;
+            }
+            
+            function nextSlide() {
+                if (currentIndex < panels.length - 1) {
+                    currentIndex++;
+                    updatePanels();
+                }
+            }
+            
+            function prevSlide() {
+                if (currentIndex > 0) {
+                    currentIndex--;
+                    updatePanels();
+                }
+            }
+            
+            // Button events
+            btnNext.addEventListener('click', nextSlide);
+            btnPrev.addEventListener('click', prevSlide);
+            
+            // Touch events
+            swipe.addEventListener('touchstart', function(e) {
+                touchStartX = e.changedTouches[0].screenX;
+            }, { passive: true });
+            
+            swipe.addEventListener('touchend', function(e) {
+                touchEndX = e.changedTouches[0].screenX;
+                handleSwipe();
+            }, { passive: true });
+            
+            function handleSwipe() {
+                const swipeThreshold = 50;
+                const diff = touchStartX - touchEndX;
+                
+                if (Math.abs(diff) > swipeThreshold) {
+                    if (diff > 0) {
+                        // Swipe left - next
+                        nextSlide();
+                    } else {
+                        // Swipe right - prev
+                        prevSlide();
+                    }
+                }
+            }
+            
+            // Keyboard events
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'ArrowLeft') {
+                    prevSlide();
+                } else if (e.key === 'ArrowRight') {
+                    nextSlide();
+                }
+            });
+            
+            // Initialize on DOM ready
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', updatePanels);
+            } else {
+                updatePanels();
+            }
+        })();
+    </script>
 </body>
 </html>
