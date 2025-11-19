@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Casino Parties - MiHi Entertainment</title>
-    <link rel="icon" type="image/svg+xml" href="../assets/images/favicon.svg">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Arvo:wght@400;700&family=Cinzel:wght@500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800;900&family=Montserrat:wght@500;600;700&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;600;700&display=swap" rel="stylesheet">
@@ -483,7 +482,7 @@
         .contact-button-wrapper {
             position: relative;
             display: inline-flex;
-            width: 200px;
+            width: 320px;
             height: 60px;
             margin: 0 auto;
             perspective: 1000px;
@@ -491,7 +490,7 @@
         @media (max-width: 640px) {
             .contact-button-wrapper {
                 width: 100%;
-                max-width: 280px;
+                max-width: 300px;
                 height: 56px;
             }
         }
@@ -532,6 +531,7 @@
             box-shadow: 0 0 25px rgba(249, 191, 59, 0.55);
         }
         .contact-button-link::after {
+            content: attr(data-back-text);
             color: #b45309;
             background: #0f172a;
             transform: rotateX(90deg) translateZ(30px);
@@ -1693,6 +1693,7 @@
                             href="#contact" 
                             class="contact-button-link"
                             data-text="Book Now"
+                            data-back-text="📞 Call:(720)551-6994"
                             aria-label="Contact us for corporate events">
                             Book Now
                         </a>
