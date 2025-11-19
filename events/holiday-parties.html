@@ -200,6 +200,22 @@
             overflow: hidden;
             box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.2);
         }
+
+        @media (max-width: 767px) {
+            .carousel-item {
+                width: 200px;
+                height: 260px;
+                margin: 0 0.75rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .carousel-item {
+                width: 180px;
+                height: 240px;
+                margin: 0 0.5rem;
+            }
+        }
         
         .carousel-item:hover {
             transform: translateY(-10px);
@@ -558,13 +574,11 @@
             width: 100vw;
             height: 100vh;
             overflow: hidden;
-            background-color: white;
-            background-image: url(https://images.unsplash.com/photo-1615800098779-1be32e60cca3?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2OTUyNDAwMTN8&ixlib=rb-4.0.3&q=85);
-            background-size: cover;
-            background-repeat: no-repeat;
+            background: linear-gradient(135deg, #8B1538 0%, #1a4d2e 100%);
             user-select: none;
             pointer-events: none;
             z-index: -1;
+            display: none;
         }
         #foil-background > div {
             --size: 5vw;
@@ -939,7 +953,7 @@
             padding: 4rem 2rem;
             min-height: 80vh;
             color: #1F1D42;
-            background-color: transparent;
+            background: linear-gradient(135deg, #8B1538 0%, #1a4d2e 100%);
         }
 
         .card-hover {
@@ -1177,10 +1191,10 @@
 
         /* Mobile Responsive Styles */
         @media (max-width: 767px) {
-            /* Hero Section Mobile */
+            /* Hero Section Mobile - More Spacing */
             section.relative {
                 min-height: 50vh !important;
-                padding: 1.5rem 0 !important;
+                padding: 2rem 0 !important;
             }
 
             section.relative .text-6xl,
@@ -1188,6 +1202,7 @@
                 font-size: 2rem !important;
                 line-height: 1.2 !important;
                 margin-bottom: 1rem !important;
+                padding: 0 1rem;
             }
 
             section.relative .text-base,
@@ -1195,129 +1210,482 @@
                 font-size: 0.875rem !important;
                 margin-bottom: 1.5rem !important;
                 padding: 0 1rem;
+                line-height: 1.5 !important;
+            }
+
+            section.relative .inline-block {
+                font-size: 0.6875rem !important;
+                padding: 0.5rem 1rem !important;
+                margin-bottom: 1rem !important;
+                line-height: 1.3 !important;
             }
 
             .btn-holiday {
                 padding: 0.75rem 1.5rem !important;
-                font-size: 0.875rem !important;
+                font-size: 0.8125rem !important;
                 width: auto;
                 display: inline-block;
+                min-width: 180px;
+                margin-top: 0.5rem !important;
             }
 
-            /* Aurora Title Mobile */
-            .aurora-title {
-                font-size: 2rem !important;
+            /* Section Headings Mobile - Maximum Compact */
+            section h1.text-6xl {
+                font-size: 1.375rem !important;
+                line-height: 1.05 !important;
+                padding: 0 0.5rem;
+                margin-bottom: 0 !important;
             }
 
             section h3.text-white {
-                font-size: 1.25rem !important;
+                font-size: 0.875rem !important;
+                padding: 0 0.5rem;
+                margin-bottom: 0 !important;
             }
 
-            /* Carousel Mobile */
+            section h3.text-2xl {
+                font-size: 0.9375rem !important;
+            }
+
+            /* Section Padding Mobile - Maximum Compact */
+            section.relative.overflow-hidden {
+                padding: 0.25rem 0 !important;
+            }
+
+            section.relative.pt-8 {
+                padding-top: 0.25rem !important;
+                padding-bottom: 0 !important;
+            }
+
+            /* Carousel Mobile - Maximum Compact */
             .carousel-item {
-                width: 180px !important;
-                height: 240px !important;
-                margin: 0 0.5rem !important;
+                width: 160px !important;
+                height: 200px !important;
+                margin: 0 0.25rem !important;
             }
 
             .carousel-item h3 {
-                font-size: 1rem !important;
+                font-size: 0.875rem !important;
+                margin-bottom: 0 !important;
             }
 
             .carousel-item p {
-                font-size: 0.75rem !important;
+                font-size: 0.625rem !important;
             }
 
-            /* Card Hover Mobile */
+            .carousel-item .p-4 {
+                padding: 0.375rem !important;
+            }
+
+            .scrolling-carousel,
+            .scrolling-carousel-left {
+                padding: 0 !important;
+            }
+
+            /* Carousel Container Mobile - Maximum Compact */
+            .w-full.overflow-hidden.relative {
+                padding: 0.25rem 0 !important;
+            }
+
+            .w-full.overflow-hidden.relative.py-8 {
+                padding-top: 0.25rem !important;
+                padding-bottom: 0.25rem !important;
+            }
+
+            /* Card Hover Mobile - Maximum Compact */
             .card-hover-container {
-                padding: 2rem 1rem !important;
+                padding: 0.5rem 0.25rem !important;
                 min-height: auto !important;
             }
 
             .card-hover {
                 width: 100% !important;
                 max-width: 100% !important;
-                height: 500px !important;
+                height: 380px !important;
             }
 
             .card-hover__content {
-                padding: 0 20px 40px !important;
+                padding: 0 0.5rem 0.75rem !important;
             }
 
             .card-hover__title {
-                font-size: 1.5rem !important;
-                margin-bottom: 0.75em !important;
+                font-size: 1.125rem !important;
+                margin-bottom: 0.375em !important;
+                line-height: 1.15 !important;
             }
 
             .card-hover__text {
-                font-size: 0.875rem !important;
-                line-height: 1.5 !important;
+                font-size: 0.75rem !important;
+                line-height: 1.35 !important;
             }
 
             .card-hover__extra {
-                font-size: 1.25rem !important;
-                padding: 40px 20px !important;
+                font-size: 1rem !important;
+                padding: 0.75rem 0.5rem !important;
             }
 
             .card-hover:hover .card-hover__content {
-                padding: 40px 20px !important;
+                padding: 0.75rem 0.5rem !important;
             }
 
-            /* Foil Section Mobile */
+            /* Foil Section Mobile - Maximum Compact */
+            .foil-section {
+                padding-top: 0.5rem !important;
+                padding-bottom: 0.5rem !important;
+                min-height: auto !important;
+            }
+
+            .foil-section > div:first-child {
+                padding: 0.5rem 0.25rem !important;
+            }
+
             .foil-section h1 {
-                font-size: 2rem !important;
+                font-size: 1.375rem !important;
+                padding: 0 0.5rem !important;
+                line-height: 1.05 !important;
+                margin-bottom: 0.25rem !important;
+                margin-top: 0 !important;
+            }
+
+            .foil-section h1.text-white {
+                color: #ffffff !important;
             }
 
             .foil-subtitle {
-                font-size: 0.75rem !important;
-                padding: 0.5rem 1rem !important;
+                font-size: 0.5rem !important;
+                padding: 0.25rem 0.625rem !important;
+                line-height: 1.15 !important;
+                margin: 0 !important;
             }
 
-            /* Card Layout Mobile */
+            .foil-subtitle-wrapper {
+                margin-bottom: 0.25rem !important;
+                margin-top: 0 !important;
+            }
+
+            /* Card Layout Mobile - Maximum Compact */
+            .card-layout {
+                padding: 0.25rem 0 !important;
+            }
+
             .card-layout .wrap {
-                padding: 1rem !important;
-                gap: 12px !important;
+                padding: 0.5rem 0.25rem !important;
+                gap: 0.375rem !important;
+                margin: 0 !important;
             }
 
             .card-layout .box {
-                padding: 1rem !important;
+                padding: 0.5rem !important;
+                flex-basis: 100% !important;
+                max-width: 100% !important;
+                margin-bottom: 0.375rem !important;
+                margin-top: 0 !important;
+            }
+
+            .card-layout .box:last-child {
+                margin-bottom: 0 !important;
             }
 
             .card-layout .box-image {
                 height: 240px !important;
+                margin-bottom: 0.25rem !important;
             }
 
             .card-layout .box-title {
-                font-size: 1.125rem !important;
+                font-size: 0.9375rem !important;
+                margin-bottom: 0.25rem !important;
+                margin-top: 0 !important;
+                line-height: 1.2 !important;
+            }
+
+            .card-layout .title-flex {
+                margin-bottom: 0.25rem !important;
             }
 
             .card-layout .description {
-                font-size: 0.875rem !important;
+                font-size: 0.75rem !important;
+                line-height: 1.35 !important;
+                margin-bottom: 0.375rem !important;
+                margin-top: 0 !important;
             }
 
-            /* Festive Card Mobile */
+            .card-layout .button {
+                padding: 0.5rem !important;
+                font-size: 0.75rem !important;
+                margin-top: 0.25rem !important;
+                margin-bottom: 0 !important;
+            }
+
+            .card-layout .box-top {
+                margin-bottom: 0.375rem !important;
+                margin-top: 0 !important;
+            }
+
+            /* Festive Card Mobile - Maximum Compact */
             .relative.mt-8 {
-                margin-top: 1rem !important;
+                margin-top: 0.25rem !important;
+                padding: 0 0.25rem !important;
             }
 
-            /* Button Mobile */
+            .relative.bg-white\/95 {
+                padding: 0.5rem 0.375rem !important;
+                margin: 0 0.25rem !important;
+            }
+
+            .relative.bg-white\/95 .max-w-5xl {
+                padding: 0 !important;
+            }
+
+            .relative.bg-white\/95 p {
+                font-size: 0.75rem !important;
+                line-height: 1.35 !important;
+                margin: 0 !important;
+            }
+
+            /* Button Mobile - Maximum Compact */
             button.bg-white {
-                padding: 0.75rem 1.5rem !important;
-                font-size: 0.875rem !important;
+                padding: 0.5rem 1rem !important;
+                font-size: 0.75rem !important;
+                min-width: 130px;
+                margin-top: 0 !important;
+            }
+
+            /* Section Content Mobile - Maximum Compact */
+            .relative.z-10.flex {
+                padding: 0.25rem 0.25rem !important;
+            }
+
+            /* All sections - ensure consistent mobile spacing */
+            section {
+                margin: 0 !important;
+                padding-left: 0 !important;
+                padding-right: 0 !important;
+            }
+
+            /* Section containers optimization */
+            section > div {
+                padding-left: 0.5rem !important;
+                padding-right: 0.5rem !important;
+            }
+
+            /* Foil section first div optimization */
+            .foil-section > div:first-child {
+                padding-left: 0.5rem !important;
+                padding-right: 0.5rem !important;
+            }
+
+            /* Ensure proper mobile padding for all section content */
+            section .relative.z-10,
+            section .relative.z-10.flex {
+                padding-left: 0.5rem !important;
+                padding-right: 0.5rem !important;
+            }
+
+            /* Optimize carousel wrapper spacing */
+            .w-full.overflow-hidden {
+                padding-left: 0 !important;
+                padding-right: 0 !important;
+            }
+
+            /* Ensure card hover container has proper mobile spacing */
+            .card-hover-container {
+                padding-left: 0.5rem !important;
+                padding-right: 0.5rem !important;
             }
 
             /* Scrolling Carousel Mobile */
             .scrolling-carousel,
             .scrolling-carousel-left {
-                animation-duration: 30s !important;
+                animation-duration: 35s !important;
+            }
+
+            /* Second Carousel Spacing - Maximum Compact */
+            .w-full.mt-16 {
+                margin-top: 0.25rem !important;
+            }
+
+            /* Remove extra spacing between sections */
+            section + section {
+                margin-top: 0 !important;
+            }
+
+            /* Remove default margins and padding from all elements on mobile */
+            * {
+                box-sizing: border-box;
+            }
+
+            /* Maximum Compact spacing for all containers */
+            .container {
+                padding-left: 0.25rem !important;
+                padding-right: 0.25rem !important;
+            }
+
+            /* Reduce line-height for more compact text */
+            p, .description {
+                margin-bottom: 0.375rem !important;
+            }
+
+            /* Remove all unnecessary margins */
+            h1, h2, h3, h4, h5, h6 {
+                margin-top: 0 !important;
+                margin-bottom: 0 !important;
+            }
+
+            /* Remove all default spacing */
+            * {
+                margin-top: 0 !important;
+            }
+
+            /* Decorative Elements Mobile - Hide on very small screens */
+            .absolute.-top-3,
+            .absolute.-bottom-3 {
+                display: none !important;
+            }
+
+            /* Touch Targets - Ensure minimum 44px for better mobile interaction */
+            .btn-holiday,
+            button.bg-white,
+            .card-layout .button {
+                min-height: 44px;
+                touch-action: manipulation;
+            }
+
+            /* Improve text readability on mobile */
+            body {
+                -webkit-text-size-adjust: 100%;
+                text-size-adjust: 100%;
+            }
+
+            /* Better spacing for mobile sections */
+            section {
+                scroll-margin-top: 1rem;
+            }
+
+            /* Optimize image loading on mobile */
+            img {
+                max-width: 100%;
+                height: auto;
+            }
+
+            /* Ensure all text elements have proper mobile sizing */
+            .text-white {
+                font-size: inherit !important;
+            }
+
+            /* Optimize spacing for all flex containers */
+            .flex {
+                gap: 0.25rem !important;
+            }
+
+            /* Ensure proper mobile width for all containers */
+            .max-w-5xl,
+            .max-w-6xl {
+                padding-left: 0.5rem !important;
+                padding-right: 0.5rem !important;
+            }
+
+            /* Mobile optimization for scrolling carousel containers */
+            .scrolling-carousel,
+            .scrolling-carousel-left {
+                gap: 0.25rem !important;
+            }
+
+            /* Ensure proper mobile spacing for festive card */
+            .relative.mt-8 .relative.bg-white\/95 {
+                border-radius: 0.5rem !important;
             }
         }
 
         @media (max-width: 480px) {
-            /* Extra Small Mobile */
+            /* Extra Small Mobile - More Spacing for Hero */
+            section.relative {
+                min-height: 45vh !important;
+                padding: 1.5rem 0 !important;
+            }
+
             section.relative .text-6xl,
             section.relative .md\:text-8xl {
-                font-size: 1.75rem !important;
+                font-size: 1.875rem !important;
+                margin-bottom: 0.875rem !important;
+            }
+
+            section.relative .text-base,
+            section.relative .md\:text-xl {
+                font-size: 0.8125rem !important;
+                margin-bottom: 1.25rem !important;
+            }
+
+            section.relative .inline-block {
+                font-size: 0.625rem !important;
+                padding: 0.4375rem 0.875rem !important;
+                margin-bottom: 0.875rem !important;
+            }
+
+            .btn-holiday {
+                padding: 0.6875rem 1.375rem !important;
+                font-size: 0.75rem !important;
+                min-width: 170px;
+                margin-top: 0.375rem !important;
+            }
+
+            /* Extra small mobile - foil sections */
+            .foil-section {
+                padding-top: 0.375rem !important;
+                padding-bottom: 0.375rem !important;
+            }
+
+            .foil-section h1 {
+                font-size: 1.25rem !important;
+            }
+
+            /* Extra small mobile - card layouts */
+            .card-layout .wrap {
+                padding: 0.375rem 0.125rem !important;
+                gap: 0.25rem !important;
+            }
+
+            .card-layout .box {
+                padding: 0.375rem !important;
+            }
+
+            .card-layout .box-image {
+                height: 220px !important;
+            }
+
+            section.relative .text-6xl,
+            section.relative .md\:text-8xl {
+                font-size: 1.625rem !important;
+                line-height: 1.1 !important;
+                margin-bottom: 0.5rem !important;
+            }
+
+            section.relative .text-base,
+            section.relative .md\:text-xl {
+                font-size: 0.8125rem !important;
+                padding: 0 0.75rem;
+                margin-bottom: 1rem !important;
+            }
+
+            section.relative .inline-block {
+                font-size: 0.625rem !important;
+                padding: 0.3125rem 0.625rem !important;
+                margin-bottom: 0.625rem !important;
+            }
+
+            .btn-holiday {
+                padding: 0.625rem 1.25rem !important;
+                font-size: 0.75rem !important;
+                min-width: 160px;
+            }
+
+            section h1.text-6xl {
+                font-size: 1.5rem !important;
+                margin-bottom: 0.375rem !important;
+            }
+
+            section h3.text-white {
+                font-size: 0.9375rem !important;
+                margin-bottom: 0.375rem !important;
             }
 
             .card-hover {
@@ -1326,41 +1694,157 @@
 
             .card-hover__title {
                 font-size: 1.25rem !important;
+                margin-bottom: 0.5em !important;
             }
 
             .card-hover__text {
-                font-size: 0.75rem !important;
+                font-size: 0.8125rem !important;
+            }
+
+            .card-hover__content {
+                padding: 0 0.875rem 1.25rem !important;
+            }
+
+            .card-hover__extra {
+                font-size: 1.125rem !important;
+                padding: 1.25rem 0.875rem !important;
+            }
+
+            .card-hover-container {
+                padding: 1rem 0.5rem !important;
             }
 
             .carousel-item {
-                width: 150px !important;
-                height: 200px !important;
+                width: 160px !important;
+                height: 220px !important;
+                margin: 0 0.375rem !important;
             }
 
-            .aurora-title {
-                font-size: 1.75rem !important;
+            .carousel-item h3 {
+                font-size: 0.9375rem !important;
+            }
+
+            .carousel-item p {
+                font-size: 0.6875rem !important;
+            }
+
+            .foil-section {
+                padding-top: 1rem !important;
             }
 
             .foil-section h1 {
-                font-size: 1.75rem !important;
+                font-size: 1.625rem !important;
+                margin-bottom: 0.5rem !important;
             }
 
-            .btn-holiday {
+            .foil-subtitle {
+                font-size: 0.5625rem !important;
+                padding: 0.4375rem 0.875rem !important;
+            }
+
+            .foil-subtitle-wrapper {
+                margin-bottom: 0.5rem !important;
+            }
+
+            .card-layout .wrap {
+                padding: 0.75rem 0.5rem !important;
+                gap: 0.625rem !important;
+            }
+
+            .card-layout .box {
+                padding: 0.875rem !important;
+            }
+
+            .card-layout .box-image {
+                height: 180px !important;
+            }
+
+            .card-layout .box-title {
+                font-size: 1rem !important;
+                margin-bottom: 0.375rem !important;
+            }
+
+            .card-layout .description {
+                font-size: 0.8125rem !important;
+                margin-bottom: 0.5rem !important;
+            }
+
+            .card-layout .button {
+                padding: 0.625rem !important;
+                font-size: 0.8125rem !important;
+                margin-top: 0.375rem !important;
+            }
+
+            button.bg-white {
                 padding: 0.625rem 1.25rem !important;
-                font-size: 0.75rem !important;
+                font-size: 0.8125rem !important;
+                min-width: 140px;
+            }
+
+            .relative.bg-white\/95 {
+                padding: 0.875rem 0.625rem !important;
+                margin: 0 0.5rem !important;
+            }
+
+            .relative.bg-white\/95 p {
+                font-size: 0.8125rem !important;
+            }
+
+            .relative.z-10.flex {
+                padding: 0.5rem 0.5rem !important;
+            }
+
+            .w-full.mt-16 {
+                margin-top: 0.75rem !important;
+            }
+
+            .w-full.overflow-hidden.relative {
+                padding: 0.5rem 0 !important;
+            }
+
+            /* Extra small mobile touch targets */
+            .btn-holiday,
+            button.bg-white {
+                min-height: 44px;
             }
         }
 
         @media (min-width: 768px) and (max-width: 1023px) {
             /* Tablet Styles */
+            section.relative {
+                min-height: 70vh !important;
+            }
+
+            section.relative .text-6xl,
+            section.relative .md\:text-8xl {
+                font-size: 3.5rem !important;
+            }
+
+            section.relative .text-base,
+            section.relative .md\:text-xl {
+                font-size: 1.125rem !important;
+            }
+
             .card-hover {
-                max-width: 550px !important;
-                height: 650px !important;
+                max-width: 600px !important;
+                height: 700px !important;
             }
 
             .carousel-item {
-                width: 200px !important;
-                height: 280px !important;
+                width: 220px !important;
+                height: 300px !important;
+            }
+
+            .foil-section h1 {
+                font-size: 3.5rem !important;
+            }
+
+            section h1.text-6xl {
+                font-size: 3rem !important;
+            }
+
+            .card-layout .box {
+                flex-basis: calc(50% - 8px) !important;
             }
         }
     </style>
@@ -1373,18 +1857,18 @@
         <div class="absolute inset-0 hero-gradient"></div>
         <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5/2Q==')] opacity-10"></div>
         
-        <div class="relative z-10 text-center text-white px-6 max-w-6xl mx-auto pt-20 md:pt-24">
-            <div class="inline-block bg-red-600/80 text-white text-sm font-bold px-4 py-1 rounded-full mb-4 animate-bounce">
-MAKE YOUR HOLIDAY EVENT SPECIAL WITH OUR
+        <div class="relative z-10 text-center text-white px-4 sm:px-6 max-w-6xl mx-auto pt-12 sm:pt-16 md:pt-24 pb-8 sm:pb-6 md:pb-8">
+            <div class="inline-block bg-red-600/80 text-white text-xs sm:text-sm font-bold px-3 sm:px-4 py-1 sm:py-1.5 rounded-full mb-3 sm:mb-3 md:mb-4 animate-bounce">
+                <span class="block sm:inline">MAKE YOUR HOLIDAY EVENT SPECIAL WITH OUR</span>
             </div>
-            <h1 class="text-6xl md:text-8xl font-black mb-4 md:mb-6 tracking-tight leading-tight text-white drop-shadow-xl">
+            <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-black mb-4 sm:mb-3 md:mb-6 tracking-tight leading-tight text-white drop-shadow-xl px-2">
                 <span class="text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-green-400">Holiday</span> 
                 <span class="text-white">Photo Booths</span>
             </h1>
-            <p class="text-base md:text-xl mb-6 md:mb-8 max-w-5xl mx-auto text-white/90 drop-shadow-md leading-relaxed">
-                Make your holiday event unforgettable with MiHi Entertainment’s one-of-a-kind photo booths and customized activations. Whether it’s an office party, corporate celebration, Mitzvah, or family gathering, our festive photo booths bring joy, energy, and memorable moments to every occasion!
+            <p class="text-sm sm:text-base md:text-xl mb-6 sm:mb-4 md:mb-8 max-w-5xl mx-auto text-white/90 drop-shadow-md leading-relaxed px-4 sm:px-6">
+                Make your holiday event unforgettable with MiHi Entertainment's one-of-a-kind photo booths and customized activations. Whether it's an office party, corporate celebration, Mitzvah, or family gathering, our festive photo booths bring joy, energy, and memorable moments to every occasion!
             </p>
-            <a href="#contact" class="btn-holiday text-white px-12 py-5 rounded-full text-lg font-bold inline-block relative z-10">
+            <a href="#contact" class="btn-holiday text-white px-8 sm:px-12 py-3 sm:py-4 md:py-5 rounded-full text-sm sm:text-base md:text-lg font-bold inline-block relative z-10 mx-2">
                 <span>Book Your Holiday Party Now</span>
             </a>
         </div>
@@ -1472,39 +1956,20 @@ MAKE YOUR HOLIDAY EVENT SPECIAL WITH OUR
     </section>
 
     <!-- Holiday Events Section -->
-    <section class="relative overflow-hidden" style="background: linear-gradient(135deg, #200f0f 0%, #1a0a0a 25%, #2d1414 50%, #1a0a0a 75%, #200f0f 100%); padding-top: 0; padding-bottom: 1rem;">
-        <div class="lines">
-            <div class="line"></div>
-            <div class="line"></div>
-            <div class="line"></div>
-            <div class="line"></div>
-            <div class="line"></div>
-            <div class="line"></div>
-            <div class="line"></div>
-            <div class="line"></div>
-            <div class="line"></div>
-            <div class="line"></div>
-        </div>
+    <section class="relative overflow-hidden" style="background: linear-gradient(135deg, #8B1538 0%, #1a4d2e 100%); padding-top: 0; padding-bottom: 0;">
         <!-- Content can be added here -->
-        <div class="relative z-10 flex flex-col items-center justify-center px-4 py-6">
-            <h3 class="text-white text-center text-2xl font-bold mb-2 tracking-wide">Stand Out This</h3>
-            <h1 class="aurora-title text-white text-center text-6xl font-bold mb-4 tracking-tight drop-shadow-lg">
+        <div class="relative z-10 flex flex-col items-center justify-center px-2 py-0.5 sm:py-4 md:py-6">
+            <h3 class="text-white text-center text-lg sm:text-xl md:text-2xl font-bold mb-0 sm:mb-2 tracking-wide">Stand Out This</h3>
+            <h1 class="text-white text-center text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-0 sm:mb-3 md:mb-4 tracking-tight drop-shadow-lg">
                 HOLIDAY SEASON
-                <div class="aurora">
-                    <div class="aurora__item"></div>
-                    <div class="aurora__item"></div>
-                    <div class="aurora__item"></div>
-                    <div class="aurora__item"></div>
-                </div>
             </h1>
         </div>
     </section>
 
     <!-- Festive Blank Section -->
-    <section class="relative pt-8 overflow-hidden" style="padding-bottom: 0;">
+    <section class="relative pt-1 sm:pt-6 md:pt-8 overflow-hidden" style="background: linear-gradient(135deg, #8B1538 0%, #1a4d2e 100%); padding-bottom: 0;">
         <!-- First Scrolling Carousel - Right to Left -->
-        <div class="w-full overflow-hidden relative py-8">
-            <div class="absolute inset-0 bg-gradient-to-r from-red-500 via-white/5 to-green-500"></div>
+        <div class="w-full overflow-hidden relative py-0.5 sm:py-4 md:py-8">
             <!-- Snowflakes Container -->
             <div id="snowflakes-first" class="absolute inset-0 overflow-hidden pointer-events-none"></div>
             <div class="scrolling-carousel flex items-center space-x-8 py-4">
@@ -1628,14 +2093,14 @@ MAKE YOUR HOLIDAY EVENT SPECIAL WITH OUR
                 </svg>
             </div>
                             
-            <div class="max-w-5xl mx-auto text-center relative z-10 px-4 md:px-8">
-                <p class="text-gray-800 text-base md:text-lg leading-relaxed">
-                    Make your holiday event unforgettable with MiHi Entertainment’s one-of-a-kind photo booths and customized activations. Whether it’s an office party, corporate celebration, Mitzvah, or family gathering, our festive photo booths bring joy, energy, and memorable moments to every occasion!</p>
+            <div class="max-w-5xl mx-auto text-center relative z-10 px-4 sm:px-6 md:px-8">
+                <p class="text-gray-800 text-sm sm:text-base md:text-lg leading-relaxed">
+                    Make your holiday event unforgettable with MiHi Entertainment's one-of-a-kind photo booths and customized activations. Whether it's an office party, corporate celebration, Mitzvah, or family gathering, our festive photo booths bring joy, energy, and memorable moments to every occasion!</p>
             </div>
         </div>
         
         <!-- Second Scrolling Carousel - Left to Right -->
-        <div class="w-full mt-16 overflow-hidden relative">
+        <div class="w-full mt-1 sm:mt-8 md:mt-16 overflow-hidden relative">
             <div class="scrolling-carousel-left flex items-center space-x-8 py-4" style="width: max-content; animation-duration: 40s;">
                 <!-- Carousel Item 1 -->
                 <div class="carousel-item flex-shrink-0 w-64 h-80 rounded-2xl overflow-hidden shadow-xl relative group">
@@ -1789,51 +2254,27 @@ MAKE YOUR HOLIDAY EVENT SPECIAL WITH OUR
                     
                     </div>
 
-        <!-- Decorative Elements -->
-        <div class="absolute inset-0 overflow-hidden pointer-events-none">
-            <div class="absolute top-1/4 -left-20 w-40 h-40 bg-red-200/30 rounded-full filter blur-3xl"></div>
-            <div class="absolute bottom-1/4 -right-20 w-40 h-40 bg-green-200/30 rounded-full filter blur-3xl"></div>
-            <div class="absolute top-1/3 right-1/4 w-24 h-24 bg-yellow-200/20 rounded-full filter blur-2xl"></div>
-        </div>
     </section>
 
     <!-- Holiday Events Section -->
-    <section class="relative overflow-hidden" style="background: linear-gradient(135deg, #200f0f 0%, #1a0a0a 25%, #2d1414 50%, #1a0a0a 75%, #200f0f 100%); padding-top: 0; padding-bottom: 1rem;">
-        <div class="lines">
-            <div class="line"></div>
-            <div class="line"></div>
-            <div class="line"></div>
-            <div class="line"></div>
-            <div class="line"></div>
-            <div class="line"></div>
-            <div class="line"></div>
-            <div class="line"></div>
-            <div class="line"></div>
-            <div class="line"></div>
-        </div>
+    <section class="relative overflow-hidden" style="background: linear-gradient(135deg, #8B1538 0%, #1a4d2e 100%); padding-top: 0; padding-bottom: 0;">
         <!-- Content can be added here -->
-        <div class="relative z-10 flex flex-col items-center justify-center px-4 py-6">
-            <h3 class="text-white text-center text-2xl font-bold mb-2 tracking-wide">View More Ideas For Your</h3>
-            <h1 class="aurora-title text-white text-center text-6xl font-bold mb-4 tracking-tight drop-shadow-lg">
+        <div class="relative z-10 flex flex-col items-center justify-center px-2 py-0.5 sm:py-4 md:py-6">
+            <h3 class="text-white text-center text-lg sm:text-xl md:text-2xl font-bold mb-0 sm:mb-2 tracking-wide">View More Ideas For Your</h3>
+            <h1 class="text-white text-center text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-0 sm:mb-3 md:mb-4 tracking-tight drop-shadow-lg">
                 HOLIDAY EVENT
-                <div class="aurora">
-                    <div class="aurora__item"></div>
-                    <div class="aurora__item"></div>
-                    <div class="aurora__item"></div>
-                    <div class="aurora__item"></div>
-                </div>
             </h1>
-            <button class="bg-white text-black px-8 py-4 rounded-full font-semibold text-lg hover:bg-gray-100 hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl">Book Now</button>
+            <button class="bg-white text-black px-4 sm:px-8 py-2 sm:py-4 rounded-full font-semibold text-xs sm:text-base md:text-lg hover:bg-gray-100 hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl mt-0 sm:mt-2 md:mt-3">Book Now</button>
         </div>
     </section>
 
     <!-- Foil Stamping Effect Section -->
-    <section class="foil-section">
+    <section class="foil-section" style="background: linear-gradient(135deg, #8B1538 0%, #1a4d2e 100%);">
         <div>
             <div class="foil-subtitle-wrapper">
                 <p class="foil-subtitle">Personalize Your Events With Our</p>
             </div>
-            <h1>Holiday Activations</h1>
+            <h1 class="text-white">Holiday Activations</h1>
         </div>
         <div class="card-layout">
             <div class="wrap">
@@ -1898,12 +2339,12 @@ MAKE YOUR HOLIDAY EVENT SPECIAL WITH OUR
     </div>
 
 <!-- Foil Stamping Effect Section -->
-<section class="foil-section">
+<section class="foil-section" style="background: linear-gradient(135deg, #8B1538 0%, #1a4d2e 100%);">
     <div>
         <div class="foil-subtitle-wrapper">
             <p class="foil-subtitle">Bring Festive Cheer To Life With Our</p>
         </div>
-        <h1>Holiday AV Services</h1>
+        <h1 class="text-white">Holiday AV Services</h1>
     </div>
     <div class="card-layout">
         <div class="wrap">
@@ -1942,7 +2383,7 @@ MAKE YOUR HOLIDAY EVENT SPECIAL WITH OUR
 </section>
 
 <!-- Card Hover Effect Section -->
-<section class="card-hover-container">
+<section class="card-hover-container" style="background: linear-gradient(135deg, #8B1538 0%, #1a4d2e 100%);">
     <div class="card-hover">
         <img src="../assets/images/holiday/santa.jpeg" alt="Holiday Photo" loading="eager" onerror="this.src='../assets/images/holiday/h1.jpg'">
         <div class="card-hover__content">
