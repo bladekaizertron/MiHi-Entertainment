@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Audio & Visual Rentals - MiHi Entertainment</title>
-    <link rel="icon" type="image/svg+xml" href="../../assets/images/favicon.svg">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&family=DM+Serif+Text:ital,wght@0,400;1,400&family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&family=Advent+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Montserrat" rel="stylesheet">
@@ -355,7 +354,8 @@
             -webkit-background-clip: text;
             background-clip: text;
             transition: transform 250ms ease;
-            display: block;
+            display: inline-flex;
+            align-items: center;
             will-change: transform;
             text-shadow: rgba(0, 0, 0, 0.1) 0 0 0.1em;
             -webkit-user-select: none; 
@@ -363,6 +363,20 @@
             -ms-user-select: none;
             user-select: none;
             font-size: 1rem;
+        }
+        
+        button.contact-button .button-inner span svg {
+            fill: none;
+            stroke: #4a5568;
+            stroke-width: 2.5;
+            width: 1em;
+            height: 1em;
+            flex-shrink: 0;
+            filter: drop-shadow(0 0 0.05em rgba(0, 0, 0, 0.3));
+        }
+        
+        button.contact-button:hover .button-inner span svg {
+            stroke: #2d3748;
         }
 
         button.contact-button:hover .button-inner span {
@@ -3210,13 +3224,27 @@
             <h3 class="av-title text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4">A/V PRODUCTION</h3>
             <h1 class="av-title text-4xl sm:text-5xl md:text-6xl font-bold mb-3 sm:mb-4">Audio Services</h1>
             <div class="wall text-base sm:text-xl md:text-5xl px-2 sm:px-4">"Ensure a seamless and immersive experience with our comprehensive sound services, combining a cutting-edge audio technology with expert support to deliver crystal-clear sound for any event."</div>
-            <button class="contact-button" onclick="window.location.href='#contact'" aria-label="Contact Us">
-                <div class="button-outer">
-                    <div class="button-inner">
-                        <span>Contact Us</span>
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 mt-4">
+                <button class="contact-button" onclick="window.location.href='#contact'" aria-label="Contact Us">
+                    <div class="button-outer">
+                        <div class="button-inner">
+                            <span class="flex items-center gap-2">
+                                Contact Us
+                                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"></path>
+                                </svg>
+                            </span>
+                        </div>
                     </div>
-                </div>
-            </button>
+                </button>
+                <button class="contact-button" onclick="window.location.href='tel:7205516994'" aria-label="Call Us">
+                    <div class="button-outer">
+                        <div class="button-inner">
+                            <span>Call : (720)551-6994</span>
+                        </div>
+                    </div>
+                </button>
+            </div>
         </div>
     </section>
 
