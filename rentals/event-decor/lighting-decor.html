@@ -5,73 +5,1210 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lighting Decor Rentals - MiHi Entertainment</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&family=Anton:wght@400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <style>
         body { font-family: 'Inter', sans-serif; color: #1a202c; }
         h1, h2, h3, h4, h5, h6 { font-family: 'Playfair Display', serif; }
         .btn-primary { background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%); transition: all 0.3s ease; }
         .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(0, 80, 255, 0.4); }
         .section-padding { padding: 5rem 0; }
-        .hero-gradient { background: linear-gradient(135deg, rgba(0, 80, 255, 0.5) 0%, rgba(0, 64, 217, 0.5) 100%); }
+        .hero-gradient { background: linear-gradient(135deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.5) 100%); }
+        
+        /* Animated Text Effect */
+        .text-effect-container {
+            position: relative;
+            display: inline-block;
+            width: 100%;
+            height: auto;
+            margin: 0 auto;
+        }
+        
+        .text-effect-wrapper {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .text-layer {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: 'Anton', sans-serif;
+            font-weight: 400;
+            letter-spacing: 0.5rem;
+            white-space: nowrap;
+            mix-blend-mode: screen;
+            pointer-events: none;
+            font-size: clamp(3rem, 8vw, 10rem);
+            line-height: 1;
+        }
+        
+        @media (max-width: 768px) {
+            .text-layer {
+                letter-spacing: 0.2rem;
+                font-size: clamp(2rem, 10vw, 5rem);
+            }
+        }
+        
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .text-layer {
+                font-size: clamp(4rem, 8vw, 8rem);
+            }
+        }
+        
+        @media (min-width: 1025px) {
+            .text-layer {
+                font-size: clamp(6rem, 8vw, 10rem);
+            }
+        }
+        
+        /* Paragraph Styling */
+        .hero-paragraph {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 300;
+            letter-spacing: 0.02em;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        /* H3 Styling */
+        .hero-h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 500;
+            letter-spacing: 0.15em;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        /* Left Column Content Styling */
+        .content-column {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: right;
+            padding-right: 2rem;
+        }
+        
+        .content-column h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.875rem;
+            font-weight: 500;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: #6b7280;
+            margin-bottom: 0.5rem;
+        }
+        
+        .content-column h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2rem;
+            font-weight: 800;
+            letter-spacing: 0.05em;
+            color: #1a202c;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+        
+        @media (min-width: 768px) {
+            .content-column h2 {
+                font-size: 2.5rem;
+            }
+        }
+        
+        @media (min-width: 1024px) {
+            .content-column h2 {
+                font-size: 3rem;
+            }
+        }
+        
+        .content-column p {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9375rem;
+            font-weight: 300;
+            line-height: 1.6;
+            color: #4b5563;
+            margin-bottom: 0.75rem;
+        }
+        
+        .content-column .btn-content {
+            display: inline-block;
+            margin-top: 1rem;
+            padding: 12px 28px;
+            background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%);
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 50px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 0.875rem;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        
+        .content-column .btn-content:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 80, 255, 0.4);
+        }
+        
+        @media (max-width: 767px) {
+            .content-column {
+                text-align: center;
+                padding-right: 0;
+                margin-bottom: 2rem;
+            }
+        }
+        
+        /* Contact Section Styling */
+        .contact-section {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .contact-section-wrapper {
+            position: relative;
+            background: linear-gradient(135deg, #fafafa 0%, #f5f5f5 100%);
+        }
+        
+        .contact-section-wrapper::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                linear-gradient(45deg, rgba(0, 80, 255, 0.03) 25%, transparent 25%),
+                linear-gradient(-45deg, rgba(0, 80, 255, 0.03) 25%, transparent 25%),
+                linear-gradient(45deg, transparent 75%, rgba(0, 80, 255, 0.03) 75%),
+                linear-gradient(-45deg, transparent 75%, rgba(0, 80, 255, 0.03) 75%);
+            background-size: 40px 40px;
+            background-position: 0 0, 0 20px, 20px -20px, -20px 0px;
+            opacity: 100%;
+            pointer-events: none;
+        }
+        
+        .contact-section-wrapper > * {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .contact-section h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.75rem;
+            font-weight: 800;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: #1a202c;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+        
+        @media (min-width: 768px) {
+            .contact-section h2 {
+                font-size: 2rem;
+            }
+        }
+        
+        @media (min-width: 1024px) {
+            .contact-section h2 {
+                font-size: 2.25rem;
+            }
+        }
+        
+        .contact-section p {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9375rem;
+            font-weight: 300;
+            line-height: 1.6;
+            color: #4b5563;
+            margin-bottom: 1.25rem;
+        }
+        
+        @media (min-width: 768px) {
+            .contact-section p {
+                font-size: 1rem;
+            }
+        }
+        
+        .contact-section .btn-contact {
+            display: inline-block;
+            padding: 14px 32px;
+            background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%);
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 50px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 0.9375rem;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        
+        .contact-section .btn-contact:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 80, 255, 0.4);
+        }
+        
+        /* Animated Button Effect */
+        .btn-animated {
+            border: 4px solid #ffffff;
+            color: #ffffff;
+            display: inline-block;
+            font-size: 18px;
+            font-weight: 600;
+            line-height: 24px;
+            margin: auto;
+            padding: 12px 32px 12px 82px;
+            position: relative;
+            text-decoration: none;
+            font-family: 'Montserrat', sans-serif;
+            transition: all 0.3s ease;
+        }
+        
+        @media (min-width: 768px) {
+            .btn-animated {
+                font-size: 20px;
+                padding: 14px 36px 14px 90px;
+            }
+        }
+        
+        @media (min-width: 1024px) {
+            .btn-animated {
+                font-size: 22px;
+                padding: 16px 40px 16px 98px;
+            }
+        }
+        
+        .btn-animated .label,
+        .btn-animated .icon-arrow {
+            backface-visibility: hidden;
+            transform: translateZ(0);
+            perspective: 1000;
+        }
+        
+        .btn-animated .label {
+            display: inline-block;
+            transition: transform .5s cubic-bezier(0.86, 0, 0.07, 1);
+        }
+        
+        .btn-animated .icon-arrow {
+            fill: #ffffff;
+            height: 15px;
+            top: 17px;
+            transition: transform .5s cubic-bezier(0.86, 0, 0.07, 1), opacity .4s cubic-bezier(0.86, 0, 0.07, 1);
+            width: 35px;
+        }
+        
+        @media (min-width: 768px) {
+            .btn-animated .icon-arrow {
+                top: 19px;
+            }
+        }
+        
+        @media (min-width: 1024px) {
+            .btn-animated .icon-arrow {
+                top: 21px;
+            }
+        }
+        
+        .btn-animated .icon-arrow.before {
+            left: 32px;
+            margin-right: 15px;
+            position: absolute;
+            transform-origin: left center;
+        }
+        
+        @media (min-width: 768px) {
+            .btn-animated .icon-arrow.before {
+                left: 36px;
+            }
+        }
+        
+        @media (min-width: 1024px) {
+            .btn-animated .icon-arrow.before {
+                left: 40px;
+            }
+        }
+        
+        .btn-animated .icon-arrow.after {
+            margin-left: 15px;
+            opacity: 0;
+            position: absolute;
+            right: 32px;
+            transform: translateX(75%) scaleX(0.1);
+            transform-origin: right center;
+        }
+        
+        @media (min-width: 768px) {
+            .btn-animated .icon-arrow.after {
+                right: 36px;
+            }
+        }
+        
+        @media (min-width: 1024px) {
+            .btn-animated .icon-arrow.after {
+                right: 40px;
+            }
+        }
+        
+        .btn-animated:hover {
+            border-color: #ffffff;
+            color: #ffffff;
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .btn-animated:hover .label {
+            transform: translateX(-52px);
+        }
+        
+        .btn-animated:hover .icon-arrow.before {
+            opacity: 0;
+            transform: translateX(-75%) scaleX(0.1);
+        }
+        
+        .btn-animated:hover .icon-arrow.after {
+            opacity: 1;
+            transform: translateX(0) scaleX(1);
+        }
+        
+        .btn-animated:hover .icon-arrow {
+            fill: #0283fc;
+        }
+        
+        .btn-animated:active {
+            border-color: #0040d9;
+            color: #0040d9;
+        }
+        
+        .btn-animated:active .icon-arrow {
+            fill: #0040d9;
+        }
+        
+        /* Blog Slider Styles */
+        .blog-slider {
+            width: 95%;
+            position: relative;
+            max-width: 1100px;
+            margin: auto;
+            background: #fff;
+            box-shadow: 0px 14px 80px rgba(34, 35, 58, 0.2);
+            padding: 30px;
+            border-radius: 25px;
+            height: 500px;
+            transition: all .3s;
+        }
+        
+        @media screen and (max-width: 992px) {
+            .blog-slider {
+                max-width: 900px;
+                height: 480px;
+            }
+        }
+        
+        @media screen and (max-width: 768px) {
+            .blog-slider {
+                min-height: 500px;
+                height: auto;
+                margin: 0 auto;
+                width: 100%;
+                max-width: 100%;
+            }
+        }
+        
+        @media screen and (max-height: 500px) and (min-width: 992px) {
+            .blog-slider {
+                height: 350px;
+            }
+        }
+        
+        .blog-slider__item {
+            display: flex;
+            align-items: center;
+        }
+        
+        @media screen and (max-width: 768px) {
+            .blog-slider__item {
+                flex-direction: column;
+            }
+        }
+        
+        .blog-slider__item.swiper-slide-active .blog-slider__img img {
+            opacity: 1;
+            transition-delay: .3s;
+        }
+        
+        .blog-slider__item.swiper-slide-active .blog-slider__content > * {
+            opacity: 1;
+            transform: none;
+        }
+        
+        .blog-slider__item.swiper-slide-active .blog-slider__content > *:nth-child(1) { transition-delay: 0.3s; }
+        .blog-slider__item.swiper-slide-active .blog-slider__content > *:nth-child(2) { transition-delay: 0.4s; }
+        .blog-slider__item.swiper-slide-active .blog-slider__content > *:nth-child(3) { transition-delay: 0.5s; }
+        .blog-slider__item.swiper-slide-active .blog-slider__content > *:nth-child(4) { transition-delay: 0.6s; }
+        .blog-slider__item.swiper-slide-active .blog-slider__content > *:nth-child(5) { transition-delay: 0.7s; }
+        
+        .blog-slider__img {
+            width: 400px;
+            flex-shrink: 0;
+            height: 400px;
+            background-image: linear-gradient(147deg, #fe8a39 0%, #fd3838 74%);
+            box-shadow: 4px 13px 30px 1px rgba(252, 56, 56, 0.2);
+            border-radius: 20px;
+            transform: translateX(-80px);
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .blog-slider__img:after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: linear-gradient(147deg, #fe8a39 0%, #fd3838 74%);
+            border-radius: 20px;
+            opacity: 0.8;
+        }
+        
+        .blog-slider__img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            opacity: 0;
+            border-radius: 20px;
+            transition: all .3s;
+            position: relative;
+            z-index: 1;
+        }
+        
+        @media screen and (max-width: 768px) {
+            .blog-slider__img {
+                transform: translateY(0);
+                width: 100%;
+                max-width: 280px;
+                height: 220px;
+                margin: 0 auto;
+            }
+        }
+        
+        @media screen and (max-width: 576px) {
+            .blog-slider__img {
+                width: 95%;
+            }
+        }
+        
+        @media screen and (max-height: 500px) and (min-width: 992px) {
+            .blog-slider__img {
+                height: 350px;
+            }
+        }
+        
+        @media screen and (min-width: 993px) {
+            .blog-slider__img {
+                width: 400px;
+                height: 400px;
+            }
+        }
+        
+        .blog-slider__content {
+            padding-right: 25px;
+        }
+        
+        @media screen and (max-width: 768px) {
+            .blog-slider__content {
+                margin-top: 0;
+                text-align: center;
+                padding: 20px 15px 0;
+            }
+        }
+        
+        @media screen and (max-width: 576px) {
+            .blog-slider__content {
+                padding: 0;
+            }
+        }
+        
+        .blog-slider__content > * {
+            opacity: 0;
+            transform: translateY(25px);
+            transition: all .4s;
+        }
+        
+        .blog-slider__code {
+            color: #7b7992;
+            margin-bottom: 15px;
+            display: block;
+            font-weight: 500;
+        }
+        
+        .blog-slider__title {
+            font-size: 32px;
+            font-weight: 800;
+            color: #0d0925;
+            margin-bottom: 20px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+        
+        @media screen and (max-width: 768px) {
+            .blog-slider__title {
+                font-size: 28px;
+            }
+        }
+        
+        .blog-slider__text {
+            color: #4e4a67;
+            margin-bottom: 30px;
+            line-height: 1.6em;
+            font-size: 18px;
+        }
+        
+        @media screen and (max-width: 768px) {
+            .blog-slider__text {
+                font-size: 16px;
+            }
+        }
+        
+        .blog-slider__button {
+            display: inline-flex;
+            background-image: linear-gradient(147deg, #fe8a39 0%, #fd3838 74%);
+            padding: 15px 35px;
+            border-radius: 50px;
+            color: #fff;
+            box-shadow: 0px 14px 80px rgba(252, 56, 56, 0.4);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            justify-content: center;
+            text-align: center;
+            letter-spacing: 1.5px;
+        }
+        
+        @media screen and (max-width: 576px) {
+            .blog-slider__button {
+                width: 100%;
+            }
+        }
+        
+        .blog-slider__pagination {
+            position: absolute;
+            z-index: 21;
+            right: 20px;
+            width: 11px !important;
+            text-align: center;
+            left: auto !important;
+            top: 50%;
+            bottom: auto !important;
+            transform: translateY(-50%);
+        }
+        
+        @media screen and (max-width: 768px) {
+            .blog-slider__pagination {
+                transform: translateX(-50%);
+                left: 50% !important;
+                top: 205px;
+                width: 100% !important;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+        }
+        
+        .blog-slider__pagination.swiper-pagination-bullets .swiper-pagination-bullet {
+            margin: 8px 0;
+        }
+        
+        @media screen and (max-width: 768px) {
+            .blog-slider__pagination.swiper-pagination-bullets .swiper-pagination-bullet {
+                margin: 0 5px;
+            }
+        }
+        
+        .blog-slider__pagination .swiper-pagination-bullet {
+            width: 11px;
+            height: 11px;
+            display: block;
+            border-radius: 10px;
+            background: #062744;
+            opacity: 0.2;
+            transition: all .3s;
+        }
+        
+        .blog-slider__pagination .swiper-pagination-bullet-active {
+            opacity: 1;
+            background: #fd3838;
+            height: 30px;
+            box-shadow: 0px 0px 20px rgba(252, 56, 56, 0.3);
+        }
+        
+        @media screen and (max-width: 768px) {
+            .blog-slider__pagination .swiper-pagination-bullet-active {
+                height: 11px;
+                width: 30px;
+            }
+        }
+        
+        .swiper-container-horizontal > .swiper-pagination-bullets,
+        .swiper-pagination-custom,
+        .swiper-pagination-fraction {
+            bottom: 10px;
+            left: 0;
+            width: 100%;
+        }
+        
+        /* Image Masonry Grid */
+        .masonry-container {
+            width: 100%;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-auto-rows: 140px;
+            grid-gap: 10px;
+        }
+        
+        .masonry-large, .masonry-medium, .masonry-small {
+            display: block;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            border-radius: 10px;
+            position: relative;
+            background: #f0f0f0;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .masonry-large:hover, .masonry-medium:hover, .masonry-small:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+        
+        .masonry-large {
+            grid-row: span 2;
+        }
+        
+        .masonry-medium {
+            grid-row: span 2;
+        }
+        
+        .masonry-small {
+            grid-row: span 1;
+        }
+        
+        .masonry-container img {
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: cover;
+            transition: transform 0.5s ease, filter 0.3s ease;
+        }
+        
+        .masonry-large:hover img,
+        .masonry-medium:hover img,
+        .masonry-small:hover img {
+            transform: scale(1.1);
+            filter: brightness(1.1);
+        }
+        
+        @media screen and (max-width: 768px) {
+            .masonry-container {
+                grid-template-columns: repeat(2, 1fr);
+                grid-auto-rows: 120px;
+                grid-gap: 8px;
+            }
+        }
+        
+        /* Mobile Optimizations */
+        @media (max-width: 767px) {
+            /* Hero Section Mobile */
+            section.relative.h-\[55vh\] {
+                height: 50vh !important;
+                min-height: 400px;
+            }
+            
+            .hero-h3 {
+                font-size: 0.875rem !important;
+                letter-spacing: 0.1em;
+                margin-bottom: 0.5rem !important;
+            }
+            
+            .text-effect-container {
+                height: clamp(3rem, 12vw, 5rem) !important;
+                min-height: 50px !important;
+                margin-bottom: 1rem !important;
+            }
+            
+            .hero-paragraph {
+                font-size: 0.875rem !important;
+                margin-bottom: 1rem !important;
+                padding: 0 0.5rem;
+                line-height: 1.5;
+            }
+            
+            /* Animated Button Mobile */
+            .btn-animated {
+                font-size: 14px !important;
+                padding: 10px 20px 10px 55px !important;
+            }
+            
+            .btn-animated .icon-arrow {
+                height: 12px;
+                width: 28px;
+                top: 13px !important;
+            }
+            
+            .btn-animated .icon-arrow.before {
+                left: 20px !important;
+            }
+            
+            .btn-animated .icon-arrow.after {
+                right: 20px !important;
+            }
+            
+            /* Two Column Section Mobile */
+            .content-column {
+                text-align: center !important;
+                padding-right: 0 !important;
+                margin-bottom: 2rem;
+            }
+            
+            .content-column h3 {
+                font-size: 0.75rem;
+                margin-bottom: 0.5rem;
+            }
+            
+            .content-column h2 {
+                font-size: 1.5rem !important;
+                margin-bottom: 0.75rem;
+            }
+            
+            .content-column p {
+                font-size: 0.875rem !important;
+                margin-bottom: 0.75rem;
+                line-height: 1.6;
+            }
+            
+            .content-column .btn-content {
+                font-size: 0.8125rem;
+                padding: 10px 24px;
+                width: 100%;
+                max-width: 280px;
+            }
+            
+            /* Blog Slider Mobile */
+            .blog-slider {
+                padding: 15px !important;
+                margin: 0 auto !important;
+                height: auto !important;
+                min-height: 420px;
+                width: 100% !important;
+                max-width: 100% !important;
+            }
+            
+            .blog-slider__item {
+                flex-direction: column !important;
+                align-items: center !important;
+                gap: 0 !important;
+            }
+            
+            .blog-slider__title {
+                font-size: 20px !important;
+                margin-bottom: 10px !important;
+                line-height: 1.3;
+            }
+            
+            .blog-slider__text {
+                font-size: 13px !important;
+                margin-bottom: 16px !important;
+                line-height: 1.5;
+            }
+            
+            .blog-slider__button {
+                font-size: 13px !important;
+                padding: 10px 24px !important;
+                width: 100%;
+                max-width: 200px;
+            }
+            
+            .blog-slider__img {
+                width: 100% !important;
+                max-width: 260px !important;
+                height: 200px !important;
+                transform: translateY(0) !important;
+                margin-bottom: 15px !important;
+            }
+            
+            .blog-slider__content {
+                margin-top: 0 !important;
+                padding: 0 10px !important;
+            }
+            
+            .blog-slider__pagination {
+                position: relative !important;
+                transform: none !important;
+                left: 0 !important;
+                top: 0 !important;
+                width: 100% !important;
+                margin-top: 15px !important;
+            }
+            
+            /* Masonry Grid Mobile */
+            .masonry-container {
+                grid-gap: 6px;
+            }
+            
+            /* Contact Section Mobile */
+            .contact-section {
+                padding: 0 0.5rem;
+            }
+            
+            .contact-section h2 {
+                font-size: 1.5rem !important;
+                margin-bottom: 0.75rem;
+            }
+            
+            .contact-section p {
+                font-size: 0.875rem !important;
+                margin-bottom: 1rem;
+                line-height: 1.5;
+            }
+            
+            .contact-section .btn-contact {
+                font-size: 0.875rem;
+                padding: 12px 28px;
+                width: 100%;
+                max-width: 280px;
+            }
+            
+            /* Section Padding Mobile */
+            section.py-8 {
+                padding-top: 2rem !important;
+                padding-bottom: 2rem !important;
+            }
+            
+            section.py-12 {
+                padding-top: 3rem !important;
+                padding-bottom: 3rem !important;
+            }
+            
+            /* Container Padding Mobile */
+            .container.mx-auto.px-6 {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+            
+            /* Grid Gap Mobile */
+            .grid.gap-8 {
+                gap: 1.5rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            /* Extra Small Devices */
+            .hero-h3 {
+                font-size: 0.75rem !important;
+            }
+            
+            .text-effect-container {
+                height: clamp(2.5rem, 10vw, 4rem) !important;
+                min-height: 40px !important;
+            }
+            
+            .hero-paragraph {
+                font-size: 0.8125rem !important;
+            }
+            
+            .content-column h2 {
+                font-size: 1.25rem !important;
+            }
+            
+            .contact-section h2 {
+                font-size: 1.25rem !important;
+            }
+            
+            .blog-slider__title {
+                font-size: 18px !important;
+            }
+            
+            .blog-slider {
+                min-height: 380px;
+                padding: 12px !important;
+            }
+            
+            .blog-slider__img {
+                height: 180px !important;
+                max-width: 240px !important;
+            }
+            
+            .blog-slider__text {
+                font-size: 12px !important;
+            }
+            
+            .blog-slider__button {
+                font-size: 12px !important;
+                padding: 8px 20px !important;
+            }
+            
+            section.relative.h-\[55vh\] {
+                min-height: 350px;
+            }
+        }
+        
+        /* Prevent Horizontal Scroll */
+        @media (max-width: 767px) {
+            html, body {
+                overflow-x: hidden;
+                width: 100%;
+                max-width: 100%;
+            }
+            
+            * {
+                max-width: 100%;
+            }
+            
+            img, video, iframe {
+                max-width: 100%;
+                height: auto;
+            }
+            
+            /* Touch-friendly elements */
+            a, button {
+                min-height: 44px;
+                min-width: 44px;
+            }
+        }
     </style>
 </head>
 <body>
     <div id="nav-placeholder"></div>
 
-    <section class="relative h-[60vh] flex items-center justify-center overflow-hidden">
-        <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=1600');"></div>
+    <section class="relative h-[55vh] md:h-[90vh] lg:h-[90vh] flex items-start justify-center overflow-hidden">
+        <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('../../assets/images/lightdecor/hero.jpg');"></div>
         <div class="absolute inset-0 hero-gradient"></div>
-        <div class="relative z-10 text-center text-white px-6">
-            <h1 class="text-5xl md:text-6xl font-bold mb-4">Lighting Decor</h1>
-            <p class="text-xl md:text-2xl mb-8">Chandeliers, Market Lights & Marquee Letters</p>
-            <a href="#contact" class="btn-primary text-white px-8 py-4 rounded-full text-lg font-semibold inline-block">Get a Quote</a>
+        <div class="relative z-10 text-center text-white px-6 max-w-4xl mx-auto pt-12 md:pt-16 lg:pt-20 pb-6 md:pb-8 lg:pb-10">
+            <h3 class="hero-h3 text-xl sm:text-2xl md:text-3xl lg:text-4xl uppercase mb-2 md:mb-3 opacity-90">EVENT DECOR</h3>
+            <div class="text-effect-container mb-3 md:mb-4 lg:mb-5" style="height: clamp(4rem, 12vw, 12rem); min-height: 60px;">
+                <div class="text-effect-wrapper" id="text-effect-ui" style="width: 100%; height: 100%;"></div>
+            </div>
+            <p class="hero-paragraph text-lg sm:text-xl md:text-2xl lg:text-3xl mb-6 md:mb-8 lg:mb-10 leading-relaxed max-w-3xl mx-auto opacity-95">
+                Lighting and Ambiance can make or break your event. Let us set the mood for your guests with our expert lighting services.
+            </p>
+            <a href="#contact" class="btn-animated">
+                <svg class="icon-arrow before">
+                    <use xlink:href="#arrow"></use>
+                </svg>
+                <span class="label">Contact Us</span>
+                <svg class="icon-arrow after">
+                    <use xlink:href="#arrow"></use>
+                </svg>
+            </a>
         </div>
     </section>
 
-    <section class="section-padding bg-white">
+    <!-- Two Column Section -->
+    <section class="py-8 md:py-10 lg:py-12" style="background: linear-gradient(135deg, #f5f3f0 0%, #f7f5f2 50%, #fafaf8 100%);">
         <div class="container mx-auto px-6">
-            <div class="max-w-4xl mx-auto">
-                <h2 class="text-4xl font-bold mb-6 text-center">Elegant Lighting Decor</h2>
-                <p class="text-lg text-gray-700 mb-8 text-center">Beautiful decorative lighting to enhance your venue's ambiance.</p>
-                
-                <div class="grid md:grid-cols-2 gap-8 mt-12">
-                    <div class="bg-gray-50 p-6 rounded-lg">
-                        <h3 class="text-2xl font-semibold mb-4">💎 Crystal Chandeliers</h3>
-                        <p class="text-gray-700">Elegant crystal chandeliers for sophisticated events.</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
+                <div class="col-span-1">
+                    <div class="content-column">
+                        <h3>ILLUMINATE YOUR EVENT WITH OUR</h3>
+                        <h2>LIGHTING SERVICES</h2>
+                        <p>Lighting is more than just brightness; it's about creating the perfect ambiance. Whether you're looking for whimsical Air Balloon Lights, glamorous Chandeliers, warm Market Lights, or bold Marquee Letters, our lighting decor sets the tone for an unforgettable experience. Each option is designed to complement your event theme and make your space shine.</p>
+                        <p>Our experienced lighting designers combine technical expertise and creative passion to bring your vision to life. Whether you want a romantic glow for a wedding or dynamic lights for a high-energy corporate event, we have the skills to make it happen.</p>
+                        <p>Our services include adaptive intelligent lighting, pinpoint pin spots, atmospheric wash lighting, and dramatic uplighting to transform any venue. We also offer custom lighting solutions like pattern projections, stage lighting for concerts or performances, uplighting rentals to set the mood, and bistro lighting for a warm, rustic feel.</p>
+                        <p>We know every event is unique, so we offer a personalized approach. Our team collaborates with you to understand your needs and venue details, creating a tailored lighting plan that exceeds your expectations.</p>
+                        <a href="#contact" class="btn-content">Interested In Hearing More?</a>
                     </div>
-                    <div class="bg-gray-50 p-6 rounded-lg">
-                        <h3 class="text-2xl font-semibold mb-4">💡 Market String Lights</h3>
-                        <p class="text-gray-700">Warm bistro lights perfect for outdoor and indoor events.</p>
-                    </div>
-                    <div class="bg-gray-50 p-6 rounded-lg">
-                        <h3 class="text-2xl font-semibold mb-4">🔤 Marquee Letters</h3>
-                        <p class="text-gray-700">Light-up marquee letters and numbers for custom displays.</p>
-                    </div>
-                    <div class="bg-gray-50 p-6 rounded-lg">
-                        <h3 class="text-2xl font-semibold mb-4">🌙 LED Neon Signs</h3>
-                        <p class="text-gray-700">Custom LED neon signs for Instagram-worthy moments.</p>
-                    </div>
-                    <div class="bg-gray-50 p-6 rounded-lg">
-                        <h3 class="text-2xl font-semibold mb-4">✨ Fairy Lights</h3>
-                        <p class="text-gray-700">Delicate fairy lights for romantic and whimsical settings.</p>
-                    </div>
-                    <div class="bg-gray-50 p-6 rounded-lg">
-                        <h3 class="text-2xl font-semibold mb-4">🕯️ LED Candles</h3>
-                        <p class="text-gray-700">Flameless LED candles for safe, beautiful ambiance.</p>
+                </div>
+                <div class="col-span-1">
+                    <div class='masonry-container'>
+                        <div class='masonry-large'>
+                            <img src='../../assets/images/lightdecor/grid1.png' alt='Lighting decor'>
+                        </div>
+                        <div class='masonry-medium'>
+                            <img src='../../assets/images/lightdecor/grid2.png' alt='Lighting decor'>
+                        </div>
+                        <div class='masonry-medium'>
+                            <img src='../../assets/images/lightdecor/grid3.png' alt='Lighting decor'>
+                        </div>
+                        <div class='masonry-large'>
+                            <img src='../../assets/images/lightdecor/grid4.png' alt='Lighting decor'>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="section-padding bg-gradient-to-r from-[#0050ff] to-[#0050ff] text-white">
-        <div class="container mx-auto px-6 text-center">
-            <h2 class="text-4xl font-bold mb-6">Create the Perfect Atmosphere!</h2>
-            <p class="text-xl mb-8">Stunning decorative lighting for any occasion</p>
-            <a href="#contact" class="bg-white text-[#0050ff] px-8 py-4 rounded-full text-lg font-semibold inline-block hover:bg-gray-100 transition">Request Quote</a>
+     <!-- Blog Slider Section -->
+    <section class="py-8 md:py-10 lg:py-12" style="background: linear-gradient(135deg, #f8f6f2 0%, #faf9f6 50%, #ffffff 100%);">
+        <div class="container mx-auto px-6">
+            <div class="blog-slider">
+                <div class="blog-slider__wrp swiper-wrapper">
+                    <div class="blog-slider__item swiper-slide">
+                        <div class="blog-slider__img">
+                            <img src="../../assets/images/lightdecor/k1.jpg" alt="">
+                        </div>
+                        <div class="blog-slider__content">
+                            <div class="blog-slider__title">Air Balloon Lights</div>
+                            <div class="blog-slider__text">Add a whimsical touch with glowing Air Balloon Lights that bring charm to any venue.</div>
+                            <a href="#" class="blog-slider__button">READ MORE</a>
+                        </div>
+                    </div>
+                    <div class="blog-slider__item swiper-slide">
+                        <div class="blog-slider__img">
+                            <img src="../../assets/images/lightdecor/k2.jpg" alt="">
+                        </div>
+                        <div class="blog-slider__content">
+                            <div class="blog-slider__title">Chandeliers</div>
+                            <div class="blog-slider__text">Boost your event with luxurious Chandeliers that create an air of sophistication.</div>
+                            <a href="#" class="blog-slider__button">READ MORE</a>
+                        </div>
+                    </div>
+                    <div class="blog-slider__item swiper-slide">
+                        <div class="blog-slider__img">
+                            <img src="../../assets/images/lightdecor/k3.jpg" alt="">
+                        </div>
+                        <div class="blog-slider__content">
+                            <div class="blog-slider__title">Marquee Lights</div>
+                            <div class="blog-slider__text">Set a cozy and inviting mood with Marquee Lights perfect for any indoor or outdoor event.</div>
+                            <a href="#" class="blog-slider__button">READ MORE</a>
+                        </div>
+                    </div>
+                    <div class="blog-slider__item swiper-slide">
+                        <div class="blog-slider__img">
+                            <img src="../../assets/images/lightdecor/k4.jpg" alt="">
+                        </div>
+                        <div class="blog-slider__content">
+                            <div class="blog-slider__title">Marquee Letters</div>
+                            <div class="blog-slider__text">Make a bold statement with custom Marquee Letters that light up your message in style.</div>
+                            <a href="#" class="blog-slider__button">READ MORE</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="blog-slider__pagination"></div>
+            </div>
         </div>
     </section>
 
+    <!-- New Section -->
+    <section class="py-8 md:py-10 lg:py-12 contact-section-wrapper">
+        <div class="container mx-auto px-6">
+            <div class="contact-section">
+                <h2>CONTACT US NOW</h2>
+                <p>Learn more about our lighting services for your next event, click the button below to send us an email and connect with us today.</p>
+                <a href="#contact" class="btn-contact">Learn More Now</a>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Generate animated text layers
+        function generateTextLayers() {
+            const container = document.getElementById('text-effect-ui');
+            const text = "LIGHTING DECOR";
+            const layerCount = 50;
+            
+            // Generate random number between min and max
+            function random(min, max) {
+                return Math.floor(Math.random() * (max - min + 1)) + min;
+            }
+            
+            // Create style element for animations
+            const styleSheet = document.createElement('style');
+            let cssText = '';
+            
+            for (let i = 0; i < layerCount; i++) {
+                // Create text layer element
+                const layer = document.createElement('div');
+                layer.className = 'text-layer';
+                layer.textContent = text;
+                layer.id = `text-layer-${i}`;
+                container.appendChild(layer);
+                
+                // Generate random color (blue-green theme to match design)
+                const r = random(0, 30);
+                const g = random(0, 100);
+                const b = random(100, 255);
+                const color = `rgba(${r}, ${g}, ${b}, 1)`;
+                
+                // Generate random blur
+                const blur = random(-10, 15);
+                const blurValue = blur > 0 ? blur : 0;
+                
+                // Generate animation duration
+                const duration = random(10000, 20000);
+                
+                // Set layer styles
+                layer.style.color = color;
+                layer.style.filter = `blur(${blurValue}px)`;
+                
+                // Generate keyframes for clip-path animation
+                const keyframeName = `clip${i}`;
+                const keyframes = [];
+                
+                for (let k = 0; k <= 100; k += 25) {
+                    const circleSize = random(30, 180);
+                    const xPos = random(-30, 130);
+                    const yPos = random(-30, 130);
+                    keyframes.push(`${k}% { clip-path: circle(${circleSize}px at ${xPos}% ${yPos}%); }`);
+                }
+                
+                cssText += `
+                    #text-layer-${i} {
+                        animation: ${keyframeName} ${duration}ms ease-in-out infinite alternate;
+                    }
+                    
+                    @keyframes ${keyframeName} {
+                        ${keyframes.join('\n                        ')}
+                    }
+                `;
+            }
+            
+            styleSheet.textContent = cssText;
+            document.head.appendChild(styleSheet);
+        }
+        
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', generateTextLayers);
+    </script>
+    <script>
+        // Initialize Swiper slider
+        document.addEventListener('DOMContentLoaded', function() {
+            var swiper = new Swiper('.blog-slider', {
+                spaceBetween: 30,
+                effect: 'fade',
+                loop: true,
+                mousewheel: {
+                    invert: false,
+                },
+                pagination: {
+                    el: '.blog-slider__pagination',
+                    clickable: true,
+                }
+            });
+        });
+    </script>
+    <svg style="display: none;">
+        <defs>
+            <symbol id="arrow" viewBox="0 0 35 15">
+                <title>Arrow</title>
+                <path d="M27.172 5L25 2.828 27.828 0 34.9 7.071l-7.07 7.071L25 11.314 27.314 9H0V5h27.172z "/>
+            </symbol>
+        </defs>
+    </svg>
     <script src="../../assets/components/navigation.js"></script>
     <script src="../../assets/components/footer.js"></script>
 </body>
