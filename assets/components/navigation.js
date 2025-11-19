@@ -248,8 +248,8 @@ document.addEventListener('DOMContentLoaded', function() {
                                         <span class="font-semibold block mb-0.5">Lighting Decor</span>
                                         <span class="text-xs text-gray-500 leading-relaxed">Chandeliers, market lights, marquee</span>
                                     </a>
-                                    <a href="${pathPrefix}rentals/event-decor/furniture.html" class="block text-sm text-gray-700 hover:text-purple-600 transition py-1.5 hover:bg-purple-50 rounded-md px-2 -mx-2">
-                                        <span class="font-semibold block mb-0.5">Furniture</span>
+                                    <a href="${pathPrefix}rentals/event-decor/eventdecor.html" class="block text-sm text-gray-700 hover:text-purple-600 transition py-1.5 hover:bg-purple-50 rounded-md px-2 -mx-2">
+                                        <span class="font-semibold block mb-0.5">Event Decor</span>
                                         <span class="text-xs text-gray-500 leading-relaxed">Lounge sets, shimmer walls, drape</span>
                                     </a>
                                 </div>
