@@ -62,17 +62,23 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 2rem;
+            padding: 1rem;
+        }
+        
+        @media (min-width: 640px) {
+            .brochure-modal-content {
+                padding: 2rem;
+            }
         }
 
         .brochure-close-button {
             position: absolute;
-            top: 1.5rem;
-            right: 1.5rem;
+            top: 0.75rem;
+            right: 0.75rem;
             z-index: 10;
             background-color: rgba(255, 255, 255, 0.9);
             border-radius: 50%;
-            padding: 0.5rem;
+            padding: 0.375rem;
             color: #4b5563;
             transition: all 0.2s ease;
             border: none;
@@ -81,6 +87,14 @@
             align-items: center;
             justify-content: center;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+        
+        @media (min-width: 640px) {
+            .brochure-close-button {
+                top: 1.5rem;
+                right: 1.5rem;
+                padding: 0.5rem;
+            }
         }
 
         .brochure-close-button:hover {
@@ -249,6 +263,14 @@
             display: inline-block;
             animation: bounceIn 1s both;
             transform-origin: center bottom;
+            word-wrap: break-word;
+            hyphens: auto;
+        }
+        
+        @media (max-width: 640px) {
+            .social-heading {
+                letter-spacing: 0.25px;
+            }
         }
         
         .social-heading:first-child {
@@ -323,7 +345,7 @@
     <div id="nav-placeholder"></div>
 
     <!-- Hero Section -->
-    <section class="relative min-h-[60vh] md:min-h-[75vh] lg:min-h-screen flex items-center justify-center overflow-hidden py-8 md:py-12 hero-section">
+    <section class="relative min-h-[50vh] sm:min-h-[60vh] md:min-h-[75vh] lg:min-h-screen flex items-center justify-center overflow-hidden py-6 sm:py-8 md:py-12 hero-section">
         <img 
             src="../assets/images/social/hero.jpg" 
             alt="Fun social event with photo booth setup"
@@ -331,40 +353,40 @@
             onload="console.log('Image loaded'); this.classList.add('loaded')"
             onerror="console.error('Error loading image:', this.src)">
         <div class="absolute inset-0 bg-black bg-opacity-70"></div>     
-        <div class="relative z-10 text-center text-white px-4 w-full">
+        <div class="relative z-10 text-center text-white px-4 sm:px-6 w-full">
             <div class="max-w-4xl mx-auto">
-                <div class="mb-3">
-                    <h1 class="text-5xl md:text-6xl lg:text-7xl leading-tight tracking-tight social-heading">
+                <div class="mb-2 sm:mb-3">
+                    <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl leading-tight tracking-tight social-heading">
                         Social Events
                     </h1>
-                    <p class="max-w-10xl mx-auto text-sm md:text-xl leading-tight mb-2 px-0 tracking-[0.12em] animate-fade-in-up animate-delay-200 social-text">
+                    <p class="max-w-10xl mx-auto text-xs sm:text-sm md:text-lg lg:text-xl leading-tight mb-2 px-2 sm:px-0 tracking-[0.12em] animate-fade-in-up animate-delay-200 social-text">
                         PHOTO BOOTH RENTALS
                     </p>
                 </div>
                 
-                <div class="h-px w-12 bg-white mx-auto my-4 animate-fade-in-up animate-delay-200"></div>
+                <div class="h-px w-8 sm:w-12 bg-white mx-auto my-3 sm:my-4 animate-fade-in-up animate-delay-200"></div>
                 
-                <p class="max-w-3xl mx-auto text-base md:text-lg leading-relaxed mb-6 px-0 text-white tracking-normal animate-fade-in-up animate-delay-200 font-medium">
+                <p class="max-w-3xl mx-auto text-sm sm:text-base md:text-lg leading-relaxed mb-4 sm:mb-6 px-2 sm:px-0 text-white tracking-normal animate-fade-in-up animate-delay-200 font-medium">
                     From mitzvahs to birthdays and more, elevate your celebration with custom-branded photo activations that delight guests and create shareable memories.
                 </p>
-                <div class="mt-6 mb-8 animate-fade-in-up animate-delay-300 flex items-center justify-center gap-3 md:gap-4">
+                <div class="mt-4 sm:mt-6 mb-6 sm:mb-8 animate-fade-in-up animate-delay-300 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-3 md:gap-4">
                     <a 
                         href="#contact" 
-                        class="bg-gradient-to-r from-pink-500 to-yellow-500 text-white hover:from-pink-600 hover:to-yellow-600 px-8 md:px-10 py-3 rounded-full text-sm font-bold tracking-wide uppercase inline-block transform transition-all duration-200 hover:shadow-lg hover:scale-105 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-pink-500 shadow-lg"
+                        class="w-full sm:w-auto bg-gradient-to-r from-pink-500 to-yellow-500 text-white hover:from-pink-600 hover:to-yellow-600 px-6 sm:px-8 md:px-10 py-2.5 sm:py-3 rounded-full text-xs sm:text-sm font-bold tracking-wide uppercase inline-block transform transition-all duration-200 hover:shadow-lg hover:scale-105 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-pink-500 shadow-lg text-center"
                         aria-label="Contact us for social events">
                         Get a Quote
                     </a>
                     <a 
                         href="#experiences"
-                        class="px-8 md:px-9 py-3 rounded-full text-sm font-bold tracking-wide uppercase inline-block transform transition-all duration-200 border border-white/70 text-white hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-white"
+                        class="w-full sm:w-auto px-6 sm:px-8 md:px-9 py-2.5 sm:py-3 rounded-full text-xs sm:text-sm font-bold tracking-wide uppercase inline-block transform transition-all duration-200 border border-white/70 text-white hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-white text-center"
                         aria-label="View our social event experiences">
                         View Experiences
                     </a>
                 </div>
 
-                <div class="text-center opacity-90 animate-fade-in-up animate-delay-400">
-                    <div class="h-px w-12 bg-white/70 mx-auto mb-3 transition-all duration-500"></div>
-                    <p class="text-white/90 tracking-wider text-sm font-medium uppercase social-location">
+                <div class="text-center opacity-90 animate-fade-in-up animate-delay-400 px-2">
+                    <div class="h-px w-8 sm:w-12 bg-white/70 mx-auto mb-2 sm:mb-3 transition-all duration-500"></div>
+                    <p class="text-white/90 tracking-wider text-xs sm:text-sm font-medium uppercase social-location leading-tight">
                         SERVICING DENVER, COLORADO, AND SURROUNDING AREAS
                     </p>
                 </div>
@@ -372,52 +394,53 @@
         </div>
     </section>
 <!-- 2nd Section -->
-    <section id="experiences" class="py-8 md:py-10 bg-white relative overflow-hidden mb-0">
+    <section id="experiences" class="py-6 sm:py-8 md:py-10 bg-white relative overflow-hidden mb-0">
         <!-- Colorful Background Pattern -->
         <div class="absolute inset-0 opacity-40">
             <div class="absolute inset-0" style="background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgdmlld0JveD0iMCAwIDYwIDYwIj48cGF0dGVybiBpZD0icGF0dGVybiIgd2lkdGg9IjYwIiBoZWlnaHQ9IjYwIiBwYXR0ZXJuVW5pdHM9InVzZXJTcGFjZU9uVXNlIiBwYXR0ZXJuVHJhbnNmb3JtPSJyb3RhdGUoNDUpIHNjYWxlKDAuNSkiPjxyZWN0IHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgZmlsbD0iI2ZmZiIvPjxwYXRoIGQ9Ik0zMCAxMHYxMEg0MHYxMEgzMHYxMEgyMFYzMEgxMFYyMGgxMFYxMGgxMHoiIGZpbGw9IiNmMDBmIiBmaWxsLW9wYWNpdHk9IjAuMiIvPjxwYXRoIGQ9Ik0zMCAxMHYxMEg0MHYxMEgzMHYxMEgyMFYzMEgxMFYyMGgxMFYxMGgxMHoiIGZpbGw9IiMwMGZmZiIgZmlsbC1vcGFjaXR5PSIwLjIiIHRyYW5zZm9ybT0icm90YXRlKDkwKSIvPjxwYXRoIGQ9Ik0zMCAxMHYxMEg0MHYxMEgzMHYxMEgyMFYzMEgxMFYyMGgxMFYxMGgxMHoiIGZpbGw9IiNmZmYwMDAiIGZpbGwtb3BhY2l0eT0iMC4yIiB0cmFuc2Zvcm09InJvdGF0ZSgxODApIi8+PHBhdGggZD0iTTMwIDEwdjEwSDQwdjEwSDMwdjEwSDIwVjMwSDEwVjIwaDEwVjEwaDEweiIgZmlsbD0iIzAwZmYwMCIgZmlsbC1vcGFjaXR5PSIwLjIiIHRyYW5zZm9ybT0icm90YXRlKDI3MCkiLz48L3BhdHRlcm4+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNwYXR0ZXJuKSIvPjwvc3ZnPg==');"></div>
         </div>
         <div id="confetti-canvas" class="absolute inset-0 pointer-events-none"></div>
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-            <h2 class="text-xl md:text-2xl font-bold tracking-wide uppercase text-gray-800 mb-5">
+            <h2 class="text-lg sm:text-xl md:text-2xl font-bold tracking-wide uppercase text-gray-800 mb-3 sm:mb-5 px-2">
                 <span class="relative inline-block">
                     <span class="relative z-10">PICTURE PERFECT FUN FOR</span>
-                    <span class="absolute bottom-0 left-0 w-full h-1.5 bg-yellow-300 opacity-50 -rotate-1 transform scale-x-110"></span>
+                    <span class="absolute bottom-0 left-0 w-full h-1 sm:h-1.5 bg-yellow-300 opacity-50 -rotate-1 transform scale-x-110"></span>
                 </span>
             </h2>
-            <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-center">
+            <h1 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-extrabold tracking-tight text-center px-2">
                 <span id="celebration-text" class="bg-clip-text text-transparent bg-gradient-to-r from-pink-500 via-yellow-400 to-pink-500 animate-gradient-x cursor-pointer hover:opacity-90 transition-opacity duration-200">
                     EVERY CELEBRATION
                 </span>
             </h1>
-            <div class="mt-8">
-                <p class="text-lg md:text-xl leading-relaxed text-gray-700 text-center animate-fade-in-up animate-delay-300">
+            <div class="mt-6 sm:mt-8">
+                <p class="text-base sm:text-lg md:text-xl leading-relaxed text-gray-700 text-center animate-fade-in-up animate-delay-300 px-2 sm:px-4">
                     Whether you're blowing out birthday candles, celebrating a mitzvah, or throwing the holiday bash of the year, our Social Photo Booths bring energy, style, and non-stop entertainment to your event. With sleek setups, custom overlays, and instant sharing capabilities, we're here to make your celebration <span class="font-semibold text-gray-900">truly memorable</span>.
                 </p>
 
                 <!-- Card Carousel -->
-                <div class="mt-12 mb-2 relative group">
-                    <h3 class="text-2xl font-bold text-center mb-8 text-gray-800">Our Social Event Gallery</h3>
+                <div class="mt-8 sm:mt-12 mb-2 relative group">
+                    <h3 class="text-xl sm:text-2xl font-bold text-center mb-6 sm:mb-8 text-gray-800 px-2">Our Social Event Gallery</h3>
                     
                     <!-- Auto-scrolling Cards Container -->
                     <div class="relative">
                         <div class="overflow-hidden py-4">
-                            <div id="cards-container" class="flex gap-6">
+                            <div id="cards-container" class="flex gap-4 sm:gap-6">
                                 <!-- Cards will be inserted here by JavaScript -->
                             </div>
                         </div>
                     </div>
                     
-                    <p class="text-center text-sm text-gray-500 mt-6">Hover to pause the carousel</p>
+                    <p class="text-center text-xs sm:text-sm text-gray-500 mt-4 sm:mt-6 px-2">Hover to pause the carousel</p>
                 </div>
                 
                 <!-- Card Carousel Styles -->
                 <style>
                     .card {
                         flex: 0 0 calc(100% - 1rem);
-                        min-width: 220px;
+                        min-width: 200px;
                         max-width: 280px;
-                        height: 240px;
+                        height: auto;
+                        min-height: 200px;
                         border-radius: 0.5rem;
                         overflow: hidden;
                         transition: all 0.3s ease;
@@ -429,7 +452,7 @@
                     
                     .card-image {
                         width: 100%;
-                        height: 180px;
+                        height: 150px;
                         object-fit: cover;
                         object-position: center;
                         display: block;
@@ -445,17 +468,26 @@
                         box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
                     }
                     
-                    .card:nth-child(even) {
-                        transform: rotate(1deg);
-                    }
-                    
                     .card:nth-child(even):hover {
                         transform: rotate(1deg) translateY(-4px);
+                    }
+                    
+                    @media (min-width: 480px) {
+                        .card {
+                            flex: 0 0 calc(50% - 1rem);
+                            min-width: 220px;
+                        }
+                        .card-image {
+                            height: 180px;
+                        }
                     }
                     
                     @media (min-width: 640px) {
                         .card {
                             flex: 0 0 calc(50% - 1rem);
+                        }
+                        .card-image {
+                            height: 220px;
                         }
                     }
                     
@@ -463,18 +495,13 @@
                         .card {
                             flex: 0 0 calc(33.333% - 1.5rem);
                         }
-                    }
-                    
-                    .card:hover {
-                        transform: translateY(-5px);
-                        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-                    }
-                    
-                    .card-image {
-                        height: 300px; /* Increased from 220px */
-                        width: 100%;
-                        object-fit: cover;
-                        transition: transform 0.5s ease;
+                        .card-image {
+                            height: 300px;
+                        }
+                        .card:hover {
+                            transform: translateY(-5px);
+                            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+                        }
                     }
                     
                     .card:hover .card-image {
@@ -482,20 +509,32 @@
                     }
                     
                     .card-content {
-                        padding: 0.75rem 1rem;
+                        padding: 0.625rem 0.75rem;
                         background: white;
                         border-top: 1px solid #f0f0f0;
+                    }
+                    
+                    @media (min-width: 640px) {
+                        .card-content {
+                            padding: 0.75rem 1rem;
+                        }
                     }
                     
                     .card-title {
                         font-weight: 600;
                         color: #333;
                         margin: 0;
-                        font-size: 0.875rem;
+                        font-size: 0.75rem;
                         line-height: 1.2;
                         white-space: nowrap;
                         overflow: hidden;
                         text-overflow: ellipsis;
+                    }
+                    
+                    @media (min-width: 640px) {
+                        .card-title {
+                            font-size: 0.875rem;
+                        }
                     }
                     
                     .card-text {
@@ -508,8 +547,8 @@
                         left: 0;
                         right: 0;
                         bottom: 0;
-                        background: rgba(0, 0, 0, 0.8);
-                        padding: 1.5rem 1.25rem;
+                        background: rgba(0, 0, 0, 0.85);
+                        padding: 1rem 0.875rem;
                         color: white;
                         opacity: 0;
                         display: flex;
@@ -518,15 +557,35 @@
                         transition: opacity 0.3s ease;
                     }
                     
+                    @media (min-width: 640px) {
+                        .card-overlay {
+                            padding: 1.5rem 1.25rem;
+                        }
+                    }
+                    
                     .card-overlay h4 {
-                        font-size: 1.25rem;
-                        margin-bottom: 0.75rem;
+                        font-size: 1rem;
+                        margin-bottom: 0.5rem;
+                    }
+                    
+                    @media (min-width: 640px) {
+                        .card-overlay h4 {
+                            font-size: 1.25rem;
+                            margin-bottom: 0.75rem;
+                        }
                     }
                     
                     .card-overlay p {
-                        font-size: 0.875rem;
-                        line-height: 1.5;
+                        font-size: 0.75rem;
+                        line-height: 1.4;
                         margin: 0;
+                    }
+                    
+                    @media (min-width: 640px) {
+                        .card-overlay p {
+                            font-size: 0.875rem;
+                            line-height: 1.5;
+                        }
                     }
                     
                     .card:hover .card-overlay {
@@ -535,15 +594,15 @@
                     
                     .card-button {
                         position: absolute;
-                        top: 1rem;
-                        right: 1rem;
+                        top: 0.75rem;
+                        right: 0.75rem;
                         background: rgba(255, 255, 255, 0.15);
                         backdrop-filter: blur(5px);
                         -webkit-backdrop-filter: blur(5px);
                         color: white;
-                        padding: 0.5rem 0.75rem;
+                        padding: 0.375rem 0.5rem;
                         border-radius: 4px;
-                        font-size: 0.7rem;
+                        font-size: 0.625rem;
                         font-weight: 600;
                         text-transform: uppercase;
                         letter-spacing: 0.5px;
@@ -551,6 +610,15 @@
                         cursor: pointer;
                         transition: all 0.3s ease;
                         z-index: 10;
+                    }
+                    
+                    @media (min-width: 640px) {
+                        .card-button {
+                            top: 1rem;
+                            right: 1rem;
+                            padding: 0.5rem 0.75rem;
+                            font-size: 0.7rem;
+                        }
                     }
                     
                     .card-button:hover {
@@ -660,7 +728,8 @@
                             
                             // Set initial position to the middle of the duplicated cards
                             const card = document.querySelector('.card');
-                            const cardWidth = card.offsetWidth + 24; // 24px gap
+                            const gap = window.innerWidth >= 640 ? 24 : 16; // 16px gap on mobile, 24px on larger screens
+                            const cardWidth = card.offsetWidth + gap;
                             scrollPosition = (cardsData.length * cardWidth);
                             updateCarousel();
                         }
@@ -669,7 +738,8 @@
                             const card = document.querySelector('.card');
                             if (!card) return;
                             
-                            const cardWidth = card.offsetWidth + 24; // 24px gap
+                            const gap = window.innerWidth >= 640 ? 24 : 16; // 16px gap on mobile, 24px on larger screens
+                            const cardWidth = card.offsetWidth + gap;
                             const containerWidth = cardsData.length * cardWidth;
                             
                             // Reset position when reaching the end of the duplicated cards
@@ -720,7 +790,7 @@
         </div>
     </section>
     <!-- Interactive Brochure Section - Festive Social Theme -->
-    <section class="py-12 bg-gradient-to-b from-purple-50 to-pink-50 relative overflow-hidden">
+    <section class="py-8 sm:py-10 md:py-12 bg-gradient-to-b from-purple-50 to-pink-50 relative overflow-hidden">
         <!-- Decorative Elements -->
         <div class="absolute inset-0 opacity-20">
             <div class="absolute top-10 left-1/4 w-32 h-32 bg-pink-400 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-blob"></div>
@@ -728,38 +798,38 @@
             <div class="absolute bottom-10 left-1/3 w-36 h-36 bg-blue-400 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-blob animation-delay-4000"></div>
         </div>
         
-        <div class="max-w-6xl mx-auto px-6 sm:px-8 relative z-10">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 md:px-8 relative z-10">
             <!-- Section Header -->
-            <div class="text-center pb-12 pt-6">
-                <span class="inline-block bg-gradient-to-r from-pink-500 to-purple-600 text-white text-sm font-bold px-6 py-1.5 rounded-full mb-6 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-300">
+            <div class="text-center pb-8 sm:pb-10 md:pb-12 pt-4 sm:pt-6">
+                <span class="inline-block bg-gradient-to-r from-pink-500 to-purple-600 text-white text-xs sm:text-sm font-bold px-4 sm:px-6 py-1 sm:py-1.5 rounded-full mb-4 sm:mb-6 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-300">
                     🎉 Social Events Guide 🎊
                 </span>
-                <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-500 mb-6 leading-[1.1] px-2 pb-2.5">
+                <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-500 mb-4 sm:mb-6 leading-[1.1] px-2 pb-2 sm:pb-2.5">
                     Let's Celebrate Together!
                 </h2>
-                <p class="text-base sm:text-lg md:text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed font-medium px-2">
+                <p class="text-sm sm:text-base md:text-lg lg:text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed font-medium px-2 sm:px-4">
                     Discover our <span class="text-pink-600 font-bold">vibrant social event packages</span> and create unforgettable moments that will be the talk of the town!
                 </p>
                 
                 <!-- Animated Confetti Separator -->
-                <div class="flex items-center justify-center gap-3 mt-8 px-2">
-                    <div class="h-1.5 w-12 sm:w-16 bg-gradient-to-r from-yellow-400 to-pink-500 rounded-full transform rotate-1"></div>
+                <div class="flex items-center justify-center gap-2 sm:gap-3 mt-6 sm:mt-8 px-2">
+                    <div class="h-1 sm:h-1.5 w-8 sm:w-12 md:w-16 bg-gradient-to-r from-yellow-400 to-pink-500 rounded-full transform rotate-1"></div>
                     <div class="flex space-x-1">
-                        <span class="text-yellow-500">✦</span>
-                        <span class="text-pink-500">✧</span>
-                        <span class="text-purple-500">✦</span>
+                        <span class="text-yellow-500 text-sm sm:text-base">✦</span>
+                        <span class="text-pink-500 text-sm sm:text-base">✧</span>
+                        <span class="text-purple-500 text-sm sm:text-base">✦</span>
                     </div>
-                    <div class="h-1.5 w-12 sm:w-16 bg-gradient-to-r from-pink-500 to-purple-500 rounded-full transform -rotate-1"></div>
+                    <div class="h-1 sm:h-1.5 w-8 sm:w-12 md:w-16 bg-gradient-to-r from-pink-500 to-purple-500 rounded-full transform -rotate-1"></div>
                 </div>
             </div>
 
             <!-- Main Content Grid -->
-            <div class="grid lg:grid-cols-2 gap-12 items-center">
+            <div class="grid lg:grid-cols-2 gap-8 sm:gap-10 md:gap-12 items-center">
                 <!-- Left: Visual Preview -->
-                <div class="order-2 lg:order-1">
+                <div class="order-2 lg:order-1 px-2 sm:px-0">
                     <div class="relative group">
                         <div class="brochure-preview">
-                            <div class="aspect-[4/3] bg-gradient-to-br from-gray-50 via-gray-100 to-gray-50 flex items-center justify-center p-8 relative overflow-hidden rounded-xl">
+                            <div class="aspect-[4/3] bg-gradient-to-br from-gray-50 via-gray-100 to-gray-50 flex items-center justify-center p-4 sm:p-6 md:p-8 relative overflow-hidden rounded-xl">
                                 <div class="absolute inset-0" style="background-image: repeating-linear-gradient(45deg, transparent, transparent 2px, rgba(0,0,0,0.03) 2px, rgba(0,0,0,0.03) 4px);"></div>
                                 <div class="absolute inset-0 bg-gradient-to-br from-white/50 via-transparent to-gray-900/20 pointer-events-none"></div>
                                 <div class="relative w-full h-full flex items-center justify-center">
@@ -782,89 +852,89 @@
                 </div>
 
                 <!-- Right: Content & CTA -->
-                <div class="order-1 lg:order-2">
-                    <div class="inline-block bg-gradient-to-r from-blue-500 to-purple-600 text-white px-4 py-2 rounded-full text-sm font-bold mb-6 shadow-lg">
+                <div class="order-1 lg:order-2 px-2 sm:px-0">
+                    <div class="inline-block bg-gradient-to-r from-blue-500 to-purple-600 text-white px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-bold mb-4 sm:mb-6 shadow-lg">
                         Social Event Packages
                     </div>
-                    <h3 class="text-4xl md:text-5xl font-bold mb-6 text-gray-900">
+                    <h3 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 text-gray-900">
                         Make Your Event Unforgettable
                     </h3>
-                    <p class="text-xl text-gray-600 mb-8 leading-relaxed">
+                    <p class="text-base sm:text-lg md:text-xl text-gray-600 mb-6 sm:mb-8 leading-relaxed">
                         Explore our curated social event packages designed to bring fun and excitement to any gathering
                     </p>
-                    <div class="space-y-4 mb-8">
-                        <div class="flex items-start space-x-4">
-                            <div class="flex-shrink-0 mt-1">
-                                <div class="w-6 h-6 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center">
-                                    <svg class="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+                    <div class="space-y-3 sm:space-y-4 mb-6 sm:mb-8">
+                        <div class="flex items-start space-x-3 sm:space-x-4">
+                            <div class="flex-shrink-0 mt-0.5 sm:mt-1">
+                                <div class="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center">
+                                    <svg class="w-2.5 h-2.5 sm:w-3 sm:h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
                                         <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
                                     </svg>
                                 </div>
                             </div>
                             <div>
-                                <p class="font-medium text-gray-900">Versatile Event Solutions</p>
-                                <p class="text-gray-600 text-sm">Perfect for birthdays, anniversaries, and all social gatherings</p>
+                                <p class="font-medium text-sm sm:text-base text-gray-900">Versatile Event Solutions</p>
+                                <p class="text-gray-600 text-xs sm:text-sm">Perfect for birthdays, anniversaries, and all social gatherings</p>
                             </div>
                         </div>
-                        <div class="flex items-start space-x-4">
-                            <div class="flex-shrink-0 mt-1">
-                                <div class="w-6 h-6 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center">
-                                    <svg class="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+                        <div class="flex items-start space-x-3 sm:space-x-4">
+                            <div class="flex-shrink-0 mt-0.5 sm:mt-1">
+                                <div class="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center">
+                                    <svg class="w-2.5 h-2.5 sm:w-3 sm:h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
                                         <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
                                     </svg>
                                 </div>
                             </div>
                             <div>
-                                <p class="font-medium text-gray-900">Interactive Experiences</p>
-                                <p class="text-gray-600 text-sm">Engage your guests with fun photo opportunities and instant sharing</p>
+                                <p class="font-medium text-sm sm:text-base text-gray-900">Interactive Experiences</p>
+                                <p class="text-gray-600 text-xs sm:text-sm">Engage your guests with fun photo opportunities and instant sharing</p>
                             </div>
                         </div>
-                        <div class="flex items-start space-x-4">
-                            <div class="flex-shrink-0 mt-1">
-                                <div class="w-6 h-6 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center">
-                                    <svg class="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+                        <div class="flex items-start space-x-3 sm:space-x-4">
+                            <div class="flex-shrink-0 mt-0.5 sm:mt-1">
+                                <div class="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center">
+                                    <svg class="w-2.5 h-2.5 sm:w-3 sm:h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
                                         <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
                                     </svg>
                                 </div>
                             </div>
                             <div>
-                                <p class="font-medium text-gray-900">Custom Branding</p>
-                                <p class="text-gray-600 text-sm">Personalize with your event theme, colors, and branding</p>
+                                <p class="font-medium text-sm sm:text-base text-gray-900">Custom Branding</p>
+                                <p class="text-gray-600 text-xs sm:text-sm">Personalize with your event theme, colors, and branding</p>
                             </div>
                         </div>
                     </div>
-                    <div class="flex flex-col sm:flex-row gap-4">
-                        <button onclick="openBrochureModal()" class="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" aria-label="View social event packages">
-                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div class="flex flex-col sm:flex-row gap-3 sm:gap-4">
+                        <button onclick="openBrochureModal()" class="w-full sm:w-auto inline-flex items-center justify-center px-5 sm:px-6 py-2.5 sm:py-3 border border-transparent text-sm sm:text-base font-medium rounded-md text-white bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" aria-label="View social event packages">
+                            <svg class="w-4 h-4 sm:w-5 sm:h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
                             </svg>
                             View Packages
-                            <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg class="w-4 h-4 sm:w-5 sm:h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
                             </svg>
                         </button>
-                        <a href="../flipbook/examples/example-assets/books/social.pdf" download class="inline-flex items-center justify-center px-6 py-3 border border-gray-300 text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200">
-                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <a href="../flipbook/examples/example-assets/books/social.pdf" download class="w-full sm:w-auto inline-flex items-center justify-center px-5 sm:px-6 py-2.5 sm:py-3 border border-gray-300 text-sm sm:text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200">
+                            <svg class="w-4 h-4 sm:w-5 sm:h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
                             </svg>
                             Download PDF
                         </a>
                     </div>
-                    <div class="flex flex-wrap items-center gap-6 pt-6 border-t border-gray-200 mt-8">
-                        <div class="flex items-center text-sm font-medium text-gray-600">
-                            <svg class="w-4 h-4 mr-2 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                    <div class="flex flex-wrap items-center gap-4 sm:gap-6 pt-4 sm:pt-6 border-t border-gray-200 mt-6 sm:mt-8">
+                        <div class="flex items-center text-xs sm:text-sm font-medium text-gray-600">
+                            <svg class="w-3 h-3 sm:w-4 sm:h-4 mr-1.5 sm:mr-2 text-green-500" fill="currentColor" viewBox="0 0 20 20">
                                 <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
                             </svg>
                             <span>Perfect for Any Occasion</span>
                         </div>
-                        <div class="flex items-center text-sm font-medium text-gray-600">
-                            <svg class="w-4 h-4 mr-2 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                        <div class="flex items-center text-xs sm:text-sm font-medium text-gray-600">
+                            <svg class="w-3 h-3 sm:w-4 sm:h-4 mr-1.5 sm:mr-2 text-green-500" fill="currentColor" viewBox="0 0 20 20">
                                 <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
                             </svg>
                             <span>Easy to Customize</span>
                         </div>
-                        <div class="flex items-center text-sm font-medium text-gray-600">
-                            <svg class="w-4 h-4 mr-2 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                        <div class="flex items-center text-xs sm:text-sm font-medium text-gray-600">
+                            <svg class="w-3 h-3 sm:w-4 sm:h-4 mr-1.5 sm:mr-2 text-green-500" fill="currentColor" viewBox="0 0 20 20">
                                 <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
                             </svg>
                             <span>Instant Sharing</span>
