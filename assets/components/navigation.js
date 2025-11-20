@@ -326,6 +326,11 @@ document.addEventListener('DOMContentLoaded', function() {
                                             <a href="${pathPrefix}services/photobooth/ai-photo-booth.html" class="block text-sm text-gray-600 hover:text-blue-600 transition">AI Photo Booth</a>
                                             <a href="${pathPrefix}services/photobooth/green-screen-booth.html" class="block text-sm text-gray-600 hover:text-blue-600 transition">Green Screen</a>
                                             <a href="${pathPrefix}services/photobooth/rosie-robot.html" class="block text-sm text-gray-600 hover:text-blue-600 transition">Rosie the Robot</a>
+                                            <a href="${pathPrefix}services/photobooth/graffiti-wall-photo-booth.html" class="block text-sm text-gray-600 hover:text-blue-600 transition">Graffiti Wall Photo Booth</a>
+                                            <a href="${pathPrefix}services/photobooth/mosaic-photo-booth.html" class="block text-sm text-gray-600 hover:text-blue-600 transition">Mosaic Photo Booth</a>
+                                            <a href="${pathPrefix}services/photobooth/roaming-photo-booth.html" class="block text-sm text-gray-600 hover:text-blue-600 transition">Roaming Photo Booth</a>
+                                            <a href="${pathPrefix}services/photobooth/virtual-photo-booth.html" class="block text-sm text-gray-600 hover:text-blue-600 transition">Virtual Photo Booth</a>
+                                            <a href="${pathPrefix}services/photobooth/photo-booth-sets.html" class="block text-sm text-gray-600 hover:text-blue-600 transition">Custom Photo Booth</a>
                                         </div>
                                     </div>
                                     <div>
@@ -334,6 +339,9 @@ document.addEventListener('DOMContentLoaded', function() {
                                             <a href="${pathPrefix}services/videobooth/360-video-booth.html" class="block text-sm text-gray-600 hover:text-blue-600 transition">360 Video Booth</a>
                                             <a href="${pathPrefix}services/videobooth/bullet-time-array.html" class="block text-sm text-gray-600 hover:text-blue-600 transition">Bullet-Time Array</a>
                                             <a href="${pathPrefix}services/videobooth/glambot-video.html" class="block text-sm text-gray-600 hover:text-blue-600 transition">GlamBot Video</a>
+                                            <a href="${pathPrefix}services/videobooth/vogue-video-booth.html" class="block text-sm text-gray-600 hover:text-blue-600 transition">Vogue Video Booth</a>
+                                            <a href="${pathPrefix}services/videobooth/slow-motion-video-booth.html" class="block text-sm text-gray-600 hover:text-blue-600 transition">Slow Motion Video Booth</a>
+                                            <a href="${pathPrefix}services/videobooth/video-testimonial-booth.html" class="block text-sm text-gray-600 hover:text-blue-600 transition">Video Testimonial Booth</a>
                                         </div>
                                     </div>
                                     <div>
@@ -367,27 +375,29 @@ document.addEventListener('DOMContentLoaded', function() {
                                 <h3 class="text-lg font-bold text-gray-900 mb-4">Rentals</h3>
                                 <div class="space-y-3">
                                     <div>
-                                        <h4 class="font-semibold text-gray-800 mb-2">AV Services</h4>
+                                        <h4 class="font-bold text-base text-blue-600 uppercase tracking-wider mb-3 pb-2 border-b-2 border-blue-200">AV Services</h4>
                                         <div class="pl-4 space-y-2">
-                                            <a href="${pathPrefix}rentals/av-services/audio-visual.html" class="block text-sm text-gray-600 hover:text-blue-600 transition">Audio & Visual</a>
+                                            <a href="${pathPrefix}rentals/av-services/audio-visual.html" class="block text-sm text-gray-600 hover:text-blue-600 transition">Audio</a>
+                                            <a href="${pathPrefix}rentals/av-services/visual-services.html" class="block text-sm text-gray-600 hover:text-blue-600 transition">Visual</a>
                                             <a href="${pathPrefix}rentals/av-services/lighting.html" class="block text-sm text-gray-600 hover:text-blue-600 transition">Lighting</a>
-                                            <a href="${pathPrefix}rentals/av-services/stages.html" class="block text-sm text-gray-600 hover:text-blue-600 transition">Stages</a>
+                                            <a href="${pathPrefix}rentals/av-services/stages.html" class="block text-sm text-gray-600 hover:text-blue-600 transition">Event Stages</a>
+                                            <a href="${pathPrefix}rentals/av-services/custom-signage.html" class="block text-sm text-gray-600 hover:text-blue-600 transition">Custom Signage</a>
                                         </div>
                                     </div>
                                     <div>
-                                        <h4 class="font-semibold text-gray-800 mb-2">Event Decor</h4>
+                                        <h4 class="font-bold text-base text-purple-600 uppercase tracking-wider mb-3 pb-2 border-b-2 border-purple-200">Event Decor</h4>
                                         <div class="pl-4 space-y-2">
-                                            <a href="${pathPrefix}rentals/event-decor/special-effects.html" class="block text-sm text-gray-600 hover:text-blue-600 transition">Special Effects</a>
-                                            <a href="${pathPrefix}rentals/event-decor/lighting-decor.html" class="block text-sm text-gray-600 hover:text-blue-600 transition">Lighting Decor</a>
-                                            <a href="${pathPrefix}rentals/event-decor/furniture.html" class="block text-sm text-gray-600 hover:text-blue-600 transition">Furniture</a>
+                                            <a href="${pathPrefix}rentals/event-decor/special-effects.html" class="block text-sm text-gray-600 hover:text-purple-600 transition">Special Effects</a>
+                                            <a href="${pathPrefix}rentals/event-decor/lighting-decor.html" class="block text-sm text-gray-600 hover:text-purple-600 transition">Lighting Decor</a>
+                                            <a href="${pathPrefix}rentals/event-decor/eventdecor.html" class="block text-sm text-gray-600 hover:text-purple-600 transition">Event Decor</a>
                                         </div>
                                     </div>
                                     <div>
-                                        <h4 class="font-semibold text-gray-800 mb-2">Games</h4>
+                                        <h4 class="font-bold text-base text-green-600 uppercase tracking-wider mb-3 pb-2 border-b-2 border-green-200">Games</h4>
                                         <div class="pl-4 space-y-2">
-                                            <a href="${pathPrefix}rentals/games/claw-machine.html" class="block text-sm text-gray-600 hover:text-blue-600 transition">Claw Machine</a>
-                                            <a href="${pathPrefix}rentals/games/vr-headsets.html" class="block text-sm text-gray-600 hover:text-blue-600 transition">VR Headsets</a>
-                                            <a href="${pathPrefix}rentals/games/money-booth.html" class="block text-sm text-gray-600 hover:text-blue-600 transition">Money Booth</a>
+                                            <a href="${pathPrefix}rentals/games/claw-machine.html" class="block text-sm text-gray-600 hover:text-green-600 transition">Claw Machine</a>
+                                            <a href="${pathPrefix}rentals/games/vr-headsets.html" class="block text-sm text-gray-600 hover:text-green-600 transition">VR Headsets</a>
+                                            <a href="${pathPrefix}rentals/games/money-booth.html" class="block text-sm text-gray-600 hover:text-green-600 transition">Money Booth</a>
                                         </div>
                                     </div>
                                 </div>
