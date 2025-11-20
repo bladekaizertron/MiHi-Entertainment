@@ -6,66 +6,1244 @@
     <title>Custom Signage - MiHi Entertainment</title>
     <link rel="icon" type="image/svg+xml" href="../../assets/images/favicon.svg">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&family=Oswald:wght@400;500;600;700&family=Exo+2:ital,wght@0,200;1,200&family=Questrial&display=swap" rel="stylesheet">
     <style>
+        html, body {
+            overflow-x: hidden;
+            width: 100%;
+        }
         body { font-family: 'Inter', sans-serif; color: #1a202c; }
         h1, h2, h3, h4, h5, h6 { font-family: 'Playfair Display', serif; }
         .btn-primary { background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%); transition: all 0.3s ease; }
         .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(0, 80, 255, 0.4); }
         .section-padding { padding: 5rem 0; }
-        .hero-gradient { background: linear-gradient(135deg, rgba(0, 80, 255, 0.5) 0%, rgba(0, 64, 217, 0.5) 100%); }
+        .hero-gradient { background: linear-gradient(135deg, rgba(0, 0, 0, 0.65) 0%, rgba(0, 0, 0, 0.65) 100%); }
+        .signage-label { 
+            font-family: 'Oswald', sans-serif; 
+            font-weight: 600; 
+            font-size: 0.875rem; 
+            letter-spacing: 0.3em; 
+            text-transform: uppercase; 
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 1rem;
+        }
+        @media (min-width: 768px) {
+            .signage-label { font-size: 1rem; letter-spacing: 0.4em; }
+        }
+        
+        /* Neon Sign Effect */
+        :root {
+            --neon-text-color: #f40;
+            --neon-border-color: #08f;
+        }
+        
+        .neon-sign {
+            font-family: 'Exo 2', sans-serif;
+            font-weight: 200;
+            font-style: italic;
+            color: #fff;
+            text-transform: uppercase;
+            animation: flicker 1.5s infinite alternate;
+            display: inline-block;
+            font-size: 2rem;
+            padding: 1.2rem 2rem 1.5rem;
+            border: 0.3rem solid #fff;
+            border-radius: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        @media (min-width: 768px) {
+            .neon-sign {
+                font-size: 3rem;
+                padding: 1.5rem 2.5rem 2rem;
+                border: 0.4rem solid #fff;
+                border-radius: 2rem;
+            }
+        }
+        
+        @media (min-width: 1024px) {
+            .neon-sign {
+                font-size: 3.5rem;
+                padding: 2rem 3rem 2.5rem;
+            }
+        }
+        
+        .neon-sign::-moz-selection {
+            background-color: var(--neon-border-color);
+            color: var(--neon-text-color);
+        }
+        
+        .neon-sign::selection {
+            background-color: var(--neon-border-color);
+            color: var(--neon-text-color);
+        }
+        
+        .neon-sign:focus {
+            outline: none;
+        }
+        
+        /* Animate neon flicker */
+        @keyframes flicker {
+            0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+                text-shadow:
+                    -0.2rem -0.2rem 1rem #fff,
+                    0.2rem 0.2rem 1rem #fff,
+                    0 0 2rem var(--neon-text-color),
+                    0 0 4rem var(--neon-text-color),
+                    0 0 6rem var(--neon-text-color),
+                    0 0 8rem var(--neon-text-color),
+                    0 0 10rem var(--neon-text-color);
+                
+                box-shadow:
+                    0 0 .5rem #fff,
+                    inset 0 0 .5rem #fff,
+                    0 0 2rem var(--neon-border-color),
+                    inset 0 0 2rem var(--neon-border-color),
+                    0 0 4rem var(--neon-border-color),
+                    inset 0 0 4rem var(--neon-border-color);
+            }
+            
+                20%, 24%, 55% {
+                text-shadow: none;
+                box-shadow: none;
+            }
+        }
+        
+        /* Neon Button Effect */
+        .neon-button {
+            position: relative;
+            display: inline-block;
+            padding: 15px 30px;
+            color: #00fff6;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: 600;
+            overflow: hidden;
+            transition: 0.2s;
+            font-family: 'Questrial', Impact, sans-serif;
+        }
+        
+        .neon-button:visited {
+            color: #00fff6;
+        }
+        
+        .neon-button:hover {
+            color: #050f1a;
+            background: #00fff6;
+            border-radius: 3px;
+            box-shadow: 0 0 10px #00fff6, 0 0 40px #00fff6, 0 0 80px #00fff6;
+            transition-delay: 600ms;
+        }
+        
+        .neon-button span {
+            position: absolute;
+            display: block;
+        }
+        
+        /* Top Neon */
+        .neon-button span:nth-child(1) {
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #00fff6);
+        }
+        
+        .neon-button:hover span:nth-child(1) {
+            left: 100%;
+            transition: 600ms;
+        }
+        
+        /* Bottom Neon */
+        .neon-button span:nth-child(3) {
+            bottom: 0;
+            right: -100%;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(270deg, transparent, #00fff6);
+        }
+        
+        .neon-button:hover span:nth-child(3) {
+            right: 100%;
+            transition: 1s;
+            transition-delay: 250ms;
+        }
+        
+        /* Right Neon */
+        .neon-button span:nth-child(2) {
+            top: -100%;
+            right: 0;
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(180deg, transparent, #00fff6);
+        }
+        
+        .neon-button:hover span:nth-child(2) {
+            top: 100%;
+            transition: 1s;
+            transition-delay: 100ms;
+        }
+        
+        /* Left Neon */
+        .neon-button span:nth-child(4) {
+            bottom: -100%;
+            left: 0;
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(360deg, transparent, #00fff6);
+        }
+        
+        .neon-button:hover span:nth-child(4) {
+            bottom: 100%;
+            transition: 1s;
+            transition-delay: 450ms;
+        }
+        
+        /* Image Grid Effect */
+        :root {
+            --img-grid-columns: 3;
+            --img-yellow: rgba(238, 188, 31, 1);
+            --img-pink: rgba(255, 82, 145, 1);
+            --img-blue: rgba(64, 98, 187, 1);
+            --img-green: rgba(6, 141, 126, 1);
+            --img-white: rgba(248, 255, 229, 1);
+        }
+        
+        .image-grid-container {
+            background-color: transparent;
+            padding: 0.5rem;
+            padding-top: 2rem;
+            border-radius: 8px;
+            margin-top: -3rem;
+            overflow: hidden;
+        }
+        
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(var(--img-grid-columns), 1fr);
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            overflow: hidden;
+        }
+        
+        .image-grid li {
+            grid-column-end: span 2;
+            position: relative;
+            width: 100%;
+            padding-bottom: 100%;
+            margin-top: -50%;
+        }
+        
+        .image-grid li:first-child {
+            margin-top: 0;
+        }
+        
+        .image-grid li:nth-child(2n) {
+            grid-column-start: 2;
+        }
+        
+        .image-grid li::before,
+        .image-grid li::after {
+            content: '';
+            position: absolute;
+            display: block;
+            width: 100%;
+            height: 100%;
+            background-size: 50% 100%, 100% 100%;
+            background-position: left, right;
+        }
+        
+        .image-grid li::before {
+            z-index: -10;
+            clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+            -webkit-clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+            background-repeat: no-repeat;
+            background-image: 
+                linear-gradient(-45deg, var(--img-yellow) 53.5%, var(--img-green) 53.5%, var(--img-green) 60%, var(--img-yellow) 60%), 
+                linear-gradient(45deg, var(--img-yellow) 65.3%, var(--img-green) 65.3%, var(--img-green) 69.9%, var(--img-yellow) 69.9%);
+        }
+        
+        .image-grid li::after {
+            clip-path: polygon(100% 50%, 50% 100%, 0 50%, 20% 50%, 50% 80%, 80% 50%);
+            -webkit-clip-path: polygon(100% 50%, 50% 100%, 0 50%, 20% 50%, 50% 80%, 80% 50%);
+            background-repeat: no-repeat;
+            background-image: linear-gradient(45deg, var(--img-yellow) 40%, var(--img-green) 40%), linear-gradient(-45deg, var(--img-yellow) 30%, var(--img-green) 30%);
+        }
+        
+        .image-grid li:nth-child(2n)::before {
+            background-image: linear-gradient(-45deg, var(--img-pink) 53.5%, var(--img-blue) 53.5%, var(--img-blue) 60%, var(--img-pink) 60%), linear-gradient(45deg, var(--img-pink) 65.3%, var(--img-blue) 65.3%, var(--img-blue) 69.9%, var(--img-pink) 69.9%);
+        }
+        
+        .image-grid li:nth-child(2n)::after {
+            background-image: linear-gradient(45deg, var(--img-pink) 40%, var(--img-blue) 40%), linear-gradient(-45deg, var(--img-pink) 30%, var(--img-blue) 30%);
+        }
+        
+        .image-grid li:nth-child(3n)::before {
+            background-image: linear-gradient(-45deg, var(--img-green) 53.5%, var(--img-pink) 53.5%, var(--img-pink) 60%, var(--img-green) 60%), linear-gradient(45deg, var(--img-green) 65.3%, var(--img-pink) 65.3%, var(--img-pink) 69.9%, var(--img-green) 69.9%);
+        }
+        
+        .image-grid li:nth-child(3n)::after {
+            background-image: linear-gradient(45deg, var(--img-green) 40%, var(--img-pink) 40%), linear-gradient(-45deg, var(--img-green) 30%, var(--img-pink) 30%);
+        }
+        
+        .image-grid img {
+            position: absolute;
+            width: 60%;
+            left: 50%;
+            top: 50%;
+            transform: translateX(-50%) translateY(-60%);
+            transition-property: transform;
+            transition-duration: .3s;
+        }
+        
+        .image-grid img:hover {
+            transform: translateX(-40%) translateY(-70%) rotatez(25deg);
+        }
+        
+        /* Left Column Content */
+        .left-column-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-end;
+            text-align: right;
+            height: 100%;
+        }
+        
+        .left-column-content h3 {
+            font-family: 'Oswald', sans-serif;
+            font-weight: 600;
+            font-size: 0.75rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 0.25rem;
+        }
+        
+        .left-column-content h2 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 2rem;
+            color: #ffffff;
+            margin-bottom: 1rem;
+            font-style: italic;
+        }
+        
+        .left-column-content p {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 0.75rem;
+            max-width: 100%;
+        }
+        
+        @media (min-width: 768px) {
+            .left-column-content h2 {
+                font-size: 2.5rem;
+            }
+            .left-column-content p {
+                font-size: 1rem;
+            }
+        }
+        
+        
+        /* Signage Description Text */
+        .signage-description {
+            font-family: 'Inter', sans-serif;
+            font-weight: 400;
+            font-size: 1.125rem;
+            line-height: 1.75;
+            letter-spacing: 0.05em;
+            color: rgba(255, 255, 255, 0.95);
+            text-shadow: 
+                0 0 10px rgba(255, 255, 255, 0.3),
+                0 0 20px rgba(255, 255, 255, 0.2),
+                0 2px 4px rgba(0, 0, 0, 0.3);
+            max-width: 56rem;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        @media (min-width: 768px) {
+            .signage-description {
+                font-size: 1.25rem;
+                letter-spacing: 0.08em;
+                max-width: 72rem;
+            }
+        }
+        
+        @media (min-width: 1024px) {
+            .signage-description {
+                font-size: 1.5rem;
+                letter-spacing: 0.1em;
+                max-width: 80rem;
+            }
+        }
+        
+        /* Canvas Background Animation */
+        #canvas {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #000;
+            z-index: 0;
+        }
+        
+        .image-grid-section {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .image-grid-section .container {
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Image Slider Section Styles */
+        .image-slider-section {
+            background: #1a1a2e;
+            background-image: 
+                repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(255, 255, 255, 0.03) 35px, rgba(255, 255, 255, 0.03) 70px),
+                repeating-linear-gradient(-45deg, transparent, transparent 35px, rgba(255, 255, 255, 0.03) 35px, rgba(255, 255, 255, 0.03) 70px);
+            position: relative;
+            min-height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 4rem 0;
+        }
+        
+        @media (min-width: 768px) {
+            .image-slider-section {
+                min-height: 70vh;
+            }
+        }
+        
+        @media (min-width: 1024px) {
+            .image-slider-section {
+                min-height: 75vh;
+            }
+        }
+        
+        @media (min-width: 1280px) {
+            .image-slider-section {
+                min-height: 80vh;
+            }
+        }
+        
+        .image-slider-section .container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+        }
+        
+        .slider-container {
+            position: relative;
+            width: 100%;
+            max-width: 100%;
+            height: 500px;
+            background: #f5f5f5;
+            box-shadow: none;
+            border-radius: 20px;
+            overflow: hidden;
+            margin: 0 auto;
+        }
+        
+        @media (min-width: 768px) {
+            .slider-container {
+                height: 70vh;
+                min-height: 500px;
+                max-height: 800px;
+            }
+        }
+        
+        @media (min-width: 1024px) {
+            .slider-container {
+                height: 75vh;
+                min-height: 600px;
+                max-height: 900px;
+            }
+        }
+        
+        @media (min-width: 1280px) {
+            .slider-container {
+                height: 80vh;
+                min-height: 700px;
+                max-height: 1000px;
+            }
+        }
+        
+        .slider-container .slide {
+            border-radius: 20px;
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .slider-container .slide .item {
+            width: 200px;
+            height: 250px;
+            position: absolute;
+            top: 50%;
+            transform: translate(0, -50%);
+            border-radius: 20px;
+            box-shadow: 0 30px 50px #505050;
+            background-position: 50% 50%;
+            background-size: cover;
+            display: inline-block;
+            transition: all 0.5s;
+        }
+        
+        .slider-container .slide .item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.4) 100%);
+            border-radius: 20px;
+            z-index: 1;
+            pointer-events: none;
+        }
+        
+        .slide .item:nth-child(1)::before,
+        .slide .item:nth-child(2)::before {
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.5) 50%, rgba(0, 0, 0, 0.3) 100%);
+        }
+        
+        .slide .item:nth-child(3)::before,
+        .slide .item:nth-child(4)::before {
+            display: none;
+        }
+
+        .slide .item:nth-child(1),
+        .slide .item:nth-child(2) {
+            top: 0;
+            left: 0;
+            transform: translate(0, 0);
+            border-radius: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 20px;
+            transition: all .5s;
+        }
+
+        .slide .item:nth-child(3) {
+            left: calc(50% + 150px);
+            top: auto;
+            bottom: 20px;
+            transform: translate(0, 0);
+        }
+        .slide .item:nth-child(4) {
+            left: calc(50% + 390px);
+            top: auto;
+            bottom: 20px;
+            transform: translate(0, 0);
+        }
+
+        .slide .item:nth-child(n + 5) {
+            left: calc(50% + 440px);
+            opacity: 0;
+        }
+        
+        .item .content {
+            position: absolute;
+            top: 50%;
+            left: 100px;
+            width: 500px;
+            text-align: left;
+            color: #ffffff;
+            transform: translate(0, -50%);
+            font-family: 'Inter', sans-serif;
+            display: none;
+            z-index: 2;
+        }
+
+        .slide .item:nth-child(2) .content {
+            display: block;
+        }
+
+        .item .content .name {
+            font-size: 60px;
+            text-transform: uppercase;
+            font-weight: bold;
+            opacity: 0;
+            animation: animate 1s ease-in-out 1 forwards;
+            font-family: 'Playfair Display', serif;
+            line-height: 1.2;
+            color: #ffffff;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8), 0 0 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .item .content .des {
+            margin-top: 15px;
+            margin-bottom: 25px;
+            opacity: 0;
+            animation: animate 1s ease-in-out 0.3s 1 forwards;
+            font-size: 18px;
+            line-height: 1.6;
+            color: #ffffff;
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8), 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .item .content button {
+            padding: 15px 30px;
+            border: 2px solid #00fff6;
+            cursor: pointer;
+            opacity: 0;
+            border-radius: 10px;
+            background-color: rgba(0, 255, 246, 0.1);
+            transition: all 0.5s ease;
+            animation: animate 1s ease-in-out 0.6s 1 forwards;
+            font-family: 'Inter', sans-serif;
+            color: #00fff6;
+            font-weight: 600;
+            font-size: 16px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            box-shadow: 
+                0 0 5px #00fff6,
+                0 0 10px #00fff6,
+                0 0 15px #00fff6,
+                inset 0 0 5px rgba(0, 255, 246, 0.2);
+            text-shadow: 
+                0 0 5px #00fff6,
+                0 0 10px #00fff6;
+        }
+
+        .item .content button:hover {
+            background-color: #00fff6;
+            color: #050f1a;
+            border: 2px solid #00fff6;
+            transform: translateY(-2px);
+            box-shadow: 
+                0 0 10px #00fff6,
+                0 0 20px #00fff6,
+                0 0 30px #00fff6,
+                0 0 40px #00fff6,
+                inset 0 0 10px rgba(255, 255, 255, 0.3);
+            text-shadow: none;
+        }
+        
+        .item .content button:active {
+            transform: translateY(0);
+            box-shadow: 
+                0 0 5px #00fff6,
+                0 0 10px #00fff6,
+                0 0 15px #00fff6;
+        }
+
+        @keyframes animate {
+            from {
+                opacity: 0;
+                transform: translate(0, 100px);
+                filter: blur(33px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translate(0);
+                filter: blur(0);
+            }
+        }
+
+        .slider-button {
+            display: flex;
+            flex-direction: row;
+            gap: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: auto;
+            align-items: center;
+            text-align: center;
+            position: absolute;
+            bottom: 20px;
+            z-index: 10;
+        }
+
+        .slider-button button {
+            width: 50px;
+            height: 45px;
+            border-radius: 8px;
+            border: 2px solid #00fff6;
+            cursor: pointer;
+            margin: 0 5px;
+            transition: all 0.3s ease;
+            background: rgba(0, 255, 246, 0.1);
+            font-size: 20px;
+            color: #00fff6;
+            font-weight: bold;
+            box-shadow: 
+                0 0 5px #00fff6,
+                0 0 10px #00fff6,
+                0 0 15px #00fff6,
+                inset 0 0 5px rgba(0, 255, 246, 0.2);
+            text-shadow: 
+                0 0 5px #00fff6,
+                0 0 10px #00fff6;
+        }
+
+        .slider-button button:hover {
+            color: #050f1a;
+            background: #00fff6;
+            border: 2px solid #00fff6;
+            transform: scale(1.15);
+            box-shadow: 
+                0 0 10px #00fff6,
+                0 0 20px #00fff6,
+                0 0 30px #00fff6,
+                0 0 40px #00fff6,
+                inset 0 0 10px rgba(255, 255, 255, 0.3);
+            text-shadow: none;
+        }
+        
+        .slider-button button:focus {
+            transform: scale(1.15);
+            background: #00fff6;
+            border: 2px solid #00fff6;
+            color: #050f1a;
+            box-shadow: 
+                0 0 10px #00fff6,
+                0 0 20px #00fff6,
+                0 0 30px #00fff6,
+                0 0 40px #00fff6;
+            outline: none;
+        }
+        
+        .slider-button button:active {
+            transform: scale(1.05);
+            box-shadow: 
+                0 0 5px #00fff6,
+                0 0 10px #00fff6,
+                0 0 15px #00fff6;
+        }
+        
+        .slider-button .next {
+            padding: 0 0 0 3px;
+        }
+        
+        .slider-button .prev {
+            padding: 0 3px 0 0;
+        }
+        
+        .item .content .seeMore {
+            text-decoration: none;
+        }
+        
+        @media (max-width: 768px) {
+            .slider-container {
+                max-width: 100%;
+                height: 400px;
+            }
+            
+            .item .content {
+                left: 50px;
+                width: 350px;
+            }
+            
+            .item .content .name {
+                font-size: 40px;
+            }
+            
+            .item .content .des {
+                font-size: 16px;
+            }
+        }
+        
+        @media (min-width: 1024px) {
+            .item .content {
+                width: 600px;
+            }
+            
+            .item .content .name {
+                font-size: 70px;
+            }
+            
+            .item .content .des {
+                font-size: 20px;
+            }
+        }
+        
+        @media (min-width: 1280px) {
+            .item .content {
+                width: 700px;
+            }
+            
+            .item .content .name {
+                font-size: 80px;
+            }
+            
+            .item .content .des {
+                font-size: 22px;
+            }
+        }
+        
+        /* Contact Us Section Styles */
+        .contact-us-section {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            position: relative;
+        }
+        
+        .contact-us-section .container {
+            text-align: center;
+            max-width: 800px;
+        }
+        
+        .contact-us-section h2 {
+            font-family: 'Oswald', sans-serif;
+            font-weight: 700;
+            font-size: 2rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: #ffffff;
+            margin-bottom: 0.75rem;
+        }
+        
+        .contact-us-section p {
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 1.5rem;
+        }
+        
+        @media (min-width: 768px) {
+            .contact-us-section h2 {
+                font-size: 2.25rem;
+            }
+            
+            .contact-us-section p {
+                font-size: 1.125rem;
+            }
+        }
+        
+        /* Blob Button Styles */
+        .blob-btn {
+            z-index: 1;
+            position: relative;
+            padding: 16px 40px;
+            margin-bottom: 0;
+            text-align: center;
+            text-transform: uppercase;
+            color: #0fe0f5;
+            font-size: 15px;
+            font-weight: bold;
+            background-color: transparent;
+            outline: none;
+            border: none;
+            transition: color 0.5s;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .blob-btn:before {
+            content: "";
+            z-index: 1;
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            border: 6px solid #0fe0f5;
+        }
+        
+        .blob-btn:after {
+            content: "";
+            z-index: -2;
+            position: absolute;
+            left: 9px;
+            top: 9px;
+            width: 100%;
+            height: 100%;
+            border: 6px solid #222;
+            transition: all 0.3s 0.2s;
+        }
+        
+        .blob-btn:hover {
+            color: #222;
+        }
+        
+        .blob-btn:hover:after {
+            transition: all 0.3s;
+            left: 0;
+            top: 0;
+        }
+        
+        .blob-btn__inner {
+            z-index: -1;
+            overflow: hidden;
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .blob-btn__blobs {
+            position: relative;
+            display: block;
+            height: 100%;
+            filter: url('#goo');
+        }
+        
+        .blob-btn__blob {
+            position: absolute;
+            top: 6px;
+            width: 25%;
+            height: 100%;
+            background: #0fe0f5;
+            border-radius: 100%;
+            transform: translate3d(0, 150%, 0) scale(1.4);
+            transition: transform 0.45s;
+        }
+        
+        .blob-btn__blob:nth-child(1) {
+            left: 0%;
+            transition-delay: 0s;
+        }
+        
+        .blob-btn__blob:nth-child(2) {
+            left: 30%;
+            transition-delay: 0.08s;
+        }
+        
+        .blob-btn__blob:nth-child(3) {
+            left: 60%;
+            transition-delay: 0.16s;
+        }
+        
+        .blob-btn__blob:nth-child(4) {
+            left: 90%;
+            transition-delay: 0.24s;
+        }
+        
+        .blob-btn:hover .blob-btn__blob {
+            transform: translateZ(0) scale(1.4);
+        }
     </style>
 </head>
 <body>
     <div id="nav-placeholder"></div>
 
-    <section class="relative h-[60vh] flex items-center justify-center overflow-hidden">
-        <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1528747045269-390fe33c19f2?w=1600');"></div>
+    <section class="relative h-[70vh] md:h-screen flex items-center justify-center overflow-hidden">
+        <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('../../assets/images/customsign/hero.jpg');"></div>
         <div class="absolute inset-0 hero-gradient"></div>
-        <div class="relative z-10 text-center text-white px-6">
-            <h1 class="text-5xl md:text-6xl font-bold mb-4">CUSTOM SIGNAGE</h1>
-            <p class="text-xl md:text-2xl mb-8">Walk Up and Win a Prize!</p>
-            <a href="#contact" class="btn-primary text-white px-8 py-4 rounded-full text-lg font-semibold inline-block">Get a Quote</a>
+        <div class="relative z-10 text-center text-white px-6 -mt-16 md:-mt-20">
+            <h3 class="signage-label">A/V PRODUCTION</h3>
+            <h1 class="neon-sign">CUSTOM SIGNAGE</h1>
+            <p class="signage-description mb-8">
+                Illuminate your event with premium custom signage solutions. Expertly crafted to showcase your brand identity and create unforgettable visual experiences that captivate your audience.
+            </p>
+            <a href="#contact" class="neon-button">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                Contact Us
+            </a>
         </div>
     </section>
 
-    <section class="section-padding bg-white">
-        <div class="container mx-auto px-6">
-            <div class="max-w-4xl mx-auto">
-                <h2 class="text-4xl font-bold mb-6 text-center">Classic Arcade Fun</h2>
-                <p class="text-lg text-gray-700 mb-8 text-center">Bring the excitement of the arcade to your event with our professional claw machines.</p>
-                
-                <div class="grid md:grid-cols-2 gap-8 mt-12">
-                    <div class="bg-gray-50 p-6 rounded-lg">
-                        <h3 class="text-2xl font-semibold mb-4">🎁 Custom Prizes</h3>
-                        <p class="text-gray-700">Fill with branded items, candy, toys, or custom prizes.</p>
+    <!-- Image Grid Section -->
+    <section class="image-grid-section py-8 md:py-12" style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);">
+        <canvas id="canvas"></canvas>
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-2 gap-3">
+                <div>
+                    <!-- Column 1 - Content -->
+                    <div class="left-column-content">
+                        <h3>CAPTIVATE YOUR AUDIENCE WITH OUR</h3>
+                        <h2><em>CUSTOM SIGNAGE</em></h2>
+                        <p>MiHi Entertainment provides comprehensive signage services for all your event needs, featuring stunning LED boards and custom neon signs to elevate your event's visual appeal. Our offerings include creating eye-catching displays, providing high-quality LED installations, and delivering unique neon signs that enhance your event's atmosphere, perfect for corporate events and corporate conferences.</p>
+                        <p>Our team specializes in crafting dynamic signage solutions that capture the essence of your occasion, whether it's a corporate event, conference, or celebration. We ensure your messages and visuals are presented beautifully on our top-of-the-line LED boards, adding a striking visual impact that captivates your audience.</p>
+                        <p>In addition, our custom neon signs bring a unique and vibrant touch to any event, making your brand or message stand out with their distinctive glow. From setup to execution, we manage every detail to ensure your signage not only meets but exceeds your expectations.</p>
+                        <p>From stunning LED displays to bespoke neon signs, MiHi Entertainment's signage services are designed to create unforgettable experiences and leave a lasting impression on your guests, especially at corporate events and corporate conferences.</p>
+                        <a href="#contact" class="neon-button" style="margin-top: 1rem;">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            Interested In Hearing More?
+                        </a>
                     </div>
-                    <div class="bg-gray-50 p-6 rounded-lg">
-                        <h3 class="text-2xl font-semibold mb-4">🎮 Full Size Machines</h3>
-                        <p class="text-gray-700">Professional arcade-quality claw machines that actually work!</p>
                     </div>
-                    <div class="bg-gray-50 p-6 rounded-lg">
-                        <h3 class="text-2xl font-semibold mb-4">🎪 Free Play</h3>
-                        <p class="text-gray-700">Set to free play mode - everyone wins!</p>
-                    </div>
-                    <div class="bg-gray-50 p-6 rounded-lg">
-                        <h3 class="text-2xl font-semibold mb-4">🎨 Branding Options</h3>
-                        <p class="text-gray-700">Custom wraps and branding available for corporate events.</p>
+                <div>
+                    <!-- Column 2 - Image Grid -->
+                    <div class="image-grid-container">
+                        <ul class="image-grid">
+                            <li>
+                                <img src="../../assets/images/customsign/imgGrid1.jpg" alt="Custom Signage 1">
+                            </li>
+                            <li>
+                                <img src="../../assets/images/customsign/imgGrid2.jpg" alt="Custom Signage 2">
+                            </li>
+                            <li>
+                                <img src="../../assets/images/customsign/imgGrid3.jpg" alt="Custom Signage 3">
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="section-padding bg-gradient-to-r from-[#0050ff] to-[#0050ff] text-white">
-        <div class="container mx-auto px-6 text-center">
-            <h2 class="text-4xl font-bold mb-6">Ready to Play?</h2>
-            <p class="text-xl mb-8">Add arcade fun to your next event</p>
-            <a href="#contact" class="bg-white text-[#0050ff] px-8 py-4 rounded-full text-lg font-semibold inline-block hover:bg-gray-100 transition">Request Quote</a>
+    <!-- Image Slider Section -->
+    <section class="image-slider-section py-8 md:py-12">
+        <div class="container mx-auto px-4">
+            <div class="slider-container">
+                <div class="slide">
+                    <div
+                        class="item"
+                        style="background-image: url('../../assets/images/customsign/slider1.jpg');"
+                    >
+                        <div class="content">
+                            <div class="name">Corporate Events</div>
+                            <div class="des">
+                                Custom branded products to tell our brand story through imagery.
+                            </div>
+                            <a class="seeMore" href="#contact">
+                                <button>See More</button>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div
+                        class="item"
+                        style="background-image: url('../../assets/images/customsign/slider2.jpg');"
+                    >
+                        <div class="content">
+                            <div class="name">Weddings</div>
+                            <div class="des">
+                                From monograms to custom neon signs, your guests will be immersed in your special day.
+                            </div>
+                            <a class="seeMore" href="#contact">
+                                <button>See More</button>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div
+                        class="item"
+                        style="background-image: url('../../assets/images/customsign/slider3.jpg');"
+                    >
+                        <div class="content">
+                            <div class="name">Trade Shows</div>
+                            <div class="des">
+                                Spend your trade show dollars making your brand shine and guests immersed in your brand.
+                            </div>
+                            <a class="seeMore" href="#contact">
+                                <button>See More</button>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div
+                        class="item"
+                        style="background-image: url('../../assets/images/customsign/slider4.jpg');"
+                    >
+                        <div class="content">
+                            <div class="name">Casino Parties</div>
+                            <div class="des">
+                                Bring life to the party and guide guests throughout your space, while highlighting sponsors for an unforgettable guest experience.
+                            </div>
+                            <a class="seeMore" href="#contact">
+                                <button>See More</button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="slider-button">
+                    <button class="prev">◁</button>
+                    <button class="next">▷</button>
+                </div>
+            </div>
         </div>
     </section>
 
+    <!-- Contact Us Section -->
+    <section id="contact" class="contact-us-section py-6 md:py-8">
+        <div class="container mx-auto px-4">
+            <h2>CONTACT US NOW</h2>
+            <p>Learn more about our event signage services for your next event, click the button below to email us and connect with our team today.</p>
+            <div class="buttons">
+                <button class="blob-btn">
+                    Learn More Now
+                    <span class="blob-btn__inner">
+                        <span class="blob-btn__blobs">
+                            <span class="blob-btn__blob"></span>
+                            <span class="blob-btn__blob"></span>
+                            <span class="blob-btn__blob"></span>
+                            <span class="blob-btn__blob"></span>
+                        </span>
+                    </span>
+                </button>
+            </div>
+        </div>
+    </section>
+    
+    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" style="display: none;">
+        <defs>
+            <filter id="goo">
+                <feGaussianBlur in="SourceGraphic" result="blur" stdDeviation="10"></feGaussianBlur>
+                <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 21 -7" result="goo"></feColorMatrix>
+                <feBlend in2="goo" in="SourceGraphic" result="mix"></feBlend>
+            </filter>
+        </defs>
+    </svg>
+
     <script src="../../assets/components/navigation.js"></script>
     <script src="../../assets/components/footer.js"></script>
+    <script>
+        // Canvas Background Animation
+        let canvas, ctx, w, h, units;
+        let unitCount = 100;
+        let hue = 0;
+
+        function init() {
+            canvas = document.querySelector("#canvas");
+            if (!canvas) return;
+            ctx = canvas.getContext("2d");
+
+            resizeReset();
+            createUnits();
+            animationLoop();
+        }
+
+        function resizeReset() {
+            if (!canvas) return;
+            const section = canvas.closest('.image-grid-section');
+            if (!section) return;
+            
+            const rect = section.getBoundingClientRect();
+            w = canvas.width = rect.width;
+            h = canvas.height = rect.height;
+            
+            ctx.fillStyle = "#222";
+            ctx.fillRect(0, 0, w, h);
+        }
+
+        function createUnits() {
+            units = [];
+            for (let i = 0; i < unitCount; i++) {
+                setTimeout(() => {
+                    units.push(new Unit());
+                }, i * 200);
+            }
+        }
+
+        function animationLoop() {
+            if (!canvas || !ctx) return;
+            ctx.fillStyle = "rgba(0, 0, 0, .05)";
+            ctx.fillRect(0, 0, w, h);
+
+            drawScene();	
+            requestAnimationFrame(animationLoop);
+        }
+
+        function drawScene() {
+            if (!units) return;
+            for (let i = 0; i < units.length; i++) {
+                units[i].update();
+                units[i].draw();
+            }
+        }
+
+        function getRandomInt(min, max) {
+            return Math.round(Math.random() * (max - min)) + min;
+        }
+
+        class Unit {
+            constructor() {
+                this.reset();
+                this.constructed = true;
+            }
+            reset() {
+                this.x = Math.round(w / 2);
+                this.y = Math.round(h / 2);
+                this.sx = this.x;
+                this.sy = this.y;
+                this.angle = 60 * getRandomInt(0, 5);
+                this.size = 1;
+                this.radian = (Math.PI / 180) * (this.angle + 90);
+                this.speed = 2;
+                this.maxDistance = 30;
+                this.time = 0;
+                this.ttl = getRandomInt(180, 300);
+                this.hue = hue;
+                hue += 0.5;
+            }
+            draw() {
+                ctx.save();
+                ctx.beginPath();		
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fillStyle = `hsl(${this.hue}, 100%, 50%)`;
+                ctx.shadowColor = `hsl(${this.hue}, 100%, 50%)`;
+                ctx.shadowBlur = 5;
+                ctx.fill();
+                ctx.closePath();
+                ctx.restore();
+            }
+            update() {
+                let dx = this.sx - this.x;
+                let dy = this.sy - this.y;
+                let distance = Math.sqrt(dx * dx + dy * dy);
+
+                if (distance >= this.maxDistance) {
+                    if (getRandomInt(0, 1)) {
+                        this.angle += 60;
+                    } else {
+                        this.angle -= 60;
+                    }
+
+                    this.radian = (Math.PI / 180) * (this.angle + 90);
+                    this.sx = this.x;
+                    this.sy = this.y; 
+                }
+
+                this.x += this.speed * Math.sin(this.radian);
+                this.y += this.speed * Math.cos(this.radian);
+                
+                if (this.time >= this.ttl || this.x < 0 || this.x > w || this.y < 0 || this.y > h) {
+                    this.reset();
+                }
+
+                this.time++;
+            }
+        } 
+
+        window.addEventListener("DOMContentLoaded", init);
+        window.addEventListener("resize", resizeReset);
+    </script>
+    <script>
+        // Image Slider Functionality
+        (function() {
+            let next = document.querySelector(".slider-button .next");
+            let prev = document.querySelector(".slider-button .prev");
+            
+            if (next && prev) {
+                next.addEventListener("click", function () {
+                    let items = document.querySelectorAll(".slide .item");
+                    if (items.length > 0) {
+                        document.querySelector(".slide").appendChild(items[0]);
+                    }
+                });
+
+                prev.addEventListener("click", function () {
+                    let items = document.querySelectorAll(".slide .item");
+                    if (items.length > 0) {
+                        document.querySelector(".slide").prepend(items[items.length - 1]);
+                    }
+                });
+            }
+        })();
+    </script>
 </body>
 </html>
