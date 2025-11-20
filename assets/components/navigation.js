@@ -235,6 +235,10 @@ document.addEventListener('DOMContentLoaded', function() {
                                         <span class="font-semibold block mb-0.5">Event Stages</span>
                                         <span class="text-xs text-gray-500 leading-relaxed">Professional stage setups</span>
                                     </a>
+                                    <a href="${pathPrefix}rentals/av-services/custom-signage.html" class="block text-sm text-gray-700 hover:text-blue-600 transition py-1.5 hover:bg-blue-50 rounded-md px-2 -mx-2">
+                                        <span class="font-semibold block mb-0.5">Custom Signage</span>
+                                        <span class="text-xs text-gray-500 leading-relaxed">Professional stage setups</span>
+                                    </a>
                                 </div>
                                 <div class="space-y-2.5">
                                     <div class="mb-4 pb-3 border-b-2 border-purple-200">
