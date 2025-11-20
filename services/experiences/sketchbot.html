@@ -1,0 +1,1222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="SketchBot Booth by MiHi Entertainment. Watch as our SketchBot draws a sketch of you in real-time. Transform photos into hand-drawn digital sketches with robotic precision.">
+    <title>SketchBot Booth - MiHi Entertainment</title>
+    <link rel="icon" type="image/svg+xml" href="../../assets/images/favicon.svg">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #1a202c;
+        }
+
+        main h1,
+        main h2,
+        main h3,
+        main h4,
+        main h5,
+        main h6 {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(26, 26, 26, 0.4);
+        }
+
+        .section-padding {
+            padding: 5rem 0;
+        }
+
+        @media (min-width: 768px) {
+            .section-padding {
+                padding: 8rem 0;
+            }
+        }
+
+        /* Paper Texture Background */
+        .paper-texture {
+            background-color: #fafafa;
+            background-image: 
+                repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,.03) 2px, rgba(0,0,0,.03) 4px, transparent 4px, transparent 6px),
+                repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(0,0,0,.03) 2px, rgba(0,0,0,.03) 4px, transparent 4px, transparent 6px);
+            background-size: 20px 20px;
+        }
+
+        /* Sketch Line Animations */
+        @keyframes draw-line {
+            from {
+                stroke-dashoffset: 1000;
+            }
+            to {
+                stroke-dashoffset: 0;
+            }
+        }
+
+        .sketch-line {
+            stroke-dasharray: 1000;
+            stroke-dashoffset: 1000;
+            animation: draw-line 3s ease forwards;
+        }
+
+        /* Pencil Float Animation */
+        @keyframes pencil-float {
+            0%, 100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-20px) rotate(5deg);
+            }
+        }
+
+        .pencil-float {
+            animation: pencil-float 6s ease-in-out infinite;
+        }
+
+        .pencil-float-delay {
+            animation: pencil-float 6s ease-in-out infinite;
+            animation-delay: 2s;
+        }
+
+        /* Sketch Dots Pattern */
+        .sketch-dots {
+            background-image: radial-gradient(circle, #2d2d2d 1px, transparent 1px);
+            background-size: 20px 20px;
+            opacity: 0.1;
+        }
+
+        /* Crosshatch Pattern */
+        .crosshatch {
+            background-image: 
+                repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(45, 45, 45, 0.05) 10px, rgba(45, 45, 45, 0.05) 20px),
+                repeating-linear-gradient(-45deg, transparent, transparent 10px, rgba(45, 45, 45, 0.05) 10px, rgba(45, 45, 45, 0.05) 20px);
+        }
+
+        /* Blob Animation */
+        @keyframes blob {
+            0%, 100% {
+                transform: translate(0, 0) scale(1);
+            }
+            33% {
+                transform: translate(30px, -50px) scale(1.1);
+            }
+            66% {
+                transform: translate(-20px, 20px) scale(0.9);
+            }
+        }
+
+        .animate-blob {
+            animation: blob 7s ease-in-out infinite;
+        }
+
+        .animation-delay-2000 {
+            animation-delay: 2s;
+        }
+
+        .animation-delay-4000 {
+            animation-delay: 4s;
+        }
+
+        /* Sketch Card Hover */
+        .sketch-card {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .sketch-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, 
+                rgba(45, 45, 45, 0.05),
+                rgba(218, 165, 32, 0.05));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .sketch-card:hover::before {
+            opacity: 1;
+        }
+
+        .sketch-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(26, 26, 26, 0.15);
+        }
+
+        /* Sketch Border Effect */
+        .sketch-border {
+            position: relative;
+        }
+
+        .sketch-border::after {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            border: 2px dashed rgba(45, 45, 45, 0.2);
+            border-radius: inherit;
+            pointer-events: none;
+        }
+
+        /* Graphite Gradient Text */
+        .graphite-gradient {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 25%, #404040 50%, #d4a017 75%, #daa520 100%);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradient-shift 5s ease infinite;
+        }
+
+        /* Light Graphite Gradient for Dark Backgrounds */
+        .graphite-gradient-light {
+            background: linear-gradient(135deg, #ffffff 0%, #f3f4f6 15%, #e5e7eb 30%, #fef3c7 50%, #fde68a 70%, #fcd34d 85%, #fbbf24 100%);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradient-shift 5s ease infinite;
+        }
+
+        @keyframes gradient-shift {
+            0%, 100% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+        }
+
+        /* Drawing Animation */
+        @keyframes draw-path {
+            from {
+                stroke-dashoffset: 1000;
+                opacity: 0;
+            }
+            to {
+                stroke-dashoffset: 0;
+                opacity: 1;
+            }
+        }
+
+        .draw-path {
+            stroke-dasharray: 1000;
+            stroke-dashoffset: 1000;
+            animation: draw-path 2s ease forwards;
+        }
+
+        /* Robotic Precision Lines */
+        .robotic-lines {
+            background-image: 
+                repeating-linear-gradient(0deg, transparent, transparent 1px, rgba(218, 165, 32, 0.1) 1px, rgba(218, 165, 32, 0.1) 2px),
+                repeating-linear-gradient(90deg, transparent, transparent 1px, rgba(218, 165, 32, 0.1) 1px, rgba(218, 165, 32, 0.1) 2px);
+            background-size: 40px 40px;
+        }
+
+        /* Auto-Scrolling Gallery */
+        .scroll-container {
+            overflow: hidden;
+            position: relative;
+            mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+            -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+        }
+        
+        .scroll-content {
+            display: flex;
+            animation: scroll-left 30s linear infinite;
+        }
+        
+        .scroll-content:hover {
+            animation-play-state: paused;
+        }
+        
+        @keyframes scroll-left {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* Lightbox Styles with Zoom */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+            cursor: zoom-out;
+        }
+        
+        .lightbox.active {
+            display: flex;
+        }
+        
+        .lightbox-img-container {
+            position: relative;
+            max-width: 90%;
+            max-height: 90vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .lightbox img {
+            max-width: 100%;
+            max-height: 90vh;
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 0 50px rgba(45, 45, 45, 0.5);
+            cursor: zoom-in;
+            transition: transform 0.3s ease;
+        }
+        
+        .lightbox img.zoomed {
+            transform: scale(2);
+            cursor: zoom-out;
+        }
+        
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-size: 40px;
+            color: white;
+            cursor: pointer;
+            z-index: 10000;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+        
+        .lightbox-close:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: rotate(90deg);
+        }
+
+        /* Animated Sketch Lines */
+        @keyframes sketch-draw {
+            0% {
+                stroke-dashoffset: 100%;
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                stroke-dashoffset: 0;
+                opacity: 1;
+            }
+        }
+
+        .sketch-line-animated {
+            stroke-dasharray: 1000;
+            stroke-dashoffset: 1000;
+            animation: sketch-draw 3s ease forwards;
+        }
+
+        /* Sketch Frame Animation */
+        @keyframes frame-draw {
+            0% {
+                clip-path: inset(100% 0 0 0);
+                opacity: 0;
+            }
+            100% {
+                clip-path: inset(0% 0 0 0);
+                opacity: 1;
+            }
+        }
+
+        .sketch-frame {
+            animation: frame-draw 1.5s ease forwards;
+        }
+
+        /* Drawing Circle Animation */
+        @keyframes draw-circle {
+            0% {
+                stroke-dashoffset: 628;
+                opacity: 0;
+            }
+            100% {
+                stroke-dashoffset: 0;
+                opacity: 1;
+            }
+        }
+
+        .draw-circle {
+            stroke-dasharray: 628;
+            stroke-dashoffset: 628;
+            animation: draw-circle 2s ease forwards;
+        }
+
+        /* Robot Arm Icon Animation */
+        @keyframes robot-arm {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-10px) rotate(5deg);
+            }
+        }
+
+        .robot-arm-icon {
+            animation: robot-arm 4s ease-in-out infinite;
+        }
+
+        /* Sketch Brush Stroke Effect */
+        @keyframes brush-stroke {
+            0% {
+                width: 0%;
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                width: 100%;
+                opacity: 0.8;
+            }
+        }
+
+        .brush-stroke {
+            position: absolute;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, rgba(45, 45, 45, 0.3), transparent);
+            animation: brush-stroke 2s ease forwards;
+        }
+
+        /* Enhanced Sketch Card */
+        .enhanced-sketch-card {
+            position: relative;
+            background: white;
+            border: 2px solid rgba(45, 45, 45, 0.1);
+            border-radius: 1rem;
+            padding: 2rem;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            overflow: visible;
+        }
+
+        .enhanced-sketch-card::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, 
+                rgba(218, 165, 32, 0.2), 
+                rgba(45, 45, 45, 0.2), 
+                rgba(218, 165, 32, 0.2));
+            border-radius: inherit;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: -1;
+        }
+
+        .enhanced-sketch-card:hover::before {
+            opacity: 1;
+        }
+
+        .enhanced-sketch-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px rgba(26, 26, 26, 0.15), 0 0 0 1px rgba(218, 165, 32, 0.2);
+        }
+
+        /* FAQ Accordion Styles */
+        .faq-item {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .faq-question {
+            cursor: pointer;
+            transition: all 0.3s ease;
+            user-select: none;
+        }
+
+        .faq-question:hover {
+            color: #1a1a1a;
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, opacity 0.3s ease;
+            opacity: 0;
+        }
+
+        .faq-answer.active {
+            max-height: 500px;
+            opacity: 1;
+        }
+
+        .faq-icon {
+            transition: transform 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .faq-icon.active {
+            transform: rotate(45deg);
+        }
+
+        .faq-item.active .faq-question {
+            color: #daa520;
+        }
+
+        /* Decorative sketch line on hover */
+        .faq-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(180deg, transparent, #daa520, transparent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .faq-item:hover::before,
+        .faq-item.active::before {
+            opacity: 1;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 640px) {
+            .section-padding {
+                padding: 3rem 0;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-white">
+    <!-- Navigation -->
+    <script src="../../assets/components/navigation.js"></script>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="relative min-h-[70vh] sm:min-h-[80vh] md:min-h-[90vh] flex items-center justify-center overflow-hidden py-8 sm:py-12 md:py-0 paper-texture">
+            <!-- Background Image -->
+            <div class="absolute inset-0 z-0">
+                <img src="../../assets/images/sketchbot/sketchbot-hero.webp" alt="SketchBot Booth Hero" class="w-full h-full object-cover">
+            </div>
+            
+            <!-- Overlay for text readability -->
+            <div class="absolute inset-0 bg-gradient-to-br from-gray-900/60 via-gray-800/50 to-gray-900/70 z-[1]"></div>
+            
+            <!-- Sketch Dots Pattern -->
+            <div class="absolute inset-0 sketch-dots z-[2]"></div>
+            
+            <!-- Crosshatch Overlay -->
+            <div class="absolute inset-0 crosshatch opacity-20 z-[2]"></div>
+
+            <!-- Graphite Glow Orbs -->
+            <div class="absolute top-20 left-10 w-48 h-48 sm:w-64 sm:h-64 md:w-96 md:h-96 bg-gray-300/20 rounded-full blur-3xl animate-blob z-[2]"></div>
+            <div class="absolute bottom-20 right-10 w-48 h-48 sm:w-64 sm:h-64 md:w-96 md:h-96 bg-amber-200/20 rounded-full blur-3xl animate-blob animation-delay-2000 z-[2]"></div>
+            <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-32 h-32 sm:w-48 sm:h-48 md:w-64 md:h-64 bg-slate-200/15 rounded-full blur-2xl animate-blob animation-delay-4000 z-[2]"></div>
+
+            <!-- Pencil Icons Floating -->
+            <div class="absolute top-32 left-20 text-4xl md:text-6xl pencil-float opacity-15 z-[3]">✏️</div>
+            <div class="absolute bottom-32 right-20 text-4xl md:text-6xl pencil-float-delay opacity-15 z-[3]">🖊️</div>
+            <div class="absolute top-1/3 right-1/4 text-3xl md:text-5xl pencil-float opacity-10 z-[3]">✏️</div>
+            <div class="absolute bottom-1/4 left-1/3 text-3xl md:text-5xl pencil-float-delay opacity-10 z-[3]">🖊️</div>
+
+            <!-- Robotic Lines -->
+            <div class="absolute inset-0 robotic-lines opacity-30 z-[2]"></div>
+
+            <div class="relative z-10 container mx-auto px-4 sm:px-6">
+                <div class="max-w-6xl mx-auto text-center">
+                    <!-- Badge -->
+                    <div class="inline-flex items-center gap-2 sm:gap-3 px-4 sm:px-6 py-2 bg-white/80 backdrop-blur-md border-2 border-white/30 rounded-full shadow-lg mb-6 sm:mb-8">
+                        <span class="text-gray-900 text-xs sm:text-sm font-semibold tracking-wider uppercase">Turn Moments into Art</span>
+                    </div>
+
+                    <!-- Main Title -->
+                    <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black mb-4 sm:mb-6 leading-tight sm:leading-none tracking-tight px-2 drop-shadow-2xl">
+                        <span class="block graphite-gradient-light mb-2">
+                            SKETCHBOT BOOTH
+                        </span>
+                    </h1>
+
+                    <!-- Subtitle -->
+                    <h2 class="text-lg sm:text-xl md:text-2xl font-semibold mb-4 sm:mb-6 text-white/95 max-w-3xl mx-auto px-4 drop-shadow-lg">
+                        A one-of-a-kind activation that turns photos into hand-drawn digital sketches in real time.
+                    </h2>
+
+                    <!-- CTA Buttons -->
+                    <div class="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center px-4 mt-8 sm:mt-12">
+                        <a href="https://boothbook.com/"
+                            class="group relative inline-flex items-center gap-2 sm:gap-3 bg-gradient-to-r from-gray-900 to-gray-800 text-white px-6 sm:px-10 py-3 sm:py-5 rounded-full text-base sm:text-lg font-bold shadow-2xl hover:shadow-gray-900/50 transition-all duration-500 transform hover:scale-110 hover:-translate-y-1 overflow-hidden w-full sm:w-auto justify-center">
+                            <span class="relative z-10">Get Your Free Quote</span>
+                            <svg class="w-4 h-4 sm:w-5 sm:h-5 relative z-10 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+                            </svg>
+                        </a>
+                        <a href="tel:7205516994"
+                            class="group inline-flex items-center gap-2 sm:gap-3 px-6 sm:px-10 py-3 sm:py-5 rounded-full text-base sm:text-lg font-bold backdrop-blur-md bg-white/80 border-2 border-white/50 hover:bg-white/90 hover:border-white/70 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:scale-110 hover:-translate-y-1 text-gray-900 w-full sm:w-auto justify-center">
+                            <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498A1 1 0 0121 17.72V21a2 2 0 01-2 2h-1C9.716 23 3 16.284 3 8V7a2 2 0 012-2z"></path>
+                            </svg>
+                            <span>Call: (720)551-6994</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Meet SketchBot Section -->
+        <section class="section-padding bg-gradient-to-b from-white via-gray-50/50 to-white relative overflow-hidden paper-texture">
+            <div class="container mx-auto px-4 sm:px-6 relative z-10">
+                <div class="max-w-5xl mx-auto text-center">
+                    <div class="inline-block mb-6 sm:mb-8 px-6 sm:px-8 py-2 sm:py-3 bg-white/80 backdrop-blur-md rounded-full border-2 border-gray-800/20 shadow-md">
+                        <span class="text-gray-800 text-xs sm:text-sm font-bold tracking-wider flex items-center gap-2">
+                            SKETCHBOT RENTALS
+                        </span>
+                    </div>
+                    
+                    <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6 sm:mb-8 text-gray-900 leading-tight">
+                        <span class="graphite-gradient">Robotic Artistry</span>
+                        <br>
+                        <span class="text-gray-800/90">Meets Creative Vision</span>
+                    </h2>
+                    
+                    <p class="text-base sm:text-lg md:text-xl mb-8 sm:mb-12 text-gray-700 max-w-3xl mx-auto leading-relaxed px-4">
+                        SketchBot brings digital creativity to life by transforming guest photos into custom digital sketches using robotic precision. Whether you're hosting a corporate event, wedding, or brand activation, SketchBot adds an artistic touch that makes every interaction unforgettable.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Auto-Scrolling Photo Gallery - Full Width -->
+            <div class="mt-12 sm:mt-16 w-full scroll-container">
+                <div class="scroll-content">
+                    <!-- First set of images -->
+                    <div class="flex gap-4 sm:gap-6 shrink-0">
+                        <div class="w-80 h-60 sm:w-96 sm:h-72 md:w-[420px] md:h-[315px] lg:w-[450px] lg:h-[338px] rounded-xl overflow-hidden shadow-2xl border-2 border-gray-300/30 cursor-pointer hover:scale-105 transition-transform" onclick="openLightbox('../../assets/images/sketchbot/sketchbot-1.webp')">
+                            <img src="../../assets/images/sketchbot/sketchbot-1.webp" alt="SketchBot Booth" class="w-full h-full object-cover">
+                        </div>
+                        <div class="w-80 h-60 sm:w-96 sm:h-72 md:w-[420px] md:h-[315px] lg:w-[450px] lg:h-[338px] rounded-xl overflow-hidden shadow-2xl border-2 border-gray-300/30 cursor-pointer hover:scale-105 transition-transform" onclick="openLightbox('../../assets/images/sketchbot/sketchbot-2.webp')">
+                            <img src="../../assets/images/sketchbot/sketchbot-2.webp" alt="SketchBot Booth" class="w-full h-full object-cover">
+                        </div>
+                        <div class="w-80 h-60 sm:w-96 sm:h-72 md:w-[420px] md:h-[315px] lg:w-[450px] lg:h-[338px] rounded-xl overflow-hidden shadow-2xl border-2 border-gray-300/30 cursor-pointer hover:scale-105 transition-transform" onclick="openLightbox('../../assets/images/sketchbot/sketchbot-3.webp')">
+                            <img src="../../assets/images/sketchbot/sketchbot-3.webp" alt="SketchBot Booth" class="w-full h-full object-cover">
+                        </div>
+                        <div class="w-80 h-60 sm:w-96 sm:h-72 md:w-[420px] md:h-[315px] lg:w-[450px] lg:h-[338px] rounded-xl overflow-hidden shadow-2xl border-2 border-gray-300/30 cursor-pointer hover:scale-105 transition-transform" onclick="openLightbox('../../assets/images/sketchbot/sketchbot-4.webp')">
+                            <img src="../../assets/images/sketchbot/sketchbot-4.webp" alt="SketchBot Booth" class="w-full h-full object-cover">
+                        </div>
+                        <div class="w-80 h-60 sm:w-96 sm:h-72 md:w-[420px] md:h-[315px] lg:w-[450px] lg:h-[338px] rounded-xl overflow-hidden shadow-2xl border-2 border-gray-300/30 cursor-pointer hover:scale-105 transition-transform" onclick="openLightbox('../../assets/images/sketchbot/sketchbot-5.webp')">
+                            <img src="../../assets/images/sketchbot/sketchbot-5.webp" alt="SketchBot Booth" class="w-full h-full object-cover">
+                        </div>
+                        <div class="w-80 h-60 sm:w-96 sm:h-72 md:w-[420px] md:h-[315px] lg:w-[450px] lg:h-[338px] rounded-xl overflow-hidden shadow-2xl border-2 border-gray-300/30 cursor-pointer hover:scale-105 transition-transform" onclick="openLightbox('../../assets/images/sketchbot/sketchbot-6.webp')">
+                            <img src="../../assets/images/sketchbot/sketchbot-6.webp" alt="SketchBot Booth" class="w-full h-full object-cover">
+                        </div>
+                        <div class="w-80 h-60 sm:w-96 sm:h-72 md:w-[420px] md:h-[315px] lg:w-[450px] lg:h-[338px] rounded-xl overflow-hidden shadow-2xl border-2 border-gray-300/30 cursor-pointer hover:scale-105 transition-transform" onclick="openLightbox('../../assets/images/sketchbot/sketchbot-7.webp')">
+                            <img src="../../assets/images/sketchbot/sketchbot-7.webp" alt="SketchBot Booth" class="w-full h-full object-cover">
+                        </div>
+                        <div class="w-80 h-60 sm:w-96 sm:h-72 md:w-[420px] md:h-[315px] lg:w-[450px] lg:h-[338px] rounded-xl overflow-hidden shadow-2xl border-2 border-gray-300/30 cursor-pointer hover:scale-105 transition-transform" onclick="openLightbox('../../assets/images/sketchbot/sketchbot-8.webp')">
+                            <img src="../../assets/images/sketchbot/sketchbot-8.webp" alt="SketchBot Booth" class="w-full h-full object-cover">
+                        </div>
+                    </div>
+                    <!-- Duplicate set for seamless loop -->
+                    <div class="flex gap-4 sm:gap-6 shrink-0">
+                        <div class="w-80 h-60 sm:w-96 sm:h-72 md:w-[420px] md:h-[315px] lg:w-[450px] lg:h-[338px] rounded-xl overflow-hidden shadow-2xl border-2 border-gray-300/30 cursor-pointer hover:scale-105 transition-transform" onclick="openLightbox('../../assets/images/sketchbot/sketchbot-1.webp')">
+                            <img src="../../assets/images/sketchbot/sketchbot-1.webp" alt="SketchBot Booth" class="w-full h-full object-cover">
+                        </div>
+                        <div class="w-80 h-60 sm:w-96 sm:h-72 md:w-[420px] md:h-[315px] lg:w-[450px] lg:h-[338px] rounded-xl overflow-hidden shadow-2xl border-2 border-gray-300/30 cursor-pointer hover:scale-105 transition-transform" onclick="openLightbox('../../assets/images/sketchbot/sketchbot-2.webp')">
+                            <img src="../../assets/images/sketchbot/sketchbot-2.webp" alt="SketchBot Booth" class="w-full h-full object-cover">
+                        </div>
+                        <div class="w-80 h-60 sm:w-96 sm:h-72 md:w-[420px] md:h-[315px] lg:w-[450px] lg:h-[338px] rounded-xl overflow-hidden shadow-2xl border-2 border-gray-300/30 cursor-pointer hover:scale-105 transition-transform" onclick="openLightbox('../../assets/images/sketchbot/sketchbot-3.webp')">
+                            <img src="../../assets/images/sketchbot/sketchbot-3.webp" alt="SketchBot Booth" class="w-full h-full object-cover">
+                        </div>
+                        <div class="w-80 h-60 sm:w-96 sm:h-72 md:w-[420px] md:h-[315px] lg:w-[450px] lg:h-[338px] rounded-xl overflow-hidden shadow-2xl border-2 border-gray-300/30 cursor-pointer hover:scale-105 transition-transform" onclick="openLightbox('../../assets/images/sketchbot/sketchbot-4.webp')">
+                            <img src="../../assets/images/sketchbot/sketchbot-4.webp" alt="SketchBot Booth" class="w-full h-full object-cover">
+                        </div>
+                        <div class="w-80 h-60 sm:w-96 sm:h-72 md:w-[420px] md:h-[315px] lg:w-[450px] lg:h-[338px] rounded-xl overflow-hidden shadow-2xl border-2 border-gray-300/30 cursor-pointer hover:scale-105 transition-transform" onclick="openLightbox('../../assets/images/sketchbot/sketchbot-5.webp')">
+                            <img src="../../assets/images/sketchbot/sketchbot-5.webp" alt="SketchBot Booth" class="w-full h-full object-cover">
+                        </div>
+                        <div class="w-80 h-60 sm:w-96 sm:h-72 md:w-[420px] md:h-[315px] lg:w-[450px] lg:h-[338px] rounded-xl overflow-hidden shadow-2xl border-2 border-gray-300/30 cursor-pointer hover:scale-105 transition-transform" onclick="openLightbox('../../assets/images/sketchbot/sketchbot-6.webp')">
+                            <img src="../../assets/images/sketchbot/sketchbot-6.webp" alt="SketchBot Booth" class="w-full h-full object-cover">
+                        </div>
+                        <div class="w-80 h-60 sm:w-96 sm:h-72 md:w-[420px] md:h-[315px] lg:w-[450px] lg:h-[338px] rounded-xl overflow-hidden shadow-2xl border-2 border-gray-300/30 cursor-pointer hover:scale-105 transition-transform" onclick="openLightbox('../../assets/images/sketchbot/sketchbot-7.webp')">
+                            <img src="../../assets/images/sketchbot/sketchbot-7.webp" alt="SketchBot Booth" class="w-full h-full object-cover">
+                        </div>
+                        <div class="w-80 h-60 sm:w-96 sm:h-72 md:w-[420px] md:h-[315px] lg:w-[450px] lg:h-[338px] rounded-xl overflow-hidden shadow-2xl border-2 border-gray-300/30 cursor-pointer hover:scale-105 transition-transform" onclick="openLightbox('../../assets/images/sketchbot/sketchbot-8.webp')">
+                            <img src="../../assets/images/sketchbot/sketchbot-8.webp" alt="SketchBot Booth" class="w-full h-full object-cover">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="section-padding bg-white relative overflow-hidden">
+            <div class="container mx-auto px-4 sm:px-6">
+                <div class="max-w-6xl mx-auto">
+                    <div class="text-center mb-12 sm:mb-16">
+                        <div class="inline-block mb-4 sm:mb-6 px-6 sm:px-8 py-2 sm:py-3 bg-white/80 backdrop-blur-md rounded-full border-2 border-gray-800/20 shadow-md">
+                            <span class="text-gray-800 text-xs sm:text-sm font-bold tracking-wider uppercase">
+                                FEATURES
+                            </span>
+                        </div>
+                        <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 text-gray-900">
+                            <span class="graphite-gradient">What SketchBot Offers</span>
+                        </h2>
+                    </div>
+
+                    <div class="grid md:grid-cols-3 gap-6 sm:gap-8">
+                        <!-- Feature 1 -->
+                        <div class="sketch-card sketch-border bg-gradient-to-br from-gray-50 to-slate-50 p-6 sm:p-8 rounded-2xl border border-gray-200/50">
+                            <div class="text-4xl sm:text-5xl mb-4 text-center">👁️</div>
+                            <h3 class="text-xl sm:text-2xl font-bold mb-3 sm:mb-4 text-gray-900 text-center">
+                                Live Sketching Experience
+                            </h3>
+                            <p class="text-gray-700 text-center leading-relaxed">
+                                Guests watch in real time as their photo is drawn by the SketchBot on paper with robotic accuracy
+                            </p>
+                        </div>
+
+                        <!-- Feature 2 -->
+                        <div class="sketch-card sketch-border bg-gradient-to-br from-slate-50 to-amber-50/30 p-6 sm:p-8 rounded-2xl border border-slate-200/50">
+                            <div class="text-4xl sm:text-5xl mb-4 text-center">✨</div>
+                            <h3 class="text-xl sm:text-2xl font-bold mb-3 sm:mb-4 text-gray-900 text-center">
+                                Customizable Output
+                            </h3>
+                            <p class="text-gray-700 text-center leading-relaxed">
+                                Add branded templates, logos, or event-themed designs to every sketch for a personalized takeaway
+                            </p>
+                        </div>
+
+                        <!-- Feature 3 -->
+                        <div class="sketch-card sketch-border bg-gradient-to-br from-amber-50/30 to-gray-50 p-6 sm:p-8 rounded-2xl border border-amber-200/50">
+                            <div class="text-4xl sm:text-5xl mb-4 text-center">📸</div>
+                            <h3 class="text-xl sm:text-2xl font-bold mb-3 sm:mb-4 text-gray-900 text-center">
+                                Photo-to-Sketch Integration
+                            </h3>
+                            <p class="text-gray-700 text-center leading-relaxed">
+                                Capture a guest's photo with another booth and send it directly to SketchBot for instant artistic transformation
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Why Choose Section -->
+        <section class="section-padding bg-gradient-to-br from-gray-100 via-slate-100 to-amber-50/30 relative overflow-hidden paper-texture">
+            <!-- Decorative Pencils -->
+            <div class="absolute top-10 left-10 text-5xl md:text-7xl pencil-float opacity-10">✏️</div>
+            <div class="absolute bottom-10 right-10 text-5xl md:text-7xl pencil-float-delay opacity-10">🖊️</div>
+            
+            <div class="container mx-auto px-4 sm:px-6 relative z-10">
+                <div class="max-w-5xl mx-auto text-center">
+                    <div class="inline-block mb-6 sm:mb-8 px-6 sm:px-8 py-2 sm:py-3 bg-white/80 backdrop-blur-md rounded-full border-2 border-gray-800/20 shadow-md">
+                        <span class="text-gray-800 text-xs sm:text-sm font-bold tracking-wider uppercase">
+                            WHY CHOOSE OUR
+                        </span>
+                    </div>
+                    
+                    <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black mb-6 sm:mb-8 text-gray-900 leading-tight">
+                        <span class="graphite-gradient">SKETCHBOT BOOTH?</span>
+                    </h2>
+                    
+                    <p class="text-base sm:text-lg md:text-xl mb-8 sm:mb-12 text-gray-700 max-w-4xl mx-auto leading-relaxed px-4">
+                        SketchBot offers a memorable twist on traditional photo booths by giving your guests a personalized art piece they can watch come to life. With seamless integration with other photo activations and the ability to customize every detail, this booth brings tech, creativity, and guest engagement together in a way that leaves a lasting impression.
+                    </p>
+
+                    <a href="https://boothbook.com/"
+                        class="inline-flex items-center gap-3 bg-gradient-to-r from-gray-900 to-gray-800 text-white px-8 sm:px-10 py-4 sm:py-5 rounded-full text-base sm:text-lg font-bold shadow-2xl hover:shadow-gray-900/50 transition-all duration-500 transform hover:scale-110 hover:-translate-y-1">
+                        <span>Get Your Free Quote →</span>
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Technical Specifications Section -->
+        <section class="section-padding bg-white relative overflow-hidden">
+            <div class="container mx-auto px-4 sm:px-6">
+                <div class="max-w-6xl mx-auto">
+                    <div class="text-center mb-12 sm:mb-16">
+                        <div class="inline-block mb-6 sm:mb-8 px-6 sm:px-8 py-2 sm:py-3 bg-white/80 backdrop-blur-md rounded-full border-2 border-gray-800/20 shadow-md">
+                            <span class="text-gray-800 text-xs sm:text-sm font-bold tracking-wider uppercase">
+                                TECHNICAL SPECIFICATIONS
+                            </span>
+                        </div>
+                        <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 text-gray-900">
+                            <span class="graphite-gradient">SKETCHBOT BOOTHS</span>
+                        </h2>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+                        <!-- Spec Cards -->
+                        <div class="sketch-card sketch-border bg-gradient-to-br from-gray-50 to-slate-50 p-6 sm:p-8 rounded-2xl border border-gray-200/50">
+                            <div class="flex items-start gap-4">
+                                <div class="text-3xl sm:text-4xl flex-shrink-0">📐</div>
+                                <div>
+                                    <h4 class="text-lg sm:text-xl font-bold mb-2 text-gray-900">Standard Options</h4>
+                                    <p class="text-gray-700">4x6 Portrait Images</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="sketch-card sketch-border bg-gradient-to-br from-slate-50 to-amber-50/30 p-6 sm:p-8 rounded-2xl border border-slate-200/50">
+                            <div class="flex items-start gap-4">
+                                <div class="text-3xl sm:text-4xl flex-shrink-0">🏷️</div>
+                                <div>
+                                    <h4 class="text-lg sm:text-xl font-bold mb-2 text-gray-900">Premium Options</h4>
+                                    <p class="text-gray-700">Branded Overlays</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="sketch-card sketch-border bg-gradient-to-br from-amber-50/30 to-gray-50 p-6 sm:p-8 rounded-2xl border border-amber-200/50">
+                            <div class="flex items-start gap-4">
+                                <div class="text-3xl sm:text-4xl flex-shrink-0">⚡</div>
+                                <div>
+                                    <h4 class="text-lg sm:text-xl font-bold mb-2 text-gray-900">Print Speed</h4>
+                                    <p class="text-gray-700">About 20-30 Seconds Per Photo</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="sketch-card sketch-border bg-gradient-to-br from-gray-50 to-slate-50 p-6 sm:p-8 rounded-2xl border border-gray-200/50">
+                            <div class="flex items-start gap-4">
+                                <div class="text-3xl sm:text-4xl flex-shrink-0">📄</div>
+                                <div>
+                                    <h4 class="text-lg sm:text-xl font-bold mb-2 text-gray-900">Print Finish</h4>
+                                    <p class="text-gray-700">Glossy Paper</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="sketch-card sketch-border bg-gradient-to-br from-slate-50 to-amber-50/30 p-6 sm:p-8 rounded-2xl border border-slate-200/50">
+                            <div class="flex items-start gap-4">
+                                <div class="text-3xl sm:text-4xl flex-shrink-0">🎨</div>
+                                <div>
+                                    <h4 class="text-lg sm:text-xl font-bold mb-2 text-gray-900">Customization</h4>
+                                    <p class="text-gray-700">Custom Drawing Styles</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="sketch-card sketch-border bg-gradient-to-br from-amber-50/30 to-gray-50 p-6 sm:p-8 rounded-2xl border border-amber-200/50">
+                            <div class="flex items-start gap-4">
+                                <div class="text-3xl sm:text-4xl flex-shrink-0">🖼️</div>
+                                <div>
+                                    <h4 class="text-lg sm:text-xl font-bold mb-2 text-gray-900">Display Add-Ons</h4>
+                                    <p class="text-gray-700">LED frames, Branded Sleeves</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="section-padding bg-gradient-to-b from-gray-50/50 via-white to-gray-50/50 relative overflow-hidden paper-texture">
+            <div class="container mx-auto px-4 sm:px-6">
+                <div class="max-w-4xl mx-auto">
+                    <div class="text-center mb-12 sm:mb-16">
+                        <div class="inline-block mb-6 sm:mb-8 px-6 sm:px-8 py-2 sm:py-3 bg-white/80 backdrop-blur-md rounded-full border-2 border-gray-800/20 shadow-md">
+                            <span class="text-gray-800 text-xs sm:text-sm font-bold tracking-wider uppercase">
+                                FAQ
+                            </span>
+                        </div>
+                        <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 text-gray-900">
+                            <span class="graphite-gradient">FREQUENTLY ASKED QUESTIONS</span>
+                        </h2>
+                    </div>
+
+                    <div class="space-y-4 sm:space-y-6">
+                        <!-- FAQ Item 1 -->
+                        <div class="faq-item sketch-card sketch-border bg-gradient-to-br from-white to-gray-50/50 p-6 sm:p-8 rounded-2xl border border-gray-200/50 shadow-lg hover:shadow-xl transition-all duration-300">
+                            <div class="faq-question flex justify-between items-start gap-4 mb-0" onclick="toggleFAQ(this)">
+                                <div class="flex items-start gap-3 flex-1">
+                                    <span class="text-amber-600 font-bold text-xl sm:text-2xl mt-1">Q:</span>
+                                    <h3 class="text-lg sm:text-xl font-bold text-gray-900 leading-tight">How does our SketchBot Work?</h3>
+                                </div>
+                                <div class="faq-icon text-2xl sm:text-3xl text-gray-400 font-light">+</div>
+                            </div>
+                            <div class="faq-answer mt-4">
+                                <div class="flex items-start gap-3 pl-8 sm:pl-10">
+                                    <span class="text-gray-600 font-semibold text-xl sm:text-2xl mt-1">A:</span>
+                                    <p class="text-gray-700 leading-relaxed flex-1">Guests take a photo, and our SketchBot transforms it into a custom line-art sketch drawn live with a robotic arm. The entire process happens in real-time, allowing guests to watch as their portrait comes to life stroke by stroke on paper.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- FAQ Item 2 -->
+                        <div class="faq-item sketch-card sketch-border bg-gradient-to-br from-white to-gray-50/50 p-6 sm:p-8 rounded-2xl border border-gray-200/50 shadow-lg hover:shadow-xl transition-all duration-300">
+                            <div class="faq-question flex justify-between items-start gap-4 mb-0" onclick="toggleFAQ(this)">
+                                <div class="flex items-start gap-3 flex-1">
+                                    <span class="text-amber-600 font-bold text-xl sm:text-2xl mt-1">Q:</span>
+                                    <h3 class="text-lg sm:text-xl font-bold text-gray-900 leading-tight">Can SketchBot work with photos from other booths?</h3>
+                                </div>
+                                <div class="faq-icon text-2xl sm:text-3xl text-gray-400 font-light">+</div>
+                            </div>
+                            <div class="faq-answer mt-4">
+                                <div class="flex items-start gap-3 pl-8 sm:pl-10">
+                                    <span class="text-gray-600 font-semibold text-xl sm:text-2xl mt-1">A:</span>
+                                    <p class="text-gray-700 leading-relaxed flex-1">Absolutely! Our Photo Activations, AI Booth, and Roaming Booth can send images directly to SketchBot for instant artistic transformation. This seamless integration allows you to create a complete photo-to-sketch experience at your event.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- FAQ Item 3 -->
+                        <div class="faq-item sketch-card sketch-border bg-gradient-to-br from-white to-gray-50/50 p-6 sm:p-8 rounded-2xl border border-gray-200/50 shadow-lg hover:shadow-xl transition-all duration-300">
+                            <div class="faq-question flex justify-between items-start gap-4 mb-0" onclick="toggleFAQ(this)">
+                                <div class="flex items-start gap-3 flex-1">
+                                    <span class="text-amber-600 font-bold text-xl sm:text-2xl mt-1">Q:</span>
+                                    <h3 class="text-lg sm:text-xl font-bold text-gray-900 leading-tight">How Long Does Each Sketch Take?</h3>
+                                </div>
+                                <div class="faq-icon text-2xl sm:text-3xl text-gray-400 font-light">+</div>
+                            </div>
+                            <div class="faq-answer mt-4">
+                                <div class="flex items-start gap-3 pl-8 sm:pl-10">
+                                    <span class="text-gray-600 font-semibold text-xl sm:text-2xl mt-1">A:</span>
+                                    <p class="text-gray-700 leading-relaxed flex-1">On average, each sketch takes 30 seconds to 1 minute depending on detail and style. Simpler line-art sketches are faster, while more detailed or stylized sketches may take closer to a minute. The robotic arm works with precision speed to ensure guests don't wait long.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- FAQ Item 4 -->
+                        <div class="faq-item sketch-card sketch-border bg-gradient-to-br from-white to-gray-50/50 p-6 sm:p-8 rounded-2xl border border-gray-200/50 shadow-lg hover:shadow-xl transition-all duration-300">
+                            <div class="faq-question flex justify-between items-start gap-4 mb-0" onclick="toggleFAQ(this)">
+                                <div class="flex items-start gap-3 flex-1">
+                                    <span class="text-amber-600 font-bold text-xl sm:text-2xl mt-1">Q:</span>
+                                    <h3 class="text-lg sm:text-xl font-bold text-gray-900 leading-tight">Do guests get to keep the sketches?</h3>
+                                </div>
+                                <div class="faq-icon text-2xl sm:text-3xl text-gray-400 font-light">+</div>
+                            </div>
+                            <div class="faq-answer mt-4">
+                                <div class="flex items-start gap-3 pl-8 sm:pl-10">
+                                    <span class="text-gray-600 font-semibold text-xl sm:text-2xl mt-1">A:</span>
+                                    <p class="text-gray-700 leading-relaxed flex-1">Yes! Each guest receives a physical copy of their sketch as a unique keepsake. Digital versions can also be shared via email or SMS for easy sharing on social media. It's the perfect combination of a tangible art piece and digital convenience.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- FAQ Item 5 -->
+                        <div class="faq-item sketch-card sketch-border bg-gradient-to-br from-white to-gray-50/50 p-6 sm:p-8 rounded-2xl border border-gray-200/50 shadow-lg hover:shadow-xl transition-all duration-300">
+                            <div class="faq-question flex justify-between items-start gap-4 mb-0" onclick="toggleFAQ(this)">
+                                <div class="flex items-start gap-3 flex-1">
+                                    <span class="text-amber-600 font-bold text-xl sm:text-2xl mt-1">Q:</span>
+                                    <h3 class="text-lg sm:text-xl font-bold text-gray-900 leading-tight">Can we customize the sketches with branding or logos?</h3>
+                                </div>
+                                <div class="faq-icon text-2xl sm:text-3xl text-gray-400 font-light">+</div>
+                            </div>
+                            <div class="faq-answer mt-4">
+                                <div class="flex items-start gap-3 pl-8 sm:pl-10">
+                                    <span class="text-gray-600 font-semibold text-xl sm:text-2xl mt-1">A:</span>
+                                    <p class="text-gray-700 leading-relaxed flex-1">Yes, each sketch can include a branded overlay, logo, or custom template that matches your event theme. We can incorporate your company colors, event branding, or special messaging directly into every sketch, making it a personalized branded experience for your guests.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- FAQ Item 6 -->
+                        <div class="faq-item sketch-card sketch-border bg-gradient-to-br from-white to-gray-50/50 p-6 sm:p-8 rounded-2xl border border-gray-200/50 shadow-lg hover:shadow-xl transition-all duration-300">
+                            <div class="faq-question flex justify-between items-start gap-4 mb-0" onclick="toggleFAQ(this)">
+                                <div class="flex items-start gap-3 flex-1">
+                                    <span class="text-amber-600 font-bold text-xl sm:text-2xl mt-1">Q:</span>
+                                    <h3 class="text-lg sm:text-xl font-bold text-gray-900 leading-tight">Is SketchBot suitable for large events?</h3>
+                                </div>
+                                <div class="faq-icon text-2xl sm:text-3xl text-gray-400 font-light">+</div>
+                            </div>
+                            <div class="faq-answer mt-4">
+                                <div class="flex items-start gap-3 pl-8 sm:pl-10">
+                                    <span class="text-gray-600 font-semibold text-xl sm:text-2xl mt-1">A:</span>
+                                    <p class="text-gray-700 leading-relaxed flex-1">Yes, SketchBot is great for high-traffic events! We can set up a queue system or use pre-captured images to keep things moving efficiently. For very large events, we can optimize the sketching process or work with pre-captured photos to ensure every guest leaves with their custom artwork without long waits.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Use Cases Section -->
+        <section class="section-padding bg-gradient-to-br from-gray-100 via-slate-100 to-amber-50/30 relative overflow-hidden paper-texture">
+            <div class="container mx-auto px-4 sm:px-6">
+                <div class="max-w-6xl mx-auto">
+                    <div class="text-center mb-12 sm:mb-16">
+                        <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 text-gray-900">
+                            <span class="graphite-gradient">OUR SKETCHBOT</span>
+                        </h2>
+                        <h3 class="text-xl sm:text-2xl md:text-3xl font-semibold text-gray-800">IS GREAT FOR</h3>
+                    </div>
+
+                    <div class="grid md:grid-cols-3 gap-6 sm:gap-8">
+                        <!-- Use Case 1 -->
+                        <div class="sketch-card sketch-border bg-white/90 backdrop-blur-sm p-6 sm:p-8 rounded-2xl border border-gray-200/50 shadow-lg">
+                            <div class="text-4xl sm:text-5xl mb-4 text-center">📸</div>
+                            <h3 class="text-xl sm:text-2xl font-bold mb-3 sm:mb-4 text-gray-900 text-center">
+                                Photo Activations
+                            </h3>
+                            <p class="text-gray-700 text-center leading-relaxed mb-4">
+                                Combine SketchBot with one of our photo experiences to instantly capture guest images and send them to the SketchBot for sketching. It's the perfect artistic follow-up to a glam shot or candid capture.
+                            </p>
+                            <a href="../../services/photobooth/ai-photo-booth.html" class="inline-block w-full text-center bg-gradient-to-r from-gray-900 to-gray-800 text-white px-6 py-3 rounded-full text-sm sm:text-base font-semibold hover:shadow-lg transition-all">
+                                LEARN MORE
+                            </a>
+                        </div>
+
+                        <!-- Use Case 2 -->
+                        <div class="sketch-card sketch-border bg-white/90 backdrop-blur-sm p-6 sm:p-8 rounded-2xl border border-gray-200/50 shadow-lg">
+                            <div class="text-4xl sm:text-5xl mb-4 text-center">🏢</div>
+                            <h3 class="text-xl sm:text-2xl font-bold mb-3 sm:mb-4 text-gray-900 text-center">
+                                Brand Activations
+                            </h3>
+                            <p class="text-gray-700 text-center leading-relaxed mb-4">
+                                Create a memorable brand moment by giving guests a personalized sketch takeaway with your logo or custom messaging. SketchBot draws attention—literally—and keeps your brand in their hands.
+                            </p>
+                            <a href="../../events/corporate-events.html" class="inline-block w-full text-center bg-gradient-to-r from-gray-800 to-slate-700 text-white px-6 py-3 rounded-full text-sm sm:text-base font-semibold hover:shadow-lg transition-all">
+                                LEARN MORE
+                            </a>
+                        </div>
+
+                        <!-- Use Case 3 -->
+                        <div class="sketch-card sketch-border bg-white/90 backdrop-blur-sm p-6 sm:p-8 rounded-2xl border border-gray-200/50 shadow-lg">
+                            <div class="text-4xl sm:text-5xl mb-4 text-center">🎪</div>
+                            <h3 class="text-xl sm:text-2xl font-bold mb-3 sm:mb-4 text-gray-900 text-center">
+                                Tradeshows
+                            </h3>
+                            <p class="text-gray-700 text-center leading-relaxed mb-4">
+                                Boost booth traffic with live sketching that stops attendees in their tracks. SketchBot offers an engaging, visual draw while giving guests something tangible to take with them—complete with your branding.
+                            </p>
+                            <a href="../../events/corporate-events.html" class="inline-block w-full text-center bg-gradient-to-r from-slate-700 to-gray-900 text-white px-6 py-3 rounded-full text-sm sm:text-base font-semibold hover:shadow-lg transition-all">
+                                LEARN MORE
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Final CTA Section -->
+        <section class="section-padding bg-gradient-to-br from-gray-900 via-slate-900 to-gray-800 text-white relative overflow-hidden">
+            <!-- Sketch Pattern Overlay -->
+            <div class="absolute inset-0 sketch-dots opacity-10"></div>
+            
+            <!-- Graphite Glow Orbs -->
+            <div class="absolute top-20 left-10 w-64 h-64 bg-gray-700/20 rounded-full blur-3xl animate-blob"></div>
+            <div class="absolute bottom-20 right-10 w-64 h-64 bg-amber-600/10 rounded-full blur-3xl animate-blob animation-delay-2000"></div>
+
+            <div class="container mx-auto px-4 sm:px-6 relative z-10">
+                <div class="max-w-4xl mx-auto text-center">
+                    <div class="inline-block mb-6 sm:mb-8 px-6 sm:px-8 py-2 sm:py-3 bg-white/10 backdrop-blur-md rounded-full border-2 border-white/20">
+                        <span class="text-white text-xs sm:text-sm font-bold tracking-wider uppercase">
+                            LET'S MAKE YOUR EVENT ONE TO REMEMBER!
+                        </span>
+                    </div>
+                    
+                    <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black mb-6 sm:mb-8 leading-tight">
+                        <span class="bg-gradient-to-r from-gray-100 via-amber-100 to-gray-100 bg-clip-text text-transparent">
+                            Turn Moments into Art
+                        </span>
+                    </h2>
+                    
+                    <p class="text-base sm:text-lg md:text-xl mb-8 sm:mb-12 text-white/90 max-w-3xl mx-auto leading-relaxed px-4">
+                        Let's create something unmatched. Reach out today to explore how our immersive photo, video, and event experiences can bring your vision to life and leave a lasting impact on your guests.
+                    </p>
+
+                    <div class="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center">
+                        <a href="https://boothbook.com/"
+                            class="inline-flex items-center gap-3 bg-white text-gray-900 px-8 sm:px-10 py-4 sm:py-5 rounded-full text-base sm:text-lg font-bold shadow-2xl hover:shadow-white/50 transition-all duration-500 transform hover:scale-110 hover:-translate-y-1">
+                            <span>Get Your Free Quote</span>
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+                            </svg>
+                        </a>
+                        <a href="tel:7205516994"
+                            class="inline-flex items-center gap-3 px-8 sm:px-10 py-4 sm:py-5 rounded-full text-base sm:text-lg font-bold backdrop-blur-md bg-white/20 border-2 border-white/50 hover:bg-white/30 hover:border-white/70 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:scale-110 hover:-translate-y-1 text-white">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498A1 1 0 0121 17.72V21a2 2 0 01-2 2h-1C9.716 23 3 16.284 3 8V7a2 2 0 012-2z"></path>
+                            </svg>
+                            <span>Call: (720)551-6994</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Related Products Section -->
+        <section class="section-padding bg-gradient-to-b from-white via-gray-50/50 to-white relative overflow-hidden paper-texture">
+            <!-- Decorative Elements -->
+            <div class="absolute top-10 left-10 text-4xl md:text-6xl pencil-float opacity-10 z-[1]">✏️</div>
+            <div class="absolute bottom-10 right-10 text-4xl md:text-6xl pencil-float-delay opacity-10 z-[1]">🖊️</div>
+            <div class="absolute inset-0 sketch-dots opacity-10 z-[1]"></div>
+            <div class="absolute inset-0 crosshatch opacity-5 z-[1]"></div>
+
+            <div class="container mx-auto px-4 sm:px-6 relative z-10">
+                <div class="max-w-6xl mx-auto">
+                    <div class="text-center mb-12 sm:mb-16">
+                        <div class="inline-block mb-6 sm:mb-8 px-6 sm:px-8 py-2 sm:py-3 bg-white/80 backdrop-blur-md rounded-full border-2 border-gray-800/20 shadow-md">
+                            <span class="text-gray-800 text-xs sm:text-sm font-bold tracking-wider uppercase">
+                                RELATED PRODUCTS
+                            </span>
+                        </div>
+                        <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6">
+                            <span class="graphite-gradient">Discover Our Related Products</span>
+                        </h2>
+                        <p class="text-base sm:text-lg md:text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed">
+                            Explore more premium photo and video booth experiences
+                        </p>
+                    </div>
+
+                    <div class="grid md:grid-cols-3 gap-6 sm:gap-8 max-w-5xl mx-auto">
+                        <!-- Cookie Printer -->
+                        <a href="../../services/experiences/cookie-printer.html" class="sketch-card sketch-border bg-white/90 backdrop-blur-sm rounded-2xl overflow-hidden border border-gray-200/50 shadow-lg hover:shadow-2xl transition-all duration-300 group">
+                            <div class="relative h-48 sm:h-56 overflow-hidden">
+                                <img src="../../assets/images/cookie-printer/cookie-printer-1.webp" alt="Cookie Printer" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500">
+                                <div class="absolute inset-0 bg-gradient-to-t from-gray-900/60 via-gray-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                                <div class="absolute top-4 right-4 text-2xl sm:text-3xl opacity-0 group-hover:opacity-100 transition-opacity">🍪</div>
+                            </div>
+                            <div class="p-4 sm:p-6">
+                                <h3 class="text-lg sm:text-xl font-bold text-gray-900 mb-2 group-hover:text-amber-600 transition-colors">Cookie Printer</h3>
+                                <p class="text-sm sm:text-base text-gray-600 leading-relaxed">Print photos, logos, or designs directly onto edible cookies in seconds</p>
+                                <div class="mt-4 flex items-center gap-2 text-gray-800 font-semibold text-sm">
+                                    <span>Learn More</span>
+                                    <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+                                    </svg>
+                                </div>
+                            </div>
+                        </a>
+
+                        <!-- AI Photo Booth -->
+                        <a href="../../services/photobooth/ai-photo-booth.html" class="sketch-card sketch-border bg-white/90 backdrop-blur-sm rounded-2xl overflow-hidden border border-gray-200/50 shadow-lg hover:shadow-2xl transition-all duration-300 group">
+                            <div class="relative h-48 sm:h-56 overflow-hidden">
+                                <img src="../../assets/images/ai-photo-booth-1.webp" alt="AI Photo Booth" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500">
+                                <div class="absolute inset-0 bg-gradient-to-t from-gray-900/60 via-gray-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                                <div class="absolute top-4 right-4 text-2xl sm:text-3xl opacity-0 group-hover:opacity-100 transition-opacity">🤖</div>
+                            </div>
+                            <div class="p-4 sm:p-6">
+                                <h3 class="text-lg sm:text-xl font-bold text-gray-900 mb-2 group-hover:text-gray-700 transition-colors">AI Photo Booth</h3>
+                                <p class="text-sm sm:text-base text-gray-600 leading-relaxed">Turn your photo into a custom AI-generated character</p>
+                                <div class="mt-4 flex items-center gap-2 text-gray-800 font-semibold text-sm">
+                                    <span>Learn More</span>
+                                    <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+                                    </svg>
+                                </div>
+                            </div>
+                        </a>
+
+                        <!-- Graffiti Wall Photo Booth -->
+                        <a href="../../services/photobooth/graffiti-wall-photo-booth.html" class="sketch-card sketch-border bg-white/90 backdrop-blur-sm rounded-2xl overflow-hidden border border-gray-200/50 shadow-lg hover:shadow-2xl transition-all duration-300 group">
+                            <div class="relative h-48 sm:h-56 overflow-hidden">
+                                <img src="../../assets/images/graffiti/graffiti-1.webp" alt="Graffiti Wall Photo Booth" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500">
+                                <div class="absolute inset-0 bg-gradient-to-t from-gray-900/60 via-gray-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                                <div class="absolute top-4 right-4 text-2xl sm:text-3xl opacity-0 group-hover:opacity-100 transition-opacity">🎨</div>
+                            </div>
+                            <div class="p-4 sm:p-6">
+                                <h3 class="text-lg sm:text-xl font-bold text-gray-900 mb-2 group-hover:text-orange-600 transition-colors">Graffiti Wall Photo Booth</h3>
+                                <p class="text-sm sm:text-base text-gray-600 leading-relaxed">Paint and create digital art with your photos</p>
+                                <div class="mt-4 flex items-center gap-2 text-gray-800 font-semibold text-sm">
+                                    <span>Learn More</span>
+                                    <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+                                    </svg>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Lightbox for Image Zoom -->
+    <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+        <span class="lightbox-close" onclick="event.stopPropagation(); closeLightbox();">&times;</span>
+        <div class="lightbox-img-container" onclick="event.stopPropagation();">
+            <img id="lightbox-img" src="" alt="SketchBot Booth - Full view" onclick="toggleZoom(event);">
+        </div>
+    </div>
+
+    <script>
+        function openLightbox(imageSrc) {
+            event.stopPropagation();
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            lightboxImg.src = imageSrc;
+            lightboxImg.classList.remove('zoomed'); // Reset zoom state
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden'; // Prevent scrolling when lightbox is open
+        }
+
+        function closeLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            lightbox.classList.remove('active');
+            lightboxImg.classList.remove('zoomed'); // Reset zoom state
+            document.body.style.overflow = ''; // Restore scrolling
+        }
+
+        function toggleZoom(event) {
+            event.stopPropagation();
+            const lightboxImg = document.getElementById('lightbox-img');
+            lightboxImg.classList.toggle('zoomed');
+        }
+
+        // Close lightbox with Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeLightbox();
+            }
+        });
+
+        // FAQ Accordion Toggle
+        function toggleFAQ(element) {
+            const faqItem = element.closest('.faq-item');
+            const answer = faqItem.querySelector('.faq-answer');
+            const icon = element.querySelector('.faq-icon');
+            
+            // Close all other FAQ items
+            document.querySelectorAll('.faq-item').forEach(item => {
+                if (item !== faqItem) {
+                    item.classList.remove('active');
+                    item.querySelector('.faq-answer').classList.remove('active');
+                    item.querySelector('.faq-icon').classList.remove('active');
+                    item.querySelector('.faq-icon').textContent = '+';
+                }
+            });
+            
+            // Toggle current FAQ item
+            faqItem.classList.toggle('active');
+            answer.classList.toggle('active');
+            icon.classList.toggle('active');
+            
+            // Change icon
+            if (answer.classList.contains('active')) {
+                icon.textContent = '×';
+            } else {
+                icon.textContent = '+';
+            }
+        }
+    </script>
+
+    <!-- Footer -->
+    <script src="../../assets/components/footer.js"></script>
+</body>
+</html>
