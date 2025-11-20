@@ -405,6 +405,17 @@
             z-index: 1;
         }
         
+        @media (max-width: 768px) {
+            .image-grid-section .container {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+            
+            .image-grid-section .grid {
+                gap: 1rem;
+            }
+        }
+        
         /* Image Slider Section Styles */
         .image-slider-section {
             background: #1a1a2e;
@@ -738,23 +749,191 @@
             text-decoration: none;
         }
         
+        /* Mobile Optimizations */
         @media (max-width: 768px) {
+            /* Hero Section Mobile */
+            .relative.z-10.text-center {
+                margin-top: 2rem !important;
+            }
+            
+            .neon-sign {
+                font-size: 1.5rem;
+                padding: 1rem 1.5rem 1.2rem;
+                border: 0.25rem solid #fff;
+                margin-bottom: 0.75rem;
+            }
+            
+            .signage-description {
+                font-size: 0.95rem;
+                padding: 0 1.5rem;
+                line-height: 1.6;
+            }
+            
+            .neon-button {
+                font-size: 14px;
+                padding: 12px 24px;
+                letter-spacing: 2px;
+            }
+            
+            /* Image Grid Section Mobile */
+            .image-grid-section {
+                padding: 2rem 0;
+            }
+            
+            .image-grid-container {
+                margin-top: -2rem;
+                padding: 0.25rem;
+                padding-top: 1rem;
+            }
+            
+            .left-column-content {
+                align-items: flex-start;
+                text-align: left;
+                padding: 1rem;
+            }
+            
+            .left-column-content h3 {
+                font-size: 0.65rem;
+                letter-spacing: 0.2em;
+                margin-bottom: 0.5rem;
+            }
+            
+            .left-column-content h2 {
+                font-size: 1.5rem;
+                margin-bottom: 0.75rem;
+            }
+            
+            .left-column-content p {
+                font-size: 0.875rem;
+                line-height: 1.5;
+                margin-bottom: 0.5rem;
+            }
+            
+            /* Slider Mobile */
+            .image-slider-section {
+                padding: 2rem 0;
+                min-height: 400px;
+            }
+            
             .slider-container {
                 max-width: 100%;
-                height: 400px;
+                height: 350px;
+                border-radius: 15px;
             }
             
             .item .content {
-                left: 50px;
-                width: 350px;
+                left: 20px;
+                width: calc(100% - 40px);
+                max-width: 320px;
             }
             
             .item .content .name {
-                font-size: 40px;
+                font-size: 32px;
+                line-height: 1.1;
             }
             
             .item .content .des {
-                font-size: 16px;
+                font-size: 14px;
+                line-height: 1.5;
+                margin-top: 10px;
+                margin-bottom: 15px;
+            }
+            
+            .item .content button {
+                padding: 10px 20px;
+                font-size: 13px;
+            }
+            
+            .slide .item:nth-child(3),
+            .slide .item:nth-child(4) {
+                display: none;
+            }
+            
+            .slider-button {
+                bottom: 15px;
+            }
+            
+            .slider-button button {
+                width: 45px;
+                height: 40px;
+                font-size: 18px;
+            }
+            
+            /* Contact Section Mobile */
+            .contact-us-section {
+                padding: 2rem 0;
+            }
+            
+            .contact-us-section h2 {
+                font-size: 1.5rem;
+                letter-spacing: 0.1em;
+                margin-bottom: 0.5rem;
+                padding: 0 1rem;
+            }
+            
+            .contact-us-section p {
+                font-size: 0.9rem;
+                line-height: 1.5;
+                margin-bottom: 1.25rem;
+                padding: 0 1rem;
+            }
+            
+            .blob-btn {
+                padding: 14px 32px;
+                font-size: 13px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            /* Extra Small Mobile */
+            .neon-sign {
+                font-size: 1.25rem;
+                padding: 0.875rem 1.25rem 1rem;
+                border: 0.2rem solid #fff;
+            }
+            
+            .signage-description {
+                font-size: 0.875rem;
+                padding: 0 1rem;
+            }
+            
+            .left-column-content h2 {
+                font-size: 1.25rem;
+            }
+            
+            .left-column-content p {
+                font-size: 0.8rem;
+            }
+            
+            .slider-container {
+                height: 300px;
+            }
+            
+            .item .content {
+                left: 15px;
+                width: calc(100% - 30px);
+                max-width: 280px;
+            }
+            
+            .item .content .name {
+                font-size: 28px;
+            }
+            
+            .item .content .des {
+                font-size: 13px;
+            }
+            
+            .contact-us-section h2 {
+                font-size: 1.25rem;
+            }
+            
+            .contact-us-section p {
+                font-size: 0.85rem;
+            }
+            
+            .blob-btn {
+                padding: 12px 28px;
+                font-size: 12px;
             }
         }
         
@@ -1104,7 +1283,7 @@
     <script>
         // Canvas Background Animation
         let canvas, ctx, w, h, units;
-        let unitCount = 100;
+        let unitCount = window.innerWidth < 768 ? 50 : 100; // Reduce particles on mobile
         let hue = 0;
 
         function init() {
@@ -1121,6 +1300,14 @@
             if (!canvas) return;
             const section = canvas.closest('.image-grid-section');
             if (!section) return;
+            
+            // Update unit count based on screen size
+            const newUnitCount = window.innerWidth < 768 ? 50 : 100;
+            if (newUnitCount !== unitCount) {
+                unitCount = newUnitCount;
+                units = [];
+                createUnits();
+            }
             
             const rect = section.getBoundingClientRect();
             w = canvas.width = rect.width;
