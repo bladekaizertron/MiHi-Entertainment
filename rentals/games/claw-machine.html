@@ -6,66 +6,3031 @@
     <title>Claw Machine Rental - MiHi Entertainment</title>
     <link rel="icon" type="image/svg+xml" href="../../assets/images/favicon.svg">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Orbitron:wght@400;500;600;700;800;900&family=Poppins:wght@900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Squada+One" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        body { font-family: 'Inter', sans-serif; color: #1a202c; }
-        h1, h2, h3, h4, h5, h6 { font-family: 'Playfair Display', serif; }
+        html, body { overflow-x: hidden; width: 100%; max-width: 100vw; }
+        body { font-family: 'Orbitron', sans-serif; color: #1a202c; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+        section { overflow-x: hidden; }
+        .container { overflow-x: hidden; max-width: 100%; }
+        
+        /* Prevent text size adjustment on mobile */
+        * {
+            -webkit-text-size-adjust: 100%;
+            -moz-text-size-adjust: 100%;
+            -ms-text-size-adjust: 100%;
+            text-size-adjust: 100%;
+        }
+        
+        /* Touch-friendly buttons */
+        button, a {
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+        }
+        h1 { font-family: 'Press Start 2P', cursive; }
+        h2, h3, h4, h5, h6 { font-family: 'Orbitron', sans-serif; font-weight: 700; }
         .btn-primary { background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%); transition: all 0.3s ease; }
         .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(0, 80, 255, 0.4); }
         .section-padding { padding: 5rem 0; }
-        .hero-gradient { background: linear-gradient(135deg, rgba(0, 80, 255, 0.5) 0%, rgba(0, 64, 217, 0.5) 100%); }
+        .hero-gradient { background: linear-gradient(135deg, rgba(0, 0, 0, 0.65) 0%, rgba(0, 0, 0, 0.65) 100%); }
+        
+        /* Keyboard Animation Styles */
+        .keyboard {
+            font-family: "Poppins", sans-serif;
+            font-weight: 900;
+        }
+        
+        .key {
+            font-size: 3.5rem;
+            display: inline-block;
+            letter-spacing: -0.2rem;
+            transition: transform 0.2s;
+        }
+        
+        @media (min-width: 768px) {
+            .key {
+                font-size: 4.5rem;
+                letter-spacing: -0.25rem;
+            }
+        }
+        
+        @keyframes pressDown1 {
+            30%, 40%, 100% {
+                transform: translateY(0);
+            }
+            35% {
+                transform: translateY(6px);
+            }
+        }
+        
+        @keyframes pressDown2 {
+            70%, 80%, 100% {
+                transform: translateY(0);
+            }
+            75% {
+                transform: translateY(6px);
+            }
+        }
+        
+        @keyframes pressDown3 {
+            30%, 40%, 100% {
+                transform: translateY(0);
+            }
+            35% {
+                transform: translateY(6px);
+            }
+        }
+        
+        @keyframes pressDown4 {
+            40%, 50%, 100% {
+                transform: translateY(0);
+            }
+            45% {
+                transform: translateY(6px);
+            }
+        }
+        
+        @keyframes pressDown5 {
+            20%, 30%, 100% {
+                transform: translateY(0);
+            }
+            25% {
+                transform: translateY(6px);
+            }
+        }
+        
+        @keyframes pressDown6 {
+            60%, 70%, 100% {
+                transform: translateY(0);
+            }
+            65% {
+                transform: translateY(6px);
+            }
+        }
+        
+        @keyframes pressDown7 {
+            10%, 20%, 100% {
+                transform: translateY(0);
+            }
+            15% {
+                transform: translateY(6px);
+            }
+        }
+        
+        @keyframes pressDown8 {
+            35%, 45%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(6px);
+            }
+        }
+        
+        @keyframes pressDown9 {
+            50%, 60%, 100% {
+                transform: translateY(0);
+            }
+            55% {
+                transform: translateY(6px);
+            }
+        }
+        
+        @keyframes pressDown10 {
+            25%, 35%, 100% {
+                transform: translateY(0);
+            }
+            30% {
+                transform: translateY(6px);
+            }
+        }
+        
+        @keyframes pressDown11 {
+            15%, 25%, 100% {
+                transform: translateY(0);
+            }
+            20% {
+                transform: translateY(6px);
+            }
+        }
+        
+        @keyframes pressDown12 {
+            45%, 55%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(6px);
+            }
+        }
+        
+        .key:nth-child(1) {
+            animation: pressDown1 2s infinite;
+        }
+        
+        .key:nth-child(2) {
+            animation: pressDown2 3s infinite;
+        }
+        
+        .key:nth-child(3) {
+            animation: pressDown3 4s infinite;
+        }
+        
+        .key:nth-child(4) {
+            animation: pressDown4 2.5s infinite;
+        }
+        
+        .key:nth-child(5) {
+            animation: pressDown5 2.5s infinite;
+        }
+        
+        .key:nth-child(6) {
+            animation: pressDown6 3.5s infinite;
+        }
+        
+        .key:nth-child(7) {
+            animation: pressDown7 2.2s infinite;
+        }
+        
+        .key:nth-child(8) {
+            animation: pressDown8 3.2s infinite;
+        }
+        
+        .key:nth-child(9) {
+            animation: pressDown9 2.8s infinite;
+        }
+        
+        .key:nth-child(10) {
+            animation: pressDown10 3.3s infinite;
+        }
+        
+        .key:nth-child(11) {
+            animation: pressDown11 2.7s infinite;
+        }
+        
+        .key:nth-child(12) {
+            animation: pressDown12 3.1s infinite;
+        }
+        
+        /* Responsive adjustments for smaller screens */
+        @media (max-width: 640px) {
+            .key {
+                font-size: 2.5rem;
+                letter-spacing: -0.15rem;
+            }
+        }
+
+        /* Mobile Responsive Styles */
+        @media (max-width: 768px) {
+            /* Hero Section Mobile */
+            .hero-section {
+                min-height: 60vh;
+                padding: 2rem 1rem;
+            }
+
+            /* Hero Section Button Container */
+            .hero-section .relative.z-10 {
+                width: 100%;
+                max-width: 100%;
+                box-sizing: border-box;
+                overflow-x: hidden;
+            }
+
+            /* Ensure button wrapper doesn't overflow */
+            .hero-section .relative.z-10 > a.animated-gradient-btn {
+                margin-left: auto;
+                margin-right: auto;
+                display: block;
+            }
+
+            /* Prevent text clipping */
+            .hero-section .animated-gradient-btn > span {
+                position: relative;
+                z-index: 10;
+            }
+
+            /* Hero Section Content - Increased Sizes for Mobile */
+            .hero-section .keyboard {
+                margin-bottom: 1.5rem !important;
+            }
+
+            .hero-section .key {
+                font-size: 3rem !important;
+                letter-spacing: -0.15rem !important;
+            }
+
+            .hero-section h3 {
+                font-size: 2rem !important;
+                margin-bottom: 1rem !important;
+            }
+
+            .hero-section p {
+                font-size: 1.125rem !important;
+                margin-bottom: 2rem !important;
+            }
+
+            /* Animated Gradient Button Mobile - Increased Size */
+            .hero-section .animated-gradient-btn {
+                --width: 200px;
+                --height: 65px;
+                --border: 4px;
+                width: 200px !important;
+                height: 65px !important;
+                min-width: 200px;
+                min-height: 65px;
+                font-size: 20px !important;
+                letter-spacing: 1.5px;
+                line-height: 65px !important;
+                max-width: 90vw;
+                box-sizing: border-box;
+                overflow: visible;
+            }
+
+            .hero-section .animated-gradient-btn::after {
+                width: 200px !important;
+                height: 65px !important;
+                left: 0 !important;
+                right: auto !important;
+                top: 0 !important;
+                bottom: auto !important;
+                margin: 0 !important;
+                -webkit-clip-path: polygon(0% 100%, 4px 100%, 4px 4px, 196px 4px, 196px 61px, 4px 61px, 4px 100%, 100% 100%, 100% 0%, 0% 0%) !important;
+                clip-path: polygon(0% 100%, 4px 100%, 4px 4px, 196px 4px, 196px 61px, 4px 61px, 4px 100%, 100% 100%, 100% 0%, 0% 0%) !important;
+                animation: gradient var(--dur) ease-in-out infinite !important;
+            }
+
+            .hero-section .animated-gradient-btn > span {
+                line-height: 65px !important;
+                display: flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                height: 100% !important;
+                width: 100% !important;
+                white-space: nowrap;
+                overflow: visible;
+                padding: 0;
+                font-size: 20px !important;
+            }
+
+            /* Regular Animated Gradient Button Mobile (for other sections) */
+            .animated-gradient-btn {
+                --width: 180px;
+                --height: 55px;
+                font-size: 20px;
+                letter-spacing: 1px;
+            }
+
+            .animated-gradient-btn::after {
+                -webkit-clip-path: polygon(0% 100%, 4px 100%, 4px 4px, 176px 4px, 176px 51px, 4px 51px, 4px 100%, 100% 100%, 100% 0%, 0% 0%);
+                clip-path: polygon(0% 100%, 4px 100%, 4px 4px, 176px 4px, 176px 51px, 4px 51px, 4px 100%, 100% 100%, 100% 0%, 0% 0%);
+            }
+
+            /* Section Padding Mobile */
+            .section-padding {
+                padding: 3rem 0;
+            }
+
+            .content-section-height {
+                min-height: auto;
+                padding: 2rem 0;
+            }
+
+            /* Card Mobile Adjustments */
+            .card, .card2, .card3 {
+                height: 300px;
+                margin-bottom: 1.5rem;
+            }
+
+            /* Feature Cards Mobile */
+            .card-container-right {
+                gap: 12px;
+                padding-bottom: 20px;
+                padding-right: 2rem;
+                padding-left: 0;
+                -webkit-overflow-scrolling: touch;
+                scroll-snap-type: x mandatory;
+                overflow-x: auto;
+                overflow-y: hidden;
+                width: 100%;
+                max-width: 100%;
+                /* Hide scrollbar but keep functionality */
+                scrollbar-width: none; /* Firefox */
+                -ms-overflow-style: none; /* IE and Edge */
+            }
+
+            /* Ensure last card has space and isn't cropped */
+            .card-container-right .feature-card:last-child {
+                margin-right: 1rem;
+            }
+
+            /* Hide scrollbar for Chrome, Safari and Opera */
+            .card-container-right::-webkit-scrollbar {
+                display: none;
+            }
+
+            /* Ensure parent containers don't cause overflow */
+            section:has(.card-container-right) {
+                overflow-x: hidden;
+                max-width: 100vw;
+            }
+
+            .container:has(.card-container-right) {
+                overflow-x: hidden;
+                max-width: 100%;
+            }
+
+            /* Fix for Content 2 section */
+            section[style*="background: #3399ff"] {
+                overflow-x: hidden !important;
+                max-width: 100vw;
+            }
+
+            section[style*="background: #3399ff"] .container {
+                overflow-x: hidden !important;
+                max-width: 100%;
+            }
+
+            /* Ensure grid items don't cause overflow */
+            section[style*="background: #3399ff"] .grid > div {
+                min-width: 0;
+                max-width: 100%;
+            }
+
+            /* Allow the grid item with cards to scroll */
+            section[style*="background: #3399ff"] .grid > div.order-1 {
+                overflow-x: visible;
+                overflow-y: visible;
+            }
+
+            /* Ensure card container has proper padding to show all cards */
+            section[style*="background: #3399ff"] .order-1 .card-container-right {
+                padding-right: 2.5rem;
+            }
+
+            /* Add extra margin to last card to ensure it's fully visible */
+            section[style*="background: #3399ff"] .card-container-right .feature-card:last-child {
+                margin-right: 1.5rem;
+                flex-shrink: 0;
+            }
+
+            /* Fix for the card container parent - allow scrolling */
+            section[style*="background: #3399ff"] .flex.items-center {
+                width: 100%;
+                max-width: 100%;
+                overflow-x: visible;
+                overflow-y: visible;
+                position: relative;
+            }
+
+            /* Ensure card container can scroll properly and show all cards */
+            section[style*="background: #3399ff"] .flex.items-center .card-container-right {
+                overflow-x: auto;
+                overflow-y: hidden;
+                width: 100%;
+                max-width: 100%;
+                padding-right: 1.5rem;
+                margin-right: -1rem;
+            }
+
+            /* Add padding to last card so it's not cut off */
+            section[style*="background: #3399ff"] .card-container-right .feature-card:last-child {
+                margin-right: 0.5rem;
+            }
+
+            .feature-card {
+                min-width: 200px;
+                height: 320px;
+                flex: 0 0 200px;
+                flex-shrink: 0;
+                scroll-snap-align: start;
+            }
+
+            .card-content {
+                padding: 90px 12px 12px;
+            }
+
+            .card-content p {
+                font-size: 0.75em;
+            }
+
+            .card-button {
+                font-size: 0.8em;
+                padding: 4px 12px;
+            }
+
+            /* Game Container Mobile */
+            .claw-game-container {
+                --m: 1.5;
+                transform: scale(0.9);
+                transform-origin: center;
+                width: 100%;
+                max-width: 100vw;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                padding: 0.5rem;
+                box-sizing: border-box;
+                overflow: hidden;
+            }
+
+            .game-wrapper {
+                padding: 0.75rem 0.5rem;
+                margin-top: 0;
+                width: 100%;
+                max-width: 100%;
+                overflow-x: hidden;
+                box-sizing: border-box;
+            }
+
+            .game-wrapper h2 {
+                font-size: 1rem !important;
+                margin-bottom: 1rem !important;
+                padding: 0 0.5rem;
+                text-align: center;
+                width: 100%;
+                max-width: 100%;
+            }
+
+            .game-title {
+                font-size: 0.9rem;
+                margin-bottom: 0.75rem;
+            }
+
+            .claw-game-container .wrapper {
+                width: 100%;
+                max-width: 100%;
+                min-height: auto !important;
+                overflow-x: hidden;
+                overflow-y: visible;
+                padding: 0.5rem 0;
+                box-sizing: border-box;
+            }
+
+            /* Ensure game machine fits on mobile */
+            .claw-game-container .claw-machine {
+                max-width: 100%;
+                width: 100%;
+                box-sizing: border-box;
+            }
+
+            /* Optimize button sizes for touch */
+            .claw-game-container button {
+                min-width: 44px;
+                min-height: 44px;
+                touch-action: manipulation;
+            }
+
+            /* Prevent overflow in collection box */
+            .claw-game-container .collection-box {
+                max-width: 100%;
+                overflow-x: hidden;
+            }
+
+            /* Optimize game performance on mobile */
+            .claw-game-container * {
+                -webkit-tap-highlight-color: transparent;
+                -webkit-touch-callout: none;
+            }
+
+            /* Ensure game is centered and contained */
+            .claw-game-container .claw-machine,
+            .claw-game-container .box {
+                max-width: 100%;
+                box-sizing: border-box;
+            }
+
+            /* Improve touch targets for game controls */
+            .claw-game-container .control button {
+                padding: 0.5rem;
+                margin: 0.5rem;
+            }
+
+            /* Optimize game section container */
+            section .container .grid > div:has(.claw-game-container) {
+                width: 100%;
+                max-width: 100%;
+                overflow-x: hidden;
+            }
+
+            /* Text Alignment Mobile */
+            .text-right {
+                text-align: left !important;
+            }
+
+            .items-end {
+                align-items: flex-start !important;
+            }
+
+            /* Prevent Text Overflow on Mobile */
+            .container {
+                padding-left: 1rem !important;
+                padding-right: 1rem !important;
+                max-width: 100vw;
+                overflow-x: hidden;
+            }
+
+            /* Ensure text containers don't overflow */
+            .flex.flex-col {
+                width: 100%;
+                max-width: 100%;
+                box-sizing: border-box;
+                overflow-wrap: break-word;
+                word-wrap: break-word;
+                word-break: break-word;
+            }
+
+            /* Fix text in lists and paragraphs */
+            ul, ol, li, p, h1, h2, h3, h4, h5, h6 {
+                max-width: 100%;
+                overflow-wrap: break-word;
+                word-wrap: break-word;
+                word-break: break-word;
+                hyphens: auto;
+            }
+
+            /* Ensure grid items don't overflow */
+            .grid > * {
+                min-width: 0;
+                max-width: 100%;
+                overflow: hidden;
+            }
+
+            /* Fix animated gradient text on mobile */
+            .animated-gradient-text {
+                display: block;
+                width: 100%;
+                max-width: 100%;
+                overflow-wrap: break-word;
+                word-wrap: break-word;
+                word-break: break-word;
+            }
+
+            /* Benefits Section Specific Fixes */
+            .list-none {
+                width: 100%;
+                max-width: 100%;
+                padding-left: 0;
+                margin-left: 0;
+            }
+
+            .list-none li {
+                width: 100%;
+                max-width: 100%;
+                padding-right: 0;
+                margin-right: 0;
+            }
+
+            /* Ensure all text content is properly contained */
+            section .container {
+                padding-left: 1rem !important;
+                padding-right: 1rem !important;
+            }
+
+            /* Fix for sections with background */
+            section[style*="background"] .container {
+                padding-left: 1rem !important;
+                padding-right: 1rem !important;
+            }
+
+            /* Accordion Mobile */
+            .accordion-wrapper {
+                padding: 0 0.5rem;
+            }
+
+            .accordion-wrapper h1 {
+                font-size: 22px;
+                margin-bottom: 10px;
+            }
+
+            .accordion .link {
+                padding: 12px 15px;
+                font-size: 14px;
+            }
+
+            .submenu p {
+                padding: 12px 15px;
+                font-size: 13px;
+            }
+
+            /* Ripple Background Mobile */
+            .circle {
+                animation-duration: 12s;
+            }
+
+            .small {
+                width: 150px;
+                height: 150px;
+            }
+
+            .medium {
+                width: 300px;
+                height: 300px;
+            }
+
+            .large {
+                width: 450px;
+                height: 450px;
+            }
+
+            .xlarge {
+                width: 600px;
+                height: 600px;
+            }
+
+            .xxlarge {
+                width: 750px;
+                height: 750px;
+            }
+        }
+
+        @media (max-width: 640px) {
+            /* Extra Small Mobile */
+            .key {
+                font-size: 1.8rem;
+                letter-spacing: -0.1rem;
+            }
+
+            /* Additional Text Overflow Protection for Small Mobile */
+            .container {
+                padding-left: 0.75rem !important;
+                padding-right: 0.75rem !important;
+            }
+
+            section .container {
+                padding-left: 0.75rem !important;
+                padding-right: 0.75rem !important;
+            }
+
+            /* Hero Section Content - Increased Sizes for Small Mobile */
+            .hero-section .key {
+                font-size: 2.5rem !important;
+                letter-spacing: -0.12rem !important;
+            }
+
+            .hero-section h3 {
+                font-size: 1.75rem !important;
+            }
+
+            .hero-section p {
+                font-size: 1rem !important;
+            }
+
+            .hero-section .animated-gradient-btn {
+                --width: 180px;
+                --height: 60px;
+                --border: 4px;
+                width: 180px !important;
+                height: 60px !important;
+                min-width: 180px;
+                min-height: 60px;
+                font-size: 18px !important;
+                letter-spacing: 1.2px;
+                line-height: 60px !important;
+                max-width: 90vw;
+                box-sizing: border-box;
+                overflow: visible;
+            }
+
+            .hero-section .animated-gradient-btn::after {
+                width: 180px !important;
+                height: 60px !important;
+                left: 0 !important;
+                right: auto !important;
+                top: 0 !important;
+                bottom: auto !important;
+                margin: 0 !important;
+                -webkit-clip-path: polygon(0% 100%, 4px 100%, 4px 4px, 176px 4px, 176px 56px, 4px 56px, 4px 100%, 100% 100%, 100% 0%, 0% 0%) !important;
+                clip-path: polygon(0% 100%, 4px 100%, 4px 4px, 176px 4px, 176px 56px, 4px 56px, 4px 100%, 100% 100%, 100% 0%, 0% 0%) !important;
+                animation: gradient var(--dur) ease-in-out infinite !important;
+            }
+
+            .hero-section .animated-gradient-btn > span {
+                line-height: 60px !important;
+                display: flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                height: 100% !important;
+                width: 100% !important;
+                white-space: nowrap;
+                overflow: visible;
+                padding: 0;
+                font-size: 18px !important;
+            }
+
+            .animated-gradient-btn {
+                --width: 160px;
+                --height: 50px;
+                font-size: 18px;
+            }
+
+            .animated-gradient-btn::after {
+                -webkit-clip-path: polygon(0% 100%, 3px 100%, 3px 3px, 157px 3px, 157px 47px, 3px 47px, 3px 100%, 100% 100%, 100% 0%, 0% 0%);
+                clip-path: polygon(0% 100%, 3px 100%, 3px 3px, 157px 3px, 157px 47px, 3px 47px, 3px 100%, 100% 100%, 100% 0%, 0% 0%);
+            }
+
+            .claw-game-container {
+                --m: 1.2;
+                transform: scale(0.8);
+                padding: 0.25rem;
+            }
+
+            /* Ensure card scrollbar is hidden on small mobile */
+            .card-container-right {
+                scrollbar-width: none;
+                -ms-overflow-style: none;
+            }
+
+            .card-container-right::-webkit-scrollbar {
+                display: none;
+            }
+
+            .game-wrapper {
+                padding: 0.5rem 0.25rem;
+            }
+
+            .game-wrapper h2 {
+                font-size: 0.9rem !important;
+                margin-bottom: 0.75rem !important;
+            }
+
+            .claw-game-container .wrapper {
+                min-height: auto !important;
+                padding: 0.25rem 0;
+            }
+
+            .feature-card {
+                min-width: 180px;
+                height: 300px;
+                flex: 0 0 180px;
+                flex-shrink: 0;
+            }
+
+            .card-container-right {
+                padding-right: 2.5rem;
+            }
+
+            .card-container-right .feature-card:last-child {
+                margin-right: 1.5rem;
+            }
+
+            .card-content {
+                padding: 85px 10px 10px;
+            }
+
+            .card-content p {
+                font-size: 0.7em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            /* Very Small Mobile */
+            .key {
+                font-size: 1.5rem;
+                letter-spacing: -0.08rem;
+            }
+
+            /* Additional Text Overflow Protection for Very Small Mobile */
+            .container {
+                padding-left: 0.5rem !important;
+                padding-right: 0.5rem !important;
+            }
+
+            section .container {
+                padding-left: 0.5rem !important;
+                padding-right: 0.5rem !important;
+            }
+
+            /* Hero Section Content - Increased Sizes for Very Small Mobile */
+            .hero-section .key {
+                font-size: 2.2rem !important;
+                letter-spacing: -0.1rem !important;
+            }
+
+            .hero-section h3 {
+                font-size: 1.5rem !important;
+            }
+
+            .hero-section p {
+                font-size: 0.95rem !important;
+            }
+
+            .hero-section .animated-gradient-btn {
+                --width: 170px;
+                --height: 55px;
+                --border: 4px;
+                width: 170px !important;
+                height: 55px !important;
+                min-width: 170px;
+                min-height: 55px;
+                font-size: 17px !important;
+                letter-spacing: 1px;
+                line-height: 55px !important;
+                max-width: 90vw;
+                box-sizing: border-box;
+                overflow: visible;
+            }
+
+            .hero-section .animated-gradient-btn::after {
+                width: 170px !important;
+                height: 55px !important;
+                left: 0 !important;
+                right: auto !important;
+                top: 0 !important;
+                bottom: auto !important;
+                margin: 0 !important;
+                -webkit-clip-path: polygon(0% 100%, 4px 100%, 4px 4px, 166px 4px, 166px 51px, 4px 51px, 4px 100%, 100% 100%, 100% 0%, 0% 0%) !important;
+                clip-path: polygon(0% 100%, 4px 100%, 4px 4px, 166px 4px, 166px 51px, 4px 51px, 4px 100%, 100% 100%, 100% 0%, 0% 0%) !important;
+                animation: gradient var(--dur) ease-in-out infinite !important;
+            }
+
+            .hero-section .animated-gradient-btn > span {
+                line-height: 55px !important;
+                display: flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                height: 100% !important;
+                width: 100% !important;
+                white-space: nowrap;
+                overflow: visible;
+                padding: 0;
+                font-size: 17px !important;
+            }
+
+            .animated-gradient-btn {
+                --width: 140px;
+                --height: 45px;
+                font-size: 16px;
+                letter-spacing: 0.5px;
+            }
+
+            .animated-gradient-btn::after {
+                -webkit-clip-path: polygon(0% 100%, 3px 100%, 3px 3px, 137px 3px, 137px 42px, 3px 42px, 3px 100%, 100% 100%, 100% 0%, 0% 0%);
+                clip-path: polygon(0% 100%, 3px 100%, 3px 3px, 137px 3px, 137px 42px, 3px 42px, 3px 100%, 100% 100%, 100% 0%, 0% 0%);
+            }
+
+            .claw-game-container {
+                --m: 1;
+                transform: scale(0.7);
+                padding: 0.25rem;
+            }
+
+            /* Ensure card scrollbar is hidden on very small mobile */
+            .card-container-right {
+                scrollbar-width: none;
+                -ms-overflow-style: none;
+            }
+
+            .card-container-right::-webkit-scrollbar {
+                display: none;
+            }
+
+            .game-wrapper {
+                padding: 0.5rem 0.25rem;
+            }
+
+            .game-wrapper h2 {
+                font-size: 0.85rem !important;
+                margin-bottom: 0.5rem !important;
+            }
+
+            .claw-game-container .wrapper {
+                min-height: auto !important;
+                padding: 0.25rem 0;
+            }
+
+            /* Ensure buttons are touch-friendly on very small screens */
+            .claw-game-container button {
+                min-width: 48px;
+                min-height: 48px;
+            }
+
+            /* Further optimize game container on very small screens */
+            .claw-game-container {
+                max-width: 100vw;
+                padding: 0.5rem 0.25rem;
+            }
+
+            .game-wrapper {
+                padding: 0.5rem 0.25rem;
+            }
+
+            .feature-card {
+                min-width: 160px;
+                height: 280px;
+                flex: 0 0 160px;
+                flex-shrink: 0;
+            }
+
+            .card-container-right {
+                padding-right: 2.5rem;
+            }
+
+            .card-container-right .feature-card:last-child {
+                margin-right: 1.5rem;
+            }
+
+            .card-icon {
+                width: 80px;
+                height: 70px;
+            }
+
+            .card-icon img {
+                width: 40px;
+                height: 40px;
+            }
+        }
+
+        /* Animated Gradient Button Styles */
+        .animated-gradient-btn {
+            --width: 220px;
+            --height: 70px;
+            --border: 4px;
+            --violet: #6559ae;
+            --orange: #ff7159;
+            --deg: 120deg;
+            --size: 400%;
+            --dur: 3s;
+
+            display: block;
+            position: relative;
+            width: var(--width);
+            height: var(--height);
+            margin: 0 auto;
+            text-transform: uppercase;
+            text-decoration: none;
+            text-align: center;
+            letter-spacing: 2px;
+            line-height: var(--height);
+            font-family: 'Squada One', cursive;
+            font-size: 28px;
+            z-index: 1;
+        }
+
+        .animated-gradient-btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            margin: auto;
+            background: linear-gradient(var(--deg), var(--violet), var(--orange), var(--violet));
+            background-size: var(--size) var(--size);
+            -webkit-clip-path: polygon(0% 100%, 4px 100%, 4px 4px, 216px 4px, 216px 66px, 4px 66px, 4px 100%, 100% 100%, 100% 0%, 0% 0%);
+            clip-path: polygon(0% 100%, 4px 100%, 4px 4px, 216px 4px, 216px 66px, 4px 66px, 4px 100%, 100% 100%, 100% 0%, 0% 0%);
+            animation: gradient var(--dur) ease-in-out infinite, border 1s forwards ease-in-out reverse;
+        }
+
+        .animated-gradient-btn > span {
+            display: block;
+            position: relative;
+            z-index: 2;
+            background: linear-gradient(var(--deg), var(--violet), var(--orange), var(--violet));
+            background-size: var(--size) var(--size);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradient var(--dur) ease-in-out infinite;
+        }
+
+        @keyframes gradient {
+            0% {
+                background-position: 14% 0%;
+            }
+            50% {
+                background-position: 87% 100%;
+            }
+            100% {
+                background-position: 14% 0%;
+            }
+        }
+
+        @keyframes border {
+            0% {
+                -webkit-clip-path: polygon(0% 100%, 4px 100%, 4px 4px, 216px 4px, 216px 66px, 4px 66px, 4px 100%, 100% 100%, 100% 0%, 0% 0%);
+                clip-path: polygon(0% 100%, 4px 100%, 4px 4px, 216px 4px, 216px 66px, 4px 66px, 4px 100%, 100% 100%, 100% 0%, 0% 0%);
+            }
+            25% {
+                -webkit-clip-path: polygon(0% 100%, 4px 100%, 4px 4px, 216px 4px, 216px 66px, 216px 66px, 216px 100%, 100% 100%, 100% 0%, 0% 0%);
+                clip-path: polygon(0% 100%, 4px 100%, 4px 4px, 216px 4px, 216px 66px, 216px 66px, 216px 100%, 100% 100%, 100% 0%, 0% 0%);
+            }
+            50% {
+                -webkit-clip-path: polygon(0% 100%, 4px 100%, 4px 4px, 216px 4px, 216px 4px, 216px 4px, 216px 4px, 216px 4px, 100% 0%, 0% 0%);
+                clip-path: polygon(0% 100%, 4px 100%, 4px 4px, 216px 4px, 216px 4px, 216px 4px, 216px 4px, 216px 4px, 100% 0%, 0% 0%);
+            }
+            75% {
+                -webkit-clip-path: polygon(0% 100%, 4px 100%, 4px 4px, 4px 4px, 4px 4px, 4px 4px, 4px 4px, 4px 4px, 4px 0%, 0% 0%);
+                clip-path: polygon(0% 100%, 4px 100%, 4px 4px, 4px 4px, 4px 4px, 4px 4px, 4px 4px, 4px 4px, 4px 0%, 0% 0%);
+            }
+            100% {
+                -webkit-clip-path: polygon(0% 100%, 4px 100%, 4px 100%, 4px 100%, 4px 100%, 4px 100%, 4px 100%, 4px 100%, 4px 100%, 0% 100%);
+                clip-path: polygon(0% 100%, 4px 100%, 4px 100%, 4px 100%, 4px 100%, 4px 100%, 4px 100%, 4px 100%, 4px 100%, 0% 100%);
+            }
+        }
+
+        /* Animated Gradient Text Styles */
+        .animated-gradient-text {
+            --deg: 120deg;
+            --size: 400%;
+            --dur: 3s;
+            background: linear-gradient(var(--deg), #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3, #ff0000);
+            background-size: var(--size) var(--size);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradient-text var(--dur) ease-in-out infinite;
+        }
+
+        @keyframes gradient-text {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        /* Gradient Grainy Background */
+        .gradient-grainy-bg {
+            position: relative;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        }
+
+        /* Section Height for Desktop/Laptop */
+        @media (min-width: 768px) {
+            .content-section-height {
+                min-height: 100vh;
+                display: flex;
+                align-items: center;
+            }
+            
+            .content-section-height > .container {
+                width: 100%;
+            }
+
+            .content-section-height .text-right {
+                padding: 2rem 0;
+            }
+
+            .content-section-height .text-right h2 {
+                margin-bottom: 3rem !important;
+            }
+
+            .content-section-height .text-right p:first-of-type {
+                margin-bottom: 3rem !important;
+            }
+
+            .content-section-height .items-start p:first-of-type {
+                margin-bottom: 3rem !important;
+            }
+
+            .content-section-height .items-start p:last-of-type {
+                margin-bottom: 4rem !important;
+            }
+        }
+
+        .gradient-grainy-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.03) 0px, transparent 1px, transparent 2px, rgba(0, 0, 0, 0.03) 3px),
+                repeating-linear-gradient(90deg, rgba(0, 0, 0, 0.03) 0px, transparent 1px, transparent 2px, rgba(0, 0, 0, 0.03) 3px);
+            background-size: 4px 4px;
+            pointer-events: none;
+            opacity: 0.5;
+        }
+
+        .gradient-grainy-bg > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Card Hover Effect Styles */
+        a {
+            text-decoration: none;
+        }
+
+        .card-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+        }
+
+        .card {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            height: 250px;
+            overflow: hidden;
+            background-color: #fff;
+            background-image: url('../../assets/images/clawmachine/pic1.jpg');
+            background-size: cover;
+            background-position: center 30%;
+            background-repeat: no-repeat;
+            box-shadow: 0px 0px 10px 2px rgba(197, 197, 197, 0.5);
+            box-sizing: border-box;
+            padding: 20px;
+            transition: all 0.3s;
+        }
+
+        .card2 {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            height: 250px;
+            overflow: hidden;
+            background-color: #fff;
+            background-image: url('../../assets/images/clawmachine/pic3.jpg');
+            background-size: cover;
+            background-position: center 30%;
+            background-repeat: no-repeat;
+            box-shadow: 0px 0px 10px 2px rgba(197, 197, 197, 0.5);
+            box-sizing: border-box;
+            padding: 20px;
+            transition: all 0.3s;
+        }
+
+        @media (min-width: 768px) {
+            .card {
+                height: 70vh;
+                min-height: 500px;
+                max-height: 700px;
+            }
+            
+            .card2 {
+                height: 70vh;
+                min-height: 500px;
+                max-height: 700px;
+            }
+        }
+
+        .card:hover {
+            transform: translateY(-20px);
+            background-position: center center;
+            background-size: 110%;
+            box-shadow: 0px 0px 20px 0px rgba(119, 119, 119, 0.6);
+        }
+
+        .card:hover .card__button {
+            transform: translateY(0%);
+            color: #027090;
+            transition: all 0.3s;
+        }
+
+        .card2:hover {
+            transform: translateY(-20px);
+            background-position: center center;
+            background-size: 110%;
+            box-shadow: 0px 0px 20px 0px rgba(119, 119, 119, 0.6);
+        }
+
+        .card2:hover .card__button {
+            transform: translateY(0%);
+            color: #027090;
+            transition: all 0.3s;
+        }
+
+        .card3 {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            height: 250px;
+            overflow: hidden;
+            background-color: #fff;
+            background-image: url('../../assets/images/clawmachine/pic4.jpg');
+            background-size: cover;
+            background-position: center 30%;
+            background-repeat: no-repeat;
+            box-shadow: 0px 0px 10px 2px rgba(197, 197, 197, 0.5);
+            box-sizing: border-box;
+            padding: 20px;
+            transition: all 0.3s;
+        }
+
+        @media (min-width: 768px) {
+            .card3 {
+                height: 70vh;
+                min-height: 500px;
+                max-height: 700px;
+            }
+        }
+
+        .card3:hover {
+            transform: translateY(-20px);
+            background-position: center center;
+            background-size: 110%;
+            box-shadow: 0px 0px 20px 0px rgba(119, 119, 119, 0.6);
+        }
+
+        .card3:hover .card__button {
+            transform: translateY(0%);
+            color: #027090;
+            transition: all 0.3s;
+        }
+
+        .card__button {
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            display: block;
+            width: 100%;
+            background-color: #fff;
+            box-sizing: border-box;
+            padding: 20px 10px;
+            font-size: 12px;
+            color: #fff;
+            font-weight: 300;
+            text-align: center;
+            text-transform: uppercase;
+            font-family: 'Open Sans', sans-serif;
+            transform: translateY(100%);
+            transition: all 0.3s;
+        }
+
+        /* Feature Cards Styles */
+        .card-container-right {
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            align-items: flex-start;
+            flex-wrap: nowrap;
+            gap: 8px;
+            width: 100%;
+            overflow-x: auto;
+            padding-bottom: 40px;
+            position: relative;
+        }
+
+        .feature-card {
+            position: relative;
+            flex: 1 1 0;
+            min-width: 150px;
+            height: 380px;
+            background-color: #287bff;
+            border-radius: 15px;
+            border-bottom-left-radius: 110px;
+            border-bottom-right-radius: 110px;
+            box-shadow: 0 10px 0 #fff,
+                  inset 0 -10px 0 rgba(255,255,255,0.25),
+                        0 30px 0 rgba(0,0,0,0.15);
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        .feature-card::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 120%;
+            left: -40%;
+            top: -100px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255, 0.2));
+            transform: rotate(35deg);
+            pointer-events: none;
+            filter: blur(5px);
+        }
+
+        .feature-card:nth-child(1) {
+            background: linear-gradient(to bottom, #ff2ae0, #645bf6);
+        }
+
+        .feature-card:nth-child(2) {
+            background: linear-gradient(to bottom, #ffec61, #f321d7);
+        }
+
+        .feature-card:nth-child(3) {
+            background: linear-gradient(to bottom, #24ff72, #9a4eff);
+        }
+
+        .card-icon {
+            position: relative;
+            width: 100px;
+            height: 85px;
+            border-bottom-left-radius: 70px;
+            border-bottom-right-radius: 70px;
+            background-color: #3c2846;
+            box-shadow: 0 8px 0 rgba(0,0,0,0.1),
+                  inset 0 -6px 0 #fff;
+            z-index: 10;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .card-icon::before {
+            content: '';
+            position: absolute;
+            width: 35px;
+            height: 35px;
+            left: -35px;
+            top: 0;
+            border-top-right-radius: 35px;
+            background-color: transparent;
+            box-shadow: 10px -10px 0 10px #3c2846;
+        }
+
+        .card-icon::after {
+            content: '';
+            position: absolute;
+            width: 35px;
+            height: 35px;
+            right: -35px;
+            top: 0;
+            border-top-left-radius: 35px;
+            background-color: transparent;
+            box-shadow: -10px -10px 0 10px #3c2846;
+        }
+
+        .card-icon img {
+            width: 50px;
+            height: 50px;
+            object-fit: contain;
+            z-index: 11;
+            position: relative;
+        }
+
+        .card-content {
+            position: absolute;
+            width: 100%;
+            padding: 100px 18px 18px;
+            text-align: center;
+        }
+
+        .card-button {
+            font-size: 0.9em;
+            color: #fff;
+            margin-bottom: 6px;
+            font-family: 'Orbitron', sans-serif;
+            background: transparent;
+            border: 1.5px solid #fff;
+            padding: 5px 14px;
+            border-radius: 18px;
+            cursor: pointer;
+        }
+
+        .card-content p {
+            color: #fff;
+            line-height: 1.4;
+            font-size: 0.8em;
+            font-family: 'Orbitron', sans-serif;
+            margin: 0;
+        }
+
+        /* Ripple Background Effect */
+        .ripple-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0;
+        }
+
+        .circle {
+            position: absolute;
+            border-radius: 50%;
+            background: white;
+            animation: ripple 15s infinite;
+            box-shadow: 0px 0px 1px 0px #508fb9;
+        }
+
+        .small {
+            width: 200px;
+            height: 200px;
+            left: -100px;
+            bottom: -100px;
+        }
+
+        .medium {
+            width: 400px;
+            height: 400px;
+            left: -200px;
+            bottom: -200px;
+        }
+
+        .large {
+            width: 600px;
+            height: 600px;
+            left: -300px;
+            bottom: -300px;
+        }
+
+        .xlarge {
+            width: 800px;
+            height: 800px;
+            left: -400px;
+            bottom: -400px;
+        }
+
+        .xxlarge {
+            width: 1000px;
+            height: 1000px;
+            left: -500px;
+            bottom: -500px;
+        }
+
+        .shade1 {
+            opacity: 0.2;
+        }
+
+        .shade2 {
+            opacity: 0.5;
+        }
+
+        .shade3 {
+            opacity: 0.7;
+        }
+
+        .shade4 {
+            opacity: 0.8;
+        }
+
+        .shade5 {
+            opacity: 0.9;
+        }
+
+        @keyframes ripple {
+            0% {
+                transform: scale(0.8);
+            }
+            50% {
+                transform: scale(1.2);
+            }
+            100% {
+                transform: scale(0.8);
+            }
+        }
+
+        /* Claw Machine Mini Game Styles */
+        .game-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            max-width: 100%;
+            padding: 0.25rem;
+            margin-top: 0;
+            overflow-x: hidden;
+        }
+
+        .game-title {
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            text-align: center;
+            color: #1a202c;
+        }
+
+        .claw-game-container {
+            --brown: #57280f;
+            --blue: #33a5da;
+            --dark-blue: #3a94b7;
+            --machine-color: #32c2db;
+            --machine-width: 200px;
+            --m: 2.5;
+        }
+
+        .claw-game-container *,
+        .claw-game-container ::before,
+        .claw-game-container ::after {
+            box-sizing: border-box;
+        }
+
+        .claw-game-container .wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 500px;
+            flex-direction: column;
+            transform: scale(1);
+            transform-origin: center;
+            max-width: 100%;
+            overflow-x: hidden;
+            box-sizing: border-box;
+        }
+
+        /* Mobile optimizations for wrapper */
+        @media (max-width: 768px) {
+            .claw-game-container .wrapper {
+                min-height: 400px;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .claw-game-container .wrapper {
+                min-height: 350px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .claw-game-container .wrapper {
+                min-height: 300px;
+            }
+        }
+
+        /* Prevent horizontal scrolling on game section */
+        @media (max-width: 768px) {
+            section:has(.claw-game-container) {
+                overflow-x: hidden;
+                max-width: 100vw;
+            }
+
+            .claw-game-container,
+            .claw-game-container * {
+                max-width: 100%;
+            }
+        }
+
+        .claw-game-container .pix,
+        .claw-game-container .pix::before,
+        .claw-game-container .pix::after {
+            width: calc(var(--w) * var(--m));
+            height: calc(var(--h) * var(--m));
+            image-rendering: pixelated;
+            background-size: calc(var(--w) * var(--m)) calc(var(--h) * var(--m));
+        }
+
+        .claw-game-container .pix::before,
+        .claw-game-container .pix::after {
+            position: absolute;
+            content: '';
+        }
+
+        .claw-game-container .claw-machine {
+            display: flex;
+            flex-direction: column;
+            border: 2px solid var(--brown);
+            overflow: hidden;
+        }
+
+        .claw-game-container .collection-box {
+            --h: 32px;
+            width: calc(var(--m) * var(--machine-width));
+            margin: calc(var(--m) * var(--h) * -1 - 10px) 0 24px;
+            display: flex;
+            align-items: bottom;
+            justify-content: start;
+        }
+
+        .claw-game-container .collection-box .toy-wrapper {
+            position: relative;
+            width: calc(100% / 6);
+            display: flex;
+            align-items: end;
+            justify-content: center;
+        }
+
+        .claw-game-container .collection-box .toy-wrapper .toy::after {
+            top: auto;
+            bottom: 0;
+        }
+
+        .claw-game-container .toy-wrapper.squeeze-in {
+            width: 0;
+            animation: squeeze-in forwards 0.4s;
+            animation-delay: 1.4s;
+        }
+
+        @keyframes squeeze-in {
+            0% {
+                width: 0;
+            }
+            100% {
+                width: calc(100% / 6);
+            }
+        }
+
+        @keyframes show-toy-2 {
+            0% {
+                opacity: 0;
+                transform: translateY(-100vh);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .claw-game-container .toy-wrapper .toy {
+            opacity: 0;
+            transform: translateY(-100vh);
+            animation: forwards show-toy-2 0.8s;
+            animation-delay: 1s;
+        }
+
+        .claw-game-container .claw-machine.show-overlay::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            left: 0;
+            top: 0;
+            background-color: var(--machine-color);
+            opacity: 0.6;
+            z-index: 6;
+            pointer-events: none;
+        }
+
+        .claw-game-container .box {
+            position: relative;
+            background-color: #7fcfed;
+            --w: var(--machine-width);
+            --h: 180px;
+        }
+
+        .claw-game-container .box::before {
+            background-color: var(--brown);
+            top: calc(70px * var(--m));
+            width: 100%;
+            height: calc(var(--m) * 8px);
+            z-index: 5;
+        }
+
+        .claw-game-container .box::after {
+            background-color: var(--machine-color);
+            top: calc(70px * var(--m));
+            right: 0px;
+            width: calc(var(--m) * 8px);
+            height: calc(var(--m) * 170px);
+            z-index: 2;
+        }
+
+        .claw-game-container .machine-top,
+        .claw-game-container .machine-bottom {
+            position: absolute;
+            width: 100%;
+            --h: 70px;
+            height: calc(var(--h) * var(--m));
+        }
+
+        .claw-game-container .machine-top {
+            top: 0;
+            display: flex;
+            align-items: center;
+            z-index: 1;
+        }
+
+        .claw-game-container .machine-top::after {
+            content: '';
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #70f7f372;
+            z-index: 1;
+        }
+
+        .claw-game-container .machine-bottom {
+            bottom: 0;
+            background-color: #def7f6;
+        }
+
+        .claw-game-container .collection-point {
+            position: absolute;
+            bottom: 0;
+            background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABYAAAAMCAYAAABm+U3GAAAAAXNSR0IArs4c6QAAADBJREFUOE9jtJqy/T8DFcGxHE9GkHGM1DYYZCjIcJoYTDMXjxqMkrZGIw8eHEMvKADnSiE1EAXSagAAAABJRU5ErkJggg==);
+            --w: 44px;
+            --h: 24px;
+            z-index: 0;
+        }
+
+        .claw-game-container .rail {
+            top: 0;
+            left: 0;
+            transition: 0.3s;
+            border: solid var(--blue);
+        }
+
+        .claw-game-container .rail.hori {
+            --h: 5px;
+            width: 100%;
+            background-color: #fff;
+            border-width: 2px 0;
+            z-index: 1;
+        }
+
+        .claw-game-container .rail.vert {
+            position: absolute;
+            --h: 70px;
+            --w: 5px;
+            background-color: #fff;
+            border-width: 0 2px;
+        }
+
+        .claw-game-container .arm-joint {
+            position: absolute;
+            top: 0;
+            left: 0;
+            --w: 5px;
+            --h: 5px;
+            transition: 0.3s;
+            z-index: -1;
+        }
+
+        .claw-game-container .arm-joint::after {
+            position: absolute;
+            border: solid var(--blue) 2px;
+            background-color: #fff;
+            --w: 10px;
+            --h: 10px;
+            top: calc(var(--m) * var(--h) * -0.25);
+            left: calc(var(--m) * var(--w) * -0.25);
+        }
+
+        .claw-game-container .arm::after {
+            position: absolute;
+            --w: 13px;
+            --h: 7px;
+            bottom: calc(var(--m) * -1px);
+            left: calc(var(--m) * -3px);
+            background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA0AAAAHCAYAAADTcMcaAAAAAXNSR0IArs4c6QAAAElJREFUKFNjZGBgYDBeeus/iCYGnI1WY2QEaTgTpUqMerAak2W3GVA0RWgKMKy4/gHDAGRx6miCWQEyGQbQbcawiRiPgTWRE3oA5mIzfZr3jVYAAAAASUVORK5CYII=);
+        }
+
+        .claw-game-container .arm.missed::after {
+            background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA0AAAAHCAYAAADTcMcaAAAAAXNSR0IArs4c6QAAAENJREFUKFNjZGBgYDBeeus/iCYGnI1WY2QEaTgTpUqMerAak2W3GVA0RWgKMKy4/gHDAGRx6miCWQEyGQbQbcawiRiPgTWRE3oA5mIzfZr3jVYAAAAASUVORK5CYII=);
+        }
+
+        .claw-game-container .control {
+            position: relative;
+            --h: 60px;
+            width: 100%;
+            text-align: right;
+            background-color: var(--dark-blue);
+        }
+
+        .claw-game-container .cover {
+            position: absolute;
+            background-color: var(--machine-color);
+            --top-size: calc(var(--m) * 20px);
+            --bottom-size: calc(var(--m) * 10px);
+            z-index: 4;
+        }
+
+        .claw-game-container .top {
+            top: 0;
+            width: 100%;
+            height: calc(var(--m) * 16px);
+        }
+
+        .claw-game-container .collection-arrow {
+            position: absolute;
+            left: calc(var(--m) * 21px);
+            top: calc(var(--m) * 9px);
+            --w: 8px;
+            --h: 4px;
+            background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAECAYAAACzzX7wAAAAAXNSR0IArs4c6QAAAClJREFUGFdjDDn86T8DHsAIksOlaI0tHyNYATZFIEmQOFwBsiKYJEgMAPTvDw1xBcM+AAAAAElFTkSuQmCC);
+            filter: sepia(1) brightness(0.5);
+        }
+
+        .claw-game-container .bottom {
+            bottom: 0px;
+            width: 100%;
+            height: calc(var(--m) * 8px);
+            background-color: var(--brown);
+        }
+
+        .claw-game-container .left {
+            bottom: 0px;
+            left: 0px;
+            height: calc(var(--m) * 170px);
+            width: calc(var(--m) * 8px);
+        }
+
+        .claw-game-container .right {
+            top: 0;
+            right: 0px;
+            height: 100%;
+            width: calc(var(--m) * 116px);
+        }
+
+        .claw-game-container .instruction {
+            position: absolute;
+            --w: 51px;
+            --h: 12px;
+            background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADMAAAAMCAYAAADPjYVSAAAAAXNSR0IArs4c6QAAAPRJREFUSEvdVkESwkAIs0d9hv9/k8/Qow4d6aSZBKjjRfdSdltYIBC63B735+m9rufLkvuQ4/joHnVCRjsp531hG89w7+S0r3xdnc8X1RONOGfynL/lO1A/A8akOZ/4Xk7GhoQy6pBx2fwkmKOJZMQQ/Q0ZFzVHP0VIlUlVVlw+GKR6p/wYBTNFzSGjLu6SMk3iDhl04NfllbH+ZZUEUDWbqn9XjkgkWBaqlJh0eHQopkwwLDU7eu0a1fWHs9eRQqeHNF4OSYfMNFvVkHSzZ0oMqP9VZBytcy9O6JptTZGJ72SZqdrvJjT3Au6VgxVds+70t+cFkvdjifIP/BkAAAAASUVORK5CYII=);
+            top: calc(var(--m) * 34px);
+            right: calc(var(--m) * 11px);
+        }
+
+        .claw-game-container .arm {
+            position: absolute;
+            --w: 7px;
+            --h: 28px;
+            background-color: #fff;
+            box-shadow: 0 0 0 2px var(--blue);
+            transition: 0.3s;
+            margin-top: calc(var(--m) * -1px);
+            margin-left: calc(var(--m) * -1px);
+        }
+
+        .claw-game-container .claws {
+            position: absolute;
+            --w: 3px;
+            --h: 10px;
+            bottom: calc(var(--m) * -5px);
+            left: calc(var(--m) * 2.5px);
+        }
+
+        .claw-game-container .claws::before,
+        .claw-game-container .claws::after {
+            top: 0;
+            --w: 10px;
+            --h: 16px;
+            transition: 0.2s;
+        }
+
+        .claw-game-container .claws::before {
+            left: calc(var(--m) * -10px);
+            background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAQCAYAAAAvf+5AAAAAAXNSR0IArs4c6QAAAGRJREFUKFNjZMADwjX4/6+88ZERpARMYAMgRSuuf2CI0BRgACnGqhCmCGYASDGGQmyKMEzEpQjFjfgUwRUSUgRWSIwi0hSCVBNjKjx4CClGCUeiggcWC0QFOD7FlCUKZJNhyQwAi8VlK14hrsQAAAAASUVORK5CYII=);
+            --close-angle: 45deg;
+            transform-origin: top right;
+        }
+
+        .claw-game-container .claws::after {
+            left: calc(var(--m) * 2.5px);
+            background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAQCAYAAAAvf+5AAAAAAXNSR0IArs4c6QAAAFxJREFUKFNjZICCcA3+/ytvfGSE8dFpsARI0YrrHxgiNAUYcClmhCmCmYBLMYqJ+BTD3UTIZBTH41OM4UtcirEGBzbF5CskymqiPENU8BBSBIoI8qIQb6IgNpkBAEPjZSuK8jVuAAAAAElFTkSuQmCC);
+            --close-angle: -45deg;
+            transform-origin: top left;
+        }
+
+        .claw-game-container .arm.open .claws::before,
+        .claw-game-container .arm.open .claws::after {
+            rotate: var(--close-angle);
+        }
+
+        .claw-game-container .arm-joint::before {
+            --w: 20px;
+            --h: 16px;
+            transform: scale(var(--scale));
+            margin-left: -15px;
+            margin-top: var(--shadow-pos);
+            background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAQCAYAAAAWGF8bAAAAAXNSR0IArs4c6QAAAF5JREFUOE9jZMABXmQc+49LDiQuMcOKEZs8iiAhQ3BZgGw43EByDYNZAjMUbCClhiEbSn0DqeU6mCsZRw3El5aJkqN+GA7+dAgLGEqTD0rWo9RQrIUDehQScjGu4gsANVo6j8xbO6QAAAAASUVORK5CYII=);
+            background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAQCAYAAAAWGF8bAAAAAXNSR0IArs4c6QAAAF5JREFUOE9jZMABrKZs/49LDiR+LMeTEZs8iiAhQ3BZgGw43EByDYNZAjMUbCClhiEbSn0DqeU6mCsZRw3El5aJkqN+GA7+dAgLGEqTD0rWo9RQrIUDehQScjGu4gsAxKQ3Ke4v44gAAAAASUVORK5CYII=);
+            z-index: -1;
+            opacity: 0.5;
+        }
+
+        .claw-game-container button {
+            position: relative;
+            z-index: 5;
+            --w: 24px;
+            --h: 24px;
+            margin: 12px 12px 0 0;
+            border: 0;
+            background-color: transparent;
+            background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAAAXNSR0IArs4c6QAAAFRJREFUKFNjZICC/////4exsdGMjIyMIHEwQUgxzACQJkZsikOPfAarWW3Di2EZhgaYYphKdE0oGtAVY9ME14BLMbomypwEMo0kP9BGA8kRR2rSAACHREftd0fKPgAAAABJRU5ErkJggg==);
+            filter: sepia(1) brightness(0.4);
+            pointer-events: none;
+            cursor: pointer;
+        }
+
+        .claw-game-container .hori-btn {
+            transform: rotate(90deg);
+        }
+
+        .claw-game-container .active {
+            animation: pulse infinite 1s;
+            pointer-events: all;
+        }
+
+        @keyframes pulse {
+            0%,
+            100% {
+                filter: sepia(0);
+            }
+            50% {
+                filter: sepia(1);
+            }
+        }
+
+        .claw-game-container .toy.display {
+            transform: scale(3);
+            animation: forwards show-toy-1 0.8s;
+            animation-delay: 1s;
+        }
+
+        .claw-game-container .toy {
+            position: absolute;
+            transition: transform 1s, left 0.3s, top 0.3s;
+            --m: 2;
+            --w: 20px;
+            --h: 27px;
+            transform: rotate(var(--rotate-angle));
+            pointer-events: none;
+        }
+
+        .claw-game-container .toy::after {
+            content: '';
+        }
+
+        .claw-game-container .toy.bear::after {
+            --w: 24px;
+            --h: 30px;
+            top: calc(var(--m) * -2px);
+            left: calc(var(--m) * -2px);
+            background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAeCAYAAAA2Lt7lAAAAAXNSR0IArs4c6QAAATNJREFUSEvtVssNwjAMbcUZwQLcYQfWQLAAU7FAEWuwA9xZAMQZgRzpRY7rOEkbTtALtLHfc54/ctuwZ7ucvfF6vD5afpb6H/P1IGTwOtw8zmS/aHJJLF9HoBmkItbOtQADAoqanu5yH4Lf7FZz50dEUCCQaCiwjIaIIK+/QS1wkIHk+wSU4NrR81u0GgGSlUscs6fvP0awOT+dvKf1NKjMYokGdZni5HKAUWEllAzlufaNcxT3AWQASKrCAoKcW5TI1hsVcK7RdByccH0OMAXpF1O1JGrNnwaeazQ+x0tBLXsK1CRAvaP+JVjqPEmgNZUkiZFD6iyJZOeCxAL3BChRnqSxeUCRuCRzsBoJl9vIn6CXrlESIXlWY5oEqCgNgDvGikFbN9UFly+y0EDuqTk25PsBag8IsJphwl4AAAAASUVORK5CYII=);
+        }
+
+        .claw-game-container .toy.bear.grabbed::after {
+            background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAeCAYAAAA2Lt7lAAAAAXNSR0IArs4c6QAAAUNJREFUSEvllr0NAjEMhe9EjWABetiBNRAswFQsAGINdoCeBUDUCORIL3KM48RHqLiGn8T+bD87l75jz3o+eeHn4XLv+Vrpe842OqENz901+hltZ10txINNAG1DKWJtXQswAVDU9OzPtyH+u81iGuwIhAokJRrqWEZDIJQ3ZtDKOWCA/B5AAreOnmfRawBKzwvVbOg/FUAReCC5vSagFmIF4s5gdXqE8h6X46Qz3Rl4ysMFlbqFDHBUWKLmBCzZ0LBVAaAHr0upy5JBq8nCczh9HBUwbjF03Dn5jSXCKUifOFU9UWv2QQP5LvA6tfZToCYA/Y7+l85K60WANlQSkoOj1FUlkpMLiOU8AtCiXKRvdUCTxEHjbcpf3ENA8jaS3H1adNSfAyCepZNZInSU5oAb5rTSrpvqBZdfZNFJ8p5as4ds30LPDrDvwGtOAAAAAElFTkSuQmCC);
+        }
+
+        .claw-game-container .toy-wrapper .toy.bear::after {
+            background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAeCAYAAAA2Lt7lAAAAAXNSR0IArs4c6QAAATVJREFUSEvtVsutwkAMTMQZQQPvDj3QBoIGqOo1ACINeoA7DYA4I9CsNCuv5f2FhQvkkpC1ZxyPbdx34lrNJg/+3J2uvTzLPcd8PQgM7v9njzPa/HWlJClfR2AZ5CK2zq0AAwJEjWt7vAzB79bzqfMDETMQpGgosI4GREyv/4JW4CQjyfsJIHDr6OVX9BYBxSoljtnj/ZcRLA83l979YhxUZnWKBnWZ4eQ04KhICQpD6zz2HpjVfcA0yEBzQaGbPzMqGFWLppNzCLheA05B3DlVa8XmuKa/S5H+L6gFTdmDKEnAemf9a7DceZbAaipNEiNnqotSpDuXJClwT8BGkyK/qkMgsgRrIbjeRoLd50dAYeXCVpUiiicXLF0QSQ1YURaAdIxpZa2b5oIrF1lGqPfUEhv4PgFUUwiwSYZ9UgAAAABJRU5ErkJggg==);
+        }
+
+        .claw-game-container .toy.bunny {
+            --w: 20px;
+            --h: 29px;
+        }
+
+        .claw-game-container .toy.bunny::after {
+            --w: 24px;
+            --h: 32px;
+            top: calc(var(--m) * -2px);
+            left: calc(var(--m) * -2px);
+            background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAgCAYAAAAIXrg4AAAAAXNSR0IArs4c6QAAAN1JREFUSEvtVtsNgzAMTCYoY9CJ2hHpRDBGO0Grq2TkOg4+KlAfSv4wjs+cH1xO5pz6w93aLtMtWxueGd+Xi7gwjNci1vnYJQvC+s4AtQuCpkHW+DYAr/ZJ09ko2o4iRAK3ON6saKSiBlFfu2kGRgHJewTXw/kZAJZrnalXG8Rxv6ABrC4yKLO979ls51Zr4LW41EXeRcMmg/lcdnvMwjxoktGWIH+8KpjOiBafjlF00W8CWIXG9PcSTXpeINYoZRfxXvubwf5dAMwatzq2UM2MqGV8hLa3ZTkj3QHyACJNPMzl3sUuAAAAAElFTkSuQmCC);
+        }
+
+        .claw-game-container .toy.bunny.grabbed::after {
+            background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAgCAYAAAAIXrg4AAAAAXNSR0IArs4c6QAAAOxJREFUSEvtVsENwjAMTCaAMWAiGBEmgjFgAqpDcmUcp76UVAWpfbVR7LMv5/RyMs/psHvZtev9me0avpm9H4EIuNweRa7zcZ8sCLt3BKgFCJoGadm7AXhnnzSdG0X9KEImcIvHmxWNVJxBpGu3zGBRQPISyfVwrgPAch1RhzxuB60Atf1dAJBEVKXfRXVdOqhRVe3ABtjKpDpmHmgVCc8CHiUfKZJfHxMQqcabZvo2nZMcMW+AJaZ5navCU0sLNVZdhUz/E8A6tG/lqucFZo1ydi3nYF3gbwEw1/hkB1NDx3hTzyTPtuWMdUfBA5gROcxJDOyoAAAAAElFTkSuQmCC);
+        }
+
+        .claw-game-container .toy-wrapper .toy.bunny::after {
+            background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAgCAYAAAAIXrg4AAAAAXNSR0IArs4c6QAAAOZJREFUSEvtVtsNgzAMTCZox6ATtSO2E5Ux2gmorpKRcZz4QCC1CL7Asn3J+cHlZJ5rdxqs7dG/s7Xhm/GdBCLg/nwVuW6Xc7IgrO8IUAsQNA0yx/cA8GqfNJ0HRetRhEzgFo83KxqpqEHU1+4xA6OA5C2S6+HcKQBbTE2FV3zkKSiCUbpEv9dq2vJ3AZZ0TAucKrJ3E/Z2FIAeMjltNGwS8112W8zCOGhyojVBdrwqmM6I2tjOxaSL/hPAKjSmv1s0yR6DD8Qapewi3mt/M9h/C4BZ41bHFqqZEbWMj9C2WJYz0h0gH33VNsxxz+QWAAAAAElFTkSuQmCC);
+        }
+
+        .claw-game-container .toy.golem::after {
+            --w: 26px;
+            --h: 30px;
+            top: calc(var(--m) * -1px);
+            left: calc(var(--m) * -3px);
+            background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAeCAYAAAAy2w7YAAAAAXNSR0IArs4c6QAAAQpJREFUSEtjZEAC4Rr8/5H5K298ZKSWPNwgkCVFtRXI5jL0NXcwwCyjVB7FooXbVqFYFO8VhmIRJfJgi0CuRTcEZiPIMhCgRB4UKoz4LEHxHgUckGNHiEWE4gVXKOLShzPoRi0ilBUGZ6qDxRt6QsCVkZHV0ddHhIogCgoEsFZYeYm3UKWWJSBzMOob9KqCXMuQqxi4RbAKj5iIJcViWAIiWHpfPH4ObK6+pRHcfGLFSEp1xBqKTd3gtIiU+MCnFpxhYfkIX3VNroUoiQG9OUWtlIfcsMGaj0aeRcTWvhQFHaEGJXreQW5So5R1sBSIq7wj1ESGWYRezmEkBphC9MY+TJxQox+XOpA4AFO+HuQ4QuSjAAAAAElFTkSuQmCC);
+        }
+
+        .claw-game-container .toy.golem.grabbed::after {
+            background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAeCAYAAAAy2w7YAAAAAXNSR0IArs4c6QAAARhJREFUSEtjZEAC4Rr8/5H5K298ZKSWPNwgkCVFtRXI5jL0NXcwwCyjVB7FooXbVqFYFO8VhmIRJfJgi0CuRTcEZiPIMhCgRB4UKoz4LEHxHgUckGNHgEWwOIGFFK64QQ9JfPqwBt2oRejZAFuQk5zqKAlWkpL30LCIUBFEQYEA1gorL/EWqtSyBGQORn2DXlWQaxlyFQO3CFbhEVsKEGs5LPEQLL0vHj8HNlPf0ghuNrFiyI4hmI+INRSbusFpEbFxQUgdOOhg+QhfdU3IIFzyKIkBWRE1q3Xkhg3WfEStJD50LCLU/EKun5BbuhhFEL6gI9SgRM87OC2CpUBc5R2hJjLMIvRyDiMxwBSiN/Zh4oQa/bjUgcQBMesk5BS8p3gAAAAASUVORK5CYII=);
+        }
+
+        .claw-game-container .toy-wrapper .toy.golem::after {
+            background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAeCAYAAAAy2w7YAAAAAXNSR0IArs4c6QAAAR1JREFUSEtjZEAC4Rr8/5H5K298ZKSWPNwgkCVFtRXI5jL0NXcwwCyjVB7FooXbVqFYFO8VhmIRJfJgi0CuRTcEZiPIMhCgRB4UKoz4LEHxHgUckGNHLSIrALEGHSzyYSbiSgToNuLTN7AWkRU2BDSRlOpAirFlWGKCliSLQI6mJP7ol48IFUGUxhmsvMRbqFLLEpA5GPUNelVBrmXIVQzcIliFR0wKIsViWOIhWHpfPH4ObK6+pRHcfGLFkB1EMHkTayg2dYPTIlLiA59acNDB8hG+6ppcC1ESA3pzilopD7lhgzUfjTyLCDW/kJtpyC1djCIIX9ARalCi5x2cFsFSIK7yjlATGWYRejmHkRhgCtEb+zBxQo1+XOpA4gCEWBjkRLE8iwAAAABJRU5ErkJggg==);
+        }
+
+        .claw-game-container .toy.cucumber {
+            --w: 16px;
+            --h: 28px;
+        }
+
+        .claw-game-container .toy.cucumber::after {
+            --w: 16px;
+            --h: 30px;
+            top: calc(var(--m) * 1px);
+            left: 0;
+            background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAeCAYAAAAl+Z4RAAAAAXNSR0IArs4c6QAAAIVJREFUSEtjZEAD4Rr8/9HFkPkrb3xkRObDOTCNzFvP4NPP8NfbBCwPMwhsAEgzIY3opoIMAhnCSI5mmGEgQ1AMgDkPl2vQ5QehAXiDH4skhheQ1cD8CxPDFi54DSDGNaMGMIDzBXWTMjEhjx7Voy4YjYXhkhIprlhgmYOiqg05h5FauQIAKIamV0t/KUgAAAAASUVORK5CYII=);
+        }
+
+        .claw-game-container .toy.cucumber.grabbed::after {
+            background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAeCAYAAAAl+Z4RAAAAAXNSR0IArs4c6QAAAIdJREFUSEtjZEAD4Rr8/9HFkPkrb3xkRObDOTCNzFvP4NPP8NfbBCwPMwhsAEgzIY3opoIMAhnCSI5mmGEgQ1AMgDkPl2vQ5QehAbiCH+RUbN7C8AKyATD/gsTwhQl1YwFvCsIiidcLxBg2agADOGeORuNoGAyXdEBxxQIrOCiq2pBLH1IrVwA8halXrQxpsQAAAABJRU5ErkJggg==);
+        }
+
+        .claw-game-container .toy-wrapper .toy.cucumber::after {
+            background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAeCAYAAAAl+Z4RAAAAAXNSR0IArs4c6QAAAIVJREFUSEtjZEAD4Rr8/9HFkPkrb3xkRObDOTCNzFvP4NPP8NfbBCwPMwhsAEgzIY3opoIMAhnCSI5mmGEgQ1AMgDkPl2vQ5QehAcgBBXIezCvIbHQ1eAORmDChbizgTUFYJDFiYdQAUkOAAZwzR6NxNAyGSzqguGKBZSGKqjbkfEhq5QoAaISsV8DV840AAAAASUVORK5CYII=);
+        }
+
+        .claw-game-container .toy.penguin {
+            --w: 24px;
+            --h: 22px;
+        }
+
+        .claw-game-container .toy.penguin::after {
+            --w: 26px;
+            --h: 24px;
+            top: calc(var(--m) * -1px);
+            left: calc(var(--m) * -1px);
+            background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAYCAYAAADkgu3FAAAAAXNSR0IArs4c6QAAAPBJREFUSEtjZMACwjX4/2MTJ1Zs5Y2PjOhqUQRgFvyd/ZhYM7GqY06VBYsjWwi3CGQJpRag2wqyEGYZ2CJaWAKzFGYZIy0tQbYMq0WwMCY1KHHpA4mPYItgwYKespCDl+Sgw5ZMF25bhTXPxHuFMRCKS5xxNGAWgSwmJuhwFScEfbTahpekoij0yGecRRJK8kZ29YrrH0iyBKY4QlMArg8Wd3h9BJIk1TKQJdgSxqhFBOOM6KCja2IgNUnj8iZyUgcnBmwVH6WWoVsCqmXpV8PCvA6qaXEVnDA1oAIU1gYgVT3WVhCucEdvRhFqliGrBwDOBdzprDO9jAAAAABJRU5ErkJggg==);
+        }
+
+        .claw-game-container .toy.penguin.grabbed::after {
+            background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAYCAYAAADkgu3FAAAAAXNSR0IArs4c6QAAAP9JREFUSEtjZMACwjX4/2MTJ1Zs5Y2PjOhqUQRgFvyd/ZhYM7GqY06VBYsjWwi3CGQJpRag2wqyEGYZ2CJaWAKzFGYZIy0tQbZsYC2CRSapcYZLH0gcw0cgQZgFyGxCyRCfPqwW4TIQ5lp0eWJ8TbRFIIULt63C6oZ4rzB4COBzJFGJgW4WgVxK06BbbcNLKA2goIce+YyzSEIJOmRXr7j+gSRLYIojNAXg+pBTL844AllKqmUgS7ClQrypbtQiUMQQHXR0TQykJmlcSRM5qYMTA7aKj1LL0C0B1bL0q2FhXgfVtLgKTpgaUAEKawOQqh5rKwhXuKM3owg1y5DVAwDi4Nbp/c5ePwAAAABJRU5ErkJggg==);
+        }
+
+        .claw-game-container .toy-wrapper .toy.penguin::after {
+            background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAYCAYAAADkgu3FAAAAAXNSR0IArs4c6QAAAPxJREFUSEtjZMACwjX4/2MTJ1Zs5Y2PjOhqUQRgFvyd/ZhYM7GqY06VBYsjWwi3CGQJpRag2wqyEGYZ2CJaWAKzFGYZIy0tQbZsBFgEClNYokBmE0qG+PSB5LAGHSx5IqdCmBi6hdjUoKdenBZhS6YLt63C6ql4rzB4CODy9eCzCORSYoKObB+ttuEllAZQ5EOPfMZZJKEkBmRXr7j+gSRLYIojNAXg+pBTL84MC7KUVMtAlmArL/EmhlGLQBFDdNDRNTGQmqRxJU3kpA5ODNgqPkotQ7cEVMvSr4aFeR1U0+IqOGFqQAUorA1AqnqsrSBc4Y7ejCLULENWDwD2ldbpo7PPMQAAAABJRU5ErkJggg==);
+        }
+
+        .claw-game-container .toy.robot {
+            --w: 20px;
+            --h: 30px;
+        }
+
+        .claw-game-container .toy.robot::after {
+            --w: 24px;
+            --h: 32px;
+            top: calc(var(--m) * -1px);
+            left: calc(var(--m) * -2px);
+            background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAgCAYAAAAIXrg4AAAAAXNSR0IArs4c6QAAAO5JREFUSEtjZMADwjX4/+OTh8mtvPGREZc6nBIgw1dc/0CM+QwRmgIMuCwBW0CsS4myDUkRyFJGkOFFtRWk6iVKfV9zB8OoBXiDamCCCGQrCJAa8dj0YfXBqAXIQTswkYye7mBxgis94ksMg8MHRBU6OBSBfUDz0hRmOTVLVZDLYfUDvMKhqQWwCgeWIsyiyKsfTi2DFDOwlAevcEBVI6jao6YFMDPBFc6oBbCUiBwH8CBCzgfUjAOQueBIHh75ABZMpFaTuMop+udk5HigpPTE1hjGaPziavQiN3CJUQOzDGvrGltjGL31TIwakCUAkfj3fsmx0PsAAAAASUVORK5CYII=);
+        }
+
+        .claw-game-container .toy.robot.grabbed::after {
+            background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAgCAYAAAAIXrg4AAAAAXNSR0IArs4c6QAAAPtJREFUSEtjZMADwjX4/+OTh8mtvPGREZc6nBIgw1dc/0CM+QwRmgIMuCwBW0CsS4myDUkRyFJGkOFFtRWk6iVKfV9zB8OoBXiDahgGEchLyIDY1IVLH0YQ0dwCohI3CYqIimSQIlxBhU8O5A6iLIApxOZwQnFEtAUkhAqKUvpYQPPSFOYnapaqoKCB1Q/wCoemFsAqHFiqMIsir344tQxSEsAyLLzCAVWNoGqPmhbAzARXOKMWwFIichzAgwg5H1AzDkDmgiN5eOQDWDARKh2JLfTon5OR44FYV+JTh9xOxWj84mr0IjdwiVEDcwDW1jW2xjB665kYNSBLAOSw8X4zbpm3AAAAAElFTkSuQmCC);
+        }
+
+        .claw-game-container .toy-wrapper .toy.robot::after {
+            background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAgCAYAAAAIXrg4AAAAAXNSR0IArs4c6QAAAPlJREFUSEtjZMADwjX4/+OTh8mtvPGREZc6nBIgw1dc/0CM+QwRmgIMuCwBW0CsS4myDUkRyFJGkOFFtRWk6iVKfV9zB8OoBXiDamCCCGQrCJAa8dj0YfXBqAXIQUtUJIMU4YoPfHKgeCTKAphCbOmRUEIg2gKiygUsiuhjAc1LU5jPqFmqgoIGVj/AKxyaWgCrcGCpwiyKvPrh1DJIMQMrDeAVDqhqBFV71LQAZia4whm1AJYSkeMAHkTI+YCacQAyFxzJwyMfwIKJUOlIbKFH/5yMHA/EuhKfOuR2KkbjF1ejF7mBS4wamAOwtq6xNYbRW8/EqAFZAgDgjP1+jrGWQwAAAABJRU5ErkJggg==);
+        }
+
+        .claw-game-container .toy.selected {
+            pointer-events: all;
+        }
+
+        @keyframes show-toy-1 {
+            0% {
+                opacity: 1;
+                transform: scale(3) translateY(0);
+            }
+            30% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 0;
+                transform: scale(1) translateY(-100vh);
+            }
+        }
+
+        .claw-game-container .control .collection-point {
+            filter: brightness(0.8);
+            bottom: calc(var(--m) * 8px);
+        }
+
+        /* Accordion Dropdown Menu Styles */
+        .accordion-wrapper {
+            max-width: 900px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .accordion-wrapper h1 {
+            color: #1a202c;
+            font-size: 28px;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .accordion-wrapper h1 a {
+            color: #c12c42;
+            font-size: 16px;
+        }
+
+        .accordion-wrapper p {
+            color: #4a5568;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .accordion {
+            width: 100%;
+            max-width: 100%;
+            margin: 0 auto;
+            background: #FFFFFF;
+            border-radius: 8px;
+            list-style-type: none;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e2e8f0;
+        }
+
+        .accordion .link {
+            cursor: pointer;
+            display: block;
+            padding: 15px 20px;
+            color: #1a202c;
+            font-size: 16px;
+            font-weight: 700;
+            border-bottom: 1px solid #e2e8f0;
+            position: relative;
+            transition: all 0.4s ease;
+            background: #FFFFFF;
+        }
+
+        .accordion li:last-child .link {
+            border-bottom: 0;
+        }
+
+        .accordion li.open .link {
+            color: #b63b4d;
+            background: #f7fafc;
+        }
+
+        .accordion .link:hover {
+            background: #f7fafc;
+            color: #2d3748;
+        }
+
+        .submenu {
+            display: none;
+            background: #f7fafc;
+            font-size: 14px;
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .submenu li {
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .submenu li:last-child {
+            border-bottom: 0;
+        }
+
+        .submenu p {
+            color: #4a5568;
+            padding: 15px 20px;
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        .submenu a {
+            display: block;
+            text-decoration: none;
+            color: #2d3748;
+            padding: 12px 20px;
+            transition: all 0.25s ease;
+        }
+
+        .submenu a:hover {
+            background: #edf2f7;
+            color: #b63b4d;
+        }
     </style>
 </head>
 <body>
     <div id="nav-placeholder"></div>
 
-    <section class="relative h-[60vh] flex items-center justify-center overflow-hidden">
-        <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1528747045269-390fe33c19f2?w=1600');"></div>
+    <section class="relative h-screen md:h-screen flex items-center justify-center overflow-hidden hero-section">
+        <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('../../assets/images/clawmachine/hero.jpg');"></div>
         <div class="absolute inset-0 hero-gradient"></div>
-        <div class="relative z-10 text-center text-white px-6">
-            <h1 class="text-5xl md:text-6xl font-bold mb-4">Claw Machine</h1>
-            <p class="text-xl md:text-2xl mb-8">Walk Up and Win a Prize!</p>
-            <a href="#contact" class="btn-primary text-white px-8 py-4 rounded-full text-lg font-semibold inline-block">Get a Quote</a>
+        <div class="relative z-10 text-center text-white px-4 md:px-6 py-8 md:py-0" style="transform: translateY(-60px);">
+            <div class="keyboard mb-6 md:mb-8">
+                <span class="key">C</span>
+                <span class="key">L</span>
+                <span class="key">A</span>
+                <span class="key">W</span>
+                <span class="key">&nbsp;</span>
+                <span class="key">M</span>
+                <span class="key">A</span>
+                <span class="key">C</span>
+                <span class="key">H</span>
+                <span class="key">I</span>
+                <span class="key">N</span>
+                <span class="key">E</span>
+            </div>
+            <h3 class="text-3xl md:text-4xl lg:text-5xl mb-4 md:mb-6 px-2">Nationwide Rentals</h3>
+            <p class="text-lg md:text-xl lg:text-2xl mb-8 md:mb-10 max-w-5xl mx-auto px-2">
+                A classic arcade favorite, our claw machine brings nonstop fun and excitement to any event.
+            </p>
+            <a href="#contact" class="animated-gradient-btn"><span>Contact Us</span></a>
         </div>
     </section>
 
-    <section class="section-padding bg-white">
-        <div class="container mx-auto px-6">
-            <div class="max-w-4xl mx-auto">
-                <h2 class="text-4xl font-bold mb-6 text-center">Classic Arcade Fun</h2>
-                <p class="text-lg text-gray-700 mb-8 text-center">Bring the excitement of the arcade to your event with our professional claw machines.</p>
-                
-                <div class="grid md:grid-cols-2 gap-8 mt-12">
-                    <div class="bg-gray-50 p-6 rounded-lg">
-                        <h3 class="text-2xl font-semibold mb-4">🎁 Custom Prizes</h3>
-                        <p class="text-gray-700">Fill with branded items, candy, toys, or custom prizes.</p>
+<!-- Content 1 -->
+    <section class="py-6 md:py-8 gradient-grainy-bg content-section-height">
+        <div class="container mx-auto px-4 md:px-6">
+            <div class="grid md:grid-cols-2 gap-4 md:gap-6">
+                <div class="card-container order-2 md:order-1">
+                    <div class="card">
+                        <a href="#" class="card__button">Learn more</a>
                     </div>
-                    <div class="bg-gray-50 p-6 rounded-lg">
-                        <h3 class="text-2xl font-semibold mb-4">🎮 Full Size Machines</h3>
-                        <p class="text-gray-700">Professional arcade-quality claw machines that actually work!</p>
+                </div>
+                <div class="flex flex-col justify-center items-start order-1 md:order-2">
+                    <p class="text-sm md:text-base text-gray-700 mb-4 md:mb-12 text-left">
+                        Looking for a way to make your event unforgettable while keeping guests entertained? Our claw machine rentals are the perfect solution. Whether it's a lively party, a corporate gathering, or a branded activation, these interactive games get everyone involved, cheering, and reaching for prizes.
+                    </p>
+                    <p class="text-sm md:text-base text-gray-700 mb-6 md:mb-16 text-left">
+                        With vibrant lights, fun sounds, and a mix of custom-branded goodies inside, the claw machines bring excitement and energy to any event space. They encourage friendly competition, spark laughter, and add a nostalgic touch that guests of all ages will love. Plus, our rentals are simple to set up, so you can focus on enjoying the experience and watching your guests have a blast. Turn your next event into a playful, engaging experience that people will remember long after the last prize is claimed.
+                    </p>
+                    <a href="#contact" class="btn-primary text-white px-5 md:px-6 py-2.5 md:py-3 rounded-full text-sm md:text-base font-semibold inline-block w-full md:w-auto text-center">Get A Quote</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<!-- Content 2 -->
+    <section class="py-6 md:py-8 bg-white content-section-height" style="position: relative; overflow-x: hidden; overflow-y: visible; background: #3399ff; max-width: 100vw;">
+        <div class="ripple-background">
+            <div class="circle xxlarge shade1"></div>
+            <div class="circle xlarge shade2"></div>
+            <div class="circle large shade3"></div>
+            <div class="circle medium shade4"></div>
+            <div class="circle small shade5"></div>
+        </div>
+        <div class="container mx-auto px-4 md:px-6" style="position: relative; z-index: 1; max-width: 100%; overflow-x: hidden;">
+            <div class="grid md:grid-cols-2 gap-4 md:gap-6">
+                <div class="flex flex-col justify-center items-start md:items-end text-left md:text-right order-2 md:order-1">
+                    <h2 class="text-xl md:text-2xl lg:text-3xl font-bold mb-4 md:mb-12 text-gray-900"><em>What is a Claw Machine?</em></h2>
+                    <p class="text-sm md:text-base text-gray-900 mb-4 md:mb-12">
+                        A claw machine is a classic arcade game that's all about skill, luck, and excitement. Guests use a joystick to control a mechanical claw, trying to grab a prize from inside the machine and drop it into the winning slot. It's a fun, interactive experience that keeps people coming back for more while creating a lively and playful atmosphere at any event.
+                    </p>
+                    <p class="text-sm md:text-base text-gray-900">
+                        Using our claw machines is simple and stress-free. We handle the setup, so all you need to do is stock it with your chosen prizes and let your guests take turns testing their luck and skill. Whether you're encouraging friendly competition, rewarding attendees, or adding a nostalgic touch to your event, our claw machine rentals are guaranteed to bring excitement and engagement to any occasion.
+                    </p>
+                </div>
+                <div class="flex items-center justify-center order-1 md:order-2" style="width: 100%; max-width: 100%;">
+                    <div class="card-container-right" style="width: 100%; max-width: 100%;">
+                        <div class="feature-card">
+                        <div class="card-icon">
+                            <img src="../../assets/images/clawmachine/icon1.png" alt="Icon 1">
+                        </div>
+                        <div class="card-content">
+                            <button class="card-button">Delivery</button>
+                            <p>We'll bring the claw machine straight to your venue, right on time and ready for the fun.</p>
+                        </div>
                     </div>
-                    <div class="bg-gray-50 p-6 rounded-lg">
-                        <h3 class="text-2xl font-semibold mb-4">🎪 Free Play</h3>
-                        <p class="text-gray-700">Set to free play mode - everyone wins!</p>
+                    <div class="feature-card">
+                        <div class="card-icon">
+                            <img src="../../assets/images/clawmachine/icon2.png" alt="Icon 2">
+                        </div>
+                        <div class="card-content">
+                            <button class="card-button">Setup</button>
+                            <p>Our crew will handle the setup process, so your guests can jump in and start playing right away.</p>
+                        </div>
                     </div>
-                    <div class="bg-gray-50 p-6 rounded-lg">
-                        <h3 class="text-2xl font-semibold mb-4">🎨 Branding Options</h3>
-                        <p class="text-gray-700">Custom wraps and branding available for corporate events.</p>
+                    <div class="feature-card">
+                        <div class="card-icon">
+                            <img src="../../assets/images/clawmachine/icon3.png" alt="Icon 3">
+                        </div>
+                        <div class="card-content">
+                            <button class="card-button">Breakdown</button>
+                            <p>Once the event is over, we'll safely pack everything up for removal.</p>
+                        </div>
+                    </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="section-padding bg-gradient-to-r from-[#0050ff] to-[#0050ff] text-white">
-        <div class="container mx-auto px-6 text-center">
-            <h2 class="text-4xl font-bold mb-6">Ready to Play?</h2>
-            <p class="text-xl mb-8">Add arcade fun to your next event</p>
-            <a href="#contact" class="bg-white text-[#0050ff] px-8 py-4 rounded-full text-lg font-semibold inline-block hover:bg-gray-100 transition">Request Quote</a>
+    <!-- Ready to Book Section -->
+    <section class="relative py-8 md:py-12 lg:py-16 flex items-center justify-center overflow-hidden min-h-[50vh] md:min-h-[60vh]">
+        <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('../../assets/images/clawmachine/pic2.jpg');"></div>
+        <div class="absolute inset-0 hero-gradient"></div>
+        <div class="relative z-10 text-center text-white px-4 md:px-6 max-w-4xl mx-auto py-4">
+            <h2 class="text-xl md:text-2xl lg:text-4xl font-bold mb-3 md:mb-5">Ready to Book?</h2>
+            <p class="text-sm md:text-base lg:text-lg mb-5 md:mb-7 px-2">
+                Book your claw machine rental and add a dose of excitement to your next event! Our team is ready to assist you in creating a memorable experience for your guests.
+            </p>
+            <a href="#contact" class="animated-gradient-btn"><span>Get A Quote</span></a>
         </div>
     </section>
 
+    <!-- Benefits Section and Game -->
+    <section class="py-6 md:py-8 bg-white content-section-height" style="position: relative; overflow: hidden; background: #3399ff;">
+        <div class="ripple-background">
+            <div class="circle xxlarge shade1"></div>
+            <div class="circle xlarge shade2"></div>
+            <div class="circle large shade3"></div>
+            <div class="circle medium shade4"></div>
+            <div class="circle small shade5"></div>
+        </div>
+        <div class="container mx-auto px-4 md:px-6" style="position: relative; z-index: 1; max-width: 100%; overflow-x: hidden;">
+            <div class="grid md:grid-cols-2 gap-4 md:gap-6">
+                <div class="flex flex-col justify-center items-start md:items-end text-left md:text-right order-2 md:order-1" style="width: 100%; max-width: 100%; box-sizing: border-box;">
+                    <h2 class="text-lg md:text-2xl lg:text-3xl font-bold mb-3 md:mb-5 animated-gradient-text" style="width: 100%; max-width: 100%;">Benefits of Having the Claw Machine at your Event</h2>
+                    <ul class="list-none space-y-2 md:space-y-3" style="width: 100%; max-width: 100%; padding: 0; margin: 0;">
+                        <li style="width: 100%; max-width: 100%; box-sizing: border-box;">
+                            <p class="mb-2 text-xs md:text-sm lg:text-base text-gray-900" style="width: 100%; max-width: 100%; word-wrap: break-word; overflow-wrap: break-word;">Want to create a dynamic and engaging atmosphere at your event? Here's how a claw machine rental can help:</p>
+                        </li>
+                        <li style="width: 100%; max-width: 100%; box-sizing: border-box;">
+                            <h3 class="text-sm md:text-base lg:text-lg font-semibold mb-1 text-gray-900" style="width: 100%; max-width: 100%; word-wrap: break-word; overflow-wrap: break-word;">Fun for Everyone</h3>
+                            <p class="text-xs md:text-sm lg:text-base text-gray-900" style="width: 100%; max-width: 100%; word-wrap: break-word; overflow-wrap: break-word;">Guests of all ages can join in, from kids testing their skills to adults reliving their arcade glory days.</p>
+                        </li>
+                        <li style="width: 100%; max-width: 100%; box-sizing: border-box;">
+                            <h3 class="text-sm md:text-base lg:text-lg font-semibold mb-1 text-gray-900" style="width: 100%; max-width: 100%; word-wrap: break-word; overflow-wrap: break-word;">Interactive Excitement</h3>
+                            <p class="text-xs md:text-sm lg:text-base text-gray-900" style="width: 100%; max-width: 100%; word-wrap: break-word; overflow-wrap: break-word;">The thrill of controlling the claw and aiming for a prize keeps everyone engaged and coming back for more.</p>
+                        </li>
+                        <li style="width: 100%; max-width: 100%; box-sizing: border-box;">
+                            <h3 class="text-sm md:text-base lg:text-lg font-semibold mb-1 text-gray-900" style="width: 100%; max-width: 100%; word-wrap: break-word; overflow-wrap: break-word;">Memorable Experience</h3>
+                            <p class="text-xs md:text-sm lg:text-base text-gray-900" style="width: 100%; max-width: 100%; word-wrap: break-word; overflow-wrap: break-word;">Nostalgia meets modern fun - your guests will be talking about their wins (and near-misses) long after the event ends.</p>
+                        </li>
+                        <li style="width: 100%; max-width: 100%; box-sizing: border-box;">
+                            <h3 class="text-sm md:text-base lg:text-lg font-semibold mb-1 text-gray-900" style="width: 100%; max-width: 100%; word-wrap: break-word; overflow-wrap: break-word;">Customizable and On-Brand</h3>
+                            <p class="text-xs md:text-sm lg:text-base text-gray-900" style="width: 100%; max-width: 100%; word-wrap: break-word; overflow-wrap: break-word;">Wrap the machine in your company's colors or logo, and fill it with branded goodies for a unique, eye-catching activation.</p>
+                        </li>
+                        <li style="width: 100%; max-width: 100%; box-sizing: border-box;">
+                            <h3 class="text-sm md:text-base lg:text-lg font-semibold mb-1 text-gray-900" style="width: 100%; max-width: 100%; word-wrap: break-word; overflow-wrap: break-word;">Event-Ready Anywhere</h3>
+                            <p class="text-xs md:text-sm lg:text-base text-gray-900" style="width: 100%; max-width: 100%; word-wrap: break-word; overflow-wrap: break-word;">Compact, portable, and easy to set up in almost any indoor space, making it a perfect addition to parties, trade shows, or corporate events.</p>
+                        </li>
+                        <li style="width: 100%; max-width: 100%; box-sizing: border-box;">
+                            <h3 class="text-sm md:text-base lg:text-lg font-semibold mb-1 text-gray-900" style="width: 100%; max-width: 100%; word-wrap: break-word; overflow-wrap: break-word;">Endless Possibilities</h3>
+                            <p class="text-xs md:text-sm lg:text-base text-gray-900" style="width: 100%; max-width: 100%; word-wrap: break-word; overflow-wrap: break-word;">Fill it with merch, toys, gift cards, or surprises — the claw machine adapts to whatever vibe or goal you have for your event.</p>
+                        </li>
+                    </ul>
+                </div>
+                <div class="flex flex-col justify-center items-center md:items-end text-center md:text-right order-1 md:order-2" style="width: 100%; max-width: 100%; box-sizing: border-box; overflow-x: hidden;">
+                    <div class="game-wrapper claw-game-container w-full" style="width: 100%; max-width: 100%; box-sizing: border-box;">
+                        <h2 class="text-lg md:text-2xl lg:text-3xl font-bold mb-3 md:mb-5 animated-gradient-text" style="width: 100%; max-width: 100%; word-wrap: break-word;">MiHi Entertainment Mini Game</h2>
+                        <div class="wrapper" style="width: 100%; max-width: 100%; box-sizing: border-box;">
+                            <div class="collection-box pix"></div>
+                            <div class="claw-machine">
+                                <div class="box pix">
+                                    <div class="machine-top pix">
+                                        <div class="arm-joint pix">
+                                            <div class="arm pix">
+                                                <div class="claws pix"></div>
+                                            </div>
+                                        </div>
+                                        <div class="rail vert pix"></div>
+                                        <div class="rail hori pix"></div>
+                                    </div>
+                                    <div class="machine-bottom pix">
+                                        <div class="collection-point pix"></div>
+                                    </div>
+                                </div>
+                                <div class="control pix">
+                                    <div class="cover left"></div>
+                                    <button class="hori-btn pix"></button>
+                                    <button class="vert-btn pix"></button>
+                                    <div class="cover right">
+                                        <div class="instruction pix"></div>
+                                    </div>
+                                    <div class="cover bottom"></div>
+                                    <div class="cover top">
+                                        <div class="collection-arrow pix"></div>
+                                    </div>
+                                    <div class="collection-point pix"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Content 3 -->
+    <section class="py-4 md:py-6 gradient-grainy-bg content-section-height-compact">
+        <div class="container mx-auto px-4 md:px-6">
+            <div class="grid md:grid-cols-2 gap-4 md:gap-6">
+                <div class="card-container order-2 md:order-1">
+                    <div class="card2">
+                        <a href="#" class="card__button">Learn more</a>
+                    </div>
+                </div>
+                <div class="flex flex-col justify-center items-start order-1 md:order-2">
+                    <h2 class="text-base md:text-lg lg:text-xl font-bold mb-2 md:mb-3 animated-gradient-text"><em>Events Perfect For The Claw Machine</em></h2>
+                    <p class="text-xs md:text-sm text-gray-700 mb-3 md:mb-4 text-left">
+                        Our claw machine rentals are a fantastic addition to a wide range of events, including:
+                    </p>
+                    <div class="space-y-2 md:space-y-3">
+                        <div>
+                            <h3 class="text-sm md:text-base font-semibold mb-0.5 text-gray-900">Corporate Events</h3>
+                            <p class="text-xs md:text-sm text-gray-700">Trade shows, team-building activities, office parties, and corporate celebrations.</p>
+                        </div>
+                        <div>
+                            <h3 class="text-sm md:text-base font-semibold mb-0.5 text-gray-900">Private Parties</h3>
+                            <p class="text-xs md:text-sm text-gray-700">Trade shows, team-building activities, office parties, and corporate celebrations.</p>
+                        </div>
+                        <div>
+                            <h3 class="text-sm md:text-base font-semibold mb-0.5 text-gray-900">Special Occasions</h3>
+                            <p class="text-xs md:text-sm text-gray-700">Trade shows, team-building activities, office parties, and corporate celebrations.</p>
+                        </div>
+                        <div>
+                            <h3 class="text-sm md:text-base font-semibold mb-0.5 text-gray-900">Family-Friendly Events</h3>
+                            <p class="text-xs md:text-sm text-gray-700">Trade shows, team-building activities, office parties, and corporate celebrations.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dropdown Section -->
+    <section class="py-6 md:py-8 gradient-grainy-bg">
+        <div class="container mx-auto px-4 md:px-6">
+            <div class="accordion-wrapper">
+                <h1>Frequently asked questions</h1>
+                <p class="text-center text-sm md:text-base px-2">Have questions about our Claw Machine Rentals? We're happy to answer them!</p>
+                <ul id="accordion" class="accordion">
+                    <li>
+                        <div class="link">How much space does the claw machine need?</div>
+                        <ul class="submenu">
+                            <li><p>Our claw machines are compact and fit comfortably in most event spaces. We recommend a space of about 4x4 feet for easy access and gameplay.</p></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <div class="link">Can the claw machine be branded?</div>
+                        <ul class="submenu">
+                            <li><p>Yes! We can wrap the machine with your logo, colors, or custom design, making it a perfect fit for brand activations and corporate events.</p></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <div class="link">What types of prizes can go inside?</div>
+                        <ul class="submenu">
+                            <li><p>You can fill the machine with small items like keychains, sunglasses, toys, gift cards, or branded giveaways. We’ll help you choose prizes that fit your event theme.</p></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <div class="link">Do you provide the prizes?</div>
+                        <ul class="submenu">
+                            <li><p>Prizes can be supplied by you, or we can help source items based on your budget and event needs.</p></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <div class="link">How do guests use the claw machine?</div>
+                        <ul class="submenu">
+                            <li><p>It’s simple! Guests use the joystick to move the claw, then press the button to try and grab a prize. The challenge keeps them coming back for more.</p></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <div class="link">Is setup and delivery included?</div>
+                        <ul class="submenu">
+                            <li><p>Yes, our team handles delivery, setup, and removal, so all you need to do is enjoy the fun with your guests.</p></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Content 4 -->
+    <section class="py-4 md:py-6 gradient-grainy-bg content-section-height-compact">
+        <div class="container mx-auto px-4 md:px-6">
+            <div class="grid md:grid-cols-2 gap-4 md:gap-6">
+                <div class="flex flex-col justify-center items-start order-2 md:order-1">
+                    <h2 class="text-base md:text-lg lg:text-xl font-bold mb-3 md:mb-6 animated-gradient-text"><em>How To Book Your Next Claw Machine Rental</em></h2>
+                    <p class="text-xs md:text-sm text-gray-700 mb-4 md:mb-8">
+                        Booking your claw machine rental is easy!
+                    </p>
+                    <div class="space-y-3 md:space-y-6 w-full">
+                        <div>
+                            <p class="text-xs md:text-sm text-gray-700">1. Share your event details—location, date, time, and the games you're interested in.</p>
+                        </div>
+                        <div>
+                            <p class="text-xs md:text-sm text-gray-700">2. Our sales team will reach out to discuss your needs.</p>
+                        </div>
+                        <div>
+                            <p class="text-xs md:text-sm text-gray-700">3. We'll send over a personalized quote.</p>
+                        </div>
+                        <div>
+                            <p class="text-xs md:text-sm text-gray-700">4. To confirm your rental, just sign the service agreement and provide a 50% deposit.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-container order-1 md:order-2">
+                    <div class="card3">
+                        <a href="#" class="card__button">Learn more</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="../../assets/components/navigation.js"></script>
     <script src="../../assets/components/footer.js"></script>
+    <script>
+        // Accordion Dropdown Menu JavaScript
+        $(function() {
+            var Accordion = function(el, multiple) {
+                this.el = el || {};
+                this.multiple = multiple || false;
+
+                // Variables privadas
+                var links = this.el.find('.link');
+                // Evento
+                links.on('click', {el: this.el, multiple: this.multiple}, this.dropdown)
+            }
+
+            Accordion.prototype.dropdown = function(e) {
+                var $el = e.data.el;
+                    $this = $(this),
+                    $next = $this.next();
+
+                $next.slideToggle();
+                $this.parent().toggleClass('open');
+
+                if (!e.data.multiple) {
+                    $el.find('.submenu').not($next).slideUp().parent().removeClass('open');
+                };
+            }	
+
+            var accordion = new Accordion($('#accordion'), false);
+        });
+    </script>
+    <script>
+        // Claw Machine Mini Game JavaScript
+        (function() {
+            const gameContainer = document.querySelector('.claw-game-container');
+            if (!gameContainer) return;
+
+            const elements = {
+                clawMachine: gameContainer.querySelector('.claw-machine'),
+                box: gameContainer.querySelector('.box'),
+                collectionBox: gameContainer.querySelector('.collection-box'),
+                collectionArrow: gameContainer.querySelector('.collection-arrow'),
+                toys: [],
+            }
+
+            const settings = {
+                targetToy: null,
+                collectedNumber: 0,
+            }
+
+            const m = 2
+            const toys = {
+                bear: {
+                    w: 20 * m,
+                    h: 27 * m,
+                },
+                bunny: {
+                    w: 20 * m,
+                    h: 29 * m,
+                },
+                golem: {
+                    w: 20 * m,
+                    h: 27 * m,
+                },
+                cucumber: {
+                    w: 16 * m,
+                    h: 28 * m,
+                },
+                penguin: {
+                    w: 24 * m,
+                    h: 22 * m,
+                },
+                robot: {
+                    w: 20 * m,
+                    h: 30 * m,
+                },
+            }
+
+            const sortedToys = [...Object.keys(toys), ...Object.keys(toys)].sort(
+                () => 0.5 - Math.random(),
+            )
+
+            const cornerBuffer = 16
+
+            const machineBuffer = {
+                x: 36,
+                y: 16,
+            }
+
+            const radToDeg = rad => Math.round(rad * (180 / Math.PI))
+            const calcX = (i, n) => i % n
+            const calcY = (i, n) => Math.floor(i / n)
+
+            const {
+                width: machineWidth,
+                height: machineHeight,
+                top: machineTop,
+            } = elements.clawMachine.getBoundingClientRect()
+
+            const { height: machineTopHeight } = gameContainer
+                .querySelector('.machine-top')
+                .getBoundingClientRect()
+
+            const { height: machineBottomHeight, top: machineBottomTop } = gameContainer
+                .querySelector('.machine-bottom')
+                .getBoundingClientRect()
+
+            const maxArmLength = machineBottomTop - machineTop - machineBuffer.y
+
+            const adjustAngle = angle => {
+                const adjustedAngle = angle % 360
+                return adjustedAngle < 0 ? adjustedAngle + 360 : adjustedAngle
+            }
+
+            const randomN = (min, max) => {
+                return Math.round(min - 0.5 + Math.random() * (max - min + 1))
+            }
+
+            //* classes *//
+
+            class Button {
+                constructor({ className, action, isLocked, pressAction, releaseAction }) {
+                    Object.assign(this, {
+                        el: gameContainer.querySelector(`.${className}`),
+                        isLocked,
+                    })
+                    this.el.addEventListener('click', action)
+                    ;['mousedown', 'touchstart'].forEach(action =>
+                        this.el.addEventListener(action, pressAction),
+                    )
+                    ;['mouseup', 'touchend'].forEach(action =>
+                        this.el.addEventListener(action, releaseAction),
+                    )
+
+                    if (!isLocked) this.activate()
+                }
+                activate() {
+                    this.isLocked = false
+                    this.el.classList.add('active')
+                }
+                deactivate() {
+                    this.isLocked = true
+                    this.el.classList.remove('active')
+                }
+            }
+
+            class WorldObject {
+                constructor(props) {
+                    Object.assign(this, {
+                        x: 0,
+                        y: 0,
+                        z: 0,
+                        angle: 0,
+                        transformOrigin: { x: 0, y: 0 },
+                        interval: null,
+                        default: {},
+                        moveWith: [],
+                        el: props.className && gameContainer.querySelector(`.${props.className}`),
+                        ...props,
+                    })
+                    this.setStyles()
+                    if (props.className) {
+                        const { width, height } = this.el.getBoundingClientRect()
+                        this.w = width
+                        this.h = height
+                    }
+                    ;['x', 'y', 'w', 'h'].forEach(key => {
+                        this.default[key] = this[key]
+                    })
+                }
+                setStyles() {
+                    Object.assign(this.el.style, {
+                        left: `${this.x}px`,
+                        top: !this.bottom && `${this.y}px`,
+                        bottom: this.bottom,
+                        width: `${this.w}px`,
+                        height: `${this.h}px`,
+                        transformOrigin: this.transformOrigin,
+                    })
+                    this.el.style.zIndex = this.z
+                }
+                setClawPos(clawPos) {
+                    this.clawPos = clawPos
+                }
+                setTransformOrigin(transformOrigin) {
+                    this.transformOrigin =
+                        transformOrigin === 'center'
+                            ? 'center'
+                            : `${transformOrigin.x}px ${transformOrigin.y}px`
+                    this.setStyles()
+                }
+                handleNext(next) {
+                    clearInterval(this.interval)
+                    if (next) next()
+                }
+                resumeMove({ moveKey, target, moveTime, next }) {
+                    this.interval = null
+                    this.move({ moveKey, target, moveTime, next })
+                }
+                resizeShadow() {
+                    elements.box.style.setProperty('--scale', 0.5 + this.h / maxArmLength / 2)
+                }
+                move({ moveKey, target, moveTime, next }) {
+                    if (this.interval) {
+                        this.handleNext(next)
+                    } else {
+                        const moveTarget = target || this.default[moveKey]
+                        this.interval = setInterval(() => {
+                            const distance =
+                                Math.abs(this[moveKey] - moveTarget) < 10
+                                    ? Math.abs(this[moveKey] - moveTarget)
+                                    : 10
+                            const increment = this[moveKey] > moveTarget ? -distance : distance
+                            if (
+                                increment > 0
+                                    ? this[moveKey] < moveTarget
+                                    : this[moveKey] > moveTarget
+                            ) {
+                                this[moveKey] += increment
+                                this.setStyles()
+                                if (moveKey === 'h') this.resizeShadow()
+                                if (this.moveWith.length) {
+                                    this.moveWith.forEach(obj => {
+                                        if (!obj) return
+                                        obj[moveKey === 'h' ? 'y' : moveKey] += increment
+                                        obj.setStyles()
+                                    })
+                                }
+                            } else {
+                                this.handleNext(next)
+                            }
+                        }, moveTime || 100)
+                    }
+                }
+                distanceBetween(target) {
+                    return Math.round(
+                        Math.sqrt(
+                            Math.pow(this.x - target.x, 2) + Math.pow(this.y - target.y, 2),
+                        ),
+                    )
+                }
+            }
+
+            class Toy extends WorldObject {
+                constructor(props) {
+                    const toyType = sortedToys[props.index]
+                    const size = toys[toyType]
+                    super({
+                        el: Object.assign(document.createElement('div'), {
+                            className: `toy pix ${toyType}`,
+                        }),
+                        x:
+                            cornerBuffer +
+                            calcX(props.index, 4) * ((machineWidth - cornerBuffer * 3) / 4) +
+                            size.w / 2 +
+                            randomN(-6, 6),
+                        y:
+                            machineBottomTop -
+                            machineTop +
+                            cornerBuffer +
+                            calcY(props.index, 4) *
+                                ((machineBottomHeight - cornerBuffer * 2) / 3) -
+                            size.h / 2 +
+                            randomN(-2, 2),
+                        z: 0,
+                        toyType,
+                        ...size,
+                        ...props,
+                    })
+                    elements.box.append(this.el)
+                    const toy = this
+
+                    this.el.addEventListener('click', () => this.collectToy(toy))
+                    elements.toys.push(this)
+                }
+                collectToy(toy) {
+                    toy.el.classList.remove('selected')
+                    toy.x = machineWidth / 2 - toy.w / 2
+                    toy.y = machineHeight / 2 - toy.h / 2
+                    toy.z = 7
+                    toy.el.style.setProperty('--rotate-angle', '0deg')
+                    toy.setTransformOrigin('center')
+                    toy.el.classList.add('display')
+                    elements.clawMachine.classList.add('show-overlay')
+                    settings.collectedNumber++
+                    elements.collectionBox.appendChild(
+                        Object.assign(document.createElement('div'), {
+                            className: `toy-wrapper ${
+                                settings.collectedNumber > 6 ? 'squeeze-in' : ''
+                            }`,
+                            innerHTML: `<div class="toy pix ${toy.toyType}"></div>`,
+                        }),
+                    )
+                    setTimeout(() => {
+                        elements.clawMachine.classList.remove('show-overlay')
+                        if (!gameContainer.querySelector('.selected'))
+                            elements.collectionArrow.classList.remove('active')
+                    }, 1000)
+                }
+                setRotateAngle() {
+                    const angle =
+                        radToDeg(
+                            Math.atan2(
+                                this.y + this.h / 2 - this.clawPos.y,
+                                this.x + this.w / 2 - this.clawPos.x,
+                            ),
+                        ) - 90
+                    const adjustedAngle = Math.round(adjustAngle(angle))
+                    this.angle =
+                        adjustedAngle < 180 ? adjustedAngle * -1 : 360 - adjustedAngle
+                    this.el.style.setProperty('--rotate-angle', `${this.angle}deg`)
+                }
+            }
+
+            //* set up *//
+            elements.box.style.setProperty('--shadow-pos', `${maxArmLength}px`)
+
+            const armJoint = new WorldObject({
+                className: 'arm-joint',
+            })
+
+            const vertRail = new WorldObject({
+                className: 'vert',
+                moveWith: [null, armJoint],
+            })
+
+            const arm = new WorldObject({
+                className: 'arm',
+            })
+
+            armJoint.resizeShadow()
+
+            armJoint.move({
+                moveKey: 'y',
+                target: machineTopHeight - machineBuffer.y,
+                moveTime: 50,
+                next: () =>
+                    vertRail.resumeMove({
+                        moveKey: 'x',
+                        target: machineBuffer.x,
+                        moveTime: 50,
+                        next: () => {
+                            Object.assign(armJoint.default, {
+                                y: machineTopHeight - machineBuffer.y,
+                                x: machineBuffer.x,
+                            })
+                            Object.assign(vertRail.default, {
+                                x: machineBuffer.x,
+                            })
+                            activateHoriBtn()
+                        },
+                    }),
+            })
+
+            const doOverlap = (a, b) => {
+                return b.x > a.x && b.x < a.x + a.w && b.y > a.y && b.y < a.y + a.h
+            }
+
+            const getClosestToy = () => {
+                const claw = {
+                    y: armJoint.y + maxArmLength + machineBuffer.y + 7,
+                    x: armJoint.x + 7,
+                    w: 40,
+                    h: 32,
+                }
+                const overlappedToys = elements.toys.filter(t => {
+                    return doOverlap(t, claw)
+                })
+
+                if (overlappedToys.length) {
+                    const toy = overlappedToys.sort((a, b) => b.index - a.index)[0]
+                    toy.setTransformOrigin({
+                        x: claw.x - toy.x,
+                        y: claw.y - toy.y,
+                    })
+                    toy.setClawPos({
+                        x: claw.x,
+                        y: claw.y,
+                    })
+                    settings.targetToy = toy
+                }
+            }
+
+            new Array(12).fill('').forEach((_, i) => {
+                if (i === 8) return
+                new Toy({ index: i })
+            })
+
+            const stopHoriBtnAndActivateVertBtn = () => {
+                armJoint.interval = null
+                horiBtn.deactivate()
+                vertBtn.activate()
+            }
+
+            const activateHoriBtn = () => {
+                horiBtn.activate()
+                ;[vertRail, armJoint, arm].forEach(c => (c.interval = null))
+            }
+
+            const dropToy = () => {
+                arm.el.classList.add('open')
+                if (settings.targetToy) {
+                    settings.targetToy.z = 3
+                    settings.targetToy.move({
+                        moveKey: 'y',
+                        target: machineHeight - settings.targetToy.h - 30,
+                        moveTime: 50,
+                    })
+                    ;[vertRail, armJoint, arm].forEach(obj => (obj.moveWith[0] = null))
+                }
+                setTimeout(() => {
+                    arm.el.classList.remove('open')
+                    activateHoriBtn()
+                    if (settings.targetToy) {
+                        settings.targetToy.el.classList.add('selected')
+                        elements.collectionArrow.classList.add('active')
+                        settings.targetToy = null
+                    }
+                }, 700)
+            }
+
+            const grabToy = () => {
+                if (settings.targetToy) {
+                    ;[vertRail, armJoint, arm].forEach(
+                        obj => (obj.moveWith[0] = settings.targetToy),
+                    )
+                    settings.targetToy.setRotateAngle()
+                    settings.targetToy.el.classList.add('grabbed')
+                } else {
+                    arm.el.classList.add('missed')
+                }
+            }
+
+            const horiBtn = new Button({
+                className: 'hori-btn',
+                isLocked: true,
+                pressAction: () => {
+                    arm.el.classList.remove('missed')
+                    vertRail.move({
+                        moveKey: 'x',
+                        target: machineWidth - armJoint.w - machineBuffer.x,
+                        next: stopHoriBtnAndActivateVertBtn,
+                    })
+                },
+                releaseAction: () => {
+                    clearInterval(vertRail.interval)
+                    stopHoriBtnAndActivateVertBtn()
+                },
+            })
+
+            const vertBtn = new Button({
+                className: 'vert-btn',
+                isLocked: true,
+                pressAction: () => {
+                    if (vertBtn.isLocked) return
+                    armJoint.move({
+                        moveKey: 'y',
+                        target: machineBuffer.y,
+                    })
+                },
+                releaseAction: () => {
+                    clearInterval(armJoint.interval)
+                    vertBtn.deactivate()
+                    getClosestToy()
+                    setTimeout(() => {
+                        arm.el.classList.add('open')
+                        arm.move({
+                            moveKey: 'h',
+                            target: maxArmLength,
+                            next: () =>
+                                setTimeout(() => {
+                                    arm.el.classList.remove('open')
+                                    grabToy()
+                                    arm.resumeMove({
+                                        moveKey: 'h',
+                                        next: () => {
+                                            vertRail.resumeMove({
+                                                moveKey: 'x',
+                                                next: () => {
+                                                    armJoint.resumeMove({
+                                                        moveKey: 'y',
+                                                        next: dropToy,
+                                                    })
+                                                },
+                                            })
+                                        },
+                                    })
+                                }, 500),
+                        })
+                    }, 500)
+                },
+            })
+        })();
+    </script>
 </body>
 </html>
