@@ -12,7 +12,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         html, body { overflow-x: hidden; width: 100%; max-width: 100vw; }
-        body { font-family: 'Orbitron', sans-serif; color: #1a202c; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+        body { 
+            font-family: 'Orbitron', sans-serif; 
+            color: #1a202c; 
+            -webkit-font-smoothing: antialiased; 
+            -moz-osx-font-smoothing: grayscale;
+            padding-top: 0 !important; /* Header height will be handled by navigation */
+        }
         /* Exclude header and footer from body font styling */
         body > header,
         body > footer {
@@ -53,6 +59,57 @@
             line-height: normal !important;
         }
         
+        /* Navigation button protection - restore original styles (must come first to override page styles) */
+        header nav .btn-primary,
+        header .btn-primary,
+        header a.btn-primary {
+            background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%) !important;
+            color: white !important;
+            border: none !important;
+            padding: 0.75rem 1.5rem !important;
+            border-radius: 9999px !important;
+            font-weight: 600 !important;
+            font-size: 1rem !important;
+            cursor: pointer !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            text-transform: none !important;
+            letter-spacing: normal !important;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1) !important;
+            transition: all 0.3s ease !important;
+            -webkit-appearance: none !important;
+            appearance: none !important;
+            text-decoration: none !important;
+            line-height: normal !important;
+        }
+        
+        header nav .btn-primary:hover,
+        header .btn-primary:hover,
+        header a.btn-primary:hover {
+            transform: translateY(-2px) !important;
+            box-shadow: 0 10px 25px rgba(0, 80, 255, 0.4) !important;
+            background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%) !important;
+            color: white !important;
+        }
+        
+        header nav .btn-primary:focus,
+        header .btn-primary:focus,
+        header a.btn-primary:focus {
+            outline: 2px solid #0050ff !important;
+            outline-offset: 2px !important;
+            background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%) !important;
+            color: white !important;
+        }
+        
+        header nav .btn-primary:active,
+        header .btn-primary:active,
+        header a.btn-primary:active {
+            transform: translateY(0) !important;
+            background: linear-gradient(135deg, #0040d9 0%, #0033b3 100%) !important;
+            color: white !important;
+        }
+        
         header nav a,
         header nav button {
             transform: none !important;
@@ -61,11 +118,28 @@
             text-decoration: none !important;
             -webkit-tap-highlight-color: auto !important;
             touch-action: auto !important;
+            /* Reset any page-level color styles - but don't override btn-primary */
+            border: none !important;
+            -webkit-appearance: none !important;
+            appearance: none !important;
         }
         
-        header nav .btn-primary:hover {
-            transform: translateY(-2px) !important;
-            box-shadow: 0 10px 25px rgba(0, 80, 255, 0.4) !important;
+        /* Navigation links - restore proper colors (excludes .btn-primary) */
+        header nav a:not(.btn-primary) {
+            color: #374151 !important;
+            background-color: transparent !important;
+        }
+        
+        header nav a:not(.btn-primary):hover {
+            color: #2563eb !important;
+            background-color: transparent !important;
+        }
+        
+        /* Navigation SVG icons */
+        header nav svg {
+            fill: currentColor !important;
+            stroke: currentColor !important;
+            color: inherit !important;
         }
         
         header h1,
@@ -153,8 +227,11 @@
         
         /* Ensure components maintain their z-index and positioning */
         header {
-            position: sticky !important;
+            position: fixed !important;
             top: 0 !important;
+            left: 0 !important;
+            right: 0 !important;
+            width: 100% !important;
             z-index: 50 !important;
         }
         
@@ -1050,7 +1127,7 @@
             }
 
             .game-wrapper {
-                padding: 0.75rem 0.5rem;
+                padding: 0;
                 margin-top: 0;
                 width: 100%;
                 max-width: 100%;
@@ -1361,7 +1438,7 @@
             }
 
             .game-wrapper {
-                padding: 0.5rem 0.25rem;
+                padding: 0;
             }
 
             .game-wrapper h2 {
@@ -1507,7 +1584,7 @@
             }
 
             .game-wrapper {
-                padding: 0.5rem 0.25rem;
+                padding: 0;
             }
 
             .game-wrapper h2 {
@@ -1533,7 +1610,7 @@
             }
 
             .game-wrapper {
-                padding: 0.5rem 0.25rem;
+                padding: 0;
             }
 
             .feature-card {
@@ -1994,26 +2071,27 @@
         .benefit-card {
             background: rgba(255, 255, 255, 0.15);
             backdrop-filter: blur(8px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            border-radius: 16px;
-            padding: 1.25rem;
+            border: none;
+            border-radius: 12px;
+            padding: 0.625rem;
             transition: all 0.3s ease;
-            height: 100%;
+            min-height: auto;
+            height: auto;
             display: flex;
             flex-direction: column;
             align-items: flex-start;
+            justify-content: flex-start;
         }
 
         .benefit-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-3px);
             background: rgba(255, 255, 255, 0.25);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-            border-color: rgba(255, 255, 255, 0.5);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
         }
 
         .benefit-icon {
-            font-size: 2rem;
-            margin-bottom: 0.75rem;
+            font-size: 1.25rem;
+            margin-bottom: 0.375rem;
             display: inline-block;
             filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
         }
@@ -2021,15 +2099,18 @@
         .benefit-title {
             color: #ffffff;
             font-weight: 700;
-            margin-bottom: 0.5rem;
-            font-size: 1.1rem;
+            margin-bottom: 0.25rem;
+            font-size: 0.9rem;
             text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            line-height: 1.3;
         }
 
         .benefit-desc {
             color: rgba(255, 255, 255, 0.95);
-            font-size: 0.9rem;
-            line-height: 1.6;
+            font-size: 0.75rem;
+            line-height: 1.4;
+            margin-bottom: 0;
+            margin-top: 0;
         }
 
         .game-wrapper-glass {
@@ -2037,7 +2118,7 @@
             backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.3);
             border-radius: 24px;
-            padding: 1.5rem;
+            padding: 0.5rem;
             width: 100%;
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
             position: relative;
@@ -2070,6 +2151,15 @@
             .benefit-card {
                 align-items: center;
                 text-align: center;
+            }
+            .game-wrapper-glass {
+                padding: 0.375rem;
+            }
+        }
+        
+        @media (max-width: 640px) {
+            .game-wrapper-glass {
+                padding: 0.25rem;
             }
         }
 
@@ -2284,7 +2374,7 @@
             justify-content: center;
             width: 100%;
             max-width: 100%;
-            padding: 0.25rem;
+            padding: 0;
             margin-top: 0;
             overflow-x: hidden;
         }
@@ -2323,6 +2413,8 @@
             max-width: 100%;
             overflow-x: hidden;
             box-sizing: border-box;
+            padding-left: 0;
+            margin-left: 0;
         }
 
         /* Mobile optimizations for wrapper */
@@ -3110,17 +3202,62 @@
             <div class="circle small shade5"></div>
         </div>
         <div class="container mx-auto px-4 md:px-6" style="position: relative; z-index: 1; max-width: 100%; overflow-x: hidden;">
-            <div class="grid lg:grid-cols-2 gap-8 md:gap-12 items-center">
-                <!-- Benefits Column -->
-                <div class="flex flex-col order-2 lg:order-1">
-                    <h2 class="text-2xl md:text-3xl lg:text-4xl section-title-white mb-8">Benefits of Having the Claw Machine at your Event</h2>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <!-- Section Header -->
+            <div class="flex flex-col items-center text-center mb-6 md:mb-8">
+                <span class="game-badge">EVENT BENEFITS</span>
+                <h2 class="game-title">Benefits of Having the Claw Machine at your Event</h2>
+                </div>
+
+            <div class="grid lg:grid-cols-2 gap-4 md:gap-6 items-start">
+                <!-- Play Mini Game - Left Side -->
+                <div class="flex flex-col justify-center items-start">
+                    <h2 class="text-base md:text-lg lg:text-xl font-bold mb-3 text-center text-white drop-shadow-md" style="font-family: 'Orbitron', sans-serif;">Play Mini Game</h2>
+                    <!-- Game Code Preserved -->
+                    <div class="game-wrapper claw-game-container w-full" style="width: 100%; max-width: 100%; box-sizing: border-box; margin-top: 0; padding: 0;">
+                        <div class="wrapper" style="width: 100%; max-width: 100%; box-sizing: border-box; padding-left: 0; margin-left: 0;">
+                            <div class="collection-box pix"></div>
+                            <div class="claw-machine">
+                                <div class="box pix">
+                                    <div class="machine-top pix">
+                                        <div class="arm-joint pix">
+                                            <div class="arm pix">
+                                                <div class="claws pix"></div>
+                                            </div>
+                                        </div>
+                                        <div class="rail vert pix"></div>
+                                        <div class="rail hori pix"></div>
+                                    </div>
+                                    <div class="machine-bottom pix">
+                                        <div class="collection-point pix"></div>
+                                    </div>
+                                </div>
+                                <div class="control pix">
+                                    <div class="cover left"></div>
+                                    <button class="hori-btn pix"></button>
+                                    <button class="vert-btn pix"></button>
+                                    <div class="cover right">
+                                        <div class="instruction pix"></div>
+                                    </div>
+                                    <div class="cover bottom"></div>
+                                    <div class="cover top">
+                                        <div class="collection-arrow pix"></div>
+                                    </div>
+                                    <div class="collection-point pix"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Benefits Section - Right Side -->
+                <div class="flex flex-col">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                         <!-- Benefit 1 -->
                         <div class="benefit-card">
                             <span class="benefit-icon">🥳</span>
                             <h3 class="benefit-title">Fun for Everyone</h3>
                             <p class="benefit-desc">Guests of all ages can join in, from kids testing their skills to adults reliving their arcade glory days.</p>
-                        </div>
+                </div>
                         <!-- Benefit 2 -->
                         <div class="benefit-card">
                             <span class="benefit-icon">🕹️</span>
@@ -3150,48 +3287,6 @@
                             <span class="benefit-icon">🎁</span>
                             <h3 class="benefit-title">Endless Possibilities</h3>
                             <p class="benefit-desc">Fill it with merch, toys, gift cards, or surprises — the claw machine adapts to whatever vibe you have.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Game Column -->
-                <div class="flex flex-col justify-center items-center order-1 lg:order-2">
-                    <div class="game-wrapper-glass">
-                         <h2 class="text-lg md:text-2xl lg:text-3xl font-bold mb-6 text-center text-white drop-shadow-md" style="font-family: inherit;">MiHi Entertainment Mini Game</h2>
-                         <!-- Game Code Preserved -->
-                        <div class="game-wrapper claw-game-container w-full" style="width: 100%; max-width: 100%; box-sizing: border-box; margin-top: 0; padding: 0;">
-                            <div class="wrapper" style="width: 100%; max-width: 100%; box-sizing: border-box;">
-                                <div class="collection-box pix"></div>
-                                <div class="claw-machine">
-                                    <div class="box pix">
-                                        <div class="machine-top pix">
-                                            <div class="arm-joint pix">
-                                                <div class="arm pix">
-                                                    <div class="claws pix"></div>
-                                                </div>
-                                            </div>
-                                            <div class="rail vert pix"></div>
-                                            <div class="rail hori pix"></div>
-                                        </div>
-                                        <div class="machine-bottom pix">
-                                            <div class="collection-point pix"></div>
-                                        </div>
-                                    </div>
-                                    <div class="control pix">
-                                        <div class="cover left"></div>
-                                        <button class="hori-btn pix"></button>
-                                        <button class="vert-btn pix"></button>
-                                        <div class="cover right">
-                                            <div class="instruction pix"></div>
-                                        </div>
-                                        <div class="cover bottom"></div>
-                                        <div class="cover top">
-                                            <div class="collection-arrow pix"></div>
-                                        </div>
-                                        <div class="collection-point pix"></div>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
