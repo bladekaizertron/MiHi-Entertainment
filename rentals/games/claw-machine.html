@@ -20,10 +20,14 @@
             padding-top: 0 !important; /* Header height will be handled by navigation */
         }
         /* Exclude header and footer from body font styling */
+        /* Don't let body font propagate to navigation/footer */
         body > header,
-        body > footer {
-            font-family: 'Inter', sans-serif !important;
+        body > footer,
+        header,
+        footer {
+            font-family: unset !important;
         }
+        
         section { overflow-x: hidden; }
         .container { overflow-x: hidden; max-width: 100%; }
         /* Exclude header and footer containers from overflow restrictions */
@@ -42,117 +46,21 @@
         
         /* ============================================
            COMPONENT PROTECTION - NAVIGATION & FOOTER
-           Prevent page styles from affecting components
+           Let navigation.js and footer.js handle their own styling completely
+           Prevent body/page fonts from affecting them
            ============================================ */
         
-        /* Navigation Protection - Complete Isolation */
+        /* Navigation - Reset font properties so navigation.js styles work */
+        /* Use 'unset' or 'initial' to prevent inheritance from body */
         header,
-        header *,
-        header nav,
-        header nav * {
-            font-family: 'Inter', sans-serif !important;
-            box-sizing: border-box !important;
-            /* Reset any page-level font styling */
-            text-transform: none !important;
-            letter-spacing: normal !important;
-            word-spacing: normal !important;
-            line-height: normal !important;
-        }
-        
-        /* Navigation button protection - restore original styles (must come first to override page styles) */
-        header nav .btn-primary,
-        header .btn-primary,
-        header a.btn-primary {
-            background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%) !important;
-            color: white !important;
-            border: none !important;
-            padding: 0.75rem 1.5rem !important;
-            border-radius: 9999px !important;
-            font-weight: 600 !important;
-            font-size: 1rem !important;
-            cursor: pointer !important;
-            display: inline-flex !important;
-            align-items: center !important;
-            justify-content: center !important;
-            text-transform: none !important;
-            letter-spacing: normal !important;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1) !important;
-            transition: all 0.3s ease !important;
-            -webkit-appearance: none !important;
-            appearance: none !important;
-            text-decoration: none !important;
-            line-height: normal !important;
-        }
-        
-        header nav .btn-primary:hover,
-        header .btn-primary:hover,
-        header a.btn-primary:hover {
-            transform: translateY(-2px) !important;
-            box-shadow: 0 10px 25px rgba(0, 80, 255, 0.4) !important;
-            background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%) !important;
-            color: white !important;
-        }
-        
-        header nav .btn-primary:focus,
-        header .btn-primary:focus,
-        header a.btn-primary:focus {
-            outline: 2px solid #0050ff !important;
-            outline-offset: 2px !important;
-            background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%) !important;
-            color: white !important;
-        }
-        
-        header nav .btn-primary:active,
-        header .btn-primary:active,
-        header a.btn-primary:active {
-            transform: translateY(0) !important;
-            background: linear-gradient(135deg, #0040d9 0%, #0033b3 100%) !important;
-            color: white !important;
-        }
-        
-        header nav a,
-        header nav button {
-            transform: none !important;
-            transition: color 0.3s ease, background-color 0.3s ease !important;
-            /* Prevent page link styles */
-            text-decoration: none !important;
-            -webkit-tap-highlight-color: auto !important;
-            touch-action: auto !important;
-            /* Reset any page-level color styles - but don't override btn-primary */
-            border: none !important;
-            -webkit-appearance: none !important;
-            appearance: none !important;
-        }
-        
-        /* Navigation links - restore proper colors (excludes .btn-primary) */
-        header nav a:not(.btn-primary) {
-            color: #374151 !important;
-            background-color: transparent !important;
-        }
-        
-        header nav a:not(.btn-primary):hover {
-            color: #2563eb !important;
-            background-color: transparent !important;
-        }
-        
-        /* Navigation SVG icons */
-        header nav svg {
-            fill: currentColor !important;
-            stroke: currentColor !important;
-            color: inherit !important;
-        }
-        
-        header h1,
-        header h2,
-        header h3,
-        header h4,
-        header h5,
-        header h6 {
-            font-family: 'Inter', sans-serif !important;
-            font-weight: 600 !important;
-            /* Reset page heading styles */
-            text-transform: none !important;
-            letter-spacing: normal !important;
+        header * {
+            font-family: unset !important;
+            font-weight: unset !important;
+            font-style: unset !important;
+            text-transform: unset !important;
+            letter-spacing: unset !important;
+            word-spacing: unset !important;
+            line-height: unset !important;
         }
         
         /* Navigation dropdown - maintain original styling */
@@ -185,44 +93,17 @@
             scrollbar-color: #c1c1c1 #f1f1f1;
         }
         
-        /* Footer Protection - Complete Isolation */
+        /* Footer - Reset font properties so footer.js styles work */
+        /* Use 'unset' to prevent inheritance from body */
         footer,
         footer * {
-            font-family: 'Inter', sans-serif !important;
-            box-sizing: border-box !important;
-            /* Reset any page-level font styling */
-            text-transform: none !important;
-            letter-spacing: normal !important;
-            word-spacing: normal !important;
-            line-height: normal !important;
-        }
-        
-        footer h1,
-        footer h2,
-        footer h3,
-        footer h4,
-        footer h5,
-        footer h6 {
-            font-family: 'Inter', sans-serif !important;
-            font-weight: 700 !important;
-            /* Reset page heading styles */
-            text-transform: none !important;
-            letter-spacing: normal !important;
-        }
-        
-        footer a {
-            /* Prevent page link styles */
-            text-decoration: none !important;
-            -webkit-tap-highlight-color: auto !important;
-            touch-action: auto !important;
-            transform: none !important;
-        }
-        
-        footer button {
-            /* Prevent page button styles */
-            -webkit-tap-highlight-color: auto !important;
-            touch-action: auto !important;
-            transform: none !important;
+            font-family: unset !important;
+            font-weight: unset !important;
+            font-style: unset !important;
+            text-transform: unset !important;
+            letter-spacing: unset !important;
+            word-spacing: unset !important;
+            line-height: unset !important;
         }
         
         /* Ensure components maintain their z-index and positioning */
@@ -264,21 +145,24 @@
             touch-action: manipulation;
         }
         /* Page headings only - exclude header and footer */
-        h1:not(header h1):not(footer h1) { font-family: 'Press Start 2P', cursive; }
-        h2:not(header h2):not(footer h2),
-        h3:not(header h3):not(footer h3),
-        h4:not(header h4):not(footer h4),
-        h5:not(header h5):not(footer h5),
-        h6:not(header h6):not(footer h6) {
+        /* Navigation and footer use their own fonts from navigation.js and footer.js */
+        h1:not(header h1):not(footer h1):not(header *):not(footer *) { 
+            font-family: 'Press Start 2P', cursive; 
+        }
+        h2:not(header h2):not(footer h2):not(header *):not(footer *),
+        h3:not(header h3):not(footer h3):not(header *):not(footer *),
+        h4:not(header h4):not(footer h4):not(header *):not(footer *),
+        h5:not(header h5):not(footer h5):not(header *):not(footer *),
+        h6:not(header h6):not(footer h6):not(header *):not(footer *) {
             font-family: 'Orbitron', sans-serif;
             font-weight: 700;
         }
         /* Page button styles - exclude header and footer */
-        .btn-primary:not(header .btn-primary):not(footer .btn-primary) {
+        .btn-primary:not(header .btn-primary):not(footer .btn-primary):not(header *):not(footer *) {
             background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%);
             transition: all 0.3s ease;
         }
-        .btn-primary:not(header .btn-primary):not(footer .btn-primary):hover {
+        .btn-primary:not(header .btn-primary):not(footer .btn-primary):not(header *):not(footer *):hover {
             transform: translateY(-2px);
             box-shadow: 0 10px 25px rgba(0, 80, 255, 0.4);
         }
@@ -443,6 +327,150 @@
                 opacity: 1;
                 transform: translateY(0);
             }
+        }
+        
+        /* Gaming-Themed Hero Buttons */
+        .hero-btn-primary {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem 2.5rem;
+            background: linear-gradient(135deg, rgba(51, 153, 255, 0.9) 0%, rgba(0, 80, 255, 0.9) 100%);
+            border: 2px solid rgba(51, 153, 255, 0.8);
+            border-radius: 50px;
+            color: white;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 
+                0 0 20px rgba(51, 153, 255, 0.5),
+                0 0 40px rgba(51, 153, 255, 0.3),
+                inset 0 0 20px rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            z-index: 1;
+        }
+        
+        .hero-btn-primary::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transform: rotate(45deg);
+            transition: transform 0.6s ease;
+            z-index: -1;
+        }
+        
+        .hero-btn-primary:hover::before {
+            transform: translateX(100%) translateY(100%) rotate(45deg);
+        }
+        
+        .hero-btn-primary:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 
+                0 0 30px rgba(51, 153, 255, 0.8),
+                0 0 60px rgba(51, 153, 255, 0.5),
+                0 10px 30px rgba(0, 0, 0, 0.3),
+                inset 0 0 30px rgba(255, 255, 255, 0.2);
+            border-color: rgba(51, 153, 255, 1);
+            background: linear-gradient(135deg, rgba(51, 153, 255, 1) 0%, rgba(0, 80, 255, 1) 100%);
+        }
+        
+        .hero-btn-primary:active {
+            transform: translateY(-1px) scale(1.02);
+        }
+        
+        .hero-btn-primary span,
+        .hero-btn-primary i {
+            position: relative;
+            z-index: 1;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+        
+        .hero-btn-primary i {
+            font-size: 0.9em;
+            transition: transform 0.3s ease;
+        }
+        
+        .hero-btn-primary:hover i {
+            transform: scale(1.2) rotate(-5deg);
+        }
+        
+        .hero-btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            justify-center;
+            padding: 1rem 2.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            border-radius: 50px;
+            color: white;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 600;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 
+                0 0 15px rgba(255, 255, 255, 0.2),
+                inset 0 0 15px rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+            z-index: 1;
+        }
+        
+        .hero-btn-secondary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+        
+        .hero-btn-secondary:hover::before {
+            left: 100%;
+        }
+        
+        .hero-btn-secondary:hover {
+            transform: translateY(-3px) scale(1.05);
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.6);
+            box-shadow: 
+                0 0 25px rgba(255, 255, 255, 0.4),
+                0 10px 30px rgba(0, 0, 0, 0.3),
+                inset 0 0 25px rgba(255, 255, 255, 0.1);
+        }
+        
+        .hero-btn-secondary:active {
+            transform: translateY(-1px) scale(1.02);
+        }
+        
+        .hero-btn-secondary span,
+        .hero-btn-secondary i {
+            position: relative;
+            z-index: 1;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .hero-btn-secondary i {
+            font-size: 0.9em;
+            transition: transform 0.3s ease;
+        }
+        
+        .hero-btn-secondary:hover i {
+            transform: scale(1.2) translateX(3px);
         }
         
         /* Improved Typography for Content Section 2 - Blue Background */
@@ -1023,6 +1051,113 @@
             }
         }
 
+        /* Content 2 Banner Section Mobile Optimization */
+        @media (max-width: 768px) {
+            /* Fix banner section padding and spacing */
+            section[style*="background: #3399ff"] {
+                padding: 1.5rem 0.75rem !important;
+                background: transparent !important;
+            }
+            
+            /* Card wrapper for mobile */
+            section[style*="background: #3399ff"] > .container {
+                background: linear-gradient(135deg, #3399ff 0%, #2d88e6 100%);
+                border-radius: 20px;
+                padding: 1.5rem 1rem !important;
+                box-shadow: 
+                    0 10px 30px rgba(0, 0, 0, 0.2),
+                    0 5px 15px rgba(0, 0, 0, 0.15),
+                    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+                margin: 0 auto;
+                max-width: calc(100% - 1.5rem);
+                position: relative;
+                overflow: hidden;
+            }
+            
+            /* Ripple background inside card */
+            section[style*="background: #3399ff"] .ripple-background {
+                border-radius: 20px;
+            }
+            
+            /* Banner heading mobile - allow wrapping */
+            section[style*="background: #3399ff"] h2.animated-gradient-text {
+                white-space: normal !important;
+                display: block !important;
+                word-break: break-word;
+                hyphens: auto;
+                line-height: 1.3 !important;
+            }
+            
+            /* Game text mobile optimization */
+            section[style*="background: #3399ff"] .game-text {
+                font-size: 0.9rem !important;
+                line-height: 1.6 !important;
+                margin-bottom: 1rem !important;
+                padding: 0 0.25rem;
+            }
+            
+            /* Game badge mobile */
+            section[style*="background: #3399ff"] .game-badge {
+                font-size: 0.7rem !important;
+                padding: 0.4rem 0.9rem !important;
+                margin-bottom: 0.75rem !important;
+            }
+            
+            /* Feature cards container mobile - card style */
+            section[style*="background: #3399ff"] .card-container-right {
+                flex-direction: column !important;
+                gap: 1rem !important;
+                padding: 0 !important;
+                width: 100%;
+                margin-top: 1.5rem;
+            }
+            
+            /* Feature cards mobile - enhanced card style */
+            section[style*="background: #3399ff"] .feature-card {
+                width: 100% !important;
+                max-width: 100% !important;
+                min-width: 100% !important;
+                height: auto !important;
+                min-height: 220px !important;
+                margin: 0 !important;
+                border-radius: 16px;
+                box-shadow: 
+                    0 8px 20px rgba(0, 0, 0, 0.15),
+                    0 3px 10px rgba(0, 0, 0, 0.1);
+                overflow: hidden;
+            }
+            
+            section[style*="background: #3399ff"] .card-content {
+                padding: 90px 1rem 1rem !important;
+            }
+            
+            section[style*="background: #3399ff"] .card-content p {
+                font-size: 0.8rem !important;
+                line-height: 1.5 !important;
+            }
+            
+            section[style*="background: #3399ff"] .card-button {
+                font-size: 0.85em !important;
+                padding: 5px 12px !important;
+            }
+            
+            section[style*="background: #3399ff"] .card-icon {
+                width: 90px !important;
+                height: 75px !important;
+            }
+            
+            section[style*="background: #3399ff"] .card-icon img {
+                width: 45px !important;
+                height: 45px !important;
+            }
+            
+            /* Content wrapper inside card */
+            section[style*="background: #3399ff"] .flex.flex-col.items-center.text-center {
+                padding: 0 !important;
+                margin-bottom: 1.5rem !important;
+            }
+        }
+        
         /* Mobile Responsive Styles */
         @media (max-width: 768px) {
             /* Hero Section Mobile */
@@ -1123,12 +1258,30 @@
                 width: 100%;
             }
             
-            /* Secondary CTA Button Mobile */
-            .hero-section a.inline-flex {
-                width: 200px !important;
-                min-width: 200px;
-                font-size: 16px !important;
-                padding: 0.75rem 1.5rem !important;
+            /* Hero Buttons Mobile Optimization */
+            .hero-btn-primary,
+            .hero-btn-secondary {
+                padding: 0.875rem 2rem !important;
+                font-size: 0.875rem !important;
+                width: 100%;
+                max-width: 280px;
+            }
+            
+            .hero-section .flex.flex-col.sm\\:flex-row {
+                width: 100%;
+                max-width: 100%;
+            }
+            
+            .hero-btn-primary span,
+            .hero-btn-secondary span {
+                white-space: nowrap;
+            }
+            
+            /* Icon spacing mobile */
+            .hero-btn-primary i,
+            .hero-btn-secondary i {
+                margin-right: 0.5rem !important;
+                font-size: 0.85em !important;
             }
 
             .hero-section .animated-gradient-btn::after {
@@ -2155,7 +2308,7 @@
         }
 
         /* Card Hover Effect Styles */
-        a {
+        a:not(header a):not(footer a) {
             text-decoration: none;
         }
 
@@ -3786,8 +3939,14 @@
                 
                 <!-- CTA Buttons -->
                 <div class="mt-8 md:mt-10 flex flex-col sm:flex-row gap-4 md:gap-6 items-center justify-center">
-                    <a href="#contact" class="animated-gradient-btn"><span>Get Your Free Quote</span></a>
-                    <a href="#contact" class="inline-flex items-center justify-center px-6 md:px-8 py-3 md:py-4 bg-white/10 backdrop-blur-md border-2 border-white/30 rounded-full text-white font-bold text-sm md:text-base uppercase tracking-wider hover:bg-white/20 hover:border-white/50 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105"><span>Contact Us</span></a>
+                    <a href="#contact" class="hero-btn-primary">
+                        <i class="fas fa-tag mr-2"></i>
+                        <span>Get Your Free Quote</span>
+                    </a>
+                    <a href="#contact" class="hero-btn-secondary">
+                        <i class="fas fa-envelope mr-2"></i>
+                        <span>Contact Us</span>
+                    </a>
                 </div>
             </div>
         </div>
@@ -3828,10 +3987,10 @@
             <div class="circle small shade5"></div>
         </div>
         <div class="container mx-auto px-4 md:px-6" style="position: relative; z-index: 1; max-width: 100%; overflow-x: hidden;">
-            <div class="flex flex-col items-center text-center mb-6 md:mb-8">
-                <span class="game-badge">Arcade Classic</span>
-                <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 md:mb-6 animated-gradient-text" style="font-family: 'Press Start 2P', cursive !important; white-space: nowrap; display: inline-block;">What is a Claw Machine?</h2>
-                <p class="game-text">
+            <div class="flex flex-col items-center text-center mb-6 md:mb-8 px-2">
+                <span class="game-badge mb-3 md:mb-4">Arcade Classic</span>
+                <h2 class="text-xl md:text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl font-bold mb-4 md:mb-6 animated-gradient-text px-2" style="font-family: 'Press Start 2P', cursive !important; line-height: 1.4;">What is a Claw Machine?</h2>
+                <p class="game-text mb-4 md:mb-5">
                     A claw machine is a classic arcade game that's all about skill, luck, and excitement. Guests use a joystick to control a mechanical claw, trying to grab a prize from inside the machine and drop it into the winning slot. It's a fun, interactive experience that keeps people coming back for more while creating a lively and playful atmosphere at any event.
                 </p>
                 <p class="game-text">
