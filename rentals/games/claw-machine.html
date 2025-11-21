@@ -13,28 +13,594 @@
     <style>
         html, body { overflow-x: hidden; width: 100%; max-width: 100vw; }
         body { font-family: 'Orbitron', sans-serif; color: #1a202c; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+        /* Exclude header and footer from body font styling */
+        body > header,
+        body > footer {
+            font-family: 'Inter', sans-serif !important;
+        }
         section { overflow-x: hidden; }
         .container { overflow-x: hidden; max-width: 100%; }
+        /* Exclude header and footer containers from overflow restrictions */
+        header .container,
+        footer .container {
+            overflow: visible !important;
+        }
         
-        /* Prevent text size adjustment on mobile */
-        * {
+        /* Prevent text size adjustment on mobile - exclude components */
+        *:not(header):not(footer):not(header *):not(footer *) {
             -webkit-text-size-adjust: 100%;
             -moz-text-size-adjust: 100%;
             -ms-text-size-adjust: 100%;
             text-size-adjust: 100%;
         }
         
-        /* Touch-friendly buttons */
-        button, a {
+        /* ============================================
+           COMPONENT PROTECTION - NAVIGATION & FOOTER
+           Prevent page styles from affecting components
+           ============================================ */
+        
+        /* Navigation Protection - Complete Isolation */
+        header,
+        header *,
+        header nav,
+        header nav * {
+            font-family: 'Inter', sans-serif !important;
+            box-sizing: border-box !important;
+            /* Reset any page-level font styling */
+            text-transform: none !important;
+            letter-spacing: normal !important;
+            word-spacing: normal !important;
+            line-height: normal !important;
+        }
+        
+        header nav a,
+        header nav button {
+            transform: none !important;
+            transition: color 0.3s ease, background-color 0.3s ease !important;
+            /* Prevent page link styles */
+            text-decoration: none !important;
+            -webkit-tap-highlight-color: auto !important;
+            touch-action: auto !important;
+        }
+        
+        header nav .btn-primary:hover {
+            transform: translateY(-2px) !important;
+            box-shadow: 0 10px 25px rgba(0, 80, 255, 0.4) !important;
+        }
+        
+        header h1,
+        header h2,
+        header h3,
+        header h4,
+        header h5,
+        header h6 {
+            font-family: 'Inter', sans-serif !important;
+            font-weight: 600 !important;
+            /* Reset page heading styles */
+            text-transform: none !important;
+            letter-spacing: normal !important;
+        }
+        
+        /* Navigation dropdown - maintain original styling */
+        header nav .group > .absolute {
+            overflow-y: auto !important;
+            overflow-x: hidden !important;
+            max-height: 90vh !important;
+        }
+        
+        header nav .group > .absolute::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        header nav .group > .absolute::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 4px;
+        }
+        
+        header nav .group > .absolute::-webkit-scrollbar-thumb {
+            background: #c1c1c1;
+            border-radius: 4px;
+        }
+        
+        header nav .group > .absolute::-webkit-scrollbar-thumb:hover {
+            background: #a8a8a8;
+        }
+        
+        header nav .group > .absolute {
+            scrollbar-width: thin;
+            scrollbar-color: #c1c1c1 #f1f1f1;
+        }
+        
+        /* Footer Protection - Complete Isolation */
+        footer,
+        footer * {
+            font-family: 'Inter', sans-serif !important;
+            box-sizing: border-box !important;
+            /* Reset any page-level font styling */
+            text-transform: none !important;
+            letter-spacing: normal !important;
+            word-spacing: normal !important;
+            line-height: normal !important;
+        }
+        
+        footer h1,
+        footer h2,
+        footer h3,
+        footer h4,
+        footer h5,
+        footer h6 {
+            font-family: 'Inter', sans-serif !important;
+            font-weight: 700 !important;
+            /* Reset page heading styles */
+            text-transform: none !important;
+            letter-spacing: normal !important;
+        }
+        
+        footer a {
+            /* Prevent page link styles */
+            text-decoration: none !important;
+            -webkit-tap-highlight-color: auto !important;
+            touch-action: auto !important;
+            transform: none !important;
+        }
+        
+        footer button {
+            /* Prevent page button styles */
+            -webkit-tap-highlight-color: auto !important;
+            touch-action: auto !important;
+            transform: none !important;
+        }
+        
+        /* Ensure components maintain their z-index and positioning */
+        header {
+            position: sticky !important;
+            top: 0 !important;
+            z-index: 50 !important;
+        }
+        
+        footer {
+            position: relative !important;
+            z-index: 1 !important;
+        }
+        
+        /* Prevent page overflow rules from affecting components */
+        header,
+        footer {
+            overflow: visible !important;
+        }
+        
+        header nav,
+        footer {
+            overflow-x: visible !important;
+            overflow-y: visible !important;
+        }
+        
+        /* Prevent body overflow from affecting navigation */
+        html:has(header nav .group:hover) {
+            overflow-x: hidden !important;
+        }
+        
+        /* Touch-friendly buttons - exclude header and footer */
+        button:not(header button):not(footer button),
+        a:not(header a):not(footer a) {
             -webkit-tap-highlight-color: transparent;
             touch-action: manipulation;
         }
-        h1 { font-family: 'Press Start 2P', cursive; }
-        h2, h3, h4, h5, h6 { font-family: 'Orbitron', sans-serif; font-weight: 700; }
-        .btn-primary { background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%); transition: all 0.3s ease; }
-        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(0, 80, 255, 0.4); }
+        /* Page headings only - exclude header and footer */
+        h1:not(header h1):not(footer h1) { font-family: 'Press Start 2P', cursive; }
+        h2:not(header h2):not(footer h2),
+        h3:not(header h3):not(footer h3),
+        h4:not(header h4):not(footer h4),
+        h5:not(header h5):not(footer h5),
+        h6:not(header h6):not(footer h6) {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+        }
+        /* Page button styles - exclude header and footer */
+        .btn-primary:not(header .btn-primary):not(footer .btn-primary) {
+            background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%);
+            transition: all 0.3s ease;
+        }
+        .btn-primary:not(header .btn-primary):not(footer .btn-primary):hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 80, 255, 0.4);
+        }
         .section-padding { padding: 5rem 0; }
         .hero-gradient { background: linear-gradient(135deg, rgba(0, 0, 0, 0.65) 0%, rgba(0, 0, 0, 0.65) 100%); }
+        
+        /* Improved Typography for Content Section 2 - Blue Background */
+        section[style*="background: #3399ff"] {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif !important;
+        }
+        
+        section[style*="background: #3399ff"] h2,
+        section[style*="background: #3399ff"] h2 em {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif !important;
+            font-weight: 700 !important;
+            font-style: normal !important;
+            letter-spacing: -0.02em !important;
+            line-height: 1.2 !important;
+            color: #ffffff !important;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.15) !important;
+        }
+        
+        section[style*="background: #3399ff"] p {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif !important;
+            font-weight: 400 !important;
+            line-height: 1.75 !important;
+            letter-spacing: 0.01em !important;
+            color: #ffffff !important;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) !important;
+            opacity: 0.95 !important;
+        }
+        
+        /* Mobile Typography Improvements */
+        @media (max-width: 640px) {
+            section[style*="background: #3399ff"] h2,
+            section[style*="background: #3399ff"] h2 em {
+                font-size: 1.375rem !important;
+                line-height: 1.3 !important;
+                margin-bottom: 1.25rem !important;
+            }
+            
+            section[style*="background: #3399ff"] p {
+                font-size: 0.9rem !important;
+                line-height: 1.65 !important;
+                margin-bottom: 1rem !important;
+            }
+        }
+        
+        @media (min-width: 641px) and (max-width: 768px) {
+            section[style*="background: #3399ff"] h2,
+            section[style*="background: #3399ff"] h2 em {
+                font-size: 1.625rem !important;
+                line-height: 1.3 !important;
+                margin-bottom: 1.5rem !important;
+            }
+            
+            section[style*="background: #3399ff"] p {
+                font-size: 0.95rem !important;
+                line-height: 1.7 !important;
+                margin-bottom: 1.25rem !important;
+            }
+        }
+        
+        @media (min-width: 769px) and (max-width: 1023px) {
+            section[style*="background: #3399ff"] h2,
+            section[style*="background: #3399ff"] h2 em {
+                font-size: 2rem !important;
+                line-height: 1.25 !important;
+            }
+            
+            section[style*="background: #3399ff"] p {
+                font-size: 1rem !important;
+                line-height: 1.75 !important;
+            }
+        }
+        
+        @media (min-width: 1024px) {
+            section[style*="background: #3399ff"] h2,
+            section[style*="background: #3399ff"] h2 em {
+                font-size: 2.5rem !important;
+                line-height: 1.2 !important;
+            }
+            
+            section[style*="background: #3399ff"] p {
+                font-size: 1.125rem !important;
+                line-height: 1.8 !important;
+            }
+        }
+        
+        /* Modern Game-Themed Content Card Styles */
+        .game-info-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.1),
+                0 0 0 3px rgba(255, 255, 255, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.5);
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .game-info-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            animation: shine 3s infinite;
+        }
+        
+        @keyframes shine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+        
+        .game-info-card .game-title {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif !important;
+            font-weight: 800 !important;
+            font-size: clamp(1.5rem, 4vw, 2.25rem) !important;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1.5rem !important;
+            line-height: 1.2 !important;
+            letter-spacing: -0.02em !important;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .game-info-card .game-text {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif !important;
+            font-weight: 400 !important;
+            font-size: clamp(0.95rem, 2.5vw, 1.125rem) !important;
+            line-height: 1.75 !important;
+            color: #1f2937 !important;
+            margin-bottom: 1.25rem !important;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .game-info-card .game-text:last-child {
+            margin-bottom: 0 !important;
+        }
+        
+        /* Gaming Badge Styles */
+        .game-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Responsive Mobile Improvements */
+        @media (max-width: 640px) {
+            .game-info-card {
+                padding: 1.5rem !important;
+                border-radius: 16px !important;
+                margin-bottom: 1.5rem;
+            }
+            
+            .game-info-card .game-title {
+                font-size: 1.5rem !important;
+                margin-bottom: 1.25rem !important;
+            }
+            
+            .game-info-card .game-text {
+                font-size: 0.95rem !important;
+                line-height: 1.7 !important;
+                margin-bottom: 1rem !important;
+            }
+            
+            .game-badge {
+                font-size: 0.7rem !important;
+                padding: 0.4rem 0.8rem !important;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .game-info-card {
+                padding: 1.25rem !important;
+                border-radius: 12px !important;
+            }
+            
+            .game-info-card .game-title {
+                font-size: 1.375rem !important;
+                margin-bottom: 1rem !important;
+            }
+            
+            .game-info-card .game-text {
+                font-size: 0.9rem !important;
+                line-height: 1.65 !important;
+            }
+        }
+        
+        /* Gaming-Themed Content Section 1 Styles */
+        .gradient-grainy-bg .game-content-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(247, 250, 252, 0.98) 100%);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            padding: 2.5rem;
+            box-shadow: 
+                0 20px 60px rgba(0, 0, 0, 0.1),
+                0 0 0 4px rgba(102, 126, 234, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.8);
+            border: 3px solid transparent;
+            background-clip: padding-box;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .gradient-grainy-bg .game-content-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 24px;
+            padding: 3px;
+            background: linear-gradient(135deg, #667eea, #764ba2, #f093fb, #4facfe);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask-composite: exclude;
+            animation: border-glow 3s ease infinite;
+        }
+        
+        @keyframes border-glow {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 1; }
+        }
+        
+        .gradient-grainy-bg .game-content-card::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.3) 50%, transparent 70%);
+            animation: card-shine 4s infinite;
+        }
+        
+        @keyframes card-shine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+        
+        .gradient-grainy-bg .game-content-title {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif !important;
+            font-weight: 800 !important;
+            font-size: clamp(1.25rem, 3.5vw, 1.75rem) !important;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem !important;
+            line-height: 1.3 !important;
+            letter-spacing: -0.01em !important;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .gradient-grainy-bg .game-content-text {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif !important;
+            font-weight: 400 !important;
+            font-size: clamp(0.95rem, 2.5vw, 1.125rem) !important;
+            line-height: 1.8 !important;
+            color: #374151 !important;
+            margin-bottom: 1.5rem !important;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .gradient-grainy-bg .game-content-text:last-of-type {
+            margin-bottom: 2rem !important;
+        }
+        
+        .gradient-grainy-bg .game-btn {
+            position: relative;
+            z-index: 1;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+            border: none !important;
+            padding: 1rem 2rem !important;
+            border-radius: 50px !important;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif !important;
+            font-weight: 700 !important;
+            font-size: clamp(0.95rem, 2.5vw, 1.125rem) !important;
+            color: white !important;
+            text-transform: uppercase !important;
+            letter-spacing: 0.1em !important;
+            box-shadow: 
+                0 10px 30px rgba(102, 126, 234, 0.4),
+                0 0 0 3px rgba(102, 126, 234, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3) !important;
+            transition: all 0.3s ease !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            gap: 0.5rem !important;
+        }
+        
+        .gradient-grainy-bg .game-btn:hover {
+            transform: translateY(-3px) scale(1.05) !important;
+            box-shadow: 
+                0 15px 40px rgba(102, 126, 234, 0.5),
+                0 0 0 4px rgba(102, 126, 234, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.4) !important;
+        }
+        
+        .gradient-grainy-bg .game-btn::after {
+            content: '→';
+            font-size: 1.2em;
+            transition: transform 0.3s ease;
+        }
+        
+        .gradient-grainy-bg .game-btn:hover::after {
+            transform: translateX(5px);
+        }
+        
+        /* Enhanced Gaming Card Image */
+        .gradient-grainy-bg .card {
+            border-radius: 20px !important;
+            overflow: hidden !important;
+            box-shadow: 
+                0 20px 60px rgba(0, 0, 0, 0.15),
+                0 0 0 4px rgba(102, 126, 234, 0.2) !important;
+            border: 3px solid rgba(255, 255, 255, 0.5) !important;
+            position: relative !important;
+        }
+        
+        .gradient-grainy-bg .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 1;
+        }
+        
+        .gradient-grainy-bg .card:hover::before {
+            opacity: 1;
+        }
+        
+        .gradient-grainy-bg .card__button {
+            z-index: 2 !important;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+            color: white !important;
+            font-weight: 700 !important;
+            text-transform: uppercase !important;
+            letter-spacing: 0.1em !important;
+        }
+        
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .gradient-grainy-bg .game-content-card {
+                padding: 1.75rem !important;
+                border-radius: 20px !important;
+            }
+            
+            .gradient-grainy-bg .game-content-text {
+                margin-bottom: 1.25rem !important;
+            }
+            
+            .gradient-grainy-bg .game-content-text:last-of-type {
+                margin-bottom: 1.5rem !important;
+            }
+            
+            .gradient-grainy-bg .game-btn {
+                width: 100% !important;
+                padding: 0.875rem 1.5rem !important;
+            }
+        }
+        
+        @media (max-width: 640px) {
+            .gradient-grainy-bg .game-content-card {
+                padding: 1.5rem !important;
+                border-radius: 16px !important;
+            }
+        }
         
         /* Keyboard Animation Styles */
         .keyboard {
@@ -352,9 +918,13 @@
                 overflow-x: visible !important;
                 overflow-y: visible !important;
                 width: 100%;
-                max-width: 100%;
+                max-width: 100% !important;
                 align-items: center;
                 justify-content: flex-start;
+            }
+
+            .card-container-optimized {
+                max-width: 100% !important;
             }
 
             .card-container-right .feature-card {
@@ -433,6 +1003,29 @@
             .card-content p {
                 font-size: 0.85em;
                 line-height: 1.5;
+            }
+
+            /* Enhanced Section Mobile Styles */
+            .flex.flex-col.items-center.text-center {
+                padding: 1.5rem 1rem !important;
+                max-width: 100% !important;
+            }
+
+            .game-title {
+                font-size: clamp(1.5rem, 6vw, 2.25rem) !important;
+                margin-bottom: 1.25rem !important;
+            }
+
+            .game-badge {
+                font-size: 0.75rem !important;
+                padding: 0.5rem 1rem !important;
+                margin-bottom: 1.25rem !important;
+            }
+
+            .game-text {
+                font-size: clamp(0.95rem, 3vw, 1.1rem) !important;
+                line-height: 1.75 !important;
+                margin-bottom: 1.25rem !important;
             }
 
             .card-button {
@@ -1301,6 +1894,183 @@
             overflow-x: auto;
             padding-bottom: 40px;
             position: relative;
+        }
+
+        .card-container-optimized {
+            max-width: 900px;
+        }
+
+        /* Enhanced Section Styles with Rainbow Wave Animation */
+        .flex.flex-col.items-center.text-center {
+            padding: 2rem 1rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        /* Rainbow Wave Animation for Game Title */
+        .game-title {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif !important;
+            font-weight: 800 !important;
+            font-size: clamp(1.75rem, 5vw, 3rem) !important;
+            background: linear-gradient(
+                90deg,
+                #ff0000 0%,
+                #ff7f00 14.28%,
+                #ffff00 28.56%,
+                #00ff00 42.84%,
+                #0000ff 57.12%,
+                #4b0082 71.4%,
+                #9400d3 85.68%,
+                #ff0000 100%
+            );
+            background-size: 200% 100%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1.5rem !important;
+            line-height: 1.2 !important;
+            letter-spacing: -0.02em !important;
+            animation: rainbow-wave 3s ease-in-out infinite;
+            position: relative;
+            display: inline-block;
+        }
+
+        @keyframes rainbow-wave {
+            0%, 100% {
+                background-position: 0% 50%;
+                transform: translateY(0px);
+            }
+            25% {
+                transform: translateY(-8px);
+            }
+            50% {
+                background-position: 100% 50%;
+                transform: translateY(0px);
+            }
+            75% {
+                transform: translateY(-8px);
+            }
+        }
+
+        /* Enhanced Game Badge */
+        .game-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 0.625rem 1.25rem;
+            border-radius: 50px;
+            font-size: 0.875rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .game-badge:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+        }
+
+        /* Enhanced Game Text */
+        .game-text {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif !important;
+            font-weight: 400 !important;
+            font-size: clamp(1rem, 2.5vw, 1.25rem) !important;
+            line-height: 1.8 !important;
+            color: #ffffff !important;
+            margin-bottom: 1.5rem !important;
+            position: relative;
+            z-index: 1;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .game-text:last-child {
+            margin-bottom: 0 !important;
+        }
+
+        /* Benefits Section Styles */
+        .benefit-card {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 16px;
+            padding: 1.25rem;
+            transition: all 0.3s ease;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.25);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        .benefit-icon {
+            font-size: 2rem;
+            margin-bottom: 0.75rem;
+            display: inline-block;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+        }
+
+        .benefit-title {
+            color: #ffffff;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .benefit-desc {
+            color: rgba(255, 255, 255, 0.95);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .game-wrapper-glass {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 24px;
+            padding: 1.5rem;
+            width: 100%;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .game-wrapper-glass::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.8), transparent);
+        }
+
+        .section-title-white {
+            color: #ffffff;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            font-weight: 800;
+            margin-bottom: 2rem;
+            text-align: left;
+        }
+
+        @media (max-width: 768px) {
+            .section-title-white {
+                text-align: center;
+                font-size: 1.75rem;
+            }
+            .benefit-card {
+                align-items: center;
+                text-align: center;
+            }
         }
 
         .feature-card {
@@ -2248,13 +3018,16 @@
                     </div>
                 </div>
                 <div class="flex flex-col justify-center items-start order-1 md:order-2">
-                    <p class="text-sm md:text-base text-gray-700 mb-4 md:mb-12 text-left">
+                    <div class="game-content-card w-full">
+                        <h3 class="game-content-title">Level Up Your Event</h3>
+                        <p class="game-content-text">
                         Looking for a way to make your event unforgettable while keeping guests entertained? Our claw machine rentals are the perfect solution. Whether it's a lively party, a corporate gathering, or a branded activation, these interactive games get everyone involved, cheering, and reaching for prizes.
                     </p>
-                    <p class="text-sm md:text-base text-gray-700 mb-6 md:mb-16 text-left">
+                        <p class="game-content-text">
                         With vibrant lights, fun sounds, and a mix of custom-branded goodies inside, the claw machines bring excitement and energy to any event space. They encourage friendly competition, spark laughter, and add a nostalgic touch that guests of all ages will love. Plus, our rentals are simple to set up, so you can focus on enjoying the experience and watching your guests have a blast. Turn your next event into a playful, engaging experience that people will remember long after the last prize is claimed.
                     </p>
-                    <a href="#contact" class="btn-primary text-white px-5 md:px-6 py-2.5 md:py-3 rounded-full text-sm md:text-base font-semibold inline-block w-full md:w-auto text-center">Get A Quote</a>
+                        <a href="#contact" class="game-btn">Get A Quote</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -2270,18 +3043,18 @@
             <div class="circle small shade5"></div>
         </div>
         <div class="container mx-auto px-4 md:px-6" style="position: relative; z-index: 1; max-width: 100%; overflow-x: hidden;">
-            <div class="grid md:grid-cols-2 gap-4 md:gap-6">
-                <div class="flex flex-col justify-center items-start md:items-end text-left md:text-right order-2 md:order-1">
-                    <h2 class="text-xl md:text-2xl lg:text-3xl font-bold mb-4 md:mb-12 text-gray-900"><em>What is a Claw Machine?</em></h2>
-                    <p class="text-sm md:text-base text-gray-900 mb-4 md:mb-12">
-                        A claw machine is a classic arcade game that's all about skill, luck, and excitement. Guests use a joystick to control a mechanical claw, trying to grab a prize from inside the machine and drop it into the winning slot. It's a fun, interactive experience that keeps people coming back for more while creating a lively and playful atmosphere at any event.
-                    </p>
-                    <p class="text-sm md:text-base text-gray-900">
-                        Using our claw machines is simple and stress-free. We handle the setup, so all you need to do is stock it with your chosen prizes and let your guests take turns testing their luck and skill. Whether you're encouraging friendly competition, rewarding attendees, or adding a nostalgic touch to your event, our claw machine rentals are guaranteed to bring excitement and engagement to any occasion.
-                    </p>
-                </div>
-                <div class="flex items-center justify-center order-1 md:order-2" style="width: 100%; max-width: 100%;">
-                    <div class="card-container-right" style="width: 100%; max-width: 100%;">
+            <div class="flex flex-col items-center text-center mb-6 md:mb-8">
+                <span class="game-badge">Arcade Classic</span>
+                <h2 class="game-title">What is a Claw Machine?</h2>
+                <p class="game-text">
+                    A claw machine is a classic arcade game that's all about skill, luck, and excitement. Guests use a joystick to control a mechanical claw, trying to grab a prize from inside the machine and drop it into the winning slot. It's a fun, interactive experience that keeps people coming back for more while creating a lively and playful atmosphere at any event.
+                </p>
+                <p class="game-text">
+                    Using our claw machines is simple and stress-free. We handle the setup, so all you need to do is stock it with your chosen prizes and let your guests take turns testing their luck and skill. Whether you're encouraging friendly competition, rewarding attendees, or adding a nostalgic touch to your event, our claw machine rentals are guaranteed to bring excitement and engagement to any occasion.
+                </p>
+            </div>
+            <div class="flex items-center justify-center">
+                <div class="card-container-right card-container-optimized">
                         <div class="feature-card">
                         <div class="card-icon">
                             <img src="../../assets/images/clawmachine/icon1.png" alt="Icon 1">
@@ -2310,7 +3083,6 @@
                         </div>
                     </div>
                     </div>
-                </div>
             </div>
         </div>
     </section>
@@ -2329,7 +3101,7 @@
     </section>
 
     <!-- Benefits Section and Game -->
-    <section class="py-6 md:py-8 bg-white content-section-height" style="position: relative; overflow: hidden; background: #3399ff;">
+    <section class="py-12 md:py-16 bg-white content-section-height" style="position: relative; overflow: hidden; background: #3399ff;">
         <div class="ripple-background">
             <div class="circle xxlarge shade1"></div>
             <div class="circle xlarge shade2"></div>
@@ -2338,71 +3110,86 @@
             <div class="circle small shade5"></div>
         </div>
         <div class="container mx-auto px-4 md:px-6" style="position: relative; z-index: 1; max-width: 100%; overflow-x: hidden;">
-            <div class="grid md:grid-cols-2 gap-4 md:gap-6">
-                <div class="flex flex-col justify-center items-start md:items-end text-left md:text-right order-2 md:order-1" style="width: 100%; max-width: 100%; box-sizing: border-box;">
-                    <h2 class="text-lg md:text-2xl lg:text-3xl font-bold mb-3 md:mb-5 animated-gradient-text" style="width: 100%; max-width: 100%;">Benefits of Having the Claw Machine at your Event</h2>
-                    <ul class="list-none space-y-2 md:space-y-3" style="width: 100%; max-width: 100%; padding: 0; margin: 0;">
-                        <li style="width: 100%; max-width: 100%; box-sizing: border-box;">
-                            <p class="mb-2 text-xs md:text-sm lg:text-base text-gray-900" style="width: 100%; max-width: 100%; word-wrap: break-word; overflow-wrap: break-word;">Want to create a dynamic and engaging atmosphere at your event? Here's how a claw machine rental can help:</p>
-                        </li>
-                        <li style="width: 100%; max-width: 100%; box-sizing: border-box;">
-                            <h3 class="text-sm md:text-base lg:text-lg font-semibold mb-1 text-gray-900" style="width: 100%; max-width: 100%; word-wrap: break-word; overflow-wrap: break-word;">Fun for Everyone</h3>
-                            <p class="text-xs md:text-sm lg:text-base text-gray-900" style="width: 100%; max-width: 100%; word-wrap: break-word; overflow-wrap: break-word;">Guests of all ages can join in, from kids testing their skills to adults reliving their arcade glory days.</p>
-                        </li>
-                        <li style="width: 100%; max-width: 100%; box-sizing: border-box;">
-                            <h3 class="text-sm md:text-base lg:text-lg font-semibold mb-1 text-gray-900" style="width: 100%; max-width: 100%; word-wrap: break-word; overflow-wrap: break-word;">Interactive Excitement</h3>
-                            <p class="text-xs md:text-sm lg:text-base text-gray-900" style="width: 100%; max-width: 100%; word-wrap: break-word; overflow-wrap: break-word;">The thrill of controlling the claw and aiming for a prize keeps everyone engaged and coming back for more.</p>
-                        </li>
-                        <li style="width: 100%; max-width: 100%; box-sizing: border-box;">
-                            <h3 class="text-sm md:text-base lg:text-lg font-semibold mb-1 text-gray-900" style="width: 100%; max-width: 100%; word-wrap: break-word; overflow-wrap: break-word;">Memorable Experience</h3>
-                            <p class="text-xs md:text-sm lg:text-base text-gray-900" style="width: 100%; max-width: 100%; word-wrap: break-word; overflow-wrap: break-word;">Nostalgia meets modern fun - your guests will be talking about their wins (and near-misses) long after the event ends.</p>
-                        </li>
-                        <li style="width: 100%; max-width: 100%; box-sizing: border-box;">
-                            <h3 class="text-sm md:text-base lg:text-lg font-semibold mb-1 text-gray-900" style="width: 100%; max-width: 100%; word-wrap: break-word; overflow-wrap: break-word;">Customizable and On-Brand</h3>
-                            <p class="text-xs md:text-sm lg:text-base text-gray-900" style="width: 100%; max-width: 100%; word-wrap: break-word; overflow-wrap: break-word;">Wrap the machine in your company's colors or logo, and fill it with branded goodies for a unique, eye-catching activation.</p>
-                        </li>
-                        <li style="width: 100%; max-width: 100%; box-sizing: border-box;">
-                            <h3 class="text-sm md:text-base lg:text-lg font-semibold mb-1 text-gray-900" style="width: 100%; max-width: 100%; word-wrap: break-word; overflow-wrap: break-word;">Event-Ready Anywhere</h3>
-                            <p class="text-xs md:text-sm lg:text-base text-gray-900" style="width: 100%; max-width: 100%; word-wrap: break-word; overflow-wrap: break-word;">Compact, portable, and easy to set up in almost any indoor space, making it a perfect addition to parties, trade shows, or corporate events.</p>
-                        </li>
-                        <li style="width: 100%; max-width: 100%; box-sizing: border-box;">
-                            <h3 class="text-sm md:text-base lg:text-lg font-semibold mb-1 text-gray-900" style="width: 100%; max-width: 100%; word-wrap: break-word; overflow-wrap: break-word;">Endless Possibilities</h3>
-                            <p class="text-xs md:text-sm lg:text-base text-gray-900" style="width: 100%; max-width: 100%; word-wrap: break-word; overflow-wrap: break-word;">Fill it with merch, toys, gift cards, or surprises — the claw machine adapts to whatever vibe or goal you have for your event.</p>
-                        </li>
-                    </ul>
+            <div class="grid lg:grid-cols-2 gap-8 md:gap-12 items-center">
+                <!-- Benefits Column -->
+                <div class="flex flex-col order-2 lg:order-1">
+                    <h2 class="text-2xl md:text-3xl lg:text-4xl section-title-white mb-8">Benefits of Having the Claw Machine at your Event</h2>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <!-- Benefit 1 -->
+                        <div class="benefit-card">
+                            <span class="benefit-icon">🥳</span>
+                            <h3 class="benefit-title">Fun for Everyone</h3>
+                            <p class="benefit-desc">Guests of all ages can join in, from kids testing their skills to adults reliving their arcade glory days.</p>
+                        </div>
+                        <!-- Benefit 2 -->
+                        <div class="benefit-card">
+                            <span class="benefit-icon">🕹️</span>
+                            <h3 class="benefit-title">Interactive Excitement</h3>
+                            <p class="benefit-desc">The thrill of controlling the claw and aiming for a prize keeps everyone engaged and coming back for more.</p>
+                        </div>
+                        <!-- Benefit 3 -->
+                        <div class="benefit-card">
+                            <span class="benefit-icon">✨</span>
+                            <h3 class="benefit-title">Memorable Experience</h3>
+                            <p class="benefit-desc">Nostalgia meets modern fun - your guests will be talking about their wins long after the event ends.</p>
+                        </div>
+                        <!-- Benefit 4 -->
+                        <div class="benefit-card">
+                            <span class="benefit-icon">🎨</span>
+                            <h3 class="benefit-title">Customizable</h3>
+                            <p class="benefit-desc">Wrap the machine in your company's colors or logo, and fill it with branded goodies for a unique activation.</p>
+                        </div>
+                        <!-- Benefit 5 -->
+                        <div class="benefit-card">
+                            <span class="benefit-icon">🚀</span>
+                            <h3 class="benefit-title">Event-Ready Anywhere</h3>
+                            <p class="benefit-desc">Compact, portable, and easy to set up in almost any indoor space. Perfect for parties and trade shows.</p>
+                        </div>
+                        <!-- Benefit 6 -->
+                        <div class="benefit-card">
+                            <span class="benefit-icon">🎁</span>
+                            <h3 class="benefit-title">Endless Possibilities</h3>
+                            <p class="benefit-desc">Fill it with merch, toys, gift cards, or surprises — the claw machine adapts to whatever vibe you have.</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="flex flex-col justify-center items-center md:items-end text-center md:text-right order-1 md:order-2" style="width: 100%; max-width: 100%; box-sizing: border-box; overflow-x: hidden;">
-                    <div class="game-wrapper claw-game-container w-full" style="width: 100%; max-width: 100%; box-sizing: border-box;">
-                        <h2 class="text-lg md:text-2xl lg:text-3xl font-bold mb-3 md:mb-5 animated-gradient-text" style="width: 100%; max-width: 100%; word-wrap: break-word;">MiHi Entertainment Mini Game</h2>
-                        <div class="wrapper" style="width: 100%; max-width: 100%; box-sizing: border-box;">
-                            <div class="collection-box pix"></div>
-                            <div class="claw-machine">
-                                <div class="box pix">
-                                    <div class="machine-top pix">
-                                        <div class="arm-joint pix">
-                                            <div class="arm pix">
-                                                <div class="claws pix"></div>
+
+                <!-- Game Column -->
+                <div class="flex flex-col justify-center items-center order-1 lg:order-2">
+                    <div class="game-wrapper-glass">
+                         <h2 class="text-lg md:text-2xl lg:text-3xl font-bold mb-6 text-center text-white drop-shadow-md" style="font-family: inherit;">MiHi Entertainment Mini Game</h2>
+                         <!-- Game Code Preserved -->
+                        <div class="game-wrapper claw-game-container w-full" style="width: 100%; max-width: 100%; box-sizing: border-box; margin-top: 0; padding: 0;">
+                            <div class="wrapper" style="width: 100%; max-width: 100%; box-sizing: border-box;">
+                                <div class="collection-box pix"></div>
+                                <div class="claw-machine">
+                                    <div class="box pix">
+                                        <div class="machine-top pix">
+                                            <div class="arm-joint pix">
+                                                <div class="arm pix">
+                                                    <div class="claws pix"></div>
+                                                </div>
                                             </div>
+                                            <div class="rail vert pix"></div>
+                                            <div class="rail hori pix"></div>
                                         </div>
-                                        <div class="rail vert pix"></div>
-                                        <div class="rail hori pix"></div>
+                                        <div class="machine-bottom pix">
+                                            <div class="collection-point pix"></div>
+                                        </div>
                                     </div>
-                                    <div class="machine-bottom pix">
+                                    <div class="control pix">
+                                        <div class="cover left"></div>
+                                        <button class="hori-btn pix"></button>
+                                        <button class="vert-btn pix"></button>
+                                        <div class="cover right">
+                                            <div class="instruction pix"></div>
+                                        </div>
+                                        <div class="cover bottom"></div>
+                                        <div class="cover top">
+                                            <div class="collection-arrow pix"></div>
+                                        </div>
                                         <div class="collection-point pix"></div>
                                     </div>
-                                </div>
-                                <div class="control pix">
-                                    <div class="cover left"></div>
-                                    <button class="hori-btn pix"></button>
-                                    <button class="vert-btn pix"></button>
-                                    <div class="cover right">
-                                        <div class="instruction pix"></div>
-                                    </div>
-                                    <div class="cover bottom"></div>
-                                    <div class="cover top">
-                                        <div class="collection-arrow pix"></div>
-                                    </div>
-                                    <div class="collection-point pix"></div>
                                 </div>
                             </div>
                         </div>
