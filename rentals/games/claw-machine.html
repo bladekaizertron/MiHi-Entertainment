@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     <title>Claw Machine Rental - MiHi Entertainment</title>
     <link rel="icon" type="image/svg+xml" href="../../assets/images/favicon.svg">
     <script src="https://cdn.tailwindcss.com"></script>
@@ -283,7 +283,167 @@
             box-shadow: 0 10px 25px rgba(0, 80, 255, 0.4);
         }
         .section-padding { padding: 5rem 0; }
-        .hero-gradient { background: linear-gradient(135deg, rgba(0, 0, 0, 0.65) 0%, rgba(0, 0, 0, 0.65) 100%); }
+        .hero-gradient { 
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.7) 0%, rgba(51, 153, 255, 0.3) 50%, rgba(0, 0, 0, 0.7) 100%);
+            position: relative;
+        }
+        
+        .hero-gradient::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 255, 255, 0.03) 2px, rgba(0, 255, 255, 0.03) 4px),
+                repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(0, 255, 255, 0.03) 2px, rgba(0, 255, 255, 0.03) 4px);
+            background-size: 50px 50px;
+            animation: scanlines 8s linear infinite;
+            pointer-events: none;
+        }
+        
+        @keyframes scanlines {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(50px); }
+        }
+        
+        /* Gaming Hero Section Enhancements */
+        .hero-section {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-section::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 50% 50%, rgba(51, 153, 255, 0.15) 0%, transparent 70%);
+            animation: pulse-glow 3s ease-in-out infinite;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        @keyframes pulse-glow {
+            0%, 100% { opacity: 0.5; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.1); }
+        }
+        
+        /* Enhanced Keyboard Animation with Neon Glow */
+        .hero-section .keyboard {
+            position: relative;
+            filter: drop-shadow(0 0 10px rgba(51, 153, 255, 0.5)) 
+                    drop-shadow(0 0 20px rgba(51, 153, 255, 0.3))
+                    drop-shadow(0 0 30px rgba(51, 153, 255, 0.2));
+        }
+        
+        .hero-section .key {
+            text-shadow: 
+                0 0 5px rgba(51, 153, 255, 0.8),
+                0 0 10px rgba(51, 153, 255, 0.6),
+                0 0 15px rgba(51, 153, 255, 0.4),
+                0 0 20px rgba(51, 153, 255, 0.3);
+            color: #ffffff;
+        }
+        
+        /* Enhanced Hero Title */
+        .hero-section h3 {
+            font-family: 'Orbitron', sans-serif !important;
+            font-weight: 800 !important;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            text-shadow: 
+                0 0 10px rgba(51, 153, 255, 0.8),
+                0 0 20px rgba(51, 153, 255, 0.6),
+                0 0 30px rgba(51, 153, 255, 0.4),
+                0 0 40px rgba(51, 153, 255, 0.3),
+                2px 2px 4px rgba(0, 0, 0, 0.8);
+            position: relative;
+            animation: title-glow 2s ease-in-out infinite alternate;
+        }
+        
+        @keyframes title-glow {
+            0% { 
+                text-shadow: 
+                    0 0 10px rgba(51, 153, 255, 0.8),
+                    0 0 20px rgba(51, 153, 255, 0.6),
+                    0 0 30px rgba(51, 153, 255, 0.4),
+                    2px 2px 4px rgba(0, 0, 0, 0.8);
+            }
+            100% { 
+                text-shadow: 
+                    0 0 15px rgba(51, 153, 255, 1),
+                    0 0 25px rgba(51, 153, 255, 0.8),
+                    0 0 35px rgba(51, 153, 255, 0.6),
+                    0 0 45px rgba(51, 153, 255, 0.4),
+                    2px 2px 4px rgba(0, 0, 0, 0.8);
+            }
+        }
+        
+        /* Enhanced Hero Description */
+        .hero-section p {
+            text-shadow: 
+                0 0 5px rgba(255, 255, 255, 0.5),
+                0 2px 4px rgba(0, 0, 0, 0.6);
+            font-weight: 500;
+            letter-spacing: 0.05em;
+        }
+        
+        /* Gaming Badge for Hero */
+        .hero-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, rgba(51, 153, 255, 0.9) 0%, rgba(0, 80, 255, 0.9) 100%);
+            color: white;
+            padding: 0.5rem 1.25rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            margin-bottom: 1.5rem;
+            box-shadow: 
+                0 0 10px rgba(51, 153, 255, 0.5),
+                0 4px 15px rgba(51, 153, 255, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            animation: badge-pulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes badge-pulse {
+            0%, 100% { 
+                box-shadow: 
+                    0 0 10px rgba(51, 153, 255, 0.5),
+                    0 4px 15px rgba(51, 153, 255, 0.3),
+                    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+            }
+            50% { 
+                box-shadow: 
+                    0 0 20px rgba(51, 153, 255, 0.8),
+                    0 4px 25px rgba(51, 153, 255, 0.5),
+                    inset 0 1px 0 rgba(255, 255, 255, 0.4);
+            }
+        }
+        
+        /* Hero Content Container */
+        .hero-section .relative.z-10 {
+            position: relative;
+            z-index: 10;
+            animation: fade-in-up 1s ease-out;
+        }
+        
+        @keyframes fade-in-up {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
         
         /* Improved Typography for Content Section 2 - Blue Background */
         section[style*="background: #3399ff"] {
@@ -867,8 +1027,35 @@
         @media (max-width: 768px) {
             /* Hero Section Mobile */
             .hero-section {
-                min-height: 60vh;
-                padding: 2rem 1rem;
+                min-height: 70vh;
+                padding: 3rem 1rem;
+            }
+            
+            /* Better mobile spacing */
+            .hero-section .relative.z-10 {
+                transform: translateY(0) !important;
+                padding: 2rem 0 !important;
+            }
+            
+            /* Hero Badge Mobile */
+            .hero-badge {
+                font-size: 0.65rem !important;
+                padding: 0.4rem 1rem !important;
+                margin-bottom: 1rem !important;
+            }
+            
+            /* Enhanced hero title mobile */
+            .hero-section h3 {
+                font-size: 1.5rem !important;
+                margin-bottom: 1rem !important;
+                letter-spacing: 0.1em !important;
+            }
+            
+            /* Enhanced hero description mobile */
+            .hero-section p {
+                font-size: 0.9375rem !important;
+                margin-bottom: 1.5rem !important;
+                line-height: 1.6 !important;
             }
 
             /* Hero Section Button Container */
@@ -921,12 +1108,27 @@
                 height: 65px !important;
                 min-width: 200px;
                 min-height: 65px;
-                font-size: 20px !important;
+                font-size: 18px !important;
                 letter-spacing: 1.5px;
                 line-height: 65px !important;
                 max-width: 90vw;
                 box-sizing: border-box;
                 overflow: visible;
+            }
+            
+            /* Hero CTA Buttons Container Mobile */
+            .hero-section .flex.flex-col.sm\\:flex-row {
+                flex-direction: column !important;
+                gap: 1rem !important;
+                width: 100%;
+            }
+            
+            /* Secondary CTA Button Mobile */
+            .hero-section a.inline-flex {
+                width: 200px !important;
+                min-width: 200px;
+                font-size: 16px !important;
+                padding: 0.75rem 1.5rem !important;
             }
 
             .hero-section .animated-gradient-btn::after {
@@ -975,7 +1177,35 @@
 
             .content-section-height {
                 min-height: auto;
-                padding: 2rem 0;
+                padding: 2.5rem 0;
+            }
+            
+            .content-section-height-compact {
+                padding: 2rem 0 !important;
+            }
+            
+            /* Better section spacing on mobile */
+            section {
+                padding-top: 2rem;
+                padding-bottom: 2rem;
+            }
+            
+            section.py-12,
+            section.py-16,
+            section.py-20 {
+                padding-top: 2.5rem !important;
+                padding-bottom: 2.5rem !important;
+            }
+            
+            section.py-6,
+            section.py-8 {
+                padding-top: 1.5rem !important;
+                padding-bottom: 1.5rem !important;
+            }
+            
+            section.py-4 {
+                padding-top: 1rem !important;
+                padding-bottom: 1rem !important;
             }
 
             /* Card Mobile Adjustments */
@@ -1112,22 +1342,22 @@
 
             /* Game Container Mobile */
             .claw-game-container {
-                --m: 1.5;
-                transform: scale(0.9);
+                --m: 1.8;
+                transform: scale(1);
                 transform-origin: center;
                 width: 100%;
-                max-width: 100vw;
+                max-width: 100%;
                 display: flex;
                 flex-direction: column;
                 align-items: center;
                 justify-content: center;
-                padding: 0.5rem;
+                padding: 1rem 0.5rem;
                 box-sizing: border-box;
                 overflow: hidden;
             }
 
             .game-wrapper {
-                padding: 0;
+                padding: 1rem 0.5rem;
                 margin-top: 0;
                 width: 100%;
                 max-width: 100%;
@@ -1136,8 +1366,8 @@
             }
 
             .game-wrapper h2 {
-                font-size: 1rem !important;
-                margin-bottom: 1rem !important;
+                font-size: 1.125rem !important;
+                margin-bottom: 1.5rem !important;
                 padding: 0 0.5rem;
                 text-align: center;
                 width: 100%;
@@ -1155,8 +1385,12 @@
                 min-height: auto !important;
                 overflow-x: hidden;
                 overflow-y: visible;
-                padding: 0.5rem 0;
+                padding: 0.75rem 0;
                 box-sizing: border-box;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
             }
 
             /* Ensure game machine fits on mobile */
@@ -1194,8 +1428,20 @@
 
             /* Improve touch targets for game controls */
             .claw-game-container .control button {
-                padding: 0.5rem;
+                padding: 0.75rem;
                 margin: 0.5rem;
+                min-width: 50px;
+                min-height: 50px;
+            }
+
+            /* Better spacing for collection box on mobile */
+            .claw-game-container .collection-box {
+                margin-bottom: 1rem;
+            }
+
+            /* Ensure game machine is properly centered on mobile */
+            .claw-game-container .claw-machine {
+                margin: 0 auto;
             }
 
             /* Optimize game section container */
@@ -1203,6 +1449,20 @@
                 width: 100%;
                 max-width: 100%;
                 overflow-x: hidden;
+            }
+
+            /* Improve game section layout on mobile */
+            section[style*="background: #3399ff"] .grid.lg\\:grid-cols-2 {
+                gap: 2rem;
+            }
+
+            section[style*="background: #3399ff"] .grid > div:has(.claw-game-container) {
+                padding: 1rem 0.5rem;
+                margin-bottom: 2rem;
+            }
+
+            section[style*="background: #3399ff"] h2[style*="Orbitron"] {
+                margin-bottom: 1.5rem !important;
             }
 
             /* Text Alignment Mobile */
@@ -1291,18 +1551,24 @@
             }
 
             .accordion-wrapper h1 {
-                font-size: 22px;
-                margin-bottom: 10px;
+                font-size: 24px;
+                margin-bottom: 12px;
             }
 
             .accordion .link {
-                padding: 12px 15px;
-                font-size: 14px;
+                padding: 16px 18px;
+                font-size: 15px;
+            }
+
+            .accordion .link::after {
+                font-size: 20px;
+                margin-left: 12px;
             }
 
             .submenu p {
-                padding: 12px 15px;
-                font-size: 13px;
+                padding: 16px 18px;
+                font-size: 14px;
+                line-height: 1.6;
             }
 
             /* Ripple Background Mobile */
@@ -1422,9 +1688,9 @@
             }
 
             .claw-game-container {
-                --m: 1.2;
-                transform: scale(0.8);
-                padding: 0.25rem;
+                --m: 1.6;
+                transform: scale(0.95);
+                padding: 0.75rem 0.5rem;
             }
 
             /* Ensure card scrollbar is hidden on small mobile */
@@ -1438,12 +1704,12 @@
             }
 
             .game-wrapper {
-                padding: 0;
+                padding: 0.75rem 0.5rem;
             }
 
             .game-wrapper h2 {
-                font-size: 0.9rem !important;
-                margin-bottom: 0.75rem !important;
+                font-size: 1rem !important;
+                margin-bottom: 1.25rem !important;
             }
 
             .claw-game-container .wrapper {
@@ -1568,9 +1834,9 @@
             }
 
             .claw-game-container {
-                --m: 1;
-                transform: scale(0.7);
-                padding: 0.25rem;
+                --m: 1.4;
+                transform: scale(0.9);
+                padding: 0.5rem;
             }
 
             /* Ensure card scrollbar is hidden on very small mobile */
@@ -1584,17 +1850,17 @@
             }
 
             .game-wrapper {
-                padding: 0;
+                padding: 0.5rem;
             }
 
             .game-wrapper h2 {
-                font-size: 0.85rem !important;
-                margin-bottom: 0.5rem !important;
+                font-size: 0.95rem !important;
+                margin-bottom: 1rem !important;
             }
 
             .claw-game-container .wrapper {
                 min-height: auto !important;
-                padding: 0.25rem 0;
+                padding: 0.5rem 0;
             }
 
             /* Ensure buttons are touch-friendly on very small screens */
@@ -1605,12 +1871,12 @@
 
             /* Further optimize game container on very small screens */
             .claw-game-container {
-                max-width: 100vw;
-                padding: 0.5rem 0.25rem;
+                max-width: 100%;
+                padding: 0.75rem 0.5rem;
             }
 
             .game-wrapper {
-                padding: 0;
+                padding: 0.75rem 0.5rem;
             }
 
             .feature-card {
@@ -1814,6 +2080,78 @@
         .gradient-grainy-bg > * {
             position: relative;
             z-index: 1;
+        }
+
+        /* FAQ Section with Ripple Background - includes grainy filter */
+        .faq-section-with-ripple::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.03) 0px, transparent 1px, transparent 2px, rgba(0, 0, 0, 0.03) 3px),
+                repeating-linear-gradient(90deg, rgba(0, 0, 0, 0.03) 0px, transparent 1px, transparent 2px, rgba(0, 0, 0, 0.03) 3px);
+            background-size: 4px 4px;
+            pointer-events: none;
+            opacity: 0.5;
+            z-index: 0;
+        }
+
+        .faq-section-with-ripple > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Booking Steps Styles */
+        .booking-step {
+            position: relative;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .booking-step::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
+            border-radius: inherit;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .booking-step:hover::before {
+            opacity: 1;
+        }
+
+        .booking-step:hover {
+            background: rgba(255, 255, 255, 0.95);
+            border-color: rgba(102, 126, 234, 0.3);
+        }
+
+        .booking-step .flex-shrink-0 {
+            position: relative;
+            z-index: 2;
+        }
+
+        .booking-step h3 {
+            position: relative;
+            z-index: 2;
+        }
+
+        .booking-step p {
+            position: relative;
+            z-index: 2;
+        }
+
+        @media (max-width: 768px) {
+            .booking-step {
+                padding: 1rem;
+            }
         }
 
         /* Card Hover Effect Styles */
@@ -2069,48 +2407,189 @@
 
         /* Benefits Section Styles */
         .benefit-card {
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(8px);
-            border: none;
-            border-radius: 12px;
-            padding: 0.625rem;
-            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 16px;
+            padding: 1.75rem 1.5rem;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             min-height: auto;
-            height: auto;
             display: flex;
             flex-direction: column;
-            align-items: flex-start;
-            justify-content: flex-start;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        @media (min-width: 1024px) {
+            .benefit-card {
+                padding: 2.25rem 2rem;
+                min-height: 240px;
+            }
+        }
+
+        .benefit-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, rgba(255,255,255,0.6), rgba(255,255,255,0.3));
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
         }
 
         .benefit-card:hover {
-            transform: translateY(-3px);
-            background: rgba(255, 255, 255, 0.25);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            transform: translateY(-6px);
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.35);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+        }
+
+        .benefit-card:hover::before {
+            transform: scaleX(1);
         }
 
         .benefit-icon {
-            font-size: 1.25rem;
-            margin-bottom: 0.375rem;
+            font-size: 2rem;
+            margin-bottom: 0.875rem;
             display: inline-block;
-            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+            filter: drop-shadow(0 2px 6px rgba(0,0,0,0.2));
+            transition: transform 0.3s ease;
+        }
+
+        @media (min-width: 1024px) {
+            .benefit-icon {
+                font-size: 2.25rem;
+                margin-bottom: 1rem;
+            }
+        }
+
+        .benefit-card:hover .benefit-icon {
+            transform: scale(1.1) rotate(5deg);
         }
 
         .benefit-title {
             color: #ffffff;
             font-weight: 700;
-            margin-bottom: 0.25rem;
-            font-size: 0.9rem;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            line-height: 1.3;
+            margin-bottom: 0.75rem;
+            font-size: 1rem;
+            text-shadow: 0 2px 6px rgba(0,0,0,0.2);
+            line-height: 1.4;
+            letter-spacing: 0.01em;
+        }
+
+        @media (min-width: 1024px) {
+            .benefit-title {
+                font-size: 1.125rem;
+                margin-bottom: 0.875rem;
+            }
         }
 
         .benefit-desc {
-            color: rgba(255, 255, 255, 0.95);
-            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.92);
+            font-size: 0.875rem;
+            line-height: 1.6;
+            margin: 0;
+            opacity: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: opacity 0.4s ease, max-height 0.4s ease, margin 0.4s ease;
+        }
+
+        @media (min-width: 1024px) {
+            .benefit-desc {
+                font-size: 0.9375rem;
+                line-height: 1.7;
+            }
+        }
+
+        .benefit-card:hover .benefit-desc {
+            opacity: 1;
+            max-height: 200px;
+            margin-top: 0.75rem;
+        }
+
+        /* Event Type Cards */
+        .event-type-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(247, 250, 252, 0.95) 100%);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+            border-radius: 16px;
+            padding: 1.5rem;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .event-type-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #667eea, #764ba2, #f093fb);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+
+        .event-type-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+            border-color: rgba(102, 126, 234, 0.4);
+        }
+
+        .event-type-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .event-type-icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.75rem;
+            display: inline-block;
+            transition: transform 0.3s ease;
+        }
+
+        .event-type-card:hover .event-type-icon {
+            transform: scale(1.15) rotate(5deg);
+        }
+
+        .event-type-title {
+            color: #1f2937;
+            font-weight: 700;
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
             line-height: 1.4;
-            margin-bottom: 0;
-            margin-top: 0;
+            transition: color 0.3s ease;
+        }
+
+        .event-type-card:hover .event-type-title {
+            color: #667eea;
+        }
+
+        .event-type-desc {
+            color: #4b5563;
+            font-size: 0.875rem;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        @media (min-width: 1024px) {
+            .event-type-card {
+                padding: 1.75rem;
+            }
+            .event-type-title {
+                font-size: 1.125rem;
+            }
+            .event-type-desc {
+                font-size: 0.9375rem;
+            }
         }
 
         .game-wrapper-glass {
@@ -2143,17 +2622,109 @@
             text-align: left;
         }
 
+        @media (max-width: 1023px) {
+            .benefit-card {
+                min-height: 180px;
+                padding: 1.5rem 1.25rem;
+            }
+        }
+
         @media (max-width: 768px) {
             .section-title-white {
                 text-align: center;
                 font-size: 1.75rem;
             }
             .benefit-card {
-                align-items: center;
-                text-align: center;
+                min-height: auto;
+                padding: 1.25rem 1rem;
+            }
+            .benefit-icon {
+                font-size: 1.75rem;
+                margin-bottom: 0.625rem;
+            }
+            .benefit-title {
+                font-size: 0.9375rem;
+                margin-bottom: 0.5rem;
+            }
+            .benefit-desc {
+                font-size: 0.8125rem;
+                line-height: 1.5;
             }
             .game-wrapper-glass {
                 padding: 0.375rem;
+            }
+            
+            /* Optimize Benefits Grid for Mobile */
+            .grid.grid-cols-1.sm\\:grid-cols-2.lg\\:grid-cols-2 {
+                grid-template-columns: 1fr !important;
+                gap: 1rem !important;
+            }
+            
+            /* Event Type Cards Mobile Optimization */
+            .event-type-card {
+                padding: 1.25rem !important;
+            }
+            
+            .event-type-icon {
+                font-size: 2rem !important;
+                margin-bottom: 0.5rem !important;
+            }
+            
+            .event-type-title {
+                font-size: 0.95rem !important;
+                margin-bottom: 0.375rem !important;
+            }
+            
+            .event-type-desc {
+                font-size: 0.8125rem !important;
+                line-height: 1.5 !important;
+            }
+            
+            /* Section Headers Mobile */
+            .flex.flex-col.items-center.text-center.mb-10,
+            .flex.flex-col.items-center.text-center.mb-12,
+            .flex.flex-col.items-center.text-center.mb-16 {
+                margin-bottom: 2rem !important;
+                padding: 0 0.5rem;
+            }
+            
+            /* Better container padding on mobile */
+            .container {
+                padding-left: 1rem !important;
+                padding-right: 1rem !important;
+            }
+            
+            /* Optimize grid gaps on mobile */
+            .grid.gap-5,
+            .grid.gap-6,
+            .grid.gap-8 {
+                gap: 1rem !important;
+            }
+            
+            .grid.gap-3,
+            .grid.gap-4 {
+                gap: 0.75rem !important;
+            }
+            
+            /* Accordion Mobile Optimization */
+            .accordion .link {
+                padding: 1rem 1.125rem !important;
+                font-size: 0.9375rem !important;
+            }
+            
+            .submenu p {
+                padding: 1rem 1.125rem !important;
+                font-size: 0.875rem !important;
+                line-height: 1.6 !important;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .benefit-card {
+                padding: 1.5rem 1.25rem;
+            }
+            .benefit-icon {
+                font-size: 1.75rem;
             }
         }
         
@@ -2366,6 +2937,32 @@
             }
         }
 
+        /* Mirrored Ripple Background */
+        .ripple-background-mirrored .small {
+            left: auto;
+            right: -100px;
+        }
+
+        .ripple-background-mirrored .medium {
+            left: auto;
+            right: -200px;
+        }
+
+        .ripple-background-mirrored .large {
+            left: auto;
+            right: -300px;
+        }
+
+        .ripple-background-mirrored .xlarge {
+            left: auto;
+            right: -400px;
+        }
+
+        .ripple-background-mirrored .xxlarge {
+            left: auto;
+            right: -500px;
+        }
+
         /* Claw Machine Mini Game Styles */
         .game-wrapper {
             display: flex;
@@ -2374,9 +2971,15 @@
             justify-content: center;
             width: 100%;
             max-width: 100%;
-            padding: 0;
+            padding: 1rem;
             margin-top: 0;
             overflow-x: hidden;
+        }
+
+        @media (min-width: 1024px) {
+            .game-wrapper {
+                padding: 1.5rem;
+            }
         }
 
         .game-title {
@@ -2497,6 +3100,13 @@
             width: 0;
             animation: squeeze-in forwards 0.4s;
             animation-delay: 1.4s;
+            overflow: hidden;
+        }
+
+        /* Ensure toys inside squeezed wrappers remain visible */
+        .claw-game-container .toy-wrapper.squeeze-in .toy {
+            opacity: 1 !important;
+            transform: translateY(0) !important;
         }
 
         @keyframes squeeze-in {
@@ -2522,8 +3132,15 @@
         .claw-game-container .toy-wrapper .toy {
             opacity: 0;
             transform: translateY(-100vh);
-            animation: forwards show-toy-2 0.8s;
+            animation: show-toy-2 0.8s forwards;
             animation-delay: 1s;
+            animation-fill-mode: both;
+            will-change: opacity, transform;
+        }
+
+        /* Fallback: ensure toys are visible after animation completes */
+        .claw-game-container .collection-box .toy-wrapper .toy {
+            transition: opacity 0.2s ease, transform 0.2s ease;
         }
 
         .claw-game-container .claw-machine.show-overlay::after {
@@ -2812,9 +3429,18 @@
         }
 
         .claw-game-container .toy.display {
-            transform: scale(3);
-            animation: forwards show-toy-1 0.8s;
+            transform: scale(3) !important;
+            animation: show-toy-1 0.8s forwards !important;
             animation-delay: 1s;
+            animation-fill-mode: both;
+            will-change: opacity, transform;
+            opacity: 1 !important;
+            visibility: visible !important;
+        }
+
+        /* Reset animation state when display class is removed */
+        .claw-game-container .toy:not(.display) {
+            animation: none !important;
         }
 
         .claw-game-container .toy {
@@ -2956,8 +3582,13 @@
                 opacity: 1;
                 transform: scale(3) translateY(0);
             }
-            30% {
-                opacity: 0;
+            50% {
+                opacity: 1;
+                transform: scale(2.5) translateY(-20px);
+            }
+            70% {
+                opacity: 0.8;
+                transform: scale(2) translateY(-40px);
             }
             100% {
                 opacity: 0;
@@ -2972,7 +3603,7 @@
 
         /* Accordion Dropdown Menu Styles */
         .accordion-wrapper {
-            max-width: 900px;
+            max-width: 1000px;
             margin: 0 auto;
             width: 100%;
         }
@@ -2990,6 +3621,12 @@
             font-size: 16px;
         }
 
+        .accordion-wrapper h2.animated-gradient-text {
+            font-family: 'Press Start 2P', cursive !important;
+            white-space: nowrap;
+            display: inline-block;
+        }
+
         .accordion-wrapper p {
             color: #4a5568;
             text-align: center;
@@ -3001,23 +3638,43 @@
             max-width: 100%;
             margin: 0 auto;
             background: #FFFFFF;
-            border-radius: 8px;
+            border-radius: 16px;
             list-style-type: none;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            border: 1px solid #e2e8f0;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+            overflow: hidden;
         }
 
         .accordion .link {
             cursor: pointer;
-            display: block;
-            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 24px;
             color: #1a202c;
             font-size: 16px;
             font-weight: 700;
-            border-bottom: 1px solid #e2e8f0;
+            border-bottom: 1px solid rgba(226, 232, 240, 0.6);
             position: relative;
-            transition: all 0.4s ease;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             background: #FFFFFF;
+            min-height: 44px;
+            touch-action: manipulation;
+        }
+
+        .accordion .link::after {
+            content: '+';
+            font-size: 24px;
+            font-weight: 300;
+            color: #667eea;
+            transition: transform 0.3s ease;
+            flex-shrink: 0;
+            margin-left: 16px;
+        }
+
+        .accordion li.open .link::after {
+            transform: rotate(45deg);
+            color: #764ba2;
         }
 
         .accordion li:last-child .link {
@@ -3025,25 +3682,28 @@
         }
 
         .accordion li.open .link {
-            color: #b63b4d;
-            background: #f7fafc;
+            color: #667eea;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
+            border-bottom-color: rgba(102, 126, 234, 0.2);
         }
 
         .accordion .link:hover {
-            background: #f7fafc;
-            color: #2d3748;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.03) 0%, rgba(118, 75, 162, 0.03) 100%);
+            color: #667eea;
+            padding-left: 28px;
         }
 
         .submenu {
             display: none;
-            background: #f7fafc;
-            font-size: 14px;
+            background: linear-gradient(135deg, rgba(247, 250, 252, 0.8) 0%, rgba(255, 255, 255, 0.9) 100%);
+            font-size: 15px;
             list-style-type: none;
             padding: 0;
+            border-top: 1px solid rgba(226, 232, 240, 0.6);
         }
 
         .submenu li {
-            border-bottom: 1px solid #e2e8f0;
+            border-bottom: 1px solid rgba(226, 232, 240, 0.4);
         }
 
         .submenu li:last-child {
@@ -3052,22 +3712,38 @@
 
         .submenu p {
             color: #4a5568;
-            padding: 15px 20px;
+            padding: 20px 24px;
             margin: 0;
-            line-height: 1.6;
+            line-height: 1.7;
+            font-size: 15px;
+        }
+
+        .submenu p[style*="color: #000000"],
+        .submenu p[style*="color: black"],
+        .submenu li:first-child p {
+            color: #000000 !important;
+            font-weight: 500 !important;
+        }
+
+        /* Force black text for the space question */
+        .accordion li:first-child .submenu p {
+            color: #000000 !important;
+            opacity: 1 !important;
+            visibility: visible !important;
         }
 
         .submenu a {
             display: block;
             text-decoration: none;
             color: #2d3748;
-            padding: 12px 20px;
+            padding: 12px 24px;
             transition: all 0.25s ease;
         }
 
         .submenu a:hover {
-            background: #edf2f7;
-            color: #b63b4d;
+            background: rgba(102, 126, 234, 0.05);
+            color: #667eea;
+            padding-left: 28px;
         }
     </style>
 </head>
@@ -3075,9 +3751,16 @@
     <div id="nav-placeholder"></div>
 
     <section class="relative h-screen md:h-screen flex items-center justify-center overflow-hidden hero-section">
-        <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('../../assets/images/clawmachine/hero.jpg');"></div>
+        <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('../../assets/images/clawmachine/hero.jpg'); background-position: center center;"></div>
         <div class="absolute inset-0 hero-gradient"></div>
-        <div class="relative z-10 text-center text-white px-4 md:px-6 py-8 md:py-0" style="transform: translateY(-60px);">
+        <div class="relative z-10 text-center text-white px-4 md:px-6 py-8 md:py-12">
+            <div class="max-w-6xl mx-auto">
+                <!-- Gaming Badge -->
+                <div class="mb-4 md:mb-6">
+                    <span class="hero-badge">🎮 ARCADE CLASSIC</span>
+                </div>
+                
+                <!-- Animated Keyboard Title -->
             <div class="keyboard mb-6 md:mb-8">
                 <span class="key">C</span>
                 <span class="key">L</span>
@@ -3092,11 +3775,21 @@
                 <span class="key">N</span>
                 <span class="key">E</span>
             </div>
-            <h3 class="text-3xl md:text-4xl lg:text-5xl mb-4 md:mb-6 px-2">Nationwide Rentals</h3>
-            <p class="text-lg md:text-xl lg:text-2xl mb-8 md:mb-10 max-w-5xl mx-auto px-2">
-                A classic arcade favorite, our claw machine brings nonstop fun and excitement to any event.
-            </p>
-            <a href="#contact" class="animated-gradient-btn"><span>Contact Us</span></a>
+                
+                <!-- Hero Title -->
+                <h3 class="text-2xl md:text-3xl lg:text-4xl xl:text-5xl mb-4 md:mb-6 px-2">Nationwide Rentals</h3>
+                
+                <!-- Hero Description -->
+                <p class="text-base md:text-lg lg:text-xl xl:text-2xl mb-8 md:mb-10 max-w-4xl mx-auto px-2 leading-relaxed">
+                    A classic arcade favorite, our claw machine brings nonstop fun and excitement to any event. Experience the thrill of the grab!
+                </p>
+                
+                <!-- CTA Buttons -->
+                <div class="mt-8 md:mt-10 flex flex-col sm:flex-row gap-4 md:gap-6 items-center justify-center">
+                    <a href="#contact" class="animated-gradient-btn"><span>Get Your Free Quote</span></a>
+                    <a href="#contact" class="inline-flex items-center justify-center px-6 md:px-8 py-3 md:py-4 bg-white/10 backdrop-blur-md border-2 border-white/30 rounded-full text-white font-bold text-sm md:text-base uppercase tracking-wider hover:bg-white/20 hover:border-white/50 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105"><span>Contact Us</span></a>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -3137,7 +3830,7 @@
         <div class="container mx-auto px-4 md:px-6" style="position: relative; z-index: 1; max-width: 100%; overflow-x: hidden;">
             <div class="flex flex-col items-center text-center mb-6 md:mb-8">
                 <span class="game-badge">Arcade Classic</span>
-                <h2 class="game-title">What is a Claw Machine?</h2>
+                <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 md:mb-6 animated-gradient-text" style="font-family: 'Press Start 2P', cursive !important; white-space: nowrap; display: inline-block;">What is a Claw Machine?</h2>
                 <p class="game-text">
                     A claw machine is a classic arcade game that's all about skill, luck, and excitement. Guests use a joystick to control a mechanical claw, trying to grab a prize from inside the machine and drop it into the winning slot. It's a fun, interactive experience that keeps people coming back for more while creating a lively and playful atmosphere at any event.
                 </p>
@@ -3193,27 +3886,27 @@
     </section>
 
     <!-- Benefits Section and Game -->
-    <section class="py-12 md:py-16 bg-white content-section-height" style="position: relative; overflow: hidden; background: #3399ff;">
-        <div class="ripple-background">
+    <section class="py-16 md:py-20 lg:py-24 bg-white content-section-height" style="position: relative; overflow: hidden; background: #3399ff;">
+        <div class="ripple-background ripple-background-mirrored">
             <div class="circle xxlarge shade1"></div>
             <div class="circle xlarge shade2"></div>
             <div class="circle large shade3"></div>
             <div class="circle medium shade4"></div>
             <div class="circle small shade5"></div>
         </div>
-        <div class="container mx-auto px-4 md:px-6" style="position: relative; z-index: 1; max-width: 100%; overflow-x: hidden;">
+        <div class="container mx-auto px-4 md:px-6 lg:px-8" style="position: relative; z-index: 1; max-width: 1400px;">
             <!-- Section Header -->
-            <div class="flex flex-col items-center text-center mb-6 md:mb-8">
-                <span class="game-badge">EVENT BENEFITS</span>
-                <h2 class="game-title">Benefits of Having the Claw Machine at your Event</h2>
+            <div class="flex flex-col items-center text-center mb-12 md:mb-16 lg:mb-20">
+                <span class="game-badge mb-4">EVENT BENEFITS</span>
+                <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 md:mb-6 animated-gradient-text" style="font-family: 'Press Start 2P', cursive !important;">Benefits of Having the Claw Machine at your Event</h2>
                 </div>
 
-            <div class="grid lg:grid-cols-2 gap-4 md:gap-6 items-start">
+            <div class="grid lg:grid-cols-2 gap-6 md:gap-8 lg:gap-12 xl:gap-16 items-start">
                 <!-- Play Mini Game - Left Side -->
-                <div class="flex flex-col justify-center items-start">
-                    <h2 class="text-base md:text-lg lg:text-xl font-bold mb-3 text-center text-white drop-shadow-md" style="font-family: 'Orbitron', sans-serif;">Play Mini Game</h2>
+                <div class="flex flex-col justify-center items-center order-1 lg:order-2 px-2 md:px-4 lg:px-6">
+                    <h2 class="text-lg md:text-xl lg:text-2xl font-bold mb-6 md:mb-8 lg:mb-10 text-center text-white drop-shadow-lg" style="font-family: 'Orbitron', sans-serif; letter-spacing: 0.05em;">Play Mini Game</h2>
                     <!-- Game Code Preserved -->
-                    <div class="game-wrapper claw-game-container w-full" style="width: 100%; max-width: 100%; box-sizing: border-box; margin-top: 0; padding: 0;">
+                    <div class="game-wrapper claw-game-container w-full max-w-lg lg:max-w-xl mx-auto" style="box-sizing: border-box; padding: 1rem;">
                         <div class="wrapper" style="width: 100%; max-width: 100%; box-sizing: border-box; padding-left: 0; margin-left: 0;">
                             <div class="collection-box pix"></div>
                             <div class="claw-machine">
@@ -3250,14 +3943,14 @@
                 </div>
 
                 <!-- Benefits Section - Right Side -->
-                <div class="flex flex-col">
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div class="flex flex-col items-center order-2 lg:order-1">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-5 md:gap-6 lg:gap-8 w-full">
                         <!-- Benefit 1 -->
                         <div class="benefit-card">
                             <span class="benefit-icon">🥳</span>
                             <h3 class="benefit-title">Fun for Everyone</h3>
                             <p class="benefit-desc">Guests of all ages can join in, from kids testing their skills to adults reliving their arcade glory days.</p>
-                </div>
+                        </div>
                         <!-- Benefit 2 -->
                         <div class="benefit-card">
                             <span class="benefit-icon">🕹️</span>
@@ -3295,35 +3988,50 @@
     </section>
 
     <!-- Content 3 -->
-    <section class="py-4 md:py-6 gradient-grainy-bg content-section-height-compact">
-        <div class="container mx-auto px-4 md:px-6">
-            <div class="grid md:grid-cols-2 gap-4 md:gap-6">
+    <section class="py-12 md:py-16 lg:py-20 gradient-grainy-bg content-section-height-compact">
+        <div class="container mx-auto px-4 md:px-6 lg:px-8" style="max-width: 1400px;">
+            <!-- Section Header -->
+            <div class="flex flex-col items-center text-center mb-8 md:mb-10 lg:mb-12 xl:mb-16 px-2">
+                <span class="game-badge mb-3 md:mb-4">PERFECT EVENTS</span>
+                <h2 class="text-xl md:text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl font-bold mb-3 md:mb-4 lg:mb-6 animated-gradient-text px-2" style="font-family: 'Press Start 2P', cursive !important;">Events Perfect For The Claw Machine</h2>
+                <p class="text-sm md:text-base lg:text-lg text-gray-700 max-w-2xl mx-auto leading-relaxed px-2">
+                    Our claw machine rentals are a fantastic addition to a wide range of events, bringing excitement and engagement to any occasion.
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-center">
+                <!-- Image/Content Card - Left Side -->
                 <div class="card-container order-2 md:order-1">
                     <div class="card2">
                         <a href="#" class="card__button">Learn more</a>
                     </div>
                 </div>
+                
+                <!-- Events List - Right Side -->
                 <div class="flex flex-col justify-center items-start order-1 md:order-2">
-                    <h2 class="text-base md:text-lg lg:text-xl font-bold mb-2 md:mb-3 animated-gradient-text"><em>Events Perfect For The Claw Machine</em></h2>
-                    <p class="text-xs md:text-sm text-gray-700 mb-3 md:mb-4 text-left">
-                        Our claw machine rentals are a fantastic addition to a wide range of events, including:
-                    </p>
-                    <div class="space-y-2 md:space-y-3">
-                        <div>
-                            <h3 class="text-sm md:text-base font-semibold mb-0.5 text-gray-900">Corporate Events</h3>
-                            <p class="text-xs md:text-sm text-gray-700">Trade shows, team-building activities, office parties, and corporate celebrations.</p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6 w-full">
+                        <div class="event-type-card group">
+                            <div class="event-type-icon">🏢</div>
+                            <h3 class="event-type-title">Corporate Events</h3>
+                            <p class="event-type-desc">Trade shows, team-building activities, office parties, and corporate celebrations.</p>
                         </div>
-                        <div>
-                            <h3 class="text-sm md:text-base font-semibold mb-0.5 text-gray-900">Private Parties</h3>
-                            <p class="text-xs md:text-sm text-gray-700">Trade shows, team-building activities, office parties, and corporate celebrations.</p>
+                        
+                        <div class="event-type-card group">
+                            <div class="event-type-icon">🎉</div>
+                            <h3 class="event-type-title">Private Parties</h3>
+                            <p class="event-type-desc">Birthday parties, anniversaries, graduations, and milestone celebrations.</p>
                         </div>
-                        <div>
-                            <h3 class="text-sm md:text-base font-semibold mb-0.5 text-gray-900">Special Occasions</h3>
-                            <p class="text-xs md:text-sm text-gray-700">Trade shows, team-building activities, office parties, and corporate celebrations.</p>
+                        
+                        <div class="event-type-card group">
+                            <div class="event-type-icon">✨</div>
+                            <h3 class="event-type-title">Special Occasions</h3>
+                            <p class="event-type-desc">Holiday parties, festivals, grand openings, and themed events.</p>
                         </div>
-                        <div>
-                            <h3 class="text-sm md:text-base font-semibold mb-0.5 text-gray-900">Family-Friendly Events</h3>
-                            <p class="text-xs md:text-sm text-gray-700">Trade shows, team-building activities, office parties, and corporate celebrations.</p>
+                        
+                        <div class="event-type-card group">
+                            <div class="event-type-icon">👨‍👩‍👧‍👦</div>
+                            <h3 class="event-type-title">Family-Friendly Events</h3>
+                            <p class="event-type-desc">Community gatherings, school events, fundraisers, and family reunions.</p>
                         </div>
                     </div>
                 </div>
@@ -3332,16 +4040,32 @@
     </section>
 
     <!-- Dropdown Section -->
-    <section class="py-6 md:py-8 gradient-grainy-bg">
-        <div class="container mx-auto px-4 md:px-6">
+    <section class="py-12 md:py-16 lg:py-20" style="position: relative; overflow-x: hidden; overflow-y: visible; background: #3399ff; max-width: 100vw;">
+        <div class="ripple-background">
+            <div class="circle xxlarge shade1"></div>
+            <div class="circle xlarge shade2"></div>
+            <div class="circle large shade3"></div>
+            <div class="circle medium shade4"></div>
+            <div class="circle small shade5"></div>
+        </div>
+        <div class="container mx-auto px-4 md:px-6 lg:px-8" style="max-width: 1000px; position: relative; z-index: 1;">
             <div class="accordion-wrapper">
-                <h1>Frequently asked questions</h1>
-                <p class="text-center text-sm md:text-base px-2">Have questions about our Claw Machine Rentals? We're happy to answer them!</p>
+                <div class="text-center mb-6 md:mb-8 lg:mb-12 px-2">
+                    <span class="inline-block px-3 py-1.5 md:px-4 md:py-2 bg-gradient-to-r from-blue-500 to-purple-600 text-white text-xs md:text-sm font-bold rounded-full mb-3 md:mb-4 uppercase tracking-wider">
+                        Got Questions?
+                    </span>
+                    <h2 class="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold mb-3 md:mb-4 lg:mb-6 animated-gradient-text px-2">
+                        Frequently Asked Questions
+                    </h2>
+                    <p class="text-sm md:text-base lg:text-lg text-gray-700 max-w-2xl mx-auto leading-relaxed px-2">
+                        Have questions about our Claw Machine Rentals? We're happy to answer them!
+                    </p>
+                </div>
                 <ul id="accordion" class="accordion">
                     <li>
                         <div class="link">How much space does the claw machine need?</div>
                         <ul class="submenu">
-                            <li><p>Our claw machines are compact and fit comfortably in most event spaces. We recommend a space of about 4x4 feet for easy access and gameplay.</p></li>
+                            <li><p style="color: #000000 !important; background-color: transparent !important;">Our claw machines are compact and fit comfortably in most event spaces. We recommend a space of about 4x4 feet for easy access and gameplay.</p></li>
                         </ul>
                     </li>
                     <li>
@@ -3380,32 +4104,65 @@
     </section>
 
     <!-- Content 4 -->
-    <section class="py-4 md:py-6 gradient-grainy-bg content-section-height-compact">
-        <div class="container mx-auto px-4 md:px-6">
-            <div class="grid md:grid-cols-2 gap-4 md:gap-6">
+    <section class="py-12 md:py-16 lg:py-20 gradient-grainy-bg content-section-height-compact">
+        <div class="container mx-auto px-4 md:px-6 lg:px-8" style="max-width: 1400px;">
+            <!-- Centered Header -->
+            <div class="text-center mb-8 md:mb-10 lg:mb-12 xl:mb-16 px-2">
+                <span class="inline-block px-3 py-1.5 md:px-4 md:py-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white text-xs md:text-sm font-bold rounded-full mb-3 md:mb-4 uppercase tracking-wider">
+                    Simple Booking Process
+                </span>
+                <h2 class="text-xl md:text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl font-bold mb-3 md:mb-4 lg:mb-6 animated-gradient-text px-2" style="font-family: 'Press Start 2P', cursive !important; letter-spacing: 0.02em; word-spacing: 0.05em; line-height: 1.3;">
+                    How To Book Your Next Claw Machine Rental
+                </h2>
+                <p class="text-xs md:text-sm lg:text-base text-gray-700 leading-relaxed max-w-3xl mx-auto px-2">
+                    Booking your claw machine rental is easy! Follow these simple steps to get started.
+                </p>
+                        </div>
+            
+            <div class="grid md:grid-cols-2 gap-8 md:gap-10 lg:gap-12 items-center">
                 <div class="flex flex-col justify-center items-start order-2 md:order-1">
-                    <h2 class="text-base md:text-lg lg:text-xl font-bold mb-3 md:mb-6 animated-gradient-text"><em>How To Book Your Next Claw Machine Rental</em></h2>
-                    <p class="text-xs md:text-sm text-gray-700 mb-4 md:mb-8">
-                        Booking your claw machine rental is easy!
-                    </p>
-                    <div class="space-y-3 md:space-y-6 w-full">
-                        <div>
-                            <p class="text-xs md:text-sm text-gray-700">1. Share your event details—location, date, time, and the games you're interested in.</p>
+                    <div class="space-y-4 md:space-y-5 lg:space-y-6 w-full">
+                        <div class="booking-step flex items-start gap-4 p-4 md:p-5 bg-white/80 backdrop-blur-sm rounded-xl shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+                            <div class="flex-shrink-0 w-12 h-12 md:w-14 md:h-14 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white font-bold text-lg md:text-xl shadow-lg">
+                                1
                         </div>
-                        <div>
-                            <p class="text-xs md:text-sm text-gray-700">2. Our sales team will reach out to discuss your needs.</p>
+                            <div class="flex-1">
+                                <h3 class="text-sm md:text-base lg:text-lg font-bold text-gray-900 mb-1 md:mb-2">Share Your Event Details</h3>
+                                <p class="text-xs md:text-sm lg:text-base text-gray-700 leading-relaxed">Location, date, time, and the games you're interested in.</p>
                         </div>
-                        <div>
-                            <p class="text-xs md:text-sm text-gray-700">3. We'll send over a personalized quote.</p>
                         </div>
-                        <div>
-                            <p class="text-xs md:text-sm text-gray-700">4. To confirm your rental, just sign the service agreement and provide a 50% deposit.</p>
+                        <div class="booking-step flex items-start gap-4 p-4 md:p-5 bg-white/80 backdrop-blur-sm rounded-xl shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+                            <div class="flex-shrink-0 w-12 h-12 md:w-14 md:h-14 bg-gradient-to-br from-purple-500 to-pink-600 rounded-full flex items-center justify-center text-white font-bold text-lg md:text-xl shadow-lg">
+                                2
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="text-sm md:text-base lg:text-lg font-bold text-gray-900 mb-1 md:mb-2">We'll Reach Out</h3>
+                                <p class="text-xs md:text-sm lg:text-base text-gray-700 leading-relaxed">Our sales team will contact you to discuss your needs and answer any questions.</p>
+                            </div>
+                        </div>
+                        <div class="booking-step flex items-start gap-4 p-4 md:p-5 bg-white/80 backdrop-blur-sm rounded-xl shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+                            <div class="flex-shrink-0 w-12 h-12 md:w-14 md:h-14 bg-gradient-to-br from-pink-500 to-red-600 rounded-full flex items-center justify-center text-white font-bold text-lg md:text-xl shadow-lg">
+                                3
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="text-sm md:text-base lg:text-lg font-bold text-gray-900 mb-1 md:mb-2">Receive Your Quote</h3>
+                                <p class="text-xs md:text-sm lg:text-base text-gray-700 leading-relaxed">We'll send over a personalized quote tailored to your event.</p>
+                            </div>
+                        </div>
+                        <div class="booking-step flex items-start gap-4 p-4 md:p-5 bg-white/80 backdrop-blur-sm rounded-xl shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+                            <div class="flex-shrink-0 w-12 h-12 md:w-14 md:h-14 bg-gradient-to-br from-green-500 to-teal-600 rounded-full flex items-center justify-center text-white font-bold text-lg md:text-xl shadow-lg">
+                                4
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="text-sm md:text-base lg:text-lg font-bold text-gray-900 mb-1 md:mb-2">Confirm & Deposit</h3>
+                                <p class="text-xs md:text-sm lg:text-base text-gray-700 leading-relaxed">Sign the service agreement and provide a 50% deposit to secure your rental.</p>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="card-container order-1 md:order-2">
                     <div class="card3">
-                        <a href="#" class="card__button">Learn more</a>
+                        <a href="#contact" class="card__button">Get Started</a>
                     </div>
                 </div>
             </div>
@@ -3605,7 +4362,10 @@
                     this.setStyles()
                 }
                 handleNext(next) {
+                    if (this.interval) {
                     clearInterval(this.interval)
+                        this.interval = null
+                    }
                     if (next) next()
                 }
                 resumeMove({ moveKey, target, moveTime, next }) {
@@ -3617,10 +4377,19 @@
                 }
                 move({ moveKey, target, moveTime, next }) {
                     if (this.interval) {
+                        clearInterval(this.interval)
+                        this.interval = null
                         this.handleNext(next)
                     } else {
                         const moveTarget = target || this.default[moveKey]
                         this.interval = setInterval(() => {
+                            // Safety check: ensure element still exists
+                            if (!this.el || !this.el.parentNode) {
+                                clearInterval(this.interval)
+                                this.interval = null
+                                return
+                            }
+                            
                             const distance =
                                 Math.abs(this[moveKey] - moveTarget) < 10
                                     ? Math.abs(this[moveKey] - moveTarget)
@@ -3636,7 +4405,7 @@
                                 if (moveKey === 'h') this.resizeShadow()
                                 if (this.moveWith.length) {
                                     this.moveWith.forEach(obj => {
-                                        if (!obj) return
+                                        if (!obj || !obj.el || !obj.el.parentNode) return
                                         obj[moveKey === 'h' ? 'y' : moveKey] += increment
                                         obj.setStyles()
                                     })
@@ -3679,6 +4448,8 @@
                             randomN(-2, 2),
                         z: 0,
                         toyType,
+                        isCollected: false,
+                        collectionTimeouts: [],
                         ...size,
                         ...props,
                     })
@@ -3689,28 +4460,128 @@
                     elements.toys.push(this)
                 }
                 collectToy(toy) {
+                    // Prevent multiple collections of the same toy
+                    if (toy.isCollected || !toy.el || !toy.el.parentNode) {
+                        return
+                    }
+                    
+                    // Clear any existing timeouts
+                    toy.collectionTimeouts.forEach(timeout => clearTimeout(timeout))
+                    toy.collectionTimeouts = []
+                    
+                    toy.isCollected = true
                     toy.el.classList.remove('selected')
                     toy.x = machineWidth / 2 - toy.w / 2
                     toy.y = machineHeight / 2 - toy.h / 2
                     toy.z = 7
                     toy.el.style.setProperty('--rotate-angle', '0deg')
                     toy.setTransformOrigin('center')
+                    
+                    // Reset any previous animation state and classes
+                    toy.el.classList.remove('display', 'selected', 'grabbed')
+                    toy.el.style.removeProperty('opacity')
+                    toy.el.style.removeProperty('visibility')
+                    toy.el.style.removeProperty('transform')
+                    toy.el.style.removeProperty('animation')
+                    
+                    // Clear targetToy if this is the target
+                    if (settings.targetToy === toy) {
+                        settings.targetToy = null
+                    }
+                    
+                    // Force a reflow to reset animation state
+                    void toy.el.offsetWidth
+                    
+                    // Ensure toy is visible before starting animation
+                    toy.el.style.opacity = '1'
+                    toy.el.style.visibility = 'visible'
                     toy.el.classList.add('display')
                     elements.clawMachine.classList.add('show-overlay')
                     settings.collectedNumber++
-                    elements.collectionBox.appendChild(
-                        Object.assign(document.createElement('div'), {
+                    
+                    const toyWrapper = Object.assign(document.createElement('div'), {
                             className: `toy-wrapper ${
                                 settings.collectedNumber > 6 ? 'squeeze-in' : ''
                             }`,
                             innerHTML: `<div class="toy pix ${toy.toyType}"></div>`,
-                        }),
-                    )
-                    setTimeout(() => {
+                    })
+                    elements.collectionBox.appendChild(toyWrapper)
+                    
+                    // Fallback: ensure toy in collection box is visible after animation completes
+                    const toyElement = toyWrapper.querySelector('.toy')
+                    
+                    // Make collection box toy visible earlier (after 1.5s instead of 2s)
+                    const timeout1 = setTimeout(() => {
+                        if (toyElement && toyElement.parentNode) {
+                            toyElement.style.opacity = '1'
+                            toyElement.style.transform = 'translateY(0)'
+                            toyElement.style.visibility = 'visible'
+                            toyElement.style.animation = 'none'
+                        }
+                    }, 1500)
+                    toy.collectionTimeouts.push(timeout1)
+                    
+                    // Ensure collection box toy is definitely visible after full animation
+                    const timeout2 = setTimeout(() => {
+                        if (toyElement && toyElement.parentNode) {
+                            toyElement.style.opacity = '1'
+                            toyElement.style.transform = 'translateY(0)'
+                            toyElement.style.visibility = 'visible'
+                            toyElement.style.animation = 'none'
+                        }
+                    }, 2000)
+                    toy.collectionTimeouts.push(timeout2)
+                    
+                    // Hide and clean up the original toy after animation completes
+                    const timeout3 = setTimeout(() => {
+                        // Remove display class and reset styles
+                        if (toy.el) {
+                            toy.el.classList.remove('display', 'selected', 'grabbed')
+                            toy.el.style.opacity = '0'
+                            toy.el.style.visibility = 'hidden'
+                            toy.el.style.transform = ''
+                            toy.el.style.animation = ''
+                        }
+                        
+                        // Remove toy from toys array to prevent re-collection
+                        const toyIndex = elements.toys.indexOf(toy)
+                        if (toyIndex > -1) {
+                            elements.toys.splice(toyIndex, 1)
+                        }
+                        
+                        // Clear toy from any moveWith arrays
+                        [vertRail, armJoint, arm].forEach(obj => {
+                            if (obj && obj.moveWith) {
+                                const moveWithIndex = obj.moveWith.indexOf(toy)
+                                if (moveWithIndex > -1) {
+                                    obj.moveWith[moveWithIndex] = null
+                                }
+                            }
+                        })
+                        
+                        // Clear targetToy if it's this toy
+                        if (settings.targetToy === toy) {
+                            settings.targetToy = null
+                        }
+                        
+                        // Remove toy from DOM to prevent state conflicts
+                        if (toy.el && toy.el.parentNode) {
+                            try {
+                                toy.el.parentNode.removeChild(toy.el)
+                            } catch (e) {
+                                // Element might already be removed
+                            }
+                        }
+                        
+                        // Clear all timeouts
+                        toy.collectionTimeouts.forEach(timeout => clearTimeout(timeout))
+                        toy.collectionTimeouts = []
+                        
                         elements.clawMachine.classList.remove('show-overlay')
                         if (!gameContainer.querySelector('.selected'))
                             elements.collectionArrow.classList.remove('active')
-                    }, 1000)
+                    }, 2000)
+                    toy.collectionTimeouts.push(timeout3)
                 }
                 setRotateAngle() {
                     const angle =
@@ -3778,12 +4649,18 @@
                     w: 40,
                     h: 32,
                 }
+                // Filter out collected toys and ensure toys still exist in DOM
                 const overlappedToys = elements.toys.filter(t => {
-                    return doOverlap(t, claw)
+                    return !t.isCollected && 
+                           t.el && 
+                           t.el.parentNode && 
+                           doOverlap(t, claw)
                 })
 
                 if (overlappedToys.length) {
                     const toy = overlappedToys.sort((a, b) => b.index - a.index)[0]
+                    // Double-check toy is still valid
+                    if (toy && !toy.isCollected && toy.el && toy.el.parentNode) {
                     toy.setTransformOrigin({
                         x: claw.x - toy.x,
                         y: claw.y - toy.y,
@@ -3793,6 +4670,11 @@
                         y: claw.y,
                     })
                     settings.targetToy = toy
+                    } else {
+                        settings.targetToy = null
+                    }
+                } else {
+                    settings.targetToy = null
                 }
             }
 
@@ -3802,19 +4684,30 @@
             })
 
             const stopHoriBtnAndActivateVertBtn = () => {
+                if (armJoint.interval) {
+                    clearInterval(armJoint.interval)
                 armJoint.interval = null
+                }
                 horiBtn.deactivate()
                 vertBtn.activate()
             }
 
             const activateHoriBtn = () => {
                 horiBtn.activate()
-                ;[vertRail, armJoint, arm].forEach(c => (c.interval = null))
+                ;[vertRail, armJoint, arm].forEach(c => {
+                    if (c.interval) {
+                        clearInterval(c.interval)
+                        c.interval = null
+                    }
+                })
             }
 
             const dropToy = () => {
                 arm.el.classList.add('open')
-                if (settings.targetToy) {
+                if (settings.targetToy && 
+                    !settings.targetToy.isCollected && 
+                    settings.targetToy.el && 
+                    settings.targetToy.el.parentNode) {
                     settings.targetToy.z = 3
                     settings.targetToy.move({
                         moveKey: 'y',
@@ -3826,16 +4719,24 @@
                 setTimeout(() => {
                     arm.el.classList.remove('open')
                     activateHoriBtn()
-                    if (settings.targetToy) {
+                    if (settings.targetToy && 
+                        !settings.targetToy.isCollected && 
+                        settings.targetToy.el && 
+                        settings.targetToy.el.parentNode) {
                         settings.targetToy.el.classList.add('selected')
                         elements.collectionArrow.classList.add('active')
+                        settings.targetToy = null
+                    } else {
                         settings.targetToy = null
                     }
                 }, 700)
             }
 
             const grabToy = () => {
-                if (settings.targetToy) {
+                if (settings.targetToy && 
+                    !settings.targetToy.isCollected && 
+                    settings.targetToy.el && 
+                    settings.targetToy.el.parentNode) {
                     ;[vertRail, armJoint, arm].forEach(
                         obj => (obj.moveWith[0] = settings.targetToy),
                     )
@@ -3843,6 +4744,7 @@
                     settings.targetToy.el.classList.add('grabbed')
                 } else {
                     arm.el.classList.add('missed')
+                    settings.targetToy = null
                 }
             }
 
