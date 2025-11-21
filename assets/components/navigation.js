@@ -273,6 +273,10 @@ document.addEventListener('DOMContentLoaded', function() {
                                         <span class="font-semibold block mb-0.5">Money Booth</span>
                                         <span class="text-xs text-gray-500 leading-relaxed">Grab the floating cash</span>
                                     </a>
+                                    <a href="${pathPrefix}rentals/games/stick-drop.html" class="block text-sm text-gray-700 hover:text-green-600 transition py-1.5 hover:bg-green-50 rounded-md px-2 -mx-2">
+                                        <span class="font-semibold block mb-0.5">Stick Drop</span>
+                                        <span class="text-xs text-gray-500 leading-relaxed">Grab the floating cash</span>
+                                    </a>
                                 </div>
                             </div>
                         </div>
