@@ -1,1 +1,1281 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stick Drop Rental - MiHi Entertainment</title>
+    <link rel="icon" type="image/svg+xml" href="../../assets/images/favicon.svg">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&family=Exo+2:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        html, body { overflow-x: hidden; }
+        body { font-family: 'Inter', sans-serif; color: #1a202c; }
+        h1, h2, h3, h4, h5, h6 { font-family: 'Rajdhani', sans-serif; font-weight: 600; letter-spacing: 0.02em; }
+        .btn-primary { background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%); transition: all 0.3s ease; }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(0, 80, 255, 0.4); }
+        .section-padding { padding: 5rem 0; }
+        .hero-gradient { background: linear-gradient(135deg, rgba(0, 0, 0, 0.65) 0%, rgba(0, 0, 0, 0.65) 100%); }
+        
+        /* Hero Section Typography */
+        .hero-section h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            font-size: 1.5rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            background: linear-gradient(135deg, #64b5f6 0%, #42a5f5 50%, #90caf9 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 30px rgba(100, 181, 246, 0.5);
+            margin-bottom: 1.5rem;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+        
+        @media (min-width: 768px) {
+            .hero-section h3 {
+                font-size: 2rem;
+                letter-spacing: 0.2em;
+            }
+        }
+        
+        @keyframes glow {
+            from {
+                filter: brightness(1);
+                text-shadow: 0 0 20px rgba(100, 181, 246, 0.5);
+            }
+            to {
+                filter: brightness(1.2);
+                text-shadow: 0 0 40px rgba(100, 181, 246, 0.8), 0 0 60px rgba(66, 165, 245, 0.4);
+            }
+        }
+        
+        .hero-section p {
+            font-family: 'Exo 2', sans-serif;
+            font-weight: 400;
+            letter-spacing: 0.02em;
+            line-height: 1.6;
+        }
+
+        /* Hero Section Content Container - Desktop Transform */
+        @media (min-width: 768px) {
+            .hero-section .relative.z-10 {
+                transform: translateY(-60px);
+            }
+        }
+        
+        /* Keyboard Animation Styles */
+        .keyboard {
+            font-family: "Orbitron", sans-serif;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+        }
+        
+        .key {
+            font-size: 3.5rem;
+            display: inline-block;
+            letter-spacing: 0.08em;
+            transition: transform 0.2s;
+            text-shadow: 0 0 20px rgba(100, 181, 246, 0.5);
+        }
+        
+        @media (min-width: 768px) {
+            .key {
+                font-size: 4.5rem;
+                letter-spacing: 0.1em;
+            }
+        }
+        
+        @keyframes pressDown1 {
+            30%, 40%, 100% {
+                transform: translateY(0);
+            }
+            35% {
+                transform: translateY(6px);
+            }
+        }
+        
+        @keyframes pressDown2 {
+            70%, 80%, 100% {
+                transform: translateY(0);
+            }
+            75% {
+                transform: translateY(6px);
+            }
+        }
+        
+        @keyframes pressDown3 {
+            30%, 40%, 100% {
+                transform: translateY(0);
+            }
+            35% {
+                transform: translateY(6px);
+            }
+        }
+        
+        @keyframes pressDown4 {
+            40%, 50%, 100% {
+                transform: translateY(0);
+            }
+            45% {
+                transform: translateY(6px);
+            }
+        }
+        
+        @keyframes pressDown5 {
+            20%, 30%, 100% {
+                transform: translateY(0);
+            }
+            25% {
+                transform: translateY(6px);
+            }
+        }
+        
+        @keyframes pressDown6 {
+            60%, 70%, 100% {
+                transform: translateY(0);
+            }
+            65% {
+                transform: translateY(6px);
+            }
+        }
+        
+        @keyframes pressDown7 {
+            10%, 20%, 100% {
+                transform: translateY(0);
+            }
+            15% {
+                transform: translateY(6px);
+            }
+        }
+        
+        @keyframes pressDown8 {
+            35%, 45%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(6px);
+            }
+        }
+        
+        @keyframes pressDown9 {
+            50%, 60%, 100% {
+                transform: translateY(0);
+            }
+            55% {
+                transform: translateY(6px);
+            }
+        }
+        
+        @keyframes pressDown10 {
+            25%, 35%, 100% {
+                transform: translateY(0);
+            }
+            30% {
+                transform: translateY(6px);
+            }
+        }
+        
+        @keyframes pressDown11 {
+            15%, 25%, 100% {
+                transform: translateY(0);
+            }
+            20% {
+                transform: translateY(6px);
+            }
+        }
+        
+        @keyframes pressDown12 {
+            45%, 55%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(6px);
+            }
+        }
+        
+        .key:nth-child(1) {
+            animation: pressDown1 2s infinite;
+        }
+        
+        .key:nth-child(2) {
+            animation: pressDown2 3s infinite;
+        }
+        
+        .key:nth-child(3) {
+            animation: pressDown3 4s infinite;
+        }
+        
+        .key:nth-child(4) {
+            animation: pressDown4 2.5s infinite;
+        }
+        
+        .key:nth-child(5) {
+            animation: pressDown5 2.5s infinite;
+        }
+        
+        .key:nth-child(6) {
+            animation: pressDown6 3.5s infinite;
+        }
+        
+        .key:nth-child(7) {
+            animation: pressDown7 2.2s infinite;
+        }
+        
+        .key:nth-child(8) {
+            animation: pressDown8 3.2s infinite;
+        }
+        
+        .key:nth-child(9) {
+            animation: pressDown9 2.8s infinite;
+        }
+        
+        .key:nth-child(10) {
+            animation: pressDown10 3.3s infinite;
+        }
+        
+        .key:nth-child(11) {
+            animation: pressDown11 2.7s infinite;
+        }
+        
+        .key:nth-child(12) {
+            animation: pressDown12 3.1s infinite;
+        }
+        
+        /* Responsive adjustments for smaller screens */
+        @media (max-width: 640px) {
+            .key {
+                font-size: 2.5rem;
+                letter-spacing: 0.06em;
+            }
+        }
+        
+        /* Animated Gradient Button */
+        .animated-gradient-btn {
+            --width: 220px;
+            --height: 70px;
+            --border: 4px;
+            --violet: #6559ae;
+            --orange: #ff7159;
+            --deg: 120deg;
+            --size: 400%;
+            --dur: 3s;
+
+            display: block;
+            position: relative;
+            width: var(--width);
+            height: var(--height);
+            margin: 0 auto;
+            text-transform: uppercase;
+            text-decoration: none;
+            text-align: center;
+            letter-spacing: 3px;
+            line-height: var(--height);
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 600;
+            font-size: 24px;
+            z-index: 1;
+        }
+
+        .animated-gradient-btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            margin: auto;
+            background: linear-gradient(var(--deg), var(--violet), var(--orange), var(--violet));
+            background-size: var(--size) var(--size);
+            -webkit-clip-path: polygon(0% 100%, 4px 100%, 4px 4px, 216px 4px, 216px 66px, 4px 66px, 4px 100%, 100% 100%, 100% 0%, 0% 0%);
+            clip-path: polygon(0% 100%, 4px 100%, 4px 4px, 216px 4px, 216px 66px, 4px 66px, 4px 100%, 100% 100%, 100% 0%, 0% 0%);
+            animation: gradient var(--dur) ease-in-out infinite, border 1s forwards ease-in-out reverse;
+        }
+
+        .animated-gradient-btn > span {
+            display: block;
+            position: relative;
+            z-index: 2;
+            background: linear-gradient(var(--deg), var(--violet), var(--orange), var(--violet));
+            background-size: var(--size) var(--size);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradient var(--dur) ease-in-out infinite;
+        }
+
+        @keyframes gradient {
+            0% {
+                background-position: 14% 0%;
+            }
+            50% {
+                background-position: 87% 100%;
+            }
+            100% {
+                background-position: 14% 0%;
+            }
+        }
+
+        @keyframes border {
+            0% {
+                -webkit-clip-path: polygon(0% 100%, 4px 100%, 4px 4px, 216px 4px, 216px 66px, 4px 66px, 4px 100%, 100% 100%, 100% 0%, 0% 0%);
+                clip-path: polygon(0% 100%, 4px 100%, 4px 4px, 216px 4px, 216px 66px, 4px 66px, 4px 100%, 100% 100%, 100% 0%, 0% 0%);
+            }
+            25% {
+                -webkit-clip-path: polygon(0% 100%, 4px 100%, 4px 4px, 216px 4px, 216px 66px, 216px 66px, 216px 100%, 100% 100%, 100% 0%, 0% 0%);
+                clip-path: polygon(0% 100%, 4px 100%, 4px 4px, 216px 4px, 216px 66px, 216px 66px, 216px 100%, 100% 100%, 100% 0%, 0% 0%);
+            }
+            50% {
+                -webkit-clip-path: polygon(0% 100%, 4px 100%, 4px 4px, 216px 4px, 216px 4px, 216px 4px, 216px 4px, 216px 4px, 100% 0%, 0% 0%);
+                clip-path: polygon(0% 100%, 4px 100%, 4px 4px, 216px 4px, 216px 4px, 216px 4px, 216px 4px, 216px 4px, 100% 0%, 0% 0%);
+            }
+            75% {
+                -webkit-clip-path: polygon(0% 100%, 4px 100%, 4px 4px, 4px 4px, 4px 4px, 4px 4px, 4px 4px, 4px 4px, 4px 0%, 0% 0%);
+                clip-path: polygon(0% 100%, 4px 100%, 4px 4px, 4px 4px, 4px 4px, 4px 4px, 4px 4px, 4px 4px, 4px 0%, 0% 0%);
+            }
+            100% {
+                -webkit-clip-path: polygon(0% 100%, 4px 100%, 4px 100%, 4px 100%, 4px 100%, 4px 100%, 4px 100%, 4px 100%, 4px 100%, 0% 100%);
+                clip-path: polygon(0% 100%, 4px 100%, 4px 100%, 4px 100%, 4px 100%, 4px 100%, 4px 100%, 4px 100%, 4px 100%, 0% 100%);
+            }
+        }
+        
+        /* Mobile Responsive Styles */
+        @media (max-width: 768px) {
+            /* Hero Section Mobile */
+            .hero-section {
+                min-height: 70vh;
+                height: auto;
+                padding: 3rem 1rem;
+            }
+
+            /* Optimize background image for mobile */
+            .hero-section .bg-cover {
+                background-attachment: scroll;
+                background-position: center center;
+            }
+
+            /* Hero Section Content Container - Optimized for Mobile */
+            .hero-section .relative.z-10 {
+                width: 100%;
+                max-width: 100%;
+                box-sizing: border-box;
+                overflow-x: hidden;
+                transform: translateY(0) !important;
+                padding: 1rem 0;
+            }
+
+            /* Ensure button wrapper doesn't overflow */
+            .hero-section .relative.z-10 > a.animated-gradient-btn {
+                margin-left: auto;
+                margin-right: auto;
+                display: block;
+            }
+
+            /* Prevent text clipping */
+            .hero-section .animated-gradient-btn > span {
+                position: relative;
+                z-index: 10;
+            }
+
+            /* Hero Section Content - Optimized Sizes for Mobile */
+            .hero-section .keyboard {
+                margin-bottom: 1.25rem !important;
+                padding: 0 0.5rem;
+            }
+
+            .hero-section .key {
+                font-size: 2.75rem !important;
+                letter-spacing: 0.06em !important;
+            }
+
+            .hero-section h3 {
+                font-size: 1.875rem !important;
+                margin-bottom: 0.875rem !important;
+                padding: 0 0.5rem;
+                line-height: 1.2;
+            }
+
+            .hero-section p {
+                font-size: 1rem !important;
+                margin-bottom: 1.75rem !important;
+                padding: 0 0.5rem;
+                line-height: 1.5;
+            }
+
+            /* Animated Gradient Button Mobile - Optimized Size */
+            .hero-section .animated-gradient-btn {
+                --width: 190px;
+                --height: 58px;
+                --border: 4px;
+                width: 190px !important;
+                height: 58px !important;
+                min-width: 190px;
+                min-height: 58px;
+                font-size: 18px !important;
+                letter-spacing: 2px;
+                line-height: 58px !important;
+                max-width: calc(100% - 2rem);
+                box-sizing: border-box;
+                overflow: visible;
+                cursor: pointer;
+                -webkit-tap-highlight-color: rgba(255, 255, 255, 0.2);
+            }
+
+            .hero-section .animated-gradient-btn::after {
+                width: 190px !important;
+                height: 58px !important;
+                left: 0 !important;
+                right: auto !important;
+                top: 0 !important;
+                bottom: auto !important;
+                margin: 0 !important;
+                -webkit-clip-path: polygon(0% 100%, 4px 100%, 4px 4px, 186px 4px, 186px 54px, 4px 54px, 4px 100%, 100% 100%, 100% 0%, 0% 0%) !important;
+                clip-path: polygon(0% 100%, 4px 100%, 4px 4px, 186px 4px, 186px 54px, 4px 54px, 4px 100%, 100% 100%, 100% 0%, 0% 0%) !important;
+                animation: gradient var(--dur) ease-in-out infinite !important;
+            }
+
+            .hero-section .animated-gradient-btn > span {
+                line-height: 58px !important;
+                display: flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                height: 100% !important;
+                width: 100% !important;
+                white-space: nowrap;
+                overflow: visible;
+                padding: 0;
+                font-size: 18px !important;
+            }
+
+            /* Regular Animated Gradient Button Mobile (for other sections) */
+            .animated-gradient-btn {
+                --width: 180px;
+                --height: 55px;
+                font-size: 20px;
+                letter-spacing: 1px;
+            }
+
+            .animated-gradient-btn::after {
+                -webkit-clip-path: polygon(0% 100%, 4px 100%, 4px 4px, 176px 4px, 176px 51px, 4px 51px, 4px 100%, 100% 100%, 100% 0%, 0% 0%);
+                clip-path: polygon(0% 100%, 4px 100%, 4px 4px, 176px 4px, 176px 51px, 4px 51px, 4px 100%, 100% 100%, 100% 0%, 0% 0%);
+            }
+        }
+        
+        @media (max-width: 640px) {
+            /* Hero Section - Small Mobile Optimization */
+            .hero-section {
+                min-height: 65vh;
+                padding: 2.5rem 0.75rem;
+            }
+
+            .hero-section .relative.z-10 {
+                padding: 0.75rem 0;
+            }
+
+            .hero-section .keyboard {
+                margin-bottom: 1rem !important;
+                padding: 0 0.25rem;
+            }
+
+            .hero-section .key {
+                font-size: 2.25rem !important;
+                letter-spacing: 0.05em !important;
+            }
+
+            .hero-section h3 {
+                font-size: 1.5rem !important;
+                margin-bottom: 0.75rem !important;
+                padding: 0 0.5rem;
+                line-height: 1.2;
+            }
+
+            .hero-section p {
+                font-size: 0.9375rem !important;
+                margin-bottom: 1.5rem !important;
+                padding: 0 0.5rem;
+                line-height: 1.5;
+            }
+
+            .hero-section .animated-gradient-btn {
+                --width: 170px;
+                --height: 54px;
+                --border: 3px;
+                width: 170px !important;
+                height: 54px !important;
+                min-width: 170px;
+                min-height: 54px;
+                font-size: 16px !important;
+                letter-spacing: 1.5px;
+                line-height: 54px !important;
+                max-width: calc(100% - 1.5rem);
+                box-sizing: border-box;
+                overflow: visible;
+            }
+
+            .hero-section .animated-gradient-btn::after {
+                width: 170px !important;
+                height: 54px !important;
+                left: 0 !important;
+                right: auto !important;
+                top: 0 !important;
+                bottom: auto !important;
+                margin: 0 !important;
+                -webkit-clip-path: polygon(0% 100%, 3px 100%, 3px 3px, 167px 3px, 167px 51px, 3px 51px, 3px 100%, 100% 100%, 100% 0%, 0% 0%) !important;
+                clip-path: polygon(0% 100%, 3px 100%, 3px 3px, 167px 3px, 167px 51px, 3px 51px, 3px 100%, 100% 100%, 100% 0%, 0% 0%) !important;
+                animation: gradient var(--dur) ease-in-out infinite !important;
+            }
+
+            .hero-section .animated-gradient-btn > span {
+                line-height: 54px !important;
+                display: flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                height: 100% !important;
+                width: 100% !important;
+                white-space: nowrap;
+                overflow: visible;
+                padding: 0;
+                font-size: 16px !important;
+            }
+
+            .animated-gradient-btn {
+                --width: 160px;
+                --height: 50px;
+                font-size: 18px;
+            }
+
+            .animated-gradient-btn::after {
+                -webkit-clip-path: polygon(0% 100%, 3px 100%, 3px 3px, 157px 3px, 157px 47px, 3px 47px, 3px 100%, 100% 100%, 100% 0%, 0% 0%);
+                clip-path: polygon(0% 100%, 3px 100%, 3px 3px, 157px 3px, 157px 47px, 3px 47px, 3px 100%, 100% 100%, 100% 0%, 0% 0%);
+            }
+        }
+        
+        /* Step Animation Styles */
+        .step-item {
+            opacity: 0;
+            transform: translateX(-20px);
+            transition: all 0.6s ease-out;
+        }
+        
+        .step-item.animate {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .step-item:nth-child(1) { transition-delay: 0.1s; }
+        .step-item:nth-child(2) { transition-delay: 0.2s; }
+        .step-item:nth-child(3) { transition-delay: 0.3s; }
+        .step-item:nth-child(4) { transition-delay: 0.4s; }
+        
+        .step-item:hover {
+            transform: translateX(5px);
+        }
+        
+        .step-item:hover .step-badge {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.4);
+        }
+        
+        .step-badge {
+            transition: all 0.3s ease;
+        }
+        
+        .step-item.animate .step-badge {
+            animation: badgePulse 0.6s ease-out;
+        }
+        
+        @keyframes badgePulse {
+            0% {
+                transform: scale(0);
+                opacity: 0;
+            }
+            50% {
+                transform: scale(1.2);
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+        
+        /* Gradient Grainy Background */
+        .gradient-grainy-bg {
+            position: relative;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        }
+
+        .gradient-grainy-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.03) 0px, transparent 1px, transparent 2px, rgba(0, 0, 0, 0.03) 3px),
+                repeating-linear-gradient(90deg, rgba(0, 0, 0, 0.03) 0px, transparent 1px, transparent 2px, rgba(0, 0, 0, 0.03) 3px);
+            background-size: 4px 4px;
+            pointer-events: none;
+            opacity: 0.5;
+        }
+
+        .gradient-grainy-bg > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Accordion Dropdown Menu Styles */
+        .accordion-wrapper {
+            max-width: 900px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .accordion-wrapper h1 {
+            color: #1a202c;
+            font-size: 28px;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .accordion-wrapper h1 a {
+            color: #c12c42;
+            font-size: 16px;
+        }
+
+        .accordion-wrapper p {
+            color: #4a5568;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .accordion {
+            width: 100%;
+            max-width: 100%;
+            margin: 0 auto;
+            background: #FFFFFF;
+            border-radius: 8px;
+            list-style-type: none;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e2e8f0;
+        }
+
+        .accordion .link {
+            cursor: pointer;
+            display: block;
+            padding: 15px 20px;
+            color: #1a202c;
+            font-size: 16px;
+            font-weight: 700;
+            border-bottom: 1px solid #e2e8f0;
+            position: relative;
+            transition: all 0.4s ease;
+            background: #FFFFFF;
+        }
+
+        .accordion li:last-child .link {
+            border-bottom: 0;
+        }
+
+        .accordion li.open .link {
+            color: #b63b4d;
+            background: #f7fafc;
+        }
+
+        .accordion .link:hover {
+            background: #f7fafc;
+            color: #2d3748;
+        }
+
+        .submenu {
+            display: none;
+            background: #f7fafc;
+            font-size: 14px;
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .submenu li {
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .submenu li:last-child {
+            border-bottom: 0;
+        }
+
+        .submenu p {
+            color: #4a5568;
+            padding: 15px 20px;
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        .submenu a {
+            display: block;
+            text-decoration: none;
+            color: #2d3748;
+            padding: 12px 20px;
+            transition: all 0.25s ease;
+        }
+
+        .submenu a:hover {
+            background: #edf2f7;
+            color: #b63b4d;
+        }
+
+        /* Mobile Responsive for Accordion */
+        @media (max-width: 768px) {
+            .accordion-wrapper {
+                padding: 0 0.5rem;
+            }
+
+            .accordion-wrapper h1 {
+                font-size: 22px;
+                margin-bottom: 10px;
+            }
+
+            .accordion .link {
+                padding: 12px 15px;
+                font-size: 14px;
+            }
+
+            .submenu p {
+                padding: 12px 15px;
+                font-size: 13px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="nav-placeholder"></div>
+
+    <section class="relative h-screen md:h-screen flex items-center justify-center overflow-hidden hero-section">
+        <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('../../assets/images/stickdrop/hero.jpg');"></div>
+        <div class="absolute inset-0 hero-gradient"></div>
+        <div class="relative z-10 text-center text-white px-4 md:px-6 py-8 md:py-0">
+            <div class="keyboard mb-6 md:mb-8">
+                <span class="key">S</span>
+                <span class="key">T</span>
+                <span class="key">I</span>
+                <span class="key">C</span>
+                <span class="key">K</span>
+                <span class="key">&nbsp;</span>
+                <span class="key">D</span>
+                <span class="key">R</span>
+                <span class="key">O</span>
+                <span class="key">P</span>
+            </div>
+            <h3 class="reaction-game-title">Reaction Game</h3>
+            <p class="text-lg md:text-xl lg:text-2xl mb-8 md:mb-10 max-w-5xl mx-auto px-2">
+                Test your reflexes and keep the crowd on their toes with our Stick Drop game, a fast-paced challenge everyone will love.
+            </p>
+            <a href="#contact" class="animated-gradient-btn"><span>Contact Us</span></a>
+        </div>
+    </section>
+
+    <!-- 1st Section -->
+    <section id="1st-section" class="py-10 md:py-14 lg:py-16 bg-white relative overflow-hidden">
+        <div class="container mx-auto px-4 md:px-6 lg:px-8">
+            <div class="max-w-6xl mx-auto">
+                <div class="grid lg:grid-cols-2 gap-8 lg:gap-10 items-center">
+                    <!-- Image Column -->
+                    <div class="order-2 lg:order-1">
+                        <div class="relative rounded-xl lg:rounded-2xl overflow-hidden shadow-xl group">
+                            <div class="aspect-[3/4] overflow-hidden">
+                                <img src="../../assets/images/stickdrop/pic1.jpg" alt="Stick Drop game in action at an outdoor event" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700">
+                            </div>
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                        </div>
+                    </div>
+
+                    <!-- Content Column -->
+                    <div class="order-1 lg:order-2 space-y-4">
+                        <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight" style="font-family: 'Rajdhani', sans-serif;">
+                            Spark Energy at Your Event
+                        </h2>
+                        <div class="w-16 h-0.5 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full"></div>
+                        <div class="space-y-3 text-gray-700 leading-relaxed">
+                            <p class="text-base md:text-lg">
+                                Looking for a fun and interactive way to spark energy at your event? Our Stick Drop game brings the excitement with a simple yet addictive challenge that guests can't resist.
+                            </p>
+                            <p class="text-base md:text-lg">
+                                Players watch as sticks drop one by one from the tower above and race to catch them before they hit the ground. It's quick, competitive, and endlessly entertaining – making it perfect for breaking the ice, encouraging friendly competition, and keeping guests engaged throughout your event.
+                            </p>
+                        </div>
+                        <div class="pt-2">
+                            <a href="#contact" class="inline-block btn-primary text-white font-semibold px-6 py-3 rounded-lg text-base md:text-lg" style="font-family: 'Rajdhani', sans-serif; letter-spacing: 0.05em;">
+                                GET A QUOTE
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2nd Section -->
+    <section id="2nd-section" class="py-8 md:py-10 lg:py-12 bg-white">
+        <div class="container mx-auto px-4 md:px-6 lg:px-8">
+            <div class="max-w-6xl mx-auto">
+                <!-- What is Stick Drop Section -->
+                <div class="text-center mb-8 md:mb-10">
+                    <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-4" style="font-family: 'Rajdhani', sans-serif;">
+                        What is the Stick Drop Reaction Game?
+                    </h2>
+                    <div class="max-w-4xl mx-auto space-y-3 text-gray-700">
+                        <p class="text-sm md:text-base leading-relaxed">
+                            The Stick Drop Reaction Game is a reflex-testing game where sticks are released at random intervals from a central pole. Players must stay sharp and react quickly to catch each one before it falls.
+                        </p>
+                        <p class="text-sm md:text-base leading-relaxed">
+                            Easy to learn and fun to master, this game creates an exciting and interactive experience that draws in participants and spectators alike.
+                        </p>
+                    </div>
+                    <div class="w-16 h-0.5 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full mx-auto mt-4"></div>
+                </div>
+
+                <!-- What's Included Section -->
+                <div class="mt-10">
+                    <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 text-center mb-6 md:mb-8" style="font-family: 'Rajdhani', sans-serif;">
+                        What's Included When You Book our Stick Drop Reaction Game?
+                    </h2>
+                    <div class="grid md:grid-cols-3 gap-4 md:gap-6">
+                        <!-- DELIVERY Card -->
+                        <div class="bg-gradient-to-br from-blue-600 to-blue-800 rounded-xl p-5 md:p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 group">
+                            <div class="flex flex-col items-center text-center">
+                                <div class="w-16 h-16 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                                    <i class="fas fa-truck text-white text-2xl"></i>
+                                </div>
+                                <div class="bg-white text-blue-700 font-semibold px-5 py-1.5 rounded-lg mb-3 text-xs md:text-sm uppercase tracking-wide inline-block" style="font-family: 'Rajdhani', sans-serif;">
+                                    DELIVERY
+                                </div>
+                                <p class="text-white text-xs md:text-sm leading-relaxed">
+                                    We'll deliver the Stick Drop Game directly to your event location, hassle-free.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- SETUP Card -->
+                        <div class="bg-gradient-to-br from-blue-600 to-blue-800 rounded-xl p-5 md:p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 group">
+                            <div class="flex flex-col items-center text-center">
+                                <div class="w-16 h-16 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                                    <i class="fas fa-tools text-white text-2xl"></i>
+                                </div>
+                                <div class="bg-white text-blue-700 font-semibold px-5 py-1.5 rounded-lg mb-3 text-xs md:text-sm uppercase tracking-wide inline-block" style="font-family: 'Rajdhani', sans-serif;">
+                                    SETUP
+                                </div>
+                                <p class="text-white text-xs md:text-sm leading-relaxed">
+                                    Our team will set up the game and make sure it's ready for guests to play.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- BREAKDOWN Card -->
+                        <div class="bg-gradient-to-br from-blue-600 to-blue-800 rounded-xl p-5 md:p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 group">
+                            <div class="flex flex-col items-center text-center">
+                                <div class="w-16 h-16 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                                    <i class="fas fa-box text-white text-2xl"></i>
+                                </div>
+                                <div class="bg-white text-blue-700 font-semibold px-5 py-1.5 rounded-lg mb-3 text-xs md:text-sm uppercase tracking-wide inline-block" style="font-family: 'Rajdhani', sans-serif;">
+                                    BREAKDOWN
+                                </div>
+                                <p class="text-white text-xs md:text-sm leading-relaxed">
+                                    After your event wraps, we'll take care of the teardown and pack the game away for you.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3rd Section -->
+    <section id="3rd-section" class="relative py-8 md:py-10 lg:py-12 overflow-hidden">
+        <!-- Background Image -->
+        <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('../../assets/images/stickdrop/pic4.jpg');"></div>
+        <!-- Overlay -->
+        <div class="absolute inset-0 bg-gradient-to-r from-black/70 via-black/60 to-black/70"></div>
+        
+        <!-- Content -->
+        <div class="container mx-auto px-4 md:px-6 lg:px-8 relative z-10">
+            <div class="max-w-6xl mx-auto text-center text-white">
+                <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-3 md:mb-4" style="font-family: 'Rajdhani', sans-serif;">
+                    Ready to Book?
+                </h2>
+                <p class="text-base md:text-lg lg:text-xl mb-6 md:mb-8 text-white/95 leading-relaxed max-w-5xl mx-auto">
+                    Book your Stick Drop game rental and add a dose of excitement to your next event! Our team is ready to assist you in creating a memorable experience for your guests.
+                </p>
+                <div class="flex justify-center">
+                    <a href="#contact" class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold px-8 md:px-10 py-3 md:py-4 rounded-lg text-base md:text-lg uppercase tracking-wide transition-all duration-300 transform hover:scale-105 hover:shadow-2xl" style="font-family: 'Rajdhani', sans-serif; box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4);">
+                        CONTACT US
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4th Section -->
+    <section id="4th-section" class="py-6 md:py-8 lg:py-10 bg-white">
+        <div class="container mx-auto px-4 md:px-6 lg:px-8">
+            <div class="max-w-6xl mx-auto">
+                <!-- Section Header -->
+                <div class="text-center mb-6 md:mb-8">
+                    <h2 class="text-xl md:text-2xl lg:text-3xl font-bold text-gray-900 mb-2" style="font-family: 'Rajdhani', sans-serif;">
+                        Benefits of Having the Stick Drop at Your Event
+                    </h2>
+                    <div class="w-20 h-0.5 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full mx-auto mb-4"></div>
+                    <p class="text-sm md:text-base text-gray-700 max-w-3xl mx-auto leading-relaxed">
+                        Want to create a dynamic and engaging atmosphere at your event? Here's how a Stick Drop rental can help:
+                    </p>
+                </div>
+
+                <!-- Benefits Grid -->
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
+                    <!-- Benefit 1: Fun for All Ages -->
+                    <div class="bg-gray-50 rounded-lg p-4 md:p-5 hover:shadow-lg transition-all duration-300 hover:-translate-y-1 border border-gray-100">
+                        <h3 class="text-base md:text-lg font-bold text-gray-900 mb-2" style="font-family: 'Rajdhani', sans-serif;">
+                            Fun for All Ages
+                        </h3>
+                        <p class="text-xs md:text-sm text-gray-700 leading-relaxed">
+                            From kids to adults, anyone can join in on the challenge and enjoy testing their reflexes.
+                        </p>
+                    </div>
+
+                    <!-- Benefit 2: Fast-Paced Competition -->
+                    <div class="bg-gray-50 rounded-lg p-4 md:p-5 hover:shadow-lg transition-all duration-300 hover:-translate-y-1 border border-gray-100">
+                        <h3 class="text-base md:text-lg font-bold text-gray-900 mb-2" style="font-family: 'Rajdhani', sans-serif;">
+                            Fast-Paced Competition
+                        </h3>
+                        <p class="text-xs md:text-sm text-gray-700 leading-relaxed">
+                            The thrill of racing to catch falling sticks keeps players on edge and creates plenty of laughs and excitement.
+                        </p>
+                    </div>
+
+                    <!-- Benefit 3: Interactive and Engaging -->
+                    <div class="bg-gray-50 rounded-lg p-4 md:p-5 hover:shadow-lg transition-all duration-300 hover:-translate-y-1 border border-gray-100">
+                        <h3 class="text-base md:text-lg font-bold text-gray-900 mb-2" style="font-family: 'Rajdhani', sans-serif;">
+                            Interactive and Engaging
+                        </h3>
+                        <p class="text-xs md:text-sm text-gray-700 leading-relaxed">
+                            Guests don't just watch — they participate, cheer each other on, and keep coming back for another try.
+                        </p>
+                    </div>
+
+                    <!-- Benefit 4: Compact and Versatile -->
+                    <div class="bg-gray-50 rounded-lg p-4 md:p-5 hover:shadow-lg transition-all duration-300 hover:-translate-y-1 border border-gray-100">
+                        <h3 class="text-base md:text-lg font-bold text-gray-900 mb-2" style="font-family: 'Rajdhani', sans-serif;">
+                            Compact and Versatile
+                        </h3>
+                        <p class="text-xs md:text-sm text-gray-700 leading-relaxed">
+                            The Stick Drop doesn't take up much room, making it easy to set up in all types of venues.
+                        </p>
+                    </div>
+
+                    <!-- Benefit 5: Perfect Icebreaker -->
+                    <div class="bg-gray-50 rounded-lg p-4 md:p-5 hover:shadow-lg transition-all duration-300 hover:-translate-y-1 border border-gray-100">
+                        <h3 class="text-base md:text-lg font-bold text-gray-900 mb-2" style="font-family: 'Rajdhani', sans-serif;">
+                            Perfect Icebreaker
+                        </h3>
+                        <p class="text-xs md:text-sm text-gray-700 leading-relaxed">
+                            This quick, skill-based challenge encourages guests to mingle and creates instant interaction.
+                        </p>
+                    </div>
+
+                    <!-- Benefit 6: Memorable and Unique -->
+                    <div class="bg-gray-50 rounded-lg p-4 md:p-5 hover:shadow-lg transition-all duration-300 hover:-translate-y-1 border border-gray-100">
+                        <h3 class="text-base md:text-lg font-bold text-gray-900 mb-2" style="font-family: 'Rajdhani', sans-serif;">
+                            Memorable and Unique
+                        </h3>
+                        <p class="text-xs md:text-sm text-gray-700 leading-relaxed">
+                            It's not a game you see every day, which makes it a standout feature at events that guests will remember.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5th Section -->
+    <section id="5th-section" class="py-6 md:py-8 lg:py-10 bg-white">
+        <div class="container mx-auto px-4 md:px-6 lg:px-8">
+            <div class="max-w-6xl mx-auto">
+                <div class="grid lg:grid-cols-2 gap-6 md:gap-8 items-center">
+                    <!-- Image Column -->
+                    <div class="order-2 lg:order-1">
+                        <div class="relative rounded-lg lg:rounded-xl overflow-hidden shadow-lg group">
+                            <div class="aspect-[3/4] overflow-hidden">
+                                <img src="../../assets/images/stickdrop/pic2.jpg" alt="People playing Stick Drop Reaction Game at an indoor event" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700">
+                            </div>
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                        </div>
+                    </div>
+
+                    <!-- Content Column -->
+                    <div class="order-1 lg:order-2 space-y-4">
+                        <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 leading-tight" style="font-family: 'Rajdhani', sans-serif;">
+                            Events Perfect For The Stick Drop Reaction Game
+                        </h2>
+                        <div class="w-16 h-0.5 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full"></div>
+                        <p class="text-sm md:text-base text-gray-700 leading-relaxed">
+                            Our Stick Drop game rentals are a fun and versatile addition to many types of events, including:
+                        </p>
+                        
+                        <!-- Event Types List -->
+                        <div class="space-y-4 pt-2">
+                            <!-- Corporate Events -->
+                            <div class="border-l-4 border-blue-500 pl-4 py-1">
+                                <h3 class="text-base md:text-lg font-bold text-gray-900 mb-1" style="font-family: 'Rajdhani', sans-serif;">
+                                    Corporate Events
+                                </h3>
+                                <p class="text-xs md:text-sm text-gray-700 leading-relaxed">
+                                    Team-building activities, office parties, company celebrations, and networking events.
+                                </p>
+                            </div>
+
+                            <!-- Private Parties -->
+                            <div class="border-l-4 border-blue-500 pl-4 py-1">
+                                <h3 class="text-base md:text-lg font-bold text-gray-900 mb-1" style="font-family: 'Rajdhani', sans-serif;">
+                                    Private Parties
+                                </h3>
+                                <p class="text-xs md:text-sm text-gray-700 leading-relaxed">
+                                    Birthdays, graduations, reunions, or any gathering where guests want interactive entertainment.
+                                </p>
+                            </div>
+
+                            <!-- Special Occasions -->
+                            <div class="border-l-4 border-blue-500 pl-4 py-1">
+                                <h3 class="text-base md:text-lg font-bold text-gray-900 mb-1" style="font-family: 'Rajdhani', sans-serif;">
+                                    Special Occasions
+                                </h3>
+                                <p class="text-xs md:text-sm text-gray-700 leading-relaxed">
+                                    Weddings, holiday parties, fundraisers, and community celebrations.
+                                </p>
+                            </div>
+
+                            <!-- Family-Friendly Events -->
+                            <div class="border-l-4 border-blue-500 pl-4 py-1">
+                                <h3 class="text-base md:text-lg font-bold text-gray-900 mb-1" style="font-family: 'Rajdhani', sans-serif;">
+                                    Family-Friendly Events
+                                </h3>
+                                <p class="text-xs md:text-sm text-gray-700 leading-relaxed">
+                                    School functions, church events, festivals, and family reunions.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- New Section Between 5th and 6th -->
+    <section id="section-between-5-6" class="py-6 md:py-8 gradient-grainy-bg">
+        <div class="container mx-auto px-4 md:px-6">
+            <div class="accordion-wrapper">
+                <h1>Frequently asked questions</h1>
+                <p class="text-center text-sm md:text-base px-2">Have questions about our Stick Drop Reaction Game Rentals? We're happy to answer them!</p>
+                <ul id="accordion" class="accordion">
+                    <li>
+                        <div class="link">How much space is needed for the Stick Drop game?</div>
+                        <ul class="submenu">
+                            <li><p>The Stick Drop is compact and fits easily into most event spaces. We recommend about 5x5 feet of space for comfortable play.</p></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <div class="link">Is the game suitable for all ages?</div>
+                        <ul class="submenu">
+                            <li><p>Yes! The Stick Drop is easy to play and fun for guests of all ages, from kids to adults.</p></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <div class="link">How do players use the Stick Drop game?</div>
+                        <ul class="submenu">
+                            <li><p>
+                                How do players use the Stick Drop game?
+                                
+                                Players simply stand by the pole and catch sticks as they fall, testing their reflexes and hand-eye coordination.</p></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <div class="link">Is it suitable for all ages?</div>
+                        <ul class="submenu">
+                            <li><p>Absolutely! The Stick Drop game is fun for all ages—from kids testing their reflexes to adults enjoying the competitive challenge. It's a great icebreaker that gets everyone involved.</p></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <div class="link">Can the Stick Drop be used at corporate events?</div>
+                        <ul class="submenu">
+                            <li><p>Absolutely. It’s a great way to encourage interaction, teamwork, and a little friendly competition at corporate functions.</p></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <div class="link">How long does each game last?</div>
+                        <ul class="submenu">
+                            <li><p>Each round is quick, usually lasting a couple of minutes, making it perfect for keeping lines moving and giving everyone a chance to play.</p></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <div class="link">Is setup and delivery included?</div>
+                        <ul class="submenu">
+                            <li><p>Yes! Our team handles the setup and breakdown, so you can focus on enjoying your event while we take care of the details.</p></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6th Section -->
+    <section id="6th-section" class="py-6 md:py-8 lg:py-10 bg-white">
+        <div class="container mx-auto px-4 md:px-6 lg:px-8">
+            <div class="max-w-6xl mx-auto">
+                <div class="grid lg:grid-cols-2 gap-6 md:gap-8 items-center">
+                    <!-- Content Column -->
+                    <div class="order-2 lg:order-1">
+                        <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-3" style="font-family: 'Rajdhani', sans-serif;">
+                            How To Book The Stick Drop Reaction Game
+                        </h2>
+                        <div class="w-16 h-0.5 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full mb-4"></div>
+                        <p class="text-sm md:text-base text-gray-700 italic mb-6 leading-relaxed">
+                            Reserving the Stick Drop Reaction Game is simple!
+                        </p>
+                        
+                        <!-- Booking Steps -->
+                        <div class="space-y-4" id="booking-steps">
+                            <!-- Step 1 -->
+                            <div class="flex gap-4 step-item cursor-pointer">
+                                <div class="step-badge flex-shrink-0 w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold text-sm md:text-base shadow-md" style="font-family: 'Rajdhani', sans-serif;">
+                                    1
+                                </div>
+                                <p class="text-sm md:text-base text-gray-700 leading-relaxed pt-1">
+                                    Give us your event info: location, date, timeframe, and which games you'd like.
+                                </p>
+                            </div>
+
+                            <!-- Step 2 -->
+                            <div class="flex gap-4 step-item cursor-pointer">
+                                <div class="step-badge flex-shrink-0 w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold text-sm md:text-base shadow-md" style="font-family: 'Rajdhani', sans-serif;">
+                                    2
+                                </div>
+                                <p class="text-sm md:text-base text-gray-700 leading-relaxed pt-1">
+                                    Our sales team will follow up to go over the details.
+                                </p>
+                            </div>
+
+                            <!-- Step 3 -->
+                            <div class="flex gap-4 step-item cursor-pointer">
+                                <div class="step-badge flex-shrink-0 w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold text-sm md:text-base shadow-md" style="font-family: 'Rajdhani', sans-serif;">
+                                    3
+                                </div>
+                                <p class="text-sm md:text-base text-gray-700 leading-relaxed pt-1">
+                                    You'll receive a custom quote.
+                                </p>
+                            </div>
+
+                            <!-- Step 4 -->
+                            <div class="flex gap-4 step-item cursor-pointer">
+                                <div class="step-badge flex-shrink-0 w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold text-sm md:text-base shadow-md" style="font-family: 'Rajdhani', sans-serif;">
+                                    4
+                                </div>
+                                <p class="text-sm md:text-base text-gray-700 leading-relaxed pt-1">
+                                    Your booking is secured with a signed agreement and 50% deposit.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Image Column -->
+                    <div class="order-1 lg:order-2">
+                        <div class="relative rounded-lg lg:rounded-xl overflow-hidden shadow-lg group">
+                            <div class="aspect-[3/4] overflow-hidden">
+                                <img src="../../assets/images/stickdrop/pic3.jpg" alt="People playing Stick Drop Reaction Game at an indoor event" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700">
+                            </div>
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="../../assets/components/navigation.js"></script>
+    <script src="../../assets/components/footer.js"></script>
+    
+    <script>
+        // Animate steps on scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            const stepsContainer = document.getElementById('booking-steps');
+            const stepItems = stepsContainer.querySelectorAll('.step-item');
+            
+            // Intersection Observer for scroll-triggered animations
+            const observerOptions = {
+                threshold: 0.2,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        stepItems.forEach((item, index) => {
+                            setTimeout(() => {
+                                item.classList.add('animate');
+                            }, index * 100);
+                        });
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+            
+            if (stepsContainer) {
+                observer.observe(stepsContainer);
+            }
+            
+            // Fallback: If IntersectionObserver is not supported, animate immediately
+            if (!window.IntersectionObserver) {
+                stepItems.forEach((item, index) => {
+                    setTimeout(() => {
+                        item.classList.add('animate');
+                    }, index * 100);
+                });
+            }
+        });
+    </script>
+    
+    <!-- Accordion Dropdown Menu JavaScript -->
+    <script>
+        $(function() {
+            var Accordion = function(el, multiple) {
+                this.el = el || {};
+                this.multiple = multiple || false;
+
+                // Variables privadas
+                var links = this.el.find('.link');
+                // Evento
+                links.on('click', {el: this.el, multiple: this.multiple}, this.dropdown)
+            }
+
+            Accordion.prototype.dropdown = function(e) {
+                var $el = e.data.el;
+                    $this = $(this),
+                    $next = $this.next();
+
+                $next.slideToggle();
+                $this.parent().toggleClass('open');
+
+                if (!e.data.multiple) {
+                    $el.find('.submenu').not($next).slideUp().parent().removeClass('open');
+                };
+            }	
+
+            var accordion = new Accordion($('#accordion'), false);
+        });
+    </script>
+</body>
+</html>
