@@ -348,6 +348,59 @@
         .card-shadow:hover {
             box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
         }
+
+        /* Auto-scrolling locations */
+        .locations-scroll-container {
+            overflow: hidden;
+            position: relative;
+            width: 100%;
+            mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
+        }
+
+        .locations-scroll-track {
+            display: flex;
+            gap: 1rem;
+            width: fit-content;
+            animation: scroll-left 60s linear infinite;
+            will-change: transform;
+        }
+
+        .locations-scroll-track:hover {
+            animation-play-state: paused;
+        }
+
+        .locations-scroll-set {
+            display: flex;
+            gap: 1rem;
+            flex-shrink: 0;
+        }
+
+        @keyframes scroll-left {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        .location-card {
+            flex-shrink: 0;
+            width: 200px;
+        }
+
+        @media (min-width: 768px) {
+            .location-card {
+                width: 240px;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .location-card {
+                width: 280px;
+            }
+        }
     </style>
 </head>
 
@@ -2273,24 +2326,26 @@
                     </div>
 
                     <!-- Locations Grid -->
-                    <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4 max-w-4xl mx-auto">
-                        <div class="group relative overflow-hidden rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-200 hover:border-blue-300">
-                            <div class="aspect-square relative">
-                                <img src="https://cdn.prod.website-files.com/683a4969614808c01cd0d34f/68b1e6469a9b5c8f747ed84b_Phoenix_Sunset.jpg?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Grand Canyon, Arizona" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
-                                <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
-                                <div class="absolute bottom-0 left-0 right-0 p-4">
-                                    <span class="text-white font-semibold text-sm drop-shadow-lg">Arizona</span>
+                    <div class="locations-scroll-container">
+                        <div class="locations-scroll-track">
+                            <div class="locations-scroll-set">
+                                <div class="location-card group relative overflow-hidden rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-200 hover:border-blue-300">
+                                    <div class="aspect-square relative">
+                                        <img src="../assets/images/location/arizona.webp?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Grand Canyon, Arizona" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                                        <div class="absolute bottom-0 left-0 right-0 p-4">
+                                            <span class="text-white font-semibold text-sm drop-shadow-lg">Arizona</span>
+                                        </div>
+                                        <!-- Fallback for missing image -->
+                                        <div class="hidden w-full h-full bg-gradient-to-br from-blue-400 to-purple-500 items-center justify-center">
+                                            <span class="text-white font-semibold text-sm">Arizona</span>
+                                        </div>
+                                    </div>
                                 </div>
-                                <!-- Fallback for missing image -->
-                                <div class="hidden w-full h-full bg-gradient-to-br from-blue-400 to-purple-500 items-center justify-center">
-                                    <span class="text-white font-semibold text-sm">Arizona</span>
-                                </div>
-                            </div>
-                        </div>
 
-                        <div class="group relative overflow-hidden rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-200 hover:border-purple-300">
+                                <div class="location-card group relative overflow-hidden rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-200 hover:border-purple-300">
                             <div class="aspect-square relative">
-                                <img src="https://images.unsplash.com/photo-1449824913935-59a10b8d2000?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Golden Gate Bridge, California" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                                <img src="../assets/images/location/california.webp?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Golden Gate Bridge, California" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
                                 <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
                                 <div class="absolute bottom-0 left-0 right-0 p-4">
                                     <span class="text-white font-semibold text-sm drop-shadow-lg">California</span>
@@ -2302,9 +2357,9 @@
                             </div>
                         </div>
 
-                        <div class="group relative overflow-hidden rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-200 hover:border-pink-300">
+                                <div class="location-card group relative overflow-hidden rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-200 hover:border-pink-300">
                             <div class="aspect-square relative">
-                                <img src="https://assets1.cbsnewsstatic.com/hub/i/r/2024/05/21/5d145205-6f2b-4f24-935a-e6b9c3b932ea/thumbnail/1200x630/ac0508ad3c25585b6f0b9a62a3f09c2f/colorado-springs.jpg?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Colorado" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                                <img src="../assets/images/location/colorado.webp?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Colorado" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
                                 <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
                                 <div class="absolute bottom-0 left-0 right-0 p-4">
                                     <span class="text-white font-semibold text-sm drop-shadow-lg">Colorado</span>
@@ -2316,9 +2371,9 @@
                             </div>
                         </div>
 
-                        <div class="group relative overflow-hidden rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-200 hover:border-red-300">
+                                <div class="location-card group relative overflow-hidden rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-200 hover:border-red-300">
                             <div class="aspect-square relative">
-                                <img src="https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Yale University, Connecticut" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                                <img src="../assets/images/location/connecticut.webp?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Yale University, Connecticut" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
                                 <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
                                 <div class="absolute bottom-0 left-0 right-0 p-4">
                                     <span class="text-white font-semibold text-sm drop-shadow-lg">Connecticut</span>
@@ -2330,9 +2385,9 @@
                             </div>
                         </div>
 
-                        <div class="group relative overflow-hidden rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-200 hover:border-orange-300">
+                                <div class="location-card group relative overflow-hidden rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-200 hover:border-orange-300">
                             <div class="aspect-square relative">
-                                <img src="https://wtop.com/wp-content/uploads/2019/06/dc-1880x1057.jpg?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Lincoln Memorial, Washington D.C." class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                                <img src="../assets/images/location/dc.webp?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Lincoln Memorial, Washington D.C." class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
                                 <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
                                 <div class="absolute bottom-0 left-0 right-0 p-4">
                                     <span class="text-white font-semibold text-sm drop-shadow-lg">D.C.</span>
@@ -2344,9 +2399,9 @@
                             </div>
                         </div>
 
-                        <div class="group relative overflow-hidden rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-200 hover:border-cyan-300">
+                                <div class="location-card group relative overflow-hidden rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-200 hover:border-cyan-300">
                             <div class="aspect-square relative">
-                                <img src="https://wanderwisdom.com/.image/w_3840,q_auto:good,c_limit/MjA1MTY0MzQ4NDg0NjI1OTg0/50-interesting-facts-about-miami-florida.jpg?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Walt Disney World, Florida" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                                <img src="../assets/images/location/florida.webp?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Walt Disney World, Florida" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
                                 <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
                                 <div class="absolute bottom-0 left-0 right-0 p-4">
                                     <span class="text-white font-semibold text-sm drop-shadow-lg">Florida</span>
@@ -2358,9 +2413,9 @@
                             </div>
                         </div>
 
-                        <div class="group relative overflow-hidden rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-200 hover:border-teal-300">
+                                <div class="location-card group relative overflow-hidden rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-200 hover:border-teal-300">
                             <div class="aspect-square relative">
-                                <img src="https://pohcdn.com/sites/default/files/styles/paragraph__live_banner__lb_image__1880bp/public/live_banner/Georgia.jpg?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="World of Coca-Cola, Georgia" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                                <img src="../assets/images/location/georgia.webp?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="World of Coca-Cola, Georgia" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
                                 <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
                                 <div class="absolute bottom-0 left-0 right-0 p-4">
                                     <span class="text-white font-semibold text-sm drop-shadow-lg">Georgia</span>
@@ -2372,9 +2427,9 @@
                             </div>
                         </div>
 
-                        <div class="group relative overflow-hidden rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-200 hover:border-green-300">
+                                <div class="location-card group relative overflow-hidden rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-200 hover:border-green-300">
                             <div class="aspect-square relative">
-                                <img src="https://images.unsplash.com/photo-1503764654157-72d979d9af2f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Willis Tower, Illinois" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                                <img src="../assets/images/location/illinois.webp?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Willis Tower, Illinois" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
                                 <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
                                 <div class="absolute bottom-0 left-0 right-0 p-4">
                                     <span class="text-white font-semibold text-sm drop-shadow-lg">Illinois</span>
@@ -2386,9 +2441,9 @@
                             </div>
                         </div>
 
-                        <div class="group relative overflow-hidden rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-200 hover:border-emerald-300">
+                                <div class="location-card group relative overflow-hidden rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-200 hover:border-emerald-300">
                             <div class="aspect-square relative">
-                                <img src="https://images.unsplash.com/photo-1621422063953-2b741eb9b2ed?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Churchill Downs, Kentucky" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                                <img src="../assets/images/location/kentucky.webp?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Churchill Downs, Kentucky" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
                                 <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
                                 <div class="absolute bottom-0 left-0 right-0 p-4">
                                     <span class="text-white font-semibold text-sm drop-shadow-lg">Kentucky</span>
@@ -2400,9 +2455,9 @@
                             </div>
                         </div>
 
-                        <div class="group relative overflow-hidden rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-200 hover:border-lime-300">
+                                <div class="location-card group relative overflow-hidden rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-200 hover:border-lime-300">
                             <div class="aspect-square relative">
-                                <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="French Quarter, Louisiana" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                                <img src="../assets/images/location/louisiana.webp?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="French Quarter, Louisiana" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
                                 <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
                                 <div class="absolute bottom-0 left-0 right-0 p-4">
                                     <span class="text-white font-semibold text-sm drop-shadow-lg">Louisiana</span>
@@ -2414,9 +2469,9 @@
                             </div>
                         </div>
 
-                        <div class="group relative overflow-hidden rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-200 hover:border-indigo-300">
+                                <div class="location-card group relative overflow-hidden rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-200 hover:border-indigo-300">
                             <div class="aspect-square relative">
-                                <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Freedom Trail, Massachusetts" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                                <img src="../assets/images/location/massachusetts.webp?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Freedom Trail, Massachusetts" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
                                 <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
                                 <div class="absolute bottom-0 left-0 right-0 p-4">
                                     <span class="text-white font-semibold text-sm drop-shadow-lg">Massachusetts</span>
@@ -2428,9 +2483,9 @@
                             </div>
                         </div>
 
-                        <div class="group relative overflow-hidden rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-200 hover:border-blue-300">
+                                <div class="location-card group relative overflow-hidden rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-200 hover:border-blue-300">
                             <div class="aspect-square relative">
-                                <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Mackinac Bridge, Michigan" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                                <img src="../assets/images/location/michigan.webp?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Mackinac Bridge, Michigan" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
                                 <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
                                 <div class="absolute bottom-0 left-0 right-0 p-4">
                                     <span class="text-white font-semibold text-sm drop-shadow-lg">Michigan</span>
@@ -2442,9 +2497,9 @@
                             </div>
                         </div>
 
-                        <div class="group relative overflow-hidden rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-200 hover:border-violet-300">
+                                <div class="location-card group relative overflow-hidden rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-200 hover:border-violet-300">
                             <div class="aspect-square relative">
-                                <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Mall of America, Minnesota" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                                <img src="../assets/images/location/minnesota.webp?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Mall of America, Minnesota" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
                                 <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
                                 <div class="absolute bottom-0 left-0 right-0 p-4">
                                     <span class="text-white font-semibold text-sm drop-shadow-lg">Minnesota</span>
@@ -2456,9 +2511,9 @@
                             </div>
                         </div>
 
-                        <div class="group relative overflow-hidden rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-200 hover:border-fuchsia-300">
+                                <div class="location-card group relative overflow-hidden rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-200 hover:border-fuchsia-300">
                             <div class="aspect-square relative">
-                                <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Las Vegas Strip, Nevada" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                                <img src="../assets/images/location/nevada.webp?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Las Vegas Strip, Nevada" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
                                 <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
                                 <div class="absolute bottom-0 left-0 right-0 p-4">
                                     <span class="text-white font-semibold text-sm drop-shadow-lg">Nevada</span>
@@ -2470,9 +2525,9 @@
                             </div>
                         </div>
 
-                        <div class="group relative overflow-hidden rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-200 hover:border-rose-300">
+                                <div class="location-card group relative overflow-hidden rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-200 hover:border-rose-300">
                             <div class="aspect-square relative">
-                                <img src="https://cdn-imgix.headout.com/tour/30357/TOUR-IMAGE/6cdcf542-452d-4897-beed-76cf68f154e4-1act-de005e04-05d9-4715-96b0-6a089d5c3460.jpg?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Statue of Liberty, New York" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                                <img src="../assets/images/location/new-york.webp?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Statue of Liberty, New York" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
                                 <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
                                 <div class="absolute bottom-0 left-0 right-0 p-4">
                                     <span class="text-white font-semibold text-sm drop-shadow-lg">New York</span>
@@ -2484,9 +2539,9 @@
                             </div>
                         </div>
 
-                        <div class="group relative overflow-hidden rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-200 hover:border-pink-300">
+                                <div class="location-card group relative overflow-hidden rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-200 hover:border-pink-300">
                             <div class="aspect-square relative">
-                                <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Redwood National Park, North California" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                                <img src="../assets/images/location/north-california.webp?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Redwood National Park, North California" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
                                 <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
                                 <div class="absolute bottom-0 left-0 right-0 p-4">
                                     <span class="text-white font-semibold text-sm drop-shadow-lg">North California</span>
@@ -2498,9 +2553,9 @@
                             </div>
                         </div>
 
-                        <div class="group relative overflow-hidden rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-200 hover:border-purple-300">
+                                <div class="location-card group relative overflow-hidden rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-200 hover:border-purple-300">
                             <div class="aspect-square relative">
-                                <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Rock and Roll Hall of Fame, Ohio" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                                <img src="../assets/images/location/ohio.webp?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Rock and Roll Hall of Fame, Ohio" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
                                 <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
                                 <div class="absolute bottom-0 left-0 right-0 p-4">
                                     <span class="text-white font-semibold text-sm drop-shadow-lg">Ohio</span>
@@ -2512,9 +2567,9 @@
                             </div>
                         </div>
 
-                        <div class="group relative overflow-hidden rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-200 hover:border-blue-300">
+                                <div class="location-card group relative overflow-hidden rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-200 hover:border-blue-300">
                             <div class="aspect-square relative">
-                                <img src="https://images.unsplash.com/photo-1549144511-f099e773c147?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Oklahoma City National Memorial, Oklahoma" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                                <img src="../assets/images/location/oklahoma.webp?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Oklahoma City National Memorial, Oklahoma" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
                                 <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
                                 <div class="absolute bottom-0 left-0 right-0 p-4">
                                     <span class="text-white font-semibold text-sm drop-shadow-lg">Oklahoma</span>
@@ -2526,9 +2581,9 @@
                             </div>
                         </div>
 
-                        <div class="group relative overflow-hidden rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-200 hover:border-indigo-300">
+                                <div class="location-card group relative overflow-hidden rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-200 hover:border-indigo-300">
                             <div class="aspect-square relative">
-                                <img src="https://images.unsplash.com/photo-1559827260-dc66d52bef19?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Crater Lake, Oregon" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                                <img src="../assets/images/location/oregon.webp?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Crater Lake, Oregon" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
                                 <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
                                 <div class="absolute bottom-0 left-0 right-0 p-4">
                                     <span class="text-white font-semibold text-sm drop-shadow-lg">Oregon</span>
@@ -2540,9 +2595,9 @@
                             </div>
                         </div>
 
-                        <div class="group relative overflow-hidden rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-200 hover:border-cyan-300">
+                                <div class="location-card group relative overflow-hidden rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-200 hover:border-cyan-300">
                             <div class="aspect-square relative">
-                                <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Liberty Bell, Pennsylvania" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                                <img src="../assets/images/location/pennsylvania.webp?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Liberty Bell, Pennsylvania" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
                                 <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
                                 <div class="absolute bottom-0 left-0 right-0 p-4">
                                     <span class="text-white font-semibold text-sm drop-shadow-lg">Pennsylvania</span>
@@ -2554,9 +2609,9 @@
                             </div>
                         </div>
 
-                        <div class="group relative overflow-hidden rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-200 hover:border-teal-300">
+                                <div class="location-card group relative overflow-hidden rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-200 hover:border-teal-300">
                             <div class="aspect-square relative">
-                                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Newport Mansions, Rhode Island" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                                <img src="../assets/images/location/rhode-islands.webp?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Newport Mansions, Rhode Island" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
                                 <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
                                 <div class="absolute bottom-0 left-0 right-0 p-4">
                                     <span class="text-white font-semibold text-sm drop-shadow-lg">Rhode Island</span>
@@ -2568,9 +2623,9 @@
                             </div>
                         </div>
 
-                        <div class="group relative overflow-hidden rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-200 hover:border-green-300">
+                                <div class="location-card group relative overflow-hidden rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-200 hover:border-green-300">
                             <div class="aspect-square relative">
-                                <img src="https://images.unsplash.com/photo-1533632359083-0185df1be85d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Charleston Historic District, South Carolina" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                                <img src="../assets/images/location/south-carolina.webp?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Charleston Historic District, South Carolina" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
                                 <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
                                 <div class="absolute bottom-0 left-0 right-0 p-4">
                                     <span class="text-white font-semibold text-sm drop-shadow-lg">South Carolina</span>
@@ -2582,9 +2637,9 @@
                             </div>
                         </div>
 
-                        <div class="group relative overflow-hidden rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-200 hover:border-emerald-300">
+                                <div class="location-card group relative overflow-hidden rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-200 hover:border-emerald-300">
                             <div class="aspect-square relative">
-                                <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Graceland, Tennessee" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                                <img src="../assets/images/location/tennessee.webp?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Graceland, Tennessee" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
                                 <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
                                 <div class="absolute bottom-0 left-0 right-0 p-4">
                                     <span class="text-white font-semibold text-sm drop-shadow-lg">Tennessee</span>
@@ -2596,9 +2651,9 @@
                             </div>
                         </div>
 
-                        <div class="group relative overflow-hidden rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-200 hover:border-lime-300">
+                                <div class="location-card group relative overflow-hidden rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-200 hover:border-lime-300">
                             <div class="aspect-square relative">
-                                <img src="https://images.unsplash.com/photo-1535498730771-e735b998cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="The Alamo, Texas" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                                <img src="../assets/images/location/texas.webp?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="The Alamo, Texas" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
                                 <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
                                 <div class="absolute bottom-0 left-0 right-0 p-4">
                                     <span class="text-white font-semibold text-sm drop-shadow-lg">Texas</span>
@@ -2610,9 +2665,9 @@
                             </div>
                         </div>
 
-                        <div class="group relative overflow-hidden rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-200 hover:border-yellow-300">
+                                <div class="location-card group relative overflow-hidden rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-200 hover:border-yellow-300">
                             <div class="aspect-square relative">
-                                <img src="https://images.unsplash.com/photo-1559827260-dc66d52bef19?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Space Needle, Washington" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                                <img src="../assets/images/location/washington.webp?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Space Needle, Washington" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
                                 <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
                                 <div class="absolute bottom-0 left-0 right-0 p-4">
                                     <span class="text-white font-semibold text-sm drop-shadow-lg">Washington</span>
@@ -2621,18 +2676,320 @@
                                 <div class="hidden w-full h-full bg-gradient-to-br from-lime-400 to-yellow-500 items-center justify-center">
                                     <span class="text-white font-semibold text-sm">Washington</span>
                                 </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Duplicate set for seamless loop -->
+                            <div class="locations-scroll-set">
+                                <div class="location-card group relative overflow-hidden rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-200 hover:border-blue-300">
+                                    <div class="aspect-square relative">
+                                        <img src="https://cdn.prod.website-files.com/683a4969614808c01cd0d34f/68b1e6469a9b5c8f747ed84b_Phoenix_Sunset.jpg?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Grand Canyon, Arizona" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                                        <div class="absolute bottom-0 left-0 right-0 p-4">
+                                            <span class="text-white font-semibold text-sm drop-shadow-lg">Arizona</span>
+                                        </div>
+                                        <div class="hidden w-full h-full bg-gradient-to-br from-blue-400 to-purple-500 items-center justify-center">
+                                            <span class="text-white font-semibold text-sm">Arizona</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="location-card group relative overflow-hidden rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-200 hover:border-purple-300">
+                                    <div class="aspect-square relative">
+                                        <img src="https://images.unsplash.com/photo-1449824913935-59a10b8d2000?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Golden Gate Bridge, California" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                                        <div class="absolute bottom-0 left-0 right-0 p-4">
+                                            <span class="text-white font-semibold text-sm drop-shadow-lg">California</span>
+                                        </div>
+                                        <div class="hidden w-full h-full bg-gradient-to-br from-purple-400 to-pink-500 items-center justify-center">
+                                            <span class="text-white font-semibold text-sm">California</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="location-card group relative overflow-hidden rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-200 hover:border-pink-300">
+                                    <div class="aspect-square relative">
+                                        <img src="https://assets1.cbsnewsstatic.com/hub/i/r/2024/05/21/5d145205-6f2b-4f24-935a-e6b9c3b932ea/thumbnail/1200x630/ac0508ad3c25585b6f0b9a62a3f09c2f/colorado-springs.jpg?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Colorado" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                                        <div class="absolute bottom-0 left-0 right-0 p-4">
+                                            <span class="text-white font-semibold text-sm drop-shadow-lg">Colorado</span>
+                                        </div>
+                                        <div class="hidden w-full h-full bg-gradient-to-br from-pink-400 to-red-500 items-center justify-center">
+                                            <span class="text-white font-semibold text-sm">Colorado</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="location-card group relative overflow-hidden rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-200 hover:border-red-300">
+                                    <div class="aspect-square relative">
+                                        <img src="https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Yale University, Connecticut" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                                        <div class="absolute bottom-0 left-0 right-0 p-4">
+                                            <span class="text-white font-semibold text-sm drop-shadow-lg">Connecticut</span>
+                                        </div>
+                                        <div class="hidden w-full h-full bg-gradient-to-br from-red-400 to-orange-500 items-center justify-center">
+                                            <span class="text-white font-semibold text-sm">Connecticut</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="location-card group relative overflow-hidden rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-200 hover:border-orange-300">
+                                    <div class="aspect-square relative">
+                                        <img src="https://wtop.com/wp-content/uploads/2019/06/dc-1880x1057.jpg?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Lincoln Memorial, Washington D.C." class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                                        <div class="absolute bottom-0 left-0 right-0 p-4">
+                                            <span class="text-white font-semibold text-sm drop-shadow-lg">D.C.</span>
+                                        </div>
+                                        <div class="hidden w-full h-full bg-gradient-to-br from-orange-400 to-yellow-500 items-center justify-center">
+                                            <span class="text-white font-semibold text-sm">D.C.</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="location-card group relative overflow-hidden rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-200 hover:border-cyan-300">
+                                    <div class="aspect-square relative">
+                                        <img src="https://wanderwisdom.com/.image/w_3840,q_auto:good,c_limit/MjA1MTY0MzQ4NDg0NjI1OTg0/50-interesting-facts-about-miami-florida.jpg?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Walt Disney World, Florida" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                                        <div class="absolute bottom-0 left-0 right-0 p-4">
+                                            <span class="text-white font-semibold text-sm drop-shadow-lg">Florida</span>
+                                        </div>
+                                        <div class="hidden w-full h-full bg-gradient-to-br from-blue-400 to-cyan-500 items-center justify-center">
+                                            <span class="text-white font-semibold text-sm">Florida</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="location-card group relative overflow-hidden rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-200 hover:border-teal-300">
+                                    <div class="aspect-square relative">
+                                        <img src="https://pohcdn.com/sites/default/files/styles/paragraph__live_banner__lb_image__1880bp/public/live_banner/Georgia.jpg?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="World of Coca-Cola, Georgia" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                                        <div class="absolute bottom-0 left-0 right-0 p-4">
+                                            <span class="text-white font-semibold text-sm drop-shadow-lg">Georgia</span>
+                                        </div>
+                                        <div class="hidden w-full h-full bg-gradient-to-br from-cyan-400 to-teal-500 items-center justify-center">
+                                            <span class="text-white font-semibold text-sm">Georgia</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="location-card group relative overflow-hidden rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-200 hover:border-green-300">
+                                    <div class="aspect-square relative">
+                                        <img src="https://images.unsplash.com/photo-1503764654157-72d979d9af2f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Willis Tower, Illinois" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                                        <div class="absolute bottom-0 left-0 right-0 p-4">
+                                            <span class="text-white font-semibold text-sm drop-shadow-lg">Illinois</span>
+                                        </div>
+                                        <div class="hidden w-full h-full bg-gradient-to-br from-teal-400 to-green-500 items-center justify-center">
+                                            <span class="text-white font-semibold text-sm">Illinois</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="location-card group relative overflow-hidden rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-200 hover:border-emerald-300">
+                                    <div class="aspect-square relative">
+                                        <img src="https://images.unsplash.com/photo-1621422063953-2b741eb9b2ed?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Churchill Downs, Kentucky" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                                        <div class="absolute bottom-0 left-0 right-0 p-4">
+                                            <span class="text-white font-semibold text-sm drop-shadow-lg">Kentucky</span>
+                                        </div>
+                                        <div class="hidden w-full h-full bg-gradient-to-br from-green-400 to-emerald-500 items-center justify-center">
+                                            <span class="text-white font-semibold text-sm">Kentucky</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="location-card group relative overflow-hidden rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-200 hover:border-lime-300">
+                                    <div class="aspect-square relative">
+                                        <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="French Quarter, Louisiana" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                                        <div class="absolute bottom-0 left-0 right-0 p-4">
+                                            <span class="text-white font-semibold text-sm drop-shadow-lg">Louisiana</span>
+                                        </div>
+                                        <div class="hidden w-full h-full bg-gradient-to-br from-emerald-400 to-lime-500 items-center justify-center">
+                                            <span class="text-white font-semibold text-sm">Louisiana</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="location-card group relative overflow-hidden rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-200 hover:border-indigo-300">
+                                    <div class="aspect-square relative">
+                                        <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Freedom Trail, Massachusetts" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                                        <div class="absolute bottom-0 left-0 right-0 p-4">
+                                            <span class="text-white font-semibold text-sm drop-shadow-lg">Massachusetts</span>
+                                        </div>
+                                        <div class="hidden w-full h-full bg-gradient-to-br from-lime-400 to-indigo-500 items-center justify-center">
+                                            <span class="text-white font-semibold text-sm">Massachusetts</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="location-card group relative overflow-hidden rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-200 hover:border-blue-300">
+                                    <div class="aspect-square relative">
+                                        <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Mackinac Bridge, Michigan" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                                        <div class="absolute bottom-0 left-0 right-0 p-4">
+                                            <span class="text-white font-semibold text-sm drop-shadow-lg">Michigan</span>
+                                        </div>
+                                        <div class="hidden w-full h-full bg-gradient-to-br from-indigo-400 to-blue-500 items-center justify-center">
+                                            <span class="text-white font-semibold text-sm">Michigan</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="location-card group relative overflow-hidden rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-200 hover:border-violet-300">
+                                    <div class="aspect-square relative">
+                                        <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Mall of America, Minnesota" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                                        <div class="absolute bottom-0 left-0 right-0 p-4">
+                                            <span class="text-white font-semibold text-sm drop-shadow-lg">Minnesota</span>
+                                        </div>
+                                        <div class="hidden w-full h-full bg-gradient-to-br from-purple-400 to-violet-500 items-center justify-center">
+                                            <span class="text-white font-semibold text-sm">Minnesota</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="location-card group relative overflow-hidden rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-200 hover:border-fuchsia-300">
+                                    <div class="aspect-square relative">
+                                        <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Las Vegas Strip, Nevada" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                                        <div class="absolute bottom-0 left-0 right-0 p-4">
+                                            <span class="text-white font-semibold text-sm drop-shadow-lg">Nevada</span>
+                                        </div>
+                                        <div class="hidden w-full h-full bg-gradient-to-br from-violet-400 to-fuchsia-500 items-center justify-center">
+                                            <span class="text-white font-semibold text-sm">Nevada</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="location-card group relative overflow-hidden rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-200 hover:border-rose-300">
+                                    <div class="aspect-square relative">
+                                        <img src="https://cdn-imgix.headout.com/tour/30357/TOUR-IMAGE/6cdcf542-452d-4897-beed-76cf68f154e4-1act-de005e04-05d9-4715-96b0-6a089d5c3460.jpg?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Statue of Liberty, New York" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                                        <div class="absolute bottom-0 left-0 right-0 p-4">
+                                            <span class="text-white font-semibold text-sm drop-shadow-lg">New York</span>
+                                        </div>
+                                        <div class="hidden w-full h-full bg-gradient-to-br from-fuchsia-400 to-rose-500 items-center justify-center">
+                                            <span class="text-white font-semibold text-sm">New York</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="location-card group relative overflow-hidden rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-200 hover:border-pink-300">
+                                    <div class="aspect-square relative">
+                                        <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Redwood National Park, North California" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                                        <div class="absolute bottom-0 left-0 right-0 p-4">
+                                            <span class="text-white font-semibold text-sm drop-shadow-lg">North California</span>
+                                        </div>
+                                        <div class="hidden w-full h-full bg-gradient-to-br from-rose-400 to-pink-500 items-center justify-center">
+                                            <span class="text-white font-semibold text-sm">North California</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="location-card group relative overflow-hidden rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-200 hover:border-purple-300">
+                                    <div class="aspect-square relative">
+                                        <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Rock and Roll Hall of Fame, Ohio" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                                        <div class="absolute bottom-0 left-0 right-0 p-4">
+                                            <span class="text-white font-semibold text-sm drop-shadow-lg">Ohio</span>
+                                        </div>
+                                        <div class="hidden w-full h-full bg-gradient-to-br from-pink-400 to-purple-500 items-center justify-center">
+                                            <span class="text-white font-semibold text-sm">Ohio</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="location-card group relative overflow-hidden rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-200 hover:border-blue-300">
+                                    <div class="aspect-square relative">
+                                        <img src="https://images.unsplash.com/photo-1549144511-f099e773c147?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Oklahoma City National Memorial, Oklahoma" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                                        <div class="absolute bottom-0 left-0 right-0 p-4">
+                                            <span class="text-white font-semibold text-sm drop-shadow-lg">Oklahoma</span>
+                                        </div>
+                                        <div class="hidden w-full h-full bg-gradient-to-br from-purple-400 to-blue-500 items-center justify-center">
+                                            <span class="text-white font-semibold text-sm">Oklahoma</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="location-card group relative overflow-hidden rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-200 hover:border-indigo-300">
+                                    <div class="aspect-square relative">
+                                        <img src="https://images.unsplash.com/photo-1559827260-dc66d52bef19?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Crater Lake, Oregon" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                                        <div class="absolute bottom-0 left-0 right-0 p-4">
+                                            <span class="text-white font-semibold text-sm drop-shadow-lg">Oregon</span>
+                                        </div>
+                                        <div class="hidden w-full h-full bg-gradient-to-br from-blue-400 to-indigo-500 items-center justify-center">
+                                            <span class="text-white font-semibold text-sm">Oregon</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="location-card group relative overflow-hidden rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-200 hover:border-cyan-300">
+                                    <div class="aspect-square relative">
+                                        <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Liberty Bell, Pennsylvania" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                                        <div class="absolute bottom-0 left-0 right-0 p-4">
+                                            <span class="text-white font-semibold text-sm drop-shadow-lg">Pennsylvania</span>
+                                        </div>
+                                        <div class="hidden w-full h-full bg-gradient-to-br from-indigo-400 to-cyan-500 items-center justify-center">
+                                            <span class="text-white font-semibold text-sm">Pennsylvania</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="location-card group relative overflow-hidden rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-200 hover:border-teal-300">
+                                    <div class="aspect-square relative">
+                                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Newport Mansions, Rhode Island" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                                        <div class="absolute bottom-0 left-0 right-0 p-4">
+                                            <span class="text-white font-semibold text-sm drop-shadow-lg">Rhode Island</span>
+                                        </div>
+                                        <div class="hidden w-full h-full bg-gradient-to-br from-cyan-400 to-teal-500 items-center justify-center">
+                                            <span class="text-white font-semibold text-sm">Rhode Island</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="location-card group relative overflow-hidden rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-200 hover:border-green-300">
+                                    <div class="aspect-square relative">
+                                        <img src="https://images.unsplash.com/photo-1533632359083-0185df1be85d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Charleston Historic District, South Carolina" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                                        <div class="absolute bottom-0 left-0 right-0 p-4">
+                                            <span class="text-white font-semibold text-sm drop-shadow-lg">South Carolina</span>
+                                        </div>
+                                        <div class="hidden w-full h-full bg-gradient-to-br from-teal-400 to-green-500 items-center justify-center">
+                                            <span class="text-white font-semibold text-sm">South Carolina</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="location-card group relative overflow-hidden rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-200 hover:border-emerald-300">
+                                    <div class="aspect-square relative">
+                                        <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Graceland, Tennessee" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                                        <div class="absolute bottom-0 left-0 right-0 p-4">
+                                            <span class="text-white font-semibold text-sm drop-shadow-lg">Tennessee</span>
+                                        </div>
+                                        <div class="hidden w-full h-full bg-gradient-to-br from-green-400 to-emerald-500 items-center justify-center">
+                                            <span class="text-white font-semibold text-sm">Tennessee</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="location-card group relative overflow-hidden rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-200 hover:border-lime-300">
+                                    <div class="aspect-square relative">
+                                        <img src="https://images.unsplash.com/photo-1535498730771-e735b998cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="The Alamo, Texas" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                                        <div class="absolute bottom-0 left-0 right-0 p-4">
+                                            <span class="text-white font-semibold text-sm drop-shadow-lg">Texas</span>
+                                        </div>
+                                        <div class="hidden w-full h-full bg-gradient-to-br from-emerald-400 to-lime-500 items-center justify-center">
+                                            <span class="text-white font-semibold text-sm">Texas</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="location-card group relative overflow-hidden rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-200 hover:border-yellow-300">
+                                    <div class="aspect-square relative">
+                                        <img src="https://images.unsplash.com/photo-1559827260-dc66d52bef19?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Space Needle, Washington" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                                        <div class="absolute bottom-0 left-0 right-0 p-4">
+                                            <span class="text-white font-semibold text-sm drop-shadow-lg">Washington</span>
+                                        </div>
+                                        <div class="hidden w-full h-full bg-gradient-to-br from-lime-400 to-yellow-500 items-center justify-center">
+                                            <span class="text-white font-semibold text-sm">Washington</span>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
 
                     <!-- Contact CTA -->
                     <div class="pt-8">
-                        <p class="text-gray-600 mb-6">Don't see your location? Contact us - we may still be able to serve your area!</p>
-                        <a href="#contact" class="inline-flex items-center justify-center px-8 py-4 rounded-full font-semibold text-lg bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-white shadow-[0_22px_60px_-20px_rgba(0,80,255,0.4)] hover:shadow-[0_28px_70px_-20px_rgba(147,51,234,0.5)] transition-transform duration-300 hover:-translate-y-1 focus:ring-4 focus:ring-blue-400/40">
-                            Get In Touch
-                            <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
-                            </svg>
+                        <p class="text-gray-600 mb-6">Want to see all our service locations?</p>
+                        <a href="our-locations.html" class="inline-flex items-center justify-center px-8 py-4 rounded-full font-semibold text-lg bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-white shadow-[0_22px_60px_-20px_rgba(0,80,255,0.4)] hover:shadow-[0_28px_70px_-20px_rgba(147,51,234,0.5)] transition-transform duration-300 hover:-translate-y-1 focus:ring-4 focus:ring-blue-400/40">
+                            View All Locations
                         </a>
                     </div>
                 </div>
