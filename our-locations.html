@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Locations - MiHi Photo Booth | Nationwide Photo Booth Rentals</title>
+    <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <style>
+        /* Custom styles for modern luxury design */
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #1a202c;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: 'Playfair Display', serif;
+        }
+
+        main {
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Navigation button styles - ensure they're not affected by page CSS */
+        header .btn-primary,
+        header a.btn-primary {
+            background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%) !important;
+            color: white !important;
+            transition: all 0.3s ease;
+        }
+
+        header .btn-primary:hover,
+        header a.btn-primary:hover {
+            transform: translateY(-2px) !important;
+            box-shadow: 0 10px 25px rgba(0, 80, 255, 0.4) !important;
+            background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%) !important;
+            color: white !important;
+        }
+
+        /* General button primary style for consistency */
+        .btn-primary {
+            background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%);
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 80, 255, 0.4);
+        }
+
+        /* Enhanced Location Cards */
+        .location-card {
+            background: white;
+            border-radius: 1.5rem;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            border: 2px solid transparent;
+        }
+
+        .location-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--card-color-start), var(--card-color-end));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+
+        .location-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .location-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            border-color: var(--card-color-start);
+        }
+
+        .location-card-title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #1a202c;
+            margin-bottom: 1rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 3px solid;
+            border-image: linear-gradient(90deg, var(--card-color-start), var(--card-color-end)) 1;
+            position: relative;
+        }
+
+        .location-card-title::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: var(--card-color-end);
+            transition: width 0.4s ease;
+        }
+
+        .location-card:hover .location-card-title::after {
+            width: 100%;
+        }
+
+        .location-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.5rem 0.75rem;
+            margin: 0.25rem 0;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+            color: #374151;
+            font-weight: 500;
+        }
+
+        .location-item:hover {
+            background: rgba(0, 0, 0, 0.03);
+            transform: translateX(4px);
+            color: var(--card-color-start);
+            font-weight: 600;
+        }
+
+        .location-item svg {
+            flex-shrink: 0;
+            transition: all 0.3s ease;
+        }
+
+        .location-item:hover svg {
+            transform: scale(1.2);
+        }
+
+        /* Location card transitions for search */
+        .location-card {
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+
+        .location-card.hidden {
+            opacity: 0;
+            visibility: hidden;
+            height: 0;
+            min-height: 0;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            transform: scale(0.95);
+            pointer-events: none;
+            border: none;
+        }
+
+        #locations-grid {
+            grid-auto-rows: min-content;
+        }
+
+        /* Card color variants */
+        .card-blue {
+            --card-color-start: #3b82f6;
+            --card-color-end: #2563eb;
+        }
+
+        .card-purple {
+            --card-color-start: #a855f7;
+            --card-color-end: #9333ea;
+        }
+
+        .card-pink {
+            --card-color-start: #ec4899;
+            --card-color-end: #db2777;
+        }
+
+        .card-red {
+            --card-color-start: #ef4444;
+            --card-color-end: #dc2626;
+        }
+
+        .card-orange {
+            --card-color-start: #f97316;
+            --card-color-end: #ea580c;
+        }
+
+        .card-cyan {
+            --card-color-start: #06b6d4;
+            --card-color-end: #0891b2;
+        }
+
+        .card-teal {
+            --card-color-start: #14b8a6;
+            --card-color-end: #0d9488;
+        }
+
+        .card-green {
+            --card-color-start: #22c55e;
+            --card-color-end: #16a34a;
+        }
+
+        .card-emerald {
+            --card-color-start: #10b981;
+            --card-color-end: #059669;
+        }
+
+        .card-lime {
+            --card-color-start: #84cc16;
+            --card-color-end: #65a30d;
+        }
+
+        .card-indigo {
+            --card-color-start: #6366f1;
+            --card-color-end: #4f46e5;
+        }
+
+        .card-violet {
+            --card-color-start: #8b5cf6;
+            --card-color-end: #7c3aed;
+        }
+
+        .card-fuchsia {
+            --card-color-start: #d946ef;
+            --card-color-end: #c026d3;
+        }
+
+        .card-rose {
+            --card-color-start: #f43f5e;
+            --card-color-end: #e11d48;
+        }
+
+        .card-yellow {
+            --card-color-start: #eab308;
+            --card-color-end: #ca8a04;
+        }
+    </style>
+</head>
+
+<body id="top" class="bg-white">
+    <!-- Navigation will be loaded by navigation.js -->
+    <script src="assets/components/navigation.js"></script>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="relative overflow-hidden bg-gradient-to-r from-[#220834] via-[#1a0b44] to-[#051637] text-white">
+            <!-- Ambient elements -->
+            <div class="absolute inset-0 pointer-events-none">
+                <div class="absolute top-10 left-1/2 -translate-x-1/2 w-[90%] h-full bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.15),transparent_60%)]"></div>
+                <div class="absolute -top-24 left-10 w-40 h-40 rounded-full bg-pink-500/20 blur-3xl"></div>
+                <div class="absolute bottom-10 right-10 w-52 h-52 rounded-full bg-blue-400/20 blur-[120px]"></div>
+            </div>
+
+            <div class="container mx-auto px-6 py-20 md:py-32 relative z-10">
+                <div class="max-w-4xl mx-auto text-center space-y-8">
+                    <h1 class="text-5xl md:text-7xl font-black leading-tight">
+                        FIND US IN A CITY NEAR YOU!
+                    </h1>
+                    <p class="text-lg md:text-xl text-gray-300 leading-relaxed">
+                        Use the list below to find the closest city to you! As a national Photo Booth company, we strive to deliver our outstanding services across the country.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Locations List Section -->
+        <section class="relative overflow-hidden bg-gray-50 py-20 md:py-28">
+            <div class="container mx-auto px-6">
+                <div class="max-w-7xl mx-auto">
+                    <!-- Search Box -->
+                    <div class="mb-12 max-w-2xl mx-auto">
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                                <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                                </svg>
+                            </div>
+                            <input 
+                                type="text" 
+                                id="location-search" 
+                                placeholder="Search by state or city..." 
+                                class="w-full pl-12 pr-4 py-4 text-lg border-2 border-gray-200 rounded-2xl focus:border-blue-500 focus:ring-4 focus:ring-blue-400/20 transition-all duration-300 shadow-lg focus:shadow-xl outline-none bg-white"
+                            />
+                            <button 
+                                id="clear-search" 
+                                class="absolute inset-y-0 right-0 pr-4 flex items-center text-gray-400 hover:text-gray-600 transition-colors hidden"
+                            >
+                                <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                                </svg>
+                            </button>
+                        </div>
+                        <p id="search-results" class="mt-4 text-center text-gray-600 text-sm hidden"></p>
+                    </div>
+
+                    <!-- Locations Grid -->
+                    <div id="locations-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8" style="grid-auto-rows: auto;">
+                        <!-- Arizona -->
+                        <div class="location-card card-blue" data-state="arizona" data-cities="phoenix tucson">
+                            <h3 class="location-card-title">ARIZONA</h3>
+                            <ul class="space-y-1">
+                                <li class="location-item">
+                                    <svg class="w-5 h-5" style="color: var(--card-color-start);" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
+                                    </svg>
+                                    <a href="#" class="hover:text-current transition-colors duration-200">
+                                        <span>Phoenix</span>
+                                    </a>
+                                </li>
+                                <li class="location-item">
+                                    <svg class="w-5 h-5" style="color: var(--card-color-start);" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
+                                    </svg>
+                                    <a href="#" class="hover:text-current transition-colors duration-200">
+                                        <span>Tucson</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- California -->
+                        <div class="location-card card-purple" data-state="california" data-cities="los angeles san diego san francisco">
+                            <h3 class="location-card-title">CALIFORNIA</h3>
+                            <ul class="space-y-1">
+                                <li class="location-item">
+                                    <svg class="w-5 h-5" style="color: var(--card-color-start);" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
+                                    </svg>
+                                    <a href="#" class="hover:text-current transition-colors duration-200">
+                                        <span>Los Angeles</span>
+                                    </a>
+                                </li>
+                                <li class="location-item">
+                                    <svg class="w-5 h-5" style="color: var(--card-color-start);" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
+                                    </svg>
+                                    <a href="#" class="hover:text-current transition-colors duration-200">
+                                        <span>San Diego</span>
+                                    </a>
+                                </li>
+                                <li class="location-item">
+                                    <svg class="w-5 h-5" style="color: var(--card-color-start);" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
+                                    </svg>
+                                    <a href="#" class="hover:text-current transition-colors duration-200">
+                                        <span>San Francisco</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- Colorado -->
+                        <div class="location-card card-pink" data-state="colorado" data-cities="aspen colorado springs denver estes park lafayette lakewood vail">
+                            <h3 class="location-card-title">COLORADO</h3>
+                            <ul class="space-y-1">
+                                <li class="location-item">
+                                    <svg class="w-5 h-5" style="color: var(--card-color-start);" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
+                                    </svg>
+                                    <a href="#" class="hover:text-current transition-colors duration-200">
+                                        <span>Aspen</span>
+                                    </a>
+                                </li>
+                                <li class="location-item">
+                                    <svg class="w-5 h-5" style="color: var(--card-color-start);" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
+                                    </svg>
+                                    <a href="#" class="hover:text-current transition-colors duration-200">
+                                        <span>Colorado Springs</span>
+                                    </a>
+                                </li>
+                                <li class="location-item">
+                                    <svg class="w-5 h-5" style="color: var(--card-color-start);" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
+                                    </svg>
+                                    <a href="#" class="hover:text-current transition-colors duration-200">
+                                        <span>Denver</span>
+                                    </a>
+                                </li>
+                                <li class="location-item">
+                                    <svg class="w-5 h-5" style="color: var(--card-color-start);" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
+                                    </svg>
+                                    <a href="#" class="hover:text-current transition-colors duration-200">
+                                        <span>Estes Park</span>
+                                    </a>
+                                </li>
+                                <li class="location-item">
+                                    <svg class="w-5 h-5" style="color: var(--card-color-start);" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
+                                    </svg>
+                                    <a href="#" class="hover:text-current transition-colors duration-200">
+                                        <span>Lafayette</span>
+                                    </a>
+                                </li>
+                                <li class="location-item">
+                                    <svg class="w-5 h-5" style="color: var(--card-color-start);" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
+                                    </svg>
+                                    <a href="#" class="hover:text-current transition-colors duration-200">
+                                        <span>Lakewood</span>
+                                    </a>
+                                </li>
+                                <li class="location-item">
+                                    <svg class="w-5 h-5" style="color: var(--card-color-start);" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
+                                    </svg>
+                                    <a href="#" class="hover:text-current transition-colors duration-200">
+                                        <span>Vail</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- Connecticut -->
+                        <div class="location-card card-red" data-state="connecticut" data-cities="hartford">
+                            <h3 class="location-card-title">CONNECTICUT</h3>
+                            <ul class="space-y-1">
+                                <li class="location-item">
+                                    <svg class="w-5 h-5" style="color: var(--card-color-start);" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
+                                    </svg>
+                                    <a href="#" class="hover:text-current transition-colors duration-200">
+                                        <span>Hartford</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- D.C. -->
+                        <div class="location-card card-orange" data-state="dc washington d.c." data-cities="washington d.c. washington dc">
+                            <h3 class="location-card-title">D.C.</h3>
+                            <ul class="space-y-1">
+                                <li class="location-item">
+                                    <svg class="w-5 h-5" style="color: var(--card-color-start);" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
+                                    </svg>
+                                    <a href="#" class="hover:text-current transition-colors duration-200">
+                                        <span>Washington D.C.</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- Florida -->
+                        <div class="location-card card-cyan" data-state="florida" data-cities="orlando">
+                            <h3 class="location-card-title">FLORIDA</h3>
+                            <ul class="space-y-1">
+                                <li class="location-item">
+                                    <svg class="w-5 h-5" style="color: var(--card-color-start);" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
+                                    </svg>
+                                    <a href="#" class="hover:text-current transition-colors duration-200">
+                                        <span>Orlando</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- Georgia -->
+                        <div class="location-card card-teal" data-state="georgia" data-cities="savannah">
+                            <h3 class="location-card-title">GEORGIA</h3>
+                            <ul class="space-y-1">
+                                <li class="location-item">
+                                    <svg class="w-5 h-5" style="color: var(--card-color-start);" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
+                                    </svg>
+                                    <a href="#" class="hover:text-current transition-colors duration-200">
+                                        <span>Savannah</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- Illinois -->
+                        <div class="location-card card-green" data-state="illinois" data-cities="chicago">
+                            <h3 class="location-card-title">ILLINOIS</h3>
+                            <ul class="space-y-1">
+                                <li class="location-item">
+                                    <svg class="w-5 h-5" style="color: var(--card-color-start);" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
+                                    </svg>
+                                    <a href="#" class="hover:text-current transition-colors duration-200">
+                                        <span>Chicago</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- Kentucky -->
+                        <!-- Kentucky -->
+                        <div class="location-card card-emerald" data-state="kentucky" data-cities="lexington">
+                            <h3 class="location-card-title">KENTUCKY</h3>
+                            <ul class="space-y-1">
+                                <li class="location-item">
+                                    <svg class="w-5 h-5" style="color: var(--card-color-start);" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
+                                    </svg>
+                                    <a href="#" class="hover:text-current transition-colors duration-200">
+                                        <span>Lexington</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- Louisiana -->
+                        <!-- Louisiana -->
+                        <div class="location-card card-lime" data-state="louisiana" data-cities="baton rouge new orleans">
+                            <h3 class="location-card-title">LOUISIANA</h3>
+                            <ul class="space-y-1">
+                                <li class="location-item">
+                                    <svg class="w-5 h-5" style="color: var(--card-color-start);" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
+                                    </svg>
+                                    <a href="#" class="hover:text-current transition-colors duration-200">
+                                        <span>Baton Rouge</span>
+                                    </a>
+                                </li>
+                                <li class="location-item">
+                                    <svg class="w-5 h-5" style="color: var(--card-color-start);" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
+                                    </svg>
+                                    <a href="#" class="hover:text-current transition-colors duration-200">
+                                        <span>New Orleans</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- Massachusetts -->
+                        <!-- Massachusetts -->
+                        <div class="location-card card-indigo" data-state="massachusetts" data-cities="boston cape cod">
+                            <h3 class="location-card-title">MASSACHUSSETS</h3>
+                            <ul class="space-y-1">
+                                <li class="location-item">
+                                    <svg class="w-5 h-5" style="color: var(--card-color-start);" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
+                                    </svg>
+                                    <a href="#" class="hover:text-current transition-colors duration-200">
+                                        <span>Boston</span>
+                                    </a>
+                                </li>
+                                <li class="location-item">
+                                    <svg class="w-5 h-5" style="color: var(--card-color-start);" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
+                                    </svg>
+                                    <a href="#" class="hover:text-current transition-colors duration-200">
+                                        <span>Cape Cod</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- Michigan -->
+                        <!-- Michigan -->
+                        <div class="location-card card-blue" data-state="michigan" data-cities="detroit">
+                            <h3 class="location-card-title">MICHIGAN</h3>
+                            <ul class="space-y-1">
+                                <li class="location-item">
+                                    <svg class="w-5 h-5" style="color: var(--card-color-start);" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
+                                    </svg>
+                                    <a href="#" class="hover:text-current transition-colors duration-200">
+                                        <span>Detroit</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- Minnesota -->
+                        <!-- Minnesota -->
+                        <div class="location-card card-violet" data-state="minnesota" data-cities="minneapolis">
+                            <h3 class="location-card-title">MINNESOTA</h3>
+                            <ul class="space-y-1">
+                                <li class="location-item">
+                                    <svg class="w-5 h-5" style="color: var(--card-color-start);" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
+                                    </svg>
+                                    <a href="#" class="hover:text-current transition-colors duration-200">
+                                        <span>Minneapolis</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- Nevada -->
+                        <!-- Nevada -->
+                        <div class="location-card card-fuchsia" data-state="nevada" data-cities="las vegas">
+                            <h3 class="location-card-title">NEVADA</h3>
+                            <ul class="space-y-1">
+                                <li class="location-item">
+                                    <svg class="w-5 h-5" style="color: var(--card-color-start);" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
+                                    </svg>
+                                    <a href="#" class="hover:text-current transition-colors duration-200">
+                                        <span>Las Vegas</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- New York -->
+                        <!-- New York -->
+                        <div class="location-card card-rose" data-state="new york" data-cities="manhattan">
+                            <h3 class="location-card-title">NEW YORK</h3>
+                            <ul class="space-y-1">
+                                <li class="location-item">
+                                    <svg class="w-5 h-5" style="color: var(--card-color-start);" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
+                                    </svg>
+                                    <a href="#" class="hover:text-current transition-colors duration-200">
+                                        <span>Manhattan</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- North Carolina -->
+                        <!-- North Carolina -->
+                        <div class="location-card card-pink" data-state="north carolina" data-cities="charlotte">
+                            <h3 class="location-card-title">NORTH CAROLINA</h3>
+                            <ul class="space-y-1">
+                                <li class="location-item">
+                                    <svg class="w-5 h-5" style="color: var(--card-color-start);" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
+                                    </svg>
+                                    <a href="#" class="hover:text-current transition-colors duration-200">
+                                        <span>Charlotte</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- Ohio -->
+                        <!-- Ohio -->
+                        <div class="location-card card-purple" data-state="ohio" data-cities="cleveland">
+                            <h3 class="location-card-title">OHIO</h3>
+                            <ul class="space-y-1">
+                                <li class="location-item">
+                                    <svg class="w-5 h-5" style="color: var(--card-color-start);" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
+                                    </svg>
+                                    <a href="#" class="hover:text-current transition-colors duration-200">
+                                        <span>Cleveland</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- Oklahoma -->
+                        <!-- Oklahoma -->
+                        <div class="location-card card-blue" data-state="oklahoma" data-cities="oklahoma city tulsa">
+                            <h3 class="location-card-title">OKLAHOMA</h3>
+                            <ul class="space-y-1">
+                                <li class="location-item">
+                                    <svg class="w-5 h-5" style="color: var(--card-color-start);" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
+                                    </svg>
+                                    <a href="#" class="hover:text-current transition-colors duration-200">
+                                        <span>Oklahoma City</span>
+                                    </a>
+                                </li>
+                                <li class="location-item">
+                                    <svg class="w-5 h-5" style="color: var(--card-color-start);" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
+                                    </svg>
+                                    <a href="#" class="hover:text-current transition-colors duration-200">
+                                        <span>Tulsa</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- Oregon -->
+                        <!-- Oregon -->
+                        <div class="location-card card-indigo" data-state="oregon" data-cities="portland">
+                            <h3 class="location-card-title">OREGON</h3>
+                            <ul class="space-y-1">
+                                <li class="location-item">
+                                    <svg class="w-5 h-5" style="color: var(--card-color-start);" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
+                                    </svg>
+                                    <a href="#" class="hover:text-current transition-colors duration-200">
+                                        <span>Portland</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- Pennsylvania -->
+                        <!-- Pennsylvania -->
+                        <div class="location-card card-cyan" data-state="pennsylvania" data-cities="pittsburgh">
+                            <h3 class="location-card-title">PENNYSYLVANIA</h3>
+                            <ul class="space-y-1">
+                                <li class="location-item">
+                                    <svg class="w-5 h-5" style="color: var(--card-color-start);" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
+                                    </svg>
+                                    <a href="#" class="hover:text-current transition-colors duration-200">
+                                        <span>Pittsburgh</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- Rhode Island -->
+                        <!-- Rhode Island -->
+                        <div class="location-card card-teal" data-state="rhode island" data-cities="newport">
+                            <h3 class="location-card-title">RHODE ISLAND</h3>
+                            <ul class="space-y-1">
+                                <li class="location-item">
+                                    <svg class="w-5 h-5" style="color: var(--card-color-start);" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
+                                    </svg>
+                                    <a href="#" class="hover:text-current transition-colors duration-200">
+                                        <span>Newport</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- South Carolina -->
+                        <!-- South Carolina -->
+                        <div class="location-card card-green" data-state="south carolina" data-cities="charleston">
+                            <h3 class="location-card-title">SOUTH CAROLINA</h3>
+                            <ul class="space-y-1">
+                                <li class="location-item">
+                                    <svg class="w-5 h-5" style="color: var(--card-color-start);" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
+                                    </svg>
+                                    <a href="#" class="hover:text-current transition-colors duration-200">
+                                        <span>Charleston</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- Tennessee -->
+                        <!-- Tennessee -->
+                        <div class="location-card card-emerald" data-state="tennessee" data-cities="nashville">
+                            <h3 class="location-card-title">TENNESSEE</h3>
+                            <ul class="space-y-1">
+                                <li class="location-item">
+                                    <svg class="w-5 h-5" style="color: var(--card-color-start);" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
+                                    </svg>
+                                    <a href="#" class="hover:text-current transition-colors duration-200">
+                                        <span>Nashville</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- Texas -->
+                        <!-- Texas -->
+                        <div class="location-card card-lime" data-state="texas" data-cities="dallas houston san antonio">
+                            <h3 class="location-card-title">TEXAS</h3>
+                            <ul class="space-y-1">
+                                <li class="location-item">
+                                    <svg class="w-5 h-5" style="color: var(--card-color-start);" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
+                                    </svg>
+                                    <a href="#" class="hover:text-current transition-colors duration-200">
+                                        <span>Dallas</span>
+                                    </a>
+                                </li>
+                                <li class="location-item">
+                                    <svg class="w-5 h-5" style="color: var(--card-color-start);" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
+                                    </svg>
+                                    <a href="#" class="hover:text-current transition-colors duration-200">
+                                        <span>Houston</span>
+                                    </a>
+                                </li>
+                                <li class="location-item">
+                                    <svg class="w-5 h-5" style="color: var(--card-color-start);" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
+                                    </svg>
+                                    <a href="#" class="hover:text-current transition-colors duration-200">
+                                        <span>San Antonio</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- Washington -->
+                        <!-- Washington -->
+                        <div class="location-card card-yellow" data-state="washington" data-cities="seattle">
+                            <h3 class="location-card-title">WASHINGTON</h3>
+                            <ul class="space-y-1">
+                                <li class="location-item">
+                                    <svg class="w-5 h-5" style="color: var(--card-color-start);" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
+                                    </svg>
+                                    <a href="#" class="hover:text-current transition-colors duration-200">
+                                        <span>Seattle</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Description Section -->
+        <section class="relative overflow-hidden bg-white py-20 md:py-28">
+            <div class="container mx-auto px-6">
+                <div class="max-w-4xl mx-auto text-center space-y-8">
+                    <h2 class="text-4xl md:text-5xl font-black text-gray-900">
+                        OUR PHOTO BOOTH LOCATIONS
+                    </h2>
+                    <p class="text-lg md:text-xl text-gray-600 leading-relaxed">
+                        Discover MiHi Entertainment's many locations across the US, bringing our cutting-edge event technology and services to a city near you.
+                    </p>
+                    
+                    <!-- Contact CTA -->
+                    <div class="pt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+                        <a href="#" class="inline-flex items-center justify-center px-8 py-4 rounded-full font-semibold text-lg bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white shadow-[0_22px_60px_-20px_rgba(99,102,241,0.4)] hover:shadow-[0_28px_70px_-20px_rgba(147,51,234,0.5)] transition-transform duration-300 hover:-translate-y-1 focus:ring-4 focus:ring-indigo-400/40">
+                            Get Your Free Quote
+                        </a>
+                        <a href="index.html#contact" class="inline-flex items-center justify-center px-8 py-4 rounded-full font-semibold text-lg bg-gradient-to-r from-blue-500 via-cyan-500 to-teal-500 text-white shadow-[0_22px_60px_-20px_rgba(0,80,255,0.4)] hover:shadow-[0_28px_70px_-20px_rgba(6,182,212,0.5)] transition-transform duration-300 hover:-translate-y-1 focus:ring-4 focus:ring-blue-400/40">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+                            </svg>
+                            CALL US
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <script src="assets/components/footer.js"></script>
+    
+    <!-- Main JavaScript -->
+    <script src="assets/js/main.js" defer></script>
+
+    <!-- Location Search Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchInput = document.getElementById('location-search');
+            const clearButton = document.getElementById('clear-search');
+            const searchResults = document.getElementById('search-results');
+            const locationCards = document.querySelectorAll('.location-card');
+            const locationsGrid = document.getElementById('locations-grid');
+
+            function filterLocations() {
+                const searchTerm = searchInput.value.toLowerCase().trim();
+                let visibleCount = 0;
+
+                locationCards.forEach(card => {
+                    const state = card.getAttribute('data-state') || '';
+                    const cities = card.getAttribute('data-cities') || '';
+                    const searchableText = `${state} ${cities}`.toLowerCase();
+
+                    if (searchTerm === '' || searchableText.includes(searchTerm)) {
+                        card.classList.remove('hidden');
+                        visibleCount++;
+                    } else {
+                        card.classList.add('hidden');
+                    }
+                });
+
+                // Show/hide clear button
+                if (searchTerm !== '') {
+                    clearButton.classList.remove('hidden');
+                } else {
+                    clearButton.classList.add('hidden');
+                }
+
+                // Update results message
+                if (searchTerm !== '') {
+                    if (visibleCount === 0) {
+                        searchResults.textContent = `No locations found for "${searchInput.value}"`;
+                        searchResults.classList.remove('hidden');
+                        searchResults.classList.add('text-red-500');
+                        searchResults.classList.remove('text-gray-600');
+                    } else {
+                        searchResults.textContent = `Found ${visibleCount} location${visibleCount !== 1 ? 's' : ''}`;
+                        searchResults.classList.remove('hidden');
+                        searchResults.classList.add('text-gray-600');
+                        searchResults.classList.remove('text-red-500');
+                    }
+                } else {
+                    searchResults.classList.add('hidden');
+                }
+            }
+
+            // Search input event
+            searchInput.addEventListener('input', filterLocations);
+
+            // Clear button event
+            clearButton.addEventListener('click', function() {
+                searchInput.value = '';
+                filterLocations();
+                searchInput.focus();
+            });
+
+        });
+    </script>
+</body>
+
+</html>
+

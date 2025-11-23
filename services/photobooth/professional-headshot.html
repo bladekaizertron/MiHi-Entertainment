@@ -1,0 +1,1500 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Professional Headshot Rentals by MiHi Entertainment. Studio-quality headshots on-site with expert lighting, instant touch-ups, and polished digital delivery.">
+    <title>Professional Headshots - MiHi Entertainment</title>
+    <link rel="icon" type="image/svg+xml" href="../../assets/images/favicon.svg">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #0f172a;
+            background: #ffffff;
+            line-height: 1.7;
+        }
+
+        main h1,
+        main h2,
+        main h3,
+        main h4,
+        main h5,
+        main h6 {
+            font-family: 'Cormorant Garamond', 'Playfair Display', serif;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 10px 30px rgba(30, 64, 175, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(30, 64, 175, 0.4);
+            background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+        }
+
+        .section-padding {
+            padding: 4rem 0;
+        }
+
+        @media (min-width: 640px) {
+            .section-padding {
+                padding: 5rem 0;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .section-padding {
+                padding: 8rem 0;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .section-padding {
+                padding: 10rem 0;
+            }
+        }
+
+        /* Premium Professional Gradient */
+        @keyframes professional-shift {
+            0%, 100% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+        }
+
+        .professional-gradient {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 25%, #334155 50%, #475569 75%, #64748b 100%);
+            background-size: 400% 400%;
+            animation: professional-shift 20s ease infinite;
+            position: relative;
+        }
+
+        .professional-gradient::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 20% 50%, rgba(30, 64, 175, 0.15) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 80%, rgba(59, 130, 246, 0.1) 0%, transparent 50%);
+        }
+
+        /* Premium Glassmorphism */
+        .glass-premium {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.15);
+        }
+
+        /* Professional Card with Premium Effect */
+        .professional-card {
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .professional-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(30, 64, 175, 0.03) 0%, rgba(59, 130, 246, 0.03) 100%);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .professional-card:hover::before {
+            opacity: 1;
+        }
+
+        .professional-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 25px 60px rgba(30, 64, 175, 0.2);
+        }
+
+        /* Premium Package Card */
+        .package-card {
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            border: 1px solid rgba(226, 232, 240, 1);
+        }
+
+        .package-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(30, 64, 175, 0.08), transparent);
+            transition: left 0.7s ease;
+        }
+
+        .package-card:hover::before {
+            left: 100%;
+        }
+
+        .package-card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 30px 70px rgba(30, 64, 175, 0.25);
+            border-color: rgba(30, 64, 175, 0.3);
+        }
+
+        .package-recommended {
+            border: 2px solid #1e40af;
+            box-shadow: 0 0 0 1px rgba(30, 64, 175, 0.1), 0 25px 60px rgba(30, 64, 175, 0.25);
+            background: linear-gradient(135deg, #ffffff 0%, #eff6ff 100%);
+            position: relative;
+        }
+
+        .package-recommended::after {
+            content: 'RECOMMENDED';
+            position: absolute;
+            top: -14px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%);
+            color: white;
+            padding: 6px 24px;
+            border-radius: 25px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            box-shadow: 0 5px 20px rgba(30, 64, 175, 0.4);
+        }
+
+        /* Enhanced Package Card Styles */
+        .package-card-enhanced {
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: visible;
+        }
+
+        .package-card-enhanced::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(30, 64, 175, 0.05), transparent);
+            transition: left 0.8s ease;
+            z-index: 1;
+        }
+
+        .package-card-enhanced:hover::before {
+            left: 100%;
+        }
+
+        .package-card-enhanced:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 35px 80px rgba(30, 64, 175, 0.2), 0 0 0 1px rgba(30, 64, 175, 0.1);
+        }
+
+        .package-recommended-enhanced {
+            border: 2px solid #1e40af;
+            box-shadow: 0 0 0 1px rgba(30, 64, 175, 0.15), 0 30px 70px rgba(30, 64, 175, 0.3);
+            position: relative;
+        }
+
+        .package-recommended-enhanced:hover {
+            transform: translateY(-18px) scale(1.03);
+            box-shadow: 0 40px 90px rgba(30, 64, 175, 0.35), 0 0 0 1px rgba(30, 64, 175, 0.2);
+        }
+
+        /* Package Icon */
+        .package-icon {
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-origin: center;
+        }
+
+        .package-card-enhanced:hover .package-icon {
+            transform: rotate(5deg) scale(1.1);
+        }
+
+        .package-icon-premium {
+            box-shadow: 0 15px 40px rgba(30, 64, 175, 0.3);
+        }
+
+        .package-card-enhanced:hover .package-icon-premium {
+            transform: rotate(8deg) scale(1.15);
+            box-shadow: 0 20px 50px rgba(30, 64, 175, 0.4);
+        }
+
+        /* Enhanced Check Icon */
+        .check-icon-enhanced {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 28px;
+            height: 28px;
+            background: linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%);
+            color: white;
+            border-radius: 50%;
+            font-size: 14px;
+            font-weight: bold;
+            flex-shrink: 0;
+            box-shadow: 0 4px 12px rgba(30, 64, 175, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .check-icon-premium {
+            background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+            box-shadow: 0 5px 15px rgba(30, 64, 175, 0.4);
+            width: 30px;
+            height: 30px;
+        }
+
+        li:hover .check-icon-enhanced {
+            transform: scale(1.15) rotate(5deg);
+            box-shadow: 0 6px 18px rgba(30, 64, 175, 0.4);
+        }
+
+        /* Premium Check Icon */
+        .check-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 26px;
+            height: 26px;
+            background: linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%);
+            color: white;
+            border-radius: 50%;
+            font-size: 14px;
+            font-weight: bold;
+            flex-shrink: 0;
+            box-shadow: 0 4px 12px rgba(30, 64, 175, 0.3);
+        }
+
+        /* Premium Professional Badge */
+        .professional-badge {
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(20px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+        }
+
+        /* Premium Feature Icon */
+        .feature-icon {
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 12px 30px rgba(30, 64, 175, 0.3);
+            transition: all 0.4s ease;
+        }
+
+        .professional-card:hover .feature-icon {
+            transform: rotate(5deg) scale(1.1);
+            box-shadow: 0 15px 40px rgba(30, 64, 175, 0.4);
+        }
+
+        /* Premium Elegant Divider */
+        .elegant-divider {
+            height: 1px;
+            background: linear-gradient(90deg, 
+                transparent 0%, 
+                rgba(226, 232, 240, 0.5) 20%,
+                rgba(30, 64, 175, 0.3) 50%,
+                rgba(226, 232, 240, 0.5) 80%,
+                transparent 100%);
+            margin: 6rem 0;
+            position: relative;
+        }
+
+        .elegant-divider::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 120px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #1e40af, transparent);
+        }
+
+        /* Premium Tech Spec Card */
+        .tech-spec-card {
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            border: 1px solid rgba(226, 232, 240, 1);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tech-spec-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(30, 64, 175, 0.05) 0%, transparent 100%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .tech-spec-card:hover::before {
+            opacity: 1;
+        }
+
+        .tech-spec-card:hover {
+            border-color: rgba(30, 64, 175, 0.4);
+            box-shadow: 0 15px 40px rgba(30, 64, 175, 0.15);
+            transform: translateY(-4px);
+        }
+
+        /* Premium Image Overlay */
+        .premium-image-wrapper {
+            position: relative;
+            overflow: hidden;
+            border-radius: 24px;
+        }
+
+        .premium-image-wrapper::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(30, 64, 175, 0.05) 0%, transparent 100%);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .premium-image-wrapper:hover::after {
+            opacity: 1;
+        }
+
+        .premium-image-wrapper img {
+            transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .premium-image-wrapper:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Premium Typography */
+        .text-premium {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Floating Animation */
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        .float-animation {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        /* Premium Section Backgrounds */
+        .section-premium-light {
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 50%, #f1f5f9 100%);
+        }
+
+        .section-premium-dark {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+        }
+
+        /* Premium Badge */
+        .badge-premium {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 6px 12px;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            border-radius: 50px;
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        }
+
+        @media (min-width: 640px) {
+            .badge-premium {
+                gap: 8px;
+                padding: 10px 24px;
+                font-size: 13px;
+                letter-spacing: 1.5px;
+            }
+        }
+
+        /* Premium Shadow */
+        .shadow-premium {
+            box-shadow: 0 25px 60px -12px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(0, 0, 0, 0.05);
+        }
+
+        .shadow-premium-lg {
+            box-shadow: 0 35px 80px -12px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Premium Auto-Scrolling Photo Gallery */
+        .headshot-gallery-container {
+            overflow: hidden;
+            position: relative;
+            width: 100%;
+            margin: 0 auto;
+            /* Fade edges for premium effect */
+            mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
+        }
+
+        .headshot-gallery-track {
+            display: flex;
+            gap: 1.5rem;
+            width: fit-content;
+            animation: scroll-left 40s linear infinite;
+            will-change: transform;
+        }
+
+        .headshot-gallery-track:hover {
+            animation-play-state: paused;
+        }
+
+        @keyframes scroll-left {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        .headshot-gallery-set {
+            display: flex;
+            gap: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .headshot-gallery-item {
+            flex-shrink: 0;
+            width: 320px;
+            height: 420px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(0, 0, 0, 0.05);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            background: #f8fafc;
+        }
+
+        .headshot-gallery-item::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(30, 64, 175, 0.05) 0%, transparent 100%);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .headshot-gallery-item:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 30px 70px rgba(30, 64, 175, 0.25), 0 0 0 1px rgba(30, 64, 175, 0.2);
+        }
+
+        .headshot-gallery-item:hover::before {
+            opacity: 1;
+        }
+
+        .headshot-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .headshot-gallery-item:hover .headshot-image {
+            transform: scale(1.1);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .headshot-gallery-item {
+                width: 280px;
+                height: 360px;
+                gap: 1rem;
+            }
+
+            .headshot-gallery-track {
+                gap: 1rem;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .headshot-gallery-item {
+                width: 240px;
+                height: 320px;
+            }
+        }
+
+        /* Mobile Optimizations */
+        @media (max-width: 640px) {
+            .premium-image-wrapper img {
+                max-width: 100%;
+                height: auto;
+            }
+            
+            .professional-card {
+                padding: 1rem;
+            }
+            
+            .tech-spec-card {
+                padding: 1.25rem;
+            }
+            
+            .package-card {
+                margin-bottom: 1.5rem;
+            }
+
+            /* Hero Image Mobile Optimizations */
+            section[class*="hero"] img[alt*="Professional Headshot Hero"] {
+                object-position: center 40%;
+            }
+
+            /* Enhanced Hero Section Mobile */
+            section[class*="hero"] {
+                min-height: 90vh !important;
+            }
+
+            section[class*="hero"] h1 {
+                letter-spacing: -0.02em;
+            }
+
+            section[class*="hero"] .btn-primary,
+            section[class*="hero"] button[data-click-to-call] {
+                min-height: 52px;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            }
+
+            section[class*="hero"] .btn-primary:hover,
+            section[class*="hero"] button[data-click-to-call]:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+            }
+
+            section[class*="hero"] p {
+                text-shadow: 1px 1px 10px rgba(0, 0, 0, 0.4) !important;
+            }
+        }
+
+        /* Additional Mobile Enhancements for Hero */
+        @media (max-width: 480px) {
+            section[class*="hero"] h1 {
+                font-size: 2.75rem !important;
+                line-height: 1.1 !important;
+            }
+
+            section[class*="hero"] .container {
+                padding-top: 3rem;
+                padding-bottom: 3rem;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-white">
+    <!-- Navigation -->
+    <script src="../../assets/components/navigation.js"></script>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="relative text-white overflow-hidden min-h-[90vh] sm:min-h-[90vh] flex items-center">
+            <!-- Background Image with Parallax Effect -->
+            <div class="absolute inset-0 z-0">
+                <img src="../../assets/images/event-photography-1.webp" alt="Professional Headshots" class="w-full h-full object-cover object-center scale-100 sm:scale-105 md:scale-110 transition-transform duration-[20s] ease-out hidden sm:block">
+                <!-- Premium Gradient Overlay -->
+                <div class="absolute inset-0 professional-gradient opacity-95"></div>
+                <!-- Additional Sophisticated Overlay -->
+                <img src="../../assets/images/headshot/professional-headshot-hero.webp" alt="Professional Headshot Hero" class="absolute inset-0 w-full h-full object-cover object-center sm:object-center">
+                <!-- Premium Light Accents -->
+                <div class="absolute top-1/4 right-1/4 w-48 h-48 sm:w-64 sm:h-64 md:w-96 md:h-96 bg-blue-600/10 rounded-full blur-3xl float-animation"></div>
+                <div class="absolute bottom-1/4 left-1/4 w-48 h-48 sm:w-64 sm:h-64 md:w-96 md:h-96 bg-indigo-600/10 rounded-full blur-3xl float-animation" style="animation-delay: 2s;"></div>
+            </div>
+            
+            <div class="container mx-auto px-5 sm:px-6 py-20 sm:py-20 md:py-24 lg:py-32 relative z-10 w-full">
+                <div class="max-w-6xl mx-auto text-center">
+                    <div class="inline-block mb-6 sm:mb-8 md:mb-10 badge-premium">
+                        <span class="flex items-center justify-center gap-1.5 sm:gap-3 text-white text-[10px] sm:text-sm">
+                            <svg class="w-3 h-3 sm:w-5 sm:h-5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" clip-rule="evenodd"></path>
+                            </svg>
+                            <span class="leading-tight">STUDIO-QUALITY PHOTOS FOR BUSINESS & EVENTS</span>
+                        </span>
+                    </div>
+                    <h1 class="text-5xl sm:text-6xl md:text-6xl lg:text-7xl xl:text-8xl 2xl:text-9xl font-bold mb-5 sm:mb-6 md:mb-8 leading-[0.95] tracking-tight px-3">
+                        <span class="inline-block text-white" style="text-shadow: 2px 2px 20px rgba(0, 0, 0, 0.5), 0 0 60px rgba(255, 255, 255, 0.4), 0 0 100px rgba(30, 64, 175, 0.3);">Professional</span> <span class="inline-block text-white/95" style="text-shadow: 2px 2px 20px rgba(0, 0, 0, 0.5), 0 0 60px rgba(255, 255, 255, 0.4), 0 0 100px rgba(30, 64, 175, 0.3);">Headshots</span>
+                    </h1>
+                    <p class="text-lg sm:text-xl md:text-xl lg:text-2xl xl:text-3xl mb-8 sm:mb-8 md:mb-12 text-white/95 max-w-4xl mx-auto leading-relaxed font-light px-5" style="text-shadow: 1px 1px 10px rgba(0, 0, 0, 0.4);">
+                        Give your guests studio-quality professional headshots on-site with expert lighting, instant touch-ups, and polished digital delivery.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-3 sm:gap-5 justify-center items-center px-4">
+                        <a href="../../index.html#contact" class="btn-primary text-white px-8 sm:px-8 md:px-12 py-4 sm:py-4 md:py-5 rounded-full font-semibold text-base sm:text-base md:text-lg relative z-10 flex items-center gap-2 group w-full sm:w-auto justify-center shadow-xl">
+                            <span>Get Your Free Quote</span>
+                            <svg class="w-5 h-5 sm:w-5 sm:h-5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                            </svg>
+                        </a>
+                        <button type="button" data-click-to-call data-call-text="Call Us" class="px-8 sm:px-8 md:px-12 py-4 sm:py-4 md:py-5 rounded-full font-semibold border-2 border-white/40 text-white glass-premium hover:bg-white/20 hover:border-white/50 transition-all duration-300 text-base sm:text-base md:text-lg cursor-pointer flex items-center gap-2 backdrop-blur-md w-full sm:w-auto justify-center shadow-lg">
+                            <svg class="w-5 h-5 sm:w-5 sm:h-5" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"></path>
+                            </svg>
+                            <span>Call Us</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Studio Quality Photos Gallery Section -->
+        <section class="section-padding section-premium-light relative overflow-hidden">
+            <div class="container mx-auto px-4 sm:px-6 relative z-10">
+                <div class="max-w-7xl mx-auto">
+                    <div class="text-center mb-10 md:mb-16">
+                        <div class="inline-block mb-4 md:mb-6 px-4 sm:px-6 py-2 bg-blue-50 border border-blue-100 rounded-full">
+                            <span class="text-sm font-semibold text-blue-600 uppercase tracking-wider">Gallery</span>
+                        </div>
+                        <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-6 md:mb-8 text-premium leading-tight">
+                            Studio-Quality Photos for Business & Events
+                        </h2>
+                        <p class="text-xl text-gray-600 max-w-3xl mx-auto font-light leading-relaxed">
+                            See the exceptional quality and professionalism of our headshot photography services
+                        </p>
+                    </div>
+
+                    <!-- Auto-Scrolling Photo Gallery -->
+                    <div class="headshot-gallery-container">
+                        <div class="headshot-gallery-track">
+                            <!-- First set of images (for seamless loop) -->
+                            <div class="headshot-gallery-set">
+                                <div class="headshot-gallery-item">
+                                    <img src="../../assets/images/headshot/professional-headshot-1.webp" alt="Professional Headshot 1" class="headshot-image">
+                                </div>
+                                <div class="headshot-gallery-item">
+                                    <img src="../../assets/images/headshot/professional-headshot-2.webp" alt="Professional Headshot 2" class="headshot-image">
+                                </div>
+                                <div class="headshot-gallery-item">
+                                    <img src="../../assets/images/headshot/professional-headshot-3.webp" alt="Professional Headshot 3" class="headshot-image">
+                                </div>
+                                <div class="headshot-gallery-item">
+                                    <img src="../../assets/images/headshot/professional-headshot-4.webp" alt="Professional Headshot 4" class="headshot-image">
+                                </div>
+                                <div class="headshot-gallery-item">
+                                    <img src="../../assets/images/headshot/professional-headshot-5.webp" alt="Professional Headshot 5" class="headshot-image">
+                                </div>
+                                <div class="headshot-gallery-item">
+                                    <img src="../../assets/images/headshot/professional-headshot-6.webp" alt="Professional Headshot 6" class="headshot-image">
+                                </div>
+                                <div class="headshot-gallery-item">
+                                    <img src="../../assets/images/headshot/professional-headshot-7.webp" alt="Professional Headshot 7" class="headshot-image">
+                                </div>
+                                <div class="headshot-gallery-item">
+                                    <img src="../../assets/images/headshot/professional-headshot-8.webp" alt="Professional Headshot 8" class="headshot-image">
+                                </div>
+                                <div class="headshot-gallery-item">
+                                    <img src="../../assets/images/headshot/professional-headshot-9.webp" alt="Professional Headshot 9" class="headshot-image">
+                                </div>
+                            </div>
+                            <!-- Duplicate set for seamless scrolling -->
+                            <div class="headshot-gallery-set">
+                                <div class="headshot-gallery-item">
+                                    <img src="../../assets/images/headshot/professional-headshot-1.webp" alt="Professional Headshot 1" class="headshot-image">
+                                </div>
+                                <div class="headshot-gallery-item">
+                                    <img src="../../assets/images/headshot/professional-headshot-2.webp" alt="Professional Headshot 2" class="headshot-image">
+                                </div>
+                                <div class="headshot-gallery-item">
+                                    <img src="../../assets/images/headshot/professional-headshot-3.webp" alt="Professional Headshot 3" class="headshot-image">
+                                </div>
+                                <div class="headshot-gallery-item">
+                                    <img src="../../assets/images/headshot/professional-headshot-4.webp" alt="Professional Headshot 4" class="headshot-image">
+                                </div>
+                                <div class="headshot-gallery-item">
+                                    <img src="../../assets/images/headshot/professional-headshot-5.webp" alt="Professional Headshot 5" class="headshot-image">
+                                </div>
+                                <div class="headshot-gallery-item">
+                                    <img src="../../assets/images/headshot/professional-headshot-6.webp" alt="Professional Headshot 6" class="headshot-image">
+                                </div>
+                                <div class="headshot-gallery-item">
+                                    <img src="../../assets/images/headshot/professional-headshot-7.webp" alt="Professional Headshot 7" class="headshot-image">
+                                </div>
+                                <div class="headshot-gallery-item">
+                                    <img src="../../assets/images/headshot/professional-headshot-8.webp" alt="Professional Headshot 8" class="headshot-image">
+                                </div>
+                                <div class="headshot-gallery-item">
+                                    <img src="../../assets/images/headshot/professional-headshot-9.webp" alt="Professional Headshot 9" class="headshot-image">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+         <!-- Studio-Quality Section -->
+         <section class="section-padding section-premium-light relative overflow-hidden">
+            <div class="container mx-auto px-4 sm:px-6 relative z-10">
+                <div class="max-w-7xl mx-auto">
+                    <div class="text-center mb-12 md:mb-20">
+                        <div class="inline-block mb-4 md:mb-6 px-4 sm:px-6 py-2 bg-blue-50 border border-blue-100 rounded-full">
+                            <span class="text-sm font-semibold text-blue-600 uppercase tracking-wider">Premium Service</span>
+                        </div>
+                        <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-6 md:mb-8 text-premium leading-tight">
+                            Professional Business Portrait Photography & Corporate Headshots
+                        </h2>
+                        <p class="text-xl md:text-2xl text-gray-600 max-w-4xl mx-auto leading-relaxed font-light">
+                            Upgrade your corporate event with high-quality, professional headshots that give guests a polished, career-ready look. Our expert photographers use flattering lighting, professional backdrops, and instant touch-ups to deliver studio-grade results on-site.
+                        </p>
+                    </div>
+
+                    <!-- Feature Grid with Image -->
+                    <div class="grid md:grid-cols-2 gap-6 md:gap-8 lg:gap-12 mb-12 md:mb-20 items-center">
+                        <!-- Left Side - Image -->
+                        <div class="premium-image-wrapper shadow-premium-lg rounded-3xl overflow-hidden">
+                            <img src="../../assets/images/headshot/professional-headshot-10.webp" alt="Professional Headshot Service" class="w-full h-full object-cover object-center scale-125">
+                        </div>
+
+                        <!-- Right Side - Feature Grid -->
+                        <div class="grid grid-cols-2 gap-3 sm:gap-4">
+                        <!-- Feature 1 -->
+                            <div class="professional-card bg-white p-4 rounded-xl shadow-lg">
+                                <div class="feature-icon mx-auto mb-3" style="width: 48px; height: 48px;">
+                                    <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                                </svg>
+                            </div>
+                                <h3 class="text-sm font-bold mb-2 text-center">Executive Portrait Photography</h3>
+                        </div>
+
+                        <!-- Feature 2 -->
+                            <div class="professional-card bg-white p-4 rounded-xl shadow-lg">
+                                <div class="feature-icon mx-auto mb-3" style="width: 48px; height: 48px;">
+                                    <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                                </svg>
+                            </div>
+                                <h3 class="text-sm font-bold mb-2 text-center">Corporate Team Headshots</h3>
+                        </div>
+
+                        <!-- Feature 3 -->
+                            <div class="professional-card bg-white p-4 rounded-xl shadow-lg">
+                                <div class="feature-icon mx-auto mb-3" style="width: 48px; height: 48px;">
+                                    <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                                </svg>
+                            </div>
+                                <h3 class="text-sm font-bold mb-2 text-center">Professional LinkedIn Photos</h3>
+                        </div>
+
+                        <!-- Feature 4 -->
+                            <div class="professional-card bg-white p-4 rounded-xl shadow-lg">
+                                <div class="feature-icon mx-auto mb-3" style="width: 48px; height: 48px;">
+                                    <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 4v16M17 4v16M3 8h4m10 0h4M3 12h18M3 16h4m10 0h4M4 20h16a1 1 0 001-1V5a1 1 0 00-1-1H4a1 1 0 00-1 1v14a1 1 0 001 1z"></path>
+                                </svg>
+                            </div>
+                                <h3 class="text-sm font-bold mb-2 text-center">Personal Branding Photography</h3>
+                        </div>
+
+                        <!-- Feature 5 -->
+                            <div class="professional-card bg-white p-4 rounded-xl shadow-lg">
+                                <div class="feature-icon mx-auto mb-3" style="width: 48px; height: 48px;">
+                                    <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                                </svg>
+                            </div>
+                                <h3 class="text-sm font-bold mb-2 text-center">Business Profile Pictures</h3>
+                        </div>
+
+                        <!-- Feature 6 -->
+                            <div class="professional-card bg-white p-4 rounded-xl shadow-lg">
+                                <div class="feature-icon mx-auto mb-3" style="width: 48px; height: 48px;">
+                                    <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                                </svg>
+                            </div>
+                                <h3 class="text-sm font-bold mb-2 text-center">Studio-Quality Lighting</h3>
+                        </div>
+
+                        <!-- Feature 7 -->
+                            <div class="professional-card bg-white p-4 rounded-xl shadow-lg">
+                                <div class="feature-icon mx-auto mb-3" style="width: 48px; height: 48px;">
+                                    <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+                                </svg>
+                            </div>
+                                <h3 class="text-sm font-bold mb-2 text-center">Professional Photo Retouching</h3>
+                        </div>
+
+                        <!-- Feature 8 -->
+                            <div class="professional-card bg-white p-4 rounded-xl shadow-lg">
+                                <div class="feature-icon mx-auto mb-3" style="width: 48px; height: 48px;">
+                                    <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                            </div>
+                                <h3 class="text-sm font-bold mb-2 text-center">Same-Day Digital Delivery</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- On-Site Experience Section -->
+        <section class="section-padding section-premium-light relative overflow-hidden">
+            <div class="container mx-auto px-4 sm:px-6 relative z-10">
+                <div class="max-w-7xl mx-auto">
+                    <div class="text-center mb-12 md:mb-20">
+                        <div class="inline-block mb-4 md:mb-6 px-4 sm:px-6 py-2 bg-blue-50 border border-blue-100 rounded-full">
+                            <span class="text-sm font-semibold text-blue-600 uppercase tracking-wider">On-Site Experience</span>
+                        </div>
+                        <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6 md:mb-8 text-premium leading-tight">
+                            On-Site Professional Headshot Experiences
+                        </h2>
+                        <p class="text-xl md:text-2xl text-gray-600 max-w-4xl mx-auto leading-relaxed font-light">
+                            A trade show headshot station is a game-changer. Our setup attracts attendees, provides them with professional-quality photos, and keeps your brand top of mind. It's the perfect mix of networking, engagement, and lasting value.
+                        </p>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-6 md:gap-8 lg:gap-12 mb-12 md:mb-20">
+                        <!-- Left Side - Feature Grid -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 lg:gap-6">
+                            <div class="professional-card bg-gradient-to-br from-blue-50 to-white p-6 lg:p-8 rounded-3xl shadow-premium border border-blue-100">
+                            <svg class="w-8 h-8 lg:w-10 lg:h-10 text-blue-600 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                            </svg>
+                                <h3 class="font-bold mb-2 text-sm lg:text-base">Professional Lighting Setups</h3>
+                        </div>
+
+                            <div class="professional-card bg-gradient-to-br from-blue-50 to-white p-6 lg:p-8 rounded-3xl shadow-premium border border-blue-100">
+                                <svg class="w-8 h-8 lg:w-10 lg:h-10 text-blue-600 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"></path>
+                            </svg>
+                                <h3 class="font-bold mb-2 text-gray-900 text-sm lg:text-base">Custom Branded Backdrop Options</h3>
+                        </div>
+
+                            <div class="professional-card bg-gradient-to-br from-blue-50 to-white p-6 lg:p-8 rounded-3xl shadow-premium border border-blue-100">
+                                <svg class="w-8 h-8 lg:w-10 lg:h-10 text-blue-600 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+                            </svg>
+                                <h3 class="font-bold mb-2 text-gray-900 text-sm lg:text-base">Real-Time Image Retouching</h3>
+                        </div>
+
+                            <div class="professional-card bg-gradient-to-br from-blue-50 to-white p-6 lg:p-8 rounded-3xl shadow-premium border border-blue-100">
+                                <svg class="w-8 h-8 lg:w-10 lg:h-10 text-blue-600 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                            </svg>
+                                <h3 class="font-bold mb-2 text-gray-900 text-sm lg:text-base">Instant Email And Text Delivery</h3>
+                        </div>
+
+                            <div class="professional-card bg-gradient-to-br from-blue-50 to-white p-6 lg:p-8 rounded-3xl shadow-premium border border-blue-100">
+                                <svg class="w-8 h-8 lg:w-10 lg:h-10 text-blue-600 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                            </svg>
+                                <h3 class="font-bold mb-2 text-gray-900 text-sm lg:text-base">Interactive Selection Kiosk</h3>
+                        </div>
+
+                            <div class="professional-card bg-gradient-to-br from-blue-50 to-white p-6 lg:p-8 rounded-3xl shadow-premium border border-blue-100">
+                                <svg class="w-8 h-8 lg:w-10 lg:h-10 text-blue-600 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"></path>
+                            </svg>
+                                <h3 class="font-bold mb-2 text-gray-900 text-sm lg:text-base">Personalized Branding Overlays</h3>
+                        </div>
+
+                            <div class="professional-card bg-gradient-to-br from-blue-50 to-white p-6 lg:p-8 rounded-3xl shadow-premium border border-blue-100">
+                                <svg class="w-8 h-8 lg:w-10 lg:h-10 text-blue-600 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path>
+                            </svg>
+                                <h3 class="font-bold mb-2 text-gray-900 text-sm lg:text-base">On-Site Prints And Digital Downloads</h3>
+                        </div>
+
+                            <div class="professional-card bg-gradient-to-br from-blue-50 to-white p-6 lg:p-8 rounded-3xl shadow-premium border border-blue-100">
+                            <svg class="w-8 h-8 lg:w-10 lg:h-10 text-blue-600 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path>
+                            </svg>
+                                <h3 class="font-bold mb-2 text-sm lg:text-base">Custom Branded Microsite</h3>
+                            </div>
+                        </div>
+
+                        <!-- Right Side - Image -->
+                        <div class="premium-image-wrapper shadow-premium-lg rounded-3xl overflow-hidden self-stretch">
+                            <img src="../../assets/images/headshot/professional-headshot-11.webp" alt="On-Site Professional Headshot Experience" class="w-full h-full object-cover object-center">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Packages Section -->
+        <section id="packages" class="section-padding bg-gradient-to-b from-gray-50 via-white to-gray-50">
+            <div class="container mx-auto px-4 sm:px-6">
+                <div class="max-w-7xl mx-auto">
+                    <!-- Header -->
+                    <div class="text-center mb-12 md:mb-20">
+                        <div class="inline-block mb-4 md:mb-6 px-4 sm:px-6 py-2 bg-blue-50 border border-blue-100 rounded-full">
+                            <span class="text-sm font-semibold text-blue-600 uppercase tracking-wider">PRODUCT PACKAGES</span>
+                        </div>
+                        <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-6 md:mb-8 text-premium leading-tight">
+                            Professional Headshot Packages
+                        </h2>
+                        <p class="text-xl text-gray-600 max-w-2xl mx-auto">Choose the perfect package for your event needs while keeping every capture professional, polished, and instantly shareable.</p>
+                    </div>
+
+                    <div class="grid lg:grid-cols-3 gap-6 md:gap-8">
+                        <!-- BASIC PACKAGE -->
+                        <div class="group bg-white rounded-3xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-gray-100">
+                            <div class="relative bg-gradient-to-br from-blue-500 via-indigo-500 to-blue-400 text-white p-8 text-center overflow-hidden">
+                                <div class="absolute top-0 right-0 w-40 h-40 bg-white opacity-10 rounded-full -mr-20 -mt-20"></div>
+                                <div class="absolute bottom-0 left-0 w-32 h-32 bg-white opacity-10 rounded-full -ml-16 -mb-16"></div>
+                            <div class="relative z-10">
+                                    <div class="inline-flex items-center justify-center w-16 h-16 bg-white/20 rounded-2xl mb-4 backdrop-blur-sm">
+                                        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20"><path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z"/></svg>
+                                    </div>
+                                    <h3 class="text-3xl font-bold mb-2">BASIC</h3>
+                                    <p class="text-white/85 text-sm">Up To 3 Hours of Service</p>
+                                </div>
+                                    </div>
+                            <div class="p-8">
+                                <ul class="space-y-4">
+                                    <li class="flex items-start gap-4 group/item">
+                                        <div class="flex-shrink-0 w-10 h-10 bg-blue-50 rounded-xl flex items-center justify-center group-hover/item:bg-blue-100 transition-colors">
+                                            <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                                </div>
+                                        <span class="text-gray-700 font-medium pt-2">Up To 3 Hours of Service</span>
+                                    </li>
+                                    <li class="flex items-start gap-4 group/item">
+                                        <div class="flex-shrink-0 w-10 h-10 bg-blue-50 rounded-xl flex items-center justify-center group-hover/item:bg-blue-100 transition-colors">
+                                            <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zm-4 7a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+                                        </div>
+                                        <span class="text-gray-700 font-medium pt-2">Professional Photographer</span>
+                                    </li>
+                                    <li class="flex items-start gap-4 group/item">
+                                        <div class="flex-shrink-0 w-10 h-10 bg-blue-50 rounded-xl flex items-center justify-center group-hover/item:bg-blue-100 transition-colors">
+                                            <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+                                        </div>
+                                        <span class="text-gray-700 font-medium pt-2">Basic Lighting Setup</span>
+                                    </li>
+                                    <li class="flex items-start gap-4 group/item">
+                                        <div class="flex-shrink-0 w-10 h-10 bg-blue-50 rounded-xl flex items-center justify-center group-hover/item:bg-blue-100 transition-colors">
+                                            <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                                        </div>
+                                        <span class="text-gray-700 font-medium pt-2">Choice of Plain Background</span>
+                                    </li>
+                                    <li class="flex items-start gap-4 group/item">
+                                        <div class="flex-shrink-0 w-10 h-10 bg-blue-50 rounded-xl flex items-center justify-center group-hover/item:bg-blue-100 transition-colors">
+                                            <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                                        </div>
+                                        <span class="text-gray-700 font-medium pt-2">On-Site Digital Delivery</span>
+                                    </li>
+                                    <li class="flex items-start gap-4 group/item">
+                                        <div class="flex-shrink-0 w-10 h-10 bg-blue-50 rounded-xl flex items-center justify-center group-hover/item:bg-blue-100 transition-colors">
+                                            <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"></path>
+                                            </svg>
+                                        </div>
+                                        <span class="text-gray-700 font-medium pt-2">Pose Coaching</span>
+                                    </li>
+                                    <li class="flex items-start gap-4 group/item">
+                                        <div class="flex-shrink-0 w-10 h-10 bg-blue-50 rounded-xl flex items-center justify-center group-hover/item:bg-blue-100 transition-colors">
+                                            <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"/></svg>
+                                        </div>
+                                        <span class="text-gray-700 font-medium pt-2">Digital Sharing via Email/SMS</span>
+                                    </li>
+                                    <li class="flex items-start gap-4 group/item">
+                                        <div class="flex-shrink-0 w-10 h-10 bg-blue-50 rounded-xl flex items-center justify-center group-hover/item:bg-blue-100 transition-colors">
+                                            <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                                        </div>
+                                        <span class="text-gray-700 font-medium pt-2">Post-Event Online Gallery</span>
+                                    </li>
+                                </ul>
+                                <a href="../../index.html#contact" class="mt-8 block w-full bg-gradient-to-r from-blue-500 to-blue-600 text-white py-4 rounded-xl font-semibold hover:from-blue-600 hover:to-indigo-600 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 text-center">Book Basic</a>
+                            </div>
+                        </div>
+
+                        <!-- RECOMMENDED PACKAGE -->
+                        <div class="relative bg-white rounded-3xl shadow-2xl overflow-hidden transform lg:scale-110 border-4 border-blue-500 hover:shadow-blue-500/50 transition-all duration-500 hover:-translate-y-2">
+                            <div class="absolute -top-1 -right-1 z-20">
+                                <div class="bg-gradient-to-r from-amber-400 to-orange-500 text-white px-6 py-2 text-xs font-bold rounded-bl-2xl rounded-tr-2xl shadow-lg flex items-center gap-2">
+                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                                    POPULAR
+                                </div>
+                            </div>
+                            <div class="relative bg-gradient-to-br from-blue-600 via-indigo-600 to-blue-700 text-white p-8 text-center overflow-hidden">
+                                <div class="absolute top-0 right-0 w-40 h-40 bg-white opacity-10 rounded-full -mr-20 -mt-20"></div>
+                                <div class="absolute bottom-0 left-0 w-32 h-32 bg-white opacity-10 rounded-full -ml-16 -mb-16"></div>
+                                <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-gradient-to-br from-blue-300/25 to-transparent rounded-full blur-3xl"></div>
+                                <div class="relative z-10">
+                                    <div class="inline-flex items-center justify-center w-16 h-16 bg-white/20 rounded-2xl mb-4 backdrop-blur-sm">
+                                        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                                    </div>
+                                    <h3 class="text-3xl font-bold mb-2">RECOMMENDED</h3>
+                                    <p class="text-blue-100 text-sm">Up To 4 Hours of Service</p>
+                                </div>
+                                    </div>
+                            <div class="p-8">
+                                <ul class="space-y-4">
+                                    <li class="flex items-start gap-4 group/item">
+                                        <div class="flex-shrink-0 w-10 h-10 bg-blue-50 rounded-xl flex items-center justify-center group-hover/item:bg-blue-100 transition-colors">
+                                            <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                                </div>
+                                        <span class="text-gray-700 font-medium pt-2">Up To 4 Hours of Service</span>
+                                    </li>
+                                    <li class="flex items-start gap-4 group/item">
+                                        <div class="flex-shrink-0 w-10 h-10 bg-blue-50 rounded-xl flex items-center justify-center group-hover/item:bg-blue-100 transition-colors">
+                                            <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+                                        </div>
+                                        <span class="text-gray-700 font-medium pt-2">Professional Photographer and Assistant</span>
+                                    </li>
+                                    <li class="flex items-start gap-4 group/item">
+                                        <div class="flex-shrink-0 w-10 h-10 bg-blue-50 rounded-xl flex items-center justify-center group-hover/item:bg-blue-100 transition-colors">
+                                            <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+                                        </div>
+                                        <span class="text-gray-700 font-medium pt-2">Enhanced Lighting Setup</span>
+                                    </li>
+                                    <li class="flex items-start gap-4 group/item">
+                                        <div class="flex-shrink-0 w-10 h-10 bg-blue-50 rounded-xl flex items-center justify-center group-hover/item:bg-blue-100 transition-colors">
+                                            <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                                        </div>
+                                        <span class="text-gray-700 font-medium pt-2">Choice of Plain Background</span>
+                                    </li>
+                                    <li class="flex items-start gap-4 group/item">
+                                        <div class="flex-shrink-0 w-10 h-10 bg-blue-50 rounded-xl flex items-center justify-center group-hover/item:bg-blue-100 transition-colors">
+                                            <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                                        </div>
+                                        <span class="text-gray-700 font-medium pt-2">On-Site Digital Delivery</span>
+                                    </li>
+                                    <li class="flex items-start gap-4 group/item">
+                                        <div class="flex-shrink-0 w-10 h-10 bg-blue-50 rounded-xl flex items-center justify-center group-hover/item:bg-blue-100 transition-colors">
+                                            <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
+                                        </div>
+                                        <span class="text-gray-700 font-medium pt-2">Basic Retouching</span>
+                                    </li>
+                                    <li class="flex items-start gap-4 group/item">
+                                        <div class="flex-shrink-0 w-10 h-10 bg-blue-50 rounded-xl flex items-center justify-center group-hover/item:bg-blue-100 transition-colors">
+                                            <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"></path>
+                                            </svg>
+                                        </div>
+                                        <span class="text-gray-700 font-medium pt-2">Pose Coaching</span>
+                                    </li>
+                                    <li class="flex items-start gap-4 group/item">
+                                        <div class="flex-shrink-0 w-10 h-10 bg-blue-50 rounded-xl flex items-center justify-center group-hover/item:bg-blue-100 transition-colors">
+                                            <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"/></svg>
+                                        </div>
+                                        <span class="text-gray-700 font-medium pt-2">Digital Sharing via SMS & Email</span>
+                                    </li>
+                                    <li class="flex items-start gap-4 group/item">
+                                        <div class="flex-shrink-0 w-10 h-10 bg-blue-50 rounded-xl flex items-center justify-center group-hover/item:bg-blue-100 transition-colors">
+                                            <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"></path>
+                                            </svg>
+                                        </div>
+                                        <span class="text-gray-700 font-medium pt-2">Enhanced Branding (Email/SMS/Microsite)</span>
+                                    </li>
+                                    <li class="flex items-start gap-4 group/item">
+                                        <div class="flex-shrink-0 w-10 h-10 bg-blue-50 rounded-xl flex items-center justify-center group-hover/item:bg-blue-100 transition-colors">
+                                            <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                                        </div>
+                                        <span class="text-gray-700 font-medium pt-2">Post-Event Online Gallery</span>
+                                    </li>
+                                </ul>
+                                <a href="../../index.html#contact" class="mt-8 w-full bg-gradient-to-r from-blue-500 to-indigo-500 text-white py-4 rounded-xl font-semibold hover:from-blue-500 hover:to-indigo-600 transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:-translate-y-1 flex items-center justify-center gap-2">
+                                    <span>Reserve Standard Package</span>
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- BRAND ACTIVATION PACKAGE -->
+                        <div class="group bg-white rounded-3xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-gray-100">
+                            <div class="relative bg-gradient-to-br from-blue-900 via-blue-800 to-blue-900 text-white p-8 text-center overflow-hidden">
+                                <div class="absolute top-0 right-0 w-40 h-40 bg-white opacity-10 rounded-full -mr-20 -mt-20"></div>
+                                <div class="absolute bottom-0 left-0 w-32 h-32 bg-white opacity-10 rounded-full -ml-16 -mb-16"></div>
+                            <div class="relative z-10">
+                                    <div class="inline-flex items-center justify-center w-16 h-16 bg-white/15 rounded-2xl mb-4 backdrop-blur-sm">
+                                        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd"/></svg>
+                                    </div>
+                                    <h3 class="text-3xl font-bold mb-2 uppercase">BRAND ACTIVATION</h3>
+                                    <p class="text-white/85 text-sm">Up To 6 Hours of Service</p>
+                                </div>
+                                    </div>
+                            <div class="p-8">
+                                <ul class="space-y-4">
+                                    <li class="flex items-start gap-4 group/item">
+                                        <div class="flex-shrink-0 w-10 h-10 bg-blue-50 rounded-xl flex items-center justify-center group-hover/item:bg-blue-100 transition-colors">
+                                            <svg class="w-5 h-5 text-blue-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                                </div>
+                                        <span class="text-gray-700 font-medium pt-2">Up To 6 Hours of Service</span>
+                                    </li>
+                                    <li class="flex items-start gap-4 group/item">
+                                        <div class="flex-shrink-0 w-10 h-10 bg-blue-50 rounded-xl flex items-center justify-center group-hover/item:bg-blue-100 transition-colors">
+                                            <svg class="w-5 h-5 text-blue-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+                                        </div>
+                                        <span class="text-gray-700 font-medium pt-2">Two Professional Photographers</span>
+                                    </li>
+                                    <li class="flex items-start gap-4 group/item">
+                                        <div class="flex-shrink-0 w-10 h-10 bg-blue-50 rounded-xl flex items-center justify-center group-hover/item:bg-blue-100 transition-colors">
+                                            <svg class="w-5 h-5 text-blue-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+                                        </div>
+                                        <span class="text-gray-700 font-medium pt-2">Studio-Quality Lighting Setup</span>
+                                    </li>
+                                    <li class="flex items-start gap-4 group/item">
+                                        <div class="flex-shrink-0 w-10 h-10 bg-blue-50 rounded-xl flex items-center justify-center group-hover/item:bg-blue-100 transition-colors">
+                                            <svg class="w-5 h-5 text-blue-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                                        </div>
+                                        <span class="text-gray-700 font-medium pt-2">Custom Branded Backdrop Option</span>
+                                    </li>
+                                    <li class="flex items-start gap-4 group/item">
+                                        <div class="flex-shrink-0 w-10 h-10 bg-blue-50 rounded-xl flex items-center justify-center group-hover/item:bg-blue-100 transition-colors">
+                                            <svg class="w-5 h-5 text-blue-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                                        </div>
+                                        <span class="text-gray-700 font-medium pt-2">On-Site Digital Delivery</span>
+                                    </li>
+                                    <li class="flex items-start gap-4 group/item">
+                                        <div class="flex-shrink-0 w-10 h-10 bg-blue-50 rounded-xl flex items-center justify-center group-hover/item:bg-blue-100 transition-colors">
+                                            <svg class="w-5 h-5 text-blue-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
+                                        </div>
+                                        <span class="text-gray-700 font-medium pt-2">Professional Retouching</span>
+                                    </li>
+                                    <li class="flex items-start gap-4 group/item">
+                                        <div class="flex-shrink-0 w-10 h-10 bg-blue-50 rounded-xl flex items-center justify-center group-hover/item:bg-blue-100 transition-colors">
+                                            <svg class="w-5 h-5 text-blue-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"></path>
+                                            </svg>
+                                        </div>
+                                        <span class="text-gray-700 font-medium pt-2">Pose Coaching</span>
+                                    </li>
+                                    <li class="flex items-start gap-4 group/item">
+                                        <div class="flex-shrink-0 w-10 h-10 bg-blue-50 rounded-xl flex items-center justify-center group-hover/item:bg-blue-100 transition-colors">
+                                            <svg class="w-5 h-5 text-blue-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"/></svg>
+                                        </div>
+                                        <span class="text-gray-700 font-medium pt-2">Digital Sharing via SMS & Email</span>
+                                    </li>
+                                    <li class="flex items-start gap-4 group/item">
+                                        <div class="flex-shrink-0 w-10 h-10 bg-blue-50 rounded-xl flex items-center justify-center group-hover/item:bg-blue-100 transition-colors">
+                                            <svg class="w-5 h-5 text-blue-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"></path>
+                                            </svg>
+                                        </div>
+                                        <span class="text-gray-700 font-medium pt-2">Enhanced Branding (Email/SMS/Microsite)</span>
+                                    </li>
+                                    <li class="flex items-start gap-4 group/item">
+                                        <div class="flex-shrink-0 w-10 h-10 bg-blue-50 rounded-xl flex items-center justify-center group-hover/item:bg-blue-100 transition-colors">
+                                            <svg class="w-5 h-5 text-blue-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                                        </div>
+                                        <span class="text-gray-700 font-medium pt-2">Post-Event Online Gallery</span>
+                                    </li>
+                                    <li class="flex items-start gap-4 group/item">
+                                        <div class="flex-shrink-0 w-10 h-10 bg-blue-50 rounded-xl flex items-center justify-center group-hover/item:bg-blue-100 transition-colors">
+                                            <svg class="w-5 h-5 text-blue-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"></path>
+                                            </svg>
+                                        </div>
+                                        <span class="text-gray-700 font-medium pt-2">Branded Booth Setup</span>
+                                    </li>
+                                </ul>
+                                <a href="../../index.html#contact" class="mt-8 block w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white py-4 rounded-xl font-semibold hover:from-blue-700 hover:to-blue-800 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 text-center">Plan Brand Activation</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Additional Options Section -->
+        <section class="section-padding section-premium-light">
+            <div class="container mx-auto px-4 sm:px-6">
+                <div class="max-w-6xl mx-auto">
+                    <div class="text-center mb-10 md:mb-16">
+                        <div class="inline-block mb-4 md:mb-6 px-4 sm:px-6 py-2 bg-blue-50 border border-blue-100 rounded-full">
+                            <span class="text-sm font-semibold text-blue-600 uppercase tracking-wider">Enhancements</span>
+                        </div>
+                        <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6 text-premium leading-tight">
+                            Additional Options
+                        </h2>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
+                        <div class="professional-card bg-gradient-to-br from-purple-50 via-white to-purple-50/30 p-8 lg:p-10 rounded-3xl shadow-premium hover:shadow-xl border border-purple-100 hover:border-purple-200 transition-all duration-300 group">
+                            <h3 class="text-xl lg:text-2xl font-bold mb-4 text-gray-900 group-hover:text-purple-600 transition-colors">AI Renderings</h3>
+                            <p class="text-gray-600 text-base leading-relaxed">Generate stunning AI renderings that add a futuristic and artistic touch to event visuals.</p>
+                        </div>
+
+                        <div class="professional-card bg-gradient-to-br from-blue-50 via-white to-blue-50/30 p-8 lg:p-10 rounded-3xl shadow-premium hover:shadow-xl border border-blue-100 hover:border-blue-200 transition-all duration-300 group">
+                            <h3 class="text-xl lg:text-2xl font-bold mb-4 text-gray-900 group-hover:text-blue-600 transition-colors">Data Analytics</h3>
+                            <p class="text-gray-600 text-base leading-relaxed">Leverage data analytics to gain insights into guest interactions and optimize future events.</p>
+                        </div>
+
+                        <div class="professional-card bg-gradient-to-br from-green-50 via-white to-green-50/30 p-8 lg:p-10 rounded-3xl shadow-premium hover:shadow-xl border border-green-100 hover:border-green-200 transition-all duration-300 group">
+                            <h3 class="text-xl lg:text-2xl font-bold mb-4 text-gray-900 group-hover:text-green-600 transition-colors">Lead Capture System</h3>
+                            <p class="text-gray-600 text-base leading-relaxed">Capture valuable guest data with a lead capture system designed for seamless event marketing.</p>
+                        </div>
+
+                        <div class="professional-card bg-gradient-to-br from-yellow-50 via-white to-yellow-50/30 p-8 lg:p-10 rounded-3xl shadow-premium hover:shadow-xl border border-yellow-100 hover:border-yellow-200 transition-all duration-300 group">
+                            <h3 class="text-xl lg:text-2xl font-bold mb-4 text-gray-900 group-hover:text-yellow-600 transition-colors">On-site Photo/Namebadge Printing</h3>
+                            <p class="text-gray-600 text-base leading-relaxed">Instantly print branded name badges or photos on-site for guests to take home.</p>
+                        </div>
+
+                        <div class="professional-card bg-gradient-to-br from-pink-50 via-white to-pink-50/30 p-8 lg:p-10 rounded-3xl shadow-premium hover:shadow-xl border border-pink-100 hover:border-pink-200 transition-all duration-300 group">
+                            <h3 class="text-xl lg:text-2xl font-bold mb-4 text-gray-900 group-hover:text-pink-600 transition-colors">Basic Hair and Makeup Touch-Ups</h3>
+                            <p class="text-gray-600 text-base leading-relaxed">Offer guests quick and professional basic hair and makeup touch-ups for a picture-perfect look.</p>
+                        </div>
+
+                        <div class="professional-card bg-gradient-to-br from-indigo-50 via-white to-indigo-50/30 p-8 lg:p-10 rounded-3xl shadow-premium hover:shadow-xl border border-indigo-100 hover:border-indigo-200 transition-all duration-300 group">
+                            <h3 class="text-xl lg:text-2xl font-bold mb-4 text-gray-900 group-hover:text-indigo-600 transition-colors">42-75" Display Monitors</h3>
+                            <p class="text-gray-600 text-base leading-relaxed">Showcase content, branding, or event highlights on large, high-definition display monitors.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Technical Specifications Section -->
+        <section class="section-padding section-premium-light">
+            <div class="container mx-auto px-4 sm:px-6">
+                <div class="max-w-7xl mx-auto">
+                    <div class="text-center mb-10 md:mb-16">
+                        <div class="inline-block mb-4 md:mb-6 px-4 sm:px-6 py-2 bg-blue-50 border border-blue-100 rounded-full">
+                            <span class="text-sm font-semibold text-blue-600 uppercase tracking-wider">Technical Specifications</span>
+                        </div>
+                        <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6 text-premium leading-tight">
+                            Professional Headshots
+                        </h2>
+                        <p class="text-xl text-gray-600 max-w-3xl mx-auto font-light">
+                            Setup Requirements & Technical Details
+                        </p>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-6 md:gap-8 lg:gap-12 mb-12 md:mb-20">
+                        <!-- Left Side - Tech Spec Grid -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3 lg:gap-4">
+                            <div class="tech-spec-card p-4 lg:p-5 rounded-3xl text-center shadow-premium">
+                                <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center mx-auto mb-3">
+                                    <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"></path>
+                                    </svg>
+                                </div>
+                            <h3 class="font-bold text-base mb-2 text-gray-900">Space Required</h3>
+                            <p class="text-gray-600 text-sm">4' x 4' Minimum</p>
+                        </div>
+
+                            <div class="tech-spec-card p-4 lg:p-5 rounded-3xl text-center shadow-premium">
+                                <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center mx-auto mb-3">
+                                    <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                                    </svg>
+                                </div>
+                            <h3 class="font-bold text-base mb-2 text-gray-900">Power Needs</h3>
+                            <p class="text-gray-600 font-light text-sm">Standard Outlet</p>
+                        </div>
+
+                            <div class="tech-spec-card p-4 lg:p-5 rounded-3xl text-center shadow-premium">
+                                <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center mx-auto mb-3">
+                                    <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                    </svg>
+                                </div>
+                            <h3 class="font-bold text-base mb-2 text-gray-900">Setup Duration</h3>
+                            <p class="text-gray-600 font-light text-sm">60-90 Minutes</p>
+                        </div>
+
+                            <div class="tech-spec-card p-4 lg:p-5 rounded-3xl text-center shadow-premium">
+                                <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center mx-auto mb-3">
+                                    <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                                    </svg>
+                                </div>
+                            <h3 class="font-bold text-base mb-2 text-gray-900">Capture Rate</h3>
+                            <p class="text-gray-600 font-light text-sm">Up to 30 People/hr</p>
+                        </div>
+
+                            <div class="tech-spec-card p-4 lg:p-5 rounded-3xl text-center shadow-premium">
+                                <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center mx-auto mb-3">
+                                    <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.111 16.404a5.5 5.5 0 017.778 0M12 20h.01m-7.08-7.071c3.904-3.905 10.236-3.905 14.141 0M1.394 9.393c5.857-5.857 15.355-5.857 21.213 0"></path>
+                                    </svg>
+                                </div>
+                            <h3 class="font-bold text-base mb-2 text-gray-900">Internet</h3>
+                            <p class="text-gray-600 font-light text-sm">Not Required</p>
+                        </div>
+
+                            <div class="tech-spec-card p-4 lg:p-5 rounded-3xl text-center shadow-premium">
+                                <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center mx-auto mb-3">
+                                    <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"></path>
+                                    </svg>
+                                </div>
+                            <h3 class="font-bold text-base mb-2 text-gray-900">Content Delivery</h3>
+                            <p class="text-gray-600 font-light text-sm">Instant Share, Edited Post-Event</p>
+                        </div>
+
+                            <div class="tech-spec-card p-4 lg:p-5 rounded-3xl text-center shadow-premium">
+                                <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center mx-auto mb-3">
+                                    <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+                                    </svg>
+                                </div>
+                            <h3 class="font-bold text-base mb-2 text-gray-900">Environment</h3>
+                            <p class="text-gray-600 font-light text-sm">Indoor Use Recommended, Outdoor Capable</p>
+                        </div>
+
+                            <div class="tech-spec-card p-4 lg:p-5 rounded-3xl text-center shadow-premium">
+                                <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center mx-auto mb-3">
+                                    <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                                    </svg>
+                                </div>
+                            <h3 class="font-bold text-base mb-2 text-gray-900">Staff</h3>
+                            <p class="text-gray-600 font-light text-sm">One-Two Operators Included</p>
+                        </div>
+
+                            <div class="tech-spec-card p-4 lg:p-5 rounded-3xl text-center shadow-premium sm:col-span-2">
+                                <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center mx-auto mb-3">
+                                    <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                                    </svg>
+                                </div>
+                            <h3 class="font-bold text-base mb-2 text-gray-900">Standard Duration</h3>
+                            <p class="text-gray-600 text-sm">2-8 hours</p>
+                        </div>
+                    </div>
+
+                        <!-- Right Side - Image -->
+                        <div class="premium-image-wrapper shadow-premium-lg rounded-3xl overflow-hidden self-stretch">
+                            <img src="../../assets/images/headshot/professional-headshot-12.webp" alt="Professional Headshot Technical Setup" class="w-full h-full object-cover object-center">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section id="contact" class="section-padding professional-gradient text-white relative overflow-hidden">
+            <div class="container mx-auto px-4 sm:px-6 relative z-10">
+                <div class="max-w-5xl mx-auto text-center">
+                    <div class="inline-block mb-8 badge-premium">
+                        <span class="text-white">Get Started Today</span>
+                    </div>
+                    <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-6 md:mb-8 leading-tight" style="text-shadow: 0 0 40px rgba(255, 255, 255, 0.3);">
+                        CONTACT US NOW
+                    </h2>
+                    <p class="text-xl md:text-2xl mb-6 text-white/95 leading-relaxed font-light max-w-3xl mx-auto">
+                        Tell us about your event by filling out the form below, and our team will be in touch as soon as possible.
+                    </p>
+                    <p class="text-lg mb-10 text-white/85 font-light">
+                        Have more questions? Scroll down to email our team directly!
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-5 justify-center">
+                        <a href="../../index.html#contact" class="bg-white text-blue-600 px-8 sm:px-12 py-4 sm:py-5 rounded-full font-semibold hover:bg-gray-50 transition-all duration-300 text-base sm:text-lg shadow-premium-lg transform hover:scale-105 flex items-center gap-2 justify-center group">
+                            <span>Get Your Free Quote</span>
+                            <svg class="w-5 h-5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                            </svg>
+                        </a>
+                        <button type="button" data-click-to-call data-call-text="Call Us" class="border-2 border-white/40 text-white px-8 sm:px-12 py-4 sm:py-5 rounded-full font-semibold glass-premium hover:bg-white/20 hover:border-white/60 transition-all duration-300 text-base sm:text-lg cursor-pointer flex items-center gap-2 justify-center backdrop-blur-md">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"></path>
+                            </svg>
+                            <span>Call Us</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Related Products Section -->
+        <section id="related-products" class="section-padding section-premium-light">
+            <div class="container mx-auto px-4 sm:px-6">
+                <div class="max-w-7xl mx-auto">
+                    <div class="text-center mb-12 md:mb-20">
+                        <div class="inline-block mb-4 md:mb-6 px-4 sm:px-6 py-2 bg-blue-50 border border-blue-100 rounded-full">
+                            <span class="text-sm font-semibold text-blue-600 uppercase tracking-wider">Explore More</span>
+                        </div>
+                        <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6 md:mb-8 text-premium leading-tight">
+                            DISCOVER OUR RELATED PRODUCTS
+                        </h2>
+                        <p class="text-xl md:text-2xl text-gray-600 max-w-3xl mx-auto font-light leading-relaxed">
+                            Discover more of what we do best—Photo Booths, Activations, and beyond! Click below to browse our related products.
+                        </p>
+                    </div>
+
+                    <div class="grid md:grid-cols-3 gap-6 md:gap-8">
+                        <!-- Trade Shows -->
+                        <a href="../../events/trade-shows.html" class="group">
+                            <div class="relative rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all transform hover:scale-105">
+                                <div class="aspect-[4/3] relative overflow-hidden">
+                                    <img src="../../assets/images/event-photography-15.webp" alt="Trade Shows" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                                </div>
+                                <div class="p-6 bg-white">
+                                    <h3 class="text-xl font-bold mb-2 text-gray-900 group-hover:text-blue-600 transition-colors">Trade Shows</h3>
+                                    <p class="text-gray-600">
+                                        Professional photography services that capture your brand's impact at trade shows.
+                                    </p>
+                                </div>
+                            </div>
+                        </a>
+
+                        <!-- Event Photography -->
+                        <a href="../../services/experiences/event-photography.html" class="group">
+                            <div class="relative rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all transform hover:scale-105">
+                                <div class="aspect-[4/3] relative overflow-hidden">
+                                    <img src="../../assets/images/event-photography-16.webp" alt="Event Photography" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                                </div>
+                                <div class="p-6 bg-white">
+                                    <h3 class="text-xl font-bold mb-2 text-gray-900 group-hover:text-blue-600 transition-colors">Event Photography</h3>
+                                    <p class="text-gray-600">
+                                        Document every moment with professional quality photography.
+                                    </p>
+                                </div>
+                            </div>
+                        </a>
+
+                        <!-- Corporate Events -->
+                        <a href="../../events/corporate-events.html" class="group">
+                            <div class="relative rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all transform hover:scale-105">
+                                <div class="aspect-[4/3] relative overflow-hidden">
+                                    <img src="../../assets/images/event-photography-17.webp" alt="Corporate Events" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                                </div>
+                                <div class="p-6 bg-white">
+                                    <h3 class="text-xl font-bold mb-2 text-gray-900 group-hover:text-blue-600 transition-colors">Corporate Events</h3>
+                                    <p class="text-gray-600">
+                                        Professional photography and headshot services for corporate events and conferences.
+                                    </p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <script src="../../assets/components/footer.js"></script>
+    <script src="../../assets/components/back-to-top.js"></script>
+</body>
+
+</html>
