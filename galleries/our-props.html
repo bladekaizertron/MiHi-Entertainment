@@ -7,13 +7,68 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Arvo:wght@400;700&family=Cinzel:wght@500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800;900&family=Montserrat:wght@500;600;700&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dongle&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@300;900&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
-        body { font-family: 'Inter', sans-serif; color: #1a202c; }
+        body { font-family: 'Inter', sans-serif; color: #1a202c; overflow-x: hidden; }
         h1, h2, h3, h4, h5, h6 { font-family: 'Playfair Display', serif; }
         .btn-primary { background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%); transition: all 0.3s ease; }
         .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(0, 80, 255, 0.4); }
+        
+        /* Bubble Button Animation */
+        .btn {
+            display: inline-block;
+            text-decoration: none;
+        }
+        
+        .btn-bubble {
+            color: white;
+            background-repeat: no-repeat;
+            position: relative;
+        }
+        
+        .btn-bubble:not(:hover):not(:focus) {
+            background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%);
+        }
+        
+        .btn-bubble:hover,
+        .btn-bubble:focus {
+            animation: bubbles 1s forwards ease-out;
+            background: 
+                radial-gradient(circle at center, transparent 30%, rgba(238, 238, 255, 0.8) 60%, rgba(238, 238, 255, 0.8) 65%, transparent 70%) 5% 120% / 0.6em 0.6em,
+                radial-gradient(circle at center, transparent 30%, rgba(238, 238, 255, 0.8) 60%, rgba(238, 238, 255, 0.8) 65%, transparent 70%) 15% 110% / 0.8em 0.8em,
+                radial-gradient(circle at center, transparent 30%, rgba(238, 238, 255, 0.8) 60%, rgba(238, 238, 255, 0.8) 65%, transparent 70%) 25% 130% / 0.7em 0.7em,
+                radial-gradient(circle at center, transparent 30%, rgba(238, 238, 255, 0.8) 60%, rgba(238, 238, 255, 0.8) 65%, transparent 70%) 35% 100% / 0.9em 0.9em,
+                radial-gradient(circle at center, transparent 30%, rgba(238, 238, 255, 0.8) 60%, rgba(238, 238, 255, 0.8) 65%, transparent 70%) 45% 115% / 0.5em 0.5em,
+                radial-gradient(circle at center, transparent 30%, rgba(238, 238, 255, 0.8) 60%, rgba(238, 238, 255, 0.8) 65%, transparent 70%) 55% 125% / 1em 1em,
+                radial-gradient(circle at center, transparent 30%, rgba(238, 238, 255, 0.8) 60%, rgba(238, 238, 255, 0.8) 65%, transparent 70%) 65% 105% / 0.75em 0.75em,
+                radial-gradient(circle at center, transparent 30%, rgba(238, 238, 255, 0.8) 60%, rgba(238, 238, 255, 0.8) 65%, transparent 70%) 75% 135% / 0.85em 0.85em,
+                radial-gradient(circle at center, transparent 30%, rgba(238, 238, 255, 0.8) 60%, rgba(238, 238, 255, 0.8) 65%, transparent 70%) 85% 120% / 0.65em 0.65em,
+                radial-gradient(circle at center, transparent 30%, rgba(238, 238, 255, 0.8) 60%, rgba(238, 238, 255, 0.8) 65%, transparent 70%) 95% 110% / 0.95em 0.95em,
+                radial-gradient(circle at center, transparent 30%, rgba(238, 238, 255, 0.8) 60%, rgba(238, 238, 255, 0.8) 65%, transparent 70%) 105% 130% / 0.55em 0.55em;
+            background-color: #0050ff;
+            background-repeat: no-repeat;
+        }
+        
+        @keyframes bubbles {
+            100% {
+                background-position: 
+                    3% -350%,
+                    18% -280%,
+                    22% -320%,
+                    38% -250%,
+                    42% -380%,
+                    58% -200%,
+                    62% -340%,
+                    78% -180%,
+                    88% -300%,
+                    98% -220%,
+                    102% -360%;
+                box-shadow: inset 0 -6.5em 0 #0040d9;
+            }
+        }
         .section-padding { padding: 5rem 0; }
         @media (max-width: 768px) {
             .section-padding { padding: 3rem 0; }
@@ -22,7 +77,7 @@
             .section-padding { padding: 2.5rem 0; }
         }
         .hero-section {
-            background-image: url('https://images.pexels.com/photos/2570062/pexels-photo-2570062.jpeg');
+            background-image: url('../assets/images/galleries/ourprops/hero.jpeg');
             background-attachment: fixed;
             background-position: center center;
             background-size: cover;
@@ -68,6 +123,368 @@
                 transform: translateY(0);
             }
         }
+
+        /* Curved Carousel Styles */
+        :root {
+            --primary-text-color: snow;
+            --primary-text-color-emphasized: #d3d3d3;
+            --background-color: rgba(252, 252, 252, 0.1);
+            --background-color-emphasized: rgba(252, 252, 252, 0.25);
+            --carousel-animation: 300ms;
+            --shadow: rgba(0, 0, 0, 1);
+        }
+
+        .carousel-container {
+            position: relative;
+            width: 100%;
+            min-height: 700px;
+            height: 700px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            margin: 0 auto;
+            z-index: 1;
+        }
+
+        .slides-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            min-height: 700px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            cursor: grab;
+        }
+
+        .slides-container:active {
+            cursor: grabbing;
+        }
+
+        .slides-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+            transform-origin: center;
+            overflow: visible;
+            min-height: 700px;
+        }
+
+        .slide {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            max-height: 620px;
+            width: auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0.5rem;
+            transform-origin: center center;
+            transition: transform 0.3s ease-in-out;
+            pointer-events: none;
+            visibility: visible;
+            opacity: 1;
+            z-index: 1;
+        }
+
+        .slide figure {
+            position: relative;
+            pointer-events: auto;
+            transform-origin: center;
+            cursor: grab;
+            user-select: none;
+        }
+
+        .slide:active figure,
+        .slide.grabbed figure {
+            cursor: grabbing;
+        }
+
+        .slide img {
+            object-fit: contain;
+            max-width: 100%;
+            max-height: 620px;
+            width: auto;
+            height: auto;
+            box-shadow: 3px 3px 30px -1px var(--shadow);
+            border-radius: 4px;
+            transition: transform var(--carousel-animation) ease-in-out, box-shadow var(--carousel-animation) ease-in-out, opacity var(--carousel-animation) ease-in-out;
+            transform: scale(1);
+            display: block;
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .carousel-nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%) scale(1);
+            z-index: 10000;
+            background: rgba(252, 252, 252, 0.1);
+            border: none;
+            border-radius: 50%;
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: var(--primary-text-color);
+            transition: background-color 0.3s ease;
+            font-family: 'Material Icons';
+            font-size: 20px;
+        }
+
+        .carousel-nav-btn:hover {
+            background: rgba(252, 252, 252, 0.25);
+        }
+
+        .carousel-nav-btn.prev {
+            left: 0.5rem;
+        }
+
+        .carousel-nav-btn.next {
+            right: 0.5rem;
+        }
+
+        .caption-container {
+            position: absolute;
+            left: 0;
+            bottom: 1rem;
+            width: 100%;
+            height: 60px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .caption-link {
+            display: inline-block;
+            position: absolute;
+            color: var(--primary-text-color);
+            text-decoration: none;
+            padding: 0.2rem 0.6rem;
+            background-color: var(--background-color);
+            border-radius: 0.4rem;
+            text-align: center;
+            font-family: 'Dongle', sans-serif;
+            font-size: clamp(0.9rem, 0.9rem + 1.5vw, 1.8rem);
+            line-height: 1;
+            transition: background-color 0.3s ease;
+        }
+
+        .caption-link:hover,
+        .caption-link:focus {
+            background-color: var(--background-color-emphasized);
+            color: var(--primary-text-color-emphasized);
+        }
+
+        .notransition {
+            transition: none !important;
+        }
+
+        /* Modernized Props CTA Section */
+        .props-cta-section {
+            padding: 4rem 0;
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.95) 0%, rgba(30, 41, 59, 0.95) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .props-cta-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 50% 50%, rgba(0, 80, 255, 0.1) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .props-cta-heading {
+            font-family: 'Montserrat', sans-serif;
+            font-size: clamp(2rem, 4vw + 1rem, 3.5rem);
+            font-weight: 700;
+            color: #0050ff;
+            margin-top: 0;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.02em;
+            line-height: 1.1;
+            text-transform: uppercase;
+            background: linear-gradient(135deg, #0050ff 0%, #0080ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+            z-index: 1;
+        }
+
+        .props-cta-description {
+            font-family: 'Inter', sans-serif;
+            font-size: clamp(1rem, 1.5vw + 0.5rem, 1.25rem);
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.7;
+            margin-bottom: 2.5rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .props-cta-button {
+            display: inline-block;
+            font-family: 'Montserrat', sans-serif;
+            font-size: clamp(0.875rem, 1vw + 0.5rem, 1rem);
+            font-weight: 600;
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            padding: 1rem 2.5rem;
+            background: linear-gradient(135deg, #0050ff 0%, #0080ff 100%);
+            border-radius: 50px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 80, 255, 0.3);
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .props-cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .props-cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 80, 255, 0.5);
+            background: linear-gradient(135deg, #0080ff 0%, #0050ff 100%);
+        }
+
+        .props-cta-button:hover::before {
+            left: 100%;
+        }
+
+        .props-cta-button:active {
+            transform: translateY(0);
+        }
+
+        @media (max-width: 768px) {
+            .props-cta-section {
+                padding: 3rem 0;
+            }
+
+            .props-cta-description {
+                margin-bottom: 2rem;
+            }
+
+            .props-cta-button {
+                padding: 0.875rem 2rem;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .props-cta-section {
+                padding: 2.5rem 0;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .carousel-container {
+                min-height: 520px;
+                height: 520px;
+                margin: 1.5rem 0;
+            }
+            
+            .slides-container {
+                min-height: 520px;
+            }
+            
+            .slides-wrapper {
+                min-height: 520px;
+            }
+            
+            .slide {
+                max-height: 480px;
+                padding: 0.25rem;
+            }
+            
+            .slide img {
+                max-height: 480px;
+                max-width: 360px;
+            }
+            
+            .carousel-nav-btn {
+                width: 36px;
+                height: 36px;
+                font-size: 18px;
+            }
+            
+            .carousel-nav-btn.prev {
+                left: 0.25rem;
+            }
+            
+            .carousel-nav-btn.next {
+                right: 0.25rem;
+            }
+            
+            .caption-container {
+                bottom: 0.5rem;
+                height: 50px;
+            }
+            
+            .caption-link {
+                font-size: clamp(0.8rem, 0.8rem + 1vw, 1.4rem);
+                padding: 0.15rem 0.5rem;
+            }
+        }
+        
+        @media (max-width: 500px) {
+            .carousel-container {
+                min-height: 450px;
+                height: 450px;
+                margin: 1rem 0;
+            }
+            
+            .slides-container {
+                min-height: 450px;
+            }
+            
+            .slides-wrapper {
+                min-height: 450px;
+            }
+            
+            .slide {
+                max-height: 410px;
+                padding: 0.2rem;
+            }
+            
+            .slide img {
+                max-height: 410px;
+                max-width: 320px;
+            }
+            
+            .carousel-nav-btn {
+                width: 32px;
+                height: 32px;
+                font-size: 16px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -95,7 +512,7 @@
                 <div class="mt-8 mb-8 animate-fade-in-up animate-delay-300">
                     <a 
                         href="#contact" 
-                        class="btn-primary inline-block px-8 py-3 rounded-lg text-white font-semibold text-lg"
+                        class="btn btn-bubble btn-primary inline-block px-8 py-3 rounded-lg text-white font-semibold text-lg"
                         aria-label="Contact us for props">
                         Contact Us
                     </a>
@@ -111,7 +528,1849 @@
         </div>
     </section>
 
+    <!-- Props1 Section -->
+    <section id="props1-section" class="bg-gradient-to-br from-gray-900 via-blue-900 to-gray-900" style="padding: 3rem 0;">
+        <div class="container mx-auto px-4">
+            <div class="carousel-container">
+                <div class="slides-container" id="carousel-slides">
+                    <div class="slides-wrapper" id="slides-wrapper">
+                        <button class="carousel-nav-btn prev" id="prev-btn" aria-label="Previous image">
+                            <span class="material-icons">arrow_back_ios</span>
+                        </button>
+                        <button class="carousel-nav-btn next" id="next-btn" aria-label="Next image">
+                            <span class="material-icons">arrow_forward_ios</span>
+                        </button>
+                        <!-- Slides will be dynamically inserted here -->
+                        <div class="caption-container">
+                            <div class="caption-wrapper">
+                                <a href="#" class="caption-link" id="caption-link" target="_blank" rel="noopener noreferrer"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container mx-auto px-4 pt-4 pb-8">
+                <div class="max-w-4xl mx-auto text-center">
+                    <h2 class="props-cta-heading">
+                        NEED PROPS? WE'VE GOT 'EM ALL
+                    </h2>
+                    <p class="props-cta-description">
+                        Got a photo booth but don't know what props you want? From wigs and hats to glasses in every shape possible, we have 'em all.
+                    </p>
+                    <a href="#contact" class="props-cta-button" aria-label="Contact us to learn more about props">
+                        CONTACT US TO LEARN MORE
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Props2 Section -->
+    <section id="props2-section" class="bg-gradient-to-br from-slate-900 via-green-900 to-slate-900" style="padding: 3rem 0;">
+        <div class="container mx-auto px-4">
+            <div class="carousel-container">
+                <div class="slides-container" id="carousel-slides-2">
+                    <div class="slides-wrapper" id="slides-wrapper-2">
+                        <button class="carousel-nav-btn prev" id="prev-btn-2" aria-label="Previous image">
+                            <span class="material-icons">arrow_back_ios</span>
+                        </button>
+                        <button class="carousel-nav-btn next" id="next-btn-2" aria-label="Next image">
+                            <span class="material-icons">arrow_forward_ios</span>
+                        </button>
+                        <!-- Slides will be dynamically inserted here -->
+                        <div class="caption-container">
+                            <div class="caption-wrapper">
+                                <a href="#" class="caption-link" id="caption-link-2" target="_blank" rel="noopener noreferrer"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container mx-auto px-4 pt-4 pb-8">
+                <div class="max-w-4xl mx-auto text-center">
+                    <h2 class="props-cta-heading">
+                        SIGNS FOR EVERYONE
+                    </h2>
+                    <p class="props-cta-description">
+                        Word signs are great for every event but especially great for these: Weddings, Quinceaneras, Employee Appreciation Parties, Gatsby/20s Shindigs, Bat/Mar Mitzvahs
+                    </p>
+                    <a href="#contact" class="props-cta-button" aria-label="Contact us to learn more about signs">
+                        CONTACT US TO LEARN MORE
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Props3 Section -->
+    <section id="props3-section" class="bg-gradient-to-br from-slate-900 via-red-900 to-slate-900" style="padding: 3rem 0;">
+        <div class="container mx-auto px-4">
+            <div class="carousel-container">
+                <div class="slides-container" id="carousel-slides-3">
+                    <div class="slides-wrapper" id="slides-wrapper-3">
+                        <button class="carousel-nav-btn prev" id="prev-btn-3" aria-label="Previous image">
+                            <span class="material-icons">arrow_back_ios</span>
+                        </button>
+                        <button class="carousel-nav-btn next" id="next-btn-3" aria-label="Next image">
+                            <span class="material-icons">arrow_forward_ios</span>
+                        </button>
+                        <!-- Slides will be dynamically inserted here -->
+                        <div class="caption-container">
+                            <div class="caption-wrapper">
+                                <a href="#" class="caption-link" id="caption-link-3" target="_blank" rel="noopener noreferrer"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container mx-auto px-4 pt-4 pb-8">
+                <div class="max-w-4xl mx-auto text-center">
+                    <h2 class="props-cta-heading">
+                        HOLIDAY PROPS TO LAST ALL WINTER
+                    </h2>
+                    <p class="props-cta-description">
+                        You have to nail those much-anticipated holiday parties - so go all out with our winter-themed props!
+                    </p>
+                    <a href="#contact" class="props-cta-button" aria-label="Contact us to learn more about holiday props">
+                        CONTACT US TO LEARN MORE
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Props4 Section -->
+    <section id="props4-section" class="bg-gradient-to-br from-slate-900 via-violet-900 to-slate-900" style="padding: 3rem 0;">
+        <div class="container mx-auto px-4">
+            <div class="carousel-container">
+                <div class="slides-container" id="carousel-slides-4">
+                    <div class="slides-wrapper" id="slides-wrapper-4">
+                        <button class="carousel-nav-btn prev" id="prev-btn-4" aria-label="Previous image">
+                            <span class="material-icons">arrow_back_ios</span>
+                        </button>
+                        <button class="carousel-nav-btn next" id="next-btn-4" aria-label="Next image">
+                            <span class="material-icons">arrow_forward_ios</span>
+                        </button>
+                        <!-- Slides will be dynamically inserted here -->
+                        <div class="caption-container">
+                            <div class="caption-wrapper">
+                                <a href="#" class="caption-link" id="caption-link-4" target="_blank" rel="noopener noreferrer"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container mx-auto px-4 pt-4 pb-8">
+                <div class="max-w-4xl mx-auto text-center">
+                    <h2 class="props-cta-heading">
+                        GUN-SLINGERS, COWBOYS, BANDITS UNITE
+                    </h2>
+                    <p class="props-cta-description">
+                        We have the goods to make your Western theme complete! Take a look at our Rustic Booth to match your event.
+                    </p>
+                    <a href="#contact" class="props-cta-button" aria-label="Contact us to learn more about western props">
+                        CONTACT US TO LEARN MORE
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Props5 Section -->
+    <section id="props5-section" class="bg-gradient-to-br from-slate-900 via-yellow-900 to-slate-900" style="padding: 3rem 0;">
+        <div class="container mx-auto px-4">
+            <div class="carousel-container">
+                <div class="slides-container" id="carousel-slides-5">
+                    <div class="slides-wrapper" id="slides-wrapper-5">
+                        <button class="carousel-nav-btn prev" id="prev-btn-5" aria-label="Previous image">
+                            <span class="material-icons">arrow_back_ios</span>
+                        </button>
+                        <button class="carousel-nav-btn next" id="next-btn-5" aria-label="Next image">
+                            <span class="material-icons">arrow_forward_ios</span>
+                        </button>
+                        <!-- Slides will be dynamically inserted here -->
+                        <div class="caption-container">
+                            <div class="caption-wrapper">
+                                <a href="#" class="caption-link" id="caption-link-5" target="_blank" rel="noopener noreferrer"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container mx-auto px-4 pt-4 pb-8">
+                <div class="max-w-4xl mx-auto text-center">
+                    <h2 class="props-cta-heading">
+                        ROARIN' 20S PROPS FOR YOUR NEXT SHINDIG
+                    </h2>
+                    <p class="props-cta-description">
+                        Had enough of Gatsby-inspired galas and references to the new Roarin' 20s? Not us!
+                    </p>
+                    <a href="#contact" class="props-cta-button" aria-label="Contact us to learn more about 20s props">
+                        CONTACT US TO LEARN MORE
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <script src="../assets/components/navigation.js"></script>
     <script src="../assets/components/footer.js"></script>
+
+    <script>
+        // Curved Carousel Implementation
+        document.addEventListener('DOMContentLoaded', function() {
+            const images = [
+                {
+                    src: '../assets/images/galleries/ourprops/prop1.png',
+                },
+                {
+                    src: '../assets/images/galleries/ourprops/prop2.png',
+                },
+                {
+                    src: '../assets/images/galleries/ourprops/prop3.png',
+                },
+                {
+                    src: '../assets/images/galleries/ourprops/prop4.png',
+                }
+            ];
+
+            const slidesWrapper = document.getElementById('slides-wrapper');
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+            const captionLink = document.getElementById('caption-link');
+            const slidesContainer = document.getElementById('carousel-slides');
+
+            if (!slidesWrapper || !prevBtn || !nextBtn || !slidesContainer) {
+                console.error('Carousel elements not found');
+                return;
+            }
+
+            let currentIndex = 1; // Start at middle image (index 1) for better balance with 4 images
+            let windowWidth = window.innerWidth;
+            let windowHeight = window.innerHeight;
+            let slideWidth = 400;
+            let isDragging = false;
+            let dragStart = 0;
+            let dragOffset = 0;
+            let wheelVelocity = 0;
+
+            // Calculate slide width based on viewport - even larger images
+            function calculateSlideWidth() {
+                windowWidth = window.innerWidth;
+                windowHeight = window.innerHeight;
+                
+                // Much larger sizing for bigger images
+                if (windowWidth >= 960) {
+                    slideWidth = Math.min(windowWidth / 2.2, 480);
+                } else if (windowWidth >= 640) {
+                    slideWidth = Math.min(windowWidth / 1.8, 400);
+                } else {
+                    slideWidth = Math.min(windowWidth / 1.6, 340);
+                }
+                
+                // Ensure reasonable bounds
+                slideWidth = Math.max(250, Math.min(slideWidth, 480));
+                console.log('Slide width calculated:', slideWidth, 'Window:', windowWidth, 'x', windowHeight);
+            }
+
+            // Calculate curved position with proper wrapping for balance
+            function getCurvedPosition(index, centerOffset = 0) {
+                const totalSlides = images.length;
+                
+                // Calculate raw relative position
+                let relativeIndex = index - currentIndex - centerOffset;
+                
+                // Wrap to ensure images appear on both sides
+                // We want images distributed around center: -2, -1, 0, 1 for 4 images
+                // Or when centered: -1.5, -0.5, 0.5, 1.5
+                
+                // Find the shortest distance around the circle
+                const halfRange = totalSlides / 2;
+                while (relativeIndex > halfRange) {
+                    relativeIndex -= totalSlides;
+                }
+                while (relativeIndex < -halfRange) {
+                    relativeIndex += totalSlides;
+                }
+                
+                // More compact spacing
+                const spacing = slideWidth * 0.65;
+                const xPos = relativeIndex * spacing;
+                
+                // Curved Y position - creates arc effect (more compact)
+                // Use absolute value so both sides curve downward
+                const curveIntensity = windowWidth <= 640 ? 20 : 30; // Less curve on mobile
+                const yPos = -Math.pow(Math.abs(relativeIndex), 1.3) * curveIntensity;
+                
+                // Rotation for 3D effect - negative on left, positive on right (more subtle)
+                const rotation = relativeIndex * (windowWidth <= 640 ? 4 : 6); // Less rotation on mobile
+
+                return {
+                    x: xPos,
+                    y: yPos,
+                    rotation: -rotation
+                };
+            }
+
+            // Create slide elements
+            function createSlides() {
+                // Clear existing slides
+                const existingSlides = slidesWrapper.querySelectorAll('.slide');
+                existingSlides.forEach(slide => slide.remove());
+                
+                console.log('Creating slides for', images.length, 'images');
+                
+                images.forEach((img, index) => {
+                    const slide = document.createElement('div');
+                    slide.className = 'slide';
+                    slide.dataset.index = index;
+                    slide.id = `slide-${index}`;
+                    
+                    const figure = document.createElement('figure');
+                    figure.id = `f${index}`;
+                    
+                    const imgElement = document.createElement('img');
+                    // Try both relative paths
+                    const imgSrc = img.src.startsWith('../') ? img.src : '../' + img.src;
+                    imgElement.src = imgSrc;
+                    imgElement.alt = img.alt || `Prop ${index + 1}`;
+                    imgElement.draggable = false;
+                    
+                    // Even larger image sizing
+                    const maxImgWidth = windowWidth <= 640 ? 340 : windowWidth <= 960 ? 440 : 480;
+                    imgElement.style.width = Math.min(slideWidth, maxImgWidth) + 'px';
+                    imgElement.style.maxWidth = maxImgWidth + 'px';
+                    imgElement.style.height = 'auto';
+                    imgElement.style.display = 'block';
+                    imgElement.style.objectFit = 'contain';
+                    imgElement.style.opacity = '1';
+                    imgElement.style.visibility = 'visible';
+                    imgElement.style.position = 'relative';
+                    
+                    // Add error handling for images
+                    imgElement.onerror = function() {
+                        console.error('❌ Failed to load image:', imgSrc);
+                        console.error('Trying alternative path...');
+                        // Try absolute path
+                        const altPath = 'assets/images/galleries/ourprops/prop' + (index + 1) + '.png';
+                        this.src = altPath;
+                        
+                        this.onerror = function() {
+                            console.error('❌ Also failed:', altPath);
+                            // Show placeholder
+                            this.style.border = '2px solid red';
+                            this.style.backgroundColor = '#333';
+                            this.style.width = '200px';
+                            this.style.height = '200px';
+                            this.style.display = 'flex';
+                            this.style.alignItems = 'center';
+                            this.style.justifyContent = 'center';
+                            this.innerHTML = '<span style="color: white;">Image ' + (index + 1) + '</span>';
+                        };
+                    };
+                    
+                    imgElement.onload = function() {
+                        console.log('✓ Successfully loaded image:', this.src);
+                    };
+                    
+                    figure.appendChild(imgElement);
+                    slide.appendChild(figure);
+                    
+                    // Insert before caption container
+                    const captionContainer = slidesWrapper.querySelector('.caption-container');
+                    if (captionContainer) {
+                        slidesWrapper.insertBefore(slide, captionContainer);
+                    } else {
+                        slidesWrapper.appendChild(slide);
+                    }
+                    
+                    console.log('Created slide', index, 'at element:', slide);
+                });
+                
+                // Wait a moment for images to start loading, then position them
+                setTimeout(() => {
+                    attachSlideListeners();
+                    updateCarousel();
+                }, 100);
+            }
+
+            function attachSlideListeners() {
+                document.querySelectorAll('.slide figure').forEach((figure, index) => {
+                    const slideIndex = parseInt(figure.closest('.slide').dataset.index);
+                    figure.addEventListener('mousedown', (e) => startDrag(e, slideIndex));
+                    figure.addEventListener('touchstart', (e) => startDrag(e, slideIndex));
+                });
+            }
+
+            // Update carousel positions
+            function updateCarousel(offset = 0) {
+                const slides = document.querySelectorAll('.slide');
+                if (slides.length === 0) {
+                    console.warn('No slides found in updateCarousel');
+                    return;
+                }
+                
+                console.log('Updating carousel with', slides.length, 'slides, offset:', offset);
+                
+                const centerOffset = offset;
+                
+                slides.forEach((slide) => {
+                    const index = parseInt(slide.dataset.index);
+                    const pos = getCurvedPosition(index, centerOffset);
+                    
+                    // Transform from center (left: 50%, top: 50%)
+                    slide.style.transform = `translate(calc(-50% + ${pos.x}px), calc(-50% + ${pos.y}px)) rotate(${pos.rotation}deg)`;
+                    slide.style.zIndex = images.length - Math.abs(index - currentIndex);
+                    slide.style.visibility = 'visible';
+                    slide.style.opacity = '1';
+                    slide.style.display = 'flex';
+                    
+                    const img = slide.querySelector('img');
+                    if (!img) {
+                        console.warn('No image found in slide', index);
+                        return;
+                    }
+                    
+                    // Ensure image is visible
+                    img.style.display = 'block';
+                    img.style.opacity = '1';
+                    img.style.visibility = 'visible';
+                    
+                    // Calculate distance for scaling (using wrapped distance)
+                    let relativeIndex = index - currentIndex - centerOffset;
+                    const totalSlides = images.length;
+                    const halfRange = totalSlides / 2;
+                    while (relativeIndex > halfRange) relativeIndex -= totalSlides;
+                    while (relativeIndex < -halfRange) relativeIndex += totalSlides;
+                    const distance = Math.abs(relativeIndex);
+                    
+                    // Scale based on distance from center
+                    if (distance < 0.5) {
+                        // Center image - largest
+                        img.style.transform = 'scale(1.15)';
+                        img.style.opacity = '1';
+                        img.style.boxShadow = '5px 5px 50px -1px rgba(255, 255, 255, 0.6)';
+                        img.style.zIndex = '10';
+                    } else if (distance < 1.5) {
+                        // Near center - medium size
+                        const scale = 1 - (distance - 0.5) * 0.2;
+                        img.style.transform = `scale(${scale})`;
+                        img.style.opacity = Math.max(0.7, 1 - (distance - 0.5) * 0.15);
+                        img.style.boxShadow = '5px 5px 50px -1px rgba(255, 255, 255, 0.4)';
+                        img.style.zIndex = '5';
+                    } else {
+                        // Far from center - smaller
+                        const scale = Math.max(0.5, 0.8 - (distance - 1.5) * 0.15);
+                        img.style.transform = `scale(${scale})`;
+                        img.style.opacity = Math.max(0.3, 0.6 - (distance - 1.5) * 0.1);
+                        img.style.boxShadow = '5px 5px 50px -1px rgba(0, 0, 0, 0.8)';
+                        img.style.zIndex = '1';
+                    }
+                    
+                    console.log(`Slide ${index}: relativeIndex=${relativeIndex.toFixed(2)}, x=${pos.x.toFixed(0)}, y=${pos.y.toFixed(0)}, rot=${pos.rotation.toFixed(1)}deg`);
+                });
+                
+                // Update caption (hide if no caption exists)
+                const captionContainer = slidesWrapper.querySelector('.caption-container');
+                if (captionLink && captionContainer) {
+                    if (images[currentIndex] && images[currentIndex].caption) {
+                        captionLink.textContent = images[currentIndex].caption;
+                        captionLink.href = images[currentIndex].href || '#';
+                        captionLink.style.display = 'inline-block';
+                        captionContainer.style.display = 'flex';
+                    } else {
+                        captionLink.style.display = 'none';
+                        captionContainer.style.display = 'none';
+                    }
+                }
+                
+                console.log('Carousel updated, currentIndex:', currentIndex);
+            }
+
+            // Navigate carousel
+            function navigate(direction) {
+                currentIndex += direction;
+                if (currentIndex < 0) currentIndex = images.length - 1;
+                if (currentIndex >= images.length) currentIndex = 0;
+                updateCarousel();
+            }
+
+            // Drag handlers
+            function startDrag(e, index) {
+                if (index !== currentIndex) return;
+                isDragging = true;
+                dragStart = e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
+                dragOffset = 0;
+                
+                const slide = document.querySelector(`.slide[data-index="${index}"]`);
+                if (slide) slide.classList.add('grabbed');
+                
+                document.addEventListener('mousemove', handleDrag);
+                document.addEventListener('mouseup', endDrag);
+                document.addEventListener('touchmove', handleDrag);
+                document.addEventListener('touchend', endDrag);
+            }
+
+            function handleDrag(e) {
+                if (!isDragging) return;
+                e.preventDefault();
+                const currentX = e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
+                const diff = (currentX - dragStart) * 0.85;
+                dragOffset = diff;
+                
+                if (Math.abs(diff / slideWidth) < 0.75) {
+                    updateCarousel(-diff / slideWidth);
+                }
+            }
+
+            function endDrag() {
+                if (!isDragging) return;
+                isDragging = false;
+                
+                const slide = document.querySelector('.slide.grabbed');
+                if (slide) slide.classList.remove('grabbed');
+                
+                const threshold = 0.2;
+                if (Math.abs(dragOffset / slideWidth) >= threshold) {
+                    navigate(-Math.sign(dragOffset));
+                } else {
+                    updateCarousel();
+                }
+                
+                dragOffset = 0;
+                
+                document.removeEventListener('mousemove', handleDrag);
+                document.removeEventListener('mouseup', endDrag);
+                document.removeEventListener('touchmove', handleDrag);
+                document.removeEventListener('touchend', endDrag);
+            }
+
+            // Wheel handler
+            function handleWheel(e) {
+                const direction = Math.sign(e.deltaY);
+                
+                if ((direction > 0 && wheelVelocity < 0) || (direction < 0 && wheelVelocity > 0)) {
+                    wheelVelocity = 0;
+                }
+                
+                wheelVelocity += 0.2 * direction;
+                
+                if (Math.abs(wheelVelocity) > 1) {
+                    navigate(Math.sign(wheelVelocity));
+                    wheelVelocity = 0;
+                }
+            }
+
+            // Event listeners
+            prevBtn.addEventListener('click', () => navigate(-1));
+            nextBtn.addEventListener('click', () => navigate(1));
+            slidesContainer.addEventListener('wheel', handleWheel);
+
+            // Prevent image dragging
+            document.addEventListener('dragstart', (e) => {
+                if (e.target.tagName === 'IMG') {
+                    e.preventDefault();
+                }
+            });
+
+            // Initialize
+            setTimeout(() => {
+                console.log('Initializing carousel...');
+                console.log('Images array:', images);
+                console.log('Image paths:', images.map(img => img.src));
+                calculateSlideWidth();
+                createSlides();
+                console.log('Carousel initialized with', images.length, 'images');
+                
+                // Force update after a short delay to ensure images load
+                setTimeout(() => {
+                    updateCarousel();
+                }, 500);
+            }, 200);
+            
+            window.addEventListener('resize', () => {
+                calculateSlideWidth();
+                createSlides();
+            });
+            
+            // Auto-update on orientation change
+            window.addEventListener('orientationchange', () => {
+                setTimeout(() => {
+                    calculateSlideWidth();
+                    createSlides();
+                }, 100);
+            });
+
+            // Prevent default on carousel container
+            slidesContainer.addEventListener('click', (e) => {
+                if (e.target.closest('.carousel-nav-btn')) return;
+                e.preventDefault();
+            });
+        });
+
+        // Curved Carousel Implementation for Props2 Section
+        document.addEventListener('DOMContentLoaded', function() {
+            const images2 = [
+                {
+                    src: '../assets/images/galleries/ourprops/prop5.png',
+                },
+                {
+                    src: '../assets/images/galleries/ourprops/prop6.png',
+                },
+                {
+                    src: '../assets/images/galleries/ourprops/prop7.png',
+                },
+                {
+                    src: '../assets/images/galleries/ourprops/prop8.png',
+                }
+            ];
+
+            const slidesWrapper2 = document.getElementById('slides-wrapper-2');
+            const prevBtn2 = document.getElementById('prev-btn-2');
+            const nextBtn2 = document.getElementById('next-btn-2');
+            const captionLink2 = document.getElementById('caption-link-2');
+            const slidesContainer2 = document.getElementById('carousel-slides-2');
+
+            if (!slidesWrapper2 || !prevBtn2 || !nextBtn2 || !slidesContainer2) {
+                console.error('Carousel 2 elements not found');
+                return;
+            }
+
+            let currentIndex2 = 1;
+            let windowWidth2 = window.innerWidth;
+            let windowHeight2 = window.innerHeight;
+            let slideWidth2 = 400;
+            let isDragging2 = false;
+            let dragStart2 = 0;
+            let dragOffset2 = 0;
+            let wheelVelocity2 = 0;
+
+            function calculateSlideWidth2() {
+                windowWidth2 = window.innerWidth;
+                windowHeight2 = window.innerHeight;
+                
+                if (windowWidth2 >= 960) {
+                    slideWidth2 = Math.min(windowWidth2 / 2.2, 480);
+                } else if (windowWidth2 >= 640) {
+                    slideWidth2 = Math.min(windowWidth2 / 1.8, 400);
+                } else {
+                    slideWidth2 = Math.min(windowWidth2 / 1.6, 340);
+                }
+                
+                slideWidth2 = Math.max(250, Math.min(slideWidth2, 480));
+            }
+
+            function getCurvedPosition2(index, centerOffset = 0) {
+                const totalSlides = images2.length;
+                let relativeIndex = index - currentIndex2 - centerOffset;
+                
+                const halfRange = totalSlides / 2;
+                while (relativeIndex > halfRange) {
+                    relativeIndex -= totalSlides;
+                }
+                while (relativeIndex < -halfRange) {
+                    relativeIndex += totalSlides;
+                }
+                
+                const spacing = slideWidth2 * 0.65;
+                const xPos = relativeIndex * spacing;
+                const curveIntensity = windowWidth2 <= 640 ? 20 : 30;
+                const yPos = -Math.pow(Math.abs(relativeIndex), 1.3) * curveIntensity;
+                const rotation = relativeIndex * (windowWidth2 <= 640 ? 4 : 6);
+
+                return {
+                    x: xPos,
+                    y: yPos,
+                    rotation: -rotation
+                };
+            }
+
+            function createSlides2() {
+                const existingSlides = slidesWrapper2.querySelectorAll('.slide');
+                existingSlides.forEach(slide => slide.remove());
+                
+                images2.forEach((img, index) => {
+                    const slide = document.createElement('div');
+                    slide.className = 'slide';
+                    slide.dataset.index = index;
+                    slide.id = `slide-2-${index}`;
+                    
+                    const figure = document.createElement('figure');
+                    figure.id = `f2-${index}`;
+                    
+                    const imgElement = document.createElement('img');
+                    const imgSrc = img.src.startsWith('../') ? img.src : '../' + img.src;
+                    imgElement.src = imgSrc;
+                    imgElement.alt = img.alt || `Prop ${index + 5}`;
+                    imgElement.draggable = false;
+                    
+                    const maxImgWidth = windowWidth2 <= 640 ? 340 : windowWidth2 <= 960 ? 440 : 480;
+                    imgElement.style.width = Math.min(slideWidth2, maxImgWidth) + 'px';
+                    imgElement.style.maxWidth = maxImgWidth + 'px';
+                    imgElement.style.height = 'auto';
+                    imgElement.style.display = 'block';
+                    imgElement.style.objectFit = 'contain';
+                    imgElement.style.opacity = '1';
+                    imgElement.style.visibility = 'visible';
+                    imgElement.style.position = 'relative';
+                    
+                    imgElement.onerror = function() {
+                        console.error('❌ Failed to load image:', imgSrc);
+                        const altPath = 'assets/images/galleries/ourprops/prop' + (index + 5) + '.png';
+                        this.src = altPath;
+                        this.onerror = function() {
+                            console.error('❌ Also failed:', altPath);
+                            this.style.border = '2px solid red';
+                            this.style.backgroundColor = '#333';
+                            this.style.width = '200px';
+                            this.style.height = '200px';
+                            this.style.display = 'flex';
+                            this.style.alignItems = 'center';
+                            this.style.justifyContent = 'center';
+                            this.innerHTML = '<span style="color: white;">Image ' + (index + 5) + '</span>';
+                        };
+                    };
+                    
+                    imgElement.onload = function() {
+                        console.log('✓ Successfully loaded image:', this.src);
+                    };
+                    
+                    figure.appendChild(imgElement);
+                    slide.appendChild(figure);
+                    
+                    const captionContainer = slidesWrapper2.querySelector('.caption-container');
+                    if (captionContainer) {
+                        slidesWrapper2.insertBefore(slide, captionContainer);
+                    } else {
+                        slidesWrapper2.appendChild(slide);
+                    }
+                });
+                
+                setTimeout(() => {
+                    attachSlideListeners2();
+                    updateCarousel2();
+                }, 100);
+            }
+
+            function attachSlideListeners2() {
+                document.querySelectorAll('#slides-wrapper-2 .slide figure').forEach((figure) => {
+                    const slideIndex = parseInt(figure.closest('.slide').dataset.index);
+                    figure.addEventListener('mousedown', (e) => startDrag2(e, slideIndex));
+                    figure.addEventListener('touchstart', (e) => startDrag2(e, slideIndex));
+                });
+            }
+
+            function updateCarousel2(offset = 0) {
+                const slides = slidesWrapper2.querySelectorAll('.slide');
+                if (slides.length === 0) {
+                    console.warn('No slides found in carousel 2');
+                    return;
+                }
+                
+                const centerOffset = offset;
+                
+                slides.forEach((slide) => {
+                    const index = parseInt(slide.dataset.index);
+                    const pos = getCurvedPosition2(index, centerOffset);
+                    
+                    slide.style.transform = `translate(calc(-50% + ${pos.x}px), calc(-50% + ${pos.y}px)) rotate(${pos.rotation}deg)`;
+                    slide.style.zIndex = images2.length - Math.abs(index - currentIndex2);
+                    slide.style.visibility = 'visible';
+                    slide.style.opacity = '1';
+                    slide.style.display = 'flex';
+                    
+                    const img = slide.querySelector('img');
+                    if (!img) return;
+                    
+                    img.style.display = 'block';
+                    img.style.opacity = '1';
+                    img.style.visibility = 'visible';
+                    
+                    let relativeIndex = index - currentIndex2 - centerOffset;
+                    const totalSlides = images2.length;
+                    const halfRange = totalSlides / 2;
+                    while (relativeIndex > halfRange) relativeIndex -= totalSlides;
+                    while (relativeIndex < -halfRange) relativeIndex += totalSlides;
+                    const distance = Math.abs(relativeIndex);
+                    
+                    if (distance < 0.5) {
+                        img.style.transform = 'scale(1.15)';
+                        img.style.opacity = '1';
+                        img.style.boxShadow = '5px 5px 50px -1px rgba(255, 255, 255, 0.6)';
+                        img.style.zIndex = '10';
+                    } else if (distance < 1.5) {
+                        const scale = 1 - (distance - 0.5) * 0.2;
+                        img.style.transform = `scale(${scale})`;
+                        img.style.opacity = Math.max(0.7, 1 - (distance - 0.5) * 0.15);
+                        img.style.boxShadow = '5px 5px 50px -1px rgba(255, 255, 255, 0.4)';
+                        img.style.zIndex = '5';
+                    } else {
+                        const scale = Math.max(0.5, 0.8 - (distance - 1.5) * 0.15);
+                        img.style.transform = `scale(${scale})`;
+                        img.style.opacity = Math.max(0.3, 0.6 - (distance - 1.5) * 0.1);
+                        img.style.boxShadow = '5px 5px 50px -1px rgba(0, 0, 0, 0.8)';
+                        img.style.zIndex = '1';
+                    }
+                });
+                
+                const captionContainer = slidesWrapper2.querySelector('.caption-container');
+                if (captionLink2 && captionContainer) {
+                    if (images2[currentIndex2] && images2[currentIndex2].caption) {
+                        captionLink2.textContent = images2[currentIndex2].caption;
+                        captionLink2.href = images2[currentIndex2].href || '#';
+                        captionLink2.style.display = 'inline-block';
+                        captionContainer.style.display = 'flex';
+                    } else {
+                        captionLink2.style.display = 'none';
+                        captionContainer.style.display = 'none';
+                    }
+                }
+            }
+
+            function navigate2(direction) {
+                currentIndex2 += direction;
+                if (currentIndex2 < 0) currentIndex2 = images2.length - 1;
+                if (currentIndex2 >= images2.length) currentIndex2 = 0;
+                updateCarousel2();
+            }
+
+            function startDrag2(e, index) {
+                if (index !== currentIndex2) return;
+                isDragging2 = true;
+                dragStart2 = e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
+                dragOffset2 = 0;
+                
+                const slide = slidesWrapper2.querySelector(`.slide[data-index="${index}"]`);
+                if (slide) slide.classList.add('grabbed');
+                
+                document.addEventListener('mousemove', handleDrag2);
+                document.addEventListener('mouseup', endDrag2);
+                document.addEventListener('touchmove', handleDrag2);
+                document.addEventListener('touchend', endDrag2);
+            }
+
+            function handleDrag2(e) {
+                if (!isDragging2) return;
+                e.preventDefault();
+                const currentX = e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
+                const diff = (currentX - dragStart2) * 0.85;
+                dragOffset2 = diff;
+                
+                if (Math.abs(diff / slideWidth2) < 0.75) {
+                    updateCarousel2(-diff / slideWidth2);
+                }
+            }
+
+            function endDrag2() {
+                if (!isDragging2) return;
+                isDragging2 = false;
+                
+                const slide = slidesWrapper2.querySelector('.slide.grabbed');
+                if (slide) slide.classList.remove('grabbed');
+                
+                const threshold = 0.2;
+                if (Math.abs(dragOffset2 / slideWidth2) >= threshold) {
+                    navigate2(-Math.sign(dragOffset2));
+                } else {
+                    updateCarousel2();
+                }
+                
+                dragOffset2 = 0;
+                
+                document.removeEventListener('mousemove', handleDrag2);
+                document.removeEventListener('mouseup', endDrag2);
+                document.removeEventListener('touchmove', handleDrag2);
+                document.removeEventListener('touchend', endDrag2);
+            }
+
+            function handleWheel2(e) {
+                if (!slidesContainer2.contains(e.target) && !slidesWrapper2.contains(e.target)) return;
+                const direction = Math.sign(e.deltaY);
+                
+                if ((direction > 0 && wheelVelocity2 < 0) || (direction < 0 && wheelVelocity2 > 0)) {
+                    wheelVelocity2 = 0;
+                }
+                
+                wheelVelocity2 += 0.2 * direction;
+                
+                if (Math.abs(wheelVelocity2) > 1) {
+                    navigate2(Math.sign(wheelVelocity2));
+                    wheelVelocity2 = 0;
+                }
+            }
+
+            prevBtn2.addEventListener('click', () => navigate2(-1));
+            nextBtn2.addEventListener('click', () => navigate2(1));
+            slidesContainer2.addEventListener('wheel', handleWheel2);
+
+            setTimeout(() => {
+                calculateSlideWidth2();
+                createSlides2();
+                setTimeout(() => {
+                    updateCarousel2();
+                }, 500);
+            }, 200);
+            
+            window.addEventListener('resize', () => {
+                calculateSlideWidth2();
+                createSlides2();
+            });
+            
+            window.addEventListener('orientationchange', () => {
+                setTimeout(() => {
+                    calculateSlideWidth2();
+                    createSlides2();
+                }, 100);
+            });
+        });
+
+        // Curved Carousel Implementation for Props3 Section
+        document.addEventListener('DOMContentLoaded', function() {
+            const images3 = [
+                {
+                    src: '../assets/images/galleries/ourprops/prop9.png',
+                },
+                {
+                    src: '../assets/images/galleries/ourprops/prop10.png',
+                },
+                {
+                    src: '../assets/images/galleries/ourprops/prop11.png',
+                },
+                {
+                    src: '../assets/images/galleries/ourprops/prop12.png',
+                }
+            ];
+
+            const slidesWrapper3 = document.getElementById('slides-wrapper-3');
+            const prevBtn3 = document.getElementById('prev-btn-3');
+            const nextBtn3 = document.getElementById('next-btn-3');
+            const captionLink3 = document.getElementById('caption-link-3');
+            const slidesContainer3 = document.getElementById('carousel-slides-3');
+
+            if (!slidesWrapper3 || !prevBtn3 || !nextBtn3 || !slidesContainer3) {
+                console.error('Carousel 3 elements not found');
+                return;
+            }
+
+            let currentIndex3 = 1;
+            let windowWidth3 = window.innerWidth;
+            let windowHeight3 = window.innerHeight;
+            let slideWidth3 = 400;
+            let isDragging3 = false;
+            let dragStart3 = 0;
+            let dragOffset3 = 0;
+            let wheelVelocity3 = 0;
+
+            function calculateSlideWidth3() {
+                windowWidth3 = window.innerWidth;
+                windowHeight3 = window.innerHeight;
+                
+                if (windowWidth3 >= 960) {
+                    slideWidth3 = Math.min(windowWidth3 / 2.2, 480);
+                } else if (windowWidth3 >= 640) {
+                    slideWidth3 = Math.min(windowWidth3 / 1.8, 400);
+                } else {
+                    slideWidth3 = Math.min(windowWidth3 / 1.6, 340);
+                }
+                
+                slideWidth3 = Math.max(250, Math.min(slideWidth3, 480));
+            }
+
+            function getCurvedPosition3(index, centerOffset = 0) {
+                const totalSlides = images3.length;
+                let relativeIndex = index - currentIndex3 - centerOffset;
+                
+                const halfRange = totalSlides / 2;
+                while (relativeIndex > halfRange) {
+                    relativeIndex -= totalSlides;
+                }
+                while (relativeIndex < -halfRange) {
+                    relativeIndex += totalSlides;
+                }
+                
+                const spacing = slideWidth3 * 0.65;
+                const xPos = relativeIndex * spacing;
+                const curveIntensity = windowWidth3 <= 640 ? 20 : 30;
+                const yPos = -Math.pow(Math.abs(relativeIndex), 1.3) * curveIntensity;
+                const rotation = relativeIndex * (windowWidth3 <= 640 ? 4 : 6);
+
+                return {
+                    x: xPos,
+                    y: yPos,
+                    rotation: -rotation
+                };
+            }
+
+            function createSlides3() {
+                const existingSlides = slidesWrapper3.querySelectorAll('.slide');
+                existingSlides.forEach(slide => slide.remove());
+                
+                images3.forEach((img, index) => {
+                    const slide = document.createElement('div');
+                    slide.className = 'slide';
+                    slide.dataset.index = index;
+                    slide.id = `slide-3-${index}`;
+                    
+                    const figure = document.createElement('figure');
+                    figure.id = `f3-${index}`;
+                    
+                    const imgElement = document.createElement('img');
+                    const imgSrc = img.src.startsWith('../') ? img.src : '../' + img.src;
+                    imgElement.src = imgSrc;
+                    imgElement.alt = img.alt || `Prop ${index + 9}`;
+                    imgElement.draggable = false;
+                    
+                    const maxImgWidth = windowWidth3 <= 640 ? 340 : windowWidth3 <= 960 ? 440 : 480;
+                    imgElement.style.width = Math.min(slideWidth3, maxImgWidth) + 'px';
+                    imgElement.style.maxWidth = maxImgWidth + 'px';
+                    imgElement.style.height = 'auto';
+                    imgElement.style.display = 'block';
+                    imgElement.style.objectFit = 'contain';
+                    imgElement.style.opacity = '1';
+                    imgElement.style.visibility = 'visible';
+                    imgElement.style.position = 'relative';
+                    
+                    imgElement.onerror = function() {
+                        console.error('❌ Failed to load image:', imgSrc);
+                        const altPath = 'assets/images/galleries/ourprops/prop' + (index + 9) + '.png';
+                        this.src = altPath;
+                        this.onerror = function() {
+                            console.error('❌ Also failed:', altPath);
+                            this.style.border = '2px solid red';
+                            this.style.backgroundColor = '#333';
+                            this.style.width = '200px';
+                            this.style.height = '200px';
+                            this.style.display = 'flex';
+                            this.style.alignItems = 'center';
+                            this.style.justifyContent = 'center';
+                            this.innerHTML = '<span style="color: white;">Image ' + (index + 9) + '</span>';
+                        };
+                    };
+                    
+                    imgElement.onload = function() {
+                        console.log('✓ Successfully loaded image:', this.src);
+                    };
+                    
+                    figure.appendChild(imgElement);
+                    slide.appendChild(figure);
+                    
+                    const captionContainer = slidesWrapper3.querySelector('.caption-container');
+                    if (captionContainer) {
+                        slidesWrapper3.insertBefore(slide, captionContainer);
+                    } else {
+                        slidesWrapper3.appendChild(slide);
+                    }
+                });
+                
+                setTimeout(() => {
+                    attachSlideListeners3();
+                    updateCarousel3();
+                }, 100);
+            }
+
+            function attachSlideListeners3() {
+                document.querySelectorAll('#slides-wrapper-3 .slide figure').forEach((figure) => {
+                    const slideIndex = parseInt(figure.closest('.slide').dataset.index);
+                    figure.addEventListener('mousedown', (e) => startDrag3(e, slideIndex));
+                    figure.addEventListener('touchstart', (e) => startDrag3(e, slideIndex));
+                });
+            }
+
+            function updateCarousel3(offset = 0) {
+                const slides = slidesWrapper3.querySelectorAll('.slide');
+                if (slides.length === 0) {
+                    console.warn('No slides found in carousel 3');
+                    return;
+                }
+                
+                const centerOffset = offset;
+                
+                slides.forEach((slide) => {
+                    const index = parseInt(slide.dataset.index);
+                    const pos = getCurvedPosition3(index, centerOffset);
+                    
+                    slide.style.transform = `translate(calc(-50% + ${pos.x}px), calc(-50% + ${pos.y}px)) rotate(${pos.rotation}deg)`;
+                    slide.style.zIndex = images3.length - Math.abs(index - currentIndex3);
+                    slide.style.visibility = 'visible';
+                    slide.style.opacity = '1';
+                    slide.style.display = 'flex';
+                    
+                    const img = slide.querySelector('img');
+                    if (!img) return;
+                    
+                    img.style.display = 'block';
+                    img.style.opacity = '1';
+                    img.style.visibility = 'visible';
+                    
+                    let relativeIndex = index - currentIndex3 - centerOffset;
+                    const totalSlides = images3.length;
+                    const halfRange = totalSlides / 2;
+                    while (relativeIndex > halfRange) relativeIndex -= totalSlides;
+                    while (relativeIndex < -halfRange) relativeIndex += totalSlides;
+                    const distance = Math.abs(relativeIndex);
+                    
+                    if (distance < 0.5) {
+                        img.style.transform = 'scale(1.15)';
+                        img.style.opacity = '1';
+                        img.style.boxShadow = '5px 5px 50px -1px rgba(255, 255, 255, 0.6)';
+                        img.style.zIndex = '10';
+                    } else if (distance < 1.5) {
+                        const scale = 1 - (distance - 0.5) * 0.2;
+                        img.style.transform = `scale(${scale})`;
+                        img.style.opacity = Math.max(0.7, 1 - (distance - 0.5) * 0.15);
+                        img.style.boxShadow = '5px 5px 50px -1px rgba(255, 255, 255, 0.4)';
+                        img.style.zIndex = '5';
+                    } else {
+                        const scale = Math.max(0.5, 0.8 - (distance - 1.5) * 0.15);
+                        img.style.transform = `scale(${scale})`;
+                        img.style.opacity = Math.max(0.3, 0.6 - (distance - 1.5) * 0.1);
+                        img.style.boxShadow = '5px 5px 50px -1px rgba(0, 0, 0, 0.8)';
+                        img.style.zIndex = '1';
+                    }
+                });
+                
+                const captionContainer = slidesWrapper3.querySelector('.caption-container');
+                if (captionLink3 && captionContainer) {
+                    if (images3[currentIndex3] && images3[currentIndex3].caption) {
+                        captionLink3.textContent = images3[currentIndex3].caption;
+                        captionLink3.href = images3[currentIndex3].href || '#';
+                        captionLink3.style.display = 'inline-block';
+                        captionContainer.style.display = 'flex';
+                    } else {
+                        captionLink3.style.display = 'none';
+                        captionContainer.style.display = 'none';
+                    }
+                }
+            }
+
+            function navigate3(direction) {
+                currentIndex3 += direction;
+                if (currentIndex3 < 0) currentIndex3 = images3.length - 1;
+                if (currentIndex3 >= images3.length) currentIndex3 = 0;
+                updateCarousel3();
+            }
+
+            function startDrag3(e, index) {
+                if (index !== currentIndex3) return;
+                isDragging3 = true;
+                dragStart3 = e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
+                dragOffset3 = 0;
+                
+                const slide = slidesWrapper3.querySelector(`.slide[data-index="${index}"]`);
+                if (slide) slide.classList.add('grabbed');
+                
+                document.addEventListener('mousemove', handleDrag3);
+                document.addEventListener('mouseup', endDrag3);
+                document.addEventListener('touchmove', handleDrag3);
+                document.addEventListener('touchend', endDrag3);
+            }
+
+            function handleDrag3(e) {
+                if (!isDragging3) return;
+                e.preventDefault();
+                const currentX = e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
+                const diff = (currentX - dragStart3) * 0.85;
+                dragOffset3 = diff;
+                
+                if (Math.abs(diff / slideWidth3) < 0.75) {
+                    updateCarousel3(-diff / slideWidth3);
+                }
+            }
+
+            function endDrag3() {
+                if (!isDragging3) return;
+                isDragging3 = false;
+                
+                const slide = slidesWrapper3.querySelector('.slide.grabbed');
+                if (slide) slide.classList.remove('grabbed');
+                
+                const threshold = 0.2;
+                if (Math.abs(dragOffset3 / slideWidth3) >= threshold) {
+                    navigate3(-Math.sign(dragOffset3));
+                } else {
+                    updateCarousel3();
+                }
+                
+                dragOffset3 = 0;
+                
+                document.removeEventListener('mousemove', handleDrag3);
+                document.removeEventListener('mouseup', endDrag3);
+                document.removeEventListener('touchmove', handleDrag3);
+                document.removeEventListener('touchend', endDrag3);
+            }
+
+            function handleWheel3(e) {
+                if (!slidesContainer3.contains(e.target) && !slidesWrapper3.contains(e.target)) return;
+                const direction = Math.sign(e.deltaY);
+                
+                if ((direction > 0 && wheelVelocity3 < 0) || (direction < 0 && wheelVelocity3 > 0)) {
+                    wheelVelocity3 = 0;
+                }
+                
+                wheelVelocity3 += 0.2 * direction;
+                
+                if (Math.abs(wheelVelocity3) > 1) {
+                    navigate3(Math.sign(wheelVelocity3));
+                    wheelVelocity3 = 0;
+                }
+            }
+
+            prevBtn3.addEventListener('click', () => navigate3(-1));
+            nextBtn3.addEventListener('click', () => navigate3(1));
+            slidesContainer3.addEventListener('wheel', handleWheel3);
+
+            setTimeout(() => {
+                calculateSlideWidth3();
+                createSlides3();
+                setTimeout(() => {
+                    updateCarousel3();
+                }, 500);
+            }, 200);
+            
+            window.addEventListener('resize', () => {
+                calculateSlideWidth3();
+                createSlides3();
+            });
+            
+            window.addEventListener('orientationchange', () => {
+                setTimeout(() => {
+                    calculateSlideWidth3();
+                    createSlides3();
+                }, 100);
+            });
+        });
+
+        // Curved Carousel Implementation for Props4 Section
+        document.addEventListener('DOMContentLoaded', function() {
+            const images4 = [
+                {
+                    src: '../assets/images/galleries/ourprops/prop13.png',
+                },
+                {
+                    src: '../assets/images/galleries/ourprops/prop14.png',
+                },
+                {
+                    src: '../assets/images/galleries/ourprops/prop15.png',
+                },
+                {
+                    src: '../assets/images/galleries/ourprops/prop16.png',
+                }
+            ];
+
+            const slidesWrapper4 = document.getElementById('slides-wrapper-4');
+            const prevBtn4 = document.getElementById('prev-btn-4');
+            const nextBtn4 = document.getElementById('next-btn-4');
+            const captionLink4 = document.getElementById('caption-link-4');
+            const slidesContainer4 = document.getElementById('carousel-slides-4');
+
+            if (!slidesWrapper4 || !prevBtn4 || !nextBtn4 || !slidesContainer4) {
+                console.error('Carousel 4 elements not found');
+                return;
+            }
+
+            let currentIndex4 = 1;
+            let windowWidth4 = window.innerWidth;
+            let windowHeight4 = window.innerHeight;
+            let slideWidth4 = 400;
+            let isDragging4 = false;
+            let dragStart4 = 0;
+            let dragOffset4 = 0;
+            let wheelVelocity4 = 0;
+
+            function calculateSlideWidth4() {
+                windowWidth4 = window.innerWidth;
+                windowHeight4 = window.innerHeight;
+                
+                if (windowWidth4 >= 960) {
+                    slideWidth4 = Math.min(windowWidth4 / 2.2, 480);
+                } else if (windowWidth4 >= 640) {
+                    slideWidth4 = Math.min(windowWidth4 / 1.8, 400);
+                } else {
+                    slideWidth4 = Math.min(windowWidth4 / 1.6, 340);
+                }
+                
+                slideWidth4 = Math.max(250, Math.min(slideWidth4, 480));
+            }
+
+            function getCurvedPosition4(index, centerOffset = 0) {
+                const totalSlides = images4.length;
+                let relativeIndex = index - currentIndex4 - centerOffset;
+                
+                const halfRange = totalSlides / 2;
+                while (relativeIndex > halfRange) {
+                    relativeIndex -= totalSlides;
+                }
+                while (relativeIndex < -halfRange) {
+                    relativeIndex += totalSlides;
+                }
+                
+                const spacing = slideWidth4 * 0.65;
+                const xPos = relativeIndex * spacing;
+                const curveIntensity = windowWidth4 <= 640 ? 20 : 30;
+                const yPos = -Math.pow(Math.abs(relativeIndex), 1.3) * curveIntensity;
+                const rotation = relativeIndex * (windowWidth4 <= 640 ? 4 : 6);
+
+                return {
+                    x: xPos,
+                    y: yPos,
+                    rotation: -rotation
+                };
+            }
+
+            function createSlides4() {
+                const existingSlides = slidesWrapper4.querySelectorAll('.slide');
+                existingSlides.forEach(slide => slide.remove());
+                
+                images4.forEach((img, index) => {
+                    const slide = document.createElement('div');
+                    slide.className = 'slide';
+                    slide.dataset.index = index;
+                    slide.id = `slide-4-${index}`;
+                    
+                    const figure = document.createElement('figure');
+                    figure.id = `f4-${index}`;
+                    
+                    const imgElement = document.createElement('img');
+                    const imgSrc = img.src.startsWith('../') ? img.src : '../' + img.src;
+                    imgElement.src = imgSrc;
+                    imgElement.alt = img.alt || `Prop ${index + 13}`;
+                    imgElement.draggable = false;
+                    
+                    const maxImgWidth = windowWidth4 <= 640 ? 340 : windowWidth4 <= 960 ? 440 : 480;
+                    imgElement.style.width = Math.min(slideWidth4, maxImgWidth) + 'px';
+                    imgElement.style.maxWidth = maxImgWidth + 'px';
+                    imgElement.style.height = 'auto';
+                    imgElement.style.display = 'block';
+                    imgElement.style.objectFit = 'contain';
+                    imgElement.style.opacity = '1';
+                    imgElement.style.visibility = 'visible';
+                    imgElement.style.position = 'relative';
+                    
+                    imgElement.onerror = function() {
+                        console.error('❌ Failed to load image:', imgSrc);
+                        const altPath = 'assets/images/galleries/ourprops/prop' + (index + 13) + '.png';
+                        this.src = altPath;
+                        this.onerror = function() {
+                            console.error('❌ Also failed:', altPath);
+                            this.style.border = '2px solid red';
+                            this.style.backgroundColor = '#333';
+                            this.style.width = '200px';
+                            this.style.height = '200px';
+                            this.style.display = 'flex';
+                            this.style.alignItems = 'center';
+                            this.style.justifyContent = 'center';
+                            this.innerHTML = '<span style="color: white;">Image ' + (index + 13) + '</span>';
+                        };
+                    };
+                    
+                    imgElement.onload = function() {
+                        console.log('✓ Successfully loaded image:', this.src);
+                    };
+                    
+                    figure.appendChild(imgElement);
+                    slide.appendChild(figure);
+                    
+                    const captionContainer = slidesWrapper4.querySelector('.caption-container');
+                    if (captionContainer) {
+                        slidesWrapper4.insertBefore(slide, captionContainer);
+                    } else {
+                        slidesWrapper4.appendChild(slide);
+                    }
+                });
+                
+                setTimeout(() => {
+                    attachSlideListeners4();
+                    updateCarousel4();
+                }, 100);
+            }
+
+            function attachSlideListeners4() {
+                document.querySelectorAll('#slides-wrapper-4 .slide figure').forEach((figure) => {
+                    const slideIndex = parseInt(figure.closest('.slide').dataset.index);
+                    figure.addEventListener('mousedown', (e) => startDrag4(e, slideIndex));
+                    figure.addEventListener('touchstart', (e) => startDrag4(e, slideIndex));
+                });
+            }
+
+            function updateCarousel4(offset = 0) {
+                const slides = slidesWrapper4.querySelectorAll('.slide');
+                if (slides.length === 0) {
+                    console.warn('No slides found in carousel 4');
+                    return;
+                }
+                
+                const centerOffset = offset;
+                
+                slides.forEach((slide) => {
+                    const index = parseInt(slide.dataset.index);
+                    const pos = getCurvedPosition4(index, centerOffset);
+                    
+                    slide.style.transform = `translate(calc(-50% + ${pos.x}px), calc(-50% + ${pos.y}px)) rotate(${pos.rotation}deg)`;
+                    slide.style.zIndex = images4.length - Math.abs(index - currentIndex4);
+                    slide.style.visibility = 'visible';
+                    slide.style.opacity = '1';
+                    slide.style.display = 'flex';
+                    
+                    const img = slide.querySelector('img');
+                    if (!img) return;
+                    
+                    img.style.display = 'block';
+                    img.style.opacity = '1';
+                    img.style.visibility = 'visible';
+                    
+                    let relativeIndex = index - currentIndex4 - centerOffset;
+                    const totalSlides = images4.length;
+                    const halfRange = totalSlides / 2;
+                    while (relativeIndex > halfRange) relativeIndex -= totalSlides;
+                    while (relativeIndex < -halfRange) relativeIndex += totalSlides;
+                    const distance = Math.abs(relativeIndex);
+                    
+                    if (distance < 0.5) {
+                        img.style.transform = 'scale(1.15)';
+                        img.style.opacity = '1';
+                        img.style.boxShadow = '5px 5px 50px -1px rgba(255, 255, 255, 0.6)';
+                        img.style.zIndex = '10';
+                    } else if (distance < 1.5) {
+                        const scale = 1 - (distance - 0.5) * 0.2;
+                        img.style.transform = `scale(${scale})`;
+                        img.style.opacity = Math.max(0.7, 1 - (distance - 0.5) * 0.15);
+                        img.style.boxShadow = '5px 5px 50px -1px rgba(255, 255, 255, 0.4)';
+                        img.style.zIndex = '5';
+                    } else {
+                        const scale = Math.max(0.5, 0.8 - (distance - 1.5) * 0.15);
+                        img.style.transform = `scale(${scale})`;
+                        img.style.opacity = Math.max(0.3, 0.6 - (distance - 1.5) * 0.1);
+                        img.style.boxShadow = '5px 5px 50px -1px rgba(0, 0, 0, 0.8)';
+                        img.style.zIndex = '1';
+                    }
+                });
+                
+                const captionContainer = slidesWrapper4.querySelector('.caption-container');
+                if (captionLink4 && captionContainer) {
+                    if (images4[currentIndex4] && images4[currentIndex4].caption) {
+                        captionLink4.textContent = images4[currentIndex4].caption;
+                        captionLink4.href = images4[currentIndex4].href || '#';
+                        captionLink4.style.display = 'inline-block';
+                        captionContainer.style.display = 'flex';
+                    } else {
+                        captionLink4.style.display = 'none';
+                        captionContainer.style.display = 'none';
+                    }
+                }
+            }
+
+            function navigate4(direction) {
+                currentIndex4 += direction;
+                if (currentIndex4 < 0) currentIndex4 = images4.length - 1;
+                if (currentIndex4 >= images4.length) currentIndex4 = 0;
+                updateCarousel4();
+            }
+
+            function startDrag4(e, index) {
+                if (index !== currentIndex4) return;
+                isDragging4 = true;
+                dragStart4 = e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
+                dragOffset4 = 0;
+                
+                const slide = slidesWrapper4.querySelector(`.slide[data-index="${index}"]`);
+                if (slide) slide.classList.add('grabbed');
+                
+                document.addEventListener('mousemove', handleDrag4);
+                document.addEventListener('mouseup', endDrag4);
+                document.addEventListener('touchmove', handleDrag4);
+                document.addEventListener('touchend', endDrag4);
+            }
+
+            function handleDrag4(e) {
+                if (!isDragging4) return;
+                e.preventDefault();
+                const currentX = e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
+                const diff = (currentX - dragStart4) * 0.85;
+                dragOffset4 = diff;
+                
+                if (Math.abs(diff / slideWidth4) < 0.75) {
+                    updateCarousel4(-diff / slideWidth4);
+                }
+            }
+
+            function endDrag4() {
+                if (!isDragging4) return;
+                isDragging4 = false;
+                
+                const slide = slidesWrapper4.querySelector('.slide.grabbed');
+                if (slide) slide.classList.remove('grabbed');
+                
+                const threshold = 0.2;
+                if (Math.abs(dragOffset4 / slideWidth4) >= threshold) {
+                    navigate4(-Math.sign(dragOffset4));
+                } else {
+                    updateCarousel4();
+                }
+                
+                dragOffset4 = 0;
+                
+                document.removeEventListener('mousemove', handleDrag4);
+                document.removeEventListener('mouseup', endDrag4);
+                document.removeEventListener('touchmove', handleDrag4);
+                document.removeEventListener('touchend', endDrag4);
+            }
+
+            function handleWheel4(e) {
+                if (!slidesContainer4.contains(e.target) && !slidesWrapper4.contains(e.target)) return;
+                const direction = Math.sign(e.deltaY);
+                
+                if ((direction > 0 && wheelVelocity4 < 0) || (direction < 0 && wheelVelocity4 > 0)) {
+                    wheelVelocity4 = 0;
+                }
+                
+                wheelVelocity4 += 0.2 * direction;
+                
+                if (Math.abs(wheelVelocity4) > 1) {
+                    navigate4(Math.sign(wheelVelocity4));
+                    wheelVelocity4 = 0;
+                }
+            }
+
+            prevBtn4.addEventListener('click', () => navigate4(-1));
+            nextBtn4.addEventListener('click', () => navigate4(1));
+            slidesContainer4.addEventListener('wheel', handleWheel4);
+
+            setTimeout(() => {
+                calculateSlideWidth4();
+                createSlides4();
+                setTimeout(() => {
+                    updateCarousel4();
+                }, 500);
+            }, 200);
+            
+            window.addEventListener('resize', () => {
+                calculateSlideWidth4();
+                createSlides4();
+            });
+            
+            window.addEventListener('orientationchange', () => {
+                setTimeout(() => {
+                    calculateSlideWidth4();
+                    createSlides4();
+                }, 100);
+            });
+        });
+
+        // Curved Carousel Implementation for Props5 Section
+        document.addEventListener('DOMContentLoaded', function() {
+            const images5 = [
+                {
+                    src: '../assets/images/galleries/ourprops/prop17.png',
+                },
+                {
+                    src: '../assets/images/galleries/ourprops/prop18.png',
+                },
+                {
+                    src: '../assets/images/galleries/ourprops/prop19.png',
+                },
+                {
+                    src: '../assets/images/galleries/ourprops/prop20.png',
+                }
+            ];
+
+            const slidesWrapper5 = document.getElementById('slides-wrapper-5');
+            const prevBtn5 = document.getElementById('prev-btn-5');
+            const nextBtn5 = document.getElementById('next-btn-5');
+            const captionLink5 = document.getElementById('caption-link-5');
+            const slidesContainer5 = document.getElementById('carousel-slides-5');
+
+            if (!slidesWrapper5 || !prevBtn5 || !nextBtn5 || !slidesContainer5) {
+                console.error('Carousel 5 elements not found');
+                return;
+            }
+
+            let currentIndex5 = 1;
+            let windowWidth5 = window.innerWidth;
+            let windowHeight5 = window.innerHeight;
+            let slideWidth5 = 400;
+            let isDragging5 = false;
+            let dragStart5 = 0;
+            let dragOffset5 = 0;
+            let wheelVelocity5 = 0;
+
+            function calculateSlideWidth5() {
+                windowWidth5 = window.innerWidth;
+                windowHeight5 = window.innerHeight;
+                
+                if (windowWidth5 >= 960) {
+                    slideWidth5 = Math.min(windowWidth5 / 2.2, 480);
+                } else if (windowWidth5 >= 640) {
+                    slideWidth5 = Math.min(windowWidth5 / 1.8, 400);
+                } else {
+                    slideWidth5 = Math.min(windowWidth5 / 1.6, 340);
+                }
+                
+                slideWidth5 = Math.max(250, Math.min(slideWidth5, 480));
+            }
+
+            function getCurvedPosition5(index, centerOffset = 0) {
+                const totalSlides = images5.length;
+                let relativeIndex = index - currentIndex5 - centerOffset;
+                
+                const halfRange = totalSlides / 2;
+                while (relativeIndex > halfRange) {
+                    relativeIndex -= totalSlides;
+                }
+                while (relativeIndex < -halfRange) {
+                    relativeIndex += totalSlides;
+                }
+                
+                const spacing = slideWidth5 * 0.65;
+                const xPos = relativeIndex * spacing;
+                const curveIntensity = windowWidth5 <= 640 ? 20 : 30;
+                const yPos = -Math.pow(Math.abs(relativeIndex), 1.3) * curveIntensity;
+                const rotation = relativeIndex * (windowWidth5 <= 640 ? 4 : 6);
+
+                return {
+                    x: xPos,
+                    y: yPos,
+                    rotation: -rotation
+                };
+            }
+
+            function createSlides5() {
+                const existingSlides = slidesWrapper5.querySelectorAll('.slide');
+                existingSlides.forEach(slide => slide.remove());
+                
+                images5.forEach((img, index) => {
+                    const slide = document.createElement('div');
+                    slide.className = 'slide';
+                    slide.dataset.index = index;
+                    slide.id = `slide-5-${index}`;
+                    
+                    const figure = document.createElement('figure');
+                    figure.id = `f5-${index}`;
+                    
+                    const imgElement = document.createElement('img');
+                    const imgSrc = img.src.startsWith('../') ? img.src : '../' + img.src;
+                    imgElement.src = imgSrc;
+                    imgElement.alt = img.alt || `Prop ${index + 17}`;
+                    imgElement.draggable = false;
+                    
+                    const maxImgWidth = windowWidth5 <= 640 ? 340 : windowWidth5 <= 960 ? 440 : 480;
+                    imgElement.style.width = Math.min(slideWidth5, maxImgWidth) + 'px';
+                    imgElement.style.maxWidth = maxImgWidth + 'px';
+                    imgElement.style.height = 'auto';
+                    imgElement.style.display = 'block';
+                    imgElement.style.objectFit = 'contain';
+                    imgElement.style.opacity = '1';
+                    imgElement.style.visibility = 'visible';
+                    imgElement.style.position = 'relative';
+                    
+                    imgElement.onerror = function() {
+                        console.error('❌ Failed to load image:', imgSrc);
+                        const altPath = 'assets/images/galleries/ourprops/prop' + (index + 17) + '.png';
+                        this.src = altPath;
+                        this.onerror = function() {
+                            console.error('❌ Also failed:', altPath);
+                            this.style.border = '2px solid red';
+                            this.style.backgroundColor = '#333';
+                            this.style.width = '200px';
+                            this.style.height = '200px';
+                            this.style.display = 'flex';
+                            this.style.alignItems = 'center';
+                            this.style.justifyContent = 'center';
+                            this.innerHTML = '<span style="color: white;">Image ' + (index + 17) + '</span>';
+                        };
+                    };
+                    
+                    imgElement.onload = function() {
+                        console.log('✓ Successfully loaded image:', this.src);
+                    };
+                    
+                    figure.appendChild(imgElement);
+                    slide.appendChild(figure);
+                    
+                    const captionContainer = slidesWrapper5.querySelector('.caption-container');
+                    if (captionContainer) {
+                        slidesWrapper5.insertBefore(slide, captionContainer);
+                    } else {
+                        slidesWrapper5.appendChild(slide);
+                    }
+                });
+                
+                setTimeout(() => {
+                    attachSlideListeners5();
+                    updateCarousel5();
+                }, 100);
+            }
+
+            function attachSlideListeners5() {
+                document.querySelectorAll('#slides-wrapper-5 .slide figure').forEach((figure) => {
+                    const slideIndex = parseInt(figure.closest('.slide').dataset.index);
+                    figure.addEventListener('mousedown', (e) => startDrag5(e, slideIndex));
+                    figure.addEventListener('touchstart', (e) => startDrag5(e, slideIndex));
+                });
+            }
+
+            function updateCarousel5(offset = 0) {
+                const slides = slidesWrapper5.querySelectorAll('.slide');
+                if (slides.length === 0) {
+                    console.warn('No slides found in carousel 5');
+                    return;
+                }
+                
+                const centerOffset = offset;
+                
+                slides.forEach((slide) => {
+                    const index = parseInt(slide.dataset.index);
+                    const pos = getCurvedPosition5(index, centerOffset);
+                    
+                    slide.style.transform = `translate(calc(-50% + ${pos.x}px), calc(-50% + ${pos.y}px)) rotate(${pos.rotation}deg)`;
+                    slide.style.zIndex = images5.length - Math.abs(index - currentIndex5);
+                    slide.style.visibility = 'visible';
+                    slide.style.opacity = '1';
+                    slide.style.display = 'flex';
+                    
+                    const img = slide.querySelector('img');
+                    if (!img) return;
+                    
+                    img.style.display = 'block';
+                    img.style.opacity = '1';
+                    img.style.visibility = 'visible';
+                    
+                    let relativeIndex = index - currentIndex5 - centerOffset;
+                    const totalSlides = images5.length;
+                    const halfRange = totalSlides / 2;
+                    while (relativeIndex > halfRange) relativeIndex -= totalSlides;
+                    while (relativeIndex < -halfRange) relativeIndex += totalSlides;
+                    const distance = Math.abs(relativeIndex);
+                    
+                    if (distance < 0.5) {
+                        img.style.transform = 'scale(1.15)';
+                        img.style.opacity = '1';
+                        img.style.boxShadow = '5px 5px 50px -1px rgba(255, 255, 255, 0.6)';
+                        img.style.zIndex = '10';
+                    } else if (distance < 1.5) {
+                        const scale = 1 - (distance - 0.5) * 0.2;
+                        img.style.transform = `scale(${scale})`;
+                        img.style.opacity = Math.max(0.7, 1 - (distance - 0.5) * 0.15);
+                        img.style.boxShadow = '5px 5px 50px -1px rgba(255, 255, 255, 0.4)';
+                        img.style.zIndex = '5';
+                    } else {
+                        const scale = Math.max(0.5, 0.8 - (distance - 1.5) * 0.15);
+                        img.style.transform = `scale(${scale})`;
+                        img.style.opacity = Math.max(0.3, 0.6 - (distance - 1.5) * 0.1);
+                        img.style.boxShadow = '5px 5px 50px -1px rgba(0, 0, 0, 0.8)';
+                        img.style.zIndex = '1';
+                    }
+                });
+                
+                const captionContainer = slidesWrapper5.querySelector('.caption-container');
+                if (captionLink5 && captionContainer) {
+                    if (images5[currentIndex5] && images5[currentIndex5].caption) {
+                        captionLink5.textContent = images5[currentIndex5].caption;
+                        captionLink5.href = images5[currentIndex5].href || '#';
+                        captionLink5.style.display = 'inline-block';
+                        captionContainer.style.display = 'flex';
+                    } else {
+                        captionLink5.style.display = 'none';
+                        captionContainer.style.display = 'none';
+                    }
+                }
+            }
+
+            function navigate5(direction) {
+                currentIndex5 += direction;
+                if (currentIndex5 < 0) currentIndex5 = images5.length - 1;
+                if (currentIndex5 >= images5.length) currentIndex5 = 0;
+                updateCarousel5();
+            }
+
+            function startDrag5(e, index) {
+                if (index !== currentIndex5) return;
+                isDragging5 = true;
+                dragStart5 = e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
+                dragOffset5 = 0;
+                
+                const slide = slidesWrapper5.querySelector(`.slide[data-index="${index}"]`);
+                if (slide) slide.classList.add('grabbed');
+                
+                document.addEventListener('mousemove', handleDrag5);
+                document.addEventListener('mouseup', endDrag5);
+                document.addEventListener('touchmove', handleDrag5);
+                document.addEventListener('touchend', endDrag5);
+            }
+
+            function handleDrag5(e) {
+                if (!isDragging5) return;
+                e.preventDefault();
+                const currentX = e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
+                const diff = (currentX - dragStart5) * 0.85;
+                dragOffset5 = diff;
+                
+                if (Math.abs(diff / slideWidth5) < 0.75) {
+                    updateCarousel5(-diff / slideWidth5);
+                }
+            }
+
+            function endDrag5() {
+                if (!isDragging5) return;
+                isDragging5 = false;
+                
+                const slide = slidesWrapper5.querySelector('.slide.grabbed');
+                if (slide) slide.classList.remove('grabbed');
+                
+                const threshold = 0.2;
+                if (Math.abs(dragOffset5 / slideWidth5) >= threshold) {
+                    navigate5(-Math.sign(dragOffset5));
+                } else {
+                    updateCarousel5();
+                }
+                
+                dragOffset5 = 0;
+                
+                document.removeEventListener('mousemove', handleDrag5);
+                document.removeEventListener('mouseup', endDrag5);
+                document.removeEventListener('touchmove', handleDrag5);
+                document.removeEventListener('touchend', endDrag5);
+            }
+
+            function handleWheel5(e) {
+                if (!slidesContainer5.contains(e.target) && !slidesWrapper5.contains(e.target)) return;
+                const direction = Math.sign(e.deltaY);
+                
+                if ((direction > 0 && wheelVelocity5 < 0) || (direction < 0 && wheelVelocity5 > 0)) {
+                    wheelVelocity5 = 0;
+                }
+                
+                wheelVelocity5 += 0.2 * direction;
+                
+                if (Math.abs(wheelVelocity5) > 1) {
+                    navigate5(Math.sign(wheelVelocity5));
+                    wheelVelocity5 = 0;
+                }
+            }
+
+            prevBtn5.addEventListener('click', () => navigate5(-1));
+            nextBtn5.addEventListener('click', () => navigate5(1));
+            slidesContainer5.addEventListener('wheel', handleWheel5);
+
+            setTimeout(() => {
+                calculateSlideWidth5();
+                createSlides5();
+                setTimeout(() => {
+                    updateCarousel5();
+                }, 500);
+            }, 200);
+            
+            window.addEventListener('resize', () => {
+                calculateSlideWidth5();
+                createSlides5();
+            });
+            
+            window.addEventListener('orientationchange', () => {
+                setTimeout(() => {
+                    calculateSlideWidth5();
+                    createSlides5();
+                }, 100);
+            });
+        });
+    </script>
 </body>
 </html>
