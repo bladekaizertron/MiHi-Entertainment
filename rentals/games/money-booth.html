@@ -41,11 +41,58 @@
             }
         }
         
+        /* Hero Section Zoom Out Optimization */
+        .hero-section {
+            width: 100%;
+            max-width: 100vw;
+            overflow: hidden;
+            box-sizing: border-box;
+            position: relative;
+        }
+        
+        .hero-section .relative.z-10 {
+            width: 100%;
+            max-width: 100%;
+            box-sizing: border-box;
+            overflow-x: hidden;
+            position: relative;
+            z-index: 10;
+        }
+        
+        /* Prevent keyboard text from overflowing on zoom out */
+        @media (max-width: 1400px) {
+            .hero-section .keyboard {
+                max-width: 100%;
+                padding: 0 1rem;
+            }
+            
+            .hero-section .key {
+                font-size: clamp(2rem, 3.5vw, 4rem);
+            }
+        }
+        
+        @media (max-width: 1200px) {
+            .hero-section .keyboard {
+                padding: 0 0.75rem;
+            }
+        }
+        
         /* Keyboard Animation Styles */
         .keyboard {
             font-family: "Orbitron", sans-serif;
             font-weight: 700;
             letter-spacing: 0.1em;
+            width: 100%;
+            max-width: 100%;
+            box-sizing: border-box;
+            overflow: hidden;
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            padding: 0 1rem;
         }
         
         .key {
@@ -54,12 +101,36 @@
             letter-spacing: 0.08em;
             transition: transform 0.2s;
             text-shadow: 0 0 20px rgba(100, 181, 246, 0.5);
+            position: relative;
+            z-index: 2;
+            flex-shrink: 0;
         }
         
         @media (min-width: 768px) {
             .key {
                 font-size: 4.5rem;
                 letter-spacing: 0.1em;
+            }
+        }
+        
+        /* Zoom out optimization for keyboard */
+        @media (max-width: 1200px) {
+            .keyboard {
+                padding: 0 0.75rem;
+            }
+            
+            .key {
+                font-size: clamp(2.5rem, 4vw, 4rem);
+            }
+        }
+        
+        @media (max-width: 1024px) {
+            .keyboard {
+                padding: 0 0.5rem;
+            }
+            
+            .key {
+                font-size: clamp(2.25rem, 3.5vw, 3.5rem);
             }
         }
         
@@ -337,8 +408,11 @@
                 max-width: 100%;
                 box-sizing: border-box;
                 overflow-x: hidden;
+                overflow-y: visible;
                 transform: translateY(0) !important;
                 padding: 1rem 0;
+                position: relative;
+                z-index: 10;
             }
 
             /* Ensure button wrapper doesn't overflow */
@@ -358,11 +432,14 @@
             .hero-section .keyboard {
                 margin-bottom: 1.25rem !important;
                 padding: 0 0.5rem;
+                max-width: 100%;
+                overflow: hidden;
             }
 
             .hero-section .key {
                 font-size: 2.75rem !important;
                 letter-spacing: 0.06em !important;
+                max-width: 100%;
             }
 
             .hero-section h3 {
@@ -452,11 +529,14 @@
             .hero-section .keyboard {
                 margin-bottom: 1rem !important;
                 padding: 0 0.25rem;
+                max-width: 100%;
+                overflow: hidden;
             }
 
             .hero-section .key {
                 font-size: 2.25rem !important;
                 letter-spacing: 0.05em !important;
+                max-width: 100%;
             }
 
             .hero-section h3 {
