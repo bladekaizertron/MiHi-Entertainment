@@ -90,10 +90,6 @@ document.addEventListener('DOMContentLoaded', function() {
                                         <span class="font-semibold block mb-0.5">Virtual Photo Booth</span>
                                         <span class="text-xs text-gray-500 leading-relaxed">Snap, pose, and share—no app required, all online</span>
                                     </a>
-                                    <a href="${pathPrefix}services/photobooth/professional-headshot.html" class="block text-sm text-gray-700 hover:text-blue-600 transition py-1.5 hover:bg-blue-50 rounded-md px-2 -mx-2">
-                                        <span class="font-semibold block mb-0.5">Professional Headshots</span>
-                                        <span class="text-xs text-gray-500 leading-relaxed">Studio-quality headshots on-site with expert lighting and instant touch-ups</span>
-                                    </a>
                                     <a href="${pathPrefix}services/photobooth/photo-booth-sets.html" class="block text-sm text-gray-700 hover:text-blue-600 transition py-1.5 hover:bg-blue-50 rounded-md px-2 -mx-2">
                                         <span class="font-semibold block mb-0.5">Custom Photo Booth</span>
                                         <span class="text-xs text-gray-500 leading-relaxed">Fully branded, immersive photo set designs made just for you</span>
@@ -287,8 +283,53 @@ document.addEventListener('DOMContentLoaded', function() {
                     </div>
                 </div>
 
-                <!-- Simple Links -->
-                <a href="${pathPrefix}index.html#galleries" class="text-gray-700 hover:text-blue-600 font-medium transition duration-300">Gallery</a>
+                <!-- Gallery -->
+                <div class="relative group">
+                    <a href="${pathPrefix}index.html#gallery" class="text-gray-700 hover:text-blue-600 font-medium transition duration-300 flex items-center">
+                        Gallery
+                        <svg class="w-4 h-4 ml-1 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </a>
+                    <div class="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-[30rem] max-h-[90vh] overflow-y-auto bg-white rounded-xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 border border-gray-200">
+                        <div class="p-8">
+                            <div class="grid grid-cols-3 gap-5">
+                                <div class="space-y-2.5">
+                                    <a href="${pathPrefix}galleries/our-work.html" class="block text-sm text-gray-700 hover:text-blue-600 transition py-1.5 hover:bg-blue-50 rounded-md px-3 -mx-3">
+                                        <span class="font-semibold block mb-0.5 whitespace-nowrap">Our Work</span>
+                                        <span class="text-xs text-gray-500 leading-relaxed block whitespace-nowrap">View a collection of our work</span>
+                                    </a>
+                                    <a href="${pathPrefix}galleries/our-services.html" class="block text-sm text-gray-700 hover:text-blue-600 transition py-1.5 hover:bg-blue-50 rounded-md px-3 -mx-3">
+                                        <span class="font-semibold block mb-0.5 whitespace-nowrap">Our Services</span>
+                                        <span class="text-xs text-gray-500 leading-relaxed block whitespace-nowrap">Check out all of the services we offer for events</span>
+                                    </a>
+                                    <a href="${pathPrefix}galleries/our-booths.html" class="block text-sm text-gray-700 hover:text-blue-600 transition py-1.5 hover:bg-blue-50 rounded-md px-3 -mx-3">
+                                        <span class="font-semibold block mb-0.5 whitespace-nowrap">Our Booths</span>
+                                        <span class="text-xs text-gray-500 leading-relaxed block whitespace-nowrap">See all of our Photo Booths</span>
+                                    </a>
+                                    <a href="${pathPrefix}galleries/our-props.html" class="block text-sm text-gray-700 hover:text-blue-600 transition py-1.5 hover:bg-blue-50 rounded-md px-3 -mx-3">
+                                        <span class="font-semibold block mb-0.5 whitespace-nowrap">Our Props</span>
+                                        <span class="text-xs text-gray-500 leading-relaxed block whitespace-nowrap">Take a look at our prop collection</span>
+                                    </a>
+                                    <a href="${pathPrefix}galleries/our-themes.html" class="block text-sm text-gray-700 hover:text-blue-600 transition py-1.5 hover:bg-blue-50 rounded-md px-3 -mx-3">
+                                        <span class="font-semibold block mb-0.5 whitespace-nowrap">Our Themes</span>
+                                        <span class="text-xs text-gray-500 leading-relaxed block whitespace-nowrap">All events themes, curated for any event</span>
+                                    </a>
+                                    <a href="${pathPrefix}galleries/our-addons.html" class="block text-sm text-gray-700 hover:text-blue-600 transition py-1.5 hover:bg-blue-50 rounded-md px-3 -mx-3">
+                                        <span class="font-semibold block mb-0.5 whitespace-nowrap">Our Add-Ons</span>
+                                        <span class="text-xs text-gray-500 leading-relaxed block whitespace-nowrap">See what we can add-on to your next rental</span>
+                                    </a>
+                                    <a href="${pathPrefix}galleries/our-designs.html" class="block text-sm text-gray-700 hover:text-blue-600 transition py-1.5 hover:bg-blue-50 rounded-md px-3 -mx-3">
+                                        <span class="font-semibold block mb-0.5 whitespace-nowrap">Our Designs</span>
+                                        <span class="text-xs text-gray-500 leading-relaxed block whitespace-nowrap">Custom Branded Booth Wraps, Backdrops, and more</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- About -->
                 <a href="${pathPrefix}index.html#about" class="text-gray-700 hover:text-blue-600 font-medium transition duration-300">About</a>
 
                 <!-- CTA Button -->
@@ -338,7 +379,6 @@ document.addEventListener('DOMContentLoaded', function() {
                                             <a href="${pathPrefix}services/photobooth/mosaic-photo-booth.html" class="block text-sm text-gray-600 hover:text-blue-600 transition">Mosaic Photo Booth</a>
                                             <a href="${pathPrefix}services/photobooth/roaming-photo-booth.html" class="block text-sm text-gray-600 hover:text-blue-600 transition">Roaming Photo Booth</a>
                                             <a href="${pathPrefix}services/photobooth/virtual-photo-booth.html" class="block text-sm text-gray-600 hover:text-blue-600 transition">Virtual Photo Booth</a>
-                                            <a href="${pathPrefix}services/photobooth/professional-headshot.html" class="block text-sm text-gray-600 hover:text-blue-600 transition">Professional Headshots</a>
                                             <a href="${pathPrefix}services/photobooth/photo-booth-sets.html" class="block text-sm text-gray-600 hover:text-blue-600 transition">Custom Photo Booth</a>
                                         </div>
                                     </div>
