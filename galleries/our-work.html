@@ -22,7 +22,7 @@
             .section-padding { padding: 2.5rem 0; }
         }
         .hero-section {
-            background-image: url('https://images.pexels.com/photos/2570062/pexels-photo-2570062.jpeg');
+            background-image: url('../assets/images/galleries/ourworks/hero.jpg');
             background-attachment: fixed;
             background-position: center center;
             background-size: cover;
@@ -68,6 +68,333 @@
                 transform: translateY(0);
             }
         }
+        
+        /* Gallery Carousel Styles */
+        .gallery-main {
+            width: 100%;
+            min-height: 400px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem 0;
+        }
+        
+        .gallery-horizontal {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            max-width: 1400px;
+            max-height: 380px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .gallery-container-right, .gallery-container-left {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+        
+        .gallery-container-left img, .gallery-container-right img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            display: none;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        
+        .gallery-container-left img:hover, .gallery-container-right img:hover {
+            transform: scale(1.02);
+        }
+        
+        .gallery-arrow-next, .gallery-arrow-back {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 10px;
+            z-index: 10;
+        }
+        
+        .gallery-arrow-next a, .gallery-arrow-back a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: rgba(0, 80, 255, 0.1);
+            border-radius: 50%;
+            color: #0050ff;
+            font-size: 24px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        
+        .gallery-arrow-next a:hover, .gallery-arrow-back a:hover {
+            background: #0050ff;
+            color: white;
+            transform: scale(1.1);
+        }
+        
+        .single-image-left:nth-child(1) {
+            animation-name: safedown;
+            animation-duration: 1s;
+        }
+        
+        .single-image-right:nth-child(1) {
+            animation-name: safeup;
+            animation-duration: 1s;
+        }
+        
+        @keyframes safedown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0.5;
+            }
+            to {
+                transform: translateY(0%);
+                opacity: 1;
+            }
+        }
+        
+        @keyframes safeup {
+            from {
+                transform: translateY(100%);
+                opacity: 0.5;
+            }
+            to {
+                transform: translateY(0%);
+                opacity: 1;
+            }
+        }
+        
+        /* Mobile Optimization */
+        @media (max-width: 768px) {
+            .gallery-main {
+                min-height: auto;
+                padding: 1rem 0;
+                overflow-x: hidden;
+            }
+            
+            .gallery-horizontal {
+                max-height: none;
+                flex-direction: row;
+                align-items: stretch;
+                position: relative;
+                padding: 0 50px;
+                gap: 0;
+            }
+            
+            .gallery-container-right, .gallery-container-left {
+                flex-direction: column;
+                width: calc(50% - 25px);
+                max-height: 380px;
+                overflow: hidden;
+                display: flex;
+            }
+            
+            .gallery-container-left {
+                margin-right: 8px;
+            }
+            
+            .gallery-container-right {
+                margin-left: 8px;
+            }
+            
+            .gallery-container-left img, .gallery-container-right img {
+                width: 100%;
+                height: auto;
+                min-height: 180px;
+                max-height: 190px;
+                object-fit: cover;
+                flex-shrink: 0;
+            }
+            
+            .gallery-arrow-next, .gallery-arrow-back {
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+                margin: 0;
+                z-index: 20;
+            }
+            
+            .gallery-arrow-back {
+                left: 5px;
+            }
+            
+            .gallery-arrow-next {
+                right: 5px;
+            }
+            
+            .gallery-arrow-next a, .gallery-arrow-back a {
+                width: 40px;
+                height: 40px;
+                font-size: 20px;
+                background: rgba(255, 255, 255, 0.95);
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+                backdrop-filter: blur(4px);
+            }
+            
+            .gallery-arrow-next a:hover, .gallery-arrow-back a:hover {
+                background: #0050ff;
+                color: white;
+            }
+        }
+        
+        @media (max-width: 640px) {
+            .gallery-main {
+                padding: 0.75rem 0;
+            }
+            
+            .gallery-horizontal {
+                padding: 0 45px;
+            }
+            
+            .gallery-container-right, .gallery-container-left {
+                width: calc(50% - 22px);
+                max-height: 320px;
+            }
+            
+            .gallery-container-left {
+                margin-right: 6px;
+            }
+            
+            .gallery-container-right {
+                margin-left: 6px;
+            }
+            
+            .gallery-container-left img, .gallery-container-right img {
+                min-height: 155px;
+                max-height: 160px;
+            }
+            
+            .gallery-arrow-next a, .gallery-arrow-back a {
+                width: 35px;
+                height: 35px;
+                font-size: 18px;
+            }
+            
+            .gallery-arrow-back {
+                left: 3px;
+            }
+            
+            .gallery-arrow-next {
+                right: 3px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .gallery-horizontal {
+                padding: 0 40px;
+            }
+            
+            .gallery-container-right, .gallery-container-left {
+                width: calc(50% - 20px);
+                max-height: 260px;
+            }
+            
+            .gallery-container-left {
+                margin-right: 4px;
+            }
+            
+            .gallery-container-right {
+                margin-left: 4px;
+            }
+            
+            .gallery-container-left img, .gallery-container-right img {
+                min-height: 125px;
+                max-height: 130px;
+            }
+            
+            .gallery-arrow-next a, .gallery-arrow-back a {
+                width: 32px;
+                height: 32px;
+                font-size: 16px;
+            }
+        }
+        
+        /* Animated Wave Background */
+        .gallery-section {
+            position: relative;
+            overflow: hidden;
+            background: #f8fafc;
+            padding: 3rem 0 !important;
+        }
+        
+        @media (max-width: 768px) {
+            .gallery-section {
+                padding: 2rem 0 !important;
+            }
+        }
+        
+        @media (max-width: 640px) {
+            .gallery-section {
+                padding: 1.5rem 0 !important;
+            }
+        }
+        
+        .wave-box {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            transform: rotate(80deg);
+            z-index: 0;
+            pointer-events: none;
+        }
+        
+        .wave {
+            opacity: 0.4;
+            position: absolute;
+            top: 3%;
+            left: 10%;
+            background: #0050ff;
+            width: 1500px;
+            height: 1300px;
+            margin-left: -150px;
+            margin-top: -250px;
+            transform-origin: 50% 48%;
+            border-radius: 43%;
+            animation: drift 7000ms infinite linear;
+        }
+        
+        .wave.-three {
+            animation: drift 7500ms infinite linear;
+            background-color: rgba(119, 218, 255, 0.3);
+        }
+        
+        .wave.-two {
+            animation: drift 3000ms infinite linear;
+            opacity: 0.1;
+            background: rgba(0, 80, 255, 0.2);
+        }
+        
+        @keyframes drift {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .gallery-section .container {
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Responsive wave adjustments */
+        @media (max-width: 768px) {
+            .wave {
+                width: 1200px;
+                height: 1000px;
+            }
+        }
+        
+        @media (max-width: 640px) {
+            .wave {
+                width: 1000px;
+                height: 800px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -110,6 +437,135 @@
             </div>
         </div>
     </section>
+
+    <!-- Gallery  -->
+    <section class="section-padding gallery-section">
+        <div class="wave-box">
+            <div class="wave -one"></div>
+            <div class="wave -two"></div>
+            <div class="wave -three"></div>
+        </div>
+        <div class="container mx-auto px-4">
+            <div class="max-w-5xl mx-auto text-center">
+                <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-3 animate-fade-in-up">
+                    <span class="text-gray-900">A </span><span class="text-[#0050ff]">LOOKBOOK</span> <span class="text-gray-900">THAT'S NEVER</span><br>
+                    <span class="text-gray-900">LOOKED </span><span class="text-[#0050ff]">QUITE THIS GOOD</span>
+                </h2>
+                <p class="text-base sm:text-lg md:text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed mb-4 animate-fade-in-up animate-delay-200">
+                    If any booth catches your eye, just click on its image to explore its dedicated web page and learn more about the product.
+                </p>
+            </div>
+            
+            <!-- All Activations Heading -->
+            <div class="max-w-5xl mx-auto text-center mt-6 md:mt-8 animate-fade-in-up animate-delay-300">
+                <h3 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-[#0050ff] mb-2">
+                    ALL ACTIVATIONS
+                </h3>
+                <div class="h-0.5 bg-[#0050ff] mx-auto" style="width: calc(100% + 2rem); max-width: 300px;"></div>
+            </div>
+            
+            <!-- Image Gallery Carousel -->
+            <div class="gallery-main mt-4 md:mt-6">
+                <div class="gallery-horizontal">
+                    <div class="gallery-arrow-back">
+                        <a href="#" id="back-image" aria-label="Previous image"><ion-icon name="arrow-back-outline"></ion-icon></a>
+                    </div>
+                    <div id="left-side" class="gallery-container-left">
+                        <img class="single-image-left" src="../assets/images/galleries/ourworks/g1.gif" alt="Event Photography" width="600" height="300">
+                        <img class="single-image-left" src="../assets/images/galleries/ourworks/g3.jpg" alt="Event Photography" width="600" height="300">
+                        <img class="single-image-left" src="../assets/images/galleries/ourworks/g5.jpg" alt="Event Photography" width="600" height="300">
+                        <img class="single-image-left" src="../assets/images/galleries/ourworks/g7.jpg" alt="Event Photography" width="600" height="300">
+                    </div>
+                    <div id="right-side" class="gallery-container-right">
+                        <img class="single-image-right" src="../assets/images/galleries/ourworks/g2.jpg" alt="Event Photography" width="600" height="300">
+                        <img class="single-image-right" src="../assets/images/galleries/ourworks/g4.jpg" alt="Event Photography" width="600" height="300">
+                        <img class="single-image-right" src="../assets/images/galleries/ourworks/g6.jpg" alt="Event Photography" width="600" height="300">
+                        <img class="single-image-right" src="../assets/images/galleries/ourworks/g8.jpg" alt="Event Photography" width="600" height="300">
+                    </div>
+                    <div class="gallery-arrow-next">
+                        <a href="#" id="next-image" aria-label="Next image"><ion-icon name="arrow-forward-outline"></ion-icon></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Icons Script -->
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    
+    <!-- Gallery Carousel Script -->
+    <script>
+        function leavesFirst(){
+            let rightImages = document.querySelectorAll('.gallery-container-right img');
+            for(let i = 0; i < rightImages.length; i++){
+                rightImages[i].style.display = "none";
+            }
+            if(rightImages[0]) {
+                rightImages[0].style.display = "block";
+            }
+
+            let leftImages = document.querySelectorAll('.gallery-container-left img');
+            for(let i = 0; i < leftImages.length; i++){
+                leftImages[i].style.display = "none";
+            }
+            if(leftImages[0]) {
+                leftImages[0].style.display = "block";
+            }
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            leavesFirst();
+
+            let nextImage = document.getElementById('next-image');
+            let backimage = document.getElementById('back-image');
+
+            if(nextImage) {
+                nextImage.onclick = function(event){
+                    let contLftImg = document.getElementById('left-side');
+                    let leftImages = document.querySelectorAll('.gallery-container-left img');
+                    if(leftImages.length > 0) {
+                        let lastLeftImage = leftImages[leftImages.length-1];
+                        lastLeftImage.remove();
+                        contLftImg.prepend(lastLeftImage);
+                    }
+
+                    let contRtImg = document.getElementById('right-side');
+                    let rightImage = document.querySelectorAll('.gallery-container-right img');
+                    if(rightImage.length > 0) {
+                        let firstRightImage = rightImage[0];
+                        firstRightImage.remove();
+                        contRtImg.append(firstRightImage);
+                    }
+                    leavesFirst();
+                    event.preventDefault();
+                }
+            }
+
+            if(backimage) {
+                backimage.onclick = function(event){
+                    let contRtImg = document.getElementById('right-side');
+                    let rightImages = document.querySelectorAll('.gallery-container-right img');
+                    if(rightImages.length > 0) {
+                        let lastRightImage = rightImages[rightImages.length-1];
+                        lastRightImage.remove();
+                        contRtImg.prepend(lastRightImage);
+                    }
+
+                    let contLfImg = document.getElementById('left-side');
+                    let leftImage = document.querySelectorAll('.gallery-container-left img');
+                    if(leftImage.length > 0) {
+                        let firstLeftImage = leftImage[0];
+                        firstLeftImage.remove();
+                        contLfImg.append(firstLeftImage);
+                    }
+                    leavesFirst();
+                    event.preventDefault();
+                }
+            }
+        });
+    </script>
 
     <script src="../assets/components/navigation.js"></script>
     <script src="../assets/components/footer.js"></script>
