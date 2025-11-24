@@ -10,7 +10,9 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@300;900&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
-        body { font-family: 'Inter', sans-serif; color: #1a202c; }
+        * { box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; color: #1a202c; overflow-x: hidden; width: 100%; max-width: 100vw; }
+        html { overflow-x: hidden; width: 100%; max-width: 100vw; }
         h1, h2, h3, h4, h5, h6 { font-family: 'Playfair Display', serif; }
         .btn-primary { background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%); transition: all 0.3s ease; }
         .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(0, 80, 255, 0.4); }
@@ -84,10 +86,11 @@
             justify-content: center;
             align-items: center;
             width: 100%;
-            max-width: 1400px;
+            max-width: 100%;
             max-height: 380px;
             overflow: hidden;
             position: relative;
+            box-sizing: border-box;
         }
         
         .gallery-container-right, .gallery-container-left {
@@ -314,12 +317,12 @@
             }
         }
         
-        /* Animated Wave Background */
+        /* Gallery Section */
         .gallery-section {
+            padding: 3rem 0 !important;
             position: relative;
             overflow: hidden;
-            background: #f8fafc;
-            padding: 3rem 0 !important;
+            background: linear-gradient(60deg, #B353DB 0%, #EF9456 100%);
         }
         
         @media (max-width: 768px) {
@@ -334,66 +337,55 @@
             }
         }
         
-        .wave-box {
+        /* Particle Background */
+        #canvas_back {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            transform: rotate(80deg);
+            filter: blur(2px);
             z-index: 0;
-            pointer-events: none;
         }
         
-        .wave {
-            opacity: 0.4;
+        #canvas_front {
             position: absolute;
-            top: 3%;
-            left: 10%;
-            background: #0050ff;
-            width: 1500px;
-            height: 1300px;
-            margin-left: -150px;
-            margin-top: -250px;
-            transform-origin: 50% 48%;
-            border-radius: 43%;
-            animation: drift 7000ms infinite linear;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
         }
         
-        .wave.-three {
-            animation: drift 7500ms infinite linear;
-            background-color: rgba(119, 218, 255, 0.3);
-        }
-        
-        .wave.-two {
-            animation: drift 3000ms infinite linear;
-            opacity: 0.1;
-            background: rgba(0, 80, 255, 0.2);
-        }
-        
-        @keyframes drift {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
+        #cover {
+            position: absolute;
+            z-index: 1;
+            width: 100%;
+            height: 100%;
+            background: black;
+            opacity: 0.4;
+            top: 0;
+            left: 0;
         }
         
         .gallery-section .container {
             position: relative;
-            z-index: 1;
+            z-index: 3;
         }
         
-        /* Responsive wave adjustments */
-        @media (max-width: 768px) {
-            .wave {
-                width: 1200px;
-                height: 1000px;
-            }
+        .gallery-section h2,
+        .gallery-section h3,
+        .gallery-section p {
+            color: white;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
         }
         
-        @media (max-width: 640px) {
-            .wave {
-                width: 1000px;
-                height: 800px;
-            }
+        .gallery-section .text-gray-900 {
+            color: white !important;
+        }
+        
+        .gallery-section .text-gray-600 {
+            color: rgba(255, 255, 255, 0.9) !important;
         }
     </style>
 </head>
@@ -440,11 +432,9 @@
 
     <!-- Gallery  -->
     <section class="section-padding gallery-section">
-        <div class="wave-box">
-            <div class="wave -one"></div>
-            <div class="wave -two"></div>
-            <div class="wave -three"></div>
-        </div>
+        <canvas id="canvas_back" data-size="40" data-opacity="2" data-dust="300"></canvas>
+        <div id="cover"></div>
+        <canvas id="canvas_front" data-size="3" data-opacity="20" data-dust="600"></canvas>
         <div class="container mx-auto px-4">
             <div class="max-w-5xl mx-auto text-center">
                 <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-3 animate-fade-in-up">
@@ -461,7 +451,7 @@
                 <h3 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-[#0050ff] mb-2">
                     ALL ACTIVATIONS
                 </h3>
-                <div class="h-0.5 bg-[#0050ff] mx-auto" style="width: calc(100% + 2rem); max-width: 300px;"></div>
+                <div class="h-0.5 bg-[#0050ff] mx-auto" style="width: 100%; max-width: 300px;"></div>
             </div>
             
             <!-- Image Gallery Carousel -->
@@ -563,6 +553,103 @@
                     leavesFirst();
                     event.preventDefault();
                 }
+            }
+        });
+    </script>
+
+    <!-- Particle Background Script -->
+    <script>
+        function clamp (value, min, max) {
+            return value >= min ? (value <= max ? value:max):min; 
+        }
+
+        function Dust (startx, starty, offset = 0, baseColor = 1, duration = 100, size = 20) {
+            //constructor
+            this.x            = startx;
+            this.y            = starty;
+            this.duration     = duration;
+            this.offset       = offset;
+            this.size         = size;
+            this.timer        = offset % duration;
+            this.baseColor    = baseColor;
+
+            //functions
+            this.draw = function (canvas) {
+                //Calculate animations
+                if (this.timer > this.duration) {
+                    this.timer = 0;
+                }
+                this.timer += 1;
+
+                //Calculate
+                const framesize           = this.size;
+                const positionMultiplier  = this.timer * (this.offset % 2);
+                const xPosition           = this.x + positionMultiplier;
+                const yPosition           = this.y + positionMultiplier;
+                const colorOpacity        = clamp((this.timer + 50) % this.duration, 0,this.baseColor);
+
+                //Update element
+                canvas.beginPath();
+                canvas.arc(xPosition, yPosition, framesize, 0, Math.PI * 2, false);
+                canvas.fillStyle = "rgba(255,255,255, " + colorOpacity + ")";
+                canvas.fill();
+            }
+        }
+
+
+        // Initialize particle animation for gallery section
+        document.addEventListener('DOMContentLoaded', function() {
+            const gallerySection = document.querySelector('.gallery-section');
+            if (!gallerySection) return;
+
+            const canvasElements = gallerySection.querySelectorAll("canvas");
+
+            function updateCanvasSize(canvasElement) {
+                const rect = gallerySection.getBoundingClientRect();
+                canvasElement.width = rect.width;
+                canvasElement.height = rect.height;
+            }
+
+            for (let i = 0; i < canvasElements.length; i++) {
+                const canvasElement = canvasElements[i];
+                const canvas = canvasElement.getContext("2d");
+                const quantity = parseInt(canvasElement.getAttribute("data-dust"));
+                const ballsize = parseInt(canvasElement.getAttribute("data-size"));
+                const ballopacity = parseInt(canvasElement.getAttribute("data-opacity"));
+
+                // Set initial canvas size
+                updateCanvasSize(canvasElement);
+
+                // Spawn dust for this canvas
+                const dusts = [];
+                const rect = gallerySection.getBoundingClientRect();
+                for (let j = 0; j < quantity; j++) {
+                    const positionX = rect.width * Math.random() * 1.5 - rect.width / 4;
+                    const positionY = rect.height * Math.random() * 1.5 - rect.height / 4;
+                    const duration = Math.random() * 500 + 1000;
+                    const size = Math.random() * ballsize;
+                    const offset = Math.random() * 100;
+                    const baseColor = clamp((Math.random() * ballopacity) / 100, 0, 0.3);
+
+                    dusts.push(new Dust(positionX, positionY, offset, baseColor, duration, size, canvas));
+                }
+
+                // Start animation with this canvas's dust array
+                (function(canvas, canvasEl, qty, dustArray) {
+                    function render() {
+                        canvas.clearRect(0, 0, canvasEl.width, canvasEl.height);
+                        for (let k = 0; k < qty; k++) {
+                            dustArray[k].draw(canvas);
+                        }
+                        setTimeout(render, 50);
+                    }
+                    render();
+                })(canvas, canvasElement, quantity, dusts);
+
+                // Update canvas size on window resize
+                window.addEventListener('resize', function() {
+                    updateCanvasSize(canvasElement);
+                });
             }
         });
     </script>
