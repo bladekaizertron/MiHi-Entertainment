@@ -10,10 +10,65 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@300;900&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
-        body { font-family: 'Inter', sans-serif; color: #1a202c; }
+        * { box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; color: #1a202c; overflow-x: hidden; width: 100%; max-width: 100vw; }
+        html { overflow-x: hidden; width: 100%; max-width: 100vw; }
         h1, h2, h3, h4, h5, h6 { font-family: 'Playfair Display', serif; }
         .btn-primary { background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%); transition: all 0.3s ease; }
         .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(0, 80, 255, 0.4); }
+        
+        /* Bubble Button Animation */
+        .btn {
+            display: inline-block;
+            text-decoration: none;
+        }
+        
+        .btn-bubble {
+            color: white;
+            background-repeat: no-repeat;
+            position: relative;
+        }
+        
+        .btn-bubble:not(:hover):not(:focus) {
+            background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%);
+        }
+        
+        .btn-bubble:hover,
+        .btn-bubble:focus {
+            animation: bubbles 1s forwards ease-out;
+            background: 
+                radial-gradient(circle at center, transparent 30%, rgba(238, 238, 255, 0.8) 60%, rgba(238, 238, 255, 0.8) 65%, transparent 70%) 5% 120% / 0.6em 0.6em,
+                radial-gradient(circle at center, transparent 30%, rgba(238, 238, 255, 0.8) 60%, rgba(238, 238, 255, 0.8) 65%, transparent 70%) 15% 110% / 0.8em 0.8em,
+                radial-gradient(circle at center, transparent 30%, rgba(238, 238, 255, 0.8) 60%, rgba(238, 238, 255, 0.8) 65%, transparent 70%) 25% 130% / 0.7em 0.7em,
+                radial-gradient(circle at center, transparent 30%, rgba(238, 238, 255, 0.8) 60%, rgba(238, 238, 255, 0.8) 65%, transparent 70%) 35% 100% / 0.9em 0.9em,
+                radial-gradient(circle at center, transparent 30%, rgba(238, 238, 255, 0.8) 60%, rgba(238, 238, 255, 0.8) 65%, transparent 70%) 45% 115% / 0.5em 0.5em,
+                radial-gradient(circle at center, transparent 30%, rgba(238, 238, 255, 0.8) 60%, rgba(238, 238, 255, 0.8) 65%, transparent 70%) 55% 125% / 1em 1em,
+                radial-gradient(circle at center, transparent 30%, rgba(238, 238, 255, 0.8) 60%, rgba(238, 238, 255, 0.8) 65%, transparent 70%) 65% 105% / 0.75em 0.75em,
+                radial-gradient(circle at center, transparent 30%, rgba(238, 238, 255, 0.8) 60%, rgba(238, 238, 255, 0.8) 65%, transparent 70%) 75% 135% / 0.85em 0.85em,
+                radial-gradient(circle at center, transparent 30%, rgba(238, 238, 255, 0.8) 60%, rgba(238, 238, 255, 0.8) 65%, transparent 70%) 85% 120% / 0.65em 0.65em,
+                radial-gradient(circle at center, transparent 30%, rgba(238, 238, 255, 0.8) 60%, rgba(238, 238, 255, 0.8) 65%, transparent 70%) 95% 110% / 0.95em 0.95em,
+                radial-gradient(circle at center, transparent 30%, rgba(238, 238, 255, 0.8) 60%, rgba(238, 238, 255, 0.8) 65%, transparent 70%) 105% 130% / 0.55em 0.55em;
+            background-color: #0050ff;
+            background-repeat: no-repeat;
+        }
+        
+        @keyframes bubbles {
+            100% {
+                background-position: 
+                    3% -350%,
+                    18% -280%,
+                    22% -320%,
+                    38% -250%,
+                    42% -380%,
+                    58% -200%,
+                    62% -340%,
+                    78% -180%,
+                    88% -300%,
+                    98% -220%,
+                    102% -360%;
+                box-shadow: inset 0 -6.5em 0 #0040d9;
+            }
+        }
         .section-padding { padding: 5rem 0; }
         @media (max-width: 768px) {
             .section-padding { padding: 3rem 0; }
@@ -22,7 +77,7 @@
             .section-padding { padding: 2.5rem 0; }
         }
         .hero-section {
-            background-image: url('https://images.pexels.com/photos/2570062/pexels-photo-2570062.jpeg');
+            background-image: url('../assets/images/galleries/ourworks/hero.jpg');
             background-attachment: fixed;
             background-position: center center;
             background-size: cover;
@@ -68,6 +123,323 @@
                 transform: translateY(0);
             }
         }
+        
+        /* Gallery Carousel Styles */
+        .gallery-main {
+            width: 100%;
+            min-height: 400px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem 0;
+        }
+        
+        .gallery-horizontal {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            max-width: 100%;
+            max-height: 380px;
+            overflow: hidden;
+            position: relative;
+            box-sizing: border-box;
+        }
+        
+        .gallery-container-right, .gallery-container-left {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+        
+        .gallery-container-left img, .gallery-container-right img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            display: none;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        
+        .gallery-container-left img:hover, .gallery-container-right img:hover {
+            transform: scale(1.02);
+        }
+        
+        .gallery-arrow-next, .gallery-arrow-back {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 10px;
+            z-index: 10;
+        }
+        
+        .gallery-arrow-next a, .gallery-arrow-back a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: rgba(0, 80, 255, 0.1);
+            border-radius: 50%;
+            color: #0050ff;
+            font-size: 24px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        
+        .gallery-arrow-next a:hover, .gallery-arrow-back a:hover {
+            background: #0050ff;
+            color: white;
+            transform: scale(1.1);
+        }
+        
+        .single-image-left:nth-child(1) {
+            animation-name: safedown;
+            animation-duration: 1s;
+        }
+        
+        .single-image-right:nth-child(1) {
+            animation-name: safeup;
+            animation-duration: 1s;
+        }
+        
+        @keyframes safedown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0.5;
+            }
+            to {
+                transform: translateY(0%);
+                opacity: 1;
+            }
+        }
+        
+        @keyframes safeup {
+            from {
+                transform: translateY(100%);
+                opacity: 0.5;
+            }
+            to {
+                transform: translateY(0%);
+                opacity: 1;
+            }
+        }
+        
+        /* Mobile Optimization */
+        @media (max-width: 768px) {
+            .gallery-main {
+                min-height: auto;
+                padding: 1rem 0;
+                overflow-x: hidden;
+            }
+            
+            .gallery-horizontal {
+                max-height: none;
+                flex-direction: row;
+                align-items: stretch;
+                position: relative;
+                padding: 0 50px;
+                gap: 0;
+            }
+            
+            .gallery-container-right, .gallery-container-left {
+                flex-direction: column;
+                width: calc(50% - 25px);
+                max-height: 380px;
+                overflow: hidden;
+                display: flex;
+            }
+            
+            .gallery-container-left {
+                margin-right: 8px;
+            }
+            
+            .gallery-container-right {
+                margin-left: 8px;
+            }
+            
+            .gallery-container-left img, .gallery-container-right img {
+                width: 100%;
+                height: auto;
+                min-height: 180px;
+                max-height: 190px;
+                object-fit: cover;
+                flex-shrink: 0;
+            }
+            
+            .gallery-arrow-next, .gallery-arrow-back {
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+                margin: 0;
+                z-index: 20;
+            }
+            
+            .gallery-arrow-back {
+                left: 5px;
+            }
+            
+            .gallery-arrow-next {
+                right: 5px;
+            }
+            
+            .gallery-arrow-next a, .gallery-arrow-back a {
+                width: 40px;
+                height: 40px;
+                font-size: 20px;
+                background: rgba(255, 255, 255, 0.95);
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+                backdrop-filter: blur(4px);
+            }
+            
+            .gallery-arrow-next a:hover, .gallery-arrow-back a:hover {
+                background: #0050ff;
+                color: white;
+            }
+        }
+        
+        @media (max-width: 640px) {
+            .gallery-main {
+                padding: 0.75rem 0;
+            }
+            
+            .gallery-horizontal {
+                padding: 0 45px;
+            }
+            
+            .gallery-container-right, .gallery-container-left {
+                width: calc(50% - 22px);
+                max-height: 320px;
+            }
+            
+            .gallery-container-left {
+                margin-right: 6px;
+            }
+            
+            .gallery-container-right {
+                margin-left: 6px;
+            }
+            
+            .gallery-container-left img, .gallery-container-right img {
+                min-height: 155px;
+                max-height: 160px;
+            }
+            
+            .gallery-arrow-next a, .gallery-arrow-back a {
+                width: 35px;
+                height: 35px;
+                font-size: 18px;
+            }
+            
+            .gallery-arrow-back {
+                left: 3px;
+            }
+            
+            .gallery-arrow-next {
+                right: 3px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .gallery-horizontal {
+                padding: 0 40px;
+            }
+            
+            .gallery-container-right, .gallery-container-left {
+                width: calc(50% - 20px);
+                max-height: 260px;
+            }
+            
+            .gallery-container-left {
+                margin-right: 4px;
+            }
+            
+            .gallery-container-right {
+                margin-left: 4px;
+            }
+            
+            .gallery-container-left img, .gallery-container-right img {
+                min-height: 125px;
+                max-height: 130px;
+            }
+            
+            .gallery-arrow-next a, .gallery-arrow-back a {
+                width: 32px;
+                height: 32px;
+                font-size: 16px;
+            }
+        }
+        
+        /* Gallery Section */
+        .gallery-section {
+            padding: 3rem 0 !important;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(60deg, #B353DB 0%, #EF9456 100%);
+        }
+        
+        @media (max-width: 768px) {
+            .gallery-section {
+                padding: 2rem 0 !important;
+            }
+        }
+        
+        @media (max-width: 640px) {
+            .gallery-section {
+                padding: 1.5rem 0 !important;
+            }
+        }
+        
+        /* Particle Background */
+        #canvas_back {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            filter: blur(2px);
+            z-index: 0;
+        }
+        
+        #canvas_front {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+        }
+        
+        #cover {
+            position: absolute;
+            z-index: 1;
+            width: 100%;
+            height: 100%;
+            background: black;
+            opacity: 0.4;
+            top: 0;
+            left: 0;
+        }
+        
+        .gallery-section .container {
+            position: relative;
+            z-index: 3;
+        }
+        
+        .gallery-section h2,
+        .gallery-section h3,
+        .gallery-section p {
+            color: white;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .gallery-section .text-gray-900 {
+            color: white !important;
+        }
+        
+        .gallery-section .text-gray-600 {
+            color: rgba(255, 255, 255, 0.9) !important;
+        }
     </style>
 </head>
 <body>
@@ -95,7 +467,7 @@
                 <div class="mt-8 mb-8 animate-fade-in-up animate-delay-300">
                     <a 
                         href="#contact" 
-                        class="btn-primary inline-block px-8 py-3 rounded-lg text-white font-semibold text-lg"
+                        class="btn btn-bubble btn-primary inline-block px-8 py-3 rounded-lg text-white font-semibold text-lg"
                         aria-label="Contact us to view our work">
                         Contact Us
                     </a>
@@ -110,6 +482,230 @@
             </div>
         </div>
     </section>
+
+    <!-- Gallery  -->
+    <section class="section-padding gallery-section">
+        <canvas id="canvas_back" data-size="40" data-opacity="2" data-dust="300"></canvas>
+        <div id="cover"></div>
+        <canvas id="canvas_front" data-size="3" data-opacity="20" data-dust="600"></canvas>
+        <div class="container mx-auto px-4">
+            <div class="max-w-5xl mx-auto text-center">
+                <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-3 animate-fade-in-up">
+                    <span class="text-gray-900">A </span><span class="text-[#0050ff]">LOOKBOOK</span> <span class="text-gray-900">THAT'S NEVER</span><br>
+                    <span class="text-gray-900">LOOKED </span><span class="text-[#0050ff]">QUITE THIS GOOD</span>
+                </h2>
+                <p class="text-base sm:text-lg md:text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed mb-4 animate-fade-in-up animate-delay-200">
+                    If any booth catches your eye, just click on its image to explore its dedicated web page and learn more about the product.
+                </p>
+            </div>
+            
+            <!-- All Activations Heading -->
+            <div class="max-w-5xl mx-auto text-center mt-6 md:mt-8 animate-fade-in-up animate-delay-300">
+                <h3 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-[#0050ff] mb-2">
+                    ALL ACTIVATIONS
+                </h3>
+                <div class="h-0.5 bg-[#0050ff] mx-auto" style="width: 100%; max-width: 300px;"></div>
+            </div>
+            
+            <!-- Image Gallery Carousel -->
+            <div class="gallery-main mt-4 md:mt-6">
+                <div class="gallery-horizontal">
+                    <div class="gallery-arrow-back">
+                        <a href="#" id="back-image" aria-label="Previous image"><ion-icon name="arrow-back-outline"></ion-icon></a>
+                    </div>
+                    <div id="left-side" class="gallery-container-left">
+                        <img class="single-image-left" src="../assets/images/galleries/ourworks/g1.gif" alt="Event Photography" width="600" height="300">
+                        <img class="single-image-left" src="../assets/images/galleries/ourworks/g3.jpg" alt="Event Photography" width="600" height="300">
+                        <img class="single-image-left" src="../assets/images/galleries/ourworks/g5.jpg" alt="Event Photography" width="600" height="300">
+                        <img class="single-image-left" src="../assets/images/galleries/ourworks/g7.jpg" alt="Event Photography" width="600" height="300">
+                    </div>
+                    <div id="right-side" class="gallery-container-right">
+                        <img class="single-image-right" src="../assets/images/galleries/ourworks/g2.jpg" alt="Event Photography" width="600" height="300">
+                        <img class="single-image-right" src="../assets/images/galleries/ourworks/g4.jpg" alt="Event Photography" width="600" height="300">
+                        <img class="single-image-right" src="../assets/images/galleries/ourworks/g6.jpg" alt="Event Photography" width="600" height="300">
+                        <img class="single-image-right" src="../assets/images/galleries/ourworks/g8.jpg" alt="Event Photography" width="600" height="300">
+                    </div>
+                    <div class="gallery-arrow-next">
+                        <a href="#" id="next-image" aria-label="Next image"><ion-icon name="arrow-forward-outline"></ion-icon></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Icons Script -->
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    
+    <!-- Gallery Carousel Script -->
+    <script>
+        function leavesFirst(){
+            let rightImages = document.querySelectorAll('.gallery-container-right img');
+            for(let i = 0; i < rightImages.length; i++){
+                rightImages[i].style.display = "none";
+            }
+            if(rightImages[0]) {
+                rightImages[0].style.display = "block";
+            }
+
+            let leftImages = document.querySelectorAll('.gallery-container-left img');
+            for(let i = 0; i < leftImages.length; i++){
+                leftImages[i].style.display = "none";
+            }
+            if(leftImages[0]) {
+                leftImages[0].style.display = "block";
+            }
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            leavesFirst();
+
+            let nextImage = document.getElementById('next-image');
+            let backimage = document.getElementById('back-image');
+
+            if(nextImage) {
+                nextImage.onclick = function(event){
+                    let contLftImg = document.getElementById('left-side');
+                    let leftImages = document.querySelectorAll('.gallery-container-left img');
+                    if(leftImages.length > 0) {
+                        let lastLeftImage = leftImages[leftImages.length-1];
+                        lastLeftImage.remove();
+                        contLftImg.prepend(lastLeftImage);
+                    }
+
+                    let contRtImg = document.getElementById('right-side');
+                    let rightImage = document.querySelectorAll('.gallery-container-right img');
+                    if(rightImage.length > 0) {
+                        let firstRightImage = rightImage[0];
+                        firstRightImage.remove();
+                        contRtImg.append(firstRightImage);
+                    }
+                    leavesFirst();
+                    event.preventDefault();
+                }
+            }
+
+            if(backimage) {
+                backimage.onclick = function(event){
+                    let contRtImg = document.getElementById('right-side');
+                    let rightImages = document.querySelectorAll('.gallery-container-right img');
+                    if(rightImages.length > 0) {
+                        let lastRightImage = rightImages[rightImages.length-1];
+                        lastRightImage.remove();
+                        contRtImg.prepend(lastRightImage);
+                    }
+
+                    let contLfImg = document.getElementById('left-side');
+                    let leftImage = document.querySelectorAll('.gallery-container-left img');
+                    if(leftImage.length > 0) {
+                        let firstLeftImage = leftImage[0];
+                        firstLeftImage.remove();
+                        contLfImg.append(firstLeftImage);
+                    }
+                    leavesFirst();
+                    event.preventDefault();
+                }
+            }
+        });
+    </script>
+
+    <!-- Particle Background Script -->
+    <script>
+        function clamp (value, min, max) {
+            return value >= min ? (value <= max ? value:max):min; 
+        }
+
+        function Dust (startx, starty, offset = 0, baseColor = 1, duration = 100, size = 20) {
+            //constructor
+            this.x            = startx;
+            this.y            = starty;
+            this.duration     = duration;
+            this.offset       = offset;
+            this.size         = size;
+            this.timer        = offset % duration;
+            this.baseColor    = baseColor;
+
+            //functions
+            this.draw = function (canvas) {
+                //Calculate animations
+                if (this.timer > this.duration) {
+                    this.timer = 0;
+                }
+                this.timer += 1;
+
+                //Calculate
+                const framesize           = this.size;
+                const positionMultiplier  = this.timer * (this.offset % 2);
+                const xPosition           = this.x + positionMultiplier;
+                const yPosition           = this.y + positionMultiplier;
+                const colorOpacity        = clamp((this.timer + 50) % this.duration, 0,this.baseColor);
+
+                //Update element
+                canvas.beginPath();
+                canvas.arc(xPosition, yPosition, framesize, 0, Math.PI * 2, false);
+                canvas.fillStyle = "rgba(255,255,255, " + colorOpacity + ")";
+                canvas.fill();
+            }
+        }
+
+
+        // Initialize particle animation for gallery section
+        document.addEventListener('DOMContentLoaded', function() {
+            const gallerySection = document.querySelector('.gallery-section');
+            if (!gallerySection) return;
+
+            const canvasElements = gallerySection.querySelectorAll("canvas");
+
+            function updateCanvasSize(canvasElement) {
+                const rect = gallerySection.getBoundingClientRect();
+                canvasElement.width = rect.width;
+                canvasElement.height = rect.height;
+            }
+
+            for (let i = 0; i < canvasElements.length; i++) {
+                const canvasElement = canvasElements[i];
+                const canvas = canvasElement.getContext("2d");
+                const quantity = parseInt(canvasElement.getAttribute("data-dust"));
+                const ballsize = parseInt(canvasElement.getAttribute("data-size"));
+                const ballopacity = parseInt(canvasElement.getAttribute("data-opacity"));
+
+                // Set initial canvas size
+                updateCanvasSize(canvasElement);
+
+                // Spawn dust for this canvas
+                const dusts = [];
+                const rect = gallerySection.getBoundingClientRect();
+                for (let j = 0; j < quantity; j++) {
+                    const positionX = rect.width * Math.random() * 1.5 - rect.width / 4;
+                    const positionY = rect.height * Math.random() * 1.5 - rect.height / 4;
+                    const duration = Math.random() * 500 + 1000;
+                    const size = Math.random() * ballsize;
+                    const offset = Math.random() * 100;
+                    const baseColor = clamp((Math.random() * ballopacity) / 100, 0, 0.3);
+
+                    dusts.push(new Dust(positionX, positionY, offset, baseColor, duration, size, canvas));
+                }
+
+                // Start animation with this canvas's dust array
+                (function(canvas, canvasEl, qty, dustArray) {
+                    function render() {
+                        canvas.clearRect(0, 0, canvasEl.width, canvasEl.height);
+                        for (let k = 0; k < qty; k++) {
+                            dustArray[k].draw(canvas);
+                        }
+                        setTimeout(render, 50);
+                    }
+                    render();
+                })(canvas, canvasElement, quantity, dusts);
+
+                // Update canvas size on window resize
+                window.addEventListener('resize', function() {
+                    updateCanvasSize(canvasElement);
+                });
+            }
+        });
+    </script>
 
     <script src="../assets/components/navigation.js"></script>
     <script src="../assets/components/footer.js"></script>
