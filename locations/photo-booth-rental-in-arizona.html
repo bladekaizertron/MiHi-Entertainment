@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phoenix Photo Booth Tile Layout</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* General Reset */
+        body {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Ensure navigation and footer styles are not affected by page CSS */
+        header {
+            position: relative;
+            z-index: 50;
+        }
+
+        footer {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Prevent Tailwind from interfering with page-specific styles */
+        .tile-grid,
+        .cta-section,
+        .booking-banner,
+        .feature-section {
+            position: relative;
+            z-index: 1;
+        }
+
+        h1, h2, h3, h4 {
+            margin: 0;
+            text-transform: uppercase;
+        }
+
+        p {
+            margin: 0;
+            line-height: 1.4;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        /* --- SECTION 1: THE TILE GRID (Matches your Screenshot) --- */
+        main {
+            margin: 0;
+            padding: 0;
+        }
+
+        .tile-grid {
+            display: grid !important;
+            grid-template-columns: 1fr 1fr !important; /* 2 Columns */
+            width: 100%;
+        }
+
+        .tile {
+            position: relative;
+            height: 400px; /* Adjust height as needed */
+            background-size: cover !important;
+            background-position: center !important;
+            display: flex !important;
+            flex-direction: column !important;
+            justify-content: center !important; /* Vertically Center text */
+            padding: 40px !important;
+            overflow: hidden;
+        }
+
+        /* Dark Overlay to make text pop */
+        .tile::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3); /* Darkens image by 30% */
+            z-index: 1;
+            transition: background 0.3s ease;
+        }
+
+        .tile:hover::before {
+            background: rgba(0, 0, 0, 0.5); /* Darker on hover */
+        }
+
+        .tile-content {
+            position: relative;
+            z-index: 2;
+            color: white;
+            max-width: 90%;
+        }
+
+        .tile-title {
+            font-size: 3rem; /* Large, bold text */
+            font-weight: 900;
+            line-height: 0.9;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: -1px;
+        }
+
+        .tile-desc {
+            font-size: 0.95rem;
+            font-weight: 400;
+            max-width: 500px;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .tile-grid {
+                grid-template-columns: 1fr; /* Stack on mobile */
+            }
+            .tile-title {
+                font-size: 2rem;
+            }
+        }
+
+        /* --- SECTION 2: CTA SPLIT (About Us) --- */
+        .cta-section {
+            display: flex;
+            flex-wrap: wrap;
+            min-height: 400px;
+        }
+
+        .cta-image {
+            flex: 1;
+            min-width: 300px;
+            background-image: url('https://static.wixstatic.com/media/a92b01_bbe7c3d91b3d44c281604e12360b7859~mv2.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .cta-content {
+            flex: 1;
+            min-width: 300px;
+            background: #f4f4f4;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 60px;
+        }
+
+        .cta-content h4 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .cta-content p {
+            color: #555;
+            margin-bottom: 25px;
+        }
+
+        .btn {
+            display: inline-block;
+            border: 2px solid #000;
+            padding: 10px 25px;
+            text-transform: uppercase;
+            font-weight: bold;
+            color: #000;
+            font-size: 0.8rem;
+            width: fit-content;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            background: #000;
+            color: white;
+        }
+
+        /* --- SECTION 3: PHOENIX BOOKING BANNER --- */
+        .booking-banner {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 60px 20px;
+            background: white;
+            text-align: center;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+
+        .booking-banner img {
+            max-width: 100%;
+            height: auto;
+            width: 350px;
+        }
+
+        .booking-text {
+            text-align: left;
+        }
+
+        .booking-text h2 {
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .booking-text h3 {
+            font-size: 2.5rem;
+            font-weight: 900;
+            margin-bottom: 20px;
+        }
+
+        /* --- SECTION 4: AI BOOTH FEATURE --- */
+        .feature-section {
+            padding: 60px 20px;
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .feature-section img {
+            width: 100%;
+            height: auto;
+            margin-bottom: 30px;
+        }
+
+        .feature-section h2 {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        .feature-section h1 {
+            font-size: 3rem;
+            font-weight: 900;
+            margin-bottom: 20px;
+        }
+
+        .feature-section p {
+            color: #555;
+        }
+
+        /* --- HERO SECTION --- */
+        .hero-section {
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, #220834 0%, #1a0b44 50%, #051637 100%);
+            color: white;
+            min-height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-ambient {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+        }
+
+        .hero-ambient-glow-1 {
+            position: absolute;
+            top: 10%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            height: 100%;
+            background: radial-gradient(circle at top, rgba(255,255,255,0.15), transparent 60%);
+        }
+
+        .hero-ambient-glow-2 {
+            position: absolute;
+            top: -6rem;
+            left: 2.5rem;
+            width: 10rem;
+            height: 10rem;
+            border-radius: 50%;
+            background: rgba(236, 72, 153, 0.2);
+            filter: blur(3rem);
+        }
+
+        .hero-ambient-glow-3 {
+            position: absolute;
+            bottom: 2.5rem;
+            right: 2.5rem;
+            width: 13rem;
+            height: 13rem;
+            border-radius: 50%;
+            background: rgba(96, 165, 250, 0.2);
+            filter: blur(120px);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            padding: 5rem 1.5rem;
+            max-width: 64rem;
+            margin: 0 auto;
+        }
+
+        .hero-title {
+            font-size: 3rem;
+            font-weight: 900;
+            line-height: 1.2;
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            line-height: 1.75;
+            color: rgba(209, 213, 219, 1);
+            margin-bottom: 2rem;
+        }
+
+        .hero-cta {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%);
+            color: white;
+            border-radius: 9999px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 25px rgba(0, 80, 255, 0.4);
+        }
+
+        .hero-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 35px rgba(0, 80, 255, 0.5);
+        }
+
+        @media (min-width: 768px) {
+            .hero-section {
+                min-height: 70vh;
+            }
+
+            .hero-content {
+                padding: 8rem 1.5rem;
+            }
+
+            .hero-title {
+                font-size: 4.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.5rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .hero-title {
+                font-size: 5rem;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <!-- Navigation will be loaded by navigation.js -->
+    <script src="../assets/components/navigation.js"></script>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <!-- Ambient elements -->
+            <div class="hero-ambient">
+                <div class="hero-ambient-glow-1"></div>
+                <div class="hero-ambient-glow-2"></div>
+                <div class="hero-ambient-glow-3"></div>
+            </div>
+
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    Photo Booth Rentals in Phoenix, AZ
+                </h1>
+                <p class="hero-subtitle">
+                    Transform your event with our premium photo booth rentals in Phoenix! From weddings to corporate events, we bring cutting-edge technology and unforgettable experiences to Arizona. Book your Phoenix photo booth rental today!
+                </p>
+                <a href="../index.html#contact" class="hero-cta">
+                    Get Your Free Quote
+                </a>
+            </div>
+        </section>
+
+    <section class="tile-section">
+        <div class="container mx-auto px-4 sm:px-6 py-12 md:py-16">
+            <div class="text-center mb-10 md:mb-16">
+                <p class="text-2xl sm:text-3xl md:text-4xl font-light text-gray-500 mb-4 md:mb-6 tracking-[0.2em]">OUR   TOP</p>
+                <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6 text-gray-900">
+                    Arizona Photo Booth Services
+                </h2>
+                <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
+                    Explore our wide range of premium photo booth rentals available in Phoenix, Arizona
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <div class="tile-grid">
+        
+        <div class="tile" style="background-image: url('../assets/images/location/product-1.webp');">
+            <div class="tile-content">
+                <div class="tile-title">MiHi<br>Photo Booth</div>
+                <p class="tile-desc">Our sleek and minimal Photo Booth Rental is the top choice for any event. With custom overlays, booth wraps, backdrops, and full sets.</p>
+            </div>
+        </div>
+
+        <div class="tile" style="background-image: url('../assets/images/location/product-2.webp');">
+            <div class="tile-content">
+                <div class="tile-title">360<br>Photo Booth</div>
+                <p class="tile-desc">With our 360 booth, your guests will enjoy a photo experience like no other. Custom branding and social sharing features make it perfect.</p>
+            </div>
+        </div>
+
+        <div class="tile" style="background-image: url('../assets/images/location/product-3.webp');">
+            <div class="tile-content">
+                <div class="tile-title">Vogue<br>Photo Booth</div>
+                <p class="tile-desc">Make your event one that guests will never forget with our Vogue Booth! Plenty of room to show off your star quality.</p>
+            </div>
+        </div>
+
+        <div class="tile" style="background-image: url('../assets/images/location/product-4.webp');">
+            <div class="tile-content">
+                <div class="tile-title">Photo<br>Mosaic Wall</div>
+                <p class="tile-desc">Make your mark at your next event with our Photo Mosaic Wall, which transforms your brand or image into a stunning mosaic.</p>
+            </div>
+        </div>
+
+        <div class="tile" style="background-image: url('../assets/images/location/product-5.gif');">
+            <div class="tile-content">
+                <div class="tile-title">Bullet-Time<br>Array Booth</div>
+                <p class="tile-desc">Looking for a photo booth that will make your event stand out? Our Bullet-Time Photo Array Booth is the answer.</p>
+            </div>
+        </div>
+
+        <div class="tile" style="background-image: url('../assets/images/location/product-6.gif');">
+            <div class="tile-content">
+                <div class="tile-title">Slow-Motion<br>Photo Booth</div>
+                <p class="tile-desc">Create lasting memories that guests will cherish, with shareable slow-motion videos that capture every special moment.</p>
+            </div>
+        </div>
+
+        <div class="tile" style="background-image: url('../assets/images/location/product-7.webp');">
+            <div class="tile-content">
+                <div class="tile-title">Boomerang<br>Photo Booth</div>
+                <p class="tile-desc">Our Boomerang Booth captures a series of photos and turns them into an animated GIF that's easy to share.</p>
+            </div>
+        </div>
+
+        <div class="tile" style="background-image: url('../assets/images/location/product-8.webp');">
+            <div class="tile-content">
+                <div class="tile-title">Roaming<br>Photo Booth</div>
+                <p class="tile-desc">You don't have to worry about missing any memorable moments. Our mobile booth lets you capture it all on the go!</p>
+            </div>
+        </div>
+        <div class="tile" style="background-image: url('../assets/images/location/product-9.gif');">
+            <div class="tile-content">
+                <div class="tile-title">GREEN SCREEN<br>Photo Booth</div>
+                <p class="tile-desc">With our Green Screen Booth, the possibilities are endless. Let your guests choose their own backgrounds and create personalized photos that capture the excitement of your event.</p>
+            </div>
+        </div>
+
+        <div class="tile" style="background-image: url('../assets/images/location/product-10.webp');">
+            <div class="tile-content">
+                <div class="tile-title">NAME BADGE<br>Photo Booth</div>
+                <p class="tile-desc">You don't have to worry about missing any memorable moments. Our mobile booth lets you capture it all on the go!</p>
+            </div>
+        </div>
+        <div class="tile" style="background-image: url('../assets/images/location/product-11.gif');">
+            <div class="tile-content">
+                <div class="tile-title">VIDEO TESTIMONIAL<br>Photo Booth</div>
+                <p class="tile-desc">Make a lasting impression on your guests with our Video Testimonial Booth! It's a great way to gather valuable insights and showcase the impact of your event or product.</p>
+            </div>
+        </div>
+
+        <div class="tile" style="background-image: url('../assets/images/location/product-12.webp');">
+            <div class="tile-content">
+                <div class="tile-title">ADDITIONAL<br>BRANDING OPTIONS</div>
+                <p class="tile-desc">You don't have to worry about missing any memorable moments. Our mobile booth lets you capture it all on the go!</p>
+            </div>
+        </div><div class="tile" style="background-image: url('../assets/images/location/product-13.webp');">
+            <div class="tile-content">
+                <div class="tile-title">EVENT<br>PHOTOGRAPHY</div>
+                <p class="tile-desc">Want to make sure your event is perfectly captured? Our team of expert photographers is ready to help! With top-of-the-line equipment and a sharp eye for detail, we'll capture every moment of your special occasion, creating beautiful and lasting memories for you to cherish.                </p>
+            </div>
+        </div>
+
+        <div class="tile" style="background-image: url('../assets/images/location/product-10.webp');">
+            <div class="tile-content">
+                <div class="tile-title">VIRTUAL<br>Photo Booth</div>
+                <p class="tile-desc">You don't have to worry about missing any memorable moments. Our mobile booth lets you capture it all on the go!</p>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="booking-banner">
+        <img src="https://static.wixstatic.com/media/a92b01_58efad90c955481089607206f7dd69d3~mv2.jpg" alt="Phoenix Booth">
+        <div class="booking-text">
+            <h2>Check out our pricing in</h2>
+            <h3>PHOENIX, AZ</h3>
+            <a href="#" class="btn" style="background:black; color:white;">Learn More Now</a>
+        </div>
+    </div>
+
+    <div class="feature-section">
+        <img src="https://static.wixstatic.com/media/a92b01_6f0a6c155d1d4c12aebd27c9aa03d8e6~mv2.png" alt="AI Booth">
+        <h2>CHECK OUT OUR</h2>
+        <h1>AI PHOTO BOOTH</h1>
+        <p>Our revolutionary AI Photo Booth rentals are designed to capture the essence of any event with unparalleled precision. Our photo booths effortlessly produce high-quality photos, while our dedicated team works behind the scenes to process them swiftly.</p>
+    </div>
+    </main>
+
+    <!-- Footer -->
+    <script src="../assets/components/footer.js"></script>
+
+</body>
+</html>

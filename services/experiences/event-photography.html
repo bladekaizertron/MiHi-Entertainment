@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Photography Services - MiHi Photo Booth</title>
+    <link rel="icon" type="image/svg+xml" href="../../assets/images/favicon.svg">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        /* Apply text color only to main content, not navigation/footer */
+        main { color: #1a202c; }
+        h1, h2, h3, h4, h5, h6 { font-family: 'Playfair Display', serif; }
+        
+        /* Animated blob effect */
+        @keyframes blob {
+            0%, 100% { transform: translate(0px, 0px) scale(1); }
+            33% { transform: translate(30px, -50px) scale(1.1); }
+            66% { transform: translate(-20px, 20px) scale(0.9); }
+        }
+        
+        .animate-blob {
+            animation: blob 7s infinite;
+        }
+        
+        .animation-delay-2000 {
+            animation-delay: 2s;
+        }
+        
+        /* Section spacing */
+        .section-padding { padding: 5rem 0; }
+        @media (min-width: 768px) { .section-padding { padding: 8rem 0; } }
+        
+        /* Glass morphism effect */
+        .glass {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        /* Radial gradient for lens effect */
+        .bg-gradient-radial {
+            background: radial-gradient(circle, var(--tw-gradient-stops));
+        }
+        
+        /* Blur utility for small blur */
+        .blur-xs {
+            filter: blur(2px);
+        }
+        
+        /* Border 3 utility */
+        .border-3 {
+            border-width: 3px;
+        }
+
+        /* Zoom Modal */
+        #zoom-modal {
+            z-index: 9999; /* Ensure it's above navigation (z-50) and all other content */
+        }
+
+        #zoom-modal img {
+            cursor: zoom-out; /* Indicate zoom-out capability */
+        }
+        
+        /* Ensure navigation stays above other content */
+        header {
+            z-index: 50 !important;
+        }
+        
+        /* Ensure navigation btn-primary button maintains its blue background */
+        header nav .btn-primary,
+        nav .btn-primary {
+            background-color: #0050ff !important;
+            background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%) !important;
+            color: white !important;
+        }
+        
+        header nav .btn-primary:hover,
+        nav .btn-primary:hover {
+            background-color: #0040d9 !important;
+            background: linear-gradient(135deg, #0040d9 0%, #0050ff 100%) !important;
+        }
+    </style>
+</head>
+<body class="bg-white">
+    <!-- Back to Top Button and Scroll Progress Bar will be loaded by back-to-top.js -->
+    
+    <script src="../../assets/components/navigation.js"></script>
+    <main>
+        <!-- Hero Section -->
+        <section class="relative text-white py-24 md:py-40 overflow-hidden">
+            <div class="absolute inset-0 bg-cover bg-center bg-no-repeat scale-105 transition-transform duration-700 hover:scale-100"
+                style="background-image: url('https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80');">
+            </div>
+            <!-- Gradient Overlay -->
+            <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/50 to-black/70"></div>
+            <!-- Decorative Blur Orbs -->
+            <div class="absolute top-20 left-10 w-96 h-96 bg-[#0050ff]/20 rounded-full blur-3xl animate-blob"></div>
+            <div class="absolute bottom-20 right-10 w-96 h-96 bg-[#0050ff]/20 rounded-full blur-3xl animate-blob animation-delay-2000"></div>
+            
+            <div class="relative z-10 container mx-auto px-6">
+                <div class="max-w-6xl mx-auto text-center">
+                    <!-- Icon Badge -->
+                    <div class="flex justify-center mb-8">
+                        <div class="w-20 h-20 bg-gradient-to-br from-[#0050ff] to-[#0040d9] rounded-2xl flex items-center justify-center shadow-2xl">
+                            <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    
+                    <!-- Main Headline -->
+                    <h1 class="text-5xl md:text-7xl lg:text-8xl font-black mb-6 leading-[1.1] tracking-tight">
+                        <span class="bg-gradient-to-r from-white via-[#ccddff] to-white bg-clip-text text-transparent drop-shadow-2xl">
+                            EVENT PHOTOGRAPHY SERVICES
+                        </span>
+                        </h1>
+
+                    <!-- Description -->
+                    <p class="text-base md:text-lg mb-12 max-w-4xl mx-auto leading-relaxed text-white/95 font-light tracking-wide drop-shadow-lg">
+                        Here's the thing about corporate event photography - everyone has a camera, but not everyone can tell your story. We're not just taking photos; we're skillfully crafting narratives through light, timing, and capturing the moments that truly matter.
+                    </p>
+                    
+                    <!-- CTA Buttons -->
+                    <div class="flex flex-col sm:flex-row gap-5 justify-center items-center mb-12">
+                        <a href="../../index.html#contact"
+                            class="group relative inline-flex items-center gap-3 bg-gradient-to-r from-white to-[#e6f0ff] text-[#0040d9] px-10 py-5 rounded-full text-lg font-bold shadow-2xl hover:shadow-[#0050ff]/50 transition-all duration-500 transform hover:scale-110 hover:-translate-y-1 overflow-hidden focus:ring-4 focus:ring-[#0050ff]/30"
+                            aria-label="Contact us for event photography">
+                            <span class="relative z-10">CONTACT US</span>
+                            <svg class="w-5 h-5 relative z-10 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+                            </svg>
+                        </a>
+                        <a href="../../index.html#products"
+                            class="group inline-flex items-center gap-3 px-10 py-5 rounded-full text-lg font-bold backdrop-blur-md bg-white/10 border-2 border-white/30 hover:bg-white/10 hover:border-white/40 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:scale-110 hover:-translate-y-1 focus:ring-4 focus:ring-white/50"
+                            aria-label="View our products">
+                            <span>VIEW OUR PRODUCTS</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- High-Tech Event Photography Section -->
+        <section class="section-padding bg-white">
+            <div class="container mx-auto px-6">
+                <div class="max-w-6xl mx-auto">
+                    <div class="grid md:grid-cols-2 gap-12 items-center mb-20">
+                        <div>
+                            <div class="inline-block px-6 py-2 bg-gradient-to-r from-[#0050ff] to-[#0040d9] text-white rounded-full text-sm font-bold mb-6">
+                                HIGH-TECH EVENT PHOTOGRAPHY
+                            </div>
+                            <h2 class="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-gray-900 via-[#0050ff] to-gray-900 bg-clip-text text-transparent">
+                                High-tech event photography
+                            </h2>
+                            <p class="text-lg text-gray-700 mb-6 leading-relaxed">
+                                Our photographers harness cutting-edge technology with SpotMyPhotos, delivering instant, personalized photo experiences at events. This advanced system uses facial recognition and AI to automatically identify guests, allowing for seamless photo delivery to attendees' phones in as little as 13 seconds.
+                            </p>
+                            <p class="text-lg text-gray-700 leading-relaxed">
+                                Experience the future of event photography where technology meets artistry, ensuring every guest receives their perfect moments instantly and effortlessly.
+                            </p>
+                        </div>
+                        <div class="relative rounded-2xl overflow-hidden shadow-2xl">
+                            <img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" 
+                                alt="Professional photographer using SpotMyPhotos technology at corporate event" 
+                                class="w-full h-[500px] object-cover">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+                
+        <!-- Real Time Branded Photos Section -->
+        <section class="section-padding bg-gradient-to-b from-gray-50 via-white to-gray-50 relative overflow-hidden">
+                <!-- Decorative elements -->
+            <div class="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-[#0050ff]/5 to-[#0040d9]/5 rounded-full filter blur-3xl"></div>
+            <div class="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-br from-[#0050ff]/5 to-[#0040d9]/5 rounded-full filter blur-3xl"></div>
+            
+            <div class="container mx-auto px-6 relative z-10">
+                <div class="max-w-6xl mx-auto">
+                    <div class="grid md:grid-cols-2 gap-12 items-center">
+                        <div class="relative rounded-2xl overflow-hidden shadow-2xl order-2 md:order-1">
+                            <img src="https://images.unsplash.com/photo-1543269865-cbf427effbad?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" 
+                                alt="Real-time branded photos with custom logos and filters being printed at event" 
+                                class="w-full h-[500px] object-cover">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+                        </div>
+                        <div class="order-1 md:order-2">
+                            <div class="inline-block px-6 py-2 bg-gradient-to-r from-[#0050ff] to-[#0040d9] text-white rounded-full text-sm font-bold mb-6">
+                                REAL TIME BRANDED PHOTOS
+                            </div>
+                            <h2 class="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-gray-900 via-[#0050ff] to-gray-900 bg-clip-text text-transparent">
+                                Real Time Branded Photos - PRINTED
+                            </h2>
+                            <p class="text-lg text-gray-700 mb-6 leading-relaxed">
+                                Tired of event photos that blend into the crowd? With your logo, custom filters, and signature brand colors, your content hits Instagram before competitors even open Photoshop. Every snapshot is designed to amplify your brand, ensuring your event shines across social media in real time.
+                            </p>
+                            <div class="space-y-4">
+                                <div class="flex items-start gap-4">
+                                    <div class="w-12 h-12 bg-gradient-to-br from-[#0050ff] to-[#0040d9] rounded-xl flex items-center justify-center flex-shrink-0">
+                                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-gray-900 mb-1">Instant Branding</h4>
+                                        <p class="text-gray-600">Your logo and brand colors applied instantly to every photo</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start gap-4">
+                                    <div class="w-12 h-12 bg-gradient-to-br from-[#0050ff] to-[#0040d9] rounded-xl flex items-center justify-center flex-shrink-0">
+                                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-gray-900 mb-1">Social Media Ready</h4>
+                                        <p class="text-gray-600">Photos optimized for instant sharing across all platforms</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start gap-4">
+                                    <div class="w-12 h-12 bg-gradient-to-br from-[#0050ff] to-[#0040d9] rounded-xl flex items-center justify-center flex-shrink-0">
+                                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-gray-900 mb-1">Physical Prints</h4>
+                                        <p class="text-gray-600">High-quality printed photos available on-site</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Immersive Experience Section -->
+        <section class="section-padding bg-white">
+            <div class="container mx-auto px-6">
+                <div class="max-w-6xl mx-auto">
+                    <div class="grid md:grid-cols-2 gap-12 items-center">
+                        <div>
+                            <div class="inline-block px-6 py-2 bg-gradient-to-r from-[#0050ff] to-[#0040d9] text-white rounded-full text-sm font-bold mb-6">
+                                IMMERSIVE EXPERIENCES
+                            </div>
+                            <h2 class="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-gray-900 via-[#0050ff] to-gray-900 bg-clip-text text-transparent">
+                                High-tech event photography
+                            </h2>
+                            <p class="text-lg text-gray-700 mb-6 leading-relaxed">
+                                While others rely on basic slideshows, we take things further. We transform entire venues into immersive, real-time visual experiences where every guest plays a starring role. They're not just taking photos—they're stepping into a dynamic, interactive brand story that unfolds live, making your event unforgettable.
+                            </p>
+                            <p class="text-lg text-gray-700 leading-relaxed">
+                                From interactive displays to live photo walls, we create engaging experiences that keep guests connected and your brand top-of-mind throughout the entire event.
+                            </p>
+                        </div>
+                        <div class="relative rounded-2xl overflow-hidden shadow-2xl">
+                            <img src="https://images.unsplash.com/photo-1511578314322-379afb476865?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" 
+                                alt="Immersive event photography experience with interactive displays and live photo walls" 
+                                class="w-full h-[500px] object-cover">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- DSLR Camera Slideshow Section -->
+        <section class="py-8 md:py-12 bg-gradient-to-b from-white via-gray-50 to-white relative overflow-hidden">
+            <!-- Decorative elements -->
+            <div class="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-[#0050ff]/5 to-[#0040d9]/5 rounded-full filter blur-3xl"></div>
+            <div class="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-br from-[#0050ff]/5 to-[#0040d9]/5 rounded-full filter blur-3xl"></div>
+            
+            <div class="container mx-auto px-6 relative z-10">
+                <div class="max-w-7xl mx-auto">
+                    <div class="text-center mb-16">
+                        <div class="inline-block px-6 py-2 bg-gradient-to-r from-[#0050ff] to-[#0040d9] text-white rounded-full text-sm font-bold mb-6">
+                            OUR WORK
+                        </div>
+                        <h2 class="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-gray-900 via-[#0050ff] to-gray-900 bg-clip-text text-transparent">
+                            Event Photography Gallery
+                        </h2>
+                        <p class="text-xl text-gray-600 max-w-2xl mx-auto">See our professional photography in action</p>
+                    </div>
+
+                    <!-- DSLR Camera Frame with Slideshow -->
+                    <div class="max-w-3xl mx-auto">
+                        <!-- Camera Body -->
+                        <div class="relative bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl p-4 md:p-5 shadow-2xl">
+                            <!-- Camera Top -->
+                            <div class="absolute -top-2 left-1/2 transform -translate-x-1/2 w-20 h-5 bg-gradient-to-br from-gray-700 to-gray-800 rounded-t-lg"></div>
+                            <!-- Camera Viewfinder -->
+                            <div class="absolute -top-1 left-1/2 transform -translate-x-1/2 w-16 h-4 bg-black rounded-full"></div>
+                            
+                            <!-- Camera Screen/Display Area -->
+                            <div class="relative bg-black rounded-lg overflow-hidden shadow-inner border-2 border-gray-700">
+                                <!-- Slideshow Container -->
+                                <div id="dslr-slideshow" class="relative aspect-video cursor-zoom-in">
+                                    <!-- Slides -->
+                                    <div class="slide active absolute inset-0 opacity-100 transition-opacity duration-1000 ease-in-out" onclick="openZoomView('https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80', 'Professional event photography at corporate gathering')">
+                                        <img src="/assets/images/event-photography-1.webp?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" 
+                                            alt="Professional event photography at corporate gathering" 
+                                            class="w-full h-full object-cover">
+                                    </div>
+                                    <div class="slide absolute inset-0 opacity-0 transition-opacity duration-1000 ease-in-out cursor-zoom-in" onclick="openZoomView('https://images.unsplash.com/photo-1543269865-cbf427effbad?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80', 'Candid moments captured at networking event')">
+                                        <img src="https://images.unsplash.com/photo-1543269865-cbf427effbad?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" 
+                                            alt="Candid moments captured at networking event" 
+                                            class="w-full h-full object-cover">
+                                    </div>
+                                    <div class="slide absolute inset-0 opacity-0 transition-opacity duration-1000 ease-in-out cursor-zoom-in" onclick="openZoomView('https://images.unsplash.com/photo-1511578314322-379afb476865?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80', 'Action photography at trade show exhibition')">
+                                        <img src="https://images.unsplash.com/photo-1511578314322-379afb476865?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" 
+                                            alt="Action photography at trade show exhibition" 
+                                            class="w-full h-full object-cover">
+                                    </div>
+                                    <div class="slide absolute inset-0 opacity-0 transition-opacity duration-1000 ease-in-out cursor-zoom-in" onclick="openZoomView('https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80', 'Professional headshots at corporate event')">
+                                        <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" 
+                                            alt="Professional headshots at corporate event" 
+                                            class="w-full h-full object-cover">
+                                    </div>
+                                    <div class="slide absolute inset-0 opacity-0 transition-opacity duration-1000 ease-in-out cursor-zoom-in" onclick="openZoomView('https://images.unsplash.com/photo-1511578314322-379afb476865?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80', 'Event photography showcasing guest interactions')">
+                                        <img src="https://images.unsplash.com/photo-1511578314322-379afb476865?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" 
+                                            alt="Event photography showcasing guest interactions" 
+                                            class="w-full h-full object-cover">
+                                    </div>
+                                    <div class="slide absolute inset-0 opacity-0 transition-opacity duration-1000 ease-in-out cursor-zoom-in" onclick="openZoomView('https://images.unsplash.com/photo-1478147427282-58a87a120781?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80', 'Festival photography capturing vibrant atmosphere')">
+                                        <img src="https://images.unsplash.com/photo-1478147427282-58a87a120781?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" 
+                                            alt="Festival photography capturing vibrant atmosphere" 
+                                            class="w-full h-full object-cover">
+                                    </div>
+                                    <div class="slide absolute inset-0 opacity-0 transition-opacity duration-1000 ease-in-out cursor-zoom-in" onclick="openZoomView('https://images.unsplash.com/photo-1478147427282-58a87a120781?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80', 'Festival photography capturing vibrant atmosphere')">
+                                        <img src="https://images.unsplash.com/photo-1478147427282-58a87a120781?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" 
+                                            alt="Festival photography capturing vibrant atmosphere" 
+                                            class="w-full h-full object-cover">
+                                    </div>
+                                    <div class="slide absolute inset-0 opacity-0 transition-opacity duration-1000 ease-in-out cursor-zoom-in" onclick="openZoomView('https://images.unsplash.com/photo-1478147427282-58a87a120781?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80', 'Festival photography capturing vibrant atmosphere')">
+                                        <img src="https://images.unsplash.com/photo-1478147427282-58a87a120781?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" 
+                                            alt="Festival photography capturing vibrant atmosphere" 
+                                            class="w-full h-full object-cover">
+                                    </div>
+                                    <div class="slide absolute inset-0 opacity-0 transition-opacity duration-1000 ease-in-out cursor-zoom-in" onclick="openZoomView('https://images.unsplash.com/photo-1478147427282-58a87a120781?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80', 'Festival photography capturing vibrant atmosphere')">
+                                        <img src="https://images.unsplash.com/photo-1478147427282-58a87a120781?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" 
+                                            alt="Festival photography capturing vibrant atmosphere" 
+                                            class="w-full h-full object-cover">
+                                    </div>
+                                    <div class="slide absolute inset-0 opacity-0 transition-opacity duration-1000 ease-in-out cursor-zoom-in" onclick="openZoomView('https://images.unsplash.com/photo-1478147427282-58a87a120781?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80', 'Festival photography capturing vibrant atmosphere')">
+                                        <img src="https://images.unsplash.com/photo-1478147427282-58a87a120781?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" 
+                                            alt="Festival photography capturing vibrant atmosphere" 
+                                            class="w-full h-full object-cover">
+                                    </div>
+                                </div>
+
+                                <!-- Camera Controls -->
+                                <div class="flex items-center justify-between mt-3 px-2">
+                                    <!-- Previous Button -->
+                                    <button id="prev-slide" class="w-8 h-8 bg-gradient-to-br from-[#0050ff] to-[#0040d9] rounded-full flex items-center justify-center text-white shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 focus:outline-none focus:ring-4 focus:ring-[#0050ff]/30" aria-label="Previous photo">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                                        </svg>
+                                    </button>
+
+                                    <!-- Slide Indicators -->
+                                    <div class="flex items-center gap-1.5">
+                                        <span id="slide-counter" class="text-white font-semibold text-xs">1 / 10</span>
+                                        <div class="flex gap-1">
+                                            <div class="indicator w-1.5 h-1.5 rounded-full bg-[#0050ff] transition-all duration-300"></div>
+                                            <div class="indicator w-1.5 h-1.5 rounded-full bg-gray-600 opacity-50 transition-all duration-300"></div>
+                                            <div class="indicator w-1.5 h-1.5 rounded-full bg-gray-600 opacity-50 transition-all duration-300"></div>
+                                            <div class="indicator w-1.5 h-1.5 rounded-full bg-gray-600 opacity-50 transition-all duration-300"></div>
+                                            <div class="indicator w-1.5 h-1.5 rounded-full bg-gray-600 opacity-50 transition-all duration-300"></div>
+                                            <div class="indicator w-1.5 h-1.5 rounded-full bg-gray-600 opacity-50 transition-all duration-300"></div>
+                                            <div class="indicator w-1.5 h-1.5 rounded-full bg-gray-600 opacity-50 transition-all duration-300"></div>
+                                            <div class="indicator w-1.5 h-1.5 rounded-full bg-gray-600 opacity-50 transition-all duration-300"></div>
+                                            <div class="indicator w-1.5 h-1.5 rounded-full bg-gray-600 opacity-50 transition-all duration-300"></div>
+                                            <div class="indicator w-1.5 h-1.5 rounded-full bg-gray-600 opacity-50 transition-all duration-300"></div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Next Button -->
+                                    <button id="next-slide" class="w-8 h-8 bg-gradient-to-br from-[#0050ff] to-[#0040d9] rounded-full flex items-center justify-center text-white shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 focus:outline-none focus:ring-4 focus:ring-[#0050ff]/30" aria-label="Next photo">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                        </svg>
+                                    </button>
+                                </div>
+
+                                <!-- Camera Info Display -->
+                                <div class="mt-2 px-2 pb-1 flex items-center justify-between text-white/80 text-[10px] font-mono">
+                                    <div class="flex items-center gap-2">
+                                        <span>f/2.8</span>
+                                        <span>1/125s</span>
+                                        <span>ISO 400</span>
+                                    </div>
+                                    <div class="flex items-center gap-1">
+                                        <svg class="w-2.5 h-2.5" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path>
+                                        </svg>
+                                        <span id="current-time">12:34</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Camera Lens -->
+                            <div class="mt-4 flex justify-center">
+                                <div class="relative">
+                                    <div class="w-16 h-16 bg-gradient-to-br from-gray-700 to-gray-900 rounded-full flex items-center justify-center shadow-2xl border-3 border-gray-600">
+                                        <div class="w-12 h-12 bg-gradient-to-br from-gray-800 to-black rounded-full flex items-center justify-center border-2 border-gray-700">
+                                            <div class="w-8 h-8 bg-black rounded-full"></div>
+                                        </div>
+                                    </div>
+                                    <!-- Lens Reflection -->
+                                    <div class="absolute top-1 left-2.5 w-5 h-5 bg-white/20 rounded-full blur-sm"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Zoom Modal -->
+                    <div id="zoom-modal" class="fixed inset-0 bg-black/95 z-50 hidden flex items-center justify-center p-4" onclick="closeZoomView(event)">
+                        <button onclick="closeZoomView(event)" class="absolute top-4 right-4 w-12 h-12 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center text-white transition-all duration-300 z-10" aria-label="Close zoom view">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                            </svg>
+                        </button>
+                        <img id="zoom-image" src="" alt="" class="max-w-full max-h-[90vh] object-contain rounded-lg shadow-2xl" onclick="event.stopPropagation()">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Event Types Section -->
+        <section class="section-padding bg-gradient-to-b from-gray-50 via-white to-gray-50 relative overflow-hidden">
+            <div class="container mx-auto px-6">
+                <div class="max-w-7xl mx-auto">
+                    <div class="text-center mb-16">
+                        <div class="inline-block px-6 py-2 bg-gradient-to-r from-[#0050ff] to-[#0040d9] text-white rounded-full text-sm font-bold mb-6">
+                            EVENT TYPES
+                        </div>
+                        <h2 class="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-gray-900 via-[#0050ff] to-gray-900 bg-clip-text text-transparent">
+                            Tell Us About Your Event
+                        </h2>
+                        <p class="text-xl text-gray-600 max-w-2xl mx-auto">Find Your Event Type</p>
+                    </div>
+
+                    <div class="grid md:grid-cols-3 gap-8">
+                        <!-- Tradeshows -->
+                        <div class="group relative rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 cursor-pointer">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent z-10"></div>
+                            <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                                alt="Professional event photography at trade shows and conventions" 
+                                class="w-full h-80 object-cover">
+                            <div class="absolute bottom-0 left-0 right-0 p-8 z-20">
+                                <h3 class="text-2xl font-bold text-white mb-2">Tradeshows</h3>
+                                <p class="text-white/90">Professional coverage for your trade show exhibitions and conventions</p>
+                            </div>
+                        </div>
+
+                        <!-- Sporting -->
+                        <div class="group relative rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 cursor-pointer">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent z-10"></div>
+                            <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                                alt="Action photography at sporting events and competitions" 
+                                class="w-full h-80 object-cover">
+                            <div class="absolute bottom-0 left-0 right-0 p-8 z-20">
+                                <h3 class="text-2xl font-bold text-white mb-2">Sporting</h3>
+                                <p class="text-white/90">Capture the energy and excitement of your sporting events</p>
+                            </div>
+                        </div>
+
+                        <!-- Festivals -->
+                        <div class="group relative rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 cursor-pointer">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent z-10"></div>
+                            <img src="https://images.unsplash.com/photo-1478147427282-58a87a120781?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                                alt="Vibrant festival photography capturing the atmosphere and crowd moments" 
+                                class="w-full h-80 object-cover">
+                            <div class="absolute bottom-0 left-0 right-0 p-8 z-20">
+                                <h3 class="text-2xl font-bold text-white mb-2">Festivals</h3>
+                                <p class="text-white/90">Document the vibrant atmosphere and memorable moments of your festival</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Grid Section -->
+        <section class="section-padding bg-white">
+            <div class="container mx-auto px-6">
+                <div class="max-w-6xl mx-auto">
+                    <div class="text-center mb-16">
+                        <h2 class="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-gray-900 via-[#0050ff] to-gray-900 bg-clip-text text-transparent">
+                            Why Choose Our Event Photography
+                        </h2>
+                        <p class="text-xl text-gray-600 max-w-2xl mx-auto">Professional photography services that tell your story</p>
+                    </div>
+                    
+                    <div class="grid md:grid-cols-3 gap-8">
+                        <div class="bg-white p-8 rounded-2xl shadow-lg border-l-4 border-[#0050ff] hover:shadow-xl transition-all duration-300">
+                            <div class="w-14 h-14 bg-gradient-to-br from-[#0050ff] to-[#0040d9] rounded-xl flex items-center justify-center mb-6">
+                                <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                                </svg>
+                            </div>
+                            <h3 class="text-xl font-bold mb-3 text-gray-900">Professional Team</h3>
+                            <p class="text-gray-600 leading-relaxed">Experienced photographers who know how to capture the perfect shot and work seamlessly with your event timeline.</p>
+                        </div>
+                        
+                        <div class="bg-white p-8 rounded-2xl shadow-lg border-l-4 border-[#0050ff] hover:shadow-xl transition-all duration-300">
+                            <div class="w-14 h-14 bg-gradient-to-br from-[#0050ff] to-[#0040d9] rounded-xl flex items-center justify-center mb-6">
+                                <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                                </svg>
+                            </div>
+                            <h3 class="text-xl font-bold mb-3 text-gray-900">High-Quality Images</h3>
+                            <p class="text-gray-600 leading-relaxed">Professional-grade equipment ensures stunning, high-resolution photos with perfect lighting and composition.</p>
+                        </div>
+                        
+                        <div class="bg-white p-8 rounded-2xl shadow-lg border-l-4 border-[#0050ff] hover:shadow-xl transition-all duration-300">
+                            <div class="w-14 h-14 bg-gradient-to-br from-[#0050ff] to-[#0040d9] rounded-xl flex items-center justify-center mb-6">
+                                <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                            </div>
+                            <h3 class="text-xl font-bold mb-3 text-gray-900">Fast Delivery</h3>
+                            <p class="text-gray-600 leading-relaxed">Receive your edited photos quickly after your event with both digital and print options available.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- CTA Section -->
+        <section class="relative section-padding bg-gradient-to-r from-[#0050ff] to-[#0040d9] text-white overflow-hidden">
+            <!-- Animated background elements -->
+            <div class="absolute inset-0 opacity-10">
+                <div class="absolute top-20 left-20 w-72 h-72 bg-white rounded-full filter blur-3xl animate-blob"></div>
+                <div class="absolute bottom-20 right-20 w-96 h-96 bg-white rounded-full filter blur-3xl animate-blob animation-delay-2000"></div>
+            </div>
+
+            <div class="container mx-auto px-6 py-20 md:py-32 text-center relative z-10">
+                <div class="max-w-4xl mx-auto space-y-6">
+                    <div class="inline-block bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-bold mb-4">
+                        ✨ Ready to Capture Your Event
+                    </div>
+                    <h2 class="text-4xl md:text-6xl font-extrabold mb-6 leading-tight">
+                        Preserve Your Memories
+                    </h2>
+                    <p class="text-xl md:text-2xl font-light max-w-3xl mx-auto mb-10 leading-relaxed">
+                    Professional event photography to remember your special day forever with stunning visuals that capture the emotion and atmosphere.
+                </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="../../index.html#contact"
+                            class="bg-white text-[#0050ff] px-10 py-4 rounded-full text-lg font-bold shadow-xl hover:bg-gray-100 hover:shadow-2xl transition-all duration-300 transform hover:scale-110 hover:-translate-y-1 focus:ring-4 focus:ring-white"
+                            aria-label="Get a custom quote for event photography">
+                            Get Your Free Quote
+                        </a>
+                        <a href="../../index.html#products"
+                            class="glass text-white px-10 py-4 rounded-full text-lg font-bold hover:bg-white/30 hover:scale-110 hover:-translate-y-1 transition-all duration-300 transform border-2 border-white/30 focus:ring-4 focus:ring-white/50"
+                            aria-label="View our products">
+                            VIEW OUR PRODUCTS
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <script src="../../assets/components/footer.js"></script>
+    <script src="../../assets/components/back-to-top.js"></script>
+    <script src="../../assets/js/main.js" defer></script>
+    
+    <!-- DSLR Slideshow JavaScript -->
+    <script>
+        (function() {
+            'use strict';
+            
+            const slides = document.querySelectorAll('#dslr-slideshow .slide');
+            const indicators = document.querySelectorAll('.indicator');
+            const prevBtn = document.getElementById('prev-slide');
+            const nextBtn = document.getElementById('next-slide');
+            const slideCounter = document.getElementById('slide-counter');
+            
+            if (!slides.length) return;
+            
+            let currentSlide = 0;
+            let autoSlideInterval;
+            
+            // Update slide display
+            function updateSlide(index) {
+                // Remove active class from all slides
+                slides.forEach((slide, i) => {
+                    slide.classList.remove('active');
+                    slide.style.opacity = i === index ? '1' : '0';
+                });
+                
+                // Update indicators
+                indicators.forEach((indicator, i) => {
+                    if (i === index) {
+                        indicator.classList.remove('opacity-50');
+                        indicator.classList.add('bg-[#0050ff]');
+                        indicator.style.opacity = '1';
+                    } else {
+                        indicator.classList.add('opacity-50');
+                        indicator.classList.remove('bg-[#0050ff]');
+                        indicator.style.opacity = '0.5';
+                    }
+                });
+                
+                // Update counter
+                slideCounter.textContent = `${index + 1} / ${slides.length}`;
+                
+                currentSlide = index;
+            }
+            
+            // Next slide
+            function nextSlide() {
+                const next = (currentSlide + 1) % slides.length;
+                updateSlide(next);
+            }
+            
+            // Previous slide
+            function prevSlide() {
+                const prev = (currentSlide - 1 + slides.length) % slides.length;
+                updateSlide(prev);
+            }
+            
+            // Start auto-slide
+            function startAutoSlide() {
+                autoSlideInterval = setInterval(nextSlide, 5000); // Change every 5 seconds
+            }
+            
+            // Stop auto-slide
+            function stopAutoSlide() {
+                if (autoSlideInterval) {
+                    clearInterval(autoSlideInterval);
+                }
+            }
+            
+            // Event listeners
+            if (nextBtn) {
+                nextBtn.addEventListener('click', () => {
+                    stopAutoSlide();
+                    nextSlide();
+                    startAutoSlide();
+                });
+            }
+            
+            if (prevBtn) {
+                prevBtn.addEventListener('click', () => {
+                    stopAutoSlide();
+                    prevSlide();
+                    startAutoSlide();
+                });
+            }
+            
+            // Indicator click handlers
+            indicators.forEach((indicator, index) => {
+                indicator.addEventListener('click', () => {
+                    stopAutoSlide();
+                    updateSlide(index);
+                    startAutoSlide();
+                });
+            });
+            
+            // Pause on hover
+            const slideshowContainer = document.getElementById('dslr-slideshow');
+            if (slideshowContainer) {
+                slideshowContainer.addEventListener('mouseenter', stopAutoSlide);
+                slideshowContainer.addEventListener('mouseleave', startAutoSlide);
+            }
+            
+            // Keyboard navigation
+            document.addEventListener('keydown', (e) => {
+                const slideshowSection = document.querySelector('#dslr-slideshow')?.closest('section');
+                if (!slideshowSection) return;
+                
+                const rect = slideshowSection.getBoundingClientRect();
+                const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
+                
+                if (isVisible) {
+                    if (e.key === 'ArrowLeft') {
+                        e.preventDefault();
+                        stopAutoSlide();
+                        prevSlide();
+                        startAutoSlide();
+                    } else if (e.key === 'ArrowRight') {
+                        e.preventDefault();
+                        stopAutoSlide();
+                        nextSlide();
+                        startAutoSlide();
+                    }
+                }
+            });
+            
+            // Initialize
+            updateSlide(0);
+            startAutoSlide();
+            
+            // Update time display (cosmetic camera feature)
+            function updateTime() {
+                const timeElement = document.getElementById('current-time');
+                if (timeElement) {
+                    const now = new Date();
+                    const hours = String(now.getHours()).padStart(2, '0');
+                    const minutes = String(now.getMinutes()).padStart(2, '0');
+                    timeElement.textContent = `${hours}:${minutes}`;
+                }
+            }
+            
+            updateTime();
+            setInterval(updateTime, 60000); // Update every minute
+        })();
+    </script>
+
+    <script>
+        // Zoom View Functions
+        function openZoomView(imageSrc, imageAlt) {
+            const modal = document.getElementById('zoom-modal');
+            const image = document.getElementById('zoom-image');
+            if (modal && image) {
+                image.src = imageSrc;
+                image.alt = imageAlt;
+                modal.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+            }
+        }
+        
+        function closeZoomView(event) {
+            if (event.target.id === 'zoom-modal' || event.target.closest('button')) {
+                const modal = document.getElementById('zoom-modal');
+                if (modal) {
+                    modal.classList.add('hidden');
+                    document.body.style.overflow = '';
+                }
+            }
+        }
+        
+        // Close zoom on Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                const modal = document.getElementById('zoom-modal');
+                if (modal && !modal.classList.contains('hidden')) {
+                    closeZoomView({ target: modal });
+                }
+            }
+        });
+    </script>
+</body>
+</html>

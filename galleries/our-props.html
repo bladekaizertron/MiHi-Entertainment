@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Props - MiHi Entertainment</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Arvo:wght@400;700&family=Cinzel:wght@500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800;900&family=Montserrat:wght@500;600;700&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@300;900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
+        body { font-family: 'Inter', sans-serif; color: #1a202c; }
+        h1, h2, h3, h4, h5, h6 { font-family: 'Playfair Display', serif; }
+        .btn-primary { background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%); transition: all 0.3s ease; }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(0, 80, 255, 0.4); }
+        .section-padding { padding: 5rem 0; }
+        @media (max-width: 768px) {
+            .section-padding { padding: 3rem 0; }
+        }
+        @media (max-width: 640px) {
+            .section-padding { padding: 2.5rem 0; }
+        }
+        .hero-section {
+            background-image: url('https://images.pexels.com/photos/2570062/pexels-photo-2570062.jpeg');
+            background-attachment: fixed;
+            background-position: center center;
+            background-size: cover;
+            background-repeat: no-repeat;
+            min-height: 100vh;
+        }
+        @media (max-width: 768px) {
+            .hero-section {
+                min-height: 85vh;
+                background-attachment: scroll;
+            }
+        }
+        .hero-section .corporate-text {
+            font-family: 'Montserrat', sans-serif;
+            letter-spacing: 0.3em;
+        }
+        @media (max-width: 640px) {
+            .container {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+        }
+        .animate-fade-in-up {
+            animation: fadeInUp 1s ease-out forwards;
+            opacity: 0;
+        }
+        .animate-delay-200 {
+            animation-delay: 0.2s;
+        }
+        .animate-delay-300 {
+            animation-delay: 0.3s;
+        }
+        .animate-delay-400 {
+            animation-delay: 0.4s;
+        }
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="nav-placeholder"></div>
+
+    <!-- Hero Section -->
+    <section class="relative flex items-center justify-center overflow-hidden py-8 hero-section">
+        <div class="absolute inset-0 bg-black bg-opacity-50"></div>     
+        <div class="relative z-10 text-center text-white px-4 w-full">
+            <div class="max-w-3xl mx-auto">
+                <div class="mb-2">
+                    <p class="max-w-3xl mx-auto text-sm md:text-base leading-tight mb-2 px-0 text-gray-100 tracking-[0.2em] animate-fade-in-up animate-delay-200 corporate-text">
+                    BROWSE OUR
+                    </p>
+                    <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold leading-tight animate-fade-in-up corporate-heading px-2">
+                        PROP COLLECTIONS
+                    </h1>
+                </div>
+                
+                <div class="h-px w-12 bg-white mx-auto my-3 animate-fade-in-up animate-delay-200"></div>
+                
+                <p class="max-w-3xl mx-auto text-sm md:text-base leading-relaxed mb-4 px-4 sm:px-0 text-gray-100 tracking-normal animate-fade-in-up animate-delay-200 corporate-text">
+                    Take a look at some of the prop packages we offer for your event! Don't see any props that fit your event theme? Let us know and ask about our custom props!
+                </p>
+                <div class="mt-8 mb-8 animate-fade-in-up animate-delay-300">
+                    <a 
+                        href="#contact" 
+                        class="btn-primary inline-block px-8 py-3 rounded-lg text-white font-semibold text-lg"
+                        aria-label="Contact us for props">
+                        Contact Us
+                    </a>
+                </div>
+
+                <div class="text-center opacity-90 animate-fade-in-up animate-delay-400">
+                    <div class="h-px w-12 bg-white/70 mx-auto mb-3 transition-all duration-500"></div>
+                    <p class="text-white/80 tracking-wider text-xs font-medium uppercase corporate-location px-4">
+                        SERVICING DENVER, COLORADO, AND NATIONWIDE CORPORATE EVENTS
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="../assets/components/navigation.js"></script>
+    <script src="../assets/components/footer.js"></script>
+</body>
+</html>

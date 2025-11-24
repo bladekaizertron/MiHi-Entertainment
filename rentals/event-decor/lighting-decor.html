@@ -1,0 +1,1856 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lighting Decor Rentals - MiHi Entertainment</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&family=Anton:wght@400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <style>
+        body { font-family: 'Inter', sans-serif; color: #1a202c; }
+        h1, h2, h3, h4, h5, h6 { font-family: 'Playfair Display', serif; }
+        .btn-primary { background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%); transition: all 0.3s ease; }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(0, 80, 255, 0.4); }
+        .section-padding { padding: 5rem 0; }
+        .hero-gradient { background: linear-gradient(135deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.5) 100%); }
+        
+        /* Animated Text Effect */
+        .text-effect-container {
+            position: relative;
+            display: inline-block;
+            width: 100%;
+            height: auto;
+            margin: 0 auto;
+        }
+        
+        .text-effect-wrapper {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .text-layer {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: 'Anton', sans-serif;
+            font-weight: 400;
+            letter-spacing: 0.5rem;
+            white-space: nowrap;
+            mix-blend-mode: screen;
+            pointer-events: none;
+            font-size: clamp(3rem, 8vw, 10rem);
+            line-height: 1;
+        }
+        
+        @media (max-width: 768px) {
+            .text-layer {
+                letter-spacing: 0.2rem;
+                font-size: clamp(2rem, 10vw, 5rem);
+            }
+        }
+        
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .text-layer {
+                font-size: clamp(4rem, 8vw, 8rem);
+            }
+        }
+        
+        @media (min-width: 1025px) {
+            .text-layer {
+                font-size: clamp(6rem, 8vw, 10rem);
+            }
+        }
+        
+        /* Paragraph Styling */
+        .hero-paragraph {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 300;
+            letter-spacing: 0.02em;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        /* H3 Styling */
+        .hero-h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 500;
+            letter-spacing: 0.15em;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        /* Left Column Content Styling */
+        .content-column {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: right;
+            padding-right: 2rem;
+        }
+        
+        .content-column h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.875rem;
+            font-weight: 500;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: #6b7280;
+            margin-bottom: 0.5rem;
+        }
+        
+        .content-column h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2rem;
+            font-weight: 800;
+            letter-spacing: 0.05em;
+            color: #1a202c;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+        
+        @media (min-width: 768px) {
+            .content-column h2 {
+                font-size: 2.5rem;
+            }
+        }
+        
+        @media (min-width: 1024px) {
+            .content-column h2 {
+                font-size: 3rem;
+            }
+        }
+        
+        .content-column p {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9375rem;
+            font-weight: 300;
+            line-height: 1.6;
+            color: #4b5563;
+            margin-bottom: 0.75rem;
+        }
+        
+        .content-column .btn-content {
+            display: inline-block;
+            margin-top: 1rem;
+            padding: 12px 28px;
+            background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%);
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 50px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 0.875rem;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        
+        .content-column .btn-content:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 80, 255, 0.4);
+        }
+        
+        @media (max-width: 767px) {
+            .content-column {
+                text-align: center;
+                padding-right: 0;
+                margin-bottom: 2rem;
+            }
+        }
+        
+        /* Contact Section Styling */
+        .contact-section {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .contact-section-wrapper {
+            position: relative;
+            background: linear-gradient(135deg, #fafafa 0%, #f5f5f5 100%);
+        }
+        
+        .contact-section-wrapper::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                linear-gradient(45deg, rgba(0, 80, 255, 0.03) 25%, transparent 25%),
+                linear-gradient(-45deg, rgba(0, 80, 255, 0.03) 25%, transparent 25%),
+                linear-gradient(45deg, transparent 75%, rgba(0, 80, 255, 0.03) 75%),
+                linear-gradient(-45deg, transparent 75%, rgba(0, 80, 255, 0.03) 75%);
+            background-size: 40px 40px;
+            background-position: 0 0, 0 20px, 20px -20px, -20px 0px;
+            opacity: 100%;
+            pointer-events: none;
+        }
+        
+        .contact-section-wrapper > * {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .contact-section h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.75rem;
+            font-weight: 800;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: #1a202c;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+        
+        @media (min-width: 768px) {
+            .contact-section h2 {
+                font-size: 2rem;
+            }
+        }
+        
+        @media (min-width: 1024px) {
+            .contact-section h2 {
+                font-size: 2.25rem;
+            }
+        }
+        
+        .contact-section p {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9375rem;
+            font-weight: 300;
+            line-height: 1.6;
+            color: #4b5563;
+            margin-bottom: 1.25rem;
+        }
+        
+        @media (min-width: 768px) {
+            .contact-section p {
+                font-size: 1rem;
+            }
+        }
+        
+        .contact-section .btn-contact {
+            display: inline-block;
+            padding: 14px 32px;
+            background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%);
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 50px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 0.9375rem;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        
+        .contact-section .btn-contact:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 80, 255, 0.4);
+        }
+        
+        /* Hero Button Container */
+        .hero-buttons-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        @media (min-width: 640px) {
+            .hero-buttons-container {
+                flex-direction: row;
+                gap: 1.5rem;
+            }
+        }
+        
+        @media (min-width: 1024px) {
+            .hero-buttons-container {
+                gap: 2rem;
+            }
+        }
+        
+        /* Animated Button Effect */
+        .btn-animated {
+            border: 4px solid #ffffff;
+            color: #ffffff;
+            display: inline-block;
+            font-size: 18px;
+            font-weight: 600;
+            line-height: 24px;
+            margin: 0;
+            padding: 12px 32px 12px 82px;
+            position: relative;
+            text-decoration: none;
+            font-family: 'Montserrat', sans-serif;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+        
+        .btn-animated.btn-call {
+            padding: 12px 32px 12px 82px;
+        }
+        
+        @media (min-width: 768px) {
+            .btn-animated {
+                font-size: 20px;
+                padding: 14px 36px 14px 90px;
+            }
+            
+            .btn-animated.btn-call {
+                padding: 14px 36px 14px 90px;
+            }
+        }
+        
+        @media (min-width: 1024px) {
+            .btn-animated {
+                font-size: 22px;
+                padding: 16px 40px 16px 98px;
+            }
+            
+            .btn-animated.btn-call {
+                padding: 16px 40px 16px 98px;
+            }
+        }
+        
+        .btn-animated .label,
+        .btn-animated .icon-arrow {
+            backface-visibility: hidden;
+            transform: translateZ(0);
+            perspective: 1000;
+        }
+        
+        .btn-animated .label {
+            display: inline-block;
+            transition: transform .5s cubic-bezier(0.86, 0, 0.07, 1);
+        }
+        
+        .btn-animated .icon-arrow {
+            fill: #ffffff;
+            height: 15px;
+            top: 17px;
+            transition: transform .5s cubic-bezier(0.86, 0, 0.07, 1), opacity .4s cubic-bezier(0.86, 0, 0.07, 1);
+            width: 35px;
+        }
+        
+        @media (min-width: 768px) {
+            .btn-animated .icon-arrow {
+                top: 19px;
+            }
+        }
+        
+        @media (min-width: 1024px) {
+            .btn-animated .icon-arrow {
+                top: 21px;
+            }
+        }
+        
+        .btn-animated .icon-arrow.before {
+            left: 32px;
+            margin-right: 15px;
+            position: absolute;
+            transform-origin: left center;
+        }
+        
+        @media (min-width: 768px) {
+            .btn-animated .icon-arrow.before {
+                left: 36px;
+            }
+        }
+        
+        @media (min-width: 1024px) {
+            .btn-animated .icon-arrow.before {
+                left: 40px;
+            }
+        }
+        
+        .btn-animated .icon-arrow.after {
+            margin-left: 15px;
+            opacity: 0;
+            position: absolute;
+            right: 32px;
+            transform: translateX(75%) scaleX(0.1);
+            transform-origin: right center;
+        }
+        
+        @media (min-width: 768px) {
+            .btn-animated .icon-arrow.after {
+                right: 36px;
+            }
+        }
+        
+        @media (min-width: 1024px) {
+            .btn-animated .icon-arrow.after {
+                right: 40px;
+            }
+        }
+        
+        .btn-animated:hover {
+            border-color: #ffffff;
+            color: #ffffff;
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .btn-animated:hover .label {
+            transform: translateX(-52px);
+        }
+        
+        .btn-animated:hover .icon-arrow.before {
+            opacity: 0;
+            transform: translateX(-75%) scaleX(0.1);
+        }
+        
+        .btn-animated:hover .icon-arrow.after {
+            opacity: 1;
+            transform: translateX(0) scaleX(1);
+        }
+        
+        .btn-animated:hover .icon-arrow {
+            fill: #0283fc;
+        }
+        
+        .btn-animated:active {
+            border-color: #0040d9;
+            color: #0040d9;
+        }
+        
+        .btn-animated:active .icon-arrow {
+            fill: #0040d9;
+        }
+        
+        /* Blog Slider Styles */
+        .blog-slider {
+            width: 95%;
+            position: relative;
+            max-width: 1100px;
+            margin: auto;
+            background: #fff;
+            box-shadow: 0px 14px 80px rgba(34, 35, 58, 0.2);
+            padding: 30px;
+            border-radius: 25px;
+            height: 500px;
+            transition: all .3s;
+        }
+        
+        @media screen and (max-width: 992px) {
+            .blog-slider {
+                max-width: 900px;
+                height: 480px;
+            }
+        }
+        
+        @media screen and (max-width: 768px) {
+            .blog-slider {
+                min-height: 500px;
+                height: auto;
+                margin: 0 auto;
+                width: 100%;
+                max-width: 100%;
+            }
+        }
+        
+        @media screen and (max-height: 500px) and (min-width: 992px) {
+            .blog-slider {
+                height: 350px;
+            }
+        }
+        
+        .blog-slider__item {
+            display: flex;
+            align-items: center;
+        }
+        
+        @media screen and (max-width: 768px) {
+            .blog-slider__item {
+                flex-direction: column;
+            }
+        }
+        
+        .blog-slider__item.swiper-slide-active .blog-slider__img img {
+            opacity: 1;
+            transition-delay: .3s;
+        }
+        
+        .blog-slider__item.swiper-slide-active .blog-slider__content > * {
+            opacity: 1;
+            transform: none;
+        }
+        
+        .blog-slider__item.swiper-slide-active .blog-slider__content > *:nth-child(1) { transition-delay: 0.3s; }
+        .blog-slider__item.swiper-slide-active .blog-slider__content > *:nth-child(2) { transition-delay: 0.4s; }
+        .blog-slider__item.swiper-slide-active .blog-slider__content > *:nth-child(3) { transition-delay: 0.5s; }
+        .blog-slider__item.swiper-slide-active .blog-slider__content > *:nth-child(4) { transition-delay: 0.6s; }
+        .blog-slider__item.swiper-slide-active .blog-slider__content > *:nth-child(5) { transition-delay: 0.7s; }
+        
+        .blog-slider__img {
+            width: 400px;
+            flex-shrink: 0;
+            height: 400px;
+            background-image: linear-gradient(147deg, #fe8a39 0%, #fd3838 74%);
+            box-shadow: 4px 13px 30px 1px rgba(252, 56, 56, 0.2);
+            border-radius: 20px;
+            transform: translateX(-80px);
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .blog-slider__img:after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: linear-gradient(147deg, #fe8a39 0%, #fd3838 74%);
+            border-radius: 20px;
+            opacity: 0.8;
+        }
+        
+        .blog-slider__img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            opacity: 0;
+            border-radius: 20px;
+            transition: all .3s;
+            position: relative;
+            z-index: 1;
+        }
+        
+        @media screen and (max-width: 768px) {
+            .blog-slider__img {
+                transform: translateY(0);
+                width: 100%;
+                max-width: 280px;
+                height: 220px;
+                margin: 0 auto;
+            }
+        }
+        
+        @media screen and (max-width: 576px) {
+            .blog-slider__img {
+                width: 95%;
+            }
+        }
+        
+        @media screen and (max-height: 500px) and (min-width: 992px) {
+            .blog-slider__img {
+                height: 350px;
+            }
+        }
+        
+        @media screen and (min-width: 993px) {
+            .blog-slider__img {
+                width: 400px;
+                height: 400px;
+            }
+        }
+        
+        .blog-slider__content {
+            padding-right: 25px;
+        }
+        
+        @media screen and (max-width: 768px) {
+            .blog-slider__content {
+                margin-top: 0;
+                text-align: center;
+                padding: 20px 15px 0;
+            }
+        }
+        
+        @media screen and (max-width: 576px) {
+            .blog-slider__content {
+                padding: 0;
+            }
+        }
+        
+        .blog-slider__content > * {
+            opacity: 0;
+            transform: translateY(25px);
+            transition: all .4s;
+        }
+        
+        .blog-slider__code {
+            color: #7b7992;
+            margin-bottom: 15px;
+            display: block;
+            font-weight: 500;
+        }
+        
+        .blog-slider__title {
+            font-size: 32px;
+            font-weight: 800;
+            color: #0d0925;
+            margin-bottom: 20px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+        
+        @media screen and (max-width: 768px) {
+            .blog-slider__title {
+                font-size: 28px;
+            }
+        }
+        
+        .blog-slider__text {
+            color: #4e4a67;
+            margin-bottom: 30px;
+            line-height: 1.6em;
+            font-size: 18px;
+        }
+        
+        @media screen and (max-width: 768px) {
+            .blog-slider__text {
+                font-size: 16px;
+            }
+        }
+        
+        .blog-slider__button {
+            display: inline-flex;
+            background-image: linear-gradient(147deg, #fe8a39 0%, #fd3838 74%);
+            padding: 15px 35px;
+            border-radius: 50px;
+            color: #fff;
+            box-shadow: 0px 14px 80px rgba(252, 56, 56, 0.4);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            justify-content: center;
+            text-align: center;
+            letter-spacing: 1.5px;
+        }
+        
+        @media screen and (max-width: 576px) {
+            .blog-slider__button {
+                width: 100%;
+            }
+        }
+        
+        .blog-slider__pagination {
+            position: absolute;
+            z-index: 21;
+            right: 20px;
+            width: 11px !important;
+            text-align: center;
+            left: auto !important;
+            top: 50%;
+            bottom: auto !important;
+            transform: translateY(-50%);
+        }
+        
+        @media screen and (max-width: 768px) {
+            .blog-slider__pagination {
+                transform: translateX(-50%);
+                left: 50% !important;
+                top: 205px;
+                width: 100% !important;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+        }
+        
+        .blog-slider__pagination.swiper-pagination-bullets .swiper-pagination-bullet {
+            margin: 8px 0;
+        }
+        
+        @media screen and (max-width: 768px) {
+            .blog-slider__pagination.swiper-pagination-bullets .swiper-pagination-bullet {
+                margin: 0 5px;
+            }
+        }
+        
+        .blog-slider__pagination .swiper-pagination-bullet {
+            width: 11px;
+            height: 11px;
+            display: block;
+            border-radius: 10px;
+            background: #062744;
+            opacity: 0.2;
+            transition: all .3s;
+        }
+        
+        .blog-slider__pagination .swiper-pagination-bullet-active {
+            opacity: 1;
+            background: #fd3838;
+            height: 30px;
+            box-shadow: 0px 0px 20px rgba(252, 56, 56, 0.3);
+        }
+        
+        @media screen and (max-width: 768px) {
+            .blog-slider__pagination .swiper-pagination-bullet-active {
+                height: 11px;
+                width: 30px;
+            }
+        }
+        
+        .swiper-container-horizontal > .swiper-pagination-bullets,
+        .swiper-pagination-custom,
+        .swiper-pagination-fraction {
+            bottom: 10px;
+            left: 0;
+            width: 100%;
+        }
+        
+        /* Image Masonry Grid */
+        .masonry-container {
+            width: 100%;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-auto-rows: 140px;
+            grid-gap: 10px;
+        }
+        
+        .masonry-large, .masonry-medium, .masonry-small {
+            display: block;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            border-radius: 10px;
+            position: relative;
+            background: #f0f0f0;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .masonry-large:hover, .masonry-medium:hover, .masonry-small:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+        
+        .masonry-large {
+            grid-row: span 2;
+        }
+        
+        .masonry-medium {
+            grid-row: span 2;
+        }
+        
+        .masonry-small {
+            grid-row: span 1;
+        }
+        
+        .masonry-container img {
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: cover;
+            transition: transform 0.5s ease, filter 0.3s ease;
+        }
+        
+        .masonry-large:hover img,
+        .masonry-medium:hover img,
+        .masonry-small:hover img {
+            transform: scale(1.1);
+            filter: brightness(1.1);
+        }
+        
+        @media screen and (max-width: 768px) {
+            .masonry-container {
+                grid-template-columns: repeat(2, 1fr);
+                grid-auto-rows: 120px;
+                grid-gap: 8px;
+            }
+        }
+        
+        /* Mobile Optimizations */
+        @media (max-width: 767px) {
+            /* Hero Section Mobile */
+            section.relative.h-\[55vh\] {
+                height: 50vh !important;
+                min-height: 400px;
+            }
+            
+            .hero-h3 {
+                font-size: 0.875rem !important;
+                letter-spacing: 0.1em;
+                margin-bottom: 0.5rem !important;
+            }
+            
+            .text-effect-container {
+                height: clamp(3rem, 12vw, 5rem) !important;
+                min-height: 50px !important;
+                margin-bottom: 1rem !important;
+            }
+            
+            .hero-paragraph {
+                font-size: 0.875rem !important;
+                margin-bottom: 1rem !important;
+                padding: 0 0.5rem;
+                line-height: 1.5;
+            }
+            
+            /* Animated Button Mobile */
+            .btn-animated {
+                font-size: 14px !important;
+                padding: 10px 20px 10px 55px !important;
+                width: 100%;
+                max-width: 280px;
+            }
+            
+            .btn-animated.btn-call {
+                padding: 10px 20px 10px 55px !important;
+            }
+            
+            .btn-animated .icon-arrow {
+                height: 12px;
+                width: 28px;
+                top: 13px !important;
+            }
+            
+            .btn-animated .icon-arrow.before {
+                left: 20px !important;
+            }
+            
+            .btn-animated .icon-arrow.after {
+                right: 20px !important;
+            }
+            
+            /* Hero Buttons Container Mobile */
+            .flex.flex-col.sm\:flex-row {
+                gap: 0.75rem !important;
+            }
+            
+            /* Two Column Section Mobile */
+            .content-column {
+                text-align: center !important;
+                padding-right: 0 !important;
+                margin-bottom: 2rem;
+            }
+            
+            .content-column h3 {
+                font-size: 0.75rem;
+                margin-bottom: 0.5rem;
+            }
+            
+            .content-column h2 {
+                font-size: 1.5rem !important;
+                margin-bottom: 0.75rem;
+            }
+            
+            .content-column p {
+                font-size: 0.875rem !important;
+                margin-bottom: 0.75rem;
+                line-height: 1.6;
+            }
+            
+            .content-column .btn-content {
+                font-size: 0.8125rem;
+                padding: 10px 24px;
+                width: 100%;
+                max-width: 280px;
+            }
+            
+            /* Blog Slider Mobile */
+            .blog-slider {
+                padding: 15px !important;
+                margin: 0 auto !important;
+                height: auto !important;
+                min-height: 420px;
+                width: 100% !important;
+                max-width: 100% !important;
+            }
+            
+            .blog-slider__item {
+                flex-direction: column !important;
+                align-items: center !important;
+                gap: 0 !important;
+            }
+            
+            .blog-slider__title {
+                font-size: 20px !important;
+                margin-bottom: 10px !important;
+                line-height: 1.3;
+            }
+            
+            .blog-slider__text {
+                font-size: 13px !important;
+                margin-bottom: 16px !important;
+                line-height: 1.5;
+            }
+            
+            .blog-slider__button {
+                font-size: 13px !important;
+                padding: 10px 24px !important;
+                width: 100%;
+                max-width: 200px;
+            }
+            
+            .blog-slider__img {
+                width: 100% !important;
+                max-width: 260px !important;
+                height: 200px !important;
+                transform: translateY(0) !important;
+                margin-bottom: 15px !important;
+            }
+            
+            .blog-slider__content {
+                margin-top: 0 !important;
+                padding: 0 10px !important;
+            }
+            
+            .blog-slider__pagination {
+                position: relative !important;
+                transform: none !important;
+                left: 0 !important;
+                top: 0 !important;
+                width: 100% !important;
+                margin-top: 15px !important;
+            }
+            
+            /* Masonry Grid Mobile */
+            .masonry-container {
+                grid-gap: 6px;
+            }
+            
+            /* Contact Section Mobile */
+            .contact-section {
+                padding: 0 0.5rem;
+            }
+            
+            .contact-section h2 {
+                font-size: 1.5rem !important;
+                margin-bottom: 0.75rem;
+            }
+            
+            .contact-section p {
+                font-size: 0.875rem !important;
+                margin-bottom: 1rem;
+                line-height: 1.5;
+            }
+            
+            .contact-section .btn-contact {
+                font-size: 0.875rem;
+                padding: 12px 28px;
+                width: 100%;
+                max-width: 280px;
+            }
+            
+            /* Section Padding Mobile */
+            section.py-8 {
+                padding-top: 2rem !important;
+                padding-bottom: 2rem !important;
+            }
+            
+            section.py-12 {
+                padding-top: 3rem !important;
+                padding-bottom: 3rem !important;
+            }
+            
+            /* Container Padding Mobile */
+            .container.mx-auto.px-6 {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+            
+            /* Grid Gap Mobile */
+            .grid.gap-8 {
+                gap: 1.5rem;
+            }
+            
+            /* Brochure Section Mobile */
+            .brochure-section {
+                padding-top: 1.5rem !important;
+                padding-bottom: 1.5rem !important;
+            }
+            
+            .brochure-section .container {
+                padding-top: 1.5rem !important;
+                padding-bottom: 1.5rem !important;
+                padding-left: 1rem !important;
+                padding-right: 1rem !important;
+            }
+            
+            .brochure-header h2 {
+                font-size: 1.5rem !important;
+                margin-bottom: 0.75rem;
+            }
+            
+            .brochure-header p {
+                font-size: 0.875rem !important;
+            }
+            
+            .brochure-badge {
+                font-size: 0.75rem !important;
+                padding: 0.35rem 1rem !important;
+            }
+            
+            .brochure-subtitle {
+                font-size: 1.5rem !important;
+            }
+            
+            .brochure-check-text {
+                font-size: 0.875rem !important;
+            }
+            
+            .brochure-check-description {
+                font-size: 0.8125rem !important;
+            }
+            
+            .brochure-button {
+                font-size: 0.875rem !important;
+                padding: 0.625rem 1.25rem !important;
+                width: 100%;
+                max-width: 280px;
+            }
+            
+            .brochure-download-button {
+                font-size: 0.875rem !important;
+                padding: 0.625rem 1.125rem !important;
+                width: 100%;
+                max-width: 280px;
+            }
+            
+            .brochure-tag {
+                font-size: 0.8125rem !important;
+            }
+            
+            .content-grid {
+                gap: 1.5rem !important;
+            }
+            
+            .brochure-cta-group {
+                flex-direction: column !important;
+                gap: 0.75rem !important;
+            }
+            
+            .compact-tags {
+                flex-direction: column !important;
+                align-items: flex-start !important;
+                gap: 0.5rem !important;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            /* Extra Small Devices */
+            .hero-h3 {
+                font-size: 0.75rem !important;
+            }
+            
+            .text-effect-container {
+                height: clamp(2.5rem, 10vw, 4rem) !important;
+                min-height: 40px !important;
+            }
+            
+            .hero-paragraph {
+                font-size: 0.8125rem !important;
+            }
+            
+            .content-column h2 {
+                font-size: 1.25rem !important;
+            }
+            
+            .contact-section h2 {
+                font-size: 1.25rem !important;
+            }
+            
+            .blog-slider__title {
+                font-size: 18px !important;
+            }
+            
+            .blog-slider {
+                min-height: 380px;
+                padding: 12px !important;
+            }
+            
+            .blog-slider__img {
+                height: 180px !important;
+                max-width: 240px !important;
+            }
+            
+            .blog-slider__text {
+                font-size: 12px !important;
+            }
+            
+            .blog-slider__button {
+                font-size: 12px !important;
+                padding: 8px 20px !important;
+            }
+            
+            section.relative.h-\[55vh\] {
+                min-height: 350px;
+            }
+        }
+        
+        /* Prevent Horizontal Scroll */
+        @media (max-width: 767px) {
+            html, body {
+                overflow-x: hidden;
+                width: 100%;
+                max-width: 100%;
+            }
+            
+            * {
+                max-width: 100%;
+            }
+            
+            img, video, iframe {
+                max-width: 100%;
+                height: auto;
+            }
+            
+            /* Touch-friendly elements */
+            a, button {
+                min-height: 44px;
+                min-width: 44px;
+            }
+        }
+        
+        /* Interactive Brochure Section Styles - Lighting Theme */
+        .brochure-section {
+            background: radial-gradient(circle, rgba(10, 20, 40, 0.95) 0%, rgba(5, 10, 25, 1) 100%);
+            position: relative;
+            overflow: hidden;
+            font-family: 'Montserrat', sans-serif;
+            min-height: auto;
+            display: flex;
+            align-items: center;
+            padding-top: 0;
+            padding-bottom: 0;
+        }
+        
+        .brochure-section .container {
+            width: 100%;
+            padding-top: 2rem;
+            padding-bottom: 2rem;
+            padding-left: clamp(1.5rem, 3vw, 3rem);
+            padding-right: clamp(1.5rem, 3vw, 3rem);
+        }
+        .brochure-header {
+            margin-bottom: 1.25rem !important;
+        }
+
+        .brochure-header h2 {
+            margin-bottom: 0.5rem;
+        }
+
+        .brochure-header p {
+            font-size: 0.95rem;
+        }
+
+        .content-grid {
+            gap: clamp(1rem, 2vw, 1.5rem);
+            align-items: stretch;
+        }
+
+        .feature-list {
+            gap: 0.65rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .brochure-cta-group {
+            gap: 0.75rem;
+        }
+
+        .compact-tags {
+            gap: 0.5rem;
+            padding-top: 0.5rem;
+        }
+
+        .compact-tags .brochure-tag {
+            font-size: 0.75rem;
+        }
+
+        @media (max-width: 1024px) {
+            .brochure-section {
+                min-height: auto;
+                display: block;
+                padding-top: 0;
+                padding-bottom: 0;
+            }
+
+            .brochure-section .container {
+                padding-top: 1.5rem;
+                padding-bottom: 1.5rem;
+            }
+        }
+
+        .brochure-section h2 {
+            font-family: 'Playfair Display', serif;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .brochure-section h3,
+        .brochure-section .brochure-subtitle {
+            font-family: 'Playfair Display', serif;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            margin-bottom: 0.75rem;
+        }
+
+        .brochure-section p,
+        .brochure-check-text,
+        .brochure-check-description,
+        .brochure-tag {
+            font-family: 'Montserrat', sans-serif;
+            letter-spacing: 0.02em;
+        }
+
+        .brochure-section .pill-label {
+            font-family: 'Montserrat', sans-serif;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+        }
+
+        .brochure-section::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(0, 80, 255, 0.18) 0%, transparent 45%),
+                radial-gradient(circle at 80% 50%, rgba(0, 80, 255, 0.15) 0%, transparent 45%);
+            pointer-events: none;
+        }
+
+        #brochure-webgl-canvas {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0;
+        }
+
+        .brochure-badge {
+            background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%);
+            color: #ffffff;
+            padding: 0.4rem 1.25rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            display: inline-block;
+            box-shadow: 0 4px 18px rgba(0, 80, 255, 0.35);
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .brochure-preview {
+            position: relative;
+            background: #0a0f1f;
+            border-radius: 1.5rem;
+            box-shadow: 0 25px 55px -15px rgba(5, 10, 25, 0.85);
+            overflow: hidden;
+            transition: transform 0.45s ease, box-shadow 0.45s ease;
+            border: 2px solid rgba(0, 80, 255, 0.35);
+        }
+
+        .brochure-preview:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 35px 60px -20px rgba(0, 80, 255, 0.5);
+            border-color: rgba(0, 80, 255, 0.6);
+        }
+
+        .brochure-preview::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: repeating-linear-gradient(45deg, transparent, transparent 2px, rgba(0, 80, 255, 0.05) 2px, rgba(0, 80, 255, 0.05) 4px);
+            opacity: 0.4;
+            pointer-events: none;
+        }
+
+        .brochure-image {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            transition: transform 0.6s ease;
+        }
+
+        .brochure-preview:hover .brochure-image {
+            transform: scale(1.03);
+        }
+
+        .brochure-check-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+        }
+
+        .brochure-check-icon {
+            flex-shrink: 0;
+            width: 1.25rem;
+            height: 1.25rem;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .brochure-check-text {
+            font-weight: 600;
+            color: #e2e8f0;
+            font-size: 0.95rem;
+        }
+
+        .brochure-check-description {
+            color: #94a3b8;
+            margin-top: 0.2rem;
+            font-size: 0.85rem;
+        }
+
+        .brochure-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%);
+            color: #ffffff;
+            padding: 0.7rem 1.5rem;
+            border-radius: 9999px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 20px 35px -15px rgba(0, 80, 255, 0.65);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .brochure-button:hover {
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 30px 45px -20px rgba(0, 80, 255, 0.75);
+        }
+
+        .brochure-download-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid #0050ff;
+            color: #e2e8f0;
+            padding: 0.7rem 1.25rem;
+            border-radius: 0.5rem;
+            font-weight: 700;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+            letter-spacing: 0.04em;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .brochure-download-button:hover {
+            background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%);
+            color: #ffffff;
+            transform: translateY(-2px);
+        }
+
+        .brochure-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            color: #94a3b8;
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .brochure-tag-icon {
+            color: #0050ff;
+            width: 1.15rem;
+            height: 1.15rem;
+        }
+
+        .brochure-modal {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            display: none;
+            background-color: rgba(0, 0, 0, 0.85);
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .brochure-modal.show {
+            display: block;
+        }
+
+        .brochure-modal-content {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .brochure-close-button {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(5, 10, 25, 0.9);
+            color: #0050ff;
+            border: none;
+            border-radius: 50%;
+            padding: 0.6rem;
+            cursor: pointer;
+            transition: transform 0.2s ease, background 0.2s ease;
+            box-shadow: 0 8px 20px rgba(5, 10, 25, 0.7);
+            z-index: 10001;
+            pointer-events: auto;
+        }
+
+        .brochure-close-button:hover {
+            transform: scale(1.08);
+            background: rgba(10, 20, 40, 0.95);
+        }
+
+        .brochure-iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+            background: transparent;
+        }
+
+        #brochureLoader {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="nav-placeholder"></div>
+
+    <section class="relative h-[55vh] md:h-[90vh] lg:h-[90vh] flex items-start justify-center overflow-hidden">
+        <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('../../assets/images/lightdecor/hero.jpg');"></div>
+        <div class="absolute inset-0 hero-gradient"></div>
+        <div class="relative z-10 text-center text-white px-6 max-w-4xl mx-auto pt-12 md:pt-16 lg:pt-20 pb-6 md:pb-8 lg:pb-10">
+            <h3 class="hero-h3 text-xl sm:text-2xl md:text-3xl lg:text-4xl uppercase mb-2 md:mb-3 opacity-90">EVENT DECOR</h3>
+            <div class="text-effect-container mb-3 md:mb-4 lg:mb-5" style="height: clamp(4rem, 12vw, 12rem); min-height: 60px;">
+                <div class="text-effect-wrapper" id="text-effect-ui" style="width: 100%; height: 100%;"></div>
+            </div>
+            <p class="hero-paragraph text-lg sm:text-xl md:text-2xl lg:text-3xl mb-6 md:mb-8 lg:mb-10 leading-relaxed max-w-3xl mx-auto opacity-95">
+                Lighting and Ambiance can make or break your event. Let us set the mood for your guests with our expert lighting services.
+            </p>
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 md:gap-6">
+                <button type="button" data-click-to-call data-call-text="Call Us" class="btn-animated cursor-pointer">
+                    <svg class="icon-arrow before">
+                        <use xlink:href="#arrow"></use>
+                    </svg>
+                    <span class="label">Call Us</span>
+                    <svg class="icon-arrow after">
+                        <use xlink:href="#arrow"></use>
+                    </svg>
+                </a>
+                <a href="#contact" class="btn-animated btn-call">
+                    <svg class="icon-arrow before">
+                        <use xlink:href="#arrow"></use>
+                    </svg>
+                    <span class="label">Contact Us</span>
+                    <svg class="icon-arrow after">
+                        <use xlink:href="#arrow"></use>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Brochure Section -->
+    <section class="py-6 md:py-8 brochure-section relative" id="lighting-decor-brochure">
+        <canvas id="brochure-webgl-canvas" style="z-index: 1;"></canvas>
+        <div class="container mx-auto px-6 relative" style="z-index: 20;">
+            <div class="text-center mb-4 space-y-1 brochure-header">
+                <span class="brochure-badge">💡 Lighting Decor Service Guide</span>
+                <h2 class="text-2xl md:text-3xl font-bold text-white mb-2 leading-tight">
+                    Design Your Signature Lighting Experience
+                </h2>
+                <p class="text-base text-cyan-100 max-w-3xl mx-auto leading-relaxed">
+                    Explore our immersive lighting decor solutions and professional lighting services crafted to elevate conferences, galas, concerts, and brand activations.
+                </p>
+                <div class="flex items-center justify-center gap-2 pt-1">
+                    <div class="h-1 w-12 bg-gradient-to-r from-blue-400 via-blue-500 to-blue-300 rounded-full"></div>
+                    <div class="h-1 w-1 bg-blue-400 rounded-full"></div>
+                    <div class="h-1 w-1 bg-blue-400 rounded-full"></div>
+                </div>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-8 items-center content-grid">
+                <div class="order-2 lg:order-1">
+                    <div class="relative group">
+                        <div class="brochure-preview">
+                            <div class="aspect-[4/3] bg-gradient-to-br from-slate-900 via-blue-950 to-slate-900 flex items-center justify-center p-4 relative overflow-hidden">
+                                <div class="absolute inset-0" style="background-image: repeating-linear-gradient(45deg, transparent, transparent 2px, rgba(0, 80, 255, 0.08) 2px, rgba(0, 80, 255, 0.08) 4px);"></div>
+                                <div class="absolute inset-0 bg-gradient-to-br from-blue-400/15 via-transparent to-slate-900/40 pointer-events-none"></div>
+                                <div class="relative w-full h-full flex items-center justify-center">
+                                    <div class="relative w-5/6 h-5/6 transform group-hover:scale-105 group-hover:-translate-y-2 transition-all duration-700" style="transform-style: preserve-3d; perspective: 1000px;">
+                                        <div class="absolute -right-2 top-0 bottom-0 w-16 bg-gradient-to-l from-blue-400/25 to-transparent blur-sm skew-y-12 transform group-hover:scale-110"></div>
+                                        <div class="absolute inset-0 bg-gradient-to-br from-blue-300/20 via-transparent to-transparent rounded-lg pointer-events-none"></div>
+                                        <div class="relative w-full h-full shadow-2xl rounded-lg overflow-hidden" style="box-shadow: 0 20px 60px rgba(0, 80, 255, 0.25), 0 0 25px rgba(0, 80, 255, 0.25);">
+                                            <img src="../../assets/images/main-flipbook.png" alt="Lighting Decor Services Brochure Preview" class="brochure-image">
+                                            <div class="absolute inset-0 bg-gradient-to-br from-blue-400/20 via-transparent to-transparent pointer-events-none"></div>
+                                            <div class="absolute bottom-0 left-0 right-0 h-1/3 bg-gradient-to-b from-transparent to-black/30"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="absolute -inset-4 bg-gradient-to-r from-blue-400/15 via-blue-500/25 to-blue-300/15 blur-3xl group-hover:blur-2xl transition-all duration-700 rounded-full"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="order-1 lg:order-2">
+                    <div class="pill-label inline-block bg-gradient-to-r from-blue-400 via-blue-500 to-blue-300 text-slate-900 px-3 py-1.5 rounded-full text-xs font-bold mb-2 shadow-lg tracking-[0.2em]">
+                        Full-Service Lighting Decor Packages
+                    </div>
+                    <h3 class="brochure-subtitle text-2xl md:text-3xl font-bold mb-2 text-white">
+                        Bring Visionary Lighting To Life
+                    </h3>
+                    <p class="text-base text-cyan-100 mb-4 leading-relaxed">
+                        From precision lighting design to dynamic LED systems and ambient lighting, our team designs turnkey solutions tailored to your venue, audience, and brand goals.
+                    </p>
+                    <div class="space-y-2 mb-4 feature-list">
+                        <div class="brochure-check-item">
+                            <div class="brochure-check-icon">
+                                <svg class="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                            </div>
+                            <div>
+                                <p class="brochure-check-text">Immersive Lighting Packages</p>
+                                <p class="brochure-check-description">LED systems, dynamic lighting, and ambient design engineered for impact and atmosphere.</p>
+                            </div>
+                        </div>
+                        <div class="brochure-check-item">
+                            <div class="brochure-check-icon">
+                                <svg class="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                            </div>
+                            <div>
+                                <p class="brochure-check-text">Lighting & Ambiance Production</p>
+                                <p class="brochure-check-description">Pixel-mapped lighting, LED systems, and ambient design for immersive event experiences.</p>
+                            </div>
+                        </div>
+                        <div class="brochure-check-item">
+                            <div class="brochure-check-icon">
+                                <svg class="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                            </div>
+                            <div>
+                                <p class="brochure-check-text">On-Site Lighting Engineers</p>
+                                <p class="brochure-check-description">Seasoned technicians who manage setup, cues, and live event lighting support.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex flex-col sm:flex-row gap-4 brochure-cta-group">
+                        <button onclick="openLightingDecorBrochureModal()" class="brochure-button" aria-label="View Lighting decor services brochure">
+                            <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+                            View Brochure
+                            <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+                        </button>
+                        <a href="../../flipbook/examples/example-assets/books/lighting.pdf" download class="brochure-download-button" aria-label="Download Lighting decor brochure PDF">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2m-6 0V4m0 12l-4-4m4 4l4-4"/></svg>
+                            Download PDF
+                        </a>
+                    </div>
+                    <div class="flex flex-wrap items-center gap-4 pt-4 border-t border-slate-800/70 compact-tags">
+                        <div class="brochure-tag"><svg class="brochure-tag-icon" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg><span class="text-sm font-medium">Lighting Focused</span></div>
+                        <div class="brochure-tag"><svg class="brochure-tag-icon" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg><span class="text-sm font-medium">Customizable</span></div>
+                        <div class="brochure-tag"><svg class="brochure-tag-icon" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg><span class="text-sm font-medium">Nationwide Support</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Two Column Section -->
+    <section class="py-8 md:py-10 lg:py-12" style="background: linear-gradient(135deg, #f5f3f0 0%, #f7f5f2 50%, #fafaf8 100%);">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
+                <div class="col-span-1">
+                    <div class="content-column">
+                        <h3>ILLUMINATE YOUR EVENT WITH OUR</h3>
+                        <h2>LIGHTING SERVICES</h2>
+                        <p>Lighting is more than just brightness; it's about creating the perfect ambiance. Whether you're looking for whimsical Air Balloon Lights, glamorous Chandeliers, warm Market Lights, or bold Marquee Letters, our lighting decor sets the tone for an unforgettable experience. Each option is designed to complement your event theme and make your space shine.</p>
+                        <p>Our experienced lighting designers combine technical expertise and creative passion to bring your vision to life. Whether you want a romantic glow for a wedding or dynamic lights for a high-energy corporate event, we have the skills to make it happen.</p>
+                        <p>Our services include adaptive intelligent lighting, pinpoint pin spots, atmospheric wash lighting, and dramatic uplighting to transform any venue. We also offer custom lighting solutions like pattern projections, stage lighting for concerts or performances, uplighting rentals to set the mood, and bistro lighting for a warm, rustic feel.</p>
+                        <p>We know every event is unique, so we offer a personalized approach. Our team collaborates with you to understand your needs and venue details, creating a tailored lighting plan that exceeds your expectations.</p>
+                        <a href="#contact" class="btn-content">Interested In Hearing More?</a>
+                    </div>
+                </div>
+                <div class="col-span-1">
+                    <div class='masonry-container'>
+                        <div class='masonry-large'>
+                            <img src='../../assets/images/lightdecor/grid1.png' alt='Lighting decor'>
+                        </div>
+                        <div class='masonry-medium'>
+                            <img src='../../assets/images/lightdecor/grid2.png' alt='Lighting decor'>
+                        </div>
+                        <div class='masonry-medium'>
+                            <img src='../../assets/images/lightdecor/grid3.png' alt='Lighting decor'>
+                        </div>
+                        <div class='masonry-large'>
+                            <img src='../../assets/images/lightdecor/grid4.png' alt='Lighting decor'>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+     <!-- Blog Slider Section -->
+    <section class="py-8 md:py-10 lg:py-12" style="background: linear-gradient(135deg, #f8f6f2 0%, #faf9f6 50%, #ffffff 100%);">
+        <div class="container mx-auto px-6">
+            <div class="blog-slider">
+                <div class="blog-slider__wrp swiper-wrapper">
+                    <div class="blog-slider__item swiper-slide">
+                        <div class="blog-slider__img">
+                            <img src="../../assets/images/lightdecor/k1.jpg" alt="">
+                        </div>
+                        <div class="blog-slider__content">
+                            <div class="blog-slider__title">Air Balloon Lights</div>
+                            <div class="blog-slider__text">Add a whimsical touch with glowing Air Balloon Lights that bring charm to any venue.</div>
+                            <a href="#" class="blog-slider__button">READ MORE</a>
+                        </div>
+                    </div>
+                    <div class="blog-slider__item swiper-slide">
+                        <div class="blog-slider__img">
+                            <img src="../../assets/images/lightdecor/k2.jpg" alt="">
+                        </div>
+                        <div class="blog-slider__content">
+                            <div class="blog-slider__title">Chandeliers</div>
+                            <div class="blog-slider__text">Boost your event with luxurious Chandeliers that create an air of sophistication.</div>
+                            <a href="#" class="blog-slider__button">READ MORE</a>
+                        </div>
+                    </div>
+                    <div class="blog-slider__item swiper-slide">
+                        <div class="blog-slider__img">
+                            <img src="../../assets/images/lightdecor/k3.jpg" alt="">
+                        </div>
+                        <div class="blog-slider__content">
+                            <div class="blog-slider__title">Marquee Lights</div>
+                            <div class="blog-slider__text">Set a cozy and inviting mood with Marquee Lights perfect for any indoor or outdoor event.</div>
+                            <a href="#" class="blog-slider__button">READ MORE</a>
+                        </div>
+                    </div>
+                    <div class="blog-slider__item swiper-slide">
+                        <div class="blog-slider__img">
+                            <img src="../../assets/images/lightdecor/k4.jpg" alt="">
+                        </div>
+                        <div class="blog-slider__content">
+                            <div class="blog-slider__title">Marquee Letters</div>
+                            <div class="blog-slider__text">Make a bold statement with custom Marquee Letters that light up your message in style.</div>
+                            <a href="#" class="blog-slider__button">READ MORE</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="blog-slider__pagination"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- New Section -->
+    <section class="py-8 md:py-10 lg:py-12 contact-section-wrapper">
+        <div class="container mx-auto px-6">
+            <div class="contact-section">
+                <h2>CONTACT US NOW</h2>
+                <p>Learn more about our lighting services for your next event, click the button below to send us an email and connect with us today.</p>
+                <a href="#contact" class="btn-contact">Learn More Now</a>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Generate animated text layers
+        function generateTextLayers() {
+            const container = document.getElementById('text-effect-ui');
+            const text = "LIGHTING DECOR";
+            const layerCount = 50;
+            
+            // Generate random number between min and max
+            function random(min, max) {
+                return Math.floor(Math.random() * (max - min + 1)) + min;
+            }
+            
+            // Create style element for animations
+            const styleSheet = document.createElement('style');
+            let cssText = '';
+            
+            for (let i = 0; i < layerCount; i++) {
+                // Create text layer element
+                const layer = document.createElement('div');
+                layer.className = 'text-layer';
+                layer.textContent = text;
+                layer.id = `text-layer-${i}`;
+                container.appendChild(layer);
+                
+                // Generate random color (blue-green theme to match design)
+                const r = random(0, 30);
+                const g = random(0, 100);
+                const b = random(100, 255);
+                const color = `rgba(${r}, ${g}, ${b}, 1)`;
+                
+                // Generate random blur
+                const blur = random(-10, 15);
+                const blurValue = blur > 0 ? blur : 0;
+                
+                // Generate animation duration
+                const duration = random(10000, 20000);
+                
+                // Set layer styles
+                layer.style.color = color;
+                layer.style.filter = `blur(${blurValue}px)`;
+                
+                // Generate keyframes for clip-path animation
+                const keyframeName = `clip${i}`;
+                const keyframes = [];
+                
+                for (let k = 0; k <= 100; k += 25) {
+                    const circleSize = random(30, 180);
+                    const xPos = random(-30, 130);
+                    const yPos = random(-30, 130);
+                    keyframes.push(`${k}% { clip-path: circle(${circleSize}px at ${xPos}% ${yPos}%); }`);
+                }
+                
+                cssText += `
+                    #text-layer-${i} {
+                        animation: ${keyframeName} ${duration}ms ease-in-out infinite alternate;
+                    }
+                    
+                    @keyframes ${keyframeName} {
+                        ${keyframes.join('\n                        ')}
+                    }
+                `;
+            }
+            
+            styleSheet.textContent = cssText;
+            document.head.appendChild(styleSheet);
+        }
+        
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', generateTextLayers);
+    </script>
+    <script>
+        // Initialize Swiper slider
+        document.addEventListener('DOMContentLoaded', function() {
+            var swiper = new Swiper('.blog-slider', {
+                spaceBetween: 30,
+                effect: 'fade',
+                loop: true,
+                mousewheel: {
+                    invert: false,
+                },
+                pagination: {
+                    el: '.blog-slider__pagination',
+                    clickable: true,
+                }
+            });
+        });
+    </script>
+    <!-- Brochure Modal -->
+    <div id="brochureModal" class="brochure-modal" aria-labelledby="lighting-decor-brochure-title" role="dialog" aria-modal="true">
+        <div class="brochure-modal-content">
+            <button onclick="closeLightingDecorBrochureModal()" class="brochure-close-button" aria-label="Close Lighting decor brochure">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+
+            <div id="brochureLoader" class="fixed inset-0 flex items-center justify-center z-[10000]" style="background-color: rgba(5, 10, 25, 0.85);">
+                <div class="text-center">
+                    <div class="inline-block relative w-16 h-16">
+                        <div class="absolute inset-0 rounded-full border-4" style="border-color: rgba(0, 80, 255, 0.3);"></div>
+                        <div class="absolute inset-0 rounded-full border-4 border-transparent animate-spin" style="border-top-color: #0050ff;"></div>
+                    </div>
+                    <p class="mt-4 text-white text-lg font-medium">Loading Lighting Decor Guide...</p>
+                </div>
+            </div>
+
+            <iframe id="brochureIframe" class="brochure-iframe" allowfullscreen loading="eager" sandbox="allow-scripts allow-same-origin"></iframe>
+        </div>
+    </div>
+
+    <svg style="display: none;">
+        <defs>
+            <symbol id="arrow" viewBox="0 0 35 15">
+                <title>Arrow</title>
+                <path d="M27.172 5L25 2.828 27.828 0 34.9 7.071l-7.07 7.071L25 11.314 27.314 9H0V5h27.172z "/>
+            </symbol>
+        </defs>
+    </svg>
+    <script>
+        // Brochure Modal Functions
+        function openLightingDecorBrochureModal() {
+            const modal = document.getElementById('brochureModal');
+            const iframe = document.getElementById('brochureIframe');
+            const loader = document.getElementById('brochureLoader');
+
+            if (!modal || !iframe) return;
+
+            modal.classList.add('show');
+            document.body.style.overflow = 'hidden';
+            if (loader) loader.style.display = 'flex';
+
+            const timestamp = new Date().getTime();
+            iframe.src = '../../flipbook/examples/light.html?t=' + timestamp;
+
+            setTimeout(() => iframe.focus(), 120);
+        }
+
+        function closeLightingDecorBrochureModal() {
+            const modal = document.getElementById('brochureModal');
+            const iframe = document.getElementById('brochureIframe');
+            const loader = document.getElementById('brochureLoader');
+
+            if (!modal || !iframe) return;
+
+            modal.classList.remove('show');
+            document.body.style.overflow = '';
+            iframe.src = 'about:blank';
+            if (loader) loader.style.display = 'none';
+        }
+
+        window.addEventListener('message', function(event) {
+            if (event.data === 'flipbookLoaded') {
+                const loader = document.getElementById('brochureLoader');
+                if (loader) loader.style.display = 'none';
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                const modal = document.getElementById('brochureModal');
+                if (modal && modal.classList.contains('show')) {
+                    closeLightingDecorBrochureModal();
+                }
+            }
+        });
+    </script>
+    <script type="module">
+        import Grid1Background from 'https://cdn.jsdelivr.net/npm/threejs-components@0.0.16/build/backgrounds/grid1.cdn.min.js';
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const canvas = document.getElementById('brochure-webgl-canvas');
+            if (!canvas) return;
+
+            try {
+                const bg = Grid1Background(canvas);
+                if (bg && bg.grid) {
+                    bg.grid.setColors([0x0050ff, 0x0040d9, 0x0066ff]);
+                    if (bg.grid.light1) {
+                        bg.grid.light1.color.set(0x0050ff);
+                        bg.grid.light1.intensity = 900;
+                    }
+                    if (bg.grid.light2) {
+                        bg.grid.light2.color.set(0x0066ff);
+                        bg.grid.light2.intensity = 400;
+                    }
+                }
+            } catch (error) {
+                console.warn('Could not load brochure background:', error);
+            }
+        });
+    </script>
+    <script src="../../assets/components/navigation.js"></script>
+    <script src="../../assets/components/footer.js"></script>
+</body>
+</html>
