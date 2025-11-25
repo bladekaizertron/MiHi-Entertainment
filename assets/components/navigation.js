@@ -106,7 +106,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                         <span class="font-semibold block mb-0.5">360 Video Booth</span>
                                         <span class="text-xs text-gray-500 leading-relaxed">Epic, shareable videos from every angle</span>
                                     </a>
-                                    <a href="${pathPrefix}services/videobooth/bullet-time-array.html" class="block text-sm text-gray-700 hover:text-purple-600 transition py-1.5 hover:bg-purple-50 rounded-md px-2 -mx-2">
+                                    <a href="${pathPrefix}services/videobooth/bullet-time-booth.html" class="block text-sm text-gray-700 hover:text-purple-600 transition py-1.5 hover:bg-purple-50 rounded-md px-2 -mx-2">
                                         <span class="font-semibold block mb-0.5">Bullet-Time Array</span>
                                         <span class="text-xs text-gray-500 leading-relaxed">Matrix-style multi-camera effects</span>
                                     </a>
@@ -386,7 +386,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                         <h4 class="font-bold text-base text-purple-600 uppercase tracking-wider mb-3 pb-2 border-b-2 border-purple-200">Video Booths</h4>
                                         <div class="pl-4 space-y-2">
                                             <a href="${pathPrefix}services/videobooth/360-video-booth.html" class="block text-sm text-gray-600 hover:text-blue-600 transition">360 Video Booth</a>
-                                            <a href="${pathPrefix}services/videobooth/bullet-time-array.html" class="block text-sm text-gray-600 hover:text-blue-600 transition">Bullet-Time Array</a>
+                                            <a href="${pathPrefix}services/videobooth/bullet-time-booth.html" class="block text-sm text-gray-600 hover:text-blue-600 transition">Bullet-Time Array</a>
                                             <a href="${pathPrefix}services/videobooth/glambot-video.html" class="block text-sm text-gray-600 hover:text-blue-600 transition">GlamBot Video</a>
                                             <a href="${pathPrefix}services/videobooth/vogue-video-booth.html" class="block text-sm text-gray-600 hover:text-blue-600 transition">Vogue Video Booth</a>
                                             <a href="${pathPrefix}services/videobooth/slow-motion-video-booth.html" class="block text-sm text-gray-600 hover:text-blue-600 transition">Slow Motion Video Booth</a>

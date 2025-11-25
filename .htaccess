@@ -1,0 +1,30 @@
+# Enable Rewrite Engine
+RewriteEngine On
+
+# Redirect requests with .html or .php extension to clean URLs
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s([^.]+)\.(html|php)[\s?] [NC]
+RewriteRule ^ %1 [R=301,L]
+
+# Add trailing slash to directories (optional, helps with consistency)
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_URI} !/$
+RewriteRule . %{REQUEST_URI}/ [R=301,L]
+
+# Handle clean URLs - serve .html files without extension
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}.html -f
+RewriteRule ^(.*)$ $1.html [L]
+
+# Handle clean URLs - serve .php files without extension
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule ^(.*)$ $1.php [L]
+
+# Handle directory index files
+DirectoryIndex index.html index.php
+
+# Prevent directory listing
+Options -Indexes
+
