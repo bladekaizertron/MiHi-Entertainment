@@ -384,10 +384,20 @@
             align-items: center;
             justify-content: center;
             transition: background 0.3s ease;
+            z-index: 10000;
+            border: none;
+            outline: none;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
         }
         
         .media-modal-close:hover {
             background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .media-modal-close:active {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(0.95);
         }
         
         @media (max-width: 1024px) {
@@ -419,6 +429,11 @@
             .media-modal-close {
                 top: 10px;
                 right: 10px;
+                width: 48px;
+                height: 48px;
+                font-size: 2.5rem;
+                background: rgba(255, 255, 255, 0.2);
+                z-index: 10001;
             }
         }
         
@@ -426,6 +441,16 @@
             .lookbook-gallery {
                 grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
                 gap: 0.75rem;
+            }
+            
+            .media-modal-close {
+                top: 10px;
+                right: 10px;
+                width: 50px;
+                height: 50px;
+                font-size: 2.8rem;
+                background: rgba(255, 255, 255, 0.25);
+                z-index: 10001;
             }
         }
         
@@ -620,7 +645,7 @@
                     <div class='gallery-item-title'>360 BOOTH</div>
                 </div>
                 <!-- gal11.mp4 - Video -->
-                <div class='large gallery-item video-item' onclick='openMediaModal("../assets/images/galleries/ourworks/gal11.mp4", "video")'>
+                <div class='large gallery-item video-item' onclick='openMediaModal("../assets/images/galleries/ourworks/gal11.mov", "video")'>
                     <video src='../assets/images/galleries/ourworks/gal11.mov' muted loop></video>
                     <div class='gallery-item-title'>CUSTOM VFX BOOTH</div>
                 </div>
@@ -660,7 +685,7 @@
                     <div class='gallery-item-title'>SNOW GLOBE SET</div>
                 </div>
                 <!-- gal19.mp4 - Video -->
-                <div class='medium gallery-item video-item' onclick='openMediaModal("../assets/images/galleries/ourworks/gal19.mp4", "video")'>
+                <div class='medium gallery-item video-item' onclick='openMediaModal("../assets/images/galleries/ourworks/gal19.mov", "video")'>
                     <video src='../assets/images/galleries/ourworks/gal19.mov' muted loop></video>
                     <div class='gallery-item-title'>WATER RAFT GREEN SCREEN</div>
                 </div>
@@ -734,7 +759,7 @@
             <!-- Media Modal (for both images and videos) -->
             <div id="mediaModal" class="media-modal" onclick="closeMediaModal(event)">
                 <div class="media-modal-content" onclick="event.stopPropagation()">
-                    <button class="media-modal-close" onclick="closeMediaModal(event)">&times;</button>
+                    <button class="media-modal-close" onclick="event.stopPropagation(); closeMediaModal(event); return false;" type="button" aria-label="Close modal">&times;</button>
                     <img id="modalImage" src="" alt="Full size image" style="display: none;">
                     <video id="modalVideo" controls style="display: none;"></video>
                 </div>
@@ -879,6 +904,7 @@
             const modalVideo = document.getElementById('modalVideo');
             
             if (event) {
+                event.preventDefault();
                 event.stopPropagation();
             }
             
@@ -896,6 +922,25 @@
                 }
             }
         }
+        
+        // Add direct event listeners for better mobile support
+        document.addEventListener('DOMContentLoaded', function() {
+            const closeButton = document.querySelector('.media-modal-close');
+            if (closeButton) {
+                // Add multiple event types for better mobile compatibility
+                closeButton.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    closeMediaModal(e);
+                });
+                
+                closeButton.addEventListener('touchend', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    closeMediaModal(e);
+                });
+            }
+        });
         
         // Close modal on Escape key
         document.addEventListener('keydown', function(e) {
