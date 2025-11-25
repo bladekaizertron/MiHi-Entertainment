@@ -69,12 +69,12 @@
                 box-shadow: inset 0 -6.5em 0 #0040d9;
             }
         }
-        .section-padding { padding: 5rem 0; }
+        .section-padding { padding: 5rem 0 2rem; }
         @media (max-width: 768px) {
-            .section-padding { padding: 3rem 0; }
+            .section-padding { padding: 3rem 0 1.5rem; }
         }
         @media (max-width: 640px) {
-            .section-padding { padding: 2.5rem 0; }
+            .section-padding { padding: 2.5rem 0 1rem; }
         }
         .hero-section {
             background-image: url('../assets/images/galleries/ourworks/hero.jpg');
@@ -124,321 +124,376 @@
             }
         }
         
-        /* Gallery Carousel Styles */
-        .gallery-main {
-            width: 100%;
-            min-height: 400px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 1rem 0;
+        /* Lookbook Gallery Grid Styles - Modern Layout */
+        .lookbook-gallery {
+            width: 90vw;
+            max-width: 1400px;
+            margin: 4em auto 1em;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-auto-rows: 60px;
+            grid-auto-flow: dense;
+            align-items: end;
+            align-content: start;
+            gap: 1.5rem;
+            padding: 0 1rem 0.5rem;
+            min-height: fit-content;
         }
         
-        .gallery-horizontal {
+        /* Ensure bottom row items align to bottom */
+        .lookbook-gallery::after {
+            content: '';
+            grid-column: 1 / -1;
+            height: 0;
+            display: block;
+        }
+        
+        /* Force all items to align to bottom of their grid cells */
+        .lookbook-gallery .gallery-item {
+            align-self: end;
+        }
+        
+        .lookbook-gallery .large, 
+        .lookbook-gallery .medium, 
+        .lookbook-gallery .small {
             display: flex;
-            justify-content: center;
-            align-items: center;
+            height: 100%;
             width: 100%;
-            max-width: 100%;
-            max-height: 380px;
-            overflow: hidden;
+            grid-column: auto / span 1;
             position: relative;
-            box-sizing: border-box;
+            overflow: hidden;
+            cursor: pointer;
+            border-radius: 16px;
+            background: #000;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15), 0 2px 8px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.6s ease-out forwards;
+            align-self: end;
         }
         
-        .gallery-container-right, .gallery-container-left {
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .lookbook-gallery .gallery-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 40px rgba(0, 80, 255, 0.25), 0 8px 16px rgba(0, 0, 0, 0.2);
+            border: 2px solid rgba(0, 80, 255, 0.3);
+        }
+        
+        .gallery-item-title {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.7) 60%, rgba(0, 0, 0, 0.3) 80%, transparent 100%);
+            color: white;
+            padding: 1.25rem 1rem 1rem;
+            font-size: 0.875rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            z-index: 1;
+            opacity: 1;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(4px);
+        }
+        
+        .gallery-item:hover .gallery-item-title {
+            background: linear-gradient(to top, rgba(0, 80, 255, 0.95) 0%, rgba(0, 80, 255, 0.75) 60%, rgba(0, 80, 255, 0.4) 80%, transparent 100%);
+            padding-bottom: 1.25rem;
+            transform: translateY(0);
+        }
+        
+        @media (max-width: 768px) {
+            .lookbook-gallery {
+                width: 95vw;
+                gap: 1rem;
+                margin: 2em auto;
+            }
+            
+            .gallery-item-title {
+                font-size: 0.75rem;
+                padding: 1rem 0.75rem 0.75rem;
+            }
+        }
+        
+        .lookbook-gallery .large {
+            grid-row: span 5;
+            border-radius: 20px;
+        }
+        
+        .lookbook-gallery .medium {
+            grid-row: span 4;
+        }
+        
+        .lookbook-gallery .small {
+            grid-row: span 3;
+        }
+        
+        .lookbook-gallery img,
+        .lookbook-gallery video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), filter 0.4s ease;
+        }
+        
+        .lookbook-gallery .gallery-item:hover img,
+        .lookbook-gallery .gallery-item:hover video {
+            transform: scale(1.08);
+        }
+        
+        /* Video hover preview */
+        .gallery-item.video-item {
+            position: relative;
+        }
+        
+        .gallery-item.video-item::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.8);
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, rgba(0, 80, 255, 0.95), rgba(0, 64, 217, 0.95));
+            border-radius: 50%;
+            z-index: 10;
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            pointer-events: none;
+            box-shadow: 0 8px 24px rgba(0, 80, 255, 0.4);
+        }
+        
+        .gallery-item.video-item::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-42%, -50%) scale(0.8);
+            width: 0;
+            height: 0;
+            border-left: 22px solid white;
+            border-top: 14px solid transparent;
+            border-bottom: 14px solid transparent;
+            z-index: 11;
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            pointer-events: none;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+        }
+        
+        .gallery-item.video-item:hover::before {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1);
+        }
+        
+        .gallery-item.video-item:hover::after {
+            opacity: 1;
+            transform: translate(-42%, -50%) scale(1);
+        }
+        
+        .gallery-item.video-item video {
+            pointer-events: none;
+        }
+        
+        .gallery-item.video-item:hover video {
+            filter: brightness(0.75) contrast(1.1);
+        }
+        
+        /* Image hover effect */
+        .gallery-item:not(.video-item) {
+            cursor: pointer;
+        }
+        
+        .gallery-item:not(.video-item):hover img {
+            filter: brightness(0.8) contrast(1.1);
+        }
+        
+        /* Add subtle overlay on hover for images */
+        .gallery-item:not(.video-item)::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(0, 80, 255, 0.1), rgba(0, 64, 217, 0.05));
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: 1;
+            pointer-events: none;
+            border-radius: inherit;
+        }
+        
+        .gallery-item:not(.video-item):hover::before {
+            opacity: 1;
+        }
+        
+        /* Media Modal (for both images and videos) */
+        .media-modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 9999;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+        
+        .media-modal.active {
             display: flex;
-            flex-direction: column;
-            flex: 1;
         }
         
-        .gallery-container-left img, .gallery-container-right img {
+        .media-modal-content {
+            position: relative;
+            width: 100%;
+            max-width: 90vw;
+            max-height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .media-modal img,
+        .media-modal video {
             width: 100%;
             height: auto;
-            object-fit: cover;
-            display: none;
-            cursor: pointer;
-            transition: transform 0.3s ease;
+            max-width: 90vw;
+            max-height: 90vh;
+            object-fit: contain;
+            border-radius: 8px;
         }
         
-        .gallery-container-left img:hover, .gallery-container-right img:hover {
-            transform: scale(1.02);
-        }
-        
-        .gallery-arrow-next, .gallery-arrow-back {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 10px;
-            z-index: 10;
-        }
-        
-        .gallery-arrow-next a, .gallery-arrow-back a {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 50px;
-            height: 50px;
-            background: rgba(0, 80, 255, 0.1);
-            border-radius: 50%;
-            color: #0050ff;
-            font-size: 24px;
-            transition: all 0.3s ease;
-            text-decoration: none;
-        }
-        
-        .gallery-arrow-next a:hover, .gallery-arrow-back a:hover {
-            background: #0050ff;
+        .media-modal-close {
+            position: absolute;
+            top: -40px;
+            right: 0;
             color: white;
-            transform: scale(1.1);
+            font-size: 2rem;
+            cursor: pointer;
+            background: rgba(255, 255, 255, 0.1);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s ease;
         }
         
-        .single-image-left:nth-child(1) {
-            animation-name: safedown;
-            animation-duration: 1s;
+        .media-modal-close:hover {
+            background: rgba(255, 255, 255, 0.2);
         }
         
-        .single-image-right:nth-child(1) {
-            animation-name: safeup;
-            animation-duration: 1s;
-        }
-        
-        @keyframes safedown {
-            from {
-                transform: translateY(-100%);
-                opacity: 0.5;
-            }
-            to {
-                transform: translateY(0%);
-                opacity: 1;
-            }
-        }
-        
-        @keyframes safeup {
-            from {
-                transform: translateY(100%);
-                opacity: 0.5;
-            }
-            to {
-                transform: translateY(0%);
-                opacity: 1;
+        @media (max-width: 1024px) {
+            .lookbook-gallery {
+                width: 92vw;
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 1.25rem;
             }
         }
         
-        /* Mobile Optimization */
         @media (max-width: 768px) {
-            .gallery-main {
-                min-height: auto;
-                padding: 1rem 0;
-                overflow-x: hidden;
+            .lookbook-gallery {
+                width: 95vw;
+                grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+                gap: 1rem;
+                margin: 2em auto;
             }
             
-            .gallery-horizontal {
-                max-height: none;
-                flex-direction: row;
-                align-items: stretch;
-                position: relative;
-                padding: 0 50px;
-                gap: 0;
+            .lookbook-gallery .large,
+            .lookbook-gallery .medium,
+            .lookbook-gallery .small {
+                border-radius: 12px;
             }
             
-            .gallery-container-right, .gallery-container-left {
-                flex-direction: column;
-                width: calc(50% - 25px);
-                max-height: 380px;
-                overflow: hidden;
-                display: flex;
+            .media-modal-content {
+                max-width: 95vw;
             }
             
-            .gallery-container-left {
-                margin-right: 8px;
-            }
-            
-            .gallery-container-right {
-                margin-left: 8px;
-            }
-            
-            .gallery-container-left img, .gallery-container-right img {
-                width: 100%;
-                height: auto;
-                min-height: 180px;
-                max-height: 190px;
-                object-fit: cover;
-                flex-shrink: 0;
-            }
-            
-            .gallery-arrow-next, .gallery-arrow-back {
-                position: absolute;
-                top: 50%;
-                transform: translateY(-50%);
-                margin: 0;
-                z-index: 20;
-            }
-            
-            .gallery-arrow-back {
-                left: 5px;
-            }
-            
-            .gallery-arrow-next {
-                right: 5px;
-            }
-            
-            .gallery-arrow-next a, .gallery-arrow-back a {
-                width: 40px;
-                height: 40px;
-                font-size: 20px;
-                background: rgba(255, 255, 255, 0.95);
-                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-                backdrop-filter: blur(4px);
-            }
-            
-            .gallery-arrow-next a:hover, .gallery-arrow-back a:hover {
-                background: #0050ff;
-                color: white;
-            }
-        }
-        
-        @media (max-width: 640px) {
-            .gallery-main {
-                padding: 0.75rem 0;
-            }
-            
-            .gallery-horizontal {
-                padding: 0 45px;
-            }
-            
-            .gallery-container-right, .gallery-container-left {
-                width: calc(50% - 22px);
-                max-height: 320px;
-            }
-            
-            .gallery-container-left {
-                margin-right: 6px;
-            }
-            
-            .gallery-container-right {
-                margin-left: 6px;
-            }
-            
-            .gallery-container-left img, .gallery-container-right img {
-                min-height: 155px;
-                max-height: 160px;
-            }
-            
-            .gallery-arrow-next a, .gallery-arrow-back a {
-                width: 35px;
-                height: 35px;
-                font-size: 18px;
-            }
-            
-            .gallery-arrow-back {
-                left: 3px;
-            }
-            
-            .gallery-arrow-next {
-                right: 3px;
+            .media-modal-close {
+                top: 10px;
+                right: 10px;
             }
         }
         
         @media (max-width: 480px) {
-            .gallery-horizontal {
-                padding: 0 40px;
-            }
-            
-            .gallery-container-right, .gallery-container-left {
-                width: calc(50% - 20px);
-                max-height: 260px;
-            }
-            
-            .gallery-container-left {
-                margin-right: 4px;
-            }
-            
-            .gallery-container-right {
-                margin-left: 4px;
-            }
-            
-            .gallery-container-left img, .gallery-container-right img {
-                min-height: 125px;
-                max-height: 130px;
-            }
-            
-            .gallery-arrow-next a, .gallery-arrow-back a {
-                width: 32px;
-                height: 32px;
-                font-size: 16px;
+            .lookbook-gallery {
+                grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+                gap: 0.75rem;
             }
         }
         
-        /* Gallery Section */
-        .gallery-section {
-            padding: 3rem 0 !important;
+        /* Particle Effect Background */
+        #lookbook-section {
             position: relative;
+            background-image: radial-gradient(#021027, #000000);
             overflow: hidden;
-            background: linear-gradient(60deg, #B353DB 0%, #EF9456 100%);
         }
         
-        @media (max-width: 768px) {
-            .gallery-section {
-                padding: 2rem 0 !important;
-            }
-        }
-        
-        @media (max-width: 640px) {
-            .gallery-section {
-                padding: 1.5rem 0 !important;
-            }
-        }
-        
-        /* Particle Background */
-        #canvas_back {
+        .particle-container {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            filter: blur(2px);
             z-index: 0;
+            pointer-events: none;
         }
         
-        #canvas_front {
+        .circle-container {
             position: absolute;
-            top: 0;
-            left: 0;
+            transform: translateY(-10vh);
+            animation-iteration-count: infinite;
+            animation-timing-function: linear;
+        }
+        
+        .circle-container .circle {
             width: 100%;
             height: 100%;
-            z-index: 2;
+            border-radius: 50%;
+            mix-blend-mode: screen;
+            background-image: radial-gradient(
+                hsl(180, 100%, 80%),
+                hsl(180, 100%, 80%) 10%,
+                hsla(180, 100%, 80%, 0) 56%
+            );
+            animation: fadein-frames 200ms infinite, scale-frames 2s infinite;
         }
         
-        #cover {
-            position: absolute;
-            z-index: 1;
-            width: 100%;
-            height: 100%;
-            background: black;
-            opacity: 0.4;
-            top: 0;
-            left: 0;
+        @keyframes fadein-frames {
+            0% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.7;
+            }
+            100% {
+                opacity: 1;
+            }
         }
         
-        .gallery-section .container {
+        @keyframes scale-frames {
+            0% {
+                transform: scale3d(0.4, 0.4, 1);
+            }
+            50% {
+                transform: scale3d(2.2, 2.2, 1);
+            }
+            100% {
+                transform: scale3d(0.4, 0.4, 1);
+            }
+        }
+        
+        /* Ensure content is above particles */
+        #lookbook-section > .container {
             position: relative;
-            z-index: 3;
-        }
-        
-        .gallery-section h2,
-        .gallery-section h3,
-        .gallery-section p {
-            color: white;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-        }
-        
-        .gallery-section .text-gray-900 {
-            color: white !important;
-        }
-        
-        .gallery-section .text-gray-600 {
-            color: rgba(255, 255, 255, 0.9) !important;
+            z-index: 1;
         }
     </style>
 </head>
@@ -483,51 +538,205 @@
         </div>
     </section>
 
-    <!-- Gallery  -->
-    <section class="section-padding gallery-section">
-        <canvas id="canvas_back" data-size="40" data-opacity="2" data-dust="300"></canvas>
-        <div id="cover"></div>
-        <canvas id="canvas_front" data-size="3" data-opacity="20" data-dust="600"></canvas>
+    <!-- LookBook Section -->
+    <section id="lookbook-section" class="section-padding">
+        <div class="particle-container" id="particleContainer"></div>
         <div class="container mx-auto px-4">
-            <div class="max-w-5xl mx-auto text-center">
-                <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-3 animate-fade-in-up">
-                    <span class="text-gray-900">A </span><span class="text-[#0050ff]">LOOKBOOK</span> <span class="text-gray-900">THAT'S NEVER</span><br>
-                    <span class="text-gray-900">LOOKED </span><span class="text-[#0050ff]">QUITE THIS GOOD</span>
+            <div class="max-w-4xl mx-auto text-center">
+                <!-- Main Heading with Alternating Colors -->
+                <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6 animate-fade-in-up" style="text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5), 0 0 20px rgba(0, 80, 255, 0.3);">
+                    <span class="text-white">A </span>
+                    <span class="text-[#4da6ff]" style="text-shadow: 0 0 20px rgba(77, 166, 255, 0.8), 0 0 40px rgba(77, 166, 255, 0.4);">LOOKBOOK</span>
+                    <span class="text-white"> THAT'S NEVER</span>
+                    <br class="hidden sm:block">
+                    <span class="text-white">LOOKED </span>
+                    <span class="text-[#4da6ff]" style="text-shadow: 0 0 20px rgba(77, 166, 255, 0.8), 0 0 40px rgba(77, 166, 255, 0.4);">QUITE THIS GOOD</span>
                 </h2>
-                <p class="text-base sm:text-lg md:text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed mb-4 animate-fade-in-up animate-delay-200">
+                
+                <!-- Descriptive Paragraph -->
+                <p class="text-base md:text-lg text-gray-200 max-w-2xl mx-auto mb-12 leading-relaxed animate-fade-in-up animate-delay-200" style="text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);">
                     If any booth catches your eye, just click on its image to explore its dedicated web page and learn more about the product.
                 </p>
+                
+                <!-- Secondary Heading with Underline -->
+                <div class="animate-fade-in-up animate-delay-300">
+                    <h3 class="text-xl sm:text-2xl md:text-3xl font-bold text-[#4da6ff] mb-3" style="text-shadow: 0 0 15px rgba(77, 166, 255, 0.6), 0 2px 10px rgba(0, 0, 0, 0.5);">
+                        ALL ACTIVATIONS
+                    </h3>
+                    <div class="h-1 w-24 bg-[#4da6ff] mx-auto" style="box-shadow: 0 0 10px rgba(77, 166, 255, 0.6);"></div>
+                </div>
             </div>
             
-            <!-- All Activations Heading -->
-            <div class="max-w-5xl mx-auto text-center mt-6 md:mt-8 animate-fade-in-up animate-delay-300">
-                <h3 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-[#0050ff] mb-2">
-                    ALL ACTIVATIONS
-                </h3>
-                <div class="h-0.5 bg-[#0050ff] mx-auto" style="width: 100%; max-width: 300px;"></div>
+            <!-- Lookbook Gallery Grid -->
+            <div class='lookbook-gallery'>
+                <!-- gal1.mp4 - Video -->
+                <div class='large gallery-item video-item' onclick='openMediaModal("../assets/images/galleries/ourworks/gal1.mp4", "video")'>
+                    <video src='../assets/images/galleries/ourworks/gal1.mp4' muted loop></video>
+                    <div class='gallery-item-title'>VOUGE BOOTH</div>
+                </div>
+                <!-- gal2.mp4 - Video -->
+                <div class='medium gallery-item video-item' onclick='openMediaModal("../assets/images/galleries/ourworks/gal2.mp4", "video")'>
+                    <video src='../assets/images/galleries/ourworks/gal2.mp4' muted loop></video>
+                    <div class='gallery-item-title'>VFX 360 BOOTH</div>
+                </div>
+                <!-- gal3.mp4 - Video -->
+                <div class='small gallery-item video-item' onclick='openMediaModal("../assets/images/galleries/ourworks/gal3.mp4", "video")'>
+                    <video src='../assets/images/galleries/ourworks/gal3.mp4' muted loop></video>
+                    <div class='gallery-item-title'>BOOMERANG/GIF BOOTH</div>
+                </div>
+                <!-- gal4.png - Image -->
+                <div class='large gallery-item' onclick='openMediaModal("../assets/images/galleries/ourworks/gal4.png", "image")'>
+                    <img src='../assets/images/galleries/ourworks/gal4.png' alt='Gallery image 4'>
+                    <div class='gallery-item-title'>COVER SHOOT</div>
+                </div>
+                <!-- gal5.mp4 - Video -->
+                <div class='small gallery-item video-item' onclick='openMediaModal("../assets/images/galleries/ourworks/gal5.mp4", "video")'>
+                    <video src='../assets/images/galleries/ourworks/gal5.mp4' muted loop></video>
+                    <div class='gallery-item-title'>BULLET-TIME ARRAY BOOTH</div>
+                </div>
+                <!-- gal6.png - Image -->
+                <div class='medium gallery-item' onclick='openMediaModal("../assets/images/galleries/ourworks/gal6.png", "image")'>
+                    <img src='../assets/images/galleries/ourworks/gal6.png' alt='Gallery image 6'>
+                    <div class='gallery-item-title'>CUSTOM SPORTS CARD</div>
+                </div>
+                <!-- gal7.mp4 - Video -->
+                <div class='large gallery-item video-item' onclick='openMediaModal("../assets/images/galleries/ourworks/gal7.mp4", "video")'>
+                    <video src='../assets/images/galleries/ourworks/gal7.mp4' muted loop></video>
+                    <div class='gallery-item-title'>GLAMBOT</div>
+                </div>
+                <!-- gal8.png - Image -->
+                <div class='small gallery-item' onclick='openMediaModal("../assets/images/galleries/ourworks/gal8.png", "image")'>
+                    <img src='../assets/images/galleries/ourworks/gal8.png' alt='Gallery image 8'>
+                    <div class='gallery-item-title'>CUSTOM NAME BADGE</div>
+                </div>
+                <!-- gal9.png - Image -->
+                <div class='medium gallery-item' onclick='openMediaModal("../assets/images/galleries/ourworks/gal9.png", "image")'>
+                    <img src='../assets/images/galleries/ourworks/gal9.png' alt='Gallery image 9'>
+                    <div class='gallery-item-title'>CUSTOM SLEIGH SET</div>
+                </div>
+                <!-- gal10.mp4 - Video -->
+                <div class='small gallery-item video-item' onclick='openMediaModal("../assets/images/galleries/ourworks/gal10.mp4", "video")'>
+                    <video src='../assets/images/galleries/ourworks/gal10.mp4' muted loop></video>
+                    <div class='gallery-item-title'>360 BOOTH</div>
+                </div>
+                <!-- gal11.mp4 - Video -->
+                <div class='large gallery-item video-item' onclick='openMediaModal("../assets/images/galleries/ourworks/gal11.mp4", "video")'>
+                    <video src='../assets/images/galleries/ourworks/gal11.mov' muted loop></video>
+                    <div class='gallery-item-title'>CUSTOM VFX BOOTH</div>
+                </div>
+                <!-- gal12.png - Image -->
+                <div class='medium gallery-item' onclick='openMediaModal("../assets/images/galleries/ourworks/gal12.png", "image")'>
+                    <img src='../assets/images/galleries/ourworks/gal12.png' alt='Gallery image 12'>
+                    <div class='gallery-item-title'>KARDASHIAN GLAM FILTER</div>
+                </div>
+                <!-- gal13.png - Image -->
+                <div class='small gallery-item' onclick='openMediaModal("../assets/images/galleries/ourworks/gal13.png", "image")'>
+                    <img src='../assets/images/galleries/ourworks/gal13.png' alt='Gallery image 13'>
+                    <div class='gallery-item-title'>LIGHT PAINTING BOOTH</div>
+                </div>
+                <!-- gal14.png - Image -->
+                <div class='large gallery-item' onclick='openMediaModal("../assets/images/galleries/ourworks/gal14.png", "image")'>
+                    <img src='../assets/images/galleries/ourworks/gal14.png' alt='Gallery image 14'>
+                    <div class='gallery-item-title'>PHOTO MOSAIC WALL</div>
+                </div>
+                <!-- gal15.png - Image -->
+                <div class='small gallery-item' onclick='openMediaModal("../assets/images/galleries/ourworks/gal15.png", "image")'>
+                    <img src='../assets/images/galleries/ourworks/gal15.png' alt='Gallery image 15'>
+                    <div class='gallery-item-title'>ROAMING PHOTO BOOTH</div>
+                </div>
+                <!-- gal16.mp4 - Video -->
+                <div class='medium gallery-item video-item' onclick='openMediaModal("../assets/images/galleries/ourworks/gal16.mp4", "video")'>
+                    <video src='../assets/images/galleries/ourworks/gal16.mp4' muted loop></video>
+                    <div class='gallery-item-title'>AI BIG REMOVAL 360 BOOTH</div>
+                </div>
+                <!-- gal17.png - Image -->
+                <div class='large gallery-item' onclick='openMediaModal("../assets/images/galleries/ourworks/gal17.png", "image")'>
+                    <img src='../assets/images/galleries/ourworks/gal17.png' alt='Gallery image 17'>
+                    <div class='gallery-item-title'>SKI LIFT CUSTOM SET</div>
+                </div>
+                <!-- gal18.png - Image -->
+                <div class='small gallery-item' onclick='openMediaModal("../assets/images/galleries/ourworks/gal18.png", "image")'>
+                    <img src='../assets/images/galleries/ourworks/gal18.png' alt='Gallery image 18'>
+                    <div class='gallery-item-title'>SNOW GLOBE SET</div>
+                </div>
+                <!-- gal19.mp4 - Video -->
+                <div class='medium gallery-item video-item' onclick='openMediaModal("../assets/images/galleries/ourworks/gal19.mp4", "video")'>
+                    <video src='../assets/images/galleries/ourworks/gal19.mov' muted loop></video>
+                    <div class='gallery-item-title'>WATER RAFT GREEN SCREEN</div>
+                </div>
+                <!-- gal20.png - Image -->
+                <div class='small gallery-item' onclick='openMediaModal("../assets/images/galleries/ourworks/gal20.png", "image")'>
+                    <img src='../assets/images/galleries/ourworks/gal20.png' alt='Gallery image 20'>
+                    <div class='gallery-item-title'>YOU-PHORIA</div>
+                </div>
+                <!-- gal21.png - Image -->
+                <div class='large gallery-item' onclick='openMediaModal("../assets/images/galleries/ourworks/gal21.png", "image")'>
+                    <img src='../assets/images/galleries/ourworks/gal21.png' alt='Gallery image 21'>
+                    <div class='gallery-item-title'>CUSTOM PHOTO LAYOUT</div>
+                </div>
+                <!-- gal22.png - Image -->
+                <div class='medium gallery-item' onclick='openMediaModal("../assets/images/galleries/ourworks/gal22.png", "image")'>
+                    <img src='../assets/images/galleries/ourworks/gal22.png' alt='Gallery image 22'>
+                    <div class='gallery-item-title'>VOGUE BOOTH</div>
+                </div>
+                <!-- gal23.png - Image -->
+                <div class='small gallery-item' onclick='openMediaModal("../assets/images/galleries/ourworks/gal23.png", "image")'>
+                    <img src='../assets/images/galleries/ourworks/gal23.png' alt='Gallery image 23'>
+                    <div class='gallery-item-title'>FEEL FAMOUS PHOTOGRAPHY</div>
+                </div>
+                <!-- gal24.png - Image -->
+                <div class='large gallery-item' onclick='openMediaModal("../assets/images/galleries/ourworks/gal24.png", "image")'>
+                    <img src='../assets/images/galleries/ourworks/gal24.png' alt='Gallery image 24'>
+                    <div class='gallery-item-title'>WALK THE RUNWAY GREEN SCREEN</div>
+                </div>
+                <!-- gal25.png - Image -->
+                <div class='small gallery-item' onclick='openMediaModal("../assets/images/galleries/ourworks/gal25.png", "image")'>
+                    <img src='../assets/images/galleries/ourworks/gal25.png' alt='Gallery image 25'>
+                    <div class='gallery-item-title'>VINTAGE PHOTO BOOTH</div>
+                </div>
+                <!-- gal26.png - Image -->
+                <div class='medium gallery-item' onclick='openMediaModal("../assets/images/galleries/ourworks/gal26.png", "image")'>
+                    <img src='../assets/images/galleries/ourworks/gal26.png' alt='Gallery image 26'>
+                    <div class='gallery-item-title'>SKI LIFT CUSTOM SET</div>
+                </div>
+                <!-- gal27.png - Image -->
+                <div class='small gallery-item' onclick='openMediaModal("../assets/images/galleries/ourworks/gal27.png", "image")'>
+                    <img src='../assets/images/galleries/ourworks/gal27.png' alt='Gallery image 27'>
+                    <div class='gallery-item-title'>FEEL FAMOUS PHOTOGRAPHY</div>
+                </div>
+                <!-- gal28.png - Image -->
+                <div class='large gallery-item' onclick='openMediaModal("../assets/images/galleries/ourworks/gal28.png", "image")'>
+                    <img src='../assets/images/galleries/ourworks/gal28.png' alt='Gallery image 28'>
+                    <div class='gallery-item-title'>MEMORY ALBUM</div>
+                </div>
+                <!-- gal29.png - Image -->
+                <div class='medium gallery-item' onclick='openMediaModal("../assets/images/galleries/ourworks/gal29.png", "image")'>
+                    <img src='../assets/images/galleries/ourworks/gal29.png' alt='Gallery image 29'>
+                    <div class='gallery-item-title'>FEEL FAMOUS PHOTOGRAPHY</div>
+                </div>
+                <!-- gal30.mp4 - Video -->
+                <div class='small gallery-item video-item' onclick='openMediaModal("../assets/images/galleries/ourworks/gal30.mp4", "video")'>
+                    <video src='../assets/images/galleries/ourworks/gal30.mp4' muted loop></video>
+                    <div class='gallery-item-title'>CUSTOM VX VIDEO BOOTH</div>
+                </div>
+                <!-- gal31.mp4 - Video -->
+                <div class='large gallery-item video-item' onclick='openMediaModal("../assets/images/galleries/ourworks/gal31.mp4", "video")'>
+                    <video src='../assets/images/galleries/ourworks/gal31.mp4' muted loop></video>
+                    <div class='gallery-item-title'>CLASSIC PHOTO BOOTH</div>
+                </div>
+                <!-- gal32.mp4 - Video -->
+                <div class='medium gallery-item video-item' onclick='openMediaModal("../assets/images/galleries/ourworks/gal32.mp4", "video")'>
+                    <video src='../assets/images/galleries/ourworks/gal32.mp4' muted loop></video>
+                    <div class='gallery-item-title'>360 BOOTH WITH FOG</div>
+                </div>
             </div>
             
-            <!-- Image Gallery Carousel -->
-            <div class="gallery-main mt-4 md:mt-6">
-                <div class="gallery-horizontal">
-                    <div class="gallery-arrow-back">
-                        <a href="#" id="back-image" aria-label="Previous image"><ion-icon name="arrow-back-outline"></ion-icon></a>
-                    </div>
-                    <div id="left-side" class="gallery-container-left">
-                        <img class="single-image-left" src="../assets/images/galleries/ourworks/g1.gif" alt="Event Photography" width="600" height="300">
-                        <img class="single-image-left" src="../assets/images/galleries/ourworks/g3.jpg" alt="Event Photography" width="600" height="300">
-                        <img class="single-image-left" src="../assets/images/galleries/ourworks/g5.jpg" alt="Event Photography" width="600" height="300">
-                        <img class="single-image-left" src="../assets/images/galleries/ourworks/g7.jpg" alt="Event Photography" width="600" height="300">
-                    </div>
-                    <div id="right-side" class="gallery-container-right">
-                        <img class="single-image-right" src="../assets/images/galleries/ourworks/g2.jpg" alt="Event Photography" width="600" height="300">
-                        <img class="single-image-right" src="../assets/images/galleries/ourworks/g4.jpg" alt="Event Photography" width="600" height="300">
-                        <img class="single-image-right" src="../assets/images/galleries/ourworks/g6.jpg" alt="Event Photography" width="600" height="300">
-                        <img class="single-image-right" src="../assets/images/galleries/ourworks/g8.jpg" alt="Event Photography" width="600" height="300">
-                    </div>
-                    <div class="gallery-arrow-next">
-                        <a href="#" id="next-image" aria-label="Next image"><ion-icon name="arrow-forward-outline"></ion-icon></a>
-                    </div>
+            <!-- Media Modal (for both images and videos) -->
+            <div id="mediaModal" class="media-modal" onclick="closeMediaModal(event)">
+                <div class="media-modal-content" onclick="event.stopPropagation()">
+                    <button class="media-modal-close" onclick="closeMediaModal(event)">&times;</button>
+                    <img id="modalImage" src="" alt="Full size image" style="display: none;">
+                    <video id="modalVideo" controls style="display: none;"></video>
                 </div>
             </div>
         </div>
@@ -537,174 +746,238 @@
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
     
-    <!-- Gallery Carousel Script -->
     <script>
-        function leavesFirst(){
-            let rightImages = document.querySelectorAll('.gallery-container-right img');
-            for(let i = 0; i < rightImages.length; i++){
-                rightImages[i].style.display = "none";
-            }
-            if(rightImages[0]) {
-                rightImages[0].style.display = "block";
-            }
-
-            let leftImages = document.querySelectorAll('.gallery-container-left img');
-            for(let i = 0; i < leftImages.length; i++){
-                leftImages[i].style.display = "none";
-            }
-            if(leftImages[0]) {
-                leftImages[0].style.display = "block";
-            }
-        }
-
-        // Initialize on page load
+        // Video hover preview - play on hover
         document.addEventListener('DOMContentLoaded', function() {
-            leavesFirst();
-
-            let nextImage = document.getElementById('next-image');
-            let backimage = document.getElementById('back-image');
-
-            if(nextImage) {
-                nextImage.onclick = function(event){
-                    let contLftImg = document.getElementById('left-side');
-                    let leftImages = document.querySelectorAll('.gallery-container-left img');
-                    if(leftImages.length > 0) {
-                        let lastLeftImage = leftImages[leftImages.length-1];
-                        lastLeftImage.remove();
-                        contLftImg.prepend(lastLeftImage);
-                    }
-
-                    let contRtImg = document.getElementById('right-side');
-                    let rightImage = document.querySelectorAll('.gallery-container-right img');
-                    if(rightImage.length > 0) {
-                        let firstRightImage = rightImage[0];
-                        firstRightImage.remove();
-                        contRtImg.append(firstRightImage);
-                    }
-                    leavesFirst();
-                    event.preventDefault();
-                }
-            }
-
-            if(backimage) {
-                backimage.onclick = function(event){
-                    let contRtImg = document.getElementById('right-side');
-                    let rightImages = document.querySelectorAll('.gallery-container-right img');
-                    if(rightImages.length > 0) {
-                        let lastRightImage = rightImages[rightImages.length-1];
-                        lastRightImage.remove();
-                        contRtImg.prepend(lastRightImage);
-                    }
-
-                    let contLfImg = document.getElementById('left-side');
-                    let leftImage = document.querySelectorAll('.gallery-container-left img');
-                    if(leftImage.length > 0) {
-                        let firstLeftImage = leftImage[0];
-                        firstLeftImage.remove();
-                        contLfImg.append(firstLeftImage);
-                    }
-                    leavesFirst();
-                    event.preventDefault();
-                }
-            }
-        });
-    </script>
-
-    <!-- Particle Background Script -->
-    <script>
-        function clamp (value, min, max) {
-            return value >= min ? (value <= max ? value:max):min; 
-        }
-
-        function Dust (startx, starty, offset = 0, baseColor = 1, duration = 100, size = 20) {
-            //constructor
-            this.x            = startx;
-            this.y            = starty;
-            this.duration     = duration;
-            this.offset       = offset;
-            this.size         = size;
-            this.timer        = offset % duration;
-            this.baseColor    = baseColor;
-
-            //functions
-            this.draw = function (canvas) {
-                //Calculate animations
-                if (this.timer > this.duration) {
-                    this.timer = 0;
-                }
-                this.timer += 1;
-
-                //Calculate
-                const framesize           = this.size;
-                const positionMultiplier  = this.timer * (this.offset % 2);
-                const xPosition           = this.x + positionMultiplier;
-                const yPosition           = this.y + positionMultiplier;
-                const colorOpacity        = clamp((this.timer + 50) % this.duration, 0,this.baseColor);
-
-                //Update element
-                canvas.beginPath();
-                canvas.arc(xPosition, yPosition, framesize, 0, Math.PI * 2, false);
-                canvas.fillStyle = "rgba(255,255,255, " + colorOpacity + ")";
-                canvas.fill();
-            }
-        }
-
-
-        // Initialize particle animation for gallery section
-        document.addEventListener('DOMContentLoaded', function() {
-            const gallerySection = document.querySelector('.gallery-section');
-            if (!gallerySection) return;
-
-            const canvasElements = gallerySection.querySelectorAll("canvas");
-
-            function updateCanvasSize(canvasElement) {
-                const rect = gallerySection.getBoundingClientRect();
-                canvasElement.width = rect.width;
-                canvasElement.height = rect.height;
-            }
-
-            for (let i = 0; i < canvasElements.length; i++) {
-                const canvasElement = canvasElements[i];
-                const canvas = canvasElement.getContext("2d");
-                const quantity = parseInt(canvasElement.getAttribute("data-dust"));
-                const ballsize = parseInt(canvasElement.getAttribute("data-size"));
-                const ballopacity = parseInt(canvasElement.getAttribute("data-opacity"));
-
-                // Set initial canvas size
-                updateCanvasSize(canvasElement);
-
-                // Spawn dust for this canvas
-                const dusts = [];
-                const rect = gallerySection.getBoundingClientRect();
-                for (let j = 0; j < quantity; j++) {
-                    const positionX = rect.width * Math.random() * 1.5 - rect.width / 4;
-                    const positionY = rect.height * Math.random() * 1.5 - rect.height / 4;
-                    const duration = Math.random() * 500 + 1000;
-                    const size = Math.random() * ballsize;
-                    const offset = Math.random() * 100;
-                    const baseColor = clamp((Math.random() * ballopacity) / 100, 0, 0.3);
-
-                    dusts.push(new Dust(positionX, positionY, offset, baseColor, duration, size, canvas));
-                }
-
-                // Start animation with this canvas's dust array
-                (function(canvas, canvasEl, qty, dustArray) {
-                    function render() {
-                        canvas.clearRect(0, 0, canvasEl.width, canvasEl.height);
-                        for (let k = 0; k < qty; k++) {
-                            dustArray[k].draw(canvas);
+            const videoItems = document.querySelectorAll('.gallery-item.video-item video');
+            const galleryItems = document.querySelectorAll('.lookbook-gallery .gallery-item');
+            const gallery = document.querySelector('.lookbook-gallery');
+            
+            // Staggered animation for gallery items
+            galleryItems.forEach((item, index) => {
+                const delay = (index % 6) * 0.05 + Math.floor(index / 6) * 0.1;
+                item.style.animationDelay = `${delay}s`;
+            });
+            
+            // Balance bottom row - ensure all items align to bottom
+            function balanceBottomRow() {
+                if (!gallery || galleryItems.length === 0) return;
+                
+                // Remove existing fillers first
+                const existingFillers = gallery.querySelectorAll('.gallery-item-filler');
+                existingFillers.forEach(filler => filler.remove());
+                
+                // Wait for layout to settle
+                requestAnimationFrame(() => {
+                    // Get all gallery items (excluding fillers)
+                    const items = Array.from(galleryItems);
+                    
+                    // Find the bottom-most position
+                    let maxBottom = 0;
+                    items.forEach(item => {
+                        const rect = item.getBoundingClientRect();
+                        const bottom = rect.bottom;
+                        if (bottom > maxBottom) {
+                            maxBottom = bottom;
                         }
-                        setTimeout(render, 50);
+                    });
+                    
+                    // Get grid column count
+                    const gridStyle = window.getComputedStyle(gallery);
+                    const columnCount = gridStyle.gridTemplateColumns.split(' ').filter(col => col.trim() !== '').length;
+                    
+                    // Find items in the bottom row (those within 5px of maxBottom)
+                    const bottomRowItems = items.filter(item => {
+                        const rect = item.getBoundingClientRect();
+                        return Math.abs(rect.bottom - maxBottom) < 5;
+                    });
+                    
+                    // If bottom row is incomplete, add fillers
+                    if (bottomRowItems.length > 0 && bottomRowItems.length < columnCount) {
+                        const itemsToAdd = columnCount - bottomRowItems.length;
+                        for (let i = 0; i < itemsToAdd; i++) {
+                            const filler = document.createElement('div');
+                            filler.className = 'gallery-item-filler';
+                            filler.style.visibility = 'hidden';
+                            filler.style.height = '1px';
+                            filler.style.gridRow = 'span 1';
+                            filler.style.opacity = '0';
+                            filler.style.pointerEvents = 'none';
+                            gallery.appendChild(filler);
+                        }
                     }
-                    render();
-                })(canvas, canvasElement, quantity, dusts);
-
-                // Update canvas size on window resize
-                window.addEventListener('resize', function() {
-                    updateCanvasSize(canvasElement);
                 });
             }
+            
+            // Balance on load and resize
+            setTimeout(balanceBottomRow, 300);
+            window.addEventListener('resize', function() {
+                setTimeout(balanceBottomRow, 200);
+            });
+            
+            videoItems.forEach(video => {
+                const item = video.closest('.gallery-item');
+                
+                item.addEventListener('mouseenter', function() {
+                    video.play().catch(e => {
+                        // Autoplay may be prevented, that's okay
+                        console.log('Video autoplay prevented:', e);
+                    });
+                });
+                
+                item.addEventListener('mouseleave', function() {
+                    video.pause();
+                    video.currentTime = 0;
+                });
+            });
         });
+        
+        // Open media modal (for both images and videos)
+        function openMediaModal(mediaSrc, type) {
+            const modal = document.getElementById('mediaModal');
+            const modalImage = document.getElementById('modalImage');
+            const modalVideo = document.getElementById('modalVideo');
+            
+            if (!modal) return;
+            
+            if (type === 'video') {
+                // Show video, hide image
+                if (modalImage) modalImage.style.display = 'none';
+                if (modalVideo) {
+                    modalVideo.style.display = 'block';
+                    modalVideo.src = mediaSrc;
+                    modalVideo.load();
+                }
+            } else {
+                // Show image, hide video
+                if (modalVideo) {
+                    modalVideo.style.display = 'none';
+                    modalVideo.pause();
+                    modalVideo.src = '';
+                }
+                if (modalImage) {
+                    modalImage.style.display = 'block';
+                    modalImage.src = mediaSrc;
+                }
+            }
+            
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            
+            // Play video when modal opens (if it's a video)
+            if (type === 'video' && modalVideo) {
+                modalVideo.play().catch(e => {
+                    console.log('Video autoplay prevented:', e);
+                });
+            }
+        }
+        
+        // Close media modal
+        function closeMediaModal(event) {
+            const modal = document.getElementById('mediaModal');
+            const modalImage = document.getElementById('modalImage');
+            const modalVideo = document.getElementById('modalVideo');
+            
+            if (event) {
+                event.stopPropagation();
+            }
+            
+            if (modal) {
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+                
+                // Clean up
+                if (modalVideo) {
+                    modalVideo.pause();
+                    modalVideo.src = '';
+                }
+                if (modalImage) {
+                    modalImage.src = '';
+                }
+            }
+        }
+        
+        // Close modal on Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeMediaModal();
+            }
+        });
+        
+        // Particle Effect Generation
+        function createParticles() {
+            const container = document.getElementById('particleContainer');
+            if (!container) return;
+            
+            const particleNum = 100;
+            const particleWidth = 10;
+            
+            // Helper function to generate random number
+            function random(max) {
+                return Math.floor(Math.random() * max);
+            }
+            
+            // Create 100 circle containers
+            for (let i = 1; i <= particleNum; i++) {
+                const circleContainer = document.createElement('div');
+                circleContainer.className = 'circle-container';
+                
+                const circle = document.createElement('div');
+                circle.className = 'circle';
+                
+                circleContainer.appendChild(circle);
+                
+                // Random circle size
+                const circleSize = random(particleWidth) + 1;
+                circleContainer.style.width = circleSize + 'px';
+                circleContainer.style.height = circleSize + 'px';
+                
+                // Random start position
+                const startPositionY = random(10) + 100;
+                const startX = random(100);
+                const endX = random(100);
+                const endY = -startPositionY - random(30);
+                
+                // Random animation duration
+                const moveDuration = 7000 + random(4000);
+                const animationDelay = random(11000);
+                const circleAnimationDelay = random(4000);
+                
+                // Create unique animation name
+                const animationName = `move-frames-${i}`;
+                
+                // Create keyframe animation
+                const style = document.createElement('style');
+                style.textContent = `
+                    @keyframes ${animationName} {
+                        from {
+                            transform: translate3d(${startX}vw, ${startPositionY}vh, 0);
+                        }
+                        to {
+                            transform: translate3d(${endX}vw, ${endY}vh, 0);
+                        }
+                    }
+                `;
+                document.head.appendChild(style);
+                
+                // Apply styles to circle container
+                circleContainer.style.animationName = animationName;
+                circleContainer.style.animationDuration = moveDuration + 'ms';
+                circleContainer.style.animationDelay = animationDelay + 'ms';
+                
+                // Apply delay to circle animation
+                circle.style.animationDelay = circleAnimationDelay + 'ms';
+                
+                container.appendChild(circleContainer);
+            }
+        }
+        
+        // Initialize particles when DOM is ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', createParticles);
+        } else {
+            createParticles();
+        }
     </script>
 
     <script src="../assets/components/navigation.js"></script>
