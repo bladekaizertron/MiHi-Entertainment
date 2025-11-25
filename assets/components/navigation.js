@@ -1,7 +1,9 @@
 // Shared Navigation Component
 // This script will load the same navigation on all pages
 
-document.addEventListener('DOMContentLoaded', function() {
+(function() {
+    // Function to initialize navigation
+    function initNavigation() {
     // Determine the correct path prefix by finding the navigation script's location
     const scripts = document.getElementsByTagName('script');
     let navScriptSrc = '';
@@ -466,11 +468,8 @@ document.addEventListener('DOMContentLoaded', function() {
     </header>
     `;
 
-    // Insert navigation at the beginning of body
-    document.body.insertAdjacentHTML('afterbegin', navigationHTML);
-
-    // Mobile menu functionality - use setTimeout to ensure DOM is updated
-    setTimeout(() => {
+    // Mobile menu functionality - defined first so it can be called later
+    function initMobileMenu() {
         const mobileMenuBtn = document.getElementById('mobile-menu-btn');
         const mobileMenuClose = document.getElementById('mobile-menu-close');
         const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
@@ -479,29 +478,31 @@ document.addEventListener('DOMContentLoaded', function() {
         const hamburgerMiddle = document.getElementById('hamburger-middle');
         const hamburgerBottom = document.getElementById('hamburger-bottom');
 
-    function animateHamburger(isOpen) {
-        if (isOpen) {
-            hamburgerTop.style.transform = 'rotate(45deg) translate(5px, 5px)';
-            hamburgerMiddle.style.opacity = '0';
-            hamburgerBottom.style.transform = 'rotate(-45deg) translate(7px, -6px)';
-        } else {
-            hamburgerTop.style.transform = 'rotate(0deg) translate(0px, 0px)';
-            hamburgerMiddle.style.opacity = '1';
-            hamburgerBottom.style.transform = 'rotate(0deg) translate(0px, 0px)';
-        }
-    }
+        if (!mobileMenuBtn || !mobileMenuOverlay || !mobileMenu) return;
 
-    if (mobileMenuBtn && mobileMenuOverlay && mobileMenu) {
+        function animateHamburger(isOpen) {
+            if (!hamburgerTop || !hamburgerMiddle || !hamburgerBottom) return;
+            if (isOpen) {
+                hamburgerTop.style.transform = 'rotate(45deg) translate(5px, 5px)';
+                hamburgerMiddle.style.opacity = '0';
+                hamburgerBottom.style.transform = 'rotate(-45deg) translate(7px, -6px)';
+            } else {
+                hamburgerTop.style.transform = 'rotate(0deg) translate(0px, 0px)';
+                hamburgerMiddle.style.opacity = '1';
+                hamburgerBottom.style.transform = 'rotate(0deg) translate(0px, 0px)';
+            }
+        }
+
         let menuOpen = false;
 
         function toggleMenu() {
             if (!menuOpen) {
                 // Open menu
                 mobileMenuOverlay.classList.remove('hidden');
-                setTimeout(() => {
+                requestAnimationFrame(() => {
                     mobileMenu.classList.remove('translate-x-full');
                     animateHamburger(true);
-                }, 10);
+                });
                 document.body.style.overflow = 'hidden';
                 menuOpen = true;
             } else {
@@ -514,6 +515,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 document.body.style.overflow = '';
                 menuOpen = false;
             }
+        }
+
+        function closeMenu() {
+            mobileMenu.classList.add('translate-x-full');
+            animateHamburger(false);
+            setTimeout(() => {
+                mobileMenuOverlay.classList.add('hidden');
+            }, 300);
+            document.body.style.overflow = '';
+            menuOpen = false;
         }
 
         // Add click listener
@@ -530,21 +541,12 @@ document.addEventListener('DOMContentLoaded', function() {
             toggleMenu();
         });
 
-        // Close mobile menu
-        function closeMenu() {
-            mobileMenu.classList.add('translate-x-full');
-            animateHamburger(false);
-            setTimeout(() => {
-                mobileMenuOverlay.classList.add('hidden');
-            }, 300);
-            document.body.style.overflow = '';
-            menuOpen = false;
+        if (mobileMenuClose) {
+            mobileMenuClose.addEventListener('click', function(e) {
+                e.preventDefault();
+                closeMenu();
+            });
         }
-
-        mobileMenuClose.addEventListener('click', function(e) {
-            e.preventDefault();
-            closeMenu();
-        });
 
         // Close mobile menu when clicking overlay
         mobileMenuOverlay.addEventListener('click', function(e) {
@@ -560,5 +562,21 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
-    }, 10); // Small delay to ensure DOM is updated
-});
+
+        // Insert navigation at the beginning of body and initialize mobile menu
+        if (document.body) {
+            document.body.insertAdjacentHTML('afterbegin', navigationHTML);
+            initMobileMenu();
+        }
+    }
+
+    // Initialize immediately if body exists, otherwise wait for DOMContentLoaded
+    if (document.body) {
+        initNavigation();
+    } else if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initNavigation);
+    } else {
+        // DOM already loaded
+        initNavigation();
+    }
+})();
