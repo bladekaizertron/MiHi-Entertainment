@@ -332,7 +332,43 @@
                 </div>
 
                 <!-- About -->
-                <a href="${pathPrefix}index.html#about" class="text-gray-700 hover:text-blue-600 font-medium transition duration-300">About</a>
+                <div class="relative group">
+                    <a href="${pathPrefix}index.html#about" class="text-gray-700 hover:text-blue-600 font-medium transition duration-300 flex items-center">
+                        About Us
+                        <svg class="w-4 h-4 ml-1 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </a>
+                    <div class="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-[30rem] max-h-[90vh] overflow-y-auto bg-white rounded-xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 border border-gray-200">
+                        <div class="p-8">
+                            <div class="grid grid-cols-3 gap-5">
+                                <div class="space-y-2.5">
+                                    <a href="${pathPrefix}about/blog.html" class="block text-sm text-gray-700 hover:text-blue-600 transition py-1.5 hover:bg-blue-50 rounded-md px-3 -mx-3">
+                                        <span class="font-semibold block mb-0.5 whitespace-nowrap">Read Our Blogs</span>
+                                        <span class="text-xs text-gray-500 leading-relaxed block whitespace-nowrap">View a collection of our work</span>
+                                    </a>
+                                    <a href="${pathPrefix}about/locations.html" class="block text-sm text-gray-700 hover:text-blue-600 transition py-1.5 hover:bg-blue-50 rounded-md px-3 -mx-3">
+                                        <span class="font-semibold block mb-0.5 whitespace-nowrap">Our Locations</span>
+                                        <span class="text-xs text-gray-500 leading-relaxed block whitespace-nowrap">Check out all of the services we offer for events</span>
+                                    </a>
+                                    <a href="${pathPrefix}about/case-studies.html" class="block text-sm text-gray-700 hover:text-blue-600 transition py-1.5 hover:bg-blue-50 rounded-md px-3 -mx-3">
+                                        <span class="font-semibold block mb-0.5 whitespace-nowrap">Case Studies</span>
+                                        <span class="text-xs text-gray-500 leading-relaxed block whitespace-nowrap">See all of our Photo Booths</span>
+                                    </a>
+                                    <a href="${pathPrefix}about/faq.html" class="block text-sm text-gray-700 hover:text-blue-600 transition py-1.5 hover:bg-blue-50 rounded-md px-3 -mx-3">
+                                        <span class="font-semibold block mb-0.5 whitespace-nowrap">FAQ</span>
+                                        <span class="text-xs text-gray-500 leading-relaxed block whitespace-nowrap">Take a look at our prop collection</span>
+                                    </a>
+                                    <a href="${pathPrefix}about/about-mihi.html" class="block text-sm text-gray-700 hover:text-blue-600 transition py-1.5 hover:bg-blue-50 rounded-md px-3 -mx-3">
+                                        <span class="font-semibold block mb-0.5 whitespace-nowrap">About MiHi</span>
+                                        <span class="text-xs text-gray-500 leading-relaxed block whitespace-nowrap">All events themes, curated for any event</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
 
                 <!-- CTA Button -->
                 <a href="${pathPrefix}index.html#contact" class="btn-primary text-white px-6 py-3 rounded-full font-semibold shadow-lg hover:shadow-xl transition-all duration-300">
