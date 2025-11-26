@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - MiHi Entertainment | Get a Quote</title>
+    <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <style>
+        /* Custom styles for modern luxury design */
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #1a202c;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Hero section */
+        .hero-section {
+            position: relative;
+            width: 100%;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        .hero-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
+            z-index: 1;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.7) 50%, rgba(0, 20, 60, 0.75) 100%);
+            z-index: 2;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 3;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        /* Smooth scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f8fafc;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%);
+            border-radius: 10px;
+            border: 2px solid #f8fafc;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, #0040d9 0%, #0033b3 100%);
+        }
+
+        /* Form styles */
+        .form-input {
+            width: 100%;
+            padding: 1rem 1.25rem;
+            background: #ffffff;
+            border: 1.5px solid #e5e7eb;
+            border-radius: 10px;
+            font-size: 1rem;
+            color: #1a202c;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        .form-input:hover {
+            border-color: #d1d5db;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #0050ff;
+            box-shadow: 0 0 0 4px rgba(0, 80, 255, 0.08);
+        }
+
+        .form-textarea {
+            width: 100%;
+            padding: 1rem 1.25rem;
+            background: #ffffff;
+            border: 1.5px solid #e5e7eb;
+            border-radius: 10px;
+            font-size: 1rem;
+            color: #1a202c;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.3s ease;
+            resize: vertical;
+            min-height: 140px;
+        }
+
+        .form-textarea:hover {
+            border-color: #d1d5db;
+        }
+
+        .form-textarea:focus {
+            outline: none;
+            border-color: #0050ff;
+            box-shadow: 0 0 0 4px rgba(0, 80, 255, 0.08);
+        }
+
+        /* Image gallery - Auto scroll */
+        .gallery-container {
+            overflow: hidden;
+            position: relative;
+            width: 100%;
+        }
+
+        .gallery-scroll {
+            display: flex;
+            gap: 1rem;
+            width: fit-content;
+            animation: scroll-right-to-left 30s linear infinite;
+        }
+
+        .gallery-scroll:hover {
+            animation-play-state: paused;
+        }
+
+        @keyframes scroll-right-to-left {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+            flex-shrink: 0;
+            width: 250px;
+            height: 250px;
+        }
+
+        @media (min-width: 768px) {
+            .gallery-item {
+                width: 300px;
+                height: 300px;
+            }
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        /* Button styles */
+        .btn-primary {
+            background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%);
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 80, 255, 0.4);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(99, 102, 241, 0.4);
+        }
+
+        /* Enhanced shadow for contact card */
+        .shadow-3xl {
+            box-shadow: 0 35px 60px -12px rgba(0, 0, 0, 0.25);
+        }
+
+        /* MiHi Brand Gradient - matching logo colors (teal to magenta) */
+        .mihi-brand-gradient {
+            background: linear-gradient(135deg, #00d4ff 0%, #00b8e6 25%, #ff00a8 75%, #ff0066 100%);
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50">
+    <main>
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <img src="assets/images/FeelFamous_00016.jpg" alt="Contact MiHi Entertainment" class="hero-image" onerror="this.style.display='none'">
+            <div class="hero-overlay"></div>
+            <div class="hero-content container mx-auto px-6 text-center">
+                <h1 class="text-5xl md:text-7xl font-black text-white mb-6 mx-auto text-center">
+                    CONTACT US
+                </h1>
+            </div>
+        </section>
+
+        <!-- Contact Options Section -->
+        <section class="py-16 md:py-24 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="max-w-6xl mx-auto">
+                    <div class="mb-16">
+                        <!-- Have Questions Card -->
+                        <div class="relative overflow-hidden rounded-3xl p-10 md:p-12 shadow-2xl hover:shadow-3xl transition-all duration-500 group mihi-brand-gradient">
+                            <!-- Decorative background elements -->
+                            <div class="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl transform translate-x-1/2 -translate-y-1/2"></div>
+                            <div class="absolute bottom-0 left-0 w-48 h-48 bg-white/5 rounded-full blur-2xl transform -translate-x-1/2 translate-y-1/2"></div>
+                            
+                            <!-- Content -->
+                            <div class="relative z-10">
+                                <div class="flex items-start justify-between mb-6">
+                                    <div class="flex-1">
+                                        <div class="inline-flex items-center gap-2 px-4 py-1.5 bg-white/20 backdrop-blur-sm rounded-full text-xs font-semibold text-white mb-4 uppercase tracking-wider">
+                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                            </svg>
+                                            Quick Contact
+                                        </div>
+                                        <h2 class="text-4xl md:text-5xl font-black text-white mb-4 leading-tight">
+                                            HAVE QUESTIONS?
+                                        </h2>
+                                        <p class="text-lg text-white/90 leading-relaxed max-w-2xl">
+                                            Send us an email to talk over your event details, we're happy to help with any questions you may have.
+                                        </p>
+                                    </div>
+                                    <!-- Icon -->
+                                    <div class="hidden md:flex items-center justify-center w-20 h-20 bg-white/20 backdrop-blur-sm rounded-2xl ml-6 group-hover:scale-110 transition-transform duration-300">
+                                        <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                                        </svg>
+                                    </div>
+                                </div>
+                                
+                                <a href="mailto:saras@mihientertainment.com" 
+                                   class="group/btn inline-flex items-center justify-center px-10 py-4 rounded-xl font-bold text-lg bg-white text-blue-600 shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 hover:scale-105">
+                                    <svg class="w-5 h-5 mr-2 group-hover/btn:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                                    </svg>
+                                    EMAIL US
+                                    <svg class="w-5 h-5 ml-2 group-hover/btn:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quote Form -->
+                    <div id="quote-form" class="bg-white rounded-2xl p-8 md:p-12 lg:p-16 shadow-xl border border-gray-200">
+                        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4 text-center">Get Your Quote</h2>
+                        <p class="text-gray-600 text-center mb-10 text-lg">Fill out the form below and we'll get back to you as soon as possible.</p>
+                        
+                        <form id="contactForm" class="space-y-8">
+                            <div class="grid md:grid-cols-2 gap-6 lg:gap-8">
+                                <div>
+                                    <label for="firstName" class="block text-sm font-semibold text-gray-700 mb-2.5">
+                                        First Name <span class="text-red-500">*</span>
+                                    </label>
+                                    <input type="text" id="firstName" name="firstName" required 
+                                        class="form-input">
+                                </div>
+                                <div>
+                                    <label for="lastName" class="block text-sm font-semibold text-gray-700 mb-2.5">
+                                        Last Name <span class="text-red-500">*</span>
+                                    </label>
+                                    <input type="text" id="lastName" name="lastName" required 
+                                        class="form-input">
+                                </div>
+                            </div>
+
+                            <div class="grid md:grid-cols-2 gap-6 lg:gap-8">
+                                <div>
+                                    <label for="email" class="block text-sm font-semibold text-gray-700 mb-2.5">
+                                        Email Address <span class="text-red-500">*</span>
+                                    </label>
+                                    <input type="email" id="email" name="email" required 
+                                        class="form-input">
+                                </div>
+                                <div>
+                                    <label for="phone" class="block text-sm font-semibold text-gray-700 mb-2.5">
+                                        Phone Number <span class="text-red-500">*</span>
+                                    </label>
+                                    <input type="tel" id="phone" name="phone" required 
+                                        class="form-input">
+                                </div>
+                            </div>
+
+                            <div class="grid md:grid-cols-2 gap-6 lg:gap-8">
+                                <div>
+                                    <label for="eventType" class="block text-sm font-semibold text-gray-700 mb-2.5">
+                                        Event Type
+                                    </label>
+                                    <select id="eventType" name="eventType" class="form-input">
+                                        <option value="">Select an event type</option>
+                                        <option value="wedding">Wedding</option>
+                                        <option value="corporate">Corporate Event</option>
+                                        <option value="social">Social Event</option>
+                                        <option value="trade-show">Trade Show</option>
+                                        <option value="holiday-party">Holiday Party</option>
+                                        <option value="casino-party">Casino Party</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label for="eventDate" class="block text-sm font-semibold text-gray-700 mb-2.5">
+                                        Event Date
+                                    </label>
+                                    <input type="date" id="eventDate" name="eventDate" 
+                                        class="form-input">
+                                </div>
+                            </div>
+
+                            <div>
+                                <label for="eventLocation" class="block text-sm font-semibold text-gray-700 mb-2.5">
+                                    Event Location
+                                </label>
+                                <input type="text" id="eventLocation" name="eventLocation" 
+                                    placeholder="City, State" class="form-input">
+                            </div>
+
+                            <div>
+                                <label for="services" class="block text-sm font-semibold text-gray-700 mb-3">
+                                    Services Interested In
+                                </label>
+                                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mt-2">
+                                    <label class="flex items-center text-gray-700 hover:text-gray-900 transition-colors cursor-pointer">
+                                        <input type="checkbox" name="services" value="photo-booth-with-printing" class="mr-3 w-4 h-4 text-blue-600 rounded focus:ring-blue-500 border-gray-300">
+                                        <span class="text-sm">Photo Booths (with printing)</span>
+                                    </label>
+                                    <label class="flex items-center text-gray-700 hover:text-gray-900 transition-colors cursor-pointer">
+                                        <input type="checkbox" name="services" value="photo-booth-without-printing" class="mr-3 w-4 h-4 text-blue-600 rounded focus:ring-blue-500 border-gray-300">
+                                        <span class="text-sm">Photo Booths (without printing)</span>
+                                    </label>
+                                    <label class="flex items-center text-gray-700 hover:text-gray-900 transition-colors cursor-pointer">
+                                        <input type="checkbox" name="services" value="video-booths" class="mr-3 w-4 h-4 text-blue-600 rounded focus:ring-blue-500 border-gray-300">
+                                        <span class="text-sm">Video Booths</span>
+                                    </label>
+                                    <label class="flex items-center text-gray-700 hover:text-gray-900 transition-colors cursor-pointer">
+                                        <input type="checkbox" name="services" value="ai-experiences" class="mr-3 w-4 h-4 text-blue-600 rounded focus:ring-blue-500 border-gray-300">
+                                        <span class="text-sm">AI Experiences</span>
+                                    </label>
+                                    <label class="flex items-center text-gray-700 hover:text-gray-900 transition-colors cursor-pointer">
+                                        <input type="checkbox" name="services" value="lighting-decor" class="mr-3 w-4 h-4 text-blue-600 rounded focus:ring-blue-500 border-gray-300">
+                                        <span class="text-sm">Lighting & Decor</span>
+                                    </label>
+                                    <label class="flex items-center text-gray-700 hover:text-gray-900 transition-colors cursor-pointer">
+                                        <input type="checkbox" name="services" value="virtual-reality" class="mr-3 w-4 h-4 text-blue-600 rounded focus:ring-blue-500 border-gray-300">
+                                        <span class="text-sm">Virtual Reality</span>
+                                    </label>
+                                    <label class="flex items-center text-gray-700 hover:text-gray-900 transition-colors cursor-pointer">
+                                        <input type="checkbox" name="services" value="professional-headshots" class="mr-3 w-4 h-4 text-blue-600 rounded focus:ring-blue-500 border-gray-300">
+                                        <span class="text-sm">Professional Headshots</span>
+                                    </label>
+                                    <label class="flex items-center text-gray-700 hover:text-gray-900 transition-colors cursor-pointer">
+                                        <input type="checkbox" name="services" value="professional-event-photography" class="mr-3 w-4 h-4 text-blue-600 rounded focus:ring-blue-500 border-gray-300">
+                                        <span class="text-sm">Professional Event Photography</span>
+                                    </label>
+                                    <label class="flex items-center text-gray-700 hover:text-gray-900 transition-colors cursor-pointer">
+                                        <input type="checkbox" name="services" value="av-dj-services" class="mr-3 w-4 h-4 text-blue-600 rounded focus:ring-blue-500 border-gray-300">
+                                        <span class="text-sm">AV + DJ Services</span>
+                                    </label>
+                                    <label class="flex items-center text-gray-700 hover:text-gray-900 transition-colors cursor-pointer">
+                                        <input type="checkbox" name="services" value="casino-services" class="mr-3 w-4 h-4 text-blue-600 rounded focus:ring-blue-500 border-gray-300">
+                                        <span class="text-sm">Casino Services</span>
+                                    </label>
+                                    <label class="flex items-center text-gray-700 hover:text-gray-900 transition-colors cursor-pointer">
+                                        <input type="checkbox" name="services" value="dancefloors" class="mr-3 w-4 h-4 text-blue-600 rounded focus:ring-blue-500 border-gray-300">
+                                        <span class="text-sm">Dancefloors</span>
+                                    </label>
+                                    <label class="flex items-center text-gray-700 hover:text-gray-900 transition-colors cursor-pointer">
+                                        <input type="checkbox" name="services" value="staging-claw-machine-stick-drop" class="mr-3 w-4 h-4 text-blue-600 rounded focus:ring-blue-500 border-gray-300">
+                                        <span class="text-sm">Staging, Claw Machine/Stick Drop</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label for="hearAbout" class="block text-sm font-semibold text-gray-700 mb-2.5">
+                                    How did you hear about us?
+                                </label>
+                                <select id="hearAbout" name="hearAbout" class="form-input">
+                                    <option value="">Select an option</option>
+                                    <option value="google-search">Google Search</option>
+                                    <option value="social-media">Social Media (Facebook, Instagram, etc.)</option>
+                                    <option value="referral">Referral from friend/family</option>
+                                    <option value="previous-customer">Previous Customer</option>
+                                    <option value="wedding-planner">Wedding Planner/Event Coordinator</option>
+                                    <option value="venue-recommendation">Venue Recommendation</option>
+                                    <option value="trade-show">Trade Show/Event</option>
+                                    <option value="online-ad">Online Advertisement</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label for="eventDetails" class="block text-sm font-semibold text-gray-700 mb-2.5">
+                                    Tell Us About Your Event
+                                </label>
+                                <textarea id="eventDetails" name="eventDetails" rows="5" 
+                                    placeholder="Please share any details about your event, guest count, theme, or special requirements..."
+                                    class="form-textarea"></textarea>
+                            </div>
+
+                            <div>
+                                <label class="flex items-start text-gray-700 cursor-pointer">
+                                    <input type="checkbox" name="privacyPolicy" required 
+                                        class="mt-1 mr-3 w-4 h-4 text-blue-600 rounded focus:ring-blue-500 border-gray-300">
+                                    <span class="text-sm">
+                                        I agree to the <a href="#" class="text-blue-600 underline hover:text-blue-700">Privacy Policy</a> <span class="text-red-500">*</span>
+                                    </span>
+                                </label>
+                            </div>
+
+                            <div class="text-center pt-4">
+                                <button type="submit" 
+                                    class="inline-flex items-center justify-center px-10 py-4 rounded-full font-semibold text-lg mihi-brand-gradient text-white shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 focus:ring-4 focus:ring-blue-400/40">
+                                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/>
+                                    </svg>
+                                    SUBMIT REQUEST
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Image Gallery Section -->
+        <section class="py-16 bg-gray-100">
+            <div class="container mx-auto px-6">
+                <div class="gallery-container">
+                    <div class="gallery-scroll">
+                        <!-- First set of gallery items -->
+                        <div class="gallery-item">
+                            <img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="People with colorful backdrop and props" onerror="this.style.display='none'">
+                        </div>
+                        <div class="gallery-item">
+                            <img src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Group with gold backdrop and props" onerror="this.style.display='none'">
+                        </div>
+                        <div class="gallery-item">
+                            <img src="https://images.unsplash.com/photo-1511578314322-379afb476865?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="People with silver backdrop and props" onerror="this.style.display='none'">
+                        </div>
+                        <div class="gallery-item">
+                            <img src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="People with colorful backdrop and props" onerror="this.style.display='none'">
+                        </div>
+                        <div class="gallery-item">
+                            <img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Group with gold backdrop and props" onerror="this.style.display='none'">
+                        </div>
+                        <div class="gallery-item">
+                            <img src="https://images.unsplash.com/photo-1511578314322-379afb476865?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="People with silver backdrop and props" onerror="this.style.display='none'">
+                        </div>
+                        <div class="gallery-item">
+                            <img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="People with colorful backdrop and props" onerror="this.style.display='none'">
+                        </div>
+                        <div class="gallery-item">
+                            <img src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Group with gold backdrop and props" onerror="this.style.display='none'">
+                        </div>
+                        <div class="gallery-item">
+                            <img src="https://images.unsplash.com/photo-1511578314322-379afb476865?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="People with silver backdrop and props" onerror="this.style.display='none'">
+                        </div>
+                        <!-- Duplicate set for seamless loop -->
+                        <div class="gallery-item">
+                            <img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="People with colorful backdrop and props" onerror="this.style.display='none'">
+                        </div>
+                        <div class="gallery-item">
+                            <img src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Group with gold backdrop and props" onerror="this.style.display='none'">
+                        </div>
+                        <div class="gallery-item">
+                            <img src="https://images.unsplash.com/photo-1511578314322-379afb476865?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="People with silver backdrop and props" onerror="this.style.display='none'">
+                        </div>
+                        <div class="gallery-item">
+                            <img src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="People with colorful backdrop and props" onerror="this.style.display='none'">
+                        </div>
+                        <div class="gallery-item">
+                            <img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Group with gold backdrop and props" onerror="this.style.display='none'">
+                        </div>
+                        <div class="gallery-item">
+                            <img src="https://images.unsplash.com/photo-1511578314322-379afb476865?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="People with silver backdrop and props" onerror="this.style.display='none'">
+                        </div>
+                        <div class="gallery-item">
+                            <img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="People with colorful backdrop and props" onerror="this.style.display='none'">
+                        </div>
+                        <div class="gallery-item">
+                            <img src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Group with gold backdrop and props" onerror="this.style.display='none'">
+                        </div>
+                        <div class="gallery-item">
+                            <img src="https://images.unsplash.com/photo-1511578314322-379afb476865?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="People with silver backdrop and props" onerror="this.style.display='none'">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="relative overflow-hidden bg-gradient-to-r from-[#220834] via-[#1a0b44] to-[#051637] text-white py-20 md:py-28">
+            <!-- Ambient elements -->
+            <div class="absolute inset-0 pointer-events-none">
+                <div class="absolute top-10 left-1/2 -translate-x-1/2 w-[90%] h-full bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.15),transparent_60%)]"></div>
+                <div class="absolute -top-24 left-10 w-40 h-40 rounded-full bg-pink-500/20 blur-3xl"></div>
+                <div class="absolute bottom-10 right-10 w-52 h-52 rounded-full bg-blue-400/20 blur-[120px]"></div>
+            </div>
+
+            <div class="container mx-auto px-6 relative z-10">
+                <div class="max-w-5xl mx-auto text-center space-y-10">
+                    <div class="inline-flex items-center gap-2 px-6 py-2 bg-white/10 border border-white/20 rounded-full text-xs font-semibold tracking-[0.4em] uppercase text-pink-200 shadow-[0_0_25px_rgba(236,72,153,0.45)]">
+                        Photo Booth Concierge
+                    </div>
+
+                    <div class="space-y-8 md:space-y-10">
+                        <h2 class="text-4xl md:text-5xl lg:text-6xl font-black leading-tight px-4">
+                            <span class="block">INFINITE POSSIBILITIES.</span>
+                            <span class="block mt-2">ENDLESS FUN.</span>
+                        </h2>
+                        <div class="space-y-6 max-w-4xl mx-auto px-4">
+                            <p class="text-lg md:text-xl text-white/90 leading-relaxed">
+                                MiHi Entertainment is your ultimate partner for unforgettable event entertainment. Whether you're looking for a state-of-the-art photo booth, professional photography, cutting-edge A/V services, or a completely custom idea, we're here to make your vision a reality.
+                            </p>
+                            <p class="text-base md:text-lg text-white/80 leading-relaxed">
+                                Our team specializes in crafting tailored solutions to meet your unique needs, ensuring every detail aligns with your event goals. From concept to execution, we collaborate with you to deliver exceptional experiences that leave a lasting impression on your guests.
+                            </p>
+                            <p class="text-base md:text-lg text-white/80 leading-relaxed">
+                                It's no wonder we've been recognized as Denver's best for Photo Booth Services and more. Ready to see what we can create together? Click below to explore all the incredible options we offer!
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <a href="index.html#gallery" class="group inline-flex items-center justify-center px-10 py-4 rounded-full font-semibold text-lg bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 text-white shadow-[0_22px_60px_-20px_rgba(236,72,153,0.8)] hover:shadow-[0_28px_70px_-20px_rgba(59,130,246,0.7)] transition-transform duration-300 hover:-translate-y-1 focus:ring-4 focus:ring-pink-400/40">
+                            CHECK OUT OUR WORK
+                            <svg class="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                            </svg>
+                        </a>
+                        <a href="index.html#products" class="inline-flex items-center justify-center px-9 py-4 rounded-full font-semibold border border-white/30 text-white bg-white/5 hover:bg-white/15 hover:shadow-lg transition-all duration-300 focus:ring-2 focus:ring-white/30">
+                            VIEW OUR PRODUCTS
+                        </a>
+                    </div>
+
+                    <!-- Trust indicators -->
+                    <div class="flex flex-wrap items-center justify-center gap-6 mt-12 text-white/80 text-sm">
+                        <div class="flex items-center gap-2">
+                            <svg class="w-4 h-4 text-pink-300" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                            </svg>
+                            Instant Prints & Digital Galleries
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <svg class="w-4 h-4 text-purple-300" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                            </svg>
+                            Onsite Booth Attendants
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <svg class="w-4 h-4 text-blue-300" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                            </svg>
+                            Custom Themes & Props
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <svg class="w-4 h-4 text-teal-300" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                            </svg>
+                            Nationwide Coverage
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- JavaScript for form handling -->
+    <script>
+        // Form submission handler
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData);
+            
+            // Get selected services
+            const services = Array.from(document.querySelectorAll('input[name="services"]:checked')).map(cb => cb.value);
+            data.services = services.join(', ');
+            
+            // Log form data (in production, this would be sent to a server)
+            console.log('Form submitted:', data);
+            
+            // Show success message
+            alert('Thank you for your inquiry! Our team will be in touch with you soon.');
+            
+            // Reset form
+            this.reset();
+        });
+
+        // Smooth scroll to form when clicking "Fill Out Form" button
+        document.querySelectorAll('a[href="#quote-form"]').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.getElementById('quote-form').scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            });
+        });
+    </script>
+
+    <!-- Load Navigation Component -->
+    <script src="assets/components/navigation.js"></script>
+    
+    <!-- Load Footer Component -->
+    <script src="assets/components/footer.js"></script>
+    
+    <!-- Load Back to Top Component -->
+    <script src="assets/components/back-to-top.js"></script>
+    
+    <!-- Phone Protection Script -->
+    <script src="assets/js/phone-protection.js"></script>
+    
+    <!-- Main JavaScript -->
+    <script src="assets/js/main.js" defer></script>
+
+</body>
+
+</html>
+

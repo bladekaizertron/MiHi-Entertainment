@@ -164,8 +164,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     </p>
                     <div class="flex gap-4 sm:gap-6 flex-wrap justify-center md:justify-end">
                         <a href="#" class="hover:text-white transition-colors whitespace-nowrap">Sitemap</a>
-                        <a href="#" class="hover:text-white transition-colors whitespace-nowrap">Privacy</a>
-                        <a href="#" class="hover:text-white transition-colors whitespace-nowrap">Terms</a>
+                        <a href="${pathPrefix}privacy-policy.html" class="hover:text-white transition-colors whitespace-nowrap">Privacy</a>
+                        <a href="${pathPrefix}terms.html" class="hover:text-white transition-colors whitespace-nowrap">Terms</a>
                     </div>
                 </div>
             </div>
