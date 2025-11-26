@@ -6,143 +6,410 @@
     <title>Case Studies - MiHi Entertainment</title>
     <link rel="icon" type="image/svg+xml" href="../assets/images/favicon.svg">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Lora:wght@400;500;600;700&family=Open+Sans:wght@400;500;600;700;800;900&family=Heebo:wght@100;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Inter', sans-serif; color: #1a202c; }
-        h1, h2, h3, h4, h5, h6 { font-family: 'Playfair Display', serif; }
+        body { font-family: 'Lora', serif; color: #1a202c; }
+        h1, h2, h3, h4, h5, h6 { font-family: 'Montserrat', sans-serif; font-weight: 700; letter-spacing: -0.01em; }
         .btn-primary { background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%); transition: all 0.3s ease; }
         .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(0, 80, 255, 0.4); }
         .section-padding { padding: 5rem 0; }
         .hero-gradient { background: linear-gradient(135deg, rgba(0, 80, 255, 0.5) 0%, rgba(0, 64, 217, 0.5) 100%); }
+        
+        /* Image Slider Styles */
+        :root {
+            --main: #777;
+            --back: #aaa;
+            --accent: hsl(220, 50%, 40%);
+            --base: 3vh;
+            --time: 1800ms;
+        }
+        
+        .slider {
+            position: relative;
+            height: 100vh;
+            width: 100%;
+            background: var(--main);
+            overflow: hidden;
+        }
+        
+        .slider__wrap {
+            position: absolute;
+            width: 100%;
+            height: 100vh;
+            transform: translateX(100%);
+            top: 0%;
+            left: 0;
+            right: auto;
+            overflow: hidden;
+            transition: transform calc(var(--time) / 4) cubic-bezier(0.785, 0.135, 0.150, 0.860);
+            transform-origin: 0% 50%;
+            transition-delay: calc(var(--time) / 4);
+            opacity: 0;
+        }
+        
+        .slider__wrap--hacked {
+            opacity: 1;
+        }
+        
+        .slider__back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-size: auto 100%;
+            background-position: center;
+            background-repeat: no-repeat;
+            transition: filter calc(var(--time) / 4) cubic-bezier(0.785, 0.135, 0.150, 0.860);
+        }
+        
+        .slider__inner {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0%;
+            background-size: auto 133.3333%;
+            background-position: center;
+            background-repeat: no-repeat;
+            transform: scale(0.75);
+            transition: transform calc(var(--time) / 4) cubic-bezier(0.785, 0.135, 0.150, 0.860), 
+                        box-shadow calc(var(--time) / 4) cubic-bezier(0.785, 0.135, 0.150, 0.860), 
+                        opacity calc(var(--time) / 4) step-end;
+            opacity: 0;
+            box-shadow: 0 var(--base) var(--base) rgba(0, 0, 0, 0);
+            padding: calc(var(--base) * 5);
+            box-sizing: border-box;
+        }
+        
+        .slider__content {
+            position: relative;
+            top: 50%;
+            width: auto;
+            transform: translateY(-50%);
+            color: white;
+            font-family: 'Heebo', sans-serif;
+            opacity: 0;
+            transition: opacity calc(var(--time) / 4);
+        }
+        
+        .slider__content h1 {
+            font-weight: 900;
+            font-size: calc(var(--base) * 3);
+            line-height: 0.85;
+            margin-bottom: calc(var(--base) / 4);
+            pointer-events: none;
+            text-shadow: 0 calc(var(--base) / 8) calc(var(--base) / 4) rgba(0, 0, 0, 0.1);
+        }
+        
+        .slider__content a {
+            cursor: pointer;
+            font-size: calc(var(--base) * 0.8);
+            letter-spacing: calc(var(--base) * 0.1);
+            font-weight: 100;
+            position: relative;
+            text-decoration: none;
+            color: white;
+        }
+        
+        .slider__content a:after {
+            content: '';
+            display: block;
+            width: calc(var(--base) * 3);
+            background: white;
+            height: 1px;
+            position: absolute;
+            top: 50%;
+            left: calc(var(--base) * 2);
+            transform: translateY(-50%);
+            transform-origin: 0% 50%;
+            transition: transform calc(var(--time) / 2) cubic-bezier(0.785, 0.135, 0.150, 0.860);
+        }
+        
+        .slider__content a:before {
+            content: '';
+            border-top: 1px solid white;
+            border-right: 1px solid white;
+            display: block;
+            width: calc(var(--base) / 3);
+            height: calc(var(--base) / 3);
+            transform: translateX(0) translateY(-50%) rotate(45deg);
+            position: absolute;
+            font-family: 'Heebo', sans-serif;
+            font-weight: 100;
+            top: 50%;
+            left: calc(var(--base) * 5);
+            transition: transform calc(var(--time) / 2) cubic-bezier(0.785, 0.135, 0.150, 0.860);
+        }
+        
+        .slider__content a:hover:after {
+            transform: scaleX(1.5);
+            transition: transform calc(var(--time) * 2 / 3) cubic-bezier(0.785, 0.135, 0.150, 0.860);
+        }
+        
+        .slider__content a:hover:before {
+            transform: translateX(calc(var(--base) * 2)) translateY(-50%) rotate(45deg);
+            transition: transform calc(var(--time) * 2 / 3) cubic-bezier(0.785, 0.135, 0.150, 0.860);
+        }
+        
+        .slider__slide {
+            position: absolute;
+            left: 0;
+            height: 100vh;
+            width: 100%;
+            transition: transform calc(var(--time) / 3) cubic-bezier(0.785, 0.135, 0.150, 0.860);
+            transition-delay: calc(var(--time) / 3);
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        .slider__slide--active {
+            transform: translateX(0%);
+            z-index: 2;
+        }
+        
+        .slider__slide--active .slider__wrap {
+            transform: translateX(0);
+            transform-origin: 100% 50%;
+            opacity: 1;
+            animation: none;
+        }
+        
+        .slider__slide--active .slider__back {
+            filter: blur(calc(var(--base) * 0.5));
+            transition: filter calc(var(--time) / 2) cubic-bezier(0.785, 0.135, 0.150, 0.860);
+            transition-delay: calc(var(--time) / 2) !important;
+        }
+        
+        .slider__slide--active .slider__inner {
+            transform: scale(0.80);
+            box-shadow: 0 calc(var(--base) / 3) calc(var(--base) * 2) rgba(0, 0, 0, 0.2);
+            pointer-events: auto;
+            opacity: 1;
+            transition: transform calc(var(--time) / 2) cubic-bezier(0.785, 0.135, 0.150, 0.860), 
+                        box-shadow calc(var(--time) / 2) cubic-bezier(0.785, 0.135, 0.150, 0.860), 
+                        opacity 1ms step-end;
+            transition-delay: calc(var(--time) / 2);
+        }
+        
+        .slider__slide--active .slider__content {
+            opacity: 1;
+            transition-delay: calc(var(--time) * 3 / 4);
+        }
+        
+        .slider__slide:not(.slider__slide--active) .slider__wrap {
+            animation-name: hack;
+            animation-duration: calc(var(--time) / 2);
+            animation-delay: calc(var(--time) / 4);
+            animation-timing-function: cubic-bezier(0.785, 0.135, 0.150, 0.860);
+        }
+        
+        @keyframes hack {
+            0% {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            50% {
+                transform: translateX(-100%);
+                opacity: 1;
+            }
+            51% {
+                transform: translateX(-100%);
+                opacity: 0;
+            }
+            52% {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            100% {
+                transform: translateX(100%);
+                opacity: 1;
+            }
+        }
+        
+        .slider__slide:nth-child(1) .slider__back,
+        .slider__slide:nth-child(1) .slider__inner {
+            background-image: url(https://unsplash.it/1600/800/?image=931);
+        }
+        
+        .slider__slide:nth-child(2) .slider__back,
+        .slider__slide:nth-child(2) .slider__inner {
+            background-image: url(https://unsplash.it/1600/800/?image=929);
+        }
+        
+        .slider__slide:nth-child(3) .slider__back,
+        .slider__slide:nth-child(3) .slider__inner {
+            background-image: url(https://unsplash.it/1600/800/?image=927);
+        }
+        
+        .slider__indicators {
+            position: absolute;
+            bottom: calc(var(--base) * 2);
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: calc(var(--base) * 0.5);
+            z-index: 10;
+        }
+        
+        .slider__indicator {
+            width: calc(var(--base) * 0.8);
+            height: calc(var(--base) * 0.8);
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        
+        .slider__indicator:hover {
+            background: rgba(255, 255, 255, 0.5);
+        }
+        
+        .slider__slide--active ~ .slider__indicators .slider__indicator[data-slide="1"],
+        .slider__slide[data-slide="1"].slider__slide--active ~ .slider__indicators .slider__indicator[data-slide="1"] {
+            background: rgba(255, 255, 255, 0.9);
+        }
     </style>
 </head>
 <body>
     <div id="nav-placeholder"></div>
 
-    <section class="relative h-[60vh] flex items-center justify-center overflow-hidden">
-        <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1531482615713-2afd69097998?w=1600');"></div>
-        <div class="absolute inset-0 hero-gradient"></div>
-        <div class="relative z-10 text-center text-white px-6">
-            <h1 class="text-5xl md:text-6xl font-bold mb-4">Case Studies</h1>
-            <p class="text-xl md:text-2xl mb-8">Real Events, Real Results</p>
+    <!-- Hero Section -->
+    <section class="relative min-h-[80vh] md:min-h-[90vh] flex items-center justify-center overflow-hidden">
+        <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('../assets/images/about/casestudies/hero.jpg');"></div>
+        <div class="absolute inset-0 bg-black/60"></div>
+        <div class="relative z-10 text-center text-white px-6 max-w-5xl mx-auto py-20">
+            <p class="text-sm md:text-base uppercase tracking-[0.2em] font-light mb-4 opacity-90">VIEW OUR</p>
+            <h1 class="text-6xl md:text-8xl lg:text-9xl font-bold mb-6 md:mb-8 leading-tight" style="text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5), 0 0 20px rgba(0, 0, 0, 0.3);">
+                CASE STUDIES
+            </h1>
+            <p class="text-lg md:text-xl lg:text-2xl mb-6 md:mb-8 max-w-3xl mx-auto leading-relaxed font-light">
+                Explore our case studies to see how MiHi Entertainment brings events to life with innovative photo booth experiences and creative solutions.
+            </p>
+            <p class="text-base md:text-lg mb-8 md:mb-10 opacity-90">
+                Click on a Case Study below to learn more about it!
+            </p>
+            <a href="../index.html#contact" class="inline-block bg-[#0050ff] hover:bg-[#0040d9] text-white font-semibold uppercase tracking-wide px-8 md:px-12 py-4 md:py-5 rounded-lg text-base md:text-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl">
+                CONTACT US
+            </a>
         </div>
     </section>
 
-    <section class="section-padding bg-white">
-        <div class="container mx-auto px-6">
-            <div class="max-w-4xl mx-auto">
-                <!-- Case Study 1 -->
-                <div class="mb-16 pb-16 border-b border-gray-200">
-                    <div class="grid md:grid-cols-2 gap-8 items-center">
-                        <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=600" alt="Wedding case study" class="rounded-2xl shadow-lg">
-                        <div>
-                            <span class="text-sm text-[#0050ff] font-semibold">Wedding Event</span>
-                            <h2 class="text-3xl font-bold mt-2 mb-4">Mountain Wedding at Vail Resort</h2>
-                            <p class="text-gray-700 mb-4">
-                                For Sarah and Mike's 250-guest wedding, we provided AI Photo Booth, 360 Video Booth, 
-                                and professional event photography. Guests loved the instant AI transformations and 
-                                360-degree slow-motion videos.
-                            </p>
-                            <div class="bg-gray-50 p-4 rounded-lg mb-4">
-                                <h4 class="font-bold mb-2">Results:</h4>
-                                <ul class="text-gray-700 space-y-1">
-                                    <li>✓ 2,500+ photos captured</li>
-                                    <li>✓ 90% guest participation rate</li>
-                                    <li>✓ 5,000+ social media shares</li>
-                                </ul>
-                            </div>
-                            <p class="italic text-gray-600">"The photo booth was the highlight of our wedding! Guests are still talking about it months later."</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Case Study 2 -->
-                <div class="mb-16 pb-16 border-b border-gray-200">
-                    <div class="grid md:grid-cols-2 gap-8 items-center">
-                        <div class="order-2 md:order-1">
-                            <span class="text-sm text-[#0050ff] font-semibold">Corporate Event</span>
-                            <h2 class="text-3xl font-bold mt-2 mb-4">Tech Company Product Launch</h2>
-                            <p class="text-gray-700 mb-4">
-                                A Fortune 500 tech company hired us for their product launch event. We set up custom-branded 
-                                photo booths with green screen technology, allowing attendees to virtually "test" the product 
-                                in different environments.
-                            </p>
-                            <div class="bg-gray-50 p-4 rounded-lg mb-4">
-                                <h4 class="font-bold mb-2">Results:</h4>
-                                <ul class="text-gray-700 space-y-1">
-                                    <li>✓ 800+ branded photos created</li>
-                                    <li>✓ 1,200+ email leads captured</li>
-                                    <li>✓ 15,000+ social impressions</li>
-                                </ul>
-                            </div>
-                            <p class="italic text-gray-600">"The photo booth generated more leads than our entire booth setup. ROI was incredible!"</p>
-                        </div>
-                        <img src="https://images.unsplash.com/photo-1511578314322-379afb476865?w=600" alt="Corporate case study" class="rounded-2xl shadow-lg order-1 md:order-2">
-                    </div>
-                </div>
-
-                <!-- Case Study 3 -->
-                <div class="mb-16 pb-16 border-b border-gray-200">
-                    <div class="grid md:grid-cols-2 gap-8 items-center">
-                        <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=600" alt="Trade show case study" class="rounded-2xl shadow-lg">
-                        <div>
-                            <span class="text-sm text-[#0050ff] font-semibold">Trade Show</span>
-                            <h2 class="text-3xl font-bold mt-2 mb-4">CES 2024 - Mosaic Wall Activation</h2>
-                            <p class="text-gray-700 mb-4">
-                                At CES 2024, we created a massive interactive mosaic wall that grew throughout the 4-day event. 
-                                Attendees took photos which were instantly added to a 20-foot digital mosaic displaying 
-                                the brand's message.
-                            </p>
-                            <div class="bg-gray-50 p-4 rounded-lg mb-4">
-                                <h4 class="font-bold mb-2">Results:</h4>
-                                <ul class="text-gray-700 space-y-1">
-                                    <li>✓ 5,000+ attendee photos</li>
-                                    <li>✓ Most-visited booth activation</li>
-                                    <li>✓ 50,000+ social media reach</li>
-                                </ul>
-                            </div>
-                            <p class="italic text-gray-600">"This drove more traffic to our booth than anything we've ever tried. Worth every penny!"</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Case Study 4 -->
-                <div>
-                    <div class="grid md:grid-cols-2 gap-8 items-center">
-                        <div class="order-2 md:order-1">
-                            <span class="text-sm text-[#0050ff] font-semibold">Charity Gala</span>
-                            <h2 class="text-3xl font-bold mt-2 mb-4">Annual Children's Hospital Fundraiser</h2>
-                            <p class="text-gray-700 mb-4">
-                                For a high-profile charity gala with 500 attendees, we provided GlamBot video, 
-                                professional photography, and a themed photo booth. All proceeds from photo purchases 
-                                went to the charity.
-                            </p>
-                            <div class="bg-gray-50 p-4 rounded-lg mb-4">
-                                <h4 class="font-bold mb-2">Results:</h4>
-                                <ul class="text-gray-700 space-y-1">
-                                    <li>✓ $15,000 raised from photo sales</li>
-                                    <li>✓ Celebrity guest participation</li>
-                                    <li>✓ Viral social media coverage</li>
-                                </ul>
-                            </div>
-                            <p class="italic text-gray-600">"The GlamBot videos created buzz on social media and helped us exceed our fundraising goals!"</p>
-                        </div>
-                        <img src="https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=600" alt="Gala case study" class="rounded-2xl shadow-lg order-1 md:order-2">
-                    </div>
+    <!-- Image Slider Section -->
+    <section class="slider">
+        <div class="slider__slide slider__slide--active" data-slide="1">
+            <div class="slider__wrap">
+                <div class="slider__back"></div>
+            </div>
+            <div class="slider__inner">
+                <div class="slider__content">
+                    <h1>Slide <br> One</h1>
+                    <a href="#" class="go-to-next">next</a>
                 </div>
             </div>
         </div>
-    </section>
-
-    <section class="section-padding bg-gradient-to-r from-[#0050ff] to-[#0050ff] text-white">
-        <div class="container mx-auto px-6 text-center">
-            <h2 class="text-4xl font-bold mb-6">Ready to Create Your Success Story?</h2>
-            <p class="text-xl mb-8">Let's make your event unforgettable</p>
-            <a href="../index.html#contact" class="bg-white text-[#0050ff] px-8 py-4 rounded-full text-lg font-semibold inline-block hover:bg-gray-100 transition">Get Started</a>
+        <div class="slider__slide" data-slide="2">
+            <div class="slider__wrap">
+                <div class="slider__back"></div>
+            </div>
+            <div class="slider__inner">
+                <div class="slider__content">
+                    <h1>Slide <br> Two</h1>
+                    <a href="#" class="go-to-next">next</a>
+                </div>
+            </div>
         </div>
+        <div class="slider__slide" data-slide="3">
+            <div class="slider__wrap">
+                <div class="slider__back"></div>
+            </div>
+            <div class="slider__inner">
+                <div class="slider__content">
+                    <h1>Slide <br> Three</h1>
+                    <a href="#" class="go-to-next">next</a>
+                </div>
+            </div>
+        </div>
+        <div class="slider__indicators"></div>
     </section>
 
     <script src="../assets/components/navigation.js"></script>
     <script src="../assets/components/footer.js"></script>
+    <script>
+        // Image Slider JavaScript
+        document.addEventListener('DOMContentLoaded', function() {
+            const slides = document.querySelectorAll('.slider__slide');
+            const indicatorsContainer = document.querySelector('.slider__indicators');
+            
+            // Create indicators
+            slides.forEach(function(slide, index) {
+                const indicator = document.createElement('div');
+                indicator.className = 'slider__indicator';
+                indicator.setAttribute('data-slide', index + 1);
+                indicatorsContainer.appendChild(indicator);
+                
+                // Add click event to indicator
+                indicator.addEventListener('click', function() {
+                    goToSlide(index + 1);
+                });
+            });
+            
+            // Add hacked class after delay
+            setTimeout(function() {
+                const wraps = document.querySelectorAll('.slider__wrap');
+                wraps.forEach(function(wrap) {
+                    wrap.classList.add('slider__wrap--hacked');
+                });
+            }, 1000);
+            
+            // Go to slide function
+            function goToSlide(number) {
+                slides.forEach(function(slide) {
+                    slide.classList.remove('slider__slide--active');
+                });
+                const targetSlide = document.querySelector('.slider__slide[data-slide="' + number + '"]');
+                if (targetSlide) {
+                    targetSlide.classList.add('slider__slide--active');
+                }
+                
+                // Update active indicator
+                const indicators = document.querySelectorAll('.slider__indicator');
+                indicators.forEach(function(indicator) {
+                    indicator.style.background = 'rgba(255, 255, 255, 0.3)';
+                });
+                const activeIndicator = document.querySelector('.slider__indicator[data-slide="' + number + '"]');
+                if (activeIndicator) {
+                    activeIndicator.style.background = 'rgba(255, 255, 255, 0.9)';
+                }
+            }
+            
+            // Next slide function
+            function goToNext() {
+                const activeSlide = document.querySelector('.slider__slide--active');
+                if (activeSlide) {
+                    const currentSlide = Number(activeSlide.getAttribute('data-slide'));
+                    const totalSlides = slides.length;
+                    let nextSlide = currentSlide + 1;
+                    if (nextSlide > totalSlides) {
+                        nextSlide = 1;
+                    }
+                    goToSlide(nextSlide);
+                }
+            }
+            
+            // Add click event to next buttons
+            const nextButtons = document.querySelectorAll('.go-to-next, .slider__next');
+            nextButtons.forEach(function(button) {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    goToNext();
+                });
+            });
+            
+            // Initialize active indicator
+            const firstIndicator = document.querySelector('.slider__indicator[data-slide="1"]');
+            if (firstIndicator) {
+                firstIndicator.style.background = 'rgba(255, 255, 255, 0.9)';
+            }
+        });
+    </script>
 </body>
 </html>

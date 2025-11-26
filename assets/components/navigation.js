@@ -347,7 +347,7 @@
                                         <span class="font-semibold block mb-0.5 whitespace-nowrap">Read Our Blogs</span>
                                         <span class="text-xs text-gray-500 leading-relaxed block whitespace-nowrap">Read about our events, activations, and more</span>
                                     </a>
-                                    <a href="${pathPrefix}about/locations.html" class="block text-sm text-gray-700 hover:text-blue-600 transition py-1.5 hover:bg-blue-50 rounded-md px-3 -mx-3">
+                                    <a href="${pathPrefix}our-locations.html" class="block text-sm text-gray-700 hover:text-blue-600 transition py-1.5 hover:bg-blue-50 rounded-md px-3 -mx-3">
                                         <span class="font-semibold block mb-0.5 whitespace-nowrap">Our Locations</span>
                                         <span class="text-xs text-gray-500 leading-relaxed block whitespace-nowrap">View all of the locations we service nationwide</span>
                                     </a>
