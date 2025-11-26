@@ -55,7 +55,7 @@
             position: absolute;
             width: 100%;
             height: 100%;
-            background-size: auto 100%;
+            background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
             transition: filter calc(var(--time) / 4) cubic-bezier(0.785, 0.135, 0.150, 0.860);
@@ -67,7 +67,7 @@
             position: absolute;
             top: 0;
             left: 0%;
-            background-size: auto 133.3333%;
+            background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
             transform: scale(0.75);
@@ -89,65 +89,297 @@
             font-family: 'Heebo', sans-serif;
             opacity: 0;
             transition: opacity calc(var(--time) / 4);
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
         }
         
         .slider__content h1 {
             font-weight: 900;
-            font-size: calc(var(--base) * 3);
-            line-height: 0.85;
-            margin-bottom: calc(var(--base) / 4);
+            font-size: calc(var(--base) * 4);
+            line-height: 0.9;
+            margin-bottom: calc(var(--base) / 2);
             pointer-events: none;
-            text-shadow: 0 calc(var(--base) / 8) calc(var(--base) / 4) rgba(0, 0, 0, 0.1);
+            text-shadow: 
+                0 2px 4px rgba(0, 0, 0, 0.4),
+                0 4px 8px rgba(0, 0, 0, 0.3),
+                0 8px 16px rgba(0, 0, 0, 0.2),
+                0 0 20px rgba(0, 0, 0, 0.15);
+            letter-spacing: -0.02em;
+            text-transform: uppercase;
         }
         
-        .slider__content a {
-            cursor: pointer;
-            font-size: calc(var(--base) * 0.8);
-            letter-spacing: calc(var(--base) * 0.1);
-            font-weight: 100;
+        /* Button Effect Styles */
+        @property --angle-1 {
+            syntax: "<angle>";
+            inherits: false;
+            initial-value: -75deg;
+        }
+
+        @property --angle-2 {
+            syntax: "<angle>";
+            inherits: false;
+            initial-value: -45deg;
+        }
+
+        :root {
+            --global--size: clamp(1rem, 2vw, 2.5rem);
+            --anim--hover-time: 400ms;
+            --anim--hover-ease: cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        /* Button Wrap Container */
+        .slider__content .button-wrap {
             position: relative;
-            text-decoration: none;
-            color: white;
+            z-index: 2;
+            border-radius: 999vw;
+            background: transparent;
+            pointer-events: none;
+            transition: all var(--anim--hover-time) var(--anim--hover-ease);
+            margin-top: calc(var(--base) / 2);
+            display: inline-block;
+            width: auto;
         }
-        
-        .slider__content a:after {
-            content: '';
-            display: block;
-            width: calc(var(--base) * 3);
-            background: white;
-            height: 1px;
+
+        /* Button Shadow Container */
+        .slider__content .button-shadow {
+            --shadow-cuttoff-fix: 0.75em;
             position: absolute;
-            top: 50%;
-            left: calc(var(--base) * 2);
-            transform: translateY(-50%);
-            transform-origin: 0% 50%;
-            transition: transform calc(var(--time) / 2) cubic-bezier(0.785, 0.135, 0.150, 0.860);
+            width: calc(100% + var(--shadow-cuttoff-fix));
+            height: calc(100% + var(--shadow-cuttoff-fix));
+            top: calc(0% - var(--shadow-cuttoff-fix) / 2);
+            left: calc(0% - var(--shadow-cuttoff-fix) / 2);
+            filter: blur(clamp(2px, 0.125em, 8px));
+            -webkit-filter: blur(clamp(2px, 0.125em, 8px));
+            -moz-filter: blur(clamp(2px, 0.125em, 8px));
+            -ms-filter: blur(clamp(2px, 0.125em, 8px));
+            overflow: visible;
+            pointer-events: none;
         }
-        
-        .slider__content a:before {
-            content: '';
-            border-top: 1px solid white;
-            border-right: 1px solid white;
-            display: block;
-            width: calc(var(--base) / 3);
-            height: calc(var(--base) / 3);
-            transform: translateX(0) translateY(-50%) rotate(45deg);
+
+        /* Shadow */
+        .slider__content .button-shadow::after {
+            content: "";
             position: absolute;
+            z-index: 0;
+            inset: 0;
+            border-radius: 999vw;
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.2));
+            width: calc(100% - var(--shadow-cuttoff-fix) - 0.15em);
+            height: calc(100% - var(--shadow-cuttoff-fix) - 0.15em);
+            top: calc(var(--shadow-cuttoff-fix) - 0.25em);
+            left: calc(var(--shadow-cuttoff-fix) - 0.4em);
+            padding: 0.1em;
+            box-sizing: border-box;
+            mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+            mask-composite: exclude;
+            transition: all var(--anim--hover-time) var(--anim--hover-ease);
+            overflow: visible;
+            opacity: 1;
+        }
+
+        /* Button Base Styles */
+        .slider__content .button-wrap button {
+            --border-width: clamp(1px, 0.0625em, 4px);
+            all: unset;
+            cursor: pointer;
+            position: relative;
+            -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+            pointer-events: auto;
+            z-index: 3;
+            display: inline-block;
+            background: linear-gradient(
+                -75deg,
+                rgba(255, 255, 255, 0.1),
+                rgba(255, 255, 255, 0.3),
+                rgba(255, 255, 255, 0.1)
+            );
+            border-radius: 999vw;
+            box-shadow: inset 0 0.125em 0.125em rgba(0, 0, 0, 0.1),
+                inset 0 -0.125em 0.125em rgba(255, 255, 255, 0.3),
+                0 0.25em 0.125em -0.125em rgba(0, 0, 0, 0.3),
+                0 0 0.1em 0.25em inset rgba(255, 255, 255, 0.2),
+                0 0 0 0 rgba(255, 255, 255, 1);
+            backdrop-filter: blur(clamp(1px, 0.125em, 4px));
+            -webkit-backdrop-filter: blur(clamp(1px, 0.125em, 4px));
+            -moz-backdrop-filter: blur(clamp(1px, 0.125em, 4px));
+            -ms-backdrop-filter: blur(clamp(1px, 0.125em, 4px));
+            transition: all var(--anim--hover-time) var(--anim--hover-ease);
+        }
+
+        .slider__content .button-wrap button:hover {
+            transform: scale(0.975);
+            backdrop-filter: blur(0.01em);
+            -webkit-backdrop-filter: blur(0.01em);
+            -moz-backdrop-filter: blur(0.01em);
+            -ms-backdrop-filter: blur(0.01em);
+            box-shadow: inset 0 0.125em 0.125em rgba(0, 0, 0, 0.1),
+                inset 0 -0.125em 0.125em rgba(255, 255, 255, 0.4),
+                0 0.15em 0.05em -0.1em rgba(0, 0, 0, 0.35),
+                0 0 0.05em 0.1em inset rgba(255, 255, 255, 0.4),
+                0 0 0 0 rgba(255, 255, 255, 1);
+        }
+
+        /* Button Text */
+        .slider__content .button-wrap button span {
+            position: relative;
+            display: block;
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
             font-family: 'Heebo', sans-serif;
-            font-weight: 100;
-            top: 50%;
-            left: calc(var(--base) * 5);
-            transition: transform calc(var(--time) / 2) cubic-bezier(0.785, 0.135, 0.150, 0.860);
+            letter-spacing: calc(var(--base) * 0.1);
+            font-weight: 500;
+            font-size: calc(var(--base) * 0.8);
+            color: rgba(255, 255, 255, 1);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-shadow: 0em 0.25em 0.05em rgba(0, 0, 0, 0.3);
+            transition: all var(--anim--hover-time) var(--anim--hover-ease);
+            padding-inline: 1.5em;
+            padding-block: 0.875em;
         }
-        
-        .slider__content a:hover:after {
-            transform: scaleX(1.5);
-            transition: transform calc(var(--time) * 2 / 3) cubic-bezier(0.785, 0.135, 0.150, 0.860);
+
+        .slider__content .button-wrap button:hover span {
+            text-shadow: 0.025em 0.025em 0.025em rgba(0, 0, 0, 0.2);
         }
-        
-        .slider__content a:hover:before {
-            transform: translateX(calc(var(--base) * 2)) translateY(-50%) rotate(45deg);
-            transition: transform calc(var(--time) * 2 / 3) cubic-bezier(0.785, 0.135, 0.150, 0.860);
+
+        /* Text Shine Effect */
+        .slider__content .button-wrap button span::after {
+            content: "";
+            display: block;
+            position: absolute;
+            z-index: 1;
+            width: calc(100% - var(--border-width));
+            height: calc(100% - var(--border-width));
+            top: calc(0% + var(--border-width) / 2);
+            left: calc(0% + var(--border-width) / 2);
+            box-sizing: border-box;
+            border-radius: 999vw;
+            overflow: clip;
+            background: linear-gradient(
+                var(--angle-2),
+                rgba(255, 255, 255, 0) 0%,
+                rgba(255, 255, 255, 0.6) 40% 50%,
+                rgba(255, 255, 255, 0) 55%
+            );
+            z-index: 3;
+            mix-blend-mode: screen;
+            pointer-events: none;
+            background-size: 200% 200%;
+            background-position: 0% 50%;
+            background-repeat: no-repeat;
+            transition: background-position calc(var(--anim--hover-time) * 1.25)
+                    var(--anim--hover-ease),
+                --angle-2 calc(var(--anim--hover-time) * 1.25) var(--anim--hover-ease);
+        }
+
+        .slider__content .button-wrap button:hover span::after {
+            background-position: 25% 50%;
+        }
+
+        .slider__content .button-wrap button:active span::after {
+            background-position: 50% 15%;
+            --angle-2: -15deg;
+        }
+
+        /* Touch Devices */
+        @media (hover: none) and (pointer: coarse) {
+            .slider__content .button-wrap button span::after,
+            .slider__content .button-wrap button:active span::after {
+                --angle-2: -45deg;
+            }
+        }
+
+        /* Button Outline */
+        .slider__content .button-wrap button::after {
+            content: "";
+            position: absolute;
+            z-index: 1;
+            inset: 0;
+            border-radius: 999vw;
+            width: calc(100% + var(--border-width));
+            height: calc(100% + var(--border-width));
+            top: calc(0% - var(--border-width) / 2);
+            left: calc(0% - var(--border-width) / 2);
+            padding: var(--border-width);
+            box-sizing: border-box;
+            background: conic-gradient(
+                    from var(--angle-1) at 50% 50%,
+                    rgba(255, 255, 255, 0.6),
+                    rgba(255, 255, 255, 0) 5% 40%,
+                    rgba(255, 255, 255, 0.6) 50%,
+                    rgba(255, 255, 255, 0) 60% 95%,
+                    rgba(255, 255, 255, 0.6)
+                ),
+                linear-gradient(180deg, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.4));
+            mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+            mask-composite: exclude;
+            transition: all var(--anim--hover-time) var(--anim--hover-ease),
+                --angle-1 500ms ease;
+            box-shadow: inset 0 0 0 calc(var(--border-width) / 2) rgba(255, 255, 255, 0.4);
+        }
+
+        .slider__content .button-wrap button:hover::after {
+            --angle-1: -125deg;
+        }
+
+        .slider__content .button-wrap button:active::after {
+            --angle-1: -75deg;
+        }
+
+        @media (hover: none) and (pointer: coarse) {
+            .slider__content .button-wrap button::after,
+            .slider__content .button-wrap button:hover::after,
+            .slider__content .button-wrap button:active::after {
+                --angle-1: -75deg;
+            }
+        }
+
+        /* Shadow Hover */
+        .slider__content .button-wrap:has(button:hover) .button-shadow {
+            filter: blur(clamp(2px, 0.0625em, 6px));
+            -webkit-filter: blur(clamp(2px, 0.0625em, 6px));
+            -moz-filter: blur(clamp(2px, 0.0625em, 6px));
+            -ms-filter: blur(clamp(2px, 0.0625em, 6px));
+            transition: filter var(--anim--hover-time) var(--anim--hover-ease);
+        }
+
+        .slider__content .button-wrap:has(button:hover) .button-shadow::after {
+            top: calc(var(--shadow-cuttoff-fix) - 0.4em);
+            opacity: 1;
+        }
+
+        /* Rotation */
+        .slider__content .button-wrap:has(button:active) {
+            transform: rotate3d(1, 0, 0, 25deg);
+        }
+
+        .slider__content .button-wrap:has(button:active) button {
+            box-shadow: inset 0 0.125em 0.125em rgba(0, 0, 0, 0.1),
+                inset 0 -0.125em 0.125em rgba(255, 255, 255, 0.4),
+                0 0.125em 0.125em -0.125em rgba(0, 0, 0, 0.3),
+                0 0 0.1em 0.25em inset rgba(255, 255, 255, 0.2),
+                0 0.225em 0.05em 0 rgba(0, 0, 0, 0.1),
+                0 0.25em 0 0 rgba(255, 255, 255, 0.5),
+                inset 0 0.25em 0.05em 0 rgba(0, 0, 0, 0.2);
+        }
+
+        .slider__content .button-wrap:has(button:active) .button-shadow {
+            filter: blur(clamp(2px, 0.125em, 12px));
+            -webkit-filter: blur(clamp(2px, 0.125em, 12px));
+            -moz-filter: blur(clamp(2px, 0.125em, 12px));
+            -ms-filter: blur(clamp(2px, 0.125em, 12px));
+        }
+
+        .slider__content .button-wrap:has(button:active) .button-shadow::after {
+            top: calc(var(--shadow-cuttoff-fix) - 0.25em);
+            opacity: 0.75;
+        }
+
+        .slider__content .button-wrap:has(button:active) span {
+            text-shadow: 0.025em 0.25em 0.05em rgba(0, 0, 0, 0.2);
         }
         
         .slider__slide {
@@ -227,17 +459,22 @@
         
         .slider__slide:nth-child(1) .slider__back,
         .slider__slide:nth-child(1) .slider__inner {
-            background-image: url(https://unsplash.it/1600/800/?image=931);
+            background-image: url('assets/images/about/casestudies/img1.jpg');
         }
         
         .slider__slide:nth-child(2) .slider__back,
         .slider__slide:nth-child(2) .slider__inner {
-            background-image: url(https://unsplash.it/1600/800/?image=929);
+            background-image: url('assets/images/about/casestudies/img2.jpg');
         }
         
         .slider__slide:nth-child(3) .slider__back,
         .slider__slide:nth-child(3) .slider__inner {
-            background-image: url(https://unsplash.it/1600/800/?image=927);
+            background-image: url('assets/images/about/casestudies/img3.jpg');
+        }
+
+        .slider__slide:nth-child(4) .slider__back,
+        .slider__slide:nth-child(4) .slider__inner {
+            background-image: url('assets/images/about/casestudies/img4.jpg');
         }
         
         .slider__indicators {
@@ -274,7 +511,7 @@
 
     <!-- Hero Section -->
     <section class="relative min-h-[80vh] md:min-h-[90vh] flex items-center justify-center overflow-hidden">
-        <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('../assets/images/about/casestudies/hero.jpg');"></div>
+        <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('assets/images/about/casestudies/hero.jpg');"></div>
         <div class="absolute inset-0 bg-black/60"></div>
         <div class="relative z-10 text-center text-white px-6 max-w-5xl mx-auto py-20">
             <p class="text-sm md:text-base uppercase tracking-[0.2em] font-light mb-4 opacity-90">VIEW OUR</p>
@@ -301,8 +538,13 @@
             </div>
             <div class="slider__inner">
                 <div class="slider__content">
-                    <h1>Slide <br> One</h1>
-                    <a href="#" class="go-to-next">next</a>
+                    <h1>Haunted Mansion <br> at Essence Fest</h1>
+                    <div class="button-wrap">
+                        <button type="button" class="go-to-next">
+                            <span>View</span>
+                        </button>
+                        <div class="button-shadow"></div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -312,8 +554,13 @@
             </div>
             <div class="slider__inner">
                 <div class="slider__content">
-                    <h1>Slide <br> Two</h1>
-                    <a href="#" class="go-to-next">next</a>
+                    <h1>Pure <br> Storage</h1>
+                    <div class="button-wrap">
+                        <button type="button" class="go-to-next">
+                            <span>View</span>
+                        </button>
+                        <div class="button-shadow"></div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -323,8 +570,29 @@
             </div>
             <div class="slider__inner">
                 <div class="slider__content">
-                    <h1>Slide <br> Three</h1>
-                    <a href="#" class="go-to-next">next</a>
+                    <h1>DHL</h1>
+                    <div class="button-wrap">
+                        <button type="button" class="go-to-next">
+                            <span>View</span>
+                        </button>
+                        <div class="button-shadow"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="slider__slide" data-slide="4">
+            <div class="slider__wrap">
+                <div class="slider__back"></div>
+            </div>
+            <div class="slider__inner">
+                <div class="slider__content">
+                    <h1>Experiential Marketing <br> Summit</h1>
+                    <div class="button-wrap">
+                        <button type="button" class="go-to-next">
+                            <span>View</span>
+                        </button>
+                        <div class="button-shadow"></div>
+                    </div>
                 </div>
             </div>
         </div>
