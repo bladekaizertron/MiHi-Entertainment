@@ -221,15 +221,15 @@
                                     <div class="mb-4 pb-3 border-b-2 border-blue-200">
                                         <h4 class="font-bold text-base text-blue-600 uppercase tracking-wider">AV Services</h4>
                                     </div>
-                                    <a href="${pathPrefix}rentals/av-services/audio-visual.html" class="block text-sm text-gray-700 hover:text-blue-600 transition py-1.5 hover:bg-blue-50 rounded-md px-2 -mx-2">
+                                    <a href="${pathPrefix}av-services/audio-services.html" class="block text-sm text-gray-700 hover:text-blue-600 transition py-1.5 hover:bg-blue-50 rounded-md px-2 -mx-2">
                                         <span class="font-semibold block mb-0.5">Audio</span>
                                         <span class="text-xs text-gray-500 leading-relaxed">Professional sound systems and audio mixing</span>
                                     </a>
-                                    <a href="${pathPrefix}rentals/av-services/visual-services.html" class="block text-sm text-gray-700 hover:text-blue-600 transition py-1.5 hover:bg-blue-50 rounded-md px-2 -mx-2">
+                                    <a href="${pathPrefix}av-services/visual-services.html" class="block text-sm text-gray-700 hover:text-blue-600 transition py-1.5 hover:bg-blue-50 rounded-md px-2 -mx-2">
                                         <span class="font-semibold block mb-0.5">Visual</span>
                                         <span class="text-xs text-gray-500 leading-relaxed">Screens, displays, and video projection</span>
                                     </a>
-                                    <a href="${pathPrefix}rentals/av-services/lighting.html" class="block text-sm text-gray-700 hover:text-blue-600 transition py-1.5 hover:bg-blue-50 rounded-md px-2 -mx-2">
+                                    <a href="${pathPrefix}av-services/event-lighting.html" class="block text-sm text-gray-700 hover:text-blue-600 transition py-1.5 hover:bg-blue-50 rounded-md px-2 -mx-2">
                                         <span class="font-semibold block mb-0.5">Lighting</span>
                                         <span class="text-xs text-gray-500 leading-relaxed">Transform spaces with lighting</span>
                                     </a>
