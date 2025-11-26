@@ -174,7 +174,7 @@
                         <div class="p-6">
                             <div class="grid grid-cols-2 gap-4">
                                 <div class="space-y-3">
-                                    <a href="${pathPrefix}weddings.html" class="block text-sm text-gray-700 hover:text-blue-600 transition">
+                                    <a href="${pathPrefix}wedding.html" class="block text-sm text-gray-700 hover:text-blue-600 transition">
                                         <span class="font-medium">Weddings</span><br>
                                         <span class="text-xs text-gray-500">Make your special day unforgettable</span>
                                     </a>
@@ -182,21 +182,21 @@
                                         <span class="font-medium">Corporate Events</span><br>
                                         <span class="text-xs text-gray-500">Fully branded experiences for your brand</span>
                                     </a>
-                                    <a href="${pathPrefix}social-events.html" class="block text-sm text-gray-700 hover:text-blue-600 transition">
+                                    <a href="${pathPrefix}socialevents.html" class="block text-sm text-gray-700 hover:text-blue-600 transition">
                                         <span class="font-medium">Social Events</span><br>
                                         <span class="text-xs text-gray-500">Birthdays, Mitzvahs, and more</span>
                                     </a>
                                 </div>
                                 <div class="space-y-3">
-                                    <a href="${pathPrefix}trade-shows.html" class="block text-sm text-gray-700 hover:text-blue-600 transition">
+                                    <a href="${pathPrefix}tradeshow-booth.html" class="block text-sm text-gray-700 hover:text-blue-600 transition">
                                         <span class="font-medium">Trade Shows</span><br>
                                         <span class="text-xs text-gray-500">Mosaic walls and high-impact activations</span>
                                     </a>
-                                    <a href="${pathPrefix}holiday-parties.html" class="block text-sm text-gray-700 hover:text-blue-600 transition">
+                                    <a href="${pathPrefix}holiday-party.html" class="block text-sm text-gray-700 hover:text-blue-600 transition">
                                         <span class="font-medium">Holiday Parties</span><br>
                                         <span class="text-xs text-gray-500">Curated sets that come to life</span>
                                     </a>
-                                    <a href="${pathPrefix}casino-parties.html" class="block text-sm text-gray-700 hover:text-blue-600 transition">
+                                    <a href="${pathPrefix}denver-casino-rentals.html" class="block text-sm text-gray-700 hover:text-blue-600 transition">
                                         <span class="font-medium">Casino Parties</span><br>
                                         <span class="text-xs text-gray-500">Tables, dealers, and full experiences</span>
                                     </a>
