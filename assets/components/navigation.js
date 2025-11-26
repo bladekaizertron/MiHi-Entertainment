@@ -297,31 +297,31 @@
                         <div class="p-8">
                             <div class="grid grid-cols-3 gap-5">
                                 <div class="space-y-2.5">
-                                    <a href="${pathPrefix}galleries/our-work.html" class="block text-sm text-gray-700 hover:text-blue-600 transition py-1.5 hover:bg-blue-50 rounded-md px-3 -mx-3">
+                                    <a href="${pathPrefix}our-work.html" class="block text-sm text-gray-700 hover:text-blue-600 transition py-1.5 hover:bg-blue-50 rounded-md px-3 -mx-3">
                                         <span class="font-semibold block mb-0.5 whitespace-nowrap">Our Work</span>
                                         <span class="text-xs text-gray-500 leading-relaxed block whitespace-nowrap">View a collection of our work</span>
                                     </a>
-                                    <a href="${pathPrefix}galleries/our-services.html" class="block text-sm text-gray-700 hover:text-blue-600 transition py-1.5 hover:bg-blue-50 rounded-md px-3 -mx-3">
+                                    <a href="${pathPrefix}our-services.html" class="block text-sm text-gray-700 hover:text-blue-600 transition py-1.5 hover:bg-blue-50 rounded-md px-3 -mx-3">
                                         <span class="font-semibold block mb-0.5 whitespace-nowrap">Our Services</span>
                                         <span class="text-xs text-gray-500 leading-relaxed block whitespace-nowrap">Check out all of the services we offer for events</span>
                                     </a>
-                                    <a href="${pathPrefix}galleries/our-booths.html" class="block text-sm text-gray-700 hover:text-blue-600 transition py-1.5 hover:bg-blue-50 rounded-md px-3 -mx-3">
+                                    <a href="${pathPrefix}our-booths.html" class="block text-sm text-gray-700 hover:text-blue-600 transition py-1.5 hover:bg-blue-50 rounded-md px-3 -mx-3">
                                         <span class="font-semibold block mb-0.5 whitespace-nowrap">Our Booths</span>
                                         <span class="text-xs text-gray-500 leading-relaxed block whitespace-nowrap">See all of our Photo Booths</span>
                                     </a>
-                                    <a href="${pathPrefix}galleries/our-props.html" class="block text-sm text-gray-700 hover:text-blue-600 transition py-1.5 hover:bg-blue-50 rounded-md px-3 -mx-3">
+                                    <a href="${pathPrefix}mihi-props.html" class="block text-sm text-gray-700 hover:text-blue-600 transition py-1.5 hover:bg-blue-50 rounded-md px-3 -mx-3">
                                         <span class="font-semibold block mb-0.5 whitespace-nowrap">Our Props</span>
                                         <span class="text-xs text-gray-500 leading-relaxed block whitespace-nowrap">Take a look at our prop collection</span>
                                     </a>
-                                    <a href="${pathPrefix}galleries/our-themes.html" class="block text-sm text-gray-700 hover:text-blue-600 transition py-1.5 hover:bg-blue-50 rounded-md px-3 -mx-3">
+                                    <a href="${pathPrefix}booth-themes.html" class="block text-sm text-gray-700 hover:text-blue-600 transition py-1.5 hover:bg-blue-50 rounded-md px-3 -mx-3">
                                         <span class="font-semibold block mb-0.5 whitespace-nowrap">Our Themes</span>
                                         <span class="text-xs text-gray-500 leading-relaxed block whitespace-nowrap">All events themes, curated for any event</span>
                                     </a>
-                                    <a href="${pathPrefix}galleries/our-addons.html" class="block text-sm text-gray-700 hover:text-blue-600 transition py-1.5 hover:bg-blue-50 rounded-md px-3 -mx-3">
+                                    <a href="${pathPrefix}our-add-ons.html" class="block text-sm text-gray-700 hover:text-blue-600 transition py-1.5 hover:bg-blue-50 rounded-md px-3 -mx-3">
                                         <span class="font-semibold block mb-0.5 whitespace-nowrap">Our Add-Ons</span>
                                         <span class="text-xs text-gray-500 leading-relaxed block whitespace-nowrap">See what we can add-on to your next rental</span>
                                     </a>
-                                    <a href="${pathPrefix}galleries/our-designs.html" class="block text-sm text-gray-700 hover:text-blue-600 transition py-1.5 hover:bg-blue-50 rounded-md px-3 -mx-3">
+                                    <a href="${pathPrefix}our-design.html" class="block text-sm text-gray-700 hover:text-blue-600 transition py-1.5 hover:bg-blue-50 rounded-md px-3 -mx-3">
                                         <span class="font-semibold block mb-0.5 whitespace-nowrap">Our Designs</span>
                                         <span class="text-xs text-gray-500 leading-relaxed block whitespace-nowrap">Custom Branded Booth Wraps, Backdrops, and more</span>
                                     </a>
