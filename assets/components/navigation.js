@@ -263,19 +263,19 @@
                                     <div class="mb-4 pb-3 border-b-2 border-green-200">
                                         <h4 class="font-bold text-base text-green-600 uppercase tracking-wider">Games</h4>
                                     </div>
-                                    <a href="${pathPrefix}rentals/games/claw-machine.html" class="block text-sm text-gray-700 hover:text-green-600 transition py-1.5 hover:bg-green-50 rounded-md px-2 -mx-2">
+                                    <a href="${pathPrefix}game-rentals/claw-machine.html" class="block text-sm text-gray-700 hover:text-green-600 transition py-1.5 hover:bg-green-50 rounded-md px-2 -mx-2">
                                         <span class="font-semibold block mb-0.5">Claw Machine</span>
                                         <span class="text-xs text-gray-500 leading-relaxed">Walk up and win a prize</span>
                                     </a>
-                                    <a href="${pathPrefix}rentals/games/vr-headsets.html" class="block text-sm text-gray-700 hover:text-green-600 transition py-1.5 hover:bg-green-50 rounded-md px-2 -mx-2">
+                                    <a href="${pathPrefix}virtual-reality-rental.html" class="block text-sm text-gray-700 hover:text-green-600 transition py-1.5 hover:bg-green-50 rounded-md px-2 -mx-2">
                                         <span class="font-semibold block mb-0.5">VR Headsets</span>
                                         <span class="text-xs text-gray-500 leading-relaxed">Immersive virtual experiences</span>
                                     </a>
-                                    <a href="${pathPrefix}rentals/games/money-booth.html" class="block text-sm text-gray-700 hover:text-green-600 transition py-1.5 hover:bg-green-50 rounded-md px-2 -mx-2">
+                                    <a href="${pathPrefix}products/money-booth.html" class="block text-sm text-gray-700 hover:text-green-600 transition py-1.5 hover:bg-green-50 rounded-md px-2 -mx-2">
                                         <span class="font-semibold block mb-0.5">Money Booth</span>
                                         <span class="text-xs text-gray-500 leading-relaxed">Grab the floating cash</span>
                                     </a>
-                                    <a href="${pathPrefix}rentals/games/stick-drop.html" class="block text-sm text-gray-700 hover:text-green-600 transition py-1.5 hover:bg-green-50 rounded-md px-2 -mx-2">
+                                    <a href="${pathPrefix}game-rentals/stick-drop.html" class="block text-sm text-gray-700 hover:text-green-600 transition py-1.5 hover:bg-green-50 rounded-md px-2 -mx-2">
                                         <span class="font-semibold block mb-0.5">Stick Drop</span>
                                         <span class="text-xs text-gray-500 leading-relaxed">Grab the floating cash</span>
                                     </a>
