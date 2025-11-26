@@ -233,11 +233,11 @@
                                         <span class="font-semibold block mb-0.5">Lighting</span>
                                         <span class="text-xs text-gray-500 leading-relaxed">Transform spaces with lighting</span>
                                     </a>
-                                    <a href="${pathPrefix}rentals/av-services/stages.html" class="block text-sm text-gray-700 hover:text-blue-600 transition py-1.5 hover:bg-blue-50 rounded-md px-2 -mx-2">
+                                    <a href="${pathPrefix}av-services/event-stages.html" class="block text-sm text-gray-700 hover:text-blue-600 transition py-1.5 hover:bg-blue-50 rounded-md px-2 -mx-2">
                                         <span class="font-semibold block mb-0.5">Event Stages</span>
                                         <span class="text-xs text-gray-500 leading-relaxed">Professional stage setups</span>
                                     </a>
-                                    <a href="${pathPrefix}rentals/av-services/custom-signage.html" class="block text-sm text-gray-700 hover:text-blue-600 transition py-1.5 hover:bg-blue-50 rounded-md px-2 -mx-2">
+                                    <a href="${pathPrefix}av-services/event-signage.html" class="block text-sm text-gray-700 hover:text-blue-600 transition py-1.5 hover:bg-blue-50 rounded-md px-2 -mx-2">
                                         <span class="font-semibold block mb-0.5">Custom Signage</span>
                                         <span class="text-xs text-gray-500 leading-relaxed">Professional stage setups</span>
                                     </a>
@@ -246,15 +246,15 @@
                                     <div class="mb-4 pb-3 border-b-2 border-purple-200">
                                         <h4 class="font-bold text-base text-purple-600 uppercase tracking-wider">Event Decor</h4>
                                     </div>
-                                    <a href="${pathPrefix}rentals/event-decor/special-effects.html" class="block text-sm text-gray-700 hover:text-purple-600 transition py-1.5 hover:bg-purple-50 rounded-md px-2 -mx-2">
+                                    <a href="${pathPrefix}event-decor/special-effects.html" class="block text-sm text-gray-700 hover:text-purple-600 transition py-1.5 hover:bg-purple-50 rounded-md px-2 -mx-2">
                                         <span class="font-semibold block mb-0.5">Special Effects</span>
                                         <span class="text-xs text-gray-500 leading-relaxed">Sparks, snow, confetti, champagne walls</span>
                                     </a>
-                                    <a href="${pathPrefix}rentals/event-decor/lighting-decor.html" class="block text-sm text-gray-700 hover:text-purple-600 transition py-1.5 hover:bg-purple-50 rounded-md px-2 -mx-2">
+                                    <a href="${pathPrefix}event-decor/lighting-decor.html" class="block text-sm text-gray-700 hover:text-purple-600 transition py-1.5 hover:bg-purple-50 rounded-md px-2 -mx-2">
                                         <span class="font-semibold block mb-0.5">Lighting Decor</span>
                                         <span class="text-xs text-gray-500 leading-relaxed">Chandeliers, market lights, marquee</span>
                                     </a>
-                                    <a href="${pathPrefix}rentals/event-decor/eventdecor.html" class="block text-sm text-gray-700 hover:text-purple-600 transition py-1.5 hover:bg-purple-50 rounded-md px-2 -mx-2">
+                                    <a href="${pathPrefix}event-decor/event-decor.html" class="block text-sm text-gray-700 hover:text-purple-600 transition py-1.5 hover:bg-purple-50 rounded-md px-2 -mx-2">
                                         <span class="font-semibold block mb-0.5">Event Decor</span>
                                         <span class="text-xs text-gray-500 leading-relaxed">Lounge sets, shimmer walls, drape</span>
                                     </a>
