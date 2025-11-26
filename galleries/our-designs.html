@@ -5,8 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Our Designs - MiHi Entertainment</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Arvo:wght@400;700&family=Cinzel:wght@500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800;900&family=Montserrat:wght@500;600;700&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Work+Sans:400,900,800,500,700,600" rel="stylesheet">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@300;900&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
@@ -14,6 +17,59 @@
         h1, h2, h3, h4, h5, h6 { font-family: 'Playfair Display', serif; }
         .btn-primary { background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%); transition: all 0.3s ease; }
         .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(0, 80, 255, 0.4); }
+        
+        /* Bubble Button Animation */
+        .btn {
+            display: inline-block;
+            text-decoration: none;
+        }
+        
+        .btn-bubble {
+            color: white;
+            background-repeat: no-repeat;
+            position: relative;
+        }
+        
+        .btn-bubble:not(:hover):not(:focus) {
+            background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%);
+        }
+        
+        .btn-bubble:hover,
+        .btn-bubble:focus {
+            animation: bubbles 1s forwards ease-out;
+            background: 
+                radial-gradient(circle at center, transparent 30%, rgba(238, 238, 255, 0.8) 60%, rgba(238, 238, 255, 0.8) 65%, transparent 70%) 5% 120% / 0.6em 0.6em,
+                radial-gradient(circle at center, transparent 30%, rgba(238, 238, 255, 0.8) 60%, rgba(238, 238, 255, 0.8) 65%, transparent 70%) 15% 110% / 0.8em 0.8em,
+                radial-gradient(circle at center, transparent 30%, rgba(238, 238, 255, 0.8) 60%, rgba(238, 238, 255, 0.8) 65%, transparent 70%) 25% 130% / 0.7em 0.7em,
+                radial-gradient(circle at center, transparent 30%, rgba(238, 238, 255, 0.8) 60%, rgba(238, 238, 255, 0.8) 65%, transparent 70%) 35% 100% / 0.9em 0.9em,
+                radial-gradient(circle at center, transparent 30%, rgba(238, 238, 255, 0.8) 60%, rgba(238, 238, 255, 0.8) 65%, transparent 70%) 45% 115% / 0.5em 0.5em,
+                radial-gradient(circle at center, transparent 30%, rgba(238, 238, 255, 0.8) 60%, rgba(238, 238, 255, 0.8) 65%, transparent 70%) 55% 125% / 1em 1em,
+                radial-gradient(circle at center, transparent 30%, rgba(238, 238, 255, 0.8) 60%, rgba(238, 238, 255, 0.8) 65%, transparent 70%) 65% 105% / 0.75em 0.75em,
+                radial-gradient(circle at center, transparent 30%, rgba(238, 238, 255, 0.8) 60%, rgba(238, 238, 255, 0.8) 65%, transparent 70%) 75% 135% / 0.85em 0.85em,
+                radial-gradient(circle at center, transparent 30%, rgba(238, 238, 255, 0.8) 60%, rgba(238, 238, 255, 0.8) 65%, transparent 70%) 85% 120% / 0.65em 0.65em,
+                radial-gradient(circle at center, transparent 30%, rgba(238, 238, 255, 0.8) 60%, rgba(238, 238, 255, 0.8) 65%, transparent 70%) 95% 110% / 0.95em 0.95em,
+                radial-gradient(circle at center, transparent 30%, rgba(238, 238, 255, 0.8) 60%, rgba(238, 238, 255, 0.8) 65%, transparent 70%) 105% 130% / 0.55em 0.55em;
+            background-color: #0050ff;
+            background-repeat: no-repeat;
+        }
+        
+        @keyframes bubbles {
+            100% {
+                background-position: 
+                    3% -350%,
+                    18% -280%,
+                    22% -320%,
+                    38% -250%,
+                    42% -380%,
+                    58% -200%,
+                    62% -340%,
+                    78% -180%,
+                    88% -300%,
+                    98% -220%,
+                    102% -360%;
+                box-shadow: inset 0 -6.5em 0 #0040d9;
+            }
+        }
         .section-padding { padding: 5rem 0; }
         @media (max-width: 768px) {
             .section-padding { padding: 3rem 0; }
@@ -22,7 +78,7 @@
             .section-padding { padding: 2.5rem 0; }
         }
         .hero-section {
-            background-image: url('https://images.pexels.com/photos/2570062/pexels-photo-2570062.jpeg');
+            background-image: url('../assets/images/galleries/ourdesigns/hero.jpg');
             background-attachment: fixed;
             background-position: center center;
             background-size: cover;
@@ -68,6 +124,971 @@
                 transform: translateY(0);
             }
         }
+        
+        /* Banner Section Styles */
+        .banner-section {
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .banner-tagline {
+            color: #64748b;
+            font-family: 'Montserrat', sans-serif;
+            letter-spacing: 0.15em;
+            font-weight: 600;
+        }
+        
+        .banner-heading {
+            background: linear-gradient(135deg, #0050ff 0%, #0040d9 50%, #0066ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 800;
+            letter-spacing: 0.02em;
+        }
+        
+        .banner-text {
+            color: #475569;
+            line-height: 1.8;
+        }
+        
+        .banner-question {
+            color: #334155;
+            font-weight: 600;
+        }
+        
+        .banner-content {
+            position: relative;
+            z-index: 10;
+        }
+        
+        .banner-section.section-padding {
+            padding: 3rem 0;
+        }
+        
+        @media (max-width: 768px) {
+            .banner-section.section-padding {
+                padding: 2rem 0;
+            }
+        }
+        
+        @media (max-width: 640px) {
+            .banner-section.section-padding {
+                padding: 1.5rem 0;
+            }
+        }
+        
+        /* Animated Background Effect */
+        #banner-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background-color: white;
+            background-image: url(https://images.unsplash.com/photo-1615800098779-1be32e60cca3?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2OTUyNDAwMTN8&ixlib=rb-4.0.3&q=85);
+            background-size: cover;
+            background-repeat: no-repeat;
+            user-select: none;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* Slider Section Background Styles */
+        .slider-section {
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Animated Background Effect for Slider */
+        #slider-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background-color: white;
+            background-image: url(https://images.unsplash.com/photo-1615800098779-1be32e60cca3?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2OTUyNDAwMTN8&ixlib=rb-4.0.3&q=85);
+            background-size: cover;
+            background-repeat: no-repeat;
+            user-select: none;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        /* Brand Section Styles */
+        .brand-section {
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .brand-content {
+            position: relative;
+            z-index: 10;
+        }
+        
+        #brand-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background-color: white;
+            background-image: url(https://images.unsplash.com/photo-1615800098779-1be32e60cca3?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2OTUyNDAwMTN8&ixlib=rb-4.0.3&q=85);
+            background-size: cover;
+            background-repeat: no-repeat;
+            user-select: none;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .brand-heading {
+            font-size: clamp(2rem, 8vw, 6rem);
+            font-weight: 900;
+            line-height: 1.1;
+            text-align: center;
+            letter-spacing: -0.02em;
+            color: #1a202c;
+            display: inline-block;
+        }
+        
+        .brand-heading .word {
+            display: inline-block;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: wordReveal 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+            margin-right: 0.3em;
+        }
+        
+        .brand-heading .word:nth-child(1) { animation-delay: 0.1s; }
+        .brand-heading .word:nth-child(2) { animation-delay: 0.2s; }
+        .brand-heading .word:nth-child(3) { animation-delay: 0.3s; }
+        .brand-heading .word:nth-child(4) { animation-delay: 0.4s; }
+        .brand-heading .word:nth-child(5) { animation-delay: 0.5s; }
+        .brand-heading .word:nth-child(6) { animation-delay: 0.6s; }
+        
+        @keyframes wordReveal {
+            0% {
+                opacity: 0;
+                transform: translateY(30px) scale(0.8);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+        
+        .brand-heading .highlight {
+            color: #0050ff;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .brand-heading .word.highlight:nth-child(2)::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #0050ff, #0066ff);
+            animation: underlineReveal 1s ease-out 1s forwards;
+            border-radius: 2px;
+        }
+        
+        .brand-heading .word.highlight:nth-child(3)::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #0050ff, #0066ff);
+            animation: underlineReveal 1s ease-out 1.1s forwards;
+            border-radius: 2px;
+        }
+        
+        @keyframes underlineReveal {
+            0% {
+                width: 0;
+            }
+            100% {
+                width: 100%;
+            }
+        }
+        
+        @media (max-width: 640px) {
+            .brand-heading .word {
+                animation-duration: 0.6s;
+            }
+        }
+
+        /* Image Slider Styles */
+        .slider-wrapper {
+            position: relative;
+            max-width: 90rem;
+            min-width: 480px;
+            background: #fff;
+            margin: 0 auto;
+            overflow: hidden;
+            box-shadow: 0 0 35px 20px #DDE5EE;
+            z-index: 10;
+        }
+
+        .slider-wrapper .slider {
+            position: relative;
+            height: 65rem;
+            padding: 5rem 0;
+        }
+
+        .slider-wrapper .slider::after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        .slider-wrapper .slide-wrapper {
+            position: relative;
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+
+        .slider-wrapper .slide-navigation__squares,
+        .slider-wrapper .slide-navigation__txt {
+            width: 10%;
+            position: relative;
+            float: left;
+            overflow: hidden;
+        }
+
+        .slider-wrapper .slide-navigation__squares::after,
+        .slider-wrapper .slide-navigation__txt::after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        .slider-wrapper .slide-navigation__txt {
+            display: block;
+            height: 100%;
+        }
+
+        .slider-wrapper .slide-navigation__txt ul {
+            margin: 0;
+            list-style: none;
+            padding: 0;
+            position: absolute;
+            display: table-cell;
+            width: 60rem;
+            white-space: nowrap;
+            transform: rotate(90deg);
+            transform-origin: 0;
+            margin-left: calc(50% - 0.14rem);
+        }
+
+        .slider-wrapper .slide-navigation__txt ul::after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        .slider-wrapper .slide-navigation__txt li {
+            text-transform: uppercase;
+            letter-spacing: 0.2rem;
+            margin: 0 1rem;
+            position: relative;
+            float: left;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #A1A5B8;
+            white-space: nowrap;
+        }
+
+        .slider-wrapper .slide-navigation__txt li span {
+            cursor: pointer;
+            transition: all 0.5s ease;
+            display: block;
+        }
+
+        .slider-wrapper .slide-navigation__txt li span.active {
+            transform: scale(1.1, 1.1);
+            color: #E34D67;
+        }
+
+        .slider-wrapper .slide-navigation__squares {
+            display: block;
+            height: 100%;
+        }
+
+        .slider-wrapper .slide-navigation__squares .squares-wrapper {
+            position: absolute;
+            margin-left: calc(50% - 0.4rem);
+            bottom: 5rem;
+            height: 25rem;
+            overflow: hidden;
+        }
+
+        .slider-wrapper .slide-navigation__squares .squares-slider {
+            position: relative;
+            display: block;
+            margin-top: -2.5rem;
+            transform: translateY(-2.5rem);
+        }
+
+        .slider-wrapper .slide-navigation__squares .square {
+            width: 0.6rem;
+            height: 0.6rem;
+            display: block;
+            margin: 1.3rem 0;
+            background: #A1A5B8;
+            transform-origin: center center;
+            box-sizing: border-box;
+        }
+
+        .slider-wrapper .slide-navigation__squares .square.red {
+            background: #E34D67;
+        }
+
+        .slider-wrapper .slides-container {
+            position: relative;
+            width: 80%;
+            float: left;
+            height: 100%;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            -webkit-touch-callout: none;
+        }
+
+        .slider-wrapper .slide {
+            position: absolute;
+            display: block;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            visibility: hidden;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .slider-wrapper .slide img {
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        .slider-wrapper .slide::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .slider-wrapper .slide .slide-content {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            padding: 5rem 5.8rem;
+            overflow: hidden;
+            z-index: 2;
+        }
+
+        .slider-wrapper .slide .slide-content h1 {
+            text-transform: uppercase;
+            color: white;
+            font-weight: 900;
+            font-size: 10rem;
+            text-align: center;
+            margin: 0;
+            opacity: 0.9;
+            position: relative;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8), 0 0 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .slider-wrapper .slide .slide-content h2 {
+            color: #E34D67;
+            font-size: 4.8rem;
+            max-width: 80%;
+            margin: 0;
+            margin-top: -6rem;
+            font-weight: 900;
+            line-height: 1;
+            position: relative;
+            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.8), 0 0 15px rgba(0, 0, 0, 0.6);
+        }
+
+        .slider-wrapper .slide .slide-txt {
+            position: relative;
+            display: block;
+            width: 100%;
+            margin-top: 6rem;
+        }
+
+        .slider-wrapper .slide .slide-txt::after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        .slider-wrapper .slide .slide-txt p {
+            margin: 0;
+            max-width: 55%;
+            color: #ffffff;
+            font-size: 1.2rem;
+            line-height: 1.4;
+            float: left;
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8), 0 0 10px rgba(0, 0, 0, 0.5);
+            font-weight: 500;
+        }
+
+        .slider-wrapper .slide .slide-txt button {
+            display: block;
+            float: right;
+            width: 18rem;
+            text-align: center;
+            background: transparent;
+            background-color: transparent;
+            border: 0.28rem solid #E34D67;
+            text-transform: uppercase;
+            padding: 0.8rem 0.5rem;
+            font-size: 1.5rem;
+            color: #E34D67;
+            font-weight: 600;
+            letter-spacing: 0.2rem;
+            outline: none;
+            overflow: hidden;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .slider-wrapper .slide .slide-txt button:hover {
+            background-color: #E34D67;
+            color: white;
+            box-shadow: 0 0 20px rgba(227, 77, 103, 0.6);
+        }
+
+        @media (min-width: 860px) {
+            .slider-wrapper {
+                font-size: 8px;
+            }
+        }
+
+        @media (min-width: 1200px) {
+            .slider-wrapper {
+                font-size: 10px;
+            }
+        }
+
+        @media (max-width: 860px) {
+            .slider-wrapper {
+                font-size: 6px;
+                min-width: 100%;
+            }
+        }
+
+        /* Mobile Responsive Styles */
+        @media (max-width: 768px) {
+            .slider-wrapper {
+                min-width: 100%;
+                margin: 0;
+                box-shadow: 0 0 15px 10px #DDE5EE;
+            }
+
+            .slider-wrapper .slider {
+                height: auto;
+                min-height: 50rem;
+                padding: 2rem 0;
+            }
+
+            /* Hide text navigation on mobile, show squares at bottom */
+            .slider-wrapper .slide-navigation__txt {
+                display: none;
+            }
+
+            .slider-wrapper .slide-navigation__squares {
+                width: 100%;
+                height: auto;
+                position: relative;
+                float: none;
+                clear: both;
+            }
+
+            .slider-wrapper .slide-navigation__squares .squares-wrapper {
+                position: relative;
+                margin: 2rem auto 0;
+                bottom: auto;
+                height: auto;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .slider-wrapper .slide-navigation__squares .squares-slider {
+                display: flex;
+                flex-direction: row;
+                gap: 12px;
+                margin-top: 0;
+                transform: none;
+            }
+
+            .slider-wrapper .slide-navigation__squares .square {
+                width: 12px !important;
+                height: 12px !important;
+                min-width: 12px !important;
+                min-height: 12px !important;
+                max-width: 12px !important;
+                max-height: 12px !important;
+                margin: 0;
+                flex-shrink: 0;
+                cursor: pointer;
+                transition: transform 0.3s ease;
+                padding: 4px;
+                box-sizing: content-box;
+            }
+
+            .slider-wrapper .slide-navigation__squares .square:hover {
+                transform: scale(1.2);
+            }
+
+            .slider-wrapper .slides-container {
+                width: 100%;
+                float: none;
+                height: 50rem;
+            }
+
+            .slider-wrapper .slide .slide-content {
+                padding: 2rem 1.5rem;
+            }
+
+            .slider-wrapper .slide .slide-content h1 {
+                font-size: 4rem;
+                margin-bottom: 1rem;
+            }
+
+            .slider-wrapper .slide .slide-content h2 {
+                font-size: 2rem;
+                max-width: 100%;
+                margin-top: -2rem;
+                margin-bottom: 1rem;
+            }
+
+            .slider-wrapper .slide .slide-txt {
+                margin-top: 2rem;
+                display: flex;
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+
+            .slider-wrapper .slide .slide-txt p {
+                max-width: 100%;
+                float: none;
+                font-size: 1.4rem;
+                line-height: 1.6;
+            }
+
+            .slider-wrapper .slide .slide-txt button {
+                float: none;
+                width: 100%;
+                max-width: 20rem;
+                margin: 0 auto;
+                padding: 1rem 0.5rem;
+                font-size: 1.4rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .slider-wrapper .slider {
+                min-height: 45rem;
+                padding: 1.5rem 0;
+            }
+
+            .slider-wrapper .slides-container {
+                height: 45rem;
+            }
+
+            .slider-wrapper .slide .slide-content {
+                padding: 1.5rem 1rem;
+            }
+
+            .slider-wrapper .slide .slide-content h1 {
+                font-size: 3rem;
+            }
+
+            .slider-wrapper .slide .slide-content h2 {
+                font-size: 1.6rem;
+                margin-top: -1.5rem;
+            }
+
+            .slider-wrapper .slide .slide-txt {
+                margin-top: 1.5rem;
+            }
+
+            .slider-wrapper .slide .slide-txt p {
+                font-size: 1.2rem;
+            }
+
+            .slider-wrapper .slide .slide-txt button {
+                font-size: 1.2rem;
+                padding: 0.8rem 0.5rem;
+            }
+
+            .slider-wrapper .slide-navigation__squares .square {
+                width: 12px !important;
+                height: 12px !important;
+                min-width: 12px !important;
+                min-height: 12px !important;
+                max-width: 12px !important;
+                max-height: 12px !important;
+                padding: 4px;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .slider-wrapper .slider {
+                min-height: 10rem;
+            }
+
+            .slider-wrapper .slides-container {
+                height: 20rem;
+            }
+
+            .slider-wrapper .slide .slide-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .slider-wrapper .slide .slide-content h2 {
+                font-size: 1.4rem;
+            }
+        }
+
+        /* Slider Section Wrapper Mobile Styles */
+        @media (max-width: 768px) {
+            .slider-section {
+                padding: 20px 10px !important;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .slider-section {
+                padding: 15px 5px !important;
+            }
+        }
+
+        /* Form Section Styles */
+        .form-section {
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            position: relative;
+            overflow: hidden;
+            padding: 5rem 0;
+        }
+
+        #form-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background-color: white;
+            background-image: url(https://images.unsplash.com/photo-1615800098779-1be32e60cca3?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2OTUyNDAwMTN8&ixlib=rb-4.0.3&q=85);
+            background-size: cover;
+            background-repeat: no-repeat;
+            user-select: none;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .form-content {
+            position: relative;
+            z-index: 10;
+        }
+
+        .form-heading {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .form-heading h2 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 900;
+            line-height: 1.1;
+            margin: 0;
+            background: linear-gradient(135deg, #0066FF 0%, #0050ff 50%, #0040d9 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.02em;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-heading .heading-line {
+            display: block;
+        }
+
+        .form-description {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .form-description p {
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            color: #333333;
+            line-height: 1.8;
+            margin: 0;
+            font-weight: 400;
+        }
+
+        /* Form Styles */
+        .event-form {
+            max-width: 1200px;
+            margin: 3rem auto 0;
+            background: #1a202c;
+            padding: 3rem;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .form-group label {
+            display: block;
+            color: #ffffff;
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .form-group label .required {
+            color: #ff4444;
+            margin-left: 2px;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="email"],
+        .form-group input[type="tel"],
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.875rem 1rem;
+            background: #ffffff;
+            border: 2px solid transparent;
+            border-radius: 8px;
+            font-size: 1rem;
+            color: #1a202c;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.3s ease;
+            box-sizing: border-box;
+        }
+
+        .form-group input[type="text"]:focus,
+        .form-group input[type="email"]:focus,
+        .form-group input[type="tel"]:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #0066FF;
+            box-shadow: 0 0 0 3px rgba(0, 102, 255, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .form-group textarea.large {
+            min-height: 120px;
+        }
+
+        .date-selectors {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 0.75rem;
+        }
+
+        .checkbox-section {
+            margin: 2rem 0;
+        }
+
+        .checkbox-section h3 {
+            color: #ffffff;
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .checkbox-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .checkbox-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .checkbox-item input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            margin-right: 0.75rem;
+            cursor: pointer;
+            accent-color: #0066FF;
+        }
+
+        .checkbox-item label {
+            color: #ffffff;
+            font-size: 0.95rem;
+            font-weight: 400;
+            cursor: pointer;
+            margin: 0;
+            flex: 1;
+        }
+
+        .privacy-checkbox {
+            display: flex;
+            align-items: flex-start;
+            margin: 2rem 0;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+        }
+
+        .privacy-checkbox input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            margin-right: 0.75rem;
+            margin-top: 2px;
+            cursor: pointer;
+            accent-color: #0066FF;
+            flex-shrink: 0;
+        }
+
+        .privacy-checkbox label {
+            color: #ffffff;
+            font-size: 0.95rem;
+            font-weight: 400;
+            cursor: pointer;
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        .privacy-checkbox a {
+            color: #0066FF;
+            text-decoration: underline;
+            transition: color 0.3s ease;
+        }
+
+        .privacy-checkbox a:hover {
+            color: #0050ff;
+        }
+
+        .submit-button {
+            width: 100%;
+            padding: 1.25rem 2rem;
+            background: linear-gradient(135deg, #0066FF 0%, #0050ff 100%);
+            color: #ffffff;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Inter', sans-serif;
+            box-shadow: 0 4px 15px rgba(0, 102, 255, 0.3);
+        }
+
+        .submit-button:hover {
+            background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 102, 255, 0.4);
+        }
+
+        .submit-button:active {
+            transform: translateY(0);
+        }
+
+        @media (max-width: 768px) {
+            .form-section {
+                padding: 3rem 0;
+            }
+
+            .form-heading h2 {
+                font-size: clamp(2rem, 8vw, 3rem);
+            }
+
+            .form-description p {
+                font-size: 1rem;
+                padding: 0 1rem;
+            }
+
+            .event-form {
+                padding: 2rem 1.5rem;
+                margin: 2rem auto 0;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+
+            .checkbox-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .date-selectors {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .form-section {
+                padding: 2.5rem 0;
+            }
+        }
     </style>
 </head>
 <body>
@@ -75,15 +1096,15 @@
 
     <!-- Hero Section -->
     <section class="relative flex items-center justify-center overflow-hidden py-8 hero-section">
-        <div class="absolute inset-0 bg-black bg-opacity-50"></div>     
+        <div class="absolute inset-0 bg-black bg-opacity-70"></div>     
         <div class="relative z-10 text-center text-white px-4 w-full">
             <div class="max-w-3xl mx-auto">
                 <div class="mb-2">
                     <p class="max-w-3xl mx-auto text-sm md:text-base leading-tight mb-2 px-0 text-gray-100 tracking-[0.2em] animate-fade-in-up animate-delay-200 corporate-text">
-                    EXPLORE OUR
+                    OUR FULLY
                     </p>
                     <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold leading-tight animate-fade-in-up corporate-heading px-2">
-                        CUSTOM DESIGNS
+                        CUSTOM BRANDED PRODUCTS
                     </h1>
                 </div>
                 
@@ -95,7 +1116,7 @@
                 <div class="mt-8 mb-8 animate-fade-in-up animate-delay-300">
                     <a 
                         href="#contact" 
-                        class="btn-primary inline-block px-8 py-3 rounded-lg text-white font-semibold text-lg"
+                        class="btn btn-bubble btn-primary inline-block px-8 py-3 rounded-lg text-white font-semibold text-lg"
                         aria-label="Contact us for custom designs">
                         Contact Us
                     </a>
@@ -111,7 +1132,601 @@
         </div>
     </section>
 
+    <!-- Banner Section -->
+    <section class="banner-section section-padding relative">
+        <div id="banner-background"></div>
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 banner-content">
+            <div class="max-w-4xl mx-auto text-center">
+                <p class="banner-tagline text-xs sm:text-sm uppercase mb-2 animate-fade-in-up animate-delay-200">
+                    YOU THINK IT, WE'LL BRAND IT
+                </p>
+                
+                <h2 class="banner-heading text-3xl sm:text-4xl md:text-5xl lg:text-6xl mb-4 sm:mb-5 leading-tight animate-fade-in-up animate-delay-300">
+                    FULLY BRAND YOUR EVENT
+                </h2>
+                
+                <p class="banner-text text-sm sm:text-base md:text-lg mb-5 sm:mb-6 px-4 sm:px-0 animate-fade-in-up animate-delay-400">
+                    When it comes to making your event stand out, custom branding is everything. From the moment guests step up to the booth, every touchpoint can reflect your brand—whether it's the backdrop behind them, the booth they interact with, or the photo layouts they take home. It's not just about logos on a screen, it's about creating an experience that feels uniquely yours and leaves a lasting impression long after the event ends.
+                </p>
+                
+                <div class="mb-4 sm:mb-5 animate-fade-in-up animate-delay-500">
+                    <p class="banner-question text-base sm:text-lg md:text-xl mb-2 sm:mb-3">
+                        Want to see the possibilities?
+                    </p>
+                    <p class="banner-text text-xs sm:text-sm md:text-base text-gray-600">
+                        Reach out to our team or keep scrolling to explore all the different elements we can brand at your event.
+                    </p>
+                </div>
+                
+                <div class="animate-fade-in-up animate-delay-600">
+                    <a 
+                        href="#contact" 
+                        class="btn btn-bubble btn-primary inline-block px-8 sm:px-10 py-3 sm:py-4 rounded-lg text-white font-bold text-sm sm:text-base md:text-lg uppercase tracking-wide shadow-lg hover:shadow-xl transition-all duration-300"
+                        aria-label="Get a quote for custom branding">
+                        GET A QUOTE
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Brand Section -->
+    <section class="brand-section section-padding relative">
+        <div id="brand-background"></div>
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 brand-content">
+            <h2 class="brand-heading">
+                <span class="word">BRAND</span>
+                <span class="word highlight">EVERY</span>
+                <span class="word highlight">ELEMENT</span>
+                <span class="word">OF</span>
+                <span class="word">YOUR</span>
+                <span class="word">EVENT</span>
+            </h2>
+        </div>
+    </section>
+
+    <!-- Image Slider Section -->
+    <section class="section-padding slider-section relative" style="padding: 40px 20px;">
+        <div id="slider-background"></div>
+        <div class="slider-wrapper">
+            <div class="slider">
+                <div class="slide-navigation__squares">
+                    <div class="squares-wrapper">
+                        <div class="squares-slider">
+                            <span class="square"></span>
+                            <span class="square"></span>
+                            <span class="square red"></span>
+                            <span class="square"></span>
+                            <span class="square"></span>
+                            <span class="square"></span>
+                            <span class="square"></span>
+                            <span class="square"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="slides-container">
+                    <div class="slide-wrapper">
+                        <div class="slide" data-order="1">
+                            <img src="../assets/images/galleries/ourdesigns/hero.jpg" alt="" />
+                            <div class="slide-content">
+                                <h1>Custom</h1>
+                                <h2>Branded Booth Drops</h2>
+                                <div class="slide-txt">
+                                    <p>Full brand your booth experience with a booth wrap that shows off your branding, logos, and more!</p>
+                                    <button>Get a Quote</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slide" data-order="2">
+                            <img src="../assets/images/galleries/ourdesigns/img1.jpg" alt="" />
+                            <div class="slide-content">
+                                <h1>Custom</h1>
+                                <h2>Layouts and Interface</h2>
+                                <div class="slide-txt">
+                                    <p>From the booth screen to the photo layout, your brand is built into every step of the experience.</p>
+                                    <button>Get a Quote</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slide" data-order="3">
+                            <img src="../assets/images/galleries/ourdesigns/img2.jpg" alt="" />
+                            <div class="slide-content">
+                                <h1>Custom</h1>
+                                <h2>Generated Mosaics</h2>
+                                <div class="slide-txt">
+                                    <p>Transform all of your event photos into one stunning branded mosaic wall. </p>
+                                    <button>Get a Quote</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slide" data-order="4">
+                            <img src="../assets/images/galleries/ourdesigns/img3.jpg" alt="" />
+                            <div class="slide-content">
+                                <h1>Custom</h1>
+                                <h2>Branded Event Signage</h2>
+                                <div class="slide-txt">
+                                    <p>From welcome signs to directional displays, every piece branded your way.</p>
+                                    <button>Get a Quote</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slide" data-order="5">
+                            <img src="../assets/images/galleries/ourdesigns/img4.jpg" alt="" />
+                            <div class="slide-content">
+                                <h1>Custom</h1>
+                                <h2>Branded Hanging Neon Signs</h2>
+                                <div class="slide-txt">
+                                    <p>From welcome signs to directional displays, every piece branded your way.</p>
+                                    <button>Get a Quote</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slide" data-order="6">
+                            <img src="../assets/images/galleries/ourdesigns/img5.jpg" alt="" />
+                            <div class="slide-content">
+                                <h1>Custom</h1>
+                                <h2>Branded Merchandise</h2>
+                                <div class="slide-txt">
+                                    <p>From welcome signs to directional displays, every piece branded your way.</p>
+                                    <button>Get a Quote</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slide" data-order="7">
+                            <img src="../assets/images/galleries/ourdesigns/img6.jpg" alt="" />
+                            <div class="slide-content">
+                                <h1>Custom</h1>
+                                <h2>Branded Backdrops</h2>
+                                <div class="slide-txt">
+                                    <p>From welcome signs to directional displays, every backdrop is fully branded your way. Available sizes: 8x8, 8x10, 10x20, 20x8</p>
+                                    <button>Get a Quote</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slide" data-order="8">
+                            <img src="../assets/images/galleries/ourdesigns/img7.jpg" alt="" />
+                            <div class="slide-content">
+                                <h1>Custom</h1>
+                                <h2>Branded Enclosures</h2>
+                                <div class="slide-txt">
+                                    <p>From walls to signage, every detail reflects your style for a clean, cohesive look. Turn your booth into a fully branded experience.</p>
+                                    <button>Get a Quote</button>
+                                </div>
+                            </div>  
+                        </div>
+                    </div>
+                </div>
+                <div class="slide-navigation__txt">
+                    <ul>
+                        <li><span data-order="1">Brand 1</span></li>
+                        <li><span data-order="2">Brand 2</span></li>
+                        <li><span data-order="3">Brand 3</span></li>
+                        <li><span data-order="4">Brand 4</span></li>
+                        <li><span data-order="5">Brand 5</span></li>
+                        <li><span data-order="6">Brand 6</span></li>
+                        <li><span data-order="7">Brand 7</span></li>
+                        <li><span data-order="8">Brand 8</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Form Section -->
+    <section class="form-section relative">
+        <div id="form-background"></div>
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 form-content">
+            <div class="form-heading">
+                <h2>
+                    <span class="heading-line">LET'S MAKE YOUR EVENT</span>
+                    <span class="heading-line">ONE TO REMEMBER!</span>
+                </h2>
+            </div>
+            <div class="form-description">
+                <p>Let's create something unmatched. Reach out today to explore how our immersive photo, video, and event experiences can bring your vision to life and leave a lasting impact on your guests.</p>
+            </div>
+
+            <!-- Event Booking Form -->
+            <form class="event-form" id="eventBookingForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="firstName">First Name<span class="required">*</span></label>
+                        <input type="text" id="firstName" name="firstName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">Last Name<span class="required">*</span></label>
+                        <input type="text" id="lastName" name="lastName" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="email">Email Address<span class="required">*</span></label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number<span class="required">*</span></label>
+                        <input type="tel" id="phone" name="phone" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="eventDate">Date Of Event<span class="required">*</span></label>
+                        <div class="date-selectors">
+                            <select id="eventMonth" name="eventMonth" required>
+                                <option value="">Month</option>
+                                <option value="01">January</option>
+                                <option value="02">February</option>
+                                <option value="03">March</option>
+                                <option value="04">April</option>
+                                <option value="05">May</option>
+                                <option value="06">June</option>
+                                <option value="07">July</option>
+                                <option value="08">August</option>
+                                <option value="09">September</option>
+                                <option value="10">October</option>
+                                <option value="11">November</option>
+                                <option value="12">December</option>
+                            </select>
+                            <select id="eventDay" name="eventDay" required>
+                                <option value="">Day</option>
+                                <option value="01">1</option>
+                                <option value="02">2</option>
+                                <option value="03">3</option>
+                                <option value="04">4</option>
+                                <option value="05">5</option>
+                                <option value="06">6</option>
+                                <option value="07">7</option>
+                                <option value="08">8</option>
+                                <option value="09">9</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
+                                <option value="13">13</option>
+                                <option value="14">14</option>
+                                <option value="15">15</option>
+                                <option value="16">16</option>
+                                <option value="17">17</option>
+                                <option value="18">18</option>
+                                <option value="19">19</option>
+                                <option value="20">20</option>
+                                <option value="21">21</option>
+                                <option value="22">22</option>
+                                <option value="23">23</option>
+                                <option value="24">24</option>
+                                <option value="25">25</option>
+                                <option value="26">26</option>
+                                <option value="27">27</option>
+                                <option value="28">28</option>
+                                <option value="29">29</option>
+                                <option value="30">30</option>
+                                <option value="31">31</option>
+                            </select>
+                            <select id="eventYear" name="eventYear" required>
+                                <option value="">Year</option>
+                                <option value="2024">2024</option>
+                                <option value="2025">2025</option>
+                                <option value="2026">2026</option>
+                                <option value="2027">2027</option>
+                                <option value="2028">2028</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="venueName">Venue Name</label>
+                        <input type="text" id="venueName" name="venueName">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="venueState">Venue State<span class="required">*</span></label>
+                        <input type="text" id="venueState" name="venueState" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="budget">Ideal Budget</label>
+                        <input type="text" id="budget" name="budget">
+                    </div>
+                </div>
+
+                <div class="form-group full-width">
+                    <label for="eventType">Type Of Event<span class="required">*</span></label>
+                    <select id="eventType" name="eventType" required>
+                        <option value="">Please select...</option>
+                        <option value="wedding">Wedding</option>
+                        <option value="corporate">Corporate Event</option>
+                        <option value="social">Social Event</option>
+                        <option value="holiday">Holiday Party</option>
+                        <option value="trade-show">Trade Show</option>
+                        <option value="casino">Casino Party</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+
+                <div class="checkbox-section">
+                    <h3>Products/Services You're Interested In</h3>
+                    <div class="checkbox-grid">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="service1" name="services" value="photo-booths-printing">
+                            <label for="service1">Photo Booths (with printing)</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="service2" name="services" value="photo-booths-no-printing">
+                            <label for="service2">Photo Booths (without printing)</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="service3" name="services" value="video-booths">
+                            <label for="service3">Video Booths</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="service4" name="services" value="ai-experiences">
+                            <label for="service4">AI Experiences</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="service5" name="services" value="lighting-decor">
+                            <label for="service5">Lighting & Decor</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="service6" name="services" value="virtual-reality">
+                            <label for="service6">Virtual Reality</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="service7" name="services" value="professional-headshots">
+                            <label for="service7">Professional Headshots</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="service8" name="services" value="event-photography">
+                            <label for="service8">Professional Event Photography</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="service9" name="services" value="av-dj-services">
+                            <label for="service9">AV + DJ Services</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="service10" name="services" value="casino-services">
+                            <label for="service10">Casino Services</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="service11" name="services" value="dancefloors">
+                            <label for="service11">Dancefloors</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="service12" name="services" value="staging">
+                            <label for="service12">Staging</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group full-width">
+                    <label for="hearAboutUs">How did you hear about us?</label>
+                    <input type="text" id="hearAboutUs" name="hearAboutUs">
+                </div>
+
+                <div class="form-group full-width">
+                    <label for="eventDetails">Tell Us About Your Event</label>
+                    <textarea id="eventDetails" name="eventDetails" class="large"></textarea>
+                </div>
+
+                <div class="privacy-checkbox">
+                    <input type="checkbox" id="privacyPolicy" name="privacyPolicy" required>
+                    <label for="privacyPolicy">
+                        I agree to the Privacy Policy<span class="required">*</span>
+                        <a href="#" target="_blank">(Click To View)</a>
+                    </label>
+                </div>
+
+                <button type="submit" class="submit-button">GET YOUR QUOTE</button>
+            </form>
+        </div>
+    </section>
+
     <script src="../assets/components/navigation.js"></script>
     <script src="../assets/components/footer.js"></script>
+    
+    <!-- Image Slider JavaScript -->
+    <script>
+        var initialSlide = $('.slides-container [data-order="1"]');
+        var initalSelected = $('.slide-navigation__txt [data-order="1"]');
+        var mq_medium = window.matchMedia('(min-width: 860px)');
+        var mq_big = window.matchMedia('(min-width: 1200px)');
+
+        function activate_slide(order) {
+            var unactiveSlide = $('.slide.active');
+            var activeSlide = $('.slides-container [data-order="' + order + '"]');
+
+            if (!(activeSlide.hasClass('active'))) {
+                slide_in(activeSlide);
+                slide_out(unactiveSlide);
+            }
+        }
+
+        function slide_in(slide) {
+            var _this = slide;
+
+            animation_in(slide);
+            _this.addClass('active');
+            gsap.to(_this, {duration: 1, autoAlpha: 1});
+        }
+
+        function slide_out(slide) {
+            var _this = slide;
+
+            _this.css('z-index', '2');
+            _this.removeClass('active');
+            gsap.to(_this, {
+                duration: 1,
+                autoAlpha: 0,
+                onComplete: function() {
+                    _this.css('z-index', '1');
+                }
+            });
+
+            animation_out(slide);
+        }
+
+        function animation_in(slide) {
+            var title = slide.find('h1');
+            var subtitle = $(slide).find('h2');
+            var text = $(slide).find('p');
+            var button = $(slide).find('button');
+            var image = $(slide).find('img');
+
+            gsap.fromTo(title, {autoAlpha: 0, x: 100}, {duration: 0.6, autoAlpha: 0.6, x: 0, ease: "power2.out"});
+            gsap.fromTo(subtitle, {autoAlpha: 0, x: -200}, {duration: 0.5, autoAlpha: 1, x: 0, ease: "power2.out", delay: -0.1});
+            gsap.fromTo(text, {autoAlpha: 0, x: 50}, {duration: 0.8, autoAlpha: 1, x: 0, ease: "power2.out"});
+            gsap.fromTo(button, {autoAlpha: 0}, {duration: 0.5, autoAlpha: 1});
+            gsap.to(image, {duration: 0, autoAlpha: 1, scale: 1});
+        }
+
+        function animation_out(slide) {
+            var title = slide.find('h1');
+            var subtitle = $(slide).find('h2');
+            var text = $(slide).find('p');
+            var button = $(slide).find('button');
+            var image = $(slide).find('img');
+
+            gsap.to(title, {duration: 0.6, autoAlpha: 0, x: 0});
+            gsap.to(subtitle, {duration: 0.5, autoAlpha: 0, x: 200});
+            gsap.to(text, {duration: 0.5, autoAlpha: 0});
+            gsap.to(button, {duration: 0.5, autoAlpha: 0});
+            gsap.to(image, {duration: 1, scale: 1.1});
+        }
+
+        $('.slide-navigation__txt span').on('click', function() {
+            var _this = $(this);
+            var order = _this.data('order');
+            var spans = $('.slide-navigation__txt span');
+            var current = $('.slide.active').data('order');
+
+            spans.removeClass('active');
+            _this.addClass('active');
+            activate_slide(order);
+            stagger_squares(order, current);
+            updateActiveSquare(order);
+        });
+
+        function stagger_squares(order, current) {
+            // Check if we're on mobile (squares are horizontal)
+            var isMobile = window.innerWidth <= 768;
+            
+            if (isMobile) {
+                // On mobile, just update the active square without animation
+                // Reset any transforms that might have been applied to prevent size issues
+                var squares = $('.slide-navigation__squares .square');
+                gsap.set(squares, {
+                    clearProps: "transform,scale,x,y,rotation"
+                });
+                return;
+            }
+
+            var mq = 0.7;
+            var moveY;
+            var squares = $('.slide-navigation__squares .square');
+            var staggerTime = -0.12;
+
+            if (order < current) {
+                staggerTime = staggerTime * -1;
+            }
+
+            if (mq_medium.matches) {
+                mq = 1;
+            }
+            if (mq_big.matches) {
+                mq = 1.3;
+            }
+
+            moveY = (order - 1) * (15 * mq);
+            gsap.to(squares, {
+                duration: 0.1,
+                y: moveY,
+                stagger: staggerTime,
+                force3D: false
+            });
+        }
+
+        // Make squares clickable on mobile and update active state
+        function updateActiveSquare(order) {
+            $('.slide-navigation__squares .square').removeClass('red');
+            $('.slide-navigation__squares .square').eq(order - 1).addClass('red');
+        }
+
+        $('.slide-navigation__squares .square').on('click', function() {
+            var squareIndex = $(this).index();
+            var order = squareIndex + 1;
+            var spans = $('.slide-navigation__txt span');
+            var newSpan = $('.slide-navigation__txt span[data-order="' + order + '"]');
+            var current = $('.slide.active').data('order');
+
+            spans.removeClass('active');
+            newSpan.addClass('active');
+            activate_slide(order);
+            stagger_squares(order, current);
+            updateActiveSquare(order);
+        });
+
+        // Touch/Swipe support for mobile devices
+        var touchStartX = 0;
+        var touchEndX = 0;
+        var minSwipeDistance = 50;
+
+        $('.slides-container').on('touchstart', function(e) {
+            touchStartX = e.originalEvent.touches[0].clientX;
+        });
+
+        $('.slides-container').on('touchend', function(e) {
+            touchEndX = e.originalEvent.changedTouches[0].clientX;
+            handleSwipe();
+        });
+
+        function handleSwipe() {
+            var swipeDistance = touchEndX - touchStartX;
+            var currentOrder = parseInt($('.slide.active').data('order'));
+            var totalSlides = $('.slide').length;
+            var newOrder;
+
+            if (Math.abs(swipeDistance) > minSwipeDistance) {
+                if (swipeDistance > 0) {
+                    // Swipe right - go to previous slide
+                    newOrder = currentOrder > 1 ? currentOrder - 1 : totalSlides;
+                } else {
+                    // Swipe left - go to next slide
+                    newOrder = currentOrder < totalSlides ? currentOrder + 1 : 1;
+                }
+
+                var spans = $('.slide-navigation__txt span');
+                var newSpan = $('.slide-navigation__txt span[data-order="' + newOrder + '"]');
+                
+                spans.removeClass('active');
+                newSpan.addClass('active');
+                activate_slide(newOrder);
+                stagger_squares(newOrder, currentOrder);
+                updateActiveSquare(newOrder);
+            }
+        }
+
+        // Function to reset square transforms on mobile
+        function resetMobileSquares() {
+            if (window.innerWidth <= 768) {
+                var squares = $('.slide-navigation__squares .square');
+                gsap.set(squares, {
+                    clearProps: "transform,scale,x,y,rotation"
+                });
+            }
+        }
+
+        $(document).ready(function() {
+            initialSlide.addClass('active');
+            initalSelected.addClass('active');
+            gsap.to(initialSlide, {duration: 0.5, autoAlpha: 1});
+            updateActiveSquare(1);
+            resetMobileSquares();
+        });
+
+        // Reset squares on window resize
+        $(window).on('resize', function() {
+            resetMobileSquares();
+        });
+    </script>
 </body>
 </html>
