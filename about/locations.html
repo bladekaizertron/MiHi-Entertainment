@@ -6,123 +6,1349 @@
     <title>Our Locations - MiHi Entertainment</title>
     <link rel="icon" type="image/svg+xml" href="../assets/images/favicon.svg">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://code.highcharts.com/6.0.6/highcharts.js"></script>
+    <script src="https://code.highcharts.com/6.0.6/highcharts-more.js"></script>
+    <script src="https://cdn.rawgit.com/mekhatria/hexagon/master/hexagon.js"></script>
     <style>
+        html, body { overflow-x: hidden; width: 100%; }
         body { font-family: 'Inter', sans-serif; color: #1a202c; }
-        h1, h2, h3, h4, h5, h6 { font-family: 'Playfair Display', serif; }
-        .btn-primary { background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%); transition: all 0.3s ease; }
-        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(0, 80, 255, 0.4); }
-        .section-padding { padding: 5rem 0; }
-        .hero-gradient { background: linear-gradient(135deg, rgba(0, 80, 255, 0.5) 0%, rgba(0, 64, 217, 0.5) 100%); }
+        h1, h2, h3, h4, h5, h6 { font-family: 'Montserrat', sans-serif; font-weight: 700; letter-spacing: -0.02em; }
+        .section-padding { padding: 3rem 0; }
+        @media (min-width: 768px) {
+            .section-padding { padding: 5rem 0; }
+        }
+        .hero-gradient { background: linear-gradient(135deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.5) 100%); }
+        
+        @keyframes bounceFloat {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-8px);
+            }
+        }
+        
+        .hero-title {
+            font-size: 1.875rem;
+            font-weight: 900;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            text-shadow: 
+                0 0 20px rgba(255, 255, 255, 0.5),
+                0 4px 8px rgba(0, 0, 0, 0.8),
+                0 8px 16px rgba(0, 0, 0, 0.6),
+                2px 2px 0px rgba(0, 80, 255, 0.3);
+            line-height: 1.1;
+            margin-bottom: 1rem;
+        }
+        
+        .hero-title .location-icon-o {
+            display: inline-block;
+            width: 1.5em;
+            height: 1.5em;
+            vertical-align: middle;
+            position: relative;
+            top: -0em;
+            margin-right: -0.61em;
+            color: #ff0000;
+            fill: #ff0000;
+            animation: bounceFloat 2s ease-in-out infinite;
+            filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.5)) 
+                    drop-shadow(0 4px 8px rgba(0, 0, 0, 0.8)) 
+                    drop-shadow(0 8px 16px rgba(0, 0, 0, 0.6)) 
+                    drop-shadow(2px 2px 0px rgba(255, 0, 0, 0.5));
+        }
+        
+        @media (min-width: 640px) {
+            .hero-title {
+                font-size: 2.5rem;
+                letter-spacing: 0.08em;
+            }
+        }
+        
+        @media (min-width: 768px) {
+            .hero-title {
+                font-size: 3.25rem;
+                letter-spacing: 0.1em;
+            }
+        }
+        
+        @media (min-width: 1024px) {
+            .hero-title {
+                font-size: 4rem;
+                letter-spacing: 0.12em;
+            }
+        }
+        
+        @media (min-width: 1280px) {
+            .hero-title {
+                font-size: 5rem;
+                letter-spacing: 0.15em;
+            }
+        }
+
+        /* Flicker Button Styles */
+        @keyframes flicker {
+            0% {
+                transform: scale(1);
+            }
+            25% {
+                transform: scale(0);
+            }
+            26% {
+                transform: scale(0) translateX(100%);
+            }
+            50% {
+                transform: scale(1) translateX(100%);
+            }
+            75% {
+                transform: scale(0) translateX(100%);
+            }
+            76% {
+                transform: scale(0);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .flicker-btn {
+            --transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.3);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+            min-width: 200px;
+            min-height: 50px;
+            padding: 15px 50px 15px 30px;
+            background: 
+                repeating-linear-gradient(
+                    0deg,
+                    rgba(139, 111, 71, 0.1) 0px,
+                    rgba(139, 111, 71, 0.1) 1px,
+                    transparent 1px,
+                    transparent 2px
+                ),
+                repeating-linear-gradient(
+                    90deg,
+                    rgba(139, 111, 71, 0.1) 0px,
+                    rgba(139, 111, 71, 0.1) 1px,
+                    transparent 1px,
+                    transparent 2px
+                ),
+                radial-gradient(circle at 20% 30%, rgba(160, 130, 109, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(139, 111, 71, 0.2) 0%, transparent 50%),
+                linear-gradient(135deg, #8B6F47 0%, #A0826D 50%, #7A5F3F 100%);
+            border-radius: 99px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 500;
+            font-size: 18px;
+            color: white;
+            text-decoration: none;
+            transition: background 0.3s, color 0.3s;
+            white-space: nowrap;
+            box-shadow: 
+                inset 0 1px 2px rgba(0, 0, 0, 0.2),
+                inset 0 -1px 2px rgba(255, 255, 255, 0.1),
+                0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        @media (min-width: 640px) {
+            .flicker-btn {
+                min-width: 220px;
+                padding: 18px 60px 18px 35px;
+                font-size: 20px;
+            }
+            .flicker-btn__filler {
+                right: 40px;
+                width: 14px;
+                height: 14px;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .flicker-btn {
+                min-width: 250px;
+                padding: 20px 70px 20px 40px;
+                font-size: 22px;
+            }
+            .flicker-btn__filler {
+                right: 45px;
+                width: 15px;
+                height: 15px;
+            }
+        }
+
+        .flicker-btn:focus {
+            box-shadow: 
+                inset 0 1px 2px rgba(0, 0, 0, 0.2),
+                inset 0 -1px 2px rgba(255, 255, 255, 0.1),
+                0 2px 4px rgba(0, 0, 0, 0.3),
+                0 0 30px rgba(139, 111, 71, 0.5);
+            outline: none;
+        }
+
+        .flicker-btn__text {
+            position: relative;
+            z-index: 4;
+            transition: color 0.3s;
+            display: inline-block;
+            color: inherit;
+        }
+
+        .flicker-btn__icon {
+            flex-shrink: 0;
+            aspect-ratio: 1;
+            width: 50px;
+            height: 50px;
+            border-radius: 100%;
+            background: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M5 12H19M19 12L12 5M19 12L12 19' stroke='%238B6F47' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center center no-repeat;
+            background-color: rgba(255, 255, 255, 0.2);
+            background-size: 24px 24px;
+            position: absolute;
+            right: 8px;
+            top: 50%;
+            z-index: 3;
+            transform: translateY(-50%) scale(0);
+            overflow: hidden;
+            transition: transform var(--transition);
+        }
+
+        .flicker-btn__filler {
+            width: 12px;
+            height: 12px;
+            background: white;
+            border-radius: 100%;
+            position: absolute;
+            right: 35px;
+            top: 50%;
+            z-index: 1;
+            transform: translateY(-50%);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.3);
+            pointer-events: none;
+            opacity: 1;
+            will-change: transform;
+        }
+
+        @media (hover: hover) and (pointer: fine) {
+            .flicker-btn:hover {
+                background: 
+                    repeating-linear-gradient(
+                        0deg,
+                        rgba(139, 111, 71, 0.1) 0px,
+                        rgba(139, 111, 71, 0.1) 1px,
+                        transparent 1px,
+                        transparent 2px
+                    ),
+                    repeating-linear-gradient(
+                        90deg,
+                        rgba(139, 111, 71, 0.1) 0px,
+                        rgba(139, 111, 71, 0.1) 1px,
+                        transparent 1px,
+                        transparent 2px
+                    ),
+                    radial-gradient(circle at 20% 30%, rgba(160, 130, 109, 0.3) 0%, transparent 50%),
+                    radial-gradient(circle at 80% 70%, rgba(139, 111, 71, 0.2) 0%, transparent 50%),
+                    linear-gradient(135deg, #9B7F57 0%, #B0927D 50%, #8A6F4F 100%);
+                color: #5A4630;
+            }
+
+            .flicker-btn:hover .flicker-btn__text {
+                color: #5A4630;
+            }
+
+            .flicker-btn:hover .flicker-btn__icon {
+                transform: translateY(-50%) scale(1);
+                background-color: rgba(139, 111, 71, 0.2);
+                background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M5 12H19M19 12L12 5M19 12L12 19' stroke='%235A4630' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+            }
+
+            .flicker-btn:hover .flicker-btn__filler {
+                transform: translateY(-50%) scale(150);
+                animation: none;
+                z-index: 1;
+            }
+        }
+
+        @media (hover: none) {
+            .flicker-btn:active {
+                background: 
+                    repeating-linear-gradient(
+                        0deg,
+                        rgba(139, 111, 71, 0.1) 0px,
+                        rgba(139, 111, 71, 0.1) 1px,
+                        transparent 1px,
+                        transparent 2px
+                    ),
+                    repeating-linear-gradient(
+                        90deg,
+                        rgba(139, 111, 71, 0.1) 0px,
+                        rgba(139, 111, 71, 0.1) 1px,
+                        transparent 1px,
+                        transparent 2px
+                    ),
+                    radial-gradient(circle at 20% 30%, rgba(160, 130, 109, 0.3) 0%, transparent 50%),
+                    radial-gradient(circle at 80% 70%, rgba(139, 111, 71, 0.2) 0%, transparent 50%),
+                    linear-gradient(135deg, #9B7F57 0%, #B0927D 50%, #8A6F4F 100%);
+                color: #5A4630;
+            }
+
+            .flicker-btn:active .flicker-btn__text {
+                color: #5A4630;
+            }
+
+            .flicker-btn:active .flicker-btn__icon {
+                transform: translateY(-50%) scale(1);
+                background-color: rgba(139, 111, 71, 0.2);
+                background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M5 12H19M19 12L12 5M19 12L12 19' stroke='%235A4630' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+            }
+
+            .flicker-btn:active .flicker-btn__filler {
+                transform: translateY(-50%) scale(150);
+                animation: none;
+                z-index: 1;
+            }
+        }
+
+        /* Navigation Contact Us Button Fix */
+        header .btn-primary,
+        nav .btn-primary,
+        .btn-primary {
+            background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%);
+            background-color: #0050ff;
+            color: #ffffff !important;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 9999px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 80, 255, 0.3);
+        }
+
+        header .btn-primary:hover,
+        nav .btn-primary:hover,
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #0040d9 0%, #0033b3 100%);
+            background-color: #0040d9;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 80, 255, 0.4);
+        }
+
+        header .btn-primary:active,
+        nav .btn-primary:active,
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+
+        /* Map Container Responsive Styles - Modern Whiteboard */
+        #container {
+            min-height: 460px;
+            overflow: hidden;
+            touch-action: pan-x pan-y;
+            -webkit-overflow-scrolling: touch;
+            background: 
+                /* Subtle grid pattern */
+                repeating-linear-gradient(
+                    0deg,
+                    rgba(0, 0, 0, 0.02) 0px,
+                    rgba(0, 0, 0, 0.02) 1px,
+                    transparent 1px,
+                    transparent 20px
+                ),
+                repeating-linear-gradient(
+                    90deg,
+                    rgba(0, 0, 0, 0.02) 0px,
+                    rgba(0, 0, 0, 0.02) 1px,
+                    transparent 1px,
+                    transparent 20px
+                ),
+                /* Whiteboard texture */
+                radial-gradient(circle at 20% 30%, rgba(0, 0, 0, 0.01) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(0, 0, 0, 0.01) 0%, transparent 50%),
+                /* Base whiteboard color */
+                linear-gradient(135deg, #f8f9fa 0%, #ffffff 50%, #f5f6f7 100%);
+            border: 8px solid #2c3e50;
+            border-radius: 16px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.15),
+                0 2px 8px rgba(0, 0, 0, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.8);
+            position: relative;
+        }
+        
+        #container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                /* Subtle noise texture */
+                url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
+            pointer-events: none;
+            border-radius: 8px;
+            z-index: 0;
+        }
+        
+        /* Ensure chart content appears above whiteboard texture */
+        #container > svg,
+        #container > div {
+            position: relative;
+            z-index: 1;
+        }
+        
+        @media (max-width: 640px) {
+            #container {
+                height: 350px !important;
+                min-height: 350px !important;
+                padding: 8px !important;
+                max-width: 100% !important;
+            }
+            
+            /* Improve readability on small screens */
+            .highcharts-data-label text {
+                font-size: 9px !important;
+            }
+        }
+        
+        @media (min-width: 641px) and (max-width: 768px) {
+            #container {
+                height: 400px !important;
+                min-height: 400px !important;
+                padding: 12px !important;
+                max-width: 100% !important;
+            }
+        }
+        
+        @media (min-width: 769px) and (max-width: 1024px) {
+            #container {
+                height: 450px !important;
+                min-height: 450px !important;
+                max-width: 90% !important;
+            }
+        }
+        
+        /* Ensure map is scrollable on mobile if needed */
+        @media (max-width: 768px) {
+            .map-wrapper {
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                touch-action: pan-x pan-y;
+            }
+        }
+
+        /* Modal Styles */
+        .city-modal {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(4px);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .city-modal.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .city-modal-content {
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            margin: auto;
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 500px;
+            width: 90%;
+            position: relative;
+            animation: slideUp 0.3s ease;
+            font-family: 'Inter', sans-serif;
+        }
+
+        @media (min-width: 640px) {
+            .city-modal-content {
+                padding: 2.5rem;
+            }
+        }
+
+        .city-modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #e5e7eb;
+        }
+
+        .city-modal-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1a202c;
+            margin: 0;
+        }
+
+        @media (min-width: 640px) {
+            .city-modal-title {
+                font-size: 1.75rem;
+            }
+        }
+
+        .city-modal-close {
+            background: none;
+            border: none;
+            font-size: 2rem;
+            font-weight: 300;
+            color: #6b7280;
+            cursor: pointer;
+            padding: 0;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.2s ease;
+        }
+
+        .city-modal-close:hover {
+            background-color: #f3f4f6;
+            color: #1a202c;
+        }
+
+        .city-modal-close:active {
+            transform: scale(0.95);
+        }
+
+        .city-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .city-item {
+            margin-bottom: 0.75rem;
+        }
+
+        .city-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .city-link {
+            display: block;
+            padding: 1rem 1.5rem;
+            background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%);
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 8px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 80, 255, 0.3);
+            text-align: center;
+        }
+
+        .city-link:hover {
+            background: linear-gradient(135deg, #0040d9 0%, #0033b3 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 80, 255, 0.4);
+        }
+
+        .city-link:active {
+            transform: translateY(0);
+        }
     </style>
 </head>
 <body>
     <div id="nav-placeholder"></div>
 
-    <section class="relative h-[60vh] flex items-center justify-center overflow-hidden">
-        <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1524661135-423995f22d0b?w=1600');"></div>
+    <!-- Hero Section -->
+    <section class="relative h-[50vh] sm:h-[60vh] md:h-[70vh] lg:h-screen flex items-center justify-center overflow-hidden">
+        <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('../assets/images/about/locations/hero.jpg');"></div>
         <div class="absolute inset-0 hero-gradient"></div>
-        <div class="relative z-10 text-center text-white px-6">
-            <h1 class="text-5xl md:text-6xl font-bold mb-4">Our Locations</h1>
-            <p class="text-xl md:text-2xl mb-8">Serving Events Nationwide</p>
+        <div class="relative z-10 text-center text-white px-4 sm:px-6 max-w-4xl mx-auto -mt-8 sm:-mt-12 md:-mt-16 lg:-mt-20">
+            <h1 class="hero-title">
+                <svg class="location-icon-o" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                </svg>
+                UR PHOTO BOOTH LOCATIONS
+            </h1>
+            <p class="text-base sm:text-lg md:text-xl lg:text-2xl mb-6 sm:mb-8">Discover MiHi Entertainment's many locations across the US, bringing our cutting-edge event technology and services to a city near you.</p>
+            <div class="mt-6 sm:mt-8">
+                <a href="../index.html#contact" class="flicker-btn">
+                    <span class="flicker-btn__text">Contact Us</span>
+                    <span class="flicker-btn__icon"></span>
+                    <span class="flicker-btn__filler"></span>
+                </a>
+            </div>
         </div>
     </section>
 
-    <section class="section-padding bg-white">
-        <div class="container mx-auto px-6">
-            <div class="max-w-6xl mx-auto">
-                <div class="text-center mb-12">
-                    <h2 class="text-4xl font-bold mb-4">Where We Serve</h2>
-                    <p class="text-xl text-gray-600">Based in Denver, serving events across the nation</p>
-                </div>
-
-                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <!-- Location 1 -->
-                    <div class="bg-gray-50 p-8 rounded-2xl">
-                        <div class="text-4xl mb-4">🏔️</div>
-                        <h3 class="text-2xl font-bold mb-3">Denver, CO</h3>
-                        <p class="text-gray-600 mb-4">Our headquarters and primary service area</p>
-                        <ul class="text-gray-700 space-y-2">
-                            <li>✓ Full equipment inventory</li>
-                            <li>✓ Same-day setup available</li>
-                            <li>✓ Local expert team</li>
-                        </ul>
-                    </div>
-
-                    <!-- Location 2 -->
-                    <div class="bg-gray-50 p-8 rounded-2xl">
-                        <div class="text-4xl mb-4">🌄</div>
-                        <h3 class="text-2xl font-bold mb-3">Colorado Springs</h3>
-                        <p class="text-gray-600 mb-4">Serving southern Colorado</p>
-                        <ul class="text-gray-700 space-y-2">
-                            <li>✓ Full service area</li>
-                            <li>✓ Mountain venue specialists</li>
-                            <li>✓ No travel fees</li>
-                        </ul>
-                    </div>
-
-                    <!-- Location 3 -->
-                    <div class="bg-gray-50 p-8 rounded-2xl">
-                        <div class="text-4xl mb-4">🏙️</div>
-                        <h3 class="text-2xl font-bold mb-3">Boulder & Fort Collins</h3>
-                        <p class="text-gray-600 mb-4">Northern Colorado coverage</p>
-                        <ul class="text-gray-700 space-y-2">
-                            <li>✓ University events</li>
-                            <li>✓ Corporate functions</li>
-                            <li>✓ Wedding specialists</li>
-                        </ul>
-                    </div>
-
-                    <!-- Location 4 -->
-                    <div class="bg-gray-50 p-8 rounded-2xl">
-                        <div class="text-4xl mb-4">⛰️</div>
-                        <h3 class="text-2xl font-bold mb-3">Mountain Resorts</h3>
-                        <p class="text-gray-600 mb-4">Vail, Aspen, Breckenridge</p>
-                        <ul class="text-gray-700 space-y-2">
-                            <li>✓ Destination weddings</li>
-                            <li>✓ Ski resort events</li>
-                            <li>✓ High-altitude expertise</li>
-                        </ul>
-                    </div>
-
-                    <!-- Location 5 -->
-                    <div class="bg-gray-50 p-8 rounded-2xl">
-                        <div class="text-4xl mb-4">✈️</div>
-                        <h3 class="text-2xl font-bold mb-3">National Coverage</h3>
-                        <p class="text-gray-600 mb-4">We travel anywhere!</p>
-                        <ul class="text-gray-700 space-y-2">
-                            <li>✓ Conference & trade shows</li>
-                            <li>✓ Multi-city tours</li>
-                            <li>✓ Destination events</li>
-                        </ul>
-                    </div>
-
-                    <!-- Location 6 -->
-                    <div class="bg-gray-50 p-8 rounded-2xl">
-                        <div class="text-4xl mb-4">🎯</div>
-                        <h3 class="text-2xl font-bold mb-3">Virtual Services</h3>
-                        <p class="text-gray-600 mb-4">Remote event support</p>
-                        <ul class="text-gray-700 space-y-2">
-                            <li>✓ Virtual photo booths</li>
-                            <li>✓ Remote event planning</li>
-                            <li>✓ Hybrid event solutions</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="mt-16 bg-gradient-to-r from-[#e6f0ff] to-[#e6f0ff] p-8 rounded-2xl">
-                    <h3 class="text-2xl font-bold mb-4 text-center">Service Radius</h3>
-                    <p class="text-lg text-gray-700 text-center mb-6">
-                        While based in Denver, we proudly serve events nationwide. Our team has experience with destination events, 
-                        multi-city tours, and remote setups. Contact us to discuss your event location!
-                    </p>
-                    <div class="text-center">
-                        <a href="../index.html#contact" class="btn-primary text-white px-8 py-4 rounded-full text-lg font-semibold inline-block">Contact Us</a>
-                    </div>
+    <!-- Locations Section -->
+    <section class="section-padding relative" style="background-image: url('https://images.unsplash.com/photo-1524661135-423995f22d0b?w=1600'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+        <div class="absolute inset-0 hero-gradient"></div>
+        <div class="container mx-auto px-4 sm:px-6 relative z-10">
+            <div class="max-w-6xl mx-auto text-center">
+                <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 sm:mb-8 tracking-wide" style="font-family: 'Montserrat', sans-serif; font-weight: 900; letter-spacing: 0.05em; text-transform: uppercase;">
+                    FIND US IN A CITY NEAR YOU!
+                </h2>
+                <p class="text-base sm:text-lg md:text-xl text-white/90 max-w-8xl mx-auto leading-relaxed mb-8 sm:mb-12" style="font-family: 'Inter', sans-serif;">
+                    Use the list below to find the closest city to you! As a national Photo Booth company, we strive to deliver our outstanding services across the country.
+                </p>
+                
+                <!-- Interactive US Map -->
+                <div class="map-wrapper mt-8 sm:mt-12 flex justify-center px-2 sm:px-4 overflow-hidden w-full">
+                    <div id="container" style="height: 460px; width: 100%; max-width: 680px; padding: 20px; position: relative; z-index: 1;"></div>
                 </div>
             </div>
         </div>
     </section>
+
+    <!-- City Modal -->
+    <div id="cityModal" class="city-modal">
+        <div class="city-modal-content">
+            <div class="city-modal-header">
+                <h3 class="city-modal-title" id="modalTitle">Areas we serve</h3>
+                <button class="city-modal-close" onclick="closeCityModal()" aria-label="Close modal">&times;</button>
+            </div>
+            <ul class="city-list" id="cityList">
+                <!-- Cities will be dynamically inserted here -->
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        // List of states that should display labels
+        const statesWithLabels = ['AZ', 'CA', 'CO', 'CT', 'DC', 'FL', 'GA', 'IL', 'KY', 'LA', 'MA', 'MI', 'MN', 'NV', 'NY', 'NC', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC', 'TN', 'TX', 'WA'];
+
+        const chart = Highcharts.chart('container', {
+            chart: {
+                type: 'bubble',
+                margin: [70, 70, 70, 70],
+                backgroundColor: 'transparent',
+                reflow: true,
+                events: {
+                    click: function(e) {
+                        // Find the clicked point
+                        const point = e.target.point || e.target.series?.points?.find(p => 
+                            e.chartX >= p.plotX + chart.plotLeft - 20 && 
+                            e.chartX <= p.plotX + chart.plotLeft + 20 &&
+                            e.chartY >= p.plotY + chart.plotTop - 20 && 
+                            e.chartY <= p.plotY + chart.plotTop + 20
+                        );
+                        
+                        if (point && point.cities) {
+                            openCityModal(point.USstate, point.cities);
+                        }
+                    }
+                }
+            },
+            title: {
+                text: ''
+            },
+            subtitle: {
+                text: ''
+            },
+            credits: {
+                enabled: false
+            },
+            plotOptions: {
+                series: {
+                    marker: {
+                        lineColor: 'transparent',
+                        symbol: 'hexagon',
+                        lineWidth: 0,
+                        radius: 14
+                    },
+                    dataLabels: {
+                        enabled: true,
+                        formatter: function() {
+                            // Only show label if state is in the approved list
+                            if (this.point.USstate && statesWithLabels.includes(this.point.USstate)) {
+                                return this.point.USstate;
+                            }
+                            return '';
+                        },
+                        color: '#000000',
+                        style: {
+                            textOutline: false,
+                            fontWeight: 'bold',
+                            fontSize: '12px'
+                        }
+                    },
+                    cursor: 'pointer',
+                    point: {
+                        events: {
+                            click: function() {
+                                if (this.cities) {
+                                    openCityModal(this.USstate, this.cities);
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            tooltip: {
+                useHTML: true,
+                headerFormat: null,
+                pointFormatter: function() {
+                    if (this.USstate) {
+                        // Default format for all states
+                        return `- State of <b>${this.USstate}</b><br/> - The <b>${this.region}</b> region<br/> <b>- ${this.capital}</b> is the capital<br/>`;
+                    }
+                    return '';
+                },
+                backgroundColor: 'rgba(255, 255, 255, 0.95)',
+                borderColor: '#333',
+                borderRadius: 8,
+                style: {
+                    fontSize: '13px'
+                },
+                animation: true,
+                hideDelay: 0
+            },
+            xAxis: {
+                lineWidth: 0,
+                minorGridLineWidth: 0,
+                lineColor: 'transparent',
+                labels: {
+                    enabled: false
+                },
+                minorTickLength: 0,
+                tickLength: 0
+            },
+            yAxis: {
+                gridLineWidth: 0,
+                tickPositions: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+                lineWidth: 0,
+                minorGridLineWidth: 0,
+                lineColor: 'transparent',
+                labels: {
+                    enabled: false
+                },
+                title: {
+                    text: null
+                },
+                minorTickLength: 0,
+                tickLength: 0
+            },
+            legend: {
+                enabled: false
+            },
+            responsive: {
+                rules: [{
+                    condition: {
+                        maxWidth: 640
+                    },
+                    chartOptions: {
+                        chart: {
+                            margin: [40, 20, 40, 20]
+                        },
+                        plotOptions: {
+                            series: {
+                                dataLabels: {
+                                    style: {
+                                        fontSize: '9px',
+                                        fontWeight: 'bold'
+                                    }
+                                },
+                                marker: {
+                                    radius: 8
+                                }
+                            }
+                        },
+                        tooltip: {
+                            style: {
+                                fontSize: '11px'
+                            }
+                        }
+                    }
+                }, {
+                    condition: {
+                        minWidth: 641,
+                        maxWidth: 768
+                    },
+                    chartOptions: {
+                        chart: {
+                            margin: [50, 40, 50, 40]
+                        },
+                        plotOptions: {
+                            series: {
+                                dataLabels: {
+                                    style: {
+                                        fontSize: '10px',
+                                        fontWeight: 'bold'
+                                    }
+                                },
+                                marker: {
+                                    radius: 10
+                                }
+                            }
+                        },
+                        tooltip: {
+                            style: {
+                                fontSize: '12px'
+                            }
+                        }
+                    }
+                }, {
+                    condition: {
+                        minWidth: 769,
+                        maxWidth: 1024
+                    },
+                    chartOptions: {
+                        chart: {
+                            margin: [60, 50, 60, 50]
+                        },
+                        plotOptions: {
+                            series: {
+                                dataLabels: {
+                                    style: {
+                                        fontSize: '11px',
+                                        fontWeight: 'bold'
+                                    }
+                                },
+                                marker: {
+                                    radius: 12
+                                }
+                            }
+                        }
+                    }
+                }]
+            },
+            series: [{
+                data: [{
+                    y: 1,
+                    USstate: "HI",
+                    capital: "Honolulu",
+                    color: "#2962ff",
+                    region: "west"
+                }, {
+                    x: 16,
+                    y: 1,
+                    USstate: "FL",
+                    capital: "Tallahassee",
+                    color: "#ffab00",
+                    region: "south",
+                    cities: ["Orlando"]
+                }]
+            }, {
+                data: [{
+                    x: 7,
+                    y: 2,
+                    USstate: "TX",
+                    capital: "Austin",
+                    color: "#ffab00",
+                    region: "south",
+                    cities: ["Dallas", "Houston", "San Antonio"]
+                }, {
+                    x: 15,
+                    y: 2,
+                    USstate: "GA",
+                    capital: "Atlanta",
+                    color: "#ffab00",
+                    region: "south",
+                    cities: ["Savannah"]
+                }]
+            }, {
+                data: [{
+                    x: 6,
+                    y: 3,
+                    USstate: "NM",
+                    capital: "Santa Fe",
+                    color: "#2962ff",
+                    region: "west"
+                }, {
+                    x: 8,
+                    y: 3,
+                    USstate: "OK",
+                    capital: "Oklahoma City",
+                    color: "#ffab00",
+                    region: "south",
+                    cities: ["Oklahoma City", "Tulsa"]
+                }, {
+                    x: 10,
+                    y: 3,
+                    USstate: "LA",
+                    capital: "Baton Rouge",
+                    color: "#ffab00",
+                    region: "south",
+                    cities: ["Baton Rouge", "New Orleans"]
+                }, {
+                    x: 12,
+                    y: 3,
+                    USstate: "MS",
+                    capital: "Jackson",
+                    color: "#ffab00",
+                    region: "south"
+                }, {
+                    x: 14,
+                    y: 3,
+                    USstate: "AL",
+                    capital: "Montgomery",
+                    color: "#ffab00",
+                    region: "south"
+                }, {
+                    x: 16,
+                    y: 3,
+                    USstate: "SC",
+                    capital: "Columbia",
+                    color: "#ffab00",
+                    region: "south",
+                    cities: ["Charleston"]
+                }]
+            }, {
+                data: [{
+                    x: 3,
+                    y: 4,
+                    USstate: "CA",
+                    capital: "Sacramento",
+                    color: "#2962ff",
+                    region: "west",
+                    cities: ["Los Angeles", "San Diego", "San Francisco"]
+                }, {
+                    x: 5,
+                    y: 4,
+                    USstate: "AZ",
+                    capital: "Phoenix",
+                    color: "#2962ff",
+                    region: "west",
+                    cities: ["Phoenix", "Tucson"]
+                }, {
+                    x: 7,
+                    y: 4,
+                    USstate: "UT",
+                    capital: "Salt Lake City",
+                    color: "#2962ff",
+                    region: "west"
+                }, {
+                    x: 9,
+                    y: 4,
+                    USstate: "KS",
+                    capital: "Topeka",
+                    color: "#00c853",
+                    region: "midwest"
+                }, {
+                    x: 11,
+                    y: 4,
+                    USstate: "AR",
+                    capital: "Little Rock",
+                    color: "#ffab00",
+                    region: "south"
+                }, {
+                    x: 13,
+                    y: 4,
+                    USstate: "TN",
+                    capital: "Nashville",
+                    color: "#ffab00",
+                    region: "south",
+                    cities: ["Nashville"]
+                }, {
+                    x: 15,
+                    y: 4,
+                    USstate: "VA",
+                    capital: "Richmond",
+                    color: "#ffab00",
+                    region: "south"
+                }, {
+                    x: 17,
+                    y: 4,
+                    USstate: "NC",
+                    capital: "Raleigh",
+                    color: "#ffab00",
+                    region: "south",
+                    cities: ["Charlotte"]
+                }]
+            }, {
+                data: [{
+                    x: 2,
+                    y: 5,
+                    USstate: "OR",
+                    capital: "Salem",
+                    color: "#2962ff",
+                    region: "west",
+                    cities: ["Portland"]
+                }, {
+                    x: 4,
+                    y: 5,
+                    USstate: "NV",
+                    capital: "Carson City",
+                    color: "#2962ff",
+                    region: "west",
+                    cities: ["Las Vegas"]
+                }, {
+                    x: 6,
+                    y: 5,
+                    USstate: "CO",
+                    capital: "Denver",
+                    color: "#2962ff",
+                    region: "west",
+                    cities: ["Aspen", "Colorado Springs", "Denver", "Estes Park", "Lafayette", "Lakewood", "Vail"]
+                }, {
+                    x: 8,
+                    y: 5,
+                    USstate: "NE",
+                    capital: "Lincoln",
+                    color: "#00c853",
+                    region: "midwest"
+                }, {
+                    x: 10,
+                    y: 5,
+                    USstate: "MO",
+                    capital: "Jefferson City",
+                    color: "#00c853",
+                    region: "midwest"
+                }, {
+                    x: 12,
+                    y: 5,
+                    USstate: "KY",
+                    capital: "Frankfort",
+                    color: "#ffab00",
+                    region: "south",
+                    cities: ["Lexington"]
+                }, {
+                    x: 14,
+                    y: 5,
+                    USstate: "WV",
+                    capital: "Charleston",
+                    color: "#ffab00",
+                    region: "south"
+                }, {
+                    x: 16,
+                    y: 5,
+                    USstate: "MD",
+                    capital: "Annapolis",
+                    color: "#ffab00",
+                    region: "south"
+                }, {
+                    x: 18,
+                    y: 5,
+                    USstate: "DE",
+                    capital: "Dover",
+                    color: "#ffab00",
+                    region: "south"
+                }, {
+                    x: 20,
+                    y: 5,
+                    USstate: "DC",
+                    capital: "Washington",
+                    color: "#ffab00",
+                    region: "south",
+                    cities: ["Washington D.C."]
+                }]
+            }, {
+                data: [{
+                    x: 3,
+                    y: 6,
+                    USstate: "ID",
+                    capital: "Boise",
+                    color: "#2962ff",
+                    region: "west"
+                }, {
+                    x: 5,
+                    y: 6,
+                    USstate: "WY",
+                    capital: "Cheyenne",
+                    color: "#2962ff",
+                    region: "west"
+                }, {
+                    x: 7,
+                    y: 6,
+                    USstate: "SD",
+                    capital: "Pierre",
+                    color: "#00c853",
+                    region: "midwest"
+                }, {
+                    x: 9,
+                    y: 6,
+                    USstate: "IA",
+                    capital: "Des Moines",
+                    color: "#00c853",
+                    region: "midwest"
+                }, {
+                    x: 11,
+                    y: 6,
+                    USstate: "IL",
+                    capital: "Springfield",
+                    color: "#00c853",
+                    region: "midwest",
+                    cities: ["Chicago"]
+                }, {
+                    x: 13,
+                    y: 6,
+                    USstate: "IN",
+                    capital: "Indianapolis",
+                    color: "#00c853",
+                    region: "midwest"
+                }, {
+                    x: 15,
+                    y: 6,
+                    USstate: "OH",
+                    capital: "Columbus",
+                    color: "#00c853",
+                    region: "midwest",
+                    cities: ["Cleveland"]
+                }, {
+                    x: 17,
+                    y: 6,
+                    USstate: "PA",
+                    capital: "Harrisburg",
+                    color: "#c51162",
+                    region: "northeast",
+                    cities: ["Pittsburgh"]
+                }, {
+                    x: 19,
+                    y: 6,
+                    USstate: "NJ",
+                    capital: "Trenton",
+                    color: "#c51162",
+                    region: "northeast"
+                }, {
+                    x: 21,
+                    y: 6,
+                    USstate: "CT",
+                    capital: "Hartford",
+                    color: "#c51162",
+                    region: "northeast",
+                    cities: ["Hartford"]
+                }]
+            }, {
+                data: [{
+                    x: 2,
+                    y: 7,
+                    USstate: "WA",
+                    capital: "Olympia",
+                    color: "#2962ff",
+                    region: "west",
+                    cities: ["Seattle"]
+                }, {
+                    x: 4,
+                    y: 7,
+                    USstate: "MT",
+                    capital: "Helena",
+                    color: "#2962ff",
+                    region: "west"
+                }, {
+                    x: 6,
+                    y: 7,
+                    USstate: "ND",
+                    capital: "Bismarck",
+                    color: "#00c853",
+                    region: "midwest"
+                }, {
+                    x: 8,
+                    y: 7,
+                    USstate: "MN",
+                    capital: "Saint Paul",
+                    color: "#00c853",
+                    region: "midwest",
+                    cities: ["Minneapolis"]
+                }, {
+                    x: 10,
+                    y: 7,
+                    USstate: "WI",
+                    capital: "Madison",
+                    color: "#00c853",
+                    region: "midwest"
+                }, {
+                    x: 14,
+                    y: 7,
+                    USstate: "MI",
+                    capital: "Lansing",
+                    color: "#00c853",
+                    region: "midwest",
+                    cities: ["Detroit"]
+                }, {
+                    x: 18,
+                    y: 7,
+                    USstate: "NY",
+                    capital: "Albany",
+                    color: "#c51162",
+                    region: "northeast",
+                    cities: ["Manhattan"]
+                }, {
+                    x: 20,
+                    y: 7,
+                    USstate: "MA",
+                    capital: "Boston",
+                    color: "#c51162",
+                    region: "northeast",
+                    cities: ["Boston", "Cape Cod"]
+                }, {
+                    x: 22,
+                    y: 7,
+                    USstate: "RI",
+                    capital: "Providence",
+                    color: "#c51162",
+                    region: "northeast",
+                    cities: ["Newport"]
+                }]
+            }, {
+                data: [{
+                    x: 19,
+                    y: 8,
+                    USstate: "VT",
+                    capital: "Montpelier",
+                    color: "#c51162",
+                    region: "northeast"
+                }, {
+                    x: 21,
+                    y: 8,
+                    USstate: "NH",
+                    capital: "Concord",
+                    color: "#c51162",
+                    region: "northeast"
+                }]
+            }, {
+                data: [{
+                    x: 0,
+                    y: 9,
+                    USstate: "AK",
+                    capital: "Juneau",
+                    color: "#2962ff",
+                    region: "west"
+                }, {
+                    x: 22,
+                    y: 9,
+                    USstate: "ME",
+                    capital: "Augusta",
+                    color: "#c51162",
+                    region: "northeast"
+                }]
+            }]
+        });
+        
+        // Handle window resize and orientation change for mobile responsiveness
+        let resizeTimer;
+        function handleResize() {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(function() {
+                const chart = Highcharts.charts.find(chart => chart && chart.renderTo.id === 'container');
+                if (chart) {
+                    chart.reflow();
+                }
+            }, 250);
+        }
+        
+        window.addEventListener('resize', handleResize);
+        window.addEventListener('orientationchange', function() {
+            setTimeout(handleResize, 500);
+        });
+
+        // Modal Functions
+        function openCityModal(state, cities) {
+            const modal = document.getElementById('cityModal');
+            const modalTitle = document.getElementById('modalTitle');
+            const cityList = document.getElementById('cityList');
+            
+            if (modal && modalTitle && cityList) {
+                // Set the modal title based on state
+                const stateNames = {
+                    'AZ': 'Arizona',
+                    'CA': 'California',
+                    'CO': 'Colorado',
+                    'CT': 'Connecticut',
+                    'DC': 'D.C.',
+                    'FL': 'Florida',
+                    'GA': 'Georgia',
+                    'IL': 'Illinois',
+                    'KY': 'Kentucky',
+                    'LA': 'Louisiana',
+                    'MA': 'Massachusetts',
+                    'MI': 'Michigan',
+                    'MN': 'Minnesota',
+                    'NV': 'Nevada',
+                    'NY': 'New York',
+                    'NC': 'North Carolina',
+                    'OH': 'Ohio',
+                    'OK': 'Oklahoma',
+                    'OR': 'Oregon',
+                    'PA': 'Pennsylvania',
+                    'RI': 'Rhode Island',
+                    'SC': 'South Carolina',
+                    'TN': 'Tennessee',
+                    'TX': 'Texas',
+                    'WA': 'Washington'
+                };
+                const stateName = stateNames[state] || state;
+                modalTitle.textContent = `Areas that we serve in ${stateName}:`;
+                
+                // Clear existing cities
+                cityList.innerHTML = '';
+                
+                // Add cities to the list
+                cities.forEach(city => {
+                    const li = document.createElement('li');
+                    li.className = 'city-item';
+                    const link = document.createElement('a');
+                    link.href = 'locations.html';
+                    link.className = 'city-link';
+                    link.textContent = city;
+                    li.appendChild(link);
+                    cityList.appendChild(li);
+                });
+                
+                modal.classList.add('show');
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        function closeCityModal() {
+            const modal = document.getElementById('cityModal');
+            if (modal) {
+                modal.classList.remove('show');
+                document.body.style.overflow = '';
+            }
+        }
+
+        // Close modal when clicking outside of it
+        window.addEventListener('click', function(event) {
+            const modal = document.getElementById('cityModal');
+            if (event.target === modal) {
+                closeCityModal();
+            }
+        });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeCityModal();
+            }
+        });
+    </script>
 
     <script src="../assets/components/navigation.js"></script>
     <script src="../assets/components/footer.js"></script>
