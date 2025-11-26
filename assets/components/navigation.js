@@ -343,7 +343,7 @@
                         <div class="p-8">
                             <div class="grid grid-cols-3 gap-5">
                                 <div class="space-y-2.5">
-                                    <a href="${pathPrefix}about/blog.html" class="block text-sm text-gray-700 hover:text-blue-600 transition py-1.5 hover:bg-blue-50 rounded-md px-3 -mx-3">
+                                    <a href="${pathPrefix}blog.html" class="block text-sm text-gray-700 hover:text-blue-600 transition py-1.5 hover:bg-blue-50 rounded-md px-3 -mx-3">
                                         <span class="font-semibold block mb-0.5 whitespace-nowrap">Read Our Blogs</span>
                                         <span class="text-xs text-gray-500 leading-relaxed block whitespace-nowrap">Read about our events, activations, and more</span>
                                     </a>
@@ -351,15 +351,15 @@
                                         <span class="font-semibold block mb-0.5 whitespace-nowrap">Our Locations</span>
                                         <span class="text-xs text-gray-500 leading-relaxed block whitespace-nowrap">View all of the locations we service nationwide</span>
                                     </a>
-                                    <a href="${pathPrefix}about/case-studies.html" class="block text-sm text-gray-700 hover:text-blue-600 transition py-1.5 hover:bg-blue-50 rounded-md px-3 -mx-3">
+                                    <a href="${pathPrefix}case-studies.html" class="block text-sm text-gray-700 hover:text-blue-600 transition py-1.5 hover:bg-blue-50 rounded-md px-3 -mx-3">
                                         <span class="font-semibold block mb-0.5 whitespace-nowrap">Case Studies</span>
                                         <span class="text-xs text-gray-500 leading-relaxed block whitespace-nowrap">Learn how our activations have helped create memorable events</span>
                                     </a>
-                                    <a href="${pathPrefix}about/faq.html" class="block text-sm text-gray-700 hover:text-blue-600 transition py-1.5 hover:bg-blue-50 rounded-md px-3 -mx-3">
+                                    <a href="${pathPrefix}faq.html" class="block text-sm text-gray-700 hover:text-blue-600 transition py-1.5 hover:bg-blue-50 rounded-md px-3 -mx-3">
                                         <span class="font-semibold block mb-0.5 whitespace-nowrap">FAQ</span>
                                         <span class="text-xs text-gray-500 leading-relaxed block whitespace-nowrap">View our most commonly asked questions</span>
                                     </a>
-                                    <a href="${pathPrefix}about/about-mihi.html" class="block text-sm text-gray-700 hover:text-blue-600 transition py-1.5 hover:bg-blue-50 rounded-md px-3 -mx-3">
+                                    <a href="${pathPrefix}about.html" class="block text-sm text-gray-700 hover:text-blue-600 transition py-1.5 hover:bg-blue-50 rounded-md px-3 -mx-3">
                                         <span class="font-semibold block mb-0.5 whitespace-nowrap">About MiHi</span>
                                         <span class="text-xs text-gray-500 leading-relaxed block whitespace-nowrap">Learn about MiHi, see our hardworking team, and more</span>
                                     </a>
