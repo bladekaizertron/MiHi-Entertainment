@@ -182,6 +182,52 @@
             display: inline-block;
             transform-style: preserve-3d;
         }
+
+        /* Auto-scrolling video gallery */
+        .video-gallery-container {
+            overflow: hidden;
+            position: relative;
+            width: 100%;
+            mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
+        }
+
+        .video-gallery-scroll {
+            display: flex;
+            gap: 1.5rem;
+            width: fit-content;
+            animation: scroll-right-to-left 50s linear infinite;
+        }
+
+        .video-gallery-scroll:hover {
+            animation-play-state: paused;
+        }
+
+        @keyframes scroll-right-to-left {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        .video-gallery-item {
+            flex-shrink: 0;
+            width: 300px;
+        }
+
+        @media (min-width: 640px) {
+            .video-gallery-item {
+                width: 350px;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .video-gallery-item {
+                width: 400px;
+            }
+        }
     </style>
 </head>
 
@@ -193,7 +239,7 @@
         <!-- Hero Section -->
         <section class="relative text-white py-24 md:py-40 overflow-hidden">
             <div class="absolute inset-0 bg-cover bg-center bg-no-repeat scale-105 transition-transform duration-700 hover:scale-100"
-                style="background-image: url('../../assets/images/360-video-booth-hero.jpg?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80');">
+                style="background-image: url('../../assets/images/360/360-hero.jpg?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80');">
             </div>
             <!-- Gradient Overlay -->
             <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/50 to-black/70"></div>
@@ -226,7 +272,7 @@
 
                     <!-- CTA Buttons -->
                     <div class="flex flex-col sm:flex-row gap-5 justify-center items-center mb-12">
-                        <a href="#"
+                        <a href="../contact-us.html"
                             class="group relative inline-flex items-center gap-3 bg-gradient-to-r from-white to-[#e6f0ff] text-[#0040d9] px-10 py-5 rounded-full text-lg font-bold shadow-2xl hover:shadow-[#0050ff]/50 transition-all duration-500 transform hover:scale-110 hover:-translate-y-1 overflow-hidden">
                             <span class="relative z-10">Get Your Free Quote</span>
                         </a>
@@ -262,7 +308,7 @@
                             </p>
                         </div>
                         <div class="relative rounded-3xl overflow-hidden shadow-2xl">
-                            <img src="../../assets/images/360-video-booth-hero.jpg?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                            <img src="../../assets/images/360/360-1.webp?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
                                 alt="360 Photo Booth" class="w-full h-full object-cover">
                         </div>
                     </div>
@@ -279,185 +325,132 @@
                             </p>
                         </div>
 
-                        <!-- Premium Grid Gallery -->
-                        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
-                            <!-- Gallery Item 1 -->
-                            <div class="group relative aspect-square rounded-2xl overflow-hidden cursor-pointer transform hover:scale-105 transition-all duration-500 hover:shadow-2xl hover:z-10" onclick="openLightbox('https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80')">
-                                <img src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
-                                     alt="360 Booth Example 1" 
-                                     class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-                            </div>
-
-                            <!-- Gallery Item 2 -->
-                            <div class="group relative aspect-square rounded-2xl overflow-hidden cursor-pointer transform hover:scale-105 transition-all duration-500 hover:shadow-2xl hover:z-10" onclick="openLightbox('https://images.unsplash.com/photo-1511578314322-379afb476865?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80')">
-                                <img src="https://images.unsplash.com/photo-1511578314322-379afb476865?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
-                                     alt="360 Booth Example 2" 
-                                     class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-                            </div>
-
-                            <!-- Gallery Item 3 - Video -->
-                            <div class="group relative aspect-square rounded-2xl overflow-hidden cursor-pointer transform hover:scale-105 transition-all duration-500 hover:shadow-2xl hover:z-10" onclick="openLightbox('https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4', 'video')">
-                                <video class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" muted loop>
-                                    <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4">
-                                </video>
-                                <div class="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/30 transition-colors">
-                                    <div class="w-16 h-16 bg-white/90 rounded-full flex items-center justify-center shadow-lg transform group-hover:scale-110 transition-transform">
-                                        <svg class="w-8 h-8 text-[#0050ff] ml-1" fill="currentColor" viewBox="0 0 24 24">
-                                            <path d="M8 5v14l11-7z"/>
-                                        </svg>
-                                    </div>
+                        <!-- Auto-Scrolling Video Gallery -->
+                        <div class="video-gallery-container">
+                            <div class="video-gallery-scroll">
+                                <!-- First set of videos -->
+                                <div class="video-gallery-item group relative aspect-square rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 cursor-pointer" onclick="openLightbox('../assets/video/360/360-photo-booth-1.mp4', 'video')">
+                                    <video class="w-full h-full object-cover rounded-2xl" autoplay muted loop playsinline>
+                                        <source src="../assets/video/360/360-photo-booth-1.mp4" type="video/mp4">
+                                    </video>
+                                </div>
+                                <div class="video-gallery-item group relative aspect-square rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 cursor-pointer" onclick="openLightbox('../assets/video/360/360-photo-booth-2.mp4', 'video')">
+                                    <video class="w-full h-full object-cover rounded-2xl" autoplay muted loop playsinline>
+                                        <source src="../assets/video/360/360-photo-booth-2.mp4" type="video/mp4">
+                                    </video>
+                                </div>
+                                <div class="video-gallery-item group relative aspect-square rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 cursor-pointer" onclick="openLightbox('../assets/video/360/360-photo-booth-3.mp4', 'video')">
+                                    <video class="w-full h-full object-cover rounded-2xl" autoplay muted loop playsinline>
+                                        <source src="../assets/video/360/360-photo-booth-3.mp4" type="video/mp4">
+                                    </video>
+                                </div>
+                                <div class="video-gallery-item group relative aspect-square rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 cursor-pointer" onclick="openLightbox('../assets/video/360/360-photo-booth-4.mp4', 'video')">
+                                    <video class="w-full h-full object-cover rounded-2xl" autoplay muted loop playsinline>
+                                        <source src="../assets/video/360/360-photo-booth-4.mp4" type="video/mp4">
+                                    </video>
+                                </div>
+                                <div class="video-gallery-item group relative aspect-square rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 cursor-pointer" onclick="openLightbox('../assets/video/360/360-photo-booth-5.mp4', 'video')">
+                                    <video class="w-full h-full object-cover rounded-2xl" autoplay muted loop playsinline>
+                                        <source src="../assets/video/360/360-photo-booth-5.mp4" type="video/mp4">
+                                    </video>
+                                </div>
+                                <div class="video-gallery-item group relative aspect-square rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 cursor-pointer" onclick="openLightbox('../assets/video/360/360-photo-booth-6.mp4', 'video')">
+                                    <video class="w-full h-full object-cover rounded-2xl" autoplay muted loop playsinline>
+                                        <source src="../assets/video/360/360-photo-booth-6.mp4" type="video/mp4">
+                                    </video>
+                                </div>
+                                <div class="video-gallery-item group relative aspect-square rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 cursor-pointer" onclick="openLightbox('../assets/video/360/360-photo-booth-7.mp4', 'video')">
+                                    <video class="w-full h-full object-cover rounded-2xl" autoplay muted loop playsinline>
+                                        <source src="../assets/video/360/360-photo-booth-7.mp4" type="video/mp4">
+                                    </video>
+                                </div>
+                                <div class="video-gallery-item group relative aspect-square rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 cursor-pointer" onclick="openLightbox('../assets/video/360/360-photo-booth-8.mp4', 'video')">
+                                    <video class="w-full h-full object-cover rounded-2xl" autoplay muted loop playsinline>
+                                        <source src="../assets/video/360/360-photo-booth-8.mp4" type="video/mp4">
+                                    </video>
+                                </div>
+                                <div class="video-gallery-item group relative aspect-square rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 cursor-pointer" onclick="openLightbox('../assets/video/360/360-photo-booth-9.mp4', 'video')">
+                                    <video class="w-full h-full object-cover rounded-2xl" autoplay muted loop playsinline>
+                                        <source src="../assets/video/360/360-photo-booth-9.mp4" type="video/mp4">
+                                    </video>
+                                </div>
+                                <div class="video-gallery-item group relative aspect-square rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 cursor-pointer" onclick="openLightbox('../assets/video/360/360-photo-booth-10.mp4', 'video')">
+                                    <video class="w-full h-full object-cover rounded-2xl" autoplay muted loop playsinline>
+                                        <source src="../assets/video/360/360-photo-booth-10.mp4" type="video/mp4">
+                                    </video>
+                                </div>
+                                <div class="video-gallery-item group relative aspect-square rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 cursor-pointer" onclick="openLightbox('../assets/video/360/360-photo-booth-11.mp4', 'video')">
+                                    <video class="w-full h-full object-cover rounded-2xl" autoplay muted loop playsinline>
+                                        <source src="../assets/video/360/360-photo-booth-11.mp4" type="video/mp4">
+                                    </video>
+                                </div>
+                                <div class="video-gallery-item group relative aspect-square rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 cursor-pointer" onclick="openLightbox('../assets/video/360/360-photo-booth-12.mp4', 'video')">
+                                    <video class="w-full h-full object-cover rounded-2xl" autoplay muted loop playsinline>
+                                        <source src="../assets/video/360/360-photo-booth-12.mp4" type="video/mp4">
+                                    </video>
+                                </div>
+                                <!-- Duplicate set for seamless loop -->
+                                <div class="video-gallery-item group relative aspect-square rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 cursor-pointer" onclick="openLightbox('../assets/video/360/360-photo-booth-1.mp4', 'video')">
+                                    <video class="w-full h-full object-cover rounded-2xl" autoplay muted loop playsinline>
+                                        <source src="../assets/video/360/360-photo-booth-1.mp4" type="video/mp4">
+                                    </video>
+                                </div>
+                                <div class="video-gallery-item group relative aspect-square rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 cursor-pointer" onclick="openLightbox('../assets/video/360/360-photo-booth-2.mp4', 'video')">
+                                    <video class="w-full h-full object-cover rounded-2xl" autoplay muted loop playsinline>
+                                        <source src="../assets/video/360/360-photo-booth-2.mp4" type="video/mp4">
+                                    </video>
+                                </div>
+                                <div class="video-gallery-item group relative aspect-square rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 cursor-pointer" onclick="openLightbox('../assets/video/360/360-photo-booth-3.mp4', 'video')">
+                                    <video class="w-full h-full object-cover rounded-2xl" autoplay muted loop playsinline>
+                                        <source src="../assets/video/360/360-photo-booth-3.mp4" type="video/mp4">
+                                    </video>
+                                </div>
+                                <div class="video-gallery-item group relative aspect-square rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 cursor-pointer" onclick="openLightbox('../assets/video/360/360-photo-booth-4.mp4', 'video')">
+                                    <video class="w-full h-full object-cover rounded-2xl" autoplay muted loop playsinline>
+                                        <source src="../assets/video/360/360-photo-booth-4.mp4" type="video/mp4">
+                                    </video>
+                                </div>
+                                <div class="video-gallery-item group relative aspect-square rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 cursor-pointer" onclick="openLightbox('../assets/video/360/360-photo-booth-5.mp4', 'video')">
+                                    <video class="w-full h-full object-cover rounded-2xl" autoplay muted loop playsinline>
+                                        <source src="../assets/video/360/360-photo-booth-5.mp4" type="video/mp4">
+                                    </video>
+                                </div>
+                                <div class="video-gallery-item group relative aspect-square rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 cursor-pointer" onclick="openLightbox('../assets/video/360/360-photo-booth-6.mp4', 'video')">
+                                    <video class="w-full h-full object-cover rounded-2xl" autoplay muted loop playsinline>
+                                        <source src="../assets/video/360/360-photo-booth-6.mp4" type="video/mp4">
+                                    </video>
+                                </div>
+                                <div class="video-gallery-item group relative aspect-square rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 cursor-pointer" onclick="openLightbox('../assets/video/360/360-photo-booth-7.mp4', 'video')">
+                                    <video class="w-full h-full object-cover rounded-2xl" autoplay muted loop playsinline>
+                                        <source src="../assets/video/360/360-photo-booth-7.mp4" type="video/mp4">
+                                    </video>
+                                </div>
+                                <div class="video-gallery-item group relative aspect-square rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 cursor-pointer" onclick="openLightbox('../assets/video/360/360-photo-booth-8.mp4', 'video')">
+                                    <video class="w-full h-full object-cover rounded-2xl" autoplay muted loop playsinline>
+                                        <source src="../assets/video/360/360-photo-booth-8.mp4" type="video/mp4">
+                                    </video>
+                                </div>
+                                <div class="video-gallery-item group relative aspect-square rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 cursor-pointer" onclick="openLightbox('../assets/video/360/360-photo-booth-9.mp4', 'video')">
+                                    <video class="w-full h-full object-cover rounded-2xl" autoplay muted loop playsinline>
+                                        <source src="../assets/video/360/360-photo-booth-9.mp4" type="video/mp4">
+                                    </video>
+                                </div>
+                                <div class="video-gallery-item group relative aspect-square rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 cursor-pointer" onclick="openLightbox('../assets/video/360/360-photo-booth-10.mp4', 'video')">
+                                    <video class="w-full h-full object-cover rounded-2xl" autoplay muted loop playsinline>
+                                        <source src="../assets/video/360/360-photo-booth-10.mp4" type="video/mp4">
+                                    </video>
+                                </div>
+                                <div class="video-gallery-item group relative aspect-square rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 cursor-pointer" onclick="openLightbox('../assets/video/360/360-photo-booth-11.mp4', 'video')">
+                                    <video class="w-full h-full object-cover rounded-2xl" autoplay muted loop playsinline>
+                                        <source src="../assets/video/360/360-photo-booth-11.mp4" type="video/mp4">
+                                    </video>
+                                </div>
+                                <div class="video-gallery-item group relative aspect-square rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 cursor-pointer" onclick="openLightbox('../assets/video/360/360-photo-booth-12.mp4', 'video')">
+                                    <video class="w-full h-full object-cover rounded-2xl" autoplay muted loop playsinline>
+                                        <source src="../assets/video/360/360-photo-booth-12.mp4" type="video/mp4">
+                                    </video>
                                 </div>
                             </div>
-
-                            <!-- Gallery Item 4 -->
-                            <div class="group relative aspect-square rounded-2xl overflow-hidden cursor-pointer transform hover:scale-105 transition-all duration-500 hover:shadow-2xl hover:z-10" onclick="openLightbox('https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80')">
-                                <img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
-                                     alt="360 Booth Example 4" 
-                                     class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-                            </div>
-
-                            <!-- Gallery Item 5 -->
-                            <div class="group relative aspect-square rounded-2xl overflow-hidden cursor-pointer transform hover:scale-105 transition-all duration-500 hover:shadow-2xl hover:z-10" onclick="openLightbox('https://images.unsplash.com/photo-1519167758481-83f29da1f5b5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80')">
-                                <img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
-                                     alt="360 Booth Example 5" 
-                                     class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-                            </div>
-
-                            <!-- Gallery Item 6 - Video -->
-                            <div class="group relative aspect-square rounded-2xl overflow-hidden cursor-pointer transform hover:scale-105 transition-all duration-500 hover:shadow-2xl hover:z-10" onclick="openLightbox('https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4', 'video')">
-                                <video class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" muted loop>
-                                    <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4" type="video/mp4">
-                                </video>
-                                <div class="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/30 transition-colors">
-                                    <div class="w-16 h-16 bg-white/90 rounded-full flex items-center justify-center shadow-lg transform group-hover:scale-110 transition-transform">
-                                        <svg class="w-8 h-8 text-[#0050ff] ml-1" fill="currentColor" viewBox="0 0 24 24">
-                                            <path d="M8 5v14l11-7z"/>
-                                        </svg>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Gallery Item 7 -->
-                            <div class="group relative aspect-square rounded-2xl overflow-hidden cursor-pointer transform hover:scale-105 transition-all duration-500 hover:shadow-2xl hover:z-10" onclick="openLightbox('https://images.unsplash.com/photo-1464207687429-7505649dae38?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80')">
-                                <img src="https://images.unsplash.com/photo-1464207687429-7505649dae38?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
-                                     alt="360 Booth Example 7" 
-                                     class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-                            </div>
-
-                            <!-- Gallery Item 8 -->
-                            <div class="group relative aspect-square rounded-2xl overflow-hidden cursor-pointer transform hover:scale-105 transition-all duration-500 hover:shadow-2xl hover:z-10" onclick="openLightbox('https://images.unsplash.com/photo-1492684223066-81342ee5ff30?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80')">
-                                <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
-                                     alt="360 Booth Example 8" 
-                                     class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-                            </div>
-
-                            <!-- Gallery Item 9 - Video (Hidden Initially) -->
-                            <div class="hidden-gallery group relative aspect-square rounded-2xl overflow-hidden cursor-pointer transform hover:scale-105 transition-all duration-500 hover:shadow-2xl hover:z-10" style="display: none;" onclick="openLightbox('https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4', 'video')">
-                                <video class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" muted loop>
-                                    <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" type="video/mp4">
-                                </video>
-                                <div class="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/30 transition-colors">
-                                    <div class="w-16 h-16 bg-white/90 rounded-full flex items-center justify-center shadow-lg transform group-hover:scale-110 transition-transform">
-                                        <svg class="w-8 h-8 text-[#0050ff] ml-1" fill="currentColor" viewBox="0 0 24 24">
-                                            <path d="M8 5v14l11-7z"/>
-                                        </svg>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Gallery Item 10 (Hidden Initially) -->
-                            <div class="hidden-gallery group relative aspect-square rounded-2xl overflow-hidden cursor-pointer transform hover:scale-105 transition-all duration-500 hover:shadow-2xl hover:z-10" style="display: none;" onclick="openLightbox('https://images.unsplash.com/photo-1511578314322-379afb476865?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80')">
-                                <img src="https://images.unsplash.com/photo-1511578314322-379afb476865?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
-                                     alt="360 Booth Example 10" 
-                                     class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-                            </div>
-
-                            <!-- Gallery Item 11 (Hidden Initially) -->
-                            <div class="hidden-gallery group relative aspect-square rounded-2xl overflow-hidden cursor-pointer transform hover:scale-105 transition-all duration-500 hover:shadow-2xl hover:z-10" style="display: none;" onclick="openLightbox('https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80')">
-                                <img src="https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
-                                     alt="360 Booth Example 11" 
-                                     class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-                            </div>
-
-                            <!-- Gallery Item 12 - Video (Hidden Initially) -->
-                            <div class="hidden-gallery group relative aspect-square rounded-2xl overflow-hidden cursor-pointer transform hover:scale-105 transition-all duration-500 hover:shadow-2xl hover:z-10" style="display: none;" onclick="openLightbox('https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4', 'video')">
-                                <video class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" muted loop>
-                                    <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4" type="video/mp4">
-                                </video>
-                                <div class="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/30 transition-colors">
-                                    <div class="w-16 h-16 bg-white/90 rounded-full flex items-center justify-center shadow-lg transform group-hover:scale-110 transition-transform">
-                                        <svg class="w-8 h-8 text-[#0050ff] ml-1" fill="currentColor" viewBox="0 0 24 24">
-                                            <path d="M8 5v14l11-7z"/>
-                                        </svg>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Gallery Item 13 (Hidden Initially) -->
-                            <div class="hidden-gallery group relative aspect-square rounded-2xl overflow-hidden cursor-pointer transform hover:scale-105 transition-all duration-500 hover:shadow-2xl hover:z-10" style="display: none;" onclick="openLightbox('https://images.unsplash.com/photo-1492684223066-81342ee5ff30?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80')">
-                                <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
-                                     alt="360 Booth Example 13" 
-                                     class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-                            </div>
-
-                            <!-- Gallery Item 14 (Hidden Initially) -->
-                            <div class="hidden-gallery group relative aspect-square rounded-2xl overflow-hidden cursor-pointer transform hover:scale-105 transition-all duration-500 hover:shadow-2xl hover:z-10" style="display: none;" onclick="openLightbox('https://images.unsplash.com/photo-1519167758481-83f29da1f5b5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80')">
-                                <img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
-                                     alt="360 Booth Example 14" 
-                                     class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-                            </div>
-
-                            <!-- Gallery Item 15 - Video (Hidden Initially) -->
-                            <div class="hidden-gallery group relative aspect-square rounded-2xl overflow-hidden cursor-pointer transform hover:scale-105 transition-all duration-500 hover:shadow-2xl hover:z-10" style="display: none;" onclick="openLightbox('https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4', 'video')">
-                                <video class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" muted loop>
-                                    <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4" type="video/mp4">
-                                </video>
-                                <div class="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/30 transition-colors">
-                                    <div class="w-16 h-16 bg-white/90 rounded-full flex items-center justify-center shadow-lg transform group-hover:scale-110 transition-transform">
-                                        <svg class="w-8 h-8 text-[#0050ff] ml-1" fill="currentColor" viewBox="0 0 24 24">
-                                            <path d="M8 5v14l11-7z"/>
-                                        </svg>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Gallery Item 16 (Hidden Initially) -->
-                            <div class="hidden-gallery group relative aspect-square rounded-2xl overflow-hidden cursor-pointer transform hover:scale-105 transition-all duration-500 hover:shadow-2xl hover:z-10" style="display: none;" onclick="openLightbox('https://images.unsplash.com/photo-1464207687429-7505649dae38?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80')">
-                                <img src="https://images.unsplash.com/photo-1464207687429-7505649dae38?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
-                                     alt="360 Booth Example 16" 
-                                     class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-                            </div>
-
-                            <!-- Gallery Item 17 (Hidden Initially) -->
-                            <div class="hidden-gallery group relative aspect-square rounded-2xl overflow-hidden cursor-pointer transform hover:scale-105 transition-all duration-500 hover:shadow-2xl hover:z-10" style="display: none;" onclick="openLightbox('https://images.unsplash.com/photo-1492684223066-81342ee5ff30?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80')">
-                                <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
-                                     alt="360 Booth Example 17" 
-                                     class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-                            </div>
-
-                            <!-- Gallery Item 18 - Video (Hidden Initially) -->
-                            <div class="hidden-gallery group relative aspect-square rounded-2xl overflow-hidden cursor-pointer transform hover:scale-105 transition-all duration-500 hover:shadow-2xl hover:z-10" style="display: none;" onclick="openLightbox('https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4', 'video')">
-                                <video class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" muted loop>
-                                    <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4" type="video/mp4">
-                                </video>
-                                <div class="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/30 transition-colors">
-                                    <div class="w-16 h-16 bg-white/90 rounded-full flex items-center justify-center shadow-lg transform group-hover:scale-110 transition-transform">
-                                        <svg class="w-8 h-8 text-[#0050ff] ml-1" fill="currentColor" viewBox="0 0 24 24">
-                                            <path d="M8 5v14l11-7z"/>
-                                        </svg>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- See More Button -->
-                        <div class="text-center mt-12">
-                            <button id="see-more-gallery-btn" onclick="toggleGallery()" class="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-[#0050ff] to-[#0040d9] text-white font-semibold rounded-full shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300">
-                                <span>See More</span>
-                                <svg id="see-more-gallery-icon" class="w-5 h-5 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                                </svg>
-                            </button>
                         </div>
                     </div>
                 </div>
@@ -536,7 +529,7 @@
                             <div class="absolute -inset-4 bg-gradient-to-r from-[#0050ff] to-[#0040d9] rounded-3xl blur-xl opacity-30 group-hover:opacity-50 transition-opacity duration-500"></div>
                             <div class="relative rounded-3xl overflow-hidden shadow-2xl transform group-hover:scale-105 transition-transform duration-500">
                                 <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent z-10"></div>
-                            <img src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                            <img src="../assets/images/360/360-2.webp?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
                                     alt="360 Booth Experience" class="w-full h-[500px] object-cover">
                             </div>
                         </div>
@@ -768,9 +761,9 @@
                                         <span class="text-gray-700 font-medium pt-2">1 Themed AI Option</span>
                                     </li>
                                 </ul>
-                                <button class="mt-8 w-full bg-gradient-to-r from-[#4d9fff] to-[#66b3ff] text-white py-4 rounded-xl font-semibold hover:from-[#66b3ff] hover:to-[#80b3ff] transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1">
+                                <a href="../contact-us.html" class="mt-8 w-full inline-block text-center bg-gradient-to-r from-[#4d9fff] to-[#66b3ff] text-white py-4 rounded-xl font-semibold hover:from-[#66b3ff] hover:to-[#80b3ff] transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1">
                                     Get Started
-                                </button>
+                                </a>
                             </div>
                         </div>
 
@@ -905,12 +898,12 @@
                                         <span class="text-gray-700 font-medium pt-2">Live-Action Props (Confetti, Money, or Bubbles)</span>
                                     </li>
                                 </ul>
-                                <button class="mt-8 w-full bg-gradient-to-r from-[#0050ff] to-[#0066ff] text-white py-4 rounded-xl font-semibold hover:from-[#0066ff] hover:to-[#0080ff] transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:-translate-y-1 flex items-center justify-center gap-2">
+                                <a href="../contact-us.html" class="mt-8 w-full inline-block text-center bg-gradient-to-r from-[#0050ff] to-[#0066ff] text-white py-4 rounded-xl font-semibold hover:from-[#0066ff] hover:to-[#0080ff] transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:-translate-y-1 flex items-center justify-center gap-2">
                                     <span>Choose Recommended</span>
                                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
                                     </svg>
-                                </button>
+                                </a>
                             </div>
                         </div>
 
@@ -1061,7 +1054,7 @@
                                         <span class="text-gray-700 font-medium pt-2">Enhanced Branding (Email/Text/Microsite)</span>
                                     </li>
                                 </ul>
-                                <a href="../../index.html#contact" class="mt-6 w-full inline-flex items-center justify-center bg-gradient-to-r from-[#001a66] to-[#002080] text-white py-4 px-6 rounded-xl font-semibold hover:from-[#002080] hover:to-[#000d33] transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 text-center">
+                                <a href="../contact-us.html" class="mt-6 w-full inline-flex items-center justify-center bg-gradient-to-r from-[#001a66] to-[#002080] text-white py-4 px-6 rounded-xl font-semibold hover:from-[#002080] hover:to-[#000d33] transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 text-center">
                                     Contact for Details
                                 </a>
                             </div>
@@ -1332,7 +1325,7 @@
         </section>
 
         <!-- Contact Section -->
-        <section class="relative section-padding bg-gradient-to-br from-[#0040d9] via-[#0040d9] to-[#0040d9] text-white overflow-hidden">
+        <section class="relative section-padding bg-gradient-to-br from-[#0040d9] via-[#0040d9] to-[#0040d9] text-white overflow-hidden" style="background-image: url('../assets/images/360/360-3.webp'); background-size: cover; background-position: center 20%; background-repeat: no-repeat;">
             <!-- Dark overlay for better text contrast -->
             <div class="absolute inset-0 bg-black/40"></div>
             
@@ -1361,7 +1354,7 @@
                 </p>
 
                 <div class="flex flex-col sm:flex-row gap-6 justify-center items-center">
-                    <a href="../../index.html#contact"
+                    <a href="../contact-us.html"
                         class="group inline-flex items-center gap-3 bg-white text-[#0050ff] px-12 py-6 rounded-full text-xl font-bold hover:shadow-2xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:bg-[#e6f0ff]">
                         <span>Get Your Free Quote</span>
                     </a>
@@ -1485,29 +1478,6 @@
             }
         }
 
-        function toggleGallery() {
-            const hiddenItems = document.querySelectorAll('.hidden-gallery');
-            const button = document.getElementById('see-more-gallery-btn');
-            const buttonText = button.querySelector('span');
-            const buttonIcon = document.getElementById('see-more-gallery-icon');
-            const isExpanded = hiddenItems[0] && hiddenItems[0].style.display !== 'none';
-            
-            hiddenItems.forEach(item => {
-                if (isExpanded) {
-                    item.style.display = 'none';
-                } else {
-                    item.style.display = 'block';
-                }
-            });
-            
-            if (isExpanded) {
-                buttonText.textContent = 'See More';
-                buttonIcon.style.transform = 'rotate(0deg)';
-            } else {
-                buttonText.textContent = 'See Less';
-                buttonIcon.style.transform = 'rotate(180deg)';
-            }
-        }
 
         // Close lightbox on ESC key
         document.addEventListener('keydown', function(event) {
