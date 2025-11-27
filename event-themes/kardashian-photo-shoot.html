@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kardashian Beauty Event Themes</title>
+    <link rel="icon" type="image/svg+xml" href="../assets/images/favicon.svg">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        html, body { overflow-x: hidden; width: 100%; max-width: 100%; }
+        body { font-family: 'Inter', sans-serif; color: #1a202c; }
+        h1, h2, h3, h4, h5, h6 { font-family: 'Playfair Display', serif; }
+        .btn-primary { background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%); transition: all 0.3s ease; }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(0, 80, 255, 0.4); }
+        .section-padding { padding: 5rem 0; }
+        .hero-gradient { background: linear-gradient(135deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.5) 100%); }
+        .blog-card { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .blog-card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1); }
+        img { max-width: 100%; height: auto; }
+        * { box-sizing: border-box; }
+        
+        /* BeforeAfter Slider Styles */
+        .beforeafter-container {
+            position: relative;
+            width: 100%;
+            max-width: 900px;
+            height: 600px;
+            margin: 0 auto;
+            border: 2px solid white;
+            overflow: hidden;
+        }
+        
+        .beforeafter-container .img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: 900px 100%;
+            background-position: center center;
+            background-repeat: no-repeat;
+        }
+        
+        .beforeafter-container .background-img {
+            background-image: url('../assets/images/kardashian/contrast/k1.jpg');
+            z-index: 0;
+        }
+        
+        .beforeafter-container .foreground-wrapper {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 50%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .beforeafter-container .foreground-img {
+            background-image: url('../assets/images/kardashian/contrast/k2.jpg');
+            width: 900px;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background-size: 900px 100%;
+            background-position: center center;
+            background-repeat: no-repeat;
+        }
+        
+        .beforeafter-container .slider {
+            position: absolute;
+            -webkit-appearance: none;
+            appearance: none;
+            width: 100%;
+            height: 100%;
+            background: transparent;
+            outline: none;
+            margin: 0;
+            padding: 0;
+            z-index: 2;
+            cursor: ew-resize;
+        }
+        
+        .beforeafter-container .slider::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 100%;
+            background: transparent;
+        }
+        
+        .beforeafter-container .slider::-moz-range-track {
+            width: 100%;
+            height: 100%;
+            background: transparent;
+        }
+        
+        .beforeafter-container .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 6px;
+            height: 100%;
+            background: white;
+            cursor: ew-resize;
+            margin-top: 0;
+            box-shadow: 0 0 0 0;
+        }
+        
+        .beforeafter-container .slider::-moz-range-thumb {
+            width: 6px;
+            height: 100%;
+            background: white;
+            cursor: ew-resize;
+            border: none;
+            border-radius: 0;
+            box-shadow: 0 0 0 0;
+        }
+        
+        .beforeafter-container .slider-button {
+            pointer-events: none;
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: white;
+            left: calc(50% - 15px);
+            top: calc(50% - 15px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 3;
+        }
+        
+        .beforeafter-container .slider-button:after {
+            content: '';
+            padding: 3px;
+            display: inline-block;
+            border: solid #5D5D5D;
+            border-width: 0 2px 2px 0;
+            transform: rotate(-45deg);
+            margin-left: 2px;
+        }
+        
+        .beforeafter-container .slider-button:before {
+            content: '';
+            padding: 3px;
+            display: inline-block;
+            border: solid #5D5D5D;
+            border-width: 0 2px 2px 0;
+            transform: rotate(135deg);
+            margin-right: 2px;
+        }
+        
+        @media (max-width: 768px) {
+            .beforeafter-container {
+                height: 400px;
+                max-width: 100%;
+                border-width: 1px;
+            }
+            
+            .beforeafter-container .img {
+                background-size: cover;
+                background-position: center center;
+            }
+            
+            .beforeafter-container .foreground-img {
+                background-size: cover;
+                width: 100%;
+            }
+            
+            .beforeafter-container .slider::-webkit-slider-thumb {
+                width: 4px;
+                height: 100%;
+            }
+            
+            .beforeafter-container .slider::-moz-range-thumb {
+                width: 4px;
+                height: 100%;
+            }
+            
+            .beforeafter-container .slider-button {
+                width: 24px;
+                height: 24px;
+            }
+            
+            .beforeafter-container .slider-button:after,
+            .beforeafter-container .slider-button:before {
+                padding: 2px;
+                border-width: 0 1.5px 1.5px 0;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .beforeafter-container {
+                height: 300px;
+            }
+            
+            .beforeafter-container .slider-button {
+                width: 20px;
+                height: 20px;
+                left: calc(50% - 10px);
+            }
+            
+            .beforeafter-container .slider-button:after,
+            .beforeafter-container .slider-button:before {
+                padding: 1.5px;
+                border-width: 0 1px 1px 0;
+            }
+        }
+        
+        /* Kardashian Book Now Button */
+        .kardashian-btn {
+            background: linear-gradient(135deg, #ffffff 0%, #f5f5f5 50%, #ffffff 100%);
+            color: #000000;
+            border: 2px solid #000000;
+            padding: 1rem 3rem;
+            font-size: 1rem;
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            font-family: 'Inter', sans-serif;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-block;
+            text-decoration: none;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .kardashian-btn:hover {
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #000000 100%);
+            color: #ffffff;
+            border-color: #ffffff;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(255, 255, 255, 0.2), 0 4px 15px rgba(0, 0, 0, 0.4);
+        }
+        
+        .kardashian-btn:active {
+            transform: translateY(-1px);
+        }
+        
+        @media (max-width: 768px) {
+            .kardashian-btn {
+                padding: 0.875rem 2rem;
+                font-size: 0.9rem;
+                letter-spacing: 0.15em;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .kardashian-btn {
+                padding: 0.75rem 1.5rem;
+                font-size: 0.85rem;
+                letter-spacing: 0.1em;
+            }
+        }
+        
+        /* Glamour Section Styles */
+        .glamour-section {
+            background: linear-gradient(135deg, #ffffff 0%, #f8f8f8 25%, #ffffff 50%, #f8f8f8 75%, #ffffff 100%);
+            padding: 3rem 0;
+        }
+        
+        .glamour-feature {
+            margin-bottom: 1rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        
+        .glamour-feature:last-of-type {
+            border-bottom: none;
+            margin-bottom: 0.75rem;
+        }
+        
+        .glamour-feature h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #000000;
+            margin-bottom: 0.25rem;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+        
+        .glamour-feature p {
+            color: #333333;
+            line-height: 1.5;
+            font-size: 0.9rem;
+            margin: 0;
+        }
+        
+        .glamour-image-wrapper {
+            height: 100%;
+            padding: 1rem;
+            display: flex;
+            align-items: stretch;
+        }
+        
+        .glamour-image {
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+            transition: all 0.4s ease;
+            width: 100%;
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .glamour-image img {
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: cover;
+            filter: saturate(1.1) contrast(1.05) brightness(1.02);
+        }
+        
+        .glamour-image:hover {
+            transform: scale(1.02);
+            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.2);
+        }
+        
+        .glamour-image:hover img {
+            filter: saturate(1.2) contrast(1.1) brightness(1.05);
+        }
+        
+        @media (max-width: 768px) {
+            .glamour-section {
+                padding: 2rem 0;
+            }
+            
+            .glamour-feature {
+                margin-bottom: 0.75rem;
+                padding-bottom: 0.5rem;
+            }
+            
+            .glamour-feature h3 {
+                font-size: 1rem;
+            }
+            
+            .glamour-feature p {
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="nav-placeholder"></div>
+
+    <!-- Kardashian Beauty Event Theme Hero Section -->
+    <section class="relative min-h-[80vh] flex items-center justify-center overflow-hidden">
+        <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('../assets/images/kardashian/hero.jpg');"></div>
+        <div class="absolute inset-0 bg-black opacity-60"></div>
+        <div class="relative z-10 text-center px-6 w-full max-w-5xl mx-auto">
+            <h1 class="text-5xl md:text-7xl lg:text-8xl font-bold mb-2 text-white uppercase tracking-tight" style="text-shadow: 3px 3px 8px rgba(0,0,0,0.8), 0 0 20px rgba(0,0,0,0.5);">KARDASHIAN BEAUTY</h1>
+            <p class="text-sm md:text-base text-white uppercase tracking-widest mb-6" style="text-shadow: 2px 2px 4px rgba(0,0,0,0.7);">EVENT THEME</p>
+            <p class="text-base md:text-lg text-white mb-8 max-w-2xl mx-auto" style="text-shadow: 1px 1px 3px rgba(0,0,0,0.7);">Strike a pose and serve star power—our Kardashian-inspired booth delivers the ultimate glam shots.</p>
+            <a href="../contact-us.html" class="inline-block bg-white text-black px-8 py-4 rounded-lg text-base md:text-lg font-semibold uppercase tracking-wide hover:bg-black hover:text-white border-2 border-white transition-all duration-300 transform hover:scale-105 shadow-2xl" style="box-shadow: 0 10px 30px rgba(255, 255, 255, 0.3);">CONTACT US</a>
+        </div>
+    </section>
+
+    <!-- BeforeAfter Section -->
+    <section class="section-padding" style="background: linear-gradient(135deg, #000000 0%, #1a1a1a 25%, #2d2d2d 50%, #1a1a1a 75%, #000000 100%);">
+        <div class="container mx-auto px-4 sm:px-6">
+            <!-- Heading Section -->
+            <div class="text-center mb-8 sm:mb-12 md:mb-16 px-4">
+                <h2 class="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-bold text-white uppercase tracking-tight mb-4 sm:mb-6" style="font-family: 'Playfair Display', serif; text-shadow: 2px 2px 8px rgba(0,0,0,0.5);">LIGHTS, CAMERA, KARDASHIAN!</h2>
+                <p class="text-sm sm:text-base md:text-lg text-gray-200 max-w-3xl mx-auto leading-relaxed px-2" style="font-family: 'Inter', sans-serif;">With sleek backdrops, chic lighting, and that signature Kardashian-style aesthetic, this booth turns every guest into an influencer. Ideal for weddings, corporate parties, or luxe socials, our Kardashian Photo Booth is the definition of glam.</p>
+            </div>
+            
+            <div class="beforeafter-container">
+                <div class="img background-img"></div>
+                <div class="foreground-wrapper">
+                    <div class="img foreground-img"></div>
+                </div>
+                <input type="range" min="1" max="100" value="50" class="slider" name="slider" id="slider">
+                <div class="slider-button"></div>
+            </div>
+            
+            <!-- Book Now Button -->
+            <div class="text-center mt-8 sm:mt-10 md:mt-12">
+                <a href="../contact-us.html" class="kardashian-btn">Book Now</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Glamour Section -->
+    <section class="glamour-section">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 items-center">
+                <!-- Left Column: Content -->
+                <div class="order-2 lg:order-1">
+                    <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-black uppercase tracking-tight mb-3" style="font-family: 'Playfair Display', serif; letter-spacing: 0.05em;">
+                        Hollywood Glamour Package
+                    </h2>
+                    
+                    <p class="text-sm md:text-base text-gray-800 mb-4 leading-relaxed" style="font-family: 'Inter', sans-serif;">
+                        Our Kardashian Theme comes with the following options:
+                    </p>
+                    
+                    <!-- Features -->
+                    <div class="glamour-feature">
+                        <h3>Backdrops</h3>
+                        <p>Experience the sleek white backdrop that creates an authentic LA photo shoot vibe. Every shot captures that signature Kardashian aesthetic with pristine, minimalist elegance.</p>
+                    </div>
+                    
+                    <div class="glamour-feature">
+                        <h3>Props</h3>
+                        <p>Complete with studio lights and high-end equipment, plus glamorous accessories that make every guest feel like A-listers. From statement pieces to subtle touches, we bring the star treatment.</p>
+                    </div>
+                    
+                    <div class="glamour-feature">
+                        <h3>Custom Layouts</h3>
+                        <p>Choose from multiple photo layouts designed for single shots, group poses, and candid moments. Each layout is crafted to showcase your guests in the most flattering, Instagram-worthy way.</p>
+                    </div>
+                    
+                    <div class="glamour-feature">
+                        <h3>Add-Ons</h3>
+                        <p>Elevate your event with additional glam touches and professional styling elements. From custom backdrops to premium props, we offer endless ways to personalize your Kardashian experience.</p>
+                    </div>
+                    
+                    <p class="text-sm md:text-base text-gray-700 mb-4 leading-relaxed italic" style="font-family: 'Inter', sans-serif;">
+                        Our theme is completely customizable to ensure every photo captures a celebrity moment that's uniquely yours.
+                    </p>
+                    
+                    <!-- Book Your Event Now Button -->
+                    <div class="mt-4">
+                        <a href="../contact-us.html" class="kardashian-btn inline-block">Book Your Event Now</a>
+                    </div>
+                </div>
+                
+                <!-- Right Column: Image -->
+                <div class="order-1 lg:order-2 h-full">
+                    <div class="glamour-image-wrapper">
+                        <div class="glamour-image">
+                            <img src="../assets/images/kardashian/k1.jpg" alt="Kardashian Theme Photo Booth">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="../assets/components/navigation.js"></script>
+    <script src="../assets/components/footer.js"></script>
+    <script>
+        $(document).ready(function() {
+            const slider = document.getElementById('slider');
+            const foregroundWrapper = document.querySelector('.foreground-wrapper');
+            const sliderButton = document.querySelector('.slider-button');
+            
+            // Initialize slider position
+            const initialPos = 50;
+            foregroundWrapper.style.width = initialPos + '%';
+            sliderButton.style.left = 'calc(' + initialPos + '% - 15px)';
+            
+            function updateSlider() {
+                const sliderPos = parseFloat(slider.value);
+                const container = document.querySelector('.beforeafter-container');
+                const isMobile = window.innerWidth <= 480;
+                const buttonSize = isMobile ? 10 : (window.innerWidth <= 768 ? 12 : 15);
+                
+                // Update the width of the foreground wrapper
+                foregroundWrapper.style.width = sliderPos + '%';
+                // Update the position of the slider button to align with the slider thumb
+                sliderButton.style.left = 'calc(' + sliderPos + '% - ' + buttonSize + 'px)';
+            }
+            
+            // Update on window resize
+            window.addEventListener('resize', function() {
+                updateSlider();
+            });
+            
+            // Update on input (while dragging) for real-time updates
+            slider.addEventListener('input', updateSlider);
+            slider.addEventListener('change', updateSlider);
+            
+            // Also update on mousemove for smoother interaction
+            let isDown = false;
+            slider.addEventListener('mousedown', function() {
+                isDown = true;
+            });
+            
+            slider.addEventListener('mouseup', function() {
+                isDown = false;
+            });
+            
+            slider.addEventListener('mousemove', function() {
+                if (isDown) {
+                    updateSlider();
+                }
+            });
+            
+            // Touch events for mobile devices
+            slider.addEventListener('touchstart', function() {
+                isDown = true;
+            });
+            
+            slider.addEventListener('touchend', function() {
+                isDown = false;
+            });
+            
+            slider.addEventListener('touchmove', function(e) {
+                if (isDown) {
+                    e.preventDefault();
+                    updateSlider();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
