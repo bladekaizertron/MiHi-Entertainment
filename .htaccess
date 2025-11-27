@@ -1,0 +1,55 @@
+# Enable Rewrite Engine
+RewriteEngine On
+
+# Force HTTPS (optional - uncomment if you want to force HTTPS)
+# RewriteCond %{HTTPS} off
+# RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Force www or non-www (optional - choose one)
+# Force www:
+# RewriteCond %{HTTP_HOST} !^www\. [NC]
+# RewriteRule ^(.*)$ https://www.%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+# Force non-www:
+# RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
+# RewriteRule ^(.*)$ https://%1%{REQUEST_URI} [L,R=301]
+
+# ============================================
+# 301 PERMANENT REDIRECTS
+# ============================================
+# Add your redirects below this line
+
+# Example: Redirect old page to new page
+# Redirect 301 /old-page.html /new-page.html
+
+# Example: Redirect old directory to new directory
+# Redirect 301 /old-directory/ /new-directory/
+
+# Example: Redirect index.html#contact to contact-us.html
+# Note: Hash fragments (#contact) cannot be redirected via .htaccess
+# Instead, redirect the base URL or use JavaScript for hash-based redirects
+
+# Example: Redirect specific old URL patterns
+# Redirect 301 /index.html#contact /contact-us.html
+
+# ============================================
+# COMMON REDIRECT PATTERNS
+# ============================================
+
+# Redirect trailing slashes (remove trailing slash)
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} (.+)/$
+RewriteRule ^ %1 [R=301,L]
+
+# Or add trailing slash (uncomment if preferred)
+# RewriteCond %{REQUEST_FILENAME} !-f
+# RewriteCond %{REQUEST_URI} !(.*)/$
+# RewriteRule ^(.*)$ $1/ [R=301,L]
+
+# ============================================
+# ADD YOUR CUSTOM REDIRECTS BELOW
+# ============================================
+
+# Example redirects (uncomment and modify as needed):
+# Redirect 301 /old-contact.html /contact-us.html
+# Redirect 301 /old-about.html /about.html
+
