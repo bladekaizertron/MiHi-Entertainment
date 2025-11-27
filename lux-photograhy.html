@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Lux Photography by MiHi Entertainment. Elevate your event with custom sets and professional photography. High-end camera, skilled photographer, and luxury experience.">
+    <title>Lux Photography - MiHi Entertainment</title>
+    <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #1a202c;
+        }
+
+        main h1,
+        main h2,
+        main h3,
+        main h4,
+        main h5,
+        main h6 {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #d4af37 0%, #f4d03f 100%);
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(212, 175, 55, 0.4);
+        }
+
+        .section-padding {
+            padding: 5rem 0;
+        }
+
+        @media (min-width: 768px) {
+            .section-padding {
+                padding: 8rem 0;
+            }
+        }
+
+        /* Luxury Gold Gradient */
+        @keyframes luxury-shift {
+            0%, 100% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+        }
+
+        .luxury-gradient {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 25%, #d4af37 50%, #f4d03f 75%, #daa520 100%);
+            background-size: 400% 400%;
+            animation: luxury-shift 15s ease infinite;
+        }
+
+        .luxury-gradient-text {
+            background: linear-gradient(135deg, #d4af37 0%, #f4d03f 25%, #daa520 50%, #cd853f 75%, #d4af37 100%);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: luxury-shift 5s ease infinite;
+        }
+
+        /* Blob Animation */
+        @keyframes blob {
+            0%, 100% {
+                transform: translate(0, 0) scale(1);
+            }
+            33% {
+                transform: translate(30px, -50px) scale(1.1);
+            }
+            66% {
+                transform: translate(-20px, 20px) scale(0.9);
+            }
+        }
+
+        .animate-blob {
+            animation: blob 7s ease-in-out infinite;
+        }
+
+        .animation-delay-2000 {
+            animation-delay: 2s;
+        }
+
+        .animation-delay-4000 {
+            animation-delay: 4s;
+        }
+
+        /* Luxury Card Hover */
+        .luxury-card {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .luxury-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, 
+                rgba(212, 175, 55, 0.05),
+                rgba(244, 208, 63, 0.05));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .luxury-card:hover::before {
+            opacity: 1;
+        }
+
+        .luxury-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(212, 175, 55, 0.2);
+            border-color: rgba(212, 175, 55, 0.4);
+        }
+
+        /* Glowing Text Effect */
+        .glow-text {
+            text-shadow: 0 0 10px rgba(212, 175, 55, 0.4),
+                         0 0 20px rgba(244, 208, 63, 0.3);
+        }
+
+        /* Premium Badge */
+        .premium-badge {
+            background: linear-gradient(135deg, #d4af37 0%, #f4d03f 100%);
+            padding: 0.5rem 1.5rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            display: inline-block;
+            box-shadow: 0 4px 20px rgba(212, 175, 55, 0.4);
+        }
+
+        /* Gallery Grid */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        @media (min-width: 768px) {
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+                gap: 2rem;
+            }
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 1rem;
+            aspect-ratio: 4/3;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        /* Lightbox Styles */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+            cursor: zoom-out;
+        }
+        
+        .lightbox.active {
+            display: flex;
+        }
+        
+        .lightbox-img-container {
+            position: relative;
+            max-width: 90%;
+            max-height: 90vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .lightbox img {
+            max-width: 100%;
+            max-height: 90vh;
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 0 50px rgba(212, 175, 55, 0.5);
+            cursor: zoom-in;
+            transition: transform 0.3s ease;
+        }
+        
+        .lightbox img.zoomed {
+            transform: scale(2);
+            cursor: zoom-out;
+        }
+        
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-size: 40px;
+            color: white;
+            cursor: pointer;
+            z-index: 10000;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+        
+        .lightbox-close:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: rotate(90deg);
+        }
+    </style>
+</head>
+
+<body class="bg-white">
+    <!-- Navigation -->
+    <script src="assets/components/navigation.js"></script>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="relative min-h-[70vh] sm:min-h-[80vh] md:min-h-[90vh] flex items-center justify-center overflow-hidden py-8 sm:py-12 md:py-0 luxury-gradient">
+            <!-- Background Overlay -->
+            <div class="absolute inset-0 bg-gradient-to-br from-black/60 via-black/50 to-black/70 z-[1]"></div>
+            
+            <!-- Decorative Gold Orbs -->
+            <div class="absolute top-20 left-10 w-48 h-48 sm:w-64 sm:h-64 md:w-96 md:h-96 bg-yellow-500/10 rounded-full blur-3xl animate-blob z-[2]"></div>
+            <div class="absolute bottom-20 right-10 w-48 h-48 sm:w-64 sm:h-64 md:w-96 md:h-96 bg-amber-500/10 rounded-full blur-3xl animate-blob animation-delay-2000 z-[2]"></div>
+            <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-32 h-32 sm:w-48 sm:h-48 md:w-64 md:h-64 bg-yellow-400/10 rounded-full blur-2xl animate-blob animation-delay-4000 z-[2]"></div>
+
+            <div class="relative z-10 container mx-auto px-4 sm:px-6">
+                <div class="max-w-6xl mx-auto text-center">
+                    <!-- Badge -->
+                    <div class="inline-flex items-center gap-2 sm:gap-3 px-4 sm:px-6 py-2 bg-white/10 backdrop-blur-md border border-yellow-400/30 rounded-full shadow-lg mb-6 sm:mb-8">
+                        <span class="text-yellow-200 text-xs sm:text-sm font-semibold tracking-wider uppercase">Luxury Photography Experience</span>
+                        <span class="text-xl sm:text-2xl">✨</span>
+                    </div>
+
+                    <!-- Main Title -->
+                    <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black mb-4 sm:mb-6 leading-tight sm:leading-none tracking-tight px-2 text-white drop-shadow-2xl glow-text">
+                        <span class="block mb-2">
+                            LUX PHOTOGRAPHY
+                        </span>
+                    </h1>
+
+                    <!-- Subtitle -->
+                    <h2 class="text-lg sm:text-xl md:text-2xl font-semibold mb-4 sm:mb-6 text-white/95 max-w-3xl mx-auto px-4 drop-shadow-lg">
+                        Enhancing Your Event With Custom Sets and Professional Photos
+                    </h2>
+
+                    <!-- Description -->
+                    <p class="text-base sm:text-lg mb-8 sm:mb-12 max-w-3xl mx-auto leading-relaxed text-white/90 font-light tracking-wide drop-shadow-lg px-4">
+                        Elevate your event with Lux Photography, where we create custom sets and capture high-end professional photos to provide a truly luxury experience.
+                    </p>
+
+                    <!-- CTA Buttons -->
+                    <div class="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center px-4 mt-8 sm:mt-12">
+                        <a href="index.html#contact"
+                            class="group relative inline-flex items-center gap-2 sm:gap-3 bg-gradient-to-r from-yellow-400 to-amber-500 text-gray-900 px-6 sm:px-10 py-3 sm:py-5 rounded-full text-base sm:text-lg font-bold shadow-2xl hover:shadow-yellow-500/50 transition-all duration-500 transform hover:scale-110 hover:-translate-y-1 overflow-hidden w-full sm:w-auto justify-center">
+                            <span class="relative z-10">Get Your Free Quote</span>
+                            <svg class="w-4 h-4 sm:w-5 sm:h-5 relative z-10 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+                            </svg>
+                        </a>
+                        <button type="button" data-click-to-call data-call-text="Call Us"
+                            class="group inline-flex items-center gap-2 sm:gap-3 px-6 sm:px-10 py-3 sm:py-5 rounded-full text-base sm:text-lg font-bold backdrop-blur-md bg-white/10 border-2 border-white/30 hover:bg-white/20 hover:border-white/40 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:scale-110 hover:-translate-y-1 text-white w-full sm:w-auto justify-center cursor-pointer">
+                            <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498A1 1 0 0121 17.72V21a2 2 0 01-2 2h-1C9.716 23 3 16.284 3 8V7a2 2 0 012-2z"></path>
+                            </svg>
+                            <span>Call Us</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Main Description Section -->
+        <section class="section-padding bg-gradient-to-b from-white via-gray-50/30 to-white relative overflow-hidden">
+            <div class="container mx-auto px-4 sm:px-6 relative z-10">
+                <div class="max-w-5xl mx-auto">
+                    <div class="inline-block mb-6 sm:mb-8 px-6 sm:px-8 py-2 sm:py-3 bg-yellow-50/80 backdrop-blur-md rounded-full border-2 border-yellow-200/50">
+                        <span class="text-yellow-900 text-xs sm:text-sm font-bold tracking-wider flex items-center gap-2">
+                            <span class="text-lg sm:text-xl">📸</span>
+                            LUXURY PHOTOGRAPHY EXPERIENCE
+                        </span>
+                    </div>
+                    
+                    <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6 sm:mb-8 text-gray-900 leading-tight text-center">
+                        <span class="luxury-gradient-text">Professional Photography</span>
+                        <br>
+                        <span class="text-gray-800/90">With Custom Sets</span>
+                    </h2>
+                    
+                    <div class="bg-white backdrop-blur-lg rounded-3xl p-8 md:p-12 border border-gray-200 shadow-lg mb-12">
+                        <p class="text-lg text-gray-700 leading-relaxed mb-6">
+                            Elevate your event with Lux Photography, where we create custom sets and capture high-end professional photos to provide a truly luxury experience. Unlike our standard photo booths, Lux Photography features a skilled photographer armed with a high-end camera, ensuring each shot is expertly composed and perfectly timed.
+                        </p>
+                        <p class="text-lg text-gray-700 leading-relaxed mb-6">
+                            Our professional photographer captures candid and posed moments throughout your event, offering a personalized touch that goes beyond traditional photo booths.
+                        </p>
+                        <p class="text-lg text-gray-700 leading-relaxed">
+                            With Lux Photography, you can choose between digital delivery of your stunning images or on-site printing for immediate keepsakes. Whether it's a corporate event, wedding, or private party, our custom sets and artistic photography will transform your special moments into timeless memories. Experience the sophistication and quality of Lux Photography and make your event unforgettable.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="section-padding bg-white relative overflow-hidden">
+            <div class="container mx-auto px-4 sm:px-6">
+                <div class="max-w-6xl mx-auto">
+                    <div class="text-center mb-12 sm:mb-16">
+                        <div class="inline-block mb-4">
+                            <div class="flex items-center gap-3 text-yellow-600">
+                                <div class="w-8 h-1 bg-yellow-500 rounded"></div>
+                                <span class="text-2xl sm:text-3xl">✨</span>
+                                <div class="w-8 h-1 bg-yellow-500 rounded"></div>
+                            </div>
+                        </div>
+                        <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 text-gray-900">
+                            <span class="luxury-gradient-text">WHAT LUX PHOTOGRAPHY OFFERS</span>
+                        </h2>
+                    </div>
+
+                    <div class="grid md:grid-cols-3 gap-6 sm:gap-8">
+                        <!-- Feature 1 -->
+                        <div class="luxury-card bg-gradient-to-br from-yellow-50 to-amber-50 p-6 sm:p-8 rounded-2xl border border-yellow-200/50">
+                            <div class="text-4xl sm:text-5xl mb-4 text-center">📷</div>
+                            <h3 class="text-xl sm:text-2xl font-bold mb-3 sm:mb-4 text-gray-900 text-center">
+                                Skilled Professional Photographer
+                            </h3>
+                            <p class="text-gray-700 text-center leading-relaxed">
+                                Expert photographer with high-end camera equipment ensures each shot is perfectly composed and timed
+                            </p>
+                        </div>
+
+                        <!-- Feature 2 -->
+                        <div class="luxury-card bg-gradient-to-br from-amber-50 to-yellow-50 p-6 sm:p-8 rounded-2xl border border-amber-200/50">
+                            <div class="text-4xl sm:text-5xl mb-4 text-center">🎨</div>
+                            <h3 class="text-xl sm:text-2xl font-bold mb-3 sm:mb-4 text-gray-900 text-center">
+                                Custom Sets & Backdrops
+                            </h3>
+                            <p class="text-gray-700 text-center leading-relaxed">
+                                Personalized custom sets designed specifically for your event theme, creating a unique luxury atmosphere
+                            </p>
+                        </div>
+
+                        <!-- Feature 3 -->
+                        <div class="luxury-card bg-gradient-to-br from-yellow-50 to-amber-50 p-6 sm:p-8 rounded-2xl border border-yellow-200/50">
+                            <div class="text-4xl sm:text-5xl mb-4 text-center">💎</div>
+                            <h3 class="text-xl sm:text-2xl font-bold mb-3 sm:mb-4 text-gray-900 text-center">
+                                Digital & Print Options
+                            </h3>
+                            <p class="text-gray-700 text-center leading-relaxed">
+                                Choose between digital delivery for easy sharing or on-site printing for immediate keepsakes
+                            </p>
+                        </div>
+
+                        <!-- Feature 4 -->
+                        <div class="luxury-card bg-gradient-to-br from-amber-50 to-yellow-50 p-6 sm:p-8 rounded-2xl border border-amber-200/50">
+                            <div class="text-4xl sm:text-5xl mb-4 text-center">🎭</div>
+                            <h3 class="text-xl sm:text-2xl font-bold mb-3 sm:mb-4 text-gray-900 text-center">
+                                Candid & Posed Moments
+                            </h3>
+                            <p class="text-gray-700 text-center leading-relaxed">
+                                Capture both candid moments and expertly posed shots throughout your entire event
+                            </p>
+                        </div>
+
+                        <!-- Feature 5 -->
+                        <div class="luxury-card bg-gradient-to-br from-yellow-50 to-amber-50 p-6 sm:p-8 rounded-2xl border border-yellow-200/50">
+                            <div class="text-4xl sm:text-5xl mb-4 text-center">🏆</div>
+                            <h3 class="text-xl sm:text-2xl font-bold mb-3 sm:mb-4 text-gray-900 text-center">
+                                High-End Equipment
+                            </h3>
+                            <p class="text-gray-700 text-center leading-relaxed">
+                                Professional-grade cameras and lighting equipment for stunning, magazine-quality results
+                            </p>
+                        </div>
+
+                        <!-- Feature 6 -->
+                        <div class="luxury-card bg-gradient-to-br from-amber-50 to-yellow-50 p-6 sm:p-8 rounded-2xl border border-amber-200/50">
+                            <div class="text-4xl sm:text-5xl mb-4 text-center">🌟</div>
+                            <h3 class="text-xl sm:text-2xl font-bold mb-3 sm:mb-4 text-gray-900 text-center">
+                                Timeless Memories
+                            </h3>
+                            <p class="text-gray-700 text-center leading-relaxed">
+                                Transform your special moments into timeless memories with artistic, sophisticated photography
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Why Choose Section -->
+        <section class="section-padding bg-gradient-to-br from-yellow-100 via-amber-100 to-yellow-50 relative overflow-hidden">
+            <!-- Decorative Elements -->
+            <div class="absolute top-10 left-10 text-5xl md:text-7xl opacity-10">✨</div>
+            <div class="absolute bottom-10 right-10 text-5xl md:text-7xl opacity-10">💎</div>
+            
+            <div class="container mx-auto px-4 sm:px-6 relative z-10">
+                <div class="max-w-5xl mx-auto text-center">
+                    <div class="inline-block mb-6 sm:mb-8 px-6 sm:px-8 py-2 sm:py-3 bg-white/80 backdrop-blur-md rounded-full border-2 border-yellow-300/50">
+                        <span class="text-yellow-900 text-xs sm:text-sm font-bold tracking-wider uppercase">
+                            WHY CHOOSE OUR
+                        </span>
+                    </div>
+                    
+                    <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black mb-6 sm:mb-8 text-gray-900 leading-tight">
+                        <span class="luxury-gradient-text">LUX PHOTOGRAPHY?</span>
+                    </h2>
+                    
+                    <p class="text-base sm:text-lg md:text-xl mb-8 sm:mb-12 text-gray-700 max-w-4xl mx-auto leading-relaxed px-4">
+                        Experience the elevated professionalism of our Lux Photography, where sophisticated visual artistry takes your photos to the next level. Our skilled photographers work with custom sets and high-end equipment to create a truly luxury experience that goes beyond traditional photo booths.
+                    </p>
+
+                    <a href="index.html#contact"
+                        class="inline-flex items-center gap-3 bg-gradient-to-r from-yellow-500 to-amber-500 text-gray-900 px-8 sm:px-10 py-4 sm:py-5 rounded-full text-base sm:text-lg font-bold shadow-2xl hover:shadow-yellow-500/50 transition-all duration-500 transform hover:scale-110 hover:-translate-y-1">
+                        <span>Get Your Free Quote →</span>
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Photo Highlights Gallery Section -->
+        <section class="section-padding bg-white relative overflow-hidden">
+            <div class="container mx-auto px-4 sm:px-6">
+                <div class="max-w-6xl mx-auto">
+                    <div class="text-center mb-12 sm:mb-16">
+                        <div class="inline-block mb-4">
+                            <div class="flex items-center gap-3 text-yellow-600">
+                                <div class="w-8 h-1 bg-yellow-500 rounded"></div>
+                                <span class="text-2xl sm:text-3xl">📸</span>
+                                <div class="w-8 h-1 bg-yellow-500 rounded"></div>
+                            </div>
+                        </div>
+                        <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 text-gray-900">
+                            <span class="luxury-gradient-text">OUR PHOTO HIGHLIGHTS</span>
+                        </h2>
+                        <p class="text-xl text-gray-600 max-w-2xl mx-auto">See the sophistication and quality of our Lux Photography</p>
+                    </div>
+
+                    <!-- Gallery Grid -->
+                    <div class="gallery-grid">
+                        <div class="gallery-item" onclick="openLightbox('https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80')">
+                            <img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Lux Photography - Professional event photography">
+                        </div>
+                        <div class="gallery-item" onclick="openLightbox('https://images.unsplash.com/photo-1543269865-cbf427effbad?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80')">
+                            <img src="https://images.unsplash.com/photo-1543269865-cbf427effbad?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Lux Photography - Custom set design">
+                        </div>
+                        <div class="gallery-item" onclick="openLightbox('https://images.unsplash.com/photo-1511578314322-379afb476865?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80')">
+                            <img src="https://images.unsplash.com/photo-1511578314322-379afb476865?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Lux Photography - Luxury event coverage">
+                        </div>
+                        <div class="gallery-item" onclick="openLightbox('https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80')">
+                            <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Lux Photography - Professional headshots">
+                        </div>
+                        <div class="gallery-item" onclick="openLightbox('https://images.unsplash.com/photo-1478147427282-58a87a120781?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80')">
+                            <img src="https://images.unsplash.com/photo-1478147427282-58a87a120781?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Lux Photography - Event moments">
+                        </div>
+                        <div class="gallery-item" onclick="openLightbox('https://images.unsplash.com/photo-1511578314322-379afb476865?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80')">
+                            <img src="https://images.unsplash.com/photo-1511578314322-379afb476865?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Lux Photography - Custom photography">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Use Cases Section -->
+        <section class="section-padding bg-gradient-to-br from-yellow-100 via-amber-100 to-yellow-50 relative overflow-hidden">
+            <div class="container mx-auto px-4 sm:px-6">
+                <div class="max-w-6xl mx-auto">
+                    <div class="text-center mb-12 sm:mb-16">
+                        <div class="inline-block mb-4">
+                            <div class="flex items-center gap-3 text-yellow-600">
+                                <div class="w-8 h-1 bg-yellow-500 rounded"></div>
+                                <span class="text-2xl sm:text-3xl">🎯</span>
+                                <div class="w-8 h-1 bg-yellow-500 rounded"></div>
+                            </div>
+                        </div>
+                        <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 text-gray-900">
+                            <span class="luxury-gradient-text">OUR LUX PHOTOGRAPHY</span>
+                        </h2>
+                        <h3 class="text-xl sm:text-2xl md:text-3xl font-semibold text-yellow-900">IS PERFECT FOR</h3>
+                    </div>
+
+                    <div class="grid md:grid-cols-3 gap-6 sm:gap-8">
+                        <!-- Use Case 1 -->
+                        <div class="luxury-card bg-white/90 backdrop-blur-sm p-6 sm:p-8 rounded-2xl border border-yellow-200/50 shadow-lg">
+                            <div class="text-4xl sm:text-5xl mb-4 text-center">💒</div>
+                            <h3 class="text-xl sm:text-2xl font-bold mb-3 sm:mb-4 text-gray-900 text-center">
+                                Weddings
+                            </h3>
+                            <p class="text-gray-700 text-center leading-relaxed mb-4">
+                                Capture every precious moment of your special day with custom sets and professional photography that tells your unique love story.
+                            </p>
+                            <a href="wedding.html" class="inline-block w-full text-center bg-gradient-to-r from-yellow-500 to-amber-500 text-white px-6 py-3 rounded-full text-sm sm:text-base font-semibold hover:shadow-lg transition-all">
+                                LEARN MORE
+                            </a>
+                        </div>
+
+                        <!-- Use Case 2 -->
+                        <div class="luxury-card bg-white/90 backdrop-blur-sm p-6 sm:p-8 rounded-2xl border border-amber-200/50 shadow-lg">
+                            <div class="text-4xl sm:text-5xl mb-4 text-center">🏢</div>
+                            <h3 class="text-xl sm:text-2xl font-bold mb-3 sm:mb-4 text-gray-900 text-center">
+                                Corporate Events
+                            </h3>
+                            <p class="text-gray-700 text-center leading-relaxed mb-4">
+                                Elevate your corporate gatherings with professional photography that captures networking moments and event highlights with sophistication.
+                            </p>
+                            <a href="corporate-events.html" class="inline-block w-full text-center bg-gradient-to-r from-amber-500 to-yellow-500 text-white px-6 py-3 rounded-full text-sm sm:text-base font-semibold hover:shadow-lg transition-all">
+                                LEARN MORE
+                            </a>
+                        </div>
+
+                        <!-- Use Case 3 -->
+                        <div class="luxury-card bg-white/90 backdrop-blur-sm p-6 sm:p-8 rounded-2xl border border-yellow-200/50 shadow-lg">
+                            <div class="text-4xl sm:text-5xl mb-4 text-center">🎉</div>
+                            <h3 class="text-xl sm:text-2xl font-bold mb-3 sm:mb-4 text-gray-900 text-center">
+                                Private Parties
+                            </h3>
+                            <p class="text-gray-700 text-center leading-relaxed mb-4">
+                                Make your private celebration unforgettable with custom sets and luxury photography that captures the essence of your special occasion.
+                            </p>
+                            <a href="socialevents.html" class="inline-block w-full text-center bg-gradient-to-r from-yellow-500 to-amber-500 text-white px-6 py-3 rounded-full text-sm sm:text-base font-semibold hover:shadow-lg transition-all">
+                                LEARN MORE
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Final CTA Section -->
+        <section class="section-padding bg-gradient-to-br from-gray-900 via-yellow-900 to-amber-900 text-white relative overflow-hidden">
+            <!-- Decorative Elements -->
+            <div class="absolute inset-0 opacity-10">
+                <div class="absolute top-20 left-20 w-72 h-72 bg-yellow-400 rounded-full filter blur-3xl animate-blob"></div>
+                <div class="absolute bottom-20 right-20 w-96 h-96 bg-amber-400 rounded-full filter blur-3xl animate-blob animation-delay-2000"></div>
+            </div>
+
+            <div class="container mx-auto px-4 sm:px-6 relative z-10">
+                <div class="max-w-4xl mx-auto text-center">
+                    <div class="inline-block mb-6 sm:mb-8 px-6 sm:px-8 py-2 sm:py-3 bg-white/10 backdrop-blur-md rounded-full border-2 border-white/20">
+                        <span class="text-white text-xs sm:text-sm font-bold tracking-wider uppercase">
+                            LET'S CREATE SOMETHING UNFORGETTABLE
+                        </span>
+                    </div>
+                    
+                    <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black mb-6 sm:mb-8 leading-tight">
+                        <span class="bg-gradient-to-r from-yellow-100 via-amber-100 to-yellow-100 bg-clip-text text-transparent">
+                            Experience Luxury Photography
+                        </span>
+                    </h2>
+                    
+                    <p class="text-base sm:text-lg md:text-xl mb-8 sm:mb-12 text-white/90 max-w-3xl mx-auto leading-relaxed px-4">
+                        Let's create something unmatched. Reach out today to explore how our Lux Photography can bring sophistication and timeless memories to your event.
+                    </p>
+
+                    <div class="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center">
+                        <a href="index.html#contact"
+                            class="inline-flex items-center gap-3 bg-white text-gray-900 px-8 sm:px-10 py-4 sm:py-5 rounded-full text-base sm:text-lg font-bold shadow-2xl hover:shadow-white/50 transition-all duration-500 transform hover:scale-110 hover:-translate-y-1">
+                            <span>Get Your Free Quote</span>
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+                            </svg>
+                        </a>
+                        <a href="#contact"
+                            class="inline-flex items-center gap-3 px-8 sm:px-10 py-4 sm:py-5 rounded-full text-base sm:text-lg font-bold backdrop-blur-md bg-white/20 border-2 border-white/50 hover:bg-white/30 hover:border-white/70 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:scale-110 hover:-translate-y-1 text-white">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498A1 1 0 0121 17.72V21a2 2 0 01-2 2h-1C9.716 23 3 16.284 3 8V7a2 2 0 012-2z"></path>
+                            </svg>
+                            <span>Contact Us</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Lightbox for Image Zoom -->
+    <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+        <span class="lightbox-close" onclick="event.stopPropagation(); closeLightbox();">&times;</span>
+        <div class="lightbox-img-container" onclick="event.stopPropagation();">
+            <img id="lightbox-img" src="" alt="Lux Photography - Full view" onclick="toggleZoom(event);">
+        </div>
+    </div>
+
+    <script>
+        function openLightbox(imageSrc) {
+            event.stopPropagation();
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            lightboxImg.src = imageSrc;
+            lightboxImg.classList.remove('zoomed'); // Reset zoom state
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden'; // Prevent scrolling when lightbox is open
+        }
+
+        function closeLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            lightbox.classList.remove('active');
+            lightboxImg.classList.remove('zoomed'); // Reset zoom state
+            document.body.style.overflow = ''; // Restore scrolling
+        }
+
+        function toggleZoom(event) {
+            event.stopPropagation();
+            const lightboxImg = document.getElementById('lightbox-img');
+            lightboxImg.classList.toggle('zoomed');
+        }
+
+        // Close lightbox with Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeLightbox();
+            }
+        });
+    </script>
+
+    <!-- Footer -->
+    <script src="assets/components/footer.js"></script>
+</body>
+</html>
+
