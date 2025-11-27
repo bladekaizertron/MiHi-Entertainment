@@ -1,0 +1,2138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photo Booth - MiHi Entertainment</title>
+    <link rel="icon" type="image/svg+xml" href="../assets/images/favicon.svg">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        html, body {
+            overflow-x: hidden;
+            width: 100%;
+        }
+        body { font-family: 'Inter', sans-serif; color: #1a202c; }
+        h1, h2, h3, h4, h5, h6 { font-family: 'Playfair Display', serif; }
+        .hero-text { font-family: 'Montserrat', sans-serif; letter-spacing: -0.02em; }
+        .btn-primary { background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%); transition: all 0.3s ease; }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(0, 80, 255, 0.4); }
+        .section-padding { padding: 5rem 0; }
+        .hero-gradient { background: linear-gradient(135deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.5) 100%); }
+        .blog-card { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .blog-card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1); }
+
+        /* Gallery Styles */
+        :root {
+            --clr-bg: hsl(36, 15%, 82%);
+            --clr-string: hsl(30, 50%, 93%);
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
+        .gallery-container {
+            position: relative;
+            width: 100%;
+            max-width: 100vw;
+            background: var(--clr-bg);
+            overflow-x: hidden;
+            overflow-y: scroll;
+            margin-top: 4rem;
+            min-height: 100vh;
+        }
+
+        .gallery {
+            position: relative;
+            width: 100%;
+            max-width: 100%;
+            display: grid;
+            justify-content: space-between;
+            justify-items: center;
+            align-items: center;
+            --left: 0;
+            --top: 0;
+            --zoom: 1;
+            --trans-dur: .8s;
+            transition-property: --left, --top, --zoom;
+            transition-duration: var(--trans-dur), var(--trans-dur), calc(.75 * var(--trans-dur));
+            transition-delay: 0s, 0s, calc(.25 * var(--trans-dur));
+            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+            transform: translate(var(--left), var(--top)) scale(var(--zoom));
+        }
+
+        .gallery-container.zoomed-in > .gallery {
+            transition-duration: var(--trans-dur), var(--trans-dur), calc(.6 * var(--trans-dur));
+            transition-delay: 0s;
+        }
+
+        @keyframes zoom-in {
+            to {
+                --left-cur: var(--left);
+                --top-cur: var(--top);
+            }
+        }
+
+        .gallery-item {
+            position: relative;
+            grid-column-end: span 2;
+        }
+
+        .gallery-item-perspective,
+        .gallery-item-strings-perspective {
+            perspective: 800px;
+        }
+
+        .gallery-item-perspective {
+            position: relative;
+            z-index: 1;
+            display: block;
+            text-decoration: none;
+            outline: none;
+        }
+
+        .gallery-container:not(.zoomed-in) .gallery-item-perspective:hover + .gallery-item-strings-perspective .gallery-item-strings,
+        .gallery-container:not(.zoomed-in) .gallery-item-perspective:hover .gallery-item-wrap {
+            animation: wobble .9s ease-in-out;
+        }
+
+        .gallery-container:not(.zoomed-in) .gallery-item-perspective:focus-visible + .gallery-item-strings-perspective .gallery-item-strings,
+        .gallery-container:not(.zoomed-in) .gallery-item-perspective:focus-visible .gallery-item-wrap {
+            animation: wobble .9s ease-in-out;
+        }
+
+        @keyframes wobble {
+            15% {
+                transform: rotateY(10deg);
+            }
+            40% {
+                transform: rotateY(-7deg);
+            }
+            60% {
+                transform: rotateY(4deg);
+            }
+            78% {
+                transform: rotateY(-2deg);
+            }
+            89% {
+                transform: rotateY(1deg);
+            }
+            100% {
+                transform: none;
+            }
+        }
+
+        .gallery-item-wrap {
+            padding: 12px;
+            background: var(--frame, #fff);
+            cursor: pointer;
+            box-shadow: 4px 6px 6px rgba(0,0,0,.7);
+            transition: .25s;
+            z-index: 1;
+        }
+
+        .gallery-item-strings-perspective {
+            position: absolute;
+            z-index: -1;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            display: flex;
+        }
+
+        .gallery-item-strings {
+            flex: auto;
+        }
+
+        .gallery-item-strings::before,
+        .gallery-item-strings::after {
+            content: "";
+            position: absolute;
+            bottom: 50%;
+            width: 1px;
+            background: var(--clr-string);
+            box-shadow: 4px 0 3px rgba(0,0,0,.4);
+            pointer-events: none;
+        }
+
+        .gallery-item-strings::before {
+            left: 7%;
+        }
+
+        .gallery-item-strings::after {
+            right: 7%;
+        }
+
+        .gallery-item-overlay {
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            background: rgba(0,0,0,.25);
+            transition: opacity var(--trans-dur);
+        }
+
+        .gallery-item.current .gallery-item-overlay {
+            opacity: 0;
+            transition-duration: .8s;
+        }
+
+        .gallery-img {
+            display: block;
+            max-width: 100%;
+        }
+
+        @media (max-width: 899px) {
+            .gallery {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 13vw;
+                padding: 8% 8%;
+            }
+
+            .gallery-item:nth-child(3n + 3) {
+                grid-column-start: 2;
+            }
+
+            .gallery-item .gallery-item-strings::before,
+            .gallery-item .gallery-item-strings::after {
+                height: 57vw;
+            }
+
+            .gallery-item:nth-child(3n + 1) .gallery-item-strings::before,
+            .gallery-item:nth-child(3n + 2) .gallery-item-strings::after {
+                height: 125vw;
+            }
+        }
+
+        @media (min-width: 900px) {
+            .gallery {
+                grid-template-columns: repeat(6, 1fr);
+                gap: 9vw;
+                padding: 7% 18%;
+            }
+
+            .gallery-item:nth-child(5n + 4) {
+                grid-column-start: 2;
+            }
+
+            .gallery-item .gallery-item-strings::before,
+            .gallery-item .gallery-item-strings::after {
+                height: 31vw;
+            }
+
+            .gallery-item:nth-child(5n + 1) .gallery-item-strings::before,
+            .gallery-item:nth-child(5n + 3) .gallery-item-strings::after {
+                height: 63vw;
+            }
+        }
+
+        /* Left Section Enhanced Styles */
+        .left-section {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .left-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(0, 80, 255, 0.08) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .left-section::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -10%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(102, 51, 153, 0.06) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .enhanced-image-container {
+            position: relative;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .enhanced-image-container::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(0, 80, 255, 0.1) 0%, rgba(102, 51, 153, 0.1) 100%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .enhanced-image-container:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 35px 60px -12px rgba(0, 80, 255, 0.3);
+        }
+
+        .enhanced-image-container:hover::before {
+            opacity: 1;
+        }
+
+        .enhanced-image-container img {
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .enhanced-image-container:hover img {
+            transform: scale(1.05);
+        }
+
+        .gradient-title {
+            background: linear-gradient(135deg, #0050ff 0%, #0040d9 50%, #7c3aed 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            background-size: 200% 200%;
+            animation: gradient-shift 8s ease infinite;
+        }
+
+        @keyframes gradient-shift {
+            0%, 100% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+        }
+
+        .feature-item {
+            position: relative;
+            padding: 0.75rem 1rem;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(249, 250, 251, 0.9) 100%);
+            border: 1px solid rgba(0, 80, 255, 0.1);
+            border-radius: 10px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: default;
+        }
+
+        .feature-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(135deg, #0050ff 0%, #7c3aed 100%);
+            border-radius: 12px 0 0 12px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .feature-item:hover {
+            transform: translateX(8px);
+            box-shadow: 0 10px 25px -5px rgba(0, 80, 255, 0.15);
+            border-color: rgba(0, 80, 255, 0.3);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 1) 0%, rgba(249, 250, 251, 1) 100%);
+        }
+
+        .feature-item:hover::before {
+            opacity: 1;
+        }
+
+        .feature-icon {
+            width: 20px;
+            height: 20px;
+            min-width: 20px;
+            background: linear-gradient(135deg, #0050ff 0%, #7c3aed 100%);
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(0, 80, 255, 0.25);
+            transition: all 0.3s ease;
+        }
+
+        .feature-item:hover .feature-icon {
+            transform: rotate(5deg) scale(1.1);
+            box-shadow: 0 6px 16px rgba(0, 80, 255, 0.35);
+        }
+
+        .feature-icon::after {
+            content: '✓';
+            color: white;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-fade-in-up {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        .animate-delay-100 {
+            animation-delay: 0.1s;
+            opacity: 0;
+        }
+
+        .animate-delay-200 {
+            animation-delay: 0.2s;
+            opacity: 0;
+        }
+
+        .animate-delay-300 {
+            animation-delay: 0.3s;
+            opacity: 0;
+        }
+
+        .content-wrapper {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Right Section Enhanced Styles */
+        .right-section {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .right-section::before {
+            content: '';
+            position: absolute;
+            top: -30%;
+            left: -15%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(0, 80, 255, 0.08) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .right-section::after {
+            content: '';
+            position: absolute;
+            bottom: -50%;
+            right: -20%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(102, 51, 153, 0.06) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Cards Section Enhanced Styles */
+        .cards-section-card {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cards-section-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .cards-section-card:hover::before {
+            left: 100%;
+        }
+
+        .cards-section-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 25px 50px -12px rgba(0, 80, 255, 0.4);
+        }
+
+        .cards-section-icon-container {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .cards-section-card:hover .cards-section-icon-container {
+            transform: scale(1.15) rotate(5deg);
+            background: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 8px 20px rgba(255, 255, 255, 0.3);
+        }
+
+        .cards-section-card:hover .cards-section-icon-container svg {
+            transform: scale(1.1);
+        }
+
+        .cards-section-card:hover h3 {
+            transform: translateX(4px);
+        }
+
+        .cards-section-card h3,
+        .cards-section-card .cards-section-icon-container svg {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Contact Form Section Styles */
+        .contact-form-section {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-form-input {
+            width: 100%;
+            padding: 0.875rem 1.25rem;
+            background: rgba(255, 255, 255, 0.95);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 12px;
+            font-size: 1rem;
+            color: #1a202c;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        .contact-form-input:hover {
+            border-color: rgba(255, 255, 255, 0.5);
+            background: rgba(255, 255, 255, 1);
+        }
+
+        .contact-form-input:focus {
+            outline: none;
+            border-color: rgba(255, 255, 255, 0.8);
+            background: rgba(255, 255, 255, 1);
+            box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.2);
+        }
+
+        .contact-form-input::placeholder {
+            color: #9ca3af;
+        }
+
+        .contact-form-select {
+            width: 100%;
+            padding: 0.875rem 1.25rem;
+            background: rgba(255, 255, 255, 0.95);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 12px;
+            font-size: 1rem;
+            color: #1a202c;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .contact-form-select:hover {
+            border-color: rgba(255, 255, 255, 0.5);
+            background: rgba(255, 255, 255, 1);
+        }
+
+        .contact-form-select:focus {
+            outline: none;
+            border-color: rgba(255, 255, 255, 0.8);
+            background: rgba(255, 255, 255, 1);
+            box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.2);
+        }
+
+        .contact-form-textarea {
+            width: 100%;
+            padding: 0.875rem 1.25rem;
+            background: rgba(255, 255, 255, 0.95);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 12px;
+            font-size: 1rem;
+            color: #1a202c;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.3s ease;
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .contact-form-textarea:hover {
+            border-color: rgba(255, 255, 255, 0.5);
+            background: rgba(255, 255, 255, 1);
+        }
+
+        .contact-form-textarea:focus {
+            outline: none;
+            border-color: rgba(255, 255, 255, 0.8);
+            background: rgba(255, 255, 255, 1);
+            box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.2);
+        }
+
+        .contact-form-checkbox {
+            width: 20px;
+            height: 20px;
+            accent-color: #0050ff;
+            cursor: pointer;
+            margin-right: 0.75rem;
+        }
+
+        .contact-form-checkbox-label {
+            display: flex;
+            align-items: center;
+            color: rgba(255, 255, 255, 0.95);
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .contact-form-checkbox-label:hover {
+            color: rgba(255, 255, 255, 1);
+        }
+
+        .contact-form-submit-btn {
+            width: 100%;
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Montserrat', sans-serif;
+            box-shadow: 0 4px 15px rgba(0, 80, 255, 0.4);
+        }
+
+        .contact-form-submit-btn:hover {
+            background: linear-gradient(135deg, #0040d9 0%, #0033b3 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 80, 255, 0.5);
+        }
+
+        .contact-form-email-btn {
+            padding: 1rem 2.5rem;
+            background: white;
+            color: #0050ff;
+            border: 2px solid white;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .contact-form-email-btn:hover {
+            background: rgba(255, 255, 255, 0.9);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 255, 255, 0.3);
+        }
+
+        /* Last Section Styles */
+        .last-section-card {
+            position: relative;
+            overflow: hidden;
+            border-radius: 20px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+        }
+
+        .last-section-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(180deg, transparent 0%, rgba(0, 80, 255, 0.3) 50%, rgba(0, 51, 179, 0.95) 100%);
+            z-index: 1;
+            transition: all 0.4s ease;
+        }
+
+        .last-section-card:hover::before {
+            background: linear-gradient(180deg, transparent 0%, rgba(0, 80, 255, 0.4) 50%, rgba(0, 51, 179, 0.98) 100%);
+        }
+
+        .last-section-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .last-section-card:hover img {
+            transform: scale(1.1);
+        }
+
+        .last-section-card-banner {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%);
+            padding: 0.875rem 1.25rem;
+            z-index: 2;
+            transition: all 0.4s ease;
+        }
+
+        .last-section-card:hover .last-section-card-banner {
+            background: linear-gradient(135deg, #0040d9 0%, #0033b3 100%);
+            padding: 1rem 1.5rem;
+        }
+
+        .last-section-card-banner h3 {
+            color: white;
+            font-weight: 700;
+            font-size: 1rem;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            margin: 0;
+            transition: all 0.4s ease;
+        }
+
+        .last-section-card:hover .last-section-card-banner h3 {
+            transform: translateX(4px);
+            font-size: 1.05rem;
+        }
+
+        .last-section-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            z-index: 3;
+            transition: left 0.6s ease;
+        }
+
+        .last-section-card:hover::after {
+            left: 100%;
+        }
+
+        /* Contact Us Section Enhanced Styles */
+        .contact-us-section {
+            position: relative;
+            background: linear-gradient(135deg, #0050ff 0%, #0040d9 50%, #0033b3 100%);
+            overflow: hidden;
+        }
+
+        .contact-us-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -20%;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .contact-us-section::after {
+            content: '';
+            position: absolute;
+            bottom: -50%;
+            right: -20%;
+            width: 700px;
+            height: 700px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.08) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .contact-us-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .contact-us-button {
+            display: inline-block;
+            padding: 1rem 3rem;
+            background: white;
+            color: #0050ff;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 1rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            text-decoration: none;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-us-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 80, 255, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .contact-us-button:hover::before {
+            left: 100%;
+        }
+
+        .contact-us-button:hover {
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            background: #f8f9fa;
+        }
+
+        .contact-us-button:active {
+            transform: translateY(-2px) scale(1.02);
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2), 0 0 0 0 rgba(255, 255, 255, 0.4);
+            }
+            50% {
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2), 0 0 0 20px rgba(255, 255, 255, 0);
+            }
+        }
+
+        .contact-us-button {
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        @media (min-width: 768px) {
+            .contact-us-button {
+                padding: 1.25rem 4rem;
+                font-size: 1.125rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="nav-placeholder"></div>
+
+    <!-- Hero Section -->
+    <section class="relative h-screen flex items-center justify-center overflow-hidden">
+        <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('../assets/images/photobooth/hero.jpg');"></div>
+        <div class="absolute inset-0 hero-gradient"></div>
+        <div class="relative z-10 text-center text-white px-6">
+            <h1 class="hero-text text-5xl md:text-6xl lg:text-7xl font-bold mb-6 drop-shadow-lg">
+                <span class="block">NATIONAL PHOTO BOOTH</span>
+                <span class="block md:ml-8 lg:ml-12">RENTALS</span>
+            </h1>
+            <p class="hero-text text-lg md:text-xl lg:text-2xl mb-8 max-w-3xl mx-auto drop-shadow-md font-light">
+                Deliver a premium photo booth experience with high-quality prints, digital sharing, and customizable branding that fits any event theme.
+            </p>
+            <a href="../contact-us.html" class="hero-text bg-[#0050ff] text-white px-8 py-4 rounded-lg text-lg font-bold inline-block hover:bg-[#0040d9] transition shadow-lg tracking-wide">
+                CONTACT US
+            </a>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="py-12 md:py-16 bg-white overflow-x-hidden">
+        <div class="container mx-auto px-6">
+            <div class="max-w-4xl mx-auto text-center">
+                <p class="hero-text text-xs md:text-sm uppercase tracking-wider text-black font-light mb-2">
+                    CLASSIC, HIGH-TECH PHOTO BOOTH WITH CUSTOM FEATURES
+                </p>
+                <h2 class="hero-text text-3xl md:text-4xl lg:text-5xl font-bold uppercase text-[#0050ff] mb-4">
+                    PHOTO BOOTH RENTALS
+                </h2>
+                <p class="hero-text text-sm md:text-base text-black mb-6 leading-normal max-w-8xl">
+                    Not all photo booths are created equal—ours take event photography to the next level. Whether it's classic prints, digital shares, or immersive interactive features, our modern, high-tech photo booths deliver high-quality, customizable images in seconds. With options like AI effects, green screen, slow motion, and GIFs, we make sure every guest walks away with content they actually want to share. Available nationwide, our photo booths are perfect for corporate events, brand activations, trade shows, weddings, and private parties. Custom branding, themed props, and instant sharing make them a must-have experience for any event looking to stand out.
+                </p>
+                <a href="../contact-us.html" class="hero-text bg-[#0050ff] text-white px-6 py-3 rounded-lg text-base font-bold inline-block hover:bg-[#0040d9] transition shadow-lg tracking-wide uppercase">
+                    BOOK NOW
+                </a>
+            </div>
+        </div>
+
+        <!-- Interactive Gallery -->
+        <div class="gallery-container">
+            <div class="gallery">
+                <div class="gallery-item">
+                    <div class="gallery-item-perspective">
+                        <div class="gallery-item-wrap">
+                            <img src="../assets/images/photobooth/section1/pic1.png" alt="Photo Booth" class="gallery-img">
+                            <div class="gallery-item-overlay"></div>
+                        </div>
+                    </div>
+                    <div class="gallery-item-strings-perspective">
+                        <div class="gallery-item-strings"></div>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-item-perspective">
+                        <div class="gallery-item-wrap">
+                            <img src="../assets/images/photobooth/section1/pic2.png" alt="Photo Booth" class="gallery-img">
+                            <div class="gallery-item-overlay"></div>
+                        </div>
+                    </div>
+                    <div class="gallery-item-strings-perspective">
+                        <div class="gallery-item-strings"></div>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-item-perspective">
+                        <div class="gallery-item-wrap">
+                            <img src="../assets/images/photobooth/section1/pic3.png" alt="Photo Booth" class="gallery-img">
+                            <div class="gallery-item-overlay"></div>
+                        </div>
+                    </div>
+                    <div class="gallery-item-strings-perspective">
+                        <div class="gallery-item-strings"></div>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-item-perspective">
+                        <div class="gallery-item-wrap">
+                            <img src="../assets/images/photobooth/section1/pic4.png" alt="Photo Booth" class="gallery-img">
+                            <div class="gallery-item-overlay"></div>
+                        </div>
+                    </div>
+                    <div class="gallery-item-strings-perspective">
+                        <div class="gallery-item-strings"></div>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-item-perspective">
+                        <div class="gallery-item-wrap">
+                            <img src="../assets/images/photobooth/section1/pic5.png" alt="Photo Booth" class="gallery-img">
+                            <div class="gallery-item-overlay"></div>
+                        </div>
+                    </div>
+                    <div class="gallery-item-strings-perspective">
+                        <div class="gallery-item-strings"></div>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-item-perspective">
+                        <div class="gallery-item-wrap">
+                            <img src="../assets/images/photobooth/section1/pic6.png" alt="Photo Booth" class="gallery-img">
+                            <div class="gallery-item-overlay"></div>
+                        </div>
+                    </div>
+                    <div class="gallery-item-strings-perspective">
+                        <div class="gallery-item-strings"></div>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-item-perspective">
+                        <div class="gallery-item-wrap">
+                            <img src="../assets/images/photobooth/section1/pic7.png" alt="Photo Booth" class="gallery-img">
+                            <div class="gallery-item-overlay"></div>
+                        </div>
+                    </div>
+                    <div class="gallery-item-strings-perspective">
+                        <div class="gallery-item-strings"></div>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-item-perspective">
+                        <div class="gallery-item-wrap">
+                            <img src="../assets/images/photobooth/section1/pic8.png" alt="Photo Booth" class="gallery-img">
+                            <div class="gallery-item-overlay"></div>
+                        </div>
+                    </div>
+                    <div class="gallery-item-strings-perspective">
+                        <div class="gallery-item-strings"></div>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-item-perspective">
+                        <div class="gallery-item-wrap">
+                            <img src="../assets/images/photobooth/section1/pic9.png" alt="Photo Booth" class="gallery-img">
+                            <div class="gallery-item-overlay"></div>
+                        </div>
+                    </div>
+                    <div class="gallery-item-strings-perspective">
+                        <div class="gallery-item-strings"></div>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-item-perspective">
+                        <div class="gallery-item-wrap">
+                            <img src="../assets/images/photobooth/section1/pic10.png" alt="Photo Booth" class="gallery-img">
+                            <div class="gallery-item-overlay"></div>
+                        </div>
+                    </div>
+                    <div class="gallery-item-strings-perspective">
+                        <div class="gallery-item-strings"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Left Section -->
+    <section class="left-section py-10 md:py-12 lg:py-14 bg-gradient-to-br from-white via-blue-50/30 to-purple-50/20">
+        <div class="container mx-auto px-6">
+            <div class="content-wrapper grid lg:grid-cols-2 gap-6 lg:gap-10 items-center">
+                <!-- Left: Image -->
+                <div class="order-2 lg:order-1 animate-fade-in-up">
+                    <div class="enhanced-image-container">
+                        <img src="../assets/images/photobooth/section2/pic1.jpg" alt="Interactive Photo Booth Experience" class="w-full h-auto object-cover">
+                    </div>
+                </div>
+
+                <!-- Right: Text Content -->
+                <div class="order-1 lg:order-2 space-y-5 lg:space-y-6">
+                    <!-- Title -->
+                    <div class="animate-fade-in-up animate-delay-100">
+                        <h2 class="hero-text text-3xl md:text-4xl lg:text-5xl font-bold gradient-title leading-tight">
+                            WHERE PHOTOGRAPHY<br>
+                            MEETS INTERACTIVE ART
+                        </h2>
+                    </div>
+
+                    <!-- Description -->
+                    <div class="animate-fade-in-up animate-delay-200">
+                        <p class="text-gray-700 text-base md:text-lg leading-relaxed">
+                            Watch your event transform into a living, breathing work of art that nobody's seen before. Our mosaic technology can take photos from every corner of your event - professional shots, booth captures, even social media posts with your hashtag - and turns them into something bigger than themselves. The blank canvas you start with? By hour two, it's a sprawling visual story that grows with every captured moment.
+                        </p>
+                    </div>
+
+                    <!-- Features Grid -->
+                    <div class="grid md:grid-cols-2 gap-3 md:gap-4 pt-1">
+                        <!-- Left Column -->
+                        <div class="space-y-2">
+                            <div class="feature-item animate-fade-in-up animate-delay-300">
+                                <div class="flex items-center gap-3">
+                                    <div class="feature-icon"></div>
+                                    <p class="text-gray-800 font-semibold text-sm md:text-base">Custom Master Image</p>
+                                </div>
+                            </div>
+                            <div class="feature-item animate-fade-in-up animate-delay-300">
+                                <div class="flex items-center gap-3">
+                                    <div class="feature-icon"></div>
+                                    <p class="text-gray-800 font-semibold text-sm md:text-base">Live Display Screen Options</p>
+                                </div>
+                            </div>
+                            <div class="feature-item animate-fade-in-up animate-delay-300">
+                                <div class="flex items-center gap-3">
+                                    <div class="feature-icon"></div>
+                                    <p class="text-gray-800 font-semibold text-sm md:text-base">Intelligent Color Matching</p>
+                                </div>
+                            </div>
+                            <div class="feature-item animate-fade-in-up animate-delay-300">
+                                <div class="flex items-center gap-3">
+                                    <div class="feature-icon"></div>
+                                    <p class="text-gray-800 font-semibold text-sm md:text-base">Real-Time Photo Processing</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Right Column -->
+                        <div class="space-y-2">
+                            <div class="feature-item animate-fade-in-up animate-delay-300">
+                                <div class="flex items-center gap-3">
+                                    <div class="feature-icon"></div>
+                                    <p class="text-gray-800 font-semibold text-sm md:text-base">Progressive Reveal</p>
+                                </div>
+                            </div>
+                            <div class="feature-item animate-fade-in-up animate-delay-300">
+                                <div class="flex items-center gap-3">
+                                    <div class="feature-icon"></div>
+                                    <p class="text-gray-800 font-semibold text-sm md:text-base">HD Camera System</p>
+                                </div>
+                            </div>
+                            <div class="feature-item animate-fade-in-up animate-delay-300">
+                                <div class="flex items-center gap-3">
+                                    <div class="feature-icon"></div>
+                                    <p class="text-gray-800 font-semibold text-sm md:text-base">Live Moderation</p>
+                                </div>
+                            </div>
+                            <div class="feature-item animate-fade-in-up animate-delay-300">
+                                <div class="flex items-center gap-3">
+                                    <div class="feature-icon"></div>
+                                    <p class="text-gray-800 font-semibold text-sm md:text-base">Brand Integration</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Right Section -->
+    <section class="right-section py-10 md:py-12 lg:py-14 bg-gradient-to-br from-white via-purple-50/20 to-blue-50/30">
+        <div class="container mx-auto px-6">
+            <div class="content-wrapper grid lg:grid-cols-2 gap-6 lg:gap-10 items-center">
+                <!-- Left: Text Content -->
+                <div class="order-1 space-y-5 lg:space-y-6">
+                    <!-- Title -->
+                    <div class="animate-fade-in-up animate-delay-100">
+                        <h2 class="hero-text text-3xl md:text-4xl lg:text-5xl font-bold gradient-title leading-tight">
+                            BRANDED PHOTO BOOTH<br>
+                            EXPERIENCES
+                        </h2>
+                    </div>
+
+                    <!-- Description -->
+                    <div class="animate-fade-in-up animate-delay-200">
+                        <p class="text-gray-700 text-base md:text-lg leading-relaxed">
+                            Memorable brand moments are interactive. Our Photo Booths capture high-quality images that engage guests and turn them into brand ambassadors. Whether it's for product launches or company celebrations, we create stunning content that lasts.
+                        </p>
+                    </div>
+
+                    <!-- Subtitle -->
+                    <div class="animate-fade-in-up animate-delay-200 pt-2">
+                        <p class="text-gray-800 font-semibold text-lg md:text-xl">
+                            Customize your Photo Booth with:
+                        </p>
+                    </div>
+
+                    <!-- Features Grid -->
+                    <div class="grid md:grid-cols-2 gap-3 md:gap-4 pt-1">
+                        <!-- Left Column -->
+                        <div class="space-y-2">
+                            <div class="feature-item animate-fade-in-up animate-delay-300">
+                                <div class="flex items-center gap-3">
+                                    <div class="feature-icon"></div>
+                                    <p class="text-gray-800 font-semibold text-sm md:text-base">Branded Photo Overlays</p>
+                                </div>
+                            </div>
+                            <div class="feature-item animate-fade-in-up animate-delay-300">
+                                <div class="flex items-center gap-3">
+                                    <div class="feature-icon"></div>
+                                    <p class="text-gray-800 font-semibold text-sm md:text-base">Custom Backdrops And Props</p>
+                                </div>
+                            </div>
+                            <div class="feature-item animate-fade-in-up animate-delay-300">
+                                <div class="flex items-center gap-3">
+                                    <div class="feature-icon"></div>
+                                    <p class="text-gray-800 font-semibold text-sm md:text-base">Personalized Photo Templates</p>
+                                </div>
+                            </div>
+                            <div class="feature-item animate-fade-in-up animate-delay-300">
+                                <div class="flex items-center gap-3">
+                                    <div class="feature-icon"></div>
+                                    <p class="text-gray-800 font-semibold text-sm md:text-base">Branded Social Sharing Microsite</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Right Column -->
+                        <div class="space-y-2">
+                            <div class="feature-item animate-fade-in-up animate-delay-300">
+                                <div class="flex items-center gap-3">
+                                    <div class="feature-icon"></div>
+                                    <p class="text-gray-800 font-semibold text-sm md:text-base">Interactive Touchscreen Experience</p>
+                                </div>
+                            </div>
+                            <div class="feature-item animate-fade-in-up animate-delay-300">
+                                <div class="flex items-center gap-3">
+                                    <div class="feature-icon"></div>
+                                    <p class="text-gray-800 font-semibold text-sm md:text-base">Instant Digital And Print Options</p>
+                                </div>
+                            </div>
+                            <div class="feature-item animate-fade-in-up animate-delay-300">
+                                <div class="flex items-center gap-3">
+                                    <div class="feature-icon"></div>
+                                    <p class="text-gray-800 font-semibold text-sm md:text-base">Branded Email And Text Sharing</p>
+                                </div>
+                            </div>
+                            <div class="feature-item animate-fade-in-up animate-delay-300">
+                                <div class="flex items-center gap-3">
+                                    <div class="feature-icon"></div>
+                                    <p class="text-gray-800 font-semibold text-sm md:text-base">Live Event Slideshows</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Image -->
+                <div class="order-2 animate-fade-in-up">
+                    <div class="enhanced-image-container">
+                        <img src="../assets/images/photobooth/section2/pic2.jpg" alt="Branded Photo Booth Experience" class="w-full h-auto object-cover">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Us Section -->
+    <section class="contact-us-section py-16 md:py-20 lg:py-24">
+        <div class="contact-us-content container mx-auto px-6">
+            <div class="flex flex-col items-center justify-center text-center">
+                <a href="../contact-us.html" class="contact-us-button">
+                    CONTACT US
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Packages Section -->
+    <section class="py-10 md:py-12 lg:py-14 bg-gradient-to-br from-white via-blue-50/30 to-purple-50/20 relative overflow-hidden">
+        <div class="absolute inset-0 opacity-40 pointer-events-none">
+            <div class="absolute -top-32 -right-24 w-96 h-96 bg-blue-200/20 rounded-full blur-3xl"></div>
+            <div class="absolute bottom-0 left-0 w-80 h-80 bg-purple-200/20 rounded-full blur-3xl"></div>
+        </div>
+
+        <div class="relative container mx-auto px-6">
+            <div class="max-w-7xl mx-auto">
+                <div class="text-center mb-12 lg:mb-16 animate-fade-in-up">
+                    <h2 class="hero-text text-3xl md:text-4xl lg:text-5xl font-bold gradient-title mb-4 leading-tight">
+                        PHOTO BOOTH<br>PACKAGES
+                    </h2>
+                    <p class="text-gray-700 text-base md:text-lg max-w-2xl mx-auto">Choose the perfect package for your event and create unforgettable memories with our premium photo booth experiences.</p>
+                </div>
+
+                <div class="grid lg:grid-cols-3 gap-6 lg:gap-8">
+                    <!-- BASIC PACKAGE -->
+                    <div class="group bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 hover:-translate-y-2 animate-fade-in-up animate-delay-100">
+                        <div class="relative bg-gradient-to-br from-blue-50 to-purple-50 p-6 text-center border-b border-gray-100">
+                            <h3 class="text-2xl md:text-3xl font-bold mb-2">
+                                BASIC <span class="text-[#0050ff]">PACKAGE</span>
+                            </h3>
+                            <p class="text-gray-600 text-sm">Essential features for your event</p>
+                        </div>
+                        <div class="p-6">
+                            <ul class="space-y-3">
+                                <li class="feature-item">
+                                    <div class="flex items-center gap-3">
+                                        <div class="feature-icon"></div>
+                                        <p class="text-gray-800 font-semibold text-sm md:text-base">Up To 3 Hours of Service</p>
+                                    </div>
+                                </li>
+                                <li class="feature-item">
+                                    <div class="flex items-center gap-3">
+                                        <div class="feature-icon"></div>
+                                        <p class="text-gray-800 font-semibold text-sm md:text-base">Engaging Attendant</p>
+                                    </div>
+                                </li>
+                                <li class="feature-item">
+                                    <div class="flex items-center gap-3">
+                                        <div class="feature-icon"></div>
+                                        <p class="text-gray-800 font-semibold text-sm md:text-base">Basic Booth</p>
+                                    </div>
+                                </li>
+                                <li class="feature-item">
+                                    <div class="flex items-center gap-3">
+                                        <div class="feature-icon"></div>
+                                        <p class="text-gray-800 font-semibold text-sm md:text-base">Choice of Backdrop</p>
+                                    </div>
+                                </li>
+                                <li class="feature-item">
+                                    <div class="flex items-center gap-3">
+                                        <div class="feature-icon"></div>
+                                        <p class="text-gray-800 font-semibold text-sm md:text-base">Onsite Printing</p>
+                                    </div>
+                                </li>
+                                <li class="feature-item">
+                                    <div class="flex items-center gap-3">
+                                        <div class="feature-icon"></div>
+                                        <p class="text-gray-800 font-semibold text-sm md:text-base">Signature Pose Flashcards</p>
+                                    </div>
+                                </li>
+                                <li class="feature-item">
+                                    <div class="flex items-center gap-3">
+                                        <div class="feature-icon"></div>
+                                        <p class="text-gray-800 font-semibold text-sm md:text-base">Print Layout: Look Book</p>
+                                    </div>
+                                </li>
+                                <li class="feature-item">
+                                    <div class="flex items-center gap-3">
+                                        <div class="feature-icon"></div>
+                                        <p class="text-gray-800 font-semibold text-sm md:text-base">Digital Sharing</p>
+                                    </div>
+                                </li>
+                            </ul>
+                            <button class="btn-primary mt-6 w-full text-white py-3 rounded-lg font-semibold">Get Started</button>
+                        </div>
+                    </div>
+
+                    <!-- RECOMMENDED PACKAGE -->
+                    <div class="relative group bg-white rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 overflow-hidden border-2 border-[#0050ff]/30 hover:border-[#0050ff]/50 hover:-translate-y-2 animate-fade-in-up animate-delay-200">
+                        <div class="absolute -top-1 -right-1 z-20">
+                            <div class="bg-gradient-to-r from-[#0050ff] to-[#7c3aed] text-white px-4 py-1.5 text-xs font-bold rounded-bl-xl rounded-tr-xl shadow-lg">
+                                MOST POPULAR
+                            </div>
+                        </div>
+                        <div class="relative bg-gradient-to-br from-[#0050ff]/10 via-purple-50 to-blue-50 p-6 text-center border-b border-gray-100">
+                            <h3 class="text-2xl md:text-3xl font-bold mb-2">
+                                RECOMMENDED <span class="text-[#0050ff]">PACKAGE</span>
+                            </h3>
+                            <p class="text-gray-600 text-sm">Most requested package</p>
+                        </div>
+                        <div class="p-6">
+                            <ul class="space-y-3">
+                                <li class="feature-item">
+                                    <div class="flex items-center gap-3">
+                                        <div class="feature-icon"></div>
+                                        <p class="text-gray-800 font-semibold text-sm md:text-base">Up To 4 Hours of Service</p>
+                                    </div>
+                                </li>
+                                <li class="feature-item">
+                                    <div class="flex items-center gap-3">
+                                        <div class="feature-icon"></div>
+                                        <p class="text-gray-800 font-semibold text-sm md:text-base">Engaging Attendant</p>
+                                    </div>
+                                </li>
+                                <li class="feature-item">
+                                    <div class="flex items-center gap-3">
+                                        <div class="feature-icon"></div>
+                                        <p class="text-gray-800 font-semibold text-sm md:text-base">Basic or Premium Booth</p>
+                                    </div>
+                                </li>
+                                <li class="feature-item">
+                                    <div class="flex items-center gap-3">
+                                        <div class="feature-icon"></div>
+                                        <p class="text-gray-800 font-semibold text-sm md:text-base">Choice of Backdrop</p>
+                                    </div>
+                                </li>
+                                <li class="feature-item">
+                                    <div class="flex items-center gap-3">
+                                        <div class="feature-icon"></div>
+                                        <p class="text-gray-800 font-semibold text-sm md:text-base">Onsite Printing</p>
+                                    </div>
+                                </li>
+                                <li class="feature-item">
+                                    <div class="flex items-center gap-3">
+                                        <div class="feature-icon"></div>
+                                        <p class="text-gray-800 font-semibold text-sm md:text-base">Signature Pose Flashcards</p>
+                                    </div>
+                                </li>
+                                <li class="feature-item">
+                                    <div class="flex items-center gap-3">
+                                        <div class="feature-icon"></div>
+                                        <p class="text-gray-800 font-semibold text-sm md:text-base">Choice of 2x6 & 4x6 Prints</p>
+                                    </div>
+                                </li>
+                                <li class="feature-item">
+                                    <div class="flex items-center gap-3">
+                                        <div class="feature-icon"></div>
+                                        <p class="text-gray-800 font-semibold text-sm md:text-base">Print Layout: Custom Design/Logo Branding</p>
+                                    </div>
+                                </li>
+                                <li class="feature-item">
+                                    <div class="flex items-center gap-3">
+                                        <div class="feature-icon"></div>
+                                        <p class="text-gray-800 font-semibold text-sm md:text-base">Digital Sharing</p>
+                                    </div>
+                                </li>
+                                <li class="feature-item">
+                                    <div class="flex items-center gap-3">
+                                        <div class="feature-icon"></div>
+                                        <p class="text-gray-800 font-semibold text-sm md:text-base">Photo Memory Album or Custom Messaging</p>
+                                    </div>
+                                </li>
+                            </ul>
+                            <button class="btn-primary mt-6 w-full text-white py-3 rounded-lg font-semibold">Choose Recommended</button>
+                        </div>
+                    </div>
+
+                    <!-- BRAND ACTIVATION PACKAGE -->
+                    <div class="group bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 hover:-translate-y-2 animate-fade-in-up animate-delay-300">
+                        <div class="relative bg-gradient-to-br from-purple-50 to-blue-50 p-6 text-center border-b border-gray-100">
+                            <h3 class="text-2xl md:text-3xl font-bold mb-2">
+                                BRAND ACTIVATION <span class="text-[#0050ff]">PACKAGE</span>
+                            </h3>
+                            <p class="text-gray-600 text-sm">Premium immersion suite</p>
+                        </div>
+                        <div class="p-6">
+                            <ul class="space-y-3">
+                                <li class="feature-item">
+                                    <div class="flex items-center gap-3">
+                                        <div class="feature-icon"></div>
+                                        <p class="text-gray-800 font-semibold text-sm md:text-base">Up To 6 Hours of Service</p>
+                                    </div>
+                                </li>
+                                <li class="feature-item">
+                                    <div class="flex items-center gap-3">
+                                        <div class="feature-icon"></div>
+                                        <p class="text-gray-800 font-semibold text-sm md:text-base">Two Engaging Attendants</p>
+                                    </div>
+                                </li>
+                                <li class="feature-item">
+                                    <div class="flex items-center gap-3">
+                                        <div class="feature-icon"></div>
+                                        <p class="text-gray-800 font-semibold text-sm md:text-base">Premium Booth with Branded Wrap</p>
+                                    </div>
+                                </li>
+                                <li class="feature-item">
+                                    <div class="flex items-center gap-3">
+                                        <div class="feature-icon"></div>
+                                        <p class="text-gray-800 font-semibold text-sm md:text-base">Custom Branded Backdrop</p>
+                                    </div>
+                                </li>
+                                <li class="feature-item">
+                                    <div class="flex items-center gap-3">
+                                        <div class="feature-icon"></div>
+                                        <p class="text-gray-800 font-semibold text-sm md:text-base">Onsite Printing</p>
+                                    </div>
+                                </li>
+                                <li class="feature-item">
+                                    <div class="flex items-center gap-3">
+                                        <div class="feature-icon"></div>
+                                        <p class="text-gray-800 font-semibold text-sm md:text-base">Signature Pose Flashcards</p>
+                                    </div>
+                                </li>
+                                <li class="feature-item">
+                                    <div class="flex items-center gap-3">
+                                        <div class="feature-icon"></div>
+                                        <p class="text-gray-800 font-semibold text-sm md:text-base">Choice of All Print Sizes (2x6, 4x6, 8x10)</p>
+                                    </div>
+                                </li>
+                                <li class="feature-item">
+                                    <div class="flex items-center gap-3">
+                                        <div class="feature-icon"></div>
+                                        <p class="text-gray-800 font-semibold text-sm md:text-base">Print Layout: Custom Design/Logo Branding</p>
+                                    </div>
+                                </li>
+                                <li class="feature-item">
+                                    <div class="flex items-center gap-3">
+                                        <div class="feature-icon"></div>
+                                        <p class="text-gray-800 font-semibold text-sm md:text-base">Premium Props + Custom Branded Props</p>
+                                    </div>
+                                </li>
+                                <li class="feature-item">
+                                    <div class="flex items-center gap-3">
+                                        <div class="feature-icon"></div>
+                                        <p class="text-gray-800 font-semibold text-sm md:text-base">Digital Sharing with Brand Integration</p>
+                                    </div>
+                                </li>
+                                <li class="feature-item">
+                                    <div class="flex items-center gap-3">
+                                        <div class="feature-icon"></div>
+                                        <p class="text-gray-800 font-semibold text-sm md:text-base">Post-Event Online Gallery with Custom Branding</p>
+                                    </div>
+                                </li>
+                                <li class="feature-item">
+                                    <div class="flex items-center gap-3">
+                                        <div class="feature-icon"></div>
+                                        <p class="text-gray-800 font-semibold text-sm md:text-base">Live Photo/Video Streaming to Event Screens</p>
+                                    </div>
+                                </li>
+                            </ul>
+                            <button class="btn-primary mt-6 w-full text-white py-3 rounded-lg font-semibold">Contact for Details</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cards Section -->
+    <section class="py-10 md:py-12 lg:py-14 bg-gradient-to-br from-white via-blue-50/30 to-purple-50/20 relative overflow-hidden">
+        <div class="absolute inset-0 opacity-40 pointer-events-none">
+            <div class="absolute -top-32 -right-24 w-96 h-96 bg-blue-200/20 rounded-full blur-3xl"></div>
+            <div class="absolute bottom-0 left-0 w-80 h-80 bg-purple-200/20 rounded-full blur-3xl"></div>
+        </div>
+
+        <div class="relative container mx-auto px-6">
+            <div class="max-w-7xl mx-auto">
+                <!-- Section Title -->
+                <div class="text-center mb-12 lg:mb-16 animate-fade-in-up">
+                    <h2 class="hero-text text-3xl md:text-4xl lg:text-5xl font-bold gradient-title mb-4 leading-tight">
+                        ADDITIONAL OPTIONS
+                    </h2>
+                </div>
+
+                <!-- Cards Grid -->
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+                    <!-- Card 1: Shimmer Wall -->
+                    <div class="cards-section-card group bg-gradient-to-br from-[#0050ff] via-[#0040d9] to-[#7c3aed] rounded-2xl p-6 lg:p-8 shadow-lg transition-all duration-300 animate-fade-in-up animate-delay-100">
+                        <div class="flex items-start gap-4 mb-4">
+                            <div class="cards-section-icon-container flex-shrink-0 w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center backdrop-blur-sm">
+                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/>
+                                </svg>
+                            </div>
+                            <h3 class="text-xl md:text-2xl font-bold text-white uppercase tracking-wide">Shimmer Wall</h3>
+                        </div>
+                        <p class="text-white/90 text-sm md:text-base leading-relaxed transition-all duration-300 group-hover:text-white">Add a touch of sparkle with a shimmer wall that glistens and enhances your event aesthetics.</p>
+                    </div>
+
+                    <!-- Card 2: 4x6" - 6x8" Prints -->
+                    <div class="cards-section-card group bg-gradient-to-br from-[#0050ff] via-[#0040d9] to-[#7c3aed] rounded-2xl p-6 lg:p-8 shadow-lg transition-all duration-300 animate-fade-in-up animate-delay-200">
+                        <div class="flex items-start gap-4 mb-4">
+                            <div class="cards-section-icon-container flex-shrink-0 w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center backdrop-blur-sm">
+                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                                </svg>
+                            </div>
+                            <h3 class="text-xl md:text-2xl font-bold text-white uppercase tracking-wide">4x6" - 6x8" Prints</h3>
+                        </div>
+                        <p class="text-white/90 text-sm md:text-base leading-relaxed transition-all duration-300 group-hover:text-white">Provide guests with professional-quality prints ranging from 4x6" to 6x8".</p>
+                    </div>
+
+                    <!-- Card 3: Branded Booth Wrap -->
+                    <div class="cards-section-card group bg-gradient-to-br from-[#0050ff] via-[#0040d9] to-[#7c3aed] rounded-2xl p-6 lg:p-8 shadow-lg transition-all duration-300 animate-fade-in-up animate-delay-300">
+                        <div class="flex items-start gap-4 mb-4">
+                            <div class="cards-section-icon-container flex-shrink-0 w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center backdrop-blur-sm">
+                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"/>
+                                </svg>
+                            </div>
+                            <h3 class="text-xl md:text-2xl font-bold text-white uppercase tracking-wide">Branded Booth Wrap</h3>
+                        </div>
+                        <p class="text-white/90 text-sm md:text-base leading-relaxed transition-all duration-300 group-hover:text-white">Ensure your booth is fully branded with a custom wrap that makes a lasting impression.</p>
+                    </div>
+
+                    <!-- Card 4: Logo Integration -->
+                    <div class="cards-section-card group bg-gradient-to-br from-[#0050ff] via-[#0040d9] to-[#7c3aed] rounded-2xl p-6 lg:p-8 shadow-lg transition-all duration-300 animate-fade-in-up animate-delay-100">
+                        <div class="flex items-start gap-4 mb-4">
+                            <div class="cards-section-icon-container flex-shrink-0 w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center backdrop-blur-sm">
+                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                                </svg>
+                            </div>
+                            <h3 class="text-xl md:text-2xl font-bold text-white uppercase tracking-wide">Logo Integration</h3>
+                        </div>
+                        <p class="text-white/90 text-sm md:text-base leading-relaxed transition-all duration-300 group-hover:text-white">Incorporate your logo seamlessly into event visuals, ensuring brand presence in every shot.</p>
+                    </div>
+
+                    <!-- Card 5: Data Collection -->
+                    <div class="cards-section-card group bg-gradient-to-br from-[#0050ff] via-[#0040d9] to-[#7c3aed] rounded-2xl p-6 lg:p-8 shadow-lg transition-all duration-300 animate-fade-in-up animate-delay-200">
+                        <div class="flex items-start gap-4 mb-4">
+                            <div class="cards-section-icon-container flex-shrink-0 w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center backdrop-blur-sm">
+                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                                </svg>
+                            </div>
+                            <h3 class="text-xl md:text-2xl font-bold text-white uppercase tracking-wide">Data Collection</h3>
+                        </div>
+                        <p class="text-white/90 text-sm md:text-base leading-relaxed transition-all duration-300 group-hover:text-white">Gather key event data with an integrated data collection system to track engagement and participation.</p>
+                    </div>
+
+                    <!-- Card 6: GIF and Boomerang Capabilities -->
+                    <div class="cards-section-card group bg-gradient-to-br from-[#0050ff] via-[#0040d9] to-[#7c3aed] rounded-2xl p-6 lg:p-8 shadow-lg transition-all duration-300 animate-fade-in-up animate-delay-300">
+                        <div class="flex items-start gap-4 mb-4">
+                            <div class="cards-section-icon-container flex-shrink-0 w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center backdrop-blur-sm">
+                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+                                </svg>
+                            </div>
+                            <h3 class="text-xl md:text-2xl font-bold text-white uppercase tracking-wide">GIF and Boomerang Capabilities</h3>
+                        </div>
+                        <p class="text-white/90 text-sm md:text-base leading-relaxed transition-all duration-300 group-hover:text-white">Offer guests the ability to create GIFs and Boomerangs for a fun and interactive experience.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Image Content Section -->
+    <section class="py-10 md:py-12 lg:py-14 bg-gradient-to-br from-white via-blue-50/30 to-purple-50/20 relative overflow-hidden">
+        <div class="absolute inset-0 opacity-40 pointer-events-none">
+            <div class="absolute -top-32 -left-24 w-96 h-96 bg-blue-200/20 rounded-full blur-3xl"></div>
+            <div class="absolute bottom-0 right-0 w-80 h-80 bg-purple-200/20 rounded-full blur-3xl"></div>
+        </div>
+
+        <div class="relative container mx-auto px-6">
+            <div class="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+                <!-- Left: Technical Specifications -->
+                <div class="order-2 lg:order-1 space-y-6 animate-fade-in-up">
+                    <div>
+                        <h2 class="hero-text text-3xl md:text-4xl lg:text-5xl font-bold gradient-title mb-2 leading-tight">
+                            PHOTO BOOTH<br>TECHNICAL SPECIFICATIONS
+                        </h2>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <!-- Specification Item 1 -->
+                        <div class="feature-item">
+                            <div class="flex items-start gap-3">
+                                <div class="feature-icon"></div>
+                                <div>
+                                    <p class="text-gray-800 font-bold text-sm md:text-base mb-1">Space Required</p>
+                                    <p class="text-gray-600 text-xs md:text-sm">8' x 8' Minimum, 15' x 8' Preferred</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Specification Item 2 -->
+                        <div class="feature-item">
+                            <div class="flex items-start gap-3">
+                                <div class="feature-icon"></div>
+                                <div>
+                                    <p class="text-gray-800 font-bold text-sm md:text-base mb-1">Power Needs</p>
+                                    <p class="text-gray-600 text-xs md:text-sm">Standard Outlet</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Specification Item 3 -->
+                        <div class="feature-item">
+                            <div class="flex items-start gap-3">
+                                <div class="feature-icon"></div>
+                                <div>
+                                    <p class="text-gray-800 font-bold text-sm md:text-base mb-1">Setup Duration</p>
+                                    <p class="text-gray-600 text-xs md:text-sm">90 Minutes</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Specification Item 4 -->
+                        <div class="feature-item">
+                            <div class="flex items-start gap-3">
+                                <div class="feature-icon"></div>
+                                <div>
+                                    <p class="text-gray-800 font-bold text-sm md:text-base mb-1">Processing Time</p>
+                                    <p class="text-gray-600 text-xs md:text-sm">Instant</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Specification Item 5 -->
+                        <div class="feature-item">
+                            <div class="flex items-start gap-3">
+                                <div class="feature-icon"></div>
+                                <div>
+                                    <p class="text-gray-800 font-bold text-sm md:text-base mb-1">Instant Internet</p>
+                                    <p class="text-gray-600 text-xs md:text-sm">Hardwired Required</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Specification Item 6 -->
+                        <div class="feature-item">
+                            <div class="flex items-start gap-3">
+                                <div class="feature-icon"></div>
+                                <div>
+                                    <p class="text-gray-800 font-bold text-sm md:text-base mb-1">Photo Capacity</p>
+                                    <p class="text-gray-600 text-xs md:text-sm">Unlimited but Predetermined</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Specification Item 7 -->
+                        <div class="feature-item">
+                            <div class="flex items-start gap-3">
+                                <div class="feature-icon"></div>
+                                <div>
+                                    <p class="text-gray-800 font-bold text-sm md:text-base mb-1">Final Resolution</p>
+                                    <p class="text-gray-600 text-xs md:text-sm">High-Resolution Photos</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Specification Item 8 -->
+                        <div class="feature-item">
+                            <div class="flex items-start gap-3">
+                                <div class="feature-icon"></div>
+                                <div>
+                                    <p class="text-gray-800 font-bold text-sm md:text-base mb-1">Output</p>
+                                    <p class="text-gray-600 text-xs md:text-sm">Digital & Print</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Specification Item 9 -->
+                        <div class="feature-item">
+                            <div class="flex items-start gap-3">
+                                <div class="feature-icon"></div>
+                                <div>
+                                    <p class="text-gray-800 font-bold text-sm md:text-base mb-1">Environment</p>
+                                    <p class="text-gray-600 text-xs md:text-sm">Indoor Use</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Specification Item 10 -->
+                        <div class="feature-item">
+                            <div class="flex items-start gap-3">
+                                <div class="feature-icon"></div>
+                                <div>
+                                    <p class="text-gray-800 font-bold text-sm md:text-base mb-1">Staff</p>
+                                    <p class="text-gray-600 text-xs md:text-sm">One-Two Operators Included</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Specification Item 11 -->
+                        <div class="feature-item">
+                            <div class="flex items-start gap-3">
+                                <div class="feature-icon"></div>
+                                <div>
+                                    <p class="text-gray-800 font-bold text-sm md:text-base mb-1">Standard Duration</p>
+                                    <p class="text-gray-600 text-xs md:text-sm">Full Event, Multi-Day</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Specification Item 12 -->
+                        <div class="feature-item">
+                            <div class="flex items-start gap-3">
+                                <div class="feature-icon"></div>
+                                <div>
+                                    <p class="text-gray-800 font-bold text-sm md:text-base mb-1">Backup</p>
+                                    <p class="text-gray-600 text-xs md:text-sm">Cloud Storage</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Image -->
+                <div class="order-1 lg:order-2 animate-fade-in-up animate-delay-200">
+                    <div class="enhanced-image-container">
+                        <img src="../assets/images/photobooth/section1/pic7.png" alt="Photo Booth Event Experience" class="w-full h-auto object-cover rounded-2xl">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Form Section -->
+    <section class="contact-form-section py-10 md:py-12 lg:py-16 bg-white">
+        <div class="container mx-auto px-6">
+            <!-- Header Section -->
+            <div class="text-center mb-8 lg:mb-12 animate-fade-in-up">
+                <h2 class="hero-text text-3xl md:text-4xl lg:text-5xl font-bold gradient-title mb-4 leading-tight">
+                    CONTACT US NOW
+                </h2>
+                <p class="text-gray-700 text-base md:text-lg max-w-3xl mx-auto mb-2">
+                    Tell us about your event by filling out the form below, and our team will be in touch as soon as possible.
+                </p>
+                <p class="text-gray-600 text-sm md:text-base">
+                    Have more questions? Scroll down to email our team directly!
+                </p>
+            </div>
+
+            <!-- Main Form Section -->
+            <div class="max-w-6xl mx-auto">
+                <div class="bg-gradient-to-br from-[#0033b3] via-[#0040d9] to-[#0050ff] rounded-3xl p-6 md:p-8 lg:p-12 shadow-2xl animate-fade-in-up animate-delay-100">
+                    <form id="contactForm" class="space-y-6">
+                        <!-- Two Column Fields -->
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <!-- Left Column -->
+                            <div class="space-y-6">
+                                <!-- First Name -->
+                                <div>
+                                    <label for="firstName" class="block text-white font-semibold text-sm md:text-base mb-2">
+                                        First Name <span class="text-red-300">*</span>
+                                    </label>
+                                    <input type="text" id="firstName" name="firstName" required 
+                                        class="contact-form-input" placeholder="Enter your first name">
+                                </div>
+
+                                <!-- Last Name -->
+                                <div>
+                                    <label for="lastName" class="block text-white font-semibold text-sm md:text-base mb-2">
+                                        Last Name <span class="text-red-300">*</span>
+                                    </label>
+                                    <input type="text" id="lastName" name="lastName" required 
+                                        class="contact-form-input" placeholder="Enter your last name">
+                                </div>
+
+                                <!-- Email Address -->
+                                <div>
+                                    <label for="email" class="block text-white font-semibold text-sm md:text-base mb-2">
+                                        Email Address <span class="text-red-300">*</span>
+                                    </label>
+                                    <input type="email" id="email" name="email" required 
+                                        class="contact-form-input" placeholder="Enter your email address">
+                                </div>
+
+                                <!-- Phone Number -->
+                                <div>
+                                    <label for="phone" class="block text-white font-semibold text-sm md:text-base mb-2">
+                                        Phone Number <span class="text-red-300">*</span>
+                                    </label>
+                                    <input type="tel" id="phone" name="phone" required 
+                                        class="contact-form-input" placeholder="Enter your phone number">
+                                </div>
+
+                                <!-- Type Of Event -->
+                                <div>
+                                    <label for="eventType" class="block text-white font-semibold text-sm md:text-base mb-2">
+                                        Type Of Event <span class="text-red-300">*</span>
+                                    </label>
+                                    <select id="eventType" name="eventType" required class="contact-form-select">
+                                        <option value="">Please select...</option>
+                                        <option value="wedding">Wedding</option>
+                                        <option value="corporate">Corporate Event</option>
+                                        <option value="birthday">Birthday Party</option>
+                                        <option value="anniversary">Anniversary</option>
+                                        <option value="graduation">Graduation</option>
+                                        <option value="holiday">Holiday Party</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- Right Column -->
+                            <div class="space-y-6">
+                                <!-- Date Of Event -->
+                                <div>
+                                    <label class="block text-white font-semibold text-sm md:text-base mb-2">
+                                        Date Of Event <span class="text-red-300">*</span>
+                                    </label>
+                                    <div class="grid grid-cols-3 gap-3">
+                                        <select id="eventMonth" name="eventMonth" required class="contact-form-select">
+                                            <option value="">Month</option>
+                                            <option value="01">January</option>
+                                            <option value="02">February</option>
+                                            <option value="03">March</option>
+                                            <option value="04">April</option>
+                                            <option value="05">May</option>
+                                            <option value="06">June</option>
+                                            <option value="07">July</option>
+                                            <option value="08">August</option>
+                                            <option value="09">September</option>
+                                            <option value="10">October</option>
+                                            <option value="11">November</option>
+                                            <option value="12">December</option>
+                                        </select>
+                                        <select id="eventDay" name="eventDay" required class="contact-form-select">
+                                            <option value="">Day</option>
+                                            <option value="01">1</option>
+                                            <option value="02">2</option>
+                                            <option value="03">3</option>
+                                            <option value="04">4</option>
+                                            <option value="05">5</option>
+                                            <option value="06">6</option>
+                                            <option value="07">7</option>
+                                            <option value="08">8</option>
+                                            <option value="09">9</option>
+                                            <option value="10">10</option>
+                                            <option value="11">11</option>
+                                            <option value="12">12</option>
+                                            <option value="13">13</option>
+                                            <option value="14">14</option>
+                                            <option value="15">15</option>
+                                            <option value="16">16</option>
+                                            <option value="17">17</option>
+                                            <option value="18">18</option>
+                                            <option value="19">19</option>
+                                            <option value="20">20</option>
+                                            <option value="21">21</option>
+                                            <option value="22">22</option>
+                                            <option value="23">23</option>
+                                            <option value="24">24</option>
+                                            <option value="25">25</option>
+                                            <option value="26">26</option>
+                                            <option value="27">27</option>
+                                            <option value="28">28</option>
+                                            <option value="29">29</option>
+                                            <option value="30">30</option>
+                                            <option value="31">31</option>
+                                        </select>
+                                        <select id="eventYear" name="eventYear" required class="contact-form-select">
+                                            <option value="">Year</option>
+                                            <option value="2024">2024</option>
+                                            <option value="2025">2025</option>
+                                            <option value="2026">2026</option>
+                                            <option value="2027">2027</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <!-- Venue Name -->
+                                <div>
+                                    <label for="venueName" class="block text-white font-semibold text-sm md:text-base mb-2">
+                                        Venue Name
+                                    </label>
+                                    <input type="text" id="venueName" name="venueName" 
+                                        class="contact-form-input" placeholder="Enter venue name">
+                                </div>
+
+                                <!-- Venue State -->
+                                <div>
+                                    <label for="venueState" class="block text-white font-semibold text-sm md:text-base mb-2">
+                                        Venue State <span class="text-red-300">*</span>
+                                    </label>
+                                    <input type="text" id="venueState" name="venueState" required 
+                                        class="contact-form-input" placeholder="Enter state">
+                                </div>
+
+                                <!-- Ideal Budget -->
+                                <div>
+                                    <label for="budget" class="block text-white font-semibold text-sm md:text-base mb-2">
+                                        Ideal Budget
+                                    </label>
+                                    <input type="text" id="budget" name="budget" 
+                                        class="contact-form-input" placeholder="Enter your budget">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Products/Services Checkboxes -->
+                        <div class="pt-4">
+                            <h3 class="text-white font-bold text-lg md:text-xl mb-4">Products/Services You're Interested In</h3>
+                            <div class="grid md:grid-cols-3 gap-4">
+                                <!-- Column 1 -->
+                                <div class="space-y-3">
+                                    <label class="contact-form-checkbox-label">
+                                        <input type="checkbox" name="services" value="photo-booth-printing" class="contact-form-checkbox">
+                                        <span>Photo Booths (with printing)</span>
+                                    </label>
+                                    <label class="contact-form-checkbox-label">
+                                        <input type="checkbox" name="services" value="ai-experiences" class="contact-form-checkbox">
+                                        <span>AI Experiences</span>
+                                    </label>
+                                    <label class="contact-form-checkbox-label">
+                                        <input type="checkbox" name="services" value="professional-headshots" class="contact-form-checkbox">
+                                        <span>Professional Headshots</span>
+                                    </label>
+                                    <label class="contact-form-checkbox-label">
+                                        <input type="checkbox" name="services" value="casino-services" class="contact-form-checkbox">
+                                        <span>Casino Services</span>
+                                    </label>
+                                    <label class="contact-form-checkbox-label">
+                                        <input type="checkbox" name="services" value="claw-machine" class="contact-form-checkbox">
+                                        <span>Claw Machine/Stick Drop</span>
+                                    </label>
+                                </div>
+
+                                <!-- Column 2 -->
+                                <div class="space-y-3">
+                                    <label class="contact-form-checkbox-label">
+                                        <input type="checkbox" name="services" value="photo-booth-no-printing" class="contact-form-checkbox">
+                                        <span>Photo Booths (without printing)</span>
+                                    </label>
+                                    <label class="contact-form-checkbox-label">
+                                        <input type="checkbox" name="services" value="lighting-decor" class="contact-form-checkbox">
+                                        <span>Lighting & Decor</span>
+                                    </label>
+                                    <label class="contact-form-checkbox-label">
+                                        <input type="checkbox" name="services" value="event-photography" class="contact-form-checkbox">
+                                        <span>Professional Event Photography</span>
+                                    </label>
+                                    <label class="contact-form-checkbox-label">
+                                        <input type="checkbox" name="services" value="dancefloors" class="contact-form-checkbox">
+                                        <span>Dancefloors</span>
+                                    </label>
+                                </div>
+
+                                <!-- Column 3 -->
+                                <div class="space-y-3">
+                                    <label class="contact-form-checkbox-label">
+                                        <input type="checkbox" name="services" value="video-booths" class="contact-form-checkbox">
+                                        <span>Video Booths</span>
+                                    </label>
+                                    <label class="contact-form-checkbox-label">
+                                        <input type="checkbox" name="services" value="virtual-reality" class="contact-form-checkbox">
+                                        <span>Virtual Reality</span>
+                                    </label>
+                                    <label class="contact-form-checkbox-label">
+                                        <input type="checkbox" name="services" value="av-dj" class="contact-form-checkbox">
+                                        <span>AV + DJ Services</span>
+                                    </label>
+                                    <label class="contact-form-checkbox-label">
+                                        <input type="checkbox" name="services" value="staging" class="contact-form-checkbox">
+                                        <span>Staging</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- How did you hear about us -->
+                        <div>
+                            <label for="hearAboutUs" class="block text-white font-semibold text-sm md:text-base mb-2">
+                                How did you hear about us?
+                            </label>
+                            <input type="text" id="hearAboutUs" name="hearAboutUs" 
+                                class="contact-form-input" placeholder="Tell us how you found us">
+                        </div>
+
+                        <!-- Tell Us About Your Event -->
+                        <div>
+                            <label for="eventDetails" class="block text-white font-semibold text-sm md:text-base mb-2">
+                                Tell Us About Your Event
+                            </label>
+                            <textarea id="eventDetails" name="eventDetails" rows="5" 
+                                class="contact-form-textarea" placeholder="Share details about your event..."></textarea>
+                        </div>
+
+                        <!-- Privacy Policy Checkbox -->
+                        <div class="flex items-start gap-3 pt-2">
+                            <input type="checkbox" id="privacyPolicy" name="privacyPolicy" required 
+                                class="contact-form-checkbox mt-1">
+                            <label for="privacyPolicy" class="text-white text-sm md:text-base">
+                                I agree to the <a href="../privacy-policy.html" class="text-blue-200 underline hover:text-blue-100 transition-colors">Privacy Policy</a> <span class="text-red-300">*</span>
+                            </label>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <button type="submit" class="contact-form-submit-btn">
+                            GET YOUR QUOTE
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Footer Email Section -->
+                <div class="mt-8 bg-gradient-to-r from-[#0050ff] to-[#0040d9] rounded-3xl p-8 md:p-10 text-center animate-fade-in-up animate-delay-200">
+                    <h3 class="text-white font-bold text-2xl md:text-3xl mb-3">HAVE QUESTIONS?</h3>
+                    <p class="text-white/90 text-base md:text-lg mb-6 max-w-2xl mx-auto">
+                        Send us an email to talk over your event details, we're happy to help with any questions you may have.
+                    </p>
+                    <a href="mailto:info@mihientertainment.com" class="contact-form-email-btn inline-block">
+                        EMAIL US
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Last Section -->
+    <section class="py-8 md:py-10 lg:py-12 bg-gradient-to-br from-white via-blue-50/30 to-purple-50/20">
+        <div class="container mx-auto px-6">
+            <!-- Header -->
+            <div class="text-center mb-6 lg:mb-8 animate-fade-in-up">
+                <h2 class="hero-text text-2xl md:text-3xl lg:text-4xl font-bold gradient-title mb-3 leading-tight">
+                    <span class="text-xl md:text-2xl lg:text-3xl font-normal text-gray-600 block mb-1.5">DISCOVER OUR</span>
+                    RELATED PRODUCTS
+                </h2>
+                <p class="text-gray-700 text-sm md:text-base max-w-3xl mx-auto">
+                    Discover more of what we do best—Photo Booths, Activations, and beyond! Click below to browse our related products.
+                </p>
+            </div>
+
+            <!-- Cards Grid -->
+            <div class="grid md:grid-cols-3 gap-4 lg:gap-6 max-w-7xl mx-auto">
+                <!-- Corporate Events Card -->
+                <a href="../corporate-events.html" class="last-section-card group animate-fade-in-up animate-delay-100">
+                    <div class="relative aspect-[4/3] rounded-t-2xl overflow-hidden">
+                        <img src="../assets/images/photobooth/lastsection/1.jpg" alt="Corporate Events" class="w-full h-full object-cover">
+                    </div>
+                    <div class="last-section-card-banner rounded-b-2xl">
+                        <h3>CORPORATE EVENTS</h3>
+                    </div>
+                </a>
+
+                <!-- Weddings Card -->
+                <a href="../wedding.html" class="last-section-card group animate-fade-in-up animate-delay-200">
+                    <div class="relative aspect-[4/3] rounded-t-2xl overflow-hidden">
+                        <img src="../assets/images/photobooth/lastsection/2.jpg" alt="Weddings" class="w-full h-full object-cover">
+                    </div>
+                    <div class="last-section-card-banner rounded-b-2xl">
+                        <h3>WEDDINGS</h3>
+                    </div>
+                </a>
+
+                <!-- Social Events Card -->
+                <a href="../socialevents.html" class="last-section-card group animate-fade-in-up animate-delay-300">
+                    <div class="relative aspect-[4/3] rounded-t-2xl overflow-hidden">
+                        <img src="../assets/images/photobooth/lastsection/3.jpg" alt="Social Events" class="w-full h-full object-cover">
+                    </div>
+                    <div class="last-section-card-banner rounded-b-2xl">
+                        <h3>SOCIAL EVENTS</h3>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <script src="../assets/components/navigation.js"></script>
+    <script src="../assets/components/footer.js"></script>
+    <script>
+        const galleryContEl = document.querySelector('.gallery-container');
+        const galleryEl = document.querySelector('.gallery');
+        let zoomedItem = null;
+        let timer;
+        let scrollTop = 0;
+
+        if(typeof CSS.registerProperty === 'function') {
+            CSS.registerProperty({
+                name: '--left',
+                syntax: '<length>',
+                inherits: false,
+                initialValue: 0,
+            });
+            CSS.registerProperty({
+                name: '--top',
+                syntax: '<length>',
+                inherits: false,
+                initialValue: 0,
+            });
+            CSS.registerProperty({
+                name: '--zoom',
+                syntax: '<number>',
+                inherits: false,
+                initialValue: 1,
+            });
+        }
+
+        galleryEl.addEventListener('click', function(e) {
+            const item = e.target.closest('.gallery-item');
+            
+            if(!item || zoomedItem === item) return;
+            
+            e.preventDefault();
+            e.stopPropagation();
+
+            const picW = item.offsetWidth;
+            const picH = item.offsetHeight;
+            const picCX = item.offsetLeft + picW / 2;
+            const picCY = item.offsetTop + picH / 2;
+            let {paddingLeft: itemPaddLeft, paddingRight: itemPaddRight} = getComputedStyle(item);
+            itemPaddLeft = parseFloat(itemPaddLeft);
+            itemPaddRight = parseFloat(itemPaddRight);
+            const zoom = Math.min(
+                (window.innerHeight - 30) / picH,
+                (window.innerWidth - 30) / picW,
+                item.querySelector('img').naturalWidth / item.querySelector('img').offsetWidth,
+            );
+
+            if(zoomedItem) {
+                galleryEl.style.transitionProperty = '--left, --top, --zoom, transform-origin';
+            } else {
+                scrollTop = window.scrollY;
+                galleryEl.style.top = -scrollTop + 'px';
+            }
+
+            galleryEl.style.transformOrigin = `${picCX}px ${picCY}px`;
+            galleryEl.style.setProperty('--left', `${galleryEl.offsetWidth / 2 - picCX}px`);
+            galleryEl.style.setProperty('--top', `${-item.offsetTop + scrollTop + (window.innerHeight - picH) / 2}px`);
+            galleryEl.style.setProperty('--zoom', zoom);
+            galleryContEl.classList.add('zoomed-in');
+            
+            if(zoomedItem) zoomedItem.classList.remove('current');
+            item.classList.add('current');
+            zoomedItem = item;
+            
+            clearTimeout(timer);
+            galleryContEl.style.overflow = 'hidden';
+            galleryContEl.style.height = '100vh';
+        });
+
+        document.body.addEventListener('click', function(e) {
+            if(!zoomedItem) return;
+            
+            e.preventDefault();
+            
+            galleryContEl.classList.remove('zoomed-in');
+            galleryEl.style.transitionProperty = '';
+            galleryEl.style.setProperty('--left', '');
+            galleryEl.style.setProperty('--top', '');
+            galleryEl.style.setProperty('--zoom', '');
+
+            zoomedItem.classList.remove('current');
+            zoomedItem = null;
+
+            clearTimeout(timer);
+            timer = setTimeout(() => {
+                galleryEl.style.top = 0;
+                galleryContEl.style.overflow = '';
+                galleryContEl.style.height = '';
+                window.scrollTo(0, scrollTop);
+            }, 800);
+        });
+    </script>
+</body>
+</html>
