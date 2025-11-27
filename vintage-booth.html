@@ -1,0 +1,1283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vintage Photo Booth - MiHi Entertainment</title>
+    <link rel="icon" type="image/svg+xml" href="../assets/images/favicon.svg">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        html, body {
+            overflow-x: hidden;
+            width: 100%;
+        }
+        body { font-family: 'Inter', sans-serif; color: #1a202c; }
+        h1, h2, h3, h4, h5, h6 { font-family: 'Playfair Display', serif; }
+        .btn-primary { background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%); transition: all 0.3s ease; }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(0, 80, 255, 0.4); }
+        .section-padding { padding: 5rem 0; }
+        .hero-gradient { 
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.4) 50%, rgba(0, 0, 0, 0.6) 100%); 
+            animation: gradientPulse 8s ease-in-out infinite;
+        }
+        
+        @keyframes gradientPulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.85; }
+        }
+        
+        .blog-card { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .blog-card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1); }
+        
+        /* Hero Section Styles */
+        .hero-section {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            min-height: 600px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        .hero-background {
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            animation: subtleZoom 20s ease-in-out infinite;
+        }
+        
+        @keyframes subtleZoom {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        .hero-content-wrapper {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            color: white;
+            width: 100%;
+            max-width: 1200px;
+            padding: 0 1.5rem;
+        }
+        
+        /* Text Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .animate-fade-in-up {
+            animation: fadeInUp 1s ease-out forwards;
+            opacity: 0;
+        }
+        
+        .animate-delay-200 {
+            animation-delay: 0.2s;
+        }
+        
+        .animate-delay-300 {
+            animation-delay: 0.3s;
+        }
+        
+        .animate-delay-400 {
+            animation-delay: 0.4s;
+        }
+        
+        /* Enhanced Text Styles */
+        .hero-title {
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5),
+                         0 2px 10px rgba(0, 0, 0, 0.3),
+                         0 0 40px rgba(255, 255, 255, 0.1);
+            letter-spacing: 0.05em;
+        }
+        
+        .hero-tagline {
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+        }
+        
+        /* Enhanced Button Styles */
+        .hero-button {
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(37, 99, 235, 0.4),
+                        0 0 0 0 rgba(37, 99, 235, 0.4);
+            transition: all 0.3s ease;
+        }
+        
+        .hero-button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+        
+        .hero-button:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+        
+        .hero-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(37, 99, 235, 0.5),
+                        0 0 0 8px rgba(37, 99, 235, 0.1);
+        }
+        
+        .hero-button:active {
+            transform: translateY(-1px);
+        }
+        
+        /* Decorative Divider */
+        .hero-divider {
+            width: 80px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.8), transparent);
+            margin: 1.5rem auto;
+        }
+        
+        /* Mobile Responsive Styles */
+        @media (max-width: 768px) {
+            .hero-section {
+                height: 100vh;
+                min-height: 100vh;
+                background-attachment: scroll;
+            }
+            
+            .hero-background {
+                background-attachment: scroll;
+                background-position: center center;
+                animation: none;
+            }
+            
+            .hero-content-wrapper {
+                padding: 0 1rem;
+            }
+            
+            .hero-title {
+                font-size: 2.5rem !important;
+                line-height: 1.2 !important;
+                margin-bottom: 1rem !important;
+            }
+            
+            .hero-tagline {
+                font-size: 1.125rem !important;
+                line-height: 1.5 !important;
+                margin-bottom: 1.5rem !important;
+            }
+            
+            .hero-button {
+                padding: 0.875rem 2rem !important;
+                font-size: 0.9375rem !important;
+            }
+            
+            .hero-divider {
+                margin: 1rem auto;
+            }
+        }
+        
+        @media (max-width: 640px) {
+            .hero-section {
+                min-height: 100vh;
+                padding: 2rem 0;
+            }
+            
+            .hero-title {
+                font-size: 2rem !important;
+                margin-bottom: 0.75rem !important;
+            }
+            
+            .hero-tagline {
+                font-size: 1rem !important;
+                margin-bottom: 1.25rem !important;
+            }
+            
+            .hero-button {
+                padding: 0.75rem 1.75rem !important;
+                font-size: 0.875rem !important;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero-content-wrapper {
+                padding: 0 0.75rem;
+            }
+            
+            .hero-title {
+                font-size: 1.75rem !important;
+            }
+            
+            .hero-tagline {
+                font-size: 0.9375rem !important;
+            }
+            
+            .hero-button {
+                padding: 0.625rem 1.5rem !important;
+                font-size: 0.8125rem !important;
+            }
+            
+            .hero-divider {
+                width: 60px;
+                margin: 0.75rem auto;
+            }
+        }
+        
+        /* Tablet Styles */
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .hero-section {
+                min-height: 100vh;
+            }
+        }
+        
+        /* Large Screen Enhancements */
+        @media (min-width: 1280px) {
+            .hero-content-wrapper {
+                max-width: 1400px;
+            }
+            
+            .hero-title {
+                letter-spacing: 0.08em;
+            }
+        }
+        
+        /* Gallery Section Styles */
+        .gallery-section {
+            padding: 3rem 0;
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 50%, #ffffff 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .gallery-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(0, 80, 255, 0.2), transparent);
+        }
+        
+        @media (min-width: 768px) {
+            .gallery-section {
+                padding: 4rem 0;
+            }
+        }
+        
+        @media (min-width: 1024px) {
+            .gallery-section {
+                padding: 5rem 0;
+            }
+        }
+        
+        .gallery-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .gallery-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        @media (min-width: 768px) {
+            .gallery-header {
+                margin-bottom: 2.5rem;
+            }
+        }
+        
+        .gallery-heading {
+            text-align: center;
+            margin-bottom: 0.5rem;
+            font-size: 2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 0.02em;
+            line-height: 1.2;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .gallery-heading::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #0050ff, transparent);
+            border-radius: 2px;
+        }
+        
+        @media (min-width: 640px) {
+            .gallery-heading {
+                font-size: 2.5rem;
+            }
+        }
+        
+        @media (min-width: 768px) {
+            .gallery-heading {
+                font-size: 3rem;
+            }
+        }
+        
+        @media (min-width: 1024px) {
+            .gallery-heading {
+                font-size: 3.5rem;
+            }
+        }
+        
+        .gallery-subheading {
+            text-align: center;
+            margin-top: 1rem;
+            font-size: 0.75rem;
+            font-weight: 400;
+            color: #6b7280;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+        }
+        
+        @media (min-width: 640px) {
+            .gallery-subheading {
+                font-size: 0.875rem;
+            }
+        }
+        
+        .gallery-text-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        @media (min-width: 768px) {
+            .gallery-text-container {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 2rem;
+            }
+        }
+        
+        .gallery-card {
+            background: white;
+            padding: 1.75rem;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06),
+                        0 1px 3px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(0, 80, 255, 0.08);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .gallery-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #0050ff, #0040d9);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+        
+        .gallery-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .gallery-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 40px rgba(0, 80, 255, 0.15),
+                        0 4px 12px rgba(0, 0, 0, 0.1);
+            border-color: rgba(0, 80, 255, 0.2);
+        }
+        
+        @media (min-width: 768px) {
+            .gallery-card {
+                padding: 2rem;
+            }
+        }
+        
+        .gallery-paragraph {
+            font-size: 0.9375rem;
+            line-height: 1.7;
+            color: #374151;
+            margin: 0;
+            text-align: left;
+        }
+        
+        @media (min-width: 640px) {
+            .gallery-paragraph {
+                font-size: 1rem;
+            }
+        }
+        
+        @media (min-width: 768px) {
+            .gallery-paragraph {
+                font-size: 1.0625rem;
+            }
+        }
+        
+        .gallery-divider {
+            width: 80px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, rgba(0, 80, 255, 0.4), transparent);
+            margin: 2rem auto;
+            border-radius: 2px;
+        }
+        
+        @media (min-width: 768px) {
+            .gallery-divider {
+                width: 100px;
+                margin: 3rem auto;
+            }
+        }
+        
+        /* Decorative Elements */
+        .gallery-decorative {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(0, 80, 255, 0.05), rgba(0, 80, 255, 0.02));
+            filter: blur(60px);
+            z-index: 0;
+        }
+        
+        .gallery-decorative-1 {
+            top: 10%;
+            left: -5%;
+        }
+        
+        .gallery-decorative-2 {
+            bottom: 10%;
+            right: -5%;
+        }
+        
+        @media (max-width: 768px) {
+            .gallery-decorative {
+                display: none;
+            }
+        }
+        
+        /* Sliding Gallery Styles */
+        .gallery-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 3rem;
+            padding: 2rem 0;
+        }
+        
+        .gallery {
+            display: grid;
+            width: 220px;
+        }
+        
+        .gallery > img {
+            grid-area: 1/1;
+            width: 100%;
+            aspect-ratio: 1;
+            object-fit: cover;
+            border: 10px solid #f2f2f2;
+            box-shadow: 0 0 4px #0007;
+            animation: slide 36s infinite;
+        }
+        
+        .gallery > img:last-child {
+            animation-name: slide-last;
+        }
+        
+        /* Set delays for each image (18 images, 2 seconds per image) */
+        .gallery > img:nth-child(1) { animation-delay: 0s; }
+        .gallery > img:nth-child(2) { animation-delay: -2s; }
+        .gallery > img:nth-child(3) { animation-delay: -4s; }
+        .gallery > img:nth-child(4) { animation-delay: -6s; }
+        .gallery > img:nth-child(5) { animation-delay: -8s; }
+        .gallery > img:nth-child(6) { animation-delay: -10s; }
+        .gallery > img:nth-child(7) { animation-delay: -12s; }
+        .gallery > img:nth-child(8) { animation-delay: -14s; }
+        .gallery > img:nth-child(9) { animation-delay: -16s; }
+        .gallery > img:nth-child(10) { animation-delay: -18s; }
+        .gallery > img:nth-child(11) { animation-delay: -20s; }
+        .gallery > img:nth-child(12) { animation-delay: -22s; }
+        .gallery > img:nth-child(13) { animation-delay: -24s; }
+        .gallery > img:nth-child(14) { animation-delay: -26s; }
+        .gallery > img:nth-child(15) { animation-delay: -28s; }
+        .gallery > img:nth-child(16) { animation-delay: -30s; }
+        .gallery > img:nth-child(17) { animation-delay: -32s; }
+        .gallery > img:nth-child(18) { animation-delay: -34s; }
+        
+        @keyframes slide {
+            0% {
+                transform: translateX(0%);
+                z-index: 2;
+            }
+            4% {
+                transform: translateX(0%);
+                z-index: 2;
+            }
+            4.5% {
+                transform: translateX(120%);
+                z-index: 2;
+            }
+            4.51% {
+                transform: translateX(120%);
+                z-index: 1;
+            }
+            5.56% {
+                transform: translateX(0%);
+                z-index: 1;
+            }
+            94.44% {
+                transform: translateX(0%);
+                z-index: 1;
+            }
+            94.45% {
+                transform: translateX(0%);
+                z-index: 2;
+            }
+            100% {
+                transform: translateX(0%);
+                z-index: 2;
+            }
+        }
+        
+        @keyframes slide-last {
+            0% {
+                transform: translateX(0%);
+                z-index: 2;
+            }
+            4% {
+                transform: translateX(0%);
+                z-index: 2;
+            }
+            4.5% {
+                transform: translateX(120%);
+                z-index: 2;
+            }
+            4.51% {
+                transform: translateX(120%);
+                z-index: 1;
+            }
+            5.56% {
+                transform: translateX(0%);
+                z-index: 1;
+            }
+            97.22% {
+                transform: translateX(0%);
+                z-index: 1;
+            }
+            97.23% {
+                transform: translateX(0%);
+                z-index: 2;
+            }
+            100% {
+                transform: translateX(0%);
+                z-index: 2;
+            }
+        }
+        
+        @media (min-width: 768px) {
+            .gallery {
+                width: 300px;
+            }
+        }
+        
+        @media (min-width: 1024px) {
+            .gallery {
+                width: 350px;
+            }
+        }
+        
+        /* Contact Form Section Styles */
+        .contact-form-section {
+            padding: 5rem 0;
+            background: linear-gradient(135deg, #f8fafc 0%, #ffffff 50%, #f8fafc 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .contact-form-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(0, 80, 255, 0.2), transparent);
+        }
+        
+        .contact-form-wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .contact-form-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .contact-form-title {
+            font-size: 2.5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 0.02em;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+        
+        @media (min-width: 640px) {
+            .contact-form-title {
+                font-size: 3rem;
+            }
+        }
+        
+        @media (min-width: 768px) {
+            .contact-form-title {
+                font-size: 3.5rem;
+            }
+        }
+        
+        @media (min-width: 1024px) {
+            .contact-form-title {
+                font-size: 4rem;
+            }
+        }
+        
+        .contact-form-subtitle {
+            font-size: 1rem;
+            color: #6b7280;
+            line-height: 1.7;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        @media (min-width: 640px) {
+            .contact-form-subtitle {
+                font-size: 1.125rem;
+            }
+        }
+        
+        .contact-form-container {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            border-radius: 24px;
+            padding: 2.5rem;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .contact-form-container::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(0, 80, 255, 0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+        
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        @media (min-width: 768px) {
+            .contact-form-container {
+                padding: 3rem;
+            }
+        }
+        
+        @media (min-width: 1024px) {
+            .contact-form-container {
+                padding: 4rem;
+            }
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+        
+        @media (min-width: 768px) {
+            .form-row {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        .form-label {
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 0.5rem;
+            letter-spacing: 0.025em;
+        }
+        
+        .form-label .required {
+            color: #ef4444;
+            margin-left: 0.25rem;
+        }
+        
+        .form-input,
+        .form-select,
+        .form-textarea {
+            width: 100%;
+            padding: 0.875rem 1.25rem;
+            font-size: 1rem;
+            color: #1f2937;
+            background: #ffffff;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .form-input:focus,
+        .form-select:focus,
+        .form-textarea:focus {
+            outline: none;
+            border-color: #0050ff;
+            box-shadow: 0 0 0 4px rgba(0, 80, 255, 0.1);
+            background: #ffffff;
+        }
+        
+        .form-input::placeholder,
+        .form-textarea::placeholder {
+            color: #9ca3af;
+        }
+        
+        .form-textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+        
+        .date-select-group {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1.5fr;
+            gap: 1rem;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+            margin-top: 0.5rem;
+        }
+        
+        @media (min-width: 640px) {
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (min-width: 1024px) {
+            .services-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+        
+        .service-checkbox {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .service-checkbox:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateX(4px);
+        }
+        
+        .service-checkbox input[type="checkbox"] {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.75rem;
+            cursor: pointer;
+            accent-color: #0050ff;
+        }
+        
+        .service-checkbox label {
+            color: #ffffff;
+            font-size: 0.875rem;
+            cursor: pointer;
+            margin: 0;
+        }
+        
+        .privacy-checkbox {
+            display: flex;
+            align-items: flex-start;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+        }
+        
+        .privacy-checkbox input[type="checkbox"] {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.75rem;
+            margin-top: 0.125rem;
+            cursor: pointer;
+            accent-color: #0050ff;
+        }
+        
+        .privacy-checkbox label {
+            color: #ffffff;
+            font-size: 0.875rem;
+            line-height: 1.6;
+            cursor: pointer;
+        }
+        
+        .privacy-checkbox a {
+            color: #60a5fa;
+            text-decoration: underline;
+            transition: color 0.3s ease;
+        }
+        
+        .privacy-checkbox a:hover {
+            color: #93c5fd;
+        }
+        
+        .submit-button {
+            width: 100%;
+            padding: 1rem 2rem;
+            font-size: 1.125rem;
+            font-weight: 700;
+            color: #ffffff;
+            background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%);
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            box-shadow: 0 10px 30px rgba(0, 80, 255, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .submit-button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+        
+        .submit-button:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+        
+        .submit-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 40px rgba(0, 80, 255, 0.4);
+        }
+        
+        .submit-button:active {
+            transform: translateY(0);
+        }
+        
+        @media (min-width: 768px) {
+            .submit-button {
+                padding: 1.25rem 2.5rem;
+                font-size: 1.25rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="nav-placeholder"></div>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-background" style="background-image: url('assets/images/vintage/15.jpg');"></div>
+        <div class="absolute inset-0 hero-gradient"></div>
+        <div class="hero-content-wrapper">
+            <h1 class="hero-title text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold mb-4 leading-tight animate-fade-in-up" style="font-family: 'Inter', sans-serif; font-weight: 700;">
+                VINTAGE<br>PHOTO BOOTH
+            </h1>
+            <div class="hero-divider animate-fade-in-up animate-delay-200"></div>
+            <p class="hero-tagline text-lg sm:text-xl md:text-2xl lg:text-3xl mb-8 md:mb-10 text-white font-light leading-relaxed max-w-2xl mx-auto animate-fade-in-up animate-delay-200">
+                Timeless elegance meets modern fun!
+            </p>
+            <div class="animate-fade-in-up animate-delay-300">
+                <a href="contact-us.html" class="hero-button inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-10 md:py-5 md:px-12 rounded-lg text-base md:text-lg relative z-10">
+                    <span class="relative z-10">CONTACT US</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery-section">
+        <div class="gallery-decorative gallery-decorative-1"></div>
+        <div class="gallery-decorative gallery-decorative-2"></div>
+        <div class="gallery-content">
+            <div class="gallery-header">
+                <h2 class="gallery-heading animate-fade-in-up">
+                    RETRO LOOK, MODERN MAGIC
+                </h2>
+                <p class="gallery-subheading animate-fade-in-up animate-delay-200">
+                    THE PERFECT BLEND OF STYLE AND FUN
+                </p>
+            </div>
+            <div class="gallery-text-container">
+                <div class="gallery-card animate-fade-in-up animate-delay-300">
+                    <p class="gallery-paragraph">
+                        Our Vintage Photo Booth is where timeless style meets modern flair. With its sleek, retro-inspired design, it's the perfect centerpiece for weddings, galas, or any event that needs a touch of nostalgic charm. But don't let the vintage look fool you—this booth is powered by cutting-edge photo tech that delivers high-quality snaps with a classic twist. It's a total vibe for guests who want that old-school aesthetic with the convenience of today's features.
+                    </p>
+                </div>
+                <div class="gallery-card animate-fade-in-up animate-delay-400">
+                    <p class="gallery-paragraph">
+                        Each session comes packed with on-site printing for instant keepsakes, digital sharing so guests can post in real time, and customizable overlays to match your theme or brand. Whether you want sepia-toned glam or a full-color moment, we've got you covered. The Vintage Booth isn't just a pretty face—it's a fully-loaded experience that brings personality, fun, and flair to every celebration.
+                    </p>
+                </div>
+            </div>
+            <div class="gallery-wrapper">
+                <div class="gallery">
+                    <img src="assets/images/vintage/1.jpeg" alt="Vintage photo booth moment">
+                    <img src="assets/images/vintage/2.jpg" alt="Vintage photo booth moment">
+                    <img src="assets/images/vintage/3.jpg" alt="Vintage photo booth moment">
+                    <img src="assets/images/vintage/4.jpg" alt="Vintage photo booth moment">
+                    <img src="assets/images/vintage/5.jpg" alt="Vintage photo booth moment">
+                    <img src="assets/images/vintage/6.jpg" alt="Vintage photo booth moment">
+                    <img src="assets/images/vintage/7.jpeg" alt="Vintage photo booth moment">
+                    <img src="assets/images/vintage/8.jpeg" alt="Vintage photo booth moment">
+                    <img src="assets/images/vintage/9.jpg" alt="Vintage photo booth moment">
+                    <img src="assets/images/vintage/10.jpg" alt="Vintage photo booth experience">
+                    <img src="assets/images/vintage/11.jpeg" alt="Vintage photo booth fun">
+                    <img src="assets/images/vintage/12.jpg" alt="Vintage photo booth moment">
+                    <img src="assets/images/vintage/13.jpeg" alt="Vintage photo booth moment">
+                    <img src="assets/images/vintage/14.png" alt="Vintage photo booth moment">
+                    <img src="assets/images/vintage/15.jpg" alt="Vintage photo booth moment">
+                    <img src="assets/images/vintage/16.jpg" alt="Vintage photo booth moment">
+                    <img src="assets/images/vintage/17.jpg" alt="Vintage photo booth moment">
+                    <img src="assets/images/vintage/18.jpg" alt="Vintage photo booth moment">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Form Section -->
+    <section class="contact-form-section">
+        <div class="contact-form-wrapper">
+            <div class="contact-form-header animate-fade-in-up">
+                <h2 class="contact-form-title">
+                    LET'S MAKE YOUR EVENT ONE TO REMEMBER!
+                </h2>
+                <p class="contact-form-subtitle animate-fade-in-up animate-delay-200">
+                    Let's create something unmatched. Reach out today to explore how our immersive photo, video, and event experiences can bring your vision to life and leave a lasting impact on your guests.
+                </p>
+            </div>
+            
+            <div class="contact-form-container animate-fade-in-up animate-delay-300">
+                <form id="eventInquiryForm" class="relative z-10">
+                    <!-- Personal Information -->
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="firstName" class="form-label">
+                                First Name<span class="required">*</span>
+                            </label>
+                            <input type="text" id="firstName" name="firstName" class="form-input" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName" class="form-label">
+                                Last Name<span class="required">*</span>
+                            </label>
+                            <input type="text" id="lastName" name="lastName" class="form-input" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="email" class="form-label">
+                                Email Address<span class="required">*</span>
+                            </label>
+                            <input type="email" id="email" name="email" class="form-input" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone" class="form-label">
+                                Phone Number<span class="required">*</span>
+                            </label>
+                            <input type="tel" id="phone" name="phone" class="form-input" required>
+                        </div>
+                    </div>
+                    
+                    <!-- Event Details -->
+                    <div class="form-group">
+                        <label class="form-label">
+                            Date of Event<span class="required">*</span>
+                        </label>
+                        <div class="date-select-group">
+                            <select id="eventMonth" name="eventMonth" class="form-select" required>
+                                <option value="">Month</option>
+                                <option value="01">January</option>
+                                <option value="02">February</option>
+                                <option value="03">March</option>
+                                <option value="04">April</option>
+                                <option value="05">May</option>
+                                <option value="06">June</option>
+                                <option value="07">July</option>
+                                <option value="08">August</option>
+                                <option value="09">September</option>
+                                <option value="10">October</option>
+                                <option value="11">November</option>
+                                <option value="12">December</option>
+                            </select>
+                            <select id="eventDay" name="eventDay" class="form-select" required>
+                                <option value="">Day</option>
+                                <option value="01">1</option>
+                                <option value="02">2</option>
+                                <option value="03">3</option>
+                                <option value="04">4</option>
+                                <option value="05">5</option>
+                                <option value="06">6</option>
+                                <option value="07">7</option>
+                                <option value="08">8</option>
+                                <option value="09">9</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
+                                <option value="13">13</option>
+                                <option value="14">14</option>
+                                <option value="15">15</option>
+                                <option value="16">16</option>
+                                <option value="17">17</option>
+                                <option value="18">18</option>
+                                <option value="19">19</option>
+                                <option value="20">20</option>
+                                <option value="21">21</option>
+                                <option value="22">22</option>
+                                <option value="23">23</option>
+                                <option value="24">24</option>
+                                <option value="25">25</option>
+                                <option value="26">26</option>
+                                <option value="27">27</option>
+                                <option value="28">28</option>
+                                <option value="29">29</option>
+                                <option value="30">30</option>
+                                <option value="31">31</option>
+                            </select>
+                            <select id="eventYear" name="eventYear" class="form-select" required>
+                                <option value="">2025</option>
+                                <option value="2025">2025</option>
+                                <option value="2026">2026</option>
+                                <option value="2027">2027</option>
+                                <option value="2028">2028</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="venueName" class="form-label">
+                                Venue Name<span class="required">*</span>
+                            </label>
+                            <input type="text" id="venueName" name="venueName" class="form-input" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="venueState" class="form-label">
+                                Venue State<span class="required">*</span>
+                            </label>
+                            <input type="text" id="venueState" name="venueState" class="form-input" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="idealBudget" class="form-label">
+                            Ideal Budget
+                        </label>
+                        <input type="text" id="idealBudget" name="idealBudget" class="form-input" placeholder="Enter your budget range">
+                    </div>
+                    
+                    <!-- Type of Event -->
+                    <div class="form-group">
+                        <label for="eventType" class="form-label">
+                            Type of Event<span class="required">*</span>
+                        </label>
+                        <select id="eventType" name="eventType" class="form-select" required>
+                            <option value="">Please select...</option>
+                            <option value="wedding">Wedding</option>
+                            <option value="corporate">Corporate Event</option>
+                            <option value="social">Social Event</option>
+                            <option value="trade-show">Trade Show</option>
+                            <option value="holiday-party">Holiday Party</option>
+                            <option value="casino-party">Casino Party</option>
+                            <option value="birthday">Birthday Party</option>
+                            <option value="anniversary">Anniversary</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Products/Services Interest -->
+                    <div class="form-group">
+                        <label class="form-label">
+                            Products/Services You're Interested In<span class="required">*</span>
+                        </label>
+                        <div class="services-grid">
+                            <div class="service-checkbox">
+                                <input type="checkbox" id="service1" name="services" value="photo-booth-without-printing">
+                                <label for="service1">Photo Booths (without printing)</label>
+                            </div>
+                            <div class="service-checkbox">
+                                <input type="checkbox" id="service2" name="services" value="photo-booth-with-printing">
+                                <label for="service2">Photo Booths (with printing)</label>
+                            </div>
+                            <div class="service-checkbox">
+                                <input type="checkbox" id="service3" name="services" value="video-booths">
+                                <label for="service3">Video Booths</label>
+                            </div>
+                            <div class="service-checkbox">
+                                <input type="checkbox" id="service4" name="services" value="ai-experiences">
+                                <label for="service4">AI Experiences</label>
+                            </div>
+                            <div class="service-checkbox">
+                                <input type="checkbox" id="service5" name="services" value="mosaic-wall">
+                                <label for="service5">Mosaic Wall</label>
+                            </div>
+                            <div class="service-checkbox">
+                                <input type="checkbox" id="service6" name="services" value="virtual-reality">
+                                <label for="service6">Virtual Reality</label>
+                            </div>
+                            <div class="service-checkbox">
+                                <input type="checkbox" id="service7" name="services" value="lighting">
+                                <label for="service7">Lighting</label>
+                            </div>
+                            <div class="service-checkbox">
+                                <input type="checkbox" id="service8" name="services" value="professional-headshots">
+                                <label for="service8">Professional Headshots</label>
+                            </div>
+                            <div class="service-checkbox">
+                                <input type="checkbox" id="service9" name="services" value="av-dj-services">
+                                <label for="service9">A/V DJ Services</label>
+                            </div>
+                            <div class="service-checkbox">
+                                <input type="checkbox" id="service10" name="services" value="casino-services">
+                                <label for="service10">Casino Services</label>
+                            </div>
+                            <div class="service-checkbox">
+                                <input type="checkbox" id="service11" name="services" value="professional-event-photography">
+                                <label for="service11">Professional Event Photography</label>
+                            </div>
+                            <div class="service-checkbox">
+                                <input type="checkbox" id="service12" name="services" value="dance-floor">
+                                <label for="service12">Dance Floor</label>
+                            </div>
+                            <div class="service-checkbox">
+                                <input type="checkbox" id="service13" name="services" value="staging">
+                                <label for="service13">Staging</label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Additional Information -->
+                    <div class="form-group">
+                        <label for="additionalInfo" class="form-label">
+                            Additional Information
+                        </label>
+                        <textarea id="additionalInfo" name="additionalInfo" class="form-textarea" placeholder="Tell us more about your event, special requirements, or any questions you have..."></textarea>
+                    </div>
+                    
+                    <!-- Privacy Policy -->
+                    <div class="form-group">
+                        <div class="privacy-checkbox">
+                            <input type="checkbox" id="privacyPolicy" name="privacyPolicy" required>
+                            <label for="privacyPolicy">
+                                I agree to the <a href="privacy-policy.html" target="_blank" rel="noopener noreferrer">Privacy Policy</a><span class="required">*</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <!-- Submit Button -->
+                    <div class="form-group" style="margin-top: 2rem;">
+                        <button type="submit" class="submit-button">
+                            Submit
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <script src="assets/components/navigation.js"></script>
+    <script src="assets/components/footer.js"></script>
+    
+    <script>
+        // Form submission handler
+        document.getElementById('eventInquiryForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData);
+            
+            // Get selected services
+            const services = Array.from(document.querySelectorAll('input[name="services"]:checked')).map(cb => cb.value);
+            data.services = services.join(', ');
+            
+            // Validate required services
+            if (services.length === 0) {
+                alert('Please select at least one product/service you\'re interested in.');
+                return;
+            }
+            
+            // Log form data (in production, this would be sent to a server)
+            console.log('Form submitted:', data);
+            
+            // Show success message
+            alert('Thank you for your inquiry! Our team will be in touch with you soon.');
+            
+            // Reset form
+            this.reset();
+        });
+    </script>
+</body>
+</html>
