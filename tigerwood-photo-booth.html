@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tigerwood Photo Booth - Elegant Rentals in Denver</title>
+    <link rel="icon" type="image/svg+xml" href="../assets/images/favicon.svg">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        html, body {
+            overflow-x: hidden;
+            width: 100%;
+        }
+        body { font-family: 'Inter', sans-serif; color: #1a202c; }
+        h1, h2, h3, h4, h5, h6 { font-family: 'Playfair Display', serif; }
+        .hero-title { font-family: 'Montserrat', sans-serif; font-weight: 800; letter-spacing: 0.05em; }
+        .btn-primary { 
+            background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%); 
+            transition: all 0.3s ease;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+        }
+        .btn-primary:hover { 
+            transform: translateY(-3px); 
+            box-shadow: 0 15px 35px rgba(0, 80, 255, 0.5);
+            background: linear-gradient(135deg, #0060ff 0%, #0050e9 100%);
+        }
+        .btn-primary:active {
+            transform: translateY(-1px);
+        }
+        .section-padding { 
+            padding: 5rem 0; 
+        }
+        @media (max-width: 768px) {
+            .section-padding {
+                padding: 3rem 0;
+            }
+        }
+        .hero-gradient { 
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.4) 50%, rgba(0, 0, 0, 0.6) 100%); 
+        }
+        .blog-card { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .blog-card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1); }
+        
+        /* Hero Section Styles */
+        .hero-section {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            min-height: 600px;
+            max-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        @media (max-width: 768px) {
+            .hero-section {
+                height: 100vh;
+                min-height: 500px;
+                max-height: 100vh;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero-section {
+                min-height: 400px;
+            }
+        }
+        
+        .hero-background {
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-position: center center;
+            background-repeat: no-repeat;
+        }
+        
+        @media (max-width: 768px) {
+            .hero-background {
+                background-attachment: scroll;
+            }
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            color: white;
+            width: 100%;
+            max-width: 1200px;
+            padding: 0 1.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 1.5rem;
+        }
+        
+        @media (max-width: 768px) {
+            .hero-content {
+                padding: 0 1rem;
+                gap: 1.25rem;
+            }
+        }
+        
+        /* Text Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .hero-title {
+            animation: fadeInUp 0.8s ease-out forwards;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        }
+        
+        .hero-tagline {
+            animation: fadeInUp 0.8s ease-out 0.2s forwards;
+            opacity: 0;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            font-weight: 400;
+        }
+        
+        .hero-cta {
+            animation: fadeInUp 0.8s ease-out 0.4s forwards;
+            opacity: 0;
+        }
+        
+        /* Enhanced Button Styles */
+        .hero-cta-button {
+            padding: 1rem 2.5rem;
+            font-size: 1rem;
+            border-radius: 50px;
+            text-transform: uppercase;
+            box-shadow: 0 8px 20px rgba(0, 80, 255, 0.3);
+        }
+        
+        @media (max-width: 768px) {
+            .hero-cta-button {
+                padding: 0.875rem 2rem;
+                font-size: 0.9rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero-cta-button {
+                padding: 0.75rem 1.75rem;
+                font-size: 0.85rem;
+            }
+        }
+        
+        /* Section 1 Styles */
+        .section-1 {
+            background: #ffffff;
+        }
+        
+        .section-1-padding {
+            padding: 3rem 0;
+        }
+        
+        @media (max-width: 768px) {
+            .section-1-padding {
+                padding: 2rem 0;
+            }
+        }
+        
+        .section-1-content {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .section-1-heading {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            letter-spacing: 0.05em;
+            color: #0050ff;
+            line-height: 1.2;
+            margin-bottom: 0.75rem;
+        }
+        
+        .section-1-subheading {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            letter-spacing: 0.05em;
+            color: #0050ff;
+            line-height: 1.2;
+            margin-top: 0.25rem;
+        }
+        
+        .section-1-text {
+            color: #1a202c;
+            line-height: 1.6;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .section-1-image {
+            width: 100%;
+            height: 100%;
+            min-height: 450px;
+            object-fit: cover;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .section-1-image:hover {
+            transform: scale(1.02);
+            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.2);
+        }
+        
+        .section-1-image-wrapper {
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+            height: 100%;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        
+        .section-1-animate {
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+        
+        @media (max-width: 768px) {
+            .section-1-text {
+                font-size: 0.9375rem;
+            }
+            .section-1-image {
+                min-height: 350px;
+            }
+        }
+        
+        /* Section 3 Styles */
+        .section-3 {
+            background: #ffffff;
+        }
+        
+        .section-3-content {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .section-3-heading {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            letter-spacing: 0.05em;
+            color: #0050ff;
+            line-height: 1.2;
+            text-transform: uppercase;
+        }
+        
+        .section-3-text {
+            color: #1a202c;
+            line-height: 1.6;
+            font-size: 1rem;
+        }
+        
+        .section-3-button {
+            background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%);
+            color: white;
+            padding: 0.75rem 2rem;
+            font-size: 0.9rem;
+            border-radius: 50px;
+            text-transform: uppercase;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(0, 80, 255, 0.3);
+            display: inline-block;
+            text-decoration: none;
+        }
+        
+        .section-3-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(0, 80, 255, 0.5);
+            background: linear-gradient(135deg, #0060ff 0%, #0050e9 100%);
+        }
+        
+        .section-3-image-wrapper {
+            position: relative;
+            width: 100%;
+            min-height: 500px;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+        }
+        
+        .section-3-image {
+            width: 100%;
+            height: 100%;
+            min-height: 500px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+        
+        @media (max-width: 768px) {
+            .section-3-image-wrapper {
+                min-height: 400px;
+            }
+            
+            .section-3-image {
+                min-height: 400px;
+            }
+        }
+        
+        .section-3-image-wrapper:hover .section-3-image {
+            transform: scale(1.02);
+        }
+        
+        @media (max-width: 768px) {
+            .section-3-content {
+                padding: 0 1rem;
+            }
+            
+            .section-3-text {
+                font-size: 0.9375rem;
+                line-height: 1.5;
+            }
+            
+            .section-3-button {
+                padding: 0.75rem 1.75rem;
+                font-size: 0.85rem;
+            }
+        }
+        
+        /* Section 4 Styles */
+        .section-4 {
+            background: #ffffff;
+        }
+        
+        .section-4-content {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .section-4-heading {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            letter-spacing: 0.05em;
+            color: #0050ff;
+            line-height: 1.2;
+            text-transform: uppercase;
+            text-align: center;
+        }
+        
+        .section-4-feature-item {
+            margin-bottom: 0.75rem;
+        }
+        
+        .section-4-feature-title {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            color: #1a202c;
+            font-size: 1rem;
+            line-height: 1.2;
+            margin-bottom: 0.25rem;
+        }
+        
+        .section-4-feature-subtitle {
+            font-family: 'Inter', sans-serif;
+            font-weight: 400;
+            color: #1a202c;
+            font-size: 0.875rem;
+            line-height: 1.5;
+        }
+        
+        .section-4-button {
+            background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%);
+            color: white;
+            padding: 0.75rem 2rem;
+            font-size: 0.9rem;
+            border-radius: 50px;
+            text-transform: uppercase;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(0, 80, 255, 0.3);
+            display: inline-block;
+            text-decoration: none;
+        }
+        
+        .section-4-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(0, 80, 255, 0.5);
+            background: linear-gradient(135deg, #0060ff 0%, #0050e9 100%);
+        }
+        
+        .section-4-image-wrapper {
+            position: relative;
+            width: 100%;
+            min-height: 500px;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+        }
+        
+        .section-4-image {
+            width: 100%;
+            height: 100%;
+            min-height: 500px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+        
+        .section-4-image-wrapper:hover .section-4-image {
+            transform: scale(1.02);
+        }
+        
+        @media (max-width: 768px) {
+            .section-4-content {
+                padding: 0 1rem;
+            }
+            
+            .section-4-image-wrapper {
+                min-height: 400px;
+            }
+            
+            .section-4-image {
+                min-height: 400px;
+            }
+            
+            .section-4-feature-title {
+                font-size: 1rem;
+            }
+            
+            .section-4-feature-subtitle {
+                font-size: 0.875rem;
+            }
+            
+            .section-4-button {
+                padding: 0.75rem 1.75rem;
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="nav-placeholder"></div>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-background" style="background-image: url('assets/images/tigerwood/hero.jpg');"></div>
+        <div class="absolute inset-0 hero-gradient"></div>
+        <div class="hero-content">
+            <h1 class="hero-title text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl">TIGERWOOD PHOTO BOOTH</h1>
+            <p class="hero-tagline text-base sm:text-lg md:text-xl lg:text-2xl px-4 max-w-2xl">Our stylish, sleek, striped stunner.</p>
+            <div class="hero-cta">
+                <a href="contact-us.html" class="btn-primary hero-cta-button text-white inline-block">
+                    Contact Us
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 1 -->
+    <section class="section-1 section-1-padding">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="section-1-content">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 items-start">
+                    <!-- Left Column - Text Content -->
+                    <div class="section-1-animate space-y-4 lg:pr-6">
+                        <div>
+                            <h2 class="section-1-heading text-2xl sm:text-3xl md:text-4xl lg:text-5xl">
+                                WHY RENT A TIGERWOOD
+                            </h2>
+                            <h3 class="section-1-subheading text-xl sm:text-2xl md:text-3xl lg:text-4xl">
+                                PHOTO BOOTH?
+                            </h3>
+                        </div>
+                        
+                        <div class="space-y-3">
+                            <p class="section-1-text">
+                                All of our photo booths are ideally themed for every kind of event we book. And the Tigerwood is no exception. Although its look is incredibly rustic-chic, we’ve used this booth for all kinds of themed parties from 1920s Vintage soirees to celebrating all that’s outdoors.
+                            </p>
+                            
+                            <p class="section-1-text">
+                                The sleek and stylish striped wooden booth has made it an incredibly popular booth for business events weddings and personal parties. And when you book with us, you can elevate your Tigerwood Booth rental with props, add-ons, and our party theme idea list.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- Right Column - Image -->
+                    <div class="section-1-animate lg:pl-4">
+                        <div class="section-1-image-wrapper">
+                            <img 
+                                src="assets/images/tigerwood/section1/1.jpeg" 
+                                alt="Rustic Photo Booth in outdoor setting with mountains in background" 
+                                class="section-1-image"
+                            >
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 3 -->
+    <section class="section-3 section-padding">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="section-3-content">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+                    <!-- Left Column -->
+                    <div class="space-y-4 lg:pr-4">
+                        <h2 class="section-3-heading text-2xl sm:text-2xl md:text-2xl lg:text-4xl mb-2">
+                            THE TIGERWOOD BOOTH AT THEMED PARTIES
+                        </h2>
+                        
+                        <div class="space-y-3">
+                            <p class="section-3-text">
+                                All of our photo booths are ideally themed for every kind of event we book. And the Tigerwood is no exception. Although its look is incredibly rustic-chic, we've used this booth for all kinds of themed parties from 1920s Vintage soirees to celebrating all that's outdoors.
+                            </p>
+                            
+                            <p class="section-3-text">
+                                Here are some ideas that go hand in hand with our sleek striped booth:
+                            </p>
+                            
+                            <ul class="list-disc list-inside space-y-2 section-3-text" style="color: #1a202c; line-height: 1.6;">
+                                <li>Floral and nature-inspired weddings</li>
+                                <li>Western saloon themes</li>
+                                <li>Country, rustic weddings</li>
+                                <li>Vintage 1920s shindigs</li>
+                                <li>Outdoor adventure</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="pt-2">
+                            <a href="our-add-ons.html" class="section-3-button">
+                                VIEW ADDITIONAL ADD-ONS
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Right Column -->
+                    <div class="lg:pl-4">
+                        <div class="section-3-image-wrapper">
+                            <img 
+                                src="assets/images/tigerwood/section3/1.jpeg" 
+                                alt="Rustic photo booth backdrop recommendations" 
+                                class="section-3-image"
+                            >
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 4 -->
+    <section class="section-4 section-padding">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="section-4-content">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+                    <!-- Left Column -->
+                    <div class="lg:pr-4">
+                        <div class="section-4-image-wrapper">
+                            <img 
+                                src="assets/images/tigerwood/section4/1.jpg" 
+                                alt="Rustic photo booth features" 
+                                class="section-4-image"
+                            >
+                        </div>
+                    </div>
+                    
+                    <!-- Right Column -->
+                    <div class="lg:pl-4">
+                        <div class="space-y-2">
+                            <h2 class="section-4-heading text-lg sm:text-xl md:text-xl lg:text-2xl mb-2">
+                                SOME OF OUR TIGERWOOD BOOTH<br>ADD-ONS
+                            </h2>
+                            
+                            <div class="space-y-2">
+                                <div class="section-4-feature-item">
+                                    <div class="section-4-feature-title">Rustic, Nature, or Outdoor Adventure Props</div>
+                                    <div class="section-4-feature-subtitle">Check out the rest of our <a href="mihi-props.html" class="text-blue-600 hover:text-blue-800 underline">prop selection</a> to make sure it flawlessly matches your party!</div>
+                                </div>
+                                
+                                <div class="section-4-feature-item">
+                                    <div class="section-4-feature-title">Additional Hour</div>
+                                    <div class="section-4-feature-subtitle">Need we say more? Your guests will be having so much fun with our booth, you'll want to add more time! Adding additional time on site is based on the attendant's availability, so increase your time ahead of time to ensure we can hang with you all night long!</div>
+                                </div>
+                                
+                                <div class="section-4-feature-item">
+                                    <div class="section-4-feature-title">Idle Hours</div>
+                                    <div class="section-4-feature-subtitle">If you're wanting to shut down the booth for those important speeches, or other times when your guests' attention will be elsewhere, we won't charge you the full price for our operational hours.</div>
+                                </div>
+                                
+                                <div class="section-4-feature-item">
+                                    <div class="section-4-feature-title">Digital Sharing</div>
+                                    <div class="section-4-feature-subtitle">Let your guests share their photos via text or email! Wi-Fi is required for these to send instantly, otherwise they'll be delivered after your event.</div>
+                                </div>
+                                
+                                <div class="section-4-feature-item">
+                                    <div class="section-4-feature-title">Unlimited Prints</div>
+                                    <div class="section-4-feature-subtitle">Make sure everyone in the picture is able to get a great printout of the fun they are having.</div>
+                                </div>
+                                
+                                <div class="section-4-feature-item">
+                                    <div class="section-4-feature-title">VIP Red Carpet Setting</div>
+                                    <div class="section-4-feature-subtitle">We will bring along our red carpet and rope off the photo booth area, creating the feel of exclusivity and glamour</div>
+                                </div>
+                                
+                                <div class="section-4-feature-item">
+                                    <div class="section-4-feature-title">Additional Photo Filters</div>
+                                    <div class="section-4-feature-subtitle">Guests can choose to add a filter to their photos. Ranging from black and white, sepia, comic book, and plenty more!</div>
+                                </div>
+                                
+                                <div class="section-4-feature-item">
+                                    <div class="section-4-feature-title">Memory Book</div>
+                                    <div class="section-4-feature-subtitle">In addition to the photos your guests receives, one will be placed into a beautiful memory book, where your guests are encouraged to write their well wishes by the picture.</div>
+                                </div>
+                            </div>
+                            
+                            <div class="pt-2 text-center">
+                                <a href="our-add-ons.html" class="section-4-button">
+                                    VIEW ADDITIONAL ADD-ONS
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="assets/components/navigation.js"></script>
+    <script src="assets/components/footer.js"></script>
+</body>
+</html>
