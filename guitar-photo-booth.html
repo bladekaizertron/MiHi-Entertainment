@@ -8,9 +8,73 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
+        /* Force navigation button styling - must override Tailwind */
+        header a[href*="contact-us"],
+        nav a[href*="contact-us"],
+        header a.btn-primary,
+        nav a.btn-primary {
+            background: #0050ff !important;
+            background-color: #0050ff !important;
+            background-image: linear-gradient(135deg, #0050ff 0%, #0040d9 100%) !important;
+            color: #ffffff !important;
+        }
+    </style>
+    <style>
         body { font-family: 'Inter', sans-serif; color: #1a202c; }
         h1, h2, h3, h4, h5, h6 { font-family: 'Inter', sans-serif; }
         .section-padding { padding: 5rem 0; }
+        
+        /* Navigation Contact Us Button Fix */
+        header a.btn-primary,
+        nav a.btn-primary,
+        header .btn-primary,
+        nav .btn-primary,
+        a.btn-primary,
+        .btn-primary {
+            background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%) !important;
+            background-color: #0050ff !important;
+            background-image: linear-gradient(135deg, #0050ff 0%, #0040d9 100%) !important;
+            color: #ffffff !important;
+            border: none !important;
+            padding: 0.75rem 1.5rem !important;
+            border-radius: 9999px !important;
+            font-weight: 600 !important;
+            text-decoration: none !important;
+            display: inline-block !important;
+            transition: all 0.3s ease !important;
+            box-shadow: 0 4px 6px rgba(0, 80, 255, 0.3) !important;
+            white-space: nowrap !important;
+        }
+
+        header a.btn-primary:hover,
+        nav a.btn-primary:hover,
+        header .btn-primary:hover,
+        nav .btn-primary:hover,
+        a.btn-primary:hover,
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #0040d9 0%, #0033b3 100%) !important;
+            background-color: #0040d9 !important;
+            background-image: linear-gradient(135deg, #0040d9 0%, #0033b3 100%) !important;
+            transform: translateY(-2px) !important;
+            box-shadow: 0 6px 12px rgba(0, 80, 255, 0.4) !important;
+        }
+
+        header a.btn-primary:active,
+        nav a.btn-primary:active,
+        header .btn-primary:active,
+        nav .btn-primary:active,
+        a.btn-primary:active,
+        .btn-primary:active {
+            transform: translateY(0) !important;
+        }
+        
+        /* Additional specificity for navigation button */
+        header nav a.btn-primary,
+        header nav .btn-primary {
+            background: #0050ff !important;
+            background-image: linear-gradient(135deg, #0050ff 0%, #0040d9 100%) !important;
+            color: #ffffff !important;
+        }
         
         /* Hero Section Styles */
         .hero-section {
@@ -627,8 +691,8 @@
                         Simple. Intuitive. Organic marketing for corporate events. Or a way to make a new best friend! Or three best friends!
                     </p>
                 </div>
-            </div>
-        </div>
+                        </div>
+                        </div>
         
         <!-- Right Column -->
         <div class="section-3-column section-3-column-right" style="background-image: url('assets/images/guitar/section2/2.jpg');">
