@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Groovy Photo Booth in Denver - MiHi Entertainment</title>
+    <link rel="icon" type="image/svg+xml" href="../assets/images/favicon.svg">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        html, body {
+            overflow-x: hidden;
+            width: 100%;
+        }
+        body { font-family: 'Inter', sans-serif; color: #1a202c; }
+        h1, h2, h3, h4, h5, h6 { font-family: 'Playfair Display', serif; }
+        .hero-title { font-family: 'Montserrat', sans-serif; font-weight: 800; letter-spacing: 0.05em; }
+        .btn-primary { 
+            background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%); 
+            transition: all 0.3s ease;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+        }
+        .btn-primary:hover { 
+            transform: translateY(-3px); 
+            box-shadow: 0 15px 35px rgba(0, 80, 255, 0.5);
+            background: linear-gradient(135deg, #0060ff 0%, #0050e9 100%);
+        }
+        .btn-primary:active {
+            transform: translateY(-1px);
+        }
+        .section-padding { 
+            padding: 5rem 0; 
+        }
+        @media (max-width: 768px) {
+            .section-padding {
+                padding: 3rem 0;
+            }
+        }
+        .hero-gradient { 
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.4) 50%, rgba(0, 0, 0, 0.6) 100%); 
+        }
+        .blog-card { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .blog-card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1); }
+        
+        /* Hero Section Styles */
+        .hero-section {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            min-height: 600px;
+            max-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        @media (max-width: 768px) {
+            .hero-section {
+                height: 100vh;
+                min-height: 500px;
+                max-height: 100vh;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero-section {
+                min-height: 400px;
+            }
+        }
+        
+        .hero-background {
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-position: center center;
+            background-repeat: no-repeat;
+        }
+        
+        @media (max-width: 768px) {
+            .hero-background {
+                background-attachment: scroll;
+            }
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            color: white;
+            width: 100%;
+            max-width: 1200px;
+            padding: 0 1.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 1.5rem;
+        }
+        
+        @media (max-width: 768px) {
+            .hero-content {
+                padding: 0 1rem;
+                gap: 1.25rem;
+            }
+        }
+        
+        /* Text Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .hero-title {
+            animation: fadeInUp 0.8s ease-out forwards;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        }
+        
+        .hero-tagline {
+            animation: fadeInUp 0.8s ease-out 0.2s forwards;
+            opacity: 0;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            font-weight: 400;
+        }
+        
+        .hero-cta {
+            animation: fadeInUp 0.8s ease-out 0.4s forwards;
+            opacity: 0;
+        }
+        
+        /* Enhanced Button Styles */
+        .hero-cta-button {
+            padding: 1rem 2.5rem;
+            font-size: 1rem;
+            border-radius: 50px;
+            text-transform: uppercase;
+            box-shadow: 0 8px 20px rgba(0, 80, 255, 0.3);
+        }
+        
+        @media (max-width: 768px) {
+            .hero-cta-button {
+                padding: 0.875rem 2rem;
+                font-size: 0.9rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero-cta-button {
+                padding: 0.75rem 1.75rem;
+                font-size: 0.85rem;
+            }
+        }
+        
+        /* Section 1 Styles */
+        .section-1 {
+            background: #ffffff;
+        }
+        
+        .section-1-padding {
+            padding: 3rem 0;
+        }
+        
+        @media (max-width: 768px) {
+            .section-1-padding {
+                padding: 2rem 0;
+            }
+        }
+        
+        .section-1-content {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .section-1-heading {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            letter-spacing: 0.05em;
+            color: #0050ff;
+            line-height: 1.2;
+            margin-bottom: 0.75rem;
+        }
+        
+        .section-1-subheading {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            letter-spacing: 0.05em;
+            color: #0050ff;
+            line-height: 1.2;
+            margin-top: 0.25rem;
+        }
+        
+        .section-1-text {
+            color: #1a202c;
+            line-height: 1.6;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .section-1-image {
+            width: 100%;
+            height: 100%;
+            min-height: 450px;
+            object-fit: cover;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .section-1-image:hover {
+            transform: scale(1.02);
+            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.2);
+        }
+        
+        .section-1-image-wrapper {
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+            height: 100%;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        
+        .section-1-animate {
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+        
+        @media (max-width: 768px) {
+            .section-1-text {
+                font-size: 0.9375rem;
+            }
+            .section-1-image {
+                min-height: 350px;
+            }
+        }
+        
+        /* Section 2 Styles */
+        .section-2 {
+            background: linear-gradient(135deg, #2c1810 0%, #1a0f08 50%, #2c1810 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .section-2::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: 
+                repeating-linear-gradient(
+                    90deg,
+                    transparent,
+                    transparent 2px,
+                    rgba(0, 0, 0, 0.1) 2px,
+                    rgba(0, 0, 0, 0.1) 4px
+                );
+            pointer-events: none;
+            opacity: 0.3;
+        }
+        
+        .section-2-card {
+            background: rgba(26, 15, 8, 0.85);
+            border-radius: 20px;
+            padding: 3rem;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+        
+        .section-2-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #8b5a3c, #d4a574, #8b5a3c);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+        
+        .section-2-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5),
+                        0 0 0 1px rgba(255, 255, 255, 0.15);
+            background: rgba(26, 15, 8, 0.95);
+        }
+        
+        .section-2-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .section-2-title {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            letter-spacing: 0.1em;
+            color: #ffffff;
+            text-transform: uppercase;
+            margin-bottom: 2rem;
+            position: relative;
+            font-size: 2rem;
+            line-height: 1.2;
+        }
+        
+        .section-2-title::after {
+            content: '';
+            position: absolute;
+            bottom: -0.75rem;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, #d4a574, transparent);
+            border-radius: 2px;
+        }
+        
+        .section-2-text {
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.9;
+            font-size: 1.0625rem;
+            margin-bottom: 1.25rem;
+        }
+        
+        .section-2-bullet-list {
+            list-style: none;
+            padding: 0;
+            margin: 1.5rem 0;
+        }
+        
+        .section-2-bullet-list li {
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.8;
+            font-size: 1.0625rem;
+            padding-left: 1.5rem;
+            position: relative;
+            margin-bottom: 0.75rem;
+        }
+        
+        .section-2-bullet-list li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 700;
+            font-size: 1.25rem;
+            line-height: 1.2;
+        }
+        
+        .section-2-intro {
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.8;
+            font-size: 1.125rem;
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+        
+        .section-2-image-wrapper {
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            margin-bottom: 2rem;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+        
+        .section-2-image-wrapper:hover {
+            transform: scale(1.03);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+        }
+        
+        .section-2-image {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.6s ease;
+        }
+        
+        .section-2-card:hover .section-2-image {
+            transform: scale(1.05);
+        }
+        
+        .section-2-content-wrapper {
+            position: relative;
+            z-index: 1;
+        }
+        
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .section-2-animate {
+            animation: slideInUp 0.8s ease-out forwards;
+            opacity: 0;
+        }
+        
+        .section-2-animate-delay-1 {
+            animation-delay: 0.2s;
+        }
+        
+        .section-2-animate-delay-2 {
+            animation-delay: 0.4s;
+        }
+        
+        @media (max-width: 1024px) {
+            .section-2-card {
+                padding: 2.5rem;
+            }
+            
+            .section-2-title {
+                font-size: 1.75rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .section-2-card {
+                padding: 2rem;
+            }
+            
+            .section-2-title {
+                font-size: 1.5rem;
+                margin-bottom: 1.5rem;
+            }
+            
+            .section-2-text {
+                font-size: 1rem;
+                line-height: 1.8;
+            }
+            
+            .section-2-image-wrapper {
+                margin-bottom: 1.5rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .section-2-card {
+                padding: 1.5rem;
+            }
+            
+            .section-2-title {
+                font-size: 1.25rem;
+            }
+        }
+        
+        /* Section 3 Styles */
+        .section-3 {
+            background: #ffffff;
+        }
+        
+        .section-3-content {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .section-3-heading {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            letter-spacing: 0.05em;
+            color: #0050ff;
+            line-height: 1.2;
+            text-transform: uppercase;
+        }
+        
+        .section-3-text {
+            color: #1a202c;
+            line-height: 1.6;
+            font-size: 1rem;
+        }
+        
+        .section-3-button {
+            background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%);
+            color: white;
+            padding: 0.75rem 2rem;
+            font-size: 0.9rem;
+            border-radius: 50px;
+            text-transform: uppercase;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(0, 80, 255, 0.3);
+            display: inline-block;
+            text-decoration: none;
+        }
+        
+        .section-3-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(0, 80, 255, 0.5);
+            background: linear-gradient(135deg, #0060ff 0%, #0050e9 100%);
+        }
+        
+        .section-3-image-wrapper {
+            position: relative;
+            width: 100%;
+            min-height: 500px;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+        }
+        
+        .section-3-image {
+            width: 100%;
+            height: 100%;
+            min-height: 500px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+        
+        @media (max-width: 768px) {
+            .section-3-image-wrapper {
+                min-height: 400px;
+            }
+            
+            .section-3-image {
+                min-height: 400px;
+            }
+        }
+        
+        .section-3-image-wrapper:hover .section-3-image {
+            transform: scale(1.02);
+        }
+        
+        @media (max-width: 768px) {
+            .section-3-content {
+                padding: 0 1rem;
+            }
+            
+            .section-3-text {
+                font-size: 0.9375rem;
+                line-height: 1.5;
+            }
+            
+            .section-3-button {
+                padding: 0.75rem 1.75rem;
+                font-size: 0.85rem;
+            }
+        }
+        
+        /* Section 4 Styles */
+        .section-4 {
+            background: #ffffff;
+        }
+        
+        .section-4-content {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .section-4-heading {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            letter-spacing: 0.05em;
+            color: #0050ff;
+            line-height: 1.2;
+            text-transform: uppercase;
+            text-align: center;
+        }
+        
+        .section-4-feature-item {
+            margin-bottom: 0.75rem;
+        }
+        
+        .section-4-feature-title {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            color: #1a202c;
+            font-size: 1rem;
+            line-height: 1.3;
+            margin-bottom: 0.125rem;
+        }
+        
+        .section-4-feature-subtitle {
+            font-family: 'Inter', sans-serif;
+            font-weight: 400;
+            color: #1a202c;
+            font-size: 0.875rem;
+            line-height: 1.4;
+        }
+        
+        .section-4-button {
+            background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%);
+            color: white;
+            padding: 0.75rem 2rem;
+            font-size: 0.9rem;
+            border-radius: 50px;
+            text-transform: uppercase;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(0, 80, 255, 0.3);
+            display: inline-block;
+            text-decoration: none;
+        }
+        
+        .section-4-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(0, 80, 255, 0.5);
+            background: linear-gradient(135deg, #0060ff 0%, #0050e9 100%);
+        }
+        
+        .section-4-image-wrapper {
+            position: relative;
+            width: 100%;
+            min-height: 500px;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+        }
+        
+        .section-4-image {
+            width: 100%;
+            height: 100%;
+            min-height: 500px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+        
+        .section-4-image-wrapper:hover .section-4-image {
+            transform: scale(1.02);
+        }
+        
+        @media (max-width: 768px) {
+            .section-4-content {
+                padding: 0 1rem;
+            }
+            
+            .section-4-image-wrapper {
+                min-height: 400px;
+            }
+            
+            .section-4-image {
+                min-height: 400px;
+            }
+            
+            .section-4-feature-title {
+                font-size: 1rem;
+            }
+            
+            .section-4-feature-subtitle {
+                font-size: 0.875rem;
+            }
+            
+            .section-4-button {
+                padding: 0.75rem 1.75rem;
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="nav-placeholder"></div>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-background" style="background-image: url('assets/images/groovy/hero.jpeg');"></div>
+        <div class="absolute inset-0 hero-gradient"></div>
+        <div class="hero-content">
+            <h1 class="hero-title text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl">GROOVY PHOTO BOOTH</h1>
+            <p class="hero-tagline text-base sm:text-lg md:text-xl lg:text-2xl px-4 max-w-2xl">Take a trip over to Funkytown.</p>
+            <div class="hero-cta">
+                <a href="contact-us.html" class="btn-primary hero-cta-button text-white inline-block">
+                    Contact Us
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 1 -->
+    <section class="section-1 section-1-padding">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="section-1-content">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 items-start">
+                    <!-- Left Column - Text Content -->
+                    <div class="section-1-animate space-y-4 lg:pr-6">
+                        <div>
+                            <h2 class="section-1-heading text-2xl sm:text-3xl md:text-4xl lg:text-5xl">
+                                OUR ROCK OF AGES:
+                            </h2>
+                            <h3 class="section-1-subheading text-xl sm:text-2xl md:text-3xl lg:text-4xl">
+                                THE GROOVY, RETRO PHOTO BOOTH
+                            </h3>
+                        </div>
+                        
+                        <div class="space-y-3">
+                            <p class="section-1-text">
+                                Call It What You Want, Groovy Or Retro, We Just Love This Booth. Having a party and looking for a creative touch? Our Groovy Photo Booth has a quirky design that you won't see in many other places. Combined with a giant beauty dish for the flash, this photo booth not only looks great but will make you look great too! We'll prove it: check out this 70's Blast from the Past party with a custom backdrop and retro props that our Groovy Booth was perfect for. This Retro Photo Booth will help take your guests back in time at your event. This unique booth will add something extra to your party, that will also add a lot of fun for your guests. Whether planning a party or event to relive a fun time, or focus on something a little more serious, the Groovy Booth and props will add some excitement for all those attending.
+                            </p>
+                            
+                            <p class="section-1-text">
+                                Before everyone had cell phones that could take a picture at the touch of a button, we always had to remember to bring a camera. With our Groovy Booth, all that your guests have to do is attend your party and have a great time (we will do the rest for you) and help make memories with photos that are customized to your requests. As with all of MiHi's photo booths, the Retro Booth rental is a seamless process, where we handle the photo needs of you and your guests, leaving the rest of the details of your events to have a little more planning time. We will come to your venue, set up, help where needed with the Groovy Booth, and make sure that your guests get the best pictures possible before they leave. There are also ways for you and or your guests to obtain the pictures after the night has ended, so make sure to ask us how.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- Right Column - Image -->
+                    <div class="section-1-animate lg:pl-4">
+                        <div class="section-1-image-wrapper">
+                            <img 
+                                src="assets/images/groovy/section1/1.jpg" 
+                                alt="Rustic Photo Booth in outdoor setting with mountains in background" 
+                                class="section-1-image"
+                            >
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 2 -->
+    <section class="section-2 section-padding">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="max-w-7xl mx-auto">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10">
+                    <!-- Left Card: Rustic Colorado Theme -->
+                    <div class="section-2-animate">
+                        <div class="section-2-card">
+                            <div class="section-2-content-wrapper">
+                                <h2 class="section-2-title">RETRO PARTY IDEAS</h2>
+                                
+                                <div class="section-2-image-wrapper">
+                                    <img 
+                                        src="assets/images/groovy/section2/1.jpg" 
+                                        alt="Rustic Colorado themed photo booth with people using vintage props" 
+                                        class="section-2-image"
+                                    >
+                                </div>
+                                
+                                <div class="space-y-4">
+                                    <p class="section-2-intro">
+                                        Looking to plan a groovy retro party?
+                                    </p>
+                                    <p class="section-2-intro">
+                                        Here are some ideas that go hand in hand with our Retro Booth:
+                                    </p>
+                                    
+                                    <ul class="section-2-bullet-list">
+                                        <li>Woodstock</li>
+                                        <li>Dance Party: Monster Mash or Twist</li>
+                                        <li>Environmentally based: Earth Day or Outdoor Inspired</li>
+                                        <li>Equal Rights or political change parties</li>
+                                        <li>Music of the '80s: Remember Cyndi Lauper or Bon Jovi</li>
+                                        <li>The 90's: Where Ghost hit the big screen, and Nintendo was all the rage</li>
+                                        <li>Dirty Dancing/Footloose theme</li>
+                                        <li>60's Game Show</li>
+                                    </ul>
+                                    
+                                    <p class="section-2-text">
+                                        Looking to create a fun, memorable experience with a unique touch? Our Retro Photo Booth will be a perfect pairing to your retro-themed party. Whether you want to relive the fun of Woodstock, with guests dressed in bell bottoms and flower prints, celebrate the environment and show the importance of historic times, such as the beginning of Earth Day, the days of MTV and big hair, or the hours of fun playing video games growing up. Let our Groovy Photo Booth and props help keep all your memories alive for years to come.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Right Card: Rustic Photo Booth Props -->
+                    <div class="section-2-animate section-2-animate-delay-1">
+                        <div class="section-2-card">
+                            <div class="section-2-content-wrapper">
+                                <h2 class="section-2-title">NOT JUST A RETRO BOOTH, BUT GROOVY PROPS TOO</h2>
+                                
+                                <div class="section-2-image-wrapper">
+                                    <img 
+                                        src="assets/images/groovy/section2/2.jpg" 
+                                        alt="Rustic photo booth props including vintage accessories and themed items" 
+                                        class="section-2-image"
+                                    >
+                                </div>
+                                    
+                                <div class="space-y-4">
+                                    <ul class="section-2-bullet-list">
+                                        <li>Sunglasses and Beads props</li>
+                                        <li>Flower Power props</li>
+                                        <li>Earthy Backdrops (Check out Pastel Retro and Groovy Swirl)</li>
+                                        <li>Music Backgrounds and instrument props</li>
+                                    </ul>
+                                    
+                                    <p class="section-2-text">
+                                        No need to just smile for the camera (although we love it when you do). Use some retro props to add some flare to your photos. Pose and keep the fun going in each shot you take. Props are a unique way, to add something extra to your photos. Whether simple or elaborate, your photos will have a personalized touch with your guests' choices that will make everyone involved remember and relive the party you are throwing.
+                                    </p>
+                                    
+                                    <p class="section-2-text">
+                                        The use of props has become a fun addition to photos in recent years. The props that come with our booths upon hire are personal forms of expression that will show the fun side of all your guests. The best part of props, they can be just about anything.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 3 -->
+    <section class="section-3 section-padding">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="section-3-content">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+                    <!-- Left Column -->
+                    <div class="space-y-4 lg:pr-4">
+                        <h2 class="section-3-heading text-2xl sm:text-2xl md:text-2xl lg:text-4xl mb-2">
+                            RETRO PHOTO BOOTHS FOR RENT
+                        </h2>
+                        
+                        <div class="space-y-3">
+                            <p class="section-3-text">
+                                Looking to plan a party that will help bring back a simpler time? When the world was changing and people weren’t always in a hurry.
+                            </p>
+                            
+                            <p class="section-3-text">
+                                Our Retro Photo Booth rental will help add some fun, loving, foot-loose energy to any event. The helpful staff at MiHi is always available to help with your rental needs and make the process as fun for you, the planner, as possible.
+                            </p>
+                            
+                            <p class="section-3-text">
+                                With many options to choose from with our Groovy Booth and props, to what kind of prints, and options you would like for your guests, we strive to make sure that all your requests are met, and that photos of your event will last forever.
+                            </p>
+                            
+                            <p class="section-3-text">
+                                The Groovy Photo Booth will be a great rental for your themed party.
+                            </p>
+                        </div>
+                        
+                        <div class="pt-2">
+                            <a href="contact-us.html" class="section-3-button">
+                                GET PRICING INFO NOW
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Right Column -->
+                    <div class="lg:pl-4">
+                        <div class="section-3-image-wrapper">
+                            <img 
+                                src="assets/images/groovy/section3/1.jpeg" 
+                                alt="Rustic photo booth backdrop recommendations" 
+                                class="section-3-image"
+                            >
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 4 -->
+    <section class="section-4 section-padding">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="section-4-content">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+                    <!-- Left Column -->
+                    <div class="lg:pr-4">
+                        <div class="section-4-image-wrapper">
+                            <img 
+                                src="assets/images/groovy/section4/1.jpeg" 
+                                alt="Rustic photo booth features" 
+                                class="section-4-image"
+                            >
+                        </div>
+                    </div>
+                    
+                    <!-- Right Column -->
+                    <div class="lg:pl-4">
+                        <div class="space-y-3">
+                            <h2 class="section-4-heading text-lg sm:text-xl md:text-xl lg:text-2xl mb-3">
+                                EVERY GROOVY PHOTO BOOTH<br>COMES WITH:
+                            </h2>
+                            
+                            <div class="space-y-2">
+                                <div class="section-4-feature-item">
+                                    <div class="section-4-feature-title">On Site Attendant</div>
+                                    <div class="section-4-feature-subtitle">Professional. Reliable. Every time.</div>
+                                </div>
+                                
+                                <div class="section-4-feature-item">
+                                    <div class="section-4-feature-title">Unlimited Sessions</div>
+                                    <div class="section-4-feature-subtitle">Guest Come Back Again and Again</div>
+                                </div>
+                                
+                                <div class="section-4-feature-item">
+                                    <div class="section-4-feature-title">Customized Prop Selection</div>
+                                    <div class="section-4-feature-subtitle">A box full of Interaction</div>
+                                </div>
+                                
+                                <div class="section-4-feature-item">
+                                    <div class="section-4-feature-title">Photo Booth Backdrop</div>
+                                    <div class="section-4-feature-subtitle">A Variety of Fabrics</div>
+                                </div>
+                                
+                                <div class="section-4-feature-item">
+                                    <div class="section-4-feature-title">Custom Photo Strip Design</div>
+                                    <div class="section-4-feature-subtitle">You Choose, We Deliver</div>
+                                </div>
+                                
+                                <div class="section-4-feature-item">
+                                    <div class="section-4-feature-title">Online Gallery</div>
+                                    <div class="section-4-feature-subtitle">Link to ALL of the Photos of your Event</div>
+                                </div>
+                            </div>
+                            
+                            <div class="pt-1 text-center">
+                                <a href="our-add-ons.html" class="section-4-button">
+                                    VIEW ADDITIONAL ADD-ONS
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="assets/components/navigation.js"></script>
+    <script src="assets/components/footer.js"></script>
+</body>
+</html>
