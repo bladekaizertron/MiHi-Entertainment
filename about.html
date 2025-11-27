@@ -4,185 +4,1443 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About MiHi Entertainment</title>
-    <link rel="icon" type="image/svg+xml" href="../assets/images/favicon.svg">
+    <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- lightGallery CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@2.7.2/css/lightgallery.css">
+    <!-- lightGallery JS -->
+    <script src="https://cdn.jsdelivr.net/npm/lightgallery@2.7.2/lightgallery.min.js"></script>
     <style>
-        body { font-family: 'Inter', sans-serif; color: #1a202c; }
-        h1, h2, h3, h4, h5, h6 { font-family: 'Playfair Display', serif; }
+        body { 
+            font-family: 'Inter', sans-serif; 
+            color: #1a202c; 
+            line-height: 1.7;
+            letter-spacing: -0.01em;
+        }
+        h1, h2, h3, h4, h5, h6 { 
+            font-family: 'Poppins', sans-serif; 
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+        }
         .btn-primary { background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%); transition: all 0.3s ease; }
         .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(0, 80, 255, 0.4); }
         .section-padding { padding: 5rem 0; }
-        .hero-gradient { background: linear-gradient(135deg, rgba(0, 80, 255, 0.5) 0%, rgba(0, 64, 217, 0.5) 100%); }
+        .hero-gradient { background: linear-gradient(135deg, rgba(6, 6, 7, 0.5) 0%, rgba(0, 0, 0, 0.5) 100%); }
+
+        /* Infinite Carousel Section Styles */
+        .small {
+            font-size: 12px;
+            color: #999;
+            display: block;
+            margin-top: 15px;
+        }
+
+        @media (max-width: 768px) {
+            .small {
+                font-size: 11px;
+                margin-top: 12px;
+                padding: 0 15px;
+            }
+
+            .demo-gallery {
+                margin: 15px 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .small {
+                font-size: 10px;
+                margin-top: 10px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .cont[style*="padding: 50px 0"] {
+                padding: 30px 0 !important;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .cont[style*="padding: 50px 0"] {
+                padding: 25px 0 !important;
+            }
+        }
+
+        .demo-gallery-poster > img {
+            transition: opacity 0.3s ease 0s;
+        }
+
+        @media (max-width: 768px) {
+            .demo-gallery-poster > img {
+                width: 30px !important;
+                height: 30px !important;
+                margin-left: -15px !important;
+                margin-top: -15px !important;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .demo-gallery-poster > img {
+                width: 24px !important;
+                height: 24px !important;
+                margin-left: -12px !important;
+                margin-top: -12px !important;
+            }
+        }
+
+        .cont {
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            section.cont {
+                padding: 30px 0 !important;
+            }
+        }
+
+        @media (max-width: 480px) {
+            section.cont {
+                padding: 25px 0 !important;
+            }
+        }
+
+        .page-head {
+            padding: 30px 0;
+            text-align: center;
+        }
+
+        .page-head h3 {
+            font-size: 20px;
+            font-weight: 400;
+            margin: 0 0 5px;
+            color: #ddd;
+            text-transform: none;
+            letter-spacing: 1px;
+        }
+
+        .page-head .lead {
+            font-size: 18px;
+            font-weight: 400;
+            line-height: 1.4;
+            margin-bottom: 30px;
+            margin-top: 0;
+        }
+
+        .btn {
+            -moz-user-select: none;
+            user-select: none;
+            background-image: none;
+            border: 1px solid transparent;
+            border-radius: 2px;
+            cursor: pointer;
+            display: inline-block;
+            font-size: 14px;
+            font-weight: normal;
+            line-height: 1.42857;
+            margin-bottom: 0;
+            padding: 6px 12px;
+            text-align: center;
+            vertical-align: middle;
+            white-space: nowrap;
+            text-decoration: none;
+        }
+
+        .btn-lg {
+            border-radius: 2px;
+            font-size: 16px;
+            line-height: 1.33333;
+            padding: 10px 20px;
+        }
+
+        .btn-primary:hover {
+            background-color: #fff;
+            color: #152836;
+        }
+
+        .btn-primary {
+            background-color: #152836;
+            border-color: #0e1a24;
+            color: #ffffff;
+        }
+
+        .btn-primary {
+            border-color: #eeeeee;
+            color: #eeeeee;
+            transition: color 0.1s ease 0s, background-color 0.15s ease 0s;
+        }
+
+        .page-head h1 {
+            font-size: 64px;
+            font-weight: 900;
+            margin: 10px 0 20px;
+            color: #FFF;
+            position: relative;
+            display: inline-block;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+            line-height: 1.1;
+        }
+
+        .page-head h1 .version {
+            bottom: 0;
+            color: #ddd;
+            font-size: 12px;
+            font-style: italic;
+            position: absolute;
+            width: 60px;
+            right: -60px;
+        }
+
+        @media (max-width: 768px) {
+            .page-head {
+                padding: 20px 0;
+            }
+
+            .page-head h3 {
+                font-size: 16px;
+                margin-bottom: 8px;
+            }
+
+            .page-head h1 {
+                font-size: 36px;
+                letter-spacing: 1px;
+                margin: 8px 0 15px;
+            }
+
+            .page-head h1 .version {
+                font-size: 10px;
+                width: 50px;
+                right: -50px;
+            }
+
+            .page-head .lead {
+                font-size: 14px;
+                margin-bottom: 20px;
+                padding: 0 15px;
+            }
+
+            .btn-lg {
+                font-size: 14px;
+                padding: 10px 18px;
+            }
+
+            .cont {
+                padding: 40px 0 !important;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .page-head h1 {
+                font-size: 28px;
+                letter-spacing: 0.5px;
+            }
+
+            .page-head h1 .version {
+                display: none;
+            }
+
+            .page-head .lead {
+                font-size: 13px;
+            }
+        }
+
+        .demo-gallery {
+            overflow: hidden;
+            width: 100%;
+            position: relative;
+            margin: 20px 0;
+        }
+
+        .demo-gallery > ul {
+            margin-bottom: 0;
+            padding: 0;
+            display: flex;
+            list-style: none;
+            width: fit-content;
+            animation: scroll 30s linear infinite;
+        }
+
+        .demo-gallery > ul:hover {
+            animation-play-state: paused;
+        }
+
+        @keyframes scroll {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        .demo-gallery > ul > li {
+            margin: 0;
+            width: 240px;
+            flex-shrink: 0;
+            margin-right: 15px;
+            list-style: none;
+        }
+
+        @media (max-width: 768px) {
+            .demo-gallery > ul > li {
+                width: 200px;
+                margin-right: 12px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .demo-gallery > ul > li {
+                width: 180px;
+                margin-right: 10px;
+            }
+
+            .demo-gallery > ul {
+                animation: scroll 20s linear infinite;
+            }
+        }
+
+        .demo-gallery > ul > li a {
+            border: 3px solid #FFF;
+            border-radius: 4px;
+            display: block;
+            overflow: hidden;
+            position: relative;
+            height: 300px;
+            width: 100%;
+        }
+
+        @media (max-width: 768px) {
+            .demo-gallery > ul > li a {
+                height: 250px;
+                border-width: 2px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .demo-gallery > ul > li a {
+                height: 220px;
+                border-width: 2px;
+            }
+        }
+
+        .demo-gallery > ul > li a > img {
+            -webkit-transition: -webkit-transform 0.15s ease 0s;
+            -moz-transition: -moz-transform 0.15s ease 0s;
+            -o-transition: -o-transform 0.15s ease 0s;
+            transition: transform 0.15s ease 0s;
+            -webkit-transform: scale3d(1, 1, 1);
+            transform: scale3d(1, 1, 1);
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        .demo-gallery > ul > li a:hover > img {
+            -webkit-transform: scale3d(1.1, 1.1, 1.1);
+            transform: scale3d(1.1, 1.1, 1.1);
+        }
+
+        .demo-gallery > ul > li a:hover .demo-gallery-poster > img {
+            opacity: 1;
+        }
+
+        .demo-gallery > ul > li a .demo-gallery-poster {
+            background-color: rgba(0, 0, 0, 0.1);
+            bottom: 0;
+            left: 0;
+            position: absolute;
+            right: 0;
+            top: 0;
+            -webkit-transition: background-color 0.15s ease 0s;
+            -o-transition: background-color 0.15s ease 0s;
+            transition: background-color 0.15s ease 0s;
+        }
+
+        .demo-gallery > ul > li a .demo-gallery-poster > img {
+            left: 50%;
+            margin-left: -20px;
+            margin-top: -20px;
+            opacity: 0;
+            position: absolute;
+            top: 50%;
+            width: 40px;
+            height: 40px;
+            -webkit-transition: opacity 0.3s ease 0s;
+            -o-transition: opacity 0.3s ease 0s;
+            transition: opacity 0.3s ease 0s;
+        }
+
+        .demo-gallery > ul > li a:hover .demo-gallery-poster {
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .demo-gallery .justified-gallery > a > img {
+            -webkit-transition: -webkit-transform 0.15s ease 0s;
+            -moz-transition: -moz-transform 0.15s ease 0s;
+            -o-transition: -o-transform 0.15s ease 0s;
+            transition: transform 0.15s ease 0s;
+            -webkit-transform: scale3d(1, 1, 1);
+            transform: scale3d(1, 1, 1);
+            height: 100%;
+            width: 100%;
+        }
+
+        .demo-gallery .justified-gallery > a:hover > img {
+            -webkit-transform: scale3d(1.1, 1.1, 1.1);
+            transform: scale3d(1.1, 1.1, 1.1);
+        }
+
+        .demo-gallery .justified-gallery > a:hover .demo-gallery-poster > img {
+            opacity: 1;
+        }
+
+        .demo-gallery .justified-gallery > a .demo-gallery-poster {
+            background-color: rgba(0, 0, 0, 0.1);
+            bottom: 0;
+            left: 0;
+            position: absolute;
+            right: 0;
+            top: 0;
+            -webkit-transition: background-color 0.15s ease 0s;
+            -o-transition: background-color 0.15s ease 0s;
+            transition: background-color 0.15s ease 0s;
+        }
+
+        .demo-gallery .justified-gallery > a .demo-gallery-poster > img {
+            left: 50%;
+            margin-left: -10px;
+            margin-top: -10px;
+            opacity: 0;
+            position: absolute;
+            top: 50%;
+            -webkit-transition: opacity 0.3s ease 0s;
+            -o-transition: opacity 0.3s ease 0s;
+            transition: opacity 0.3s ease 0s;
+        }
+
+        .demo-gallery .justified-gallery > a:hover .demo-gallery-poster {
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .demo-gallery .video .demo-gallery-poster img {
+            height: 48px;
+            margin-left: -24px;
+            margin-top: -24px;
+            opacity: 0.8;
+            width: 48px;
+        }
+
+        .demo-gallery.dark > ul > li a {
+            border: 3px solid #04070a;
+        }
+
+        /* Icon Section Styles */
+        .icon-section {
+            background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 50%, #0f1629 100%);
+            padding: 100px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .icon-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(0, 80, 255, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(138, 43, 226, 0.15) 0%, transparent 50%);
+            animation: pulse 8s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        .icon-section-header {
+            text-align: center;
+            margin-bottom: 70px;
+            padding: 0 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .icon-section-header h2 {
+            font-size: 48px;
+            font-weight: 900;
+            background: linear-gradient(135deg, #00d4ff 0%, #0050ff 50%, #7c3aed 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 0 0 30px rgba(0, 212, 255, 0.5);
+            animation: gradient-shift 5s ease infinite;
+            background-size: 200% 200%;
+        }
+
+        @keyframes gradient-shift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        @media (max-width: 768px) {
+            .icon-section-header h2 {
+                font-size: 32px;
+                letter-spacing: 1px;
+            }
+            .icon-section {
+                padding: 60px 0;
+            }
+            .icon-section-header {
+                margin-bottom: 50px;
+            }
+        }
+
+        .icon-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        @media (max-width: 1024px) {
+            .icon-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 25px;
+                padding: 0 30px;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .icon-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+                padding: 0 20px;
+            }
+        }
+
+        .icon-item {
+            text-align: center;
+            padding: 0;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 20px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            aspect-ratio: 1;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .icon-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 20px;
+            padding: 2px;
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.3), rgba(124, 58, 237, 0.3));
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .icon-item:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 
+                0 20px 40px rgba(0, 80, 255, 0.4),
+                0 0 60px rgba(0, 212, 255, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            border-color: rgba(0, 212, 255, 0.5);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .icon-item:hover::before {
+            opacity: 1;
+        }
+
+        .icon-item-icon {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: transparent;
+            border-radius: 20px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            padding: 25px;
+            z-index: 1;
+        }
+
+        .icon-item-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+        }
+
+        .icon-item:hover .icon-item-icon {
+            transform: scale(1.2);
+        }
+
+        .icon-item:hover .icon-item-icon img {
+            filter: 
+                drop-shadow(0 0 20px rgba(0, 212, 255, 0.6))
+                drop-shadow(0 0 40px rgba(124, 58, 237, 0.4))
+                brightness(1.1);
+        }
+
+        .icon-item-text {
+            font-size: 15px;
+            font-weight: 600;
+            color: #152836;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            line-height: 1.5;
+            margin: 0;
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        /* Section Three Styles */
+        .section-three {
+            background: linear-gradient(135deg, #f8fafc 0%, #ffffff 50%, #f1f5f9 100%);
+            padding: 80px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section-three::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 10% 20%, rgba(0, 80, 255, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 90% 80%, rgba(124, 58, 237, 0.03) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .section-three-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: grid;
+            grid-template-columns: 1fr 1.1fr 1fr;
+            gap: 40px;
+            align-items: stretch;
+            position: relative;
+            z-index: 1;
+        }
+
+        @media (max-width: 1024px) {
+            .section-three-container {
+                grid-template-columns: 1fr;
+                gap: 30px;
+                padding: 0 30px;
+            }
+        }
+
+        .section-three-image-wrapper {
+            display: flex;
+            align-items: center;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+            border-radius: 20px;
+        }
+
+        .section-three-image-wrapper::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.1) 100%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: 1;
+            border-radius: 20px;
+        }
+
+        .section-three-image-wrapper:hover::before {
+            opacity: 1;
+        }
+
+        .section-three-image {
+            width: 100%;
+            height: 100%;
+            min-height: 480px;
+            object-fit: cover;
+            border-radius: 20px;
+            box-shadow: 
+                0 20px 60px rgba(0, 0, 0, 0.15),
+                0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+
+        .section-three-image:hover {
+            transform: scale(1.05);
+            box-shadow: 
+                0 30px 80px rgba(0, 0, 0, 0.25),
+                0 0 0 1px rgba(255, 255, 255, 0.2) inset;
+        }
+
+        .section-three-content {
+            padding: 50px 45px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.98) 100%);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 24px;
+            box-shadow: 
+                0 20px 60px rgba(0, 0, 0, 0.12),
+                0 0 0 1px rgba(255, 255, 255, 0.8) inset,
+                0 1px 3px rgba(0, 0, 0, 0.05);
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            min-height: 480px;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .section-three-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #0050ff 0%, #7c3aed 100%);
+            border-radius: 24px 24px 0 0;
+        }
+
+        @media (max-width: 1024px) {
+            .section-three-content {
+                padding: 35px 30px;
+            }
+        }
+
+        .section-three-content h2 {
+            font-size: 36px;
+            font-weight: 900;
+            background: linear-gradient(135deg, #152836 0%, #1e293b 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 28px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            line-height: 1.2;
+            position: relative;
+        }
+
+        .section-three-content h2::after {
+            content: '';
+            position: absolute;
+            bottom: -12px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, #0050ff 0%, #7c3aed 100%);
+            border-radius: 2px;
+        }
+
+        .section-three-content p {
+            font-size: 16px;
+            line-height: 1.75;
+            color: #475569;
+            margin-bottom: 22px;
+            font-weight: 400;
+        }
+
+        .section-three-content p:last-of-type {
+            margin-bottom: 0;
+        }
+
+        .section-three-cta {
+            display: flex;
+            gap: 18px;
+            margin-top: 36px;
+            flex-wrap: wrap;
+        }
+
+        @media (max-width: 640px) {
+            .section-three-cta {
+                flex-direction: column;
+            }
+        }
+
+        .section-three-btn {
+            flex: 1;
+            min-width: 200px;
+            padding: 16px 32px;
+            background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 
+                0 6px 20px rgba(0, 80, 255, 0.35),
+                0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+            border: none;
+            cursor: pointer;
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section-three-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .section-three-btn:hover::before {
+            left: 100%;
+        }
+
+        .section-three-btn:hover {
+            transform: translateY(-4px);
+            box-shadow: 
+                0 12px 30px rgba(0, 80, 255, 0.45),
+                0 0 0 1px rgba(255, 255, 255, 0.2) inset;
+            background: linear-gradient(135deg, #0040d9 0%, #0033b3 100%);
+        }
+
+        .section-three-btn.secondary {
+            background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%);
+            box-shadow: 
+                0 6px 20px rgba(124, 58, 237, 0.35),
+                0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+        }
+
+        .section-three-btn.secondary:hover {
+            box-shadow: 
+                0 12px 30px rgba(124, 58, 237, 0.45),
+                0 0 0 1px rgba(255, 255, 255, 0.2) inset;
+            background: linear-gradient(135deg, #6d28d9 0%, #5b21b6 100%);
+        }
+
+        /* Cards Carousel Section Styles */
+        .cards-carousel-section {
+            position: relative;
+            padding: 100px 0;
+            background: url('assets/images/about/aboutmihi/section2/3.jpg') center/cover no-repeat;
+            background-attachment: fixed;
+            overflow: hidden;
+        }
+
+        .cards-carousel-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                rgba(0, 0, 0, 0.5),
+                radial-gradient(circle at 20% 30%, rgba(0, 80, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(124, 58, 237, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .cards-carousel-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cards-carousel-wrapper {
+            position: relative;
+            background: transparent;
+            border-radius: 24px;
+            overflow: hidden;
+            min-height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4);
+        }
+
+        .testimonial-card {
+            position: relative;
+            z-index: 2;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 50px 60px;
+            max-width: 800px;
+            margin: 0 auto;
+            box-shadow: 
+                0 20px 60px rgba(0, 0, 0, 0.3),
+                0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+            position: relative;
+        }
+
+        .testimonial-quote-icon {
+            position: absolute;
+            font-size: 80px;
+            color: rgba(0, 80, 255, 0.15);
+            font-family: Georgia, serif;
+            line-height: 1;
+        }
+
+        .testimonial-quote-icon.left {
+            top: 20px;
+            left: 30px;
+        }
+
+        .testimonial-quote-icon.right {
+            bottom: 20px;
+            right: 30px;
+            transform: rotate(180deg);
+        }
+
+        .testimonial-stars {
+            display: flex;
+            gap: 6px;
+            margin-bottom: 25px;
+            justify-content: center;
+        }
+
+        .testimonial-star {
+            width: 28px;
+            height: 28px;
+            fill: #0050ff;
+        }
+
+        .testimonial-star.half {
+            opacity: 0.5;
+        }
+
+        .testimonial-text {
+            font-size: 20px;
+            line-height: 1.7;
+            color: #1e293b;
+            text-align: center;
+            margin-bottom: 30px;
+            font-weight: 400;
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            text-align: center;
+            margin-bottom: 8px;
+        }
+
+        .testimonial-author-name {
+            font-size: 24px;
+            font-weight: 800;
+            color: #0f172a;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+        }
+
+        .testimonial-source {
+            font-size: 14px;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            text-decoration: underline;
+            font-weight: 600;
+        }
+
+        .carousel-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 80, 255, 0.9);
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            transition: all 0.3s ease;
+            z-index: 3;
+            box-shadow: 0 4px 15px rgba(0, 80, 255, 0.4);
+        }
+
+        .carousel-nav:hover {
+            background: rgba(0, 80, 255, 1);
+            transform: translateY(-50%) scale(1.1);
+            box-shadow: 0 6px 20px rgba(0, 80, 255, 0.6);
+        }
+
+        .carousel-nav.prev {
+            left: 20px;
+        }
+
+        .carousel-nav.next {
+            right: 20px;
+        }
+
+        .carousel-dots {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 30px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .carousel-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.4);
+            border: 2px solid rgba(255, 255, 255, 0.6);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .carousel-dot.active {
+            background: #0050ff;
+            border-color: #0050ff;
+            transform: scale(1.2);
+        }
+
+        @media (max-width: 768px) {
+            .cards-carousel-section {
+                padding: 60px 0;
+            }
+
+            .cards-carousel-container {
+                padding: 0 20px;
+            }
+
+            .cards-carousel-wrapper {
+                min-height: 400px;
+            }
+
+            .testimonial-card {
+                padding: 40px 30px;
+                margin: 0 20px;
+            }
+
+            .testimonial-text {
+                font-size: 16px;
+            }
+
+            .testimonial-author-name {
+                font-size: 20px;
+            }
+
+            .testimonial-quote-icon {
+                font-size: 60px;
+            }
+
+            .testimonial-quote-icon.left {
+                top: 15px;
+                left: 20px;
+            }
+
+            .testimonial-quote-icon.right {
+                bottom: 15px;
+                right: 20px;
+            }
+
+            .carousel-nav {
+                width: 40px;
+                height: 40px;
+                font-size: 20px;
+            }
+
+            .carousel-nav.prev {
+                left: 10px;
+            }
+
+            .carousel-nav.next {
+                right: 10px;
+            }
+        }
     </style>
 </head>
 <body>
     <div id="nav-placeholder"></div>
 
-    <section class="relative h-[60vh] flex items-center justify-center overflow-hidden">
-        <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1511578314322-379afb476865?w=1600');"></div>
+    <!-- About Us Hero Section -->
+    <section class="relative h-screen min-h-[500px] flex items-center justify-center overflow-hidden">
+        <div class="absolute inset-0 bg-cover bg-center bg-no-repeat" style="background-image: url('assets/images/about/aboutmihi/hero.jpg');"></div>
         <div class="absolute inset-0 hero-gradient"></div>
-        <div class="relative z-10 text-center text-white px-6">
-            <h1 class="text-5xl md:text-6xl font-bold mb-4">About MiHi</h1>
-            <p class="text-xl md:text-2xl mb-8">Denver's Premier Event Entertainment Company</p>
+        <div class="relative z-10 text-center text-white px-4 sm:px-6 max-w-4xl mx-auto">
+            <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-4 sm:mb-6">ABOUT US</h1>
+            <p class="text-base sm:text-lg md:text-xl lg:text-2xl mb-6 sm:mb-8 px-4">We are a Nationwide Photo Booth Rental company based in Denver, Colorado</p>
+            <a href="contact-us.html" class="btn-primary text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg text-base sm:text-lg font-semibold inline-block">CONTACT US</a>
         </div>
     </section>
 
-    <!-- Our Story -->
-    <section class="section-padding bg-white">
-        <div class="container mx-auto px-6">
-            <div class="max-w-4xl mx-auto">
-                <h2 class="text-4xl font-bold mb-6 text-center">Our Story</h2>
-                <p class="text-lg text-gray-700 mb-6 leading-relaxed">
-                    Founded in Denver, Colorado, MiHi Entertainment has grown from a small photo booth rental company 
-                    to one of the region's most trusted names in event entertainment. Our journey began with a simple 
-                    mission: to help people create unforgettable memories at their most important celebrations.
-                </p>
-                <p class="text-lg text-gray-700 mb-6 leading-relaxed">
-                    Today, we're proud to serve thousands of events annually across Colorado and nationwide, from intimate 
-                    weddings in mountain resorts to massive corporate activations at trade shows. Our commitment to innovation, 
-                    quality, and exceptional service has made us the go-to choice for event planners, venues, and hosts.
-                </p>
+    <!-- Infinite Carousel Section -->
+    <section class="cont" style="background-color: #152836; color: #eee; padding: 50px 0;">
+        <div class="page-head">
+            <h3>What Can We Do For You At</h3>
+            <h1>MIHI ENTERTAINMENT?</h1>
+            <p class="lead">At MiHi Entertainment, we specialize in exceptional photo booth rentals that infuse boundless creativity and unforgettable memories into every event. Our mission is to provide an engaging, interactive, and personalized experience for guests through our diverse range of photo booths, video activations, and custom branding solutions, all tailored to meet the distinct needs of our clients.</p>
+            <a href="https://github.com/sachinchoolur/lightgallery.js" class="btn btn-primary btn-lg">Get Pricing Information</a>
+        </div>
+
+        <div class="demo-gallery">
+            <ul id="lightgallery">
+                <li data-responsive="assets/images/about/aboutmihi/section1/pic1.png" data-src="assets/images/about/aboutmihi/section1/pic1.png"
+                data-sub-html="<h4>Sunset Serenity</h4><p>A gorgeous Sunset tonight captured at Coniston Water....</p>">
+                    <a href="">
+                        <img class="img-responsive" src="assets/images/about/aboutmihi/section1/pic1.png">
+                        <div class="demo-gallery-poster">
+                            <img src="https://sachinchoolur.github.io/lightgallery.js/static/img/zoom.png">
+                        </div>
+                    </a>
+                </li>
+                <li data-responsive="assets/images/about/aboutmihi/section1/pic2.png" data-src="assets/images/about/aboutmihi/section1/pic2.png"
+                data-sub-html="<h4>Coniston Calmness</h4><p>Beautiful morning</p>">
+                    <a href="">
+                        <img class="img-responsive" src="assets/images/about/aboutmihi/section1/pic2.png">
+                        <div class="demo-gallery-poster">
+                            <img src="https://sachinchoolur.github.io/lightgallery.js/static/img/zoom.png">
+                        </div>
+                    </a>
+                </li>
+                <!-- Duplicate items for seamless infinite loop -->
+                <li data-responsive="assets/images/about/aboutmihi/section1/pic3.png" data-src="assets/images/about/aboutmihi/section1/pic3.png"
+                data-sub-html="<h4>Fading Light</h4><p>Classic view from Rigwood Jetty on Coniston Water an old archive shot similar to an old post but a little later on.</p>">
+                    <a href="">
+                        <img class="img-responsive" src="assets/images/about/aboutmihi/section1/pic3.png">
+                        <div class="demo-gallery-poster">
+                            <img src="https://sachinchoolur.github.io/lightgallery.js/static/img/zoom.png">
+                        </div>
+                    </a>
+                </li>
+                <li data-responsive="assets/images/about/aboutmihi/section1/pic4.png" data-src="assets/images/about/aboutmihi/section1/pic4.png"
+                data-sub-html="<h4>Bowness Bay</h4><p>A beautiful Sunrise this morning taken En-route to Keswick not one as planned but I'm extremely happy I was passing the right place at the right time....</p>">
+                    <a href="">
+                        <img class="img-responsive" src="assets/images/about/aboutmihi/section1/pic4.png">
+                        <div class="demo-gallery-poster">
+                            <img src="https://sachinchoolur.github.io/lightgallery.js/static/img/zoom.png">
+                        </div>
+                    </a>
+                </li>
+                <li data-responsive="assets/images/about/aboutmihi/section1/pic5.png" data-src="assets/images/about/aboutmihi/section1/pic5.png"
+                data-sub-html="<h4>Sunset Serenity</h4><p>A gorgeous Sunset tonight captured at Coniston Water....</p>">
+                    <a href="">
+                        <img class="img-responsive" src="assets/images/about/aboutmihi/section1/pic5.png">
+                        <div class="demo-gallery-poster">
+                            <img src="https://sachinchoolur.github.io/lightgallery.js/static/img/zoom.png">
+                        </div>
+                    </a>
+                </li>
+                <li data-responsive="assets/images/about/aboutmihi/section1/pic6.png" data-src="assets/images/about/aboutmihi/section1/pic6.png"
+                data-sub-html="<h4>Coniston Calmness</h4><p>Beautiful morning</p>">
+                    <a href="">
+                        <img class="img-responsive" src="assets/images/about/aboutmihi/section1/pic6.png">
+                        <div class="demo-gallery-poster">
+                            <img src="https://sachinchoolur.github.io/lightgallery.js/static/img/zoom.png">
+                        </div>
+                    </a>
+                </li>
+                <!-- Duplicate all items for seamless infinite loop -->
+                <li data-responsive="assets/images/about/aboutmihi/section1/pic1.png" data-src="assets/images/about/aboutmihi/section1/pic1.png"
+                data-sub-html="<h4>Sunset Serenity</h4><p>A gorgeous Sunset tonight captured at Coniston Water....</p>">
+                    <a href="">
+                        <img class="img-responsive" src="assets/images/about/aboutmihi/section1/pic1.png">
+                        <div class="demo-gallery-poster">
+                            <img src="https://sachinchoolur.github.io/lightgallery.js/static/img/zoom.png">
+                        </div>
+                    </a>
+                </li>
+                <li data-responsive="assets/images/about/aboutmihi/section1/pic2.png" data-src="assets/images/about/aboutmihi/section1/pic2.png"
+                data-sub-html="<h4>Coniston Calmness</h4><p>Beautiful morning</p>">
+                    <a href="">
+                        <img class="img-responsive" src="assets/images/about/aboutmihi/section1/pic2.png">
+                        <div class="demo-gallery-poster">
+                            <img src="https://sachinchoolur.github.io/lightgallery.js/static/img/zoom.png">
+                        </div>
+                    </a>
+                </li>
+                <li data-responsive="assets/images/about/aboutmihi/section1/pic3.png" data-src="assets/images/about/aboutmihi/section1/pic3.png"
+                data-sub-html="<h4>Fading Light</h4><p>Classic view from Rigwood Jetty on Coniston Water an old archive shot similar to an old post but a little later on.</p>">
+                    <a href="">
+                        <img class="img-responsive" src="assets/images/about/aboutmihi/section1/pic3.png">
+                        <div class="demo-gallery-poster">
+                            <img src="https://sachinchoolur.github.io/lightgallery.js/static/img/zoom.png">
+                        </div>
+                    </a>
+                </li>
+                <li data-responsive="assets/images/about/aboutmihi/section1/pic4.png" data-src="assets/images/about/aboutmihi/section1/pic4.png"
+                data-sub-html="<h4>Bowness Bay</h4><p>A beautiful Sunrise this morning taken En-route to Keswick not one as planned but I'm extremely happy I was passing the right place at the right time....</p>">
+                    <a href="">
+                        <img class="img-responsive" src="assets/images/about/aboutmihi/section1/pic4.png">
+                        <div class="demo-gallery-poster">
+                            <img src="https://sachinchoolur.github.io/lightgallery.js/static/img/zoom.png">
+                        </div>
+                    </a>
+                </li>
+                <li data-responsive="assets/images/about/aboutmihi/section1/pic5.png" data-src="assets/images/about/aboutmihi/section1/pic5.png"
+                data-sub-html="<h4>Sunset Serenity</h4><p>A gorgeous Sunset tonight captured at Coniston Water....</p>">
+                    <a href="">
+                        <img class="img-responsive" src="assets/images/about/aboutmihi/section1/pic5.png">
+                        <div class="demo-gallery-poster">
+                            <img src="https://sachinchoolur.github.io/lightgallery.js/static/img/zoom.png">
+                        </div>
+                    </a>
+                </li>
+                <li data-responsive="assets/images/about/aboutmihi/section1/pic6.png" data-src="assets/images/about/aboutmihi/section1/pic6.png"
+                data-sub-html="<h4>Coniston Calmness</h4><p>Beautiful morning</p>">
+                    <a href="">
+                        <img class="img-responsive" src="assets/images/about/aboutmihi/section1/pic6.png">
+                        <div class="demo-gallery-poster">
+                            <img src="https://sachinchoolur.github.io/lightgallery.js/static/img/zoom.png">
+                        </div>
+                    </a>
+                </li>
+            </ul>
+            <span class="small">Click on any of the images to see MiHi Gallery</span>
+        </div>
+    </section>
+
+    <!-- Icon Section -->
+    <section class="icon-section">
+        <div class="icon-section-header">
+            <h2>Our Photo Booth Activations Include:</h2>
+        </div>
+        <div class="icon-grid">
+            <div class="icon-item">
+                <div class="icon-item-icon">
+                    <img src="assets/images/about/aboutmihi/sectionicons/1.png" alt="Engaging Attendants">
+                </div>
             </div>
-        </div>
-    </section>
-
-    <!-- Mission & Values -->
-    <section class="section-padding bg-gray-50">
-        <div class="container mx-auto px-6">
-            <div class="max-w-6xl mx-auto">
-                <h2 class="text-4xl font-bold mb-12 text-center">Our Mission & Values</h2>
-                <div class="grid md:grid-cols-3 gap-8">
-                    <div class="bg-white p-8 rounded-2xl shadow-lg">
-                        <div class="text-4xl mb-4">🎯</div>
-                        <h3 class="text-2xl font-bold mb-4">Our Mission</h3>
-                        <p class="text-gray-700">
-                            To transform ordinary events into extraordinary experiences through cutting-edge technology, 
-                            creative entertainment solutions, and unmatched customer service.
-                        </p>
-                    </div>
-
-                    <div class="bg-white p-8 rounded-2xl shadow-lg">
-                        <div class="text-4xl mb-4">💡</div>
-                        <h3 class="text-2xl font-bold mb-4">Innovation</h3>
-                        <p class="text-gray-700">
-                            We continuously invest in the latest technology and trends, from AI photo booths to 360 video, 
-                            ensuring our clients always have access to the most exciting entertainment options.
-                        </p>
-                    </div>
-
-                    <div class="bg-white p-8 rounded-2xl shadow-lg">
-                        <div class="text-4xl mb-4">⭐</div>
-                        <h3 class="text-2xl font-bold mb-4">Excellence</h3>
-                        <p class="text-gray-700">
-                            Every event matters. From setup to teardown, our professional team ensures flawless execution 
-                            and creates memories that last a lifetime.
-                        </p>
-                    </div>
+            <div class="icon-item">
+                <div class="icon-item-icon">
+                    <img src="assets/images/about/aboutmihi/sectionicons/2.png" alt="Basic or Premium Booth">
+                </div>
+            </div>
+            <div class="icon-item">
+                <div class="icon-item-icon">
+                    <img src="assets/images/about/aboutmihi/sectionicons/3.png" alt="Choice of Backdrop">
+                </div>
+            </div>
+            <div class="icon-item">
+                <div class="icon-item-icon">
+                    <img src="assets/images/about/aboutmihi/sectionicons/4.png" alt="Physical & Digital Props">
+                </div>
+            </div>
+            <div class="icon-item">
+                <div class="icon-item-icon">
+                    <img src="assets/images/about/aboutmihi/sectionicons/5.png" alt="Custom Overlay Design">
+                </div>
+            </div>
+            <div class="icon-item">
+                <div class="icon-item-icon">
+                    <img src="assets/images/about/aboutmihi/sectionicons/6.png" alt="Custom SMS/Email Messaging">
+                </div>
+            </div>
+            <div class="icon-item">
+                <div class="icon-item-icon">
+                    <img src="assets/images/about/aboutmihi/sectionicons/7.png" alt="Post-Event Online Gallery">
+                </div>
+            </div>
+            <div class="icon-item">
+                <div class="icon-item-icon">
+                    <img src="assets/images/about/aboutmihi/sectionicons/8.png" alt="Choice of Audio">
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Why Choose Us -->
-    <section class="section-padding bg-white">
-        <div class="container mx-auto px-6">
-            <div class="max-w-4xl mx-auto">
-                <h2 class="text-4xl font-bold mb-12 text-center">Why Choose MiHi?</h2>
-                <div class="space-y-6">
-                    <div class="flex items-start gap-4">
-                        <div class="flex-shrink-0 w-12 h-12 bg-[#ccddff] rounded-full flex items-center justify-center">
-                            <span class="text-[#0050ff] text-xl font-bold">✓</span>
-                        </div>
-                        <div>
-                            <h3 class="text-xl font-bold mb-2">Cutting-Edge Technology</h3>
-                            <p class="text-gray-700">We invest in the latest equipment and technology, from AI photo transformation to robotic photography, ensuring your event features the newest and most exciting entertainment.</p>
-                        </div>
-                    </div>
+    <!-- Section Three -->
+    <section class="section-three">
+        <div class="section-three-container">
+            <!-- Left Image -->
+            <div class="section-three-image-wrapper">
+                <img src="assets/images/about/aboutmihi/section2/1.jpg" alt="Photo booth experience" class="section-three-image">
+            </div>
 
-                    <div class="flex items-start gap-4">
-                        <div class="flex-shrink-0 w-12 h-12 bg-[#ccddff] rounded-full flex items-center justify-center">
-                            <span class="text-[#0050ff] text-xl font-bold">✓</span>
-                        </div>
-                        <div>
-                            <h3 class="text-xl font-bold mb-2">Professional Team</h3>
-                            <p class="text-gray-700">Our experienced attendants and technicians are background-checked, professionally trained, and passionate about making your event perfect.</p>
-                        </div>
-                    </div>
-
-                    <div class="flex items-start gap-4">
-                        <div class="flex-shrink-0 w-12 h-12 bg-[#ccddff] rounded-full flex items-center justify-center">
-                            <span class="text-[#0050ff] text-xl font-bold">✓</span>
-                        </div>
-                        <div>
-                            <h3 class="text-xl font-bold mb-2">Full-Service Solutions</h3>
-                            <p class="text-gray-700">From initial consultation to day-of execution, we handle everything. Custom designs, on-site support, and technical expertise - all included.</p>
-                        </div>
-                    </div>
-
-                    <div class="flex items-start gap-4">
-                        <div class="flex-shrink-0 w-12 h-12 bg-[#ccddff] rounded-full flex items-center justify-center">
-                            <span class="text-[#0050ff] text-xl font-bold">✓</span>
-                        </div>
-                        <div>
-                            <h3 class="text-xl font-bold mb-2">Proven Track Record</h3>
-                            <p class="text-gray-700">Thousands of successful events, hundreds of 5-star reviews, and partnerships with Colorado's top venues and event planners speak to our reliability and quality.</p>
-                        </div>
-                    </div>
-
-                    <div class="flex items-start gap-4">
-                        <div class="flex-shrink-0 w-12 h-12 bg-[#ccddff] rounded-full flex items-center justify-center">
-                            <span class="text-[#0050ff] text-xl font-bold">✓</span>
-                        </div>
-                        <div>
-                            <h3 class="text-xl font-bold mb-2">Nationwide Coverage</h3>
-                            <p class="text-gray-700">While based in Denver, we serve events across the United States, bringing our expertise and equipment to destination weddings, conferences, and celebrations everywhere.</p>
-                        </div>
-                    </div>
+            <!-- Center Content -->
+            <div class="section-three-content">
+                <h2>Our Mission Statement</h2>
+                <p>Our journey began with a simple yet innovative idea: to create a photo booth experience that would not only elevate events but also foster genuine connections. Today, MiHi Entertainment continues to captivate audiences and transform special occasions into memorable moments. We pride ourselves on our passion for crafting bespoke experiences, offering an extensive selection of backdrops, props, and multimedia services to perfectly align with your vision.</p>
+                <p>With our unwavering commitment to quality and a keen eye for detail, you can trust MiHi Entertainment to be the life of the party. So, whether you're looking to make a lasting impression on your target audience or simply seeking to add a touch of excitement to your celebration, let Jeff and the MiHi Entertainment team bring your event to life. Together, we'll ensure your event leaves a lasting impact.</p>
+                <div class="section-three-cta">
+                    <a href="contact-us.html" class="section-three-btn">Get Pricing Information</a>
+                    <a href="contact-us.html" class="section-three-btn secondary">Schedule a Call with Us</a>
                 </div>
+            </div>
+
+            <!-- Right Image -->
+            <div class="section-three-image-wrapper">
+                <img src="assets/images/about/aboutmihi/section2/2.jpg" alt="Photo booth at event" class="section-three-image">
             </div>
         </div>
     </section>
 
-    <!-- Stats -->
-    <section class="section-padding bg-gradient-to-r from-[#0050ff] to-[#0050ff] text-white">
-        <div class="container mx-auto px-6">
-            <div class="max-w-6xl mx-auto">
-                <h2 class="text-4xl font-bold mb-12 text-center">By The Numbers</h2>
-                <div class="grid md:grid-cols-4 gap-8 text-center">
-                    <div>
-                        <div class="text-5xl font-bold mb-2">5,000+</div>
-                        <div class="text-xl opacity-90">Events Served</div>
+    <!-- Cards Carousel Section -->
+    <section class="cards-carousel-section">
+        <div class="cards-carousel-container">
+            <div class="cards-carousel-wrapper">
+                <button class="carousel-nav prev" onclick="changeTestimonial(-1)">‹</button>
+                <button class="carousel-nav next" onclick="changeTestimonial(1)">›</button>
+                
+                <div class="testimonial-card" id="testimonialCard">
+                    <div class="testimonial-quote-icon left">"</div>
+                    <div class="testimonial-quote-icon right">"</div>
+                    
+                    <div class="testimonial-stars">
+                        <svg class="testimonial-star" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                        </svg>
+                        <svg class="testimonial-star" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                        </svg>
+                        <svg class="testimonial-star" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                        </svg>
+                        <svg class="testimonial-star" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                        </svg>
+                        <svg class="testimonial-star" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                        </svg>
                     </div>
-                    <div>
-                        <div class="text-5xl font-bold mb-2">500K+</div>
-                        <div class="text-xl opacity-90">Photos Captured</div>
-                    </div>
-                    <div>
-                        <div class="text-5xl font-bold mb-2">98%</div>
-                        <div class="text-xl opacity-90">Client Satisfaction</div>
-                    </div>
-                    <div>
-                        <div class="text-5xl font-bold mb-2">15+</div>
-                        <div class="text-xl opacity-90">Years Experience</div>
+                    
+                    <p class="testimonial-text" id="testimonialText">
+                        MiHi Entertainment is the best and very reliable. Their team of professionals will take great care of you no matter what service you choose. I give them 10's across the board!!
+                    </p>
+                    
+                    <div class="testimonial-author">
+                        <div class="testimonial-author-name" id="testimonialName">PABLO ZACARIAS</div>
+                        <div class="testimonial-source" id="testimonialSource">Google Reviews</div>
                     </div>
                 </div>
+            </div>
+            
+            <div class="carousel-dots" id="carouselDots">
+                <span class="carousel-dot active" onclick="goToTestimonial(0)"></span>
+                <span class="carousel-dot" onclick="goToTestimonial(1)"></span>
+                <span class="carousel-dot" onclick="goToTestimonial(2)"></span>
             </div>
         </div>
     </section>
 
-    <!-- CTA -->
-    <section class="section-padding bg-white">
-        <div class="container mx-auto px-6 text-center">
-            <h2 class="text-4xl font-bold mb-6">Ready to Work Together?</h2>
-            <p class="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
-                Let's create something amazing for your next event. Contact us today for a free consultation!
-            </p>
-            <a href="../index.html#contact" class="btn-primary text-white px-8 py-4 rounded-full text-lg font-semibold inline-block">Get in Touch</a>
-        </div>
-    </section>
+    <script src="assets/components/navigation.js"></script>
+    <script src="assets/components/footer.js"></script>
+    <script>
+        // Initialize lightGallery after DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof lightGallery !== 'undefined') {
+                lightGallery(document.getElementById('lightgallery'));
+            }
+        });
 
-    <script src="../assets/components/navigation.js"></script>
-    <script src="../assets/components/footer.js"></script>
+        // Testimonial Carousel Functionality
+        const testimonials = [
+            {
+                text: "MiHi Entertainment is the best and very reliable. Their team of professionals will take great care of you no matter what service you choose. I give them 10's across the board!!",
+                name: "PABLO ZACARIAS",
+                source: "Google Reviews"
+            },
+            {
+                text: "Our organization used MiHi for a photo booth at a professional work event in order to capture some simple 'headshots' of staff as well as fun group photos. The results are fabulous and our staff are very pleased. The staff was easy to work with in advance of the event as well as onsite, and they even provided a nonprofit rate.",
+                name: "CCH E&A TEAM",
+                source: "Google Reviews"
+            },
+            {
+                text: "We had a wonderful experience working with MiHi from the very start! They are very friendly and easy to work with. We love that they allowed us to create our own custom photo layout to use for our wedding. Our attendant was also a great day of our wedding, I highly recommend using MiHi for your wedding or next photo booth!",
+                name: "Angelica Lombardi",
+                source: "Google Reviews"
+            },
+            {
+                text: "The Feel Famous event was beyond fabulous, it was just straight eye candy everywhere you looked",
+                name: "DAWN WILLIAMS",
+                source: "VENHUB"
+            },
+        ];
+
+        let currentTestimonial = 0;
+
+        function updateTestimonial(index) {
+            const testimonial = testimonials[index];
+            document.getElementById('testimonialText').textContent = testimonial.text;
+            document.getElementById('testimonialName').textContent = testimonial.name;
+            document.getElementById('testimonialSource').textContent = testimonial.source;
+            
+            // Update dots
+            const dots = document.querySelectorAll('.carousel-dot');
+            dots.forEach((dot, i) => {
+                dot.classList.toggle('active', i === index);
+            });
+        }
+
+        function changeTestimonial(direction) {
+            currentTestimonial += direction;
+            if (currentTestimonial < 0) {
+                currentTestimonial = testimonials.length - 1;
+            } else if (currentTestimonial >= testimonials.length) {
+                currentTestimonial = 0;
+            }
+            updateTestimonial(currentTestimonial);
+        }
+
+        function goToTestimonial(index) {
+            currentTestimonial = index;
+            updateTestimonial(currentTestimonial);
+        }
+
+        // Auto-rotate testimonials every 5 seconds
+        setInterval(() => {
+            changeTestimonial(1);
+        }, 5000);
+    </script>
 </body>
 </html>
