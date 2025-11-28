@@ -50,11 +50,8 @@
             <div class="hidden lg:flex items-center space-x-8">
                 <!-- Products Dropdown -->
                 <div class="relative group">
-                    <a href="${pathPrefix}index.html#products" class="text-gray-700 hover:text-blue-600 font-medium transition duration-300 flex items-center">
+                    <a href="${pathPrefix}index.html#products" class="text-gray-700 hover:text-blue-600 font-medium transition duration-300">
                         Products
-                        <svg class="w-4 h-4 ml-1 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                        </svg>
                     </a>
                     <div class="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-[56rem] max-h-[90vh] overflow-y-auto bg-white rounded-xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 border border-gray-200">
                         <div class="p-6">
@@ -168,11 +165,8 @@
 
                 <!-- Event Types -->
                 <div class="relative group">
-                    <a href="${pathPrefix}index.html#event-types" class="text-gray-700 hover:text-blue-600 font-medium transition duration-300 flex items-center">
+                    <a href="${pathPrefix}index.html#event-types" class="text-gray-700 hover:text-blue-600 font-medium transition duration-300">
                         Events
-                        <svg class="w-4 h-4 ml-1 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                        </svg>
                     </a>
                     <div class="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-[40rem] bg-white rounded-2xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 border border-gray-100">
                         <div class="p-6">
@@ -212,11 +206,8 @@
 
                 <!-- Rentals -->
                 <div class="relative group">
-                    <a href="${pathPrefix}index.html#rentals" class="text-gray-700 hover:text-blue-600 font-medium transition duration-300 flex items-center">
+                    <a href="${pathPrefix}index.html#rentals" class="text-gray-700 hover:text-blue-600 font-medium transition duration-300">
                         Rentals
-                        <svg class="w-4 h-4 ml-1 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                        </svg>
                     </a>
                     <div class="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-[56rem] max-h-[90vh] overflow-y-auto bg-white rounded-xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 border border-gray-200">
                         <div class="p-6">
@@ -291,11 +282,8 @@
 
                 <!-- Gallery -->
                 <div class="relative group">
-                    <a href="${pathPrefix}index.html#gallery" class="text-gray-700 hover:text-blue-600 font-medium transition duration-300 flex items-center">
+                    <a href="${pathPrefix}index.html#gallery" class="text-gray-700 hover:text-blue-600 font-medium transition duration-300">
                         Gallery
-                        <svg class="w-4 h-4 ml-1 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                        </svg>
                     </a>
                     <div class="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-[30rem] max-h-[90vh] overflow-y-auto bg-white rounded-xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 border border-gray-200">
                         <div class="p-8">
@@ -337,11 +325,8 @@
 
                 <!-- About -->
                 <div class="relative group">
-                    <a href="${pathPrefix}index.html#about" class="text-gray-700 hover:text-blue-600 font-medium transition duration-300 flex items-center">
+                    <a href="${pathPrefix}index.html#about" class="text-gray-700 hover:text-blue-600 font-medium transition duration-300">
                         About Us
-                        <svg class="w-4 h-4 ml-1 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                        </svg>
                     </a>
                     <div class="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-[30rem] max-h-[90vh] overflow-y-auto bg-white rounded-xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 border border-gray-200">
                         <div class="p-8">
