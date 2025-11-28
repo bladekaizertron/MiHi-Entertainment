@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Snow Globe Photo Booth Set | MiHi Entertainment</title>
+    <title>Sleigh Photo Booth Set | MiHi Entertainment</title>
     <link rel="icon" type="image/svg+xml" href="../assets/images/favicon.svg">
     <script src="https://cdn.tailwindcss.com"></script>
     <link
@@ -114,7 +114,21 @@
         }
 
         .hero-gradient {
-            background: linear-gradient(135deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.4) 50%, rgba(0, 0, 0, 0.6) 100%);
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.5) 50%, rgba(0, 0, 0, 0.7) 100%);
+        }
+
+        .hero-background {
+            animation: zoomIn 20s ease-in-out infinite alternate;
+        }
+
+        @keyframes zoomIn {
+            from {
+                transform: scale(1);
+            }
+
+            to {
+                transform: scale(1.1);
+            }
         }
 
         .hero-content {
@@ -223,7 +237,13 @@
             padding: 3rem 0;
         }
 
-        @media (max-width: 768px) {
+        @media (min-width: 768px) {
+            .section-1-padding {
+                padding: 5rem 0;
+            }
+        }
+
+        @media (max-width: 767px) {
             .section-1-padding {
                 padding: 2rem 0;
             }
@@ -256,21 +276,39 @@
             height: 100%;
             min-height: 450px;
             object-fit: cover;
-            border-radius: 12px;
+            border-radius: 16px;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .section-1-image:hover {
-            transform: scale(1.02);
-            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.2);
+            transform: scale(1.03) translateY(-5px);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.25);
         }
 
         .section-1-image-wrapper {
             position: relative;
             overflow: hidden;
-            border-radius: 12px;
+            border-radius: 16px;
             height: 100%;
+        }
+
+        .section-1-image-wrapper::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(0, 80, 255, 0.1) 0%, transparent 100%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .section-1-image-wrapper:hover::before {
+            opacity: 1;
         }
 
         .section-1-animate {
@@ -297,7 +335,7 @@
             }
         }
 
-        /* Section 2 Styles - Jump! Jump! */
+        /* Section 2 Styles */
         .section-2 {
             background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
         }
@@ -306,7 +344,13 @@
             padding: 4rem 0;
         }
 
-        @media (max-width: 768px) {
+        @media (min-width: 768px) {
+            .section-2-padding {
+                padding: 5rem 0;
+            }
+        }
+
+        @media (max-width: 767px) {
             .section-2-padding {
                 padding: 3rem 0;
             }
@@ -339,8 +383,14 @@
             height: 100%;
             min-height: 450px;
             object-fit: cover;
-            border-radius: 12px;
+            border-radius: 16px;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .section-2-image:hover {
+            transform: scale(1.03) translateY(-5px);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.25);
         }
 
         @media (max-width: 768px) {
@@ -353,7 +403,7 @@
             }
         }
 
-        /* Section 3 Styles - We'll Blow It Up */
+        /* Section 3 Styles */
         .section-3 {
             background: #ffffff;
         }
@@ -362,7 +412,13 @@
             padding: 4rem 0;
         }
 
-        @media (max-width: 768px) {
+        @media (min-width: 768px) {
+            .section-3-padding {
+                padding: 5rem 0;
+            }
+        }
+
+        @media (max-width: 767px) {
             .section-3-padding {
                 padding: 3rem 0;
             }
@@ -390,21 +446,6 @@
             margin-bottom: 1rem;
         }
 
-        .section-3-image {
-            width: 100%;
-            height: 100%;
-            min-height: 450px;
-            object-fit: cover;
-            border-radius: 12px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .section-3-image:hover {
-            transform: scale(1.02);
-            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.2);
-        }
-
         .section-3-list {
             list-style: none;
             padding: 0;
@@ -421,52 +462,83 @@
         }
 
         .section-3-list li:before {
-            content: "•";
+            content: "✓";
             position: absolute;
             left: 0;
             color: #0050ff;
             font-weight: bold;
-            font-size: 1.5rem;
+            font-size: 1.25rem;
+            background: rgba(0, 80, 255, 0.1);
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1;
         }
 
-        @media (max-width: 768px) {
-            .section-3-image {
-                min-height: 350px;
-            }
+        .section-3-list li {
+            transition: transform 0.2s ease, padding-left 0.2s ease;
+        }
+
+        .section-3-list li:hover {
+            transform: translateX(5px);
+            padding-left: 2rem;
         }
 
         /* Gallery Section */
         .gallery-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1.5rem;
-            margin-top: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
         }
 
         @media (max-width: 1024px) {
             .gallery-grid {
                 grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem;
             }
         }
 
         @media (max-width: 640px) {
             .gallery-grid {
                 grid-template-columns: 1fr;
+                gap: 1.5rem;
             }
         }
 
         .gallery-item {
             position: relative;
             overflow: hidden;
-            border-radius: 12px;
+            border-radius: 16px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             aspect-ratio: 1;
+            cursor: pointer;
+        }
+
+        .gallery-item::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(0, 80, 255, 0.2) 0%, transparent 100%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: 1;
         }
 
         .gallery-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+        }
+
+        .gallery-item:hover::after {
+            opacity: 1;
         }
 
         .gallery-item img {
@@ -474,14 +546,94 @@
             height: 100%;
             object-fit: cover;
             display: block;
+            transition: transform 0.4s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        /* Feature Cards */
+        .feature-card {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 2px solid transparent;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 50px rgba(0, 80, 255, 0.2);
+            border-color: rgba(0, 80, 255, 0.3);
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        /* Scroll Animations */
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .fade-in-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Section Dividers */
+        .section-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent 0%, rgba(0, 80, 255, 0.3) 50%, transparent 100%);
+            margin: 4rem 0;
         }
 
         /* CTA Section */
         .cta-section {
             background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%);
             color: white;
-            padding: 4rem 0;
+            padding: 5rem 0;
             text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+                opacity: 0.5;
+            }
+
+            50% {
+                transform: scale(1.1);
+                opacity: 0.8;
+            }
         }
 
         .cta-heading {
@@ -518,8 +670,23 @@
 
         .cta-button:hover {
             background: #f8f9fa;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.3);
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Enhanced Section Headings */
+        .section-heading-decoration {
+            display: inline-block;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, #0050ff 0%, #0040d9 100%);
+            border-radius: 2px;
+            margin-bottom: 1rem;
         }
     </style>
 </head>
@@ -529,14 +696,15 @@
 
     <!-- Hero Section -->
     <section class="hero-section">
-        <div class="hero-background" style="background-image: url('../assets/images/snowglobe/hero.jpg');"></div>
+        <div class="hero-background" style="background-image: url('../assets/images/sleigh/hero.jpeg');"></div>
         <div class="absolute inset-0 hero-gradient"></div>
         <div class="hero-content">
             <h1 class="hero-title text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl">
-                SNOW GLOBE PHOTO BOOTH SET
+                SLEIGH PHOTO BOOTH SET
             </h1>
             <p class="hero-subtitle text-base sm:text-lg md:text-xl lg:text-2xl px-4 max-w-2xl">
-                Step inside a snow globe with this enchanting set that transports guests to a frosty, winter wonderland.
+                Experience the magic of the holidays with a cozy, festive backdrop that captures the spirit of a winter
+                sleigh ride.
             </p>
             <div class="hero-cta">
                 <a href="../contact-us.html" class="hero-cta-button">
@@ -550,142 +718,174 @@
     <section class="section-1 section-1-padding">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
             <div class="section-1-content">
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 items-start">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
                     <!-- Left Column - Text Content -->
-                    <div class="section-1-animate space-y-4 lg:pr-6">
+                    <div class="section-1-animate fade-in-up space-y-6 lg:pr-6">
                         <div>
+                            <div class="section-heading-decoration"></div>
                             <h2 class="section-1-heading text-2xl sm:text-3xl md:text-4xl lg:text-5xl">
-                                SNOW GLOBE PHOTO BOOTH SET
+                                SLEIGH PHOTO BOOTH SET
                             </h2>
                         </div>
 
-                        <div class="space-y-3">
-                            <p class="section-1-text">
-                                We know you want to be the center of attention. And we know how you can be.
+                        <div class="space-y-4">
+                            <p class="section-1-text text-lg">
+                                Cold weather doesn't have to stop a fun photo session with family and friends. This set
+                                comes with everything you need to create a magical winter scene:
                             </p>
 
-                            <p class="section-1-text">
-                                Is there anything more attention-grabbing than a giant blow up snow globe with snowy and
-                                bouncing guests in it? Not much! Which is exactly why we offer this <strong>Snow Globe
-                                    Photo Set</strong>. Sometimes your event calls for more than the usual photo booth
-                                experience, it calls for over-the-top fun and crazy images for your guests to treasure
-                                forever. It's a sure-fire guest magnet.
-                            </p>
-
-                            <p class="section-1-text">
-                                Field of Dreams said it best - if you offer them a giant snow globe set, they will come
-                                and party in it.
-                            </p>
-                        </div>
-                    </div>
-
-                    <!-- Right Column - Image -->
-                    <div class="section-1-animate lg:pl-4">
-                        <div class="section-1-image-wrapper">
-                            <img src="../assets/images/snowglobe/img1.jpeg" alt="Snow Globe Photo Booth Set"
-                                class="section-1-image">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Section 2 - Jump! Jump! -->
-    <section class="section-2 section-2-padding">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="section-2-content">
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 items-center">
-                    <!-- Left Column - Image -->
-                    <div class="lg:order-1">
-                        <div class="section-1-image-wrapper">
-                            <img src="../assets/images/snowglobe/img2.jpeg" alt="Jump! Jump! Snow Globe Photo Booth"
-                                class="section-2-image">
-                        </div>
-                    </div>
-
-                    <!-- Right Column - Text Content -->
-                    <div class="space-y-4 lg:pl-6">
-                        <h2 class="section-2-heading text-2xl sm:text-3xl md:text-4xl lg:text-5xl">
-                            JUMP! JUMP!
-                        </h2>
-
-                        <div class="space-y-3">
-                            <p class="section-2-text">
-                                One of the best parts of this booth is that you can take normal photos with it, but
-                                really, you didn't get it for that did you?
-                            </p>
-
-                            <p class="section-2-text">
-                                You got it so you can party in it!
-                            </p>
-
-                            <p class="section-2-text">
-                                So, make sure to use our Gif and Boomerang options to capture the best pratfalls and
-                                snow throws of the day. Compare bounce height to your friends. See how much snow you can
-                                get in the air. Your party isn't lame, and neither are you. Prove it!
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Section 3 - We'll Blow It Up -->
-    <section class="section-3 section-3-padding">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="section-3-content">
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 items-center">
-                    <!-- Left Column - Text Content -->
-                    <div class="space-y-4 lg:pr-6">
-                        <h2 class="section-3-heading text-2xl sm:text-3xl md:text-4xl lg:text-5xl">
-                            WE'LL BLOW IT UP - IN A GOOD WAY!
-                        </h2>
-
-                        <div class="space-y-3">
-                            <p class="section-3-text">
-                                Here's the thing, we didn't want everyone jumpin' solo, so we got a BIG snow globe -
-                                makes sense right?
-                            </p>
-
-                            <p class="section-3-text">
-                                But because it's big, we're going to be there for you every step along the way. Our
-                                attendants handle set up, they show you our snow gear props to doll up before entry, and
-                                they make sure you're safe, sound, and super jazzed to be there.
-                            </p>
-
-                            <p class="section-3-text">
-                                Here's what can come with your Snow Globe Photo Set:
-                            </p>
-
-                            <ul class="section-3-list">
-                                <li>Custom frame designs for your gif or photos</li>
-                                <li>Online gallery to view and save the images</li>
-                                <li>Jackets, hats, scarves, ear muffs and the usual snow gear accouterments</li>
+                            <ul class="section-3-list space-y-2">
+                                <li>An Open Sleigh</li>
+                                <li>Snow</li>
+                                <li>Trees</li>
+                                <li>A Dickens-Esque Set</li>
                             </ul>
                         </div>
                     </div>
 
                     <!-- Right Column - Image -->
-                    <div class="lg:pl-4">
+                    <div class="section-1-animate fade-in-up lg:pl-4">
                         <div class="section-1-image-wrapper">
-                            <img src="../assets/images/snowglobe/1.png" alt="We'll Blow It Up - Snow Globe Photo Booth"
-                                class="section-3-image">
+                            <img src="../assets/images/sleigh/img1.jpg" alt="Sleigh Photo Booth Set"
+                                class="section-1-image">
                         </div>
                     </div>
                 </div>
 
+                <!-- Feature Cards -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-16 fade-in-up">
+                    <div class="feature-card">
+                        <div class="feature-icon">🛷</div>
+                        <h3 class="font-bold text-xl mb-2 text-gray-800">Open Sleigh</h3>
+                        <p class="text-gray-600">Authentic sleigh design perfect for winter photo sessions</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">❄️</div>
+                        <h3 class="font-bold text-xl mb-2 text-gray-800">Snow Effects</h3>
+                        <p class="text-gray-600">Realistic snow elements to create a magical winter atmosphere</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🌲</div>
+                        <h3 class="font-bold text-xl mb-2 text-gray-800">Winter Trees</h3>
+                        <p class="text-gray-600">Beautifully decorated trees to complete the winter scene</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🎭</div>
+                        <h3 class="font-bold text-xl mb-2 text-gray-800">Dickens-Esque Set</h3>
+                        <p class="text-gray-600">Classic Victorian winter theme for timeless photos</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 2 - Winter-Themed Props -->
+    <section class="section-2 section-2-padding">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="section-2-content">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+                    <!-- Left Column - Image -->
+                    <div class="lg:order-1 fade-in-up">
+                        <div class="section-1-image-wrapper">
+                            <img src="../assets/images/sleigh/img2.png" alt="Winter-Themed Props for Sleigh Photo Booth"
+                                class="section-2-image">
+                        </div>
+                    </div>
+
+                    <!-- Right Column - Text Content -->
+                    <div class="space-y-6 lg:pl-6 fade-in-up">
+                        <div>
+                            <div class="section-heading-decoration"></div>
+                            <h2 class="section-2-heading text-2xl sm:text-3xl md:text-4xl lg:text-5xl">
+                                WINTER-THEMED PROPS:
+                            </h2>
+                        </div>
+
+                        <div class="space-y-4">
+                            <p class="section-2-text text-lg">
+                                No Sleigh Photo Booth Set is complete without our winter-themed props:
+                            </p>
+
+                            <ul class="section-3-list space-y-2">
+                                <li>Fake Snow</li>
+                                <li>Trees</li>
+                                <li>Lanterns</li>
+                                <li>Snow Jackets</li>
+                            </ul>
+
+                            <p class="section-2-text text-lg font-semibold text-gray-700">
+                                Reach out and ask us for more options!
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 3 - What Comes With The Sleigh -->
+    <section class="section-3 section-3-padding">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="section-3-content">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center mb-16">
+                    <!-- Left Column - Text Content -->
+                    <div class="space-y-6 lg:pr-6 fade-in-up">
+                        <div>
+                            <div class="section-heading-decoration"></div>
+                            <h2 class="section-3-heading text-2xl sm:text-3xl md:text-4xl lg:text-5xl">
+                                EVERY SLEIGH COMES WITH JUST WHAT YOU NEED!
+                            </h2>
+                        </div>
+
+                        <div class="space-y-4">
+                            <p class="section-3-text text-lg">
+                                Our Sleigh Set comes with everything you need to have a proper winter-themed event!
+                                We'll provide the sleigh, backdrop, winter-themed props, and as always, a trusted photo
+                                booth attendant to make sure your event runs smooth.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Right Column - Image -->
+                    <div class="lg:pl-4 fade-in-up">
+                        <div class="section-1-image-wrapper">
+                            <img src="../assets/images/sleigh/1.png" alt="Sleigh Photo Booth Set Complete Package"
+                                class="section-1-image">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-divider"></div>
+
                 <!-- Gallery -->
-                <div class="gallery-grid mt-12">
+                <div class="text-center mb-8 fade-in-up">
+                    <h3 class="section-3-heading text-2xl sm:text-3xl md:text-4xl mb-4">GALLERY</h3>
+                    <p class="text-gray-600 text-lg">See the magic of our Sleigh Photo Booth Set in action</p>
+                </div>
+                <div class="gallery-grid fade-in-up">
                     <div class="gallery-item">
-                        <img src="../assets/images/snowglobe/2.png" alt="Snow Globe Photo Booth Gallery 1">
+                        <img src="../assets/images/sleigh/2.png" alt="Sleigh Photo Booth Gallery 1">
                     </div>
                     <div class="gallery-item">
-                        <img src="../assets/images/snowglobe/3.png" alt="Snow Globe Photo Booth Gallery 2">
+                        <img src="../assets/images/sleigh/3.png" alt="Sleigh Photo Booth Gallery 2">
                     </div>
                     <div class="gallery-item">
-                        <img src="../assets/images/snowglobe/1.png" alt="Snow Globe Photo Booth Gallery 3">
+                        <img src="../assets/images/sleigh/4.png" alt="Sleigh Photo Booth Gallery 3">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="../assets/images/sleigh/5.png" alt="Sleigh Photo Booth Gallery 4">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="../assets/images/sleigh/6.png" alt="Sleigh Photo Booth Gallery 5">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="../assets/images/sleigh/7.png" alt="Sleigh Photo Booth Gallery 6">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="../assets/images/sleigh/8.png" alt="Sleigh Photo Booth Gallery 7">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="../assets/images/sleigh/9.png" alt="Sleigh Photo Booth Gallery 8">
                     </div>
                 </div>
             </div>
@@ -695,20 +895,58 @@
     <!-- CTA Section -->
     <section class="cta-section">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="cta-heading">NEED HELP BOOKING?</h2>
-            <h3 class="cta-heading text-xl mb-4">WE'RE HERE FOR YOU!</h3>
-            <p class="cta-text">
-                Get in touch with our team to discuss your event and get pricing information for the Snow Globe Photo
-                Booth Set.
-            </p>
-            <a href="../contact-us.html" class="cta-button">
-                GET PRICING NOW
-            </a>
+            <div class="cta-content">
+                <h2 class="cta-heading">NEED HELP BOOKING?</h2>
+                <h3 class="cta-heading text-xl mb-4">WE'RE HERE FOR YOU!</h3>
+                <p class="cta-text max-w-2xl mx-auto">
+                    Get in touch with our team to discuss your event and get pricing information for the Sleigh Photo
+                    Booth
+                    Set.
+                </p>
+                <a href="../contact-us.html" class="cta-button">
+                    GET PRICING NOW
+                </a>
+            </div>
         </div>
     </section>
 
     <script src="../assets/components/navigation.js"></script>
     <script src="../assets/components/footer.js"></script>
+
+    <script>
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all fade-in-up elements
+        document.querySelectorAll('.fade-in-up').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Smooth scroll behavior
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>

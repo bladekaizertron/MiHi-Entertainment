@@ -1,23 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Holiday Party - MiHi Entertainment</title>
+    <title>Holiday Party Photo Booth Rental | MiHi Entertainment</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Arvo:wght@400;700&family=Cinzel:wght@500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800;900&family=Montserrat:wght@500;600;700&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Arvo:wght@400;700&family=Cinzel:wght@500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800;900&family=Montserrat:wght@500;600;700&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;600;700&display=swap"
+        rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Archivo+Black&display=swap" rel="stylesheet">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@300;900&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
-        html, body { 
-            font-family: 'Inter', sans-serif; 
-            color: #1a202c; 
+
+        html,
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #1a202c;
             overflow-x: hidden;
             max-width: 100vw;
         }
-        h1, h2, h3, h4, h5, h6 { font-family: 'Playfair Display', serif; }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: 'Playfair Display', serif;
+        }
+
         /* Animated Radial Gradient Button Effect */
         .btn-hero-animated {
             outline: none;
@@ -51,12 +66,10 @@
             transform: scale(0);
             transition: transform 0.3s ease-in;
             mix-blend-mode: difference;
-            background: radial-gradient(
-                circle at center,
-                #fff 24%,
-                #000 25%,
-                #000 100%
-            );
+            background: radial-gradient(circle at center,
+                    #fff 24%,
+                    #000 25%,
+                    #000 100%);
             pointer-events: none;
         }
 
@@ -68,6 +81,7 @@
             top: 3px;
             box-shadow: none;
         }
+
         /* Navigation Button Styling - Separate from hero button */
         header .btn-primary,
         nav .btn-primary {
@@ -82,23 +96,35 @@
             transition: all 0.3s ease;
             box-shadow: 0 4px 6px rgba(0, 80, 255, 0.3);
         }
+
         header .btn-primary:hover,
         nav .btn-primary:hover {
             background-color: #0040d9;
             transform: translateY(-2px);
             box-shadow: 0 6px 12px rgba(0, 80, 255, 0.4);
         }
+
         header .btn-primary:active,
         nav .btn-primary:active {
             transform: translateY(0);
         }
-        .section-padding { padding: 5rem 0; }
+
+        .section-padding {
+            padding: 5rem 0;
+        }
+
         @media (max-width: 768px) {
-            .section-padding { padding: 3rem 0; }
+            .section-padding {
+                padding: 3rem 0;
+            }
         }
+
         @media (max-width: 640px) {
-            .section-padding { padding: 2.5rem 0; }
+            .section-padding {
+                padding: 2.5rem 0;
+            }
         }
+
         .hero-section {
             background-image: url('../assets/images/holiday/hero.webp');
             background-attachment: fixed;
@@ -110,29 +136,35 @@
             width: 100%;
             max-width: 100vw;
         }
+
         @media (max-width: 768px) {
             .hero-section {
                 min-height: 85vh;
                 background-attachment: scroll;
             }
         }
+
         .hero-section .corporate-text {
             font-family: 'Montserrat', sans-serif;
             letter-spacing: 0.3em;
         }
+
         @media (max-width: 640px) {
             .container {
                 padding-left: 1rem;
                 padding-right: 1rem;
             }
         }
+
         * {
             box-sizing: border-box;
         }
-        body > * {
+
+        body>* {
             max-width: 100vw;
             overflow-x: hidden;
         }
+
         /* Exclude header from overflow restrictions to prevent scrollbar */
         header,
         header *,
@@ -142,20 +174,24 @@
             overflow-x: visible !important;
             overflow-y: visible !important;
         }
+
         /* Ensure navigation dropdowns can scroll if needed */
-        header nav .group > .absolute {
+        header nav .group>.absolute {
             overflow-y: auto !important;
             overflow-x: hidden !important;
         }
+
         /* Card Grid Styles */
         .cards-grid-main {
             max-width: 1200px;
             margin: 0 auto;
         }
+
         #cards-sets-section {
             background-color: #ffffff;
             position: relative;
         }
+
         #cards-sets-section::before {
             content: '';
             position: absolute;
@@ -168,15 +204,18 @@
             z-index: 0;
             pointer-events: none;
         }
-        #cards-sets-section > * {
+
+        #cards-sets-section>* {
             position: relative;
             z-index: 1;
         }
+
         .holiday-banner {
             text-align: center;
             padding: 1.5rem 1rem;
             margin-bottom: 2rem;
         }
+
         .holiday-banner-top {
             font-size: 2rem;
             font-weight: 400;
@@ -186,6 +225,7 @@
             margin-bottom: 0.25rem;
             font-family: 'Inter', sans-serif;
         }
+
         .holiday-banner-title {
             font-size: 5rem;
             font-weight: 700;
@@ -194,13 +234,14 @@
             letter-spacing: 0.05em;
             font-family: 'Archivo Black', sans-serif;
         }
+
         .gradient-text {
             /* Fallback: Set a background color. */
             background-color: #0050ff;
-            
+
             /* Create the gradient. */
             background-image: linear-gradient(45deg, #f3ec78, #af4261);
-            
+
             /* Set the background size and repeat properties. */
             background-size: 100%;
             background-repeat: repeat;
@@ -208,11 +249,12 @@
             /* Use the text as a mask for the background. */
             /* This will show the gradient as a text color rather than element bg. */
             -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent; 
+            -webkit-text-fill-color: transparent;
             -moz-background-clip: text;
             -moz-text-fill-color: transparent;
             background-clip: text;
         }
+
         .holiday-banner-description {
             font-size: 1.05rem;
             line-height: 1.6;
@@ -223,35 +265,43 @@
             font-weight: 500;
             letter-spacing: 0.01em;
         }
+
         @media (max-width: 768px) {
             .holiday-banner {
                 padding: 1.25rem 1rem;
                 margin-bottom: 1.5rem;
             }
+
             .holiday-banner-title {
                 font-size: 2rem;
                 margin-bottom: 0.5rem;
             }
+
             .holiday-banner-description {
                 font-size: 0.875rem;
                 line-height: 1.4;
             }
         }
+
         @media (max-width: 640px) {
             .holiday-banner {
                 padding: 1rem;
                 margin-bottom: 1.25rem;
             }
+
             .holiday-banner-title {
                 font-size: 1.5rem;
             }
+
             .holiday-banner-top {
                 font-size: 0.7rem;
             }
+
             .holiday-banner-description {
                 font-size: 0.8rem;
             }
         }
+
         .cards-grid {
             display: flex;
             flex-wrap: wrap;
@@ -259,26 +309,31 @@
             margin: 0;
             padding: 0;
         }
+
         .cards-grid-item {
             display: flex;
             padding: 1rem;
             align-items: stretch;
         }
+
         @media (min-width: 40rem) {
             .cards-grid-item {
                 width: 50%;
             }
         }
+
         @media (min-width: 56rem) {
             .cards-grid-item {
                 width: 33.3333%;
             }
         }
+
         @media (min-width: 75rem) {
             .cards-grid-item {
                 width: 25%;
             }
         }
+
         .card-grid {
             background-color: white;
             border-radius: 0.25rem;
@@ -289,6 +344,7 @@
             width: 100%;
             height: 100%;
         }
+
         .card-grid-image {
             width: 100%;
             height: 250px;
@@ -296,12 +352,14 @@
             overflow: hidden;
             flex-shrink: 0;
         }
+
         .card-grid-image img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             vertical-align: middle;
         }
+
         .card-grid-content {
             padding: 1rem;
             background: linear-gradient(to bottom left, #EF8D9C 40%, #FFC39E 100%);
@@ -309,6 +367,7 @@
             flex-direction: column;
             flex: 1;
         }
+
         .card-grid-title {
             color: #ffffff;
             font-size: 1.1rem;
@@ -318,6 +377,7 @@
             margin: 0px;
             font-family: 'Inter', sans-serif;
         }
+
         .card-grid-text {
             color: #ffffff;
             font-size: 0.875rem;
@@ -327,6 +387,7 @@
             font-family: 'Inter', sans-serif;
             flex: 1;
         }
+
         .btn-card {
             margin-top: auto;
             color: #ffffff;
@@ -343,20 +404,24 @@
             font-family: 'Inter', sans-serif;
             transition: background-color 0.3s ease;
         }
+
         .btn-card:hover {
             background-color: rgba(255, 255, 255, 0.12);
         }
+
         /* Infinite Scrolling Carousel Styles */
         .block-carousel {
             overflow: hidden;
             pointer-events: none;
             margin-top: 2rem;
         }
+
         @media (prefers-reduced-motion: reduce) {
             .block-carousel[data-animated="true"] {
                 overflow: visible;
             }
         }
+
         .carousel-items {
             list-style: none;
             align-items: stretch;
@@ -368,26 +433,31 @@
             margin: 0;
             padding-left: 0;
         }
+
         @media (max-width: 600px) {
             .carousel-items {
                 gap: 2rem;
             }
         }
+
         @media (min-width: 1133px) {
             .carousel-items {
                 grid-auto-columns: 30rem;
             }
         }
+
         @media (prefers-reduced-motion: reduce) {
             .carousel-items {
                 overflow: visible;
                 overflow-x: scroll;
             }
         }
+
         .block-carousel[data-animated="true"] .carousel-items:hover,
         .block-carousel[data-animated="true"] .carousel-items:focus {
             animation-play-state: paused;
         }
+
         @media (prefers-reduced-motion: no-preference) {
             .block-carousel[data-animated="true"] .carousel-items {
                 animation-duration: 60s;
@@ -397,11 +467,13 @@
                 width: max-content;
             }
         }
+
         @keyframes scroll {
             to {
                 transform: translate(calc(-50% - 0.5rem));
             }
         }
+
         .carousel-items .card {
             color: #1a202c;
             background-color: #ffffff;
@@ -413,20 +485,24 @@
             flex-direction: column;
             height: 100%;
         }
+
         .carousel-items .card h3 {
             margin-bottom: 1rem;
             font-family: 'Playfair Display', serif;
             font-size: 1.5rem;
             color: #1a202c;
         }
+
         .carousel-items .card p {
             line-height: 1.7;
             color: #4a5568;
             margin-bottom: 0.75rem;
         }
+
         .carousel-items .card p:last-of-type {
             margin-bottom: 0;
         }
+
         .carousel-items .image-content {
             margin-bottom: 1.5rem;
             border-radius: 0.25rem;
@@ -434,15 +510,18 @@
             flex-shrink: 0;
             height: 250px;
         }
+
         .carousel-items .image-content img {
             width: 100%;
             height: 100%;
             display: block;
             object-fit: cover;
         }
+
         .carousel-items .card p {
             flex: 1;
         }
+
         /* Sets Section Background Design */
         #sets-section {
             background: #e8ddc3;
@@ -450,22 +529,23 @@
             overflow: hidden;
             padding: 2rem 0;
         }
+
         #sets-section .holiday-banner {
             padding: 1rem 1rem;
             margin-bottom: 1.5rem;
         }
+
         #sets-section .block-carousel {
             margin-top: 1rem;
         }
+
         #sets-section::before {
             content: "";
             position: absolute;
             inset: -50px;
-            background: 
-                repeating-radial-gradient(#000 0 0.0001%, #fff 0 0.0002%) 
-                60% 60%/3000px 3000px,
-                repeating-conic-gradient(#000 0 0.0001%, #fff 0 0.0002%) 
-                40% 40%/4000px 3000px;
+            background:
+                repeating-radial-gradient(#000 0 0.0001%, #fff 0 0.0002%) 60% 60%/3000px 3000px,
+                repeating-conic-gradient(#000 0 0.0001%, #fff 0 0.0002%) 40% 40%/4000px 3000px;
             background-blend-mode: difference;
             filter: blur(2px) contrast(100) brightness(40);
             mix-blend-mode: lighten;
@@ -473,10 +553,12 @@
             z-index: 0;
             pointer-events: none;
         }
-        #sets-section > * {
+
+        #sets-section>* {
             position: relative;
             z-index: 1;
         }
+
         /* Banner Section Styles */
         .banner-hero-section {
             background-image: url('../assets/images/holiday/f5.webp');
@@ -491,50 +573,62 @@
             justify-content: center;
             overflow: hidden;
         }
+
         .banner-hero-section .max-w-full {
             padding: 2rem 0;
         }
+
         .banner-hero-section p {
             margin-bottom: 0.75rem;
             font-size: 0.75rem;
         }
+
         .banner-hero-section h1 {
             margin-bottom: 1.5rem;
             font-size: 2.5rem;
         }
+
         .banner-hero-section .btn-hero-animated {
             padding: 1rem 2rem;
             font-size: 1rem;
         }
+
         @media (min-width: 640px) {
             .banner-hero-section p {
                 font-size: 0.875rem;
             }
+
             .banner-hero-section h1 {
                 font-size: 3rem;
             }
         }
+
         @media (min-width: 768px) {
             .banner-hero-section {
                 min-height: 45vh;
                 background-attachment: scroll;
             }
+
             .banner-hero-section .max-w-full {
                 padding: 3rem 0;
             }
+
             .banner-hero-section h1 {
                 font-size: 4rem;
                 margin-bottom: 2rem;
             }
+
             .banner-hero-section .btn-hero-animated {
                 padding: 1.25rem 2.5rem;
             }
         }
+
         @media (min-width: 1024px) {
             .banner-hero-section h1 {
                 font-size: 5rem;
             }
         }
+
         /* Holiday Activations Section Styles */
         .activation-card {
             background-color: #ffffff;
@@ -545,22 +639,26 @@
             display: flex;
             flex-direction: column;
         }
+
         .activation-card:hover {
             transform: translateY(-4px);
             box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
         }
+
         .activation-image {
             width: 100%;
             height: 300px;
             overflow: hidden;
             background-color: #f3f4f6;
         }
+
         .activation-image img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             display: block;
         }
+
         .activation-title {
             font-size: 1.5rem;
             font-weight: 700;
@@ -569,6 +667,7 @@
             font-family: 'Inter', sans-serif;
             text-transform: uppercase;
         }
+
         .activation-description {
             font-size: 0.95rem;
             line-height: 1.6;
@@ -577,19 +676,23 @@
             flex: 1;
             font-family: 'Inter', sans-serif;
         }
+
         @media (max-width: 768px) {
             .activation-image {
                 height: 250px;
             }
+
             .activation-title {
                 font-size: 1.25rem;
                 margin: 1.25rem 1.25rem 0.75rem 1.25rem;
             }
+
             .activation-description {
                 font-size: 0.875rem;
                 margin: 0 1.25rem 1.25rem 1.25rem;
             }
         }
+
         /* Holiday Activations Section Background Design - Same as Sets Section */
         #holiday-activations-section {
             background: #e8ddc3;
@@ -597,28 +700,30 @@
             overflow: hidden;
             padding: 2rem 0;
         }
+
         #holiday-activations-section .holiday-banner {
             padding: 1rem 1rem;
             margin-bottom: 1.5rem;
         }
+
         #holiday-activations-section .grid {
             margin-top: 1rem;
             gap: 1.5rem;
         }
+
         @media (min-width: 768px) {
             #holiday-activations-section .grid {
                 gap: 2rem;
             }
         }
+
         #holiday-activations-section::before {
             content: "";
             position: absolute;
             inset: -50px;
-            background: 
-                repeating-radial-gradient(#000 0 0.0001%, #fff 0 0.0002%) 
-                60% 60%/3000px 3000px,
-                repeating-conic-gradient(#000 0 0.0001%, #fff 0 0.0002%) 
-                40% 40%/4000px 3000px;
+            background:
+                repeating-radial-gradient(#000 0 0.0001%, #fff 0 0.0002%) 60% 60%/3000px 3000px,
+                repeating-conic-gradient(#000 0 0.0001%, #fff 0 0.0002%) 40% 40%/4000px 3000px;
             background-blend-mode: difference;
             filter: blur(2px) contrast(100) brightness(40);
             mix-blend-mode: lighten;
@@ -626,15 +731,18 @@
             z-index: 0;
             pointer-events: none;
         }
-        #holiday-activations-section > * {
+
+        #holiday-activations-section>* {
             position: relative;
             z-index: 1;
         }
+
         /* Holiday AV Services Section Background Design - Same as Cards Sets Section */
         #holiday-av-services-section {
             background-color: #ffffff;
             position: relative;
         }
+
         #holiday-av-services-section::before {
             content: '';
             position: absolute;
@@ -647,10 +755,12 @@
             z-index: 0;
             pointer-events: none;
         }
-        #holiday-av-services-section > * {
+
+        #holiday-av-services-section>* {
             position: relative;
             z-index: 1;
         }
+
         /* Mini Game Section Background Design - Holiday Theme */
         #mini-game-section {
             background: linear-gradient(135deg, #fef5e7 0%, #ffe5cc 50%, #ffd9b3 100%);
@@ -658,6 +768,7 @@
             overflow: hidden;
             padding: 2rem 0;
         }
+
         #mini-game-section::before {
             content: '';
             position: absolute;
@@ -665,25 +776,22 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: 
-                repeating-linear-gradient(
-                    45deg,
+            background:
+                repeating-linear-gradient(45deg,
                     transparent,
                     transparent 10px,
                     rgba(191, 77, 40, 0.1) 10px,
-                    rgba(191, 77, 40, 0.1) 20px
-                ),
-                repeating-linear-gradient(
-                    -45deg,
+                    rgba(191, 77, 40, 0.1) 20px),
+                repeating-linear-gradient(-45deg,
                     transparent,
                     transparent 10px,
                     rgba(225, 245, 196, 0.1) 10px,
-                    rgba(225, 245, 196, 0.1) 20px
-                );
+                    rgba(225, 245, 196, 0.1) 20px);
             opacity: 0.4;
             z-index: 0;
             pointer-events: none;
         }
+
         #mini-game-section::after {
             content: '';
             position: absolute;
@@ -691,33 +799,38 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: radial-gradient(
-                circle,
-                rgba(255, 215, 0, 0.1) 0%,
-                transparent 50%
-            );
+            background: radial-gradient(circle,
+                    rgba(255, 215, 0, 0.1) 0%,
+                    transparent 50%);
             animation: sparkle 8s ease-in-out infinite;
             z-index: 0;
             pointer-events: none;
         }
+
         @keyframes sparkle {
-            0%, 100% {
+
+            0%,
+            100% {
                 transform: rotate(0deg) scale(1);
                 opacity: 0.3;
             }
+
             50% {
                 transform: rotate(180deg) scale(1.2);
                 opacity: 0.5;
             }
         }
-        #mini-game-section > * {
+
+        #mini-game-section>* {
             position: relative;
             z-index: 1;
         }
+
         #mini-game-section .holiday-banner {
             padding: 1rem 1rem;
             margin-bottom: 1.5rem;
         }
+
         /* Santa Game Styles - Scoped to game container */
         #santa-game-container {
             position: relative;
@@ -733,18 +846,22 @@
             overflow: hidden;
             cursor: grab;
         }
+
         #santa-game-container * {
             box-sizing: border-box;
         }
+
         #santa-game-container canvas {
             width: 100%;
             height: 100%;
             display: block;
         }
+
         #santa-game-container div,
         #santa-game-container i {
             user-select: none;
         }
+
         #santa-game-container i {
             position: absolute;
             color: white;
@@ -756,44 +873,54 @@
             animation-iteration-count: infinite, infinite;
             animation-play-state: running, running;
         }
+
         #santa-game-container button {
             pointer-events: auto;
         }
+
         @media (max-width: 768px) {
             #santa-game-container {
                 min-height: 500px;
                 height: 500px;
             }
+
             #santa-game-container canvas {
                 width: 100%;
                 height: 100%;
             }
         }
+
         @media (max-width: 640px) {
             #santa-game-container {
                 min-height: 400px;
                 height: 400px;
             }
         }
+
         @keyframes snowflakes-fall {
             0% {
                 top: -10%;
             }
+
             100% {
                 top: 100%;
             }
         }
+
         @keyframes snowflakes-shake {
             0% {
                 transform: translateX(0px);
             }
+
             50% {
                 transform: translateX(80px);
             }
+
             100% {
                 transform: translateX(0px);
             }
         }
+
         /* Santa Section Styles - Same background as hero section */
         .santa-hero-section {
             background-image: url('../assets/images/holiday/hero.webp');
@@ -806,6 +933,7 @@
             width: 100%;
             max-width: 100vw;
         }
+
         .santa-hero-section::before {
             content: '';
             position: absolute;
@@ -816,40 +944,48 @@
             background: rgba(0, 0, 0, 0.6);
             z-index: 0;
         }
-        .santa-hero-section > * {
+
+        .santa-hero-section>* {
             position: relative;
             z-index: 1;
         }
+
         .santa-hero-section h2 {
             color: #ffffff !important;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8), 0 0 10px rgba(0, 0, 0, 0.5);
         }
+
         .santa-hero-section p {
             color: #f0f0f0 !important;
             text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
         }
+
         @media (max-width: 768px) {
             .santa-hero-section {
                 background-attachment: scroll;
             }
         }
+
         .santa-image-wrapper {
             width: 100%;
             border-radius: 0.5rem;
             overflow: hidden;
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
         }
+
         .santa-image {
             width: 100%;
             height: auto;
             display: block;
             object-fit: cover;
         }
+
         @media (min-width: 1024px) {
             .santa-image-wrapper {
                 max-width: 100%;
             }
         }
+
         /* Booking Form Styles */
         .booking-form input[type="text"],
         .booking-form input[type="email"],
@@ -858,6 +994,7 @@
         .booking-form textarea {
             transition: all 0.3s ease;
         }
+
         .booking-form input[type="text"]:focus,
         .booking-form input[type="email"]:focus,
         .booking-form input[type="tel"]:focus,
@@ -866,24 +1003,30 @@
             transform: translateY(-2px);
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
+
         .animate-fade-in-up {
             animation: fadeInUp 1s ease-out forwards;
             opacity: 0;
         }
+
         .animate-delay-200 {
             animation-delay: 0.2s;
         }
+
         .animate-delay-300 {
             animation-delay: 0.3s;
         }
+
         .animate-delay-400 {
             animation-delay: 0.4s;
         }
+
         @keyframes fadeInUp {
             from {
                 opacity: 0;
                 transform: translateY(20px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -891,33 +1034,38 @@
         }
     </style>
 </head>
+
 <body>
     <div id="nav-placeholder"></div>
 
     <!-- Hero Section -->
-    <section class="relative flex items-center justify-center overflow-hidden py-8 hero-section" style="overflow-x: hidden; max-width: 100vw;">
-        <div class="absolute inset-0 bg-black bg-opacity-50"></div>     
+    <section class="relative flex items-center justify-center overflow-hidden py-8 hero-section"
+        style="overflow-x: hidden; max-width: 100vw;">
+        <div class="absolute inset-0 bg-black bg-opacity-50"></div>
         <div class="relative z-10 text-center text-white px-4 w-full">
             <div class="max-w-full mx-auto">
                 <div class="mb-2">
-                    <p class="max-w-full mx-auto text-sm md:text-base leading-tight mb-2 px-0 text-gray-100 tracking-[0.2em] animate-fade-in-up animate-delay-200 corporate-text">
-                    MAKE YOUR HOLIDAY EVENT SPECIAL WITH OUR
+                    <p
+                        class="max-w-full mx-auto text-sm md:text-base leading-tight mb-2 px-0 text-gray-100 tracking-[0.2em] animate-fade-in-up animate-delay-200 corporate-text">
+                        MAKE YOUR HOLIDAY EVENT SPECIAL WITH OUR
                     </p>
-                    <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold leading-tight animate-fade-in-up corporate-heading px-2">
+                    <h1
+                        class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold leading-tight animate-fade-in-up corporate-heading px-2">
                         HOLIDAY PHOTO BOOTHS
                     </h1>
                 </div>
-                
+
                 <div class="h-px w-12 bg-white mx-auto my-3 animate-fade-in-up animate-delay-200"></div>
-                
-                <p class="max-w-full mx-auto text-sm md:text-base leading-relaxed mb-4 px-4 sm:px-0 text-gray-100 tracking-normal animate-fade-in-up animate-delay-200 corporate-text">
-                    Make your holiday celebrations unforgettable with MiHi's seasonal photo booths and custom festive sets. Whether you're planning an office gathering, corporate celebration, community event, or a family get-together, our photo booths capture every joyful moment with fun, warmth, and style—no matter what you celebrate.
+
+                <p
+                    class="max-w-full mx-auto text-sm md:text-base leading-relaxed mb-4 px-4 sm:px-0 text-gray-100 tracking-normal animate-fade-in-up animate-delay-200 corporate-text">
+                    Make your holiday celebrations unforgettable with MiHi's seasonal photo booths and custom festive
+                    sets. Whether you're planning an office gathering, corporate celebration, community event, or a
+                    family get-together, our photo booths capture every joyful moment with fun, warmth, and style—no
+                    matter what you celebrate.
                 </p>
                 <div class="mt-8 mb-8 animate-fade-in-up animate-delay-300">
-                    <a 
-                        href="#contact" 
-                        class="btn-hero-animated"
-                        aria-label="Contact us for custom designs">
+                    <a href="#contact" class="btn-hero-animated" aria-label="Contact us for custom designs">
                         Contact Us
                     </a>
                 </div>
@@ -940,7 +1088,10 @@
                     <p class="holiday-banner-top">STAND OUT THIS</p>
                     <h1 class="holiday-banner-title gradient-text">HOLIDAY SEASON</h1>
                     <p class="holiday-banner-description">
-                        Make your holiday event unforgettable with MiHi Entertainment's one-of-a-kind holiday photo booths and customized activations. Whether it's an office party, office holiday party, corporate holiday party, or family gathering, our Christmas photo booths bring festive cheer and fun to every celebration!
+                        Make your holiday event unforgettable with MiHi Entertainment's one-of-a-kind holiday photo
+                        booths and customized activations. Whether it's an office party, office holiday party, corporate
+                        holiday party, or family gathering, our Christmas photo booths bring festive cheer and fun to
+                        every celebration!
                     </p>
                 </div>
                 <ul class="cards-grid">
@@ -951,8 +1102,9 @@
                             </div>
                             <div class="card-grid-content">
                                 <h2 class="card-grid-title">360° Photo Booth</h2>
-                                <p class="card-grid-text">Capture the joy of the season from every angle with our immersive 360° Holiday Booth experience.</p>
-                                <button class="btn-card">Read More</button>
+                                <p class="card-grid-text">Capture the joy of the season from every angle with our
+                                    immersive 360° Holiday Booth experience.</p>
+                                <a href="product/360-photo-booth.html" class="btn-card">Read More</a>
                             </div>
                         </div>
                     </li>
@@ -963,8 +1115,9 @@
                             </div>
                             <div class="card-grid-content">
                                 <h2 class="card-grid-title">ROAMING PHOTO BOOTH</h2>
-                                <p class="card-grid-text">Spread the festive cheer as our Roaming Photo Booth captures candid holiday moments throughout your event.</p>
-                                <button class="btn-card">Read More</button>
+                                <p class="card-grid-text">Spread the festive cheer as our Roaming Photo Booth captures
+                                    candid holiday moments throughout your event.</p>
+                                <a href="product/roaming-photo-booth.html" class="btn-card">Read More</a>
                             </div>
                         </div>
                     </li>
@@ -975,8 +1128,9 @@
                             </div>
                             <div class="card-grid-content">
                                 <h2 class="card-grid-title">AUDIO GUESTBOOK</h2>
-                                <p class="card-grid-text">Let your guests leave heartfelt holiday messages with our Audio Guestbook, creating memories you can listen to for years to come.</p>
-                                <button class="btn-card">Read More</button>
+                                <p class="card-grid-text">Let your guests leave heartfelt holiday messages with our
+                                    Audio Guestbook, creating memories you can listen to for years to come.</p>
+                                <a href="audio-guestbook.html" class="btn-card">Read More</a>
                             </div>
                         </div>
                     </li>
@@ -987,8 +1141,9 @@
                             </div>
                             <div class="card-grid-content">
                                 <h2 class="card-grid-title">A/V SERVICES</h2>
-                                <p class="card-grid-text">Transform your holiday event into a winter wonderland with stunning lighting, crystal-clear audio and festive custom displays.</p>
-                                <button class="btn-card">Read More</button>
+                                <p class="card-grid-text">Transform your holiday event into a winter wonderland with
+                                    stunning lighting, crystal-clear audio and festive custom displays.</p>
+                                <a href="av-production.html" class="btn-card">Read More</a>
                             </div>
                         </div>
                     </li>
@@ -1004,10 +1159,13 @@
                 <p class="holiday-banner-top">STAND OUT THIS</p>
                 <h1 class="holiday-banner-title gradient-text">HOLIDAY SEASON</h1>
                 <p class="holiday-banner-description">
-                    Bring your holiday event to life with MiHi Entertainment's custom photo sets and seasonal photo booths. Perfect for an office gathering, company celebration, community event, or family get-together, our personalized setups deliver festive cheer and create picture-perfect moments that guests will treasure—no matter what you celebrate.
+                    Bring your holiday event to life with MiHi Entertainment's custom photo sets and seasonal photo
+                    booths. Perfect for an office gathering, company celebration, community event, or family
+                    get-together, our personalized setups deliver festive cheer and create picture-perfect moments that
+                    guests will treasure—no matter what you celebrate.
                 </p>
             </div>
-            
+
             <!-- Infinite Scrolling Carousel -->
             <section class="block block-carousel">
                 <ul class="carousel-items">
@@ -1016,28 +1174,36 @@
                             <img src="../assets/images/holiday/h5.jpg" alt="Holiday Set 1">
                         </div>
                         <h3>SKI LIFT PHOTO SET</h3>
-                        <p>Capture the charm of winter with our Ski Lift photo set, a set perfect addition to any holiday photo booth or office holiday party.</p>
+                        <p>Capture the charm of winter with our Ski Lift photo set, a set perfect addition to any
+                            holiday photo booth or office holiday party.</p>
+                        <a href="custom-sets/ski-lift-photo-set.html" class="btn-card">Read More</a>
                     </li>
                     <li class="card">
                         <div class="image-content">
                             <img src="../assets/images/holiday/h6.avif" alt="Holiday Set 2">
                         </div>
                         <h3>SKI GOGGLE PHOTO SET</h3>
-                        <p> Step into a snowy adventure with our Ski Goggle set, bringing festive fun to corporate holiday parties and holiday events alike.</p>
+                        <p> Step into a snowy adventure with our Ski Goggle set, bringing festive fun to corporate
+                            holiday parties and holiday events alike.</p>
+                        <a href="custom-sets/ski-goggle-photo-set.html" class="btn-card">Read More</a>
                     </li>
                     <li class="card">
                         <div class="image-content">
                             <img src="../assets/images/holiday/h7.jpg" alt="Holiday Set 3">
                         </div>
                         <h3>SNOW GLOBE PHOTO SET</h3>
-                        <p>Create magical memories inside our Snow Globe set, a stunning centerpiece for holiday photo booths at family gatherings or office parties.</p>
+                        <p>Create magical memories inside our Snow Globe set, a stunning centerpiece for holiday photo
+                            booths at family gatherings or office parties.</p>
+                        <a href="custom-sets/snow-globe-photo-set.html" class="btn-card">Read More</a>
                     </li>
                     <li class="card">
                         <div class="image-content">
                             <img src="../assets/images/holiday/h8.jpg" alt="Holiday Set 4">
                         </div>
                         <h3>SLEIGH PHOTO SET</h3>
-                        <p>Add a touch of holiday nostalgia with our Sleigh Set, ideal for photobooths and corporate holiday celebrations.</p>
+                        <p>Add a touch of holiday nostalgia with our Sleigh Set, ideal for photobooths and corporate
+                            holiday celebrations.</p>
+                        <a href="custom-sets/sleigh-photo-set.html" class="btn-card">Read More</a>
                     </li>
                 </ul>
             </section>
@@ -1056,10 +1222,7 @@
                     HOLIDAY EVENT
                 </h1>
                 <div class="mt-6 md:mt-8">
-                    <a 
-                        href="#contact" 
-                        class="btn-hero-animated"
-                        aria-label="Book your holiday booth now">
+                    <a href="#contact" class="btn-hero-animated" aria-label="Book your holiday booth now">
                         BOOK YOUR HOLIDAY BOOTH NOW
                     </a>
                 </div>
@@ -1074,10 +1237,12 @@
                 <p class="holiday-banner-top">FUN & ENTERTAINMENT FOR YOUR</p>
                 <h1 class="holiday-banner-title gradient-text">MINI GAME SECTION</h1>
                 <p class="holiday-banner-description">
-                    Add excitement and joy to your holiday event with our interactive mini games! Perfect for office holiday parties, corporate celebrations, and family gatherings, these engaging activities bring guests together and create unforgettable festive memories.
+                    Add excitement and joy to your holiday event with our interactive mini games! Perfect for office
+                    holiday parties, corporate celebrations, and family gatherings, these engaging activities bring
+                    guests together and create unforgettable festive memories.
                 </p>
             </div>
-            
+
             <!-- Santa Game Container -->
             <div id="santa-game-container">
             </div>
@@ -1091,7 +1256,9 @@
                 <p class="holiday-banner-top">PERSONALIZE YOUR EVENT WITH OUR</p>
                 <h1 class="holiday-banner-title gradient-text">HOLIDAY ACTIVATIONS</h1>
                 <p class="holiday-banner-description">
-                    Elevate your corporate holiday party, office holiday party, or office party with our festive holiday activations. From personalized Holiday Cards and our cutting-edge Holiday AI Booth to seamless Background Removal, we create memorable experiences that capture the magic of the season!
+                    Elevate your corporate holiday party, office holiday party, or office party with our festive holiday
+                    activations. From personalized Holiday Cards and our cutting-edge Holiday AI Booth to seamless
+                    Background Removal, we create memorable experiences that capture the magic of the season!
                 </p>
             </div>
 
@@ -1103,7 +1270,9 @@
                     </div>
                     <h3 class="activation-title">HOLIDAY CARDS</h3>
                     <p class="activation-description">
-                        Add a festive touch to your office holiday party or corporate holiday party with custom Holiday Cards that guests can take home as a cherished keepsake, perfect for capturing the spirit of the season at any office party or gathering.
+                        Add a festive touch to your office holiday party or corporate holiday party with custom Holiday
+                        Cards that guests can take home as a cherished keepsake, perfect for capturing the spirit of the
+                        season at any office party or gathering.
                     </p>
                 </div>
 
@@ -1114,7 +1283,9 @@
                     </div>
                     <h3 class="activation-title">HOLIDAY AI BOOTH</h3>
                     <p class="activation-description">
-                        Keep your office party or corporate holiday party buzzing with our Holiday AI Booth, a cutting-edge activation that creates personalized and interactive experiences your guests will love.
+                        Keep your office party or corporate holiday party buzzing with our Holiday AI Booth, a
+                        cutting-edge activation that creates personalized and interactive experiences your guests will
+                        love.
                     </p>
                 </div>
 
@@ -1125,7 +1296,8 @@
                     </div>
                     <h3 class="activation-title">BACKGROUND REMOVAL</h3>
                     <p class="activation-description">
-                        Elevate photos at your office holiday party or corporate holiday party with seamless Background Removal, transforming every shot into a festive masterpiece that perfectly fits the season.
+                        Elevate photos at your office holiday party or corporate holiday party with seamless Background
+                        Removal, transforming every shot into a festive masterpiece that perfectly fits the season.
                     </p>
                 </div>
             </div>
@@ -1139,7 +1311,10 @@
                 <p class="holiday-banner-top">BRING FESTIVE CHEER TO LIFE WITH OUR</p>
                 <h1 class="holiday-banner-title gradient-text">HOLIDAY AV SERVICES</h1>
                 <p class="holiday-banner-description">
-                    Create an unforgettable atmosphere at your office holiday party or corporate holiday party with our professional AV services. From stunning holiday event lighting and crystal-clear audio solutions to custom signage, we offer everything you need to bring your holiday photo booths and celebrations to life.
+                    Create an unforgettable atmosphere at your office holiday party or corporate holiday party with our
+                    professional AV services. From stunning holiday event lighting and crystal-clear audio solutions to
+                    custom signage, we offer everything you need to bring your holiday photo booths and celebrations to
+                    life.
                 </p>
             </div>
 
@@ -1151,7 +1326,8 @@
                     </div>
                     <h3 class="activation-title">HOLIDAY EVENT LIGHTING</h3>
                     <p class="activation-description">
-                        Transform your holiday event with dynamic lighting solutions, from festive color schemes to dazzling displays that set the perfect mood.
+                        Transform your holiday event with dynamic lighting solutions, from festive color schemes to
+                        dazzling displays that set the perfect mood.
                     </p>
                 </div>
 
@@ -1162,7 +1338,8 @@
                     </div>
                     <h3 class="activation-title">HOLIDAY NEON SIGNS</h3>
                     <p class="activation-description">
-                        Add a touch of personality with our Holiday Neon Signs, featuring custom designs that light up your event in style.
+                        Add a touch of personality with our Holiday Neon Signs, featuring custom designs that light up
+                        your event in style.
                     </p>
                 </div>
 
@@ -1173,7 +1350,8 @@
                     </div>
                     <h3 class="activation-title">HOLIDAY AUDIO SOLUTIONS</h3>
                     <p class="activation-description">
-                        Ensure every moment is heard with our Holiday Audio Solutions, delivering high-quality sound for music, speeches, and announcements.
+                        Ensure every moment is heard with our Holiday Audio Solutions, delivering high-quality sound for
+                        music, speeches, and announcements.
                     </p>
                 </div>
             </div>
@@ -1190,18 +1368,20 @@
                         SANTA AUDIO GUESTBOOK
                     </h2>
                     <p class="text-base md:text-lg leading-relaxed mb-6 md:mb-8">
-                        This fun and festive phone acts as a direct connection to Santa Claus, allowing children to leave a message and eagerly await his reply. Ideal for holiday events, office holiday parties, or as a creative guestbook for weddings and family gatherings, this holiday photo booths offers an interactive experience that guests of all ages will love. Contact us today to book your holiday photo booths and activations!
+                        This fun and festive phone acts as a direct connection to Santa Claus, allowing children to
+                        leave a message and eagerly await his reply. Ideal for holiday events, office holiday parties,
+                        or as a creative guestbook for weddings and family gatherings, this holiday photo booths offers
+                        an interactive experience that guests of all ages will love. Contact us today to book your
+                        holiday photo booths and activations!
                     </p>
                     <div>
-                        <a 
-                            href="#contact" 
-                            class="btn-hero-animated inline-block"
+                        <a href="audio-guestbook.html" class="btn-hero-animated inline-block"
                             aria-label="Give Santa a call">
                             GIVE SANTA A CALL
                         </a>
                     </div>
                 </div>
-                
+
                 <!-- Right Column - Image -->
                 <div class="order-1 lg:order-2">
                     <div class="santa-image-wrapper">
@@ -1212,10 +1392,11 @@
 
             <!-- Booking Form -->
             <div class="mt-12 md:mt-16">
-                <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-blue-600 mb-8 md:mb-10 text-center uppercase">
+                <h2
+                    class="text-3xl sm:text-4xl md:text-5xl font-bold text-blue-600 mb-8 md:mb-10 text-center uppercase">
                     BOOK YOUR HOLIDAY PHOTO BOOTH NOW
                 </h2>
-                
+
                 <form class="booking-form bg-blue-900 text-white p-6 md:p-8 rounded-lg">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                         <!-- Left Column -->
@@ -1224,35 +1405,35 @@
                                 <label for="firstName" class="block text-sm font-medium mb-2">
                                     First Name <span class="text-red-400">*</span>
                                 </label>
-                                <input type="text" id="firstName" name="firstName" required 
+                                <input type="text" id="firstName" name="firstName" required
                                     class="w-full px-4 py-2 rounded bg-white text-gray-900 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
                             </div>
                             <div>
                                 <label for="lastName" class="block text-sm font-medium mb-2">
                                     Last Name <span class="text-red-400">*</span>
                                 </label>
-                                <input type="text" id="lastName" name="lastName" required 
+                                <input type="text" id="lastName" name="lastName" required
                                     class="w-full px-4 py-2 rounded bg-white text-gray-900 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
                             </div>
                             <div>
                                 <label for="email" class="block text-sm font-medium mb-2">
                                     Email Address <span class="text-red-400">*</span>
                                 </label>
-                                <input type="email" id="email" name="email" required 
+                                <input type="email" id="email" name="email" required
                                     class="w-full px-4 py-2 rounded bg-white text-gray-900 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
                             </div>
                             <div>
                                 <label for="phone" class="block text-sm font-medium mb-2">
                                     Phone Number <span class="text-red-400">*</span>
                                 </label>
-                                <input type="tel" id="phone" name="phone" required 
+                                <input type="tel" id="phone" name="phone" required
                                     class="w-full px-4 py-2 rounded bg-white text-gray-900 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
                             </div>
                             <div>
                                 <label for="eventType" class="block text-sm font-medium mb-2">
                                     Type Of Event <span class="text-red-400">*</span>
                                 </label>
-                                <select id="eventType" name="eventType" required 
+                                <select id="eventType" name="eventType" required
                                     class="w-full px-4 py-2 rounded bg-white text-gray-900 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
                                     <option value="">Please select...</option>
                                     <option value="corporate">Corporate Event</option>
@@ -1272,7 +1453,7 @@
                                     Date Of Event <span class="text-red-400">*</span>
                                 </label>
                                 <div class="grid grid-cols-3 gap-2">
-                                    <select id="eventMonth" name="eventMonth" required 
+                                    <select id="eventMonth" name="eventMonth" required
                                         class="px-4 py-2 rounded bg-white text-gray-900 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
                                         <option value="">Month</option>
                                         <option value="01">January</option>
@@ -1288,7 +1469,7 @@
                                         <option value="11">November</option>
                                         <option value="12">December</option>
                                     </select>
-                                    <select id="eventDay" name="eventDay" required 
+                                    <select id="eventDay" name="eventDay" required
                                         class="px-4 py-2 rounded bg-white text-gray-900 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
                                         <option value="">Day</option>
                                         <option value="01">1</option>
@@ -1323,7 +1504,7 @@
                                         <option value="30">30</option>
                                         <option value="31">31</option>
                                     </select>
-                                    <select id="eventYear" name="eventYear" required 
+                                    <select id="eventYear" name="eventYear" required
                                         class="px-4 py-2 rounded bg-white text-gray-900 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
                                         <option value="2024">2024</option>
                                         <option value="2025" selected>2025</option>
@@ -1335,21 +1516,21 @@
                                 <label for="venueName" class="block text-sm font-medium mb-2">
                                     Venue Name
                                 </label>
-                                <input type="text" id="venueName" name="venueName" 
+                                <input type="text" id="venueName" name="venueName"
                                     class="w-full px-4 py-2 rounded bg-white text-gray-900 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
                             </div>
                             <div>
                                 <label for="venueState" class="block text-sm font-medium mb-2">
                                     Venue State <span class="text-red-400">*</span>
                                 </label>
-                                <input type="text" id="venueState" name="venueState" required 
+                                <input type="text" id="venueState" name="venueState" required
                                     class="w-full px-4 py-2 rounded bg-white text-gray-900 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
                             </div>
                             <div>
                                 <label for="budget" class="block text-sm font-medium mb-2">
                                     Ideal Budget
                                 </label>
-                                <input type="text" id="budget" name="budget" 
+                                <input type="text" id="budget" name="budget"
                                     class="w-full px-4 py-2 rounded bg-white text-gray-900 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
                             </div>
                         </div>
@@ -1363,71 +1544,71 @@
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                             <div class="space-y-3">
                                 <label class="flex items-center">
-                                    <input type="checkbox" name="services[]" value="photo-booths-printing" 
+                                    <input type="checkbox" name="services[]" value="photo-booths-printing"
                                         class="mr-3 w-4 h-4 text-blue-600 rounded focus:ring-blue-500">
                                     <span>Photo Booths (with printing)</span>
                                 </label>
                                 <label class="flex items-center">
-                                    <input type="checkbox" name="services[]" value="ai-experiences" 
+                                    <input type="checkbox" name="services[]" value="ai-experiences"
                                         class="mr-3 w-4 h-4 text-blue-600 rounded focus:ring-blue-500">
                                     <span>AI Experiences</span>
                                 </label>
                                 <label class="flex items-center">
-                                    <input type="checkbox" name="services[]" value="professional-headshots" 
+                                    <input type="checkbox" name="services[]" value="professional-headshots"
                                         class="mr-3 w-4 h-4 text-blue-600 rounded focus:ring-blue-500">
                                     <span>Professional Headshots</span>
                                 </label>
                                 <label class="flex items-center">
-                                    <input type="checkbox" name="services[]" value="casino-services" 
+                                    <input type="checkbox" name="services[]" value="casino-services"
                                         class="mr-3 w-4 h-4 text-blue-600 rounded focus:ring-blue-500">
                                     <span>Casino Services</span>
                                 </label>
                                 <label class="flex items-center">
-                                    <input type="checkbox" name="services[]" value="claw-machine" 
+                                    <input type="checkbox" name="services[]" value="claw-machine"
                                         class="mr-3 w-4 h-4 text-blue-600 rounded focus:ring-blue-500">
                                     <span>Claw Machine/Stick Drop</span>
                                 </label>
                             </div>
                             <div class="space-y-3">
                                 <label class="flex items-center">
-                                    <input type="checkbox" name="services[]" value="photo-booths-no-printing" 
+                                    <input type="checkbox" name="services[]" value="photo-booths-no-printing"
                                         class="mr-3 w-4 h-4 text-blue-600 rounded focus:ring-blue-500">
                                     <span>Photo Booths (without printing)</span>
                                 </label>
                                 <label class="flex items-center">
-                                    <input type="checkbox" name="services[]" value="lighting-decor" 
+                                    <input type="checkbox" name="services[]" value="lighting-decor"
                                         class="mr-3 w-4 h-4 text-blue-600 rounded focus:ring-blue-500">
                                     <span>Lighting & Decor</span>
                                 </label>
                                 <label class="flex items-center">
-                                    <input type="checkbox" name="services[]" value="event-photography" 
+                                    <input type="checkbox" name="services[]" value="event-photography"
                                         class="mr-3 w-4 h-4 text-blue-600 rounded focus:ring-blue-500">
                                     <span>Professional Event Photography</span>
                                 </label>
                                 <label class="flex items-center">
-                                    <input type="checkbox" name="services[]" value="dancefloors" 
+                                    <input type="checkbox" name="services[]" value="dancefloors"
                                         class="mr-3 w-4 h-4 text-blue-600 rounded focus:ring-blue-500">
                                     <span>Dancefloors</span>
                                 </label>
                             </div>
                             <div class="space-y-3">
                                 <label class="flex items-center">
-                                    <input type="checkbox" name="services[]" value="video-booths" 
+                                    <input type="checkbox" name="services[]" value="video-booths"
                                         class="mr-3 w-4 h-4 text-blue-600 rounded focus:ring-blue-500">
                                     <span>Video Booths</span>
                                 </label>
                                 <label class="flex items-center">
-                                    <input type="checkbox" name="services[]" value="virtual-reality" 
+                                    <input type="checkbox" name="services[]" value="virtual-reality"
                                         class="mr-3 w-4 h-4 text-blue-600 rounded focus:ring-blue-500">
                                     <span>Virtual Reality</span>
                                 </label>
                                 <label class="flex items-center">
-                                    <input type="checkbox" name="services[]" value="av-dj-services" 
+                                    <input type="checkbox" name="services[]" value="av-dj-services"
                                         class="mr-3 w-4 h-4 text-blue-600 rounded focus:ring-blue-500">
                                     <span>AV + DJ Services</span>
                                 </label>
                                 <label class="flex items-center">
-                                    <input type="checkbox" name="services[]" value="staging" 
+                                    <input type="checkbox" name="services[]" value="staging"
                                         class="mr-3 w-4 h-4 text-blue-600 rounded focus:ring-blue-500">
                                     <span>Staging</span>
                                 </label>
@@ -1441,14 +1622,14 @@
                             <label for="hearAbout" class="block text-sm font-medium mb-2">
                                 How did you hear about us?
                             </label>
-                            <textarea id="hearAbout" name="hearAbout" rows="3" 
+                            <textarea id="hearAbout" name="hearAbout" rows="3"
                                 class="w-full px-4 py-2 rounded bg-white text-gray-900 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
                         </div>
                         <div>
                             <label for="eventDetails" class="block text-sm font-medium mb-2">
                                 Tell Us About Your Event
                             </label>
-                            <textarea id="eventDetails" name="eventDetails" rows="4" 
+                            <textarea id="eventDetails" name="eventDetails" rows="4"
                                 class="w-full px-4 py-2 rounded bg-white text-gray-900 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
                         </div>
                     </div>
@@ -1456,17 +1637,18 @@
                     <!-- Privacy Policy -->
                     <div class="mb-6">
                         <label class="flex items-start">
-                            <input type="checkbox" name="privacyPolicy" required 
+                            <input type="checkbox" name="privacyPolicy" required
                                 class="mt-1 mr-3 w-4 h-4 text-blue-600 rounded focus:ring-blue-500">
                             <span class="text-sm">
-                                I agree to the <a href="#" class="text-blue-300 underline hover:text-blue-200">Privacy Policy</a> <span class="text-red-400">*</span>
+                                I agree to the <a href="#" class="text-blue-300 underline hover:text-blue-200">Privacy
+                                    Policy</a> <span class="text-red-400">*</span>
                             </span>
                         </label>
                     </div>
 
                     <!-- Submit Button -->
                     <div class="text-center">
-                        <button type="submit" 
+                        <button type="submit"
                             class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-lg text-lg transition duration-300 shadow-lg hover:shadow-xl">
                             GET YOUR QUOTE
                         </button>
@@ -1511,10 +1693,10 @@
         // Listen for preference changes
         prefersReducedMotion.addEventListener('change', (e) => handleCarouselState(e.matches));
     </script>
-    
+
     <!-- Santa Game Script -->
     <script>
-        (function() {
+        (function () {
             // Scoped to avoid conflicts
             const gameContainer = document.getElementById('santa-game-container');
             if (!gameContainer) return;
@@ -1611,7 +1793,7 @@
                 canvas.style.width = width + 'px';
                 canvas.style.height = height + 'px';
             }
-            
+
             // Wait for container to be ready
             if (gameContainer.offsetWidth > 0) {
                 updateCanvasSize();
@@ -1869,13 +2051,13 @@
                 if (
                     platformTheStickHits &&
                     platformTheStickHits.x +
-                        platformTheStickHits.w / 2 -
-                        config.perfectAreaSize / 2 <
-                        stickFarX &&
+                    platformTheStickHits.w / 2 -
+                    config.perfectAreaSize / 2 <
+                    stickFarX &&
                     stickFarX <
-                        platformTheStickHits.x +
-                            platformTheStickHits.w / 2 +
-                            config.perfectAreaSize / 2
+                    platformTheStickHits.x +
+                    platformTheStickHits.w / 2 +
+                    config.perfectAreaSize / 2
                 )
                     return [platformTheStickHits, true];
 
@@ -1947,9 +2129,9 @@
                 ctx.translate(
                     santaX - config.santaWidth / 2,
                     santaY +
-                        config.canvasHeight -
-                        config.platformHeight -
-                        config.santaHeight / 2
+                    config.canvasHeight -
+                    config.platformHeight -
+                    config.santaHeight / 2
                 );
 
                 ctx.fillRect(
@@ -1971,7 +2153,7 @@
                 ctx.fillStyle = colours.skin;
                 ctx.arc(5, -7, 3, 0, Math.PI * 2, false);
                 ctx.fill();
-                
+
                 ctx.beginPath();
                 ctx.fillStyle = "white";
                 ctx.arc(7, -2, 3, 0, Math.PI * 2, false);
@@ -2153,7 +2335,7 @@
                     Math.sinus(
                         (sceneOffset * config.backgroundSpeedMultiplier + windowX) * stretch
                     ) *
-                        amplitude +
+                    amplitude +
                     sineBaseY
                 );
             }
@@ -2182,4 +2364,5 @@
         })();
     </script>
 </body>
+
 </html>
