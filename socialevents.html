@@ -778,14 +778,16 @@
                         });
                         
                         // Pause on hover
-                        const carousel = document.querySelector('.group');
-                        carousel.addEventListener('mouseenter', () => {
-                            isPaused = true;
-                        });
-                        
-                        carousel.addEventListener('mouseleave', () => {
-                            isPaused = false;
-                        });
+                        const overflowContainer = cardsContainer.closest('.overflow-hidden');
+                        if (overflowContainer) {
+                            overflowContainer.addEventListener('mouseenter', () => {
+                                isPaused = true;
+                            });
+                            
+                            overflowContainer.addEventListener('mouseleave', () => {
+                                isPaused = false;
+                            });
+                        }
                         
                         // Initialize
                         createCards();
