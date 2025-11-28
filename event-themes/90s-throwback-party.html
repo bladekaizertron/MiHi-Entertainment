@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>90s Throwback Event Theme - MiHi Entertainment</title>
+    <link rel="icon" type="image/svg+xml" href="../assets/images/favicon.svg">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        html, body { 
+            overflow-x: hidden; 
+            width: 100%; 
+            max-width: 100%; 
+        }
+        
+        body { 
+            font-family: 'Inter', sans-serif;
+            color: #1a202c; 
+            background: #0a0a0a;
+        }
+        
+        /* Headings use Playfair Display */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', serif;
+        }
+        
+        /* Navigation uses default Tailwind styles from navigation.js - no CSS overrides */
+        /* Fixed navigation positioning */
+        header {
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            right: 0 !important;
+            width: 100% !important;
+            z-index: 50 !important;
+        }
+        
+        /* Ensure navigation buttons keep their original text case and Tailwind padding */
+        header .btn-primary,
+        header a.btn-primary {
+            text-transform: none !important;
+            padding: 0.75rem 1.5rem !important; /* Match Tailwind px-6 py-3 */
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            font-size: inherit !important;
+            letter-spacing: normal !important;
+            border: none !important;
+            backdrop-filter: none !important;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05) !important;
+            position: static !important;
+            overflow: visible !important;
+        }
+        
+        header .btn-primary::before {
+            display: none !important;
+        }
+        
+        header .btn-primary:hover {
+            transform: none !important;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04) !important;
+        }
+        
+        .section-padding { 
+            padding: 6rem 0; 
+        }
+        
+        img { 
+            max-width: 100%; 
+            height: auto; 
+        }
+        
+        * { 
+            box-sizing: border-box; 
+        }
+        
+        /* Modern Hero Section */
+        .hero-section {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-center;
+            overflow: hidden;
+        }
+        
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(255, 20, 147, 0.4) 0%, rgba(0, 191, 255, 0.5) 50%, rgba(0, 0, 0, 0.7) 100%);
+            z-index: 1;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            max-width: 100%;
+        }
+        
+        .hero-title {
+            font-size: clamp(3rem, 8vw, 8rem);
+            font-weight: 800;
+            color: #ffffff;
+            letter-spacing: -0.02em;
+            margin-bottom: 1rem;
+            line-height: 0.95;
+            text-shadow: 0 0 40px rgba(255, 20, 147, 0.5), 0 0 60px rgba(0, 191, 255, 0.3);
+            text-align: center;
+            width: 100%;
+        }
+        
+        .hero-subtitle {
+            font-size: clamp(0.75rem, 1.5vw, 1rem);
+            color: rgba(255, 255, 255, 0.8);
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            margin-bottom: 2rem;
+            font-weight: 500;
+            text-align: center;
+            width: 100%;
+        }
+        
+        .hero-description {
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            color: rgba(255, 255, 255, 0.9);
+            max-width: 600px;
+            margin: 0 auto 3rem;
+            line-height: 1.6;
+            font-weight: 300;
+            text-align: center;
+            width: 100%;
+        }
+        
+        /* Modern Button Styles - 90s Colors */
+        .modern-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.25rem 3rem;
+            font-size: 0.95rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: #ffffff;
+            background: linear-gradient(135deg, rgba(255, 20, 147, 0.9) 0%, rgba(0, 191, 255, 0.9) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50px;
+            text-decoration: none;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(255, 20, 147, 0.3), 
+                        0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .modern-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.6s ease;
+        }
+        
+        .modern-btn:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 15px 40px rgba(255, 20, 147, 0.5), 
+                        0 0 0 1px rgba(255, 255, 255, 0.2) inset,
+                        0 0 60px rgba(0, 191, 255, 0.4);
+            background: linear-gradient(135deg, rgba(255, 20, 147, 1) 0%, rgba(0, 191, 255, 1) 100%);
+        }
+        
+        .modern-btn:hover::before {
+            left: 100%;
+        }
+        
+        .modern-btn:active {
+            transform: translateY(-1px) scale(1);
+        }
+        
+        /* Call Us Button */
+        .modern-btn-call {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            padding: 1.25rem 3rem;
+            font-size: 0.95rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: #ffffff;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50px;
+            text-decoration: none;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .modern-btn-call::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.6s ease;
+        }
+        
+        .modern-btn-call:hover {
+            transform: translateY(-3px) scale(1.02);
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.5);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3),
+                        0 0 0 1px rgba(255, 255, 255, 0.2) inset;
+        }
+        
+        .modern-btn-call:hover::before {
+            left: 100%;
+        }
+        
+        .modern-btn-call:active {
+            transform: translateY(-1px) scale(1);
+        }
+        
+        .modern-btn-call svg {
+            flex-shrink: 0;
+        }
+        
+        /* Modern Section Styles - 90s Colors */
+        .modern-section {
+            position: relative;
+            padding: 6rem 0;
+            background: linear-gradient(180deg, #0a0a0a 0%, #1a0a1e 50%, #0a0a0a 100%);
+        }
+        
+        .modern-section-light {
+            background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 50%, #ffffff 100%);
+        }
+        
+        .section-title {
+            font-size: clamp(2.5rem, 6vw, 5rem);
+            font-weight: 700;
+            color: #ffffff;
+            text-align: center;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+            line-height: 1.1;
+        }
+        
+        .section-title-light {
+            color: #1a202c;
+        }
+        
+        .section-subtitle {
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            color: rgba(255, 255, 255, 0.7);
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 4rem;
+            line-height: 1.7;
+            font-weight: 300;
+        }
+        
+        .section-subtitle-light {
+            color: #6b7280;
+        }
+        
+        /* Feature Cards */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+        
+        .feature-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 2.5rem;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255, 20, 147, 0.1) 0%, rgba(0, 191, 255, 0.1) 100%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(255, 20, 147, 0.5);
+            box-shadow: 0 20px 60px rgba(255, 20, 147, 0.2),
+                        0 0 0 1px rgba(0, 191, 255, 0.1) inset;
+        }
+        
+        .feature-card:hover::before {
+            opacity: 1;
+        }
+        
+        .feature-card > * {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, rgba(255, 20, 147, 0.2) 0%, rgba(0, 191, 255, 0.2) 100%);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(255, 20, 147, 0.3);
+            color: #ffffff;
+        }
+        
+        .feature-icon svg {
+            color: #ffffff;
+            stroke: #ffffff;
+        }
+        
+        .feature-card h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 1rem;
+            letter-spacing: -0.01em;
+        }
+        
+        .feature-card p {
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.7;
+            font-size: 0.95rem;
+            font-weight: 300;
+        }
+        
+        /* Content Section */
+        .content-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+        
+        .content-text h2 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.02em;
+            line-height: 1.1;
+        }
+        
+        .content-text p {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.8;
+            font-size: 1.05rem;
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+        
+        .content-image {
+            position: relative;
+            border-radius: 24px;
+            overflow: hidden;
+            aspect-ratio: 4/3;
+        }
+        
+        .content-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        .content-image::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(255, 20, 147, 0.2) 0%, rgba(0, 191, 255, 0.2) 100%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: 1;
+        }
+        
+        .content-image:hover img {
+            transform: scale(1.05);
+        }
+        
+        .content-image:hover::before {
+            opacity: 1;
+        }
+        
+        /* Feature List */
+        .feature-list {
+            list-style: none;
+            padding: 0;
+            margin: 2rem 0;
+        }
+        
+        .feature-item {
+            padding: 1.5rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: flex-start;
+            gap: 1.5rem;
+        }
+        
+        .feature-item:last-child {
+            border-bottom: none;
+        }
+        
+        .feature-item-icon {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, rgba(255, 20, 147, 0.8) 0%, rgba(0, 191, 255, 0.8) 100%);
+            border-radius: 50%;
+            flex-shrink: 0;
+            margin-top: 0.25rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid rgba(255, 20, 147, 0.5);
+            box-shadow: 0 0 15px rgba(255, 20, 147, 0.4);
+            position: relative;
+        }
+        
+        .feature-item-icon::before {
+            content: '✓';
+            color: #ffffff;
+            font-size: 16px;
+            font-weight: bold;
+            line-height: 1;
+        }
+        
+        .feature-item-content h4 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.01em;
+        }
+        
+        .feature-item-content p {
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.7;
+            font-size: 0.95rem;
+            margin: 0;
+            font-weight: 300;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .content-section {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+            
+            .content-image {
+                order: -1;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .section-padding {
+                padding: 4rem 0;
+            }
+            
+            .modern-section {
+                padding: 4rem 0;
+            }
+            
+            .feature-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .modern-btn {
+                padding: 1rem 2.5rem;
+                font-size: 0.875rem;
+            }
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .animate-fade-in {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+        
+        /* btn-primary styling */
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.875rem 2rem;
+            font-size: 0.95rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            color: #ffffff;
+            background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50px;
+            text-decoration: none;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 80, 255, 0.3), 
+                        0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.6s ease;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 15px 40px rgba(0, 80, 255, 0.5), 
+                        0 0 0 1px rgba(255, 255, 255, 0.2) inset,
+                        0 0 60px rgba(0, 80, 255, 0.4);
+            background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%);
+        }
+        
+        .btn-primary:hover::before {
+            left: 100%;
+        }
+        
+        .btn-primary:active {
+            transform: translateY(-1px) scale(1);
+        }
+    </style>
+</head>
+<body>
+    <div id="nav-placeholder"></div>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('../assets/images/galleries/ourthemes/card2.jpg');"></div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1 class="hero-title animate-fade-in">90s Throwback</h1>
+            <p class="hero-subtitle animate-fade-in" style="animation-delay: 0.2s;">Event Theme</p>
+            <p class="hero-description animate-fade-in" style="animation-delay: 0.4s;">
+                Nostalgia meets neon in this colorful, funky 90s-inspired theme.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 items-center justify-center animate-fade-in" style="animation-delay: 0.6s;">
+                <a href="../contact-us.html" class="modern-btn">
+                    Get Your Free Quote
+                </a>
+                <button type="button" data-click-to-call data-call-text="Call Us" class="modern-btn-call">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"></path>
+                    </svg>
+                    <span>Call Us</span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Back to the 90s Section -->
+    <section class="modern-section">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
+            <h2 class="section-title">Back to the 90s!</h2>
+            <p class="section-subtitle">
+                Think cassette tapes, bold colors, and retro vibes. Our 90s Throwback Theme takes guests straight back to the decade of fun.
+            </p>
+            <p class="section-subtitle" style="margin-top: -3rem;">
+                Perfect for birthdays, socials, or corporate events that want to keep things playful, this theme is pure nostalgic joy.
+            </p>
+            <div class="text-center">
+                <a href="../contact-us.html" class="modern-btn">Get Your Free Quote</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="modern-section">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
+            <h2 class="section-title">Totally Rad Customizations</h2>
+            <p class="section-subtitle">
+                Our 90s Theme comes with the following options:
+            </p>
+            
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                            <line x1="9" y1="3" x2="9" y2="21"></line>
+                        </svg>
+                    </div>
+                    <h3>Backdrops</h3>
+                    <p>Unlike other photo booth companies with limited options, we offer an extensive selection of 90s-inspired backdrops that perfectly capture that nostalgic decade vibe!</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                        </svg>
+                    </div>
+                    <h3>Props</h3>
+                    <p>Channel your inner Cher Horowitz with all the best 90s accessories and props that'll transport your guests straight back to the decade of grunge, pop, and everything in between!</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="3" width="7" height="7"></rect>
+                            <rect x="14" y="3" width="7" height="7"></rect>
+                            <rect x="14" y="14" width="7" height="7"></rect>
+                            <rect x="3" y="14" width="7" height="7"></rect>
+                        </svg>
+                    </div>
+                    <h3>Custom Layouts</h3>
+                    <p>Design photo strips with authentic 90s styling, complete with retro fonts and layouts that scream nostalgia.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                        </svg>
+                    </div>
+                    <h3>Add-Ons</h3>
+                    <p>Add extra 90s flair with decade-specific enhancements and throwback touches.</p>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <p class="section-subtitle mb-6" style="font-style: italic; max-width: 800px;">
+                    Our 90s theme is totally customizable to capture the exact vibe you're going for, whether it's grunge, pop, or that classic 90s aesthetic. It's all that and a bag of chips!
+                </p>
+                <a href="../contact-us.html" class="modern-btn">Book Your Event Now</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Content Section with Image -->
+    <section class="modern-section">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
+            <div class="content-section">
+                <div class="content-text">
+                    <h2>Experience the Nostalgia</h2>
+                    <p>
+                        Step back in time to the decade of bold fashion, iconic music, and unforgettable moments. Our 90s Throwback Theme brings all the best elements of the era together—from cassette tapes and bold patterns to vibrant colors and retro vibes.
+                    </p>
+                    <p>
+                        Every detail is carefully curated to create an authentic 90s experience that will have your guests reminiscing and dancing all night long.
+                    </p>
+                    <ul class="feature-list">
+                        <li class="feature-item">
+                            <div class="feature-item-icon"></div>
+                            <div class="feature-item-content">
+                                <h4>Extensive Backdrops</h4>
+                                <p>Choose from our wide selection of 90s-inspired backdrops</p>
+                            </div>
+                        </li>
+                        <li class="feature-item">
+                            <div class="feature-item-icon"></div>
+                            <div class="feature-item-content">
+                                <h4>90s Props</h4>
+                                <p>Complete your look with authentic 90s accessories and props</p>
+                            </div>
+                        </li>
+                        <li class="feature-item">
+                            <div class="feature-item-icon"></div>
+                            <div class="feature-item-content">
+                                <h4>Retro Styling</h4>
+                                <p>Personalized layouts and designs with authentic 90s fonts</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="content-image">
+                    <img src="../assets/images/galleries/ourthemes/card2.jpg" alt="90s Throwback Theme Photo Booth">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- View Other Themes Section -->
+    <section class="modern-section modern-section-light">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
+            <div class="text-center">
+                <h2 class="section-title section-title-light">View Our Other Event Themes</h2>
+                <p class="section-subtitle section-subtitle-light mb-8">Scroll to see all of our themes</p>
+                <a href="../booth-themes.html" class="modern-btn" style="background: linear-gradient(135deg, rgba(255, 20, 147, 0.9) 0%, rgba(0, 191, 255, 0.9) 100%);">
+                    View All Themes
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="../assets/components/navigation.js"></script>
+    <script src="../assets/components/footer.js"></script>
+</body>
+</html>
+
