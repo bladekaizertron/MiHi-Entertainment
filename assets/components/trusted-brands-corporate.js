@@ -110,7 +110,7 @@ function renderCorporateBrands() {
         logoDiv.className = 'brand-logo';
         
         const img = document.createElement('img');
-        const imgPath = `../assets/images/trusted_by_brands/${brand.image}`;
+        const imgPath = `assets/images/trusted_by_brands/${brand.image}`;
         img.src = imgPath;
         img.alt = brand.name;
         img.loading = 'lazy';
