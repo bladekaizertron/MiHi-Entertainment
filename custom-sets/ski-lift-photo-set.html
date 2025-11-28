@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Ski Lift Photo Booth Set Rentals by MiHi Entertainment. Bring the thrill of the slopes to your event with an authentic retired ski lift from Colorado's ski destinations.">
+    <title>Ski Lift Photo Booth Set Rentals - MiHi Entertainment</title>
+    <link rel="icon" type="image/svg+xml" href="../../assets/images/favicon.svg">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #1a202c;
+        }
+
+        main h1,
+        main h2,
+        main h3,
+        main h4,
+        main h5,
+        main h6 {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%);
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 80, 255, 0.4);
+        }
+
+        .section-padding {
+            padding: 5rem 0;
+        }
+
+        @media (min-width: 768px) {
+            .section-padding {
+                padding: 8rem 0;
+            }
+        }
+
+        @keyframes gradient-shift {
+            0%, 100% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+        }
+
+        .animated-gradient-mountain {
+            background: linear-gradient(-45deg, #1e40af, #3b82f6, #60a5fa, #2563eb);
+            background-size: 400% 400%;
+            animation: gradient-shift 15s ease infinite;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes blob {
+            0%, 100% {
+                transform: translate(0px, 0px) scale(1);
+            }
+            33% {
+                transform: translate(30px, -50px) scale(1.1);
+            }
+            66% {
+                transform: translate(-20px, 20px) scale(0.9);
+            }
+        }
+
+        .animate-blob {
+            animation: blob 7s infinite;
+        }
+
+        .animation-delay-2000 {
+            animation-delay: 2s;
+        }
+
+        .animation-delay-4000 {
+            animation-delay: 4s;
+        }
+
+        .feature-icon {
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .glass {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .carousel-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .carousel-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .carousel-slide.active {
+            opacity: 1;
+        }
+
+        .carousel-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body class="bg-white">
+    <div id="nav-placeholder"></div>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="relative min-h-[90vh] flex items-center justify-center overflow-hidden animated-gradient-mountain">
+            <div class="absolute inset-0" style="background-image: url('../../assets/images/ski-lift/ski-lift-hero.webp'); background-size: cover; background-position: center; background-repeat: no-repeat;"></div>
+            <div class="absolute inset-0 bg-black/60"></div>
+            <div class="absolute top-20 left-10 w-96 h-96 bg-blue-400/20 rounded-full blur-3xl animate-blob"></div>
+            <div class="absolute bottom-20 right-10 w-96 h-96 bg-indigo-400/20 rounded-full blur-3xl animate-blob animation-delay-2000"></div>
+
+            <div class="relative z-10 container mx-auto px-6">
+                <div class="max-w-6xl mx-auto text-center">
+                    <h1 class="text-5xl md:text-7xl lg:text-8xl font-black mb-6 leading-[1.1] tracking-tight">
+                        <span class="inline-block bg-gradient-to-r from-blue-200 via-white to-indigo-200 bg-clip-text text-transparent drop-shadow-2xl">
+                            SKI LIFT
+                        </span>
+                        <span class="block bg-gradient-to-r from-indigo-200 via-blue-200 to-white bg-clip-text text-transparent drop-shadow-2xl mt-2">
+                            PHOTO BOOTH SET
+                        </span>
+                    </h1>
+
+                    <h2 class="text-lg md:text-xl lg:text-2xl font-semibold mb-8 text-blue-100/95 drop-shadow-xl uppercase tracking-wider">
+                        Bring the thrill of the slopes to your event with a scenic, high-altitude setting perfect for mountain-themed photos.
+                    </h2>
+
+                    <p class="text-base md:text-lg mb-12 max-w-3xl mx-auto leading-relaxed text-white/95 font-light tracking-wide drop-shadow-lg">
+                        Experience the authentic charm of Colorado's mountain resorts with our retired ski lift, carefully updated to bring a pleasing aesthetic to your photos.
+                    </p>
+
+                    <div class="flex flex-col sm:flex-row gap-5 justify-center items-center mb-12">
+                        <a href="../contact-us.html"
+                            class="group relative inline-flex items-center gap-3 bg-gradient-to-r from-blue-400 to-indigo-400 text-gray-900 px-10 py-5 rounded-full text-lg font-bold shadow-2xl hover:shadow-blue-500/50 transition-all duration-500 transform hover:scale-110 hover:-translate-y-1 overflow-hidden">
+                            <span class="relative z-10">Get Your Free Quote</span>
+                            <svg class="w-5 h-5 relative z-10 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+                            </svg>
+                        </a>
+                        <button type="button" data-click-to-call data-call-text="Call Us"
+                            class="group inline-flex items-center gap-3 px-10 py-5 rounded-full text-lg font-bold backdrop-blur-md bg-white/10 border-2 border-blue-400/50 hover:bg-white/20 hover:border-blue-400/70 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:scale-110 hover:-translate-y-1 text-white cursor-pointer">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498A1 1 0 0121 17.72V21a2 2 0 01-2 2h-1C9.716 23 3 16.284 3 8V7a2 2 0 012-2z"/>
+                            </svg>
+                            <span>Call Us</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Main Description Section -->
+        <section class="section-padding bg-white">
+            <div class="container mx-auto px-6">
+                <div class="max-w-6xl mx-auto">
+                    <div class="grid md:grid-cols-2 gap-12 items-center mb-20">
+                        <div>
+                            <h2 class="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-gray-900 via-blue-600 to-gray-900 bg-clip-text text-transparent">
+                                Refined for Excellence
+                            </h2>
+                            <p class="text-lg text-gray-700 mb-6 leading-relaxed">
+                                The MiHi Team has put a lot of time in refining the Ski Lift Set. Our goal was to bring the very best quality in an immersive seasonal experience.
+                            </p>
+                            <p class="text-lg text-gray-700 mb-6 leading-relaxed">
+                                We use an authentic retired ski lift from one of Colorado's ski destinations because we love local. It is updated to bring a pleasing aesthetic to your photos.
+                            </p>
+                            <p class="text-lg text-gray-700 leading-relaxed">
+                                The Ski Lift Set is perfect for any event as it is classic, and looks great set up in any venue!
+                            </p>
+                        </div>
+                        <div class="relative rounded-3xl overflow-hidden shadow-2xl">
+                            <div class="aspect-[4/3] carousel-container" data-carousel="carousel-1">
+                                <div class="carousel-slide active">
+                                    <img src="../../assets/images/ski-lift/ski-lift-1.gif" alt="Ski Lift Photo Booth">
+                                </div>
+                                <div class="carousel-slide">
+                                    <img src="../../assets/images/ski-lift/ski-lift-2.webp" alt="Ski Lift Photo Booth">
+                                </div>
+                                <div class="carousel-slide">
+                                    <img src="../../assets/images/ski-lift/ski-lift-3.webp" alt="Ski Lift Photo Booth">
+                                </div>
+                                <div class="carousel-slide">
+                                    <img src="../../assets/images/ski-lift/ski-lift-4.webp" alt="Ski Lift Photo Booth">
+                                </div>
+                                <div class="carousel-slide">
+                                    <img src="../../assets/images/ski-lift/ski-lift-5.webp" alt="Ski Lift Photo Booth">
+                                </div>
+                                <div class="carousel-slide">
+                                    <img src="../../assets/images/ski-lift/ski-lift-6.webp" alt="Ski Lift Photo Booth">
+                                </div>
+                                <div class="carousel-slide">
+                                    <img src="../../assets/images/ski-lift/ski-lift-7.webp" alt="Ski Lift Photo Booth">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="section-padding bg-gradient-to-b from-blue-50 to-white">
+            <div class="container mx-auto px-6">
+                <div class="max-w-6xl mx-auto">
+                    <div class="text-center mb-16">
+                        <h2 class="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-gray-900 via-blue-600 to-gray-900 bg-clip-text text-transparent">
+                            Complete Photo Booth Experience
+                        </h2>
+                        <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                            Just like our other Photo Booths, our Ski Lift Set comes with many options to ensure your guests have an unforgettable experience.
+                        </p>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                        <div class="text-center p-8 rounded-2xl bg-gradient-to-br from-blue-50 to-indigo-50 border border-blue-200">
+                            <div class="feature-icon mx-auto">
+                                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path>
+                                </svg>
+                            </div>
+                            <h3 class="text-xl font-bold mb-3 text-gray-900">Onsite Printing</h3>
+                            <p class="text-gray-600">Instant photo prints with custom designs</p>
+                        </div>
+
+                        <div class="text-center p-8 rounded-2xl bg-gradient-to-br from-blue-50 to-indigo-50 border border-blue-200">
+                            <div class="feature-icon mx-auto">
+                                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                            </div>
+                            <h3 class="text-xl font-bold mb-3 text-gray-900">Boomerang/GIF Options</h3>
+                            <p class="text-gray-600">Create fun animated memories</p>
+                        </div>
+
+                        <div class="text-center p-8 rounded-2xl bg-gradient-to-br from-blue-50 to-indigo-50 border border-blue-200">
+                            <div class="feature-icon mx-auto">
+                                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"></path>
+                                </svg>
+                            </div>
+                            <h3 class="text-xl font-bold mb-3 text-gray-900">Instant Digital Sharing</h3>
+                            <p class="text-gray-600">Share photos instantly with guests</p>
+                        </div>
+
+                        <div class="text-center p-8 rounded-2xl bg-gradient-to-br from-blue-50 to-indigo-50 border border-blue-200">
+                            <div class="feature-icon mx-auto">
+                                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                                </svg>
+                            </div>
+                            <h3 class="text-xl font-bold mb-3 text-gray-900">Online Gallery</h3>
+                            <p class="text-gray-600">High-quality photos accessible to all guests</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Snow Globe Add-On Section -->
+        <section class="section-padding bg-white">
+            <div class="container mx-auto px-6">
+                <div class="max-w-6xl mx-auto">
+                    <div class="text-center mb-16">
+                        <span class="inline-block px-6 py-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-full text-sm font-semibold mb-6 shadow-lg">ADD-ON</span>
+                        <h2 class="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-gray-900 via-blue-600 to-gray-900 bg-clip-text text-transparent">
+                            A CUTE ADD-ON: THE SNOW GLOBE INSERT
+                        </h2>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-12 items-center">
+                        <div class="relative rounded-3xl overflow-hidden shadow-2xl order-2 md:order-1">
+                            <img src="../../assets/images/ski-lift/ski-lift-8.webp" alt="Ski Lift Photo Booth" class="aspect-[4/3] w-full h-full object-cover">
+                        </div>
+                        <div class="order-1 md:order-2">
+                            <h3 class="text-3xl md:text-4xl font-bold mb-6 text-gray-900">
+                                The Perfect Addition
+                            </h3>
+                            <p class="text-lg text-gray-700 mb-6 leading-relaxed">
+                                Our Snow Globe is the perfect addition to the Ski Lift Set! With this product you'll get your normal printout with a custom design and another photo that is inserted into the snow globe.
+                            </p>
+                            <p class="text-lg text-gray-700 leading-relaxed">
+                                We really love this product because it is another way to preserve a memory and we know you'll love it too!
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Customization Section -->
+        <section class="section-padding bg-gradient-to-b from-white to-blue-50">
+            <div class="container mx-auto px-6">
+                <div class="max-w-6xl mx-auto">
+                    <div class="text-center mb-16">
+                        <span class="inline-block px-6 py-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-full text-sm font-semibold mb-6 shadow-lg">CUSTOMIZATION</span>
+                        <h2 class="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-gray-900 via-blue-600 to-gray-900 bg-clip-text text-transparent">
+                            SKI LIFT PHOTO BOOTH SET CUSTOMIZATION
+                        </h2>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-12 items-center">
+                        <div>
+                            <h3 class="text-3xl md:text-4xl font-bold mb-6 text-gray-900">
+                                Fully Customizable Experience
+                            </h3>
+                            <p class="text-lg text-gray-700 mb-6 leading-relaxed">
+                                At MiHi Entertainment we don't believe in "what you see is what you get". We work to ensure, based on your preferences, that all we offer can be customized.
+                            </p>
+                            <p class="text-lg text-gray-700 mb-6 leading-relaxed">
+                                The Ski Lift Set is no exception and produces an output that really creates the experience of being on the mountain.
+                            </p>
+                            <p class="text-lg text-gray-700 leading-relaxed">
+                                If there is something you want to include with the Ski Lift Set, just get in touch and let us know and we can discuss options.
+                            </p>
+                        </div>
+                        <div class="relative rounded-3xl overflow-hidden shadow-2xl">
+                            <img src="../../assets/images/ski-lift/ski-lift-9.webp" alt="Ski Lift Photo Booth" class="aspect-[4/3] w-full h-full object-cover">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Key Features Grid -->
+        <section class="section-padding bg-white">
+            <div class="container mx-auto px-6">
+                <div class="max-w-7xl mx-auto">
+                    <div class="text-center mb-16">
+                        <span class="inline-block px-6 py-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-full text-sm font-semibold mb-6 shadow-lg">WHY CHOOSE US</span>
+                        <h2 class="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-gray-900 via-blue-600 to-gray-900 bg-clip-text text-transparent">
+                            What Makes It Special
+                        </h2>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <div class="text-center p-8 rounded-2xl bg-gradient-to-br from-blue-50 to-indigo-50 border border-blue-200">
+                            <div class="feature-icon mx-auto">
+                                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                                </svg>
+                            </div>
+                            <h3 class="text-xl font-bold mb-3 text-gray-900">Authentic Colorado Ski Lift</h3>
+                            <p class="text-gray-600">Retired ski lift from one of Colorado's premier ski destinations</p>
+                        </div>
+
+                        <div class="text-center p-8 rounded-2xl bg-gradient-to-br from-blue-50 to-indigo-50 border border-blue-200">
+                            <div class="feature-icon mx-auto">
+                                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                                </svg>
+                            </div>
+                            <h3 class="text-xl font-bold mb-3 text-gray-900">Local & Authentic</h3>
+                            <p class="text-gray-600">We love local - supporting Colorado's mountain communities</p>
+                        </div>
+
+                        <div class="text-center p-8 rounded-2xl bg-gradient-to-br from-blue-50 to-indigo-50 border border-blue-200">
+                            <div class="feature-icon mx-auto">
+                                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path>
+                                </svg>
+                            </div>
+                            <h3 class="text-xl font-bold mb-3 text-gray-900">Classic Design</h3>
+                            <p class="text-gray-600">Timeless aesthetic that looks great in any venue</p>
+                        </div>
+
+                        <div class="text-center p-8 rounded-2xl bg-gradient-to-br from-blue-50 to-indigo-50 border border-blue-200">
+                            <div class="feature-icon mx-auto">
+                                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path>
+                                </svg>
+                            </div>
+                            <h3 class="text-xl font-bold mb-3 text-gray-900">Fully Customizable</h3>
+                            <p class="text-gray-600">Tailor every aspect to match your event's theme and preferences</p>
+                        </div>
+
+                        <div class="text-center p-8 rounded-2xl bg-gradient-to-br from-blue-50 to-indigo-50 border border-blue-200">
+                            <div class="feature-icon mx-auto">
+                                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path>
+                                </svg>
+                            </div>
+                            <h3 class="text-xl font-bold mb-3 text-gray-900">Mountain Experience</h3>
+                            <p class="text-gray-600">Creates the authentic feeling of being on the mountain</p>
+                        </div>
+
+                        <div class="text-center p-8 rounded-2xl bg-gradient-to-br from-blue-50 to-indigo-50 border border-blue-200">
+                            <div class="feature-icon mx-auto">
+                                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"></path>
+                                </svg>
+                            </div>
+                            <h3 class="text-xl font-bold mb-3 text-gray-900">Versatile Venue Fit</h3>
+                            <p class="text-gray-600">Perfect for any event type and venue size</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="section-padding animated-gradient-mountain relative overflow-hidden">
+            <div class="absolute inset-0 bg-black/40"></div>
+            <div class="relative z-10 container mx-auto px-6">
+                <div class="max-w-4xl mx-auto text-center">
+                    <h2 class="text-4xl md:text-5xl font-bold mb-6 text-white">NEED HELP BOOKING?</h2>
+                    <h3 class="text-3xl md:text-4xl font-bold mb-8 text-blue-200">WE'RE HERE FOR YOU!</h3>
+                    <p class="text-xl mb-8 max-w-2xl mx-auto text-white/95">
+                        Ready to bring the mountain experience to your event? Contact us today to get pricing and discuss customization options for your Ski Lift Photo Booth Set.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                        <a href="../contact-us.html" class="inline-block bg-gradient-to-r from-blue-400 to-indigo-400 text-gray-900 px-10 py-5 rounded-full text-lg font-bold shadow-2xl hover:shadow-blue-500/50 transition-all duration-500 transform hover:scale-110 hover:-translate-y-1">
+                            Get Your Free Quote
+                        </a>
+                        <button type="button" data-click-to-call data-call-text="Call Us"
+                            class="group inline-flex items-center gap-3 px-10 py-5 rounded-full text-lg font-bold backdrop-blur-md bg-white/10 border-2 border-blue-400/50 hover:bg-white/20 hover:border-blue-400/70 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:scale-110 hover:-translate-y-1 text-white cursor-pointer">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498A1 1 0 0121 17.72V21a2 2 0 01-2 2h-1C9.716 23 3 16.284 3 8V7a2 2 0 012-2z"/>
+                            </svg>
+                            <span>Call Us</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="../../assets/components/navigation.js"></script>
+    <script src="../../assets/components/footer.js"></script>
+    <script>
+        // Carousel functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const carousels = document.querySelectorAll('.carousel-container');
+            
+            carousels.forEach(function(carousel) {
+                const slides = carousel.querySelectorAll('.carousel-slide');
+                let currentSlide = 0;
+                
+                function showSlide(index) {
+                    slides.forEach(function(slide, i) {
+                        slide.classList.remove('active');
+                        if (i === index) {
+                            slide.classList.add('active');
+                        }
+                    });
+                }
+                
+                function nextSlide() {
+                    currentSlide = (currentSlide + 1) % slides.length;
+                    showSlide(currentSlide);
+                }
+                
+                // Start the carousel
+                setInterval(nextSlide, 3000); // Change slide every 3 seconds
+            });
+        });
+    </script>
+</body>
+</html>
+

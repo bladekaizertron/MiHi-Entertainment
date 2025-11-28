@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Saloon Door Photo Booth Set Rentals by MiHi Entertainment. Step through the swinging doors into a world of charm and character with our rustic Western or neon saloon door photo sets.">
+    <title>Saloon Door Photo Booth Set Rentals - MiHi Entertainment</title>
+    <link rel="icon" type="image/svg+xml" href="../../assets/images/favicon.svg">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #1a202c;
+        }
+
+        main h1,
+        main h2,
+        main h3,
+        main h4,
+        main h5,
+        main h6 {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%);
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 80, 255, 0.4);
+        }
+
+        .section-padding {
+            padding: 5rem 0;
+        }
+
+        @media (min-width: 768px) {
+            .section-padding {
+                padding: 8rem 0;
+            }
+        }
+
+        @keyframes gradient-shift {
+            0%, 100% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+        }
+
+        .animated-gradient-western {
+            background: linear-gradient(-45deg, #78350f, #92400e, #b45309, #a16207);
+            background-size: 400% 400%;
+            animation: gradient-shift 15s ease infinite;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes blob {
+            0%, 100% {
+                transform: translate(0px, 0px) scale(1);
+            }
+            33% {
+                transform: translate(30px, -50px) scale(1.1);
+            }
+            66% {
+                transform: translate(-20px, 20px) scale(0.9);
+            }
+        }
+
+        .animate-blob {
+            animation: blob 7s infinite;
+        }
+
+        .animation-delay-2000 {
+            animation-delay: 2s;
+        }
+
+        .animation-delay-4000 {
+            animation-delay: 4s;
+        }
+
+        .feature-icon {
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, #92400e 0%, #78350f 100%);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .glass {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        @keyframes swing {
+            0%, 100% {
+                transform: rotate(0deg);
+            }
+            25% {
+                transform: rotate(5deg);
+            }
+            75% {
+                transform: rotate(-5deg);
+            }
+        }
+
+        .animate-swing {
+            animation: swing 3s ease-in-out infinite;
+        }
+
+        .carousel-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .carousel-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .carousel-slide.active {
+            opacity: 1;
+        }
+
+        .carousel-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body class="bg-white">
+    <div id="nav-placeholder"></div>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="relative min-h-[90vh] flex items-center justify-center overflow-hidden animated-gradient-western">
+            <div class="absolute inset-0" style="background-image: url('../../assets/images/saloon-door/saloon-door-hero.webp'); background-size: cover; background-position: center; background-repeat: no-repeat;"></div>
+            <div class="absolute inset-0 bg-black/60"></div>
+            <div class="absolute top-20 left-10 w-96 h-96 bg-amber-600/20 rounded-full blur-3xl animate-blob"></div>
+            <div class="absolute bottom-20 right-10 w-96 h-96 bg-orange-600/20 rounded-full blur-3xl animate-blob animation-delay-2000"></div>
+
+            <div class="relative z-10 container mx-auto px-6">
+                <div class="max-w-6xl mx-auto text-center">
+                    <h1 class="text-5xl md:text-7xl lg:text-8xl font-black mb-6 leading-[1.1] tracking-tight">
+                        <span class="inline-block bg-gradient-to-r from-amber-200 via-white to-orange-200 bg-clip-text text-transparent drop-shadow-2xl">
+                            SALOON DOOR
+                        </span>
+                        <span class="block bg-gradient-to-r from-orange-200 via-amber-200 to-white bg-clip-text text-transparent drop-shadow-2xl mt-2">
+                            PHOTO BOOTH SET
+                        </span>
+                    </h1>
+
+                    <h2 class="text-lg md:text-xl lg:text-2xl font-semibold mb-8 text-amber-100/95 drop-shadow-xl uppercase tracking-wider">
+                        Step through the swinging doors into a world of charm and character with our Saloon Door Photo Set.
+                    </h2>
+
+                    <p class="text-base md:text-lg mb-12 max-w-3xl mx-auto leading-relaxed text-white/95 font-light tracking-wide drop-shadow-lg">
+                        Add a rustic and stylish flair to your event, transporting guests straight to the Wild West.
+                    </p>
+
+                    <div class="flex flex-col sm:flex-row gap-5 justify-center items-center mb-12">
+                        <a href="../contact-us.html"
+                            class="group relative inline-flex items-center gap-3 bg-gradient-to-r from-amber-500 to-orange-500 text-gray-900 px-10 py-5 rounded-full text-lg font-bold shadow-2xl hover:shadow-amber-500/50 transition-all duration-500 transform hover:scale-110 hover:-translate-y-1 overflow-hidden">
+                            <span class="relative z-10">Get Your Free Quote</span>
+                            <svg class="w-5 h-5 relative z-10 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+                            </svg>
+                        </a>
+                        <button type="button" data-click-to-call data-call-text="Call Us"
+                            class="group inline-flex items-center gap-3 px-10 py-5 rounded-full text-lg font-bold backdrop-blur-md bg-white/10 border-2 border-amber-400/50 hover:bg-white/20 hover:border-amber-400/70 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:scale-110 hover:-translate-y-1 text-white cursor-pointer">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498A1 1 0 0121 17.72V21a2 2 0 01-2 2h-1C9.716 23 3 16.284 3 8V7a2 2 0 012-2z"/>
+                            </svg>
+                            <span>Call Us</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Main Description Section -->
+        <section class="section-padding bg-white">
+            <div class="container mx-auto px-6">
+                <div class="max-w-6xl mx-auto">
+                    <div class="grid md:grid-cols-2 gap-12 items-center mb-20">
+                        <div>
+                            <h2 class="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-gray-900 via-amber-700 to-gray-900 bg-clip-text text-transparent">
+                                Rustic & Stylish Flair
+                            </h2>
+                            <p class="text-lg text-gray-700 mb-6 leading-relaxed">
+                                Our Saloon Door Photo Set adds a rustic and stylish flair to your event, transporting guests straight to the Wild West. Whether you're hosting a Western-themed party, a corporate event with a twist, or looking to create a unique photo opportunity, this set provides the perfect ambiance.
+                            </p>
+                            <p class="text-lg text-gray-700 mb-6 leading-relaxed">
+                                Crafted with intricate details and authentic design, our saloon doors are an instant hit for creating memorable photo moments.
+                            </p>
+                            <p class="text-lg text-gray-700 leading-relaxed">
+                                Not only are our saloon doors visually stunning, but they're also highly versatile, blending seamlessly with various event themes. Pair them with hay bales, barrels, or string lights to complete the Western look, or keep it simple for a touch of understated elegance.
+                            </p>
+                        </div>
+                        <div class="relative rounded-3xl overflow-hidden shadow-2xl">
+                            <div class="aspect-[4/3] carousel-container" data-carousel="carousel-1">
+                                <div class="carousel-slide active">
+                                    <img src="../../assets/images/saloon-door/saloon-door-1.webp" alt="Saloon Door Photo Booth">
+                                </div>
+                                <div class="carousel-slide">
+                                    <img src="../../assets/images/saloon-door/saloon-door-2.webp" alt="Saloon Door Photo Booth">
+                                </div>
+                                <div class="carousel-slide">
+                                    <img src="../../assets/images/saloon-door/saloon-door-3.webp" alt="Saloon Door Photo Booth">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Rustic Western Saloon Doors Section -->
+        <section class="section-padding bg-gradient-to-b from-amber-50 to-white">
+            <div class="container mx-auto px-6">
+                <div class="max-w-6xl mx-auto">
+                    <div class="text-center mb-16">
+                        <h2 class="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-gray-900 via-amber-700 to-gray-900 bg-clip-text text-transparent">
+                            RUSTIC WESTERN SALOON DOORS
+                        </h2>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-12 items-center">
+                        <div class="relative rounded-3xl overflow-hidden shadow-2xl order-2 md:order-1">
+                            <img src="../../assets/images/saloon-door/saloon-door-4.webp" alt="Saloon Door Photo Booth" class="aspect-[4/3] w-full h-full object-cover">
+                        </div>
+                        <div class="order-1 md:order-2">
+                            <h3 class="text-3xl md:text-4xl font-bold mb-6 text-gray-900">
+                                Classic Western Charm
+                            </h3>
+                            <p class="text-lg text-gray-700 mb-6 leading-relaxed">
+                                Our classic saloon doors feature authentic wood textures, bold hardware, and classic swinging panels. These iconic doors bring a timeless Western charm to your event, making guests feel like they're stepping into a saloon straight out of the Old West.
+                            </p>
+                            <p class="text-lg text-gray-700 leading-relaxed">
+                                Perfect for themed parties, weddings, or corporate activations, they're a stylish way to set the scene.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Neon Saloon Doors Section -->
+        <section class="section-padding bg-white">
+            <div class="container mx-auto px-6">
+                <div class="max-w-6xl mx-auto">
+                    <div class="text-center mb-16">
+                        <h2 class="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-gray-900 via-amber-700 to-gray-900 bg-clip-text text-transparent">
+                            NEON SALOON DOORS: A FUTURISTIC TWIST
+                        </h2>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-12 items-center">
+                        <div>
+                            <h3 class="text-3xl md:text-4xl font-bold mb-6 text-gray-900">
+                                Modern Meets Classic
+                            </h3>
+                            <p class="text-lg text-gray-700 mb-6 leading-relaxed">
+                                Take your Western-themed event to the next level with our Neon Saloon Doors. By adding dynamic neon lights to the classic design, we've created a modern, eye-catching twist on a beloved classic.
+                            </p>
+                            <p class="text-lg text-gray-700 leading-relaxed">
+                                These glowing doors add vibrant color and energy, perfect for night events, tech-forward activations, or anyone looking to blend the old with the new.
+                            </p>
+                        </div>
+                        <div class="relative rounded-3xl overflow-hidden shadow-2xl">
+                            <img src="../../assets/images/saloon-door/saloon-door-5.webp" alt="Saloon Door Photo Booth" class="aspect-[4/3] w-full h-full object-cover">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Grid -->
+        <section class="section-padding bg-gradient-to-b from-white to-amber-50">
+            <div class="container mx-auto px-6">
+                <div class="max-w-7xl mx-auto">
+                    <div class="text-center mb-16">
+                        <span class="inline-block px-6 py-2 bg-gradient-to-r from-amber-600 to-orange-600 text-white rounded-full text-sm font-semibold mb-6 shadow-lg">FEATURES</span>
+                        <h2 class="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-gray-900 via-amber-700 to-gray-900 bg-clip-text text-transparent">
+                            What Makes It Special
+                        </h2>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <div class="text-center p-8 rounded-2xl bg-gradient-to-br from-amber-50 to-orange-50 border border-amber-200">
+                            <div class="feature-icon mx-auto">
+                                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                                </svg>
+                            </div>
+                            <h3 class="text-xl font-bold mb-3 text-gray-900">Authentic Design</h3>
+                            <p class="text-gray-600">Crafted with intricate details and authentic wood textures</p>
+                        </div>
+
+                        <div class="text-center p-8 rounded-2xl bg-gradient-to-br from-amber-50 to-orange-50 border border-amber-200">
+                            <div class="feature-icon mx-auto">
+                                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                                </svg>
+                            </div>
+                            <h3 class="text-xl font-bold mb-3 text-gray-900">Classic Swinging Panels</h3>
+                            <p class="text-gray-600">Iconic swinging doors that bring the Old West to life</p>
+                        </div>
+
+                        <div class="text-center p-8 rounded-2xl bg-gradient-to-br from-amber-50 to-orange-50 border border-amber-200">
+                            <div class="feature-icon mx-auto">
+                                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path>
+                                </svg>
+                            </div>
+                            <h3 class="text-xl font-bold mb-3 text-gray-900">Highly Versatile</h3>
+                            <p class="text-gray-600">Blends seamlessly with various event themes and styles</p>
+                        </div>
+
+                        <div class="text-center p-8 rounded-2xl bg-gradient-to-br from-amber-50 to-orange-50 border border-amber-200">
+                            <div class="feature-icon mx-auto">
+                                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                                </svg>
+                            </div>
+                            <h3 class="text-xl font-bold mb-3 text-gray-900">Neon Option Available</h3>
+                            <p class="text-gray-600">Dynamic neon lights for a modern, eye-catching twist</p>
+                        </div>
+
+                        <div class="text-center p-8 rounded-2xl bg-gradient-to-br from-amber-50 to-orange-50 border border-amber-200">
+                            <div class="feature-icon mx-auto">
+                                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                                </svg>
+                            </div>
+                            <h3 class="text-xl font-bold mb-3 text-gray-900">Memorable Moments</h3>
+                            <p class="text-gray-600">Creates immersive experiences guests won't stop talking about</p>
+                        </div>
+
+                        <div class="text-center p-8 rounded-2xl bg-gradient-to-br from-amber-50 to-orange-50 border border-amber-200">
+                            <div class="feature-icon mx-auto">
+                                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"></path>
+                                </svg>
+                            </div>
+                            <h3 class="text-xl font-bold mb-3 text-gray-900">Perfect Pairing Options</h3>
+                            <p class="text-gray-600">Pair with hay bales, barrels, or string lights for complete Western look</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="section-padding animated-gradient-western relative overflow-hidden">
+            <div class="absolute inset-0 bg-black/50"></div>
+            <div class="relative z-10 container mx-auto px-6">
+                <div class="max-w-4xl mx-auto text-center">
+                    <h2 class="text-4xl md:text-5xl font-bold mb-6 text-white">NEED HELP BOOKING?</h2>
+                    <h3 class="text-3xl md:text-4xl font-bold mb-8 text-amber-200">WE'RE HERE FOR YOU!</h3>
+                    <p class="text-xl mb-8 max-w-2xl mx-auto text-white/95">
+                        Ready to bring the Wild West to your event? Contact us today to get pricing and discuss which saloon door style works best for your occasion.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                        <a href="../contact-us.html" class="inline-block bg-gradient-to-r from-amber-500 to-orange-500 text-gray-900 px-10 py-5 rounded-full text-lg font-bold shadow-2xl hover:shadow-amber-500/50 transition-all duration-500 transform hover:scale-110 hover:-translate-y-1">
+                            Get Your Free Quote
+                        </a>
+                        <button type="button" data-click-to-call data-call-text="Call Us"
+                            class="group inline-flex items-center gap-3 px-10 py-5 rounded-full text-lg font-bold backdrop-blur-md bg-white/10 border-2 border-amber-400/50 hover:bg-white/20 hover:border-amber-400/70 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:scale-110 hover:-translate-y-1 text-white cursor-pointer">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498A1 1 0 0121 17.72V21a2 2 0 01-2 2h-1C9.716 23 3 16.284 3 8V7a2 2 0 012-2z"/>
+                            </svg>
+                            <span>Call Us</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="../../assets/components/navigation.js"></script>
+    <script src="../../assets/components/footer.js"></script>
+    <script>
+        // Carousel functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const carousels = document.querySelectorAll('.carousel-container');
+            
+            carousels.forEach(function(carousel) {
+                const slides = carousel.querySelectorAll('.carousel-slide');
+                let currentSlide = 0;
+                
+                function showSlide(index) {
+                    slides.forEach(function(slide, i) {
+                        slide.classList.remove('active');
+                        if (i === index) {
+                            slide.classList.add('active');
+                        }
+                    });
+                }
+                
+                function nextSlide() {
+                    currentSlide = (currentSlide + 1) % slides.length;
+                    showSlide(currentSlide);
+                }
+                
+                // Start the carousel
+                setInterval(nextSlide, 3000); // Change slide every 3 seconds
+            });
+        });
+    </script>
+</body>
+</html>
+
