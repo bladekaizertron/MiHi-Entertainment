@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Professional birthday party photo booth services by MiHi Entertainment. Make your birthday celebration memorable with our fun photo experiences.">
+    <title>Birthday Party Photo Booth Services - MiHi Entertainment</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #1a202c;
+            background-color: #ffffff;
+            overflow-x: hidden;
+        }
+        h1, h2, h3, h4, h5, h6 { font-family: 'Playfair Display', serif; }
+        
+        .btn-primary { 
+            background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%);
+            color: white;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+        .btn-primary:hover::before {
+            left: 100%;
+        }
+        .btn-primary:hover { 
+            transform: translateY(-3px); 
+            box-shadow: 0 15px 35px rgba(0, 80, 255, 0.4);
+        }
+        .btn-primary:active {
+            transform: translateY(-1px);
+        }
+        
+        .section-padding { 
+            padding: 6rem 0;
+        }
+        
+        @media (max-width: 768px) {
+            .section-padding {
+                padding: 4rem 0;
+            }
+        }
+        
+        .animate-fade-in {
+            animation: fadeIn 1s ease-out forwards;
+            opacity: 0;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+        
+        .float-animation {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .hero-section {
+            min-height: 70vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(0, 80, 255, 0.4) 0%, rgba(128, 0, 255, 0.4) 100%);
+            z-index: 1;
+        }
+        
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 0.8s ease-in-out, transform 0.8s ease-in-out;
+            transform: scale(1.1);
+        }
+        
+        .hero-bg.loaded {
+            opacity: 1;
+            transform: scale(1);
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 10;
+        }
+        
+        .product-card {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .product-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(0, 80, 255, 0.05) 0%, rgba(128, 0, 255, 0.05) 100%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: 1;
+            pointer-events: none;
+        }
+        
+        .product-card:hover::before {
+            opacity: 1;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-12px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+        }
+        
+        .product-card-image {
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .product-card:hover .product-card-image {
+            transform: scale(1.1);
+        }
+        
+        .image-hover-effect {
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), filter 0.4s ease;
+        }
+        
+        .image-hover-effect:hover {
+            transform: scale(1.08);
+            filter: brightness(1.15) contrast(1.05);
+        }
+        
+        .content-card {
+            background: white;
+            border-radius: 1.5rem;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        
+        .content-card:hover {
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+            transform: translateY(-6px);
+            border-color: rgba(0, 80, 255, 0.2);
+        }
+        
+        .section-divider {
+            height: 2px;
+            background: linear-gradient(to right, transparent, #e2e8f0, transparent);
+            margin: 4rem 0;
+        }
+        
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 8px 20px rgba(0, 80, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .feature-icon:hover {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 12px 30px rgba(0, 80, 255, 0.4);
+        }
+        
+        .number-badge {
+            transition: all 0.3s ease;
+        }
+        
+        .number-badge:hover {
+            transform: scale(1.15) rotate(5deg);
+            box-shadow: 0 6px 15px rgba(0, 80, 255, 0.3);
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #0050ff 0%, #8000ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .decorative-blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(60px);
+            opacity: 0.3;
+            animation: float 8s ease-in-out infinite;
+        }
+        
+        .blob-1 {
+            width: 300px;
+            height: 300px;
+            background: linear-gradient(135deg, #0050ff 0%, #8000ff 100%);
+            top: 10%;
+            right: -5%;
+            animation-delay: 0s;
+        }
+        
+        .blob-2 {
+            width: 250px;
+            height: 250px;
+            background: linear-gradient(135deg, #ff00ff 0%, #0050ff 100%);
+            bottom: 10%;
+            left: -5%;
+            animation-delay: 2s;
+        }
+        
+        .section-header {
+            position: relative;
+        }
+        
+        .section-header::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, #0050ff 0%, #8000ff 100%);
+            border-radius: 2px;
+        }
+        
+        .product-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.5) 100%);
+            transition: opacity 0.4s ease;
+        }
+        
+        .product-card:hover .product-overlay {
+            opacity: 0.6;
+        }
+        
+        .stagger-animation {
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .stagger-1 { animation-delay: 0.1s; }
+        .stagger-2 { animation-delay: 0.2s; }
+        .stagger-3 { animation-delay: 0.3s; }
+        .stagger-4 { animation-delay: 0.4s; }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(0, 80, 255, 0.05) 0%, rgba(128, 0, 255, 0.05) 100%);
+            border-left: 4px solid;
+            border-image: linear-gradient(135deg, #0050ff 0%, #8000ff 100%) 1;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .highlight-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.6s;
+        }
+        
+        .highlight-box:hover::before {
+            left: 100%;
+        }
+        
+        @media (max-width: 768px) {
+            .hero-section {
+                min-height: 50vh;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <div id="navigation-container"></div>
+    <script src="../assets/components/navigation.js"></script>
+
+    <!-- Hero Section -->
+    <section class="hero-section text-white">
+        <img 
+            src="../assets/images/bdayparty/hero.jpg" 
+            alt="Birthday party photo booth celebration"
+            class="hero-bg"
+            onload="this.classList.add('loaded')"
+            onerror="console.error('Error loading image:', this.src)">
+        <div class="container mx-auto px-6 text-center relative z-10" style="text-shadow: 2px 2px 4px rgba(0,0,0,0.7);">
+            <h1 class="text-5xl md:text-7xl font-bold mb-4 animate-fade-in">BIRTHDAY PARTY</h1>
+            <h2 class="text-2xl md:text-3xl font-light mb-8 animate-fade-in" style="animation-delay: 0.2s;">PHOTO BOOTH</h2>
+            <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto animate-fade-in" style="animation-delay: 0.4s;">
+                Give them a birthday bash filled with personality, laughs, and unforgettable moments.
+            </p>
+            <a href="../contact-us.html" class="btn-primary px-8 py-4 rounded-lg text-lg font-semibold inline-block animate-fade-in" style="animation-delay: 0.6s;">
+                CONTACT US
+            </a>
+        </div>
+    </section>
+
+    <!-- Snap Into Birthday Mode Section -->
+    <section class="section-padding bg-white">
+        <div class="container mx-auto px-6">
+            <div class="max-w-7xl mx-auto">
+                <!-- Header -->
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl md:text-5xl font-bold mb-6">Snap Into Birthday Mode</h2>
+                    <div class="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-600 mx-auto mb-8"></div>
+                </div>
+                
+                <!-- Two Column Layout: Text and Image -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16">
+                    <!-- Text Content -->
+                    <div class="space-y-6">
+                        <p class="text-lg md:text-xl text-gray-700 leading-relaxed">
+                            From kid-friendly themes to grown-up glam, birthday parties are meant to reflect the guest of honor's unique style. Whether it's a milestone bash or something low-key, birthdays call for celebration.
+                        </p>
+                        <p class="text-lg md:text-xl text-gray-700 leading-relaxed">
+                            Our photo booths keep the party going with themed templates, custom props, and interactive activations that match your vibe. Add a GlamBot, 360 Booth, or GIF overlay for content that's ready for their highlight reel.
+                        </p>
+                        <div class="pt-4">
+                            <a href="../contact-us.html" class="btn-primary px-8 py-4 rounded-lg text-lg font-semibold inline-block">
+                                BOOK NOW
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Image -->
+                    <div class="relative">
+                        <div class="overflow-hidden rounded-2xl shadow-2xl">
+                            <img src="../assets/images/bdayparty/pic1.jpg" alt="Birthday party photo booth" class="w-full h-auto object-cover image-hover-effect">
+                        </div>
+                        <!-- Decorative element -->
+                        <div class="absolute -bottom-6 -right-6 w-32 h-32 bg-gradient-to-br from-blue-400 to-purple-500 rounded-full opacity-20 blur-3xl -z-10"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How to Plan Section -->
+    <section class="section-padding bg-gradient-to-br from-gray-50 via-white to-gray-50">
+        <div class="container mx-auto px-6">
+            <div class="max-w-6xl mx-auto">
+                <!-- Section Header -->
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl md:text-5xl font-bold mb-6">How to Plan the Best Birthday Party Ever</h2>
+                    <div class="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-600 mx-auto mb-6"></div>
+                    <p class="text-lg md:text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed">
+                        From big milestones to low-key get-togethers, birthdays are your chance to make someone feel celebrated. Start with a theme, then build an experience that's personal and fun for everyone.
+                    </p>
+                </div>
+                
+                <!-- What You'll Need Card -->
+                <div class="content-card p-8 md:p-12 mb-12">
+                    <div class="flex items-center mb-6">
+                        <div class="feature-icon">✓</div>
+                        <h3 class="text-3xl font-bold ml-4">What you'll need:</h3>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="flex items-start space-x-4">
+                            <div class="flex-shrink-0 w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center mt-1">
+                                <span class="text-blue-600 font-bold text-lg">1</span>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-lg mb-2">Perfect Theme</h4>
+                                <p class="text-gray-700">A theme that reflects the guest of honor's style</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <div class="flex-shrink-0 w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center mt-1">
+                                <span class="text-blue-600 font-bold text-lg">2</span>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-lg mb-2">Right Venue</h4>
+                                <p class="text-gray-700">A venue that works for the size and energy of the crowd</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <div class="flex-shrink-0 w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center mt-1">
+                                <span class="text-blue-600 font-bold text-lg">3</span>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-lg mb-2">Food & Music</h4>
+                                <p class="text-gray-700">Food, cake, and a playlist full of favorites</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <div class="flex-shrink-0 w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center mt-1">
+                                <span class="text-blue-600 font-bold text-lg">4</span>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-lg mb-2">Entertainment</h4>
+                                <p class="text-gray-700">Entertainment that keeps guests engaged and having fun</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Closing Statement -->
+                <div class="text-center bg-gradient-to-r from-blue-50 to-purple-50 rounded-2xl p-8 md:p-12 mb-12">
+                    <p class="text-xl md:text-2xl text-gray-800 leading-relaxed max-w-4xl mx-auto mb-8">
+                        With custom birthday overlays, themed props, and even roaming photo options, MiHi makes it easy to turn your party into a memory-making moment from start to finish.
+                    </p>
+                    <a href="../contact-us.html" class="btn-primary px-10 py-5 rounded-lg text-lg font-semibold inline-block">
+                        BOOK YOUR EVENT NOW
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Related Products Section -->
+    <section class="section-padding bg-white">
+        <div class="container mx-auto px-6">
+            <!-- Section Header -->
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4">DISCOVER OUR</h2>
+                <h3 class="text-3xl md:text-4xl font-bold text-blue-600 mb-4">RELATED PRODUCTS</h3>
+                <div class="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-600 mx-auto mb-6"></div>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+                    Discover more of what we do best—Photo Booths, Activations, and beyond! Click below to browse our related products.
+                </p>
+            </div>
+            
+            <!-- Product Cards Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                <!-- 360 Photo Booth -->
+                <div class="product-card bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100">
+                    <div class="h-64 flex items-center justify-center relative overflow-hidden">
+                        <img src="../assets/images/bdayparty/pic2.jpg" alt="360 Photo Booth" class="absolute inset-0 w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-black opacity-40 hover:opacity-30 transition-opacity duration-300"></div>
+                        <h4 class="text-4xl font-bold text-white text-center relative z-10 drop-shadow-lg">360</h4>
+                    </div>
+                    <div class="p-6">
+                        <h5 class="text-2xl font-bold mb-3">Photo Booth</h5>
+                        <p class="text-gray-600 mb-4">Capture stunning 360-degree moments</p>
+                        <a href="../product/360-photo-booth.html" class="text-blue-600 font-semibold hover:text-blue-800 transition inline-flex items-center group">
+                            Learn More 
+                            <svg class="w-5 h-5 ml-2 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Array Photo Booth -->
+                <div class="product-card bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100">
+                    <div class="h-64 flex items-center justify-center relative overflow-hidden">
+                        <img src="../assets/images/bdayparty/gif1.gif" alt="Array Photo Booth" class="absolute inset-0 w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-black opacity-40 hover:opacity-30 transition-opacity duration-300"></div>
+                        <h4 class="text-4xl font-bold text-white text-center relative z-10 drop-shadow-lg">Array</h4>
+                    </div>
+                    <div class="p-6">
+                        <h5 class="text-2xl font-bold mb-3">Photo Booth</h5>
+                        <p class="text-gray-600 mb-4">Bullet-time photography experience</p>
+                        <a href="../product/bullet-time-booth.html" class="text-blue-600 font-semibold hover:text-blue-800 transition inline-flex items-center group">
+                            Learn More 
+                            <svg class="w-5 h-5 ml-2 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Classic Photo Booth -->
+                <div class="product-card bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100">
+                    <div class="h-64 flex items-center justify-center relative overflow-hidden">
+                        <img src="../assets/images/bdayparty/pic3.jpg" alt="Classic Photo Booth" class="absolute inset-0 w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-black opacity-40 hover:opacity-30 transition-opacity duration-300"></div>
+                        <h4 class="text-4xl font-bold text-white text-center relative z-10 drop-shadow-lg">Classic</h4>
+                    </div>
+                    <div class="p-6">
+                        <h5 class="text-2xl font-bold mb-3">Photo Booth</h5>
+                        <p class="text-gray-600 mb-4">Timeless photo booth experience</p>
+                        <a href="../product/photo-booth.html" class="text-blue-600 font-semibold hover:text-blue-800 transition inline-flex items-center group">
+                            Learn More 
+                            <svg class="w-5 h-5 ml-2 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <div id="footer-container"></div>
+    <script src="../assets/components/footer.js"></script>
+
+    <!-- Back to Top -->
+    <script src="../assets/components/back-to-top.js"></script>
+</body>
+</html>
+

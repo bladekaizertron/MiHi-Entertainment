@@ -616,6 +616,8 @@
                         cursor: pointer;
                         transition: all 0.3s ease;
                         z-index: 10;
+                        text-decoration: none;
+                        display: inline-block;
                     }
                     
                     @media (min-width: 640px) {
@@ -648,7 +650,8 @@
                                 image: '../assets/images/social/imc1.jpg', 
                                 title: 'Birthday Parties', 
                                 description: 'From sweet sixteens to 60th soirées, our booths keep guests smiling, snapping, and sharing. Add custom props or a themed overlay to match the party vibe.',
-                                badge: 'Lets Party'
+                                badge: 'Lets Party',
+                                link: 'event-type/birthday-party.html'
                             },
                             { 
                                 image: '../assets/images/social/imc2.jpg',
@@ -716,10 +719,14 @@
                             duplicatedCards.forEach((card, index) => {
                                 const cardElement = document.createElement('div');
                                 cardElement.className = 'card group flex-shrink-0';
+                                const badgeElement = card.link 
+                                    ? `<a href="${card.link}" class="card-button">${card.badge}</a>`
+                                    : `<button class="card-button">${card.badge}</button>`;
+                                
                                 cardElement.innerHTML = `
                                     <div class="relative overflow-hidden">
                                         <img src="${card.image}" alt="${card.title}" class="card-image">
-                                        <button class="card-button">${card.badge}</button>
+                                        ${badgeElement}
                                         <div class="card-overlay">
                                             <h4 class="font-semibold text-white">${card.title}</h4>
                                             <p class="text-sm text-gray-200">${card.description}</p>
