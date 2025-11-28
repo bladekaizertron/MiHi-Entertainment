@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Analog Phone Audio Guestbook by MiHi Entertainment. Capture lifetime messages from your guests with our retro phone guestbook experience.">
+    <title>Analog Phone Audio Guestbook - MiHi Entertainment</title>
+    <link rel="preload" as="image" href="assets/images/audioguestbook/hero.jpg">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <style>
+        /* Protect navigation button from page-specific styles - must override Tailwind utilities */
+        header .btn-primary,
+        header nav .btn-primary,
+        header a.btn-primary,
+        header nav a.btn-primary,
+        header a.btn-primary.text-white,
+        header nav a.btn-primary.text-white {
+            background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%) !important;
+            background-color: #0050ff !important;
+            background-image: linear-gradient(135deg, #0050ff 0%, #0040d9 100%) !important;
+            color: #ffffff !important;
+            transition: all 0.3s ease !important;
+            border: none !important;
+        }
+
+        header .btn-primary:hover,
+        header nav .btn-primary:hover,
+        header a.btn-primary:hover,
+        header nav a.btn-primary:hover,
+        header a.btn-primary.text-white:hover,
+        header nav a.btn-primary.text-white:hover {
+            background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%) !important;
+            background-color: #0050ff !important;
+            background-image: linear-gradient(135deg, #0050ff 0%, #0040d9 100%) !important;
+            color: #ffffff !important;
+            transform: translateY(-2px) !important;
+            box-shadow: 0 10px 25px rgba(0, 80, 255, 0.4) !important;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #1a202c;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .hero-section {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            transition: transform 0.3s ease-out;
+            will-change: transform;
+        }
+
+        .hero-section:hover .hero-bg {
+            transform: scale(1.03);
+        }
+
+        .animate-fade-in-up {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        .animate-delay-200 {
+            animation-delay: 0.2s;
+        }
+
+        .animate-delay-300 {
+            animation-delay: 0.3s;
+        }
+
+        .animate-delay-400 {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .phone-icon {
+            animation: ring 2s ease-in-out infinite;
+        }
+
+        @keyframes ring {
+
+            0%,
+            100% {
+                transform: rotate(0deg);
+            }
+
+            10%,
+            30% {
+                transform: rotate(-10deg);
+            }
+
+            20%,
+            40% {
+                transform: rotate(10deg);
+            }
+        }
+
+        .section-padding {
+            padding: 5rem 0;
+        }
+
+        @media (max-width: 768px) {
+            .section-padding {
+                padding: 3rem 0;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .section-padding {
+                padding: 2.5rem 0;
+            }
+        }
+
+        .faq-item {
+            transition: all 0.3s ease;
+        }
+
+        .faq-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+
+<body>
+    <div id="nav-placeholder"></div>
+
+    <!-- Hero Section -->
+    <section
+        class="relative min-h-[50vh] sm:min-h-[60vh] md:min-h-[75vh] lg:min-h-screen flex items-center justify-center overflow-hidden py-6 sm:py-8 md:py-12 hero-section">
+        <img src="assets/images/audioguestbook/hero.jpg" alt="Analog Phone Audio Guestbook"
+            class="absolute inset-0 w-full h-full object-cover hero-bg"
+            onload="console.log('Image loaded'); this.classList.add('loaded')"
+            onerror="console.error('Error loading image:', this.src)">
+        <div class="absolute inset-0 bg-black bg-opacity-60"></div>
+        <div class="relative z-10 text-center text-white px-4 sm:px-6 w-full">
+            <div class="max-w-4xl mx-auto">
+                <div class="mb-4 sm:mb-6 flex justify-center">
+                    <img src="assets/images/audioguestbook/pic1.jpg" alt="Phone Booth"
+                        class="w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 object-contain phone-icon animate-fade-in-up">
+                </div>
+                <div class="mb-2 sm:mb-3">
+                    <h1
+                        class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl leading-tight tracking-tight font-bold animate-fade-in-up">
+                        ANALOG PHONE AUDIO GUESTBOOK
+                    </h1>
+                </div>
+
+                <div class="h-px w-8 sm:w-12 bg-white mx-auto my-3 sm:my-4 animate-fade-in-up animate-delay-200"></div>
+
+                <p
+                    class="max-w-3xl mx-auto text-sm sm:text-base md:text-lg leading-relaxed mb-4 sm:mb-6 px-2 sm:px-0 text-white tracking-normal animate-fade-in-up animate-delay-200 font-medium">
+                    What's better than leaving messages that will last a lifetime? Doing it on an analog phone!
+                </p>
+                <div
+                    class="mt-4 sm:mt-6 mb-6 sm:mb-8 animate-fade-in-up animate-delay-300 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-3 md:gap-4">
+                    <a href="#contact"
+                        class="w-full sm:w-auto bg-gradient-to-r from-blue-500 to-purple-600 text-white hover:from-blue-600 hover:to-purple-700 px-6 sm:px-8 md:px-10 py-2.5 sm:py-3 rounded-full text-xs sm:text-sm font-bold tracking-wide uppercase inline-flex items-center justify-center gap-2 transform transition-all duration-200 hover:shadow-lg hover:scale-105 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-blue-500 shadow-lg"
+                        aria-label="Contact us for audio guestbook">
+                        <span>Contact Us</span>
+                        <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                        </svg>
+                    </a>
+                    <button type="button" data-click-to-call data-call-text="Call Us"
+                        class="w-full sm:w-auto bg-white/10 backdrop-blur-sm border border-white/30 text-white hover:bg-white/20 px-6 sm:px-8 md:px-9 py-2.5 sm:py-3 rounded-full text-xs sm:text-sm font-bold tracking-wide uppercase inline-flex items-center justify-center gap-2 transform transition-all duration-200 hover:shadow-lg hover:scale-105 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-transparent cursor-pointer"
+                        aria-label="Call us">
+                        <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z">
+                            </path>
+                        </svg>
+                        <span>Call Us</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="section-padding relative overflow-hidden">
+        <img src="assets/images/audioguestbook/pic1.jpg" alt="Phone Booth Background"
+            class="absolute inset-0 w-full h-full object-cover hero-bg">
+        <div class="absolute inset-0 bg-white bg-opacity-50"></div>
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-12">
+                <h2
+                    class="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4 animate-fade-in-up drop-shadow-lg">
+                    RING, RING... HELLO?
+                </h2>
+                <p
+                    class="text-lg sm:text-xl text-gray-800 max-w-3xl mx-auto animate-fade-in-up animate-delay-200 font-medium drop-shadow-md">
+                    With our BRAND NEW analog phone guest book, your guests can leave you messages with ease which will
+                    all be sent over to you post-event.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8 lg:gap-12 items-center mb-12">
+                <div class="order-2 md:order-1">
+                    <img src="assets/images/audioguestbook/pic2.jpg" alt="Talking on Retro Phone"
+                        class="w-full h-auto rounded-lg shadow-xl animate-fade-in-up animate-delay-300">
+                </div>
+                <div class="order-1 md:order-2">
+                    <h3 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-6 animate-fade-in-up drop-shadow-md">
+                        It's as easy as 1... 2... 3!
+                    </h3>
+                    <div class="space-y-6">
+                        <div
+                            class="flex items-start space-x-4 animate-fade-in-up animate-delay-200 bg-white/60 backdrop-blur-sm rounded-lg p-4 shadow-md">
+                            <div
+                                class="flex-shrink-0 w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white font-bold text-xl shadow-lg">
+                                1
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-semibold text-gray-900 mb-2 drop-shadow-sm">Pick up the phone
+                                </h4>
+                                <p class="text-gray-800 font-medium">Your guests simply pick up the retro phone and get
+                                    ready to
+                                    leave their message.</p>
+                            </div>
+                        </div>
+                        <div
+                            class="flex items-start space-x-4 animate-fade-in-up animate-delay-300 bg-white/60 backdrop-blur-sm rounded-lg p-4 shadow-md">
+                            <div
+                                class="flex-shrink-0 w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white font-bold text-xl shadow-lg">
+                                2
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-semibold text-gray-900 mb-2 drop-shadow-sm">Wait for the beep
+                                </h4>
+                                <p class="text-gray-800 font-medium">After picking up, guests wait for the beep signal
+                                    indicating
+                                    the recording has started.</p>
+                            </div>
+                        </div>
+                        <div
+                            class="flex items-start space-x-4 animate-fade-in-up animate-delay-400 bg-white/60 backdrop-blur-sm rounded-lg p-4 shadow-md">
+                            <div
+                                class="flex-shrink-0 w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white font-bold text-xl shadow-lg">
+                                3
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-semibold text-gray-900 mb-2 drop-shadow-sm">Start leaving a
+                                    message</h4>
+                                <p class="text-gray-800 font-medium">Once you're done, it's as simple as placing the
+                                    phone back down
+                                    on its cradle to save the message.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-8">
+                        <a href="#contact"
+                            class="inline-flex items-center justify-center px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold rounded-lg hover:from-blue-600 hover:to-purple-700 transform transition-all duration-200 hover:scale-105 shadow-lg hover:shadow-xl">
+                            <span>INQUIRE ABOUT AUDIO GUESTBOOK</span>
+                            <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="section-padding bg-white">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+                    Audio Guestbook FAQ
+                </h2>
+                <p class="text-lg text-gray-600">
+                    Read our Audio Guestbook FAQ below:
+                </p>
+            </div>
+
+            <div class="space-y-6">
+                <div class="faq-item bg-gray-50 rounded-lg p-6 border border-gray-200">
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Q: What is an audio guestbook?</h3>
+                    <p class="text-gray-700 leading-relaxed">
+                        A: An audio guestbook is a unique way to capture messages from your guests at a special event,
+                        such as a wedding or anniversary party. Instead of writing in a traditional guestbook, your
+                        guests can record a personal message that is then compiled into a keepsake album.
+                    </p>
+                </div>
+
+                <div class="faq-item bg-gray-50 rounded-lg p-6 border border-gray-200">
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Q: How does the audio guestbook work?</h3>
+                    <p class="text-gray-700 leading-relaxed">
+                        A: Our audio guestbook kit comes with a recording device and a beautiful album. Simply place the
+                        recording device on a table or stand and invite your guests to record a message. After the
+                        event, you'll receive all the recordings and can add them to your album.
+                    </p>
+                </div>
+
+                <div class="faq-item bg-gray-50 rounded-lg p-6 border border-gray-200">
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Q: How long can the messages be?</h3>
+                    <p class="text-gray-700 leading-relaxed">
+                        A: The recording device allows for messages up to 3 minutes in length.
+                    </p>
+                </div>
+
+                <div class="faq-item bg-gray-50 rounded-lg p-6 border border-gray-200">
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Q: How do I receive the recordings?</h3>
+                    <p class="text-gray-700 leading-relaxed">
+                        A: We will provide you with a digital file containing all the recordings, as well as a link to a
+                        private online gallery where you can listen to and download the recordings.
+                    </p>
+                </div>
+
+                <div class="faq-item bg-gray-50 rounded-lg p-6 border border-gray-200">
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Q: How long does it take to receive my audio
+                        guestbook?</h3>
+                    <p class="text-gray-700 leading-relaxed">
+                        A: We aim to deliver your audio guestbook within 1 week of your event.
+                    </p>
+                </div>
+
+                <div class="faq-item bg-gray-50 rounded-lg p-6 border border-gray-200">
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Q: Can I add more recordings to my audio guestbook
+                        after the event?</h3>
+                    <p class="text-gray-700 leading-relaxed">
+                        A: Yes, you can add more recordings to your album after the event. Simply send us the additional
+                        recordings and we'll add them to your digital file.
+                    </p>
+                </div>
+
+                <div class="faq-item bg-gray-50 rounded-lg p-6 border border-gray-200">
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Q: What if I have a problem with my audio
+                        guestbook?</h3>
+                    <p class="text-gray-700 leading-relaxed">
+                        A: We strive to ensure that our customers are completely satisfied with their audio guestbooks.
+                        If you have any problems, please contact us and we will do our best to resolve the issue.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section-padding bg-gradient-to-b from-gray-50 to-white">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+                Ready to Capture Memories?
+            </h2>
+            <p class="text-lg sm:text-xl text-gray-600 mb-8">
+                Contact us today to learn more about our Analog Phone Audio Guestbook and make your event unforgettable.
+            </p>
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href="contact-us.html"
+                    class="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold rounded-lg hover:from-blue-600 hover:to-purple-700 transform transition-all duration-200 hover:scale-105 shadow-lg hover:shadow-xl">
+                    <span>CONTACT US</span>
+                    <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                    </svg>
+                </a>
+                <button type="button" data-click-to-call data-call-text="Call Us"
+                    class="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 bg-white border-2 border-gray-300 text-gray-700 font-semibold rounded-lg hover:bg-gray-50 transform transition-all duration-200 hover:scale-105 shadow-md hover:shadow-lg">
+                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z">
+                        </path>
+                    </svg>
+                    <span>Call Us</span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <script src="assets/components/navigation.js"></script>
+    <script src="assets/components/footer.js"></script>
+</body>
+
+</html>
