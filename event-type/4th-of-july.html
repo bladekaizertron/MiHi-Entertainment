@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Professional 4th of July photo booth services by MiHi Entertainment. Throw a red, white, and blue celebration that's festive, fun, and photo-ready.">
+    <title>4th of July Photo Booth Services - MiHi Entertainment</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&family=Syne:wght@600;700;800&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+        }
+
+        body {
+            font-family: 'DM Sans', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            color: #0f172a;
+            background-color: #ffffff;
+            overflow-x: hidden;
+            line-height: 1.7;
+            letter-spacing: -0.011em;
+            font-weight: 400;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: 'Outfit', 'Manrope', 'Inter', sans-serif;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            line-height: 1.15;
+        }
+
+        .display-font {
+            font-family: 'Outfit', 'Manrope', sans-serif;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #a855f7 100%);
+            background-size: 200% 200%;
+            color: white;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
+            overflow: hidden;
+            font-weight: 600;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+            font-size: 0.875rem;
+            border: none;
+            box-shadow: 0 8px 24px rgba(99, 102, 241, 0.35), 0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+            font-family: 'Outfit', 'Manrope', sans-serif;
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: left 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .btn-primary:hover {
+            background-position: 100% 0;
+            transform: translateY(-6px) scale(1.03);
+            box-shadow: 0 24px 48px rgba(99, 102, 241, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.2) inset;
+        }
+
+        .btn-primary:hover::before {
+            left: 100%;
+        }
+
+        .btn-primary:active {
+            transform: translateY(-2px) scale(1.01);
+        }
+
+        .section-padding {
+            padding: 8rem 0;
+        }
+
+        @media (max-width: 768px) {
+            .section-padding {
+                padding: 5rem 0;
+            }
+        }
+
+        .animate-fade-in {
+            animation: fadeIn 1s ease-out forwards;
+            opacity: 0;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        .float-animation {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .hero-section {
+            min-height: 75vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.5) 0%, rgba(139, 92, 246, 0.5) 50%, rgba(168, 85, 247, 0.5) 100%);
+            z-index: 1;
+        }
+
+        .hero-section::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 30% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 0.8s ease-in-out, transform 0.8s ease-in-out;
+            transform: scale(1.1);
+        }
+
+        .hero-bg.loaded {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+        }
+
+        .product-card {
+            transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
+            overflow: hidden;
+            background: white;
+            border-radius: 2rem;
+            border: 1px solid rgba(226, 232, 240, 0.8);
+        }
+
+        .product-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .product-card::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.4) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .product-card:hover::before {
+            opacity: 1;
+        }
+
+        .product-card:hover::after {
+            opacity: 1;
+        }
+
+        .product-card:hover {
+            transform: translateY(-20px) scale(1.04);
+            box-shadow: 0 40px 80px rgba(99, 102, 241, 0.3), 0 0 0 1px rgba(99, 102, 241, 0.15);
+            border-color: rgba(99, 102, 241, 0.3);
+        }
+
+        .product-card-image {
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .product-card:hover .product-card-image {
+            transform: scale(1.1);
+        }
+
+        .image-hover-effect {
+            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), filter 0.6s ease, box-shadow 0.6s ease;
+            border-radius: 1.5rem;
+        }
+
+        .image-hover-effect:hover {
+            transform: scale(1.05) translateY(-4px);
+            filter: brightness(1.1) contrast(1.08) saturate(1.1);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .content-card {
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            border-radius: 2.5rem;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08), 0 2px 8px rgba(0, 0, 0, 0.04);
+            transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            border: 1px solid rgba(226, 232, 240, 0.9);
+            backdrop-filter: blur(20px) saturate(180%);
+        }
+
+        .content-card:hover {
+            box-shadow: 0 32px 64px rgba(99, 102, 241, 0.18), 0 0 0 1px rgba(99, 102, 241, 0.15);
+            transform: translateY(-12px) scale(1.02);
+            border-color: rgba(99, 102, 241, 0.4);
+        }
+
+        .section-divider {
+            height: 2px;
+            background: linear-gradient(to right, transparent, #e2e8f0, transparent);
+            margin: 4rem 0;
+        }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #a855f7 100%);
+            background-size: 200% 200%;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 10px 25px rgba(99, 102, 241, 0.4), 0 0 0 4px rgba(99, 102, 241, 0.1);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            font-weight: 600;
+        }
+
+        .feature-icon:hover {
+            transform: scale(1.15) rotate(10deg);
+            box-shadow: 0 15px 35px rgba(99, 102, 241, 0.5), 0 0 0 6px rgba(99, 102, 241, 0.15);
+            background-position: 100% 0;
+        }
+
+        .number-badge {
+            transition: all 0.3s ease;
+        }
+
+        .number-badge:hover {
+            transform: scale(1.15) rotate(5deg);
+            box-shadow: 0 6px 15px rgba(0, 80, 255, 0.3);
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #a855f7 100%);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientFlow 3s ease infinite;
+        }
+
+        @keyframes gradientFlow {
+
+            0%,
+            100% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+        }
+
+        .decorative-blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(60px);
+            opacity: 0.3;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .blob-1 {
+            width: 300px;
+            height: 300px;
+            background: linear-gradient(135deg, #0050ff 0%, #8000ff 100%);
+            top: 10%;
+            right: -5%;
+            animation-delay: 0s;
+        }
+
+        .blob-2 {
+            width: 250px;
+            height: 250px;
+            background: linear-gradient(135deg, #ff00ff 0%, #0050ff 100%);
+            bottom: 10%;
+            left: -5%;
+            animation-delay: 2s;
+        }
+
+        .section-header {
+            position: relative;
+        }
+
+        .section-header::after {
+            content: '';
+            position: absolute;
+            bottom: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 5px;
+            background: linear-gradient(90deg, #6366f1 0%, #8b5cf6 50%, #a855f7 100%);
+            background-size: 200% 100%;
+            border-radius: 3px;
+            animation: gradientFlow 3s ease infinite;
+            box-shadow: 0 2px 10px rgba(99, 102, 241, 0.4);
+        }
+
+        .product-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.5) 100%);
+            transition: opacity 0.4s ease;
+        }
+
+        .product-card:hover .product-overlay {
+            opacity: 0.6;
+        }
+
+        .stagger-animation {
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .stagger-1 {
+            animation-delay: 0.1s;
+        }
+
+        .stagger-2 {
+            animation-delay: 0.2s;
+        }
+
+        .stagger-3 {
+            animation-delay: 0.3s;
+        }
+
+        .stagger-4 {
+            animation-delay: 0.4s;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.06) 0%, rgba(139, 92, 246, 0.06) 50%, rgba(168, 85, 247, 0.06) 100%);
+            border-left: 5px solid;
+            border-image: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #a855f7 100%) 1;
+            position: relative;
+            overflow: hidden;
+            border-radius: 1rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .highlight-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: left 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .highlight-box:hover::before {
+            left: 100%;
+        }
+
+        .highlight-box:hover {
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.15);
+            transform: translateX(4px);
+        }
+
+        .text-gradient {
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #a855f7 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-title {
+            font-size: clamp(2.75rem, 6vw, 4.5rem);
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+            font-family: 'Outfit', 'Manrope', sans-serif;
+        }
+
+        /* Enhanced readability for body text */
+        .text-content {
+            font-family: 'DM Sans', 'Inter', sans-serif;
+            font-size: 1.125rem;
+            line-height: 1.8;
+            color: #334155;
+            letter-spacing: -0.011em;
+            font-weight: 400;
+        }
+
+        /* Modern link styling */
+        a:not(.btn-primary):not(.btn-modern) {
+            transition: all 0.3s ease;
+        }
+
+        /* Improved focus states */
+        a:focus-visible,
+        button:focus-visible {
+            outline: 2px solid #6366f1;
+            outline-offset: 2px;
+            border-radius: 4px;
+        }
+
+        .modern-card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        @media (max-width: 768px) {
+            .hero-section {
+                min-height: 60vh;
+            }
+
+            h1 {
+                font-size: 2.5rem !important;
+            }
+
+            h2 {
+                font-size: 1.5rem !important;
+            }
+        }
+
+        /* Smooth scroll behavior */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Enhanced typography */
+        p {
+            font-size: 1.125rem;
+            line-height: 1.85;
+            color: #334155;
+            font-weight: 400;
+            font-family: 'DM Sans', 'Inter', sans-serif;
+        }
+
+        @media (max-width: 768px) {
+            p {
+                font-size: 1.0625rem;
+                line-height: 1.75;
+            }
+        }
+
+        /* Modern typography scale */
+        h1 {
+            font-size: clamp(3rem, 7vw, 5.5rem);
+            font-weight: 800;
+            font-family: 'Outfit', 'Manrope', sans-serif;
+        }
+
+        h2 {
+            font-size: clamp(2.25rem, 5vw, 4rem);
+            font-weight: 700;
+            font-family: 'Outfit', 'Manrope', sans-serif;
+        }
+
+        h3 {
+            font-size: clamp(1.875rem, 4vw, 3rem);
+            font-weight: 700;
+            font-family: 'Outfit', 'Manrope', sans-serif;
+        }
+
+        h4 {
+            font-size: clamp(1.625rem, 3.5vw, 2.25rem);
+            font-weight: 600;
+            font-family: 'Outfit', 'Manrope', sans-serif;
+        }
+
+        h5 {
+            font-size: clamp(1.375rem, 3vw, 2rem);
+            font-weight: 600;
+            font-family: 'Outfit', 'Manrope', sans-serif;
+        }
+
+        h6 {
+            font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+            font-weight: 600;
+            font-family: 'Outfit', 'Manrope', sans-serif;
+        }
+
+        /* Modern card enhancements */
+        .modern-card-enhanced {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(24px) saturate(180%);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08), 0 2px 8px rgba(0, 0, 0, 0.04);
+            transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .modern-card-enhanced:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 28px 72px rgba(0, 0, 0, 0.14), 0 4px 12px rgba(0, 0, 0, 0.08);
+            border-color: rgba(99, 102, 241, 0.3);
+        }
+
+        /* Improved button styles */
+        .btn-modern {
+            font-family: 'Outfit', 'Manrope', sans-serif;
+            font-weight: 600;
+            letter-spacing: 0.8px;
+            border-radius: 1rem;
+            padding: 1.125rem 2.75rem;
+            font-size: 0.9375rem;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        /* Enhanced spacing utilities */
+        .spacing-modern {
+            letter-spacing: -0.02em;
+        }
+
+        /* Modern section backgrounds */
+        .section-bg-modern {
+            background: linear-gradient(to bottom, #ffffff 0%, #f8fafc 50%, #ffffff 100%);
+        }
+
+        /* Improved readability */
+        .text-readable {
+            font-size: 1.125rem;
+            line-height: 1.85;
+            color: #334155;
+            max-width: 65ch;
+            font-family: 'DM Sans', 'Inter', sans-serif;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <div id="navigation-container"></div>
+    <script src="../assets/components/navigation.js"></script>
+
+    <!-- Hero Section -->
+    <section class="hero-section text-white">
+        <img src="../assets/images/4thjuly/hero.jpg" alt="4th of July celebration photo booth" class="hero-bg"
+            onload="this.classList.add('loaded')" onerror="console.error('Error loading image:', this.src)">
+        <div class="container mx-auto px-6 text-center relative z-10"
+            style="text-shadow: 2px 2px 12px rgba(0,0,0,0.6), 0 0 40px rgba(0,0,0,0.4);">
+            <h1 class="section-title text-white mb-6 animate-fade-in tracking-tight font-extrabold"
+                style="font-size: clamp(3.5rem, 8vw, 6.5rem); line-height: 1.05; font-family: 'Outfit', 'Manrope', sans-serif;">
+                4TH OF JULY</h1>
+            <h2 class="text-white mb-8 animate-fade-in tracking-tight font-bold"
+                style="animation-delay: 0.2s; text-shadow: 1px 1px 8px rgba(0,0,0,0.7); font-size: clamp(2.25rem, 5.5vw, 4rem); letter-spacing: -0.03em; font-family: 'Outfit', 'Manrope', sans-serif;">
+                PHOTO BOOTH</h2>
+            <p class="text-xl md:text-2xl mb-12 max-w-3xl mx-auto animate-fade-in text-white font-normal leading-relaxed"
+                style="animation-delay: 0.4s; text-shadow: 1px 1px 6px rgba(0,0,0,0.7); font-weight: 400; letter-spacing: -0.011em; font-family: 'DM Sans', sans-serif; line-height: 1.75;">
+                Throw a red, white, and blue celebration that's festive, fun, and photo-ready.
+            </p>
+            <a href="../contact-us.html"
+                class="btn-primary btn-modern px-14 py-6 rounded-xl text-base font-bold inline-block animate-fade-in shadow-2xl hover:shadow-3xl"
+                style="animation-delay: 0.6s; font-family: 'Outfit', 'Manrope', sans-serif;">
+                CONTACT US
+            </a>
+        </div>
+    </section>
+
+    <!-- Red, White & Ready to Party Section -->
+    <section class="section-padding bg-white section-bg-modern">
+        <div class="container mx-auto px-6">
+            <div class="max-w-7xl mx-auto">
+                <!-- Header -->
+                <div class="text-center mb-28 section-header">
+                    <h2 class="section-title mb-6 text-gray-900 font-extrabold spacing-modern"
+                        style="font-family: 'Outfit', 'Manrope', sans-serif;">Red, White & Ready to Party</h2>
+                    <p class="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto mt-6 font-medium"
+                        style="letter-spacing: -0.011em; font-family: 'DM Sans', sans-serif; line-height: 1.75;">
+                        4th of July events are filled with fireworks, BBQs, and patriotic vibes. From backyard parties
+                        to city festivals, it's a day to celebrate freedom, fun, and community.
+                    </p>
+                </div>
+
+                <!-- Two Column Layout: Text and Image -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-16">
+                    <!-- Text Content -->
+                    <div class="space-y-8">
+                        <div class="space-y-7">
+                            <p class="text-lg md:text-xl text-gray-700 leading-relaxed font-normal text-readable"
+                                style="letter-spacing: -0.011em; font-family: 'DM Sans', sans-serif; line-height: 1.85;">
+                                4th of July events are filled with fireworks, BBQs, and patriotic vibes. From backyard
+                                parties to city festivals, it's a day to celebrate freedom, fun, and community.
+                            </p>
+                            <p class="text-lg md:text-xl text-gray-700 leading-relaxed font-normal text-readable"
+                                style="letter-spacing: -0.011em; font-family: 'DM Sans', sans-serif; line-height: 1.85;">
+                                Our red, white, and blue-inspired photo booths come packed with themed props,
+                                sparkler-worthy backdrops, and instant prints that scream "summer celebration." Add a
+                                360 booth or custom overlay for star-spangled content that pops.
+                            </p>
+                        </div>
+                        <div class="pt-8">
+                            <a href="../contact-us.html"
+                                class="btn-primary btn-modern px-12 py-5 rounded-xl text-base font-bold inline-block"
+                                style="font-family: 'Outfit', 'Manrope', sans-serif;">
+                                BOOK NOW
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Image -->
+                    <div class="relative">
+                        <div class="overflow-hidden rounded-2xl shadow-2xl">
+                            <img src="../assets/images/4thjuly/pic1.jpg" alt="4th of July celebration photo booth"
+                                class="w-full h-auto object-cover image-hover-effect">
+                        </div>
+                        <!-- Decorative element -->
+                        <div
+                            class="absolute -bottom-6 -right-6 w-32 h-32 bg-gradient-to-br from-blue-400 to-purple-500 rounded-full opacity-20 blur-3xl -z-10">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How to Throw a 4th of July Party That Pops Section -->
+    <section class="section-padding bg-gradient-to-br from-gray-50 via-white to-gray-50">
+        <div class="container mx-auto px-6">
+            <div class="max-w-6xl mx-auto">
+                <!-- Section Header -->
+                <div class="text-center mb-28 section-header">
+                    <h2 class="section-title mb-6 text-gray-900 font-extrabold spacing-modern"
+                        style="font-family: 'Outfit', 'Manrope', sans-serif;">How to Throw a 4th of July Party That Pops
+                    </h2>
+                    <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed mt-6 font-normal"
+                        style="letter-spacing: -0.011em; font-family: 'DM Sans', sans-serif; line-height: 1.85;">
+                        Whether it's a backyard BBQ or a big city celebration, the Fourth of July is all about good
+                        vibes and patriotic fun. The key is keeping it casual, festive, and packed with ways for people
+                        to celebrate together.
+                    </p>
+                </div>
+
+                <!-- What You'll Need Card -->
+                <div class="content-card modern-card-enhanced p-10 md:p-14 mb-16">
+                    <div class="flex items-center mb-10">
+                        <div class="feature-icon" style="width: 80px; height: 80px; font-size: 2.25rem;">✓</div>
+                        <h3 class="text-3xl md:text-4xl font-bold ml-6 spacing-modern"
+                            style="font-family: 'Outfit', 'Manrope', sans-serif;">What you'll need:</h3>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-7">
+                        <div class="flex items-start space-x-5">
+                            <div
+                                class="flex-shrink-0 w-10 h-10 bg-gradient-to-br from-indigo-100 to-purple-100 rounded-full flex items-center justify-center mt-1 shadow-sm">
+                                <span class="text-indigo-600 font-bold text-xl">•</span>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-lg md:text-xl mb-2 spacing-modern"
+                                    style="font-family: 'Outfit', 'Manrope', sans-serif; color: #1e293b;">Classic
+                                    cookout food and cold drinks</h4>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-5">
+                            <div
+                                class="flex-shrink-0 w-10 h-10 bg-gradient-to-br from-indigo-100 to-purple-100 rounded-full flex items-center justify-center mt-1 shadow-sm">
+                                <span class="text-indigo-600 font-bold text-xl">•</span>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-lg md:text-xl mb-2 spacing-modern"
+                                    style="font-family: 'Outfit', 'Manrope', sans-serif; color: #1e293b;">Red, white,
+                                    and blue decorations, flags, and tableware</h4>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-5">
+                            <div
+                                class="flex-shrink-0 w-10 h-10 bg-gradient-to-br from-indigo-100 to-purple-100 rounded-full flex items-center justify-center mt-1 shadow-sm">
+                                <span class="text-indigo-600 font-bold text-xl">•</span>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-lg md:text-xl mb-2 spacing-modern"
+                                    style="font-family: 'Outfit', 'Manrope', sans-serif; color: #1e293b;">Lawn games or
+                                    live music to keep guests entertained</h4>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-5">
+                            <div
+                                class="flex-shrink-0 w-10 h-10 bg-gradient-to-br from-indigo-100 to-purple-100 rounded-full flex items-center justify-center mt-1 shadow-sm">
+                                <span class="text-indigo-600 font-bold text-xl">•</span>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-lg md:text-xl mb-2 spacing-modern"
+                                    style="font-family: 'Outfit', 'Manrope', sans-serif; color: #1e293b;">A spot for
+                                    fireworks watching or sparklers for the kids</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Closing Statement -->
+                <div class="text-center highlight-box rounded-3xl p-12 md:p-16 mb-16">
+                    <p class="text-xl md:text-2xl text-gray-800 leading-relaxed max-w-4xl mx-auto mb-12 font-medium"
+                        style="letter-spacing: -0.011em; font-family: 'DM Sans', sans-serif; line-height: 1.85;">
+                        Pair the fun with a photo booth that brings the fireworks to life. MiHi's patriotic overlays,
+                        themed props, and easy sharing features let guests snap and post all night long.
+                    </p>
+                    <a href="../contact-us.html"
+                        class="btn-primary btn-modern px-14 py-6 rounded-xl text-base font-bold inline-block"
+                        style="font-family: 'Outfit', 'Manrope', sans-serif;">
+                        BOOK YOUR EVENT NOW
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Related Products Section -->
+    <section class="section-padding bg-white section-bg-modern">
+        <div class="container mx-auto px-6">
+            <!-- Section Header -->
+            <div class="text-center mb-28 section-header">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 text-gray-900 spacing-modern"
+                    style="font-family: 'Outfit', 'Manrope', sans-serif;">DISCOVER OUR</h2>
+                <h3 class="text-4xl md:text-5xl font-bold gradient-text mb-8 spacing-modern"
+                    style="font-family: 'Outfit', 'Manrope', sans-serif;">RELATED PRODUCTS</h3>
+                <p class="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto mt-6 font-normal"
+                    style="letter-spacing: -0.011em; font-family: 'DM Sans', sans-serif; line-height: 1.85;">
+                    Discover more of what we do best—Photo Booths, Activations, and beyond! Click below to browse our
+                    related products.
+                </p>
+            </div>
+
+            <!-- Product Cards Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                <!-- Roaming Photo Booth -->
+                <div
+                    class="product-card bg-white rounded-3xl shadow-xl overflow-hidden border border-gray-200 modern-card-enhanced">
+                    <div class="h-72 flex items-center justify-center relative overflow-hidden rounded-t-3xl">
+                        <img src="../assets/images/4thjuly/pic2.jpg" alt="Roaming Photo Booth"
+                            class="absolute inset-0 w-full h-full object-cover product-card-image">
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-black/20 transition-opacity duration-500">
+                        </div>
+                        <h4 class="text-5xl md:text-6xl font-bold text-white text-center relative z-10 drop-shadow-2xl tracking-tight spacing-modern"
+                            style="font-family: 'Outfit', 'Manrope', sans-serif;">Roaming</h4>
+                    </div>
+                    <div class="p-8 md:p-10 bg-gradient-to-br from-white to-gray-50">
+                        <h5 class="text-2xl md:text-3xl font-bold mb-4 text-gray-900 spacing-modern"
+                            style="font-family: 'Outfit', 'Manrope', sans-serif;">Photo Booth</h5>
+                        <p class="text-gray-600 mb-7 leading-relaxed text-base md:text-lg"
+                            style="letter-spacing: -0.011em; font-family: 'DM Sans', sans-serif; line-height: 1.75;">
+                            The booth that comes to you, anywhere at your event</p>
+                        <a href="#"
+                            class="text-gradient font-bold hover:opacity-80 transition inline-flex items-center group text-lg md:text-xl spacing-modern"
+                            style="font-family: 'Outfit', 'Manrope', sans-serif;">
+                            Learn More
+                            <svg class="w-6 h-6 ml-2 transform group-hover:translate-x-2 transition-transform"
+                                fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                                    d="M9 5l7 7-7 7"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Array Photo Booth -->
+                <div
+                    class="product-card bg-white rounded-3xl shadow-xl overflow-hidden border border-gray-200 modern-card-enhanced">
+                    <div class="h-72 flex items-center justify-center relative overflow-hidden rounded-t-3xl">
+                        <img src="../assets/images/4thjuly/pic3.jpg" alt="Array Photo Booth"
+                            class="absolute inset-0 w-full h-full object-cover product-card-image">
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-black/20 transition-opacity duration-500">
+                        </div>
+                        <h4 class="text-5xl md:text-6xl font-bold text-white text-center relative z-10 drop-shadow-2xl tracking-tight spacing-modern"
+                            style="font-family: 'Outfit', 'Manrope', sans-serif;">Array</h4>
+                    </div>
+                    <div class="p-8 md:p-10 bg-gradient-to-br from-white to-gray-50">
+                        <h5 class="text-2xl md:text-3xl font-bold mb-4 text-gray-900 spacing-modern"
+                            style="font-family: 'Outfit', 'Manrope', sans-serif;">Photo Booth</h5>
+                        <p class="text-gray-600 mb-7 leading-relaxed text-base md:text-lg"
+                            style="letter-spacing: -0.011em; font-family: 'DM Sans', sans-serif; line-height: 1.75;">
+                            Transport yourself anywhere with green screen magic</p>
+                        <a href="#"
+                            class="text-gradient font-bold hover:opacity-80 transition inline-flex items-center group text-lg md:text-xl spacing-modern"
+                            style="font-family: 'Outfit', 'Manrope', sans-serif;">
+                            Learn More
+                            <svg class="w-6 h-6 ml-2 transform group-hover:translate-x-2 transition-transform"
+                                fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                                    d="M9 5l7 7-7 7"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Classic Photo Booth -->
+                <div
+                    class="product-card bg-white rounded-3xl shadow-xl overflow-hidden border border-gray-200 modern-card-enhanced">
+                    <div class="h-72 flex items-center justify-center relative overflow-hidden rounded-t-3xl">
+                        <img src="../assets/images/4thjuly/pic1.jpg" alt="Classic Photo Booth"
+                            class="absolute inset-0 w-full h-full object-cover product-card-image">
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-black/20 transition-opacity duration-500">
+                        </div>
+                        <h4 class="text-5xl md:text-6xl font-bold text-white text-center relative z-10 drop-shadow-2xl tracking-tight spacing-modern"
+                            style="font-family: 'Outfit', 'Manrope', sans-serif;">Classic</h4>
+                    </div>
+                    <div class="p-8 md:p-10 bg-gradient-to-br from-white to-gray-50">
+                        <h5 class="text-2xl md:text-3xl font-bold mb-4 text-gray-900 spacing-modern"
+                            style="font-family: 'Outfit', 'Manrope', sans-serif;">Photo Booth</h5>
+                        <p class="text-gray-600 mb-7 leading-relaxed text-base md:text-lg"
+                            style="letter-spacing: -0.011em; font-family: 'DM Sans', sans-serif; line-height: 1.75;">
+                            Timeless photo booth experience perfect for any celebration</p>
+                        <a href="#"
+                            class="text-gradient font-bold hover:opacity-80 transition inline-flex items-center group text-lg md:text-xl spacing-modern"
+                            style="font-family: 'Outfit', 'Manrope', sans-serif;">
+                            Learn More
+                            <svg class="w-6 h-6 ml-2 transform group-hover:translate-x-2 transition-transform"
+                                fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                                    d="M9 5l7 7-7 7"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <div id="footer-container"></div>
+    <script src="../assets/components/footer.js"></script>
+
+    <!-- Back to Top -->
+    <script src="../assets/components/back-to-top.js"></script>
+</body>
+
+</html>
