@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stage Rentals - MiHi Entertainment</title>
+    <title>EVENT STAGES | MiHi Entertainment</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@300;400;500;600;700&family=Raleway:wght@300;400;500;600;700;800;900&family=Cinzel:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@200;300;400;500;600;700;800;900&family=Montserrat:wght@300;400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@300;400;500;600;700&family=Raleway:wght@300;400;500;600;700;800;900&family=Cinzel:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@200;300;400;500;600;700;800;900&family=Montserrat:wght@300;400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
     <style>
         @property --k {
             syntax: '<number>';
@@ -13,71 +16,91 @@
             inherits: false;
         }
 
-        svg[height='0'][aria-hidden='true'] { 
+        svg[height='0'][aria-hidden='true'] {
             position: fixed;
         }
 
-        body { 
-            font-family: 'Raleway', sans-serif; 
-            color: #1a202c; 
+        html {
+            scroll-behavior: smooth;
         }
-        h1, h2, h3, h4, h5, h6 { 
-            font-family: 'Bebas Neue', 'Oswald', sans-serif; 
+
+        body {
+            font-family: 'Raleway', sans-serif;
+            color: #1a202c;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: 'Bebas Neue', 'Oswald', sans-serif;
             font-weight: 700;
             letter-spacing: 0.1em;
         }
+
         h3.av-title {
             font-family: 'Oswald', sans-serif !important;
             font-weight: 600;
             letter-spacing: 0.3em;
             text-transform: uppercase;
-            background: 
-                linear-gradient(90deg, 
-                    hsl(calc(var(--k)*1turn), 95%, 65%), 
+            background:
+                linear-gradient(90deg,
+                    hsl(calc(var(--k)*1turn), 95%, 65%),
                     hsl(calc(var(--k)*1turn + 90deg), 95%, 65%)) text;
             color: #0000;
             filter: url(#glow);
             animation: k 4s linear infinite;
         }
 
-        @keyframes k { 
-            to { --k: 1; } 
+        @keyframes k {
+            to {
+                --k: 1;
+            }
         }
+
         .cinematic-title {
             font-family: 'Bebas Neue', sans-serif;
             font-weight: 400;
             letter-spacing: 0.15em;
             text-transform: uppercase;
-            text-shadow: 
+            text-shadow:
                 0 0 10px rgba(255, 255, 255, 0.3),
                 0 0 20px rgba(255, 255, 255, 0.2),
                 0 2px 4px rgba(0, 0, 0, 0.8),
                 0 4px 8px rgba(0, 0, 0, 0.6);
         }
+
         .cinematic-subtitle {
             font-family: 'Rajdhani', 'Oswald', sans-serif;
             font-weight: 400;
             letter-spacing: 0.15em;
             text-transform: uppercase;
-            text-shadow: 
+            text-shadow:
                 0 0 10px rgba(255, 255, 255, 0.2),
                 0 2px 4px rgba(0, 0, 0, 0.8),
                 0 4px 8px rgba(0, 0, 0, 0.6);
             font-size: 1.1em;
             line-height: 1.8;
         }
-        .btn-primary { 
-            background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%); 
+
+        .btn-primary {
+            background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%);
             transition: all 0.3s ease;
             font-family: 'Oswald', sans-serif;
             letter-spacing: 0.1em;
             text-transform: uppercase;
         }
-        .btn-primary:hover { 
-            transform: translateY(-2px); 
-            box-shadow: 0 10px 25px rgba(0, 80, 255, 0.4); 
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 80, 255, 0.4);
         }
-        .section-padding { padding: 5rem 0; }
+
+        .section-padding {
+            padding: 5rem 0;
+        }
 
         @media (max-width: 768px) {
             .section-padding {
@@ -96,8 +119,9 @@
                 padding: 2rem 0;
             }
         }
-        .hero-gradient { 
-            background: linear-gradient(135deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.7) 100%); 
+
+        .hero-gradient {
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.7) 100%);
         }
 
         /* Cosmic Text Effect */
@@ -106,13 +130,11 @@
             --cosmic-font-size: 6rem;
             --glow-hue: 222deg;
             --shadow-hue: 180deg;
-            --spring-easing: linear(
-                0, 0.002, 0.01 0.9%, 0.038 1.8%, 0.156, 0.312 5.8%, 0.789 11.1%, 1.015 14.2%,
-                1.096, 1.157, 1.199, 1.224 20.3%, 1.231, 1.231, 1.226, 1.214 24.6%,
-                1.176 26.9%, 1.057 32.6%, 1.007 35.5%, 0.984, 0.968, 0.956, 0.949 42%,
-                0.946 44.1%, 0.95 46.5%, 0.998 57.2%, 1.007, 1.011 63.3%, 1.012 68.3%,
-                0.998 84%, 1
-            );
+            --spring-easing: linear(0, 0.002, 0.01 0.9%, 0.038 1.8%, 0.156, 0.312 5.8%, 0.789 11.1%, 1.015 14.2%,
+                    1.096, 1.157, 1.199, 1.224 20.3%, 1.231, 1.231, 1.226, 1.214 24.6%,
+                    1.176 26.9%, 1.057 32.6%, 1.007 35.5%, 0.984, 0.968, 0.956, 0.949 42%,
+                    0.946 44.1%, 0.95 46.5%, 0.998 57.2%, 1.007, 1.011 63.3%, 1.012 68.3%,
+                    0.998 84%, 1);
             --spring-duration: 1.33s;
         }
 
@@ -135,6 +157,7 @@
             .name {
                 gap: 0.3em;
             }
+
             .cosmic-spacer {
                 flex-basis: 100%;
                 height: 0;
@@ -272,7 +295,7 @@
             padding: 20px 40px;
             text-transform: uppercase;
             transition: all 0.1s ease-out;
-            text-shadow: 
+            text-shadow:
                 0 0 10px rgba(255, 255, 255, 0.3),
                 0 2px 4px rgba(0, 0, 0, 0.8);
         }
@@ -311,15 +334,15 @@
             background: none;
         }
 
-        .button--bubble:hover + .button--bubble__effect-container .circle {
+        .button--bubble:hover+.button--bubble__effect-container .circle {
             background: #00b8e6;
         }
 
-        .button--bubble:hover + .button--bubble__effect-container .button {
+        .button--bubble:hover+.button--bubble__effect-container .button {
             background: #00b8e6;
         }
 
-        .button--bubble:active + .button--bubble__effect-container {
+        .button--bubble:active+.button--bubble__effect-container {
             transform: scale(0.95);
         }
 
@@ -421,7 +444,7 @@
             padding: 20px 40px;
             text-transform: uppercase;
             transition: all 0.3s ease-out;
-            text-shadow: 
+            text-shadow:
                 0 0 10px rgba(255, 255, 255, 0.3),
                 0 2px 4px rgba(0, 0, 0, 0.8);
             position: relative;
@@ -461,9 +484,12 @@
         }
 
         @keyframes pulse {
-            0%, 100% {
+
+            0%,
+            100% {
                 transform: scale(1);
             }
+
             50% {
                 transform: scale(1.1);
             }
@@ -492,6 +518,7 @@
                 -ms-filter: hue-rotate(0);
                 filter: hue-rotate(0);
             }
+
             to {
                 -webkit-filter: hue-rotate(360deg);
                 -moz-filter: hue-rotate(360deg);
@@ -537,13 +564,16 @@
                 height: auto;
                 margin-top: 2rem;
             }
+
             .section-a-responsive {
                 padding: 2rem 0 !important;
             }
+
             #section-b .right-column,
             #section-d .right-column {
                 margin-top: 1.5rem;
             }
+
             .left-column.left-aligned {
                 position: relative;
                 z-index: 10;
@@ -588,14 +618,14 @@
             -moz-transition: .2s;
             transition: .2s;
             cursor: pointer;
-            -webkit-box-shadow: -2px 0 3px rgba(0,0,0,0.3);
-            -moz-box-shadow: -2px 0 3px rgba(0,0,0,0.3);
-            box-shadow: -2px 0 3px rgba(0,0,0,0.3);
+            -webkit-box-shadow: -2px 0 3px rgba(0, 0, 0, 0.3);
+            -moz-box-shadow: -2px 0 3px rgba(0, 0, 0, 0.3);
+            box-shadow: -2px 0 3px rgba(0, 0, 0, 0.3);
         }
 
         @media (max-width: 768px) {
             .portfolio {
-                box-shadow: -1px 0 2px rgba(0,0,0,0.25);
+                box-shadow: -1px 0 2px rgba(0, 0, 0, 0.25);
             }
         }
 
@@ -607,7 +637,8 @@
         .portfolio:nth-child(1) {
             left: 10px;
         }
-        .portfolio:nth-child(1):hover {  
+
+        .portfolio:nth-child(1):hover {
             -webkit-transform: rotate(-2deg);
             -moz-transform: rotate(-2deg);
             transform: rotate(-2deg);
@@ -617,6 +648,7 @@
         .portfolio:nth-child(2) {
             left: 10%;
         }
+
         .portfolio:nth-child(2):hover {
             -webkit-transform: rotate(-2deg);
             -moz-transform: rotate(-2deg);
@@ -624,20 +656,22 @@
             left: 5%;
         }
 
-        .portfolio:nth-child(3) {  
+        .portfolio:nth-child(3) {
             left: 20%;
         }
-        .portfolio:nth-child(3):hover {  
+
+        .portfolio:nth-child(3):hover {
             -webkit-transform: rotate(-2deg);
             -moz-transform: rotate(-2deg);
             transform: rotate(-2deg);
             left: 15%;
         }
 
-        .portfolio:nth-child(4) {  
+        .portfolio:nth-child(4) {
             left: 30%;
         }
-        .portfolio:nth-child(4):hover {  
+
+        .portfolio:nth-child(4):hover {
             -webkit-transform: rotate(-2deg);
             -moz-transform: rotate(-2deg);
             transform: rotate(-2deg);
@@ -645,6 +679,7 @@
         }
 
         @media (max-width: 768px) {
+
             .portfolio:nth-child(1),
             .portfolio:nth-child(2),
             .portfolio:nth-child(3),
@@ -656,6 +691,7 @@
                 margin-bottom: 10px;
                 transform: none !important;
             }
+
             .portfolio:nth-child(1):hover,
             .portfolio:nth-child(2):hover,
             .portfolio:nth-child(3):hover,
@@ -663,26 +699,28 @@
                 left: 0;
                 transform: none !important;
             }
+
             #portfolio-content {
                 display: flex;
                 flex-direction: column;
                 height: auto;
             }
+
             #portfolio-gallery {
                 height: auto;
                 min-height: 300px;
             }
         }
 
-        .portfolio.opened {  
+        .portfolio.opened {
             z-index: 1000;
             left: 0 !important;
             -webkit-transform: rotate(0deg);
             -moz-transform: rotate(0deg);
             transform: rotate(0deg);
-            -webkit-box-shadow: 0 0 3px rgba(0,0,0,0.3);
-            -moz-box-shadow: 0 0 3px rgba(0,0,0,0.3);
-            box-shadow: 0 0 3px rgba(0,0,0,0.3);
+            -webkit-box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+            -moz-box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
             width: 100%;
             max-width: 100%;
         }
@@ -692,6 +730,7 @@
                 position: relative !important;
                 margin-bottom: 10px;
             }
+
             #portfolio-content .portfolio:not(.opened) {
                 display: block !important;
             }
@@ -794,19 +833,54 @@
         }
 
         @-webkit-keyframes comein {
-            0% { opacity: 0; -webkit-transform: translateY(-3000px); }
-            80% { opacity: 1; -webkit-transform: translateY(40px); }
-            100% { opacity: 1; -webkit-transform: translateY(0); }
+            0% {
+                opacity: 0;
+                -webkit-transform: translateY(-3000px);
+            }
+
+            80% {
+                opacity: 1;
+                -webkit-transform: translateY(40px);
+            }
+
+            100% {
+                opacity: 1;
+                -webkit-transform: translateY(0);
+            }
         }
+
         @-moz-keyframes comein {
-            0% { opacity: 0; -moz-transform: translateY(-3000px); }
-            80% { opacity: 1; -moz-transform: translateY(40px); }
-            100% { opacity: 1; -moz-transform: translateY(0); }
+            0% {
+                opacity: 0;
+                -moz-transform: translateY(-3000px);
+            }
+
+            80% {
+                opacity: 1;
+                -moz-transform: translateY(40px);
+            }
+
+            100% {
+                opacity: 1;
+                -moz-transform: translateY(0);
+            }
         }
+
         @keyframes comein {
-            0% { opacity: 0; transform: translateY(-3000px); }
-            80% { opacity: 1; transform: translateY(40px); }
-            100% { opacity: 1; transform: translateY(0); }
+            0% {
+                opacity: 0;
+                transform: translateY(-3000px);
+            }
+
+            80% {
+                opacity: 1;
+                transform: translateY(40px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         /* Left Column Content Styles */
@@ -928,6 +1002,7 @@
         }
 
         @media (max-width: 640px) {
+
             .left-column .btn-more,
             .btn-more.bubbly-button {
                 font-size: 0.75rem;
@@ -937,6 +1012,7 @@
         }
 
         @media (max-width: 480px) {
+
             .left-column .btn-more,
             .btn-more.bubbly-button {
                 font-size: 0.7rem;
@@ -969,10 +1045,10 @@
         .btn-more.bubbly-button:before {
             display: none;
             top: -75%;
-            background-image:  
+            background-image:
                 radial-gradient(circle, #0050ff 20%, transparent 20%),
                 radial-gradient(circle, transparent 20%, #0050ff 20%, transparent 30%),
-                radial-gradient(circle, #0050ff 20%, transparent 20%), 
+                radial-gradient(circle, #0050ff 20%, transparent 20%),
                 radial-gradient(circle, #0050ff 20%, transparent 20%),
                 radial-gradient(circle, transparent 10%, #0050ff 15%, transparent 20%),
                 radial-gradient(circle, #0050ff 20%, transparent 20%),
@@ -986,8 +1062,8 @@
         .btn-more.bubbly-button:after {
             display: none;
             bottom: -75%;
-            background-image:  
-                radial-gradient(circle, #0050ff 20%, transparent 20%), 
+            background-image:
+                radial-gradient(circle, #0050ff 20%, transparent 20%),
                 radial-gradient(circle, #0050ff 20%, transparent 20%),
                 radial-gradient(circle, transparent 10%, #0050ff 15%, transparent 20%),
                 radial-gradient(circle, #0050ff 20%, transparent 20%),
@@ -1020,9 +1096,11 @@
             0% {
                 background-position: 5% 90%, 10% 90%, 10% 90%, 15% 90%, 25% 90%, 25% 90%, 40% 90%, 55% 90%, 70% 90%;
             }
+
             50% {
                 background-position: 0% 80%, 0% 20%, 10% 40%, 20% 0%, 30% 30%, 22% 50%, 50% 50%, 65% 20%, 90% 30%;
             }
+
             100% {
                 background-position: 0% 70%, 0% 10%, 10% 30%, 20% -10%, 30% 20%, 22% 40%, 50% 40%, 65% 10%, 90% 20%;
                 background-size: 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%;
@@ -1033,9 +1111,11 @@
             0% {
                 background-position: 10% -10%, 30% 10%, 55% -10%, 70% -10%, 85% -10%, 70% -10%, 70% 0%;
             }
+
             50% {
                 background-position: 0% 80%, 20% 80%, 45% 60%, 60% 100%, 75% 70%, 95% 60%, 105% 0%;
             }
+
             100% {
                 background-position: 0% 90%, 20% 90%, 45% 70%, 60% 110%, 75% 80%, 95% 70%, 110% 10%;
                 background-size: 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%;
@@ -1051,9 +1131,9 @@
         /* Slider Styles */
         .slider {
             background-color: #fff;
-            box-shadow: inset 0 0 2px hsla(0,0%,0%,.2),
-                        0 3px 1px hsla(0,0%,100%,.75),
-                        0 -1px 1px 2px hsla(0,0%,0%,.1);
+            box-shadow: inset 0 0 2px hsla(0, 0%, 0%, .2),
+                0 3px 1px hsla(0, 0%, 100%, .75),
+                0 -1px 1px 2px hsla(0, 0%, 0%, .1);
             height: 18.75em;
             margin: 0 auto;
             padding: .5em;
@@ -1063,7 +1143,7 @@
             transform: translateY(-3000px);
             overflow: visible;
             transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
-                        box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+                box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         @media (max-width: 768px) {
@@ -1089,14 +1169,14 @@
                 padding: 0.3em;
             }
         }
-        
+
         .slider.animate-comein:hover {
             transform: scale(1.05) translateY(-8px);
-            box-shadow: inset 0 0 2px hsla(0,0%,0%,.2),
-                        0 3px 1px hsla(0,0%,100%,.75),
-                        0 -1px 1px 2px hsla(0,0%,0%,.1),
-                        0 15px 40px rgba(0, 0, 0, 0.3),
-                        0 5px 15px rgba(0, 0, 0, 0.2);
+            box-shadow: inset 0 0 2px hsla(0, 0%, 0%, .2),
+                0 3px 1px hsla(0, 0%, 100%, .75),
+                0 -1px 1px 2px hsla(0, 0%, 0%, .1),
+                0 15px 40px rgba(0, 0, 0, 0.3),
+                0 5px 15px rgba(0, 0, 0, 0.2);
         }
 
         .slider.animate-comein {
@@ -1111,12 +1191,12 @@
         .slider:before {
             background-color: #22130c;
             bottom: -2.5em;
-            box-shadow: inset 0 1px 1px 1px hsla(0,0%,100%,.2),
-                        inset 0 -2px 1px hsla(0,0%,0%,.4),
-                        0 5px 50px hsla(0,0%,0%,.25),
-                        0 20px 20px -15px hsla(0,0%,0%,.2),
-                        0 30px 20px -15px hsla(0,0%,0%,.15),
-                        0 40px 20px -15px hsla(0,0%,0%,.1);
+            box-shadow: inset 0 1px 1px 1px hsla(0, 0%, 100%, .2),
+                inset 0 -2px 1px hsla(0, 0%, 0%, .4),
+                0 5px 50px hsla(0, 0%, 0%, .25),
+                0 20px 20px -15px hsla(0, 0%, 0%, .2),
+                0 30px 20px -15px hsla(0, 0%, 0%, .15),
+                0 40px 20px -15px hsla(0, 0%, 0%, .1);
             content: '';
             left: -2.5em;
             position: absolute;
@@ -1143,25 +1223,25 @@
                 top: -1em;
             }
         }
-        
+
         .slider.animate-comein:hover:before {
-            box-shadow: inset 0 1px 1px 1px hsla(0,0%,100%,.3),
-                        inset 0 -2px 1px hsla(0,0%,0%,.5),
-                        0 8px 60px hsla(0,0%,0%,.35),
-                        0 25px 25px -15px hsla(0,0%,0%,.3),
-                        0 35px 25px -15px hsla(0,0%,0%,.25),
-                        0 45px 25px -15px hsla(0,0%,0%,.15);
+            box-shadow: inset 0 1px 1px 1px hsla(0, 0%, 100%, .3),
+                inset 0 -2px 1px hsla(0, 0%, 0%, .5),
+                0 8px 60px hsla(0, 0%, 0%, .35),
+                0 25px 25px -15px hsla(0, 0%, 0%, .3),
+                0 35px 25px -15px hsla(0, 0%, 0%, .25),
+                0 45px 25px -15px hsla(0, 0%, 0%, .15);
         }
 
         /* Mat */
         .slider:after {
             background-color: #fff5e5;
             bottom: -1.5em;
-            box-shadow: 0 2px 1px hsla(0,0%,100%,.2),
-                        0 -1px 1px 1px hsla(0,0%,0%,.4),
-                        inset 0 2px 3px 1px hsla(0,0%,0%,.2),
-                        inset 0 4px 3px 1px hsla(0,0%,0%,.2),
-                        inset 0 6px 3px 1px hsla(0,0%,0%,.1);
+            box-shadow: 0 2px 1px hsla(0, 0%, 100%, .2),
+                0 -1px 1px 1px hsla(0, 0%, 0%, .4),
+                inset 0 2px 3px 1px hsla(0, 0%, 0%, .2),
+                inset 0 4px 3px 1px hsla(0, 0%, 0%, .2),
+                inset 0 6px 3px 1px hsla(0, 0%, 0%, .1);
             content: '';
             left: -1.5em;
             position: absolute;
@@ -1188,18 +1268,18 @@
                 top: -0.75em;
             }
         }
-        
+
         .slider.animate-comein:hover:after {
-            box-shadow: 0 3px 2px hsla(0,0%,100%,.3),
-                        0 -2px 2px 1px hsla(0,0%,0%,.5),
-                        inset 0 3px 4px 1px hsla(0,0%,0%,.25),
-                        inset 0 5px 4px 1px hsla(0,0%,0%,.25),
-                        inset 0 7px 4px 1px hsla(0,0%,0%,.15);
+            box-shadow: 0 3px 2px hsla(0, 0%, 100%, .3),
+                0 -2px 2px 1px hsla(0, 0%, 0%, .5),
+                inset 0 3px 4px 1px hsla(0, 0%, 0%, .25),
+                inset 0 5px 4px 1px hsla(0, 0%, 0%, .25),
+                inset 0 7px 4px 1px hsla(0, 0%, 0%, .15);
         }
 
         /* Slides */
         .slider li {
-            box-shadow: 0 -1px 0 2px hsla(0,0%,0%,.03);
+            box-shadow: 0 -1px 0 2px hsla(0, 0%, 0%, .03);
             list-style: none;
             position: absolute;
             top: 0;
@@ -1209,6 +1289,7 @@
             padding: 0;
             margin: 0;
         }
+
         .slider input {
             display: none;
         }
@@ -1216,7 +1297,7 @@
         /* Navigation */
         .slider label {
             background-color: #111;
-            background-image: linear-gradient(transparent, hsla(0,0%,0%,.25));
+            background-image: linear-gradient(transparent, hsla(0, 0%, 0%, .25));
             border: .2em solid transparent;
             bottom: .5em;
             border-radius: 100%;
@@ -1231,34 +1312,41 @@
             visibility: hidden;
             z-index: 10;
         }
+
         .slider label:after {
             border-radius: 100%;
             bottom: -.2em;
             box-shadow: inset 0 0 0 .2em #111,
-                        inset 0 2px 2px #000,
-                        0 1px 1px hsla(0,0%,100%,.25);
+                inset 0 2px 2px #000,
+                0 1px 1px hsla(0, 0%, 100%, .25);
             content: '';
             left: -.2em;
             position: absolute;
             right: -.2em;
             top: -.2em;
         }
+
         .slider:hover label {
             opacity: 1;
             visibility: visible;
         }
-        .slider input:checked + label {
+
+        .slider input:checked+label {
             background-color: #fff;
         }
+
         .slider:hover li:nth-child(1) label {
             left: .5em;
         }
+
         .slider:hover li:nth-child(2) label {
             left: 2em;
         }
+
         .slider:hover li:nth-child(3) label {
             left: 3.5em;
         }
+
         .slider:hover li:nth-child(4) label {
             left: 5em;
         }
@@ -1268,7 +1356,7 @@
             height: 17.75em;
             opacity: 1;
             transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
-                        filter 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+                filter 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             width: 24em;
             visibility: visible;
             position: absolute;
@@ -1303,28 +1391,28 @@
                 left: 0.3em;
             }
         }
-        
+
         .slider:hover img {
             transform: scale(1.02);
             filter: brightness(1.1) contrast(1.05);
         }
-        
+
         /* Hide images by default, show when checked */
         .slider li:not(:has(input:checked)) img {
             opacity: 0;
             visibility: hidden;
         }
-        
+
         /* Show image when input is checked - using multiple selectors for compatibility */
-        .slider li input:checked ~ img,
-        .slider li input[checked] ~ img,
+        .slider li input:checked~img,
+        .slider li input[checked]~img,
         .slider li:has(input:checked) img,
         .slider li:has(input[checked]) img {
             opacity: 1 !important;
             visibility: visible !important;
             z-index: 10;
         }
-        
+
         /* Fallback: if only one slide, show it */
         .slider li:only-child img {
             opacity: 1 !important;
@@ -1342,6 +1430,7 @@
             0% {
                 --shimmer: 0deg;
             }
+
             100% {
                 --shimmer: 360deg;
             }
@@ -1351,46 +1440,48 @@
             0% {
                 opacity: 0;
             }
+
             15% {
                 opacity: 1;
             }
+
             55% {
                 opacity: 1;
             }
+
             100% {
                 opacity: 0;
             }
         }
-        
+
         @keyframes text {
             0% {
                 background-position: 100% center;
-            }    
+            }
+
             100% {
                 background-position: -100% center;
-            }    
+            }
         }
 
         .email-team-button {
             --inset: 40px;
             --bg: #1a202c;
-            
+
             color: var(--bg);
             font-weight: 600;
             font-size: 1.5rem;
             font-family: 'Oswald', sans-serif;
             letter-spacing: 0.1em;
             text-transform: uppercase;
-            background-image: linear-gradient(
-                315deg,
-                #ffc4ec -10%,
-                #efdbfd 50%,
-                #ffedd6 110%
-            );
+            background-image: linear-gradient(315deg,
+                    #ffc4ec -10%,
+                    #efdbfd 50%,
+                    #ffedd6 110%);
             padding: 1.2em 2.2em;
             position: relative;
             isolation: isolate;
-            box-shadow: 0 2px 3px 1px hsl(var(--glow-hue) 50% 20% / 50%), inset 0 -10px 20px -10px hsla(var(--shadow-hue),10%,90%,95%);
+            box-shadow: 0 2px 3px 1px hsl(var(--glow-hue) 50% 20% / 50%), inset 0 -10px 20px -10px hsla(var(--shadow-hue), 10%, 90%, 95%);
             border-radius: 0.66em;
             border: none;
             cursor: pointer;
@@ -1427,7 +1518,7 @@
             scale: 1.2;
             box-shadow: 0 4px 8px -2px hsl(var(--glow-hue) 50% 20% / 50%), inset 0 0 0 transparent;
         }
-        
+
         .email-team-button:active {
             scale: 1.1;
             transition-duration: calc(var(--spring-duration)*0.5);
@@ -1438,23 +1529,21 @@
             inset: calc(var(--inset) * -1);
             border-radius: inherit;
             pointer-events: none;
-            mask-image: conic-gradient(
-                from var(--shimmer, 0deg),
-                transparent 0%,
-                transparent 20%,
-                black 36%,
-                black 45%,
-                transparent 50%,
-                transparent 70%,
-                black 85%,
-                black 95%,
-                transparent 100%
-            );
+            mask-image: conic-gradient(from var(--shimmer, 0deg),
+                    transparent 0%,
+                    transparent 20%,
+                    black 36%,
+                    black 45%,
+                    transparent 50%,
+                    transparent 70%,
+                    black 85%,
+                    black 95%,
+                    transparent 100%);
             mask-size: cover;
             mix-blend-mode: plus-lighter;
             animation: shimmer 1s linear infinite both;
         }
-        
+
         .email-team-button:hover .shimmer::before,
         .email-team-button:hover .shimmer::after,
         .email-team-button.active .shimmer::before,
@@ -1462,7 +1551,7 @@
             opacity: 1;
             animation: shine 1.2s ease-in 1 forwards;
         }
-        
+
         .email-team-button .shimmer::before,
         .email-team-button .shimmer::after {
             transition: all 0.5s ease;
@@ -1474,11 +1563,11 @@
             inset: var(--inset);
             pointer-events: none;
         }
-        
+
         .email-team-button .shimmer::before {
-            box-shadow: 0 0 calc(var(--inset) * 0.1)  2px hsl(var(--glow-hue) 20% 95%),
-                0 0 calc(var(--inset) * 0.18)  4px hsl(var(--glow-hue) 20% 80%),
-                0 0 calc(var(--inset) * 0.33)  4px hsl(var(--glow-hue) 50% 70%),
+            box-shadow: 0 0 calc(var(--inset) * 0.1) 2px hsl(var(--glow-hue) 20% 95%),
+                0 0 calc(var(--inset) * 0.18) 4px hsl(var(--glow-hue) 20% 80%),
+                0 0 calc(var(--inset) * 0.33) 4px hsl(var(--glow-hue) 50% 70%),
                 0 0 calc(var(--inset) * 0.66) 5px hsl(var(--glow-hue) 100% 70%);
             z-index: -1;
         }
@@ -1494,7 +1583,7 @@
             color: transparent;
             background-clip: text;
             background-color: var(--bg);
-            background-image: linear-gradient(120deg, transparent, hsla(var(--glow-hue),100%,80%,0.66) 40%, hsla(var(--glow-hue),100%,90%,.9) 50%, transparent 52%);
+            background-image: linear-gradient(120deg, transparent, hsla(var(--glow-hue), 100%, 80%, 0.66) 40%, hsla(var(--glow-hue), 100%, 90%, .9) 50%, transparent 52%);
             background-repeat: no-repeat;
             background-size: 300% 300%;
             background-position: center 200%;
@@ -1710,6 +1799,7 @@
             0% {
                 background-position: 0;
             }
+
             100% {
                 background-position: 1440px;
             }
@@ -1725,7 +1815,7 @@
             height: calc(100% - 20px);
         }
 
-        .listar-feature-item.listar-feature-has-link ~ .listar-feature-fix-bottom-padding.listar-fix-feature-arrow-button-height {
+        .listar-feature-item.listar-feature-has-link~.listar-feature-fix-bottom-padding.listar-fix-feature-arrow-button-height {
             position: relative;
             display: block;
             width: 100%;
@@ -1772,6 +1862,7 @@
             0% {
                 box-shadow: 0 0 0 0 rgba(163, 177, 198, 0.3), 0 0 0 1em rgba(163, 177, 198, 0.3), 0 0 0 3em rgba(163, 177, 198, 0.03), 0 0 0 5em rgba(163, 177, 198, 0.01);
             }
+
             100% {
                 box-shadow: 0 0 0 1em rgba(163, 177, 198, 0.3), 0 0 0 3em rgba(163, 177, 198, 0.03), 0 0 0 5em rgba(163, 177, 198, 0.03), 0 0 0 8em rgba(163, 177, 198, 0.01);
             }
@@ -1801,7 +1892,7 @@
             background: -o-linear-gradient(left, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0) 40%, rgba(255, 255, 255, 1) 100%);
             background: -ms-linear-gradient(left, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0) 40%, rgba(255, 255, 255, 1) 100%);
             background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0) 40%, rgba(255, 255, 255, 1) 100%);
-            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff',endColorstr='#ffffff',GradientType=1);
+            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#ffffff', GradientType=1);
         }
 
         .listar-feature-item .listar-feature-item-inner:before {
@@ -1836,13 +1927,13 @@
         }
 
         .listar-feature-right-border:before,
-        .listar-hovering-features .listar-feature-item a:hover ~ .listar-feature-item-inner .listar-feature-right-border:before {
+        .listar-hovering-features .listar-feature-item a:hover~.listar-feature-item-inner .listar-feature-right-border:before {
             border: 11px solid #2f53bf;
         }
 
         .listar-feature-right-border:before,
-        .listar-hovering-features .listar-feature-item a:hover ~ .listar-feature-item-inner .listar-feature-right-border:before,
-        .listar-hovering-features-grey .listar-feature-item a:hover ~ .listar-feature-item-inner .listar-feature-right-border:before {
+        .listar-hovering-features .listar-feature-item a:hover~.listar-feature-item-inner .listar-feature-right-border:before,
+        .listar-hovering-features-grey .listar-feature-item a:hover~.listar-feature-item-inner .listar-feature-right-border:before {
             content: "";
             position: absolute;
             width: 100%;
@@ -1966,12 +2057,12 @@
             line-height: 1.5;
         }
 
-        .listar-feature-item .listar-feature-item-title.listar-feature-counter-added > span {
+        .listar-feature-item .listar-feature-item-title.listar-feature-counter-added>span {
             margin-left: 25px;
             border-radius: 0 50px 50px 0;
         }
 
-        .listar-feature-item .listar-feature-item-title > span {
+        .listar-feature-item .listar-feature-item-title>span {
             box-shadow: 15px 20px 30px rgba(80, 80, 80, 0.12), 5px 0px 40px rgba(80, 80, 80, 0.1);
             padding: 10px 20px;
             display: inline-block;
@@ -1979,7 +2070,7 @@
             background-color: #fff;
         }
 
-        .listar-feature-item .listar-feature-item-title > span span {
+        .listar-feature-item .listar-feature-item-title>span span {
             box-shadow: 15px 15px 30px rgba(80, 80, 80, 0.2), 5px 0px 80px rgba(80, 80, 80, 0.15);
             padding: 10px 0;
             display: inline-block;
@@ -2072,38 +2163,85 @@
             line-height: 52px;
         }
 
-        .col-lg-1, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-lg-10, .col-lg-11, .col-lg-12,
-        .col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, .col-md-12,
-        .col-sm-1, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-10, .col-sm-11, .col-sm-12,
-        .col-xs-1, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9, .col-xs-10, .col-xs-11, .col-xs-12 {
+        .col-lg-1,
+        .col-lg-2,
+        .col-lg-3,
+        .col-lg-4,
+        .col-lg-5,
+        .col-lg-6,
+        .col-lg-7,
+        .col-lg-8,
+        .col-lg-9,
+        .col-lg-10,
+        .col-lg-11,
+        .col-lg-12,
+        .col-md-1,
+        .col-md-2,
+        .col-md-3,
+        .col-md-4,
+        .col-md-5,
+        .col-md-6,
+        .col-md-7,
+        .col-md-8,
+        .col-md-9,
+        .col-md-10,
+        .col-md-11,
+        .col-md-12,
+        .col-sm-1,
+        .col-sm-2,
+        .col-sm-3,
+        .col-sm-4,
+        .col-sm-5,
+        .col-sm-6,
+        .col-sm-7,
+        .col-sm-8,
+        .col-sm-9,
+        .col-sm-10,
+        .col-sm-11,
+        .col-sm-12,
+        .col-xs-1,
+        .col-xs-2,
+        .col-xs-3,
+        .col-xs-4,
+        .col-xs-5,
+        .col-xs-6,
+        .col-xs-7,
+        .col-xs-8,
+        .col-xs-9,
+        .col-xs-10,
+        .col-xs-11,
+        .col-xs-12 {
             align-self: flex-start;
         }
     </style>
 </head>
+
 <body>
     <svg width='0' height='0' aria-hidden='true'>
         <filter id='glow' x='-50%' y='-200%' width='200%' height='500%' primitiveUnits='objectBoundingBox'>
-            <feGaussianBlur stdDeviation='.025 .2'/>
-            <feColorMatrix type='saturate' values='1.3'/>
-            <feBlend in='SourceGraphic'/>
+            <feGaussianBlur stdDeviation='.025 .2' />
+            <feColorMatrix type='saturate' values='1.3' />
+            <feBlend in='SourceGraphic' />
         </filter>
     </svg>
     <svg xmlns="http://www.w3.org/2000/svg" version="1.1" class="goo">
         <defs>
             <filter id="goo">
                 <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
-                <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9" result="goo" />
-                <feComposite in="SourceGraphic" in2="goo"/>
+                <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9"
+                    result="goo" />
+                <feComposite in="SourceGraphic" in2="goo" />
             </filter>
         </defs>
     </svg>
     <div id="nav-placeholder"></div>
 
-    <section class="hero-section relative h-screen flex items-center justify-center overflow-hidden">
-        <div class="hero-background bg-cover bg-center" style="background-image: url('../../assets/images/stages/hero.jpg');"></div>
+    <section id="hero" class="hero-section relative h-screen flex items-center justify-center overflow-hidden">
+        <div class="hero-background bg-cover bg-center"
+            style="background-image: url('../../assets/images/stages/hero.jpg');"></div>
         <div class="absolute inset-0 hero-gradient"></div>
         <div class="hero-content relative z-10 text-center text-white px-4 sm:px-6 max-w-4xl mx-auto">
-			<h3 class="av-title text-xl sm:text-2xl md:text-3xl mb-3 md:mb-4 tracking-widest">A/V PRODUCTION</h3>
+            <h3 class="av-title text-xl sm:text-2xl md:text-3xl mb-3 md:mb-4 tracking-widest">A/V PRODUCTION</h3>
             <div class="name mb-4 sm:mb-6 md:mb-8">
                 <div class="cosmic" style="--color: #23b1d8" data-text="E">
                     <span>E</span>
@@ -2140,13 +2278,17 @@
                     <span>S</span>
                 </div>
             </div>
-            <p class="cinematic-subtitle text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl mb-6 sm:mb-8 md:mb-10 lg:mb-12 max-w-6xl mx-auto font-normal px-2">
-				Amplify your message. Captivate your audience. Create experiences that resonate. We're your trusted partner for AV services, offering expertly designed event staging solutions that bring your vision to life.
-			</p>
+            <p
+                class="cinematic-subtitle text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl mb-6 sm:mb-8 md:mb-10 lg:mb-12 max-w-6xl mx-auto font-normal px-2">
+                Amplify your message. Captivate your audience. Create experiences that resonate. We're your trusted
+                partner for AV services, offering expertly designed event staging solutions that bring your vision to
+                life.
+            </p>
             <div class="px-2 hero-buttons-container">
                 <span class="button--bubble__container">
-                    <button type="button" data-click-to-call data-call-text="Call Us" class="button button--bubble cursor-pointer">
-                        <span>Call Us</span>
+                    <button type="button" data-click-to-call data-call-text="Get A Free Quote"
+                        class="button button--bubble cursor-pointer">
+                        <span>Get A Free Quote</span>
                         <span class="button-arrow">→</span>
                     </button>
                     <span class="button--bubble__effect-container">
@@ -2168,19 +2310,27 @@
     </section>
 
     <!-- A - Two Column Section -->
-    <section class="two-column-section section-padding bg-white stack-animation-wrapper section-a-responsive" id="section-a" style="padding: 3rem 0;">
+    <section class="two-column-section section-padding bg-white stack-animation-wrapper section-a-responsive"
+        id="section-a" style="padding: 3rem 0;">
         <div class="container mx-auto px-4 sm:px-6">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 md:gap-8 items-start md:items-center">
                 <!-- Left Column -->
                 <div class="left-column order-2 md:order-1">
                     <h3>TAKE YOUR EVENT TO THE NEXT LEVEL WITH</h3>
                     <h2>EVENT <em>STAGES</em></h2>
-                    <p>MiHi Entertainment provides professional event staging services to help your event stand out and leave a lasting impression. From elegant stages for keynote speeches to dynamic setups for live performances, our team designs and executes staging solutions tailored to your needs.</p>
-                    <p>Our AV services ensure every aspect of your event runs seamlessly. With cutting-edge equipment and expert technicians, we deliver event staging that connects with your audience and makes an impact. Whether you're hosting a corporate event, gala, or conference, our stages are built to impress.</p>
-                    <p>We take a personalized approach to each event, working closely with you to understand your goals and venue details. Let MiHi Entertainment bring your event to life with customized event staging that blends function, style, and innovation.</p>
-                    <a href="#contact" class="btn-more bubbly-button">Interested In Hearing More?</a>
+                    <p>MiHi Entertainment provides professional event staging services to help your event stand out and
+                        leave a lasting impression. From elegant stages for keynote speeches to dynamic setups for live
+                        performances, our team designs and executes staging solutions tailored to your needs.</p>
+                    <p>Our AV services ensure every aspect of your event runs seamlessly. With cutting-edge equipment
+                        and expert technicians, we deliver event staging that connects with your audience and makes an
+                        impact. Whether you're hosting a corporate event, gala, or conference, our stages are built to
+                        impress.</p>
+                    <p>We take a personalized approach to each event, working closely with you to understand your goals
+                        and venue details. Let MiHi Entertainment bring your event to life with customized event staging
+                        that blends function, style, and innovation.</p>
+                    <a href="../contact-us.html" class="btn-more bubbly-button">Interested In Hearing More?</a>
                 </div>
-                
+
                 <!-- Right Column -->
                 <div class="right-column order-1 md:order-2">
                     <div id="portfolio-gallery">
@@ -2208,8 +2358,9 @@
         </div>
     </section>
 
-	<!-- B - Two Column Section -->
-    <section class="two-column-section section-padding bg-white stack-animation-wrapper" id="section-b" style="padding: 3rem 0;">
+    <!-- B - Two Column Section -->
+    <section class="two-column-section section-padding bg-white stack-animation-wrapper" id="section-b"
+        style="padding: 3rem 0;">
         <div class="container mx-auto px-4 sm:px-6">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 md:gap-8 items-start md:items-center">
                 <!-- Left Column -->
@@ -2223,26 +2374,32 @@
                         </li>
                     </ul>
                 </div>
-                
+
                 <!-- Right Column -->
                 <div class="left-column left-aligned order-1 md:order-2">
-                    <h2>CONFERENCES</h2>
-                    <p>Set the tone, increase audience engagement, and ensure speakers and presentations are showcased effectively, creating a polished and professional atmosphere that leaves a lasting impression.</p>
+                    <h2><a href="../contact-us.html">CONFERENCES</a></h2>
+                    <p>Set the tone, increase audience engagement, and ensure speakers and presentations are showcased
+                        effectively, creating a polished and professional atmosphere that leaves a lasting impression.
+                    </p>
                 </div>
             </div>
         </div>
     </section>
 
-	<!-- C - Two Column Section -->
-    <section class="two-column-section section-padding bg-white stack-animation-wrapper" id="section-c" style="padding: 3rem 0;">
+    <!-- C - Two Column Section -->
+    <section class="two-column-section section-padding bg-white stack-animation-wrapper" id="section-c"
+        style="padding: 3rem 0;">
         <div class="container mx-auto px-4 sm:px-6">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 md:gap-8 items-center">
                 <!-- Left Column -->
                 <div class="left-column">
-                    <h2>WEDDINGS</h2>
-                    <p>Create a romantic and refined atmosphere for your wedding with a beautifully designed stage. Whether it's for heartfelt toasts, memorable speeches, or live entertainment, our stages ensure every moment is unforgettable and full of charm, leaving a lasting impression on you and your guests</p>
+                    <h2><a href="../wedding.html">WEDDINGS</a></h2>
+                    <p>Create a romantic and refined atmosphere for your wedding with a beautifully designed stage.
+                        Whether it's for heartfelt toasts, memorable speeches, or live entertainment, our stages ensure
+                        every moment is unforgettable and full of charm, leaving a lasting impression on you and your
+                        guests</p>
                 </div>
-                
+
                 <!-- Right Column -->
                 <div class="right-column">
                     <!-- Images from Craig Henry's Dribbble profile: http://dribbble.com/craighenry -->
@@ -2258,10 +2415,12 @@
         </div>
     </section>
 
-	<!-- Email Button -->
-	<section class="two-column-section section-padding bg-white stack-animation-wrapper" id="section-email" style="padding: 3rem 0;">
+    <!-- Email Button -->
+    <section class="two-column-section section-padding bg-white stack-animation-wrapper" id="section-email"
+        style="padding: 3rem 0;">
         <div class="container mx-auto px-4 sm:px-6">
-            <div class="email-button-container" style="display: flex; align-items: center; justify-content: center; padding: 2rem 0;">
+            <div class="email-button-container"
+                style="display: flex; align-items: center; justify-content: center; padding: 2rem 0;">
                 <button class="email-team-button">
                     <span class="text">Email Our Team</span>
                     <span class="shimmer"></span>
@@ -2271,7 +2430,8 @@
     </section>
 
     <!-- D - Two Column Section -->
-    <section class="two-column-section section-padding bg-white stack-animation-wrapper" id="section-d" style="padding: 3rem 0;">
+    <section class="two-column-section section-padding bg-white stack-animation-wrapper" id="section-d"
+        style="padding: 3rem 0;">
         <div class="container mx-auto px-4 sm:px-6">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 md:gap-8 items-start md:items-center">
                 <!-- Left Column -->
@@ -2285,26 +2445,31 @@
                         </li>
                     </ul>
                 </div>
-                
+
                 <!-- Right Column -->
                 <div class="left-column left-aligned order-1 md:order-2">
-                    <h2>PERFORMANCES</h2>
-                    <p>Make your event performances shine with our customizable stages. Add branding or lighting to tie your event details together and bring your event to life.</p>
+                    <h2><a href="../contact-us.html">PERFORMANCES</a></h2>
+                    <p>Make your event performances shine with our customizable stages. Add branding or lighting to tie
+                        your event details together and bring your event to life.</p>
                 </div>
             </div>
         </div>
     </section>
 
-	<!-- E - Two Column Section -->
-    <section class="two-column-section section-padding bg-white stack-animation-wrapper" id="section-e" style="padding: 3rem 0;margin-bottom: 1rem;">
+    <!-- E - Two Column Section -->
+    <section class="two-column-section section-padding bg-white stack-animation-wrapper" id="section-e"
+        style="padding: 3rem 0;margin-bottom: 1rem;">
         <div class="container mx-auto px-4 sm:px-6">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 md:gap-8 items-center">
                 <!-- Left Column -->
                 <div class="left-column">
-                    <h2>EVENT PRODUCTION</h2>
-                    <p>Transform your event with a stage that sets the perfect backdrop for every moment. From dynamic presentations to live performances, our stages provide a professional and polished setting that ensures all eyes are on your speakers and entertainers, creating an atmosphere that engages and captivates your audience.</p>
+                    <h2><a href="../contact-us.html">EVENT PRODUCTION</a></h2>
+                    <p>Transform your event with a stage that sets the perfect backdrop for every moment. From dynamic
+                        presentations to live performances, our stages provide a professional and polished setting that
+                        ensures all eyes are on your speakers and entertainers, creating an atmosphere that engages and
+                        captivates your audience.</p>
                 </div>
-                
+
                 <!-- Right Column -->
                 <div class="right-column">
                     <!-- Images from Craig Henry's Dribbble profile: http://dribbble.com/craighenry -->
@@ -2321,15 +2486,21 @@
     </section>
 
     <!-- F - New Section -->
-    <section class="two-column-section section-padding bg-white stack-animation-wrapper" id="section-f" style="padding: 0;">
+    <section class="two-column-section section-padding bg-white stack-animation-wrapper" id="section-f"
+        style="padding: 0;">
         <header class="header-design">
             <div class="listar-map-button">
                 <div class="listar-map-button-text" style="display: inline-block; opacity: 1;">
-                    <span class="icon-map2">
-                        Contact Us Now </span>
+                    <a href="#hero" style="text-decoration: none; color: inherit; cursor: pointer;">
+                        <span class="icon-map2">
+                            Contact Us Now </span>
+                    </a>
                 </div>
             </div>
-            <p class="header-design-text" style="text-align: center; color: #fff; padding: 15px 30px; margin: 0; font-size: 18px; font-weight: 500; line-height: 1.8; position: relative; z-index: 10; max-width: 800px; margin-left: auto; margin-right: auto; text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5), 0 0 20px rgba(0, 0, 0, 0.3); letter-spacing: 0.5px;">Learn more about our event stage services for your next event, click the button below to email us and connect with our team today.</p>
+            <p class="header-design-text"
+                style="text-align: center; color: #fff; padding: 15px 30px; margin: 0; font-size: 18px; font-weight: 500; line-height: 1.8; position: relative; z-index: 10; max-width: 800px; margin-left: auto; margin-right: auto; text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5), 0 0 20px rgba(0, 0, 0, 0.3); letter-spacing: 0.5px;">
+                Learn more about our event stage services for your next event, click the button below to email us and
+                connect with our team today.</p>
             <div class="footer-wave"></div>
         </header>
     </section>
@@ -2339,8 +2510,8 @@
     <script src="../../assets/components/navigation.js"></script>
     <script src="../../assets/components/footer.js"></script>
     <script>
-        $(document).ready(function() {
-            $('.button--bubble').each(function() {
+        $(document).ready(function () {
+            $('.button--bubble').each(function () {
                 var $circlesTopLeft = $(this).parent().find('.circle.top-left');
                 var $circlesBottomRight = $(this).parent().find('.circle.bottom-right');
 
@@ -2468,62 +2639,62 @@
 
                 btTl.timeScale(2.6);
 
-                $(this).on('mouseover', function() {
+                $(this).on('mouseover', function () {
                     btTl.restart();
                 });
             });
 
             // Portfolio Gallery Effect
-            $('#portfolio-content .portfolio').each(function(index) {
+            $('#portfolio-content .portfolio').each(function (index) {
                 $(this).attr('id', 'img' + (index + 1));
             });
-            
-            $('#portfolio-content .portfolio').each(function() {
+
+            $('#portfolio-content .portfolio').each(function () {
                 $('#portfolio-navi').append('<div class="portfolio-circle"></div>');
             });
-            
-            $('.portfolio-circle').each(function(index) {
+
+            $('.portfolio-circle').each(function (index) {
                 $(this).attr('id', 'circle' + (index + 1));
-            });   
-               
-            $('#portfolio-content .portfolio').click(function() {
-                if($(this).hasClass('opened')) {
+            });
+
+            $('#portfolio-content .portfolio').click(function () {
+                if ($(this).hasClass('opened')) {
                     $(this).removeClass('opened');
                     $("#portfolio-content .portfolio").fadeIn("fast");
                     $(this).find('.ombra').fadeOut();
                     $("#portfolio-navi div").removeClass("activenav");
                 } else {
                     var indexi = $("#portfolio-content .portfolio").index(this) + 1;
-                    $(this).addClass('opened'); 
+                    $(this).addClass('opened');
                     $("#portfolio-content .portfolio").not(this).fadeOut("fast");
                     $(this).find('.ombra').fadeIn();
-                    $("#circle" + indexi).addClass('activenav'); 
+                    $("#circle" + indexi).addClass('activenav');
                 }
-            });	
+            });
 
             // Navigation buttons
-            $("#portfolio-navi div").click(function() {
-                if($(this).hasClass("activenav")) {
+            $("#portfolio-navi div").click(function () {
+                if ($(this).hasClass("activenav")) {
                     return false;
                 }
-                    
+
                 $("#portfolio-navi div").removeClass("activenav");
                 $("#portfolio-content .portfolio").removeClass('opened');
                 $("#portfolio-content .portfolio").show();
                 $('.ombra').hide();
-                    
+
                 var index = $("#portfolio-navi div").index(this) + 1;
-                $("#img" + index).addClass('opened'); 
+                $("#img" + index).addClass('opened');
                 $("#portfolio-content .portfolio").not("#img" + index).fadeOut("fast");
                 $("#img" + index).find('.ombra').fadeIn();
-                    
+
                 $(this).addClass("activenav");
             });
 
             // Trigger gallery entrance animation when scrolling to section A
             const sectionA = document.querySelector('#section-a');
             const portfolioContent = document.querySelector('#portfolio-content');
-            
+
             if (sectionA && portfolioContent) {
                 const observer = new IntersectionObserver((entries) => {
                     entries.forEach(entry => {
@@ -2534,14 +2705,14 @@
                 }, {
                     threshold: 0.2 // Trigger when 20% of section A is visible
                 });
-                
+
                 observer.observe(sectionA);
             }
 
             // Trigger slider entrance animation when scrolling to section B
             const sectionB = document.querySelector('#section-b');
             const sliderB = document.querySelector('#section-b .slider');
-            
+
             if (sectionB && sliderB) {
                 // Check if section is already visible on page load
                 const rectB = sectionB.getBoundingClientRect();
@@ -2549,7 +2720,7 @@
                 if (isVisibleB && !sliderB.classList.contains('animate-comein')) {
                     sliderB.classList.add('animate-comein');
                 }
-                
+
                 const observerB = new IntersectionObserver((entries) => {
                     entries.forEach(entry => {
                         if (entry.isIntersecting && !sliderB.classList.contains('animate-comein')) {
@@ -2559,14 +2730,14 @@
                 }, {
                     threshold: 0.2 // Trigger when 20% of section B is visible
                 });
-                
+
                 observerB.observe(sectionB);
             }
 
             // Trigger slider entrance animation when scrolling to section C
             const sectionC = document.querySelector('#section-c');
             const sliderC = document.querySelector('#section-c .slider');
-            
+
             if (sectionC && sliderC) {
                 // Check if section is already visible on page load
                 const rect = sectionC.getBoundingClientRect();
@@ -2574,7 +2745,7 @@
                 if (isVisible && !sliderC.classList.contains('animate-comein')) {
                     sliderC.classList.add('animate-comein');
                 }
-                
+
                 const observerC = new IntersectionObserver((entries) => {
                     entries.forEach(entry => {
                         if (entry.isIntersecting && !sliderC.classList.contains('animate-comein')) {
@@ -2584,14 +2755,14 @@
                 }, {
                     threshold: 0.2 // Trigger when 20% of section C is visible
                 });
-                
+
                 observerC.observe(sectionC);
             }
 
             // Trigger slider entrance animation when scrolling to section D
             const sectionD = document.querySelector('#section-d');
             const sliderD = document.querySelector('#section-d .slider');
-            
+
             if (sectionD && sliderD) {
                 // Check if section is already visible on page load
                 const rectD = sectionD.getBoundingClientRect();
@@ -2599,7 +2770,7 @@
                 if (isVisibleD && !sliderD.classList.contains('animate-comein')) {
                     sliderD.classList.add('animate-comein');
                 }
-                
+
                 const observerD = new IntersectionObserver((entries) => {
                     entries.forEach(entry => {
                         if (entry.isIntersecting && !sliderD.classList.contains('animate-comein')) {
@@ -2609,14 +2780,14 @@
                 }, {
                     threshold: 0.2 // Trigger when 20% of section D is visible
                 });
-                
+
                 observerD.observe(sectionD);
             }
 
             // Trigger slider entrance animation when scrolling to section E
             const sectionE = document.querySelector('#section-e');
             const sliderE = document.querySelector('#section-e .slider');
-            
+
             if (sectionE && sliderE) {
                 // Check if section is already visible on page load
                 const rectE = sectionE.getBoundingClientRect();
@@ -2624,7 +2795,7 @@
                 if (isVisibleE && !sliderE.classList.contains('animate-comein')) {
                     sliderE.classList.add('animate-comein');
                 }
-                
+
                 const observerE = new IntersectionObserver((entries) => {
                     entries.forEach(entry => {
                         if (entry.isIntersecting && !sliderE.classList.contains('animate-comein')) {
@@ -2634,20 +2805,36 @@
                 }, {
                     threshold: 0.2 // Trigger when 20% of section E is visible
                 });
-                
+
                 observerE.observe(sectionE);
             }
 
             // Bubbly Button Animation
-            var animateButton = function(e) {
-                e.preventDefault();
-                //reset animation
-                e.target.classList.remove('animate');
-                
-                e.target.classList.add('animate');
-                setTimeout(function(){
-                    e.target.classList.remove('animate');
-                }, 700);
+            var animateButton = function (e) {
+                var target = e.target;
+                var isLink = target.tagName === 'A' && target.href;
+
+                if (isLink) {
+                    e.preventDefault();
+                    //reset animation
+                    target.classList.remove('animate');
+
+                    target.classList.add('animate');
+                    setTimeout(function () {
+                        target.classList.remove('animate');
+                        // Navigate after animation completes
+                        window.location.href = target.href;
+                    }, 700);
+                } else {
+                    e.preventDefault();
+                    //reset animation
+                    target.classList.remove('animate');
+
+                    target.classList.add('animate');
+                    setTimeout(function () {
+                        target.classList.remove('animate');
+                    }, 700);
+                }
             };
 
             var bubblyButtons = document.getElementsByClassName("bubbly-button");
@@ -2659,4 +2846,5 @@
         });
     </script>
 </body>
+
 </html>
