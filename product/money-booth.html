@@ -1,24 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Money Booth Rental - MiHi Entertainment</title>
+    <title>Money Booth | MiHi Entertainment</title>
     <link rel="icon" type="image/svg+xml" href="../../assets/images/favicon.svg">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&family=Exo+2:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&family=Exo+2:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        html, body { overflow-x: hidden; }
-        body { font-family: 'Inter', sans-serif; color: #1a202c; }
-        h1, h2, h3, h4, h5, h6 { font-family: 'Rajdhani', sans-serif; font-weight: 600; letter-spacing: 0.02em; }
-        .btn-primary { background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%); transition: all 0.3s ease; }
-        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(0, 80, 255, 0.4); }
-        .section-padding { padding: 5rem 0; }
-        .hero-gradient { background: linear-gradient(135deg, rgba(0, 0, 0, 0.65) 0%, rgba(0, 0, 0, 0.65) 100%); }
-        
+        html,
+        body {
+            overflow-x: hidden;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #1a202c;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%);
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 80, 255, 0.4);
+        }
+
+        .section-padding {
+            padding: 5rem 0;
+        }
+
+        .hero-gradient {
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.65) 0%, rgba(0, 0, 0, 0.65) 100%);
+        }
+
         /* Hero Section Typography */
         .hero-section h3 {
             font-family: 'Rajdhani', sans-serif;
@@ -26,7 +62,7 @@
             letter-spacing: 0.05em;
             text-transform: uppercase;
         }
-        
+
         .hero-section p {
             font-family: 'Exo 2', sans-serif;
             font-weight: 400;
@@ -40,7 +76,7 @@
                 transform: translateY(-60px);
             }
         }
-        
+
         /* Hero Section Zoom Out Optimization */
         .hero-section {
             width: 100%;
@@ -49,7 +85,7 @@
             box-sizing: border-box;
             position: relative;
         }
-        
+
         .hero-section .relative.z-10 {
             width: 100%;
             max-width: 100%;
@@ -58,25 +94,25 @@
             position: relative;
             z-index: 10;
         }
-        
+
         /* Prevent keyboard text from overflowing on zoom out */
         @media (max-width: 1400px) {
             .hero-section .keyboard {
                 max-width: 100%;
                 padding: 0 1rem;
             }
-            
+
             .hero-section .key {
                 font-size: clamp(2rem, 3.5vw, 4rem);
             }
         }
-        
+
         @media (max-width: 1200px) {
             .hero-section .keyboard {
                 padding: 0 0.75rem;
             }
         }
-        
+
         /* Keyboard Animation Styles */
         .keyboard {
             font-family: "Orbitron", sans-serif;
@@ -94,7 +130,7 @@
             align-items: center;
             padding: 0 1rem;
         }
-        
+
         .key {
             font-size: 3.5rem;
             display: inline-block;
@@ -105,191 +141,239 @@
             z-index: 2;
             flex-shrink: 0;
         }
-        
+
         @media (min-width: 768px) {
             .key {
                 font-size: 4.5rem;
                 letter-spacing: 0.1em;
             }
         }
-        
+
         /* Zoom out optimization for keyboard */
         @media (max-width: 1200px) {
             .keyboard {
                 padding: 0 0.75rem;
             }
-            
+
             .key {
                 font-size: clamp(2.5rem, 4vw, 4rem);
             }
         }
-        
+
         @media (max-width: 1024px) {
             .keyboard {
                 padding: 0 0.5rem;
             }
-            
+
             .key {
                 font-size: clamp(2.25rem, 3.5vw, 3.5rem);
             }
         }
-        
+
         @keyframes pressDown1 {
-            30%, 40%, 100% {
+
+            30%,
+            40%,
+            100% {
                 transform: translateY(0);
             }
+
             35% {
                 transform: translateY(6px);
             }
         }
-        
+
         @keyframes pressDown2 {
-            70%, 80%, 100% {
+
+            70%,
+            80%,
+            100% {
                 transform: translateY(0);
             }
+
             75% {
                 transform: translateY(6px);
             }
         }
-        
+
         @keyframes pressDown3 {
-            30%, 40%, 100% {
+
+            30%,
+            40%,
+            100% {
                 transform: translateY(0);
             }
+
             35% {
                 transform: translateY(6px);
             }
         }
-        
+
         @keyframes pressDown4 {
-            40%, 50%, 100% {
+
+            40%,
+            50%,
+            100% {
                 transform: translateY(0);
             }
+
             45% {
                 transform: translateY(6px);
             }
         }
-        
+
         @keyframes pressDown5 {
-            20%, 30%, 100% {
+
+            20%,
+            30%,
+            100% {
                 transform: translateY(0);
             }
+
             25% {
                 transform: translateY(6px);
             }
         }
-        
+
         @keyframes pressDown6 {
-            60%, 70%, 100% {
+
+            60%,
+            70%,
+            100% {
                 transform: translateY(0);
             }
+
             65% {
                 transform: translateY(6px);
             }
         }
-        
+
         @keyframes pressDown7 {
-            10%, 20%, 100% {
+
+            10%,
+            20%,
+            100% {
                 transform: translateY(0);
             }
+
             15% {
                 transform: translateY(6px);
             }
         }
-        
+
         @keyframes pressDown8 {
-            35%, 45%, 100% {
+
+            35%,
+            45%,
+            100% {
                 transform: translateY(0);
             }
+
             40% {
                 transform: translateY(6px);
             }
         }
-        
+
         @keyframes pressDown9 {
-            50%, 60%, 100% {
+
+            50%,
+            60%,
+            100% {
                 transform: translateY(0);
             }
+
             55% {
                 transform: translateY(6px);
             }
         }
-        
+
         @keyframes pressDown10 {
-            25%, 35%, 100% {
+
+            25%,
+            35%,
+            100% {
                 transform: translateY(0);
             }
+
             30% {
                 transform: translateY(6px);
             }
         }
-        
+
         @keyframes pressDown11 {
-            15%, 25%, 100% {
+
+            15%,
+            25%,
+            100% {
                 transform: translateY(0);
             }
+
             20% {
                 transform: translateY(6px);
             }
         }
-        
+
         @keyframes pressDown12 {
-            45%, 55%, 100% {
+
+            45%,
+            55%,
+            100% {
                 transform: translateY(0);
             }
+
             50% {
                 transform: translateY(6px);
             }
         }
-        
+
         .key:nth-child(1) {
             animation: pressDown1 2s infinite;
         }
-        
+
         .key:nth-child(2) {
             animation: pressDown2 3s infinite;
         }
-        
+
         .key:nth-child(3) {
             animation: pressDown3 4s infinite;
         }
-        
+
         .key:nth-child(4) {
             animation: pressDown4 2.5s infinite;
         }
-        
+
         .key:nth-child(5) {
             animation: pressDown5 2.5s infinite;
         }
-        
+
         .key:nth-child(6) {
             animation: pressDown6 3.5s infinite;
         }
-        
+
         .key:nth-child(7) {
             animation: pressDown7 2.2s infinite;
         }
-        
+
         .key:nth-child(8) {
             animation: pressDown8 3.2s infinite;
         }
-        
+
         .key:nth-child(9) {
             animation: pressDown9 2.8s infinite;
         }
-        
+
         .key:nth-child(10) {
             animation: pressDown10 3.3s infinite;
         }
-        
+
         .key:nth-child(11) {
             animation: pressDown11 2.7s infinite;
         }
-        
+
         .key:nth-child(12) {
             animation: pressDown12 3.1s infinite;
         }
-        
+
         /* Responsive adjustments for smaller screens */
         @media (max-width: 640px) {
             .key {
@@ -297,7 +381,7 @@
                 letter-spacing: 0.06em;
             }
         }
-        
+
         /* Animated Gradient Button */
         .animated-gradient-btn {
             --width: 220px;
@@ -340,7 +424,7 @@
             animation: gradient var(--dur) ease-in-out infinite, border 1s forwards ease-in-out reverse;
         }
 
-        .animated-gradient-btn > span {
+        .animated-gradient-btn>span {
             display: block;
             position: relative;
             z-index: 2;
@@ -356,9 +440,11 @@
             0% {
                 background-position: 14% 0%;
             }
+
             50% {
                 background-position: 87% 100%;
             }
+
             100% {
                 background-position: 14% 0%;
             }
@@ -369,26 +455,31 @@
                 -webkit-clip-path: polygon(0% 100%, 4px 100%, 4px 4px, 216px 4px, 216px 66px, 4px 66px, 4px 100%, 100% 100%, 100% 0%, 0% 0%);
                 clip-path: polygon(0% 100%, 4px 100%, 4px 4px, 216px 4px, 216px 66px, 4px 66px, 4px 100%, 100% 100%, 100% 0%, 0% 0%);
             }
+
             25% {
                 -webkit-clip-path: polygon(0% 100%, 4px 100%, 4px 4px, 216px 4px, 216px 66px, 216px 66px, 216px 100%, 100% 100%, 100% 0%, 0% 0%);
                 clip-path: polygon(0% 100%, 4px 100%, 4px 4px, 216px 4px, 216px 66px, 216px 66px, 216px 100%, 100% 100%, 100% 0%, 0% 0%);
             }
+
             50% {
                 -webkit-clip-path: polygon(0% 100%, 4px 100%, 4px 4px, 216px 4px, 216px 4px, 216px 4px, 216px 4px, 216px 4px, 100% 0%, 0% 0%);
                 clip-path: polygon(0% 100%, 4px 100%, 4px 4px, 216px 4px, 216px 4px, 216px 4px, 216px 4px, 216px 4px, 100% 0%, 0% 0%);
             }
+
             75% {
                 -webkit-clip-path: polygon(0% 100%, 4px 100%, 4px 4px, 4px 4px, 4px 4px, 4px 4px, 4px 4px, 4px 4px, 4px 0%, 0% 0%);
                 clip-path: polygon(0% 100%, 4px 100%, 4px 4px, 4px 4px, 4px 4px, 4px 4px, 4px 4px, 4px 4px, 4px 0%, 0% 0%);
             }
+
             100% {
                 -webkit-clip-path: polygon(0% 100%, 4px 100%, 4px 100%, 4px 100%, 4px 100%, 4px 100%, 4px 100%, 4px 100%, 4px 100%, 0% 100%);
                 clip-path: polygon(0% 100%, 4px 100%, 4px 100%, 4px 100%, 4px 100%, 4px 100%, 4px 100%, 4px 100%, 4px 100%, 0% 100%);
             }
         }
-        
+
         /* Mobile Responsive Styles */
         @media (max-width: 768px) {
+
             /* Hero Section Mobile */
             .hero-section {
                 min-height: 70vh;
@@ -416,14 +507,14 @@
             }
 
             /* Ensure button wrapper doesn't overflow */
-            .hero-section .relative.z-10 > a.animated-gradient-btn {
+            .hero-section .relative.z-10>a.animated-gradient-btn {
                 margin-left: auto;
                 margin-right: auto;
                 display: block;
             }
 
             /* Prevent text clipping */
-            .hero-section .animated-gradient-btn > span {
+            .hero-section .animated-gradient-btn>span {
                 position: relative;
                 z-index: 10;
             }
@@ -488,7 +579,7 @@
                 animation: gradient var(--dur) ease-in-out infinite !important;
             }
 
-            .hero-section .animated-gradient-btn > span {
+            .hero-section .animated-gradient-btn>span {
                 line-height: 58px !important;
                 display: flex !important;
                 align-items: center !important;
@@ -514,8 +605,9 @@
                 clip-path: polygon(0% 100%, 4px 100%, 4px 4px, 176px 4px, 176px 51px, 4px 51px, 4px 100%, 100% 100%, 100% 0%, 0% 0%);
             }
         }
-        
+
         @media (max-width: 640px) {
+
             /* Hero Section - Small Mobile Optimization */
             .hero-section {
                 min-height: 65vh;
@@ -582,7 +674,7 @@
                 animation: gradient var(--dur) ease-in-out infinite !important;
             }
 
-            .hero-section .animated-gradient-btn > span {
+            .hero-section .animated-gradient-btn>span {
                 line-height: 54px !important;
                 display: flex !important;
                 align-items: center !important;
@@ -606,6 +698,7 @@
                 clip-path: polygon(0% 100%, 3px 100%, 3px 3px, 157px 3px, 157px 47px, 3px 47px, 3px 100%, 100% 100%, 100% 0%, 0% 0%);
             }
         }
+
         /* --- Modern Hero Section - Compact & Mobile Optimized --- */
         .money-booth-hero-upgraded {
             width: 100%;
@@ -642,18 +735,27 @@
             border-radius: 50%;
             animation: float 8s ease-in-out infinite alternate;
         }
+
         .money-booth-hero-upgraded::before {
             top: -80px;
             left: -80px;
         }
+
         .money-booth-hero-upgraded::after {
             bottom: -80px;
             right: -80px;
         }
 
         @keyframes float {
-            0% { transform: translateY(0); opacity: 0.7; }
-            100% { transform: translateY(30px); opacity: 0.9; }
+            0% {
+                transform: translateY(0);
+                opacity: 0.7;
+            }
+
+            100% {
+                transform: translateY(30px);
+                opacity: 0.9;
+            }
         }
 
         .money-booth-hero-container {
@@ -730,10 +832,10 @@
         .money-booth-hero-btn:before {
             display: none;
             top: -75%;
-            background-image:  
+            background-image:
                 radial-gradient(circle, #1e90ff 20%, transparent 20%),
                 radial-gradient(circle, transparent 20%, #1e90ff 20%, transparent 30%),
-                radial-gradient(circle, #1e90ff 20%, transparent 20%), 
+                radial-gradient(circle, #1e90ff 20%, transparent 20%),
                 radial-gradient(circle, #1e90ff 20%, transparent 20%),
                 radial-gradient(circle, transparent 10%, #1e90ff 15%, transparent 20%),
                 radial-gradient(circle, #1e90ff 20%, transparent 20%),
@@ -746,8 +848,8 @@
         .money-booth-hero-btn:after {
             display: none;
             bottom: -75%;
-            background-image:  
-                radial-gradient(circle, #1e90ff 20%, transparent 20%), 
+            background-image:
+                radial-gradient(circle, #1e90ff 20%, transparent 20%),
                 radial-gradient(circle, #1e90ff 20%, transparent 20%),
                 radial-gradient(circle, transparent 10%, #1e90ff 15%, transparent 20%),
                 radial-gradient(circle, #1e90ff 20%, transparent 20%),
@@ -782,9 +884,11 @@
             0% {
                 background-position: 5% 90%, 10% 90%, 10% 90%, 15% 90%, 25% 90%, 25% 90%, 40% 90%, 55% 90%, 70% 90%;
             }
+
             50% {
                 background-position: 0% 80%, 0% 20%, 10% 40%, 20% 0%, 30% 30%, 22% 50%, 50% 50%, 65% 20%, 90% 30%;
             }
+
             100% {
                 background-position: 0% 70%, 0% 10%, 10% 30%, 20% -10%, 30% 20%, 22% 40%, 50% 40%, 65% 10%, 90% 20%;
                 background-size: 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%;
@@ -795,9 +899,11 @@
             0% {
                 background-position: 10% -10%, 30% 10%, 55% -10%, 70% -10%, 85% -10%, 70% -10%, 70% 0%;
             }
+
             50% {
                 background-position: 0% 80%, 20% 80%, 45% 60%, 60% 100%, 75% 70%, 95% 60%, 105% 0%;
             }
+
             100% {
                 background-position: 0% 90%, 20% 90%, 45% 70%, 60% 110%, 75% 80%, 95% 70%, 110% 10%;
                 background-size: 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%;
@@ -959,7 +1065,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background-image: 
+            background-image:
                 repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(133, 187, 101, 0.03) 35px, rgba(133, 187, 101, 0.03) 70px),
                 repeating-linear-gradient(-45deg, transparent, transparent 35px, rgba(133, 187, 101, 0.03) 35px, rgba(133, 187, 101, 0.03) 70px);
             pointer-events: none;
@@ -1130,6 +1236,7 @@
                 opacity: 0;
                 transform: translateY(30px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -1297,7 +1404,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background-image: 
+            background-image:
                 repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(133, 187, 101, 0.03) 35px, rgba(133, 187, 101, 0.03) 70px),
                 repeating-linear-gradient(-45deg, transparent, transparent 35px, rgba(133, 187, 101, 0.03) 35px, rgba(133, 187, 101, 0.03) 70px);
             pointer-events: none;
@@ -1357,11 +1464,9 @@
             margin: 1rem;
             display: grid;
             grid-template-columns:
-                var(--indent) calc(2 * var(--indent)) 1fr 1fr calc(1.5 * var(--indent))
-                var(--indent);
+                var(--indent) calc(2 * var(--indent)) 1fr 1fr calc(1.5 * var(--indent)) var(--indent);
             grid-template-rows:
-                var(--indent) calc(2 * var(--indent)) 1fr calc(1.5 * var(--indent))
-                var(--indent);
+                var(--indent) calc(2 * var(--indent)) 1fr calc(1.5 * var(--indent)) var(--indent);
             max-width: 50rem;
             position: relative;
             z-index: 2;
@@ -1481,7 +1586,7 @@
                 grid-column: 3/4;
                 padding-right: 0.5rem;
             }
-            
+
             .money-content-section .card img {
                 grid-column: 4/5;
             }
@@ -1493,12 +1598,12 @@
                 grid-template-rows: auto auto;
                 gap: 1.5rem;
             }
-            
+
             .money-content-section .card::before {
                 grid-column: 1/-1;
                 grid-row: 1/-1;
             }
-            
+
             .money-content-section .card img {
                 grid-column: 2/3;
                 grid-row: 1/2;
@@ -1506,7 +1611,7 @@
                 max-width: 100%;
                 z-index: 2;
             }
-            
+
             .money-content-section .card figcaption {
                 grid-column: 2/3;
                 grid-row: 2/3;
@@ -1515,19 +1620,19 @@
                 gap: 1rem;
                 padding-right: 0;
             }
-            
+
             .money-content-section .card blockquote {
                 grid-column: unset;
                 grid-row: unset;
                 font-size: clamp(1.75rem, 5vw, 2.5rem);
                 text-align: center;
             }
-            
+
             .money-content-section .card cite {
                 grid-column: unset;
                 grid-row: unset;
             }
-            
+
             .money-content-section .card .money-content-btn {
                 grid-column: unset;
                 grid-row: unset;
@@ -1665,7 +1770,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background-image: 
+            background-image:
                 repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(133, 187, 101, 0.03) 35px, rgba(133, 187, 101, 0.03) 70px),
                 repeating-linear-gradient(-45deg, transparent, transparent 35px, rgba(133, 187, 101, 0.03) 35px, rgba(133, 187, 101, 0.03) 70px);
             pointer-events: none;
@@ -2042,7 +2147,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: 
+            background-image:
                 repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.03) 0px, transparent 1px, transparent 2px, rgba(0, 0, 0, 0.03) 3px),
                 repeating-linear-gradient(90deg, rgba(0, 0, 0, 0.03) 0px, transparent 1px, transparent 2px, rgba(0, 0, 0, 0.03) 3px);
             background-size: 4px 4px;
@@ -2050,7 +2155,7 @@
             opacity: 0.5;
         }
 
-        .gradient-grainy-bg > * {
+        .gradient-grainy-bg>* {
             position: relative;
             z-index: 1;
         }
@@ -2192,7 +2297,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background-image: 
+            background-image:
                 repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(133, 187, 101, 0.03) 35px, rgba(133, 187, 101, 0.03) 70px),
                 repeating-linear-gradient(-45deg, transparent, transparent 35px, rgba(133, 187, 101, 0.03) 35px, rgba(133, 187, 101, 0.03) 70px);
             pointer-events: none;
@@ -2463,15 +2568,15 @@
                 font-size: 0.85rem;
             }
         }
-
-
     </style>
 </head>
+
 <body>
     <div id="nav-placeholder"></div>
 
     <section class="relative h-screen md:h-screen flex items-center justify-center overflow-hidden hero-section">
-        <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('../../assets/images/moneybooth/hero.jpg');"></div>
+        <div class="absolute inset-0 bg-cover bg-center"
+            style="background-image: url('../../assets/images/moneybooth/hero.jpg');"></div>
         <div class="absolute inset-0 hero-gradient"></div>
         <div class="relative z-10 text-center text-white px-4 md:px-6 py-8 md:py-0">
             <div class="keyboard mb-6 md:mb-8">
@@ -2488,7 +2593,8 @@
                 <span class="key">H</span>
             </div>
             <p class="text-lg md:text-xl lg:text-2xl mb-8 md:mb-10 max-w-5xl mx-auto px-2">
-                Step into the booth and grab as much branded cash, vouchers, or tickets as possible in a timed flurry. A high-energy giveaway experience guests love.
+                Step into the booth and grab as much branded cash, vouchers, or tickets as possible in a timed flurry. A
+                high-energy giveaway experience guests love.
             </p>
             <a href="#contact" class="animated-gradient-btn"><span>Contact Us</span></a>
         </div>
@@ -2503,12 +2609,15 @@
                 MONEY BOOTH <span>RENTALS</span>
             </h1>
             <p class="money-booth-hero-desc">
-                Our Money Booth isn't just a crowd-pleaser—it's a full-on event magnet. This immersive challenge invites guests to step inside and grab as many branded bills, tickets, or prizes as they can while a whirlwind of excitement surrounds them.
+                Our Money Booth isn't just a crowd-pleaser—it's a full-on event magnet. This immersive challenge invites
+                guests to step inside and grab as many branded bills, tickets, or prizes as they can while a whirlwind
+                of excitement surrounds them.
             </p>
             <p class="money-booth-hero-desc">
-                Perfect for giveaways, activations, lead capture, and booth promotions—this high-energy attraction adds fun, movement, and hype to any event.
+                Perfect for giveaways, activations, lead capture, and booth promotions—this high-energy attraction adds
+                fun, movement, and hype to any event.
             </p>
-            <a href="#contact" class="money-booth-hero-btn bubbly-button">Book Now</a>
+            <a href="../contact-us.html" class="money-booth-hero-btn bubbly-button">Book Now</a>
         </div>
     </section>
 
@@ -2519,7 +2628,7 @@
                 <h1 class="money-booth-features-title">MONEY BOOTH</h1>
                 <h3 class="money-booth-features-subtitle">FEATURES</h3>
             </div>
-            
+
             <div class="money-booth-features-grid">
                 <div class="money-booth-feature-card">
                     <div class="money-booth-feature-icon">
@@ -2527,27 +2636,30 @@
                     </div>
                     <h3 class="money-booth-feature-title">Branded Bills & Vouchers</h3>
                     <p class="money-booth-feature-text">
-                        Customize the high-value prizes with your logo and event messaging. Create memorable branded experiences that guests will treasure.
+                        Customize the high-value prizes with your logo and event messaging. Create memorable branded
+                        experiences that guests will treasure.
                     </p>
                 </div>
-                
+
                 <div class="money-booth-feature-card">
                     <div class="money-booth-feature-icon">
                         <i class="fas fa-stopwatch"></i>
                     </div>
                     <h3 class="money-booth-feature-title">Fast-Paced Guest Experience</h3>
                     <p class="money-booth-feature-text">
-                        Guests step inside and grab as much as they can in a timed challenge. High-energy excitement that keeps everyone engaged.
+                        Guests step inside and grab as much as they can in a timed challenge. High-energy excitement
+                        that keeps everyone engaged.
                     </p>
                 </div>
-                
+
                 <div class="money-booth-feature-card">
                     <div class="money-booth-feature-icon">
                         <i class="fas fa-eye"></i>
                     </div>
                     <h3 class="money-booth-feature-title">Eye-Catching Activation</h3>
                     <p class="money-booth-feature-text">
-                        A high-energy booth that attracts attention and foot traffic from across the room. Perfect for maximizing event engagement.
+                        A high-energy booth that attracts attention and foot traffic from across the room. Perfect for
+                        maximizing event engagement.
                     </p>
                 </div>
             </div>
@@ -2559,26 +2671,19 @@
         <div class="money-content-container">
             <div class="wrapper">
                 <figure class="card">
-                    <img
-                        src="../../assets/images/moneybooth/money1.jpg"
-                        width="640"
-                        height="640"
-                        alt="Money Booth"
-                    />
+                    <img src="../../assets/images/moneybooth/money1.jpg" width="640" height="640" alt="Money Booth" />
                     <figcaption>
                         <blockquote>
                             Why Choose Our Money Booth?
                         </blockquote>
-                        <cite
-                            >Crowd Magnet That Pays Off
+                        <cite>Crowd Magnet That Pays Off
                             The fast-paced challenge excites guests and instantly pulls in a crowd.
-                            
+
                             Instant Energy Boost for Your Brand
                             Bold, visual, and unforgettable—your booth becomes the main attraction.
-                            
+
                             Prizes That Promote You
-                            Branded bills and vouchers turn every grab into direct brand engagement.</cite
-                        >
+                            Branded bills and vouchers turn every grab into direct brand engagement.</cite>
                         <a href="#contact" class="money-content-btn">Book Now</a>
                     </figcaption>
                 </figure>
@@ -2684,48 +2789,69 @@
         <div class="container mx-auto px-4 md:px-6">
             <div class="accordion-wrapper">
                 <h1>Frequently asked questions</h1>
-                <p class="text-center text-sm md:text-base px-2">Have questions about our Money Booth Rentals? We're happy to answer them!</p>
+                <p class="text-center text-sm md:text-base px-2">Have questions about our Money Booth Rentals? We're
+                    happy to answer them!</p>
                 <ul id="accordion" class="accordion">
                     <li>
                         <div class="link">What goes inside the booth?</div>
                         <ul class="submenu">
-                            <li><p>Branded bills, promo vouchers, golden tickets—anything lightweight that guests can grab. We’ll help you customize the contents.</p></li>
+                            <li>
+                                <p>Branded bills, promo vouchers, golden tickets—anything lightweight that guests can
+                                    grab. We’ll help you customize the contents.</p>
+                            </li>
                         </ul>
                     </li>
                     <li>
                         <div class="link">How many people can go in at once?</div>
                         <ul class="submenu">
-                            <li><p>One person at a time keeps the excitement focused and ensures safety. Each session lasts 15–30 seconds.</p></li>
+                            <li>
+                                <p>One person at a time keeps the excitement focused and ensures safety. Each session
+                                    lasts 15–30 seconds.</p>
+                            </li>
                         </ul>
                     </li>
                     <li>
                         <div class="link">Is the booth loud?</div>
                         <ul class="submenu">
-                            <li><p>It makes a fun whooshing sound from the blower, but it won’t overpower your event. Think exciting—not overwhelming.</p></li>
+                            <li>
+                                <p>It makes a fun whooshing sound from the blower, but it won’t overpower your event.
+                                    Think exciting—not overwhelming.</p>
+                            </li>
                         </ul>
                     </li>
                     <li>
                         <div class="link">Do you provide the prizes?</div>
                         <ul class="submenu">
-                            <li><p>Prizes can be supplied by you, or we can help source branded bills and vouchers based on your budget and event needs.</p></li>
+                            <li>
+                                <p>Prizes can be supplied by you, or we can help source branded bills and vouchers based
+                                    on your budget and event needs.</p>
+                            </li>
                         </ul>
                     </li>
                     <li>
                         <div class="link">Can the booth be branded?</div>
                         <ul class="submenu">
-                            <li><p>Yes! Wrap the exterior with your logo or graphics, and even customize the fake money or vouchers inside.</p></li>
+                            <li>
+                                <p>Yes! Wrap the exterior with your logo or graphics, and even customize the fake money
+                                    or vouchers inside.</p>
+                            </li>
                         </ul>
                     </li>
                     <li>
                         <div class="link">How much space is needed?</div>
                         <ul class="submenu">
-                            <li><p>About 4x4 ft for the booth itself, plus space for the queue and viewing area.</p></li>
+                            <li>
+                                <p>About 4x4 ft for the booth itself, plus space for the queue and viewing area.</p>
+                            </li>
                         </ul>
                     </li>
                     <li>
                         <div class="link">Can we use real cash?</div>
                         <ul class="submenu">
-                            <li><p>Technically yes, but we recommend vouchers or branded bills—it keeps things fun, safe, and promotional.</p></li>
+                            <li>
+                                <p>Technically yes, but we recommend vouchers or branded bills—it keeps things fun,
+                                    safe, and promotional.</p>
+                            </li>
                         </ul>
                     </li>
                 </ul>
@@ -2747,7 +2873,8 @@
                     </div>
                     <div class="moneybooth-card-content">
                         <h3 class="moneybooth-card-title">BRAND ACTIVATIONS</h3>
-                        <p class="moneybooth-card-text">A crowd-magnet that delivers high-energy engagement and branded giveaways.</p>
+                        <p class="moneybooth-card-text">A crowd-magnet that delivers high-energy engagement and branded
+                            giveaways.</p>
                         <a href="#contact" class="moneybooth-card-btn">LEARN MORE</a>
                     </div>
                 </div>
@@ -2757,7 +2884,8 @@
                     </div>
                     <div class="moneybooth-card-content">
                         <h3 class="moneybooth-card-title">CORPORATE PARTIES</h3>
-                        <p class="moneybooth-card-text">Adds fun, competitive energy and gives guests a chance to win branded prizes.</p>
+                        <p class="moneybooth-card-text">Adds fun, competitive energy and gives guests a chance to win
+                            branded prizes.</p>
                         <a href="#contact" class="moneybooth-card-btn">LEARN MORE</a>
                     </div>
                 </div>
@@ -2767,7 +2895,8 @@
                     </div>
                     <div class="moneybooth-card-content">
                         <h3 class="moneybooth-card-title">TRADE SHOWS</h3>
-                        <p class="moneybooth-card-text">Encourages booth visits with an irresistible prize-focused experience.</p>
+                        <p class="moneybooth-card-text">Encourages booth visits with an irresistible prize-focused
+                            experience.</p>
                         <a href="#contact" class="moneybooth-card-btn">LEARN MORE</a>
                     </div>
                 </div>
@@ -2779,23 +2908,23 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="../../assets/components/navigation.js"></script>
     <script src="../../assets/components/footer.js"></script>
-    
+
     <!-- Accordion Dropdown Menu JavaScript -->
     <script>
-        $(function() {
-            var Accordion = function(el, multiple) {
+        $(function () {
+            var Accordion = function (el, multiple) {
                 this.el = el || {};
                 this.multiple = multiple || false;
 
                 // Variables privadas
                 var links = this.el.find('.link');
                 // Evento
-                links.on('click', {el: this.el, multiple: this.multiple}, this.dropdown)
+                links.on('click', { el: this.el, multiple: this.multiple }, this.dropdown)
             }
 
-            Accordion.prototype.dropdown = function(e) {
+            Accordion.prototype.dropdown = function (e) {
                 var $el = e.data.el;
-                    $this = $(this),
+                $this = $(this),
                     $next = $this.next();
 
                 $next.slideToggle();
@@ -2804,16 +2933,16 @@
                 if (!e.data.multiple) {
                     $el.find('.submenu').not($next).slideUp().parent().removeClass('open');
                 };
-            }	
+            }
 
             var accordion = new Accordion($('#accordion'), false);
         });
     </script>
-    
+
     <!-- Raining Dollars Effect Script -->
     <script>
         const app = document.getElementById('dollar-app');
-        
+
         if (app) {
             function addDollar() {
                 const span = document.createElement('SPAN');
@@ -2821,31 +2950,31 @@
                 span.style.fontSize = 20 + Math.random() * 40 + 'px';
                 span.style.left = Math.random() * window.innerWidth + 'px';
                 span.style.animationDuration = 1 + Math.random() * 3 + 's';
-                
+
                 const icon = document.createElement('I');
-                icon.classList.add('fas','fa-dollar-sign');
+                icon.classList.add('fas', 'fa-dollar-sign');
                 icon.style.animationDuration = 1 + Math.random() * 3 + 's';
-                
+
                 span.appendChild(icon);
                 app.appendChild(span);
-                
+
                 setTimeout(() => {
                     span.remove();
                 }, 5000);
             }
-            
+
             // Start the raining dollars effect
             setInterval(addDollar, 100);
         }
 
         // Bubbly Button Effect
-        var animateButton = function(e) {
+        var animateButton = function (e) {
             e.preventDefault();
             //reset animation
             e.target.classList.remove('animate');
-            
+
             e.target.classList.add('animate');
-            setTimeout(function(){
+            setTimeout(function () {
                 e.target.classList.remove('animate');
             }, 700);
         };
@@ -2857,4 +2986,5 @@
         }
     </script>
 </body>
+
 </html>
