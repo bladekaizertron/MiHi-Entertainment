@@ -1,26 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VR Headset Rentals - MiHi Entertainment</title>
+    <title>Transform Parties with Virtual Reality Rentals | MiHi Entertainment</title>
     <link rel="icon" type="image/svg+xml" href="../../assets/images/favicon.svg">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&family=Exo+2:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&family=Exo+2:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link href="https://api.fontshare.com/v2/css?f[]=archivo@100,200,300,400,500,600,700,800,900&f[]=clash-display@200,300,400,500,600,700&display=swap" rel="stylesheet">
+    <link
+        href="https://api.fontshare.com/v2/css?f[]=archivo@100,200,300,400,500,600,700,800,900&f[]=clash-display@200,300,400,500,600,700&display=swap"
+        rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Antic+Didone|Montserrat:700" rel="stylesheet">
     <style>
-        html, body { overflow-x: hidden; }
-        body { font-family: 'Inter', sans-serif; color: #1a202c; }
-        h1, h2, h3, h4, h5, h6 { font-family: 'Rajdhani', sans-serif; font-weight: 600; letter-spacing: 0.02em; }
-        .btn-primary { background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%); transition: all 0.3s ease; }
-        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(0, 80, 255, 0.4); }
-        .section-padding { padding: 5rem 0; }
-        .hero-gradient { background: linear-gradient(135deg, rgba(0, 0, 0, 0.65) 0%, rgba(0, 0, 0, 0.65) 100%); }
-        
+        html,
+        body {
+            overflow-x: hidden;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #1a202c;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%);
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 80, 255, 0.4);
+        }
+
+        .section-padding {
+            padding: 5rem 0;
+        }
+
+        .hero-gradient {
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.65) 0%, rgba(0, 0, 0, 0.65) 100%);
+        }
+
         /* Hero Section Typography */
         .hero-section h3 {
             font-family: 'Rajdhani', sans-serif;
@@ -28,7 +66,7 @@
             letter-spacing: 0.05em;
             text-transform: uppercase;
         }
-        
+
         .hero-section p {
             font-family: 'Exo 2', sans-serif;
             font-weight: 400;
@@ -42,14 +80,14 @@
                 transform: translateY(-60px);
             }
         }
-        
+
         /* Keyboard Animation Styles */
         .keyboard {
             font-family: "Orbitron", sans-serif;
             font-weight: 700;
             letter-spacing: 0.1em;
         }
-        
+
         .key {
             font-size: 3.5rem;
             display: inline-block;
@@ -57,170 +95,218 @@
             transition: transform 0.2s;
             text-shadow: 0 0 20px rgba(100, 181, 246, 0.5);
         }
-        
+
         @media (min-width: 768px) {
             .key {
                 font-size: 4.5rem;
                 letter-spacing: 0.1em;
             }
         }
-        
+
         @keyframes pressDown1 {
-            30%, 40%, 100% {
+
+            30%,
+            40%,
+            100% {
                 transform: translateY(0);
             }
+
             35% {
                 transform: translateY(6px);
             }
         }
-        
+
         @keyframes pressDown2 {
-            70%, 80%, 100% {
+
+            70%,
+            80%,
+            100% {
                 transform: translateY(0);
             }
+
             75% {
                 transform: translateY(6px);
             }
         }
-        
+
         @keyframes pressDown3 {
-            30%, 40%, 100% {
+
+            30%,
+            40%,
+            100% {
                 transform: translateY(0);
             }
+
             35% {
                 transform: translateY(6px);
             }
         }
-        
+
         @keyframes pressDown4 {
-            40%, 50%, 100% {
+
+            40%,
+            50%,
+            100% {
                 transform: translateY(0);
             }
+
             45% {
                 transform: translateY(6px);
             }
         }
-        
+
         @keyframes pressDown5 {
-            20%, 30%, 100% {
+
+            20%,
+            30%,
+            100% {
                 transform: translateY(0);
             }
+
             25% {
                 transform: translateY(6px);
             }
         }
-        
+
         @keyframes pressDown6 {
-            60%, 70%, 100% {
+
+            60%,
+            70%,
+            100% {
                 transform: translateY(0);
             }
+
             65% {
                 transform: translateY(6px);
             }
         }
-        
+
         @keyframes pressDown7 {
-            10%, 20%, 100% {
+
+            10%,
+            20%,
+            100% {
                 transform: translateY(0);
             }
+
             15% {
                 transform: translateY(6px);
             }
         }
-        
+
         @keyframes pressDown8 {
-            35%, 45%, 100% {
+
+            35%,
+            45%,
+            100% {
                 transform: translateY(0);
             }
+
             40% {
                 transform: translateY(6px);
             }
         }
-        
+
         @keyframes pressDown9 {
-            50%, 60%, 100% {
+
+            50%,
+            60%,
+            100% {
                 transform: translateY(0);
             }
+
             55% {
                 transform: translateY(6px);
             }
         }
-        
+
         @keyframes pressDown10 {
-            25%, 35%, 100% {
+
+            25%,
+            35%,
+            100% {
                 transform: translateY(0);
             }
+
             30% {
                 transform: translateY(6px);
             }
         }
-        
+
         @keyframes pressDown11 {
-            15%, 25%, 100% {
+
+            15%,
+            25%,
+            100% {
                 transform: translateY(0);
             }
+
             20% {
                 transform: translateY(6px);
             }
         }
-        
+
         @keyframes pressDown12 {
-            45%, 55%, 100% {
+
+            45%,
+            55%,
+            100% {
                 transform: translateY(0);
             }
+
             50% {
                 transform: translateY(6px);
             }
         }
-        
+
         .key:nth-child(1) {
             animation: pressDown1 2s infinite;
         }
-        
+
         .key:nth-child(2) {
             animation: pressDown2 3s infinite;
         }
-        
+
         .key:nth-child(3) {
             animation: pressDown3 4s infinite;
         }
-        
+
         .key:nth-child(4) {
             animation: pressDown4 2.5s infinite;
         }
-        
+
         .key:nth-child(5) {
             animation: pressDown5 2.5s infinite;
         }
-        
+
         .key:nth-child(6) {
             animation: pressDown6 3.5s infinite;
         }
-        
+
         .key:nth-child(7) {
             animation: pressDown7 2.2s infinite;
         }
-        
+
         .key:nth-child(8) {
             animation: pressDown8 3.2s infinite;
         }
-        
+
         .key:nth-child(9) {
             animation: pressDown9 2.8s infinite;
         }
-        
+
         .key:nth-child(10) {
             animation: pressDown10 3.3s infinite;
         }
-        
+
         .key:nth-child(11) {
             animation: pressDown11 2.7s infinite;
         }
-        
+
         .key:nth-child(12) {
             animation: pressDown12 3.1s infinite;
         }
-        
+
         /* Responsive adjustments for smaller screens */
         @media (max-width: 640px) {
             .key {
@@ -228,7 +314,7 @@
                 letter-spacing: 0.06em;
             }
         }
-        
+
         /* Animated Gradient Button */
         .animated-gradient-btn {
             --width: 220px;
@@ -271,7 +357,7 @@
             animation: gradient var(--dur) ease-in-out infinite, border 1s forwards ease-in-out reverse;
         }
 
-        .animated-gradient-btn > span {
+        .animated-gradient-btn>span {
             display: block;
             position: relative;
             z-index: 2;
@@ -287,9 +373,11 @@
             0% {
                 background-position: 14% 0%;
             }
+
             50% {
                 background-position: 87% 100%;
             }
+
             100% {
                 background-position: 14% 0%;
             }
@@ -300,26 +388,31 @@
                 -webkit-clip-path: polygon(0% 100%, 4px 100%, 4px 4px, 216px 4px, 216px 66px, 4px 66px, 4px 100%, 100% 100%, 100% 0%, 0% 0%);
                 clip-path: polygon(0% 100%, 4px 100%, 4px 4px, 216px 4px, 216px 66px, 4px 66px, 4px 100%, 100% 100%, 100% 0%, 0% 0%);
             }
+
             25% {
                 -webkit-clip-path: polygon(0% 100%, 4px 100%, 4px 4px, 216px 4px, 216px 66px, 216px 66px, 216px 100%, 100% 100%, 100% 0%, 0% 0%);
                 clip-path: polygon(0% 100%, 4px 100%, 4px 4px, 216px 4px, 216px 66px, 216px 66px, 216px 100%, 100% 100%, 100% 0%, 0% 0%);
             }
+
             50% {
                 -webkit-clip-path: polygon(0% 100%, 4px 100%, 4px 4px, 216px 4px, 216px 4px, 216px 4px, 216px 4px, 216px 4px, 100% 0%, 0% 0%);
                 clip-path: polygon(0% 100%, 4px 100%, 4px 4px, 216px 4px, 216px 4px, 216px 4px, 216px 4px, 216px 4px, 100% 0%, 0% 0%);
             }
+
             75% {
                 -webkit-clip-path: polygon(0% 100%, 4px 100%, 4px 4px, 4px 4px, 4px 4px, 4px 4px, 4px 4px, 4px 4px, 4px 0%, 0% 0%);
                 clip-path: polygon(0% 100%, 4px 100%, 4px 4px, 4px 4px, 4px 4px, 4px 4px, 4px 4px, 4px 4px, 4px 0%, 0% 0%);
             }
+
             100% {
                 -webkit-clip-path: polygon(0% 100%, 4px 100%, 4px 100%, 4px 100%, 4px 100%, 4px 100%, 4px 100%, 4px 100%, 4px 100%, 0% 100%);
                 clip-path: polygon(0% 100%, 4px 100%, 4px 100%, 4px 100%, 4px 100%, 4px 100%, 4px 100%, 4px 100%, 4px 100%, 0% 100%);
             }
         }
-        
+
         /* Mobile Responsive Styles */
         @media (max-width: 768px) {
+
             /* Hero Section Mobile */
             .hero-section {
                 min-height: 70vh;
@@ -344,14 +437,14 @@
             }
 
             /* Ensure button wrapper doesn't overflow */
-            .hero-section .relative.z-10 > a.animated-gradient-btn {
+            .hero-section .relative.z-10>a.animated-gradient-btn {
                 margin-left: auto;
                 margin-right: auto;
                 display: block;
             }
 
             /* Prevent text clipping */
-            .hero-section .animated-gradient-btn > span {
+            .hero-section .animated-gradient-btn>span {
                 position: relative;
                 z-index: 10;
             }
@@ -414,7 +507,7 @@
                 animation: gradient var(--dur) ease-in-out infinite !important;
             }
 
-            .hero-section .animated-gradient-btn > span {
+            .hero-section .animated-gradient-btn>span {
                 line-height: 58px !important;
                 display: flex !important;
                 align-items: center !important;
@@ -440,8 +533,9 @@
                 clip-path: polygon(0% 100%, 4px 100%, 4px 4px, 176px 4px, 176px 51px, 4px 51px, 4px 100%, 100% 100%, 100% 0%, 0% 0%);
             }
         }
-        
+
         @media (max-width: 640px) {
+
             /* Hero Section - Small Mobile Optimization */
             .hero-section {
                 min-height: 65vh;
@@ -505,7 +599,7 @@
                 animation: gradient var(--dur) ease-in-out infinite !important;
             }
 
-            .hero-section .animated-gradient-btn > span {
+            .hero-section .animated-gradient-btn>span {
                 line-height: 54px !important;
                 display: flex !important;
                 align-items: center !important;
@@ -589,7 +683,7 @@
                 clip-path: polygon(0% 100%, 3px 100%, 3px 3px, 157px 3px, 157px 47px, 3px 47px, 3px 100%, 100% 100%, 100% 0%, 0% 0%) !important;
             }
 
-            .hero-section .animated-gradient-btn > span {
+            .hero-section .animated-gradient-btn>span {
                 line-height: 50px !important;
                 font-size: 15px !important;
             }
@@ -637,7 +731,7 @@
                 clip-path: polygon(0% 100%, 3px 100%, 3px 3px, 147px 3px, 147px 45px, 3px 45px, 3px 100%, 100% 100%, 100% 0%, 0% 0%) !important;
             }
 
-            .hero-section .animated-gradient-btn > span {
+            .hero-section .animated-gradient-btn>span {
                 line-height: 48px !important;
                 font-size: 14px !important;
             }
@@ -978,8 +1072,7 @@
 
         .rotating-slider__prev:hover img,
         .rotating-slider__next:hover img {
-            filter: brightness(0) saturate(100%) invert(0%) sepia(1%) saturate(0%)
-                hue-rotate(185deg) brightness(102%) contrast(100%);
+            filter: brightness(0) saturate(100%) invert(0%) sepia(1%) saturate(0%) hue-rotate(185deg) brightness(102%) contrast(100%);
         }
 
         .rotating-slider__live {
@@ -1211,15 +1304,18 @@
             background-clip: text;
             animation: gradient-shift 3s ease infinite;
             text-shadow: 0 0 30px rgba(160, 160, 255, 0.5),
-                         0 0 60px rgba(160, 160, 255, 0.3),
-                         0 0 90px rgba(160, 160, 255, 0.2);
+                0 0 60px rgba(160, 160, 255, 0.3),
+                0 0 90px rgba(160, 160, 255, 0.2);
             filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.3));
         }
 
         @keyframes gradient-shift {
-            0%, 100% {
+
+            0%,
+            100% {
                 background-position: 0% 50%;
             }
+
             50% {
                 background-position: 100% 50%;
             }
@@ -1232,7 +1328,7 @@
             place-items: center;
         }
 
-        .slides__wrapper > * {
+        .slides__wrapper>* {
             grid-area: 1 / -1;
         }
 
@@ -1245,8 +1341,8 @@
             place-items: center;
         }
 
-        .slides > *,
-        .slides--infos > * {
+        .slides>*,
+        .slides--infos>* {
             grid-area: 1 / -1;
         }
 
@@ -1260,11 +1356,8 @@
             aspect-ratio: var(--slide-aspect);
             user-select: none;
             perspective: 800px;
-            transform: perspective(1000px)
-                translate3d(var(--slide-tx), var(--slide-ty), var(--slide-tz, 0))
-                rotateY(var(--slide-rotY)) scale(var(--slide-scale));
-            transition: transform var(--slide-transition-duration)
-                var(--slide-transition-easing);
+            transform: perspective(1000px) translate3d(var(--slide-tx), var(--slide-ty), var(--slide-tz, 0)) rotateY(var(--slide-rotY)) scale(var(--slide-scale));
+            transition: transform var(--slide-transition-duration) var(--slide-transition-easing);
         }
 
         .slide[data-current] {
@@ -1334,10 +1427,8 @@
             top: 50%;
             left: 50%;
             object-fit: cover;
-            transform: translate(-50%, -50%) scale(1.25)
-                translate3d(var(--bgPosX), var(--bgPosY), 0);
-            transition: filter var(--slide-transition-duration)
-                var(--slide-transition-easing);
+            transform: translate(-50%, -50%) scale(1.25) translate3d(var(--bgPosX), var(--bgPosY), 0);
+            transition: filter var(--slide-transition-duration) var(--slide-transition-easing);
         }
 
         .slide__bg {
@@ -1665,31 +1756,37 @@
                 font-size: 15px;
             }
         }
+
         @media screen and (min-width: 820px) {
             .image-slider-section {
                 font-size: 16px;
             }
         }
+
         @media screen and (min-width: 900px) {
             .image-slider-section {
                 font-size: 17px;
             }
         }
+
         @media screen and (min-width: 980px) {
             .image-slider-section {
                 font-size: 18px;
             }
         }
+
         @media screen and (min-width: 1060px) {
             .image-slider-section {
                 font-size: 19px;
             }
         }
+
         @media screen and (min-width: 1220px) {
             .image-slider-section {
                 font-size: 20px;
             }
         }
+
         @media screen and (min-width: 1400px) {
             .image-slider-section {
                 font-size: 22px;
@@ -1859,6 +1956,7 @@
             0% {
                 opacity: 0;
             }
+
             100% {
                 opacity: 1;
             }
@@ -1872,22 +1970,25 @@
                 bottom: 0;
                 top: auto;
             }
+
             .image-slider-section #slider-app {
                 height: auto;
                 min-height: 100vh;
             }
+
             .image-slider-section .slider-wrapper {
                 min-height: 60vh;
             }
         }
-
     </style>
 </head>
+
 <body>
     <div id="nav-placeholder"></div>
 
     <section class="relative h-screen md:h-screen flex items-center justify-center overflow-hidden hero-section">
-        <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('../../assets/images/vr/hero.jpg');"></div>
+        <div class="absolute inset-0 bg-cover bg-center"
+            style="background-image: url('../../assets/images/vr/hero.jpg');"></div>
         <div class="absolute inset-0 hero-gradient"></div>
         <div class="relative z-10 text-center text-white px-4 md:px-6 py-8 md:py-0">
             <div class="keyboard mb-6 md:mb-8">
@@ -1907,7 +2008,8 @@
             <p class="text-lg md:text-xl lg:text-2xl mb-8 md:mb-10 max-w-5xl mx-auto px-2">
                 We can make your dream event a reality!
             </p>
-            <button type="button" data-click-to-call data-call-text="Call Us" class="animated-gradient-btn cursor-pointer"><span>Call Us</span></button>
+            <button type="button" data-click-to-call data-call-text="Call Us"
+                class="animated-gradient-btn cursor-pointer"><span>Call Us</span></button>
         </div>
     </section>
 
@@ -1917,9 +2019,9 @@
             <div class="content-section">
                 <h1 class="hero-title">Who are We?</h1>
                 <p class="hero-subtitle">
-                    We’re MiHi Photo Booth. 
+                    We’re MiHi Photo Booth.
                 </p>
-                <button class="soft-button">Get Quote</button>
+                <a href="contact-us.html" class="soft-button">Get Quote</a>
 
                 <div class="feature-grid">
                     <div class="feature-card">
@@ -1948,13 +2050,12 @@
                 </div>
             </div>
             <div class="image-section">
-                <img
-                    src="../../assets/images/vr/pic1.jpg"
-                    alt="Soft UI Illustration"
-                    class="soft-image"
-                />
+                <img src="../../assets/images/vr/pic1.jpg" alt="Soft UI Illustration" class="soft-image" />
                 <p class="hero-subtitle">
-                    We’re MiHi Photo Booth. We’ve been industry leaders in the Denver photo booth scene. We developed the Pose Flashcards, we’ve been voted Denver’s Best Photo Booth Service, and we’re dropping an atomic bomb of awesome on Denver’s party scene with our virtual reality rentals! Once you’ve experienced the magic of VR, no other party will feel complete without it! 
+                    We’re MiHi Photo Booth. We’ve been industry leaders in the Denver photo booth scene. We developed
+                    the Pose Flashcards, we’ve been voted Denver’s Best Photo Booth Service, and we’re dropping an
+                    atomic bomb of awesome on Denver’s party scene with our virtual reality rentals! Once you’ve
+                    experienced the magic of VR, no other party will feel complete without it!
                 </p>
             </div>
         </div>
@@ -1967,7 +2068,10 @@
                 Immersive Event Entertainment
             </h1>
             <div class="base-template__text">
-                Virtual reality rentals take the stress out of party planning by delivering a fresh, customizable, mind-blowing experience that guarantees guests have an unforgettable time. Instead of worrying about every detail or risking a boring event, VR offers unique fun for everyone, making your party stand out and keeping people talking about it long after it’s over.    
+                Virtual reality rentals take the stress out of party planning by delivering a fresh, customizable,
+                mind-blowing experience that guarantees guests have an unforgettable time. Instead of worrying about
+                every detail or risking a boring event, VR offers unique fun for everyone, making your party stand out
+                and keeping people talking about it long after it’s over.
             </div>
 
             <div class="base-template__content">
@@ -1983,13 +2087,15 @@
                             <!-- Slide 1 -->
 
                             <div class="rotating-slider__slide" data-title="VIRTUAL REALITY RENTALS">
-                                <img class="rotating-slider__image" src="../../assets/images/vr/pic2.jpg" alt="VIRTUAL REALITY RENTALS">
+                                <img class="rotating-slider__image" src="../../assets/images/vr/pic2.jpg"
+                                    alt="VIRTUAL REALITY RENTALS">
                             </div>
 
                             <!-- Slide 2 -->
 
                             <div class="rotating-slider__slide" data-title="Geometry in Contrast">
-                                <img class="rotating-slider__image" src="../../assets/images/vr/hero.jpg" alt="THE ANSWER TO AWESOME PARTIES">
+                                <img class="rotating-slider__image" src="../../assets/images/vr/hero.jpg"
+                                    alt="THE ANSWER TO AWESOME PARTIES">
                             </div>
 
                         </div>
@@ -2004,10 +2110,12 @@
 
                         <div class="rotating-slider__navigation">
                             <button class="rotating-slider__prev">
-                                <img src="https://bato-web-agency.github.io/bato-shared/img/rotating-slider/prev.svg" alt="Previous Slide">
+                                <img src="https://bato-web-agency.github.io/bato-shared/img/rotating-slider/prev.svg"
+                                    alt="Previous Slide">
                             </button>
                             <button class="rotating-slider__next">
-                                <img src="https://bato-web-agency.github.io/bato-shared/img/rotating-slider/next.svg" alt="Next Slide">
+                                <img src="https://bato-web-agency.github.io/bato-shared/img/rotating-slider/next.svg"
+                                    alt="Next Slide">
                             </button>
                         </div>
 
@@ -2021,10 +2129,12 @@
     </section>
 
     <!-- Image 3d Carousel -->
-    <section class="section-padding carousel-3d-section" style="background: linear-gradient(135deg, rgba(20, 20, 30, 0.95) 0%, rgba(10, 10, 20, 0.95) 50%, rgba(5, 5, 15, 0.95) 100%); position: relative; min-height: 100vh; display: flex; align-items: center; justify-content: center; overflow-x: hidden;">
+    <section class="section-padding carousel-3d-section"
+        style="background: linear-gradient(135deg, rgba(20, 20, 30, 0.95) 0%, rgba(10, 10, 20, 0.95) 50%, rgba(5, 5, 15, 0.95) 100%); position: relative; min-height: 100vh; display: flex; align-items: center; justify-content: center; overflow-x: hidden;">
         <div class="slider">
             <button class="slider--btn slider--btn__prev">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="m15 18-6-6 6-6" />
                 </svg>
             </button>
@@ -2039,7 +2149,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="slide__bg" style="--bg: url(../../assets/images/vr/vr1.png); --dir: 0" data-current></div>
+                    <div class="slide__bg" style="--bg: url(../../assets/images/vr/vr1.png); --dir: 0" data-current>
+                    </div>
 
                     <!-- slide 2 -->
                     <div class="slide" data-next>
@@ -2059,7 +2170,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="slide__bg" style="--bg: url(../../assets/images/vr/vr3.png); --dir: -1" data-previous></div>
+                    <div class="slide__bg" style="--bg: url(../../assets/images/vr/vr3.png); --dir: -1" data-previous>
+                    </div>
 
                     <!-- slide 4 -->
                     <div class="slide">
@@ -2233,7 +2345,8 @@
                                     <span>Sketch</span>
                                 </div>
                                 <div data-description class="slide-info--text">
-                                    <span>Create and collaborate in 3D design with an intuitive VR tool that brings your ideas to life.</span>
+                                    <span>Create and collaborate in 3D design with an intuitive VR tool that brings your
+                                        ideas to life.</span>
                                 </div>
                             </div>
                         </div>
@@ -2250,7 +2363,8 @@
                                     <span>RAIDERS</span>
                                 </div>
                                 <div data-description class="slide-info--text">
-                                    <span>Jetpack through the air and engage in fast-paced shooting action in this free-to-play VR shooter.</span>
+                                    <span>Jetpack through the air and engage in fast-paced shooting action in this
+                                        free-to-play VR shooter.</span>
                                 </div>
                             </div>
                         </div>
@@ -2267,7 +2381,8 @@
                                     <span>WORLDS</span>
                                 </div>
                                 <div data-description class="slide-info--text">
-                                    <span>Explore and create in a vast social VR universe filled with games, events, and interactive experiences.</span>
+                                    <span>Explore and create in a vast social VR universe filled with games, events, and
+                                        interactive experiences.</span>
                                 </div>
                             </div>
                         </div>
@@ -2284,7 +2399,8 @@
                                     <span>DASH</span>
                                 </div>
                                 <div data-description class="slide-info--text">
-                                    <span>Compete in a fast-paced, team-based VR shooter with dynamic movement and intense multiplayer battles.</span>
+                                    <span>Compete in a fast-paced, team-based VR shooter with dynamic movement and
+                                        intense multiplayer battles.</span>
                                 </div>
                             </div>
                         </div>
@@ -2301,7 +2417,8 @@
                                     <span>ONE</span>
                                 </div>
                                 <div data-description class="slide-info--text">
-                                    <span>Experience a VR battle royale where you can climb, fly, and build your way to victory.</span>
+                                    <span>Experience a VR battle royale where you can climb, fly, and build your way to
+                                        victory.</span>
                                 </div>
                             </div>
                         </div>
@@ -2318,7 +2435,8 @@
                                     <span>VR FISHING</span>
                                 </div>
                                 <div data-description class="slide-info--text">
-                                    <span>Relax and enjoy realistic fishing in serene environments, complete with accurate physics and visuals.</span>
+                                    <span>Relax and enjoy realistic fishing in serene environments, complete with
+                                        accurate physics and visuals.</span>
                                 </div>
                             </div>
                         </div>
@@ -2335,7 +2453,8 @@
                                     <span>VR GAME</span>
                                 </div>
                                 <div data-description class="slide-info--text">
-                                    <span>Embark on a tranquil VR journey, exploring peaceful landscapes at your own pace.</span>
+                                    <span>Embark on a tranquil VR journey, exploring peaceful landscapes at your own
+                                        pace.</span>
                                 </div>
                             </div>
                         </div>
@@ -2352,7 +2471,8 @@
                                     <span>CLIMB</span>
                                 </div>
                                 <div data-description class="slide-info--text">
-                                    <span>Scale breathtaking cliffs and experience the thrill of free solo climbing in stunning VR environments.</span>
+                                    <span>Scale breathtaking cliffs and experience the thrill of free solo climbing in
+                                        stunning VR environments.</span>
                                 </div>
                             </div>
                         </div>
@@ -2369,7 +2489,8 @@
                                     <span>MECHS</span>
                                 </div>
                                 <div data-description class="slide-info--text">
-                                    <span>Enter the arena in this futuristic VR sports game where you control mechanized athletes in high-speed matches.</span>
+                                    <span>Enter the arena in this futuristic VR sports game where you control mechanized
+                                        athletes in high-speed matches.</span>
                                 </div>
                             </div>
                         </div>
@@ -2386,7 +2507,8 @@
                                     <span>CHAT</span>
                                 </div>
                                 <div data-description class="slide-info--text">
-                                    <span>Socialize, create, and explore user-generated worlds in this expansive VR community platform.</span>
+                                    <span>Socialize, create, and explore user-generated worlds in this expansive VR
+                                        community platform.</span>
                                 </div>
                             </div>
                         </div>
@@ -2403,7 +2525,8 @@
                                     <span>THE PLANK</span>
                                 </div>
                                 <div data-description class="slide-info--text">
-                                    <span>Test your courage by walking a virtual plank high above the city in this thrilling VR experience.</span>
+                                    <span>Test your courage by walking a virtual plank high above the city in this
+                                        thrilling VR experience.</span>
                                 </div>
                             </div>
                         </div>
@@ -2420,7 +2543,8 @@
                                     <span>BAIT</span>
                                 </div>
                                 <div data-description class="slide-info--text">
-                                    <span>Cast your line in the world’s top VR fishing game with 60+ fish species and multiplayer fun.</span>
+                                    <span>Cast your line in the world’s top VR fishing game with 60+ fish species and
+                                        multiplayer fun.</span>
                                 </div>
                             </div>
                         </div>
@@ -2437,7 +2561,8 @@
                                     <span>ARKHAM SHADOW</span>
                                 </div>
                                 <div data-description class="slide-info--text">
-                                    <span>Step into Batman’s cowl and confront a new threat in Gotham’s VR uprising.</span>
+                                    <span>Step into Batman’s cowl and confront a new threat in Gotham’s VR
+                                        uprising.</span>
                                 </div>
                             </div>
                         </div>
@@ -2454,7 +2579,8 @@
                                     <span>SABER</span>
                                 </div>
                                 <div data-description class="slide-info--text">
-                                    <span>Slash to the beat in this high-energy VR rhythm game where music, movement, and precision collide.</span>
+                                    <span>Slash to the beat in this high-energy VR rhythm game where music, movement,
+                                        and precision collide.</span>
                                 </div>
                             </div>
                         </div>
@@ -2471,7 +2597,8 @@
                                     <span>BLASTON</span>
                                 </div>
                                 <div data-description class="slide-info--text">
-                                    <span>Engage in intense, real-time duels where dodging and strategic shooting are key to victory.</span>
+                                    <span>Engage in intense, real-time duels where dodging and strategic shooting are
+                                        key to victory.</span>
                                 </div>
                             </div>
                         </div>
@@ -2488,7 +2615,8 @@
                                     <span>AND TANKARDS</span>
                                 </div>
                                 <div data-description class="slide-info--text">
-                                    <span>Immerse yourself in VR’s first social collectible card game, battling with over 280 cards in a lively tavern setting.</span>
+                                    <span>Immerse yourself in VR’s first social collectible card game, battling with
+                                        over 280 cards in a lively tavern setting.</span>
                                 </div>
                             </div>
                         </div>
@@ -2505,7 +2633,8 @@
                                     <span>ROLLER COASTERS</span>
                                 </div>
                                 <div data-description class="slide-info--text">
-                                    <span>Experience the thrill of roller coasters in fantastical environments, delivering heart-pounding excitement in VR.</span>
+                                    <span>Experience the thrill of roller coasters in fantastical environments,
+                                        delivering heart-pounding excitement in VR.</span>
                                 </div>
                             </div>
                         </div>
@@ -2522,7 +2651,8 @@
                                     <span>NINJA VR</span>
                                 </div>
                                 <div data-description class="slide-info--text">
-                                    <span>Slice and dice flying fruit with precision in this fast-paced, immersive VR adaptation of the classic game.</span>
+                                    <span>Slice and dice flying fruit with precision in this fast-paced, immersive VR
+                                        adaptation of the classic game.</span>
                                 </div>
                             </div>
                         </div>
@@ -2539,7 +2669,8 @@
                                     <span>TAG</span>
                                 </div>
                                 <div data-description class="slide-info--text">
-                                    <span>Run, jump, and climb using only your hands in a virtual gorilla world across six different environments.</span>
+                                    <span>Run, jump, and climb using only your hands in a virtual gorilla world across
+                                        six different environments.</span>
                                 </div>
                             </div>
                         </div>
@@ -2548,7 +2679,8 @@
             </div>
 
             <button class="slider--btn slider--btn__next">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="m9 18 6-6-6-6" />
                 </svg>
             </button>
@@ -2567,7 +2699,7 @@
             <aside class="slider-panel" id="slider-panel">
                 <h2 class="slider-panel-header" id="slider-panel-header"></h2>
                 <p class="slider-panel-info" id="slider-panel-info"></p>
-                <button class="slider-panel-button" id="slider-panel-button">Read More</button>
+                <a href="contact-us.html" class="slider-panel-button" id="slider-panel-button">Read More</a>
             </aside>
         </div>
     </section>
@@ -2948,7 +3080,7 @@
                 if (progressPercent === 100) {
                     // Display welcome message
                     loaderText.textContent = "Welcome to MiHi Virtual Realty Services Page";
-                    
+
                     // Wait a moment to show the message, then initialize
                     setTimeout(() => {
                         init();
@@ -3031,7 +3163,7 @@
 
     <!-- Image Slider JavaScript -->
     <script>
-        (function() {
+        (function () {
             const sliderData = [
                 {
                     id: 0,
@@ -3065,7 +3197,7 @@
                 panel.style.backgroundColor = sliderData[id].colour;
                 panelHeader.textContent = sliderData[id].header;
                 panelInfo.innerHTML = sliderData[id].body;
-                
+
                 // Position panel on left for id: 1, right for others
                 if (id === 1) {
                     panel.style.left = '0';
@@ -3078,7 +3210,7 @@
                     panel.style.boxShadow = '5px 0 25px 0 rgba(0, 0, 0, 0.3)';
                     panel.classList.remove('compact-panel');
                 }
-                
+
                 if (buttonHover) {
                     panelButton.style.color = sliderData[id].colour;
                 } else {
@@ -3128,4 +3260,5 @@
     </script>
 
 </body>
+
 </html>
