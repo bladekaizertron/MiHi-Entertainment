@@ -1,49 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Our Services - MiHi Entertainment</title>
+    <title>Our Services | MiHi Entertainment</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Arvo:wght@400;700&family=Cinzel:wght@500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800;900&family=Montserrat:wght@500;600;700&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;600;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Arvo:wght@400;700&family=Cinzel:wght@500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800;900&family=Montserrat:wght@500;600;700&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;600;700&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@300;900&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
-        html, body { 
-            font-family: 'Inter', sans-serif; 
-            color: #1a202c; 
+
+        html,
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #1a202c;
             width: 100%;
             max-width: 100vw;
             overflow-x: hidden;
             margin: 0;
             padding: 0;
         }
-        h1, h2, h3, h4, h5, h6 { font-family: 'Playfair Display', serif; }
-        .btn-primary { background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%); transition: all 0.3s ease; }
-        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(0, 80, 255, 0.4); }
-        
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%);
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 80, 255, 0.4);
+        }
+
         /* Bubble Button Animation */
         .btn {
             display: inline-block;
             text-decoration: none;
         }
-        
+
         .btn-bubble {
             color: white;
             background-repeat: no-repeat;
             position: relative;
         }
-        
+
         .btn-bubble:not(:hover):not(:focus) {
             background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%);
         }
-        
+
         .btn-bubble:hover,
         .btn-bubble:focus {
             animation: bubbles 1s forwards ease-out;
-            background: 
+            background:
                 radial-gradient(circle at center, transparent 30%, rgba(238, 238, 255, 0.8) 60%, rgba(238, 238, 255, 0.8) 65%, transparent 70%) 5% 120% / 0.6em 0.6em,
                 radial-gradient(circle at center, transparent 30%, rgba(238, 238, 255, 0.8) 60%, rgba(238, 238, 255, 0.8) 65%, transparent 70%) 15% 110% / 0.8em 0.8em,
                 radial-gradient(circle at center, transparent 30%, rgba(238, 238, 255, 0.8) 60%, rgba(238, 238, 255, 0.8) 65%, transparent 70%) 25% 130% / 0.7em 0.7em,
@@ -58,10 +81,10 @@
             background-color: #0050ff;
             background-repeat: no-repeat;
         }
-        
+
         @keyframes bubbles {
             100% {
-                background-position: 
+                background-position:
                     3% -350%,
                     18% -280%,
                     22% -320%,
@@ -76,29 +99,39 @@
                 box-shadow: inset 0 -6.5em 0 #0040d9;
             }
         }
-        .section-padding { padding: 5rem 0; }
+
+        .section-padding {
+            padding: 5rem 0;
+        }
+
         @media (max-width: 768px) {
-            .section-padding { padding: 3rem 0; }
+            .section-padding {
+                padding: 3rem 0;
+            }
         }
+
         @media (max-width: 640px) {
-            .section-padding { padding: 2.5rem 0; }
+            .section-padding {
+                padding: 2.5rem 0;
+            }
         }
-        
+
         .services-cards-section.section-padding {
             padding: 5rem 0;
         }
-        
+
         @media (max-width: 768px) {
             .services-cards-section.section-padding {
                 padding: 3rem 0;
             }
         }
-        
+
         @media (max-width: 640px) {
             .services-cards-section.section-padding {
                 padding: 2rem 0;
             }
         }
+
         .hero-section {
             background-image: url('../assets/images/galleries/ourservices/hero.jpg');
             background-attachment: fixed;
@@ -107,56 +140,65 @@
             background-repeat: no-repeat;
             min-height: 100vh;
         }
+
         @media (max-width: 768px) {
             .hero-section {
                 min-height: 85vh;
                 background-attachment: scroll;
             }
         }
+
         .hero-section .corporate-text {
             font-family: 'Montserrat', sans-serif;
             letter-spacing: 0.3em;
         }
+
         @media (max-width: 640px) {
             .container {
                 padding-left: 1rem;
                 padding-right: 1rem;
             }
         }
+
         .animate-fade-in-up {
             animation: fadeInUp 1s ease-out forwards;
             opacity: 0;
         }
+
         .animate-delay-200 {
             animation-delay: 0.2s;
         }
+
         .animate-delay-300 {
             animation-delay: 0.3s;
         }
+
         .animate-delay-400 {
             animation-delay: 0.4s;
         }
+
         @keyframes fadeInUp {
             from {
                 opacity: 0;
                 transform: translateY(20px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
-        
+
         /* Card Images Section Styles */
         * {
             box-sizing: border-box;
         }
-        
+
         body {
             overflow-x: hidden;
             max-width: 100vw;
         }
-        
+
         .services-cards-section {
             background: linear-gradient(135deg, #f8f9ff 0%, #f0f4ff 25%, #e8f0ff 50%, #f0f4ff 75%, #f8f9ff 100%);
             background-size: 200% 200%;
@@ -165,7 +207,7 @@
             max-width: 100vw;
             overflow-x: hidden;
         }
-        
+
         .services-cards-section::before {
             content: '';
             position: absolute;
@@ -173,14 +215,14 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: 
+            background:
                 radial-gradient(circle at 20% 30%, rgba(0, 80, 255, 0.08) 0%, transparent 50%),
                 radial-gradient(circle at 80% 70%, rgba(102, 51, 153, 0.06) 0%, transparent 50%),
                 radial-gradient(circle at 50% 50%, rgba(0, 102, 255, 0.04) 0%, transparent 50%);
             pointer-events: none;
             z-index: 0;
         }
-        
+
         .services-cards-section::after {
             content: '';
             position: absolute;
@@ -188,13 +230,13 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background-image: 
+            background-image:
                 repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(0, 80, 255, 0.03) 35px, rgba(0, 80, 255, 0.03) 70px),
                 repeating-linear-gradient(-45deg, transparent, transparent 35px, rgba(102, 51, 153, 0.02) 35px, rgba(102, 51, 153, 0.02) 70px);
             pointer-events: none;
             z-index: 0;
         }
-        
+
         .services-cards-container {
             position: relative;
             z-index: 1;
@@ -203,13 +245,13 @@
             margin: 0 auto;
             padding: 0;
         }
-        
+
         @media (max-width: 640px) {
             .services-cards-container {
                 max-width: 100%;
             }
         }
-        
+
         .services-title {
             font-family: 'Montserrat', sans-serif;
             font-weight: 800;
@@ -224,13 +266,13 @@
             background-clip: text;
             line-height: 1.2;
         }
-        
+
         @media (max-width: 1024px) {
             .services-title {
                 font-size: 2.5rem;
             }
         }
-        
+
         @media (max-width: 768px) {
             .services-title {
                 font-size: 2rem;
@@ -239,7 +281,7 @@
                 letter-spacing: 0.08em;
             }
         }
-        
+
         @media (max-width: 640px) {
             .services-title {
                 font-size: 1.5rem;
@@ -247,7 +289,7 @@
                 letter-spacing: 0.05em;
             }
         }
-        
+
         /* Letter Drop Animation for SERVICES */
         .services-word {
             font-family: 'Montserrat', sans-serif;
@@ -259,7 +301,7 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
-        
+
         .letterDrop {
             position: relative;
             top: 0;
@@ -274,40 +316,68 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
-        
+
         @keyframes letterDrop {
             10% {
                 opacity: 0.5;
             }
+
             20% {
                 opacity: 0.8;
                 top: 3.75em;
                 transform: rotateX(-360deg);
             }
+
             100% {
                 opacity: 1;
                 top: 0;
                 transform: rotateX(360deg);
             }
         }
-        
+
         .letterDrop:nth-child(2n) {
             background: linear-gradient(135deg, #663399 0%, #9A12B3 50%, #663399 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
-        
-        .ld1 { animation-delay: 1.1s; }
-        .ld2 { animation-delay: 1.2s; }
-        .ld3 { animation-delay: 1.3s; }
-        .ld4 { animation-delay: 1.4s; }
-        .ld5 { animation-delay: 1.5s; }
-        .ld6 { animation-delay: 1.6s; }
-        .ld7 { animation-delay: 1.7s; }
-        .ld8 { animation-delay: 1.8s; }
-        .ld9 { animation-delay: 1.9s; }
-        
+
+        .ld1 {
+            animation-delay: 1.1s;
+        }
+
+        .ld2 {
+            animation-delay: 1.2s;
+        }
+
+        .ld3 {
+            animation-delay: 1.3s;
+        }
+
+        .ld4 {
+            animation-delay: 1.4s;
+        }
+
+        .ld5 {
+            animation-delay: 1.5s;
+        }
+
+        .ld6 {
+            animation-delay: 1.6s;
+        }
+
+        .ld7 {
+            animation-delay: 1.7s;
+        }
+
+        .ld8 {
+            animation-delay: 1.8s;
+        }
+
+        .ld9 {
+            animation-delay: 1.9s;
+        }
+
         .services-carousel-wrapper {
             position: relative;
             width: 100%;
@@ -316,39 +386,39 @@
             overflow: hidden;
             box-sizing: border-box;
         }
-        
+
         @media (max-width: 1400px) {
             .services-carousel-wrapper {
                 padding: 0 4rem;
             }
         }
-        
+
         @media (max-width: 1024px) {
             .services-carousel-wrapper {
                 padding: 0 3.5rem;
             }
         }
-        
+
         @media (max-width: 768px) {
             .services-carousel-wrapper {
                 padding: 0 2.5rem;
             }
         }
-        
+
         @media (max-width: 640px) {
             .services-carousel-wrapper {
                 padding: 0 0;
                 margin: 0;
             }
         }
-        
+
         @media (max-width: 480px) {
             .services-carousel-wrapper {
                 padding: 0 0;
                 margin: 0;
             }
         }
-        
+
         .services-carousel-container {
             display: flex;
             gap: 1rem;
@@ -363,24 +433,24 @@
             overscroll-behavior-x: contain;
             box-sizing: border-box;
         }
-        
+
         .services-carousel-container::-webkit-scrollbar {
             display: none;
         }
-        
+
         @media (max-width: 1024px) {
             .services-carousel-container {
                 gap: 0.875rem;
             }
         }
-        
+
         @media (max-width: 768px) {
             .services-carousel-container {
                 gap: 1rem;
                 padding: 0.75rem 0;
             }
         }
-        
+
         @media (max-width: 640px) {
             .services-carousel-container {
                 gap: 0;
@@ -390,7 +460,7 @@
                 max-width: 100vw;
             }
         }
-        
+
         @media (max-width: 480px) {
             .services-carousel-container {
                 gap: 0;
@@ -400,7 +470,7 @@
                 max-width: 100vw;
             }
         }
-        
+
         @media (max-width: 360px) {
             .services-carousel-container {
                 gap: 0;
@@ -410,44 +480,44 @@
                 max-width: 100vw;
             }
         }
-        
+
         .services-grid {
             display: flex;
             gap: 1rem;
             width: max-content;
             box-sizing: border-box;
         }
-        
+
         @media (max-width: 1024px) {
             .services-grid {
                 gap: 0.875rem;
             }
         }
-        
+
         @media (max-width: 768px) {
             .services-grid {
                 gap: 1rem;
             }
         }
-        
+
         @media (max-width: 640px) {
             .services-grid {
                 gap: 0;
             }
         }
-        
+
         @media (max-width: 480px) {
             .services-grid {
                 gap: 0;
             }
         }
-        
+
         @media (max-width: 360px) {
             .services-grid {
                 gap: 0;
             }
         }
-        
+
         .carousel-arrow {
             position: absolute;
             top: 50%;
@@ -466,47 +536,47 @@
             transition: all 0.3s ease;
             box-shadow: 0 4px 12px rgba(0, 80, 255, 0.2);
         }
-        
+
         .carousel-arrow:hover {
             background: #0050ff;
             color: white;
             transform: translateY(-50%) scale(1.1);
             box-shadow: 0 6px 20px rgba(0, 80, 255, 0.4);
         }
-        
+
         .carousel-arrow:active {
             transform: translateY(-50%) scale(0.95);
         }
-        
+
         .carousel-arrow-left {
             left: 1rem;
         }
-        
+
         .carousel-arrow-right {
             right: 1rem;
         }
-        
+
         @media (max-width: 768px) {
             .carousel-arrow {
                 width: 44px;
                 height: 44px;
                 border-width: 2px;
             }
-            
+
             .carousel-arrow-left {
                 left: 0.75rem;
             }
-            
+
             .carousel-arrow-right {
                 right: 0.75rem;
             }
-            
+
             .carousel-arrow svg {
                 width: 20px;
                 height: 20px;
             }
         }
-        
+
         @media (max-width: 640px) {
             .carousel-arrow {
                 width: 40px;
@@ -514,53 +584,53 @@
                 background: rgba(255, 255, 255, 0.98);
                 box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
             }
-            
+
             .carousel-arrow-left {
                 left: 0.25rem;
             }
-            
+
             .carousel-arrow-right {
                 right: 0.25rem;
             }
-            
+
             .carousel-arrow svg {
                 width: 16px;
                 height: 16px;
             }
         }
-        
+
         @media (max-width: 480px) {
             .carousel-arrow {
                 width: 36px;
                 height: 36px;
             }
-            
+
             .carousel-arrow-left {
                 left: 0.125rem;
             }
-            
+
             .carousel-arrow-right {
                 right: 0.125rem;
             }
-            
+
             .carousel-arrow svg {
                 width: 14px;
                 height: 14px;
             }
         }
-        
+
         @media (max-width: 360px) {
             .carousel-arrow {
                 width: 32px;
                 height: 32px;
             }
-            
+
             .carousel-arrow svg {
                 width: 12px;
                 height: 12px;
             }
         }
-        
+
         .service-card {
             background: #ffffff;
             border-radius: 1rem;
@@ -576,7 +646,7 @@
             max-width: calc((100% - 2rem) / 3);
             box-sizing: border-box;
         }
-        
+
         @media (max-width: 1400px) {
             .service-card {
                 flex: 0 0 calc((100% - 2rem) / 3);
@@ -584,7 +654,7 @@
                 max-width: calc((100% - 2rem) / 3);
             }
         }
-        
+
         @media (max-width: 1024px) {
             .service-card {
                 flex: 0 0 calc((100% - 1.75rem) / 3);
@@ -592,7 +662,7 @@
                 max-width: calc((100% - 1.75rem) / 3);
             }
         }
-        
+
         @media (max-width: 768px) {
             .service-card {
                 flex: 0 0 calc((100% - 1rem) / 2);
@@ -600,7 +670,7 @@
                 max-width: calc((100% - 1rem) / 2);
             }
         }
-        
+
         @media (max-width: 640px) {
             .service-card {
                 flex: 0 0 100vw;
@@ -611,7 +681,7 @@
                 margin: 0;
             }
         }
-        
+
         @media (max-width: 480px) {
             .service-card {
                 flex: 0 0 100vw;
@@ -620,7 +690,7 @@
                 border-radius: 0.5rem;
             }
         }
-        
+
         @media (max-width: 360px) {
             .service-card {
                 flex: 0 0 100vw;
@@ -628,62 +698,62 @@
                 max-width: 100vw;
             }
         }
-        
+
         .service-card:hover {
             transform: translateY(-8px);
             box-shadow: 0 12px 24px rgba(0, 80, 255, 0.15);
         }
-        
+
         .service-card-image {
             width: 100%;
             height: 300px;
             object-fit: cover;
             display: block;
         }
-        
+
         @media (max-width: 768px) {
             .service-card-image {
                 height: 240px;
             }
         }
-        
+
         @media (max-width: 640px) {
             .service-card-image {
                 height: 220px;
             }
         }
-        
+
         @media (max-width: 480px) {
             .service-card-image {
                 height: 200px;
             }
         }
-        
+
         .service-card-content {
             padding: 1.5rem;
             flex: 1;
             display: flex;
             flex-direction: column;
         }
-        
+
         @media (max-width: 768px) {
             .service-card-content {
                 padding: 1.25rem;
             }
         }
-        
+
         @media (max-width: 640px) {
             .service-card-content {
                 padding: 1rem;
             }
         }
-        
+
         @media (max-width: 480px) {
             .service-card-content {
                 padding: 0.875rem;
             }
         }
-        
+
         .service-card-title {
             font-family: 'Montserrat', sans-serif;
             font-weight: 700;
@@ -692,20 +762,20 @@
             line-height: 1.4;
             margin-bottom: 1rem;
         }
-        
+
         @media (max-width: 1024px) {
             .service-card-title {
                 font-size: 1rem;
             }
         }
-        
+
         @media (max-width: 768px) {
             .service-card-title {
                 font-size: 0.9375rem;
                 margin-bottom: 0.875rem;
             }
         }
-        
+
         @media (max-width: 640px) {
             .service-card-title {
                 font-size: 0.9375rem;
@@ -713,14 +783,14 @@
                 line-height: 1.3;
             }
         }
-        
+
         @media (max-width: 480px) {
             .service-card-title {
                 font-size: 0.875rem;
                 margin-bottom: 0.625rem;
             }
         }
-        
+
         .service-card-text {
             font-family: 'Inter', sans-serif;
             color: #4a5568;
@@ -728,28 +798,28 @@
             line-height: 1.6;
             flex: 1;
         }
-        
+
         @media (max-width: 768px) {
             .service-card-text {
                 font-size: 0.875rem;
                 line-height: 1.5;
             }
         }
-        
+
         @media (max-width: 640px) {
             .service-card-text {
                 font-size: 0.8125rem;
                 line-height: 1.5;
             }
         }
-        
+
         @media (max-width: 480px) {
             .service-card-text {
                 font-size: 0.75rem;
                 line-height: 1.45;
             }
         }
-        
+
         /* Contact Section Styles */
         .contact-section {
             position: relative;
@@ -764,20 +834,20 @@
             background-attachment: fixed;
             overflow: hidden;
         }
-        
+
         @media (max-width: 768px) {
             .contact-section {
                 background-attachment: scroll;
                 min-height: 300px;
             }
         }
-        
+
         @media (max-width: 640px) {
             .contact-section {
                 min-height: 280px;
             }
         }
-        
+
         .contact-section::before {
             content: '';
             position: absolute;
@@ -788,7 +858,7 @@
             background: linear-gradient(135deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.4) 100%);
             z-index: 1;
         }
-        
+
         .contact-section-content {
             position: relative;
             z-index: 2;
@@ -797,19 +867,19 @@
             max-width: 900px;
             margin: 0 auto;
         }
-        
+
         @media (max-width: 768px) {
             .contact-section-content {
                 padding: 2rem 1.5rem;
             }
         }
-        
+
         @media (max-width: 640px) {
             .contact-section-content {
                 padding: 1.5rem 1rem;
             }
         }
-        
+
         .contact-section-title {
             font-family: 'Montserrat', sans-serif;
             font-weight: 700;
@@ -821,60 +891,63 @@
             letter-spacing: 0.05em;
             text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
         }
-        
+
         @media (max-width: 1024px) {
             .contact-section-title {
                 font-size: 2rem;
             }
         }
-        
+
         @media (max-width: 768px) {
             .contact-section-title {
                 font-size: 1.75rem;
                 margin-bottom: 1.25rem;
             }
         }
-        
+
         @media (max-width: 640px) {
             .contact-section-title {
                 font-size: 1.5rem;
                 margin-bottom: 1rem;
             }
         }
-        
+
         @media (max-width: 480px) {
             .contact-section-title {
                 font-size: 1.25rem;
             }
         }
-        
     </style>
 </head>
+
 <body>
     <div id="nav-placeholder"></div>
 
     <!-- Hero Section -->
     <section class="relative flex items-center justify-center overflow-hidden py-8 hero-section">
-        <div class="absolute inset-0 bg-black bg-opacity-50"></div>     
+        <div class="absolute inset-0 bg-black bg-opacity-50"></div>
         <div class="relative z-10 text-center text-white px-4 w-full">
             <div class="max-w-3xl mx-auto">
                 <div class="mb-2">
-                    <p class="max-w-3xl mx-auto text-sm md:text-base leading-tight mb-2 px-0 text-gray-100 tracking-[0.2em] animate-fade-in-up animate-delay-200 corporate-text">
-                    VIEW OUR
+                    <p
+                        class="max-w-3xl mx-auto text-sm md:text-base leading-tight mb-2 px-0 text-gray-100 tracking-[0.2em] animate-fade-in-up animate-delay-200 corporate-text">
+                        VIEW OUR
                     </p>
-                    <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold leading-tight animate-fade-in-up corporate-heading px-2">
+                    <h1
+                        class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold leading-tight animate-fade-in-up corporate-heading px-2">
                         SERVICES
                     </h1>
                 </div>
-                
+
                 <div class="h-px w-12 bg-white mx-auto my-3 animate-fade-in-up animate-delay-200"></div>
-                
-                <p class="max-w-9xl mx-auto text-sm md:text-base leading-relaxed mb-4 px-4 sm:px-0 text-gray-100 tracking-normal animate-fade-in-up animate-delay-200 corporate-text">
-                    All of our packages come with these standard services included. On top of our standard services, we also have Premium Add-Ons that you can add to various packages.
+
+                <p
+                    class="max-w-9xl mx-auto text-sm md:text-base leading-relaxed mb-4 px-4 sm:px-0 text-gray-100 tracking-normal animate-fade-in-up animate-delay-200 corporate-text">
+                    All of our packages come with these standard services included. On top of our standard services, we
+                    also have Premium Add-Ons that you can add to various packages.
                 </p>
                 <div class="mt-8 mb-8 animate-fade-in-up animate-delay-300">
-                    <a 
-                        href="#contact" 
+                    <a href="./contact-us.html"
                         class="btn btn-bubble btn-primary inline-block px-8 py-3 rounded-lg text-white font-semibold text-lg"
                         aria-label="Contact us for services">
                         Contact Us
@@ -894,112 +967,118 @@
     <!-- Card Images Section -->
     <section class="section-padding services-cards-section">
         <div class="services-cards-container">
-            <h2 class="services-title">OUR STANDARD <span class="services-word" id="services-word">SERVICES</span> INCLUDE:</h2>
-            
+            <h2 class="services-title">OUR STANDARD <span class="services-word" id="services-word">SERVICES</span>
+                INCLUDE:</h2>
+
             <div class="services-carousel-wrapper">
-                <button class="carousel-arrow carousel-arrow-left" id="servicesCarouselPrev" aria-label="Previous services">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M15 18l-6-6 6-6"/>
+                <button class="carousel-arrow carousel-arrow-left" id="servicesCarouselPrev"
+                    aria-label="Previous services">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M15 18l-6-6 6-6" />
                     </svg>
                 </button>
-                
+
                 <div class="services-carousel-container" id="servicesCarousel">
                     <div class="services-grid">
                         <!-- Card 1: Unlimited Sessions -->
                         <div class="service-card animate-fade-in-up animate-delay-200">
-                            <img 
-                                src="../assets/images/galleries/ourservices/cardimg1.jpg" 
-                                alt="Unlimited Sessions with Two Prints Per Session" 
-                                class="service-card-image"
+                            <img src="../assets/images/galleries/ourservices/cardimg1.jpg"
+                                alt="Unlimited Sessions with Two Prints Per Session" class="service-card-image"
                                 onerror="this.src='https://via.placeholder.com/400x300/0050ff/ffffff?text=Unlimited+Sessions'">
                             <div class="service-card-content">
                                 <h3 class="service-card-title">UNLIMITED SESSIONS WITH TWO PRINTS PER SESSION</h3>
                                 <p class="service-card-text">
-                                    We try to be responsible with our printing, which is why we limit the physical prints to two per person to prevent waste. Don't worry, you'll get the option to text or email yourself a copy as well!
+                                    We try to be responsible with our printing, which is why we limit the physical
+                                    prints to two per person to prevent waste. Don't worry, you'll get the option to
+                                    text or email yourself a copy as well!
                                 </p>
                             </div>
                         </div>
-                        
+
                         <!-- Card 2: Personalized Props -->
                         <div class="service-card animate-fade-in-up animate-delay-300">
-                            <img 
-                                src="../assets/images/galleries/ourservices/cardimg2.jpg" 
-                                alt="Personalized Props and Pose Flashcards" 
-                                class="service-card-image"
+                            <img src="../assets/images/galleries/ourservices/cardimg2.jpg"
+                                alt="Personalized Props and Pose Flashcards" class="service-card-image"
                                 onerror="this.src='https://via.placeholder.com/400x300/0050ff/ffffff?text=Personalized+Props'">
                             <div class="service-card-content">
                                 <h3 class="service-card-title">PERSONALIZED PROPS AND POSE FLASHCARDS</h3>
                                 <p class="service-card-text">
-                                    We're always updating our prop selection to keep your pictures fresh and exciting! Have you seen our pose flashcards? Your attendant is armed with a stack of flashcards that have pose ideas on them. Right before the photo booth takes a picture, you'll be prompted to strike a pose.
+                                    We're always updating our prop selection to keep your pictures fresh and exciting!
+                                    Have you seen our pose flashcards? Your attendant is armed with a stack of
+                                    flashcards that have pose ideas on them. Right before the photo booth takes a
+                                    picture, you'll be prompted to strike a pose.
                                 </p>
                             </div>
                         </div>
-                        
+
                         <!-- Card 3: Customized Photo Strip -->
                         <div class="service-card animate-fade-in-up animate-delay-400">
-                            <img 
-                                src="../assets/images/galleries/ourservices/cardimg3.jpg" 
-                                alt="Customized Photo Strip Layout Design" 
-                                class="service-card-image"
+                            <img src="../assets/images/galleries/ourservices/cardimg3.jpg"
+                                alt="Customized Photo Strip Layout Design" class="service-card-image"
                                 onerror="this.src='https://via.placeholder.com/400x300/0050ff/ffffff?text=Custom+Photo+Strip'">
                             <div class="service-card-content">
                                 <h3 class="service-card-title">CUSTOMIZED PHOTO STRIP LAYOUT DESIGN</h3>
                                 <p class="service-card-text">
-                                    We make photo strips all day for our clients and we love it! From vintage to modern, retro to elegant, we believe each person's special event is just that, special, and it deserves a custom one of a kind photo strip!
+                                    We make photo strips all day for our clients and we love it! From vintage to modern,
+                                    retro to elegant, we believe each person's special event is just that, special, and
+                                    it deserves a custom one of a kind photo strip!
                                 </p>
                             </div>
                         </div>
-                        
+
                         <!-- Card 4: Professional Attendant -->
                         <div class="service-card animate-fade-in-up animate-delay-200">
-                            <img 
-                                src="../assets/images/galleries/ourservices/cardimg4.jpg" 
-                                alt="Professional Attendant Service" 
-                                class="service-card-image"
+                            <img src="../assets/images/galleries/ourservices/cardimg4.jpg"
+                                alt="Professional Attendant Service" class="service-card-image"
                                 onerror="this.src='https://via.placeholder.com/400x300/0050ff/ffffff?text=Professional+Attendant'">
                             <div class="service-card-content">
                                 <h3 class="service-card-title">ENGAGING ATTENDANTS</h3>
                                 <p class="service-card-text">
-                                    Not only do our attendants deliver and set up the photo booth rental, but they also stand by to ensure your guests always have ideas to pose for the camera. Their friendly attitude will keep your guests coming back for more.
+                                    Not only do our attendants deliver and set up the photo booth rental, but they also
+                                    stand by to ensure your guests always have ideas to pose for the camera. Their
+                                    friendly attitude will keep your guests coming back for more.
                                 </p>
                             </div>
                         </div>
-                        
+
                         <!-- Card 5: Digital Gallery Access -->
                         <div class="service-card animate-fade-in-up animate-delay-300">
-                            <img 
-                                src="../assets/images/galleries/ourservices/cardimg5.jpg" 
-                                alt="Digital Gallery Access" 
+                            <img src="../assets/images/galleries/ourservices/cardimg5.jpg" alt="Digital Gallery Access"
                                 class="service-card-image"
                                 onerror="this.src='https://via.placeholder.com/400x300/0050ff/ffffff?text=Digital+Gallery'">
                             <div class="service-card-content">
                                 <h3 class="service-card-title">ONLINE POST-EVENT GALLERY</h3>
                                 <p class="service-card-text">
-                                    We found that our guests were taking pictures of the printed photo strips and texting them to their friends and family so we decided to offer the online gallery as a complimentary "Thank You" for booking with us.
+                                    We found that our guests were taking pictures of the printed photo strips and
+                                    texting them to their friends and family so we decided to offer the online gallery
+                                    as a complimentary "Thank You" for booking with us.
                                 </p>
                             </div>
                         </div>
-                        
+
                         <!-- Card 6: Setup and Breakdown -->
                         <div class="service-card animate-fade-in-up animate-delay-400">
-                            <img 
-                                src="../assets/images/galleries/ourservices/cardimg6.jpg" 
-                                alt="Setup and Breakdown Service" 
-                                class="service-card-image"
+                            <img src="../assets/images/galleries/ourservices/cardimg6.jpg"
+                                alt="Setup and Breakdown Service" class="service-card-image"
                                 onerror="this.src='https://via.placeholder.com/400x300/0050ff/ffffff?text=Setup+Breakdown'">
                             <div class="service-card-content">
                                 <h3 class="service-card-title">CHOICE OF BACKDROPS</h3>
                                 <p class="service-card-text">
-                                    We've got quite the collection of backdrops to block out the background and focus fully on you! Does your venue have a great background? We can set up without the backdrop! If you're feeling crafty, we can use your backdrop.
+                                    We've got quite the collection of backdrops to block out the background and focus
+                                    fully on you! Does your venue have a great background? We can set up without the
+                                    backdrop! If you're feeling crafty, we can use your backdrop.
                                 </p>
                             </div>
                         </div>
                     </div>
                 </div>
-                
-                <button class="carousel-arrow carousel-arrow-right" id="servicesCarouselNext" aria-label="Next services">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M9 18l6-6-6-6"/>
+
+                <button class="carousel-arrow carousel-arrow-right" id="servicesCarouselNext"
+                    aria-label="Next services">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M9 18l6-6-6-6" />
                     </svg>
                 </button>
             </div>
@@ -1014,7 +1093,9 @@
                 <span style="display: block; margin-top: 0.5rem;">EVENT?</span>
             </h2>
             <div class="animate-fade-in-up animate-delay-200">
-                <a href="#contact" class="btn btn-bubble btn-primary inline-block px-8 py-3 rounded-lg text-white font-semibold text-lg" aria-label="Contact us for your event">
+                <a href="./contact-us.html"
+                    class="btn btn-bubble btn-primary inline-block px-8 py-3 rounded-lg text-white font-semibold text-lg"
+                    aria-label="Contact us for your event">
                     Contact Us
                 </a>
             </div>
@@ -1024,74 +1105,74 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         // Letter Drop jQuery Plugin
-        (function($) {
-            $.fn.letterDrop = function() {
+        (function ($) {
+            $.fn.letterDrop = function () {
                 // Chainability
-                return this.each( function() { 
-                    var obj = $( this );
-                    
+                return this.each(function () {
+                    var obj = $(this);
+
                     var drop = {
-                        arr : obj.text().split( '' ),
-                        
-                        range : {
-                            min : 1,
-                            max : 9
+                        arr: obj.text().split(''),
+
+                        range: {
+                            min: 1,
+                            max: 9
                         },
-                        
-                        styles : function() {
+
+                        styles: function () {
                             var dropDelays = '\n', addCSS;
-                            
-                            for ( i = this.range.min; i <= this.range.max; i++ ) {
-                                dropDelays += '.ld' + i + ' { animation-delay: 1.' + i + 's; }\n';  
+
+                            for (i = this.range.min; i <= this.range.max; i++) {
+                                dropDelays += '.ld' + i + ' { animation-delay: 1.' + i + 's; }\n';
                             }
-                            
-                            addCSS = $( '<style>' + dropDelays + '</style>' );
-                            $( 'head' ).append( addCSS );
+
+                            addCSS = $('<style>' + dropDelays + '</style>');
+                            $('head').append(addCSS);
                         },
-                        
-                        main : function() {
+
+                        main: function () {
                             var dp = 0;
-                            obj.text( '' );
-                            
-                            $.each( this.arr, function( index, value ) {
-                                dp = Math.floor( Math.random() * ( drop.range.max - drop.range.min + 1 ) + drop.range.min );
-                                
-                                if ( value === ' ' )
+                            obj.text('');
+
+                            $.each(this.arr, function (index, value) {
+                                dp = Math.floor(Math.random() * (drop.range.max - drop.range.min + 1) + drop.range.min);
+
+                                if (value === ' ')
                                     value = '&nbsp;'; //Add spaces
-                                
-                                obj.append( '<span class="letterDrop ld' + dp + '">' + value + '</span>' );
+
+                                obj.append('<span class="letterDrop ld' + dp + '">' + value + '</span>');
                             });
                         }
                     };
-                    
+
                     // Create styles
                     drop.styles();
-                    
+
                     // Initialise
                     drop.main();
                 });
             };
         }(jQuery));
-        
+
         // Initialize letterDrop on SERVICES word
-        $(document).ready(function() {
+        $(document).ready(function () {
             $('#services-word').letterDrop();
-            
+
             // Services Carousel Functionality
             const carousel = document.getElementById('servicesCarousel');
             const prevBtn = document.getElementById('servicesCarouselPrev');
             const nextBtn = document.getElementById('servicesCarouselNext');
-            
+
             if (carousel && prevBtn && nextBtn) {
                 // Calculate scroll amount based on visible cards
                 function getScrollAmount() {
                     const firstCard = carousel.querySelector('.service-card');
                     if (!firstCard) return 0;
-                    
+
                     const cardWidth = firstCard.offsetWidth;
                     const gap = window.getComputedStyle(carousel).gap;
                     const gapValue = parseFloat(gap) || 16; // Default to 16px if gap not found
-                    
+
                     // Scroll by 3 cards (or 2 on tablet, 1 on mobile)
                     let cardsToScroll = 3;
                     if (window.innerWidth <= 640) {
@@ -1099,37 +1180,37 @@
                     } else if (window.innerWidth <= 768) {
                         cardsToScroll = 2;
                     }
-                    
+
                     return (cardWidth + gapValue) * cardsToScroll;
                 }
-                
+
                 // Improve touch scrolling on mobile
                 let isScrolling = false;
                 carousel.addEventListener('touchstart', () => {
                     isScrolling = true;
                 });
-                
+
                 carousel.addEventListener('touchend', () => {
                     setTimeout(() => {
                         isScrolling = false;
                         updateButtons();
                     }, 100);
                 });
-                
+
                 // Check if we can scroll
                 function updateButtons() {
                     const maxScroll = carousel.scrollWidth - carousel.clientWidth;
                     const tolerance = 5; // Small tolerance for rounding
-                    
+
                     prevBtn.style.opacity = carousel.scrollLeft <= tolerance ? '0.5' : '1';
                     prevBtn.style.pointerEvents = carousel.scrollLeft <= tolerance ? 'none' : 'auto';
                     prevBtn.disabled = carousel.scrollLeft <= tolerance;
-                    
+
                     nextBtn.style.opacity = carousel.scrollLeft >= maxScroll - tolerance ? '0.5' : '1';
                     nextBtn.style.pointerEvents = carousel.scrollLeft >= maxScroll - tolerance ? 'none' : 'auto';
                     nextBtn.disabled = carousel.scrollLeft >= maxScroll - tolerance;
                 }
-                
+
                 // Next button
                 nextBtn.addEventListener('click', () => {
                     const scrollAmount = getScrollAmount();
@@ -1138,7 +1219,7 @@
                         behavior: 'smooth'
                     });
                 });
-                
+
                 // Previous button
                 prevBtn.addEventListener('click', () => {
                     const scrollAmount = getScrollAmount();
@@ -1147,10 +1228,10 @@
                         behavior: 'smooth'
                     });
                 });
-                
+
                 // Update buttons on scroll
                 carousel.addEventListener('scroll', updateButtons);
-                
+
                 // Update buttons on resize
                 let resizeTimeout;
                 window.addEventListener('resize', () => {
@@ -1159,7 +1240,7 @@
                         updateButtons();
                     }, 100);
                 });
-                
+
                 // Initial button state
                 setTimeout(updateButtons, 100);
             }
@@ -1168,4 +1249,5 @@
     <script src="../assets/components/navigation.js"></script>
     <script src="../assets/components/footer.js"></script>
 </body>
+
 </html>
