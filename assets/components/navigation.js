@@ -39,7 +39,7 @@
     const assetsPrefix = pathPrefix + 'assets/';
 
     const navigationHTML = `
-    <header class="bg-white shadow-lg sticky top-0 z-50">
+    <header class="bg-white shadow-lg fixed top-0 left-0 right-0 z-50">
         <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
             <!-- Logo -->
             <a href="${pathPrefix}index.html" class="flex items-center" aria-label="Go to home">

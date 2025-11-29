@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kardashian Photo Shoot Event Theme - MiHi Entertainment</title>
+    <title>Western Event Theme - MiHi Entertainment</title>
     <link rel="icon" type="image/svg+xml" href="../assets/images/favicon.svg">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -25,6 +25,7 @@
             font-family: 'Playfair Display', serif;
         }
         
+        /* Navigation uses default Tailwind styles from navigation.js - no CSS overrides */
         /* Fixed navigation positioning */
         header {
             position: fixed !important;
@@ -87,7 +88,7 @@
         .hero-overlay {
             position: absolute;
             inset: 0;
-            background: linear-gradient(135deg, rgba(212, 175, 147, 0.3) 0%, rgba(139, 90, 90, 0.4) 30%, rgba(0, 0, 0, 0.85) 100%);
+            background: linear-gradient(135deg, rgba(180, 83, 9, 0.4) 0%, rgba(120, 53, 15, 0.5) 50%, rgba(0, 0, 0, 0.75) 100%);
             z-index: 1;
         }
         
@@ -105,13 +106,13 @@
         }
         
         .hero-title {
-            font-size: clamp(2.5rem, 7vw, 7rem);
+            font-size: clamp(3rem, 8vw, 8rem);
             font-weight: 800;
             color: #ffffff;
             letter-spacing: -0.02em;
             margin-bottom: 1rem;
             line-height: 0.95;
-            text-shadow: 0 0 60px rgba(212, 175, 147, 0.5);
+            text-shadow: 0 0 40px rgba(180, 83, 9, 0.5);
             text-align: center;
             width: 100%;
         }
@@ -138,7 +139,7 @@
             width: 100%;
         }
         
-        /* Modern Button Styles - Rose Gold */
+        /* Modern Button Styles */
         .modern-btn {
             display: inline-flex;
             align-items: center;
@@ -149,13 +150,13 @@
             letter-spacing: 0.1em;
             text-transform: uppercase;
             color: #ffffff;
-            background: linear-gradient(135deg, rgba(212, 175, 147, 0.9) 0%, rgba(183, 130, 113, 0.9) 50%, rgba(139, 90, 90, 0.9) 100%);
+            background: linear-gradient(135deg, rgba(180, 83, 9, 0.9) 0%, rgba(120, 53, 15, 0.9) 100%);
             border: 1px solid rgba(255, 255, 255, 0.2);
             border-radius: 50px;
             text-decoration: none;
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             backdrop-filter: blur(10px);
-            box-shadow: 0 8px 32px rgba(212, 175, 147, 0.3), 
+            box-shadow: 0 8px 32px rgba(180, 83, 9, 0.3), 
                         0 0 0 1px rgba(255, 255, 255, 0.1) inset;
             position: relative;
             overflow: hidden;
@@ -168,16 +169,16 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
             transition: left 0.6s ease;
         }
         
         .modern-btn:hover {
             transform: translateY(-3px) scale(1.02);
-            box-shadow: 0 15px 40px rgba(212, 175, 147, 0.5), 
+            box-shadow: 0 15px 40px rgba(180, 83, 9, 0.5), 
                         0 0 0 1px rgba(255, 255, 255, 0.2) inset,
-                        0 0 60px rgba(212, 175, 147, 0.4);
-            background: linear-gradient(135deg, rgba(212, 175, 147, 1) 0%, rgba(183, 130, 113, 1) 50%, rgba(139, 90, 90, 1) 100%);
+                        0 0 60px rgba(180, 83, 9, 0.4);
+            background: linear-gradient(135deg, rgba(180, 83, 9, 1) 0%, rgba(120, 53, 15, 1) 100%);
         }
         
         .modern-btn:hover::before {
@@ -247,11 +248,11 @@
         .modern-section {
             position: relative;
             padding: 6rem 0;
-            background: linear-gradient(180deg, #0a0a0a 0%, #1a1214 50%, #0a0a0a 100%);
+            background: linear-gradient(180deg, #0a0a0a 0%, #1a0f08 50%, #0a0a0a 100%);
         }
         
         .modern-section-light {
-            background: linear-gradient(180deg, #ffffff 0%, #fdf8f6 50%, #ffffff 100%);
+            background: linear-gradient(180deg, #ffffff 0%, #faf6f1 50%, #ffffff 100%);
         }
         
         .section-title {
@@ -308,16 +309,16 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, rgba(212, 175, 147, 0.1) 0%, rgba(139, 90, 90, 0.1) 100%);
+            background: linear-gradient(135deg, rgba(180, 83, 9, 0.1) 0%, rgba(120, 53, 15, 0.1) 100%);
             opacity: 0;
             transition: opacity 0.4s ease;
         }
         
         .feature-card:hover {
             transform: translateY(-8px);
-            border-color: rgba(212, 175, 147, 0.5);
-            box-shadow: 0 20px 60px rgba(212, 175, 147, 0.2),
-                        0 0 0 1px rgba(212, 175, 147, 0.1) inset;
+            border-color: rgba(180, 83, 9, 0.5);
+            box-shadow: 0 20px 60px rgba(180, 83, 9, 0.2),
+                        0 0 0 1px rgba(180, 83, 9, 0.1) inset;
         }
         
         .feature-card:hover::before {
@@ -332,13 +333,13 @@
         .feature-icon {
             width: 60px;
             height: 60px;
-            background: linear-gradient(135deg, rgba(212, 175, 147, 0.2) 0%, rgba(139, 90, 90, 0.2) 100%);
+            background: linear-gradient(135deg, rgba(180, 83, 9, 0.2) 0%, rgba(120, 53, 15, 0.2) 100%);
             border-radius: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
             margin-bottom: 1.5rem;
-            border: 1px solid rgba(212, 175, 147, 0.3);
+            border: 1px solid rgba(180, 83, 9, 0.3);
             color: #ffffff;
         }
         
@@ -405,7 +406,7 @@
             content: '';
             position: absolute;
             inset: 0;
-            background: linear-gradient(135deg, rgba(212, 175, 147, 0.2) 0%, rgba(139, 90, 90, 0.2) 100%);
+            background: linear-gradient(135deg, rgba(180, 83, 9, 0.2) 0%, rgba(120, 53, 15, 0.2) 100%);
             opacity: 0;
             transition: opacity 0.4s ease;
             z-index: 1;
@@ -441,15 +442,15 @@
         .feature-item-icon {
             width: 32px;
             height: 32px;
-            background: linear-gradient(135deg, rgba(212, 175, 147, 0.8) 0%, rgba(139, 90, 90, 0.8) 100%);
+            background: linear-gradient(135deg, rgba(180, 83, 9, 0.8) 0%, rgba(120, 53, 15, 0.8) 100%);
             border-radius: 50%;
             flex-shrink: 0;
             margin-top: 0.25rem;
             display: flex;
             align-items: center;
             justify-content: center;
-            border: 2px solid rgba(212, 175, 147, 0.5);
-            box-shadow: 0 0 15px rgba(212, 175, 147, 0.4);
+            border: 2px solid rgba(180, 83, 9, 0.5);
+            box-shadow: 0 0 15px rgba(180, 83, 9, 0.4);
             position: relative;
         }
         
@@ -580,13 +581,13 @@
     <div id="nav-placeholder"></div>
     <!-- Hero Section -->
     <section class="hero-section">
-        <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('../assets/images/galleries/ourthemes/kardashian-photo-shoot.jpg');"></div>
+        <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('../assets/images/galleries/ourthemes/western.jpg');"></div>
         <div class="hero-overlay"></div>
         <div class="hero-content">
-            <h1 class="hero-title animate-fade-in">Kardashian Photo Shoot</h1>
+            <h1 class="hero-title animate-fade-in">Western</h1>
             <p class="hero-subtitle animate-fade-in" style="animation-delay: 0.2s;">Event Theme</p>
             <p class="hero-description animate-fade-in" style="animation-delay: 0.4s;">
-                Step into the spotlight with Hollywood glamour—red carpet ready, camera-perfect, and absolutely iconic.
+                Saddle up for an unforgettable adventure—where dusty trails meet legendary tales and every moment feels like the Wild West.
             </p>
             <div class="flex flex-col sm:flex-row gap-4 items-center justify-center animate-fade-in" style="animation-delay: 0.6s;">
                 <a href="../contact-us.html" class="modern-btn">
@@ -605,9 +606,9 @@
     <!-- Intro Section -->
     <section class="modern-section">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
-            <h2 class="section-title">Serve Looks, Not Excuses</h2>
+            <h2 class="section-title">Howdy, Partner!</h2>
             <p class="section-subtitle">
-                Channel your inner celebrity with our Kardashian-inspired photo shoot experience. From flawless lighting to magazine-worthy poses, this theme transforms any event into an A-list affair. Perfect for birthday bashes, bridal showers, influencer events, or anyone who wants to feel like a star.
+                From rodeo roundups to country barn dances, our Western Theme brings the spirit of the frontier to your event. Perfect for corporate hoedowns, birthday shindigs, themed weddings, or any celebration that calls for boots, hats, and good ol' country charm.
             </p>
             <div class="text-center">
                 <a href="../contact-us.html" class="modern-btn">Get Your Free Quote</a>
@@ -618,9 +619,9 @@
     <!-- Features Section -->
     <section class="modern-section">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
-            <h2 class="section-title">VIP Customization</h2>
+            <h2 class="section-title">Frontier Customization</h2>
             <p class="section-subtitle">
-                Our Kardashian Photo Shoot Theme comes with the following options:
+                Our Western Theme comes with the following options:
             </p>
             
             <div class="feature-grid">
@@ -632,17 +633,19 @@
                         </svg>
                     </div>
                     <h3>Backdrops</h3>
-                    <p>Choose from our collection of luxe backdrops featuring rose gold shimmer walls, paparazzi flash effects, minimalist studio vibes, and iconic Calabasas-inspired settings!</p>
+                    <p>Choose from our rugged collection of Western backdrops featuring saloon doors, desert sunsets, rustic barns, and old-timey wanted posters that transport your guests straight to the frontier!</p>
                 </div>
                 
                 <div class="feature-card">
                     <div class="feature-icon">
                         <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
+                            <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+                            <path d="M2 17l10 5 10-5"></path>
+                            <path d="M2 12l10 5 10-5"></path>
                         </svg>
                     </div>
                     <h3>Props</h3>
-                    <p>Slay with our selection of glam props! From designer-inspired sunglasses to champagne flutes, statement jewelry, and "paparazzi" cameras—we've got everything to make your guests feel famous!</p>
+                    <p>Giddy up with our selection of cowboy props! From Stetsons and bandanas to sheriff badges and lassos, we've got all the gear to make your guests feel like true outlaws and cowboys!</p>
                 </div>
                 
                 <div class="feature-card">
@@ -655,7 +658,7 @@
                         </svg>
                     </div>
                     <h3>Custom Layouts</h3>
-                    <p>Create photo layouts with that high-fashion editorial feel, featuring sleek typography, magazine cover styling, and Instagram-ready aesthetics.</p>
+                    <p>Create photo layouts with that authentic Wild West feel, featuring weathered textures, vintage typography, and rustic wood-grain styling.</p>
                 </div>
                 
                 <div class="feature-card">
@@ -665,13 +668,13 @@
                         </svg>
                     </div>
                     <h3>Add-Ons</h3>
-                    <p>Enhance your VIP experience with beauty light rings, glam filters, magazine cover prints, digital sharing stations, and instant social media uploads.</p>
+                    <p>Enhance your Western experience with wanted poster prints, branding iron stamps, custom horseshoe frames, and authentic frontier photo packages.</p>
                 </div>
             </div>
             
             <div class="text-center mt-12">
                 <p class="section-subtitle mb-6" style="font-style: italic; max-width: 800px;">
-                    This theme is completely customizable to capture the exact level of glam you want, whether you're going for subtle chic or full-on celebrity extravagance. It's giving main character energy for your event!
+                    This theme is completely customizable to capture the exact Western energy you want, whether you're going for classic cowboy or modern country chic. It's a rootin' tootin' good time guaranteed!
                 </p>
                 <a href="../contact-us.html" class="modern-btn">Book Your Event Now</a>
             </div>
@@ -683,39 +686,39 @@
         <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
             <div class="content-section">
                 <div class="content-text">
-                    <h2>Your Moment to Shine</h2>
+                    <h2>Ride Into The Sunset</h2>
                     <p>
-                        Experience what it feels like to be a celebrity. Our Kardashian Photo Shoot Theme brings the full A-list treatment—from professional lighting that makes everyone look flawless to luxurious backdrops that scream high fashion.
+                        Step into the Wild West and become a legend. Our Western Theme brings together all the rugged charm of the frontier—from weathered leather and dusty boots to golden sunsets and starry desert nights.
                     </p>
                     <p>
-                        Every detail is meticulously designed to create that coveted editorial look that your guests will be obsessing over and posting for weeks.
+                        Every detail is carefully crafted to create an authentic cowboy experience that will have your guests two-stepping and saying "yeehaw" all night long.
                     </p>
                     <ul class="feature-list">
                         <li class="feature-item">
                             <div class="feature-item-icon"></div>
                             <div class="feature-item-content">
-                                <h4>Studio-Quality Lighting</h4>
-                                <p>Professional ring lights and beauty lighting for that perfect glow</p>
+                                <h4>Authentic Backdrops</h4>
+                                <p>Saloons, deserts, barns, and vintage Western scenes</p>
                             </div>
                         </li>
                         <li class="feature-item">
                             <div class="feature-item-icon"></div>
                             <div class="feature-item-content">
-                                <h4>Glam Props Collection</h4>
-                                <p>Designer accessories, statement pieces, and celebrity-inspired items</p>
+                                <h4>Cowboy Props</h4>
+                                <p>Hats, boots, bandanas, toy guns, and sheriff badges</p>
                             </div>
                         </li>
                         <li class="feature-item">
                             <div class="feature-item-icon"></div>
                             <div class="feature-item-content">
-                                <h4>Magazine Cover Prints</h4>
-                                <p>Custom photo prints styled as high-fashion magazine covers</p>
+                                <h4>Wanted Poster Prints</h4>
+                                <p>Custom photo prints styled as old-timey wanted posters</p>
                             </div>
                         </li>
                     </ul>
                 </div>
                 <div class="content-image">
-                    <img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=800&h=600&fit=crop" alt="Kardashian Photo Shoot Theme">
+                    <img src="https://images.unsplash.com/photo-1508739773434-c26b3d09e071?w=800&h=600&fit=crop" alt="Western Theme Photo Booth">
                 </div>
             </div>
         </div>
@@ -727,7 +730,7 @@
             <div class="text-center">
                 <h2 class="section-title section-title-light">View Our Other Event Themes</h2>
                 <p class="section-subtitle section-subtitle-light mb-8">Scroll to see all of our themes</p>
-                <a href="../booth-themes.html" class="modern-btn" style="background: linear-gradient(135deg, rgba(212, 175, 147, 0.9) 0%, rgba(183, 130, 113, 0.9) 50%, rgba(139, 90, 90, 0.9) 100%);">
+                <a href="../booth-themes.html" class="modern-btn" style="background: linear-gradient(135deg, rgba(180, 83, 9, 0.9) 0%, rgba(120, 53, 15, 0.9) 100%);">
                     View All Themes
                 </a>
             </div>
