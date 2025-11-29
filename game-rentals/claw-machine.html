@@ -1,41 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-    <title>Claw Machine Rental - MiHi Entertainment</title>
-    <link rel="icon" type="image/svg+xml" href="../../assets/images/favicon.svg">
+    <title>Claw Machine Rental | MiHi Entertainment</title>
+    <link rel="icon" type="image/svg+xml" href="../assets/images/favicon.svg">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Orbitron:wght@400;500;600;700;800;900&family=Poppins:wght@900&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Orbitron:wght@400;500;600;700;800;900&family=Poppins:wght@900&display=swap"
+        rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Squada+One" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        html, body { overflow-x: hidden; width: 100%; max-width: 100vw; }
-        body { 
-            font-family: 'Orbitron', sans-serif; 
-            color: #1a202c; 
-            -webkit-font-smoothing: antialiased; 
-            -moz-osx-font-smoothing: grayscale;
-            padding-top: 0 !important; /* Header height will be handled by navigation */
+        html,
+        body {
+            overflow-x: hidden;
+            width: 100%;
+            max-width: 100vw;
         }
+
+        body {
+            font-family: 'Orbitron', sans-serif;
+            color: #1a202c;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            padding-top: 0 !important;
+            /* Header height will be handled by navigation */
+        }
+
         /* Exclude header and footer from body font styling */
         /* Don't let body font propagate to navigation/footer */
-        body > header,
-        body > footer,
+        body>header,
+        body>footer,
         header,
         footer {
-            font-family: unset !important;
+            font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !important;
         }
-        
-        section { overflow-x: hidden; }
-        .container { overflow-x: hidden; max-width: 100%; }
+
+        section {
+            overflow-x: hidden;
+        }
+
+        .container {
+            overflow-x: hidden;
+            max-width: 100%;
+        }
+
         /* Exclude header and footer containers from overflow restrictions */
         header .container,
         footer .container {
             overflow: visible !important;
         }
-        
+
         /* Prevent text size adjustment on mobile - exclude components */
         *:not(header):not(footer):not(header *):not(footer *) {
             -webkit-text-size-adjust: 100%;
@@ -43,69 +61,112 @@
             -ms-text-size-adjust: 100%;
             text-size-adjust: 100%;
         }
-        
+
         /* ============================================
            COMPONENT PROTECTION - NAVIGATION & FOOTER
            Let navigation.js and footer.js handle their own styling completely
            Prevent body/page fonts from affecting them
            ============================================ */
-        
+
         /* Navigation - Reset font properties so navigation.js styles work */
-        /* Use 'unset' or 'initial' to prevent inheritance from body */
+        /* Explicitly set system fonts to prevent inheritance from body Orbitron font */
         header,
         header * {
-            font-family: unset !important;
-            font-weight: unset !important;
-            font-style: unset !important;
-            text-transform: unset !important;
-            letter-spacing: unset !important;
-            word-spacing: unset !important;
-            line-height: unset !important;
+            font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !important;
+            font-weight: revert !important;
+            font-style: revert !important;
+            text-transform: revert !important;
+            letter-spacing: revert !important;
+            word-spacing: revert !important;
+            line-height: revert !important;
         }
-        
+
+        /* Reset color inheritance for navigation - let navigation.js handle colors */
+        header a:not(.btn-primary),
+        header nav a:not(.btn-primary) {
+            color: revert !important;
+        }
+
         /* Navigation dropdown - maintain original styling */
-        header nav .group > .absolute {
+        header nav .group>.absolute {
             overflow-y: auto !important;
             overflow-x: hidden !important;
             max-height: 90vh !important;
         }
-        
-        header nav .group > .absolute::-webkit-scrollbar {
+
+        header nav .group>.absolute::-webkit-scrollbar {
             width: 8px;
         }
-        
-        header nav .group > .absolute::-webkit-scrollbar-track {
+
+        header nav .group>.absolute::-webkit-scrollbar-track {
             background: #f1f1f1;
             border-radius: 4px;
         }
-        
-        header nav .group > .absolute::-webkit-scrollbar-thumb {
+
+        header nav .group>.absolute::-webkit-scrollbar-thumb {
             background: #c1c1c1;
             border-radius: 4px;
         }
-        
-        header nav .group > .absolute::-webkit-scrollbar-thumb:hover {
+
+        header nav .group>.absolute::-webkit-scrollbar-thumb:hover {
             background: #a8a8a8;
         }
-        
-        header nav .group > .absolute {
+
+        header nav .group>.absolute {
             scrollbar-width: thin;
             scrollbar-color: #c1c1c1 #f1f1f1;
         }
-        
+
         /* Footer - Reset font properties so footer.js styles work */
-        /* Use 'unset' to prevent inheritance from body */
+        /* Explicitly set system fonts to prevent inheritance from body Orbitron font */
         footer,
         footer * {
-            font-family: unset !important;
-            font-weight: unset !important;
-            font-style: unset !important;
-            text-transform: unset !important;
-            letter-spacing: unset !important;
-            word-spacing: unset !important;
-            line-height: unset !important;
+            font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !important;
+            font-weight: revert !important;
+            font-style: revert !important;
+            text-transform: revert !important;
+            letter-spacing: revert !important;
+            word-spacing: revert !important;
+            line-height: revert !important;
         }
-        
+
+        /* Navigation Contact Us Button - Ensure text is visible */
+        header .btn-primary,
+        header a.btn-primary,
+        header nav .btn-primary,
+        header nav a.btn-primary {
+            background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%) !important;
+            background-color: #0050ff !important;
+            color: #ffffff !important;
+            border: none !important;
+            padding: 0.75rem 1.5rem !important;
+            border-radius: 9999px !important;
+            font-weight: 600 !important;
+            text-decoration: none !important;
+            display: inline-block !important;
+            transition: all 0.3s ease !important;
+            box-shadow: 0 4px 6px rgba(0, 80, 255, 0.3) !important;
+            white-space: nowrap !important;
+        }
+
+        header .btn-primary:hover,
+        header a.btn-primary:hover,
+        header nav .btn-primary:hover,
+        header nav a.btn-primary:hover {
+            background: linear-gradient(135deg, #0040d9 0%, #0033b3 100%) !important;
+            background-color: #0040d9 !important;
+            color: #ffffff !important;
+            transform: translateY(-2px) !important;
+            box-shadow: 0 6px 12px rgba(0, 80, 255, 0.4) !important;
+        }
+
+        header .btn-primary:active,
+        header a.btn-primary:active,
+        header nav .btn-primary:active,
+        header nav a.btn-primary:active {
+            transform: translateY(0) !important;
+        }
+
         /* Ensure components maintain their z-index and positioning */
         header {
             position: fixed !important;
@@ -115,40 +176,42 @@
             width: 100% !important;
             z-index: 50 !important;
         }
-        
+
         footer {
             position: relative !important;
             z-index: 1 !important;
         }
-        
+
         /* Prevent page overflow rules from affecting components */
         header,
         footer {
             overflow: visible !important;
         }
-        
+
         header nav,
         footer {
             overflow-x: visible !important;
             overflow-y: visible !important;
         }
-        
+
         /* Prevent body overflow from affecting navigation */
         html:has(header nav .group:hover) {
             overflow-x: hidden !important;
         }
-        
+
         /* Touch-friendly buttons - exclude header and footer */
         button:not(header button):not(footer button),
         a:not(header a):not(footer a) {
             -webkit-tap-highlight-color: transparent;
             touch-action: manipulation;
         }
+
         /* Page headings only - exclude header and footer */
         /* Navigation and footer use their own fonts from navigation.js and footer.js */
-        h1:not(header h1):not(footer h1):not(header *):not(footer *) { 
-            font-family: 'Press Start 2P', cursive; 
+        h1:not(header h1):not(footer h1):not(header *):not(footer *) {
+            font-family: 'Press Start 2P', cursive;
         }
+
         h2:not(header h2):not(footer h2):not(header *):not(footer *),
         h3:not(header h3):not(footer h3):not(header *):not(footer *),
         h4:not(header h4):not(footer h4):not(header *):not(footer *),
@@ -157,21 +220,27 @@
             font-family: 'Orbitron', sans-serif;
             font-weight: 700;
         }
+
         /* Page button styles - exclude header and footer */
         .btn-primary:not(header .btn-primary):not(footer .btn-primary):not(header *):not(footer *) {
             background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%);
             transition: all 0.3s ease;
         }
+
         .btn-primary:not(header .btn-primary):not(footer .btn-primary):not(header *):not(footer *):hover {
             transform: translateY(-2px);
             box-shadow: 0 10px 25px rgba(0, 80, 255, 0.4);
         }
-        .section-padding { padding: 5rem 0; }
-        .hero-gradient { 
+
+        .section-padding {
+            padding: 5rem 0;
+        }
+
+        .hero-gradient {
             background: linear-gradient(135deg, rgba(0, 0, 0, 0.7) 0%, rgba(51, 153, 255, 0.3) 50%, rgba(0, 0, 0, 0.7) 100%);
             position: relative;
         }
-        
+
         .hero-gradient::before {
             content: '';
             position: absolute;
@@ -179,25 +248,30 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: 
+            background:
                 repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 255, 255, 0.03) 2px, rgba(0, 255, 255, 0.03) 4px),
                 repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(0, 255, 255, 0.03) 2px, rgba(0, 255, 255, 0.03) 4px);
             background-size: 50px 50px;
             animation: scanlines 8s linear infinite;
             pointer-events: none;
         }
-        
+
         @keyframes scanlines {
-            0% { transform: translateY(0); }
-            100% { transform: translateY(50px); }
+            0% {
+                transform: translateY(0);
+            }
+
+            100% {
+                transform: translateY(50px);
+            }
         }
-        
+
         /* Gaming Hero Section Enhancements */
         .hero-section {
             position: relative;
             overflow: hidden;
         }
-        
+
         .hero-section::after {
             content: '';
             position: absolute;
@@ -210,36 +284,43 @@
             pointer-events: none;
             z-index: 1;
         }
-        
+
         @keyframes pulse-glow {
-            0%, 100% { opacity: 0.5; transform: scale(1); }
-            50% { opacity: 0.8; transform: scale(1.1); }
+
+            0%,
+            100% {
+                opacity: 0.5;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 0.8;
+                transform: scale(1.1);
+            }
         }
-        
+
         /* Enhanced Keyboard Animation with Neon Glow */
         .hero-section .keyboard {
             position: relative;
-            filter: drop-shadow(0 0 10px rgba(51, 153, 255, 0.5)) 
-                    drop-shadow(0 0 20px rgba(51, 153, 255, 0.3))
-                    drop-shadow(0 0 30px rgba(51, 153, 255, 0.2));
+            filter: drop-shadow(0 0 10px rgba(51, 153, 255, 0.5)) drop-shadow(0 0 20px rgba(51, 153, 255, 0.3)) drop-shadow(0 0 30px rgba(51, 153, 255, 0.2));
         }
-        
+
         .hero-section .key {
-            text-shadow: 
+            text-shadow:
                 0 0 5px rgba(51, 153, 255, 0.8),
                 0 0 10px rgba(51, 153, 255, 0.6),
                 0 0 15px rgba(51, 153, 255, 0.4),
                 0 0 20px rgba(51, 153, 255, 0.3);
             color: #ffffff;
         }
-        
+
         /* Enhanced Hero Title */
         .hero-section h3 {
             font-family: 'Orbitron', sans-serif !important;
             font-weight: 800 !important;
             text-transform: uppercase;
             letter-spacing: 0.15em;
-            text-shadow: 
+            text-shadow:
                 0 0 10px rgba(51, 153, 255, 0.8),
                 0 0 20px rgba(51, 153, 255, 0.6),
                 0 0 30px rgba(51, 153, 255, 0.4),
@@ -248,17 +329,18 @@
             position: relative;
             animation: title-glow 2s ease-in-out infinite alternate;
         }
-        
+
         @keyframes title-glow {
-            0% { 
-                text-shadow: 
+            0% {
+                text-shadow:
                     0 0 10px rgba(51, 153, 255, 0.8),
                     0 0 20px rgba(51, 153, 255, 0.6),
                     0 0 30px rgba(51, 153, 255, 0.4),
                     2px 2px 4px rgba(0, 0, 0, 0.8);
             }
-            100% { 
-                text-shadow: 
+
+            100% {
+                text-shadow:
                     0 0 15px rgba(51, 153, 255, 1),
                     0 0 25px rgba(51, 153, 255, 0.8),
                     0 0 35px rgba(51, 153, 255, 0.6),
@@ -266,16 +348,16 @@
                     2px 2px 4px rgba(0, 0, 0, 0.8);
             }
         }
-        
+
         /* Enhanced Hero Description */
         .hero-section p {
-            text-shadow: 
+            text-shadow:
                 0 0 5px rgba(255, 255, 255, 0.5),
                 0 2px 4px rgba(0, 0, 0, 0.6);
             font-weight: 500;
             letter-spacing: 0.05em;
         }
-        
+
         /* Gaming Badge for Hero */
         .hero-badge {
             display: inline-block;
@@ -288,47 +370,51 @@
             text-transform: uppercase;
             letter-spacing: 0.15em;
             margin-bottom: 1.5rem;
-            box-shadow: 
+            box-shadow:
                 0 0 10px rgba(51, 153, 255, 0.5),
                 0 4px 15px rgba(51, 153, 255, 0.3),
                 inset 0 1px 0 rgba(255, 255, 255, 0.3);
             border: 1px solid rgba(255, 255, 255, 0.2);
             animation: badge-pulse 2s ease-in-out infinite;
         }
-        
+
         @keyframes badge-pulse {
-            0%, 100% { 
-                box-shadow: 
+
+            0%,
+            100% {
+                box-shadow:
                     0 0 10px rgba(51, 153, 255, 0.5),
                     0 4px 15px rgba(51, 153, 255, 0.3),
                     inset 0 1px 0 rgba(255, 255, 255, 0.3);
             }
-            50% { 
-                box-shadow: 
+
+            50% {
+                box-shadow:
                     0 0 20px rgba(51, 153, 255, 0.8),
                     0 4px 25px rgba(51, 153, 255, 0.5),
                     inset 0 1px 0 rgba(255, 255, 255, 0.4);
             }
         }
-        
+
         /* Hero Content Container */
         .hero-section .relative.z-10 {
             position: relative;
             z-index: 10;
             animation: fade-in-up 1s ease-out;
         }
-        
+
         @keyframes fade-in-up {
             from {
                 opacity: 0;
                 transform: translateY(30px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
-        
+
         /* Gaming-Themed Hero Buttons */
         .hero-btn-primary {
             display: inline-flex;
@@ -347,14 +433,14 @@
             text-decoration: none;
             position: relative;
             overflow: hidden;
-            box-shadow: 
+            box-shadow:
                 0 0 20px rgba(51, 153, 255, 0.5),
                 0 0 40px rgba(51, 153, 255, 0.3),
                 inset 0 0 20px rgba(255, 255, 255, 0.1);
             transition: all 0.3s ease;
             z-index: 1;
         }
-        
+
         .hero-btn-primary::before {
             content: '';
             position: absolute;
@@ -367,14 +453,14 @@
             transition: transform 0.6s ease;
             z-index: -1;
         }
-        
+
         .hero-btn-primary:hover::before {
             transform: translateX(100%) translateY(100%) rotate(45deg);
         }
-        
+
         .hero-btn-primary:hover {
             transform: translateY(-3px) scale(1.05);
-            box-shadow: 
+            box-shadow:
                 0 0 30px rgba(51, 153, 255, 0.8),
                 0 0 60px rgba(51, 153, 255, 0.5),
                 0 10px 30px rgba(0, 0, 0, 0.3),
@@ -382,31 +468,31 @@
             border-color: rgba(51, 153, 255, 1);
             background: linear-gradient(135deg, rgba(51, 153, 255, 1) 0%, rgba(0, 80, 255, 1) 100%);
         }
-        
+
         .hero-btn-primary:active {
             transform: translateY(-1px) scale(1.02);
         }
-        
+
         .hero-btn-primary span,
         .hero-btn-primary i {
             position: relative;
             z-index: 1;
             text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
         }
-        
+
         .hero-btn-primary i {
             font-size: 0.9em;
             transition: transform 0.3s ease;
         }
-        
+
         .hero-btn-primary:hover i {
             transform: scale(1.2) rotate(-5deg);
         }
-        
+
         .hero-btn-secondary {
             display: inline-flex;
             align-items: center;
-            justify-center;
+            justify-content: center;
             padding: 1rem 2.5rem;
             background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(10px);
@@ -421,13 +507,13 @@
             text-decoration: none;
             position: relative;
             overflow: hidden;
-            box-shadow: 
+            box-shadow:
                 0 0 15px rgba(255, 255, 255, 0.2),
                 inset 0 0 15px rgba(255, 255, 255, 0.05);
             transition: all 0.3s ease;
             z-index: 1;
         }
-        
+
         .hero-btn-secondary::before {
             content: '';
             position: absolute;
@@ -438,46 +524,46 @@
             background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
             transition: left 0.5s ease;
         }
-        
+
         .hero-btn-secondary:hover::before {
             left: 100%;
         }
-        
+
         .hero-btn-secondary:hover {
             transform: translateY(-3px) scale(1.05);
             background: rgba(255, 255, 255, 0.15);
             border-color: rgba(255, 255, 255, 0.6);
-            box-shadow: 
+            box-shadow:
                 0 0 25px rgba(255, 255, 255, 0.4),
                 0 10px 30px rgba(0, 0, 0, 0.3),
                 inset 0 0 25px rgba(255, 255, 255, 0.1);
         }
-        
+
         .hero-btn-secondary:active {
             transform: translateY(-1px) scale(1.02);
         }
-        
+
         .hero-btn-secondary span,
         .hero-btn-secondary i {
             position: relative;
             z-index: 1;
             text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
         }
-        
+
         .hero-btn-secondary i {
             font-size: 0.9em;
             transition: transform 0.3s ease;
         }
-        
+
         .hero-btn-secondary:hover i {
             transform: scale(1.2) translateX(3px);
         }
-        
+
         /* Improved Typography for Content Section 2 - Blue Background */
         section[style*="background: #3399ff"] {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif !important;
         }
-        
+
         section[style*="background: #3399ff"] h2,
         section[style*="background: #3399ff"] h2 em {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif !important;
@@ -488,7 +574,7 @@
             color: #ffffff !important;
             text-shadow: 0 2px 4px rgba(0, 0, 0, 0.15) !important;
         }
-        
+
         section[style*="background: #3399ff"] p {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif !important;
             font-weight: 400 !important;
@@ -498,71 +584,75 @@
             text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) !important;
             opacity: 0.95 !important;
         }
-        
+
         /* Mobile Typography Improvements */
         @media (max-width: 640px) {
+
             section[style*="background: #3399ff"] h2,
             section[style*="background: #3399ff"] h2 em {
                 font-size: 1.375rem !important;
                 line-height: 1.3 !important;
                 margin-bottom: 1.25rem !important;
             }
-            
+
             section[style*="background: #3399ff"] p {
                 font-size: 0.9rem !important;
                 line-height: 1.65 !important;
                 margin-bottom: 1rem !important;
             }
         }
-        
+
         @media (min-width: 641px) and (max-width: 768px) {
+
             section[style*="background: #3399ff"] h2,
             section[style*="background: #3399ff"] h2 em {
                 font-size: 1.625rem !important;
                 line-height: 1.3 !important;
                 margin-bottom: 1.5rem !important;
             }
-            
+
             section[style*="background: #3399ff"] p {
                 font-size: 0.95rem !important;
                 line-height: 1.7 !important;
                 margin-bottom: 1.25rem !important;
             }
         }
-        
+
         @media (min-width: 769px) and (max-width: 1023px) {
+
             section[style*="background: #3399ff"] h2,
             section[style*="background: #3399ff"] h2 em {
                 font-size: 2rem !important;
                 line-height: 1.25 !important;
             }
-            
+
             section[style*="background: #3399ff"] p {
                 font-size: 1rem !important;
                 line-height: 1.75 !important;
             }
         }
-        
+
         @media (min-width: 1024px) {
+
             section[style*="background: #3399ff"] h2,
             section[style*="background: #3399ff"] h2 em {
                 font-size: 2.5rem !important;
                 line-height: 1.2 !important;
             }
-            
+
             section[style*="background: #3399ff"] p {
                 font-size: 1.125rem !important;
                 line-height: 1.8 !important;
             }
         }
-        
+
         /* Modern Game-Themed Content Card Styles */
         .game-info-card {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
             border-radius: 20px;
             padding: 2rem;
-            box-shadow: 
+            box-shadow:
                 0 8px 32px rgba(0, 0, 0, 0.1),
                 0 0 0 3px rgba(255, 255, 255, 0.3),
                 inset 0 1px 0 rgba(255, 255, 255, 0.5);
@@ -570,7 +660,7 @@
             position: relative;
             overflow: hidden;
         }
-        
+
         .game-info-card::before {
             content: '';
             position: absolute;
@@ -581,12 +671,17 @@
             background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
             animation: shine 3s infinite;
         }
-        
+
         @keyframes shine {
-            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
-            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+            0% {
+                transform: translateX(-100%) translateY(-100%) rotate(45deg);
+            }
+
+            100% {
+                transform: translateX(100%) translateY(100%) rotate(45deg);
+            }
         }
-        
+
         .game-info-card .game-title {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif !important;
             font-weight: 800 !important;
@@ -601,7 +696,7 @@
             position: relative;
             z-index: 1;
         }
-        
+
         .game-info-card .game-text {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif !important;
             font-weight: 400 !important;
@@ -612,11 +707,11 @@
             position: relative;
             z-index: 1;
         }
-        
+
         .game-info-card .game-text:last-child {
             margin-bottom: 0 !important;
         }
-        
+
         /* Gaming Badge Styles */
         .game-badge {
             display: inline-block;
@@ -633,7 +728,7 @@
             position: relative;
             z-index: 1;
         }
-        
+
         /* Responsive Mobile Improvements */
         @media (max-width: 640px) {
             .game-info-card {
@@ -641,48 +736,48 @@
                 border-radius: 16px !important;
                 margin-bottom: 1.5rem;
             }
-            
+
             .game-info-card .game-title {
                 font-size: 1.5rem !important;
                 margin-bottom: 1.25rem !important;
             }
-            
+
             .game-info-card .game-text {
                 font-size: 0.95rem !important;
                 line-height: 1.7 !important;
                 margin-bottom: 1rem !important;
             }
-            
+
             .game-badge {
                 font-size: 0.7rem !important;
                 padding: 0.4rem 0.8rem !important;
             }
         }
-        
+
         @media (max-width: 480px) {
             .game-info-card {
                 padding: 1.25rem !important;
                 border-radius: 12px !important;
             }
-            
+
             .game-info-card .game-title {
                 font-size: 1.375rem !important;
                 margin-bottom: 1rem !important;
             }
-            
+
             .game-info-card .game-text {
                 font-size: 0.9rem !important;
                 line-height: 1.65 !important;
             }
         }
-        
+
         /* Gaming-Themed Content Section 1 Styles */
         .gradient-grainy-bg .game-content-card {
             background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(247, 250, 252, 0.98) 100%);
             backdrop-filter: blur(20px);
             border-radius: 24px;
             padding: 2.5rem;
-            box-shadow: 
+            box-shadow:
                 0 20px 60px rgba(0, 0, 0, 0.1),
                 0 0 0 4px rgba(102, 126, 234, 0.2),
                 inset 0 1px 0 rgba(255, 255, 255, 0.8);
@@ -691,7 +786,7 @@
             position: relative;
             overflow: hidden;
         }
-        
+
         .gradient-grainy-bg .game-content-card::before {
             content: '';
             position: absolute;
@@ -708,12 +803,19 @@
             mask-composite: exclude;
             animation: border-glow 3s ease infinite;
         }
-        
+
         @keyframes border-glow {
-            0%, 100% { opacity: 0.6; }
-            50% { opacity: 1; }
+
+            0%,
+            100% {
+                opacity: 0.6;
+            }
+
+            50% {
+                opacity: 1;
+            }
         }
-        
+
         .gradient-grainy-bg .game-content-card::after {
             content: '';
             position: absolute;
@@ -724,12 +826,17 @@
             background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.3) 50%, transparent 70%);
             animation: card-shine 4s infinite;
         }
-        
+
         @keyframes card-shine {
-            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
-            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+            0% {
+                transform: translateX(-100%) translateY(-100%) rotate(45deg);
+            }
+
+            100% {
+                transform: translateX(100%) translateY(100%) rotate(45deg);
+            }
         }
-        
+
         .gradient-grainy-bg .game-content-title {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif !important;
             font-weight: 800 !important;
@@ -744,7 +851,7 @@
             position: relative;
             z-index: 1;
         }
-        
+
         .gradient-grainy-bg .game-content-text {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif !important;
             font-weight: 400 !important;
@@ -755,11 +862,11 @@
             position: relative;
             z-index: 1;
         }
-        
+
         .gradient-grainy-bg .game-content-text:last-of-type {
             margin-bottom: 2rem !important;
         }
-        
+
         .gradient-grainy-bg .game-btn {
             position: relative;
             z-index: 1;
@@ -773,7 +880,7 @@
             color: white !important;
             text-transform: uppercase !important;
             letter-spacing: 0.1em !important;
-            box-shadow: 
+            box-shadow:
                 0 10px 30px rgba(102, 126, 234, 0.4),
                 0 0 0 3px rgba(102, 126, 234, 0.2),
                 inset 0 1px 0 rgba(255, 255, 255, 0.3) !important;
@@ -783,36 +890,36 @@
             justify-content: center !important;
             gap: 0.5rem !important;
         }
-        
+
         .gradient-grainy-bg .game-btn:hover {
             transform: translateY(-3px) scale(1.05) !important;
-            box-shadow: 
+            box-shadow:
                 0 15px 40px rgba(102, 126, 234, 0.5),
                 0 0 0 4px rgba(102, 126, 234, 0.3),
                 inset 0 1px 0 rgba(255, 255, 255, 0.4) !important;
         }
-        
+
         .gradient-grainy-bg .game-btn::after {
             content: '→';
             font-size: 1.2em;
             transition: transform 0.3s ease;
         }
-        
+
         .gradient-grainy-bg .game-btn:hover::after {
             transform: translateX(5px);
         }
-        
+
         /* Enhanced Gaming Card Image */
         .gradient-grainy-bg .card {
             border-radius: 20px !important;
             overflow: hidden !important;
-            box-shadow: 
+            box-shadow:
                 0 20px 60px rgba(0, 0, 0, 0.15),
                 0 0 0 4px rgba(102, 126, 234, 0.2) !important;
             border: 3px solid rgba(255, 255, 255, 0.5) !important;
             position: relative !important;
         }
-        
+
         .gradient-grainy-bg .card::before {
             content: '';
             position: absolute;
@@ -825,11 +932,11 @@
             transition: opacity 0.3s ease;
             z-index: 1;
         }
-        
+
         .gradient-grainy-bg .card:hover::before {
             opacity: 1;
         }
-        
+
         .gradient-grainy-bg .card__button {
             z-index: 2 !important;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
@@ -838,211 +945,259 @@
             text-transform: uppercase !important;
             letter-spacing: 0.1em !important;
         }
-        
+
         /* Mobile Responsive */
         @media (max-width: 768px) {
             .gradient-grainy-bg .game-content-card {
                 padding: 1.75rem !important;
                 border-radius: 20px !important;
             }
-            
+
             .gradient-grainy-bg .game-content-text {
                 margin-bottom: 1.25rem !important;
             }
-            
+
             .gradient-grainy-bg .game-content-text:last-of-type {
                 margin-bottom: 1.5rem !important;
             }
-            
+
             .gradient-grainy-bg .game-btn {
                 width: 100% !important;
                 padding: 0.875rem 1.5rem !important;
             }
         }
-        
+
         @media (max-width: 640px) {
             .gradient-grainy-bg .game-content-card {
                 padding: 1.5rem !important;
                 border-radius: 16px !important;
             }
         }
-        
+
         /* Keyboard Animation Styles */
         .keyboard {
             font-family: "Poppins", sans-serif;
             font-weight: 900;
         }
-        
+
         .key {
             font-size: 3.5rem;
             display: inline-block;
             letter-spacing: -0.2rem;
             transition: transform 0.2s;
         }
-        
+
         @media (min-width: 768px) {
             .key {
                 font-size: 4.5rem;
                 letter-spacing: -0.25rem;
             }
         }
-        
+
         @keyframes pressDown1 {
-            30%, 40%, 100% {
+
+            30%,
+            40%,
+            100% {
                 transform: translateY(0);
             }
+
             35% {
                 transform: translateY(6px);
             }
         }
-        
+
         @keyframes pressDown2 {
-            70%, 80%, 100% {
+
+            70%,
+            80%,
+            100% {
                 transform: translateY(0);
             }
+
             75% {
                 transform: translateY(6px);
             }
         }
-        
+
         @keyframes pressDown3 {
-            30%, 40%, 100% {
+
+            30%,
+            40%,
+            100% {
                 transform: translateY(0);
             }
+
             35% {
                 transform: translateY(6px);
             }
         }
-        
+
         @keyframes pressDown4 {
-            40%, 50%, 100% {
+
+            40%,
+            50%,
+            100% {
                 transform: translateY(0);
             }
+
             45% {
                 transform: translateY(6px);
             }
         }
-        
+
         @keyframes pressDown5 {
-            20%, 30%, 100% {
+
+            20%,
+            30%,
+            100% {
                 transform: translateY(0);
             }
+
             25% {
                 transform: translateY(6px);
             }
         }
-        
+
         @keyframes pressDown6 {
-            60%, 70%, 100% {
+
+            60%,
+            70%,
+            100% {
                 transform: translateY(0);
             }
+
             65% {
                 transform: translateY(6px);
             }
         }
-        
+
         @keyframes pressDown7 {
-            10%, 20%, 100% {
+
+            10%,
+            20%,
+            100% {
                 transform: translateY(0);
             }
+
             15% {
                 transform: translateY(6px);
             }
         }
-        
+
         @keyframes pressDown8 {
-            35%, 45%, 100% {
+
+            35%,
+            45%,
+            100% {
                 transform: translateY(0);
             }
+
             40% {
                 transform: translateY(6px);
             }
         }
-        
+
         @keyframes pressDown9 {
-            50%, 60%, 100% {
+
+            50%,
+            60%,
+            100% {
                 transform: translateY(0);
             }
+
             55% {
                 transform: translateY(6px);
             }
         }
-        
+
         @keyframes pressDown10 {
-            25%, 35%, 100% {
+
+            25%,
+            35%,
+            100% {
                 transform: translateY(0);
             }
+
             30% {
                 transform: translateY(6px);
             }
         }
-        
+
         @keyframes pressDown11 {
-            15%, 25%, 100% {
+
+            15%,
+            25%,
+            100% {
                 transform: translateY(0);
             }
+
             20% {
                 transform: translateY(6px);
             }
         }
-        
+
         @keyframes pressDown12 {
-            45%, 55%, 100% {
+
+            45%,
+            55%,
+            100% {
                 transform: translateY(0);
             }
+
             50% {
                 transform: translateY(6px);
             }
         }
-        
+
         .key:nth-child(1) {
             animation: pressDown1 2s infinite;
         }
-        
+
         .key:nth-child(2) {
             animation: pressDown2 3s infinite;
         }
-        
+
         .key:nth-child(3) {
             animation: pressDown3 4s infinite;
         }
-        
+
         .key:nth-child(4) {
             animation: pressDown4 2.5s infinite;
         }
-        
+
         .key:nth-child(5) {
             animation: pressDown5 2.5s infinite;
         }
-        
+
         .key:nth-child(6) {
             animation: pressDown6 3.5s infinite;
         }
-        
+
         .key:nth-child(7) {
             animation: pressDown7 2.2s infinite;
         }
-        
+
         .key:nth-child(8) {
             animation: pressDown8 3.2s infinite;
         }
-        
+
         .key:nth-child(9) {
             animation: pressDown9 2.8s infinite;
         }
-        
+
         .key:nth-child(10) {
             animation: pressDown10 3.3s infinite;
         }
-        
+
         .key:nth-child(11) {
             animation: pressDown11 2.7s infinite;
         }
-        
+
         .key:nth-child(12) {
             animation: pressDown12 3.1s infinite;
         }
-        
+
         /* Responsive adjustments for smaller screens */
         @media (max-width: 640px) {
             .key {
@@ -1053,18 +1208,19 @@
 
         /* Content 2 Banner Section Mobile Optimization */
         @media (max-width: 768px) {
+
             /* Fix banner section padding and spacing */
             section[style*="background: #3399ff"] {
                 padding: 1.5rem 0.75rem !important;
                 background: transparent !important;
             }
-            
+
             /* Card wrapper for mobile */
-            section[style*="background: #3399ff"] > .container {
+            section[style*="background: #3399ff"]>.container {
                 background: linear-gradient(135deg, #3399ff 0%, #2d88e6 100%);
                 border-radius: 20px;
                 padding: 1.5rem 1rem !important;
-                box-shadow: 
+                box-shadow:
                     0 10px 30px rgba(0, 0, 0, 0.2),
                     0 5px 15px rgba(0, 0, 0, 0.15),
                     inset 0 1px 0 rgba(255, 255, 255, 0.1);
@@ -1073,12 +1229,12 @@
                 position: relative;
                 overflow: hidden;
             }
-            
+
             /* Ripple background inside card */
             section[style*="background: #3399ff"] .ripple-background {
                 border-radius: 20px;
             }
-            
+
             /* Banner heading mobile - allow wrapping */
             section[style*="background: #3399ff"] h2.animated-gradient-text {
                 white-space: normal !important;
@@ -1087,7 +1243,7 @@
                 hyphens: auto;
                 line-height: 1.3 !important;
             }
-            
+
             /* Game text mobile optimization */
             section[style*="background: #3399ff"] .game-text {
                 font-size: 0.9rem !important;
@@ -1095,14 +1251,14 @@
                 margin-bottom: 1rem !important;
                 padding: 0 0.25rem;
             }
-            
+
             /* Game badge mobile */
             section[style*="background: #3399ff"] .game-badge {
                 font-size: 0.7rem !important;
                 padding: 0.4rem 0.9rem !important;
                 margin-bottom: 0.75rem !important;
             }
-            
+
             /* Feature cards container mobile - card style */
             section[style*="background: #3399ff"] .card-container-right {
                 flex-direction: column !important;
@@ -1111,7 +1267,7 @@
                 width: 100%;
                 margin-top: 1.5rem;
             }
-            
+
             /* Feature cards mobile - enhanced card style */
             section[style*="background: #3399ff"] .feature-card {
                 width: 100% !important;
@@ -1121,71 +1277,72 @@
                 min-height: 220px !important;
                 margin: 0 !important;
                 border-radius: 16px;
-                box-shadow: 
+                box-shadow:
                     0 8px 20px rgba(0, 0, 0, 0.15),
                     0 3px 10px rgba(0, 0, 0, 0.1);
                 overflow: hidden;
             }
-            
+
             section[style*="background: #3399ff"] .card-content {
                 padding: 90px 1rem 1rem !important;
             }
-            
+
             section[style*="background: #3399ff"] .card-content p {
                 font-size: 0.8rem !important;
                 line-height: 1.5 !important;
             }
-            
+
             section[style*="background: #3399ff"] .card-button {
                 font-size: 0.85em !important;
                 padding: 5px 12px !important;
             }
-            
+
             section[style*="background: #3399ff"] .card-icon {
                 width: 90px !important;
                 height: 75px !important;
             }
-            
+
             section[style*="background: #3399ff"] .card-icon img {
                 width: 45px !important;
                 height: 45px !important;
             }
-            
+
             /* Content wrapper inside card */
             section[style*="background: #3399ff"] .flex.flex-col.items-center.text-center {
                 padding: 0 !important;
                 margin-bottom: 1.5rem !important;
             }
         }
-        
+
         /* Mobile Responsive Styles */
         @media (max-width: 768px) {
+
             /* Hero Section Mobile */
             .hero-section {
                 min-height: 70vh;
                 padding: 3rem 1rem;
             }
-            
+
             /* Better mobile spacing */
             .hero-section .relative.z-10 {
                 transform: translateY(0) !important;
                 padding: 2rem 0 !important;
             }
-            
+
             /* Hero Badge Mobile */
             .hero-badge {
                 font-size: 0.65rem !important;
                 padding: 0.4rem 1rem !important;
                 margin-bottom: 1rem !important;
             }
-            
+
             /* Enhanced hero title mobile */
             .hero-section h3 {
                 font-size: 1.5rem !important;
                 margin-bottom: 1rem !important;
                 letter-spacing: 0.1em !important;
             }
-            
+
             /* Enhanced hero description mobile */
             .hero-section p {
                 font-size: 0.9375rem !important;
@@ -1202,14 +1359,14 @@
             }
 
             /* Ensure button wrapper doesn't overflow */
-            .hero-section .relative.z-10 > a.animated-gradient-btn {
+            .hero-section .relative.z-10>a.animated-gradient-btn {
                 margin-left: auto;
                 margin-right: auto;
                 display: block;
             }
 
             /* Prevent text clipping */
-            .hero-section .animated-gradient-btn > span {
+            .hero-section .animated-gradient-btn>span {
                 position: relative;
                 z-index: 10;
             }
@@ -1250,14 +1407,14 @@
                 box-sizing: border-box;
                 overflow: visible;
             }
-            
+
             /* Hero CTA Buttons Container Mobile */
             .hero-section .flex.flex-col.sm\\:flex-row {
                 flex-direction: column !important;
                 gap: 1rem !important;
                 width: 100%;
             }
-            
+
             /* Hero Buttons Mobile Optimization */
             .hero-btn-primary,
             .hero-btn-secondary {
@@ -1266,17 +1423,17 @@
                 width: 100%;
                 max-width: 280px;
             }
-            
+
             .hero-section .flex.flex-col.sm\\:flex-row {
                 width: 100%;
                 max-width: 100%;
             }
-            
+
             .hero-btn-primary span,
             .hero-btn-secondary span {
                 white-space: nowrap;
             }
-            
+
             /* Icon spacing mobile */
             .hero-btn-primary i,
             .hero-btn-secondary i {
@@ -1297,7 +1454,7 @@
                 animation: gradient var(--dur) ease-in-out infinite !important;
             }
 
-            .hero-section .animated-gradient-btn > span {
+            .hero-section .animated-gradient-btn>span {
                 line-height: 65px !important;
                 display: flex !important;
                 align-items: center !important;
@@ -1332,37 +1489,39 @@
                 min-height: auto;
                 padding: 2.5rem 0;
             }
-            
+
             .content-section-height-compact {
                 padding: 2rem 0 !important;
             }
-            
+
             /* Better section spacing on mobile */
             section {
                 padding-top: 2rem;
                 padding-bottom: 2rem;
             }
-            
+
             section.py-12,
             section.py-16,
             section.py-20 {
                 padding-top: 2.5rem !important;
                 padding-bottom: 2.5rem !important;
             }
-            
+
             section.py-6,
             section.py-8 {
                 padding-top: 1.5rem !important;
                 padding-bottom: 1.5rem !important;
             }
-            
+
             section.py-4 {
                 padding-top: 1rem !important;
                 padding-bottom: 1rem !important;
             }
 
             /* Card Mobile Adjustments */
-            .card, .card2, .card3 {
+            .card,
+            .card2,
+            .card3 {
                 height: 300px;
                 margin-bottom: 1.5rem;
             }
@@ -1432,7 +1591,7 @@
             }
 
             /* Ensure grid items don't cause overflow */
-            section[style*="background: #3399ff"] .grid > div {
+            section[style*="background: #3399ff"] .grid>div {
                 min-width: 0;
                 max-width: 100%;
             }
@@ -1598,7 +1757,7 @@
             }
 
             /* Optimize game section container */
-            section .container .grid > div:has(.claw-game-container) {
+            section .container .grid>div:has(.claw-game-container) {
                 width: 100%;
                 max-width: 100%;
                 overflow-x: hidden;
@@ -1609,7 +1768,7 @@
                 gap: 2rem;
             }
 
-            section[style*="background: #3399ff"] .grid > div:has(.claw-game-container) {
+            section[style*="background: #3399ff"] .grid>div:has(.claw-game-container) {
                 padding: 1rem 0.5rem;
                 margin-bottom: 2rem;
             }
@@ -1646,7 +1805,16 @@
             }
 
             /* Fix text in lists and paragraphs */
-            ul, ol, li, p, h1, h2, h3, h4, h5, h6 {
+            ul,
+            ol,
+            li,
+            p,
+            h1,
+            h2,
+            h3,
+            h4,
+            h5,
+            h6 {
                 max-width: 100%;
                 overflow-wrap: break-word;
                 word-wrap: break-word;
@@ -1655,7 +1823,7 @@
             }
 
             /* Ensure grid items don't overflow */
-            .grid > * {
+            .grid>* {
                 min-width: 0;
                 max-width: 100%;
                 overflow: hidden;
@@ -1756,6 +1924,7 @@
         }
 
         @media (max-width: 640px) {
+
             /* Extra Small Mobile */
             .key {
                 font-size: 1.8rem;
@@ -1816,7 +1985,7 @@
                 animation: gradient var(--dur) ease-in-out infinite !important;
             }
 
-            .hero-section .animated-gradient-btn > span {
+            .hero-section .animated-gradient-btn>span {
                 line-height: 60px !important;
                 display: flex !important;
                 align-items: center !important;
@@ -1901,6 +2070,7 @@
         }
 
         @media (max-width: 480px) {
+
             /* Very Small Mobile */
             .key {
                 font-size: 1.5rem;
@@ -1961,7 +2131,7 @@
                 animation: gradient var(--dur) ease-in-out infinite !important;
             }
 
-            .hero-section .animated-gradient-btn > span {
+            .hero-section .animated-gradient-btn>span {
                 line-height: 55px !important;
                 display: flex !important;
                 align-items: center !important;
@@ -2104,7 +2274,7 @@
             animation: gradient var(--dur) ease-in-out infinite, border 1s forwards ease-in-out reverse;
         }
 
-        .animated-gradient-btn > span {
+        .animated-gradient-btn>span {
             display: block;
             position: relative;
             z-index: 2;
@@ -2120,9 +2290,11 @@
             0% {
                 background-position: 14% 0%;
             }
+
             50% {
                 background-position: 87% 100%;
             }
+
             100% {
                 background-position: 14% 0%;
             }
@@ -2133,18 +2305,22 @@
                 -webkit-clip-path: polygon(0% 100%, 4px 100%, 4px 4px, 216px 4px, 216px 66px, 4px 66px, 4px 100%, 100% 100%, 100% 0%, 0% 0%);
                 clip-path: polygon(0% 100%, 4px 100%, 4px 4px, 216px 4px, 216px 66px, 4px 66px, 4px 100%, 100% 100%, 100% 0%, 0% 0%);
             }
+
             25% {
                 -webkit-clip-path: polygon(0% 100%, 4px 100%, 4px 4px, 216px 4px, 216px 66px, 216px 66px, 216px 100%, 100% 100%, 100% 0%, 0% 0%);
                 clip-path: polygon(0% 100%, 4px 100%, 4px 4px, 216px 4px, 216px 66px, 216px 66px, 216px 100%, 100% 100%, 100% 0%, 0% 0%);
             }
+
             50% {
                 -webkit-clip-path: polygon(0% 100%, 4px 100%, 4px 4px, 216px 4px, 216px 4px, 216px 4px, 216px 4px, 216px 4px, 100% 0%, 0% 0%);
                 clip-path: polygon(0% 100%, 4px 100%, 4px 4px, 216px 4px, 216px 4px, 216px 4px, 216px 4px, 216px 4px, 100% 0%, 0% 0%);
             }
+
             75% {
                 -webkit-clip-path: polygon(0% 100%, 4px 100%, 4px 4px, 4px 4px, 4px 4px, 4px 4px, 4px 4px, 4px 4px, 4px 0%, 0% 0%);
                 clip-path: polygon(0% 100%, 4px 100%, 4px 4px, 4px 4px, 4px 4px, 4px 4px, 4px 4px, 4px 4px, 4px 0%, 0% 0%);
             }
+
             100% {
                 -webkit-clip-path: polygon(0% 100%, 4px 100%, 4px 100%, 4px 100%, 4px 100%, 4px 100%, 4px 100%, 4px 100%, 4px 100%, 0% 100%);
                 clip-path: polygon(0% 100%, 4px 100%, 4px 100%, 4px 100%, 4px 100%, 4px 100%, 4px 100%, 4px 100%, 4px 100%, 0% 100%);
@@ -2168,9 +2344,11 @@
             0% {
                 background-position: 0% 50%;
             }
+
             50% {
                 background-position: 100% 50%;
             }
+
             100% {
                 background-position: 0% 50%;
             }
@@ -2189,8 +2367,8 @@
                 display: flex;
                 align-items: center;
             }
-            
-            .content-section-height > .container {
+
+            .content-section-height>.container {
                 width: 100%;
             }
 
@@ -2222,7 +2400,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: 
+            background-image:
                 repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.03) 0px, transparent 1px, transparent 2px, rgba(0, 0, 0, 0.03) 3px),
                 repeating-linear-gradient(90deg, rgba(0, 0, 0, 0.03) 0px, transparent 1px, transparent 2px, rgba(0, 0, 0, 0.03) 3px);
             background-size: 4px 4px;
@@ -2230,7 +2408,7 @@
             opacity: 0.5;
         }
 
-        .gradient-grainy-bg > * {
+        .gradient-grainy-bg>* {
             position: relative;
             z-index: 1;
         }
@@ -2243,7 +2421,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: 
+            background-image:
                 repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.03) 0px, transparent 1px, transparent 2px, rgba(0, 0, 0, 0.03) 3px),
                 repeating-linear-gradient(90deg, rgba(0, 0, 0, 0.03) 0px, transparent 1px, transparent 2px, rgba(0, 0, 0, 0.03) 3px);
             background-size: 4px 4px;
@@ -2252,7 +2430,7 @@
             z-index: 0;
         }
 
-        .faq-section-with-ripple > * {
+        .faq-section-with-ripple>* {
             position: relative;
             z-index: 1;
         }
@@ -2326,7 +2504,7 @@
             height: 250px;
             overflow: hidden;
             background-color: #fff;
-            background-image: url('../../assets/images/clawmachine/pic1.jpg');
+            background-image: url('../assets/images/clawmachine/pic1.jpg');
             background-size: cover;
             background-position: center 30%;
             background-repeat: no-repeat;
@@ -2343,7 +2521,7 @@
             height: 250px;
             overflow: hidden;
             background-color: #fff;
-            background-image: url('../../assets/images/clawmachine/pic3.jpg');
+            background-image: url('../assets/images/clawmachine/pic3.jpg');
             background-size: cover;
             background-position: center 30%;
             background-repeat: no-repeat;
@@ -2359,7 +2537,7 @@
                 min-height: 500px;
                 max-height: 700px;
             }
-            
+
             .card2 {
                 height: 70vh;
                 min-height: 500px;
@@ -2400,7 +2578,7 @@
             height: 250px;
             overflow: hidden;
             background-color: #fff;
-            background-image: url('../../assets/images/clawmachine/pic4.jpg');
+            background-image: url('../assets/images/clawmachine/pic4.jpg');
             background-size: cover;
             background-position: center 30%;
             background-repeat: no-repeat;
@@ -2480,17 +2658,15 @@
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif !important;
             font-weight: 800 !important;
             font-size: clamp(1.75rem, 5vw, 3rem) !important;
-            background: linear-gradient(
-                90deg,
-                #ff0000 0%,
-                #ff7f00 14.28%,
-                #ffff00 28.56%,
-                #00ff00 42.84%,
-                #0000ff 57.12%,
-                #4b0082 71.4%,
-                #9400d3 85.68%,
-                #ff0000 100%
-            );
+            background: linear-gradient(90deg,
+                    #ff0000 0%,
+                    #ff7f00 14.28%,
+                    #ffff00 28.56%,
+                    #00ff00 42.84%,
+                    #0000ff 57.12%,
+                    #4b0082 71.4%,
+                    #9400d3 85.68%,
+                    #ff0000 100%);
             background-size: 200% 100%;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -2504,17 +2680,22 @@
         }
 
         @keyframes rainbow-wave {
-            0%, 100% {
+
+            0%,
+            100% {
                 background-position: 0% 50%;
                 transform: translateY(0px);
             }
+
             25% {
                 transform: translateY(-8px);
             }
+
             50% {
                 background-position: 100% 50%;
                 transform: translateY(0px);
             }
+
             75% {
                 transform: translateY(-8px);
             }
@@ -2591,7 +2772,7 @@
             left: 0;
             right: 0;
             height: 3px;
-            background: linear-gradient(90deg, rgba(255,255,255,0.6), rgba(255,255,255,0.3));
+            background: linear-gradient(90deg, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.3));
             transform: scaleX(0);
             transition: transform 0.4s ease;
         }
@@ -2611,7 +2792,7 @@
             font-size: 2rem;
             margin-bottom: 0.875rem;
             display: inline-block;
-            filter: drop-shadow(0 2px 6px rgba(0,0,0,0.2));
+            filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.2));
             transition: transform 0.3s ease;
         }
 
@@ -2631,7 +2812,7 @@
             font-weight: 700;
             margin-bottom: 0.75rem;
             font-size: 1rem;
-            text-shadow: 0 2px 6px rgba(0,0,0,0.2);
+            text-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
             line-height: 1.4;
             letter-spacing: 0.01em;
         }
@@ -2737,9 +2918,11 @@
             .event-type-card {
                 padding: 1.75rem;
             }
+
             .event-type-title {
                 font-size: 1.125rem;
             }
+
             .event-type-desc {
                 font-size: 0.9375rem;
             }
@@ -2764,12 +2947,12 @@
             left: 0;
             right: 0;
             height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.8), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.8), transparent);
         }
 
         .section-title-white {
             color: #ffffff;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             font-weight: 800;
             margin-bottom: 2rem;
             text-align: left;
@@ -2787,52 +2970,57 @@
                 text-align: center;
                 font-size: 1.75rem;
             }
+
             .benefit-card {
                 min-height: auto;
                 padding: 1.25rem 1rem;
             }
+
             .benefit-icon {
                 font-size: 1.75rem;
                 margin-bottom: 0.625rem;
             }
+
             .benefit-title {
                 font-size: 0.9375rem;
                 margin-bottom: 0.5rem;
             }
+
             .benefit-desc {
                 font-size: 0.8125rem;
                 line-height: 1.5;
             }
+
             .game-wrapper-glass {
                 padding: 0.375rem;
             }
-            
+
             /* Optimize Benefits Grid for Mobile */
             .grid.grid-cols-1.sm\\:grid-cols-2.lg\\:grid-cols-2 {
                 grid-template-columns: 1fr !important;
                 gap: 1rem !important;
             }
-            
+
             /* Event Type Cards Mobile Optimization */
             .event-type-card {
                 padding: 1.25rem !important;
             }
-            
+
             .event-type-icon {
                 font-size: 2rem !important;
                 margin-bottom: 0.5rem !important;
             }
-            
+
             .event-type-title {
                 font-size: 0.95rem !important;
                 margin-bottom: 0.375rem !important;
             }
-            
+
             .event-type-desc {
                 font-size: 0.8125rem !important;
                 line-height: 1.5 !important;
             }
-            
+
             /* Section Headers Mobile */
             .flex.flex-col.items-center.text-center.mb-10,
             .flex.flex-col.items-center.text-center.mb-12,
@@ -2840,31 +3028,31 @@
                 margin-bottom: 2rem !important;
                 padding: 0 0.5rem;
             }
-            
+
             /* Better container padding on mobile */
             .container {
                 padding-left: 1rem !important;
                 padding-right: 1rem !important;
             }
-            
+
             /* Optimize grid gaps on mobile */
             .grid.gap-5,
             .grid.gap-6,
             .grid.gap-8 {
                 gap: 1rem !important;
             }
-            
+
             .grid.gap-3,
             .grid.gap-4 {
                 gap: 0.75rem !important;
             }
-            
+
             /* Accordion Mobile Optimization */
             .accordion .link {
                 padding: 1rem 1.125rem !important;
                 font-size: 0.9375rem !important;
             }
-            
+
             .submenu p {
                 padding: 1rem 1.125rem !important;
                 font-size: 0.875rem !important;
@@ -2876,11 +3064,12 @@
             .benefit-card {
                 padding: 1.5rem 1.25rem;
             }
+
             .benefit-icon {
                 font-size: 1.75rem;
             }
         }
-        
+
         @media (max-width: 640px) {
             .game-wrapper-glass {
                 padding: 0.25rem;
@@ -2897,8 +3086,8 @@
             border-bottom-left-radius: 110px;
             border-bottom-right-radius: 110px;
             box-shadow: 0 10px 0 #fff,
-                  inset 0 -10px 0 rgba(255,255,255,0.25),
-                        0 30px 0 rgba(0,0,0,0.15);
+                inset 0 -10px 0 rgba(255, 255, 255, 0.25),
+                0 30px 0 rgba(0, 0, 0, 0.15);
             overflow: hidden;
             display: flex;
             justify-content: center;
@@ -2912,7 +3101,7 @@
             height: 120%;
             left: -40%;
             top: -100px;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255, 0.2));
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2));
             transform: rotate(35deg);
             pointer-events: none;
             filter: blur(5px);
@@ -2937,8 +3126,8 @@
             border-bottom-left-radius: 70px;
             border-bottom-right-radius: 70px;
             background-color: #3c2846;
-            box-shadow: 0 8px 0 rgba(0,0,0,0.1),
-                  inset 0 -6px 0 #fff;
+            box-shadow: 0 8px 0 rgba(0, 0, 0, 0.1),
+                inset 0 -6px 0 #fff;
             z-index: 10;
             display: flex;
             justify-content: center;
@@ -3082,9 +3271,11 @@
             0% {
                 transform: scale(0.8);
             }
+
             50% {
                 transform: scale(1.2);
             }
+
             100% {
                 transform: scale(0.8);
             }
@@ -3266,6 +3457,7 @@
             0% {
                 width: 0;
             }
+
             100% {
                 width: calc(100% / 6);
             }
@@ -3276,6 +3468,7 @@
                 opacity: 0;
                 transform: translateY(-100vh);
             }
+
             100% {
                 opacity: 1;
                 transform: translateY(0);
@@ -3572,10 +3765,12 @@
         }
 
         @keyframes pulse {
+
             0%,
             100% {
                 filter: sepia(0);
             }
+
             50% {
                 filter: sepia(1);
             }
@@ -3735,14 +3930,17 @@
                 opacity: 1;
                 transform: scale(3) translateY(0);
             }
+
             50% {
                 opacity: 1;
                 transform: scale(2.5) translateY(-20px);
             }
+
             70% {
                 opacity: 0.8;
                 transform: scale(2) translateY(-40px);
             }
+
             100% {
                 opacity: 0;
                 transform: scale(1) translateY(-100vh);
@@ -3900,11 +4098,14 @@
         }
     </style>
 </head>
+
 <body>
     <div id="nav-placeholder"></div>
 
     <section class="relative h-screen md:h-screen flex items-center justify-center overflow-hidden hero-section">
-        <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('../../assets/images/clawmachine/hero.jpg'); background-position: center center;"></div>
+        <div class="absolute inset-0 bg-cover bg-center"
+            style="background-image: url('../assets/images/clawmachine/hero.jpg'); background-position: center center;">
+        </div>
         <div class="absolute inset-0 hero-gradient"></div>
         <div class="relative z-10 text-center text-white px-4 md:px-6 py-8 md:py-12">
             <div class="max-w-6xl mx-auto">
@@ -3912,31 +4113,33 @@
                 <div class="mb-4 md:mb-6">
                     <span class="hero-badge">🎮 ARCADE CLASSIC</span>
                 </div>
-                
+
                 <!-- Animated Keyboard Title -->
-            <div class="keyboard mb-6 md:mb-8">
-                <span class="key">C</span>
-                <span class="key">L</span>
-                <span class="key">A</span>
-                <span class="key">W</span>
-                <span class="key">&nbsp;</span>
-                <span class="key">M</span>
-                <span class="key">A</span>
-                <span class="key">C</span>
-                <span class="key">H</span>
-                <span class="key">I</span>
-                <span class="key">N</span>
-                <span class="key">E</span>
-            </div>
-                
+                <div class="keyboard mb-6 md:mb-8">
+                    <span class="key">C</span>
+                    <span class="key">L</span>
+                    <span class="key">A</span>
+                    <span class="key">W</span>
+                    <span class="key">&nbsp;</span>
+                    <span class="key">M</span>
+                    <span class="key">A</span>
+                    <span class="key">C</span>
+                    <span class="key">H</span>
+                    <span class="key">I</span>
+                    <span class="key">N</span>
+                    <span class="key">E</span>
+                </div>
+
                 <!-- Hero Title -->
                 <h3 class="text-2xl md:text-3xl lg:text-4xl xl:text-5xl mb-4 md:mb-6 px-2">Nationwide Rentals</h3>
-                
+
                 <!-- Hero Description -->
-                <p class="text-base md:text-lg lg:text-xl xl:text-2xl mb-8 md:mb-10 max-w-4xl mx-auto px-2 leading-relaxed">
-                    A classic arcade favorite, our claw machine brings nonstop fun and excitement to any event. Experience the thrill of the grab!
+                <p
+                    class="text-base md:text-lg lg:text-xl xl:text-2xl mb-8 md:mb-10 max-w-4xl mx-auto px-2 leading-relaxed">
+                    A classic arcade favorite, our claw machine brings nonstop fun and excitement to any event.
+                    Experience the thrill of the grab!
                 </p>
-                
+
                 <!-- CTA Buttons -->
                 <div class="mt-8 md:mt-10 flex flex-col sm:flex-row gap-4 md:gap-6 items-center justify-center">
                     <a href="#contact" class="hero-btn-primary">
@@ -3952,33 +4155,42 @@
         </div>
     </section>
 
-<!-- Content 1 -->
+    <!-- Content 1 -->
     <section class="py-6 md:py-8 gradient-grainy-bg content-section-height">
         <div class="container mx-auto px-4 md:px-6">
             <div class="grid md:grid-cols-2 gap-4 md:gap-6">
                 <div class="card-container order-2 md:order-1">
                     <div class="card">
-                        <a href="#" class="card__button">Learn more</a>
+                        <a href="../contact-us.html" class="card__button">Learn more</a>
                     </div>
                 </div>
                 <div class="flex flex-col justify-center items-start order-1 md:order-2">
                     <div class="game-content-card w-full">
                         <h3 class="game-content-title">Level Up Your Event</h3>
                         <p class="game-content-text">
-                        Looking for a way to make your event unforgettable while keeping guests entertained? Our claw machine rentals are the perfect solution. Whether it's a lively party, a corporate gathering, or a branded activation, these interactive games get everyone involved, cheering, and reaching for prizes.
-                    </p>
+                            Looking for a way to make your event unforgettable while keeping guests entertained? Our
+                            claw machine rentals are the perfect solution. Whether it's a lively party, a corporate
+                            gathering, or a branded activation, these interactive games get everyone involved, cheering,
+                            and reaching for prizes.
+                        </p>
                         <p class="game-content-text">
-                        With vibrant lights, fun sounds, and a mix of custom-branded goodies inside, the claw machines bring excitement and energy to any event space. They encourage friendly competition, spark laughter, and add a nostalgic touch that guests of all ages will love. Plus, our rentals are simple to set up, so you can focus on enjoying the experience and watching your guests have a blast. Turn your next event into a playful, engaging experience that people will remember long after the last prize is claimed.
-                    </p>
-                        <a href="#contact" class="game-btn">Get A Quote</a>
+                            With vibrant lights, fun sounds, and a mix of custom-branded goodies inside, the claw
+                            machines bring excitement and energy to any event space. They encourage friendly
+                            competition, spark laughter, and add a nostalgic touch that guests of all ages will love.
+                            Plus, our rentals are simple to set up, so you can focus on enjoying the experience and
+                            watching your guests have a blast. Turn your next event into a playful, engaging experience
+                            that people will remember long after the last prize is claimed.
+                        </p>
+                        <a href="../contact-us.html" class="game-btn">Get A Quote</a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-<!-- Content 2 -->
-    <section class="py-6 md:py-8 bg-white content-section-height" style="position: relative; overflow-x: hidden; overflow-y: visible; background: #3399ff; max-width: 100vw;">
+    <!-- Content 2 -->
+    <section class="py-6 md:py-8 bg-white content-section-height"
+        style="position: relative; overflow-x: hidden; overflow-y: visible; background: #3399ff; max-width: 100vw;">
         <div class="ripple-background">
             <div class="circle xxlarge shade1"></div>
             <div class="circle xlarge shade2"></div>
@@ -3986,66 +4198,82 @@
             <div class="circle medium shade4"></div>
             <div class="circle small shade5"></div>
         </div>
-        <div class="container mx-auto px-4 md:px-6" style="position: relative; z-index: 1; max-width: 100%; overflow-x: hidden;">
+        <div class="container mx-auto px-4 md:px-6"
+            style="position: relative; z-index: 1; max-width: 100%; overflow-x: hidden;">
             <div class="flex flex-col items-center text-center mb-6 md:mb-8 px-2">
                 <span class="game-badge mb-3 md:mb-4">Arcade Classic</span>
-                <h2 class="text-xl md:text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl font-bold mb-4 md:mb-6 animated-gradient-text px-2" style="font-family: 'Press Start 2P', cursive !important; line-height: 1.4;">What is a Claw Machine?</h2>
+                <h2 class="text-xl md:text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl font-bold mb-4 md:mb-6 animated-gradient-text px-2"
+                    style="font-family: 'Press Start 2P', cursive !important; line-height: 1.4;">What is a Claw Machine?
+                </h2>
                 <p class="game-text mb-4 md:mb-5">
-                    A claw machine is a classic arcade game that's all about skill, luck, and excitement. Guests use a joystick to control a mechanical claw, trying to grab a prize from inside the machine and drop it into the winning slot. It's a fun, interactive experience that keeps people coming back for more while creating a lively and playful atmosphere at any event.
+                    A claw machine is a classic arcade game that's all about skill, luck, and excitement. Guests use a
+                    joystick to control a mechanical claw, trying to grab a prize from inside the machine and drop it
+                    into the winning slot. It's a fun, interactive experience that keeps people coming back for more
+                    while creating a lively and playful atmosphere at any event.
                 </p>
                 <p class="game-text">
-                    Using our claw machines is simple and stress-free. We handle the setup, so all you need to do is stock it with your chosen prizes and let your guests take turns testing their luck and skill. Whether you're encouraging friendly competition, rewarding attendees, or adding a nostalgic touch to your event, our claw machine rentals are guaranteed to bring excitement and engagement to any occasion.
+                    Using our claw machines is simple and stress-free. We handle the setup, so all you need to do is
+                    stock it with your chosen prizes and let your guests take turns testing their luck and skill.
+                    Whether you're encouraging friendly competition, rewarding attendees, or adding a nostalgic touch to
+                    your event, our claw machine rentals are guaranteed to bring excitement and engagement to any
+                    occasion.
                 </p>
             </div>
             <div class="flex items-center justify-center">
                 <div class="card-container-right card-container-optimized">
-                        <div class="feature-card">
+                    <div class="feature-card">
                         <div class="card-icon">
-                            <img src="../../assets/images/clawmachine/icon1.png" alt="Icon 1">
+                            <img src="../assets/images/clawmachine/icon1.png" alt="Icon 1">
                         </div>
                         <div class="card-content">
                             <button class="card-button">Delivery</button>
-                            <p>We'll bring the claw machine straight to your venue, right on time and ready for the fun.</p>
+                            <p>We'll bring the claw machine straight to your venue, right on time and ready for the fun.
+                            </p>
                         </div>
                     </div>
                     <div class="feature-card">
                         <div class="card-icon">
-                            <img src="../../assets/images/clawmachine/icon2.png" alt="Icon 2">
+                            <img src="../assets/images/clawmachine/icon2.png" alt="Icon 2">
                         </div>
                         <div class="card-content">
                             <button class="card-button">Setup</button>
-                            <p>Our crew will handle the setup process, so your guests can jump in and start playing right away.</p>
+                            <p>Our crew will handle the setup process, so your guests can jump in and start playing
+                                right away.</p>
                         </div>
                     </div>
                     <div class="feature-card">
                         <div class="card-icon">
-                            <img src="../../assets/images/clawmachine/icon3.png" alt="Icon 3">
+                            <img src="../assets/images/clawmachine/icon3.png" alt="Icon 3">
                         </div>
                         <div class="card-content">
                             <button class="card-button">Breakdown</button>
                             <p>Once the event is over, we'll safely pack everything up for removal.</p>
                         </div>
                     </div>
-                    </div>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Ready to Book Section -->
-    <section class="relative py-8 md:py-12 lg:py-16 flex items-center justify-center overflow-hidden min-h-[50vh] md:min-h-[60vh]">
-        <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('../../assets/images/clawmachine/pic2.jpg');"></div>
+    <section
+        class="relative py-8 md:py-12 lg:py-16 flex items-center justify-center overflow-hidden min-h-[50vh] md:min-h-[60vh]">
+        <div class="absolute inset-0 bg-cover bg-center"
+            style="background-image: url('../assets/images/clawmachine/pic2.jpg');"></div>
         <div class="absolute inset-0 hero-gradient"></div>
         <div class="relative z-10 text-center text-white px-4 md:px-6 max-w-4xl mx-auto py-4">
             <h2 class="text-xl md:text-2xl lg:text-4xl font-bold mb-3 md:mb-5">Ready to Book?</h2>
             <p class="text-sm md:text-base lg:text-lg mb-5 md:mb-7 px-2">
-                Book your claw machine rental and add a dose of excitement to your next event! Our team is ready to assist you in creating a memorable experience for your guests.
+                Book your claw machine rental and add a dose of excitement to your next event! Our team is ready to
+                assist you in creating a memorable experience for your guests.
             </p>
-            <a href="#contact" class="animated-gradient-btn"><span>Get A Quote</span></a>
+            <a href="../contact-us.html" class="animated-gradient-btn"><span>Get A Quote</span></a>
         </div>
     </section>
 
     <!-- Benefits Section and Game -->
-    <section class="py-16 md:py-20 lg:py-24 bg-white content-section-height" style="position: relative; overflow: hidden; background: #3399ff;">
+    <section class="py-16 md:py-20 lg:py-24 bg-white content-section-height"
+        style="position: relative; overflow: hidden; background: #3399ff;">
         <div class="ripple-background ripple-background-mirrored">
             <div class="circle xxlarge shade1"></div>
             <div class="circle xlarge shade2"></div>
@@ -4057,16 +4285,21 @@
             <!-- Section Header -->
             <div class="flex flex-col items-center text-center mb-12 md:mb-16 lg:mb-20">
                 <span class="game-badge mb-4">EVENT BENEFITS</span>
-                <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 md:mb-6 animated-gradient-text" style="font-family: 'Press Start 2P', cursive !important;">Benefits of Having the Claw Machine at your Event</h2>
-                </div>
+                <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 md:mb-6 animated-gradient-text"
+                    style="font-family: 'Press Start 2P', cursive !important;">Benefits of Having the Claw Machine at
+                    your Event</h2>
+            </div>
 
             <div class="grid lg:grid-cols-2 gap-6 md:gap-8 lg:gap-12 xl:gap-16 items-start">
                 <!-- Play Mini Game - Left Side -->
                 <div class="flex flex-col justify-center items-center order-1 lg:order-2 px-2 md:px-4 lg:px-6">
-                    <h2 class="text-lg md:text-xl lg:text-2xl font-bold mb-6 md:mb-8 lg:mb-10 text-center text-white drop-shadow-lg" style="font-family: 'Orbitron', sans-serif; letter-spacing: 0.05em;">Play Mini Game</h2>
+                    <h2 class="text-lg md:text-xl lg:text-2xl font-bold mb-6 md:mb-8 lg:mb-10 text-center text-white drop-shadow-lg"
+                        style="font-family: 'Orbitron', sans-serif; letter-spacing: 0.05em;">Play Mini Game</h2>
                     <!-- Game Code Preserved -->
-                    <div class="game-wrapper claw-game-container w-full max-w-lg lg:max-w-xl mx-auto" style="box-sizing: border-box; padding: 1rem;">
-                        <div class="wrapper" style="width: 100%; max-width: 100%; box-sizing: border-box; padding-left: 0; margin-left: 0;">
+                    <div class="game-wrapper claw-game-container w-full max-w-lg lg:max-w-xl mx-auto"
+                        style="box-sizing: border-box; padding: 1rem;">
+                        <div class="wrapper"
+                            style="width: 100%; max-width: 100%; box-sizing: border-box; padding-left: 0; margin-left: 0;">
                             <div class="collection-box pix"></div>
                             <div class="claw-machine">
                                 <div class="box pix">
@@ -4108,37 +4341,43 @@
                         <div class="benefit-card">
                             <span class="benefit-icon">🥳</span>
                             <h3 class="benefit-title">Fun for Everyone</h3>
-                            <p class="benefit-desc">Guests of all ages can join in, from kids testing their skills to adults reliving their arcade glory days.</p>
+                            <p class="benefit-desc">Guests of all ages can join in, from kids testing their skills to
+                                adults reliving their arcade glory days.</p>
                         </div>
                         <!-- Benefit 2 -->
                         <div class="benefit-card">
                             <span class="benefit-icon">🕹️</span>
                             <h3 class="benefit-title">Interactive Excitement</h3>
-                            <p class="benefit-desc">The thrill of controlling the claw and aiming for a prize keeps everyone engaged and coming back for more.</p>
+                            <p class="benefit-desc">The thrill of controlling the claw and aiming for a prize keeps
+                                everyone engaged and coming back for more.</p>
                         </div>
                         <!-- Benefit 3 -->
                         <div class="benefit-card">
                             <span class="benefit-icon">✨</span>
                             <h3 class="benefit-title">Memorable Experience</h3>
-                            <p class="benefit-desc">Nostalgia meets modern fun - your guests will be talking about their wins long after the event ends.</p>
+                            <p class="benefit-desc">Nostalgia meets modern fun - your guests will be talking about their
+                                wins long after the event ends.</p>
                         </div>
                         <!-- Benefit 4 -->
                         <div class="benefit-card">
                             <span class="benefit-icon">🎨</span>
                             <h3 class="benefit-title">Customizable</h3>
-                            <p class="benefit-desc">Wrap the machine in your company's colors or logo, and fill it with branded goodies for a unique activation.</p>
+                            <p class="benefit-desc">Wrap the machine in your company's colors or logo, and fill it with
+                                branded goodies for a unique activation.</p>
                         </div>
                         <!-- Benefit 5 -->
                         <div class="benefit-card">
                             <span class="benefit-icon">🚀</span>
                             <h3 class="benefit-title">Event-Ready Anywhere</h3>
-                            <p class="benefit-desc">Compact, portable, and easy to set up in almost any indoor space. Perfect for parties and trade shows.</p>
+                            <p class="benefit-desc">Compact, portable, and easy to set up in almost any indoor space.
+                                Perfect for parties and trade shows.</p>
                         </div>
                         <!-- Benefit 6 -->
                         <div class="benefit-card">
                             <span class="benefit-icon">🎁</span>
                             <h3 class="benefit-title">Endless Possibilities</h3>
-                            <p class="benefit-desc">Fill it with merch, toys, gift cards, or surprises — the claw machine adapts to whatever vibe you have.</p>
+                            <p class="benefit-desc">Fill it with merch, toys, gift cards, or surprises — the claw
+                                machine adapts to whatever vibe you have.</p>
                         </div>
                     </div>
                 </div>
@@ -4152,45 +4391,51 @@
             <!-- Section Header -->
             <div class="flex flex-col items-center text-center mb-8 md:mb-10 lg:mb-12 xl:mb-16 px-2">
                 <span class="game-badge mb-3 md:mb-4">PERFECT EVENTS</span>
-                <h2 class="text-xl md:text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl font-bold mb-3 md:mb-4 lg:mb-6 animated-gradient-text px-2" style="font-family: 'Press Start 2P', cursive !important;">Events Perfect For The Claw Machine</h2>
+                <h2 class="text-xl md:text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl font-bold mb-3 md:mb-4 lg:mb-6 animated-gradient-text px-2"
+                    style="font-family: 'Press Start 2P', cursive !important;">Events Perfect For The Claw Machine</h2>
                 <p class="text-sm md:text-base lg:text-lg text-gray-700 max-w-2xl mx-auto leading-relaxed px-2">
-                    Our claw machine rentals are a fantastic addition to a wide range of events, bringing excitement and engagement to any occasion.
+                    Our claw machine rentals are a fantastic addition to a wide range of events, bringing excitement and
+                    engagement to any occasion.
                 </p>
             </div>
-            
+
             <div class="grid md:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-center">
                 <!-- Image/Content Card - Left Side -->
                 <div class="card-container order-2 md:order-1">
                     <div class="card2">
-                        <a href="#" class="card__button">Learn more</a>
+                        <a href="../contact-us.html" class="card__button">Learn more</a>
                     </div>
                 </div>
-                
+
                 <!-- Events List - Right Side -->
                 <div class="flex flex-col justify-center items-start order-1 md:order-2">
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6 w-full">
                         <div class="event-type-card group">
                             <div class="event-type-icon">🏢</div>
                             <h3 class="event-type-title">Corporate Events</h3>
-                            <p class="event-type-desc">Trade shows, team-building activities, office parties, and corporate celebrations.</p>
+                            <p class="event-type-desc">Trade shows, team-building activities, office parties, and
+                                corporate celebrations.</p>
                         </div>
-                        
+
                         <div class="event-type-card group">
                             <div class="event-type-icon">🎉</div>
                             <h3 class="event-type-title">Private Parties</h3>
-                            <p class="event-type-desc">Birthday parties, anniversaries, graduations, and milestone celebrations.</p>
+                            <p class="event-type-desc">Birthday parties, anniversaries, graduations, and milestone
+                                celebrations.</p>
                         </div>
-                        
+
                         <div class="event-type-card group">
                             <div class="event-type-icon">✨</div>
                             <h3 class="event-type-title">Special Occasions</h3>
-                            <p class="event-type-desc">Holiday parties, festivals, grand openings, and themed events.</p>
+                            <p class="event-type-desc">Holiday parties, festivals, grand openings, and themed events.
+                            </p>
                         </div>
-                        
+
                         <div class="event-type-card group">
                             <div class="event-type-icon">👨‍👩‍👧‍👦</div>
                             <h3 class="event-type-title">Family-Friendly Events</h3>
-                            <p class="event-type-desc">Community gatherings, school events, fundraisers, and family reunions.</p>
+                            <p class="event-type-desc">Community gatherings, school events, fundraisers, and family
+                                reunions.</p>
                         </div>
                     </div>
                 </div>
@@ -4199,7 +4444,8 @@
     </section>
 
     <!-- Dropdown Section -->
-    <section class="py-12 md:py-16 lg:py-20" style="position: relative; overflow-x: hidden; overflow-y: visible; background: #3399ff; max-width: 100vw;">
+    <section class="py-12 md:py-16 lg:py-20"
+        style="position: relative; overflow-x: hidden; overflow-y: visible; background: #3399ff; max-width: 100vw;">
         <div class="ripple-background">
             <div class="circle xxlarge shade1"></div>
             <div class="circle xlarge shade2"></div>
@@ -4210,10 +4456,12 @@
         <div class="container mx-auto px-4 md:px-6 lg:px-8" style="max-width: 1000px; position: relative; z-index: 1;">
             <div class="accordion-wrapper">
                 <div class="text-center mb-6 md:mb-8 lg:mb-12 px-2">
-                    <span class="inline-block px-3 py-1.5 md:px-4 md:py-2 bg-gradient-to-r from-blue-500 to-purple-600 text-white text-xs md:text-sm font-bold rounded-full mb-3 md:mb-4 uppercase tracking-wider">
+                    <span
+                        class="inline-block px-3 py-1.5 md:px-4 md:py-2 bg-gradient-to-r from-blue-500 to-purple-600 text-white text-xs md:text-sm font-bold rounded-full mb-3 md:mb-4 uppercase tracking-wider">
                         Got Questions?
                     </span>
-                    <h2 class="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold mb-3 md:mb-4 lg:mb-6 animated-gradient-text px-2">
+                    <h2
+                        class="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold mb-3 md:mb-4 lg:mb-6 animated-gradient-text px-2">
                         Frequently Asked Questions
                     </h2>
                     <p class="text-sm md:text-base lg:text-lg text-gray-700 max-w-2xl mx-auto leading-relaxed px-2">
@@ -4224,37 +4472,57 @@
                     <li>
                         <div class="link">How much space does the claw machine need?</div>
                         <ul class="submenu">
-                            <li><p style="color: #000000 !important; background-color: transparent !important;">Our claw machines are compact and fit comfortably in most event spaces. We recommend a space of about 4x4 feet for easy access and gameplay.</p></li>
+                            <li>
+                                <p style="color: #000000 !important; background-color: transparent !important;">Our claw
+                                    machines are compact and fit comfortably in most event spaces. We recommend a space
+                                    of about 4x4 feet for easy access and gameplay.</p>
+                            </li>
                         </ul>
                     </li>
                     <li>
                         <div class="link">Can the claw machine be branded?</div>
                         <ul class="submenu">
-                            <li><p>Yes! We can wrap the machine with your logo, colors, or custom design, making it a perfect fit for brand activations and corporate events.</p></li>
+                            <li>
+                                <p>Yes! We can wrap the machine with your logo, colors, or custom design, making it a
+                                    perfect fit for brand activations and corporate events.</p>
+                            </li>
                         </ul>
                     </li>
                     <li>
                         <div class="link">What types of prizes can go inside?</div>
                         <ul class="submenu">
-                            <li><p>You can fill the machine with small items like keychains, sunglasses, toys, gift cards, or branded giveaways. We’ll help you choose prizes that fit your event theme.</p></li>
+                            <li>
+                                <p>You can fill the machine with small items like keychains, sunglasses, toys, gift
+                                    cards, or branded giveaways. We’ll help you choose prizes that fit your event theme.
+                                </p>
+                            </li>
                         </ul>
                     </li>
                     <li>
                         <div class="link">Do you provide the prizes?</div>
                         <ul class="submenu">
-                            <li><p>Prizes can be supplied by you, or we can help source items based on your budget and event needs.</p></li>
+                            <li>
+                                <p>Prizes can be supplied by you, or we can help source items based on your budget and
+                                    event needs.</p>
+                            </li>
                         </ul>
                     </li>
                     <li>
                         <div class="link">How do guests use the claw machine?</div>
                         <ul class="submenu">
-                            <li><p>It’s simple! Guests use the joystick to move the claw, then press the button to try and grab a prize. The challenge keeps them coming back for more.</p></li>
+                            <li>
+                                <p>It’s simple! Guests use the joystick to move the claw, then press the button to try
+                                    and grab a prize. The challenge keeps them coming back for more.</p>
+                            </li>
                         </ul>
                     </li>
                     <li>
                         <div class="link">Is setup and delivery included?</div>
                         <ul class="submenu">
-                            <li><p>Yes, our team handles delivery, setup, and removal, so all you need to do is enjoy the fun with your guests.</p></li>
+                            <li>
+                                <p>Yes, our team handles delivery, setup, and removal, so all you need to do is enjoy
+                                    the fun with your guests.</p>
+                            </li>
                         </ul>
                     </li>
                 </ul>
@@ -4267,54 +4535,72 @@
         <div class="container mx-auto px-4 md:px-6 lg:px-8" style="max-width: 1400px;">
             <!-- Centered Header -->
             <div class="text-center mb-8 md:mb-10 lg:mb-12 xl:mb-16 px-2">
-                <span class="inline-block px-3 py-1.5 md:px-4 md:py-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white text-xs md:text-sm font-bold rounded-full mb-3 md:mb-4 uppercase tracking-wider">
+                <span
+                    class="inline-block px-3 py-1.5 md:px-4 md:py-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white text-xs md:text-sm font-bold rounded-full mb-3 md:mb-4 uppercase tracking-wider">
                     Simple Booking Process
                 </span>
-                <h2 class="text-xl md:text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl font-bold mb-3 md:mb-4 lg:mb-6 animated-gradient-text px-2" style="font-family: 'Press Start 2P', cursive !important; letter-spacing: 0.02em; word-spacing: 0.05em; line-height: 1.3;">
+                <h2 class="text-xl md:text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl font-bold mb-3 md:mb-4 lg:mb-6 animated-gradient-text px-2"
+                    style="font-family: 'Press Start 2P', cursive !important; letter-spacing: 0.02em; word-spacing: 0.05em; line-height: 1.3;">
                     How To Book Your Next Claw Machine Rental
                 </h2>
                 <p class="text-xs md:text-sm lg:text-base text-gray-700 leading-relaxed max-w-3xl mx-auto px-2">
                     Booking your claw machine rental is easy! Follow these simple steps to get started.
                 </p>
-                        </div>
-            
+            </div>
+
             <div class="grid md:grid-cols-2 gap-8 md:gap-10 lg:gap-12 items-center">
                 <div class="flex flex-col justify-center items-start order-2 md:order-1">
                     <div class="space-y-4 md:space-y-5 lg:space-y-6 w-full">
-                        <div class="booking-step flex items-start gap-4 p-4 md:p-5 bg-white/80 backdrop-blur-sm rounded-xl shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
-                            <div class="flex-shrink-0 w-12 h-12 md:w-14 md:h-14 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white font-bold text-lg md:text-xl shadow-lg">
+                        <div
+                            class="booking-step flex items-start gap-4 p-4 md:p-5 bg-white/80 backdrop-blur-sm rounded-xl shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+                            <div
+                                class="flex-shrink-0 w-12 h-12 md:w-14 md:h-14 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white font-bold text-lg md:text-xl shadow-lg">
                                 1
-                        </div>
+                            </div>
                             <div class="flex-1">
-                                <h3 class="text-sm md:text-base lg:text-lg font-bold text-gray-900 mb-1 md:mb-2">Share Your Event Details</h3>
-                                <p class="text-xs md:text-sm lg:text-base text-gray-700 leading-relaxed">Location, date, time, and the games you're interested in.</p>
+                                <h3 class="text-sm md:text-base lg:text-lg font-bold text-gray-900 mb-1 md:mb-2">Share
+                                    Your Event Details</h3>
+                                <p class="text-xs md:text-sm lg:text-base text-gray-700 leading-relaxed">Location, date,
+                                    time, and the games you're interested in.</p>
+                            </div>
                         </div>
-                        </div>
-                        <div class="booking-step flex items-start gap-4 p-4 md:p-5 bg-white/80 backdrop-blur-sm rounded-xl shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
-                            <div class="flex-shrink-0 w-12 h-12 md:w-14 md:h-14 bg-gradient-to-br from-purple-500 to-pink-600 rounded-full flex items-center justify-center text-white font-bold text-lg md:text-xl shadow-lg">
+                        <div
+                            class="booking-step flex items-start gap-4 p-4 md:p-5 bg-white/80 backdrop-blur-sm rounded-xl shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+                            <div
+                                class="flex-shrink-0 w-12 h-12 md:w-14 md:h-14 bg-gradient-to-br from-purple-500 to-pink-600 rounded-full flex items-center justify-center text-white font-bold text-lg md:text-xl shadow-lg">
                                 2
                             </div>
                             <div class="flex-1">
-                                <h3 class="text-sm md:text-base lg:text-lg font-bold text-gray-900 mb-1 md:mb-2">We'll Reach Out</h3>
-                                <p class="text-xs md:text-sm lg:text-base text-gray-700 leading-relaxed">Our sales team will contact you to discuss your needs and answer any questions.</p>
+                                <h3 class="text-sm md:text-base lg:text-lg font-bold text-gray-900 mb-1 md:mb-2">We'll
+                                    Reach Out</h3>
+                                <p class="text-xs md:text-sm lg:text-base text-gray-700 leading-relaxed">Our sales team
+                                    will contact you to discuss your needs and answer any questions.</p>
                             </div>
                         </div>
-                        <div class="booking-step flex items-start gap-4 p-4 md:p-5 bg-white/80 backdrop-blur-sm rounded-xl shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
-                            <div class="flex-shrink-0 w-12 h-12 md:w-14 md:h-14 bg-gradient-to-br from-pink-500 to-red-600 rounded-full flex items-center justify-center text-white font-bold text-lg md:text-xl shadow-lg">
+                        <div
+                            class="booking-step flex items-start gap-4 p-4 md:p-5 bg-white/80 backdrop-blur-sm rounded-xl shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+                            <div
+                                class="flex-shrink-0 w-12 h-12 md:w-14 md:h-14 bg-gradient-to-br from-pink-500 to-red-600 rounded-full flex items-center justify-center text-white font-bold text-lg md:text-xl shadow-lg">
                                 3
                             </div>
                             <div class="flex-1">
-                                <h3 class="text-sm md:text-base lg:text-lg font-bold text-gray-900 mb-1 md:mb-2">Receive Your Quote</h3>
-                                <p class="text-xs md:text-sm lg:text-base text-gray-700 leading-relaxed">We'll send over a personalized quote tailored to your event.</p>
+                                <h3 class="text-sm md:text-base lg:text-lg font-bold text-gray-900 mb-1 md:mb-2">Receive
+                                    Your Quote</h3>
+                                <p class="text-xs md:text-sm lg:text-base text-gray-700 leading-relaxed">We'll send over
+                                    a personalized quote tailored to your event.</p>
                             </div>
                         </div>
-                        <div class="booking-step flex items-start gap-4 p-4 md:p-5 bg-white/80 backdrop-blur-sm rounded-xl shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
-                            <div class="flex-shrink-0 w-12 h-12 md:w-14 md:h-14 bg-gradient-to-br from-green-500 to-teal-600 rounded-full flex items-center justify-center text-white font-bold text-lg md:text-xl shadow-lg">
+                        <div
+                            class="booking-step flex items-start gap-4 p-4 md:p-5 bg-white/80 backdrop-blur-sm rounded-xl shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+                            <div
+                                class="flex-shrink-0 w-12 h-12 md:w-14 md:h-14 bg-gradient-to-br from-green-500 to-teal-600 rounded-full flex items-center justify-center text-white font-bold text-lg md:text-xl shadow-lg">
                                 4
                             </div>
                             <div class="flex-1">
-                                <h3 class="text-sm md:text-base lg:text-lg font-bold text-gray-900 mb-1 md:mb-2">Confirm & Deposit</h3>
-                                <p class="text-xs md:text-sm lg:text-base text-gray-700 leading-relaxed">Sign the service agreement and provide a 50% deposit to secure your rental.</p>
+                                <h3 class="text-sm md:text-base lg:text-lg font-bold text-gray-900 mb-1 md:mb-2">Confirm
+                                    & Deposit</h3>
+                                <p class="text-xs md:text-sm lg:text-base text-gray-700 leading-relaxed">Sign the
+                                    service agreement and provide a 50% deposit to secure your rental.</p>
                             </div>
                         </div>
                     </div>
@@ -4329,24 +4615,24 @@
     </section>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="../../assets/components/navigation.js"></script>
-    <script src="../../assets/components/footer.js"></script>
+    <script src="../assets/components/navigation.js"></script>
+    <script src="../assets/components/footer.js"></script>
     <script>
         // Accordion Dropdown Menu JavaScript
-        $(function() {
-            var Accordion = function(el, multiple) {
+        $(function () {
+            var Accordion = function (el, multiple) {
                 this.el = el || {};
                 this.multiple = multiple || false;
 
                 // Variables privadas
                 var links = this.el.find('.link');
                 // Evento
-                links.on('click', {el: this.el, multiple: this.multiple}, this.dropdown)
+                links.on('click', { el: this.el, multiple: this.multiple }, this.dropdown)
             }
 
-            Accordion.prototype.dropdown = function(e) {
+            Accordion.prototype.dropdown = function (e) {
                 var $el = e.data.el;
-                    $this = $(this),
+                $this = $(this),
                     $next = $this.next();
 
                 $next.slideToggle();
@@ -4355,14 +4641,14 @@
                 if (!e.data.multiple) {
                     $el.find('.submenu').not($next).slideUp().parent().removeClass('open');
                 };
-            }	
+            }
 
             var accordion = new Accordion($('#accordion'), false);
         });
     </script>
     <script>
         // Claw Machine Mini Game JavaScript
-        (function() {
+        (function () {
             const gameContainer = document.querySelector('.claw-game-container');
             if (!gameContainer) return;
 
@@ -4456,12 +4742,12 @@
                         isLocked,
                     })
                     this.el.addEventListener('click', action)
-                    ;['mousedown', 'touchstart'].forEach(action =>
-                        this.el.addEventListener(action, pressAction),
-                    )
-                    ;['mouseup', 'touchend'].forEach(action =>
-                        this.el.addEventListener(action, releaseAction),
-                    )
+                        ;['mousedown', 'touchstart'].forEach(action =>
+                            this.el.addEventListener(action, pressAction),
+                        )
+                        ;['mouseup', 'touchend'].forEach(action =>
+                            this.el.addEventListener(action, releaseAction),
+                        )
 
                     if (!isLocked) this.activate()
                 }
@@ -4522,7 +4808,7 @@
                 }
                 handleNext(next) {
                     if (this.interval) {
-                    clearInterval(this.interval)
+                        clearInterval(this.interval)
                         this.interval = null
                     }
                     if (next) next()
@@ -4548,7 +4834,7 @@
                                 this.interval = null
                                 return
                             }
-                            
+
                             const distance =
                                 Math.abs(this[moveKey] - moveTarget) < 10
                                     ? Math.abs(this[moveKey] - moveTarget)
@@ -4602,7 +4888,7 @@
                             machineTop +
                             cornerBuffer +
                             calcY(props.index, 4) *
-                                ((machineBottomHeight - cornerBuffer * 2) / 3) -
+                            ((machineBottomHeight - cornerBuffer * 2) / 3) -
                             size.h / 2 +
                             randomN(-2, 2),
                         z: 0,
@@ -4623,11 +4909,11 @@
                     if (toy.isCollected || !toy.el || !toy.el.parentNode) {
                         return
                     }
-                    
+
                     // Clear any existing timeouts
                     toy.collectionTimeouts.forEach(timeout => clearTimeout(timeout))
                     toy.collectionTimeouts = []
-                    
+
                     toy.isCollected = true
                     toy.el.classList.remove('selected')
                     toy.x = machineWidth / 2 - toy.w / 2
@@ -4635,40 +4921,39 @@
                     toy.z = 7
                     toy.el.style.setProperty('--rotate-angle', '0deg')
                     toy.setTransformOrigin('center')
-                    
+
                     // Reset any previous animation state and classes
                     toy.el.classList.remove('display', 'selected', 'grabbed')
                     toy.el.style.removeProperty('opacity')
                     toy.el.style.removeProperty('visibility')
                     toy.el.style.removeProperty('transform')
                     toy.el.style.removeProperty('animation')
-                    
+
                     // Clear targetToy if this is the target
                     if (settings.targetToy === toy) {
                         settings.targetToy = null
                     }
-                    
+
                     // Force a reflow to reset animation state
                     void toy.el.offsetWidth
-                    
+
                     // Ensure toy is visible before starting animation
                     toy.el.style.opacity = '1'
                     toy.el.style.visibility = 'visible'
                     toy.el.classList.add('display')
                     elements.clawMachine.classList.add('show-overlay')
                     settings.collectedNumber++
-                    
+
                     const toyWrapper = Object.assign(document.createElement('div'), {
-                            className: `toy-wrapper ${
-                                settings.collectedNumber > 6 ? 'squeeze-in' : ''
+                        className: `toy-wrapper ${settings.collectedNumber > 6 ? 'squeeze-in' : ''
                             }`,
-                            innerHTML: `<div class="toy pix ${toy.toyType}"></div>`,
+                        innerHTML: `<div class="toy pix ${toy.toyType}"></div>`,
                     })
                     elements.collectionBox.appendChild(toyWrapper)
-                    
+
                     // Fallback: ensure toy in collection box is visible after animation completes
                     const toyElement = toyWrapper.querySelector('.toy')
-                    
+
                     // Make collection box toy visible earlier (after 1.5s instead of 2s)
                     const timeout1 = setTimeout(() => {
                         if (toyElement && toyElement.parentNode) {
@@ -4679,7 +4964,7 @@
                         }
                     }, 1500)
                     toy.collectionTimeouts.push(timeout1)
-                    
+
                     // Ensure collection box toy is definitely visible after full animation
                     const timeout2 = setTimeout(() => {
                         if (toyElement && toyElement.parentNode) {
@@ -4690,7 +4975,7 @@
                         }
                     }, 2000)
                     toy.collectionTimeouts.push(timeout2)
-                    
+
                     // Hide and clean up the original toy after animation completes
                     const timeout3 = setTimeout(() => {
                         // Remove display class and reset styles
@@ -4701,13 +4986,13 @@
                             toy.el.style.transform = ''
                             toy.el.style.animation = ''
                         }
-                        
+
                         // Remove toy from toys array to prevent re-collection
                         const toyIndex = elements.toys.indexOf(toy)
                         if (toyIndex > -1) {
                             elements.toys.splice(toyIndex, 1)
                         }
-                        
+
                         // Clear toy from any moveWith arrays
                         [vertRail, armJoint, arm].forEach(obj => {
                             if (obj && obj.moveWith) {
@@ -4717,12 +5002,12 @@
                                 }
                             }
                         })
-                        
+
                         // Clear targetToy if it's this toy
                         if (settings.targetToy === toy) {
                             settings.targetToy = null
                         }
-                        
+
                         // Remove toy from DOM to prevent state conflicts
                         if (toy.el && toy.el.parentNode) {
                             try {
@@ -4731,11 +5016,11 @@
                                 // Element might already be removed
                             }
                         }
-                        
+
                         // Clear all timeouts
                         toy.collectionTimeouts.forEach(timeout => clearTimeout(timeout))
                         toy.collectionTimeouts = []
-                        
+
                         elements.clawMachine.classList.remove('show-overlay')
                         if (!gameContainer.querySelector('.selected'))
                             elements.collectionArrow.classList.remove('active')
@@ -4810,25 +5095,25 @@
                 }
                 // Filter out collected toys and ensure toys still exist in DOM
                 const overlappedToys = elements.toys.filter(t => {
-                    return !t.isCollected && 
-                           t.el && 
-                           t.el.parentNode && 
-                           doOverlap(t, claw)
+                    return !t.isCollected &&
+                        t.el &&
+                        t.el.parentNode &&
+                        doOverlap(t, claw)
                 })
 
                 if (overlappedToys.length) {
                     const toy = overlappedToys.sort((a, b) => b.index - a.index)[0]
                     // Double-check toy is still valid
                     if (toy && !toy.isCollected && toy.el && toy.el.parentNode) {
-                    toy.setTransformOrigin({
-                        x: claw.x - toy.x,
-                        y: claw.y - toy.y,
-                    })
-                    toy.setClawPos({
-                        x: claw.x,
-                        y: claw.y,
-                    })
-                    settings.targetToy = toy
+                        toy.setTransformOrigin({
+                            x: claw.x - toy.x,
+                            y: claw.y - toy.y,
+                        })
+                        toy.setClawPos({
+                            x: claw.x,
+                            y: claw.y,
+                        })
+                        settings.targetToy = toy
                     } else {
                         settings.targetToy = null
                     }
@@ -4845,7 +5130,7 @@
             const stopHoriBtnAndActivateVertBtn = () => {
                 if (armJoint.interval) {
                     clearInterval(armJoint.interval)
-                armJoint.interval = null
+                    armJoint.interval = null
                 }
                 horiBtn.deactivate()
                 vertBtn.activate()
@@ -4853,19 +5138,19 @@
 
             const activateHoriBtn = () => {
                 horiBtn.activate()
-                ;[vertRail, armJoint, arm].forEach(c => {
-                    if (c.interval) {
-                        clearInterval(c.interval)
-                        c.interval = null
-                    }
-                })
+                    ;[vertRail, armJoint, arm].forEach(c => {
+                        if (c.interval) {
+                            clearInterval(c.interval)
+                            c.interval = null
+                        }
+                    })
             }
 
             const dropToy = () => {
                 arm.el.classList.add('open')
-                if (settings.targetToy && 
-                    !settings.targetToy.isCollected && 
-                    settings.targetToy.el && 
+                if (settings.targetToy &&
+                    !settings.targetToy.isCollected &&
+                    settings.targetToy.el &&
                     settings.targetToy.el.parentNode) {
                     settings.targetToy.z = 3
                     settings.targetToy.move({
@@ -4873,14 +5158,14 @@
                         target: machineHeight - settings.targetToy.h - 30,
                         moveTime: 50,
                     })
-                    ;[vertRail, armJoint, arm].forEach(obj => (obj.moveWith[0] = null))
+                        ;[vertRail, armJoint, arm].forEach(obj => (obj.moveWith[0] = null))
                 }
                 setTimeout(() => {
                     arm.el.classList.remove('open')
                     activateHoriBtn()
-                    if (settings.targetToy && 
-                        !settings.targetToy.isCollected && 
-                        settings.targetToy.el && 
+                    if (settings.targetToy &&
+                        !settings.targetToy.isCollected &&
+                        settings.targetToy.el &&
                         settings.targetToy.el.parentNode) {
                         settings.targetToy.el.classList.add('selected')
                         elements.collectionArrow.classList.add('active')
@@ -4892,9 +5177,9 @@
             }
 
             const grabToy = () => {
-                if (settings.targetToy && 
-                    !settings.targetToy.isCollected && 
-                    settings.targetToy.el && 
+                if (settings.targetToy &&
+                    !settings.targetToy.isCollected &&
+                    settings.targetToy.el &&
                     settings.targetToy.el.parentNode) {
                     ;[vertRail, armJoint, arm].forEach(
                         obj => (obj.moveWith[0] = settings.targetToy),
@@ -4969,4 +5254,5 @@
         })();
     </script>
 </body>
+
 </html>
