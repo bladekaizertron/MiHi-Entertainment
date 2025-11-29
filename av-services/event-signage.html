@@ -1254,7 +1254,7 @@
                                 Custom branded products to tell our brand story through imagery.
                             </div>
                             <a class="seeMore" href="../corporate-events.html">
-                                <button>See More</button>
+                                <button type="button">See More</button>
                             </a>
                         </div>
                     </div>
@@ -1265,8 +1265,8 @@
                             <div class="des">
                                 From monograms to custom neon signs, your guests will be immersed in your special day.
                             </div>
-                            <a class="seeMore" href="../weddings.html">
-                                <button>See More</button>
+                            <a class="seeMore" href="../wedding.html">
+                                <button type="button">See More</button>
                             </a>
                         </div>
                     </div>
@@ -1277,8 +1277,8 @@
                             <div class="des">
                                 Spend your trade show dollars making your brand shine and guests immersed in your brand.
                             </div>
-                            <a class="seeMore" href="../trade-shows.html">
-                                <button>See More</button>
+                            <a class="seeMore" href="../tradeshow-booth.html">
+                                <button type="button">See More</button>
                             </a>
                         </div>
                     </div>
@@ -1291,7 +1291,7 @@
                                 sponsors for an unforgettable guest experience.
                             </div>
                             <a class="seeMore" href="../denver-casino-rentals.html">
-                                <button>See More</button>
+                                <button type="button">See More</button>
                             </a>
                         </div>
                     </div>
@@ -1531,6 +1531,25 @@
                     });
                 }
             }
+
+            // Handle See More button clicks - navigate to parent anchor href
+            // Use event delegation to handle clicks even after slider DOM manipulation
+            document.addEventListener('click', function (e) {
+                // Check if the clicked element is a See More button or inside one
+                const button = e.target.closest('a.seeMore button');
+                if (button) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    const link = button.closest('a.seeMore');
+                    if (link) {
+                        // Use getAttribute to get the relative path, not the absolute URL
+                        const href = link.getAttribute('href');
+                        if (href) {
+                            window.location.href = href;
+                        }
+                    }
+                }
+            });
         });
     </script>
 </body>
