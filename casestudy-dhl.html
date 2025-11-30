@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DHL Case Study - MiHi Entertainment</title>
+    <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <style>
+        /* Custom styles for black and yellow theme */
+        :root {
+            --yellow-primary: #FFD700;
+            --yellow-light: #FFE082;
+            --yellow-dark: #F59E0B;
+            --black-primary: #000000;
+            --black-dark: #0a0a0a;
+            --black-light: #1a1a1a;
+            --gray-dark: #2a2a2a;
+            --gray-medium: #3a3a3a;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #ffffff;
+            background-color: var(--black-primary);
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+        }
+
+        /* Smooth scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--black-dark);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, var(--yellow-primary) 0%, var(--yellow-dark) 100%);
+            border-radius: 10px;
+            border: 2px solid var(--black-dark);
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, var(--yellow-light) 0%, var(--yellow-primary) 100%);
+        }
+
+        /* Hero section */
+        .hero-section {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.85) 0%, rgba(26, 26, 26, 0.85) 100%);
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 0;
+            opacity: 0.65;
+            filter: brightness(0.75) sepia(0.8) hue-rotate(45deg) saturate(1.3);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            max-width: 7xl;
+            margin: 0 auto;
+            padding: 0 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+        }
+
+        .hero-content>div {
+            position: relative;
+            z-index: 3;
+            max-width: 60%;
+            padding-right: 2rem;
+        }
+
+        /* Image gallery */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .gallery-item {
+            overflow: hidden;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 20px rgba(255, 215, 0, 0.3);
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .gallery-item:hover {
+            border-color: var(--yellow-primary);
+            box-shadow: 0 8px 30px rgba(255, 215, 0, 0.5);
+            transform: translateY(-5px);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .gallery-item video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+            display: block;
+        }
+
+        .gallery-item:hover video {
+            transform: scale(1.05);
+        }
+
+        /* Lightbox Modal */
+        .lightbox-modal {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.95);
+            overflow: auto;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .lightbox-modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .lightbox-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90vh;
+            margin: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lightbox-content img,
+        .lightbox-content video {
+            max-width: 100%;
+            max-height: 90vh;
+            object-fit: contain;
+            border-radius: 0.5rem;
+            box-shadow: 0 8px 40px rgba(255, 215, 0, 0.5);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 35px;
+            color: var(--yellow-primary);
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 10000;
+            transition: all 0.3s ease;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background-color: rgba(0, 0, 0, 0.7);
+            border: 2px solid var(--yellow-primary);
+        }
+
+        .lightbox-close:hover {
+            background-color: var(--yellow-primary);
+            color: black;
+            transform: scale(1.1);
+        }
+
+        /* Stats section */
+        .stat-card {
+            background: linear-gradient(135deg, var(--yellow-primary) 0%, var(--yellow-dark) 100%);
+            border-radius: 1rem;
+            padding: 2rem;
+            text-align: center;
+            color: black;
+            border: 2px solid var(--yellow-light);
+            box-shadow: 0 8px 30px rgba(255, 215, 0, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(255, 215, 0, 0.6);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 900;
+            margin-bottom: 0.5rem;
+            font-family: 'Orbitron', sans-serif;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+        }
+
+        .stat-label {
+            font-size: 1.25rem;
+            opacity: 0.95;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+        }
+
+        /* Pie Chart Container */
+        .pie-chart-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 3rem;
+            margin: 2rem 0;
+        }
+
+        .pie-chart-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            aspect-ratio: 1;
+        }
+
+        .pie-chart-svg {
+            width: 100%;
+            height: 100%;
+            filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.3));
+        }
+
+        .pie-segment {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .pie-segment:hover {
+            filter: brightness(1.2);
+            transform-origin: center;
+        }
+
+        .pie-legend {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem 1.5rem;
+            background: rgba(255, 215, 0, 0.05);
+            border: 2px solid transparent;
+            border-radius: 0.75rem;
+            transition: all 0.3s ease;
+        }
+
+        .legend-item:hover {
+            background: rgba(255, 215, 0, 0.1);
+            border-color: var(--yellow-primary);
+            transform: translateX(5px);
+        }
+
+        .legend-color {
+            width: 24px;
+            height: 24px;
+            border-radius: 4px;
+            flex-shrink: 0;
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        }
+
+        .legend-content {
+            flex: 1;
+        }
+
+        .legend-number {
+            font-size: 2rem;
+            font-weight: 900;
+            font-family: 'Orbitron', sans-serif;
+            color: var(--yellow-primary);
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+            line-height: 1;
+        }
+
+        .legend-label {
+            font-size: 0.95rem;
+            color: var(--yellow-light);
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            margin-top: 0.25rem;
+        }
+
+        .results-stats {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .results-stat-item {
+            color: var(--yellow-primary);
+            font-size: 1.25rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+        }
+
+        /* Text selection */
+        ::selection {
+            background-color: var(--yellow-primary);
+            color: black;
+        }
+
+        ::-moz-selection {
+            background-color: var(--yellow-primary);
+            color: black;
+        }
+
+        /* Yellow glow effect for headings */
+        .yellow-glow {
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+        }
+
+        /* Smooth transitions */
+        * {
+            transition: color 0.3s ease, background-color 0.3s ease;
+        }
+
+        /* Event Goals Section */
+        .event-goals-section {
+            position: relative;
+            background-color: var(--black-light);
+        }
+
+        /* Execution Section */
+        .execution-section {
+            position: relative;
+            background-color: var(--black-light);
+        }
+
+        /* Results Section with Background Image */
+        .results-section {
+            position: relative;
+            background-image: url('assets/images/dhl/img1.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .results-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.75) 100%);
+            z-index: 0;
+        }
+
+        .results-section>div {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* CTA Section with Background Video */
+        .cta-section {
+            position: relative;
+            min-height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .cta-video-bg {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            transform: translate(-50%, -50%);
+            object-fit: cover;
+            z-index: 0;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0.65) 100%);
+            backdrop-filter: blur(2px);
+            z-index: 1;
+        }
+
+        .cta-section>div {
+            position: relative;
+            z-index: 2;
+        }
+
+        .cta-button {
+            background: linear-gradient(135deg, var(--yellow-primary) 0%, var(--yellow-dark) 100%);
+            box-shadow: 0 8px 30px rgba(255, 215, 0, 0.5);
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            color: black;
+        }
+
+        .cta-button:hover {
+            background: linear-gradient(135deg, var(--yellow-light) 0%, var(--yellow-primary) 100%);
+            box-shadow: 0 12px 40px rgba(255, 215, 0, 0.7);
+            transform: translateY(-3px) scale(1.05);
+        }
+
+        .cta-button:active {
+            transform: translateY(-1px) scale(1.02);
+        }
+
+        /* Navigation Contact Us Button */
+        .btn-primary {
+            background: linear-gradient(135deg, var(--yellow-primary) 0%, var(--yellow-dark) 100%);
+            color: black !important;
+            border: none;
+            cursor: pointer;
+            display: inline-block;
+            text-decoration: none;
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, var(--yellow-light) 0%, var(--yellow-primary) 100%);
+            box-shadow: 0 8px 30px rgba(255, 215, 0, 0.5);
+        }
+    </style>
+</head>
+
+<body class="bg-black">
+    <!-- Navigation will be loaded by navigation.js -->
+    <div id="navigation-container"></div>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <img src="assets/images/dhl/hero.jpg" alt="DHL Hero" class="hero-bg">
+        <div class="hero-content text-center px-4 py-20">
+            <div class="max-w-3xl mx-auto">
+                <h1 class="text-6xl md:text-8xl font-bold text-white mb-6">DHL</h1>
+                <h2 class="text-3xl md:text-5xl font-semibold text-white mb-8">CASE STUDY</h2>
+                <p class="text-xl md:text-2xl text-white/90 max-w-3xl mx-auto">
+                    Discover how MiHi Entertainment partnered with DHL at CES 2025 to deliver an AI Experience that
+                    boosted engagement, ROI, and showcased their customer-first solutions.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Event Goals Section -->
+    <section class="event-goals-section py-20 px-4">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-3xl md:text-5xl font-bold mb-8 yellow-glow" style="color: var(--yellow-primary);">EVENT
+                GOALS</h2>
+            <p class="text-lg md:text-xl text-gray-300 leading-relaxed mb-6">
+                At CES 2025, DHL aimed to engage their VIP clients (approximately 80 attendees) with an activation that
+                highlighted how DHL addresses key customer pain points and simplifies their lives. The goal was to
+                create a memorable, personalized experience that showcased DHL's ability to remove obstacles and deliver
+                seamless solutions.
+            </p>
+            <p class="text-lg md:text-xl text-gray-300 leading-relaxed mb-6">
+                To achieve this, the activation focused on three specific pain points identified by DHL: "Firefighting
+                Yesterday's Problems," "Constantly Playing Catch Up," and "Your 3PL Not in Sync." Each pain point was
+                represented through a unique aesthetic, capturing a "before" scenario where the customer is depicted in
+                a stressful situation and an "after" scenario illustrating a joyful and peaceful resolution with DHL's
+                help.
+            </p>
+            <p class="text-lg md:text-xl text-gray-300 leading-relaxed">
+                Participants took a single photo, which was transformed into two AI-generated images reflecting their
+                chosen pain point. The final output paired the "before" and "after" visuals, creating a powerful
+                representation of how DHL alleviates customer challenges and delivers a streamlined experience.
+            </p>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="py-20 px-4 bg-black">
+        <div class="max-w-7xl mx-auto">
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="assets/images/dhl/hero.jpg" alt="DHL Hero">
+                </div>
+                <div class="gallery-item">
+                    <img src="assets/images/dhl/pic1.png" alt="DHL CES 2025">
+                </div>
+                <div class="gallery-item">
+                    <img src="assets/images/dhl/pic2.png" alt="DHL CES 2025 2">
+                </div>
+                <div class="gallery-item">
+                    <img src="assets/images/dhl/pic3.png" alt="DHL Booth Setup">
+                </div>
+                <div class="gallery-item">
+                    <img src="assets/images/dhl/pic4.png" alt="DHL Event">
+                </div>
+                <div class="gallery-item">
+                    <img src="assets/images/dhl/pic5.png" alt="DHL Activation">
+                </div>
+                <div class="gallery-item">
+                    <img src="assets/images/dhl/pic6.png" alt="DHL AI Experience">
+                </div>
+                <div class="gallery-item">
+                    <img src="assets/images/dhl/pic7.png" alt="DHL Booth">
+                </div>
+                <div class="gallery-item">
+                    <img src="assets/images/dhl/pic8.png" alt="DHL Results">
+                </div>
+                <div class="gallery-item">
+                    <video src="assets/images/dhl/vid1.mp4" alt="DHL Video 1" controls muted loop>
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                <div class="gallery-item">
+                    <video src="assets/images/dhl/vid2.mp4" alt="DHL Video 2" controls muted loop>
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                <div class="gallery-item">
+                    <video src="assets/images/dhl/vid3.mp4" alt="DHL Video 3" controls muted loop>
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox-modal" class="lightbox-modal">
+        <span class="lightbox-close" id="lightbox-close">&times;</span>
+        <div class="lightbox-content" id="lightbox-content">
+            <!-- Content will be inserted here -->
+        </div>
+    </div>
+
+    <!-- Execution Section -->
+    <section class="execution-section py-20 px-4">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-3xl md:text-5xl font-bold mb-8 yellow-glow" style="color: var(--yellow-primary);">EXECUTION
+            </h2>
+            <p class="text-lg md:text-xl text-gray-300 leading-relaxed mb-6">
+                To deliver a seamless and immersive branded experience, the project featured a custom-designed booth
+                wrap and backdrop, ensuring a cohesive and visually striking environment.
+            </p>
+            <p class="text-lg md:text-xl text-gray-300 leading-relaxed mb-6">
+                Advanced technology was incorporated through a tailored AI-powered data collection survey, enabling
+                valuable insights and participant engagement.
+            </p>
+            <p class="text-lg md:text-xl text-gray-300 leading-relaxed">
+                The photo booth experience was fully customized to align with the brand's identity, offering a unique
+                twist with dual AI-generated photos presented in a single print, creating a memorable and innovative
+                takeaway for attendees.
+            </p>
+        </div>
+    </section>
+
+    <!-- Results Section -->
+    <section class="results-section py-20 px-4">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-3xl md:text-5xl font-bold mb-12 text-center text-white">RESULTS</h2>
+
+            <p class="text-lg md:text-xl text-gray-300 leading-relaxed mb-12 max-w-4xl mx-auto text-center">
+                The collaboration between DHL and MiHi Entertainment resulted in exceptional engagement and
+                participation at CES 2025, demonstrating the power of personalized AI experiences in corporate event
+                activations.
+            </p>
+
+            <!-- Pain Point Results - Pie Chart -->
+            <div class="pie-chart-container">
+                <div class="pie-chart-wrapper">
+                    <svg class="pie-chart-svg" viewBox="0 0 200 200" id="pie-chart-svg">
+                        <!-- Pie chart will be generated by JavaScript -->
+                    </svg>
+                </div>
+
+                <div class="pie-legend">
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #FFD700;"></div>
+                        <div class="legend-content">
+                            <div class="legend-number">36</div>
+                            <div class="legend-label">CHOSE 'Constantly Playing Catch Up'</div>
+                        </div>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #FFE082;"></div>
+                        <div class="legend-content">
+                            <div class="legend-number">24</div>
+                            <div class="legend-label">CHOSE 'Firefighting Yesterday's Problems'</div>
+                        </div>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #F59E0B;"></div>
+                        <div class="legend-content">
+                            <div class="legend-number">14</div>
+                            <div class="legend-label">CHOSE 'Your 3PL Not in Sync'</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Overall Stats -->
+            <div class="max-w-4xl mx-auto text-center">
+                <div class="results-stats">
+                    <div class="results-stat-item">Participants from 33+ companies</div>
+                    <div class="results-stat-item">95% Participation Rate</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonial Section -->
+    <section class="py-20 px-4 bg-gradient-to-b from-gray-900 to-black">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-3xl md:text-5xl font-bold mb-4 text-white">READ OUR OUTSTANDING</h2>
+            <h3 class="text-3xl md:text-5xl font-bold mb-12 yellow-glow" style="color: #FFD700;">FEEDBACK</h3>
+
+            <blockquote class="text-xl md:text-2xl italic mb-8 text-gray-200 leading-relaxed border-l-4 pl-6"
+                style="border-color: #FFD700;">
+                "Our team would like to extend a huge thank you to you and the MiHi team that helped execute our
+                sponsorship activation at CES. Thank you for collaborating with us to make our brand come to life at the
+                CTA Member Party. A special shout-out to Aidan for the incredible AI graphics and Chase for his flawless
+                execution onsite. We greatly appreciate your team's flexibility, creativity and professionalism. Thank
+                you for being a valued partner, and I hope we have the opportunity to work with you all again
+                soon.<br><br>
+
+                Quality of Service: 5/5<br>
+                Responsiveness: 5/5<br>
+                Professionalism: 5/5<br>
+                Value: 5/5<br>
+                Flexibility: 5/5<br><br>
+
+                Thank you SO much for all the hard work that went into bringing our brand to life at CES! Our team loved
+                the AI photos and are still glowing about how well they turned out!"
+            </blockquote>
+
+            <div class="mt-8">
+                <p class="text-xl font-semibold text-white">ANGELA BURD</p>
+                <p class="text-lg text-gray-400">Marketing Events Manager</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section py-20 px-4">
+        <video class="cta-video-bg" autoplay muted loop playsinline>
+            <source src="assets/images/dhl/vid1.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-4xl md:text-6xl font-bold mb-12 text-white tracking-tight">
+                WANT TO LEARN MORE?
+            </h2>
+            <a href="contact-us.html"
+                class="cta-button inline-block px-10 py-5 md:px-12 md:py-6 rounded-lg text-lg md:text-xl font-bold uppercase tracking-wider">
+                SCHEDULE A CALL NOW
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="footer-container" class="bg-gray-900 text-white py-12">
+        <!-- Footer will be loaded by footer.js -->
+    </footer>
+
+    <!-- Load Navigation Component -->
+    <script src="assets/components/navigation.js"></script>
+
+    <!-- Load Footer Component -->
+    <script src="assets/components/footer.js"></script>
+
+    <!-- Main JavaScript -->
+    <script src="assets/js/main.js" defer></script>
+
+    <!-- Lightbox JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const modal = document.getElementById('lightbox-modal');
+            const modalContent = document.getElementById('lightbox-content');
+            const closeBtn = document.getElementById('lightbox-close');
+            const galleryItems = document.querySelectorAll('.gallery-item');
+
+            // Function to open lightbox
+            function openLightbox(element) {
+                modalContent.innerHTML = '';
+
+                if (element.tagName === 'IMG') {
+                    const img = document.createElement('img');
+                    img.src = element.src;
+                    img.alt = element.alt;
+                    modalContent.appendChild(img);
+                } else if (element.tagName === 'VIDEO') {
+                    const video = document.createElement('video');
+                    video.src = element.src;
+                    video.controls = true;
+                    video.autoplay = true;
+                    video.loop = true;
+                    modalContent.appendChild(video);
+                }
+
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+
+            // Function to close lightbox
+            function closeLightbox() {
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+                // Stop video playback
+                const video = modalContent.querySelector('video');
+                if (video) {
+                    video.pause();
+                    video.currentTime = 0;
+                }
+            }
+
+            // Add click event to all gallery items
+            galleryItems.forEach(item => {
+                item.addEventListener('click', function () {
+                    const img = item.querySelector('img');
+                    const video = item.querySelector('video');
+                    if (img) {
+                        openLightbox(img);
+                    } else if (video) {
+                        openLightbox(video);
+                    }
+                });
+            });
+
+            // Close lightbox when clicking close button
+            closeBtn.addEventListener('click', closeLightbox);
+
+            // Close lightbox when clicking outside the content
+            modal.addEventListener('click', function (e) {
+                if (e.target === modal) {
+                    closeLightbox();
+                }
+            });
+
+            // Close lightbox with Escape key
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape' && modal.classList.contains('active')) {
+                    closeLightbox();
+                }
+            });
+
+            // Generate Pie Chart
+            function createPieChart() {
+                const svg = document.getElementById('pie-chart-svg');
+                if (!svg) return;
+
+                const centerX = 100;
+                const centerY = 100;
+                const radius = 100;
+                const data = [
+                    { value: 36, label: "CHOSE 'Constantly Playing Catch Up'", color: '#FFD700' },
+                    { value: 24, label: "CHOSE 'Firefighting Yesterday's Problems'", color: '#FFE082' },
+                    { value: 14, label: "CHOSE 'Your 3PL Not in Sync'", color: '#F59E0B' }
+                ];
+
+                const total = data.reduce((sum, item) => sum + item.value, 0);
+                let currentAngle = -90; // Start from top
+
+                data.forEach((item, index) => {
+                    const percentage = (item.value / total) * 100;
+                    const angle = (item.value / total) * 360;
+                    const endAngle = currentAngle + angle;
+
+                    // Convert angles to radians
+                    const startRad = (currentAngle * Math.PI) / 180;
+                    const endRad = (endAngle * Math.PI) / 180;
+
+                    // Calculate start and end points
+                    const x1 = centerX + radius * Math.cos(startRad);
+                    const y1 = centerY + radius * Math.sin(startRad);
+                    const x2 = centerX + radius * Math.cos(endRad);
+                    const y2 = centerY + radius * Math.sin(endRad);
+
+                    // Determine if arc is large (more than 180 degrees)
+                    const largeArc = angle > 180 ? 1 : 0;
+
+                    // Create path
+                    const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+                    path.setAttribute('class', 'pie-segment');
+                    path.setAttribute('d', `M ${centerX},${centerY} L ${x1},${y1} A ${radius},${radius} 0 ${largeArc},1 ${x2},${y2} Z`);
+                    path.setAttribute('fill', item.color);
+                    path.setAttribute('stroke', '#000000');
+                    path.setAttribute('stroke-width', '3');
+                    path.setAttribute('data-value', item.value);
+                    path.setAttribute('data-label', item.label);
+
+                    svg.appendChild(path);
+
+                    currentAngle = endAngle;
+                });
+            }
+
+            createPieChart();
+        });
+    </script>
+</body>
+
+</html>
