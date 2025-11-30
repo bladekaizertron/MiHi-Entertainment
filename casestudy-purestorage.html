@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pure Storage Case Study - MiHi Entertainment</title>
+    <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <style>
+        /* Custom styles for black and orange theme */
+        :root {
+            --orange-primary: #FF6B35;
+            --orange-light: #FF8C42;
+            --orange-dark: #E55A2B;
+            --black-primary: #000000;
+            --black-dark: #0a0a0a;
+            --black-light: #1a1a1a;
+            --gray-dark: #2a2a2a;
+            --gray-medium: #3a3a3a;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #ffffff;
+            background-color: var(--black-primary);
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+        }
+
+        /* Smooth scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--black-dark);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, var(--orange-primary) 0%, var(--orange-dark) 100%);
+            border-radius: 10px;
+            border: 2px solid var(--black-dark);
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, var(--orange-light) 0%, var(--orange-primary) 100%);
+        }
+
+        /* Hero section */
+        .hero-section {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.95) 0%, rgba(26, 26, 26, 0.95) 100%);
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 0;
+            opacity: 0.4;
+            filter: brightness(0.6) sepia(1) hue-rotate(10deg) saturate(1.5);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            max-width: 7xl;
+            margin: 0 auto;
+            padding: 0 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+        }
+
+        .hero-content>div {
+            position: relative;
+            z-index: 3;
+            max-width: 60%;
+            padding-right: 2rem;
+        }
+
+        .hero-ai-image {
+            position: absolute;
+            right: 0;
+            top: 0;
+            height: 100vh;
+            width: auto;
+            z-index: 1;
+            object-fit: contain;
+            object-position: right center;
+            opacity: 0.85;
+            filter: drop-shadow(0 0 40px rgba(255, 107, 53, 0.6));
+            animation: float 6s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0) translateX(0);
+            }
+
+            50% {
+                transform: translateY(-15px) translateX(-10px);
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .hero-ai-image {
+                height: 90vh;
+            }
+
+            .hero-content>div {
+                max-width: 55%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-ai-image {
+                height: 85vh;
+                opacity: 0.7;
+            }
+
+            .hero-content>div {
+                max-width: 50%;
+                padding-right: 1.5rem;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .hero-ai-image {
+                height: 80vh;
+                opacity: 0.5;
+            }
+
+            .hero-content>div {
+                max-width: 45%;
+                padding-right: 1rem;
+            }
+        }
+
+        /* Image gallery */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .gallery-item {
+            overflow: hidden;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 20px rgba(255, 107, 53, 0.3);
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .gallery-item:hover {
+            border-color: var(--orange-primary);
+            box-shadow: 0 8px 30px rgba(255, 107, 53, 0.5);
+            transform: translateY(-5px);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Stats section */
+        .stat-card {
+            background: linear-gradient(135deg, var(--orange-primary) 0%, var(--orange-dark) 100%);
+            border-radius: 1rem;
+            padding: 2rem;
+            text-align: center;
+            color: white;
+            border: 2px solid var(--orange-light);
+            box-shadow: 0 8px 30px rgba(255, 107, 53, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(255, 107, 53, 0.6);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 900;
+            margin-bottom: 0.5rem;
+            font-family: 'Orbitron', sans-serif;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+        }
+
+        .stat-label {
+            font-size: 1.25rem;
+            opacity: 0.95;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+        }
+
+        /* Text selection */
+        ::selection {
+            background-color: var(--orange-primary);
+            color: white;
+        }
+
+        ::-moz-selection {
+            background-color: var(--orange-primary);
+            color: white;
+        }
+
+        /* Orange glow effect for headings */
+        .orange-glow {
+            text-shadow: 0 0 20px rgba(255, 107, 53, 0.5);
+        }
+
+        /* Smooth transitions */
+        * {
+            transition: color 0.3s ease, background-color 0.3s ease;
+        }
+
+        /* Creative Process Section with Background */
+        .creative-process-section {
+            position: relative;
+            background-image: url('assets/images/purestorage/pic15.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .creative-process-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.75) 100%);
+            z-index: 0;
+        }
+
+        .creative-process-section>div {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Background Section with Background Image */
+        .background-section {
+            position: relative;
+            background-image: url('assets/images/purestorage/pic9.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .background-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.75) 100%);
+            z-index: 0;
+        }
+
+        .background-section>div {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Partnership Section with Background Image */
+        .partnership-section {
+            position: relative;
+            background-image: url('assets/images/purestorage/pic7.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .partnership-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.75) 100%);
+            z-index: 0;
+        }
+
+        .partnership-section>div {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Data Heroes Campaign Section with Background Image */
+        .data-heroes-section {
+            position: relative;
+            background-image: url('assets/images/purestorage/pic13.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .data-heroes-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.75) 100%);
+            z-index: 0;
+        }
+
+        .data-heroes-section>div {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Results Section with Background Image */
+        .results-section {
+            position: relative;
+            background-image: url('assets/images/purestorage/pic11.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .results-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.75) 100%);
+            z-index: 0;
+        }
+
+        .results-section>div {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Conclusion Section with Background Image */
+        .conclusion-section {
+            position: relative;
+            background-image: url('assets/images/purestorage/pic14.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .conclusion-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.75) 100%);
+            z-index: 0;
+        }
+
+        .conclusion-section>div {
+            position: relative;
+            z-index: 1;
+        }
+    </style>
+</head>
+
+<body class="bg-black">
+    <!-- Navigation will be loaded by navigation.js -->
+    <div id="navigation-container"></div>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <img src="assets/images/purestorage/hero.jpg" alt="Pure Storage Hero" class="hero-bg">
+        <img src="assets/images/purestorage/ai hero.avif" alt="AI Hero" class="hero-ai-image">
+        <div class="hero-content text-center px-4 py-20">
+            <div class="max-w-3xl mx-auto">
+                <h1 class="text-6xl md:text-8xl font-bold text-white mb-6">PURE STORAGE</h1>
+                <h2 class="text-3xl md:text-5xl font-semibold text-white mb-8">CASE STUDY</h2>
+                <p class="text-xl md:text-2xl text-white/90 max-w-3xl mx-auto">
+                    Revolutionizing Experiential Creative Design with AI
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Through Our Creative Process Section -->
+    <section class="creative-process-section py-20 px-4">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-4xl md:text-6xl font-bold text-center mb-4 text-white">THROUGH OUR</h2>
+            <h3 class="text-4xl md:text-6xl font-bold text-center mb-12 orange-glow" style="color: #FF6B35;">CREATIVE
+                PROCESS</h3>
+
+            <div class="text-center mb-12">
+                <h4 class="text-2xl md:text-3xl font-semibold mb-6 text-white">
+                    OUR GOAL IS TO INCREASE YOUR MARKETING DATA AND ANALYTICS TO BOOST YOUR TRADESHOW RESULTS
+                </h4>
+                <p class="text-xl mb-8 text-gray-300">We do this with:</p>
+                <ul class="list-none space-y-3 text-lg text-gray-200">
+                    <li>• Lead Generation</li>
+                    <li>• Data Gathering</li>
+                    <li>• Sales Qualifications</li>
+                    <li>• Post-Event Engagement</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="py-20 px-4 bg-black">
+        <div class="max-w-7xl mx-auto">
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="assets/images/purestorage/hero.jpg" alt="Pure Storage Hero">
+                </div>
+                <div class="gallery-item">
+                    <img src="assets/images/purestorage/pic1.png" alt="Booth set up">
+                </div>
+                <div class="gallery-item">
+                    <img src="assets/images/purestorage/pic2.png" alt="Booth set up">
+                </div>
+                <div class="gallery-item">
+                    <img src="assets/images/purestorage/pic3.png" alt="Booth set up with table and laptop">
+                </div>
+                <div class="gallery-item">
+                    <img src="assets/images/purestorage/pic4.png" alt="Booth set up with an attendant">
+                </div>
+                <div class="gallery-item">
+                    <img src="assets/images/purestorage/pic5.png" alt="Booth set up">
+                </div>
+                <div class="gallery-item">
+                    <img src="assets/images/purestorage/pic6.png" alt="Pure Storage at an event">
+                </div>
+                <div class="gallery-item">
+                    <img src="assets/images/purestorage/pic7.png" alt="Pure Storage booth set up">
+                </div>
+                <div class="gallery-item">
+                    <img src="assets/images/purestorage/pic8.png" alt="AI examples">
+                </div>
+                <div class="gallery-item">
+                    <img src="assets/images/purestorage/pic9.png" alt="Camera set up for AI booth">
+                </div>
+                <div class="gallery-item">
+                    <img src="assets/images/purestorage/pic10.png" alt="Pure Storage booth">
+                </div>
+                <div class="gallery-item">
+                    <img src="assets/images/purestorage/pic11.png" alt="AI outputs on a TV screen">
+                </div>
+                <div class="gallery-item">
+                    <img src="assets/images/purestorage/pic12.png" alt="Pure Storage AI booth with superhero example">
+                </div>
+                <div class="gallery-item">
+                    <img src="assets/images/purestorage/pic13.png" alt="booth set up">
+                </div>
+                <div class="gallery-item">
+                    <img src="assets/images/purestorage/pic14.png" alt="Booth at an event">
+                </div>
+                <div class="gallery-item">
+                    <img src="assets/images/purestorage/pic15.jpg" alt="Pure Storage event">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonial Section -->
+    <section class="py-20 px-4 bg-gradient-to-b from-gray-900 to-black">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-3xl md:text-5xl font-bold mb-4 text-white">READ OUR OUTSTANDING</h2>
+            <h3 class="text-3xl md:text-5xl font-bold mb-12 orange-glow" style="color: #FF6B35;">TESTIMONIAL</h3>
+
+            <blockquote class="text-xl md:text-2xl italic mb-8 text-gray-200 leading-relaxed border-l-4 pl-6"
+                style="border-color: #FF6B35;">
+                "Partnering with MiHi Entertainment gave us just the edge we were looking for!<br><br>
+
+                They helped us create an opportunity for attendees to learn, to get to know our products, and to walk
+                away with a personalized experience that was different from any other on the tradeshow floor. Attendees
+                are constantly telling us we have the best booth. With the support of these activations, we exceeded all
+                of our attendance goals.<br><br>
+
+                Looking forward to our continued partnership with MiHi!"
+            </blockquote>
+
+            <div class="mt-8">
+                <p class="text-xl font-semibold text-white">Jennifer Romano</p>
+                <p class="text-lg text-gray-400">Strategic Marketing Manager Lead, Industry Events</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Background Section -->
+    <section class="background-section py-20 px-4">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-3xl md:text-5xl font-bold mb-8 text-white">BACKGROUND</h2>
+            <p class="text-lg md:text-xl text-gray-300 leading-relaxed mb-6">
+                Pure Storage, a leading provider of enterprise-grade storage solutions, aimed to enhance its brand
+                experience and engagement at a large-scale trade show.
+            </p>
+            <p class="text-lg md:text-xl text-gray-300 leading-relaxed">
+                They sought to create an immersive and interactive experience that integrated AI technology and allowed
+                participants to feel more connected to their brand.
+            </p>
+        </div>
+    </section>
+
+    <!-- Partnership Section -->
+    <section class="partnership-section py-20 px-4">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-3xl md:text-5xl font-bold mb-8 text-white">PARTNERSHIP</h2>
+            <p class="text-lg md:text-xl text-gray-300 leading-relaxed mb-6">
+                Pure Storage collaborated with MiHi Entertainment, a creative and experiential marketing agency known
+                for its unique approach to creating cutting-edge, immersive experiences.
+            </p>
+            <p class="text-lg md:text-xl text-gray-300 leading-relaxed">
+                MiHi Entertainment's expertise in integrating AI technology and crafting engaging experiences made them
+                the ideal partner for Pure Storage.
+            </p>
+        </div>
+    </section>
+
+    <!-- Data Heroes Campaign Section -->
+    <section class="data-heroes-section py-20 px-4">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-3xl md:text-5xl font-bold mb-4 text-center text-white">THE</h2>
+            <h3 class="text-4xl md:text-6xl font-bold mb-8 text-center orange-glow" style="color: #FF6B35;">DATA
+                HEROES<br>CAMPAIGN</h3>
+
+            <p class="text-lg md:text-xl text-gray-300 leading-relaxed mb-6">
+                Together, MiHi Entertainment and Pure Storage developed the Data Heroes campaign. MiHi Entertainment
+                designed backdrops, generated art for the Pure Storage website, created website graphics, and built a
+                fully interactive experience for Pure Storage's booth.
+            </p>
+            <p class="text-lg md:text-xl text-gray-300 leading-relaxed">
+                The Data Heroes campaign featured an AI-powered photo booth with a villain character to emphasize the
+                importance of transitioning from hard discs to cloud storage. This activation provided a fun and
+                engaging way for participants to connect with the brand and learn more about Pure Storage's offerings.
+            </p>
+        </div>
+    </section>
+
+    <!-- AI Analytics Quiz Section -->
+    <section class="py-20 px-4 bg-gradient-to-b from-gray-900 to-black">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-3xl md:text-5xl font-bold mb-4 text-white">WITH MIHI ENTERTAINMENT</h2>
+            <h3 class="text-3xl md:text-5xl font-bold mb-8 orange-glow" style="color: #FF6B35;">AI ANALYTICS QUIZ</h3>
+
+            <p class="text-lg md:text-xl text-gray-300 leading-relaxed mb-6">
+                To further enhance the engagement, MiHi Entertainment developed an AI Analytics Quiz. Participants
+                answered questions that helped differentiate their character, and the analytics provided insights into
+                potential clients, vendors, and more.
+            </p>
+            <p class="text-lg md:text-xl text-gray-300 leading-relaxed mb-6">
+                The AI Analytics Quiz provided valuable data to Pure Storage while offering participants a personalized
+                and interactive experience.
+            </p>
+            <p class="text-lg md:text-xl text-gray-300 leading-relaxed">
+                Working together with the end goals in mind, we designed a custom quiz with targets questions to garner
+                tailored results:
+            </p>
+        </div>
+    </section>
+
+    <!-- Results Section -->
+    <section class="results-section py-20 px-4">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-3xl md:text-5xl font-bold mb-12 text-center text-white">RESULTS</h2>
+
+            <p class="text-lg md:text-xl text-gray-300 leading-relaxed mb-12 max-w-4xl mx-auto text-center">
+                The collaboration between Pure Storage and MiHi Entertainment resulted in a successful and memorable
+                event experience that generated buzz around Pure Storage's brand. Participants enjoyed the unique
+                experience and the opportunity to engage with AI technology in a fun and accessible way.
+            </p>
+
+            <p class="text-lg md:text-xl text-gray-300 leading-relaxed mb-12 max-w-4xl mx-auto text-center">
+                The Data Heroes campaign was so successful that it evolved into a large-scale trade show product,
+                showcasing the potential of AI integration in experiential marketing. Additionally, the campaign caught
+                the attention of a keynote speaker who commended Pure Storage and MiHi Entertainment for their
+                responsible use of AI.
+            </p>
+
+            <!-- Stats Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16">
+                <div class="stat-card">
+                    <div class="stat-number">460K</div>
+                    <div class="stat-label">REACHED</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">1.4M</div>
+                    <div class="stat-label">IMPRESSIONS</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">4,442</div>
+                    <div class="stat-label">AI RENDERS</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Conclusion Section -->
+    <section class="conclusion-section py-20 px-4">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-3xl md:text-5xl font-bold mb-8 text-white">CONCLUSION</h2>
+            <p class="text-lg md:text-xl text-gray-300 leading-relaxed mb-6">
+                The partnership between MiHi Entertainment and Pure Storage demonstrates the power of integrating AI
+                technology into experiential marketing, creating memorable and engaging experiences that resonate with
+                participants. The Data Heroes campaign elevated Pure Storage's presence at the trade show, generating
+                buzz and demonstrating their commitment to innovation and cutting-edge technology.
+            </p>
+            <p class="text-lg md:text-xl text-gray-300 leading-relaxed">
+                As AI continues to shape the future of experiential marketing, partnerships like the one between MiHi
+                Entertainment and Pure Storage serve as an example of the incredible potential for creating memorable
+                brand experiences that engage and captivate audiences.
+            </p>
+        </div>
+    </section>
+
+    <!-- Key Benefits Section -->
+    <section class="py-20 px-4 bg-black">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Expertise in AI Integration -->
+                <div class="bg-gray-900 p-8 rounded-lg shadow-lg border-2 transition-all duration-300 hover:border-orange-500"
+                    style="border-color: rgba(255, 107, 53, 0.3);">
+                    <h3 class="text-2xl font-bold mb-4" style="color: #FF6B35;">EXPERTISE IN AI INTEGRATION</h3>
+                    <p class="text-gray-300 leading-relaxed">
+                        The collaboration with Pure Storage highlights MiHi Entertainment's ability to successfully
+                        integrate AI technology into events. This demonstrates the potential to create engaging and
+                        personalized experiences for attendees, which can be a significant selling point for buyers and
+                        planners seeking innovative event solutions.
+                    </p>
+                </div>
+
+                <!-- Customized & Memorable Experiences -->
+                <div class="bg-gray-900 p-8 rounded-lg shadow-lg border-2 transition-all duration-300 hover:border-orange-500"
+                    style="border-color: rgba(255, 107, 53, 0.3);">
+                    <h3 class="text-2xl font-bold mb-4" style="color: #FF6B35;">CUSTOMIZED & MEMORABLE EXPERIENCES</h3>
+                    <p class="text-gray-300 leading-relaxed">
+                        MiHi Entertainment's creation of the AI Analytics Quiz showcases the ability to develop unique
+                        and interactive experiences that leave lasting impressions on participants. This level of
+                        personalization is highly appealing to buyers and planners who want their events to stand out
+                        and be memorable for attendees.
+                    </p>
+                </div>
+
+                <!-- Enhanced Brand Engagement & Awareness -->
+                <div class="bg-gray-900 p-8 rounded-lg shadow-lg border-2 transition-all duration-300 hover:border-orange-500"
+                    style="border-color: rgba(255, 107, 53, 0.3);">
+                    <h3 class="text-2xl font-bold mb-4" style="color: #FF6B35;">ENHANCED BRAND ENGAGEMENT & AWARENESS
+                    </h3>
+                    <p class="text-gray-300 leading-relaxed">
+                        The success of the Data Heroes campaign illustrates how MiHi Entertainment's innovative approach
+                        can help elevate a brand's presence at events. This is a key selling point for buyers and
+                        planners aiming to maximize their clients' brand exposure and create buzz around their products
+                        or services.
+                    </p>
+                </div>
+
+                <!-- Scalability & Adaptability -->
+                <div class="bg-gray-900 p-8 rounded-lg shadow-lg border-2 transition-all duration-300 hover:border-orange-500"
+                    style="border-color: rgba(255, 107, 53, 0.3);">
+                    <h3 class="text-2xl font-bold mb-4" style="color: #FF6B35;">SCALABILITY & ADAPTABILITY</h3>
+                    <p class="text-gray-300 leading-relaxed">
+                        The evolution of the Data Heroes campaign into a large-scale trade show product demonstrates
+                        MiHi Entertainment's flexibility in designing experiences that can be adapted to various event
+                        sizes and types. This is crucial for buyers and planners who require versatile solutions for
+                        their clients' events.
+                    </p>
+                </div>
+
+                <!-- Positive Industry Recognition -->
+                <div class="bg-gray-900 p-8 rounded-lg shadow-lg border-2 transition-all duration-300 hover:border-orange-500"
+                    style="border-color: rgba(255, 107, 53, 0.3);">
+                    <h3 class="text-2xl font-bold mb-4" style="color: #FF6B35;">POSITIVE INDUSTRY RECOGNITION</h3>
+                    <p class="text-gray-300 leading-relaxed">
+                        The recognition received for the responsible use of AI is a testament to MiHi Entertainment's
+                        commitment to ethical practices and making a positive impact on the industry. This can resonate
+                        with buyers and planners who value working with partners that prioritize ethical standards.
+                    </p>
+                </div>
+
+                <!-- Results-Driven Approach -->
+                <div class="bg-gray-900 p-8 rounded-lg shadow-lg border-2 transition-all duration-300 hover:border-orange-500"
+                    style="border-color: rgba(255, 107, 53, 0.3);">
+                    <h3 class="text-2xl font-bold mb-4" style="color: #FF6B35;">RESULTS-DRIVEN APPROACH</h3>
+                    <p class="text-gray-300 leading-relaxed">
+                        The success of the Pure Storage event and the valuable data collected from participants show
+                        that MiHi Entertainment's approach can lead to tangible results for clients. This is important
+                        for buyers and planners who need to demonstrate a strong return on investment (ROI) for their
+                        events.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 px-4 bg-gradient-to-b from-gray-900 to-black">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-3xl md:text-5xl font-bold mb-8 text-white">WANT TO LEARN MORE?</h2>
+            <a href="contact-us.html"
+                class="inline-block px-8 py-4 rounded-lg text-xl font-semibold text-white transition-all duration-300 transform hover:scale-105 hover:shadow-2xl"
+                style="background: linear-gradient(135deg, #FF6B35 0%, #E55A2B 100%); box-shadow: 0 8px 30px rgba(255, 107, 53, 0.4);">
+                SCHEDULE A CALL NOW
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="footer-container" class="bg-gray-900 text-white py-12">
+        <!-- Footer will be loaded by footer.js -->
+    </footer>
+
+    <!-- Load Navigation Component -->
+    <script src="assets/components/navigation.js"></script>
+
+    <!-- Load Footer Component -->
+    <script src="assets/components/footer.js"></script>
+
+    <!-- Main JavaScript -->
+    <script src="assets/js/main.js" defer></script>
+</body>
+
+</html>

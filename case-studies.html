@@ -1,20 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Case Studies - MiHi Entertainment</title>
     <link rel="icon" type="image/svg+xml" href="../assets/images/favicon.svg">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Lora:wght@400;500;600;700&family=Open+Sans:wght@400;500;600;700;800;900&family=Heebo:wght@100;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Lora:wght@400;500;600;700&family=Open+Sans:wght@400;500;600;700;800;900&family=Heebo:wght@100;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
     <style>
-        body { font-family: 'Lora', serif; color: #1a202c; }
-        h1, h2, h3, h4, h5, h6 { font-family: 'Montserrat', sans-serif; font-weight: 700; letter-spacing: -0.01em; }
-        .btn-primary { background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%); transition: all 0.3s ease; }
-        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(0, 80, 255, 0.4); }
-        .section-padding { padding: 5rem 0; }
-        .hero-gradient { background: linear-gradient(135deg, rgba(0, 80, 255, 0.5) 0%, rgba(0, 64, 217, 0.5) 100%); }
-        
+        body {
+            font-family: 'Lora', serif;
+            color: #1a202c;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            letter-spacing: -0.01em;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%);
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 80, 255, 0.4);
+        }
+
+        .section-padding {
+            padding: 5rem 0;
+        }
+
+        .hero-gradient {
+            background: linear-gradient(135deg, rgba(0, 80, 255, 0.5) 0%, rgba(0, 64, 217, 0.5) 100%);
+        }
+
         /* Image Slider Styles */
         :root {
             --main: #777;
@@ -23,7 +53,7 @@
             --base: 3vh;
             --time: 1800ms;
         }
-        
+
         .slider {
             position: relative;
             height: 100vh;
@@ -31,7 +61,7 @@
             background: var(--main);
             overflow: hidden;
         }
-        
+
         .slider__wrap {
             position: absolute;
             width: 100%;
@@ -46,11 +76,11 @@
             transition-delay: calc(var(--time) / 4);
             opacity: 0;
         }
-        
+
         .slider__wrap--hacked {
             opacity: 1;
         }
-        
+
         .slider__back {
             position: absolute;
             width: 100%;
@@ -60,7 +90,7 @@
             background-repeat: no-repeat;
             transition: filter calc(var(--time) / 4) cubic-bezier(0.785, 0.135, 0.150, 0.860);
         }
-        
+
         .slider__inner {
             width: 100%;
             height: 100%;
@@ -71,15 +101,15 @@
             background-position: center;
             background-repeat: no-repeat;
             transform: scale(0.75);
-            transition: transform calc(var(--time) / 4) cubic-bezier(0.785, 0.135, 0.150, 0.860), 
-                        box-shadow calc(var(--time) / 4) cubic-bezier(0.785, 0.135, 0.150, 0.860), 
-                        opacity calc(var(--time) / 4) step-end;
+            transition: transform calc(var(--time) / 4) cubic-bezier(0.785, 0.135, 0.150, 0.860),
+                box-shadow calc(var(--time) / 4) cubic-bezier(0.785, 0.135, 0.150, 0.860),
+                opacity calc(var(--time) / 4) step-end;
             opacity: 0;
             box-shadow: 0 var(--base) var(--base) rgba(0, 0, 0, 0);
             padding: calc(var(--base) * 5);
             box-sizing: border-box;
         }
-        
+
         .slider__content {
             position: relative;
             top: 50%;
@@ -93,14 +123,14 @@
             flex-direction: column;
             align-items: flex-start;
         }
-        
+
         .slider__content h1 {
             font-weight: 900;
             font-size: calc(var(--base) * 4);
             line-height: 0.9;
             margin-bottom: calc(var(--base) / 2);
             pointer-events: none;
-            text-shadow: 
+            text-shadow:
                 0 2px 4px rgba(0, 0, 0, 0.4),
                 0 4px 8px rgba(0, 0, 0, 0.3),
                 0 8px 16px rgba(0, 0, 0, 0.2),
@@ -108,7 +138,7 @@
             letter-spacing: -0.02em;
             text-transform: uppercase;
         }
-        
+
         /* Button Effect Styles */
         @property --angle-1 {
             syntax: "<angle>";
@@ -178,8 +208,9 @@
             opacity: 1;
         }
 
-        /* Button Base Styles */
-        .slider__content .button-wrap button {
+        /* Button Base Styles - Enhanced for both button and anchor */
+        .slider__content .button-wrap button,
+        .slider__content .button-wrap a.go-to-next {
             --border-width: clamp(1px, 0.0625em, 4px);
             all: unset;
             cursor: pointer;
@@ -188,65 +219,90 @@
             pointer-events: auto;
             z-index: 3;
             display: inline-block;
-            background: linear-gradient(
-                -75deg,
-                rgba(255, 255, 255, 0.1),
-                rgba(255, 255, 255, 0.3),
-                rgba(255, 255, 255, 0.1)
-            );
+            text-decoration: none;
+            background: linear-gradient(-75deg,
+                    rgba(255, 255, 255, 0.15),
+                    rgba(255, 255, 255, 0.35),
+                    rgba(255, 255, 255, 0.15));
             border-radius: 999vw;
             box-shadow: inset 0 0.125em 0.125em rgba(0, 0, 0, 0.1),
-                inset 0 -0.125em 0.125em rgba(255, 255, 255, 0.3),
+                inset 0 -0.125em 0.125em rgba(255, 255, 255, 0.4),
                 0 0.25em 0.125em -0.125em rgba(0, 0, 0, 0.3),
-                0 0 0.1em 0.25em inset rgba(255, 255, 255, 0.2),
+                0 0 0.1em 0.25em inset rgba(255, 255, 255, 0.3),
+                0 0 0.5em rgba(255, 255, 255, 0.2),
                 0 0 0 0 rgba(255, 255, 255, 1);
-            backdrop-filter: blur(clamp(1px, 0.125em, 4px));
-            -webkit-backdrop-filter: blur(clamp(1px, 0.125em, 4px));
-            -moz-backdrop-filter: blur(clamp(1px, 0.125em, 4px));
-            -ms-backdrop-filter: blur(clamp(1px, 0.125em, 4px));
+            backdrop-filter: blur(clamp(2px, 0.15em, 6px));
+            -webkit-backdrop-filter: blur(clamp(2px, 0.15em, 6px));
+            -moz-backdrop-filter: blur(clamp(2px, 0.15em, 6px));
+            -ms-backdrop-filter: blur(clamp(2px, 0.15em, 6px));
             transition: all var(--anim--hover-time) var(--anim--hover-ease);
         }
 
-        .slider__content .button-wrap button:hover {
-            transform: scale(0.975);
+        .slider__content .button-wrap button:hover,
+        .slider__content .button-wrap a.go-to-next:hover {
+            transform: scale(0.98) translateY(-2px);
             backdrop-filter: blur(0.01em);
             -webkit-backdrop-filter: blur(0.01em);
             -moz-backdrop-filter: blur(0.01em);
             -ms-backdrop-filter: blur(0.01em);
             box-shadow: inset 0 0.125em 0.125em rgba(0, 0, 0, 0.1),
-                inset 0 -0.125em 0.125em rgba(255, 255, 255, 0.4),
-                0 0.15em 0.05em -0.1em rgba(0, 0, 0, 0.35),
-                0 0 0.05em 0.1em inset rgba(255, 255, 255, 0.4),
+                inset 0 -0.125em 0.125em rgba(255, 255, 255, 0.5),
+                0 0.3em 0.15em -0.1em rgba(0, 0, 0, 0.4),
+                0 0 0.1em 0.15em inset rgba(255, 255, 255, 0.5),
+                0 0 0.8em rgba(255, 255, 255, 0.3),
                 0 0 0 0 rgba(255, 255, 255, 1);
         }
 
-        /* Button Text */
-        .slider__content .button-wrap button span {
+        /* Button Text - Enhanced */
+        .slider__content .button-wrap button span,
+        .slider__content .button-wrap a.go-to-next span {
             position: relative;
-            display: block;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5em;
             user-select: none;
             -webkit-user-select: none;
             -moz-user-select: none;
             -ms-user-select: none;
             font-family: 'Heebo', sans-serif;
-            letter-spacing: calc(var(--base) * 0.1);
-            font-weight: 500;
-            font-size: calc(var(--base) * 0.8);
+            letter-spacing: calc(var(--base) * 0.12);
+            font-weight: 600;
+            font-size: calc(var(--base) * 0.85);
             color: rgba(255, 255, 255, 1);
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
-            text-shadow: 0em 0.25em 0.05em rgba(0, 0, 0, 0.3);
+            text-shadow: 0em 0.25em 0.05em rgba(0, 0, 0, 0.4),
+                0 0 10px rgba(255, 255, 255, 0.3);
             transition: all var(--anim--hover-time) var(--anim--hover-ease);
-            padding-inline: 1.5em;
-            padding-block: 0.875em;
+            padding-inline: 1.75em;
+            padding-block: 1em;
         }
 
-        .slider__content .button-wrap button:hover span {
-            text-shadow: 0.025em 0.025em 0.025em rgba(0, 0, 0, 0.2);
+        /* Arrow icon after text */
+        .slider__content .button-wrap button span::before,
+        .slider__content .button-wrap a.go-to-next span::before {
+            content: "→";
+            display: inline-block;
+            font-size: 1.2em;
+            transition: transform var(--anim--hover-time) var(--anim--hover-ease);
+            opacity: 0.9;
         }
 
-        /* Text Shine Effect */
-        .slider__content .button-wrap button span::after {
+        .slider__content .button-wrap button:hover span,
+        .slider__content .button-wrap a.go-to-next:hover span {
+            text-shadow: 0.025em 0.025em 0.025em rgba(0, 0, 0, 0.2),
+                0 0 15px rgba(255, 255, 255, 0.5);
+        }
+
+        .slider__content .button-wrap button:hover span::before,
+        .slider__content .button-wrap a.go-to-next:hover span::before {
+            transform: translateX(0.3em);
+            opacity: 1;
+        }
+
+        /* Text Shine Effect - Enhanced */
+        .slider__content .button-wrap button span::after,
+        .slider__content .button-wrap a.go-to-next span::after {
             content: "";
             display: block;
             position: absolute;
@@ -258,42 +314,45 @@
             box-sizing: border-box;
             border-radius: 999vw;
             overflow: clip;
-            background: linear-gradient(
-                var(--angle-2),
-                rgba(255, 255, 255, 0) 0%,
-                rgba(255, 255, 255, 0.6) 40% 50%,
-                rgba(255, 255, 255, 0) 55%
-            );
+            background: linear-gradient(var(--angle-2),
+                    rgba(255, 255, 255, 0) 0%,
+                    rgba(255, 255, 255, 0.7) 40% 50%,
+                    rgba(255, 255, 255, 0) 55%);
             z-index: 3;
             mix-blend-mode: screen;
             pointer-events: none;
             background-size: 200% 200%;
             background-position: 0% 50%;
             background-repeat: no-repeat;
-            transition: background-position calc(var(--anim--hover-time) * 1.25)
-                    var(--anim--hover-ease),
+            transition: background-position calc(var(--anim--hover-time) * 1.25) var(--anim--hover-ease),
                 --angle-2 calc(var(--anim--hover-time) * 1.25) var(--anim--hover-ease);
         }
 
-        .slider__content .button-wrap button:hover span::after {
-            background-position: 25% 50%;
+        .slider__content .button-wrap button:hover span::after,
+        .slider__content .button-wrap a.go-to-next:hover span::after {
+            background-position: 30% 50%;
         }
 
-        .slider__content .button-wrap button:active span::after {
+        .slider__content .button-wrap button:active span::after,
+        .slider__content .button-wrap a.go-to-next:active span::after {
             background-position: 50% 15%;
             --angle-2: -15deg;
         }
 
         /* Touch Devices */
         @media (hover: none) and (pointer: coarse) {
+
             .slider__content .button-wrap button span::after,
-            .slider__content .button-wrap button:active span::after {
+            .slider__content .button-wrap button:active span::after,
+            .slider__content .button-wrap a.go-to-next span::after,
+            .slider__content .button-wrap a.go-to-next:active span::after {
                 --angle-2: -45deg;
             }
         }
 
-        /* Button Outline */
-        .slider__content .button-wrap button::after {
+        /* Button Outline - Enhanced */
+        .slider__content .button-wrap button::after,
+        .slider__content .button-wrap a.go-to-next::after {
             content: "";
             position: absolute;
             z-index: 1;
@@ -305,14 +364,12 @@
             left: calc(0% - var(--border-width) / 2);
             padding: var(--border-width);
             box-sizing: border-box;
-            background: conic-gradient(
-                    from var(--angle-1) at 50% 50%,
+            background: conic-gradient(from var(--angle-1) at 50% 50%,
                     rgba(255, 255, 255, 0.6),
                     rgba(255, 255, 255, 0) 5% 40%,
                     rgba(255, 255, 255, 0.6) 50%,
                     rgba(255, 255, 255, 0) 60% 95%,
-                    rgba(255, 255, 255, 0.6)
-                ),
+                    rgba(255, 255, 255, 0.6)),
                 linear-gradient(180deg, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.4));
             mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
             mask-composite: exclude;
@@ -321,42 +378,52 @@
             box-shadow: inset 0 0 0 calc(var(--border-width) / 2) rgba(255, 255, 255, 0.4);
         }
 
-        .slider__content .button-wrap button:hover::after {
+        .slider__content .button-wrap button:hover::after,
+        .slider__content .button-wrap a.go-to-next:hover::after {
             --angle-1: -125deg;
         }
 
-        .slider__content .button-wrap button:active::after {
+        .slider__content .button-wrap button:active::after,
+        .slider__content .button-wrap a.go-to-next:active::after {
             --angle-1: -75deg;
         }
 
         @media (hover: none) and (pointer: coarse) {
+
             .slider__content .button-wrap button::after,
             .slider__content .button-wrap button:hover::after,
-            .slider__content .button-wrap button:active::after {
+            .slider__content .button-wrap button:active::after,
+            .slider__content .button-wrap a.go-to-next::after,
+            .slider__content .button-wrap a.go-to-next:hover::after,
+            .slider__content .button-wrap a.go-to-next:active::after {
                 --angle-1: -75deg;
             }
         }
 
-        /* Shadow Hover */
-        .slider__content .button-wrap:has(button:hover) .button-shadow {
-            filter: blur(clamp(2px, 0.0625em, 6px));
-            -webkit-filter: blur(clamp(2px, 0.0625em, 6px));
-            -moz-filter: blur(clamp(2px, 0.0625em, 6px));
-            -ms-filter: blur(clamp(2px, 0.0625em, 6px));
+        /* Shadow Hover - Enhanced */
+        .slider__content .button-wrap:has(button:hover) .button-shadow,
+        .slider__content .button-wrap:has(a.go-to-next:hover) .button-shadow {
+            filter: blur(clamp(3px, 0.08em, 8px));
+            -webkit-filter: blur(clamp(3px, 0.08em, 8px));
+            -moz-filter: blur(clamp(3px, 0.08em, 8px));
+            -ms-filter: blur(clamp(3px, 0.08em, 8px));
             transition: filter var(--anim--hover-time) var(--anim--hover-ease);
         }
 
-        .slider__content .button-wrap:has(button:hover) .button-shadow::after {
-            top: calc(var(--shadow-cuttoff-fix) - 0.4em);
+        .slider__content .button-wrap:has(button:hover) .button-shadow::after,
+        .slider__content .button-wrap:has(a.go-to-next:hover) .button-shadow::after {
+            top: calc(var(--shadow-cuttoff-fix) - 0.5em);
             opacity: 1;
         }
 
-        /* Rotation */
-        .slider__content .button-wrap:has(button:active) {
+        /* Rotation - Enhanced */
+        .slider__content .button-wrap:has(button:active),
+        .slider__content .button-wrap:has(a.go-to-next:active) {
             transform: rotate3d(1, 0, 0, 25deg);
         }
 
-        .slider__content .button-wrap:has(button:active) button {
+        .slider__content .button-wrap:has(button:active) button,
+        .slider__content .button-wrap:has(a.go-to-next:active) a.go-to-next {
             box-shadow: inset 0 0.125em 0.125em rgba(0, 0, 0, 0.1),
                 inset 0 -0.125em 0.125em rgba(255, 255, 255, 0.4),
                 0 0.125em 0.125em -0.125em rgba(0, 0, 0, 0.3),
@@ -366,22 +433,25 @@
                 inset 0 0.25em 0.05em 0 rgba(0, 0, 0, 0.2);
         }
 
-        .slider__content .button-wrap:has(button:active) .button-shadow {
-            filter: blur(clamp(2px, 0.125em, 12px));
-            -webkit-filter: blur(clamp(2px, 0.125em, 12px));
-            -moz-filter: blur(clamp(2px, 0.125em, 12px));
-            -ms-filter: blur(clamp(2px, 0.125em, 12px));
+        .slider__content .button-wrap:has(button:active) .button-shadow,
+        .slider__content .button-wrap:has(a.go-to-next:active) .button-shadow {
+            filter: blur(clamp(3px, 0.15em, 14px));
+            -webkit-filter: blur(clamp(3px, 0.15em, 14px));
+            -moz-filter: blur(clamp(3px, 0.15em, 14px));
+            -ms-filter: blur(clamp(3px, 0.15em, 14px));
         }
 
-        .slider__content .button-wrap:has(button:active) .button-shadow::after {
-            top: calc(var(--shadow-cuttoff-fix) - 0.25em);
-            opacity: 0.75;
+        .slider__content .button-wrap:has(button:active) .button-shadow::after,
+        .slider__content .button-wrap:has(a.go-to-next:active) .button-shadow::after {
+            top: calc(var(--shadow-cuttoff-fix) - 0.3em);
+            opacity: 0.8;
         }
 
-        .slider__content .button-wrap:has(button:active) span {
+        .slider__content .button-wrap:has(button:active) span,
+        .slider__content .button-wrap:has(a.go-to-next:active) span {
             text-shadow: 0.025em 0.25em 0.05em rgba(0, 0, 0, 0.2);
         }
-        
+
         .slider__slide {
             position: absolute;
             left: 0;
@@ -392,81 +462,85 @@
             pointer-events: none;
             z-index: 0;
         }
-        
+
         .slider__slide--active {
             transform: translateX(0%);
             z-index: 2;
         }
-        
+
         .slider__slide--active .slider__wrap {
             transform: translateX(0);
             transform-origin: 100% 50%;
             opacity: 1;
             animation: none;
         }
-        
+
         .slider__slide--active .slider__back {
             filter: blur(calc(var(--base) * 0.5));
             transition: filter calc(var(--time) / 2) cubic-bezier(0.785, 0.135, 0.150, 0.860);
             transition-delay: calc(var(--time) / 2) !important;
         }
-        
+
         .slider__slide--active .slider__inner {
             transform: scale(0.80);
             box-shadow: 0 calc(var(--base) / 3) calc(var(--base) * 2) rgba(0, 0, 0, 0.2);
             pointer-events: auto;
             opacity: 1;
-            transition: transform calc(var(--time) / 2) cubic-bezier(0.785, 0.135, 0.150, 0.860), 
-                        box-shadow calc(var(--time) / 2) cubic-bezier(0.785, 0.135, 0.150, 0.860), 
-                        opacity 1ms step-end;
+            transition: transform calc(var(--time) / 2) cubic-bezier(0.785, 0.135, 0.150, 0.860),
+                box-shadow calc(var(--time) / 2) cubic-bezier(0.785, 0.135, 0.150, 0.860),
+                opacity 1ms step-end;
             transition-delay: calc(var(--time) / 2);
         }
-        
+
         .slider__slide--active .slider__content {
             opacity: 1;
             transition-delay: calc(var(--time) * 3 / 4);
         }
-        
+
         .slider__slide:not(.slider__slide--active) .slider__wrap {
             animation-name: hack;
             animation-duration: calc(var(--time) / 2);
             animation-delay: calc(var(--time) / 4);
             animation-timing-function: cubic-bezier(0.785, 0.135, 0.150, 0.860);
         }
-        
+
         @keyframes hack {
             0% {
                 transform: translateX(0);
                 opacity: 1;
             }
+
             50% {
                 transform: translateX(-100%);
                 opacity: 1;
             }
+
             51% {
                 transform: translateX(-100%);
                 opacity: 0;
             }
+
             52% {
                 transform: translateX(100%);
                 opacity: 0;
             }
+
             100% {
                 transform: translateX(100%);
                 opacity: 1;
             }
         }
-        
+
         .slider__slide:nth-child(1) .slider__back,
         .slider__slide:nth-child(1) .slider__inner {
             background-image: url('assets/images/about/casestudies/img1.jpg');
         }
-        
+
         .slider__slide:nth-child(2) .slider__back,
         .slider__slide:nth-child(2) .slider__inner {
             background-image: url('assets/images/about/casestudies/img2.jpg');
         }
-        
+
         .slider__slide:nth-child(3) .slider__back,
         .slider__slide:nth-child(3) .slider__inner {
             background-image: url('assets/images/about/casestudies/img3.jpg');
@@ -476,7 +550,7 @@
         .slider__slide:nth-child(4) .slider__inner {
             background-image: url('assets/images/about/casestudies/img4.jpg');
         }
-        
+
         .slider__indicators {
             position: absolute;
             bottom: calc(var(--base) * 2);
@@ -486,7 +560,7 @@
             gap: calc(var(--base) * 0.5);
             z-index: 10;
         }
-        
+
         .slider__indicator {
             width: calc(var(--base) * 0.8);
             height: calc(var(--base) * 0.8);
@@ -495,36 +569,41 @@
             cursor: pointer;
             transition: background 0.3s ease;
         }
-        
+
         .slider__indicator:hover {
             background: rgba(255, 255, 255, 0.5);
         }
-        
-        .slider__slide--active ~ .slider__indicators .slider__indicator[data-slide="1"],
-        .slider__slide[data-slide="1"].slider__slide--active ~ .slider__indicators .slider__indicator[data-slide="1"] {
+
+        .slider__slide--active~.slider__indicators .slider__indicator[data-slide="1"],
+        .slider__slide[data-slide="1"].slider__slide--active~.slider__indicators .slider__indicator[data-slide="1"] {
             background: rgba(255, 255, 255, 0.9);
         }
     </style>
 </head>
+
 <body>
     <div id="nav-placeholder"></div>
 
     <!-- Hero Section -->
     <section class="relative min-h-[80vh] md:min-h-[90vh] flex items-center justify-center overflow-hidden">
-        <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('assets/images/about/casestudies/hero.jpg');"></div>
+        <div class="absolute inset-0 bg-cover bg-center"
+            style="background-image: url('assets/images/about/casestudies/hero.jpg');"></div>
         <div class="absolute inset-0 bg-black/60"></div>
         <div class="relative z-10 text-center text-white px-6 max-w-5xl mx-auto py-20">
             <p class="text-sm md:text-base uppercase tracking-[0.2em] font-light mb-4 opacity-90">VIEW OUR</p>
-            <h1 class="text-6xl md:text-8xl lg:text-9xl font-bold mb-6 md:mb-8 leading-tight" style="text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5), 0 0 20px rgba(0, 0, 0, 0.3);">
+            <h1 class="text-6xl md:text-8xl lg:text-9xl font-bold mb-6 md:mb-8 leading-tight"
+                style="text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5), 0 0 20px rgba(0, 0, 0, 0.3);">
                 CASE STUDIES
             </h1>
             <p class="text-lg md:text-xl lg:text-2xl mb-6 md:mb-8 max-w-3xl mx-auto leading-relaxed font-light">
-                Explore our case studies to see how MiHi Entertainment brings events to life with innovative photo booth experiences and creative solutions.
+                Explore our case studies to see how MiHi Entertainment brings events to life with innovative photo booth
+                experiences and creative solutions.
             </p>
             <p class="text-base md:text-lg mb-8 md:mb-10 opacity-90">
                 Click on a Case Study below to learn more about it!
             </p>
-            <a href="../index.html#contact" class="inline-block bg-[#0050ff] hover:bg-[#0040d9] text-white font-semibold uppercase tracking-wide px-8 md:px-12 py-4 md:py-5 rounded-lg text-base md:text-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl">
+            <a href="../index.html#contact"
+                class="inline-block bg-[#0050ff] hover:bg-[#0040d9] text-white font-semibold uppercase tracking-wide px-8 md:px-12 py-4 md:py-5 rounded-lg text-base md:text-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl">
                 CONTACT US
             </a>
         </div>
@@ -540,9 +619,9 @@
                 <div class="slider__content">
                     <h1>Haunted Mansion <br> at Essence Fest</h1>
                     <div class="button-wrap">
-                        <button type="button" class="go-to-next">
+                        <a href="haunted-mansion-at-essence-fest.html" class="go-to-next">
                             <span>View</span>
-                        </button>
+                        </a>
                         <div class="button-shadow"></div>
                     </div>
                 </div>
@@ -556,9 +635,9 @@
                 <div class="slider__content">
                     <h1>Pure <br> Storage</h1>
                     <div class="button-wrap">
-                        <button type="button" class="go-to-next">
+                        <a href="casestudy-purestorage.html" class="go-to-next">
                             <span>View</span>
-                        </button>
+                        </a>
                         <div class="button-shadow"></div>
                     </div>
                 </div>
@@ -572,9 +651,9 @@
                 <div class="slider__content">
                     <h1>DHL</h1>
                     <div class="button-wrap">
-                        <button type="button" class="go-to-next">
+                        <a href="ems-case-study.html" class="go-to-next">
                             <span>View</span>
-                        </button>
+                        </a>
                         <div class="button-shadow"></div>
                     </div>
                 </div>
@@ -588,9 +667,9 @@
                 <div class="slider__content">
                     <h1>Experiential Marketing <br> Summit</h1>
                     <div class="button-wrap">
-                        <button type="button" class="go-to-next">
+                        <a href="casestudy-dhl.html" class="go-to-next">
                             <span>View</span>
-                        </button>
+                        </a>
                         <div class="button-shadow"></div>
                     </div>
                 </div>
@@ -603,44 +682,44 @@
     <script src="../assets/components/footer.js"></script>
     <script>
         // Image Slider JavaScript
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             const slides = document.querySelectorAll('.slider__slide');
             const indicatorsContainer = document.querySelector('.slider__indicators');
-            
+
             // Create indicators
-            slides.forEach(function(slide, index) {
+            slides.forEach(function (slide, index) {
                 const indicator = document.createElement('div');
                 indicator.className = 'slider__indicator';
                 indicator.setAttribute('data-slide', index + 1);
                 indicatorsContainer.appendChild(indicator);
-                
+
                 // Add click event to indicator
-                indicator.addEventListener('click', function() {
+                indicator.addEventListener('click', function () {
                     goToSlide(index + 1);
                 });
             });
-            
+
             // Add hacked class after delay
-            setTimeout(function() {
+            setTimeout(function () {
                 const wraps = document.querySelectorAll('.slider__wrap');
-                wraps.forEach(function(wrap) {
+                wraps.forEach(function (wrap) {
                     wrap.classList.add('slider__wrap--hacked');
                 });
             }, 1000);
-            
+
             // Go to slide function
             function goToSlide(number) {
-                slides.forEach(function(slide) {
+                slides.forEach(function (slide) {
                     slide.classList.remove('slider__slide--active');
                 });
                 const targetSlide = document.querySelector('.slider__slide[data-slide="' + number + '"]');
                 if (targetSlide) {
                     targetSlide.classList.add('slider__slide--active');
                 }
-                
+
                 // Update active indicator
                 const indicators = document.querySelectorAll('.slider__indicator');
-                indicators.forEach(function(indicator) {
+                indicators.forEach(function (indicator) {
                     indicator.style.background = 'rgba(255, 255, 255, 0.3)';
                 });
                 const activeIndicator = document.querySelector('.slider__indicator[data-slide="' + number + '"]');
@@ -648,7 +727,7 @@
                     activeIndicator.style.background = 'rgba(255, 255, 255, 0.9)';
                 }
             }
-            
+
             // Next slide function
             function goToNext() {
                 const activeSlide = document.querySelector('.slider__slide--active');
@@ -662,16 +741,21 @@
                     goToSlide(nextSlide);
                 }
             }
-            
+
             // Add click event to next buttons
+            // Only prevent default for buttons, allow anchor tags to navigate
             const nextButtons = document.querySelectorAll('.go-to-next, .slider__next');
-            nextButtons.forEach(function(button) {
-                button.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    goToNext();
+            nextButtons.forEach(function (button) {
+                button.addEventListener('click', function (e) {
+                    // Only prevent default if it's a button, not an anchor tag
+                    if (button.tagName === 'BUTTON' || button.classList.contains('slider__next')) {
+                        e.preventDefault();
+                        goToNext();
+                    }
+                    // Anchor tags will navigate naturally
                 });
             });
-            
+
             // Initialize active indicator
             const firstIndicator = document.querySelector('.slider__indicator[data-slide="1"]');
             if (firstIndicator) {
@@ -680,4 +764,5 @@
         });
     </script>
 </body>
+
 </html>

@@ -1,0 +1,1288 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Haunted Mansion at Essence Fest - MiHi Entertainment</title>
+    <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&family=Montserrat:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <style>
+        /* Force navigation button styling - must override Tailwind */
+        header a[href*="contact-us"],
+        nav a[href*="contact-us"],
+        header a.btn-primary,
+        nav a.btn-primary {
+            background: #8B5CF6 !important;
+            background-color: #8B5CF6 !important;
+            background-image: linear-gradient(135deg, #8B5CF6 0%, #7C3AED 100%) !important;
+            color: #ffffff !important;
+        }
+    </style>
+    <style>
+        :root {
+            --violet-primary: #8B5CF6;
+            --violet-dark: #7C3AED;
+            --violet-darker: #6D28D9;
+            --violet-light: #A78BFA;
+            --violet-lighter: #C4B5FD;
+        }
+
+        html,
+        body {
+            overflow-x: hidden;
+            width: 100%;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #e5e7eb;
+            background: #0a0a0a;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .section-padding {
+            padding: 5rem 0;
+        }
+
+        /* Navigation Contact Us Button Fix */
+        header a.btn-primary,
+        nav a.btn-primary,
+        header .btn-primary,
+        nav .btn-primary,
+        a.btn-primary,
+        .btn-primary {
+            background: linear-gradient(135deg, #8B5CF6 0%, #7C3AED 100%) !important;
+            background-color: #8B5CF6 !important;
+            background-image: linear-gradient(135deg, #8B5CF6 0%, #7C3AED 100%) !important;
+            color: #ffffff !important;
+            border: none !important;
+            padding: 0.75rem 1.5rem !important;
+            border-radius: 9999px !important;
+            font-weight: 600 !important;
+            text-decoration: none !important;
+            display: inline-block !important;
+            transition: all 0.3s ease !important;
+            box-shadow: 0 4px 6px rgba(139, 92, 246, 0.3) !important;
+            white-space: nowrap !important;
+        }
+
+        header a.btn-primary:hover,
+        nav a.btn-primary:hover,
+        header .btn-primary:hover,
+        nav .btn-primary:hover,
+        a.btn-primary:hover,
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #7C3AED 0%, #6D28D9 100%) !important;
+            background-color: #7C3AED !important;
+            background-image: linear-gradient(135deg, #7C3AED 0%, #6D28D9 100%) !important;
+            transform: translateY(-2px) !important;
+            box-shadow: 0 6px 12px rgba(139, 92, 246, 0.4) !important;
+        }
+
+        header a.btn-primary:active,
+        nav a.btn-primary:active,
+        header .btn-primary:active,
+        nav .btn-primary:active,
+        a.btn-primary:active,
+        .btn-primary:active {
+            transform: translateY(0) !important;
+        }
+
+        /* Additional specificity for navigation button */
+        header nav a.btn-primary,
+        header nav .btn-primary {
+            background: #8B5CF6 !important;
+            background-image: linear-gradient(135deg, #8B5CF6 0%, #7C3AED 100%) !important;
+            color: #ffffff !important;
+        }
+
+        /* Hero Section Styles */
+        .hero-section {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            min-height: 700px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .hero-background {
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-position: center center;
+            background-repeat: no-repeat;
+            animation: zoomIn 20s ease-in-out infinite alternate;
+        }
+
+        @keyframes zoomIn {
+            from {
+                transform: scale(1);
+            }
+
+            to {
+                transform: scale(1.1);
+            }
+        }
+
+        .hero-gradient {
+            background: linear-gradient(135deg, rgba(124, 58, 237, 0.7) 0%, rgba(0, 0, 0, 0.6) 50%, rgba(139, 92, 246, 0.7) 100%);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            color: white;
+            width: 100%;
+            max-width: 1200px;
+            padding: 0 1.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+        }
+
+        /* Text Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .hero-title {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            text-shadow: 0 4px 20px rgba(139, 92, 246, 0.5), 0 2px 10px rgba(0, 0, 0, 0.7);
+            animation: fadeInUp 0.8s ease-out forwards, float 3s ease-in-out infinite;
+            line-height: 1.1;
+        }
+
+        .hero-subtitle {
+            font-family: 'Inter', sans-serif;
+            font-weight: 500;
+            font-size: 1.5rem;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            animation: fadeInUp 0.8s ease-out 0.2s forwards;
+            opacity: 0;
+            line-height: 1.6;
+            letter-spacing: 0.1em;
+        }
+
+        .hero-cta {
+            animation: fadeInUp 0.8s ease-out 0.4s forwards;
+            opacity: 0;
+        }
+
+        /* Enhanced Button Styles */
+        .hero-cta-button {
+            background: linear-gradient(135deg, #8B5CF6 0%, #7C3AED 100%);
+            color: white;
+            padding: 1.25rem 3rem;
+            font-size: 0.875rem;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            border-radius: 50px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 8px 25px rgba(139, 92, 246, 0.4), 0 0 30px rgba(139, 92, 246, 0.2);
+        }
+
+        .hero-cta-button:hover {
+            background: linear-gradient(135deg, #7C3AED 0%, #6D28D9 100%);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(139, 92, 246, 0.6), 0 0 40px rgba(139, 92, 246, 0.3);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        .hero-cta-button:active {
+            transform: translateY(-1px);
+        }
+
+        @media (max-width: 768px) {
+            .hero-section {
+                min-height: 600px;
+            }
+
+            .hero-content {
+                padding: 0 1rem;
+                gap: 1.5rem;
+            }
+
+            .hero-title {
+                font-size: 2.5rem !important;
+            }
+
+            .hero-subtitle {
+                font-size: 1.125rem;
+            }
+
+            .gallery-section-title {
+                font-size: 2rem;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+                gap: 1.75rem;
+            }
+
+            .cta-heading {
+                font-size: 1.75rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-section {
+                min-height: 500px;
+            }
+
+            .hero-title {
+                font-size: 2rem !important;
+            }
+
+            .section-1-padding {
+                padding: 2.5rem 0;
+            }
+        }
+
+        /* Section 1 Styles */
+        .section-1 {
+            background: #0a0a0a;
+            position: relative;
+        }
+
+        .section-1-padding {
+            padding: 5rem 0;
+        }
+
+        @media (max-width: 768px) {
+            .section-1-padding {
+                padding: 3rem 0;
+            }
+        }
+
+        .section-1-content {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent 0%, rgba(139, 92, 246, 0.2) 50%, transparent 100%);
+            margin: 2rem 0;
+        }
+
+        .section-1-heading {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            letter-spacing: 0.05em;
+            color: #8B5CF6;
+            line-height: 1.2;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .section-1-heading::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, #8B5CF6 0%, #7C3AED 100%);
+            border-radius: 2px;
+        }
+
+        .section-1-text {
+            color: #d1d5db;
+            line-height: 1.8;
+            font-size: 1.0625rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .section-1-image {
+            width: 100%;
+            height: 100%;
+            min-height: 500px;
+            object-fit: cover;
+            border-radius: 16px;
+            box-shadow: 0 25px 70px rgba(139, 92, 246, 0.3), 0 0 0 1px rgba(139, 92, 246, 0.2);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .section-1-image:hover {
+            transform: scale(1.03) translateY(-5px);
+            box-shadow: 0 35px 90px rgba(139, 92, 246, 0.4), 0 0 0 1px rgba(139, 92, 246, 0.3), 0 0 40px rgba(139, 92, 246, 0.2);
+        }
+
+        .section-1-image-wrapper {
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+            height: 100%;
+        }
+
+        .section-1-animate {
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .section-1-text {
+                font-size: 0.9375rem;
+            }
+
+            .section-1-image {
+                min-height: 350px;
+            }
+        }
+
+        /* Gallery Section Styles */
+        .gallery-section {
+            background: linear-gradient(180deg, #0a0a0a 0%, #1a0a1a 50%, #0a0a0a 100%);
+            padding: 5rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .gallery-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent 0%, rgba(139, 92, 246, 0.3) 50%, transparent 100%);
+        }
+
+        .gallery-section-title {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            letter-spacing: 0.1em;
+            color: #8B5CF6;
+            text-transform: uppercase;
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .gallery-section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, #8B5CF6 0%, #7C3AED 100%);
+            border-radius: 2px;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 3rem;
+            max-width: 1400px;
+            margin-left: auto;
+            margin-right: auto;
+            grid-auto-flow: dense;
+        }
+
+        @media (min-width: 1200px) {
+            .gallery-grid {
+                grid-template-columns: repeat(4, 1fr);
+                grid-auto-rows: 280px;
+                gap: 1.5rem;
+                align-items: stretch;
+            }
+
+            /* Row 1: Large featured (2x2) + 2 small items */
+            .gallery-item:nth-child(1) {
+                grid-column: 1 / span 2;
+                grid-row: 1 / span 2;
+            }
+
+            .gallery-item:nth-child(2) {
+                grid-column: 3;
+                grid-row: 1;
+            }
+
+            .gallery-item:nth-child(3) {
+                grid-column: 4;
+                grid-row: 1;
+            }
+
+            /* Row 2: Wide item spanning columns 3-4 */
+            .gallery-item:nth-child(4) {
+                grid-column: 3 / span 2;
+                grid-row: 2;
+            }
+
+            /* Row 3: 3 small items */
+            .gallery-item:nth-child(5) {
+                grid-column: 1;
+                grid-row: 3;
+            }
+
+            .gallery-item:nth-child(6) {
+                grid-column: 2;
+                grid-row: 3;
+            }
+
+            .gallery-item:nth-child(7) {
+                grid-column: 3;
+                grid-row: 3;
+            }
+
+            .gallery-item:nth-child(8) {
+                grid-column: 4;
+                grid-row: 3;
+            }
+
+            /* Row 4: Wide item + 2 small */
+            .gallery-item:nth-child(9) {
+                grid-column: 1 / span 2;
+                grid-row: 4;
+            }
+
+            .gallery-item:nth-child(10) {
+                grid-column: 3;
+                grid-row: 4;
+            }
+
+            .gallery-item:nth-child(11) {
+                grid-column: 4;
+                grid-row: 4;
+            }
+
+            /* Row 5: 2 wide items (videos) */
+            .gallery-item:nth-child(12) {
+                grid-column: 1 / span 2;
+                grid-row: 5;
+            }
+
+            .gallery-item:nth-child(13) {
+                grid-column: 3 / span 2;
+                grid-row: 5;
+            }
+        }
+
+        @media (min-width: 768px) and (max-width: 1199px) {
+            .gallery-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 1.5rem;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .gallery-grid {
+                gap: 1.25rem;
+            }
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 16px;
+            box-shadow: 0 15px 40px rgba(139, 92, 246, 0.3), 0 0 0 1px rgba(139, 92, 246, 0.2);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            background: #1a1a1a;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: stretch;
+        }
+
+        @media (min-width: 1200px) {
+
+            /* All items should fill their grid cells */
+            .gallery-item {
+                min-height: 0;
+            }
+        }
+
+        .gallery-item video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.4s ease;
+            flex-shrink: 0;
+        }
+
+        @media (max-width: 767px) {
+            .gallery-item {
+                aspect-ratio: 4 / 3;
+            }
+        }
+
+        .gallery-item:hover video {
+            transform: scale(1.1);
+        }
+
+        .gallery-video-wrapper {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: stretch;
+            flex: 1;
+        }
+
+        .gallery-video-wrapper video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .gallery-video-wrapper::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.1) 0%, rgba(124, 58, 237, 0.1) 100%);
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 1;
+            border-radius: 16px;
+        }
+
+        .gallery-item:hover .gallery-video-wrapper::after {
+            opacity: 1;
+        }
+
+        .gallery-item::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0) 0%, rgba(124, 58, 237, 0.1) 100%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 25px 60px rgba(139, 92, 246, 0.5), 0 0 0 1px rgba(139, 92, 246, 0.4), 0 0 40px rgba(139, 92, 246, 0.2);
+        }
+
+        .gallery-item:hover::before {
+            opacity: 1;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.4s ease;
+            flex-shrink: 0;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        /* Services Section Styles */
+        .services-section {
+            background: linear-gradient(180deg, #0f0f0f 0%, #0a0a0a 50%, #0f0f0f 100%);
+            padding: 6rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .services-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent 0%, rgba(139, 92, 246, 0.4) 50%, transparent 100%);
+        }
+
+        .services-section::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 50% 50%, rgba(139, 92, 246, 0.03) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.75rem;
+            margin-top: 4rem;
+            max-width: 1400px;
+            margin-left: auto;
+            margin-right: auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        @media (min-width: 1200px) {
+            .services-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 2rem;
+            }
+        }
+
+        @media (min-width: 768px) and (max-width: 1199px) {
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.75rem;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .services-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+        }
+
+        .service-card {
+            background: linear-gradient(135deg, #1a1a1a 0%, #1f0a2e 100%);
+            padding: 2.75rem;
+            border-radius: 24px;
+            box-shadow:
+                0 10px 40px rgba(139, 92, 246, 0.15),
+                0 0 0 1px rgba(139, 92, 246, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.05);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(139, 92, 246, 0.15);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            min-height: 320px;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #8B5CF6 0%, #7C3AED 50%, #A78BFA 100%);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 2;
+        }
+
+        .service-card::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.1) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            pointer-events: none;
+        }
+
+        .service-card:hover {
+            transform: translateY(-12px) scale(1.02);
+            box-shadow:
+                0 25px 70px rgba(139, 92, 246, 0.35),
+                0 0 0 1px rgba(139, 92, 246, 0.5),
+                0 0 60px rgba(139, 92, 246, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            border-color: rgba(139, 92, 246, 0.5);
+        }
+
+        .service-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .service-card:hover::after {
+            opacity: 1;
+        }
+
+        .service-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 16px;
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.2) 0%, rgba(124, 58, 237, 0.2) 100%);
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            transition: all 0.5s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-icon::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.3) 0%, rgba(124, 58, 237, 0.3) 100%);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .service-card:hover .service-icon {
+            transform: scale(1.1) rotate(5deg);
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.3) 0%, rgba(124, 58, 237, 0.3) 100%);
+            border-color: rgba(139, 92, 246, 0.5);
+            box-shadow: 0 8px 20px rgba(139, 92, 246, 0.3);
+        }
+
+        .service-card:hover .service-icon::before {
+            opacity: 1;
+        }
+
+        .service-icon svg {
+            width: 28px;
+            height: 28px;
+            stroke: #8B5CF6;
+            fill: none;
+            stroke-width: 2;
+            transition: all 0.5s ease;
+            position: relative;
+            z-index: 1;
+        }
+
+        .service-card:hover .service-icon svg {
+            stroke: #A78BFA;
+            transform: scale(1.1);
+        }
+
+        .service-title {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            color: #8B5CF6;
+            font-size: 1.5rem;
+            margin-bottom: 1.25rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            line-height: 1.3;
+            transition: color 0.3s ease;
+        }
+
+        .service-card:hover .service-title {
+            color: #A78BFA;
+        }
+
+        .service-description {
+            color: #d1d5db;
+            line-height: 1.85;
+            font-size: 1.0625rem;
+            flex-grow: 1;
+            transition: color 0.3s ease;
+        }
+
+        .service-card:hover .service-description {
+            color: #e5e7eb;
+        }
+
+        @media (max-width: 767px) {
+            .service-card {
+                padding: 2rem;
+                min-height: 280px;
+            }
+
+            .service-icon {
+                width: 48px;
+                height: 48px;
+                margin-bottom: 1.25rem;
+            }
+
+            .service-icon svg {
+                width: 24px;
+                height: 24px;
+            }
+
+            .service-title {
+                font-size: 1.25rem;
+                margin-bottom: 1rem;
+            }
+
+            .service-description {
+                font-size: 1rem;
+            }
+        }
+
+        /* Section Heading Styles */
+        .section-heading {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            letter-spacing: 0.1em;
+            color: #8B5CF6;
+            line-height: 1.2;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            position: relative;
+            padding-bottom: 1.5rem;
+            font-size: 2.5rem;
+        }
+
+        .section-heading::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 4px;
+            background: linear-gradient(90deg, #8B5CF6 0%, #7C3AED 50%, #A78BFA 100%);
+            border-radius: 2px;
+            box-shadow: 0 0 20px rgba(139, 92, 246, 0.5);
+        }
+
+        @media (max-width: 767px) {
+            .section-heading {
+                font-size: 2rem;
+                padding-bottom: 1.25rem;
+            }
+
+            .section-heading::after {
+                width: 80px;
+            }
+        }
+
+        .section-subheading {
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            color: #d1d5db;
+            line-height: 1.5;
+            font-size: 1.125rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, #8B5CF6 0%, #7C3AED 50%, #6D28D9 100%);
+            padding: 5rem 0;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="100" height="100" patternUnits="userSpaceOnUse"><path d="M 100 0 L 0 0 0 100" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-heading {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .cta-button {
+            background: white;
+            color: #8B5CF6;
+            padding: 1.25rem 3rem;
+            font-size: 0.875rem;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            border-radius: 50px;
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            margin-top: 1.5rem;
+        }
+
+        .cta-button:hover {
+            background: #faf5ff;
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.3);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+    </style>
+</head>
+
+<body>
+    <div id="nav-placeholder"></div>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-background" style="background-image: url('assets/images/hauntedmansion/hero.jpg');"></div>
+        <div class="absolute inset-0 hero-gradient"></div>
+        <div class="hero-content">
+            <h1 class="hero-title text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl">
+                HAUNTED MANSION
+            </h1>
+            <p class="hero-subtitle text-base sm:text-lg md:text-xl lg:text-2xl px-4 max-w-2xl">
+                AT ESSENCE FEST
+            </p>
+            <div class="hero-cta">
+                <a href="contact-us.html" class="hero-cta-button">
+                    CONTACT US
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 1 - Introduction -->
+    <section class="section-1 section-1-padding">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="section-1-content">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 items-start">
+                    <!-- Left Column - Text Content -->
+                    <div class="section-1-animate space-y-5 lg:pr-6">
+                        <div>
+                            <h2 class="section-1-heading text-2xl sm:text-3xl md:text-4xl lg:text-5xl">
+                                HAUNTED MANSION AT ESSENCE FEST
+                            </h2>
+                        </div>
+
+                        <div class="space-y-4">
+                            <p class="section-1-text text-lg">
+                                At MiHi, we thrive on crafting unique and custom activations from the ground up. When
+                                Wasserman, a prominent player in the event marketing industry, approached us, they had a
+                                special request: bring the Haunted Mansion to life for their movie screening event in
+                                New Orleans during the Essence Festival.
+                            </p>
+
+                            <p class="section-1-text text-lg">
+                                This VIP event boasted a relatively small guest count, making the creation of an
+                                attractive and engaging experience critical to its success.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Right Column - Image -->
+                    <div class="section-1-animate lg:pl-4">
+                        <div class="section-1-image-wrapper">
+                            <img src="assets/images/hauntedmansion/pic1.png"
+                                alt="Haunted Mansion photo booth with spooky backdrop" class="section-1-image">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery-section">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="gallery-section-title">GALLERY</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="assets/images/hauntedmansion/pic2.png"
+                        alt="Haunted Mansion text with ghosts floating around">
+                </div>
+                <div class="gallery-item">
+                    <img src="assets/images/hauntedmansion/pic3.png"
+                        alt="Lady with wide eyes open in front of a haunted house background">
+                </div>
+                <div class="gallery-item">
+                    <img src="assets/images/hauntedmansion/pic4.png"
+                        alt="A guy smiling with ghosts around him making silly faces">
+                </div>
+                <div class="gallery-item">
+                    <img src="assets/images/hauntedmansion/pic5.png"
+                        alt="Lady with no expression with a ghost around her with its hands up">
+                </div>
+                <div class="gallery-item">
+                    <img src="assets/images/hauntedmansion/pic6.png"
+                        alt="Haunted Mansion with ghosts flying all around">
+                </div>
+                <div class="gallery-item">
+                    <img src="assets/images/hauntedmansion/pic7.png"
+                        alt="A guy standing in haunted house with a ghost looking at him">
+                </div>
+                <div class="gallery-item">
+                    <img src="assets/images/hauntedmansion/pic8.png"
+                        alt="Guy looking up while a ghost stands by him looking forwards">
+                </div>
+                <div class="gallery-item">
+                    <img src="assets/images/hauntedmansion/pic9.png"
+                        alt="Lady holding her hands out in a haunted house">
+                </div>
+                <div class="gallery-item">
+                    <img src="assets/images/hauntedmansion/pic10.png" alt="Guy looking forwards with spooky background">
+                </div>
+                <div class="gallery-item">
+                    <img src="assets/images/hauntedmansion/pic11.png"
+                        alt="Two ladies smiling and holding up peace signs">
+                </div>
+                <div class="gallery-item">
+                    <img src="assets/images/hauntedmansion/pci7.png" alt="Lady smiling with ghosts smiling">
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-video-wrapper">
+                        <video autoplay loop muted playsinline>
+                            <source src="assets/images/hauntedmansion/vid1.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-video-wrapper">
+                        <video autoplay loop muted playsinline>
+                            <source src="assets/images/hauntedmansion/vid2.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services-section">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="section-heading text-3xl sm:text-4xl md:text-5xl">
+                SERVICES PROVIDED
+            </h2>
+
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M2 17L12 22L22 17" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M2 12L12 17L22 12" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </div>
+                    <h3 class="service-title">DESIGN & SET FABRICATION</h3>
+                    <p class="service-description">
+                        Our set was a fabric Victorian background that we produced. Our client had initially planned on
+                        building a physical structure, however, our fabrication allowed them to open up more budget in
+                        different areas of the event, as well as extended the deadline with faster lead times.
+                    </p>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M2 17L12 22L22 17" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M2 12L12 17L22 12" stroke-linecap="round" stroke-linejoin="round" />
+                            <circle cx="12" cy="12" r="2" />
+                        </svg>
+                    </div>
+                    <h3 class="service-title">ANIMATION DESIGN & PROGRAMMING</h3>
+                    <p class="service-description">
+                        Our team developed captivating and ghostly animations that added an extra layer of spookiness to
+                        the experience.
+                    </p>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="3" y="3" width="18" height="18" rx="2" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                            <path d="M9 3V21" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M3 9H21" stroke-linecap="round" stroke-linejoin="round" />
+                            <circle cx="9" cy="9" r="1.5" />
+                            <circle cx="15" cy="9" r="1.5" />
+                            <circle cx="9" cy="15" r="1.5" />
+                            <circle cx="15" cy="15" r="1.5" />
+                        </svg>
+                    </div>
+                    <h3 class="service-title">DOUBLE-EXPOSURE PHOTOGRAPHY</h3>
+                    <p class="service-description">
+                        To achieve the ghostly effect, we employed double exposure photography techniques, seamlessly
+                        blending the real and spectral worlds.
+                    </p>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="2" y="3" width="20" height="14" rx="2" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                            <path d="M8 21H16" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M12 17V21" stroke-linecap="round" stroke-linejoin="round" />
+                            <circle cx="12" cy="10" r="3" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </div>
+                    <h3 class="service-title">USER EXPERIENCE (UX) FOCUS</h3>
+                    <p class="service-description">
+                        Understanding that a successful activation extends beyond the final output, our initial emphasis
+                        was on the user experience that guests would encounter at the booth. We opted for a mirror photo
+                        booth adorned with a vintage frame, but what truly set it apart were the special video effects
+                        displayed on the screen. These effects would overlay on guests as they stood in front of the
+                        booth, transforming each person into a ghostly apparition, perfectly complementing the Haunted
+                        Mansion theme.
+                    </p>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M2 17L12 22L22 17" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M2 12L12 17L22 12" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M12 2V12" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </div>
+                    <h3 class="service-title">BRANDED UX DESIGN</h3>
+                    <p class="service-description">
+                        Recognizing the importance of user experience, we designed an interactive interface that aligned
+                        with the event's theme, ensuring a memorable encounter for every guest.
+                    </p>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M22 11.08V12C21.9988 14.1564 21.3005 16.2547 20.0093 17.9818C18.7182 19.7088 16.9033 20.9725 14.8354 21.5839C12.7674 22.1953 10.5573 22.1219 8.53447 21.3746C6.51168 20.6273 4.78465 19.2461 3.61096 17.4371C2.43727 15.628 1.87979 13.4881 2.02168 11.3363C2.16356 9.18455 2.99721 7.13631 4.39828 5.49706C5.79935 3.85781 7.69279 2.71537 9.79619 2.24013C11.8996 1.7649 14.1003 1.98232 16.07 2.85999"
+                                stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M22 4L12 14.01L9 11.01" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </div>
+                    <h3 class="service-title">SUCCESSFUL OUTCOME</h3>
+                    <p class="service-description">
+                        The event unfolded seamlessly, and the feedback from our client was overwhelmingly positive.
+                        They expressed their satisfaction, noting that they had never witnessed such a high level of
+                        quality and creative work in their extensive experience. Our collaboration not only engaged the
+                        guests but also amplified excitement around the movie premiere, achieving our client's goals and
+                        further cementing our commitment to delivering exceptional event experiences.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Client Goals Section -->
+    <section class="section-1 section-1-padding" style="background: linear-gradient(135deg, #0a0a0a 0%, #1a0a1a 100%);">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="section-1-content">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+                    <!-- Left Column - Image -->
+                    <div class="section-1-animate lg:pr-4 order-2 lg:order-1">
+                        <div class="section-1-image-wrapper">
+                            <img src="assets/images/hauntedmansion/pic1.png" alt="Haunted Mansion activation"
+                                class="section-1-image">
+                        </div>
+                    </div>
+
+                    <!-- Right Column - Text Content -->
+                    <div class="section-1-animate space-y-5 lg:pl-6 order-1 lg:order-2">
+                        <div>
+                            <h2 class="section-1-heading text-2xl sm:text-3xl md:text-4xl lg:text-5xl">
+                                CLIENT GOALS
+                            </h2>
+                        </div>
+
+                        <div class="space-y-4">
+                            <p class="section-1-text text-lg">
+                                Our client's primary objectives were to engage event attendees and generate excitement
+                                for the movie premiere. To accomplish this, we collaborated closely with their creative
+                                team to define the project scope and create a comprehensive plan.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="cta-content">
+                <h2 class="cta-heading">WANT TO LEARN MORE?</h2>
+                <a href="contact-us.html" class="cta-button">
+                    SCHEDULE A CALL NOW
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <script src="assets/components/navigation.js"></script>
+    <script src="assets/components/footer.js"></script>
+</body>
+
+</html>
