@@ -1,46 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Our Add-ons - MiHi Entertainment</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Arvo:wght@400;700&family=Cinzel:wght@500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800;900&family=Montserrat:wght@500;600;700&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Arvo:wght@400;700&family=Cinzel:wght@500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800;900&family=Montserrat:wght@500;600;700&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@300;900&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
-        html, body {
+
+        html,
+        body {
             overflow-x: hidden;
             width: 100%;
             max-width: 100%;
         }
-        body { font-family: 'Inter', sans-serif; color: #1a202c; }
-        h1, h2, h3, h4, h5, h6 { font-family: 'Playfair Display', serif; }
-        .btn-primary { background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%); transition: all 0.3s ease; }
-        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(0, 80, 255, 0.4); }
-        
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #1a202c;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%);
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 80, 255, 0.4);
+        }
+
         /* Bubble Button Animation */
         .btn {
             display: inline-block;
             text-decoration: none;
         }
-        
+
         .btn-bubble {
             color: white;
             background-repeat: no-repeat;
             position: relative;
         }
-        
+
         .btn-bubble:not(:hover):not(:focus) {
             background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%);
         }
-        
+
         .btn-bubble:hover,
         .btn-bubble:focus {
             animation: bubbles 1s forwards ease-out;
-            background: 
+            background:
                 radial-gradient(circle at center, transparent 30%, rgba(238, 238, 255, 0.8) 60%, rgba(238, 238, 255, 0.8) 65%, transparent 70%) 5% 120% / 0.6em 0.6em,
                 radial-gradient(circle at center, transparent 30%, rgba(238, 238, 255, 0.8) 60%, rgba(238, 238, 255, 0.8) 65%, transparent 70%) 15% 110% / 0.8em 0.8em,
                 radial-gradient(circle at center, transparent 30%, rgba(238, 238, 255, 0.8) 60%, rgba(238, 238, 255, 0.8) 65%, transparent 70%) 25% 130% / 0.7em 0.7em,
@@ -55,10 +82,10 @@
             background-color: #0050ff;
             background-repeat: no-repeat;
         }
-        
+
         @keyframes bubbles {
             100% {
-                background-position: 
+                background-position:
                     3% -350%,
                     18% -280%,
                     22% -320%,
@@ -73,13 +100,23 @@
                 box-shadow: inset 0 -6.5em 0 #0040d9;
             }
         }
-        .section-padding { padding: 5rem 0; }
+
+        .section-padding {
+            padding: 5rem 0;
+        }
+
         @media (max-width: 768px) {
-            .section-padding { padding: 3rem 0; }
+            .section-padding {
+                padding: 3rem 0;
+            }
         }
+
         @media (max-width: 640px) {
-            .section-padding { padding: 2.5rem 0; }
+            .section-padding {
+                padding: 2.5rem 0;
+            }
         }
+
         .hero-section {
             background-image: url('../assets/images/galleries/ouraddons/hero.jpeg');
             background-attachment: fixed;
@@ -88,46 +125,55 @@
             background-repeat: no-repeat;
             min-height: 100vh;
         }
+
         @media (max-width: 768px) {
             .hero-section {
                 min-height: 85vh;
                 background-attachment: scroll;
             }
         }
+
         .hero-section .corporate-text {
             font-family: 'Montserrat', sans-serif;
             letter-spacing: 0.3em;
         }
+
         @media (max-width: 640px) {
             .container {
                 padding-left: 1rem;
                 padding-right: 1rem;
             }
         }
+
         .animate-fade-in-up {
             animation: fadeInUp 1s ease-out forwards;
             opacity: 0;
         }
+
         .animate-delay-200 {
             animation-delay: 0.2s;
         }
+
         .animate-delay-300 {
             animation-delay: 0.3s;
         }
+
         .animate-delay-400 {
             animation-delay: 0.4s;
         }
+
         @keyframes fadeInUp {
             from {
                 opacity: 0;
                 transform: translateY(20px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
-        
+
         .addons-heading {
             font-family: 'Montserrat', sans-serif;
             font-weight: 700;
@@ -142,20 +188,20 @@
             text-align: center;
             margin-bottom: 0.75rem;
         }
-        
+
         @media (max-width: 768px) {
             .addons-heading {
                 font-size: 1.875rem;
             }
         }
-        
+
         @media (max-width: 640px) {
             .addons-heading {
                 font-size: 1.5rem;
                 letter-spacing: 0.1em;
             }
         }
-        
+
         .addons-subtext {
             color: #374151;
             line-height: 1.6;
@@ -164,18 +210,18 @@
             max-width: 2xl;
             margin: 0 auto;
         }
-        
+
         .addons-subtext a {
             color: #0050ff;
             text-decoration: underline;
             text-underline-offset: 4px;
             transition: color 0.3s ease;
         }
-        
+
         .addons-subtext a:hover {
             color: #0040d9;
         }
-        
+
         /* Card Styles */
         .addons-cards-container {
             margin-top: 3rem;
@@ -185,25 +231,25 @@
             width: 100%;
             overflow-x: hidden;
         }
-        
+
         @media (min-width: 640px) {
             .addons-cards-container {
                 grid-template-columns: repeat(2, 1fr);
             }
         }
-        
+
         @media (min-width: 1024px) {
             .addons-cards-container {
                 grid-template-columns: repeat(3, 1fr);
             }
         }
-        
+
         @media (min-width: 1280px) {
             .addons-cards-container {
                 grid-template-columns: repeat(4, 1fr);
             }
         }
-        
+
         .addon-card {
             display: flex;
             flex-direction: column;
@@ -211,7 +257,7 @@
             max-width: 100%;
             overflow: hidden;
         }
-        
+
         .addon-card ul {
             margin: 0;
             padding: 0;
@@ -221,7 +267,7 @@
             flex-wrap: wrap;
             gap: 0.625rem;
         }
-        
+
         .addon-card ul li {
             text-transform: uppercase;
             background: var(--clr-tag);
@@ -231,24 +277,24 @@
             padding: 0.375rem 0.625rem;
             border-radius: 0.188rem;
         }
-        
+
         .addon-card .content {
             padding: 0.938rem 0.625rem;
         }
-        
+
         .addon-card .content h3 {
             text-transform: capitalize;
             font-size: clamp(1.5rem, 1.3909rem + 0.4364vw, 1.8rem);
             font-family: 'Playfair Display', serif;
             margin-bottom: 0.5rem;
         }
-        
+
         .addon-card .content p {
             margin: 0.625rem 0 1.25rem;
             color: #565656;
             line-height: 1.6;
         }
-        
+
         .addon-card-inner {
             position: relative;
             width: 100%;
@@ -259,7 +305,7 @@
             overflow: hidden;
             max-width: 100%;
         }
-        
+
         .addon-card-inner .box {
             width: 100%;
             height: 100%;
@@ -268,18 +314,18 @@
             overflow: hidden;
             position: relative;
         }
-        
+
         .addon-card-inner .imgBox {
             position: absolute;
             inset: 0;
         }
-        
+
         .addon-card-inner .imgBox img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
-        
+
         .addon-card-inner .icon {
             position: absolute;
             bottom: -0.375rem;
@@ -290,11 +336,11 @@
             border-top-left-radius: 50%;
             z-index: 1;
         }
-        
+
         .addon-card-inner .icon:hover .iconBox {
             transform: scale(1.1);
         }
-        
+
         .addon-card-inner .icon::before {
             position: absolute;
             content: "";
@@ -306,7 +352,7 @@
             border-bottom-right-radius: 1.25rem;
             box-shadow: 0.313rem 0.313rem 0 0.313rem #fff;
         }
-        
+
         .addon-card-inner .icon::after {
             position: absolute;
             content: "";
@@ -318,7 +364,7 @@
             border-bottom-right-radius: 1.25rem;
             box-shadow: 0.313rem 0.313rem 0 0.313rem var(--clr);
         }
-        
+
         .addon-card-inner .icon .iconBox {
             position: absolute;
             inset: 0.625rem;
@@ -330,70 +376,83 @@
             transition: 0.3s;
             text-decoration: none;
         }
-        
+
         .addon-card-inner .icon .iconBox span {
             color: #fff;
             font-size: 1.5rem;
         }
-        
+
         /* Card color variations for 10 cards */
         .addon-card:nth-child(1) .addon-card-inner .icon .iconBox {
             background: #d3b19a;
         }
+
         .addon-card:nth-child(2) .addon-card-inner .icon .iconBox {
             background: #70b3b1;
         }
+
         .addon-card:nth-child(3) .addon-card-inner .icon .iconBox {
             background: #d05fa2;
         }
+
         .addon-card:nth-child(4) .addon-card-inner .icon .iconBox {
             background: #0050ff;
         }
+
         .addon-card:nth-child(5) .addon-card-inner .icon .iconBox {
             background: #ff6b6b;
         }
+
         .addon-card:nth-child(6) .addon-card-inner .icon .iconBox {
             background: #4ecdc4;
         }
+
         .addon-card:nth-child(7) .addon-card-inner .icon .iconBox {
             background: #ffe66d;
         }
+
         .addon-card:nth-child(8) .addon-card-inner .icon .iconBox {
             background: #a8e6cf;
         }
+
         .addon-card:nth-child(9) .addon-card-inner .icon .iconBox {
             background: #ff8b94;
         }
+
         .addon-card:nth-child(10) .addon-card-inner .icon .iconBox {
             background: #95a5a6;
         }
     </style>
 </head>
+
 <body>
     <div id="nav-placeholder"></div>
 
     <!-- Hero Section -->
     <section class="relative flex items-center justify-center overflow-hidden py-8 hero-section">
-        <div class="absolute inset-0 bg-black bg-opacity-50"></div>     
+        <div class="absolute inset-0 bg-black bg-opacity-50"></div>
         <div class="relative z-10 text-center text-white px-4 w-full">
             <div class="max-w-3xl mx-auto">
                 <div class="mb-2">
-                    <p class="max-w-3xl mx-auto text-sm md:text-base leading-tight mb-2 px-0 text-gray-100 tracking-[0.2em] animate-fade-in-up animate-delay-200 corporate-text">
-                    ENHANCE YOUR EVENT WITH OUR
+                    <p
+                        class="max-w-3xl mx-auto text-sm md:text-base leading-tight mb-2 px-0 text-gray-100 tracking-[0.2em] animate-fade-in-up animate-delay-200 corporate-text">
+                        ENHANCE YOUR EVENT WITH OUR
                     </p>
-                    <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold leading-tight animate-fade-in-up corporate-heading px-2">
+                    <h1
+                        class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold leading-tight animate-fade-in-up corporate-heading px-2">
                         OUR ADD-ONS
                     </h1>
                 </div>
-                
+
                 <div class="h-px w-12 bg-white mx-auto my-3 animate-fade-in-up animate-delay-200"></div>
-                
-                <p class="max-w-3xl mx-auto text-sm md:text-base leading-relaxed mb-4 px-4 sm:px-0 text-gray-100 tracking-normal animate-fade-in-up animate-delay-200 corporate-text">
-                    Scroll down to view all of the package add-ons available for any event! Contact us for more information on how to add any of these amazing additions to your next photo booth rental.
+
+                <p
+                    class="max-w-3xl mx-auto text-sm md:text-base leading-relaxed mb-4 px-4 sm:px-0 text-gray-100 tracking-normal animate-fade-in-up animate-delay-200 corporate-text">
+                    Scroll down to view all of the package add-ons available for any event! Contact us for more
+                    information on how to add any of these amazing additions to your next photo booth rental.
                 </p>
                 <div class="mt-8 mb-8 animate-fade-in-up animate-delay-300">
-                    <a 
-                        href="#contact" 
+                    <a href="contact-us.html"
                         class="btn btn-bubble btn-primary inline-block px-8 py-3 rounded-lg text-white font-semibold text-lg"
                         aria-label="Contact us for add-ons">
                         Contact Us
@@ -418,10 +477,10 @@
                     OUR ADD-ONS INCLUDE:
                 </h2>
                 <p class="addons-subtext animate-fade-in-up animate-delay-200">
-                    For additional information and pricing, <a href="#contact">contact us</a>.
+                    For additional information and pricing, <a href="contact-us.html">contact us</a>.
                 </p>
             </div>
-            
+
             <div class="addons-cards-container">
                 <div class="addon-card">
                     <div class="addon-card-inner" style="--clr:#fff;">
@@ -430,7 +489,7 @@
                                 <img src="../assets/images/galleries/ouraddons/addon1.jpeg" alt="Additional Hours">
                             </div>
                             <div class="icon">
-                                <a href="#" class="iconBox">
+                                <a href="contact-us.html" class="iconBox">
                                     <span class="material-symbols-outlined">arrow_outward</span>
                                 </a>
                             </div>
@@ -438,10 +497,11 @@
                     </div>
                     <div class="content">
                         <h3>Additional Hours</h3>
-                        <p>Need we say more? Your guests will be having so much fun with our booth, that you'll want to add more time!</p>
+                        <p>Need we say more? Your guests will be having so much fun with our booth, that you'll want to
+                            add more time!</p>
                     </div>
                 </div>
-                
+
                 <div class="addon-card">
                     <div class="addon-card-inner" style="--clr:#fff;">
                         <div class="box">
@@ -449,7 +509,7 @@
                                 <img src="../assets/images/galleries/ouraddons/addon2.jpg" alt="Idle Hours">
                             </div>
                             <div class="icon">
-                                <a href="#" class="iconBox">
+                                <a href="contact-us.html" class="iconBox">
                                     <span class="material-symbols-outlined">arrow_outward</span>
                                 </a>
                             </div>
@@ -457,10 +517,12 @@
                     </div>
                     <div class="content">
                         <h3>Idle Hours</h3>
-                        <p>If you're wanting to shut down the booth for those important speeches, or other times when your guests’ attention will be elsewhere, we won't charge you the full price for our operational hours.</p>
+                        <p>If you're wanting to shut down the booth for those important speeches, or other times when
+                            your guests’ attention will be elsewhere, we won't charge you the full price for our
+                            operational hours.</p>
                     </div>
                 </div>
-                
+
                 <div class="addon-card">
                     <div class="addon-card-inner" style="--clr:#fff;">
                         <div class="box">
@@ -468,7 +530,7 @@
                                 <img src="../assets/images/galleries/ouraddons/addon3.png" alt="Digital Sharing">
                             </div>
                             <div class="icon">
-                                <a href="#" class="iconBox">
+                                <a href="contact-us.html" class="iconBox">
                                     <span class="material-symbols-outlined">arrow_outward</span>
                                 </a>
                             </div>
@@ -476,10 +538,11 @@
                     </div>
                     <div class="content">
                         <h3>Digital Sharing</h3>
-                        <p>Let your guests share their photos via text or email! Wi-Fi is required for these to send instantly, otherwise they'll be delivered after your event.</p>
+                        <p>Let your guests share their photos via text or email! Wi-Fi is required for these to send
+                            instantly, otherwise they'll be delivered after your event.</p>
                     </div>
                 </div>
-                
+
                 <div class="addon-card">
                     <div class="addon-card-inner" style="--clr:#fff;">
                         <div class="box">
@@ -487,7 +550,7 @@
                                 <img src="../assets/images/galleries/ouraddons/addon4.jpeg" alt="Social Sharing Kiosk">
                             </div>
                             <div class="icon">
-                                <a href="#" class="iconBox">
+                                <a href="contact-us.html" class="iconBox">
                                     <span class="material-symbols-outlined">arrow_outward</span>
                                 </a>
                             </div>
@@ -495,18 +558,21 @@
                     </div>
                     <div class="content">
                         <h3>Social Sharing Kiosk</h3>
-                        <p>Have a large number of attendees? After your guests take their pictures at the photo booth, the pictures are automatically sent to the kiosk where guests can then share their pictures online.</p>
+                        <p>Have a large number of attendees? After your guests take their pictures at the photo booth,
+                            the pictures are automatically sent to the kiosk where guests can then share their pictures
+                            online.</p>
                     </div>
                 </div>
-                
+
                 <div class="addon-card">
                     <div class="addon-card-inner" style="--clr:#fff;">
                         <div class="box">
                             <div class="imgBox">
-                                <img src="../assets/images/galleries/ouraddons/addon5.jpg" alt="Green Screen Background">
+                                <img src="../assets/images/galleries/ouraddons/addon5.jpg"
+                                    alt="Green Screen Background">
                             </div>
                             <div class="icon">
-                                <a href="#" class="iconBox">
+                                <a href="contact-us.html" class="iconBox">
                                     <span class="material-symbols-outlined">arrow_outward</span>
                                 </a>
                             </div>
@@ -514,18 +580,20 @@
                     </div>
                     <div class="content">
                         <h3>Green Screen Background</h3>
-                        <p>Instead of picking just one backdrop, why not 6? We'll set up a green screen and work with you to choose or create images that your guests can pick from!</p>
+                        <p>Instead of picking just one backdrop, why not 6? We'll set up a green screen and work with
+                            you to choose or create images that your guests can pick from!</p>
                     </div>
                 </div>
-                
+
                 <div class="addon-card">
                     <div class="addon-card-inner" style="--clr:#fff;">
                         <div class="box">
                             <div class="imgBox">
-                                <img src="../assets/images/galleries/ouraddons/addon6.jpeg" alt="VIP Red Carpet Setting">
+                                <img src="../assets/images/galleries/ouraddons/addon6.jpeg"
+                                    alt="VIP Red Carpet Setting">
                             </div>
                             <div class="icon">
-                                <a href="#" class="iconBox">
+                                <a href="contact-us.html" class="iconBox">
                                     <span class="material-symbols-outlined">arrow_outward</span>
                                 </a>
                             </div>
@@ -533,18 +601,20 @@
                     </div>
                     <div class="content">
                         <h3>VIP Red Carpet Setting</h3>
-                        <p>We will bring along our red carpet and rope off the photo booth area, creating the feel of exclusivity and glamour!</p>
+                        <p>We will bring along our red carpet and rope off the photo booth area, creating the feel of
+                            exclusivity and glamour!</p>
                     </div>
                 </div>
-                
+
                 <div class="addon-card">
                     <div class="addon-card-inner" style="--clr:#fff;">
                         <div class="box">
                             <div class="imgBox">
-                                <img src="../assets/images/galleries/ouraddons/addon7.gif" alt="Additional Photo Filters">
+                                <img src="../assets/images/galleries/ouraddons/addon7.gif"
+                                    alt="Additional Photo Filters">
                             </div>
                             <div class="icon">
-                                <a href="#" class="iconBox">
+                                <a href="contact-us.html" class="iconBox">
                                     <span class="material-symbols-outlined">arrow_outward</span>
                                 </a>
                             </div>
@@ -552,10 +622,11 @@
                     </div>
                     <div class="content">
                         <h3>Additional Photo Filters</h3>
-                        <p>Guests can choose to add a filter to their photos. Ranging from black and white, sepia, comic book, and plenty more!</p>
+                        <p>Guests can choose to add a filter to their photos. Ranging from black and white, sepia, comic
+                            book, and plenty more!</p>
                     </div>
                 </div>
-                
+
                 <div class="addon-card">
                     <div class="addon-card-inner" style="--clr:#fff;">
                         <div class="box">
@@ -563,7 +634,7 @@
                                 <img src="../assets/images/galleries/ouraddons/addon8.jpeg" alt="Custom Backdrop">
                             </div>
                             <div class="icon">
-                                <a href="#" class="iconBox">
+                                <a href="contact-us.html" class="iconBox">
                                     <span class="material-symbols-outlined">arrow_outward</span>
                                 </a>
                             </div>
@@ -571,10 +642,11 @@
                     </div>
                     <div class="content">
                         <h3>Custom Backdrop</h3>
-                        <p>Want to give your event the feeling of an VIP party? You can do so by choosing a custom step and repeat backdrop. We'll design and perfect it just for you!</p>
+                        <p>Want to give your event the feeling of an VIP party? You can do so by choosing a custom step
+                            and repeat backdrop. We'll design and perfect it just for you!</p>
                     </div>
                 </div>
-                
+
                 <div class="addon-card">
                     <div class="addon-card-inner" style="--clr:#fff;">
                         <div class="box">
@@ -582,7 +654,7 @@
                                 <img src="../assets/images/galleries/ouraddons/addon9.jpg" alt="Memory Album Book">
                             </div>
                             <div class="icon">
-                                <a href="#" class="iconBox">
+                                <a href="contact-us.html" class="iconBox">
                                     <span class="material-symbols-outlined">arrow_outward</span>
                                 </a>
                             </div>
@@ -590,18 +662,20 @@
                     </div>
                     <div class="content">
                         <h3>Memory Album Book</h3>
-                        <p>In addition to the photos your guests receives, one will be placed into a beautiful memory book, where your guests are encouraged to write their well wishes by the picture.</p>
+                        <p>In addition to the photos your guests receives, one will be placed into a beautiful memory
+                            book, where your guests are encouraged to write their well wishes by the picture.</p>
                     </div>
                 </div>
-                
+
                 <div class="addon-card">
                     <div class="addon-card-inner" style="--clr:#fff;">
                         <div class="box">
                             <div class="imgBox">
-                                <img src="../assets/images/galleries/ouraddons/addon10.gif" alt="Unlimited Photo Prints">
+                                <img src="../assets/images/galleries/ouraddons/addon10.gif"
+                                    alt="Unlimited Photo Prints">
                             </div>
                             <div class="icon">
-                                <a href="#" class="iconBox">
+                                <a href="contact-us.html" class="iconBox">
                                     <span class="material-symbols-outlined">arrow_outward</span>
                                 </a>
                             </div>
@@ -609,17 +683,19 @@
                     </div>
                     <div class="content">
                         <h3>Unlimited Photo Prints</h3>
-                        <p>Make sure everyone in the picture is able to get a great printout of the fun they are having.</p>
+                        <p>Make sure everyone in the picture is able to get a great printout of the fun they are having.
+                        </p>
                     </div>
                 </div>
                 <div class="addon-card">
                     <div class="addon-card-inner" style="--clr:#fff;">
                         <div class="box">
                             <div class="imgBox">
-                                <img src="../assets/images/galleries/ouraddons/addon11.gif" alt="Unlimited Photo Prints">
+                                <img src="../assets/images/galleries/ouraddons/addon11.gif"
+                                    alt="Unlimited Photo Prints">
                             </div>
                             <div class="icon">
-                                <a href="#" class="iconBox">
+                                <a href="contact-us.html" class="iconBox">
                                     <span class="material-symbols-outlined">arrow_outward</span>
                                 </a>
                             </div>
@@ -627,7 +703,8 @@
                     </div>
                     <div class="content">
                         <h3>Single Photo Layout</h3>
-                        <p>Our standard photo strips come with every package, but why not add a full single 4x6 Photo to your event? Customize the design, and make it your own.</p>
+                        <p>Our standard photo strips come with every package, but why not add a full single 4x6 Photo to
+                            your event? Customize the design, and make it your own.</p>
                     </div>
                 </div>
             </div>
@@ -637,4 +714,5 @@
     <script src="../assets/components/navigation.js"></script>
     <script src="../assets/components/footer.js"></script>
 </body>
+
 </html>
