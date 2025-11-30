@@ -443,6 +443,147 @@
             }
         }
 
+        /* Chart Legend Styles */
+        .chart-legend {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.5rem 0.75rem;
+            margin: 1rem auto 0 auto;
+            padding: 0.5rem 0.75rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            backdrop-filter: blur(10px);
+            max-width: 680px;
+        }
+
+        @media (max-width: 640px) {
+            .chart-legend {
+                gap: 0.375rem 0.5rem;
+                padding: 0.5rem;
+                margin: 0.75rem auto 0 auto;
+            }
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.375rem;
+            color: white;
+            font-size: 0.7rem;
+            font-weight: 500;
+        }
+
+        @media (max-width: 640px) {
+            .legend-item {
+                font-size: 0.65rem;
+                gap: 0.3rem;
+            }
+        }
+
+        .legend-marker {
+            width: 12px;
+            height: 12px;
+            border-radius: 2px;
+            flex-shrink: 0;
+        }
+
+        @media (max-width: 640px) {
+            .legend-marker {
+                width: 10px;
+                height: 10px;
+            }
+        }
+
+        .legend-marker.clickable {
+            position: relative;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .legend-marker.clickable::after {
+            content: '✓';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 8px;
+            font-weight: bold;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.8;
+                transform: scale(1.05);
+            }
+        }
+
+        /* Chart Instructions */
+        .chart-instructions {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            color: white;
+            font-size: 0.9rem;
+            text-align: center;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        @media (max-width: 640px) {
+            .chart-instructions {
+                padding: 0.75rem 1rem;
+                font-size: 0.8rem;
+                margin-bottom: 1rem;
+            }
+        }
+
+        .chart-instructions p {
+            margin: 0.5rem 0;
+        }
+
+        @media (max-width: 640px) {
+            .chart-instructions p {
+                margin: 0.375rem 0;
+            }
+        }
+
+        .chart-instructions strong {
+            font-weight: 600;
+            color: #ffd700;
+        }
+
+        /* Improved marker hover states */
+        .highcharts-markers path {
+            transition: transform 0.2s ease, filter 0.2s ease;
+        }
+
+        .highcharts-markers path:hover {
+            transform: scale(1.15);
+            filter: brightness(1.2) drop-shadow(0 0 8px rgba(255, 255, 255, 0.5));
+        }
+
+        /* State counter badge */
+        .state-counter {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 80, 255, 0.9);
+            color: white;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            margin-left: 0.5rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
         /* Modal Styles */
         .city-modal {
             display: none;
@@ -495,6 +636,26 @@
             position: relative;
             animation: slideUp 0.3s ease;
             font-family: 'Inter', sans-serif;
+            border: 3px solid #0050ff;
+        }
+
+        .city-modal-content::before {
+            content: '';
+            position: absolute;
+            top: -3px;
+            left: -3px;
+            right: -3px;
+            bottom: -3px;
+            background: linear-gradient(45deg, #0050ff, #ffd700, #0050ff);
+            border-radius: 16px;
+            z-index: -1;
+            opacity: 0.3;
+            animation: shimmer 3s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.6; }
         }
 
         @media (min-width: 640px) {
@@ -587,6 +748,136 @@
             box-shadow: 0 6px 12px rgba(0, 80, 255, 0.4);
         }
 
+        .city-link::before {
+            content: '📍 ';
+            margin-right: 0.5rem;
+        }
+
+        /* Search/Filter Feature */
+        .city-search {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        .city-search:focus {
+            outline: none;
+            border-color: #0050ff;
+            box-shadow: 0 0 0 3px rgba(0, 80, 255, 0.1);
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 2rem;
+            color: #6b7280;
+            font-style: italic;
+        }
+
+        /* Chart Search Box Styles */
+        .chart-search-container {
+            max-width: 680px;
+            width: 100%;
+            margin: 0 auto 1.5rem auto;
+            position: relative;
+        }
+
+        .chart-search-box {
+            width: 100%;
+            padding: 1rem 1.5rem 1rem 3rem;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50px;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            color: white;
+            font-size: 1rem;
+            font-family: 'Inter', sans-serif;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            outline: none;
+        }
+
+        .chart-search-box::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .chart-search-box:focus {
+            border-color: #ffd700;
+            background: rgba(255, 255, 255, 0.25);
+            box-shadow: 0 0 0 4px rgba(255, 215, 0, 0.2);
+        }
+
+        .chart-search-icon {
+            position: absolute;
+            left: 1.25rem;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.25rem;
+            pointer-events: none;
+        }
+
+        .chart-search-clear {
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            color: white;
+            font-size: 1.25rem;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+
+        .chart-search-clear:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .chart-search-clear.show {
+            display: flex;
+        }
+
+        .chart-search-results {
+            text-align: center;
+            margin-top: 0.75rem;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 0.875rem;
+            font-weight: 500;
+            min-height: 1.5rem;
+        }
+
+        .chart-search-results.hidden {
+            display: none;
+        }
+
+        .chart-search-results.highlight {
+            color: #ffd700;
+            font-weight: 600;
+        }
+
+        @media (max-width: 640px) {
+            .chart-search-box {
+                padding: 0.875rem 1.25rem 0.875rem 2.75rem;
+                font-size: 0.9rem;
+            }
+
+            .chart-search-icon {
+                left: 1rem;
+                font-size: 1.1rem;
+            }
+        }
+
         .city-link:active {
             transform: translateY(0);
         }
@@ -626,12 +917,56 @@
                     FIND US IN A CITY NEAR YOU!
                 </h2>
                 <p class="text-base sm:text-lg md:text-xl text-white/90 max-w-8xl mx-auto leading-relaxed mb-8 sm:mb-12" style="font-family: 'Inter', sans-serif;">
-                    Use the list below to find the closest city to you! As a national Photo Booth company, we strive to deliver our outstanding services across the country.
+                    Use the interactive map below to find the closest city to you! As a national Photo Booth company, we strive to deliver our outstanding services across the country.
                 </p>
                 
+                <!-- Chart Instructions -->
+                <div class="chart-instructions">
+                    <p><strong>💡 Tip:</strong> Click on any <strong>highlighted state</strong> (with gold border) to see available cities we serve!</p>
+                    <p>Hover over any state to learn more. <span id="availableStatesCount" class="state-counter">0</span> states have locations available.</p>
+                </div>
+
+                <!-- Chart Search Box -->
+                <div class="chart-search-container">
+                    <span class="chart-search-icon">🔍</span>
+                    <input type="text" 
+                           id="chartSearchBox" 
+                           class="chart-search-box" 
+                           placeholder="🔍 Search for a city or state (e.g., 'New York', 'CA', 'Orlando')..." 
+                           autocomplete="off"
+                           onkeyup="handleChartSearchKeyup(event)"
+                           oninput="filterChartStates()">
+                    <button class="chart-search-clear" id="chartSearchClear" onclick="clearChartSearch()" aria-label="Clear search">×</button>
+                    <div id="chartSearchResults" class="chart-search-results hidden"></div>
+                </div>
+                
                 <!-- Interactive US Map -->
-                <div class="map-wrapper mt-8 sm:mt-12 flex justify-center px-2 sm:px-4 overflow-hidden w-full">
+                <div class="map-wrapper mt-4 sm:mt-6 flex justify-center px-2 sm:px-4 overflow-hidden w-full">
                     <div id="container" style="height: 460px; width: 100%; max-width: 680px; padding: 20px; position: relative; z-index: 1;"></div>
+                </div>
+
+                <!-- Chart Legend -->
+                <div class="chart-legend">
+                    <div class="legend-item">
+                        <div class="legend-marker" style="background: #ffab00;"></div>
+                        <span>South Region</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-marker" style="background: #2962ff;"></div>
+                        <span>West Region</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-marker" style="background: #00c853;"></div>
+                        <span>Midwest Region</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-marker" style="background: #c51162;"></div>
+                        <span>Northeast Region</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-marker clickable" style="background: #000000;"></div>
+                        <span>States with Available Cities</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -644,15 +979,210 @@
                 <h3 class="city-modal-title" id="modalTitle">Areas we serve</h3>
                 <button class="city-modal-close" onclick="closeCityModal()" aria-label="Close modal">&times;</button>
             </div>
+            <input type="text" 
+                   id="citySearch" 
+                   class="city-search" 
+                   placeholder="🔍 Search cities..." 
+                   autocomplete="off"
+                   onkeyup="filterCities()">
             <ul class="city-list" id="cityList">
                 <!-- Cities will be dynamically inserted here -->
             </ul>
+            <div id="noResults" class="no-results" style="display: none;">
+                No cities found matching your search.
+            </div>
         </div>
     </div>
 
     <script>
         // List of states that should display labels
         const statesWithLabels = ['AZ', 'CA', 'CO', 'CT', 'DC', 'FL', 'GA', 'IL', 'KY', 'LA', 'MA', 'MI', 'MN', 'NV', 'NY', 'NC', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC', 'TN', 'TX', 'WA'];
+
+        // Count states with available cities
+        function countAvailableStates() {
+            let count = 0;
+            chart.series.forEach(series => {
+                series.data.forEach(point => {
+                    if (point.cities && point.cities.length > 0) {
+                        count++;
+                    }
+                });
+            });
+            const counterElement = document.getElementById('availableStatesCount');
+            if (counterElement) {
+                counterElement.textContent = count;
+            }
+        }
+
+        // Store original colors and states for search filtering
+        let originalStateData = [];
+        const stateNameMap = {
+            'AZ': 'Arizona', 'CA': 'California', 'CO': 'Colorado', 'CT': 'Connecticut',
+            'DC': 'District of Columbia', 'FL': 'Florida', 'GA': 'Georgia', 'IL': 'Illinois',
+            'KY': 'Kentucky', 'LA': 'Louisiana', 'MA': 'Massachusetts', 'MI': 'Michigan',
+            'MN': 'Minnesota', 'NV': 'Nevada', 'NY': 'New York', 'NC': 'North Carolina',
+            'OH': 'Ohio', 'OK': 'Oklahoma', 'OR': 'Oregon', 'PA': 'Pennsylvania',
+            'RI': 'Rhode Island', 'SC': 'South Carolina', 'TN': 'Tennessee', 'TX': 'Texas',
+            'WA': 'Washington', 'HI': 'Hawaii', 'NM': 'New Mexico', 'MS': 'Mississippi',
+            'AL': 'Alabama', 'UT': 'Utah', 'KS': 'Kansas', 'AR': 'Arkansas', 'VA': 'Virginia',
+            'NE': 'Nebraska', 'MO': 'Missouri', 'WV': 'West Virginia', 'MD': 'Maryland',
+            'DE': 'Delaware', 'ID': 'Idaho', 'WY': 'Wyoming', 'SD': 'South Dakota',
+            'IA': 'Iowa', 'IN': 'Indiana', 'NJ': 'New Jersey', 'MT': 'Montana',
+            'ND': 'North Dakota', 'WI': 'Wisconsin', 'VT': 'Vermont', 'NH': 'New Hampshire',
+            'AK': 'Alaska', 'ME': 'Maine'
+        };
+
+        // Filter chart states based on search
+        function filterChartStates() {
+            const searchBox = document.getElementById('chartSearchBox');
+            const clearButton = document.getElementById('chartSearchClear');
+            const resultsDiv = document.getElementById('chartSearchResults');
+            const searchTerm = searchBox ? searchBox.value.toLowerCase().trim() : '';
+            
+            // Show/hide clear button
+            if (clearButton) {
+                if (searchTerm.length > 0) {
+                    clearButton.classList.add('show');
+                } else {
+                    clearButton.classList.remove('show');
+                }
+            }
+
+            if (!chart || !chart.series) return;
+
+            // Get all chart series and update points
+            let matchCount = 0;
+            let matchedStates = [];
+
+            chart.series.forEach((series, seriesIndex) => {
+                series.data.forEach((point, pointIndex) => {
+                    if (!point.USstate) return;
+
+                    let matches = false;
+                    const stateAbbr = point.USstate;
+                    const stateName = stateNameMap[stateAbbr] || stateAbbr;
+                    const stateNameLower = stateName.toLowerCase();
+                    const stateAbbrLower = stateAbbr.toLowerCase();
+                    
+                    // Check if search matches state name or abbreviation
+                    if (searchTerm === '' || stateNameLower.includes(searchTerm) || stateAbbrLower.includes(searchTerm)) {
+                        matches = true;
+                    }
+                    
+                    // Check if search matches any city in the state
+                    if (!matches && point.cities && point.cities.length > 0) {
+                        point.cities.forEach(city => {
+                            if (city.toLowerCase().includes(searchTerm)) {
+                                matches = true;
+                            }
+                        });
+                    }
+
+                    if (matches && searchTerm !== '') {
+                        matchCount++;
+                        matchedStates.push(stateAbbr);
+                    }
+
+                    // Prepare update options
+                    const updateOptions = {
+                        marker: {},
+                        dataLabels: {
+                            enabled: true,
+                            style: {}
+                        }
+                    };
+
+                    if (searchTerm === '') {
+                        // Reset to original appearance
+                        updateOptions.marker = {
+                            fillColor: point.color,
+                            lineColor: point.cities && point.cities.length > 0 ? '#ffd700' : 'transparent',
+                            lineWidth: point.cities && point.cities.length > 0 ? 3 : 0,
+                            radius: point.cities && point.cities.length > 0 ? 16 : 14,
+                            opacity: 1
+                        };
+                        updateOptions.dataLabels.style = {
+                            opacity: 1,
+                            fontWeight: 'bold',
+                            fontSize: '12px',
+                            color: '#000000'
+                        };
+                    } else if (matches) {
+                        // Highlight matching state - make it bright and prominent
+                        updateOptions.marker = {
+                            fillColor: point.color,
+                            lineColor: '#ffd700',
+                            lineWidth: 5,
+                            radius: 22,
+                            opacity: 1
+                        };
+                        updateOptions.dataLabels.style = {
+                            opacity: 1,
+                            fontWeight: 'bold',
+                            fontSize: '15px',
+                            color: '#1a202c',
+                            textOutline: '2px contrast'
+                        };
+                    } else {
+                        // Grey out non-matching states
+                        updateOptions.marker = {
+                            fillColor: '#cccccc',
+                            lineColor: 'transparent',
+                            lineWidth: 0,
+                            radius: 8,
+                            opacity: 0.25
+                        };
+                        updateOptions.dataLabels.style = {
+                            opacity: 0.15,
+                            fontWeight: 'normal',
+                            fontSize: '10px',
+                            color: '#999999'
+                        };
+                    }
+
+                    // Apply update using point.update()
+                    point.update(updateOptions, false);
+                });
+            });
+
+            // Redraw chart after all updates
+            chart.redraw();
+
+            // Update results message
+            if (resultsDiv) {
+                if (searchTerm === '') {
+                    resultsDiv.classList.add('hidden');
+                    resultsDiv.textContent = '';
+                } else if (matchCount > 0) {
+                    resultsDiv.classList.remove('hidden');
+                    resultsDiv.classList.add('highlight');
+                    resultsDiv.textContent = `✓ Found ${matchCount} matching location${matchCount > 1 ? 's' : ''}: ${matchedStates.join(', ')}`;
+                } else {
+                    resultsDiv.classList.remove('hidden');
+                    resultsDiv.classList.remove('highlight');
+                    resultsDiv.textContent = `No matches found for "${searchBox.value}"`;
+                }
+            }
+        }
+
+        // Handle keyboard events for chart search
+        function handleChartSearchKeyup(event) {
+            filterChartStates();
+            // Clear search on Escape key
+            if (event.key === 'Escape') {
+                clearChartSearch();
+            }
+        }
+
+        // Clear chart search
+        function clearChartSearch() {
+            const searchBox = document.getElementById('chartSearchBox');
+            if (searchBox) {
+                searchBox.value = '';
+                filterChartStates();
+                searchBox.focus();
+            }
+        }
 
         const chart = Highcharts.chart('container', {
             chart: {
@@ -688,35 +1218,83 @@
             plotOptions: {
                 series: {
                     marker: {
-                        lineColor: 'transparent',
+                        lineColor: function() {
+                            // Highlight clickable states with a gold border
+                            return this.cities ? '#ffd700' : 'transparent';
+                        },
+                        lineWidth: function() {
+                            return this.cities ? 3 : 0;
+                        },
                         symbol: 'hexagon',
-                        lineWidth: 0,
-                        radius: 14
+                        radius: function() {
+                            // Make clickable states slightly larger
+                            return this.cities ? 16 : 14;
+                        },
+                        states: {
+                            hover: {
+                                lineWidth: 4,
+                                radius: 18,
+                                fillColor: function() {
+                                    // Brighten on hover
+                                    return Highcharts.color(this.color).brighten(0.2).get();
+                                },
+                                lineColor: '#ffd700'
+                            }
+                        }
                     },
                     dataLabels: {
                         enabled: true,
                         formatter: function() {
                             // Only show label if state is in the approved list
                             if (this.point.USstate && statesWithLabels.includes(this.point.USstate)) {
-                                return this.point.USstate;
+                                let label = this.point.USstate;
+                                // Add indicator for states with cities
+                                if (this.point.cities && this.point.cities.length > 0) {
+                                    label += ' ✓';
+                                }
+                                return label;
                             }
                             return '';
                         },
                         color: '#000000',
                         style: {
-                            textOutline: false,
+                            textOutline: '2px contrast',
                             fontWeight: 'bold',
-                            fontSize: '12px'
+                            fontSize: '12px',
+                            cursor: 'pointer'
                         }
                     },
                     cursor: 'pointer',
                     point: {
                         events: {
                             click: function() {
-                                if (this.cities) {
+                                if (this.cities && this.cities.length > 0) {
                                     openCityModal(this.USstate, this.cities);
+                                } else {
+                                    // Show a friendly message for states without cities
+                                    alert(`We don't have locations in ${this.USstate} yet, but we're always expanding! Contact us to request service in your area.`);
+                                }
+                            },
+                            mouseOver: function() {
+                                // Enhance hover feedback
+                                if (this.cities && this.cities.length > 0) {
+                                    this.series.chart.tooltip.update({
+                                        style: {
+                                            fontSize: '14px',
+                                            fontWeight: '600'
+                                        }
+                                    });
                                 }
                             }
+                        }
+                    },
+                    states: {
+                        hover: {
+                            brightness: 0.1,
+                            enabled: true
+                        },
+                        inactive: {
+                            opacity: 0.6
                         }
                     }
                 }
@@ -726,19 +1304,79 @@
                 headerFormat: null,
                 pointFormatter: function() {
                     if (this.USstate) {
-                        // Default format for all states
-                        return `- State of <b>${this.USstate}</b><br/> - The <b>${this.region}</b> region<br/> <b>- ${this.capital}</b> is the capital<br/>`;
+                        const stateNames = {
+                            'AZ': 'Arizona', 'CA': 'California', 'CO': 'Colorado', 'CT': 'Connecticut',
+                            'DC': 'District of Columbia', 'FL': 'Florida', 'GA': 'Georgia', 'IL': 'Illinois',
+                            'KY': 'Kentucky', 'LA': 'Louisiana', 'MA': 'Massachusetts', 'MI': 'Michigan',
+                            'MN': 'Minnesota', 'NV': 'Nevada', 'NY': 'New York', 'NC': 'North Carolina',
+                            'OH': 'Ohio', 'OK': 'Oklahoma', 'OR': 'Oregon', 'PA': 'Pennsylvania',
+                            'RI': 'Rhode Island', 'SC': 'South Carolina', 'TN': 'Tennessee', 'TX': 'Texas',
+                            'WA': 'Washington'
+                        };
+                        const stateName = stateNames[this.USstate] || this.USstate;
+                        const regionColors = {
+                            'south': '#ffab00',
+                            'west': '#2962ff',
+                            'midwest': '#00c853',
+                            'northeast': '#c51162'
+                        };
+                        const regionColor = regionColors[this.region] || '#666';
+                        
+                        let html = `<div style="padding: 4px 0;">
+                            <div style="font-size: 16px; font-weight: bold; color: #1a202c; margin-bottom: 8px;">
+                                ${stateName} (${this.USstate})
+                            </div>
+                            <div style="font-size: 13px; color: #4a5568; margin-bottom: 4px;">
+                                📍 Capital: <b>${this.capital}</b>
+                            </div>
+                            <div style="font-size: 13px; color: #4a5568; margin-bottom: 4px;">
+                                🌎 Region: <b style="color: ${regionColor};">${this.region.charAt(0).toUpperCase() + this.region.slice(1)}</b>
+                            </div>`;
+                        
+                        if (this.cities && this.cities.length > 0) {
+                            html += `<div style="margin-top: 8px; padding-top: 8px; border-top: 2px solid #e5e7eb;">
+                                <div style="font-size: 12px; color: #6b7280; margin-bottom: 4px;">
+                                    <strong style="color: #059669;">✓ We serve ${this.cities.length} location${this.cities.length > 1 ? 's' : ''}:</strong>
+                                </div>
+                                <div style="font-size: 13px; color: #1a202c;">
+                                    ${this.cities.join(', ')}
+                                </div>
+                                <div style="margin-top: 8px; font-size: 11px; color: #ffd700; font-weight: 600;">
+                                    👆 Click to see details
+                                </div>
+                            </div>`;
+                        } else {
+                            html += `<div style="margin-top: 8px; padding-top: 8px; border-top: 2px solid #e5e7eb;">
+                                <div style="font-size: 12px; color: #9ca3af;">
+                                    No locations available yet
+                                </div>
+                            </div>`;
+                        }
+                        
+                        html += `</div>`;
+                        return html;
                     }
                     return '';
                 },
-                backgroundColor: 'rgba(255, 255, 255, 0.95)',
-                borderColor: '#333',
-                borderRadius: 8,
+                backgroundColor: 'rgba(255, 255, 255, 0.98)',
+                borderColor: '#0050ff',
+                borderRadius: 12,
+                borderWidth: 2,
+                shadow: {
+                    color: 'rgba(0, 0, 0, 0.2)',
+                    offsetX: 0,
+                    offsetY: 2,
+                    opacity: 0.3,
+                    width: 4
+                },
                 style: {
-                    fontSize: '13px'
+                    fontSize: '13px',
+                    fontFamily: "'Inter', sans-serif"
                 },
                 animation: true,
-                hideDelay: 0
+                hideDelay: 100,
+                followPointer: false,
+                padding: 12
             },
             xAxis: {
                 lineWidth: 0,
@@ -1250,6 +1888,9 @@
                 }]
             }]
         });
+
+        // Count available states after chart is created
+        setTimeout(countAvailableStates, 500);
         
         // Handle window resize and orientation change for mobile responsiveness
         let resizeTimer;
@@ -1268,11 +1909,16 @@
             setTimeout(handleResize, 500);
         });
 
+        // Store original city list for filtering
+        let originalCityList = [];
+
         // Modal Functions
         function openCityModal(state, cities) {
             const modal = document.getElementById('cityModal');
             const modalTitle = document.getElementById('modalTitle');
             const cityList = document.getElementById('cityList');
+            const citySearch = document.getElementById('citySearch');
+            const noResults = document.getElementById('noResults');
             
             if (modal && modalTitle && cityList) {
                 // Set the modal title based on state
@@ -1304,33 +1950,104 @@
                     'WA': 'Washington'
                 };
                 const stateName = stateNames[state] || state;
-                modalTitle.textContent = `Areas that we serve in ${stateName}:`;
+                modalTitle.textContent = `${cities.length} Location${cities.length > 1 ? 's' : ''} in ${stateName}`;
+                
+                // Clear search field
+                if (citySearch) {
+                    citySearch.value = '';
+                }
                 
                 // Clear existing cities
                 cityList.innerHTML = '';
+                originalCityList = [];
+                
+                // City-specific page mappings
+                const cityPageMap = {
+                    'Phoenix': 'locations/photo-booth-rental-in-phoenix%252C-arizona.html'
+                };
+                
+                // Function to properly encode file paths with special characters
+                function getCityUrl(city) {
+                    if (cityPageMap[city]) {
+                        // For files with encoded characters in filename, return as-is
+                        return cityPageMap[city];
+                    }
+                    return 'locations.html';
+                }
                 
                 // Add cities to the list
                 cities.forEach(city => {
                     const li = document.createElement('li');
                     li.className = 'city-item';
+                    li.setAttribute('data-city', city.toLowerCase());
                     const link = document.createElement('a');
-                    link.href = 'locations.html';
+                    // Use city-specific page if available, otherwise use default
+                    link.href = getCityUrl(city);
                     link.className = 'city-link';
                     link.textContent = city;
                     li.appendChild(link);
                     cityList.appendChild(li);
+                    originalCityList.push(li.cloneNode(true));
                 });
+                
+                // Hide no results message
+                if (noResults) {
+                    noResults.style.display = 'none';
+                }
                 
                 modal.classList.add('show');
                 document.body.style.overflow = 'hidden';
+                
+                // Focus on search input
+                if (citySearch) {
+                    setTimeout(() => citySearch.focus(), 100);
+                }
+            }
+        }
+
+        // Filter cities based on search input
+        function filterCities() {
+            const searchInput = document.getElementById('citySearch');
+            const cityList = document.getElementById('cityList');
+            const noResults = document.getElementById('noResults');
+            
+            if (!searchInput || !cityList) return;
+            
+            const searchTerm = searchInput.value.toLowerCase().trim();
+            const cityItems = cityList.querySelectorAll('.city-item');
+            let visibleCount = 0;
+            
+            cityItems.forEach(item => {
+                const cityName = item.getAttribute('data-city') || '';
+                if (cityName.includes(searchTerm)) {
+                    item.style.display = '';
+                    visibleCount++;
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+            
+            // Show/hide no results message
+            if (noResults) {
+                if (visibleCount === 0 && searchTerm !== '') {
+                    noResults.style.display = 'block';
+                } else {
+                    noResults.style.display = 'none';
+                }
             }
         }
 
         function closeCityModal() {
             const modal = document.getElementById('cityModal');
+            const citySearch = document.getElementById('citySearch');
             if (modal) {
                 modal.classList.remove('show');
                 document.body.style.overflow = '';
+                // Clear search when closing
+                if (citySearch) {
+                    citySearch.value = '';
+                    filterCities(); // Reset filter
+                }
             }
         }
 
