@@ -50,7 +50,7 @@
         .hero-overlay {
             position: absolute;
             inset: 0;
-            background: linear-gradient(135deg, rgba(139, 105, 20, 0.4) 0%, rgba(101, 67, 33, 0.5) 50%, rgba(0, 0, 0, 0.7) 100%);
+            background: rgba(0, 0, 0, 0.5);
             z-index: 1;
         }
         
@@ -215,6 +215,24 @@
         
         .modern-section-light {
             background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 50%, #ffffff 100%);
+        }
+        
+        /* Parallax Section */
+        .parallax-section {
+            background-attachment: fixed;
+            overflow: hidden;
+        }
+        
+        .parallax-overlay {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+        }
+        
+        @media (max-width: 768px) {
+            .parallax-section {
+                background-attachment: scroll;
+            }
         }
         
         .section-title {
@@ -503,7 +521,7 @@
 <body>
     <!-- Hero Section -->
     <section class="hero-section">
-        <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1519741497674-611481863552?w=1920&h=1080&fit=crop');"></div>
+        <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('../assets/images/rustic-wedding/rustic-wedding-hero.webp');"></div>
         <div class="hero-overlay"></div>
         <div class="hero-content">
             <h1 class="hero-title animate-fade-in">Rustic Wedding</h1>
@@ -638,18 +656,19 @@
                     </ul>
                 </div>
                 <div class="content-image">
-                    <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=800&h=600&fit=crop" alt="Rustic Wedding Theme Photo Booth">
+                    <img src="../assets/images/rustic-wedding/rustic-wedding-1.webp" alt="Rustic Wedding Theme Photo Booth">
                 </div>
             </div>
         </div>
     </section>
 
     <!-- View Other Themes Section -->
-    <section class="modern-section modern-section-light">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
+    <section class="modern-section parallax-section" style="background-image: url('../assets/images/rustic-wedding/rustic-wedding-2.webp'); background-size: cover; background-position: center; background-repeat: no-repeat; position: relative;">
+        <div class="parallax-overlay" style="position: absolute; inset: 0; background: rgba(0, 0, 0, 0.5); z-index: 1;"></div>
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl" style="position: relative; z-index: 2;">
             <div class="text-center">
-                <h2 class="section-title section-title-light">View Our Other Event Themes</h2>
-                <p class="section-subtitle section-subtitle-light mb-8">Scroll to see all of our themes</p>
+                <h2 class="section-title">View Our Other Event Themes</h2>
+                <p class="section-subtitle mb-8">Scroll to see all of our themes</p>
                 <a href="../booth-themes.html" class="modern-btn" style="background: linear-gradient(135deg, rgba(201, 168, 108, 0.9) 0%, rgba(139, 105, 20, 0.9) 100%);">
                     View All Themes
                 </a>

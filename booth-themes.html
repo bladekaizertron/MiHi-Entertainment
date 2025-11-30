@@ -103,6 +103,13 @@
             transition: opacity 0.3s ease;
         }
 
+        img.theme-card-overlay {
+            background: none;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
         .theme-card:hover .theme-card-overlay {
             opacity: 1;
         }
@@ -494,11 +501,14 @@
             const card = document.createElement('div');
             card.className = 'theme-card';
             const themeUrl = theme.url || '#';
+            const overlayContent = theme.id === 1 
+                ? `<img src="../assets/images/70s-80s-retro-party/70s-80s-retro-party-hero.webp" alt="${theme.name}" class="theme-card-overlay">`
+                : `<div class="theme-card-overlay"></div>`;
             card.innerHTML = `
                 <a href="${themeUrl}" class="block h-full">
                     <div class="theme-card-image">
                         <img src="../assets/images/galleries/ourthemes/${theme.image}" alt="${theme.name}" loading="lazy">
-                        <div class="theme-card-overlay"></div>
+                        ${overlayContent}
                         <div class="theme-card-badge">${theme.category}</div>
                     </div>
                     <div class="theme-card-content">
