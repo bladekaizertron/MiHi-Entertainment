@@ -209,22 +209,26 @@
 
         /* --- SECTION 2: CTA SPLIT (About Us) --- */
         .cta-section {
-            display: flex;
-            flex-wrap: wrap;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
             min-height: 400px;
         }
 
+        @media (max-width: 768px) {
+            .cta-section {
+                grid-template-columns: 1fr;
+            }
+        }
+
         .cta-image {
-            flex: 1;
-            min-width: 300px;
-            background-image: url('https://static.wixstatic.com/media/a92b01_bbe7c3d91b3d44c281604e12360b7859~mv2.jpg');
+            width: 100%;
+            background-image: url('../assets/images/location/snow-globe.webp');
             background-size: cover;
             background-position: center;
         }
 
         .cta-content {
-            flex: 1;
-            min-width: 300px;
+            width: 100%;
             background: #f4f4f4;
             display: flex;
             flex-direction: column;
@@ -859,7 +863,7 @@
                     Colorado Springs Photo Booth Services
                 </h2>
                 <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
-                    Explore our wide range of premium photo booth rentals available in Colorado Springs, Colorado. Perfect for weddings, corporate events, parties, and special occasions throughout the Pikes Peak region.
+                    An unforgettable and engaging experience awaits you at your upcoming event in Colorado Springs, CO, and MiHi Entertainment is here to provide it! As industry experts, we prioritize custom branding and maximizing ROI for our agency partners, ensuring that guests have a seamless and unforgettable experience. Whether it's a wedding, a corporate event, or any other occasion, our services guarantee the best possible outcome. Trust us to be your go-to partner for your Colorado Springs Photo Booth Rental.
                 </p>
             </div>
         </div>
@@ -978,7 +982,7 @@
         <a href="#map" class="btn-venues">VIEW THE VENUES NOW</a>
     </div>
     <div class="feature-section">
-        <img src="https://static.wixstatic.com/media/a92b01_6f0a6c155d1d4c12aebd27c9aa03d8e6~mv2.png" alt="AI Photo Booth Rental in Colorado Springs, Colorado">
+        <img src="../assets/images/location/ai-bg.webp" alt="AI Photo Booth Rental in Colorado Springs, Colorado">
         <div class="feature-content">
             <h2>CHECK OUT OUR</h2>
             <h2>AI PHOTO BOOTH</h2>

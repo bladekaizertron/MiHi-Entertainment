@@ -199,22 +199,26 @@
 
         /* --- SECTION 2: CTA SPLIT (About Us) --- */
         .cta-section {
-            display: flex;
-            flex-wrap: wrap;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
             min-height: 400px;
         }
 
+        @media (max-width: 768px) {
+            .cta-section {
+                grid-template-columns: 1fr;
+            }
+        }
+
         .cta-image {
-            flex: 1;
-            min-width: 300px;
-            background-image: url('https://static.wixstatic.com/media/a92b01_bbe7c3d91b3d44c281604e12360b7859~mv2.jpg');
+            width: 100%;
+            background-image: url('../assets/images/location/snow-globe.webp');
             background-size: cover;
             background-position: center;
         }
 
         .cta-content {
-            flex: 1;
-            min-width: 300px;
+            width: 100%;
             background: #f4f4f4;
             display: flex;
             flex-direction: column;
@@ -951,7 +955,16 @@
             </div>
         </div>
     </div>
-
+     <!-- Local SEO Content Section -->
+     <section class="cta-section">
+        <div class="cta-image"></div>
+        <div class="cta-content">
+            <h4>Why Choose MiHi Entertainment for Your Aspen Photo Booth Rental?</h4>
+            <p>Aspen is renowned for its world-class venues, breathtaking mountain scenery, and exclusive events year-round. Whether you're planning a luxury wedding at one of Aspen's premier mountain resorts, a high-end corporate event, or an elegant celebration in this iconic Colorado destination, our photo booth rentals add the perfect touch of sophistication and entertainment.</p>
+            <p>We serve all of Aspen and the surrounding Roaring Fork Valley, including Snowmass Village, Basalt, and nearby mountain communities. Our team understands the unique needs of Aspen's upscale events and delivers exceptional service with cutting-edge technology that matches the premium standards of this world-famous destination.</p>
+            <a href="../contact-us.html" class="btn">Get Your Free Quote</a>
+        </div>
+    </section>
 
     
     <div class="venues-title-section">
@@ -959,7 +972,7 @@
         <a href="#map" class="btn-venues">VIEW THE VENUES NOW</a>
     </div>
     <div class="feature-section">
-        <img src="https://static.wixstatic.com/media/a92b01_6f0a6c155d1d4c12aebd27c9aa03d8e6~mv2.png" alt="AI Booth">
+        <img src="../assets/images/location/ai-bg.webp" alt="AI Photo Booth Rental in Aspen, Colorado">
         <div class="feature-content">
             <h2>CHECK OUT OUR</h2>
             <h2>AI PHOTO BOOTH</h2>
