@@ -35,9 +35,15 @@ function renderTrustedBrands(options = {}) {
     // Very simple path detection - always use 'assets/' for root, '../assets/' for everything else
     console.log('Determining assets prefix for path:', currentPath);
     
-    // Since we're on the index.html page, we should use 'assets/'
-    assetsPrefix = 'assets/';
-    console.log('Using fixed path prefix: assets/');
+    // Check if we're in a subdirectory (like /product/)
+    if (currentPath.includes('/product/') || currentPath.includes('/locations/') || currentPath.includes('/av-services/') || currentPath.includes('/event-decor/') || currentPath.includes('/game-rentals/') || currentPath.includes('/products/')) {
+        assetsPrefix = '../assets/';
+        console.log('Using subdirectory path prefix: ../assets/');
+    } else {
+        // Root level pages
+        assetsPrefix = 'assets/';
+        console.log('Using root path prefix: assets/');
+    }
     
     // Test a sample image path
     const testImagePath = `${assetsPrefix}images/trusted_by_brands/adidas.png`;

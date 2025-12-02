@@ -24,12 +24,28 @@
             font-family: 'Playfair Display', serif;
         }
 
-        .btn-primary {
+        /* Navigation button styling - ensure it has proper background */
+        header .btn-primary,
+        header nav .btn-primary,
+        nav .btn-primary {
+            background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%) !important;
+            transition: all 0.3s ease;
+        }
+
+        header .btn-primary:hover,
+        header nav .btn-primary:hover,
+        nav .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 80, 255, 0.4);
+        }
+
+        /* Scoped to main content only to avoid affecting navigation */
+        main .btn-primary {
             background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
             transition: all 0.3s ease;
         }
 
-        .btn-primary:hover {
+        main .btn-primary:hover {
             transform: translateY(-2px);
             box-shadow: 0 10px 25px rgba(26, 26, 26, 0.4);
         }
@@ -513,7 +529,7 @@
 
     <main>
         <!-- Hero Section -->
-        <section class="relative min-h-[70vh] sm:min-h-[80vh] md:min-h-[90vh] flex items-center justify-center overflow-hidden py-8 sm:py-12 md:py-0 paper-texture">
+        <section class="relative h-screen flex items-center justify-center overflow-hidden paper-texture">
             <!-- Background Image -->
             <div class="absolute inset-0 z-0">
                 <img src="../../assets/images/sketchbot/sketchbot-hero.webp" alt="SketchBot Booth Hero" class="w-full h-full object-cover">
@@ -542,27 +558,31 @@
             <!-- Robotic Lines -->
             <div class="absolute inset-0 robotic-lines opacity-30 z-[2]"></div>
 
-            <div class="relative z-10 container mx-auto px-4 sm:px-6">
+            <div class="relative z-10 container mx-auto px-4 sm:px-6 pt-20">
                 <div class="max-w-6xl mx-auto text-center">
                     <!-- Badge -->
-                    <div class="inline-flex items-center gap-2 sm:gap-3 px-4 sm:px-6 py-2 bg-white/80 backdrop-blur-md border-2 border-white/30 rounded-full shadow-lg mb-6 sm:mb-8">
-                        <span class="text-gray-900 text-xs sm:text-sm font-semibold tracking-wider uppercase">Turn Moments into Art</span>
+                    <div class="inline-flex items-center gap-2 sm:gap-3 px-4 sm:px-6 py-2 bg-gray-500/20 backdrop-blur-md border border-gray-400/50 rounded-full shadow-lg shadow-gray-500/10 mb-6 sm:mb-8">
+                        <div class="w-2 h-2 bg-gray-400 rounded-full animate-pulse"></div>
+                        <span class="text-gray-300 text-xs sm:text-sm font-semibold tracking-wider uppercase">Turn Moments into Art</span>
+                        <div class="w-2 h-2 bg-gray-400 rounded-full animate-pulse" style="animation-delay: 0.5s;"></div>
                     </div>
 
                     <!-- Main Title -->
-                    <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black mb-4 sm:mb-6 leading-tight sm:leading-none tracking-tight px-2 drop-shadow-2xl">
+                    <h1 class="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black mb-6 leading-tight tracking-tight px-2 drop-shadow-2xl">
                         <span class="block graphite-gradient-light mb-2">
                             SKETCHBOT BOOTH
                         </span>
                     </h1>
 
-                    <!-- Subtitle -->
-                    <h2 class="text-lg sm:text-xl md:text-2xl font-semibold mb-4 sm:mb-6 text-white/95 max-w-3xl mx-auto px-4 drop-shadow-lg">
-                        A one-of-a-kind activation that turns photos into hand-drawn digital sketches in real time.
-                    </h2>
+                    <!-- Description -->
+                    <div class="max-w-3xl mx-auto mb-8 px-4">
+                        <p class="text-lg sm:text-xl md:text-2xl leading-relaxed text-white/95 font-light drop-shadow-lg">
+                            A one-of-a-kind activation that turns photos into hand-drawn digital sketches in real time.
+                        </p>
+                    </div>
 
                     <!-- CTA Buttons -->
-                    <div class="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center px-4 mt-8 sm:mt-12">
+                    <div class="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center px-4">
                         <a href="../contact-us.html"
                             class="group relative inline-flex items-center gap-2 sm:gap-3 bg-gradient-to-r from-gray-900 to-gray-800 text-white px-6 sm:px-10 py-3 sm:py-5 rounded-full text-base sm:text-lg font-bold shadow-2xl hover:shadow-gray-900/50 transition-all duration-500 transform hover:scale-110 hover:-translate-y-1 overflow-hidden w-full sm:w-auto justify-center">
                             <span class="relative z-10">Get Your Free Quote</span>
@@ -577,6 +597,22 @@
                             </svg>
                             <span>Call Us</span>
                         </button>
+                    </div>
+
+                    <!-- Trust Indicators -->
+                    <div class="flex flex-wrap items-center justify-center gap-4 sm:gap-8 mt-8 sm:mt-12 text-white/70 px-4">
+                        <div class="flex items-center gap-2">
+                            <div class="w-2 h-2 bg-gray-400 rounded-full"></div>
+                            <span class="text-xs sm:text-sm font-medium">Live Sketching Experience</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <div class="w-2 h-2 bg-amber-400 rounded-full"></div>
+                            <span class="text-xs sm:text-sm font-medium">Robotic Precision</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <div class="w-2 h-2 bg-gray-300 rounded-full"></div>
+                            <span class="text-xs sm:text-sm font-medium">Instant Digital Delivery</span>
+                        </div>
                     </div>
                 </div>
             </div>

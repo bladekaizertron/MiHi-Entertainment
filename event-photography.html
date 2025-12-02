@@ -89,7 +89,7 @@
     <script src="../../assets/components/navigation.js"></script>
     <main>
         <!-- Hero Section -->
-        <section class="relative text-white py-24 md:py-40 overflow-hidden">
+        <section class="relative h-screen flex items-center justify-center overflow-hidden text-white">
             <div class="absolute inset-0 bg-cover bg-center bg-no-repeat scale-105 transition-transform duration-700 hover:scale-100"
                 style="background-image: url('https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80');">
             </div>
@@ -99,45 +99,60 @@
             <div class="absolute top-20 left-10 w-96 h-96 bg-[#0050ff]/20 rounded-full blur-3xl animate-blob"></div>
             <div class="absolute bottom-20 right-10 w-96 h-96 bg-[#0050ff]/20 rounded-full blur-3xl animate-blob animation-delay-2000"></div>
             
-            <div class="relative z-10 container mx-auto px-6">
+            <div class="relative z-10 container mx-auto px-4 sm:px-6 pt-20">
                 <div class="max-w-6xl mx-auto text-center">
-                    <!-- Icon Badge -->
-                    <div class="flex justify-center mb-8">
-                        <div class="w-20 h-20 bg-gradient-to-br from-[#0050ff] to-[#0040d9] rounded-2xl flex items-center justify-center shadow-2xl">
-                            <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path>
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                            </svg>
-                        </div>
+                    <!-- Badge -->
+                    <div class="inline-flex items-center gap-2 sm:gap-3 px-4 sm:px-6 py-2 bg-[#0050ff]/20 backdrop-blur-md border border-[#0050ff]/50 rounded-full shadow-lg shadow-[#0050ff]/10 mb-6 sm:mb-8">
+                        <div class="w-2 h-2 bg-[#0050ff] rounded-full animate-pulse"></div>
+                        <span class="text-blue-300 text-xs sm:text-sm font-semibold tracking-wider uppercase">Professional Event Photography</span>
+                        <div class="w-2 h-2 bg-[#0050ff] rounded-full animate-pulse" style="animation-delay: 0.5s;"></div>
                     </div>
                     
                     <!-- Main Headline -->
-                    <h1 class="text-5xl md:text-7xl lg:text-8xl font-black mb-6 leading-[1.1] tracking-tight">
+                    <h1 class="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black mb-6 leading-[1.1] tracking-tight">
                         <span class="bg-gradient-to-r from-white via-[#ccddff] to-white bg-clip-text text-transparent drop-shadow-2xl">
                             EVENT PHOTOGRAPHY SERVICES
                         </span>
                         </h1>
 
                     <!-- Description -->
-                    <p class="text-base md:text-lg mb-12 max-w-4xl mx-auto leading-relaxed text-white/95 font-light tracking-wide drop-shadow-lg">
-                        Here's the thing about corporate event photography - everyone has a camera, but not everyone can tell your story. We're not just taking photos; we're skillfully crafting narratives through light, timing, and capturing the moments that truly matter.
-                    </p>
+                    <div class="max-w-3xl mx-auto mb-8 px-4">
+                        <p class="text-lg sm:text-xl md:text-2xl leading-relaxed text-white/95 font-light tracking-wide drop-shadow-lg">
+                            Here's the thing about corporate event photography - everyone has a camera, but not everyone can tell your story. We're not just taking photos; we're skillfully crafting narratives through light, timing, and capturing the moments that truly matter.
+                        </p>
+                    </div>
                     
                     <!-- CTA Buttons -->
-                    <div class="flex flex-col sm:flex-row gap-5 justify-center items-center mb-12">
+                    <div class="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center px-4">
                         <a href="../../index.html#contact"
-                            class="group relative inline-flex items-center gap-3 bg-gradient-to-r from-white to-[#e6f0ff] text-[#0040d9] px-10 py-5 rounded-full text-lg font-bold shadow-2xl hover:shadow-[#0050ff]/50 transition-all duration-500 transform hover:scale-110 hover:-translate-y-1 overflow-hidden focus:ring-4 focus:ring-[#0050ff]/30"
+                            class="group relative inline-flex items-center gap-2 sm:gap-3 bg-gradient-to-r from-white to-[#e6f0ff] text-[#0040d9] px-6 sm:px-10 py-3 sm:py-5 rounded-full text-base sm:text-lg font-bold shadow-2xl hover:shadow-[#0050ff]/50 transition-all duration-500 transform hover:scale-110 hover:-translate-y-1 overflow-hidden w-full sm:w-auto justify-center focus:ring-4 focus:ring-[#0050ff]/30"
                             aria-label="Contact us for event photography">
                             <span class="relative z-10">CONTACT US</span>
-                            <svg class="w-5 h-5 relative z-10 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg class="w-4 h-4 sm:w-5 sm:h-5 relative z-10 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
                             </svg>
                         </a>
                         <a href="../../index.html#products"
-                            class="group inline-flex items-center gap-3 px-10 py-5 rounded-full text-lg font-bold backdrop-blur-md bg-white/10 border-2 border-white/30 hover:bg-white/10 hover:border-white/40 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:scale-110 hover:-translate-y-1 focus:ring-4 focus:ring-white/50"
+                            class="group inline-flex items-center gap-2 sm:gap-3 px-6 sm:px-10 py-3 sm:py-5 rounded-full text-base sm:text-lg font-bold backdrop-blur-md bg-white/10 border-2 border-white/30 hover:bg-white/10 hover:border-white/40 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:scale-110 hover:-translate-y-1 w-full sm:w-auto justify-center focus:ring-4 focus:ring-white/50"
                             aria-label="View our products">
                             <span>VIEW OUR PRODUCTS</span>
                         </a>
+                    </div>
+
+                    <!-- Trust Indicators -->
+                    <div class="flex flex-wrap items-center justify-center gap-4 sm:gap-8 mt-8 sm:mt-12 text-white/70 px-4">
+                        <div class="flex items-center gap-2">
+                            <div class="w-2 h-2 bg-blue-400 rounded-full"></div>
+                            <span class="text-xs sm:text-sm font-medium">Professional Team</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <div class="w-2 h-2 bg-blue-300 rounded-full"></div>
+                            <span class="text-xs sm:text-sm font-medium">High-Quality Images</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <div class="w-2 h-2 bg-blue-200 rounded-full"></div>
+                            <span class="text-xs sm:text-sm font-medium">Fast Delivery</span>
+                        </div>
                     </div>
                 </div>
             </div>

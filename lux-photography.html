@@ -24,12 +24,28 @@
             font-family: 'Playfair Display', serif;
         }
 
-        .btn-primary {
+        /* Navigation button styling - ensure it has proper background */
+        header .btn-primary,
+        header nav .btn-primary,
+        nav .btn-primary {
+            background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%) !important;
+            transition: all 0.3s ease;
+        }
+
+        header .btn-primary:hover,
+        header nav .btn-primary:hover,
+        nav .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 80, 255, 0.4);
+        }
+
+        /* Scoped to main content only to avoid affecting navigation */
+        main .btn-primary {
             background: linear-gradient(135deg, #d4af37 0%, #f4d03f 100%);
             transition: all 0.3s ease;
         }
 
-        .btn-primary:hover {
+        main .btn-primary:hover {
             transform: translateY(-2px);
             box-shadow: 0 10px 25px rgba(212, 175, 55, 0.4);
         }
@@ -427,7 +443,7 @@
 
     <main>
         <!-- Hero Section -->
-        <section class="relative min-h-[70vh] sm:min-h-[80vh] md:min-h-[90vh] flex items-center justify-center overflow-hidden py-8 sm:py-12 md:py-0">
+        <section class="relative h-screen flex items-center justify-center overflow-hidden">
             <!-- Background Image -->
             <div class="absolute inset-0 z-0">
                 <img src="assets/images/lux/lux-hero.webp" alt="Lux Photography Hero" class="w-full h-full object-cover">
@@ -440,32 +456,31 @@
             <div class="absolute bottom-20 right-10 w-48 h-48 sm:w-64 sm:h-64 md:w-96 md:h-96 bg-amber-500/10 rounded-full blur-3xl animate-blob animation-delay-2000 z-[2]"></div>
             <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-32 h-32 sm:w-48 sm:h-48 md:w-64 md:h-64 bg-yellow-400/10 rounded-full blur-2xl animate-blob animation-delay-4000 z-[2]"></div>
 
-            <div class="relative z-10 container mx-auto px-4 sm:px-6">
+            <div class="relative z-10 container mx-auto px-4 sm:px-6 pt-20">
                 <div class="max-w-6xl mx-auto text-center">
                     <!-- Badge -->
-                    <div class="inline-flex items-center gap-2 sm:gap-3 px-4 sm:px-6 py-2 bg-white/10 backdrop-blur-md border border-yellow-400/30 rounded-full shadow-lg mb-6 sm:mb-8">
-                        <span class="text-yellow-200 text-xs sm:text-sm font-semibold tracking-wider uppercase">Luxury Photography Experience</span>
+                    <div class="inline-flex items-center gap-2 sm:gap-3 px-4 sm:px-6 py-2 bg-yellow-500/20 backdrop-blur-md border border-yellow-400/50 rounded-full shadow-lg shadow-yellow-500/10 mb-6 sm:mb-8">
+                        <div class="w-2 h-2 bg-yellow-400 rounded-full animate-pulse"></div>
+                        <span class="text-yellow-300 text-xs sm:text-sm font-semibold tracking-wider uppercase">Luxury Photography Experience</span>
+                        <div class="w-2 h-2 bg-yellow-400 rounded-full animate-pulse" style="animation-delay: 0.5s;"></div>
                     </div>
 
                     <!-- Main Title -->
-                    <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black mb-4 sm:mb-6 leading-tight sm:leading-none tracking-tight px-2 text-white drop-shadow-2xl glow-text">
+                    <h1 class="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black mb-6 leading-tight tracking-tight px-2 text-white drop-shadow-2xl glow-text">
                         <span class="block mb-2">
                             LUX PHOTOGRAPHY
                         </span>
                     </h1>
 
-                    <!-- Subtitle -->
-                    <h2 class="text-lg sm:text-xl md:text-2xl font-semibold mb-4 sm:mb-6 text-white/95 max-w-3xl mx-auto px-4 drop-shadow-lg">
-                        Enhancing Your Event With Custom Sets and Professional Photos
-                    </h2>
-
                     <!-- Description -->
-                    <p class="text-base sm:text-lg mb-8 sm:mb-12 max-w-3xl mx-auto leading-relaxed text-white/90 font-light tracking-wide drop-shadow-lg px-4">
-                        Elevate your event with Lux Photography, where we create custom sets and capture high-end professional photos to provide a truly luxury experience.
-                    </p>
+                    <div class="max-w-3xl mx-auto mb-8 px-4">
+                        <p class="text-lg sm:text-xl md:text-2xl leading-relaxed text-white/95 font-light tracking-wide drop-shadow-lg">
+                            Elevate your event with Lux Photography, where we create custom sets and capture high-end professional photos to provide a truly luxury experience.
+                        </p>
+                    </div>
 
                     <!-- CTA Buttons -->
-                    <div class="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center px-4 mt-8 sm:mt-12">
+                    <div class="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center px-4">
                         <a href="contact-us.html"
                             class="group relative inline-flex items-center gap-2 sm:gap-3 bg-gradient-to-r from-yellow-400 to-amber-500 text-gray-900 px-6 sm:px-10 py-3 sm:py-5 rounded-full text-base sm:text-lg font-bold shadow-2xl hover:shadow-yellow-500/50 transition-all duration-500 transform hover:scale-110 hover:-translate-y-1 overflow-hidden w-full sm:w-auto justify-center">
                             <span class="relative z-10">Get Your Free Quote</span>
@@ -477,6 +492,22 @@
                             </svg>
                             <span>Call Us</span>
                         </button>
+                    </div>
+
+                    <!-- Trust Indicators -->
+                    <div class="flex flex-wrap items-center justify-center gap-4 sm:gap-8 mt-8 sm:mt-12 text-white/70 px-4">
+                        <div class="flex items-center gap-2">
+                            <div class="w-2 h-2 bg-yellow-400 rounded-full"></div>
+                            <span class="text-xs sm:text-sm font-medium">Professional Photographer</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <div class="w-2 h-2 bg-amber-400 rounded-full"></div>
+                            <span class="text-xs sm:text-sm font-medium">Custom Sets & Backdrops</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <div class="w-2 h-2 bg-yellow-300 rounded-full"></div>
+                            <span class="text-xs sm:text-sm font-medium">Digital & Print Options</span>
+                        </div>
                     </div>
                 </div>
             </div>

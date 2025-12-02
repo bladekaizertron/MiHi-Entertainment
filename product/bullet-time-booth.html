@@ -19,12 +19,27 @@
             font-family: 'Playfair Display', serif; 
         }
         
-        /* Button Styles */
-        .btn-primary { 
+        /* Navigation button styling - ensure it has proper background */
+        header .btn-primary,
+        header nav .btn-primary,
+        nav .btn-primary {
+            background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%) !important;
+            transition: all 0.3s ease;
+        }
+
+        header .btn-primary:hover,
+        header nav .btn-primary:hover,
+        nav .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 80, 255, 0.4);
+        }
+
+        /* Scoped to main content only to avoid affecting navigation */
+        main .btn-primary { 
             background: linear-gradient(135deg, #dc2626 0%, #ea580c 100%);
             transition: all 0.3s ease; 
         }
-        .btn-primary:hover { 
+        main .btn-primary:hover { 
             transform: translateY(-2px); 
             box-shadow: 0 20px 40px rgba(220, 38, 38, 0.5);
         }
@@ -242,18 +257,23 @@
     
     <main>
         <!-- Hero Section -->
-        <section class="gradient-hero relative min-h-screen flex items-center justify-center text-gray-900 py-20 md:py-32" style="background-image: url('../../assets/video/bullet-time/bullet-time-hero.webp'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+        <section class="gradient-hero relative h-screen flex items-center justify-center overflow-hidden text-gray-900" style="background-image: url('../../assets/video/bullet-time/bullet-time-hero.webp'); background-size: cover; background-position: center; background-repeat: no-repeat;">
             <div class="absolute inset-0 bg-white/30"></div>
-            <div class="container mx-auto px-4 sm:px-6 relative z-10">
-                <div class="max-w-5xl mx-auto text-center animate-fade-in-up">
-                    <span class="premium-badge mb-6 text-white">Epic Freeze-Frame Experience</span>
+            <div class="relative z-10 container mx-auto px-4 sm:px-6 pt-20">
+                <div class="max-w-6xl mx-auto text-center">
+                    <!-- Badge -->
+                    <div class="inline-flex items-center gap-2 sm:gap-3 px-4 sm:px-6 py-2 bg-red-500/20 backdrop-blur-md border border-red-400/30 rounded-full shadow-lg shadow-red-500/10 mb-6 sm:mb-8">
+                        <div class="w-2 h-2 bg-red-400 rounded-full animate-pulse"></div>
+                        <span class="text-red-200 text-xs sm:text-sm font-semibold tracking-wider uppercase">Epic Freeze-Frame Experience</span>
+                        <div class="w-2 h-2 bg-red-400 rounded-full animate-pulse" style="animation-delay: 0.5s;"></div>
+                    </div>
                     <h1 class="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black mb-6 leading-tight glow-text">
                         Bullet-Time Array<br>Booth Rentals
                     </h1>
-                    <p class="text-lg sm:text-xl md:text-2xl mb-8 text-white max-w-3xl mx-auto leading-relaxed">
+                    <p class="text-lg sm:text-xl md:text-2xl mb-8 text-white max-w-3xl mx-auto leading-relaxed px-4">
                         Create mind-bending frozen time photos with a professional multi-camera array that captures stunning 180-degree Matrix-style moments.
                     </p>
-                    <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                    <div class="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center px-4">
                         <a href="../../contact-us.html" 
                            class="btn-primary text-white px-8 py-4 rounded-full text-lg font-bold hover:scale-105 transition-all duration-300 shadow-2xl w-full sm:w-auto">
                             Get Your Free Quote
@@ -265,6 +285,22 @@
                             </svg>
                             <span>Call Us</span>
                         </button>
+                    </div>
+
+                    <!-- Trust Indicators -->
+                    <div class="flex flex-wrap items-center justify-center gap-4 sm:gap-8 mt-8 sm:mt-12 text-white/70 px-4">
+                        <div class="flex items-center gap-2">
+                            <div class="w-2 h-2 bg-red-400 rounded-full"></div>
+                            <span class="text-xs sm:text-sm font-medium">Multi-Camera Array</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <div class="w-2 h-2 bg-orange-400 rounded-full"></div>
+                            <span class="text-xs sm:text-sm font-medium">Matrix-Style Effects</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <div class="w-2 h-2 bg-amber-400 rounded-full"></div>
+                            <span class="text-xs sm:text-sm font-medium">Instant Playback</span>
+                        </div>
                     </div>
                 </div>
             </div>

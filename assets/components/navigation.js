@@ -141,6 +141,10 @@
                                         <span class="font-semibold block mb-0.5">Event Photography</span>
                                         <span class="text-xs text-gray-500 leading-relaxed">Professional coverage of every moment</span>
                                     </a>
+                                    <a href="${pathPrefix}product/brand-activation.html" class="block text-sm text-gray-700 hover:text-green-600 transition py-1.5 hover:bg-green-50 rounded-md px-2 -mx-2">
+                                        <span class="font-semibold block mb-0.5">Brand Activation</span>
+                                        <span class="text-xs text-gray-500 leading-relaxed">Immersive brand experiences and activations</span>
+                                    </a>
                                     <a href="${pathPrefix}products/sketchbot-booth.html" class="block text-sm text-gray-700 hover:text-green-600 transition py-1.5 hover:bg-green-50 rounded-md px-2 -mx-2">
                                         <span class="font-semibold block mb-0.5">SketchBot</span>
                                         <span class="text-xs text-gray-500 leading-relaxed">Live robot-drawn portraits</span>
@@ -427,6 +431,7 @@
                                         <h4 class="font-bold text-base text-green-600 uppercase tracking-wider mb-3 pb-2 border-b-2 border-green-200">Additional Experiences</h4>
                                         <div class="pl-4 space-y-2">
                                             <a href="${pathPrefix}event-photography.html" class="block text-sm text-gray-600 hover:text-blue-600 transition">Event Photography</a>
+                                            <a href="${pathPrefix}product/brand-activation.html" class="block text-sm text-gray-600 hover:text-blue-600 transition">Brand Activation</a>
                                             <a href="${pathPrefix}products/sketchbot-booth.html" class="block text-sm text-gray-600 hover:text-blue-600 transition">SketchBot</a>
                                             <a href="${pathPrefix}products/cookie-printer.html" class="block text-sm text-gray-600 hover:text-blue-600 transition">Cookie Printer</a>
                                             <a href="${pathPrefix}pose-flashcards.html" class="block text-sm text-gray-600 hover:text-blue-600 transition">Pose Cards</a>
