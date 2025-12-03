@@ -364,7 +364,7 @@
 
 
                 <!-- CTA Button -->
-                <a href="${pathPrefix}contact-us.html" class="btn-primary text-white px-6 py-3 rounded-full font-semibold shadow-lg hover:shadow-xl transition-all duration-300">
+                <a href="${pathPrefix}contact-us.html" class="btn-primary text-white px-6 py-3 rounded-full font-semibold bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 shadow-[0_20px_45px_-15px_rgba(236,72,153,0.75)] hover:shadow-[0_25px_60px_-18px_rgba(59,130,246,0.7)] transition-all duration-300">
                     Contact Us
                 </a>
             </div>
@@ -606,7 +606,7 @@
 
                             <!-- Mobile Contact Button -->
                             <div class="space-y-4">
-                                <a href="${pathPrefix}contact-us.html" class="btn-primary text-white px-6 py-3 rounded-full font-semibold shadow-lg hover:shadow-xl transition-all duration-300 text-center block">Contact Us</a>
+                                <a href="${pathPrefix}contact-us.html" class="btn-primary text-white px-6 py-3 rounded-full font-semibold bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 shadow-[0_20px_45px_-15px_rgba(236,72,153,0.75)] hover:shadow-[0_25px_60px_-18px_rgba(59,130,246,0.7)] transition-all duration-300 text-center block">Contact Us</a>
                             </div>
                         </div>
                     </div>

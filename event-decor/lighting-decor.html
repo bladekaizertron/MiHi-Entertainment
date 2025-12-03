@@ -501,106 +501,162 @@
             fill: #0040d9;
         }
 
+        /* Headline Carousel Styles */
+        .headline-carousel {
+            padding: 20px 0 80px;
+            position: relative;
+        }
+        
+        .headline-carousel .swiper-slide {
+            opacity: 0.3;
+            transition: opacity 0.6s ease;
+        }
+        
+        .headline-carousel .swiper-slide-active {
+            opacity: 1;
+        }
+        
+        .headline-carousel .swiper-button-next,
+        .headline-carousel .swiper-button-prev {
+            color: #0050ff;
+            background: white;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            box-shadow: 0 4px 20px rgba(0, 80, 255, 0.3);
+            transition: all 0.3s ease;
+            margin-top: 0;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        
+        .headline-carousel .swiper-button-next {
+            right: -20px;
+        }
+        
+        .headline-carousel .swiper-button-prev {
+            left: -20px;
+        }
+        
+        .headline-carousel .swiper-button-next:hover,
+        .headline-carousel .swiper-button-prev:hover {
+            background: #0050ff;
+            color: white;
+            transform: translateY(-50%) scale(1.1);
+            box-shadow: 0 6px 25px rgba(0, 80, 255, 0.5);
+        }
+        
+        .headline-carousel .swiper-button-next::after,
+        .headline-carousel .swiper-button-prev::after {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        
+        .headline-carousel .swiper-pagination {
+            bottom: 20px;
+            position: absolute;
+        }
+        
+        .headline-carousel .swiper-pagination-bullet {
+            background: #0050ff;
+            opacity: 0.3;
+            width: 12px;
+            height: 12px;
+            transition: all 0.3s ease;
+            margin: 0 6px;
+        }
+        
+        .headline-carousel .swiper-pagination-bullet-active {
+            opacity: 1;
+            width: 40px;
+            border-radius: 6px;
+        }
+        
+        @media (max-width: 1024px) {
+            .headline-carousel .swiper-button-next {
+                right: 0;
+            }
+            
+            .headline-carousel .swiper-button-prev {
+                left: 0;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .headline-carousel {
+                padding: 20px 0 60px;
+            }
+            
+            .headline-carousel .swiper-button-next,
+            .headline-carousel .swiper-button-prev {
+                width: 44px;
+                height: 44px;
+            }
+            
+            .headline-carousel .swiper-button-next::after,
+            .headline-carousel .swiper-button-prev::after {
+                font-size: 20px;
+            }
+        }
+
         /* Blog Slider Styles */
         .blog-slider {
             width: 95%;
-            position: relative;
             max-width: 1100px;
-            margin: auto;
+            margin: 0 auto;
             background: #fff;
             box-shadow: 0px 14px 80px rgba(34, 35, 58, 0.2);
             padding: 30px;
             border-radius: 25px;
-            height: 500px;
-            transition: all .3s;
+            min-height: 500px;
         }
 
-        @media screen and (max-width: 992px) {
-            .blog-slider {
-                max-width: 900px;
-                height: 480px;
-            }
+        .blog-slider .swiper-wrapper {
+            align-items: center;
         }
 
-        @media screen and (max-width: 768px) {
-            .blog-slider {
-                min-height: 500px;
+        .blog-slider .swiper-slide {
                 height: auto;
-                margin: 0 auto;
-                width: 100%;
-                max-width: 100%;
-            }
-        }
-
-        @media screen and (max-height: 500px) and (min-width: 992px) {
-            .blog-slider {
-                height: 350px;
-            }
         }
 
         .blog-slider__item {
             display: flex;
             align-items: center;
+            gap: 30px;
+            width: 100%;
+            padding: 20px 0;
         }
 
         @media screen and (max-width: 768px) {
+            .blog-slider {
+                width: 100%;
+                padding: 20px;
+                min-height: auto;
+            }
+            
             .blog-slider__item {
                 flex-direction: column;
+                gap: 20px;
             }
         }
 
         .blog-slider__item.swiper-slide-active .blog-slider__img img {
             opacity: 1;
-            transition-delay: .3s;
         }
 
-        .blog-slider__item.swiper-slide-active .blog-slider__content>* {
+        .blog-slider__item.swiper-slide-active .blog-slider__content > * {
             opacity: 1;
-            transform: none;
-        }
-
-        .blog-slider__item.swiper-slide-active .blog-slider__content>*:nth-child(1) {
-            transition-delay: 0.3s;
-        }
-
-        .blog-slider__item.swiper-slide-active .blog-slider__content>*:nth-child(2) {
-            transition-delay: 0.4s;
-        }
-
-        .blog-slider__item.swiper-slide-active .blog-slider__content>*:nth-child(3) {
-            transition-delay: 0.5s;
-        }
-
-        .blog-slider__item.swiper-slide-active .blog-slider__content>*:nth-child(4) {
-            transition-delay: 0.6s;
-        }
-
-        .blog-slider__item.swiper-slide-active .blog-slider__content>*:nth-child(5) {
-            transition-delay: 0.7s;
+            transform: translateY(0);
         }
 
         .blog-slider__img {
             width: 400px;
             flex-shrink: 0;
             height: 400px;
-            background-image: linear-gradient(147deg, #fe8a39 0%, #fd3838 74%);
-            box-shadow: 4px 13px 30px 1px rgba(252, 56, 56, 0.2);
             border-radius: 20px;
-            transform: translateX(-80px);
             overflow: hidden;
             position: relative;
-        }
-
-        .blog-slider__img:after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: linear-gradient(147deg, #fe8a39 0%, #fd3838 74%);
-            border-radius: 20px;
-            opacity: 0.8;
+            box-shadow: 4px 13px 30px 1px rgba(0, 0, 0, 0.2);
         }
 
         .blog-slider__img img {
@@ -608,64 +664,36 @@
             height: 100%;
             object-fit: cover;
             display: block;
-            opacity: 0;
+            opacity: 1;
             border-radius: 20px;
-            transition: all .3s;
-            position: relative;
-            z-index: 1;
+            transition: opacity 0.3s ease;
         }
 
         @media screen and (max-width: 768px) {
             .blog-slider__img {
-                transform: translateY(0);
                 width: 100%;
-                max-width: 280px;
-                height: 220px;
+                max-width: 300px;
+                height: 250px;
                 margin: 0 auto;
             }
         }
 
-        @media screen and (max-width: 576px) {
-            .blog-slider__img {
-                width: 95%;
-            }
-        }
-
-        @media screen and (max-height: 500px) and (min-width: 992px) {
-            .blog-slider__img {
-                height: 350px;
-            }
-        }
-
-        @media screen and (min-width: 993px) {
-            .blog-slider__img {
-                width: 400px;
-                height: 400px;
-            }
-        }
-
         .blog-slider__content {
-            padding-right: 25px;
+            flex: 1;
+            padding-left: 20px;
         }
 
         @media screen and (max-width: 768px) {
             .blog-slider__content {
-                margin-top: 0;
+                padding-left: 0;
                 text-align: center;
-                padding: 20px 15px 0;
             }
         }
 
-        @media screen and (max-width: 576px) {
-            .blog-slider__content {
-                padding: 0;
-            }
-        }
-
-        .blog-slider__content>* {
-            opacity: 0;
-            transform: translateY(25px);
-            transition: all .4s;
+        .blog-slider__content > * {
+            opacity: 1;
+            transform: translateY(0);
+            transition: opacity 0.4s ease, transform 0.4s ease;
         }
 
         .blog-slider__code {
@@ -860,9 +888,9 @@
         @media (max-width: 767px) {
 
             /* Hero Section Mobile */
-            section.relative.h-\[55vh\] {
-                height: 50vh !important;
-                min-height: 400px;
+            section#hero.relative.h-screen {
+                height: 100vh !important;
+                min-height: 100vh;
             }
 
             .hero-h3 {
@@ -1172,8 +1200,8 @@
                 padding: 8px 20px !important;
             }
 
-            section.relative.h-\[55vh\] {
-                min-height: 350px;
+            section#hero.relative.h-screen {
+                min-height: 100vh;
             }
         }
 
@@ -1790,48 +1818,55 @@
     <div id="nav-placeholder"></div>
 
     <main role="main">
-    <section id="hero" class="relative h-[55vh] md:h-[90vh] lg:h-[90vh] flex items-start justify-center overflow-hidden"
+    <section id="hero" class="relative h-screen flex items-center justify-center overflow-hidden"
         aria-label="Lighting Decor Hero Section">
         <div class="absolute inset-0 bg-cover bg-center"
             style="background-image: url('../../assets/images/lightdecor/hero.jpg');"
             aria-hidden="true" role="presentation"></div>
         <div class="absolute inset-0 hero-gradient" aria-hidden="true"></div>
-        <div
-            class="relative z-10 text-center text-white px-6 max-w-4xl mx-auto pt-12 md:pt-16 lg:pt-20 pb-6 md:pb-8 lg:pb-10">
-            <h3 class="hero-h3 text-xl sm:text-2xl md:text-3xl lg:text-4xl uppercase mb-2 md:mb-3 opacity-90">EVENT
-                DECOR</h3>
-            <div class="text-effect-container mb-3 md:mb-4 lg:mb-5"
-                style="height: clamp(4rem, 12vw, 12rem); min-height: 60px;">
-                <div class="text-effect-wrapper" id="text-effect-ui" style="width: 100%; height: 100%;"
-                    aria-label="LIGHTING DECOR - Professional Lighting Decor Services"></div>
+        <div class="relative z-10 container mx-auto px-4 sm:px-6 pt-20">
+            <div class="max-w-6xl mx-auto text-center">
+                <!-- Badge -->
+                <div class="inline-flex items-center gap-2 sm:gap-3 px-4 sm:px-6 py-2 bg-cyan-500/20 backdrop-blur-md border border-cyan-400/30 rounded-full shadow-lg shadow-cyan-500/10 mb-6 sm:mb-8">
+                    <div class="w-2 h-2 bg-cyan-400 rounded-full animate-pulse"></div>
+                    <span class="text-cyan-200 text-xs sm:text-sm font-semibold tracking-wider uppercase">Professional Lighting Decor Services</span>
+                    <div class="w-2 h-2 bg-cyan-400 rounded-full animate-pulse" style="animation-delay: 0.5s;"></div>
             </div>
-            <!-- SEO-optimized visible h1 for search engines (screen reader only but indexed) -->
-            <h1 class="sr-only">Lighting Decor Services - Air Balloon Lights, Chandeliers, Marquee Letters & Market Lights | MiHi Entertainment</h1>
-            <p
-                class="hero-paragraph text-lg sm:text-xl md:text-2xl lg:text-3xl mb-6 md:mb-8 lg:mb-10 leading-relaxed max-w-3xl mx-auto opacity-95">
-                Lighting and Ambiance can make or break your event. Let us set the mood for your guests with our expert
-                <a href="../av-services/event-lighting.html" class="text-cyan-300 hover:text-cyan-200 underline">lighting services</a> including <a href="lighting-decor.html" class="text-cyan-300 hover:text-cyan-200 underline">air balloon lights</a>, <a href="lighting-decor.html" class="text-cyan-300 hover:text-cyan-200 underline">chandeliers</a>, and <a href="lighting-decor.html" class="text-cyan-300 hover:text-cyan-200 underline">marquee letters</a> for your <a href="../../wedding.html" class="text-cyan-300 hover:text-cyan-200 underline">wedding</a> or <a href="../../corporate-events.html" class="text-cyan-300 hover:text-cyan-200 underline">corporate event</a>.
-            </p>
-            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 md:gap-6">
-                <button type="button" data-click-to-call data-call-text="Call Us" class="btn-animated cursor-pointer"
-                    aria-label="Get a free quote for lighting decor services">
-                    <svg class="icon-arrow before" aria-hidden="true">
-                        <use xlink:href="#arrow"></use>
+                <h1 class="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black mb-6 leading-tight text-white" style="text-shadow: 2px 2px 8px rgba(0,0,0,0.7);">
+                    Lighting Decor<br>Services
+                </h1>
+                <p class="text-lg sm:text-xl md:text-2xl mb-8 text-white max-w-7xl mx-auto leading-relaxed px-4 opacity-95">
+                    Lighting and Ambiance can make or break your event. Let us set the mood for your guests with our expert lighting services including air balloon lights, chandeliers, and marquee letters for your wedding or corporate event.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center px-4">
+                    <a href="../../contact-us.html" 
+                       class="btn-primary text-white px-8 py-4 rounded-full text-lg font-bold hover:scale-105 transition-all duration-300 shadow-2xl w-full sm:w-auto">
+                        Get Your Free Quote
+                    </a>
+                    <button type="button" data-click-to-call data-call-text="Call Us"
+                        class="group inline-flex items-center justify-center gap-3 bg-white hover:bg-gray-50 text-cyan-600 border-2 border-cyan-600 hover:border-cyan-700 px-8 py-4 rounded-full text-lg font-bold transition-all duration-300 shadow-xl hover:shadow-2xl hover:scale-105 w-full sm:w-auto">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498A1 1 0 0121 17.72V21a2 2 0 01-2 2h-1C9.716 23 3 16.284 3 8V7a2 2 0 012-2z"/>
                     </svg>
-                    <span class="label">GET A FREE QUOTE</span>
-                    <svg class="icon-arrow after" aria-hidden="true">
-                        <use xlink:href="#arrow"></use>
-                    </svg>
+                        <span>Call Us</span>
                 </button>
-                <a href="#contact" class="btn-animated btn-call" aria-label="Contact us about lighting decor services">
-                    <svg class="icon-arrow before" aria-hidden="true">
-                        <use xlink:href="#arrow"></use>
-                    </svg>
-                    <span class="label">Contact Us</span>
-                    <svg class="icon-arrow after" aria-hidden="true">
-                        <use xlink:href="#arrow"></use>
-                    </svg>
-                </a>
+                </div>
+
+                <!-- Trust Indicators -->
+                <div class="flex flex-wrap items-center justify-center gap-4 sm:gap-8 mt-8 sm:mt-12 text-white/70 px-4">
+                    <div class="flex items-center gap-2">
+                        <div class="w-2 h-2 bg-cyan-400 rounded-full"></div>
+                        <span class="text-xs sm:text-sm font-medium">Air Balloon Lights</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <div class="w-2 h-2 bg-cyan-300 rounded-full"></div>
+                        <span class="text-xs sm:text-sm font-medium">Chandeliers</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <div class="w-2 h-2 bg-cyan-200 rounded-full"></div>
+                        <span class="text-xs sm:text-sm font-medium">Marquee Letters</span>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -1846,8 +1881,7 @@
                     Design Your Signature Lighting Experience
                 </h2>
                 <p class="text-base text-cyan-100 max-w-3xl mx-auto leading-relaxed">
-                    Explore our immersive <a href="lighting-decor.html" class="text-cyan-300 hover:text-cyan-200 underline">lighting decor solutions</a> and professional <a href="../av-services/event-lighting.html" class="text-cyan-300 hover:text-cyan-200 underline">lighting services</a> crafted to elevate
-                    <a href="../../corporate-events.html" class="text-cyan-300 hover:text-cyan-200 underline">conferences</a>, <a href="../../holiday-party.html" class="text-cyan-300 hover:text-cyan-200 underline">galas</a>, concerts, and brand activations.
+                    Explore our immersive lighting decor solutions and professional lighting services crafted to elevate conferences, galas, concerts, and brand activations.
                 </p>
                 <div class="flex items-center justify-center gap-2 pt-1">
                     <div class="h-1 w-12 bg-gradient-to-r from-blue-400 via-blue-500 to-blue-300 rounded-full"></div>
@@ -1907,8 +1941,8 @@
                         Bring Visionary Lighting To Life
                     </h3>
                     <p class="text-base text-cyan-100 mb-4 leading-relaxed">
-                        From precision <a href="../av-services/event-lighting.html" class="text-cyan-300 hover:text-cyan-200 underline">lighting design</a> to dynamic LED systems and ambient lighting, our team designs
-                        turnkey solutions tailored to your venue, audience, and brand goals for <a href="../../corporate-events.html" class="text-cyan-300 hover:text-cyan-200 underline">corporate events</a>, <a href="../../wedding.html" class="text-cyan-300 hover:text-cyan-200 underline">weddings</a>, and <a href="../../holiday-party.html" class="text-cyan-300 hover:text-cyan-200 underline">celebrations</a>.
+                        From precision lighting design to dynamic LED systems and ambient lighting, our team designs
+                        turnkey solutions tailored to your venue, audience, and brand goals for corporate events, weddings, and celebrations.
                     </p>
                     <div class="space-y-2 mb-4 feature-list">
                         <div class="brochure-check-item">
@@ -2013,16 +2047,16 @@
                         <h3>ILLUMINATE YOUR EVENT WITH OUR</h3>
                         <h2>LIGHTING SERVICES</h2>
                         <p>Lighting is more than just brightness; it's about creating the perfect ambiance. Whether
-                            you're looking for whimsical <a href="lighting-decor.html" class="text-blue-600 hover:text-blue-700 underline">Air Balloon Lights</a>, glamorous <a href="lighting-decor.html" class="text-blue-600 hover:text-blue-700 underline">Chandeliers</a>, warm Market Lights,
-                            or bold <a href="lighting-decor.html" class="text-blue-600 hover:text-blue-700 underline">Marquee Letters</a>, our <a href="lighting-decor.html" class="text-blue-600 hover:text-blue-700 underline">lighting decor</a> sets the tone for an unforgettable experience.
-                            Each option is designed to complement your event theme and make your space shine for <a href="../../wedding.html" class="text-blue-600 hover:text-blue-700 underline">weddings</a>, <a href="../../corporate-events.html" class="text-blue-600 hover:text-blue-700 underline">corporate events</a>, and <a href="../../holiday-party.html" class="text-blue-600 hover:text-blue-700 underline">celebrations</a>.</p>
+                            you're looking for whimsical Air Balloon Lights, glamorous Chandeliers, warm Market Lights,
+                            or bold Marquee Letters, our lighting decor sets the tone for an unforgettable experience.
+                            Each option is designed to complement your event theme and make your space shine for weddings, corporate events, and celebrations.</p>
                         <p>Our experienced lighting designers combine technical expertise and creative passion to bring
-                            your vision to life. Whether you want a romantic glow for a <a href="../../wedding.html" class="text-blue-600 hover:text-blue-700 underline">wedding</a> or dynamic lights for a
-                            high-energy <a href="../../corporate-events.html" class="text-blue-600 hover:text-blue-700 underline">corporate event</a>, we have the skills to make it happen.</p>
+                            your vision to life. Whether you want a romantic glow for a wedding or dynamic lights for a
+                            high-energy corporate event, we have the skills to make it happen.</p>
                         <p>Our services include adaptive intelligent lighting, pinpoint pin spots, atmospheric wash
-                            lighting, and dramatic <a href="lighting-decor.html" class="text-blue-600 hover:text-blue-700 underline">uplighting</a> to transform any venue. We also offer custom <a href="../av-services/event-lighting.html" class="text-blue-600 hover:text-blue-700 underline">lighting solutions</a>
-                            like pattern projections, <a href="../av-services/event-lighting.html" class="text-blue-600 hover:text-blue-700 underline">stage lighting</a> for concerts or performances, uplighting
-                            rentals to set the mood, and <a href="lighting-decor.html" class="text-blue-600 hover:text-blue-700 underline">bistro lighting</a> for a warm, rustic feel.</p>
+                            lighting, and dramatic uplighting to transform any venue. We also offer custom lighting solutions
+                            like pattern projections, stage lighting for concerts or performances, uplighting
+                            rentals to set the mood, and bistro lighting for a warm, rustic feel.</p>
                         <p>We know every event is unique, so we offer a personalized approach. Our team collaborates
                             with you to understand your needs and venue details, creating a tailored lighting plan that
                             exceeds your expectations.</p>
@@ -2049,58 +2083,161 @@
         </div>
     </section>
 
-    <!-- Blog Slider Section -->
-    <section class="py-8 md:py-10 lg:py-12"
+    <!-- Lighting Services Headline Carousel Section -->
+    <section class="py-16 md:py-20 lg:py-24 relative overflow-hidden"
         style="background: linear-gradient(135deg, #f8f6f2 0%, #faf9f6 50%, #ffffff 100%);">
-        <div class="container mx-auto px-6">
-            <div class="blog-slider">
-                <div class="blog-slider__wrp swiper-wrapper">
-                    <div class="blog-slider__item swiper-slide">
-                        <div class="blog-slider__img">
-                            <img src="../../assets/images/lightdecor/k1.jpg" alt="Glowing air balloon lights creating whimsical ambiance for wedding and party events" loading="lazy">
+        <div class="container mx-auto px-4 sm:px-6">
+            <div class="swiper headline-carousel">
+                <div class="swiper-wrapper">
+                    <!-- Air Balloon Lights -->
+                    <div class="swiper-slide">
+                        <div class="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center max-w-7xl mx-auto">
+                            <div class="order-2 lg:order-1">
+                                <div class="relative rounded-3xl overflow-hidden shadow-2xl group">
+                                    <img src="../../assets/images/lightdecor/k1.jpg" 
+                                         alt="Glowing air balloon lights creating whimsical ambiance for wedding and party events" 
+                                         class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                                         loading="lazy"
+                                         width="800"
+                                         height="600">
+                                    <div class="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent"></div>
                         </div>
-                        <div class="blog-slider__content">
-                            <div class="blog-slider__title">Air Balloon Lights</div>
-                            <div class="blog-slider__text">Add a whimsical touch with glowing Air Balloon Lights that
-                                bring charm to any venue. Perfect for <a href="../../wedding.html" class="text-orange-400 hover:text-orange-300 underline">weddings</a> and <a href="../../holiday-party.html" class="text-orange-400 hover:text-orange-300 underline">celebrations</a>.</div>
-                            <a href="../contact-us.html" class="blog-slider__button" aria-label="Learn more about air balloon lights">LEARN MORE</a>
+                        </div>
+                            <div class="order-1 lg:order-2">
+                                <div class="inline-block px-4 py-2 bg-blue-100 text-blue-700 rounded-full text-sm font-semibold mb-4">
+                                    Lighting Decor
+                    </div>
+                                <h2 class="text-4xl md:text-5xl lg:text-6xl font-black mb-6 text-gray-900 leading-tight" style="font-family: 'Playfair Display', serif;">
+                                    Air Balloon Lights
+                                </h2>
+                                <p class="text-lg md:text-xl text-gray-600 mb-8 leading-relaxed">
+                                    Add a whimsical touch with glowing Air Balloon Lights that bring charm to any venue. Perfect for weddings and celebrations.
+                                </p>
+                                <a href="../contact-us.html" 
+                                   class="inline-flex items-center justify-center bg-gradient-to-r from-blue-600 to-cyan-600 text-white px-8 py-4 rounded-full text-base font-semibold hover:from-blue-700 hover:to-cyan-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
+                                   aria-label="Learn more about air balloon lights">
+                                    Learn More
+                                    <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                    </svg>
+                                </a>
+                        </div>
                         </div>
                     </div>
-                    <div class="blog-slider__item swiper-slide">
-                        <div class="blog-slider__img">
-                            <img src="../../assets/images/lightdecor/k2.jpg" alt="Luxurious chandeliers creating elegant atmosphere for corporate events and galas" loading="lazy">
+
+                    <!-- Chandeliers -->
+                    <div class="swiper-slide">
+                        <div class="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center max-w-7xl mx-auto">
+                            <div class="order-2 lg:order-1">
+                                <div class="relative rounded-3xl overflow-hidden shadow-2xl group">
+                                    <img src="../../assets/images/lightdecor/k2.jpg" 
+                                         alt="Luxurious chandeliers creating elegant atmosphere for corporate events and galas" 
+                                         class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                                         loading="lazy"
+                                         width="800"
+                                         height="600">
+                                    <div class="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent"></div>
                         </div>
-                        <div class="blog-slider__content">
-                            <div class="blog-slider__title">Chandeliers</div>
-                            <div class="blog-slider__text">Boost your event with luxurious Chandeliers that create an
-                                air of sophistication for <a href="../../corporate-events.html" class="text-orange-400 hover:text-orange-300 underline">corporate events</a> and <a href="../../holiday-party.html" class="text-orange-400 hover:text-orange-300 underline">galas</a>.</div>
-                            <a href="../contact-us.html" class="blog-slider__button" aria-label="Learn more about chandeliers">LEARN MORE</a>
+                        </div>
+                            <div class="order-1 lg:order-2">
+                                <div class="inline-block px-4 py-2 bg-blue-100 text-blue-700 rounded-full text-sm font-semibold mb-4">
+                                    Lighting Decor
+                    </div>
+                                <h2 class="text-4xl md:text-5xl lg:text-6xl font-black mb-6 text-gray-900 leading-tight" style="font-family: 'Playfair Display', serif;">
+                                    Chandeliers
+                                </h2>
+                                <p class="text-lg md:text-xl text-gray-600 mb-8 leading-relaxed">
+                                    Boost your event with luxurious Chandeliers that create an air of sophistication for corporate events and galas.
+                                </p>
+                                <a href="../contact-us.html" 
+                                   class="inline-flex items-center justify-center bg-gradient-to-r from-blue-600 to-cyan-600 text-white px-8 py-4 rounded-full text-base font-semibold hover:from-blue-700 hover:to-cyan-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
+                                   aria-label="Learn more about chandeliers">
+                                    Learn More
+                                    <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                    </svg>
+                                </a>
+                        </div>
                         </div>
                     </div>
-                    <div class="blog-slider__item swiper-slide">
-                        <div class="blog-slider__img">
-                            <img src="../../assets/images/lightdecor/k3.jpg" alt="Warm market lights creating cozy atmosphere for indoor and outdoor events" loading="lazy">
-                        </div>
-                        <div class="blog-slider__content">
-                            <div class="blog-slider__title">Marquee Lights</div>
-                            <div class="blog-slider__text">Set a cozy and inviting mood with Market Lights perfect for
-                                any indoor or outdoor <a href="../../wedding.html" class="text-orange-400 hover:text-orange-300 underline">wedding</a> or <a href="../../corporate-events.html" class="text-orange-400 hover:text-orange-300 underline">corporate event</a>.</div>
-                            <a href="../contact-us.html" class="blog-slider__button" aria-label="Learn more about market lights">LEARN MORE</a>
+
+                    <!-- Market Lights -->
+                    <div class="swiper-slide">
+                        <div class="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center max-w-7xl mx-auto">
+                            <div class="order-2 lg:order-1">
+                                <div class="relative rounded-3xl overflow-hidden shadow-2xl group">
+                                    <img src="../../assets/images/lightdecor/k3.jpg" 
+                                         alt="Warm market lights creating cozy atmosphere for indoor and outdoor events" 
+                                         class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                                         loading="lazy"
+                                         width="800"
+                                         height="600">
+                                    <div class="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent"></div>
+                </div>
+                            </div>
+                            <div class="order-1 lg:order-2">
+                                <div class="inline-block px-4 py-2 bg-blue-100 text-blue-700 rounded-full text-sm font-semibold mb-4">
+                                    Lighting Decor
+                                </div>
+                                <h2 class="text-4xl md:text-5xl lg:text-6xl font-black mb-6 text-gray-900 leading-tight" style="font-family: 'Playfair Display', serif;">
+                                    Market Lights
+                                </h2>
+                                <p class="text-lg md:text-xl text-gray-600 mb-8 leading-relaxed">
+                                    Set a cozy and inviting mood with Market Lights perfect for any indoor or outdoor wedding or corporate event.
+                                </p>
+                                <a href="../contact-us.html" 
+                                   class="inline-flex items-center justify-center bg-gradient-to-r from-blue-600 to-cyan-600 text-white px-8 py-4 rounded-full text-base font-semibold hover:from-blue-700 hover:to-cyan-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
+                                   aria-label="Learn more about market lights">
+                                    Learn More
+                                    <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                    </svg>
+                                </a>
+                            </div>
                         </div>
                     </div>
-                    <div class="blog-slider__item swiper-slide">
-                        <div class="blog-slider__img">
-                            <img src="../../assets/images/lightdecor/k4.jpg" alt="Custom marquee letters lighting up message for weddings and corporate brand activations" loading="lazy">
-                        </div>
-                        <div class="blog-slider__content">
-                            <div class="blog-slider__title">Marquee Letters</div>
-                            <div class="blog-slider__text">Make a bold statement with custom Marquee Letters that light
-                                up your message in style for <a href="../../wedding.html" class="text-orange-400 hover:text-orange-300 underline">weddings</a> and <a href="../../corporate-events.html" class="text-orange-400 hover:text-orange-300 underline">corporate events</a>.</div>
-                            <a href="../contact-us.html" class="blog-slider__button" aria-label="Learn more about marquee letters">LEARN MORE</a>
+
+                    <!-- Marquee Letters -->
+                    <div class="swiper-slide">
+                        <div class="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center max-w-7xl mx-auto">
+                            <div class="order-2 lg:order-1">
+                                <div class="relative rounded-3xl overflow-hidden shadow-2xl group">
+                                    <img src="../../assets/images/lightdecor/k4.jpg" 
+                                         alt="Custom marquee letters lighting up message for weddings and corporate brand activations" 
+                                         class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                                         loading="lazy"
+                                         width="800"
+                                         height="600">
+                                    <div class="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent"></div>
+                                </div>
+                            </div>
+                            <div class="order-1 lg:order-2">
+                                <div class="inline-block px-4 py-2 bg-blue-100 text-blue-700 rounded-full text-sm font-semibold mb-4">
+                                    Lighting Decor
+                                </div>
+                                <h2 class="text-4xl md:text-5xl lg:text-6xl font-black mb-6 text-gray-900 leading-tight" style="font-family: 'Playfair Display', serif;">
+                                    Marquee Letters
+                                </h2>
+                                <p class="text-lg md:text-xl text-gray-600 mb-8 leading-relaxed">
+                                    Make a bold statement with custom Marquee Letters that light up your message in style for weddings and corporate events.
+                                </p>
+                                <a href="../contact-us.html" 
+                                   class="inline-flex items-center justify-center bg-gradient-to-r from-blue-600 to-cyan-600 text-white px-8 py-4 rounded-full text-base font-semibold hover:from-blue-700 hover:to-cyan-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
+                                   aria-label="Learn more about marquee letters">
+                                    Learn More
+                                    <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                    </svg>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="blog-slider__pagination"></div>
+                <!-- Navigation -->
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+                <!-- Pagination -->
+                <div class="swiper-pagination"></div>
             </div>
         </div>
     </section>
@@ -2110,7 +2247,7 @@
         <div class="container mx-auto px-6">
             <div class="contact-section">
                 <h2>CONTACT US NOW</h2>
-                <p>Learn more about our professional <a href="lighting-decor.html" class="text-blue-600 hover:text-blue-700 underline">lighting decor services</a> including <a href="lighting-decor.html" class="text-blue-600 hover:text-blue-700 underline">air balloon lights</a>, <a href="lighting-decor.html" class="text-blue-600 hover:text-blue-700 underline">chandeliers</a>, <a href="lighting-decor.html" class="text-blue-600 hover:text-blue-700 underline">marquee letters</a>, and <a href="../av-services/event-lighting.html" class="text-blue-600 hover:text-blue-700 underline">event lighting</a> for your next <a href="../../wedding.html" class="text-blue-600 hover:text-blue-700 underline">wedding</a>, <a href="../../corporate-events.html" class="text-blue-600 hover:text-blue-700 underline">corporate event</a>, or <a href="../../holiday-party.html" class="text-blue-600 hover:text-blue-700 underline">holiday party</a>. Click the button below to send us an
+                <p>Learn more about our professional lighting decor services including air balloon lights, chandeliers, marquee letters, and event lighting for your next wedding, corporate event, or holiday party. Click the button below to send us an
                     email and connect with our expert lighting decor team today.</p>
                 <a href="mailto:info@mihientertainment.com" class="btn-contact" aria-label="Email our lighting decor team">Learn More Now</a>
             </div>
@@ -2189,19 +2326,25 @@
         document.addEventListener('DOMContentLoaded', generateTextLayers);
     </script>
     <script>
-        // Initialize Swiper slider
+        // Initialize Headline Carousel
         document.addEventListener('DOMContentLoaded', function () {
-            var swiper = new Swiper('.blog-slider', {
-                spaceBetween: 30,
-                effect: 'fade',
+            var headlineCarousel = new Swiper('.headline-carousel', {
+                slidesPerView: 1,
+                spaceBetween: 0,
                 loop: true,
-                mousewheel: {
-                    invert: false,
+                autoplay: {
+                    delay: 5000,
+                    disableOnInteraction: false,
                 },
+                speed: 600,
                 pagination: {
-                    el: '.blog-slider__pagination',
+                    el: '.headline-carousel .swiper-pagination',
                     clickable: true,
-                }
+                },
+                navigation: {
+                    nextEl: '.headline-carousel .swiper-button-next',
+                    prevEl: '.headline-carousel .swiper-button-prev',
+                },
             });
         });
     </script>
