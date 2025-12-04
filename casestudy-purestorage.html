@@ -635,10 +635,14 @@
         /* Background Section with Background Image */
         .background-section {
             position: relative;
-            background-image: url('assets/images/purestorage/pic9.png');
+            min-height: 100vh;
+            background-image: url('assets/images/purestorage/pic9.webp');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
         }
 
         .background-section::before {
@@ -648,22 +652,42 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: linear-gradient(135deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.75) 100%);
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.3) 100%);
             z-index: 0;
         }
 
         .background-section>div {
             position: relative;
             z-index: 1;
+            width: 100%;
+            max-width: 50%;
+            padding: 2rem 4rem 2rem 2rem;
+            background: linear-gradient(to left, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.6) 30%, rgba(0, 0, 0, 0.3) 60%, transparent 100%);
+            backdrop-filter: blur(2px);
+        }
+
+        .background-section>div::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to left, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.7) 40%, transparent 100%);
+            z-index: -1;
         }
 
         /* Partnership Section with Background Image */
         .partnership-section {
             position: relative;
-            background-image: url('assets/images/purestorage/pic7.png');
+            min-height: 100vh;
+            background-image: url('assets/images/purestorage/pic7.webp');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
         }
 
         .partnership-section::before {
@@ -673,22 +697,42 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: linear-gradient(135deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.75) 100%);
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.3) 100%);
             z-index: 0;
         }
 
         .partnership-section>div {
             position: relative;
             z-index: 1;
+            width: 100%;
+            max-width: 50%;
+            padding: 2rem 2rem 2rem 4rem;
+            background: linear-gradient(to right, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.6) 30%, rgba(0, 0, 0, 0.3) 60%, transparent 100%);
+            backdrop-filter: blur(2px);
+        }
+
+        .partnership-section>div::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to right, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.7) 40%, transparent 100%);
+            z-index: -1;
         }
 
         /* Data Heroes Campaign Section with Background Image */
         .data-heroes-section {
             position: relative;
+            min-height: 100vh;
             background-image: url('assets/images/purestorage/pic13.png');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
         }
 
         .data-heroes-section::before {
@@ -698,13 +742,29 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: linear-gradient(135deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.75) 100%);
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.3) 100%);
             z-index: 0;
         }
 
         .data-heroes-section>div {
             position: relative;
             z-index: 1;
+            width: 100%;
+            max-width: 50%;
+            padding: 2rem 4rem 2rem 2rem;
+            background: linear-gradient(to left, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.6) 30%, rgba(0, 0, 0, 0.3) 60%, transparent 100%);
+            backdrop-filter: blur(2px);
+        }
+
+        .data-heroes-section>div::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to left, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.7) 40%, transparent 100%);
+            z-index: -1;
         }
 
         /* Results Section with Background Image */
@@ -979,12 +1039,69 @@
 
             /* Background sections overlay adjustment */
             .creative-process-section::before,
-            .background-section::before,
-            .partnership-section::before,
-            .data-heroes-section::before,
             .results-section::before,
             .conclusion-section::before {
                 background: linear-gradient(135deg, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.85) 100%);
+            }
+
+            /* Data Heroes section mobile adjustments */
+            .data-heroes-section {
+                min-height: 100vh;
+                justify-content: center;
+            }
+
+            .data-heroes-section>div {
+                max-width: 100%;
+                padding: 2rem 1.5rem;
+                background: linear-gradient(to left, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.6) 30%, rgba(0, 0, 0, 0.3) 60%, transparent 100%);
+            }
+
+            .data-heroes-section>div::before {
+                background: linear-gradient(to left, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.7) 40%, transparent 100%);
+            }
+
+            .data-heroes-section::before {
+                background: linear-gradient(135deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.4) 100%);
+            }
+
+            /* Partnership section mobile adjustments */
+            .partnership-section {
+                min-height: 100vh;
+                justify-content: center;
+            }
+
+            .partnership-section>div {
+                max-width: 100%;
+                padding: 2rem 1.5rem;
+                background: linear-gradient(to right, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.6) 30%, rgba(0, 0, 0, 0.3) 60%, transparent 100%);
+            }
+
+            .partnership-section>div::before {
+                background: linear-gradient(to right, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.7) 40%, transparent 100%);
+            }
+
+            .partnership-section::before {
+                background: linear-gradient(135deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.4) 100%);
+            }
+
+            /* Background section mobile adjustments */
+            .background-section {
+                min-height: 100vh;
+                justify-content: center;
+            }
+
+            .background-section>div {
+                max-width: 100%;
+                padding: 2rem 1.5rem;
+                background: linear-gradient(to left, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.6) 30%, rgba(0, 0, 0, 0.3) 60%, transparent 100%);
+            }
+
+            .background-section>div::before {
+                background: linear-gradient(to left, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.7) 40%, transparent 100%);
+            }
+
+            .background-section::before {
+                background: linear-gradient(135deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.4) 100%);
             }
         }
 
@@ -1195,13 +1312,13 @@
                     <img src="assets/images/purestorage/pic6.png" alt="Pure Storage at an event">
                 </div>
                 <div class="gallery-item">
-                    <img src="assets/images/purestorage/pic7.png" alt="Pure Storage booth set up">
+                    <img src="assets/images/purestorage/pic7.webp" alt="Pure Storage booth set up">
                 </div>
                 <div class="gallery-item">
                     <img src="assets/images/purestorage/pic8.png" alt="AI examples">
                 </div>
                 <div class="gallery-item">
-                    <img src="assets/images/purestorage/pic9.png" alt="Camera set up for AI booth">
+                    <img src="assets/images/purestorage/pic9.webp" alt="Camera set up for AI booth">
                 </div>
                 <div class="gallery-item">
                     <img src="assets/images/purestorage/pic10.png" alt="Pure Storage booth">
@@ -1268,9 +1385,9 @@
     </section>
 
     <!-- Background Section -->
-    <section class="background-section py-12 md:py-20 px-4">
-        <div class="max-w-4xl mx-auto">
-            <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-6 md:mb-8 text-white text-center">BACKGROUND</h2>
+    <section class="background-section px-4">
+        <div>
+            <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-6 md:mb-8 text-white">BACKGROUND</h2>
             <p class="text-base md:text-lg lg:text-xl text-gray-300 leading-relaxed mb-4 md:mb-6">
                 Pure Storage, a leading provider of enterprise-grade storage solutions, aimed to enhance its brand
                 experience and engagement at a large-scale trade show.
@@ -1283,9 +1400,9 @@
     </section>
 
     <!-- Partnership Section -->
-    <section class="partnership-section py-12 md:py-20 px-4">
-        <div class="max-w-4xl mx-auto">
-            <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-6 md:mb-8 text-white text-center">PARTNERSHIP</h2>
+    <section class="partnership-section px-4">
+        <div>
+            <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-6 md:mb-8 text-white">PARTNERSHIP</h2>
             <p class="text-base md:text-lg lg:text-xl text-gray-300 leading-relaxed mb-4 md:mb-6">
                 Pure Storage collaborated with MiHi Entertainment, a creative and experiential marketing agency known
                 for its unique approach to creating cutting-edge, immersive experiences.
@@ -1298,10 +1415,10 @@
     </section>
 
     <!-- Data Heroes Campaign Section -->
-    <section class="data-heroes-section py-12 md:py-20 px-4">
-        <div class="max-w-4xl mx-auto">
-            <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-3 md:mb-4 text-center text-white">THE</h2>
-            <h3 class="text-2xl sm:text-3xl md:text-4xl lg:text-6xl font-bold mb-6 md:mb-8 text-center orange-glow" style="color: #FF6B35;">DATA
+    <section class="data-heroes-section px-4">
+        <div>
+            <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-3 md:mb-4 text-white">THE</h2>
+            <h3 class="text-2xl sm:text-3xl md:text-4xl lg:text-6xl font-bold mb-6 md:mb-8 orange-glow" style="color: #FF6B35;">DATA
                 HEROES<br>CAMPAIGN</h3>
 
             <p class="text-base md:text-lg lg:text-xl text-gray-300 leading-relaxed mb-4 md:mb-6">
