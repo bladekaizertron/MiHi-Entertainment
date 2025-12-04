@@ -1,0 +1,1021 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Extreme Strings - Electric Violin Shows in Denver</title>
+    <link rel="icon" type="image/svg+xml" href="../assets/images/favicon.svg">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Montserrat:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <style>
+        html,
+        body {
+            overflow-x: hidden;
+            width: 100%;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #1a202c;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        .hero-gradient {
+            background: linear-gradient(135deg, rgba(0, 80, 255, 0.1) 0%, rgba(139, 111, 71, 0.1) 100%);
+        }
+
+        .content-card {
+            transition: all 0.3s ease;
+        }
+
+        .content-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .accent-gradient {
+            background: linear-gradient(135deg, #0050ff 0%, #8B6F47 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .title-gradient {
+            background: linear-gradient(135deg, #0050ff 0%, #0066ff 50%, #0050ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            background-size: 200% auto;
+            animation: shimmer 3s linear infinite;
+        }
+
+        @keyframes shimmer {
+            to {
+                background-position: 200% center;
+            }
+        }
+
+        .decorative-line {
+            height: 4px;
+            background: linear-gradient(90deg, transparent, #0050ff, transparent);
+            margin: 2rem 0;
+        }
+
+        .text-highlight {
+            position: relative;
+            display: inline-block;
+        }
+
+        .text-highlight::after {
+            content: '';
+            position: absolute;
+            bottom: 0.2em;
+            left: 0;
+            right: 0;
+            height: 0.3em;
+            background: linear-gradient(135deg, rgba(0, 80, 255, 0.2), rgba(139, 111, 71, 0.2));
+            z-index: -1;
+            border-radius: 2px;
+        }
+
+        .author-badge {
+            background: linear-gradient(135deg, rgba(0, 80, 255, 0.05), rgba(139, 111, 71, 0.05));
+            backdrop-filter: blur(10px);
+        }
+
+        .content-section {
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.9), rgba(249, 250, 251, 0.9));
+            border-left: 4px solid transparent;
+            border-image: linear-gradient(135deg, #0050ff, #8B6F47) 1;
+        }
+
+        .paragraph-card {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .paragraph-card:hover {
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            transform: translateY(-2px);
+        }
+
+        .photo-credit-box {
+            background: linear-gradient(135deg, rgba(0, 80, 255, 0.05), rgba(139, 111, 71, 0.05));
+            border-left: 3px solid #0050ff;
+            border-radius: 8px;
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            margin-top: 0.5rem;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            min-width: 180px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.2s ease;
+            z-index: 50;
+            pointer-events: none;
+        }
+
+        .dropdown-menu.show {
+            pointer-events: auto;
+        }
+
+        .dropdown-menu.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-item {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem 1rem;
+            color: #374151;
+            font-size: 0.875rem;
+            transition: all 0.2s ease;
+            cursor: pointer;
+            border-bottom: 1px solid #f3f4f6;
+            pointer-events: auto;
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+        }
+
+        .dropdown-item:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-item:hover {
+            background-color: #f9fafb;
+            color: #111827;
+        }
+
+        .dropdown-item svg {
+            margin-right: 0.75rem;
+            flex-shrink: 0;
+        }
+
+        #share-notification {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .carousel-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 16px;
+        }
+
+        .carousel-slide {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .carousel-slide.active {
+            display: block;
+            opacity: 1;
+        }
+
+        .carousel-image {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            display: block;
+        }
+
+        .carousel-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 10;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .carousel-button:hover {
+            background: rgba(255, 255, 255, 1);
+            transform: translateY(-50%) scale(1.1);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .carousel-button.prev {
+            left: 1rem;
+        }
+
+        .carousel-button.next {
+            right: 1rem;
+        }
+
+        .carousel-indicators {
+            position: absolute;
+            bottom: 1rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            z-index: 10;
+            background: rgba(255, 255, 255, 0.7);
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            backdrop-filter: blur(10px);
+        }
+
+        .carousel-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0.3);
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .carousel-indicator.active {
+            background: #0050ff;
+            border-color: #0050ff;
+            transform: scale(1.2);
+        }
+
+        .carousel-indicator:hover {
+            background: rgba(0, 80, 255, 0.6);
+        }
+
+        .carousel-image {
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .carousel-image:hover {
+            transform: scale(1.02);
+        }
+
+        /* Lightbox Styles */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 9999;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .lightbox.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 1;
+        }
+
+        .lightbox-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lightbox-image {
+            max-width: 100%;
+            max-height: 90vh;
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 10000;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .lightbox-close:hover {
+            background: rgba(255, 255, 255, 1);
+            transform: scale(1.1);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 10000;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .lightbox-nav:hover {
+            background: rgba(255, 255, 255, 1);
+            transform: translateY(-50%) scale(1.1);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .lightbox-nav.prev {
+            left: 2rem;
+        }
+
+        .lightbox-nav.next {
+            right: 2rem;
+        }
+
+        .lightbox-counter {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255, 255, 255, 0.9);
+            padding: 0.5rem 1.5rem;
+            border-radius: 9999px;
+            color: #1a202c;
+            font-weight: 600;
+            font-size: 0.875rem;
+            z-index: 10000;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Tag Button Styles */
+        .content-tag {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: #f3f4f6;
+            border: 1px solid #e5e7eb;
+            border-radius: 6px;
+            color: #374151;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            cursor: pointer;
+            margin: 0.25rem;
+        }
+
+        .content-tag:hover {
+            background: #e5e7eb;
+            border-color: #d1d5db;
+            transform: translateY(-1px);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .tag-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .lightbox-close {
+                top: 1rem;
+                right: 1rem;
+                width: 40px;
+                height: 40px;
+            }
+
+            .lightbox-nav {
+                width: 44px;
+                height: 44px;
+            }
+
+            .lightbox-nav.prev {
+                left: 1rem;
+            }
+
+            .lightbox-nav.next {
+                right: 1rem;
+            }
+
+            .lightbox-counter {
+                bottom: 1rem;
+            }
+        }
+
+        /* Print Styles */
+        @media print {
+
+            /* Hide navigation, footer, and non-essential elements */
+            header,
+            nav,
+            footer,
+            .carousel-button,
+            .carousel-indicators,
+            .dropdown-menu,
+            #dropdown-toggle,
+            .lightbox,
+            .author-badge button,
+            .social-media-footer {
+                display: none !important;
+            }
+
+            /* Ensure content is visible and properly formatted */
+            body {
+                font-size: 12pt;
+                line-height: 1.6;
+                color: #000;
+                background: #fff;
+            }
+
+            /* Page breaks */
+            .paragraph-card,
+            .content-section {
+                page-break-inside: avoid;
+                break-inside: avoid;
+            }
+
+            /* Links should be visible in print */
+            a {
+                color: #000;
+                text-decoration: underline;
+            }
+
+            /* Images should print */
+            img {
+                max-width: 100%;
+                height: auto;
+                page-break-inside: avoid;
+            }
+
+            /* Carousel images should all be visible */
+            .carousel-slide {
+                display: block !important;
+                page-break-after: always;
+            }
+
+            .carousel-slide:last-child {
+                page-break-after: auto;
+            }
+
+            /* Remove shadows and gradients for print */
+            .paragraph-card,
+            .content-section,
+            .author-badge {
+                box-shadow: none;
+                border: 1px solid #ddd;
+            }
+
+            /* Ensure proper spacing */
+            main {
+                padding-top: 0;
+            }
+
+            section {
+                page-break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation will be injected here by navigation.js -->
+
+    <!-- Main Content -->
+    <main class="pt-20 bg-gradient-to-b from-gray-50 via-white to-gray-50">
+        <!-- Main Title -->
+        <section class="py-12 md:py-16 relative overflow-hidden">
+            <div class="absolute inset-0 bg-gradient-to-br from-blue-50 via-transparent to-purple-50 opacity-50"></div>
+            <div class="container mx-auto px-4 sm:px-6 relative z-10">
+                <div class="max-w-5xl mx-auto">
+                    <h1
+                        class="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold mb-8 leading-tight uppercase tracking-tight">
+                        <span class="title-gradient">Extreme Strings: A High-Energy</span>
+                        <br>
+                        <span class="text-gray-800">Live Electric Violin Performance Act</span>
+                    </h1>
+                    <div class="decorative-line"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Hero Image Section -->
+        <section class="py-12 md:py-20 bg-white relative overflow-hidden">
+            <div class="container mx-auto px-4 sm:px-6">
+                <div class="max-w-6xl mx-auto">
+                    <!-- Image Container -->
+                    <div class="relative rounded-2xl overflow-hidden shadow-2xl">
+                        <img src="../assets/images/post/extremestrings/img1.png"
+                            alt="Extreme Strings - Live Electric Violin Performance" class="w-full h-auto">
+                    </div>
+
+                    <!-- Description Text -->
+                    <div class="mt-8 md:mt-12 text-center max-w-3xl mx-auto">
+                        <p class="text-lg md:text-xl text-gray-700 leading-relaxed">
+                            <a href="https://www.extremestrings.com/" target="_blank" rel="noopener noreferrer"
+                                class="text-blue-600 hover:text-blue-700 font-bold underline decoration-2 underline-offset-2 transition-colors">Extreme
+                                Strings</a> is a live music experience
+                            featuring an electric violinist. Experience the energy and artistry of a high-energy
+                            performance that brings classical instruments into the modern era with stunning visual
+                            effects and dynamic sound.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Photo Credit -->
+        <div class="container mx-auto px-4 sm:px-6 pb-8">
+            <div class="max-w-4xl mx-auto">
+                <div class="photo-credit-box px-6 py-4 rounded-lg">
+                    <p class="text-sm italic text-gray-700 flex items-center">
+                        <svg class="w-4 h-4 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                        </svg>
+                        Photos from
+                        <a href="https://matriarchphotography.com/" target="_blank" rel="noopener noreferrer"
+                            class="text-blue-600 hover:text-blue-700 font-semibold underline decoration-2 underline-offset-2 ml-1 transition-colors">
+                            Matriarch Photography
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Weddings and Corporate Events Section -->
+        <section class="py-12 md:py-16 bg-gradient-to-b from-gray-50 to-white">
+            <div class="container mx-auto px-4 sm:px-6">
+                <div class="max-w-6xl mx-auto space-y-12 md:space-y-16">
+                    <!-- Weddings Section -->
+                    <div class="space-y-6 md:space-y-8">
+                        <h2
+                            class="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 text-gray-900 leading-tight uppercase tracking-tight">
+                            <span class="text-highlight">WEDDINGS: A PERSONALIZED</span>
+                        </h2>
+
+                        <!-- Two Column Layout: Image and Text -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-start">
+                            <!-- Image Column -->
+                            <div class="order-2 md:order-1">
+                                <div class="relative rounded-2xl overflow-hidden shadow-2xl">
+                                    <img src="../assets/images/post/extremestrings/img2.png"
+                                        alt="Extreme Strings Electric Violinist Performance" class="w-full h-auto">
+                                </div>
+                            </div>
+
+                            <!-- Text Column -->
+                            <div class="order-1 md:order-2">
+                                <div class="paragraph-card p-8 md:p-10 content-section">
+                                    <div class="prose prose-lg max-w-none">
+                                        <p class="text-gray-700 text-lg md:text-xl leading-relaxed mb-6">
+                                            For weddings, <a href="https://www.extremestrings.com/" target="_blank"
+                                                rel="noopener noreferrer"
+                                                class="text-blue-600 hover:text-blue-700 font-bold underline decoration-2 underline-offset-2 transition-colors">Extreme
+                                                Strings</a> provides tailored ceremony and cocktail hour packages,
+                                            collaborating with couples to create a personalized musical timeline that
+                                            reflects their personalities and preferences.
+                                        </p>
+                                        <p class="text-gray-700 text-lg md:text-xl leading-relaxed mb-6">
+                                            It details services from prelude music to processional/recessional songs,
+                                            unity candle melodies, and upbeat cocktail hour tunes, emphasizing how the
+                                            electric violinist adds elegance and energy.
+                                        </p>
+                                        <p class="text-gray-700 text-lg md:text-xl leading-relaxed">
+                                            A specific highlight mentions a performance at Sunspot Lodge in Winter Park
+                                            Resort, featuring a romantic ceremony overlooking the valley and an
+                                            energetic
+                                            cocktail hour with popular songs like "Despacito."
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Reception Text Block -->
+                        <div class="paragraph-card p-8 md:p-10 content-section">
+                            <div class="prose prose-lg max-w-none">
+                                <p class="text-gray-700 text-lg md:text-xl leading-relaxed">
+                                    During the reception, the violinist joined forces with a DJ from Elite
+                                    Entertainment, captivating guests on the dance floor with a fusion of live violin
+                                    and DJ beats, even performing a rousing rendition of 'The Devil Went Down to
+                                    Georgia.'
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Corporate Events Section -->
+                    <div class="space-y-6 md:space-y-8">
+                        <h2
+                            class="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 text-gray-900 leading-tight uppercase tracking-tight">
+                            <span class="text-highlight">CORPORATE EVENTS: FUSION OF LIVE</span>
+                        </h2>
+                        <h2
+                            class="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 text-gray-900 leading-tight uppercase tracking-tight">
+                            <span class="text-highlight">MUSIC AND DJ</span>
+                        </h2>
+
+                        <!-- Two Column Layout: Text and Image -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-start">
+                            <!-- Text Column -->
+                            <div>
+                                <div class="paragraph-card p-8 md:p-10 content-section">
+                                    <div class="prose prose-lg max-w-none">
+                                        <p class="text-gray-700 text-lg md:text-xl leading-relaxed mb-6">
+                                            For corporate events, <a href="https://www.extremestrings.com/"
+                                                target="_blank" rel="noopener noreferrer"
+                                                class="text-blue-600 hover:text-blue-700 font-bold underline decoration-2 underline-offset-2 transition-colors">Extreme
+                                                Strings</a> offers a unique "fusion" product, where the electric
+                                            violinist performs alongside a DJ, creating a dynamic and immersive musical
+                                            experience. This fusion style allows the violinist to improvise and
+                                            complement the DJ's grooves, adding an extra layer of energy and excitement
+                                            to the event.
+                                        </p>
+                                        <p class="text-gray-700 text-lg md:text-xl leading-relaxed">
+                                            One of their most memorable corporate events was Feel Famous 2024, where the
+                                            violinist seamlessly transitioned from atmospheric, space-themed music to a
+                                            lively dance party, complete with LED lights on the electric violin to match
+                                            the event's neon-colored theme.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Image Column -->
+                            <div>
+                                <div class="relative rounded-2xl overflow-hidden shadow-2xl">
+                                    <img src="../assets/images/post/extremestrings/img3.png"
+                                        alt="Extreme Strings Electric Violinist with LED Lights" class="w-full h-auto">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Collaboration Section -->
+                    <div class="space-y-6 md:space-y-8">
+                        <h2
+                            class="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 text-gray-900 leading-tight uppercase tracking-tight">
+                            <span class="text-highlight">COLLABORATION WITH DJS AND REFERRALS</span>
+                        </h2>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Learn More Banner and Gallery Section -->
+        <section class="py-12 md:py-16 bg-white">
+            <div class="container mx-auto px-4 sm:px-6">
+                <div class="max-w-6xl mx-auto space-y-12">
+                    <!-- Blue Banner -->
+                    <div class="bg-blue-600 rounded-lg py-6 md:py-8 text-center">
+                        <h2 class="text-2xl md:text-3xl font-bold text-white uppercase tracking-wide">
+                            <a href="https://www.extremestrings.com/" target="_blank" rel="noopener noreferrer"
+                                class="text-white hover:text-blue-100 transition-colors cursor-pointer">
+                                LEARN MORE ABOUT EXTREME STRINGS
+                            </a>
+                        </h2>
+                    </div>
+
+                    <!-- Three Image Gallery -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+                        <!-- Left Image -->
+                        <div class="relative rounded-2xl overflow-hidden shadow-xl aspect-[4/3] cursor-pointer group hover:shadow-2xl transition-shadow"
+                            onclick="openImageLightbox('../assets/images/post/extremestrings/img4.png', 'Extreme Strings Electric Violinist Performance')">
+                            <img src="../assets/images/post/extremestrings/img4.png"
+                                alt="Extreme Strings Electric Violinist Performance"
+                                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                            <div
+                                class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-opacity duration-300 flex items-center justify-center">
+                                <svg class="w-12 h-12 text-white opacity-0 group-hover:opacity-100 transition-opacity"
+                                    fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
+                                </svg>
+                            </div>
+                        </div>
+
+                        <!-- Middle Image -->
+                        <div class="relative rounded-2xl overflow-hidden shadow-xl aspect-[4/3] cursor-pointer group hover:shadow-2xl transition-shadow"
+                            onclick="openImageLightbox('../assets/images/post/extremestrings/img5.png', 'Extreme Strings Electric Violinist Performance')">
+                            <img src="../assets/images/post/extremestrings/img5.png"
+                                alt="Extreme Strings Electric Violinist Performance"
+                                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                            <div
+                                class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-opacity duration-300 flex items-center justify-center">
+                                <svg class="w-12 h-12 text-white opacity-0 group-hover:opacity-100 transition-opacity"
+                                    fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
+                                </svg>
+                            </div>
+                        </div>
+
+                        <!-- Right Image -->
+                        <div class="relative rounded-2xl overflow-hidden shadow-xl aspect-[4/3] cursor-pointer group hover:shadow-2xl transition-shadow"
+                            onclick="openImageLightbox('../assets/images/post/extremestrings/img6.png', 'Extreme Strings Electric Violinist Performance')">
+                            <img src="../assets/images/post/extremestrings/img6.png"
+                                alt="Extreme Strings Electric Violinist Performance"
+                                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                            <div
+                                class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-opacity duration-300 flex items-center justify-center">
+                                <svg class="w-12 h-12 text-white opacity-0 group-hover:opacity-100 transition-opacity"
+                                    fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Booth Banter and Social Media Section -->
+                    <div class="space-y-6">
+                        <!-- Booth Banter Button -->
+                        <div class="text-center">
+                            <a href="#"
+                                class="inline-block px-6 py-3 border-2 border-gray-300 rounded-lg text-gray-700 font-semibold hover:bg-gray-50 transition-colors">
+                                Booth Banter
+                            </a>
+                        </div>
+
+                        <!-- Booth Banter Link -->
+                        <div class="text-center">
+                            <a href="#" class="text-gray-700 hover:text-blue-600 transition-colors">
+                                Booth Banter
+                            </a>
+                        </div>
+
+                        <!-- Separator Line -->
+                        <div class="border-t border-gray-300"></div>
+
+                        <!-- Social Media Icons -->
+                        <div class="flex justify-center items-center gap-6 md:gap-8">
+                            <!-- Facebook -->
+                            <a href="https://www.facebook.com/mihientertainment" target="_blank"
+                                rel="noopener noreferrer"
+                                class="w-10 h-10 md:w-12 md:h-12 rounded-full bg-gray-900 flex items-center justify-center text-white hover:scale-110 transition-all duration-300 shadow-lg hover:shadow-xl"
+                                aria-label="Facebook">
+                                <svg class="w-5 h-5 md:w-6 md:h-6" fill="currentColor" viewBox="0 0 24 24">
+                                    <path
+                                        d="M22.675 0h-21.35C.59 0 0 .59 0 1.325v21.35C0 23.41.59 24 1.325 24H12.82v-9.29H9.69v-3.62h3.13V8.41c0-3.1 1.89-4.79 4.66-4.79 1.32 0 2.46.1 2.79.14v3.24h-1.9c-1.5 0-1.79.71-1.79 1.76v2.31h3.59l-.47 3.62h-3.12V24h5.7c.73 0 1.32-.59 1.32-1.32V1.32C24 .59 23.41 0 22.675 0z" />
+                                </svg>
+                            </a>
+
+                            <!-- Twitter/X -->
+                            <a href="https://twitter.com/mihientertainment" target="_blank" rel="noopener noreferrer"
+                                class="w-10 h-10 md:w-12 md:h-12 rounded-full bg-gray-900 flex items-center justify-center text-white hover:scale-110 transition-all duration-300 shadow-lg hover:shadow-xl"
+                                aria-label="Twitter">
+                                <svg class="w-5 h-5 md:w-6 md:h-6" fill="currentColor" viewBox="0 0 24 24">
+                                    <path
+                                        d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                                </svg>
+                            </a>
+
+                            <!-- LinkedIn -->
+                            <a href="https://www.linkedin.com/company/mihientertainment/" target="_blank"
+                                rel="noopener noreferrer"
+                                class="w-10 h-10 md:w-12 md:h-12 rounded-full bg-gray-900 flex items-center justify-center text-white hover:scale-110 transition-all duration-300 shadow-lg hover:shadow-xl"
+                                aria-label="LinkedIn">
+                                <svg class="w-5 h-5 md:w-6 md:h-6" fill="currentColor" viewBox="0 0 24 24">
+                                    <path
+                                        d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                                </svg>
+                            </a>
+
+                            <!-- Share Link -->
+                            <button id="share-link-btn"
+                                class="w-10 h-10 md:w-12 md:h-12 rounded-full bg-gray-900 flex items-center justify-center text-white hover:scale-110 transition-all duration-300 shadow-lg hover:shadow-xl cursor-pointer"
+                                aria-label="Share link">
+                                <svg class="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
+                                </svg>
+                            </button>
+
+                            <!-- Print -->
+                            <button id="print-link-btn"
+                                class="w-10 h-10 md:w-12 md:h-12 rounded-full bg-gray-900 flex items-center justify-center text-white hover:scale-110 transition-all duration-300 shadow-lg hover:shadow-xl cursor-pointer"
+                                aria-label="Print">
+                                <svg class="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Image Lightbox Modal -->
+        <div id="image-lightbox"
+            class="fixed inset-0 bg-black bg-opacity-95 z-50 hidden flex items-center justify-center p-4">
+            <button id="lightbox-close"
+                class="absolute top-4 right-4 text-white hover:text-gray-300 transition-colors z-10"
+                aria-label="Close lightbox">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+            <div class="max-w-7xl max-h-full">
+                <img id="lightbox-image" src="" alt="" class="max-w-full max-h-[90vh] object-contain rounded-lg">
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer will be injected here by footer.js -->
+
+    <!-- Navigation and Footer Scripts -->
+    <script src="../assets/components/navigation.js"></script>
+    <script src="../assets/components/footer.js"></script>
+
+    <!-- Social Media Footer Buttons Script -->
+    <script>
+        (function () {
+            const shareLinkBtn = document.getElementById('share-link-btn');
+            const printLinkBtn = document.getElementById('print-link-btn');
+
+            // Share link functionality
+            if (shareLinkBtn) {
+                shareLinkBtn.addEventListener('click', () => {
+                    const url = window.location.href;
+                    const title = document.title;
+
+                    // Check if Web Share API is available
+                    if (navigator.share) {
+                        navigator.share({
+                            title: title,
+                            url: url
+                        }).catch((error) => {
+                            console.log('Error sharing:', error);
+                            fallbackShare(url);
+                        });
+                    } else {
+                        fallbackShare(url);
+                    }
+                });
+            }
+
+            // Print functionality
+            if (printLinkBtn) {
+                printLinkBtn.addEventListener('click', () => {
+                    window.print();
+                });
+            }
+
+            // Fallback share method (copy to clipboard)
+            function fallbackShare(url) {
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    navigator.clipboard.writeText(url).then(() => {
+                        showShareNotification('Link copied to clipboard!');
+                    }).catch((error) => {
+                        console.error('Failed to copy:', error);
+                        showShareNotification('Failed to copy link', true);
+                    });
+                } else {
+                    // Fallback for older browsers
+                    const textArea = document.createElement('textarea');
+                    textArea.value = url;
+                    textArea.style.position = 'fixed';
+                    textArea.style.opacity = '0';
+                    document.body.appendChild(textArea);
+                    textArea.select();
+                    try {
+                        document.execCommand('copy');
+                        showShareNotification('Link copied to clipboard!');
+                    } catch (err) {
+                        console.error('Failed to copy:', err);
+                        showShareNotification('Failed to copy link', true);
+                    }
+                    document.body.removeChild(textArea);
+                }
+            }
+
+            // Show notification
+            function showShareNotification(message, isError = false) {
+                // Remove existing notification if any
+                const existing = document.getElementById('share-footer-notification');
+                if (existing) {
+                    existing.remove();
+                }
+
+                const notification = document.createElement('div');
+                notification.id = 'share-footer-notification';
+                notification.className = `fixed bottom-4 right-4 px-6 py-3 rounded-lg shadow-lg z-50 transition-all duration-300 ${isError ? 'bg-red-500 text-white' : 'bg-green-500 text-white'}`;
+                notification.textContent = message;
+                notification.style.opacity = '0';
+                notification.style.transform = 'translateY(20px)';
+                document.body.appendChild(notification);
+
+                // Animate in
+                setTimeout(() => {
+                    notification.style.opacity = '1';
+                    notification.style.transform = 'translateY(0)';
+                }, 10);
+
+                // Remove after 3 seconds
+                setTimeout(() => {
+                    notification.style.opacity = '0';
+                    notification.style.transform = 'translateY(20px)';
+                    setTimeout(() => {
+                        if (notification.parentNode) {
+                            notification.parentNode.removeChild(notification);
+                        }
+                    }, 300);
+                }, 3000);
+            }
+        })();
+
+        // Image Lightbox Functionality
+        function openImageLightbox(imageSrc, imageAlt) {
+            const lightbox = document.getElementById('image-lightbox');
+            const lightboxImage = document.getElementById('lightbox-image');
+            const lightboxClose = document.getElementById('lightbox-close');
+
+            if (lightbox && lightboxImage) {
+                lightboxImage.src = imageSrc;
+                lightboxImage.alt = imageAlt;
+                lightbox.classList.remove('hidden');
+                document.body.style.overflow = 'hidden'; // Prevent background scrolling
+            }
+
+            // Close on button click
+            if (lightboxClose) {
+                lightboxClose.addEventListener('click', closeImageLightbox);
+            }
+
+            // Close on background click
+            lightbox.addEventListener('click', function (e) {
+                if (e.target === lightbox) {
+                    closeImageLightbox();
+                }
+            });
+
+            // Close on Escape key
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape' && !lightbox.classList.contains('hidden')) {
+                    closeImageLightbox();
+                }
+            });
+        }
+
+        function closeImageLightbox() {
+            const lightbox = document.getElementById('image-lightbox');
+            if (lightbox) {
+                lightbox.classList.add('hidden');
+                document.body.style.overflow = ''; // Restore scrolling
+            }
+        }
+    </script>
+
+</body>
+
+</html>
