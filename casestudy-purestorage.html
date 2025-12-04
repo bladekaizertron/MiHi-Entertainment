@@ -32,6 +32,7 @@
             font-family: 'Inter', sans-serif;
             color: #ffffff;
             background-color: var(--black-primary);
+            overflow-x: hidden;
         }
 
         h1,
@@ -69,6 +70,13 @@
             background: linear-gradient(135deg, var(--orange-light) 0%, var(--orange-primary) 100%);
         }
 
+        /* Ensure navigation is above hero images */
+        header,
+        #navigation-container {
+            position: relative;
+            z-index: 100 !important;
+        }
+
         /* Hero section */
         .hero-section {
             position: relative;
@@ -78,45 +86,126 @@
             justify-content: center;
             background: linear-gradient(135deg, rgba(0, 0, 0, 0.95) 0%, rgba(26, 26, 26, 0.95) 100%);
             overflow: hidden;
+            padding-top: 80px;
+            isolation: isolate;
         }
 
         .hero-bg {
             position: absolute;
-            top: 0;
-            left: 0;
+            inset: 80px 0 0 0;
             width: 100%;
-            height: 100%;
+            height: calc(100% - 80px);
             object-fit: cover;
+            object-position: center;
             z-index: 0;
-            opacity: 0.4;
-            filter: brightness(0.6) sepia(1) hue-rotate(10deg) saturate(1.5);
+            opacity: 0.7;
+            will-change: opacity;
+            transform: translateZ(0);
         }
 
         .hero-content {
             position: relative;
             z-index: 2;
             width: 100%;
-            max-width: 7xl;
+            max-width: 1280px;
             margin: 0 auto;
             padding: 0 1rem;
             display: flex;
             align-items: center;
             justify-content: flex-start;
+            animation: fadeInUp 1s ease-out;
         }
 
-        .hero-content>div {
+        .hero-content > div {
             position: relative;
             z-index: 3;
             max-width: 60%;
             padding-right: 2rem;
         }
 
+        /* Cool text effects */
+        .hero-content h1 {
+            background: linear-gradient(135deg, #ffffff 0%, #FF6B35 50%, #ffffff 100%);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 40px rgba(255, 107, 53, 0.5);
+            animation: gradientShift 3s ease infinite, fadeInUp 1s ease-out 0.2s both;
+            letter-spacing: 0.1em;
+            font-weight: 900;
+            text-transform: uppercase;
+        }
+
+        .hero-content h2 {
+            background: linear-gradient(135deg, #FF6B35 0%, #FF8C42 50%, #FF6B35 100%);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradientShift 3s ease infinite 0.5s, fadeInUp 1s ease-out 0.4s both;
+            letter-spacing: 0.15em;
+            font-weight: 700;
+            text-transform: uppercase;
+            position: relative;
+        }
+
+        .hero-content h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #FF6B35, transparent);
+            animation: expandLine 1s ease-out 0.8s both;
+        }
+
+        .hero-content p {
+            animation: fadeInUp 1s ease-out 0.6s both;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            letter-spacing: 0.05em;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes gradientShift {
+            0%, 100% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+        }
+
+        @keyframes expandLine {
+            from {
+                width: 0;
+                opacity: 0;
+            }
+            to {
+                width: 100px;
+                opacity: 1;
+            }
+        }
+
         .hero-ai-image {
             position: absolute;
             right: 0;
-            top: 0;
-            height: 100vh;
+            top: 80px;
+            height: calc(100% - 80px);
             width: auto;
+            max-width: 60%;
             z-index: 1;
             object-fit: contain;
             object-position: right center;
@@ -124,23 +213,23 @@
             filter: drop-shadow(0 0 40px rgba(255, 107, 53, 0.6));
             animation: float 6s ease-in-out infinite;
             pointer-events: none;
+            will-change: transform, opacity;
+            transform: translateZ(0);
         }
 
         @keyframes float {
-
-            0%,
-            100% {
-                transform: translateY(0) translateX(0);
+            0%, 100% {
+                transform: translate3d(0, 0, 0);
             }
-
             50% {
-                transform: translateY(-15px) translateX(-10px);
+                transform: translate3d(-10px, -15px, 0);
             }
         }
 
         @media (max-width: 1024px) {
             .hero-ai-image {
-                height: 90vh;
+                top: 80px;
+                height: calc(100% - 80px);
             }
 
             .hero-content>div {
@@ -149,26 +238,138 @@
         }
 
         @media (max-width: 768px) {
+            .hero-section {
+                min-height: 100vh;
+                padding: 0;
+                padding-top: 70px;
+            }
+
+            .hero-bg {
+                inset: 70px 0 0 0;
+                height: calc(100% - 70px);
+            }
+
             .hero-ai-image {
-                height: 85vh;
-                opacity: 0.7;
+                top: 70px;
+                left: 0;
+                right: 0;
+                width: 100%;
+                height: calc(100% - 70px);
+                opacity: 0.75;
+                max-width: none;
+                object-fit: cover;
+                object-position: center;
+            }
+
+            .hero-content {
+                justify-content: center;
+                padding: 0 1rem;
             }
 
             .hero-content>div {
-                max-width: 50%;
-                padding-right: 1.5rem;
+                max-width: 100%;
+                padding-right: 0;
+                text-align: center;
             }
+
+            .hero-content h1 {
+                letter-spacing: 0.05em;
+                font-size: 2.5rem !important;
+            }
+
+            .hero-content h2 {
+                letter-spacing: 0.1em;
+            }
+
+            .hero-content h2::after {
+                width: 60px;
+            }
+
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 1rem;
+            }
+
+            .stat-card {
+                padding: 1.5rem;
+            }
+
+            .stat-number {
+                font-size: 2.5rem;
+            }
+
+            .stat-label {
+                font-size: 1rem;
+            }
+
+            /* Creative Process Section Mobile */
+            .creative-process-section li {
+                padding: 0.75rem 1rem 0.75rem 2rem;
+                margin: 0.5rem auto;
+                font-size: 0.9rem;
+            }
+
+            .creative-process-section li::before {
+                left: 0.5rem;
+            }
+
+            .creative-process-section h3::after {
+                width: 0;
+                animation: expandUnderlineMobile 1s ease-out 0.8s forwards;
+            }
+
+            @keyframes expandUnderlineMobile {
+                to {
+                    width: 120px;
+                }
+            }
+
         }
 
         @media (max-width: 640px) {
+            .hero-section {
+                min-height: 100vh;
+                padding: 0;
+                padding-top: 60px;
+            }
+
+            .hero-bg {
+                inset: 60px 0 0 0;
+                height: calc(100% - 60px);
+            }
+
             .hero-ai-image {
-                height: 80vh;
-                opacity: 0.5;
+                top: 60px;
+                left: 0;
+                right: 0;
+                width: 100%;
+                height: calc(100% - 60px);
+                opacity: 0.7;
+                max-width: none;
+                object-fit: cover;
+                object-position: center;
             }
 
             .hero-content>div {
-                max-width: 45%;
-                padding-right: 1rem;
+                max-width: 100%;
+                padding-right: 0;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .stat-card {
+                padding: 1.25rem;
+            }
+
+            .stat-number {
+                font-size: 2rem;
+            }
+
+            .stat-label {
+                font-size: 0.9rem;
             }
         }
 
@@ -264,6 +465,7 @@
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
+            overflow: hidden;
         }
 
         .creative-process-section::before {
@@ -280,6 +482,154 @@
         .creative-process-section>div {
             position: relative;
             z-index: 1;
+        }
+
+        /* Enhanced Creative Process Section Styles */
+        .creative-process-section h2 {
+            animation: fadeInDown 0.8s ease-out;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        .creative-process-section h3 {
+            animation: fadeInDown 0.8s ease-out 0.2s both;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            position: relative;
+            display: block;
+            width: 100%;
+            text-align: center;
+        }
+
+        .creative-process-section h3::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #FF6B35, transparent);
+            animation: expandUnderline 1s ease-out 0.8s forwards;
+        }
+
+        .creative-process-section h4 {
+            animation: fadeInUp 0.8s ease-out 0.4s both;
+            line-height: 1.4;
+            letter-spacing: 0.05em;
+        }
+
+        .creative-process-section ul {
+            animation: fadeInUp 0.8s ease-out 0.6s both;
+        }
+
+        .creative-process-section li {
+            position: relative;
+            padding: 1.25rem 1.5rem 1.25rem 3rem;
+            margin: 0.75rem auto;
+            max-width: 600px;
+            background: linear-gradient(135deg, rgba(255, 107, 53, 0.1) 0%, rgba(255, 140, 66, 0.05) 100%),
+                        radial-gradient(circle at 2px 2px, rgba(255, 107, 53, 0.15) 1px, transparent 0);
+            background-size: 100% 100%, 20px 20px;
+            border: 1px solid rgba(255, 107, 53, 0.3);
+            border-left: 4px solid #FF6B35;
+            border-radius: 12px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: default;
+            text-align: left;
+            list-style: none;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            display: block;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2), inset 0 0 20px rgba(255, 107, 53, 0.05);
+        }
+
+        .creative-process-section li::before {
+            content: '⚡';
+            position: absolute;
+            left: 0.75rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #FF6B35;
+            font-weight: bold;
+            font-size: 1.4em;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            filter: drop-shadow(0 0 8px rgba(255, 107, 53, 0.8));
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .creative-process-section li::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 107, 53, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .creative-process-section li:hover {
+            background: linear-gradient(135deg, rgba(255, 107, 53, 0.25) 0%, rgba(255, 140, 66, 0.15) 100%);
+            transform: translateX(15px) scale(1.02);
+            box-shadow: 0 8px 30px rgba(255, 107, 53, 0.4), 
+                        0 0 40px rgba(255, 107, 53, 0.2),
+                        inset 0 0 30px rgba(255, 107, 53, 0.1);
+            border-left-width: 6px;
+            border-color: rgba(255, 107, 53, 0.6);
+        }
+
+        .creative-process-section li:hover::before {
+            transform: translateY(-50%) translateX(5px) scale(1.2);
+            filter: drop-shadow(0 0 15px rgba(255, 107, 53, 1));
+            animation: none;
+        }
+
+        .creative-process-section li:hover::after {
+            left: 100%;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+                transform: translateY(-50%) scale(1);
+            }
+            50% {
+                opacity: 0.7;
+                transform: translateY(-50%) scale(1.1);
+            }
+        }
+
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes expandUnderline {
+            to {
+                width: 200px;
+            }
+        }
+
+        /* Testimonial Section - Clean Layout */
+        .testimonial-section {
+            position: relative;
+        }
+
+        .testimonial-section blockquote {
+            margin: 0;
+        }
+
+        .testimonial-section blockquote p {
+            margin: 0;
         }
 
         /* Background Section with Background Image */
@@ -407,6 +757,99 @@
             z-index: 1;
         }
 
+        /* Conclusion Typewriter Effect */
+        .conclusion-text-1,
+        .conclusion-text-2 {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .conclusion-text-1 {
+            clip-path: inset(0 100% 0 0);
+            animation: typewriter1 8s steps(200, end) 0.5s forwards;
+        }
+
+        .conclusion-text-1::after {
+            content: '▊';
+            position: absolute;
+            left: 0;
+            top: 0;
+            color: #FF6B35;
+            font-weight: bold;
+            font-size: 1.3em;
+            filter: drop-shadow(0 0 8px rgba(255, 107, 53, 0.9));
+            animation: moveCursor1 8s steps(200, end) 0.5s forwards,
+                       blink 1s step-end infinite 0.5s, 
+                       hideCursor 0.1s forwards 8.5s;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        .conclusion-text-2 {
+            clip-path: inset(0 100% 0 0);
+            animation: typewriter2 7s steps(180, end) 9s forwards;
+        }
+
+        .conclusion-text-2::after {
+            content: '▊';
+            position: absolute;
+            left: 0;
+            top: 0;
+            color: #FF6B35;
+            font-weight: bold;
+            font-size: 1.3em;
+            filter: drop-shadow(0 0 8px rgba(255, 107, 53, 0.9));
+            animation: moveCursor2 7s steps(180, end) 9s forwards,
+                       blink 1s step-end infinite 9s;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        @keyframes moveCursor1 {
+            from {
+                left: 0;
+            }
+            to {
+                left: 100%;
+            }
+        }
+
+        @keyframes moveCursor2 {
+            from {
+                left: 0;
+            }
+            to {
+                left: 100%;
+            }
+        }
+
+        @keyframes typewriter1 {
+            to {
+                clip-path: inset(0 0 0 0);
+            }
+        }
+
+        @keyframes typewriter2 {
+            to {
+                clip-path: inset(0 0 0 0);
+            }
+        }
+
+        @keyframes blink {
+            0%, 50% {
+                opacity: 1;
+            }
+            51%, 100% {
+                opacity: 0;
+            }
+        }
+
+        @keyframes hideCursor {
+            to {
+                opacity: 0;
+            }
+        }
+
         /* Navigation Contact Us Button Fix - Ensure text is visible */
         header .btn-primary,
         header a.btn-primary,
@@ -452,6 +895,227 @@
         .btn-primary:active {
             transform: translateY(0) !important;
         }
+
+        /* Mobile Optimizations */
+        @media (max-width: 768px) {
+            /* Typography adjustments */
+            h1 {
+                font-size: 2.5rem !important;
+                line-height: 1.2;
+            }
+
+            h2 {
+                font-size: 2rem !important;
+                line-height: 1.3;
+            }
+
+            h3 {
+                font-size: 1.75rem !important;
+                line-height: 1.3;
+            }
+
+            h4 {
+                font-size: 1.5rem !important;
+            }
+
+            /* Section padding */
+            section {
+                padding: 3rem 1rem !important;
+            }
+
+            /* Hero content text */
+            .hero-content h1 {
+                font-size: 2.5rem !important;
+                margin-bottom: 1rem !important;
+            }
+
+            .hero-content h2 {
+                font-size: 1.5rem !important;
+                margin-bottom: 1.5rem !important;
+            }
+
+            .hero-content p {
+                font-size: 1rem !important;
+            }
+
+            /* Gallery improvements */
+            .gallery-item {
+                border-radius: 0.375rem;
+            }
+
+            /* Stats grid */
+            .grid.grid-cols-1.md\:grid-cols-3 {
+                grid-template-columns: 1fr !important;
+            }
+
+            /* Text content */
+            p {
+                font-size: 1rem;
+                line-height: 1.6;
+            }
+
+            blockquote {
+                font-size: 1.125rem !important;
+                padding-left: 1rem !important;
+                border-left-width: 3px !important;
+            }
+
+            /* Button adjustments */
+            .btn-primary,
+            a[href="contact-us.html"] {
+                padding: 0.625rem 1.25rem !important;
+                font-size: 0.875rem !important;
+            }
+
+            /* Key Benefits cards */
+            .bg-gray-900.p-8 {
+                padding: 1.5rem !important;
+            }
+
+            .bg-gray-900.p-8 h3 {
+                font-size: 1.25rem !important;
+                margin-bottom: 1rem !important;
+            }
+
+            /* Background sections overlay adjustment */
+            .creative-process-section::before,
+            .background-section::before,
+            .partnership-section::before,
+            .data-heroes-section::before,
+            .results-section::before,
+            .conclusion-section::before {
+                background: linear-gradient(135deg, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.85) 100%);
+            }
+        }
+
+        @media (max-width: 640px) {
+            /* Extra small devices */
+            h1 {
+                font-size: 2rem !important;
+            }
+
+            h2 {
+                font-size: 1.75rem !important;
+            }
+
+            h3 {
+                font-size: 1.5rem !important;
+            }
+
+            section {
+                padding: 2rem 1rem !important;
+            }
+
+            .hero-content h1 {
+                font-size: 2rem !important;
+            }
+
+            .hero-content h2 {
+                font-size: 1.25rem !important;
+            }
+
+            .hero-content p {
+                font-size: 0.875rem !important;
+            }
+
+            blockquote {
+                font-size: 1rem !important;
+                padding: 1rem !important;
+            }
+
+            .stat-number {
+                font-size: 1.75rem !important;
+            }
+
+            .stat-label {
+                font-size: 0.875rem !important;
+            }
+
+            /* Ensure images don't overflow */
+            img {
+                max-width: 100%;
+                height: auto;
+            }
+
+            /* Gallery single column on very small screens */
+            .gallery-grid {
+                grid-template-columns: 1fr !important;
+            }
+        }
+
+        @media (max-width: 480px) {
+            /* Small phones */
+            .hero-section {
+                min-height: 100vh;
+                padding: 0;
+                padding-top: 60px;
+            }
+
+            .hero-bg {
+                inset: 60px 0 0 0;
+                height: calc(100% - 60px);
+            }
+
+            .hero-ai-image {
+                top: 60px;
+                left: 0;
+                right: 0;
+                width: 100%;
+                height: calc(100% - 60px);
+                opacity: 0.65;
+                max-width: none;
+                object-fit: cover;
+                object-position: center;
+            }
+
+            .hero-content h1 {
+                font-size: 1.75rem !important;
+            }
+
+            .hero-content h2 {
+                font-size: 1.125rem !important;
+            }
+
+            section {
+                padding: 1.5rem 0.75rem !important;
+            }
+
+            .stat-card {
+                padding: 1rem !important;
+            }
+
+            .stat-number {
+                font-size: 1.5rem !important;
+            }
+        }
+
+        /* Improve touch targets on mobile */
+        @media (max-width: 768px) {
+            a,
+            button,
+            .btn-primary {
+                min-height: 44px;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            /* Prevent horizontal scroll */
+            * {
+                max-width: 100%;
+            }
+
+            /* Better text wrapping */
+            h1, h2, h3, h4, h5, h6 {
+                word-wrap: break-word;
+                hyphens: auto;
+            }
+
+            /* Improve list spacing */
+            ul, ol {
+                padding-left: 1.5rem;
+            }
+        }
     </style>
 </head>
 
@@ -460,14 +1124,24 @@
     <div id="navigation-container"></div>
 
     <!-- Hero Section -->
-    <section class="hero-section">
-        <img src="assets/images/purestorage/hero.jpg" alt="Pure Storage Hero" class="hero-bg">
-        <img src="assets/images/purestorage/ai hero.avif" alt="AI Hero" class="hero-ai-image">
-        <div class="hero-content text-center px-4 py-20">
+    <section class="hero-section" aria-label="Hero section">
+        <img src="assets/images/purestorage/hero.jpg" 
+             alt="Pure Storage event showcasing innovative AI-powered photo booth experience" 
+             class="hero-bg"
+             loading="eager"
+             fetchpriority="high"
+             decoding="async">
+        <img src="assets/images/purestorage/ai-girl.png" 
+             alt="AI-generated character illustration" 
+             class="hero-ai-image"
+             loading="eager"
+             decoding="async"
+             aria-hidden="true">
+        <div class="hero-content text-center px-4 py-20 md:py-32">
             <div class="max-w-3xl mx-auto">
-                <h1 class="text-6xl md:text-8xl font-bold text-white mb-6">PURE STORAGE</h1>
-                <h2 class="text-3xl md:text-5xl font-semibold text-white mb-8">CASE STUDY</h2>
-                <p class="text-xl md:text-2xl text-white/90 max-w-3xl mx-auto">
+                <h1 class="text-3xl sm:text-4xl md:text-6xl lg:text-8xl mb-4 md:mb-6">PURE STORAGE</h1>
+                <h2 class="text-xl sm:text-2xl md:text-3xl lg:text-5xl mb-6 md:mb-8">CASE STUDY</h2>
+                <p class="text-base sm:text-lg md:text-xl lg:text-2xl text-white/90 max-w-3xl mx-auto px-2">
                     Revolutionizing Experiential Creative Design with AI
                 </p>
             </div>
@@ -475,29 +1149,28 @@
     </section>
 
     <!-- Through Our Creative Process Section -->
-    <section class="creative-process-section py-20 px-4">
+    <section class="creative-process-section py-12 md:py-20 px-4">
         <div class="max-w-7xl mx-auto">
-            <h2 class="text-4xl md:text-6xl font-bold text-center mb-4 text-white">THROUGH OUR</h2>
-            <h3 class="text-4xl md:text-6xl font-bold text-center mb-12 orange-glow" style="color: #FF6B35;">CREATIVE
-                PROCESS</h3>
+            <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-6xl font-bold text-center mb-2 md:mb-4 text-white">THROUGH OUR</h2>
+            <h3 class="text-2xl sm:text-3xl md:text-4xl lg:text-6xl font-bold text-center mb-8 md:mb-12 orange-glow" style="color: #FF6B35;">CREATIVE PROCESS</h3>
 
-            <div class="text-center mb-12">
-                <h4 class="text-2xl md:text-3xl font-semibold mb-6 text-white">
+            <div class="text-center mb-8 md:mb-12">
+                <h4 class="text-lg sm:text-xl md:text-2xl lg:text-3xl font-semibold mb-4 md:mb-6 text-white px-2">
                     OUR GOAL IS TO INCREASE YOUR MARKETING DATA AND ANALYTICS TO BOOST YOUR TRADESHOW RESULTS
                 </h4>
-                <p class="text-xl mb-8 text-gray-300">We do this with:</p>
-                <ul class="list-none space-y-3 text-lg text-gray-200">
-                    <li>• Lead Generation</li>
-                    <li>• Data Gathering</li>
-                    <li>• Sales Qualifications</li>
-                    <li>• Post-Event Engagement</li>
+                <p class="text-base md:text-xl mb-6 md:mb-8 text-gray-300">We do this with:</p>
+                <ul class="list-none space-y-2 md:space-y-3 text-base md:text-lg text-white">
+                    <li>Lead Generation</li>
+                    <li>Data Gathering</li>
+                    <li>Sales Qualifications</li>
+                    <li>Post-Event Engagement</li>
                 </ul>
             </div>
         </div>
     </section>
 
     <!-- Gallery Section -->
-    <section class="py-20 px-4 bg-black">
+    <section class="py-12 md:py-20 px-4 bg-black">
         <div class="max-w-7xl mx-auto">
             <div class="gallery-grid">
                 <div class="gallery-item">
@@ -553,39 +1226,56 @@
     </section>
 
     <!-- Testimonial Section -->
-    <section class="py-20 px-4 bg-gradient-to-b from-gray-900 to-black">
-        <div class="max-w-4xl mx-auto text-center">
-            <h2 class="text-3xl md:text-5xl font-bold mb-4 text-white">READ OUR OUTSTANDING</h2>
-            <h3 class="text-3xl md:text-5xl font-bold mb-12 orange-glow" style="color: #FF6B35;">TESTIMONIAL</h3>
+    <section class="testimonial-section py-16 md:py-24 px-4 bg-gradient-to-b from-gray-900 to-black">
+        <div class="max-w-5xl mx-auto">
+            <div class="text-center mb-12">
+                <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-3 md:mb-4 text-white">READ OUR OUTSTANDING</h2>
+                <h3 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-8 md:mb-12 orange-glow" style="color: #FF6B35;">TESTIMONIAL</h3>
+            </div>
 
-            <blockquote class="text-xl md:text-2xl italic mb-8 text-gray-200 leading-relaxed border-l-4 pl-6"
-                style="border-color: #FF6B35;">
-                "Partnering with MiHi Entertainment gave us just the edge we were looking for!<br><br>
+            <div class="bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl p-8 md:p-12 shadow-2xl border border-gray-700">
+                <div class="flex items-start mb-6">
+                    <div class="text-5xl md:text-6xl text-orange-500 opacity-30 mr-4 -mt-2">"</div>
+                    <blockquote class="flex-1">
+                        <p class="text-lg md:text-xl lg:text-2xl text-gray-200 leading-relaxed mb-6 italic">
+                            Partnering with MiHi Entertainment gave us just the edge we were looking for!
+                        </p>
+                        <p class="text-lg md:text-xl lg:text-2xl text-gray-200 leading-relaxed mb-6 italic">
+                            They helped us create an opportunity for attendees to learn, to get to know our products, and to walk
+                            away with a personalized experience that was different from any other on the tradeshow floor. Attendees
+                            are constantly telling us we have the best booth. With the support of these activations, we exceeded all
+                            of our attendance goals.
+                        </p>
+                        <p class="text-lg md:text-xl lg:text-2xl text-gray-200 leading-relaxed italic">
+                            Looking forward to our continued partnership with MiHi!"
+                        </p>
+                    </blockquote>
+                </div>
 
-                They helped us create an opportunity for attendees to learn, to get to know our products, and to walk
-                away with a personalized experience that was different from any other on the tradeshow floor. Attendees
-                are constantly telling us we have the best booth. With the support of these activations, we exceeded all
-                of our attendance goals.<br><br>
-
-                Looking forward to our continued partnership with MiHi!"
-            </blockquote>
-
-            <div class="mt-8">
-                <p class="text-xl font-semibold text-white">Jennifer Romano</p>
-                <p class="text-lg text-gray-400">Strategic Marketing Manager Lead, Industry Events</p>
+                <div class="flex items-center pt-6 border-t border-gray-700">
+                    <div class="flex-1">
+                        <p class="text-xl md:text-2xl font-semibold text-white mb-1">Jennifer Romano</p>
+                        <p class="text-base md:text-lg text-gray-400">Strategic Marketing Manager Lead, Industry Events</p>
+                    </div>
+                    <div class="ml-4">
+                        <div class="flex text-orange-500 text-2xl">
+                            <span>★★★★★</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Background Section -->
-    <section class="background-section py-20 px-4">
+    <section class="background-section py-12 md:py-20 px-4">
         <div class="max-w-4xl mx-auto">
-            <h2 class="text-3xl md:text-5xl font-bold mb-8 text-white">BACKGROUND</h2>
-            <p class="text-lg md:text-xl text-gray-300 leading-relaxed mb-6">
+            <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-6 md:mb-8 text-white text-center">BACKGROUND</h2>
+            <p class="text-base md:text-lg lg:text-xl text-gray-300 leading-relaxed mb-4 md:mb-6">
                 Pure Storage, a leading provider of enterprise-grade storage solutions, aimed to enhance its brand
                 experience and engagement at a large-scale trade show.
             </p>
-            <p class="text-lg md:text-xl text-gray-300 leading-relaxed">
+            <p class="text-base md:text-lg lg:text-xl text-gray-300 leading-relaxed">
                 They sought to create an immersive and interactive experience that integrated AI technology and allowed
                 participants to feel more connected to their brand.
             </p>
@@ -593,14 +1283,14 @@
     </section>
 
     <!-- Partnership Section -->
-    <section class="partnership-section py-20 px-4">
+    <section class="partnership-section py-12 md:py-20 px-4">
         <div class="max-w-4xl mx-auto">
-            <h2 class="text-3xl md:text-5xl font-bold mb-8 text-white">PARTNERSHIP</h2>
-            <p class="text-lg md:text-xl text-gray-300 leading-relaxed mb-6">
+            <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-6 md:mb-8 text-white text-center">PARTNERSHIP</h2>
+            <p class="text-base md:text-lg lg:text-xl text-gray-300 leading-relaxed mb-4 md:mb-6">
                 Pure Storage collaborated with MiHi Entertainment, a creative and experiential marketing agency known
                 for its unique approach to creating cutting-edge, immersive experiences.
             </p>
-            <p class="text-lg md:text-xl text-gray-300 leading-relaxed">
+            <p class="text-base md:text-lg lg:text-xl text-gray-300 leading-relaxed">
                 MiHi Entertainment's expertise in integrating AI technology and crafting engaging experiences made them
                 the ideal partner for Pure Storage.
             </p>
@@ -608,18 +1298,18 @@
     </section>
 
     <!-- Data Heroes Campaign Section -->
-    <section class="data-heroes-section py-20 px-4">
+    <section class="data-heroes-section py-12 md:py-20 px-4">
         <div class="max-w-4xl mx-auto">
-            <h2 class="text-3xl md:text-5xl font-bold mb-4 text-center text-white">THE</h2>
-            <h3 class="text-4xl md:text-6xl font-bold mb-8 text-center orange-glow" style="color: #FF6B35;">DATA
+            <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-3 md:mb-4 text-center text-white">THE</h2>
+            <h3 class="text-2xl sm:text-3xl md:text-4xl lg:text-6xl font-bold mb-6 md:mb-8 text-center orange-glow" style="color: #FF6B35;">DATA
                 HEROES<br>CAMPAIGN</h3>
 
-            <p class="text-lg md:text-xl text-gray-300 leading-relaxed mb-6">
+            <p class="text-base md:text-lg lg:text-xl text-gray-300 leading-relaxed mb-4 md:mb-6">
                 Together, MiHi Entertainment and Pure Storage developed the Data Heroes campaign. MiHi Entertainment
                 designed backdrops, generated art for the Pure Storage website, created website graphics, and built a
                 fully interactive experience for Pure Storage's booth.
             </p>
-            <p class="text-lg md:text-xl text-gray-300 leading-relaxed">
+            <p class="text-base md:text-lg lg:text-xl text-gray-300 leading-relaxed">
                 The Data Heroes campaign featured an AI-powered photo booth with a villain character to emphasize the
                 importance of transitioning from hard discs to cloud storage. This activation provided a fun and
                 engaging way for participants to connect with the brand and learn more about Pure Storage's offerings.
@@ -628,21 +1318,21 @@
     </section>
 
     <!-- AI Analytics Quiz Section -->
-    <section class="py-20 px-4 bg-gradient-to-b from-gray-900 to-black">
+    <section class="py-12 md:py-20 px-4 bg-gradient-to-b from-gray-900 to-black">
         <div class="max-w-4xl mx-auto">
-            <h2 class="text-3xl md:text-5xl font-bold mb-4 text-white">WITH MIHI ENTERTAINMENT</h2>
-            <h3 class="text-3xl md:text-5xl font-bold mb-8 orange-glow" style="color: #FF6B35;">AI ANALYTICS QUIZ</h3>
+            <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-3 md:mb-4 text-white text-center">WITH MIHI ENTERTAINMENT</h2>
+            <h3 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-6 md:mb-8 orange-glow text-center" style="color: #FF6B35;">AI ANALYTICS QUIZ</h3>
 
-            <p class="text-lg md:text-xl text-gray-300 leading-relaxed mb-6">
+            <p class="text-base md:text-lg lg:text-xl text-gray-300 leading-relaxed mb-4 md:mb-6">
                 To further enhance the engagement, MiHi Entertainment developed an AI Analytics Quiz. Participants
                 answered questions that helped differentiate their character, and the analytics provided insights into
                 potential clients, vendors, and more.
             </p>
-            <p class="text-lg md:text-xl text-gray-300 leading-relaxed mb-6">
+            <p class="text-base md:text-lg lg:text-xl text-gray-300 leading-relaxed mb-4 md:mb-6">
                 The AI Analytics Quiz provided valuable data to Pure Storage while offering participants a personalized
                 and interactive experience.
             </p>
-            <p class="text-lg md:text-xl text-gray-300 leading-relaxed">
+            <p class="text-base md:text-lg lg:text-xl text-gray-300 leading-relaxed">
                 Working together with the end goals in mind, we designed a custom quiz with targets questions to garner
                 tailored results:
             </p>
@@ -650,17 +1340,17 @@
     </section>
 
     <!-- Results Section -->
-    <section class="results-section py-20 px-4">
+    <section class="results-section py-12 md:py-20 px-4">
         <div class="max-w-7xl mx-auto">
-            <h2 class="text-3xl md:text-5xl font-bold mb-12 text-center text-white">RESULTS</h2>
+            <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-8 md:mb-12 text-center text-white">RESULTS</h2>
 
-            <p class="text-lg md:text-xl text-gray-300 leading-relaxed mb-12 max-w-4xl mx-auto text-center">
+            <p class="text-base md:text-lg lg:text-xl text-gray-300 leading-relaxed mb-8 md:mb-12 max-w-4xl mx-auto text-center px-2">
                 The collaboration between Pure Storage and MiHi Entertainment resulted in a successful and memorable
                 event experience that generated buzz around Pure Storage's brand. Participants enjoyed the unique
                 experience and the opportunity to engage with AI technology in a fun and accessible way.
             </p>
 
-            <p class="text-lg md:text-xl text-gray-300 leading-relaxed mb-12 max-w-4xl mx-auto text-center">
+            <p class="text-base md:text-lg lg:text-xl text-gray-300 leading-relaxed mb-8 md:mb-12 max-w-4xl mx-auto text-center px-2">
                 The Data Heroes campaign was so successful that it evolved into a large-scale trade show product,
                 showcasing the potential of AI integration in experiential marketing. Additionally, the campaign caught
                 the attention of a keynote speaker who commended Pure Storage and MiHi Entertainment for their
@@ -668,7 +1358,7 @@
             </p>
 
             <!-- Stats Grid -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 mt-8 md:mt-16">
                 <div class="stat-card">
                     <div class="stat-number">460K</div>
                     <div class="stat-label">REACHED</div>
@@ -686,16 +1376,16 @@
     </section>
 
     <!-- Conclusion Section -->
-    <section class="conclusion-section py-20 px-4">
+    <section class="conclusion-section py-12 md:py-20 px-4">
         <div class="max-w-4xl mx-auto">
-            <h2 class="text-3xl md:text-5xl font-bold mb-8 text-white">CONCLUSION</h2>
-            <p class="text-lg md:text-xl text-gray-300 leading-relaxed mb-6">
+            <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-6 md:mb-8 text-white text-center">CONCLUSION</h2>
+            <p class="conclusion-text-1 text-base md:text-lg lg:text-xl text-gray-300 leading-relaxed mb-4 md:mb-6">
                 The partnership between MiHi Entertainment and Pure Storage demonstrates the power of integrating AI
                 technology into experiential marketing, creating memorable and engaging experiences that resonate with
                 participants. The Data Heroes campaign elevated Pure Storage's presence at the trade show, generating
                 buzz and demonstrating their commitment to innovation and cutting-edge technology.
             </p>
-            <p class="text-lg md:text-xl text-gray-300 leading-relaxed">
+            <p class="conclusion-text-2 text-base md:text-lg lg:text-xl text-gray-300 leading-relaxed">
                 As AI continues to shape the future of experiential marketing, partnerships like the one between MiHi
                 Entertainment and Pure Storage serve as an example of the incredible potential for creating memorable
                 brand experiences that engage and captivate audiences.
@@ -704,9 +1394,9 @@
     </section>
 
     <!-- Key Benefits Section -->
-    <section class="py-20 px-4 bg-black">
+    <section class="py-12 md:py-20 px-4 bg-black">
         <div class="max-w-7xl mx-auto">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
                 <!-- Expertise in AI Integration -->
                 <div class="bg-gray-900 p-8 rounded-lg shadow-lg border-2 transition-all duration-300 hover:border-orange-500"
                     style="border-color: rgba(255, 107, 53, 0.3);">
@@ -783,14 +1473,21 @@
     </section>
 
     <!-- CTA Section -->
-    <section class="py-20 px-4 bg-gradient-to-b from-gray-900 to-black">
+    <section class="py-12 md:py-20 px-4 bg-gradient-to-b from-gray-900 to-black">
         <div class="max-w-4xl mx-auto text-center">
-            <h2 class="text-3xl md:text-5xl font-bold mb-8 text-white">WANT TO LEARN MORE?</h2>
-            <a href="contact-us.html"
-                class="inline-block px-8 py-4 rounded-lg text-xl font-semibold text-white transition-all duration-300 transform hover:scale-105 hover:shadow-2xl"
-                style="background: linear-gradient(135deg, #FF6B35 0%, #E55A2B 100%); box-shadow: 0 8px 30px rgba(255, 107, 53, 0.4);">
-                SCHEDULE A CALL NOW
-            </a>
+            <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-6 md:mb-8 text-white px-2">WANT TO LEARN MORE?</h2>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <a href="contact-us.html"
+                    class="inline-block px-6 py-3 md:px-8 md:py-4 rounded-lg text-base md:text-xl font-semibold text-white transition-all duration-300 transform hover:scale-105 hover:shadow-2xl"
+                    style="background: linear-gradient(135deg, #FF6B35 0%, #E55A2B 100%); box-shadow: 0 8px 30px rgba(255, 107, 53, 0.4);">
+                    GET YOUR FREE QUOTE
+                </a>
+                <button type="button" data-click-to-call data-call-text="Call Us"
+                    class="inline-block px-6 py-3 md:px-8 md:py-4 rounded-lg text-base md:text-xl font-semibold text-white transition-all duration-300 transform hover:scale-105 hover:shadow-2xl cursor-pointer border-none"
+                    style="background: linear-gradient(135deg, #FF6B35 0%, #E55A2B 100%); box-shadow: 0 8px 30px rgba(255, 107, 53, 0.4);">
+                    CALL US
+                </button>
+            </div>
         </div>
     </section>
 
@@ -807,6 +1504,8 @@
 
     <!-- Main JavaScript -->
     <script src="assets/js/main.js" defer></script>
+    <!-- Phone Protection Script -->
+    <script src="assets/js/phone-protection.js"></script>
     <!-- Load Back to Top Component -->
     <script src="assets/components/back-to-top.js"></script>
 
