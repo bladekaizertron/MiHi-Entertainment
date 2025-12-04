@@ -459,11 +459,15 @@
 
         /* Custom button styles */
         .btn-primary {
-            background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%);
             transition: all 0.3s ease;
         }
+        
+        /* Only apply blue gradient if no Tailwind gradient classes are present */
+        .btn-primary:not([class*="bg-gradient"]) {
+            background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%);
+        }
 
-        .btn-primary:hover {
+        .btn-primary:hover:not([class*="bg-gradient"]) {
             transform: translateY(-2px);
             box-shadow: 0 10px 25px rgba(0, 80, 255, 0.4);
         }
@@ -687,7 +691,7 @@
                         <!-- CTA Buttons -->
                         <div class="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center px-4">
                             <a href="contact-us.html"
-                                class="btn-primary inline-flex items-center justify-center text-white px-6 sm:px-10 py-3 sm:py-5 rounded-full text-base sm:text-lg font-semibold bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 shadow-[0_20px_45px_-15px_rgba(236,72,153,0.75)] hover:shadow-[0_25px_60px_-18px_rgba(59,130,246,0.7)] hover:scale-110 active:scale-95 transition-all duration-300 transform hover:-translate-y-1 focus:ring-4 focus:ring-pink-400/40 w-full sm:w-auto"
+                                class="btn-primary inline-flex items-center justify-center text-white px-6 sm:px-10 py-3 sm:py-5 rounded-full text-base sm:text-lg font-semibold bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 hover:from-pink-600 hover:via-purple-600 hover:to-blue-600 shadow-[0_20px_45px_-15px_rgba(236,72,153,0.75)] hover:shadow-[0_25px_60px_-18px_rgba(59,130,246,0.7)] hover:scale-110 active:scale-95 transition-all duration-300 transform hover:-translate-y-1 focus:ring-4 focus:ring-pink-400/40 w-full sm:w-auto"
                                 aria-label="Get a quote for your event">
                                 Get Your Free Quote
                             </a>
@@ -783,7 +787,7 @@
                             </li>
                         </ul>
                         <div class="flex flex-col sm:flex-row gap-4">
-                            <button onclick="openBrochureModal()" class="group inline-flex items-center justify-center px-8 py-4 rounded-full font-semibold text-lg bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 text-white shadow-[0_20px_45px_-15px_rgba(236,72,153,0.75)] hover:shadow-[0_25px_60px_-18px_rgba(59,130,246,0.7)] transition-transform duration-300 hover:-translate-y-1 focus:ring-4 focus:ring-pink-400/40" aria-label="Open interactive photobooth lookbook">
+                            <button onclick="openBrochureModal()" class="group inline-flex items-center justify-center px-8 py-4 rounded-full font-semibold text-lg bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 hover:from-pink-600 hover:via-purple-600 hover:to-blue-600 text-white shadow-[0_20px_45px_-15px_rgba(236,72,153,0.75)] hover:shadow-[0_25px_60px_-18px_rgba(59,130,246,0.7)] transition-all duration-300 hover:-translate-y-1 hover:scale-105 focus:ring-4 focus:ring-pink-400/40" aria-label="Open interactive photobooth lookbook">
                                 <svg class="w-6 h-6 mr-2 opacity-90 group-hover:opacity-100" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
                                 Flip Through the Booth Book
                                 <svg class="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
@@ -869,7 +873,7 @@
                             </div>
                             <div class="flex flex-col sm:flex-row gap-4">
                                 <a href="product/ai-photo-booth.html"
-                                    class="group inline-flex items-center justify-center px-8 py-4 rounded-full font-semibold text-lg bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 text-white shadow-[0_20px_45px_-15px_rgba(236,72,153,0.75)] hover:shadow-[0_25px_60px_-18px_rgba(59,130,246,0.7)] transition-transform duration-300 hover:-translate-y-1 focus:ring-4 focus:ring-pink-400/40"
+                                    class="group inline-flex items-center justify-center px-8 py-4 rounded-full font-semibold text-lg bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 hover:from-pink-600 hover:via-purple-600 hover:to-blue-600 text-white shadow-[0_20px_45px_-15px_rgba(236,72,153,0.75)] hover:shadow-[0_25px_60px_-18px_rgba(59,130,246,0.7)] transition-all duration-300 hover:-translate-y-1 hover:scale-105 focus:ring-4 focus:ring-pink-400/40"
                                     aria-label="Learn more about AI Photo Booth">
                                     Learn More
                                     <svg class="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none"
@@ -1265,7 +1269,7 @@
                             <p class="text-lg text-white/95 mb-6 max-w-md leading-relaxed">Watch as the camera rotates around you in
                                 stunning slow motion, capturing epic moments from every angle</p>
                             <a href="product/360-photo-booth.html"
-                                class="group inline-flex items-center justify-center px-8 py-4 rounded-full font-semibold bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 text-white shadow-[0_20px_45px_-15px_rgba(236,72,153,0.75)] hover:shadow-[0_25px_60px_-18px_rgba(59,130,246,0.7)] transition-transform duration-300 hover:-translate-y-1">
+                                class="group inline-flex items-center justify-center px-8 py-4 rounded-full font-semibold bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 hover:from-pink-600 hover:via-purple-600 hover:to-blue-600 text-white shadow-[0_20px_45px_-15px_rgba(236,72,153,0.75)] hover:shadow-[0_25px_60px_-18px_rgba(59,130,246,0.7)] transition-all duration-300 hover:-translate-y-1 hover:scale-105">
                                 Explore 360° Experience
                                 <svg class="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -1439,7 +1443,7 @@
                 <!-- See More Button -->
                 <div class="flex justify-center mt-12">
                     <button id="seeMoreVideoBooths" onclick="toggleVideoBooths()"
-                        class="group inline-flex items-center justify-center gap-3 px-10 py-4 rounded-full font-semibold text-lg bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 text-white shadow-[0_22px_60px_-20px_rgba(236,72,153,0.8)] hover:shadow-[0_28px_70px_-20px_rgba(59,130,246,0.7)] transition-transform duration-300 hover:-translate-y-1 focus:ring-4 focus:ring-pink-400/40">
+                        class="group inline-flex items-center justify-center gap-3 px-10 py-4 rounded-full font-semibold text-lg bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 hover:from-pink-600 hover:via-purple-600 hover:to-blue-600 text-white shadow-[0_22px_60px_-20px_rgba(236,72,153,0.8)] hover:shadow-[0_28px_70px_-20px_rgba(59,130,246,0.7)] transition-all duration-300 hover:-translate-y-1 hover:scale-105 focus:ring-4 focus:ring-pink-400/40">
                         <span>See More</span>
                         <svg id="seeMoreIcon" class="w-5 h-5 transition-transform duration-300 group-hover:translate-y-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
@@ -3320,7 +3324,7 @@
                     </div>
 
                     <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                        <a href="contact-us.html" class="group inline-flex items-center justify-center px-10 py-4 rounded-full font-semibold text-lg bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 text-white shadow-[0_22px_60px_-20px_rgba(236,72,153,0.8)] hover:shadow-[0_28px_70px_-20px_rgba(59,130,246,0.7)] transition-transform duration-300 hover:-translate-y-1 focus:ring-4 focus:ring-pink-400/40" aria-label="Start photobooth design consultation">
+                        <a href="contact-us.html" class="group inline-flex items-center justify-center px-10 py-4 rounded-full font-semibold text-lg bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 hover:from-pink-600 hover:via-purple-600 hover:to-blue-600 text-white shadow-[0_22px_60px_-20px_rgba(236,72,153,0.8)] hover:shadow-[0_28px_70px_-20px_rgba(59,130,246,0.7)] transition-all duration-300 hover:-translate-y-1 hover:scale-105 focus:ring-4 focus:ring-pink-400/40" aria-label="Start photobooth design consultation">
                             <svg class="w-6 h-6 mr-2 opacity-90 group-hover:opacity-100" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
                             Design My Booth Experience
                             <svg class="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>

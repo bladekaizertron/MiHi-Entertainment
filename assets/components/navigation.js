@@ -38,6 +38,37 @@
 
     const assetsPrefix = pathPrefix + 'assets/';
 
+    // Add global style to fix gradient buttons - override page-specific CSS
+    const style = document.createElement('style');
+    style.textContent = `
+        /* Fix for gradient buttons - allow Tailwind gradients to work on all pages */
+        .btn-primary.bg-gradient-to-r,
+        .btn-primary[class*="bg-gradient"],
+        header .btn-primary.bg-gradient-to-r,
+        header .btn-primary[class*="bg-gradient"],
+        nav .btn-primary.bg-gradient-to-r,
+        nav .btn-primary[class*="bg-gradient"],
+        a.btn-primary.bg-gradient-to-r,
+        a.btn-primary[class*="bg-gradient"] {
+            background: unset !important;
+            background-image: linear-gradient(to right, rgb(236, 72, 153), rgb(168, 85, 247), rgb(59, 130, 246)) !important;
+        }
+        .btn-primary.bg-gradient-to-r:hover,
+        .btn-primary[class*="bg-gradient"]:hover,
+        header .btn-primary.bg-gradient-to-r:hover,
+        header .btn-primary[class*="bg-gradient"]:hover,
+        nav .btn-primary.bg-gradient-to-r:hover,
+        nav .btn-primary[class*="bg-gradient"]:hover,
+        a.btn-primary.bg-gradient-to-r:hover,
+        a.btn-primary[class*="bg-gradient"]:hover {
+            background-image: linear-gradient(to right, rgb(219, 39, 119), rgb(147, 51, 234), rgb(37, 99, 235)) !important;
+        }
+    `;
+    if (!document.getElementById('gradient-button-fix')) {
+        style.id = 'gradient-button-fix';
+        document.head.appendChild(style);
+    }
+
     const navigationHTML = `
     <header class="bg-white shadow-lg fixed top-0 left-0 right-0 z-50">
         <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
@@ -364,7 +395,7 @@
 
 
                 <!-- CTA Button -->
-                <a href="${pathPrefix}contact-us.html" class="btn-primary text-white px-6 py-3 rounded-full font-semibold bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 shadow-[0_20px_45px_-15px_rgba(236,72,153,0.75)] hover:shadow-[0_25px_60px_-18px_rgba(59,130,246,0.7)] transition-all duration-300">
+                <a href="${pathPrefix}contact-us.html" class="btn-primary text-white px-6 py-3 rounded-full font-semibold bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 hover:from-pink-600 hover:via-purple-600 hover:to-blue-600 transition-all duration-300 transform hover:scale-105">
                     Contact Us
                 </a>
             </div>
@@ -606,7 +637,7 @@
 
                             <!-- Mobile Contact Button -->
                             <div class="space-y-4">
-                                <a href="${pathPrefix}contact-us.html" class="btn-primary text-white px-6 py-3 rounded-full font-semibold bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 shadow-[0_20px_45px_-15px_rgba(236,72,153,0.75)] hover:shadow-[0_25px_60px_-18px_rgba(59,130,246,0.7)] transition-all duration-300 text-center block">Contact Us</a>
+                                <a href="${pathPrefix}contact-us.html" class="btn-primary text-white px-6 py-3 rounded-full font-semibold bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 hover:from-pink-600 hover:via-purple-600 hover:to-blue-600 transition-all duration-300 text-center block transform hover:scale-105">Contact Us</a>
                             </div>
                         </div>
                     </div>

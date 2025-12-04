@@ -196,11 +196,15 @@
 
         /* Button styles */
         .btn-primary {
-            background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%);
             transition: all 0.3s ease;
         }
+        
+        /* Only apply blue gradient if no Tailwind gradient classes are present */
+        .btn-primary:not([class*="bg-gradient"]) {
+            background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%);
+        }
 
-        .btn-primary:hover {
+        .btn-primary:hover:not([class*="bg-gradient"]) {
             transform: translateY(-2px);
             box-shadow: 0 10px 25px rgba(0, 80, 255, 0.4);
         }
@@ -380,7 +384,7 @@
                     </div>
 
                     <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                        <a href="index.html#gallery" class="group inline-flex items-center justify-center px-10 py-4 rounded-full font-semibold text-lg bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 text-white shadow-[0_22px_60px_-20px_rgba(236,72,153,0.8)] hover:shadow-[0_28px_70px_-20px_rgba(59,130,246,0.7)] transition-transform duration-300 hover:-translate-y-1 focus:ring-4 focus:ring-pink-400/40">
+                        <a href="index.html#gallery" class="group inline-flex items-center justify-center px-10 py-4 rounded-full font-semibold text-lg bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 hover:from-pink-600 hover:via-purple-600 hover:to-blue-600 text-white shadow-[0_22px_60px_-20px_rgba(236,72,153,0.8)] hover:shadow-[0_28px_70px_-20px_rgba(59,130,246,0.7)] transition-all duration-300 hover:-translate-y-1 hover:scale-105 focus:ring-4 focus:ring-pink-400/40">
                             CHECK OUT OUR WORK
                             <svg class="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
