@@ -1,30 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Race Car Event Theme - MiHi Entertainment</title>
     <link rel="icon" type="image/svg+xml" href="../assets/images/favicon.svg">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
     <style>
-        html, body { 
-            overflow-x: hidden; 
-            width: 100%; 
-            max-width: 100%; 
+        html,
+        body {
+            overflow-x: hidden;
+            width: 100%;
+            max-width: 100%;
         }
-        
-        body { 
+
+        body {
             font-family: 'Inter', sans-serif;
-            color: #1a202c; 
+            color: #1a202c;
             background: #0a0a0a;
         }
-        
+
         /* Headings use Playfair Display */
-        h1, h2, h3, h4, h5, h6 {
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
             font-family: 'Playfair Display', serif;
         }
-        
+
         /* Navigation uses default Tailwind styles from navigation.js - no CSS overrides */
         /* Fixed navigation positioning */
         header {
@@ -35,7 +44,7 @@
             width: 100% !important;
             z-index: 50 !important;
         }
-        
+
         /* Ensure navigation buttons keep their original text case and Tailwind padding */
         header .btn-primary,
         header a.btn-primary {
@@ -52,29 +61,29 @@
             position: static !important;
             overflow: visible !important;
         }
-        
+
         header .btn-primary::before {
             display: none !important;
         }
-        
+
         header .btn-primary:hover {
             transform: none !important;
             box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04) !important;
         }
-        
-        .section-padding { 
-            padding: 6rem 0; 
+
+        .section-padding {
+            padding: 6rem 0;
         }
-        
-        img { 
-            max-width: 100%; 
-            height: auto; 
+
+        img {
+            max-width: 100%;
+            height: auto;
         }
-        
-        * { 
-            box-sizing: border-box; 
+
+        * {
+            box-sizing: border-box;
         }
-        
+
         /* Modern Hero Section */
         .hero-section {
             position: relative;
@@ -84,14 +93,14 @@
             justify-content: center;
             overflow: hidden;
         }
-        
+
         .hero-overlay {
             position: absolute;
             inset: 0;
             background: linear-gradient(135deg, rgba(220, 38, 38, 0.4) 0%, rgba(251, 146, 60, 0.3) 25%, rgba(0, 0, 0, 0.6) 50%, rgba(220, 38, 38, 0.3) 75%, rgba(0, 0, 0, 0.85) 100%);
             z-index: 1;
         }
-        
+
         .hero-content {
             position: relative;
             z-index: 2;
@@ -104,7 +113,7 @@
             width: 100%;
             max-width: 100%;
         }
-        
+
         .hero-title {
             font-size: clamp(3rem, 8vw, 8rem);
             font-weight: 800;
@@ -116,7 +125,7 @@
             text-align: center;
             width: 100%;
         }
-        
+
         .hero-subtitle {
             font-size: clamp(0.75rem, 1.5vw, 1rem);
             color: rgba(255, 255, 255, 0.8);
@@ -127,7 +136,7 @@
             text-align: center;
             width: 100%;
         }
-        
+
         .hero-description {
             font-size: clamp(1rem, 2vw, 1.25rem);
             color: rgba(255, 255, 255, 0.9);
@@ -138,7 +147,7 @@
             text-align: center;
             width: 100%;
         }
-        
+
         /* Racing Background Effects */
         .racing-container {
             position: absolute;
@@ -146,21 +155,34 @@
             overflow: hidden;
             z-index: 0;
         }
-        
+
         .speed-line {
             position: absolute;
             height: 2px;
             background: linear-gradient(90deg, transparent, rgba(220, 38, 38, 0.6), rgba(251, 146, 60, 0.8), transparent);
             animation: speedLine var(--duration) linear infinite;
         }
-        
+
         @keyframes speedLine {
-            0% { transform: translateX(-100%); opacity: 0; }
-            10% { opacity: 1; }
-            90% { opacity: 1; }
-            100% { transform: translateX(200vw); opacity: 0; }
+            0% {
+                transform: translateX(-100%);
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 1;
+            }
+
+            90% {
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateX(200vw);
+                opacity: 0;
+            }
         }
-        
+
         /* Checkered flag pattern */
         .checkered-accent {
             position: absolute;
@@ -168,17 +190,15 @@
             left: 0;
             right: 0;
             height: 20px;
-            background: repeating-linear-gradient(
-                90deg,
-                #ffffff 0px,
-                #ffffff 20px,
-                #000000 20px,
-                #000000 40px
-            );
+            background: repeating-linear-gradient(90deg,
+                    #ffffff 0px,
+                    #ffffff 20px,
+                    #000000 20px,
+                    #000000 40px);
             z-index: 1;
             opacity: 0.8;
         }
-        
+
         /* Modern Button Styles */
         .modern-btn {
             display: inline-flex;
@@ -196,12 +216,12 @@
             text-decoration: none;
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             backdrop-filter: blur(10px);
-            box-shadow: 0 8px 32px rgba(220, 38, 38, 0.4), 
-                        0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+            box-shadow: 0 8px 32px rgba(220, 38, 38, 0.4),
+                0 0 0 1px rgba(255, 255, 255, 0.1) inset;
             position: relative;
             overflow: hidden;
         }
-        
+
         .modern-btn::before {
             content: '';
             position: absolute;
@@ -212,23 +232,23 @@
             background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
             transition: left 0.6s ease;
         }
-        
+
         .modern-btn:hover {
             transform: translateY(-3px) scale(1.02);
-            box-shadow: 0 15px 40px rgba(220, 38, 38, 0.6), 
-                        0 0 0 1px rgba(255, 255, 255, 0.2) inset,
-                        0 0 60px rgba(220, 38, 38, 0.5);
+            box-shadow: 0 15px 40px rgba(220, 38, 38, 0.6),
+                0 0 0 1px rgba(255, 255, 255, 0.2) inset,
+                0 0 60px rgba(220, 38, 38, 0.5);
             background: linear-gradient(135deg, rgba(220, 38, 38, 1) 0%, rgba(251, 146, 60, 1) 50%, rgba(220, 38, 38, 1) 100%);
         }
-        
+
         .modern-btn:hover::before {
             left: 100%;
         }
-        
+
         .modern-btn:active {
             transform: translateY(-1px) scale(1);
         }
-        
+
         /* Call Us Button */
         .modern-btn-call {
             display: inline-flex;
@@ -252,7 +272,7 @@
             position: relative;
             overflow: hidden;
         }
-        
+
         .modern-btn-call::before {
             content: '';
             position: absolute;
@@ -263,38 +283,38 @@
             background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
             transition: left 0.6s ease;
         }
-        
+
         .modern-btn-call:hover {
             transform: translateY(-3px) scale(1.02);
             background: rgba(255, 255, 255, 0.2);
             border-color: rgba(255, 255, 255, 0.5);
             box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3),
-                        0 0 0 1px rgba(255, 255, 255, 0.2) inset;
+                0 0 0 1px rgba(255, 255, 255, 0.2) inset;
         }
-        
+
         .modern-btn-call:hover::before {
             left: 100%;
         }
-        
+
         .modern-btn-call:active {
             transform: translateY(-1px) scale(1);
         }
-        
+
         .modern-btn-call svg {
             flex-shrink: 0;
         }
-        
+
         /* Modern Section Styles */
         .modern-section {
             position: relative;
             padding: 6rem 0;
             background: linear-gradient(180deg, #0a0a0a 0%, #1a0a0a 50%, #0a0a0a 100%);
         }
-        
+
         .modern-section-light {
             background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 50%, #ffffff 100%);
         }
-        
+
         .section-title {
             font-size: clamp(2.5rem, 6vw, 5rem);
             font-weight: 700;
@@ -304,11 +324,11 @@
             letter-spacing: -0.02em;
             line-height: 1.1;
         }
-        
+
         .section-title-light {
             color: #1a202c;
         }
-        
+
         .section-subtitle {
             font-size: clamp(1rem, 2vw, 1.25rem);
             color: rgba(255, 255, 255, 0.7);
@@ -318,11 +338,11 @@
             line-height: 1.7;
             font-weight: 300;
         }
-        
+
         .section-subtitle-light {
             color: #6b7280;
         }
-        
+
         /* Feature Cards */
         .feature-grid {
             display: grid;
@@ -330,7 +350,7 @@
             gap: 2rem;
             margin-top: 4rem;
         }
-        
+
         .feature-card {
             background: rgba(255, 255, 255, 0.03);
             backdrop-filter: blur(20px);
@@ -341,7 +361,7 @@
             position: relative;
             overflow: hidden;
         }
-        
+
         .feature-card::before {
             content: '';
             position: absolute;
@@ -353,23 +373,23 @@
             opacity: 0;
             transition: opacity 0.4s ease;
         }
-        
+
         .feature-card:hover {
             transform: translateY(-8px);
             border-color: rgba(220, 38, 38, 0.5);
             box-shadow: 0 20px 60px rgba(220, 38, 38, 0.2),
-                        0 0 0 1px rgba(220, 38, 38, 0.1) inset;
+                0 0 0 1px rgba(220, 38, 38, 0.1) inset;
         }
-        
+
         .feature-card:hover::before {
             opacity: 1;
         }
-        
-        .feature-card > * {
+
+        .feature-card>* {
             position: relative;
             z-index: 1;
         }
-        
+
         .feature-icon {
             width: 60px;
             height: 60px;
@@ -382,12 +402,12 @@
             border: 1px solid rgba(220, 38, 38, 0.4);
             color: #ffffff;
         }
-        
+
         .feature-icon svg {
             color: #ffffff;
             stroke: #ffffff;
         }
-        
+
         .feature-card h3 {
             font-size: 1.5rem;
             font-weight: 700;
@@ -395,14 +415,14 @@
             margin-bottom: 1rem;
             letter-spacing: -0.01em;
         }
-        
+
         .feature-card p {
             color: rgba(255, 255, 255, 0.7);
             line-height: 1.7;
             font-size: 0.95rem;
             font-weight: 300;
         }
-        
+
         /* Content Section */
         .content-section {
             display: grid;
@@ -410,7 +430,7 @@
             gap: 4rem;
             align-items: center;
         }
-        
+
         .content-text h2 {
             font-size: clamp(2.5rem, 5vw, 4rem);
             font-weight: 700;
@@ -419,7 +439,7 @@
             letter-spacing: -0.02em;
             line-height: 1.1;
         }
-        
+
         .content-text p {
             color: rgba(255, 255, 255, 0.8);
             line-height: 1.8;
@@ -427,21 +447,21 @@
             margin-bottom: 2rem;
             font-weight: 300;
         }
-        
+
         .content-image {
             position: relative;
             border-radius: 24px;
             overflow: hidden;
             aspect-ratio: 4/3;
         }
-        
+
         .content-image img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
-        
+
         .content-image::before {
             content: '';
             position: absolute;
@@ -451,22 +471,22 @@
             transition: opacity 0.4s ease;
             z-index: 1;
         }
-        
+
         .content-image:hover img {
             transform: scale(1.05);
         }
-        
+
         .content-image:hover::before {
             opacity: 1;
         }
-        
+
         /* Feature List */
         .feature-list {
             list-style: none;
             padding: 0;
             margin: 2rem 0;
         }
-        
+
         .feature-item {
             padding: 1.5rem 0;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
@@ -474,11 +494,11 @@
             align-items: flex-start;
             gap: 1.5rem;
         }
-        
+
         .feature-item:last-child {
             border-bottom: none;
         }
-        
+
         .feature-item-icon {
             width: 32px;
             height: 32px;
@@ -493,7 +513,7 @@
             box-shadow: 0 0 15px rgba(220, 38, 38, 0.5);
             position: relative;
         }
-        
+
         .feature-item-icon::before {
             content: '✓';
             color: #ffffff;
@@ -501,7 +521,7 @@
             font-weight: bold;
             line-height: 1;
         }
-        
+
         .feature-item-content h4 {
             font-size: 1.25rem;
             font-weight: 600;
@@ -509,7 +529,7 @@
             margin-bottom: 0.5rem;
             letter-spacing: -0.01em;
         }
-        
+
         .feature-item-content p {
             color: rgba(255, 255, 255, 0.7);
             line-height: 1.7;
@@ -517,7 +537,7 @@
             margin: 0;
             font-weight: 300;
         }
-        
+
         /* Placeholder image styling */
         .placeholder-image {
             width: 100%;
@@ -528,55 +548,56 @@
             justify-content: center;
             font-size: 6rem;
         }
-        
+
         /* Responsive Design */
         @media (max-width: 1024px) {
             .content-section {
                 grid-template-columns: 1fr;
                 gap: 3rem;
             }
-            
+
             .content-image {
                 order: -1;
             }
         }
-        
+
         @media (max-width: 768px) {
             .section-padding {
                 padding: 4rem 0;
             }
-            
+
             .modern-section {
                 padding: 4rem 0;
             }
-            
+
             .feature-grid {
                 grid-template-columns: 1fr;
                 gap: 1.5rem;
             }
-            
+
             .modern-btn {
                 padding: 1rem 2.5rem;
                 font-size: 0.875rem;
             }
         }
-        
+
         /* Animations */
         @keyframes fadeInUp {
             from {
                 opacity: 0;
                 transform: translateY(30px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
-        
+
         .animate-fade-in {
             animation: fadeInUp 0.8s ease-out forwards;
         }
-        
+
         /* btn-primary styling */
         .btn-primary {
             display: inline-flex;
@@ -594,12 +615,12 @@
             text-decoration: none;
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             backdrop-filter: blur(10px);
-            box-shadow: 0 8px 32px rgba(220, 38, 38, 0.3), 
-                        0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+            box-shadow: 0 8px 32px rgba(220, 38, 38, 0.3),
+                0 0 0 1px rgba(255, 255, 255, 0.1) inset;
             position: relative;
             overflow: hidden;
         }
-        
+
         .btn-primary::before {
             content: '';
             position: absolute;
@@ -610,42 +631,49 @@
             background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
             transition: left 0.6s ease;
         }
-        
+
         .btn-primary:hover {
             transform: translateY(-3px) scale(1.02);
-            box-shadow: 0 15px 40px rgba(220, 38, 38, 0.5), 
-                        0 0 0 1px rgba(255, 255, 255, 0.2) inset,
-                        0 0 60px rgba(220, 38, 38, 0.4);
+            box-shadow: 0 15px 40px rgba(220, 38, 38, 0.5),
+                0 0 0 1px rgba(255, 255, 255, 0.2) inset,
+                0 0 60px rgba(220, 38, 38, 0.4);
             background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
         }
-        
+
         .btn-primary:hover::before {
             left: 100%;
         }
-        
+
         .btn-primary:active {
             transform: translateY(-1px) scale(1);
         }
 
         /* Racing flag animation */
         @keyframes wave {
-            0%, 100% { transform: rotate(-5deg); }
-            50% { transform: rotate(5deg); }
+
+            0%,
+            100% {
+                transform: rotate(-5deg);
+            }
+
+            50% {
+                transform: rotate(5deg);
+            }
         }
-        
+
         .racing-flag {
             position: absolute;
             z-index: 0;
             opacity: 0.15;
         }
-        
+
         .flag-1 {
             top: 15%;
             right: 10%;
             font-size: 8rem;
             animation: wave 3s ease-in-out infinite;
         }
-        
+
         .flag-2 {
             bottom: 20%;
             left: 8%;
@@ -655,6 +683,7 @@
         }
     </style>
 </head>
+
 <body>
     <div id="nav-placeholder"></div>
 
@@ -669,15 +698,19 @@
             <h1 class="hero-title animate-fade-in">Race Car</h1>
             <p class="hero-subtitle animate-fade-in" style="animation-delay: 0.2s;">Event Theme</p>
             <p class="hero-description animate-fade-in" style="animation-delay: 0.4s;">
-                Rev up your event with our high-octane race car photo booth theme. Perfect for racing fans, car enthusiasts, and anyone who loves the thrill of speed.
+                Rev up your event with our high-octane race car photo booth theme. Perfect for racing fans, car
+                enthusiasts, and anyone who loves the thrill of speed.
             </p>
-            <div class="flex flex-col sm:flex-row gap-4 items-center justify-center animate-fade-in" style="animation-delay: 0.6s;">
+            <div class="flex flex-col sm:flex-row gap-4 items-center justify-center animate-fade-in"
+                style="animation-delay: 0.6s;">
                 <a href="../contact-us.html" class="modern-btn">
-                    Get Your Free Quote
+                    Get Your Quote
                 </a>
                 <button type="button" data-click-to-call data-call-text="Call Us" class="modern-btn-call">
                     <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"></path>
+                        <path
+                            d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z">
+                        </path>
                     </svg>
                     <span>Call Us</span>
                 </button>
@@ -690,13 +723,15 @@
         <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
             <h2 class="section-title">Start Your Engines</h2>
             <p class="section-subtitle">
-                Feel the rush of the racetrack with our Race Car Theme. Featuring checkered flags, sleek racing designs, and high-speed energy, this theme captures the excitement and adrenaline of motorsports.
+                Feel the rush of the racetrack with our Race Car Theme. Featuring checkered flags, sleek racing designs,
+                and high-speed energy, this theme captures the excitement and adrenaline of motorsports.
             </p>
             <p class="section-subtitle" style="margin-top: -2rem; margin-bottom: 2rem;">
-                Perfect for racing-themed birthdays, car shows, corporate events, NASCAR watch parties, or any occasion where you want to bring the thrill of the track to your celebration.
+                Perfect for racing-themed birthdays, car shows, corporate events, NASCAR watch parties, or any occasion
+                where you want to bring the thrill of the track to your celebration.
             </p>
             <div class="text-center">
-                <a href="../contact-us.html" class="modern-btn">Get Your Free Quote</a>
+                <a href="../contact-us.html" class="modern-btn">Get Your Quote</a>
             </div>
         </div>
     </section>
@@ -708,32 +743,37 @@
             <p class="section-subtitle">
                 Our Race Car Theme comes with the following options:
             </p>
-            
+
             <div class="feature-grid">
                 <div class="feature-card">
                     <div class="feature-icon">
-                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
                             <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
                             <line x1="9" y1="3" x2="9" y2="21"></line>
                         </svg>
                     </div>
                     <h3>Backdrops</h3>
-                    <p>Choose from our collection of racing-inspired backdrops featuring checkered flags, racetracks, pit stops, and speedway scenes that create the perfect high-octane atmosphere!</p>
+                    <p>Choose from our collection of racing-inspired backdrops featuring checkered flags, racetracks,
+                        pit stops, and speedway scenes that create the perfect high-octane atmosphere!</p>
                 </div>
-                
+
                 <div class="feature-card">
                     <div class="feature-icon">
-                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
                             <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
                         </svg>
                     </div>
                     <h3>Props</h3>
-                    <p>Complete your racing experience with helmets, trophies, checkered flags, steering wheels, winner's champagne, and racing accessories that bring the track to life!</p>
+                    <p>Complete your racing experience with helmets, trophies, checkered flags, steering wheels,
+                        winner's champagne, and racing accessories that bring the track to life!</p>
                 </div>
-                
+
                 <div class="feature-card">
                     <div class="feature-icon">
-                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
                             <rect x="3" y="3" width="7" height="7"></rect>
                             <rect x="14" y="3" width="7" height="7"></rect>
                             <rect x="14" y="14" width="7" height="7"></rect>
@@ -741,23 +781,29 @@
                         </svg>
                     </div>
                     <h3>Custom Layouts</h3>
-                    <p>Design photo layouts with checkered flag borders, racing stripes, speedometer graphics, and motorsport designs that capture the thrill of the race.</p>
+                    <p>Design photo layouts with checkered flag borders, racing stripes, speedometer graphics, and
+                        motorsport designs that capture the thrill of the race.</p>
                 </div>
-                
+
                 <div class="feature-card">
                     <div class="feature-icon">
-                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <polygon
+                                points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
+                            </polygon>
                         </svg>
                     </div>
                     <h3>Add-Ons</h3>
-                    <p>Enhance your racing experience with additional motorsport-themed enhancements, sound effects, and victory lane touches.</p>
+                    <p>Enhance your racing experience with additional motorsport-themed enhancements, sound effects, and
+                        victory lane touches.</p>
                 </div>
             </div>
-            
+
             <div class="text-center mt-12">
                 <p class="section-subtitle mb-6" style="font-style: italic; max-width: 800px;">
-                    This theme is completely customizable to match your specific racing vision, creating that perfect atmosphere of speed, competition, and adrenaline. Perfect for celebrating in true champion style!
+                    This theme is completely customizable to match your specific racing vision, creating that perfect
+                    atmosphere of speed, competition, and adrenaline. Perfect for celebrating in true champion style!
                 </p>
                 <a href="../contact-us.html" class="modern-btn">Book Your Event Now</a>
             </div>
@@ -771,10 +817,14 @@
                 <div class="content-text">
                     <h2>Race to the Finish</h2>
                     <p>
-                        Transform your event into a high-speed racing adventure with our Race Car Theme. From checkered flags to roaring engines and victory celebrations, every detail captures the excitement and adrenaline of motorsports.
+                        Transform your event into a high-speed racing adventure with our Race Car Theme. From checkered
+                        flags to roaring engines and victory celebrations, every detail captures the excitement and
+                        adrenaline of motorsports.
                     </p>
                     <p>
-                        Perfect for racing-themed parties, car enthusiast gatherings, NASCAR events, Formula 1 watch parties, or any occasion where you want to bring the thrill of the track and create memories at full throttle.
+                        Perfect for racing-themed parties, car enthusiast gatherings, NASCAR events, Formula 1 watch
+                        parties, or any occasion where you want to bring the thrill of the track and create memories at
+                        full throttle.
                     </p>
                     <ul class="feature-list">
                         <li class="feature-item">
@@ -813,7 +863,8 @@
             <div class="text-center">
                 <h2 class="section-title section-title-light">View Our Other Event Themes</h2>
                 <p class="section-subtitle section-subtitle-light mb-8">Scroll to see all of our themes</p>
-                <a href="../booth-themes.html" class="modern-btn" style="background: linear-gradient(135deg, rgba(220, 38, 38, 0.9) 0%, rgba(251, 146, 60, 0.9) 50%, rgba(220, 38, 38, 0.9) 100%);">
+                <a href="../booth-themes.html" class="modern-btn"
+                    style="background: linear-gradient(135deg, rgba(220, 38, 38, 0.9) 0%, rgba(251, 146, 60, 0.9) 50%, rgba(220, 38, 38, 0.9) 100%);">
                     View All Themes
                 </a>
             </div>
@@ -828,7 +879,7 @@
         function createSpeedLines() {
             const container = document.getElementById('racing-lines');
             const numLines = 15;
-            
+
             for (let i = 0; i < numLines; i++) {
                 const line = document.createElement('div');
                 line.className = 'speed-line';
@@ -839,7 +890,7 @@
                 container.appendChild(line);
             }
         }
-        
+
         createSpeedLines();
     </script>
     <!-- Load Back to Top Component -->

@@ -1,42 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Spooky Halloween Event Theme - MiHi Entertainment</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
     <style>
-        html, body { 
-            overflow-x: hidden; 
-            width: 100%; 
-            max-width: 100%; 
+        html,
+        body {
+            overflow-x: hidden;
+            width: 100%;
+            max-width: 100%;
         }
-        
-        body { 
+
+        body {
             font-family: 'Inter', sans-serif;
-            color: #1a202c; 
+            color: #1a202c;
             background: #0a0a0a;
             padding-top: 80px;
         }
-        
-        h1, h2, h3, h4, h5, h6 {
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
             font-family: 'Playfair Display', serif;
         }
-        
-        .section-padding { 
-            padding: 6rem 0; 
+
+        .section-padding {
+            padding: 6rem 0;
         }
-        
-        img { 
-            max-width: 100%; 
-            height: auto; 
+
+        img {
+            max-width: 100%;
+            height: auto;
         }
-        
-        * { 
-            box-sizing: border-box; 
+
+        * {
+            box-sizing: border-box;
         }
-        
+
         /* Modern Hero Section */
         .hero-section {
             position: relative;
@@ -46,14 +55,14 @@
             justify-content: center;
             overflow: hidden;
         }
-        
+
         .hero-overlay {
             position: absolute;
             inset: 0;
             background: rgba(0, 0, 0, 0.5);
             z-index: 1;
         }
-        
+
         .hero-content {
             position: relative;
             z-index: 2;
@@ -66,7 +75,7 @@
             width: 100%;
             max-width: 100%;
         }
-        
+
         .hero-title {
             font-size: clamp(3rem, 8vw, 8rem);
             font-weight: 800;
@@ -78,7 +87,7 @@
             text-align: center;
             width: 100%;
         }
-        
+
         .hero-subtitle {
             font-size: clamp(0.75rem, 1.5vw, 1rem);
             color: rgba(255, 255, 255, 0.8);
@@ -89,7 +98,7 @@
             text-align: center;
             width: 100%;
         }
-        
+
         .hero-description {
             font-size: clamp(1rem, 2vw, 1.25rem);
             color: rgba(255, 255, 255, 0.9);
@@ -100,7 +109,7 @@
             text-align: center;
             width: 100%;
         }
-        
+
         /* Modern Button Styles */
         .modern-btn {
             display: inline-flex;
@@ -118,12 +127,12 @@
             text-decoration: none;
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             backdrop-filter: blur(10px);
-            box-shadow: 0 8px 32px rgba(255, 107, 53, 0.3), 
-                        0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+            box-shadow: 0 8px 32px rgba(255, 107, 53, 0.3),
+                0 0 0 1px rgba(255, 255, 255, 0.1) inset;
             position: relative;
             overflow: hidden;
         }
-        
+
         .modern-btn::before {
             content: '';
             position: absolute;
@@ -134,23 +143,23 @@
             background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
             transition: left 0.6s ease;
         }
-        
+
         .modern-btn:hover {
             transform: translateY(-3px) scale(1.02);
-            box-shadow: 0 15px 40px rgba(255, 107, 53, 0.5), 
-                        0 0 0 1px rgba(255, 255, 255, 0.2) inset,
-                        0 0 60px rgba(139, 92, 246, 0.4);
+            box-shadow: 0 15px 40px rgba(255, 107, 53, 0.5),
+                0 0 0 1px rgba(255, 255, 255, 0.2) inset,
+                0 0 60px rgba(139, 92, 246, 0.4);
             background: linear-gradient(135deg, rgba(255, 107, 53, 1) 0%, rgba(139, 92, 246, 1) 100%);
         }
-        
+
         .modern-btn:hover::before {
             left: 100%;
         }
-        
+
         .modern-btn:active {
             transform: translateY(-1px) scale(1);
         }
-        
+
         /* Call Us Button */
         .modern-btn-call {
             display: inline-flex;
@@ -174,7 +183,7 @@
             position: relative;
             overflow: hidden;
         }
-        
+
         .modern-btn-call::before {
             content: '';
             position: absolute;
@@ -185,56 +194,56 @@
             background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
             transition: left 0.6s ease;
         }
-        
+
         .modern-btn-call:hover {
             transform: translateY(-3px) scale(1.02);
             background: rgba(255, 255, 255, 0.2);
             border-color: rgba(255, 255, 255, 0.5);
             box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3),
-                        0 0 0 1px rgba(255, 255, 255, 0.2) inset;
+                0 0 0 1px rgba(255, 255, 255, 0.2) inset;
         }
-        
+
         .modern-btn-call:hover::before {
             left: 100%;
         }
-        
+
         .modern-btn-call:active {
             transform: translateY(-1px) scale(1);
         }
-        
+
         .modern-btn-call svg {
             flex-shrink: 0;
         }
-        
+
         /* Modern Section Styles */
         .modern-section {
             position: relative;
             padding: 6rem 0;
             background: linear-gradient(180deg, #0a0a0a 0%, #1a0a1a 50%, #0a0a0a 100%);
         }
-        
+
         .modern-section-light {
             background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 50%, #ffffff 100%);
         }
-        
+
         /* Parallax Section */
         .parallax-section {
             background-attachment: fixed;
             overflow: hidden;
         }
-        
+
         .parallax-overlay {
             position: absolute;
             inset: 0;
             z-index: 1;
         }
-        
+
         @media (max-width: 768px) {
             .parallax-section {
                 background-attachment: scroll;
             }
         }
-        
+
         .section-title {
             font-size: clamp(2.5rem, 6vw, 5rem);
             font-weight: 700;
@@ -244,11 +253,11 @@
             letter-spacing: -0.02em;
             line-height: 1.1;
         }
-        
+
         .section-title-light {
             color: #1a202c;
         }
-        
+
         .section-subtitle {
             font-size: clamp(1rem, 2vw, 1.25rem);
             color: rgba(255, 255, 255, 0.7);
@@ -258,11 +267,11 @@
             line-height: 1.7;
             font-weight: 300;
         }
-        
+
         .section-subtitle-light {
             color: #6b7280;
         }
-        
+
         /* Feature Cards */
         .feature-grid {
             display: grid;
@@ -270,7 +279,7 @@
             gap: 2rem;
             margin-top: 4rem;
         }
-        
+
         .feature-card {
             background: rgba(255, 255, 255, 0.03);
             backdrop-filter: blur(20px);
@@ -281,7 +290,7 @@
             position: relative;
             overflow: hidden;
         }
-        
+
         .feature-card::before {
             content: '';
             position: absolute;
@@ -293,23 +302,23 @@
             opacity: 0;
             transition: opacity 0.4s ease;
         }
-        
+
         .feature-card:hover {
             transform: translateY(-8px);
             border-color: rgba(255, 107, 53, 0.5);
             box-shadow: 0 20px 60px rgba(255, 107, 53, 0.2),
-                        0 0 0 1px rgba(139, 92, 246, 0.1) inset;
+                0 0 0 1px rgba(139, 92, 246, 0.1) inset;
         }
-        
+
         .feature-card:hover::before {
             opacity: 1;
         }
-        
-        .feature-card > * {
+
+        .feature-card>* {
             position: relative;
             z-index: 1;
         }
-        
+
         .feature-icon {
             width: 60px;
             height: 60px;
@@ -322,12 +331,12 @@
             border: 1px solid rgba(255, 107, 53, 0.3);
             color: #ffffff;
         }
-        
+
         .feature-icon svg {
             color: #ffffff;
             stroke: #ffffff;
         }
-        
+
         .feature-card h3 {
             font-size: 1.5rem;
             font-weight: 700;
@@ -335,14 +344,14 @@
             margin-bottom: 1rem;
             letter-spacing: -0.01em;
         }
-        
+
         .feature-card p {
             color: rgba(255, 255, 255, 0.7);
             line-height: 1.7;
             font-size: 0.95rem;
             font-weight: 300;
         }
-        
+
         /* Content Section */
         .content-section {
             display: grid;
@@ -350,7 +359,7 @@
             gap: 4rem;
             align-items: center;
         }
-        
+
         .content-text h2 {
             font-size: clamp(2.5rem, 5vw, 4rem);
             font-weight: 700;
@@ -359,7 +368,7 @@
             letter-spacing: -0.02em;
             line-height: 1.1;
         }
-        
+
         .content-text p {
             color: rgba(255, 255, 255, 0.8);
             line-height: 1.8;
@@ -367,21 +376,21 @@
             margin-bottom: 2rem;
             font-weight: 300;
         }
-        
+
         .content-image {
             position: relative;
             border-radius: 24px;
             overflow: hidden;
             aspect-ratio: 4/3;
         }
-        
+
         .content-image img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
-        
+
         .content-image::before {
             content: '';
             position: absolute;
@@ -391,29 +400,29 @@
             transition: opacity 0.4s ease;
             z-index: 1;
         }
-        
+
         .content-image:hover img {
             transform: scale(1.05);
         }
-        
+
         .content-image:hover::before {
             opacity: 1;
         }
-        
+
         /* Carousel Styles */
         .carousel-container {
             position: relative;
             overflow: hidden;
         }
-        
+
         .carousel-container:hover::before {
             opacity: 0;
         }
-        
+
         .carousel-container:hover .carousel-slide img {
             transform: none;
         }
-        
+
         .carousel-slides {
             position: relative;
             width: 100%;
@@ -421,21 +430,21 @@
             display: flex;
             transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        
+
         .carousel-slide {
             min-width: 100%;
             width: 100%;
             height: 100%;
             flex-shrink: 0;
         }
-        
+
         .carousel-slide img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             display: block;
         }
-        
+
         .carousel-btn {
             position: absolute;
             top: 50%;
@@ -454,25 +463,25 @@
             color: #1a202c;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
         }
-        
+
         .carousel-btn:hover {
             background: rgba(255, 255, 255, 1);
             transform: translateY(-50%) scale(1.1);
             box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
         }
-        
+
         .carousel-btn:active {
             transform: translateY(-50%) scale(0.95);
         }
-        
+
         .carousel-btn-prev {
             left: 16px;
         }
-        
+
         .carousel-btn-next {
             right: 16px;
         }
-        
+
         .carousel-indicators {
             position: absolute;
             bottom: 16px;
@@ -482,7 +491,7 @@
             gap: 8px;
             z-index: 10;
         }
-        
+
         .carousel-indicator {
             width: 12px;
             height: 12px;
@@ -493,23 +502,23 @@
             transition: all 0.3s ease;
             padding: 0;
         }
-        
+
         .carousel-indicator.active {
             background: rgba(255, 255, 255, 0.9);
             border-color: rgba(255, 255, 255, 1);
         }
-        
+
         .carousel-indicator:hover {
             background: rgba(255, 255, 255, 0.6);
         }
-        
+
         /* Feature List */
         .feature-list {
             list-style: none;
             padding: 0;
             margin: 2rem 0;
         }
-        
+
         .feature-item {
             padding: 1.5rem 0;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
@@ -517,11 +526,11 @@
             align-items: flex-start;
             gap: 1.5rem;
         }
-        
+
         .feature-item:last-child {
             border-bottom: none;
         }
-        
+
         .feature-item-icon {
             width: 32px;
             height: 32px;
@@ -536,7 +545,7 @@
             box-shadow: 0 0 15px rgba(255, 107, 53, 0.4);
             position: relative;
         }
-        
+
         .feature-item-icon::before {
             content: '✓';
             color: #ffffff;
@@ -544,7 +553,7 @@
             font-weight: bold;
             line-height: 1;
         }
-        
+
         .feature-item-content h4 {
             font-size: 1.25rem;
             font-weight: 600;
@@ -552,7 +561,7 @@
             margin-bottom: 0.5rem;
             letter-spacing: -0.01em;
         }
-        
+
         .feature-item-content p {
             color: rgba(255, 255, 255, 0.7);
             line-height: 1.7;
@@ -560,71 +569,74 @@
             margin: 0;
             font-weight: 300;
         }
-        
+
         /* Responsive Design */
         @media (max-width: 1024px) {
             .content-section {
                 grid-template-columns: 1fr;
                 gap: 3rem;
             }
-            
+
             .content-image {
                 order: -1;
             }
         }
-        
+
         @media (max-width: 768px) {
             .section-padding {
                 padding: 4rem 0;
             }
-            
+
             .modern-section {
                 padding: 4rem 0;
             }
-            
+
             .feature-grid {
                 grid-template-columns: 1fr;
                 gap: 1.5rem;
             }
-            
+
             .modern-btn {
                 padding: 1rem 2.5rem;
                 font-size: 0.875rem;
             }
         }
-        
+
         /* Animations */
         @keyframes fadeInUp {
             from {
                 opacity: 0;
                 transform: translateY(30px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
-        
+
         .animate-fade-in {
             animation: fadeInUp 0.8s ease-out forwards;
         }
-        
+
         /* Button Primary Styles for Navigation */
         .btn-primary {
             background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%);
             transition: all 0.3s ease;
         }
-        
+
         .btn-primary:hover {
             transform: translateY(-2px);
             box-shadow: 0 10px 25px rgba(0, 80, 255, 0.4);
         }
     </style>
 </head>
+
 <body>
     <!-- Hero Section -->
     <section class="hero-section">
-        <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('../assets/images/spooky-halloween/spooky-halloween-hero.webp');"></div>
+        <div class="absolute inset-0 bg-cover bg-center"
+            style="background-image: url('../assets/images/spooky-halloween/spooky-halloween-hero.webp');"></div>
         <div class="hero-overlay"></div>
         <div class="hero-content">
             <h1 class="hero-title animate-fade-in">Spooky Halloween</h1>
@@ -632,13 +644,16 @@
             <p class="hero-description animate-fade-in" style="animation-delay: 0.4s;">
                 Ghosts, ghouls, and glamour collide in this chillingly fun Halloween celebration.
             </p>
-            <div class="flex flex-col sm:flex-row gap-4 items-center justify-center animate-fade-in" style="animation-delay: 0.6s;">
+            <div class="flex flex-col sm:flex-row gap-4 items-center justify-center animate-fade-in"
+                style="animation-delay: 0.6s;">
                 <a href="../contact-us.html" class="modern-btn">
-                    Get Your Free Quote
+                    Get Your Quote
                 </a>
                 <button type="button" data-click-to-call data-call-text="Call Us" class="modern-btn-call">
                     <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"></path>
+                        <path
+                            d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z">
+                        </path>
                     </svg>
                     <span>Call Us</span>
                 </button>
@@ -651,10 +666,12 @@
         <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
             <h2 class="section-title">Fright Night Fun!</h2>
             <p class="section-subtitle">
-                From haunted décor to spooky photo booths, this theme gives guests the perfect mix of eerie and exciting. Perfect for October bashes, brand activations, or even weddings that dare to be different, our Halloween theme promises a thrilling night full of fun (and maybe a scare or two!).
+                From haunted décor to spooky photo booths, this theme gives guests the perfect mix of eerie and
+                exciting. Perfect for October bashes, brand activations, or even weddings that dare to be different, our
+                Halloween theme promises a thrilling night full of fun (and maybe a scare or two!).
             </p>
             <div class="text-center">
-                <a href="../contact-us.html" class="modern-btn">Get Your Free Quote</a>
+                <a href="../contact-us.html" class="modern-btn">Get Your Quote</a>
             </div>
         </div>
     </section>
@@ -666,32 +683,39 @@
             <p class="section-subtitle">
                 Our Halloween Theme comes with the following options:
             </p>
-            
+
             <div class="feature-grid">
                 <div class="feature-card">
                     <div class="feature-icon">
-                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
                             <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
                             <line x1="9" y1="3" x2="9" y2="21"></line>
                         </svg>
                     </div>
                     <h3>Backdrops</h3>
-                    <p>Set the eerie scene with our creepy backdrops, or let your guests' amazing costumes take center stage with over 40+ backdrop options to choose from!</p>
+                    <p>Set the eerie scene with our creepy backdrops, or let your guests' amazing costumes take center
+                        stage with over 40+ backdrop options to choose from!</p>
                 </div>
-                
+
                 <div class="feature-card">
                     <div class="feature-icon">
-                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path
+                                d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
+                            </path>
                         </svg>
                     </div>
                     <h3>Props</h3>
-                    <p>Grab your broomstick and check out the spine-tingling props that MiHi Entertainment has in store for your frightfully fun event!</p>
+                    <p>Grab your broomstick and check out the spine-tingling props that MiHi Entertainment has in store
+                        for your frightfully fun event!</p>
                 </div>
-                
+
                 <div class="feature-card">
                     <div class="feature-icon">
-                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
                             <rect x="3" y="3" width="7" height="7"></rect>
                             <rect x="14" y="3" width="7" height="7"></rect>
                             <rect x="14" y="14" width="7" height="7"></rect>
@@ -699,23 +723,29 @@
                         </svg>
                     </div>
                     <h3>Custom Layouts</h3>
-                    <p>Design photo strips with Halloween-themed layouts featuring spooky fonts and ghoulish graphics.</p>
+                    <p>Design photo strips with Halloween-themed layouts featuring spooky fonts and ghoulish graphics.
+                    </p>
                 </div>
-                
+
                 <div class="feature-card">
                     <div class="feature-icon">
-                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <polygon
+                                points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
+                            </polygon>
                         </svg>
                     </div>
                     <h3>Add-Ons</h3>
                     <p>Add extra scares and thrills with additional Halloween enhancements and spooky surprises.</p>
                 </div>
             </div>
-            
+
             <div class="text-center mt-12">
                 <p class="section-subtitle mb-6" style="font-style: italic; max-width: 800px;">
-                    Our Halloween theme is fully customizable to match your level of spookiness, from family-friendly fun to truly terrifying setups. Perfect for creating that haunting atmosphere that'll make your event unforgettable!
+                    Our Halloween theme is fully customizable to match your level of spookiness, from family-friendly
+                    fun to truly terrifying setups. Perfect for creating that haunting atmosphere that'll make your
+                    event unforgettable!
                 </p>
                 <a href="../contact-us.html" class="modern-btn">Book Your Event Now</a>
             </div>
@@ -729,10 +759,13 @@
                 <div class="content-text">
                     <h2>Create a Haunting Experience</h2>
                     <p>
-                        Step into a world where spooky meets spectacular. Our Spooky Halloween Theme brings together the best of eerie elegance—from spine-chilling backdrops to ghoulish props that will have your guests howling with delight.
+                        Step into a world where spooky meets spectacular. Our Spooky Halloween Theme brings together the
+                        best of eerie elegance—from spine-chilling backdrops to ghoulish props that will have your
+                        guests howling with delight.
                     </p>
                     <p>
-                        Every detail is carefully curated to create an unforgettable Halloween experience that will have your guests talking long after the last trick-or-treater has gone home.
+                        Every detail is carefully curated to create an unforgettable Halloween experience that will have
+                        your guests talking long after the last trick-or-treater has gone home.
                     </p>
                     <ul class="feature-list">
                         <li class="feature-item">
@@ -746,7 +779,8 @@
                             <div class="feature-item-icon"></div>
                             <div class="feature-item-content">
                                 <h4>Spine-Tingling Props</h4>
-                                <p>Witches' hats, broomsticks, masks, and all the accessories for a frightfully fun time</p>
+                                <p>Witches' hats, broomsticks, masks, and all the accessories for a frightfully fun time
+                                </p>
                             </div>
                         </li>
                         <li class="feature-item">
@@ -761,20 +795,24 @@
                 <div class="content-image carousel-container">
                     <div class="carousel-slides">
                         <div class="carousel-slide">
-                            <img src="../assets/images/spooky-halloween/spooky-halloween-1.webp" alt="Spooky Halloween Theme Photo Booth">
+                            <img src="../assets/images/spooky-halloween/spooky-halloween-1.webp"
+                                alt="Spooky Halloween Theme Photo Booth">
                         </div>
                         <div class="carousel-slide">
-                            <img src="../assets/images/spooky-halloween/spooky-halloween-2.webp" alt="Spooky Halloween Theme Photo Booth">
+                            <img src="../assets/images/spooky-halloween/spooky-halloween-2.webp"
+                                alt="Spooky Halloween Theme Photo Booth">
                         </div>
                     </div>
                     <button class="carousel-btn carousel-btn-prev" aria-label="Previous image">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M15 18l-6-6 6-6"/>
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M15 18l-6-6 6-6" />
                         </svg>
                     </button>
                     <button class="carousel-btn carousel-btn-next" aria-label="Next image">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M9 18l6-6-6-6"/>
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M9 18l6-6-6-6" />
                         </svg>
                     </button>
                     <div class="carousel-indicators">
@@ -787,13 +825,16 @@
     </section>
 
     <!-- View Other Themes Section -->
-    <section class="modern-section parallax-section" style="background-image: url('../assets/images/spooky-halloween/spooky-halloween-3.webp'); background-size: cover; background-position: center 20%; background-repeat: no-repeat; position: relative;">
-        <div class="parallax-overlay" style="position: absolute; inset: 0; background: rgba(0, 0, 0, 0.5); z-index: 1;"></div>
+    <section class="modern-section parallax-section"
+        style="background-image: url('../assets/images/spooky-halloween/spooky-halloween-3.webp'); background-size: cover; background-position: center 20%; background-repeat: no-repeat; position: relative;">
+        <div class="parallax-overlay" style="position: absolute; inset: 0; background: rgba(0, 0, 0, 0.5); z-index: 1;">
+        </div>
         <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl" style="position: relative; z-index: 2;">
             <div class="text-center">
                 <h2 class="section-title">View Our Other Event Themes</h2>
                 <p class="section-subtitle mb-8">Scroll to see all of our themes</p>
-                <a href="../booth-themes.html" class="modern-btn" style="background: linear-gradient(135deg, rgba(255, 107, 53, 0.9) 0%, rgba(139, 92, 246, 0.9) 100%);">
+                <a href="../booth-themes.html" class="modern-btn"
+                    style="background: linear-gradient(135deg, rgba(255, 107, 53, 0.9) 0%, rgba(139, 92, 246, 0.9) 100%);">
                     VIEW ALL THEMES
                 </a>
             </div>
@@ -806,7 +847,7 @@
             threshold: 0.1,
             rootMargin: '0px 0px -50px 0px'
         };
-        
+
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -815,7 +856,7 @@
                 }
             });
         }, observerOptions);
-        
+
         document.querySelectorAll('.feature-card, .content-section').forEach(el => {
             el.style.opacity = '0';
             el.style.transform = 'translateY(30px)';
@@ -823,60 +864,60 @@
             observer.observe(el);
         });
     </script>
-    
+
     <!-- Navigation Component -->
     <script src="../assets/components/navigation.js"></script>
-    
+
     <!-- Footer Component -->
     <script src="../assets/components/footer.js"></script>
     <script>
         // Carousel functionality
-        (function() {
+        (function () {
             const carousel = document.querySelector('.carousel-container');
             if (!carousel) return;
-            
+
             const slidesContainer = carousel.querySelector('.carousel-slides');
             const slides = carousel.querySelectorAll('.carousel-slide');
             const prevBtn = carousel.querySelector('.carousel-btn-prev');
             const nextBtn = carousel.querySelector('.carousel-btn-next');
             const indicators = carousel.querySelectorAll('.carousel-indicator');
-            
+
             let currentSlide = 0;
             const totalSlides = slides.length;
-            
+
             function showSlide(index) {
                 // Calculate the transform offset
                 const offset = -index * 100;
                 slidesContainer.style.transform = `translateX(${offset}%)`;
-                
+
                 // Update indicators
                 indicators.forEach(indicator => indicator.classList.remove('active'));
                 indicators[index].classList.add('active');
-                
+
                 currentSlide = index;
             }
-            
+
             function nextSlide() {
                 const next = (currentSlide + 1) % totalSlides;
                 showSlide(next);
             }
-            
+
             function prevSlide() {
                 const prev = (currentSlide - 1 + totalSlides) % totalSlides;
                 showSlide(prev);
             }
-            
+
             // Event listeners
             nextBtn.addEventListener('click', nextSlide);
             prevBtn.addEventListener('click', prevSlide);
-            
+
             indicators.forEach((indicator, index) => {
                 indicator.addEventListener('click', () => showSlide(index));
             });
-            
+
             // Initialize first slide
             showSlide(0);
-            
+
             // Auto-play carousel (optional - uncomment to enable)
             // let autoPlayInterval = setInterval(nextSlide, 5000);
             // carousel.addEventListener('mouseenter', () => clearInterval(autoPlayInterval));

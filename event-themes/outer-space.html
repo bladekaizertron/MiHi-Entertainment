@@ -1,30 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Outer Space Event Theme - MiHi Entertainment</title>
     <link rel="icon" type="image/svg+xml" href="../assets/images/favicon.svg">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
     <style>
-        html, body { 
-            overflow-x: hidden; 
-            width: 100%; 
-            max-width: 100%; 
+        html,
+        body {
+            overflow-x: hidden;
+            width: 100%;
+            max-width: 100%;
         }
-        
-        body { 
+
+        body {
             font-family: 'Inter', sans-serif;
-            color: #1a202c; 
+            color: #1a202c;
             background: #0a0a0a;
         }
-        
+
         /* Headings use Playfair Display */
-        h1, h2, h3, h4, h5, h6 {
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
             font-family: 'Playfair Display', serif;
         }
-        
+
         /* Navigation uses default Tailwind styles from navigation.js - no CSS overrides */
         /* Fixed navigation positioning */
         header {
@@ -35,7 +44,7 @@
             width: 100% !important;
             z-index: 50 !important;
         }
-        
+
         /* Ensure navigation buttons keep their original text case and Tailwind padding */
         header .btn-primary,
         header a.btn-primary {
@@ -52,29 +61,29 @@
             position: static !important;
             overflow: visible !important;
         }
-        
+
         header .btn-primary::before {
             display: none !important;
         }
-        
+
         header .btn-primary:hover {
             transform: none !important;
             box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04) !important;
         }
-        
-        .section-padding { 
-            padding: 6rem 0; 
+
+        .section-padding {
+            padding: 6rem 0;
         }
-        
-        img { 
-            max-width: 100%; 
-            height: auto; 
+
+        img {
+            max-width: 100%;
+            height: auto;
         }
-        
-        * { 
-            box-sizing: border-box; 
+
+        * {
+            box-sizing: border-box;
         }
-        
+
         /* Modern Hero Section */
         .hero-section {
             position: relative;
@@ -84,14 +93,14 @@
             justify-content: center;
             overflow: hidden;
         }
-        
+
         .hero-overlay {
             position: absolute;
             inset: 0;
             background: linear-gradient(135deg, rgba(99, 102, 241, 0.4) 0%, rgba(139, 92, 246, 0.4) 25%, rgba(236, 72, 153, 0.3) 50%, rgba(6, 182, 212, 0.3) 75%, rgba(0, 0, 0, 0.8) 100%);
             z-index: 1;
         }
-        
+
         .hero-content {
             position: relative;
             z-index: 2;
@@ -104,7 +113,7 @@
             width: 100%;
             max-width: 100%;
         }
-        
+
         .hero-title {
             font-size: clamp(3rem, 8vw, 8rem);
             font-weight: 800;
@@ -116,7 +125,7 @@
             text-align: center;
             width: 100%;
         }
-        
+
         .hero-subtitle {
             font-size: clamp(0.75rem, 1.5vw, 1rem);
             color: rgba(255, 255, 255, 0.8);
@@ -127,7 +136,7 @@
             text-align: center;
             width: 100%;
         }
-        
+
         .hero-description {
             font-size: clamp(1rem, 2vw, 1.25rem);
             color: rgba(255, 255, 255, 0.9);
@@ -138,7 +147,7 @@
             text-align: center;
             width: 100%;
         }
-        
+
         /* Stars Background */
         .stars-container {
             position: absolute;
@@ -146,19 +155,28 @@
             overflow: hidden;
             z-index: 0;
         }
-        
+
         .star {
             position: absolute;
             background: white;
             border-radius: 50%;
             animation: twinkle var(--duration) ease-in-out infinite;
         }
-        
+
         @keyframes twinkle {
-            0%, 100% { opacity: 0.3; transform: scale(1); }
-            50% { opacity: 1; transform: scale(1.3); }
+
+            0%,
+            100% {
+                opacity: 0.3;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 1;
+                transform: scale(1.3);
+            }
         }
-        
+
         /* Modern Button Styles */
         .modern-btn {
             display: inline-flex;
@@ -176,12 +194,12 @@
             text-decoration: none;
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             backdrop-filter: blur(10px);
-            box-shadow: 0 8px 32px rgba(139, 92, 246, 0.4), 
-                        0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+            box-shadow: 0 8px 32px rgba(139, 92, 246, 0.4),
+                0 0 0 1px rgba(255, 255, 255, 0.1) inset;
             position: relative;
             overflow: hidden;
         }
-        
+
         .modern-btn::before {
             content: '';
             position: absolute;
@@ -192,23 +210,23 @@
             background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
             transition: left 0.6s ease;
         }
-        
+
         .modern-btn:hover {
             transform: translateY(-3px) scale(1.02);
-            box-shadow: 0 15px 40px rgba(139, 92, 246, 0.6), 
-                        0 0 0 1px rgba(255, 255, 255, 0.2) inset,
-                        0 0 60px rgba(139, 92, 246, 0.5);
+            box-shadow: 0 15px 40px rgba(139, 92, 246, 0.6),
+                0 0 0 1px rgba(255, 255, 255, 0.2) inset,
+                0 0 60px rgba(139, 92, 246, 0.5);
             background: linear-gradient(135deg, rgba(99, 102, 241, 1) 0%, rgba(139, 92, 246, 1) 50%, rgba(236, 72, 153, 1) 100%);
         }
-        
+
         .modern-btn:hover::before {
             left: 100%;
         }
-        
+
         .modern-btn:active {
             transform: translateY(-1px) scale(1);
         }
-        
+
         /* Call Us Button */
         .modern-btn-call {
             display: inline-flex;
@@ -232,7 +250,7 @@
             position: relative;
             overflow: hidden;
         }
-        
+
         .modern-btn-call::before {
             content: '';
             position: absolute;
@@ -243,38 +261,38 @@
             background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
             transition: left 0.6s ease;
         }
-        
+
         .modern-btn-call:hover {
             transform: translateY(-3px) scale(1.02);
             background: rgba(255, 255, 255, 0.2);
             border-color: rgba(255, 255, 255, 0.5);
             box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3),
-                        0 0 0 1px rgba(255, 255, 255, 0.2) inset;
+                0 0 0 1px rgba(255, 255, 255, 0.2) inset;
         }
-        
+
         .modern-btn-call:hover::before {
             left: 100%;
         }
-        
+
         .modern-btn-call:active {
             transform: translateY(-1px) scale(1);
         }
-        
+
         .modern-btn-call svg {
             flex-shrink: 0;
         }
-        
+
         /* Modern Section Styles */
         .modern-section {
             position: relative;
             padding: 6rem 0;
             background: linear-gradient(180deg, #0a0a0a 0%, #0d0a1a 50%, #0a0a0a 100%);
         }
-        
+
         .modern-section-light {
             background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 50%, #ffffff 100%);
         }
-        
+
         .section-title {
             font-size: clamp(2.5rem, 6vw, 5rem);
             font-weight: 700;
@@ -284,11 +302,11 @@
             letter-spacing: -0.02em;
             line-height: 1.1;
         }
-        
+
         .section-title-light {
             color: #1a202c;
         }
-        
+
         .section-subtitle {
             font-size: clamp(1rem, 2vw, 1.25rem);
             color: rgba(255, 255, 255, 0.7);
@@ -298,11 +316,11 @@
             line-height: 1.7;
             font-weight: 300;
         }
-        
+
         .section-subtitle-light {
             color: #6b7280;
         }
-        
+
         /* Feature Cards */
         .feature-grid {
             display: grid;
@@ -310,7 +328,7 @@
             gap: 2rem;
             margin-top: 4rem;
         }
-        
+
         .feature-card {
             background: rgba(255, 255, 255, 0.03);
             backdrop-filter: blur(20px);
@@ -321,7 +339,7 @@
             position: relative;
             overflow: hidden;
         }
-        
+
         .feature-card::before {
             content: '';
             position: absolute;
@@ -333,23 +351,23 @@
             opacity: 0;
             transition: opacity 0.4s ease;
         }
-        
+
         .feature-card:hover {
             transform: translateY(-8px);
             border-color: rgba(139, 92, 246, 0.5);
             box-shadow: 0 20px 60px rgba(139, 92, 246, 0.2),
-                        0 0 0 1px rgba(139, 92, 246, 0.1) inset;
+                0 0 0 1px rgba(139, 92, 246, 0.1) inset;
         }
-        
+
         .feature-card:hover::before {
             opacity: 1;
         }
-        
-        .feature-card > * {
+
+        .feature-card>* {
             position: relative;
             z-index: 1;
         }
-        
+
         .feature-icon {
             width: 60px;
             height: 60px;
@@ -362,12 +380,12 @@
             border: 1px solid rgba(139, 92, 246, 0.4);
             color: #ffffff;
         }
-        
+
         .feature-icon svg {
             color: #ffffff;
             stroke: #ffffff;
         }
-        
+
         .feature-card h3 {
             font-size: 1.5rem;
             font-weight: 700;
@@ -375,14 +393,14 @@
             margin-bottom: 1rem;
             letter-spacing: -0.01em;
         }
-        
+
         .feature-card p {
             color: rgba(255, 255, 255, 0.7);
             line-height: 1.7;
             font-size: 0.95rem;
             font-weight: 300;
         }
-        
+
         /* Content Section */
         .content-section {
             display: grid;
@@ -390,7 +408,7 @@
             gap: 4rem;
             align-items: center;
         }
-        
+
         .content-text h2 {
             font-size: clamp(2.5rem, 5vw, 4rem);
             font-weight: 700;
@@ -399,7 +417,7 @@
             letter-spacing: -0.02em;
             line-height: 1.1;
         }
-        
+
         .content-text p {
             color: rgba(255, 255, 255, 0.8);
             line-height: 1.8;
@@ -407,21 +425,21 @@
             margin-bottom: 2rem;
             font-weight: 300;
         }
-        
+
         .content-image {
             position: relative;
             border-radius: 24px;
             overflow: hidden;
             aspect-ratio: 4/3;
         }
-        
+
         .content-image img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
-        
+
         .content-image::before {
             content: '';
             position: absolute;
@@ -431,22 +449,22 @@
             transition: opacity 0.4s ease;
             z-index: 1;
         }
-        
+
         .content-image:hover img {
             transform: scale(1.05);
         }
-        
+
         .content-image:hover::before {
             opacity: 1;
         }
-        
+
         /* Feature List */
         .feature-list {
             list-style: none;
             padding: 0;
             margin: 2rem 0;
         }
-        
+
         .feature-item {
             padding: 1.5rem 0;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
@@ -454,11 +472,11 @@
             align-items: flex-start;
             gap: 1.5rem;
         }
-        
+
         .feature-item:last-child {
             border-bottom: none;
         }
-        
+
         .feature-item-icon {
             width: 32px;
             height: 32px;
@@ -473,7 +491,7 @@
             box-shadow: 0 0 15px rgba(139, 92, 246, 0.5);
             position: relative;
         }
-        
+
         .feature-item-icon::before {
             content: '✓';
             color: #ffffff;
@@ -481,7 +499,7 @@
             font-weight: bold;
             line-height: 1;
         }
-        
+
         .feature-item-content h4 {
             font-size: 1.25rem;
             font-weight: 600;
@@ -489,7 +507,7 @@
             margin-bottom: 0.5rem;
             letter-spacing: -0.01em;
         }
-        
+
         .feature-item-content p {
             color: rgba(255, 255, 255, 0.7);
             line-height: 1.7;
@@ -497,7 +515,7 @@
             margin: 0;
             font-weight: 300;
         }
-        
+
         /* Placeholder image styling */
         .placeholder-image {
             width: 100%;
@@ -508,55 +526,56 @@
             justify-content: center;
             font-size: 6rem;
         }
-        
+
         /* Responsive Design */
         @media (max-width: 1024px) {
             .content-section {
                 grid-template-columns: 1fr;
                 gap: 3rem;
             }
-            
+
             .content-image {
                 order: -1;
             }
         }
-        
+
         @media (max-width: 768px) {
             .section-padding {
                 padding: 4rem 0;
             }
-            
+
             .modern-section {
                 padding: 4rem 0;
             }
-            
+
             .feature-grid {
                 grid-template-columns: 1fr;
                 gap: 1.5rem;
             }
-            
+
             .modern-btn {
                 padding: 1rem 2.5rem;
                 font-size: 0.875rem;
             }
         }
-        
+
         /* Animations */
         @keyframes fadeInUp {
             from {
                 opacity: 0;
                 transform: translateY(30px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
-        
+
         .animate-fade-in {
             animation: fadeInUp 0.8s ease-out forwards;
         }
-        
+
         /* btn-primary styling */
         .btn-primary {
             display: inline-flex;
@@ -574,12 +593,12 @@
             text-decoration: none;
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             backdrop-filter: blur(10px);
-            box-shadow: 0 8px 32px rgba(139, 92, 246, 0.3), 
-                        0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+            box-shadow: 0 8px 32px rgba(139, 92, 246, 0.3),
+                0 0 0 1px rgba(255, 255, 255, 0.1) inset;
             position: relative;
             overflow: hidden;
         }
-        
+
         .btn-primary::before {
             content: '';
             position: absolute;
@@ -590,65 +609,72 @@
             background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
             transition: left 0.6s ease;
         }
-        
+
         .btn-primary:hover {
             transform: translateY(-3px) scale(1.02);
-            box-shadow: 0 15px 40px rgba(139, 92, 246, 0.5), 
-                        0 0 0 1px rgba(255, 255, 255, 0.2) inset,
-                        0 0 60px rgba(139, 92, 246, 0.4);
+            box-shadow: 0 15px 40px rgba(139, 92, 246, 0.5),
+                0 0 0 1px rgba(255, 255, 255, 0.2) inset,
+                0 0 60px rgba(139, 92, 246, 0.4);
             background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
         }
-        
+
         .btn-primary:hover::before {
             left: 100%;
         }
-        
+
         .btn-primary:active {
             transform: translateY(-1px) scale(1);
         }
 
         /* Floating planets */
         @keyframes float {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(3deg); }
+
+            0%,
+            100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+
+            50% {
+                transform: translateY(-20px) rotate(3deg);
+            }
         }
-        
+
         .floating {
             animation: float 6s ease-in-out infinite;
         }
-        
+
         .planet {
             position: absolute;
             border-radius: 50%;
             z-index: 0;
         }
-        
+
         .planet-1 {
             width: 120px;
             height: 120px;
             background: linear-gradient(135deg, #6366f1, #8b5cf6);
-            box-shadow: inset -20px -20px 40px rgba(0,0,0,0.4), 0 0 40px rgba(139, 92, 246, 0.4);
+            box-shadow: inset -20px -20px 40px rgba(0, 0, 0, 0.4), 0 0 40px rgba(139, 92, 246, 0.4);
             top: 20%;
             right: 15%;
             animation: float 8s ease-in-out infinite;
         }
-        
+
         .planet-2 {
             width: 60px;
             height: 60px;
             background: linear-gradient(135deg, #f97316, #ef4444);
-            box-shadow: inset -10px -10px 20px rgba(0,0,0,0.4), 0 0 20px rgba(249, 115, 22, 0.4);
+            box-shadow: inset -10px -10px 20px rgba(0, 0, 0, 0.4), 0 0 20px rgba(249, 115, 22, 0.4);
             bottom: 30%;
             left: 10%;
             animation: float 6s ease-in-out infinite;
             animation-delay: -2s;
         }
-        
+
         .planet-3 {
             width: 40px;
             height: 40px;
             background: linear-gradient(135deg, #06b6d4, #3b82f6);
-            box-shadow: inset -8px -8px 16px rgba(0,0,0,0.4), 0 0 15px rgba(6, 182, 212, 0.4);
+            box-shadow: inset -8px -8px 16px rgba(0, 0, 0, 0.4), 0 0 15px rgba(6, 182, 212, 0.4);
             top: 35%;
             left: 20%;
             animation: float 7s ease-in-out infinite;
@@ -656,6 +682,7 @@
         }
     </style>
 </head>
+
 <body>
     <div id="nav-placeholder"></div>
 
@@ -670,15 +697,19 @@
             <h1 class="hero-title animate-fade-in">Outer Space</h1>
             <p class="hero-subtitle animate-fade-in" style="animation-delay: 0.2s;">Event Theme</p>
             <p class="hero-description animate-fade-in" style="animation-delay: 0.4s;">
-                Launch your event into the cosmos with our stunning outer space photo booth theme. Perfect for galaxy-themed parties, sci-fi celebrations, and astronomical adventures.
+                Launch your event into the cosmos with our stunning outer space photo booth theme. Perfect for
+                galaxy-themed parties, sci-fi celebrations, and astronomical adventures.
             </p>
-            <div class="flex flex-col sm:flex-row gap-4 items-center justify-center animate-fade-in" style="animation-delay: 0.6s;">
+            <div class="flex flex-col sm:flex-row gap-4 items-center justify-center animate-fade-in"
+                style="animation-delay: 0.6s;">
                 <a href="../contact-us.html" class="modern-btn">
-                    Get Your Free Quote
+                    Get Your Quote
                 </a>
                 <button type="button" data-click-to-call data-call-text="Call Us" class="modern-btn-call">
                     <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"></path>
+                        <path
+                            d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z">
+                        </path>
                     </svg>
                     <span>Call Us</span>
                 </button>
@@ -691,13 +722,16 @@
         <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
             <h2 class="section-title">Explore the Universe</h2>
             <p class="section-subtitle">
-                Transport your guests to the far reaches of the galaxy with our Outer Space Theme. Featuring stunning cosmic visuals, twinkling stars, and celestial wonders, this theme captures the mystery and beauty of the universe.
+                Transport your guests to the far reaches of the galaxy with our Outer Space Theme. Featuring stunning
+                cosmic visuals, twinkling stars, and celestial wonders, this theme captures the mystery and beauty of
+                the universe.
             </p>
             <p class="section-subtitle" style="margin-top: -2rem; margin-bottom: 2rem;">
-                Perfect for astronomy enthusiasts, sci-fi fans, space-themed birthdays, corporate events, or any occasion where you want to create an out-of-this-world experience.
+                Perfect for astronomy enthusiasts, sci-fi fans, space-themed birthdays, corporate events, or any
+                occasion where you want to create an out-of-this-world experience.
             </p>
             <div class="text-center">
-                <a href="../contact-us.html" class="modern-btn">Get Your Free Quote</a>
+                <a href="../contact-us.html" class="modern-btn">Get Your Quote</a>
             </div>
         </div>
     </section>
@@ -709,32 +743,37 @@
             <p class="section-subtitle">
                 Our Outer Space Theme comes with the following options:
             </p>
-            
+
             <div class="feature-grid">
                 <div class="feature-card">
                     <div class="feature-icon">
-                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
                             <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
                             <line x1="9" y1="3" x2="9" y2="21"></line>
                         </svg>
                     </div>
                     <h3>Backdrops</h3>
-                    <p>Choose from our collection of space-inspired backdrops featuring galaxies, nebulas, star fields, and planetary landscapes that create the perfect cosmic atmosphere!</p>
+                    <p>Choose from our collection of space-inspired backdrops featuring galaxies, nebulas, star fields,
+                        and planetary landscapes that create the perfect cosmic atmosphere!</p>
                 </div>
-                
+
                 <div class="feature-card">
                     <div class="feature-icon">
-                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
                             <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
                         </svg>
                     </div>
                     <h3>Props</h3>
-                    <p>Complete your space adventure with astronaut helmets, alien masks, rocket ships, planets, and cosmic accessories that bring the universe to life!</p>
+                    <p>Complete your space adventure with astronaut helmets, alien masks, rocket ships, planets, and
+                        cosmic accessories that bring the universe to life!</p>
                 </div>
-                
+
                 <div class="feature-card">
                     <div class="feature-icon">
-                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
                             <rect x="3" y="3" width="7" height="7"></rect>
                             <rect x="14" y="3" width="7" height="7"></rect>
                             <rect x="14" y="14" width="7" height="7"></rect>
@@ -742,23 +781,30 @@
                         </svg>
                     </div>
                     <h3>Custom Layouts</h3>
-                    <p>Design photo layouts with galaxy graphics, star borders, rocket motifs, and celestial designs that capture the wonder of space exploration.</p>
+                    <p>Design photo layouts with galaxy graphics, star borders, rocket motifs, and celestial designs
+                        that capture the wonder of space exploration.</p>
                 </div>
-                
+
                 <div class="feature-card">
                     <div class="feature-icon">
-                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <polygon
+                                points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
+                            </polygon>
                         </svg>
                     </div>
                     <h3>Add-Ons</h3>
-                    <p>Enhance your cosmic experience with additional space-themed enhancements, LED lighting effects, and stellar touches.</p>
+                    <p>Enhance your cosmic experience with additional space-themed enhancements, LED lighting effects,
+                        and stellar touches.</p>
                 </div>
             </div>
-            
+
             <div class="text-center mt-12">
                 <p class="section-subtitle mb-6" style="font-style: italic; max-width: 800px;">
-                    This theme is completely customizable to match your specific cosmic vision, creating that perfect atmosphere of wonder, exploration, and adventure. Perfect for celebrating in true intergalactic style!
+                    This theme is completely customizable to match your specific cosmic vision, creating that perfect
+                    atmosphere of wonder, exploration, and adventure. Perfect for celebrating in true intergalactic
+                    style!
                 </p>
                 <a href="../contact-us.html" class="modern-btn">Book Your Event Now</a>
             </div>
@@ -772,10 +818,14 @@
                 <div class="content-text">
                     <h2>Journey Through the Stars</h2>
                     <p>
-                        Transform your event into an interstellar adventure with our Outer Space Theme. From swirling galaxies to twinkling star fields and distant planets, every detail captures the awe-inspiring beauty of the cosmos.
+                        Transform your event into an interstellar adventure with our Outer Space Theme. From swirling
+                        galaxies to twinkling star fields and distant planets, every detail captures the awe-inspiring
+                        beauty of the cosmos.
                     </p>
                     <p>
-                        Perfect for space-themed parties, sci-fi celebrations, astronomy events, or any occasion where you want to transport your guests to another dimension and create memories that are truly out of this world.
+                        Perfect for space-themed parties, sci-fi celebrations, astronomy events, or any occasion where
+                        you want to transport your guests to another dimension and create memories that are truly out of
+                        this world.
                     </p>
                     <ul class="feature-list">
                         <li class="feature-item">
@@ -814,7 +864,8 @@
             <div class="text-center">
                 <h2 class="section-title section-title-light">View Our Other Event Themes</h2>
                 <p class="section-subtitle section-subtitle-light mb-8">Scroll to see all of our themes</p>
-                <a href="../booth-themes.html" class="modern-btn" style="background: linear-gradient(135deg, rgba(99, 102, 241, 0.9) 0%, rgba(139, 92, 246, 0.9) 50%, rgba(236, 72, 153, 0.9) 100%);">
+                <a href="../booth-themes.html" class="modern-btn"
+                    style="background: linear-gradient(135deg, rgba(99, 102, 241, 0.9) 0%, rgba(139, 92, 246, 0.9) 50%, rgba(236, 72, 153, 0.9) 100%);">
                     View All Themes
                 </a>
             </div>
@@ -829,7 +880,7 @@
         function createStars() {
             const starsContainer = document.getElementById('stars');
             const numStars = 200;
-            
+
             for (let i = 0; i < numStars; i++) {
                 const star = document.createElement('div');
                 star.className = 'star';
@@ -842,7 +893,7 @@
                 starsContainer.appendChild(star);
             }
         }
-        
+
         createStars();
     </script>
     <!-- Load Back to Top Component -->

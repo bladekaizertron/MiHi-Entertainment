@@ -1,30 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Casino Royale Event Theme - MiHi Entertainment</title>
     <link rel="icon" type="image/svg+xml" href="../assets/images/favicon.svg">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
     <style>
-        html, body { 
-            overflow-x: hidden; 
-            width: 100%; 
-            max-width: 100%; 
+        html,
+        body {
+            overflow-x: hidden;
+            width: 100%;
+            max-width: 100%;
         }
-        
-        body { 
+
+        body {
             font-family: 'Inter', sans-serif;
-            color: #1a202c; 
+            color: #1a202c;
             background: #0a0a0a;
         }
-        
+
         /* Headings use Playfair Display */
-        h1, h2, h3, h4, h5, h6 {
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
             font-family: 'Playfair Display', serif;
         }
-        
+
         /* Navigation uses default Tailwind styles from navigation.js - no CSS overrides */
         /* Fixed navigation positioning */
         header {
@@ -35,12 +44,13 @@
             width: 100% !important;
             z-index: 50 !important;
         }
-        
+
         /* Ensure navigation buttons keep their original text case and Tailwind padding */
         header .btn-primary,
         header a.btn-primary {
             text-transform: none !important;
-            padding: 0.75rem 1.5rem !important; /* Match Tailwind px-6 py-3 */
+            padding: 0.75rem 1.5rem !important;
+            /* Match Tailwind px-6 py-3 */
             display: inline-flex !important;
             align-items: center !important;
             justify-content: center !important;
@@ -52,29 +62,29 @@
             position: static !important;
             overflow: visible !important;
         }
-        
+
         header .btn-primary::before {
             display: none !important;
         }
-        
+
         header .btn-primary:hover {
             transform: none !important;
             box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04) !important;
         }
-        
-        .section-padding { 
-            padding: 6rem 0; 
+
+        .section-padding {
+            padding: 6rem 0;
         }
-        
-        img { 
-            max-width: 100%; 
-            height: auto; 
+
+        img {
+            max-width: 100%;
+            height: auto;
         }
-        
-        * { 
-            box-sizing: border-box; 
+
+        * {
+            box-sizing: border-box;
         }
-        
+
         /* Modern Hero Section */
         .hero-section {
             position: relative;
@@ -84,14 +94,14 @@
             justify-content: center;
             overflow: hidden;
         }
-        
+
         .hero-overlay {
             position: absolute;
             inset: 0;
             background: transparent;
             z-index: 1;
         }
-        
+
         .hero-content {
             position: relative;
             z-index: 2;
@@ -104,7 +114,7 @@
             width: 100%;
             max-width: 100%;
         }
-        
+
         .hero-title {
             font-size: clamp(3rem, 8vw, 8rem);
             font-weight: 800;
@@ -116,7 +126,7 @@
             text-align: center;
             width: 100%;
         }
-        
+
         .hero-subtitle {
             font-size: clamp(0.75rem, 1.5vw, 1rem);
             color: rgba(255, 255, 255, 0.8);
@@ -127,7 +137,7 @@
             text-align: center;
             width: 100%;
         }
-        
+
         .hero-description {
             font-size: clamp(1rem, 2vw, 1.25rem);
             color: rgba(255, 255, 255, 0.9);
@@ -138,7 +148,7 @@
             text-align: center;
             width: 100%;
         }
-        
+
         /* Modern Button Styles - Casino Colors */
         .modern-btn {
             display: inline-flex;
@@ -156,12 +166,12 @@
             text-decoration: none;
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             backdrop-filter: blur(10px);
-            box-shadow: 0 8px 32px rgba(220, 20, 60, 0.3), 
-                        0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+            box-shadow: 0 8px 32px rgba(220, 20, 60, 0.3),
+                0 0 0 1px rgba(255, 255, 255, 0.1) inset;
             position: relative;
             overflow: hidden;
         }
-        
+
         .modern-btn::before {
             content: '';
             position: absolute;
@@ -172,23 +182,23 @@
             background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
             transition: left 0.6s ease;
         }
-        
+
         .modern-btn:hover {
             transform: translateY(-3px) scale(1.02);
-            box-shadow: 0 15px 40px rgba(220, 20, 60, 0.5), 
-                        0 0 0 1px rgba(255, 255, 255, 0.2) inset,
-                        0 0 60px rgba(184, 134, 11, 0.4);
+            box-shadow: 0 15px 40px rgba(220, 20, 60, 0.5),
+                0 0 0 1px rgba(255, 255, 255, 0.2) inset,
+                0 0 60px rgba(184, 134, 11, 0.4);
             background: linear-gradient(135deg, rgba(220, 20, 60, 1) 0%, rgba(184, 134, 11, 1) 100%);
         }
-        
+
         .modern-btn:hover::before {
             left: 100%;
         }
-        
+
         .modern-btn:active {
             transform: translateY(-1px) scale(1);
         }
-        
+
         /* Call Us Button */
         .modern-btn-call {
             display: inline-flex;
@@ -212,7 +222,7 @@
             position: relative;
             overflow: hidden;
         }
-        
+
         .modern-btn-call::before {
             content: '';
             position: absolute;
@@ -223,38 +233,38 @@
             background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
             transition: left 0.6s ease;
         }
-        
+
         .modern-btn-call:hover {
             transform: translateY(-3px) scale(1.02);
             background: rgba(255, 255, 255, 0.2);
             border-color: rgba(255, 255, 255, 0.5);
             box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3),
-                        0 0 0 1px rgba(255, 255, 255, 0.2) inset;
+                0 0 0 1px rgba(255, 255, 255, 0.2) inset;
         }
-        
+
         .modern-btn-call:hover::before {
             left: 100%;
         }
-        
+
         .modern-btn-call:active {
             transform: translateY(-1px) scale(1);
         }
-        
+
         .modern-btn-call svg {
             flex-shrink: 0;
         }
-        
+
         /* Modern Section Styles - Casino Colors */
         .modern-section {
             position: relative;
             padding: 6rem 0;
             background: linear-gradient(180deg, #0a0a0a 0%, #1a0a0a 50%, #0a0a0a 100%);
         }
-        
+
         .modern-section-light {
             background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 50%, #ffffff 100%);
         }
-        
+
         .modern-section-with-bg {
             position: relative;
             background-size: cover;
@@ -262,7 +272,7 @@
             background-repeat: no-repeat;
             overflow: hidden;
         }
-        
+
         .modern-section-with-bg::before {
             content: '';
             position: absolute;
@@ -270,22 +280,22 @@
             background: linear-gradient(180deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.5) 50%, rgba(0, 0, 0, 0.6) 100%);
             z-index: 1;
         }
-        
-        .modern-section-with-bg > * {
+
+        .modern-section-with-bg>* {
             position: relative;
             z-index: 2;
         }
-        
+
         .section-title-overlay {
             color: #ffffff !important;
             text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8), 0 0 30px rgba(0, 0, 0, 0.5);
         }
-        
+
         .section-subtitle-overlay {
             color: rgba(255, 255, 255, 0.95) !important;
             text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
         }
-        
+
         .section-title {
             font-size: clamp(2.5rem, 6vw, 5rem);
             font-weight: 700;
@@ -295,11 +305,11 @@
             letter-spacing: -0.02em;
             line-height: 1.1;
         }
-        
+
         .section-title-light {
             color: #1a202c;
         }
-        
+
         .section-subtitle {
             font-size: clamp(1rem, 2vw, 1.25rem);
             color: rgba(255, 255, 255, 0.7);
@@ -309,11 +319,11 @@
             line-height: 1.7;
             font-weight: 300;
         }
-        
+
         .section-subtitle-light {
             color: #6b7280;
         }
-        
+
         /* Feature Cards */
         .feature-grid {
             display: grid;
@@ -321,7 +331,7 @@
             gap: 2rem;
             margin-top: 4rem;
         }
-        
+
         .feature-card {
             background: rgba(255, 255, 255, 0.03);
             backdrop-filter: blur(20px);
@@ -332,7 +342,7 @@
             position: relative;
             overflow: hidden;
         }
-        
+
         .feature-card::before {
             content: '';
             position: absolute;
@@ -344,23 +354,23 @@
             opacity: 0;
             transition: opacity 0.4s ease;
         }
-        
+
         .feature-card:hover {
             transform: translateY(-8px);
             border-color: rgba(220, 20, 60, 0.5);
             box-shadow: 0 20px 60px rgba(220, 20, 60, 0.2),
-                        0 0 0 1px rgba(184, 134, 11, 0.1) inset;
+                0 0 0 1px rgba(184, 134, 11, 0.1) inset;
         }
-        
+
         .feature-card:hover::before {
             opacity: 1;
         }
-        
-        .feature-card > * {
+
+        .feature-card>* {
             position: relative;
             z-index: 1;
         }
-        
+
         .feature-icon {
             width: 60px;
             height: 60px;
@@ -373,12 +383,12 @@
             border: 1px solid rgba(220, 20, 60, 0.3);
             color: #ffffff;
         }
-        
+
         .feature-icon svg {
             color: #ffffff;
             stroke: #ffffff;
         }
-        
+
         .feature-card h3 {
             font-size: 1.5rem;
             font-weight: 700;
@@ -386,14 +396,14 @@
             margin-bottom: 1rem;
             letter-spacing: -0.01em;
         }
-        
+
         .feature-card p {
             color: rgba(255, 255, 255, 0.7);
             line-height: 1.7;
             font-size: 0.95rem;
             font-weight: 300;
         }
-        
+
         /* Content Section */
         .content-section {
             display: grid;
@@ -401,7 +411,7 @@
             gap: 4rem;
             align-items: center;
         }
-        
+
         .content-text h2 {
             font-size: clamp(2.5rem, 5vw, 4rem);
             font-weight: 700;
@@ -410,7 +420,7 @@
             letter-spacing: -0.02em;
             line-height: 1.1;
         }
-        
+
         .content-text p {
             color: rgba(255, 255, 255, 0.8);
             line-height: 1.8;
@@ -418,21 +428,21 @@
             margin-bottom: 2rem;
             font-weight: 300;
         }
-        
+
         .content-image {
             position: relative;
             border-radius: 24px;
             overflow: hidden;
             aspect-ratio: 4/3;
         }
-        
+
         .content-image img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
-        
+
         .content-image::before {
             content: '';
             position: absolute;
@@ -442,15 +452,15 @@
             transition: opacity 0.4s ease;
             z-index: 1;
         }
-        
+
         .content-image:hover img {
             transform: scale(1.05);
         }
-        
+
         .content-image:hover::before {
             opacity: 1;
         }
-        
+
         /* Image Carousel Styles */
         .image-carousel {
             position: relative;
@@ -459,33 +469,33 @@
             aspect-ratio: 4/3;
             background: #0a0a0a;
         }
-        
+
         .carousel-container {
             position: relative;
             width: 100%;
             height: 100%;
         }
-        
+
         .carousel-slides {
             display: flex;
             width: 100%;
             height: 100%;
             transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
-        
+
         .carousel-slide {
             min-width: 100%;
             height: 100%;
             position: relative;
         }
-        
+
         .carousel-slide img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             display: block;
         }
-        
+
         .carousel-slide::before {
             content: '';
             position: absolute;
@@ -494,7 +504,7 @@
             z-index: 1;
             pointer-events: none;
         }
-        
+
         .carousel-nav {
             position: absolute;
             top: 50%;
@@ -514,22 +524,22 @@
             transition: all 0.3s ease;
             opacity: 0.7;
         }
-        
+
         .carousel-nav:hover {
             opacity: 1;
             background: rgba(220, 20, 60, 0.8);
             border-color: rgba(184, 134, 11, 0.5);
             transform: translateY(-50%) scale(1.1);
         }
-        
+
         .carousel-nav-prev {
             left: 1rem;
         }
-        
+
         .carousel-nav-next {
             right: 1rem;
         }
-        
+
         .carousel-nav svg {
             width: 24px;
             height: 24px;
@@ -537,7 +547,7 @@
             fill: none;
             stroke-width: 2;
         }
-        
+
         .carousel-indicators {
             position: absolute;
             bottom: 1rem;
@@ -547,7 +557,7 @@
             gap: 0.5rem;
             z-index: 10;
         }
-        
+
         .carousel-indicator {
             width: 12px;
             height: 12px;
@@ -557,21 +567,21 @@
             cursor: pointer;
             transition: all 0.3s ease;
         }
-        
+
         .carousel-indicator.active {
             background: rgba(220, 20, 60, 0.9);
             border-color: rgba(184, 134, 11, 0.8);
             transform: scale(1.2);
             box-shadow: 0 0 10px rgba(220, 20, 60, 0.6);
         }
-        
+
         /* Feature List */
         .feature-list {
             list-style: none;
             padding: 0;
             margin: 2rem 0;
         }
-        
+
         .feature-item {
             padding: 1.5rem 0;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
@@ -579,11 +589,11 @@
             align-items: flex-start;
             gap: 1.5rem;
         }
-        
+
         .feature-item:last-child {
             border-bottom: none;
         }
-        
+
         .feature-item-icon {
             width: 32px;
             height: 32px;
@@ -598,7 +608,7 @@
             box-shadow: 0 0 15px rgba(220, 20, 60, 0.4);
             position: relative;
         }
-        
+
         .feature-item-icon::before {
             content: '✓';
             color: #ffffff;
@@ -606,7 +616,7 @@
             font-weight: bold;
             line-height: 1;
         }
-        
+
         .feature-item-content h4 {
             font-size: 1.25rem;
             font-weight: 600;
@@ -614,7 +624,7 @@
             margin-bottom: 0.5rem;
             letter-spacing: -0.01em;
         }
-        
+
         .feature-item-content p {
             color: rgba(255, 255, 255, 0.7);
             line-height: 1.7;
@@ -622,56 +632,57 @@
             margin: 0;
             font-weight: 300;
         }
-        
+
         /* Responsive Design */
-            @media (max-width: 1024px) {
+        @media (max-width: 1024px) {
             .content-section {
                 grid-template-columns: 1fr;
                 gap: 3rem;
             }
-            
+
             .content-image,
             .image-carousel {
                 order: -1;
             }
         }
-        
+
         @media (max-width: 768px) {
             .section-padding {
                 padding: 4rem 0;
             }
-            
+
             .modern-section {
                 padding: 4rem 0;
             }
-            
+
             .feature-grid {
                 grid-template-columns: 1fr;
                 gap: 1.5rem;
             }
-            
+
             .modern-btn {
                 padding: 1rem 2.5rem;
                 font-size: 0.875rem;
             }
         }
-        
+
         /* Animations */
         @keyframes fadeInUp {
             from {
                 opacity: 0;
                 transform: translateY(30px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
-        
+
         .animate-fade-in {
             animation: fadeInUp 0.8s ease-out forwards;
         }
-        
+
         /* btn-primary styling */
         .btn-primary {
             display: inline-flex;
@@ -689,12 +700,12 @@
             text-decoration: none;
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             backdrop-filter: blur(10px);
-            box-shadow: 0 8px 32px rgba(0, 80, 255, 0.3), 
-                        0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+            box-shadow: 0 8px 32px rgba(0, 80, 255, 0.3),
+                0 0 0 1px rgba(255, 255, 255, 0.1) inset;
             position: relative;
             overflow: hidden;
         }
-        
+
         .btn-primary::before {
             content: '';
             position: absolute;
@@ -705,30 +716,33 @@
             background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
             transition: left 0.6s ease;
         }
-        
+
         .btn-primary:hover {
             transform: translateY(-3px) scale(1.02);
-            box-shadow: 0 15px 40px rgba(0, 80, 255, 0.5), 
-                        0 0 0 1px rgba(255, 255, 255, 0.2) inset,
-                        0 0 60px rgba(0, 80, 255, 0.4);
+            box-shadow: 0 15px 40px rgba(0, 80, 255, 0.5),
+                0 0 0 1px rgba(255, 255, 255, 0.2) inset,
+                0 0 60px rgba(0, 80, 255, 0.4);
             background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%);
         }
-        
+
         .btn-primary:hover::before {
             left: 100%;
         }
-        
+
         .btn-primary:active {
             transform: translateY(-1px) scale(1);
         }
     </style>
 </head>
+
 <body>
     <div id="nav-placeholder"></div>
 
     <!-- Hero Section -->
     <section class="hero-section">
-        <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('../assets/images/denver-casino-parties-and-events/denver-casino-parties-and-events-hero.webp');"></div>
+        <div class="absolute inset-0 bg-cover bg-center"
+            style="background-image: url('../assets/images/denver-casino-parties-and-events/denver-casino-parties-and-events-hero.webp');">
+        </div>
         <div class="hero-overlay"></div>
         <div class="hero-content">
             <h1 class="hero-title animate-fade-in">Casino Royale</h1>
@@ -736,13 +750,16 @@
             <p class="hero-description animate-fade-in" style="animation-delay: 0.4s;">
                 Bring the thrill of Vegas to your event with photo booths designed for big bets and even bigger fun.
             </p>
-            <div class="flex flex-col sm:flex-row gap-4 items-center justify-center animate-fade-in" style="animation-delay: 0.6s;">
+            <div class="flex flex-col sm:flex-row gap-4 items-center justify-center animate-fade-in"
+                style="animation-delay: 0.6s;">
                 <a href="../contact-us.html" class="modern-btn">
-                    Get Your Free Quote
+                    Get Your Quote
                 </a>
                 <button type="button" data-click-to-call data-call-text="Call Us" class="modern-btn-call">
                     <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"></path>
+                        <path
+                            d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z">
+                        </path>
                     </svg>
                     <span>Call Us</span>
                 </button>
@@ -755,13 +772,16 @@
         <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
             <h2 class="section-title">Lights, Luck & Laughter!</h2>
             <p class="section-subtitle">
-                High-rolling vibes, poker chip props, and neon card backdrops—our Casino Photo Booth is all about turning guests into winners. Every spin of the roulette or roll of the dice becomes a picture-perfect moment.
+                High-rolling vibes, poker chip props, and neon card backdrops—our Casino Photo Booth is all about
+                turning guests into winners. Every spin of the roulette or roll of the dice becomes a picture-perfect
+                moment.
             </p>
             <p class="section-subtitle" style="margin-top: -3rem;">
-                From galas to fundraisers, this rental keeps the energy buzzing while adding that glamorous Vegas sparkle. Everyone leaves with a jackpot snapshot!
+                From galas to fundraisers, this rental keeps the energy buzzing while adding that glamorous Vegas
+                sparkle. Everyone leaves with a jackpot snapshot!
             </p>
             <div class="text-center">
-                <a href="../contact-us.html" class="modern-btn">Get Your Free Quote</a>
+                <a href="../contact-us.html" class="modern-btn">Get Your Quote</a>
             </div>
         </div>
     </section>
@@ -773,32 +793,39 @@
             <p class="section-subtitle">
                 Our Casino Theme comes with the following options:
             </p>
-            
+
             <div class="feature-grid">
                 <div class="feature-card">
                     <div class="feature-icon">
-                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
                             <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
                             <line x1="9" y1="3" x2="9" y2="21"></line>
                         </svg>
                     </div>
                     <h3>Backdrops</h3>
-                    <p>Strike a pose like a high roller with our casino-inspired backdrops that create that perfect Vegas atmosphere for your lucky event!</p>
+                    <p>Strike a pose like a high roller with our casino-inspired backdrops that create that perfect
+                        Vegas atmosphere for your lucky event!</p>
                 </div>
-                
+
                 <div class="feature-card">
                     <div class="feature-icon">
-                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path
+                                d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
+                            </path>
                         </svg>
                     </div>
                     <h3>Props</h3>
-                    <p>Roll the dice with our collection of casino props and gambling accessories that'll make every guest feel like they've hit the jackpot!</p>
+                    <p>Roll the dice with our collection of casino props and gambling accessories that'll make every
+                        guest feel like they've hit the jackpot!</p>
                 </div>
-                
+
                 <div class="feature-card">
                     <div class="feature-icon">
-                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
                             <rect x="3" y="3" width="7" height="7"></rect>
                             <rect x="14" y="3" width="7" height="7"></rect>
                             <rect x="14" y="14" width="7" height="7"></rect>
@@ -806,23 +833,30 @@
                         </svg>
                     </div>
                     <h3>Custom Layouts</h3>
-                    <p>Design photo layouts with playing card graphics, poker chip borders, and casino-themed styling.</p>
+                    <p>Design photo layouts with playing card graphics, poker chip borders, and casino-themed styling.
+                    </p>
                 </div>
-                
+
                 <div class="feature-card">
                     <div class="feature-icon">
-                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <polygon
+                                points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
+                            </polygon>
                         </svg>
                     </div>
                     <h3>Add-Ons</h3>
-                    <p>Set the perfect casino ambiance with our AV solutions including high-quality microphones for live dealer announcements and sound systems that bring Vegas to you!</p>
+                    <p>Set the perfect casino ambiance with our AV solutions including high-quality microphones for live
+                        dealer announcements and sound systems that bring Vegas to you!</p>
                 </div>
             </div>
-            
+
             <div class="text-center mt-12">
                 <p class="section-subtitle mb-6" style="font-style: italic; max-width: 800px;">
-                    This theme is completely customizable to create your perfect casino night atmosphere, with both classic Photo Booth and dynamic 360 Booth options. Your guests will feel like they're playing with house money!
+                    This theme is completely customizable to create your perfect casino night atmosphere, with both
+                    classic Photo Booth and dynamic 360 Booth options. Your guests will feel like they're playing with
+                    house money!
                 </p>
                 <a href="../contact-us.html" class="modern-btn">Book Your Event Now</a>
             </div>
@@ -836,10 +870,13 @@
                 <div class="content-text">
                     <h2>Experience the Vegas Vibe</h2>
                     <p>
-                        Step into a world of high-stakes excitement and glamorous entertainment. Our Casino Royale Theme brings the thrill of Las Vegas directly to your event—from poker chip props and neon card backdrops to roulette wheels and dice.
+                        Step into a world of high-stakes excitement and glamorous entertainment. Our Casino Royale Theme
+                        brings the thrill of Las Vegas directly to your event—from poker chip props and neon card
+                        backdrops to roulette wheels and dice.
                     </p>
                     <p>
-                        Every detail is carefully curated to create an authentic casino experience that will have your guests feeling like high rollers, no matter where your event takes place.
+                        Every detail is carefully curated to create an authentic casino experience that will have your
+                        guests feeling like high rollers, no matter where your event takes place.
                     </p>
                     <ul class="feature-list">
                         <li class="feature-item">
@@ -869,20 +906,22 @@
                     <div class="carousel-container">
                         <div class="carousel-slides" id="carouselSlides">
                             <div class="carousel-slide">
-                                <img src="../assets/images/denver-casino-parties-and-events/denver-casino-parties-and-events-1.webp" alt="Casino Royale Theme Photo Booth 1">
+                                <img src="../assets/images/denver-casino-parties-and-events/denver-casino-parties-and-events-1.webp"
+                                    alt="Casino Royale Theme Photo Booth 1">
                             </div>
                             <div class="carousel-slide">
-                                <img src="../assets/images/denver-casino-parties-and-events/denver-casino-parties-and-events-2.webp" alt="Casino Royale Theme Photo Booth 2">
+                                <img src="../assets/images/denver-casino-parties-and-events/denver-casino-parties-and-events-2.webp"
+                                    alt="Casino Royale Theme Photo Booth 2">
                             </div>
                         </div>
                         <button class="carousel-nav carousel-nav-prev" id="carouselPrev" aria-label="Previous image">
                             <svg viewBox="0 0 24 24">
-                                <path d="M15 18l-6-6 6-6"/>
+                                <path d="M15 18l-6-6 6-6" />
                             </svg>
                         </button>
                         <button class="carousel-nav carousel-nav-next" id="carouselNext" aria-label="Next image">
                             <svg viewBox="0 0 24 24">
-                                <path d="M9 18l6-6-6-6"/>
+                                <path d="M9 18l6-6-6-6" />
                             </svg>
                         </button>
                         <div class="carousel-indicators" id="carouselIndicators">
@@ -896,12 +935,14 @@
     </section>
 
     <!-- View Other Themes Section -->
-    <section class="modern-section modern-section-with-bg" style="background-image: url('../assets/images/denver-casino-parties-and-events/denver-casino-parties-and-events-3.webp');">
+    <section class="modern-section modern-section-with-bg"
+        style="background-image: url('../assets/images/denver-casino-parties-and-events/denver-casino-parties-and-events-3.webp');">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
             <div class="text-center">
                 <h2 class="section-title section-title-overlay">View Our Other Event Themes</h2>
                 <p class="section-subtitle section-subtitle-overlay mb-8">Scroll to see all of our themes</p>
-                <a href="../booth-themes.html" class="modern-btn" style="background: linear-gradient(135deg, rgba(220, 20, 60, 0.9) 0%, rgba(184, 134, 11, 0.9) 100%); box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.2) inset;">
+                <a href="../booth-themes.html" class="modern-btn"
+                    style="background: linear-gradient(135deg, rgba(220, 20, 60, 0.9) 0%, rgba(184, 134, 11, 0.9) 100%); box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.2) inset;">
                     View All Themes
                 </a>
             </div>
@@ -913,7 +954,7 @@
     <script src="../assets/components/footer.js"></script>
     <script>
         // Image Carousel Functionality
-        (function() {
+        (function () {
             const slides = document.getElementById('carouselSlides');
             const prevBtn = document.getElementById('carouselPrev');
             const nextBtn = document.getElementById('carouselNext');
@@ -924,7 +965,7 @@
 
             function updateCarousel() {
                 slides.style.transform = `translateX(-${currentSlide * 100}%)`;
-                
+
                 // Update indicators
                 indicators.forEach((indicator, index) => {
                     if (index === currentSlide) {

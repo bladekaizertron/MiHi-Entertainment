@@ -116,7 +116,7 @@
             animation: fadeInUp 1s ease-out;
         }
 
-        .hero-content > div {
+        .hero-content>div {
             position: relative;
             z-index: 3;
             max-width: 60%;
@@ -173,6 +173,7 @@
                 opacity: 0;
                 transform: translateY(30px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -180,9 +181,12 @@
         }
 
         @keyframes gradientShift {
-            0%, 100% {
+
+            0%,
+            100% {
                 background-position: 0% 50%;
             }
+
             50% {
                 background-position: 100% 50%;
             }
@@ -193,6 +197,7 @@
                 width: 0;
                 opacity: 0;
             }
+
             to {
                 width: 100px;
                 opacity: 1;
@@ -218,9 +223,12 @@
         }
 
         @keyframes float {
-            0%, 100% {
+
+            0%,
+            100% {
                 transform: translate3d(0, 0, 0);
             }
+
             50% {
                 transform: translate3d(-10px, -15px, 0);
             }
@@ -529,7 +537,7 @@
             margin: 0.75rem auto;
             max-width: 600px;
             background: linear-gradient(135deg, rgba(255, 107, 53, 0.1) 0%, rgba(255, 140, 66, 0.05) 100%),
-                        radial-gradient(circle at 2px 2px, rgba(255, 107, 53, 0.15) 1px, transparent 0);
+                radial-gradient(circle at 2px 2px, rgba(255, 107, 53, 0.15) 1px, transparent 0);
             background-size: 100% 100%, 20px 20px;
             border: 1px solid rgba(255, 107, 53, 0.3);
             border-left: 4px solid #FF6B35;
@@ -573,9 +581,9 @@
         .creative-process-section li:hover {
             background: linear-gradient(135deg, rgba(255, 107, 53, 0.25) 0%, rgba(255, 140, 66, 0.15) 100%);
             transform: translateX(15px) scale(1.02);
-            box-shadow: 0 8px 30px rgba(255, 107, 53, 0.4), 
-                        0 0 40px rgba(255, 107, 53, 0.2),
-                        inset 0 0 30px rgba(255, 107, 53, 0.1);
+            box-shadow: 0 8px 30px rgba(255, 107, 53, 0.4),
+                0 0 40px rgba(255, 107, 53, 0.2),
+                inset 0 0 30px rgba(255, 107, 53, 0.1);
             border-left-width: 6px;
             border-color: rgba(255, 107, 53, 0.6);
         }
@@ -591,10 +599,13 @@
         }
 
         @keyframes pulse {
-            0%, 100% {
+
+            0%,
+            100% {
                 opacity: 1;
                 transform: translateY(-50%) scale(1);
             }
+
             50% {
                 opacity: 0.7;
                 transform: translateY(-50%) scale(1.1);
@@ -607,6 +618,7 @@
                 opacity: 0;
                 transform: translateY(-30px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -839,8 +851,8 @@
             font-size: 1.3em;
             filter: drop-shadow(0 0 8px rgba(255, 107, 53, 0.9));
             animation: moveCursor1 8s steps(200, end) 0.5s forwards,
-                       blink 1s step-end infinite 0.5s, 
-                       hideCursor 0.1s forwards 8.5s;
+                blink 1s step-end infinite 0.5s,
+                hideCursor 0.1s forwards 8.5s;
             pointer-events: none;
             z-index: 10;
         }
@@ -860,7 +872,7 @@
             font-size: 1.3em;
             filter: drop-shadow(0 0 8px rgba(255, 107, 53, 0.9));
             animation: moveCursor2 7s steps(180, end) 9s forwards,
-                       blink 1s step-end infinite 9s;
+                blink 1s step-end infinite 9s;
             pointer-events: none;
             z-index: 10;
         }
@@ -869,6 +881,7 @@
             from {
                 left: 0;
             }
+
             to {
                 left: 100%;
             }
@@ -878,6 +891,7 @@
             from {
                 left: 0;
             }
+
             to {
                 left: 100%;
             }
@@ -896,10 +910,14 @@
         }
 
         @keyframes blink {
-            0%, 50% {
+
+            0%,
+            50% {
                 opacity: 1;
             }
-            51%, 100% {
+
+            51%,
+            100% {
                 opacity: 0;
             }
         }
@@ -958,6 +976,7 @@
 
         /* Mobile Optimizations */
         @media (max-width: 768px) {
+
             /* Typography adjustments */
             h1 {
                 font-size: 2.5rem !important;
@@ -1106,6 +1125,7 @@
         }
 
         @media (max-width: 640px) {
+
             /* Extra small devices */
             h1 {
                 font-size: 2rem !important;
@@ -1161,6 +1181,7 @@
         }
 
         @media (max-width: 480px) {
+
             /* Small phones */
             .hero-section {
                 min-height: 100vh;
@@ -1208,6 +1229,7 @@
 
         /* Improve touch targets on mobile */
         @media (max-width: 768px) {
+
             a,
             button,
             .btn-primary {
@@ -1223,13 +1245,19 @@
             }
 
             /* Better text wrapping */
-            h1, h2, h3, h4, h5, h6 {
+            h1,
+            h2,
+            h3,
+            h4,
+            h5,
+            h6 {
                 word-wrap: break-word;
                 hyphens: auto;
             }
 
             /* Improve list spacing */
-            ul, ol {
+            ul,
+            ol {
                 padding-left: 1.5rem;
             }
         }
@@ -1242,18 +1270,11 @@
 
     <!-- Hero Section -->
     <section class="hero-section" aria-label="Hero section">
-        <img src="assets/images/purestorage/hero.jpg" 
-             alt="Pure Storage event showcasing innovative AI-powered photo booth experience" 
-             class="hero-bg"
-             loading="eager"
-             fetchpriority="high"
-             decoding="async">
-        <img src="assets/images/purestorage/ai-girl.png" 
-             alt="AI-generated character illustration" 
-             class="hero-ai-image"
-             loading="eager"
-             decoding="async"
-             aria-hidden="true">
+        <img src="assets/images/purestorage/hero.jpg"
+            alt="Pure Storage event showcasing innovative AI-powered photo booth experience" class="hero-bg"
+            loading="eager" fetchpriority="high" decoding="async">
+        <img src="assets/images/purestorage/ai-girl.png" alt="AI-generated character illustration" class="hero-ai-image"
+            loading="eager" decoding="async" aria-hidden="true">
         <div class="hero-content text-center px-4 py-20 md:py-32">
             <div class="max-w-3xl mx-auto">
                 <h1 class="text-3xl sm:text-4xl md:text-6xl lg:text-8xl mb-4 md:mb-6">PURE STORAGE</h1>
@@ -1268,8 +1289,10 @@
     <!-- Through Our Creative Process Section -->
     <section class="creative-process-section py-12 md:py-20 px-4">
         <div class="max-w-7xl mx-auto">
-            <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-6xl font-bold text-center mb-2 md:mb-4 text-white">THROUGH OUR</h2>
-            <h3 class="text-2xl sm:text-3xl md:text-4xl lg:text-6xl font-bold text-center mb-8 md:mb-12 orange-glow" style="color: #FF6B35;">CREATIVE PROCESS</h3>
+            <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-6xl font-bold text-center mb-2 md:mb-4 text-white">
+                THROUGH OUR</h2>
+            <h3 class="text-2xl sm:text-3xl md:text-4xl lg:text-6xl font-bold text-center mb-8 md:mb-12 orange-glow"
+                style="color: #FF6B35;">CREATIVE PROCESS</h3>
 
             <div class="text-center mb-8 md:mb-12">
                 <h4 class="text-lg sm:text-xl md:text-2xl lg:text-3xl font-semibold mb-4 md:mb-6 text-white px-2">
@@ -1346,11 +1369,14 @@
     <section class="testimonial-section py-16 md:py-24 px-4 bg-gradient-to-b from-gray-900 to-black">
         <div class="max-w-5xl mx-auto">
             <div class="text-center mb-12">
-                <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-3 md:mb-4 text-white">READ OUR OUTSTANDING</h2>
-                <h3 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-8 md:mb-12 orange-glow" style="color: #FF6B35;">TESTIMONIAL</h3>
+                <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-3 md:mb-4 text-white">READ OUR
+                    OUTSTANDING</h2>
+                <h3 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-8 md:mb-12 orange-glow"
+                    style="color: #FF6B35;">TESTIMONIAL</h3>
             </div>
 
-            <div class="bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl p-8 md:p-12 shadow-2xl border border-gray-700">
+            <div
+                class="bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl p-8 md:p-12 shadow-2xl border border-gray-700">
                 <div class="flex items-start mb-6">
                     <div class="text-5xl md:text-6xl text-orange-500 opacity-30 mr-4 -mt-2">"</div>
                     <blockquote class="flex-1">
@@ -1358,9 +1384,12 @@
                             Partnering with MiHi Entertainment gave us just the edge we were looking for!
                         </p>
                         <p class="text-lg md:text-xl lg:text-2xl text-gray-200 leading-relaxed mb-6 italic">
-                            They helped us create an opportunity for attendees to learn, to get to know our products, and to walk
-                            away with a personalized experience that was different from any other on the tradeshow floor. Attendees
-                            are constantly telling us we have the best booth. With the support of these activations, we exceeded all
+                            They helped us create an opportunity for attendees to learn, to get to know our products,
+                            and to walk
+                            away with a personalized experience that was different from any other on the tradeshow
+                            floor. Attendees
+                            are constantly telling us we have the best booth. With the support of these activations, we
+                            exceeded all
                             of our attendance goals.
                         </p>
                         <p class="text-lg md:text-xl lg:text-2xl text-gray-200 leading-relaxed italic">
@@ -1372,7 +1401,8 @@
                 <div class="flex items-center pt-6 border-t border-gray-700">
                     <div class="flex-1">
                         <p class="text-xl md:text-2xl font-semibold text-white mb-1">Jennifer Romano</p>
-                        <p class="text-base md:text-lg text-gray-400">Strategic Marketing Manager Lead, Industry Events</p>
+                        <p class="text-base md:text-lg text-gray-400">Strategic Marketing Manager Lead, Industry Events
+                        </p>
                     </div>
                     <div class="ml-4">
                         <div class="flex text-orange-500 text-2xl">
@@ -1418,7 +1448,8 @@
     <section class="data-heroes-section px-4">
         <div>
             <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-3 md:mb-4 text-white">THE</h2>
-            <h3 class="text-2xl sm:text-3xl md:text-4xl lg:text-6xl font-bold mb-6 md:mb-8 orange-glow" style="color: #FF6B35;">DATA
+            <h3 class="text-2xl sm:text-3xl md:text-4xl lg:text-6xl font-bold mb-6 md:mb-8 orange-glow"
+                style="color: #FF6B35;">DATA
                 HEROES<br>CAMPAIGN</h3>
 
             <p class="text-base md:text-lg lg:text-xl text-gray-300 leading-relaxed mb-4 md:mb-6">
@@ -1437,8 +1468,10 @@
     <!-- AI Analytics Quiz Section -->
     <section class="py-12 md:py-20 px-4 bg-gradient-to-b from-gray-900 to-black">
         <div class="max-w-4xl mx-auto">
-            <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-3 md:mb-4 text-white text-center">WITH MIHI ENTERTAINMENT</h2>
-            <h3 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-6 md:mb-8 orange-glow text-center" style="color: #FF6B35;">AI ANALYTICS QUIZ</h3>
+            <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-3 md:mb-4 text-white text-center">WITH
+                MIHI ENTERTAINMENT</h2>
+            <h3 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-6 md:mb-8 orange-glow text-center"
+                style="color: #FF6B35;">AI ANALYTICS QUIZ</h3>
 
             <p class="text-base md:text-lg lg:text-xl text-gray-300 leading-relaxed mb-4 md:mb-6">
                 To further enhance the engagement, MiHi Entertainment developed an AI Analytics Quiz. Participants
@@ -1459,15 +1492,18 @@
     <!-- Results Section -->
     <section class="results-section py-12 md:py-20 px-4">
         <div class="max-w-7xl mx-auto">
-            <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-8 md:mb-12 text-center text-white">RESULTS</h2>
+            <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-8 md:mb-12 text-center text-white">
+                RESULTS</h2>
 
-            <p class="text-base md:text-lg lg:text-xl text-gray-300 leading-relaxed mb-8 md:mb-12 max-w-4xl mx-auto text-center px-2">
+            <p
+                class="text-base md:text-lg lg:text-xl text-gray-300 leading-relaxed mb-8 md:mb-12 max-w-4xl mx-auto text-center px-2">
                 The collaboration between Pure Storage and MiHi Entertainment resulted in a successful and memorable
                 event experience that generated buzz around Pure Storage's brand. Participants enjoyed the unique
                 experience and the opportunity to engage with AI technology in a fun and accessible way.
             </p>
 
-            <p class="text-base md:text-lg lg:text-xl text-gray-300 leading-relaxed mb-8 md:mb-12 max-w-4xl mx-auto text-center px-2">
+            <p
+                class="text-base md:text-lg lg:text-xl text-gray-300 leading-relaxed mb-8 md:mb-12 max-w-4xl mx-auto text-center px-2">
                 The Data Heroes campaign was so successful that it evolved into a large-scale trade show product,
                 showcasing the potential of AI integration in experiential marketing. Additionally, the campaign caught
                 the attention of a keynote speaker who commended Pure Storage and MiHi Entertainment for their
@@ -1495,7 +1531,8 @@
     <!-- Conclusion Section -->
     <section class="conclusion-section py-12 md:py-20 px-4">
         <div class="max-w-4xl mx-auto">
-            <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-6 md:mb-8 text-white text-center">CONCLUSION</h2>
+            <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-6 md:mb-8 text-white text-center">
+                CONCLUSION</h2>
             <p class="conclusion-text-1 text-base md:text-lg lg:text-xl text-gray-300 leading-relaxed mb-4 md:mb-6">
                 The partnership between MiHi Entertainment and Pure Storage demonstrates the power of integrating AI
                 technology into experiential marketing, creating memorable and engaging experiences that resonate with
@@ -1592,12 +1629,13 @@
     <!-- CTA Section -->
     <section class="py-12 md:py-20 px-4 bg-gradient-to-b from-gray-900 to-black">
         <div class="max-w-4xl mx-auto text-center">
-            <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-6 md:mb-8 text-white px-2">WANT TO LEARN MORE?</h2>
+            <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-6 md:mb-8 text-white px-2">WANT TO
+                LEARN MORE?</h2>
             <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
                 <a href="contact-us.html"
                     class="inline-block px-6 py-3 md:px-8 md:py-4 rounded-lg text-base md:text-xl font-semibold text-white transition-all duration-300 transform hover:scale-105 hover:shadow-2xl"
                     style="background: linear-gradient(135deg, #FF6B35 0%, #E55A2B 100%); box-shadow: 0 8px 30px rgba(255, 107, 53, 0.4);">
-                    GET YOUR FREE QUOTE
+                    GET YOUR QUOTE
                 </a>
                 <button type="button" data-click-to-call data-call-text="Call Us"
                     class="inline-block px-6 py-3 md:px-8 md:py-4 rounded-lg text-base md:text-xl font-semibold text-white transition-all duration-300 transform hover:scale-105 hover:shadow-2xl cursor-pointer border-none"
