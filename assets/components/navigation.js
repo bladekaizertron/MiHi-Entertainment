@@ -412,232 +412,214 @@
             </div>
 
             <!-- Mobile Menu Overlay -->
-            <div id="mobile-menu-overlay" class="fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden hidden">
-                <div class="fixed top-0 right-0 h-full w-80 max-w-[90vw] bg-white shadow-2xl transform transition-transform duration-300 ease-in-out translate-x-full" id="mobile-menu">
-                    <div class="flex flex-col h-full">
+            <div id="mobile-menu-overlay" class="fixed inset-0 bg-black/70 backdrop-blur-md z-40 lg:hidden hidden transition-opacity duration-300">
+                <div class="fixed top-0 right-0 h-full w-[88vw] max-w-sm bg-white shadow-2xl transform transition-transform duration-300 ease-out translate-x-full" id="mobile-menu">
+                    <div class="flex flex-col h-full overflow-hidden">
                         <!-- Mobile Menu Header -->
-                        <div class="flex items-center justify-between p-6 border-b border-gray-200">
-                            <img src="${assetsPrefix}images/logo.svg" alt="MiHi Entertainment" class="h-10 w-auto" />
-                            <button id="mobile-menu-close" class="text-gray-500 hover:text-gray-700 transition duration-300">
-                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        <div class="flex items-center justify-between px-6 py-5 bg-gradient-to-r from-gray-50 to-white border-b border-gray-200/50 sticky top-0 z-10 backdrop-blur-sm">
+                            <img src="${assetsPrefix}images/logo.svg" alt="MiHi Entertainment" class="h-10 w-auto drop-shadow-sm" />
+                            <button id="mobile-menu-close" class="p-2.5 rounded-xl hover:bg-gray-100 active:bg-gray-200 transition-all duration-200 text-gray-600 hover:text-gray-900 shadow-sm hover:shadow-md">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path>
                                 </svg>
                             </button>
                         </div>
 
                         <!-- Mobile Menu Content -->
-                        <div class="flex-1 overflow-y-auto p-6">
+                        <div class="flex-1 overflow-y-auto px-5 py-6 space-y-3">
                             <!-- Mobile Products Section -->
-                            <div class="mb-8">
-                                <h3 class="text-lg font-bold text-gray-900 mb-4">Products</h3>
-                                <div class="space-y-3">
-                                    <div>
-                                        <h4 class="font-bold text-base text-blue-600 uppercase tracking-wider mb-3 pb-2 border-b-2 border-blue-200">Photo Booths</h4>
-                                        <div class="pl-4 space-y-2">
-                                            <a href="${pathPrefix}product/ai-photo-booth.html" class="block text-sm text-gray-600 hover:text-blue-600 transition">AI Photo Booth</a>
-                                            <a href="${pathPrefix}product/green-screen-photo-booth.html" class="block text-sm text-gray-600 hover:text-blue-600 transition">Green Screen</a>
-                                            <a href="${pathPrefix}product/rosie-the-robot-photo-booth.html" class="block text-sm text-gray-600 hover:text-blue-600 transition">Rosie the Robot</a>
-                                            <a href="${pathPrefix}product/graffiti-wall-photo-booth.html" class="block text-sm text-gray-600 hover:text-blue-600 transition">Graffiti Wall Photo Booth</a>
-                                            <a href="${pathPrefix}product/mosaic-photo-booth.html" class="block text-sm text-gray-600 hover:text-blue-600 transition">Mosaic Photo Booth</a>
-                                            <a href="${pathPrefix}product/roaming-photo-booth.html" class="block text-sm text-gray-600 hover:text-blue-600 transition">Roaming Photo Booth</a>
-                                            <a href="${pathPrefix}product/virtual-photo-booth.html" class="block text-sm text-gray-600 hover:text-blue-600 transition">Virtual Photo Booth</a>
-                                            <a href="${pathPrefix}product/professional-headshots.html" class="block text-sm text-gray-600 hover:text-blue-600 transition">Professional Headshots</a>
-                                            <a href="${pathPrefix}photo-booth-sets.html" class="block text-sm text-gray-600 hover:text-blue-600 transition">Custom Photo Booth</a>
-                                            <a href="${pathPrefix}index.html#photo-booths" class="block text-xs text-blue-600 hover:text-blue-700 transition font-semibold mt-3 pt-3 border-t border-gray-200">View All →</a>
-                                        </div>
+                            <div class="bg-white rounded-2xl shadow-lg border border-gray-200/50 overflow-hidden">
+                                <button class="mobile-menu-toggle w-full flex items-center justify-between px-5 py-4 hover:bg-gray-50/50 transition-colors group" data-target="products-content">
+                                    <div class="flex items-center gap-3">
+                                        <span class="w-1.5 h-6 bg-gradient-to-b from-blue-500 via-purple-500 to-pink-500 rounded-full shadow-sm"></span>
+                                        <span class="text-base font-bold text-gray-900 group-hover:text-gray-700">Products</span>
                                     </div>
-                                    <div>
-                                        <h4 class="font-bold text-base text-purple-600 uppercase tracking-wider mb-3 pb-2 border-b-2 border-purple-200">Video Booths</h4>
-                                        <div class="pl-4 space-y-2">
-                                            <a href="${pathPrefix}product/360-photo-booth.html" class="block text-sm text-gray-600 hover:text-blue-600 transition">360 Video Booth</a>
-                                            <a href="${pathPrefix}product/bullet-time-booth.html" class="block text-sm text-gray-600 hover:text-blue-600 transition">Bullet-Time Array</a>
-                                            <a href="${pathPrefix}product/glambot-photo-booth.html" class="block text-sm text-gray-600 hover:text-blue-600 transition">GlamBot Video</a>
-                                            <a href="${pathPrefix}product/vogue-photo-booth.html" class="block text-sm text-gray-600 hover:text-blue-600 transition">Vogue Video Booth</a>
-                                            <a href="${pathPrefix}product/slow-motion-booth.html" class="block text-sm text-gray-600 hover:text-blue-600 transition">Slow Motion Video Booth</a>
-                                            <a href="${pathPrefix}product/video-testimonial-booth.html" class="block text-sm text-gray-600 hover:text-blue-600 transition">Video Testimonial Booth</a>
-                                            <a href="${pathPrefix}index.html#video-booths" class="block text-xs text-purple-600 hover:text-purple-700 transition font-semibold mt-3 pt-3 border-t border-gray-200">View All →</a>
+                                    <svg class="w-5 h-5 text-gray-400 transition-transform duration-300 transform rotate-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path>
+                                    </svg>
+                                </button>
+                                <div id="products-content" class="hidden overflow-hidden transition-all duration-300 ease-in-out" style="max-height: 0px;">
+                                    <div class="px-5 pb-4 space-y-4">
+                                        <!-- Photo Booths Category -->
+                                        <div>
+                                            <div class="flex items-center gap-2.5 mb-3 py-2.5 px-4 rounded-lg bg-blue-50/70 border border-blue-200/50 -mx-1">
+                                                <span class="w-2 h-2 rounded-full bg-blue-500 shadow-sm"></span>
+                                                <span class="text-xs font-bold text-blue-700 uppercase tracking-widest">Photo Booths</span>
+                                            </div>
+                                            <div class="space-y-1 pl-1">
+                                                <a href="${pathPrefix}product/ai-photo-booth.html" class="block text-sm text-gray-700 hover:text-blue-700 hover:bg-blue-50/50 transition-all rounded-lg py-2.5 px-3 font-medium">AI Photo Booth</a>
+                                                <a href="${pathPrefix}product/green-screen-photo-booth.html" class="block text-sm text-gray-700 hover:text-blue-700 hover:bg-blue-50/50 transition-all rounded-lg py-2.5 px-3 font-medium">Green Screen</a>
+                                                <a href="${pathPrefix}product/rosie-the-robot-photo-booth.html" class="block text-sm text-gray-700 hover:text-blue-700 hover:bg-blue-50/50 transition-all rounded-lg py-2.5 px-3 font-medium">Rosie the Robot</a>
+                                                <a href="${pathPrefix}product/graffiti-wall-photo-booth.html" class="block text-sm text-gray-700 hover:text-blue-700 hover:bg-blue-50/50 transition-all rounded-lg py-2.5 px-3 font-medium">Graffiti Wall Photo Booth</a>
+                                                <a href="${pathPrefix}product/mosaic-photo-booth.html" class="block text-sm text-gray-700 hover:text-blue-700 hover:bg-blue-50/50 transition-all rounded-lg py-2.5 px-3 font-medium">Mosaic Photo Booth</a>
+                                                <a href="${pathPrefix}product/roaming-photo-booth.html" class="block text-sm text-gray-700 hover:text-blue-700 hover:bg-blue-50/50 transition-all rounded-lg py-2.5 px-3 font-medium">Roaming Photo Booth</a>
+                                                <a href="${pathPrefix}product/virtual-photo-booth.html" class="block text-sm text-gray-700 hover:text-blue-700 hover:bg-blue-50/50 transition-all rounded-lg py-2.5 px-3 font-medium">Virtual Photo Booth</a>
+                                                <a href="${pathPrefix}product/professional-headshots.html" class="block text-sm text-gray-700 hover:text-blue-700 hover:bg-blue-50/50 transition-all rounded-lg py-2.5 px-3 font-medium">Professional Headshots</a>
+                                                <a href="${pathPrefix}photo-booth-sets.html" class="block text-sm text-gray-700 hover:text-blue-700 hover:bg-blue-50/50 transition-all rounded-lg py-2.5 px-3 font-medium">Custom Photo Booth</a>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div>
-                                        <h4 class="font-bold text-base text-green-600 uppercase tracking-wider mb-3 pb-2 border-b-2 border-green-200">Additional Experiences</h4>
-                                        <div class="pl-4 space-y-2">
-                                            <a href="${pathPrefix}event-photography.html" class="block text-sm text-gray-600 hover:text-blue-600 transition">Event Photography</a>
-                                            <a href="${pathPrefix}product/brand-activation.html" class="block text-sm text-gray-600 hover:text-blue-600 transition">Brand Activation</a>
-                                            <a href="${pathPrefix}products/sketchbot-booth.html" class="block text-sm text-gray-600 hover:text-blue-600 transition">SketchBot</a>
-                                            <a href="${pathPrefix}products/cookie-printer.html" class="block text-sm text-gray-600 hover:text-blue-600 transition">Cookie Printer</a>
-                                            <a href="${pathPrefix}pose-flashcards.html" class="block text-sm text-gray-600 hover:text-blue-600 transition">Pose Cards</a>
-                                            <a href="${pathPrefix}lux-photography.html" class="block text-sm text-gray-600 hover:text-blue-600 transition">Lux Photography</a>
+                                        <!-- Video Booths Category -->
+                                        <div>
+                                            <div class="flex items-center gap-2.5 mb-3 py-2.5 px-4 rounded-lg bg-purple-50/70 border border-purple-200/50 -mx-1">
+                                                <span class="w-2 h-2 rounded-full bg-purple-500 shadow-sm"></span>
+                                                <span class="text-xs font-bold text-purple-700 uppercase tracking-widest">Video Booths</span>
+                                            </div>
+                                            <div class="space-y-1 pl-1">
+                                                <a href="${pathPrefix}product/360-photo-booth.html" class="block text-sm text-gray-700 hover:text-purple-700 hover:bg-purple-50/50 transition-all rounded-lg py-2.5 px-3 font-medium">360 Video Booth</a>
+                                                <a href="${pathPrefix}product/bullet-time-booth.html" class="block text-sm text-gray-700 hover:text-purple-700 hover:bg-purple-50/50 transition-all rounded-lg py-2.5 px-3 font-medium">Bullet-Time Array</a>
+                                                <a href="${pathPrefix}product/glambot-photo-booth.html" class="block text-sm text-gray-700 hover:text-purple-700 hover:bg-purple-50/50 transition-all rounded-lg py-2.5 px-3 font-medium">GlamBot Video</a>
+                                                <a href="${pathPrefix}product/vogue-photo-booth.html" class="block text-sm text-gray-700 hover:text-purple-700 hover:bg-purple-50/50 transition-all rounded-lg py-2.5 px-3 font-medium">Vogue Video Booth</a>
+                                                <a href="${pathPrefix}product/slow-motion-booth.html" class="block text-sm text-gray-700 hover:text-purple-700 hover:bg-purple-50/50 transition-all rounded-lg py-2.5 px-3 font-medium">Slow Motion Video Booth</a>
+                                                <a href="${pathPrefix}product/video-testimonial-booth.html" class="block text-sm text-gray-700 hover:text-purple-700 hover:bg-purple-50/50 transition-all rounded-lg py-2.5 px-3 font-medium">Video Testimonial Booth</a>
+                                            </div>
+                                        </div>
+                                        <!-- Additional Experiences Category -->
+                                        <div>
+                                            <div class="flex items-center gap-2.5 mb-3 py-2.5 px-4 rounded-lg bg-green-50/70 border border-green-200/50 -mx-1">
+                                                <span class="w-2 h-2 rounded-full bg-green-500 shadow-sm"></span>
+                                                <span class="text-xs font-bold text-green-700 uppercase tracking-widest">Additional Experiences</span>
+                                            </div>
+                                            <div class="space-y-1 pl-1">
+                                                <a href="${pathPrefix}event-photography.html" class="block text-sm text-gray-700 hover:text-green-700 hover:bg-green-50/50 transition-all rounded-lg py-2.5 px-3 font-medium">Event Photography</a>
+                                                <a href="${pathPrefix}product/brand-activation.html" class="block text-sm text-gray-700 hover:text-green-700 hover:bg-green-50/50 transition-all rounded-lg py-2.5 px-3 font-medium">Brand Activation</a>
+                                                <a href="${pathPrefix}products/sketchbot-booth.html" class="block text-sm text-gray-700 hover:text-green-700 hover:bg-green-50/50 transition-all rounded-lg py-2.5 px-3 font-medium">SketchBot</a>
+                                                <a href="${pathPrefix}products/cookie-printer.html" class="block text-sm text-gray-700 hover:text-green-700 hover:bg-green-50/50 transition-all rounded-lg py-2.5 px-3 font-medium">Cookie Printer</a>
+                                                <a href="${pathPrefix}pose-flashcards.html" class="block text-sm text-gray-700 hover:text-green-700 hover:bg-green-50/50 transition-all rounded-lg py-2.5 px-3 font-medium">Pose Cards</a>
+                                                <a href="${pathPrefix}lux-photography.html" class="block text-sm text-gray-700 hover:text-green-700 hover:bg-green-50/50 transition-all rounded-lg py-2.5 px-3 font-medium">Lux Photography</a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
                             <!-- Mobile Events Section -->
-                            <div class="mb-8">
-                                <h3 class="text-lg font-bold text-gray-900 mb-4">Events</h3>
-                                <div class="space-y-2">
-                                    <a href="${pathPrefix}wedding.html" class="block text-sm text-gray-600 hover:text-blue-600 transition">
-                                        <span class="font-medium">Weddings</span><br>
-                                        <span class="text-xs text-gray-500">Make your special day unforgettable</span>
-                                    </a>
-                                    <a href="${pathPrefix}corporate-events.html" class="block text-sm text-gray-600 hover:text-blue-600 transition">
-                                        <span class="font-medium">Corporate Events</span><br>
-                                        <span class="text-xs text-gray-500">Fully branded experiences for your brand</span>
-                                    </a>
-                                    <a href="${pathPrefix}socialevents.html" class="block text-sm text-gray-600 hover:text-blue-600 transition">
-                                        <span class="font-medium">Social Events</span><br>
-                                        <span class="text-xs text-gray-500">Birthdays, Mitzvahs, and more</span>
-                                    </a>
-                                    <a href="${pathPrefix}tradeshow-booth.html" class="block text-sm text-gray-600 hover:text-blue-600 transition">
-                                        <span class="font-medium">Trade Shows</span><br>
-                                        <span class="text-xs text-gray-500">Mosaic walls and high-impact activations</span>
-                                    </a>
-                                    <a href="${pathPrefix}holiday-party.html" class="block text-sm text-gray-600 hover:text-blue-600 transition">
-                                        <span class="font-medium">Holiday Parties</span><br>
-                                        <span class="text-xs text-gray-500">Curated sets that come to life</span>
-                                    </a>
-                                    <a href="${pathPrefix}denver-casino-rentals.html" class="block text-sm text-gray-600 hover:text-blue-600 transition">
-                                        <span class="font-medium">Casino Parties</span><br>
-                                        <span class="text-xs text-gray-500">Tables, dealers, and full experiences</span>
-                                    </a>
+                            <div class="bg-white rounded-2xl shadow-lg border border-gray-200/50 overflow-hidden">
+                                <button class="mobile-menu-toggle w-full flex items-center justify-between px-5 py-4 hover:bg-gray-50/50 transition-colors group" data-target="events-content">
+                                    <div class="flex items-center gap-3">
+                                        <span class="w-1.5 h-6 bg-gradient-to-b from-pink-500 via-rose-500 to-blue-500 rounded-full shadow-sm"></span>
+                                        <span class="text-base font-bold text-gray-900 group-hover:text-gray-700">Events</span>
+                                    </div>
+                                    <svg class="w-5 h-5 text-gray-400 transition-transform duration-300 transform rotate-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path>
+                                    </svg>
+                                </button>
+                                <div id="events-content" class="hidden overflow-hidden transition-all duration-300 ease-in-out" style="max-height: 0px;">
+                                    <div class="px-5 pb-4 space-y-1">
+                                        <a href="${pathPrefix}wedding.html" class="block text-sm text-gray-700 hover:text-blue-700 hover:bg-blue-50/50 transition-all rounded-lg py-2.5 px-3 font-medium">Weddings</a>
+                                        <a href="${pathPrefix}corporate-events.html" class="block text-sm text-gray-700 hover:text-blue-700 hover:bg-blue-50/50 transition-all rounded-lg py-2.5 px-3 font-medium">Corporate Events</a>
+                                        <a href="${pathPrefix}socialevents.html" class="block text-sm text-gray-700 hover:text-blue-700 hover:bg-blue-50/50 transition-all rounded-lg py-2.5 px-3 font-medium">Social Events</a>
+                                        <a href="${pathPrefix}tradeshow-booth.html" class="block text-sm text-gray-700 hover:text-blue-700 hover:bg-blue-50/50 transition-all rounded-lg py-2.5 px-3 font-medium">Trade Shows</a>
+                                        <a href="${pathPrefix}holiday-party.html" class="block text-sm text-gray-700 hover:text-blue-700 hover:bg-blue-50/50 transition-all rounded-lg py-2.5 px-3 font-medium">Holiday Parties</a>
+                                        <a href="${pathPrefix}denver-casino-rentals.html" class="block text-sm text-gray-700 hover:text-blue-700 hover:bg-blue-50/50 transition-all rounded-lg py-2.5 px-3 font-medium">Casino Parties</a>
+                                    </div>
                                 </div>
                             </div>
 
                             <!-- Mobile Rentals Section -->
-                            <div class="mb-8">
-                                <h3 class="text-lg font-bold text-gray-900 mb-4">Rentals</h3>
-                                <div class="space-y-3">
-                                    <div>
-                                        <h4 class="font-bold text-base text-blue-600 uppercase tracking-wider mb-3 pb-2 border-b-2 border-blue-200">AV Services</h4>
-                                        <div class="pl-4 space-y-2">
-                                            <a href="${pathPrefix}av-services/audio-services.html" class="block text-sm text-gray-600 hover:text-blue-600 transition">
-                                                <span class="font-semibold block mb-0.5">Audio</span>
-                                                <span class="text-xs text-gray-500 leading-relaxed">Professional sound systems and audio mixing</span>
-                                            </a>
-                                            <a href="${pathPrefix}av-services/visual-services.html" class="block text-sm text-gray-600 hover:text-blue-600 transition">
-                                                <span class="font-semibold block mb-0.5">Visual</span>
-                                                <span class="text-xs text-gray-500 leading-relaxed">Screens, displays, and video projection</span>
-                                            </a>
-                                            <a href="${pathPrefix}av-services/event-lighting.html" class="block text-sm text-gray-600 hover:text-blue-600 transition">
-                                                <span class="font-semibold block mb-0.5">Lighting</span>
-                                                <span class="text-xs text-gray-500 leading-relaxed">Transform spaces with lighting</span>
-                                            </a>
-                                            <a href="${pathPrefix}av-services/event-stages.html" class="block text-sm text-gray-600 hover:text-blue-600 transition">
-                                                <span class="font-semibold block mb-0.5">Event Stages</span>
-                                                <span class="text-xs text-gray-500 leading-relaxed">Professional stage setups</span>
-                                            </a>
-                                            <a href="${pathPrefix}av-services/event-signage.html" class="block text-sm text-gray-600 hover:text-blue-600 transition">
-                                                <span class="font-semibold block mb-0.5">Custom Signage</span>
-                                                <span class="text-xs text-gray-500 leading-relaxed">Professional stage setups</span>
-                                            </a>
-                                        </div>
+                            <div class="bg-white rounded-2xl shadow-lg border border-gray-200/50 overflow-hidden">
+                                <button class="mobile-menu-toggle w-full flex items-center justify-between px-5 py-4 hover:bg-gray-50/50 transition-colors group" data-target="rentals-content">
+                                    <div class="flex items-center gap-3">
+                                        <span class="w-1.5 h-6 bg-gradient-to-b from-indigo-500 via-purple-500 to-pink-500 rounded-full shadow-sm"></span>
+                                        <span class="text-base font-bold text-gray-900 group-hover:text-gray-700">Rentals</span>
                                     </div>
-                                    <div>
-                                        <h4 class="font-bold text-base text-purple-600 uppercase tracking-wider mb-3 pb-2 border-b-2 border-purple-200">Event Decor</h4>
-                                        <div class="pl-4 space-y-2">
-                                            <a href="${pathPrefix}event-decor/special-effects.html" class="block text-sm text-gray-600 hover:text-purple-600 transition">
-                                                <span class="font-semibold block mb-0.5">Special Effects</span>
-                                                <span class="text-xs text-gray-500 leading-relaxed">Sparks, snow, confetti, champagne walls</span>
-                                            </a>
-                                            <a href="${pathPrefix}event-decor/lighting-decor.html" class="block text-sm text-gray-600 hover:text-purple-600 transition">
-                                                <span class="font-semibold block mb-0.5">Lighting Decor</span>
-                                                <span class="text-xs text-gray-500 leading-relaxed">Chandeliers, market lights, marquee</span>
-                                            </a>
-                                            <a href="${pathPrefix}event-decor/event-decor.html" class="block text-sm text-gray-600 hover:text-purple-600 transition">
-                                                <span class="font-semibold block mb-0.5">Event Decor</span>
-                                                <span class="text-xs text-gray-500 leading-relaxed">Lounge sets, shimmer walls, drape</span>
-                                            </a>
+                                    <svg class="w-5 h-5 text-gray-400 transition-transform duration-300 transform rotate-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path>
+                                    </svg>
+                                </button>
+                                <div id="rentals-content" class="hidden overflow-hidden transition-all duration-300 ease-in-out" style="max-height: 0px;">
+                                    <div class="px-5 pb-4 space-y-4">
+                                        <!-- AV Services Category -->
+                                        <div>
+                                            <div class="flex items-center gap-2.5 mb-3 py-2.5 px-4 rounded-lg bg-blue-50/70 border border-blue-200/50 -mx-1">
+                                                <span class="w-2 h-2 rounded-full bg-blue-500 shadow-sm"></span>
+                                                <span class="text-xs font-bold text-blue-700 uppercase tracking-widest">AV Services</span>
+                                            </div>
+                                            <div class="space-y-1 pl-1">
+                                                <a href="${pathPrefix}av-services/audio-services.html" class="block text-sm text-gray-700 hover:text-blue-700 hover:bg-blue-50/50 transition-all rounded-lg py-2.5 px-3 font-medium">Audio</a>
+                                                <a href="${pathPrefix}av-services/visual-services.html" class="block text-sm text-gray-700 hover:text-blue-700 hover:bg-blue-50/50 transition-all rounded-lg py-2.5 px-3 font-medium">Visual</a>
+                                                <a href="${pathPrefix}av-services/event-lighting.html" class="block text-sm text-gray-700 hover:text-blue-700 hover:bg-blue-50/50 transition-all rounded-lg py-2.5 px-3 font-medium">Lighting</a>
+                                                <a href="${pathPrefix}av-services/event-stages.html" class="block text-sm text-gray-700 hover:text-blue-700 hover:bg-blue-50/50 transition-all rounded-lg py-2.5 px-3 font-medium">Event Stages</a>
+                                                <a href="${pathPrefix}av-services/event-signage.html" class="block text-sm text-gray-700 hover:text-blue-700 hover:bg-blue-50/50 transition-all rounded-lg py-2.5 px-3 font-medium">Custom Signage</a>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div>
-                                        <h4 class="font-bold text-base text-green-600 uppercase tracking-wider mb-3 pb-2 border-b-2 border-green-200">Games</h4>
-                                        <div class="pl-4 space-y-2">
-                                            <a href="${pathPrefix}game-rentals/claw-machine.html" class="block text-sm text-gray-600 hover:text-green-600 transition">
-                                                <span class="font-semibold block mb-0.5">Claw Machine</span>
-                                                <span class="text-xs text-gray-500 leading-relaxed">Walk up and win a prize</span>
-                                            </a>
-                                            <a href="${pathPrefix}virtual-reality-rental.html" class="block text-sm text-gray-600 hover:text-green-600 transition">
-                                                <span class="font-semibold block mb-0.5">VR Headsets</span>
-                                                <span class="text-xs text-gray-500 leading-relaxed">Immersive virtual experiences</span>
-                                            </a>
-                                            <a href="${pathPrefix}product/money-booth.html" class="block text-sm text-gray-600 hover:text-green-600 transition">
-                                                <span class="font-semibold block mb-0.5">Money Booth</span>
-                                                <span class="text-xs text-gray-500 leading-relaxed">Grab the floating cash</span>
-                                            </a>
-                                            <a href="${pathPrefix}game-rentals/stick-drop.html" class="block text-sm text-gray-600 hover:text-green-600 transition">
-                                                <span class="font-semibold block mb-0.5">Stick Drop</span>
-                                                <span class="text-xs text-gray-500 leading-relaxed">Grab the floating cash</span>
-                                            </a>
+                                        <!-- Event Decor Category -->
+                                        <div>
+                                            <div class="flex items-center gap-2.5 mb-3 py-2.5 px-4 rounded-lg bg-purple-50/70 border border-purple-200/50 -mx-1">
+                                                <span class="w-2 h-2 rounded-full bg-purple-500 shadow-sm"></span>
+                                                <span class="text-xs font-bold text-purple-700 uppercase tracking-widest">Event Decor</span>
+                                            </div>
+                                            <div class="space-y-1 pl-1">
+                                                <a href="${pathPrefix}event-decor/special-effects.html" class="block text-sm text-gray-700 hover:text-purple-700 hover:bg-purple-50/50 transition-all rounded-lg py-2.5 px-3 font-medium">Special Effects</a>
+                                                <a href="${pathPrefix}event-decor/lighting-decor.html" class="block text-sm text-gray-700 hover:text-purple-700 hover:bg-purple-50/50 transition-all rounded-lg py-2.5 px-3 font-medium">Lighting Decor</a>
+                                                <a href="${pathPrefix}event-decor/event-decor.html" class="block text-sm text-gray-700 hover:text-purple-700 hover:bg-purple-50/50 transition-all rounded-lg py-2.5 px-3 font-medium">Event Decor</a>
+                                            </div>
+                                        </div>
+                                        <!-- Games Category -->
+                                        <div>
+                                            <div class="flex items-center gap-2.5 mb-3 py-2.5 px-4 rounded-lg bg-green-50/70 border border-green-200/50 -mx-1">
+                                                <span class="w-2 h-2 rounded-full bg-green-500 shadow-sm"></span>
+                                                <span class="text-xs font-bold text-green-700 uppercase tracking-widest">Games</span>
+                                            </div>
+                                            <div class="space-y-1 pl-1">
+                                                <a href="${pathPrefix}game-rentals/claw-machine.html" class="block text-sm text-gray-700 hover:text-green-700 hover:bg-green-50/50 transition-all rounded-lg py-2.5 px-3 font-medium">Claw Machine</a>
+                                                <a href="${pathPrefix}virtual-reality-rental.html" class="block text-sm text-gray-700 hover:text-green-700 hover:bg-green-50/50 transition-all rounded-lg py-2.5 px-3 font-medium">VR Headsets</a>
+                                                <a href="${pathPrefix}product/money-booth.html" class="block text-sm text-gray-700 hover:text-green-700 hover:bg-green-50/50 transition-all rounded-lg py-2.5 px-3 font-medium">Money Booth</a>
+                                                <a href="${pathPrefix}game-rentals/stick-drop.html" class="block text-sm text-gray-700 hover:text-green-700 hover:bg-green-50/50 transition-all rounded-lg py-2.5 px-3 font-medium">Stick Drop</a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
                             <!-- Mobile Gallery Section -->
-                            <div class="mb-8">
-                                <h3 class="text-lg font-bold text-gray-900 mb-4">Gallery</h3>
-                                <div class="space-y-2">
-                                    <a href="${pathPrefix}our-work.html" class="block text-sm text-gray-600 hover:text-blue-600 transition">
-                                        <span class="font-semibold block mb-0.5">Our Work</span>
-                                        <span class="text-xs text-gray-500 leading-relaxed">View a collection of our work</span>
-                                    </a>
-                                    <a href="${pathPrefix}our-services.html" class="block text-sm text-gray-600 hover:text-blue-600 transition">
-                                        <span class="font-semibold block mb-0.5">Our Services</span>
-                                        <span class="text-xs text-gray-500 leading-relaxed">Check out all of the services we offer for events</span>
-                                    </a>
-                                    <a href="${pathPrefix}our-booths.html" class="block text-sm text-gray-600 hover:text-blue-600 transition">
-                                        <span class="font-semibold block mb-0.5">Our Booths</span>
-                                        <span class="text-xs text-gray-500 leading-relaxed">See all of our Photo Booths</span>
-                                    </a>
-                                    <a href="${pathPrefix}mihi-props.html" class="block text-sm text-gray-600 hover:text-blue-600 transition">
-                                        <span class="font-semibold block mb-0.5">Our Props</span>
-                                        <span class="text-xs text-gray-500 leading-relaxed">Take a look at our prop collection</span>
-                                    </a>
-                                    <a href="${pathPrefix}booth-themes.html" class="block text-sm text-gray-600 hover:text-blue-600 transition">
-                                        <span class="font-semibold block mb-0.5">Our Themes</span>
-                                        <span class="text-xs text-gray-500 leading-relaxed">All events themes, curated for any event</span>
-                                    </a>
-                                    <a href="${pathPrefix}our-add-ons.html" class="block text-sm text-gray-600 hover:text-blue-600 transition">
-                                        <span class="font-semibold block mb-0.5">Our Add-Ons</span>
-                                        <span class="text-xs text-gray-500 leading-relaxed">See what we can add-on to your next rental</span>
-                                    </a>
-                                    <a href="${pathPrefix}our-design.html" class="block text-sm text-gray-600 hover:text-blue-600 transition">
-                                        <span class="font-semibold block mb-0.5">Our Designs</span>
-                                        <span class="text-xs text-gray-500 leading-relaxed">Custom Branded Booth Wraps, Backdrops, and more</span>
-                                    </a>
+                            <div class="bg-white rounded-2xl shadow-lg border border-gray-200/50 overflow-hidden">
+                                <button class="mobile-menu-toggle w-full flex items-center justify-between px-5 py-4 hover:bg-gray-50/50 transition-colors group" data-target="gallery-content">
+                                    <div class="flex items-center gap-3">
+                                        <span class="w-1.5 h-6 bg-gradient-to-b from-blue-400 to-cyan-500 rounded-full shadow-sm"></span>
+                                        <span class="text-base font-bold text-gray-900 group-hover:text-gray-700">Gallery</span>
+                                    </div>
+                                    <svg class="w-5 h-5 text-gray-400 transition-transform duration-300 transform rotate-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path>
+                                    </svg>
+                                </button>
+                                <div id="gallery-content" class="hidden overflow-hidden transition-all duration-300 ease-in-out" style="max-height: 0px;">
+                                    <div class="px-5 pb-4 space-y-1">
+                                        <a href="${pathPrefix}our-work.html" class="block text-sm text-gray-700 hover:text-blue-700 hover:bg-blue-50/50 transition-all rounded-lg py-2.5 px-3 font-medium">Our Work</a>
+                                        <a href="${pathPrefix}our-services.html" class="block text-sm text-gray-700 hover:text-blue-700 hover:bg-blue-50/50 transition-all rounded-lg py-2.5 px-3 font-medium">Our Services</a>
+                                        <a href="${pathPrefix}our-booths.html" class="block text-sm text-gray-700 hover:text-blue-700 hover:bg-blue-50/50 transition-all rounded-lg py-2.5 px-3 font-medium">Our Booths</a>
+                                        <a href="${pathPrefix}mihi-props.html" class="block text-sm text-gray-700 hover:text-blue-700 hover:bg-blue-50/50 transition-all rounded-lg py-2.5 px-3 font-medium">Our Props</a>
+                                        <a href="${pathPrefix}booth-themes.html" class="block text-sm text-gray-700 hover:text-blue-700 hover:bg-blue-50/50 transition-all rounded-lg py-2.5 px-3 font-medium">Our Themes</a>
+                                        <a href="${pathPrefix}our-add-ons.html" class="block text-sm text-gray-700 hover:text-blue-700 hover:bg-blue-50/50 transition-all rounded-lg py-2.5 px-3 font-medium">Our Add-Ons</a>
+                                        <a href="${pathPrefix}our-design.html" class="block text-sm text-gray-700 hover:text-blue-700 hover:bg-blue-50/50 transition-all rounded-lg py-2.5 px-3 font-medium">Our Designs</a>
+                                    </div>
                                 </div>
                             </div>
 
                             <!-- Mobile About Us Section -->
-                            <div class="mb-8">
-                                <h3 class="text-lg font-bold text-gray-900 mb-4">About Us</h3>
-                                <div class="space-y-2">
-                                    <a href="${pathPrefix}blog.html" class="block text-sm text-gray-600 hover:text-blue-600 transition">
-                                        <span class="font-semibold block mb-0.5">Read Our Blogs</span>
-                                        <span class="text-xs text-gray-500 leading-relaxed">Read about our events, activations, and more</span>
-                                    </a>
-                                    <a href="${pathPrefix}our-locations.html" class="block text-sm text-gray-600 hover:text-blue-600 transition">
-                                        <span class="font-semibold block mb-0.5">Our Locations</span>
-                                        <span class="text-xs text-gray-500 leading-relaxed">View all of the locations we service nationwide</span>
-                                    </a>
-                                    <a href="${pathPrefix}case-studies.html" class="block text-sm text-gray-600 hover:text-blue-600 transition">
-                                        <span class="font-semibold block mb-0.5">Case Studies</span>
-                                        <span class="text-xs text-gray-500 leading-relaxed">Learn how our activations have helped create memorable events</span>
-                                    </a>
-                                    <a href="${pathPrefix}faq.html" class="block text-sm text-gray-600 hover:text-blue-600 transition">
-                                        <span class="font-semibold block mb-0.5">FAQ</span>
-                                        <span class="text-xs text-gray-500 leading-relaxed">View our most commonly asked questions</span>
-                                    </a>
-                                    <a href="${pathPrefix}about.html" class="block text-sm text-gray-600 hover:text-blue-600 transition">
-                                        <span class="font-semibold block mb-0.5">About MiHi</span>
-                                        <span class="text-xs text-gray-500 leading-relaxed">Learn about MiHi, see our hardworking team, and more</span>
-                                    </a>
+                            <div class="bg-white rounded-2xl shadow-lg border border-gray-200/50 overflow-hidden">
+                                <button class="mobile-menu-toggle w-full flex items-center justify-between px-5 py-4 hover:bg-gray-50/50 transition-colors group" data-target="about-content">
+                                    <div class="flex items-center gap-3">
+                                        <span class="w-1.5 h-6 bg-gradient-to-b from-purple-400 to-pink-500 rounded-full shadow-sm"></span>
+                                        <span class="text-base font-bold text-gray-900 group-hover:text-gray-700">About Us</span>
+                                    </div>
+                                    <svg class="w-5 h-5 text-gray-400 transition-transform duration-300 transform rotate-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path>
+                                    </svg>
+                                </button>
+                                <div id="about-content" class="hidden overflow-hidden transition-all duration-300 ease-in-out" style="max-height: 0px;">
+                                    <div class="px-5 pb-4 space-y-1">
+                                        <a href="${pathPrefix}blog.html" class="block text-sm text-gray-700 hover:text-purple-700 hover:bg-purple-50/50 transition-all rounded-lg py-2.5 px-3 font-medium">Read Our Blogs</a>
+                                        <a href="${pathPrefix}our-locations.html" class="block text-sm text-gray-700 hover:text-purple-700 hover:bg-purple-50/50 transition-all rounded-lg py-2.5 px-3 font-medium">Our Locations</a>
+                                        <a href="${pathPrefix}case-studies.html" class="block text-sm text-gray-700 hover:text-purple-700 hover:bg-purple-50/50 transition-all rounded-lg py-2.5 px-3 font-medium">Case Studies</a>
+                                        <a href="${pathPrefix}faq.html" class="block text-sm text-gray-700 hover:text-purple-700 hover:bg-purple-50/50 transition-all rounded-lg py-2.5 px-3 font-medium">FAQ</a>
+                                        <a href="${pathPrefix}about.html" class="block text-sm text-gray-700 hover:text-purple-700 hover:bg-purple-50/50 transition-all rounded-lg py-2.5 px-3 font-medium">About MiHi</a>
+                                    </div>
                                 </div>
                             </div>
 
                             <!-- Mobile Contact Button -->
-                            <div class="space-y-4">
-                                <a href="${pathPrefix}contact-us.html" class="btn-primary text-white px-6 py-3 rounded-full font-semibold bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 hover:from-pink-600 hover:via-purple-600 hover:to-blue-600 transition-all duration-300 text-center block transform hover:scale-105">Contact Us</a>
+                            <div class="pb-4 pt-2">
+                                <a href="${pathPrefix}contact-us.html" class="btn-primary text-white px-6 py-4 rounded-2xl font-bold bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 hover:from-pink-600 hover:via-purple-600 hover:to-blue-600 transition-all duration-300 text-center block shadow-xl hover:shadow-2xl transform hover:scale-[1.02] active:scale-[0.98] text-base">Contact Us</a>
                             </div>
                         </div>
                     </div>
@@ -740,6 +722,69 @@
                 closeMenu();
             }
         });
+
+        // Collapsible sections functionality
+        function initCollapsibleSections() {
+            const toggleButtons = document.querySelectorAll('.mobile-menu-toggle');
+            toggleButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    const targetId = this.getAttribute('data-target');
+                    const content = document.getElementById(targetId);
+                    const chevron = this.querySelector('svg');
+                    
+                    if (!content) return;
+                    
+                    const isHidden = content.classList.contains('hidden');
+                    
+                    if (isHidden) {
+                        // Expand
+                        content.classList.remove('hidden');
+                        const height = content.scrollHeight;
+                        content.style.maxHeight = '0px';
+                        content.style.opacity = '0';
+                        
+                        requestAnimationFrame(() => {
+                            content.style.transition = 'max-height 0.3s ease-in-out, opacity 0.3s ease-in-out';
+                            content.style.maxHeight = height + 'px';
+                            content.style.opacity = '1';
+                        });
+                        
+                        if (chevron) {
+                            chevron.style.transition = 'transform 0.3s ease-in-out';
+                            chevron.style.transform = 'rotate(180deg)';
+                        }
+                    } else {
+                        // Collapse
+                        const height = content.scrollHeight;
+                        content.style.maxHeight = height + 'px';
+                        content.style.opacity = '1';
+                        
+                        requestAnimationFrame(() => {
+                            content.style.transition = 'max-height 0.3s ease-in-out, opacity 0.3s ease-in-out';
+                            content.style.maxHeight = '0px';
+                            content.style.opacity = '0';
+                            
+                            setTimeout(() => {
+                                content.classList.add('hidden');
+                                content.style.maxHeight = '';
+                                content.style.opacity = '';
+                            }, 300);
+                        });
+                        
+                        if (chevron) {
+                            chevron.style.transition = 'transform 0.3s ease-in-out';
+                            chevron.style.transform = 'rotate(0deg)';
+                        }
+                    }
+                });
+            });
+        }
+        
+        // Initialize collapsible sections
+        initCollapsibleSections();
     }
 
         // Insert navigation at the beginning of body and initialize mobile menu

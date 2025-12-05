@@ -296,15 +296,33 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
     <style>
-        /* Navigation Contact Us Button Fix - Force visibility */
-        header a[href*="contact-us"],
-        nav a[href*="contact-us"],
-        header a.btn-primary,
-        nav a.btn-primary,
-        header .btn-primary,
-        nav .btn-primary,
-        a.btn-primary,
-        .btn-primary {
+        /* Protect navigation from page styles - ensure navigation.js styles are preserved */
+        header.bg-white.shadow-lg.fixed {
+            z-index: 50 !important;
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            right: 0 !important;
+        }
+        
+        header.bg-white.shadow-lg.fixed nav a:not(.btn-primary) {
+            background: transparent !important;
+            background-color: transparent !important;
+            background-image: none !important;
+            padding: 0 !important;
+            border-radius: 0 !important;
+            box-shadow: none !important;
+            display: inline !important;
+            white-space: normal !important;
+            min-height: auto !important;
+            min-width: auto !important;
+        }
+        
+        /* Page-specific button styles - exclude navigation */
+        main a.btn-primary:not(header a):not(nav a),
+        main .btn-primary:not(header .btn-primary):not(nav .btn-primary),
+        .section-padding a.btn-primary,
+        .section-padding .btn-primary {
             background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%) !important;
             background-color: #0050ff !important;
             background-image: linear-gradient(135deg, #0050ff 0%, #0040d9 100%) !important;
@@ -320,12 +338,10 @@
             white-space: nowrap !important;
         }
 
-        header a.btn-primary:hover,
-        nav a.btn-primary:hover,
-        header .btn-primary:hover,
-        nav .btn-primary:hover,
-        a.btn-primary:hover,
-        .btn-primary:hover {
+        main a.btn-primary:not(header a):not(nav a):hover,
+        main .btn-primary:not(header .btn-primary):not(nav .btn-primary):hover,
+        .section-padding a.btn-primary:hover,
+        .section-padding .btn-primary:hover {
             background: linear-gradient(135deg, #0040d9 0%, #0033b3 100%) !important;
             background-color: #0040d9 !important;
             background-image: linear-gradient(135deg, #0040d9 0%, #0033b3 100%) !important;
@@ -334,12 +350,10 @@
             box-shadow: 0 6px 12px rgba(0, 80, 255, 0.4) !important;
         }
 
-        header a.btn-primary:active,
-        nav a.btn-primary:active,
-        header .btn-primary:active,
-        nav .btn-primary:active,
-        a.btn-primary:active,
-        .btn-primary:active {
+        main a.btn-primary:not(header a):not(nav a):active,
+        main .btn-primary:not(header .btn-primary):not(nav .btn-primary):active,
+        .section-padding a.btn-primary:active,
+        .section-padding .btn-primary:active {
             transform: translateY(0) !important;
         }
 
@@ -367,11 +381,13 @@
             border-width: 0;
         }
 
-        /* Touch-friendly improvements */
+        /* Touch-friendly improvements - exclude navigation */
         @media (max-width: 768px) {
-
-            a,
-            button {
+            /* Only apply to page content, not navigation */
+            main a:not(header a):not(nav a),
+            main button:not(header button):not(nav button),
+            .section-padding a,
+            .section-padding button {
                 min-height: 44px;
                 min-width: 44px;
                 display: inline-flex;
@@ -420,10 +436,12 @@
                 padding-right: 0.75rem;
             }
 
-            /* Ensure buttons are touch-friendly */
-            button,
-            a.button,
-            .btn {
+            /* Ensure buttons are touch-friendly - exclude navigation */
+            main button:not(header button):not(nav button),
+            main a.button:not(header a):not(nav a),
+            .section-padding button,
+            .section-padding a.button,
+            .section-padding .btn {
                 padding: 0.75rem 1.25rem;
                 font-size: 0.9rem;
             }
@@ -3735,11 +3753,6 @@
             justify-content: center;
         }
 
-        @media (max-width: 800px) {
-            html {
-                font-size: 2vw;
-            }
-        }
 
         @media (max-width: 768px) {
             .email-button-wrapper {
