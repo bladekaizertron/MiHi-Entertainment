@@ -107,7 +107,7 @@ function renderTrustedBrands(options = {}) {
             <div class="relative container mx-auto px-6">
                 <!-- Premium Header -->
                 <div class="text-center mb-12 max-w-4xl mx-auto space-y-10">
-                    <span class="inline-flex items-center gap-2 px-5 py-2 bg-gradient-to-r from-pink-500/10 via-purple-500/10 to-blue-500/10 border border-pink-500/20 rounded-full text-xs font-semibold tracking-[0.35em] uppercase text-pink-600 shadow-[0_0_20px_rgba(236,72,153,0.15)]">
+                    <span class="inline-flex items-center gap-2 px-5 py-2 bg-gradient-to-r from-[#FF4F4F]/10 via-[#FF4F4F]/10 to-[#FF4F4F]/10 border border-[#FF4F4F]/20 rounded-full text-xs font-semibold tracking-[0.35em] uppercase text-[#FF4F4F] shadow-[0_0_20px_rgba(255,79,79,0.15)]">
                         ${config.badge}
                     </span>
                     <div class="space-y-5">

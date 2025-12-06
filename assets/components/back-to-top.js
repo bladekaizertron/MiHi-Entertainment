@@ -12,14 +12,14 @@
     // Create Scroll Progress Bar
     const scrollProgress = document.createElement('div');
     scrollProgress.id = 'scroll-progress';
-    scrollProgress.className = 'fixed top-0 left-0 h-1 bg-gradient-to-r from-[#0050ff] to-[#0040d9] z-50 transition-all duration-300';
+    scrollProgress.className = 'fixed top-0 left-0 h-1 bg-gradient-to-r from-[#FF4F4F] to-[#FF3838] z-50 transition-all duration-300';
     scrollProgress.style.width = '0%';
     document.body.appendChild(scrollProgress);
 
     // Create Back to Top Button
     const backToTopButton = document.createElement('button');
     backToTopButton.id = 'back-to-top';
-    backToTopButton.className = 'fixed bottom-8 right-8 bg-gradient-to-r from-pink-500/80 via-purple-500/80 to-blue-500/80 backdrop-blur-lg text-white p-4 rounded-full border border-white/20 shadow-[0_20px_45px_-15px_rgba(236,72,153,0.75)] opacity-0 pointer-events-none transition-all duration-300 hover:scale-110 hover:shadow-[0_25px_60px_-18px_rgba(59,130,246,0.7)] hover:from-pink-500/90 hover:via-purple-500/90 hover:to-blue-500/90 focus:ring-4 focus:ring-pink-400/40 z-40';
+    backToTopButton.className = 'fixed bottom-8 right-8 bg-[#FF4F4F] backdrop-blur-lg text-white p-4 rounded-full border border-white/20 shadow-[0_20px_45px_-15px_rgba(255,79,79,0.75)] opacity-0 pointer-events-none transition-all duration-300 hover:scale-110 hover:bg-[#FF3838] hover:shadow-[0_25px_60px_-18px_rgba(255,79,79,0.7)] focus:ring-4 focus:ring-[#FF4F4F]/40 z-40';
     backToTopButton.setAttribute('aria-label', 'Back to top');
     backToTopButton.innerHTML = `
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
