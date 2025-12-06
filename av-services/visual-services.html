@@ -16,7 +16,7 @@
     <meta name="robots" content="index, follow">
     <meta name="language" content="English">
     <meta name="revisit-after" content="7 days">
-    <meta name="theme-color" content="#a200f7">
+    <meta name="theme-color" content="#FF4F4F">
     <meta name="format-detection" content="telephone=yes">
     <link rel="canonical" href="https://www.mihientertainment.com/av-services/visual-services.html">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -287,11 +287,27 @@
     </script>
 
     <script src="https://cdn.tailwindcss.com"></script>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&family=VT323&display=swap"
-        rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Audiowide&display=swap" rel="stylesheet">
+    <!-- Brand Guide Typography: Azo Sans Font Family -->
     <style>
+        /* Azo Sans Font Face Declarations */
+        @font-face {
+            font-family: 'Azo Sans';
+            src: url('../../assets/fonts/AzoSans-Regular.woff2') format('woff2'),
+                url('../../assets/fonts/AzoSans-Regular.woff') format('woff');
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'Azo Sans Uber';
+            src: url('../../assets/fonts/AzoSansUber-Regular.woff2') format('woff2'),
+                url('../../assets/fonts/AzoSansUber-Regular.woff') format('woff');
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+
         * {
             box-sizing: border-box;
         }
@@ -302,12 +318,19 @@
             scroll-behavior: smooth;
         }
 
+        /* Brand Guide: Body Text - Azo Sans Uber */
         body {
-            font-family: 'Inter', sans-serif;
-            color: #1a202c;
+            font-family: 'Azo Sans Uber', sans-serif;
+            color: #1F1F1F;
             overflow-x: hidden;
             width: 100%;
             position: relative;
+            background: #ffffff;
+        }
+
+        p {
+            font-family: 'Azo Sans Uber', sans-serif;
+            color: #1F1F1F;
         }
 
         /* Screen reader only - for SEO purposes */
@@ -323,33 +346,41 @@
             border-width: 0;
         }
 
+        /* Brand Guide: Headers - Azo Sans Uber (Uppercase) */
         h1,
         h2,
         h3,
         h4,
         h5,
         h6 {
-            font-family: 'Rajdhani', sans-serif;
-            font-weight: 600;
+            font-family: 'Azo Sans Uber', sans-serif;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 0.02em;
+            line-height: 1.2;
+            color: #FF4F4F;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
         h1.av-title {
-            font-family: 'Orbitron', sans-serif !important;
-            font-weight: 800;
-            letter-spacing: 0.15em;
+            font-family: 'Azo Sans Uber', sans-serif !important;
+            font-weight: 400;
+            letter-spacing: 0.02em;
             text-transform: uppercase;
+            color: #FF4F4F;
         }
 
         /* Spotlight Effect for A/V PRODUCTION */
         h3.av-title {
-            font-family: 'Orbitron', sans-serif !important;
-            font-weight: 700;
+            font-family: 'Azo Sans Uber', sans-serif !important;
+            font-weight: 400;
             font-size: 5rem !important;
-            letter-spacing: 0.1em;
+            letter-spacing: 0.02em;
             text-transform: uppercase;
             position: relative;
             background: transparent;
-            color: #ffffff;
+            color: #FF4F4F;
             text-align: center;
             display: inline-block;
         }
@@ -385,7 +416,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(#f70000, #f89200, #f8f501, #038f00, #0168f8, #a200f7);
+            background: linear-gradient(#FF4F4F, #18F1E1, #FF4F4F);
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -423,20 +454,20 @@
             max-width: 790px;
             height: 90px;
             margin: 0.75rem auto;
-            background: linear-gradient(135deg, #1a1a3e 0%, #2d1b4e 100%);
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
             border-radius: 5px;
             padding: 4px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5),
-                inset 0 1px 2px rgba(255, 255, 255, 0.1);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1),
+                inset 0 1px 2px rgba(255, 255, 255, 0.5);
         }
 
         .monitor-wrapper {
-            background: #050321;
+            background: #ffffff;
             width: 100%;
             height: 82px;
             border-radius: 2px;
-            box-shadow: 0px 2px 2px 2px rgba(0, 0, 0, 0.30),
-                inset 0 0 20px rgba(0, 0, 0, 0.5);
+            box-shadow: 0px 2px 2px 2px rgba(0, 0, 0, 0.1),
+                inset 0 0 20px rgba(255, 79, 79, 0.05);
             padding: 2px;
             position: relative;
         }
@@ -449,8 +480,8 @@
             right: 0;
             bottom: 0;
             border-radius: 2px;
-            box-shadow: inset 0 0 30px rgba(0, 255, 255, 0.1),
-                inset 0 0 60px rgba(138, 43, 226, 0.05);
+            box-shadow: inset 0 0 30px rgba(24, 241, 225, 0.1),
+                inset 0 0 60px rgba(255, 79, 79, 0.05);
             pointer-events: none;
             z-index: 1;
         }
@@ -458,12 +489,12 @@
         .monitor {
             width: 100%;
             height: 78px;
-            background: linear-gradient(135deg, #1e1e3f 0%, #2a1a3a 100%);
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
             border-radius: 2px;
             overflow: hidden;
             white-space: nowrap;
-            box-shadow: inset 0px 5px 10px 2px rgba(0, 0, 0, 0.6),
-                inset 0 0 20px rgba(0, 0, 0, 0.4);
+            box-shadow: inset 0px 5px 10px 2px rgba(0, 0, 0, 0.1),
+                inset 0 0 20px rgba(255, 79, 79, 0.05);
             position: relative;
         }
 
@@ -485,15 +516,15 @@
         }
 
         .monitor p {
-            font-family: 'VT323', monospace;
+            font-family: 'Azo Sans Uber', sans-serif;
             font-size: 2rem;
             position: absolute;
             display: inline-block;
             animation: scrollText 40s infinite linear;
-            color: #00ffcc;
-            text-shadow: 0 0 10px rgba(0, 255, 204, 0.5),
-                0 0 20px rgba(0, 255, 204, 0.3),
-                0 0 30px rgba(0, 255, 204, 0.2);
+            color: #18F1E1;
+            text-shadow: 0 0 10px rgba(24, 241, 225, 0.5),
+                0 0 20px rgba(24, 241, 225, 0.3),
+                0 0 30px rgba(24, 241, 225, 0.2);
             white-space: nowrap;
             padding: 0;
             margin: 0;
@@ -580,17 +611,20 @@
             }
         }
 
+        /* Brand Guide: CTAs use Coral (#FF4F4F) */
         .btn-primary {
-            background: linear-gradient(135deg, #7b11a9 0%, #6e028f 100%);
+            background: #FF4F4F;
+            color: #ffffff;
             transition: all 0.3s ease;
         }
 
         .btn-primary:hover {
+            background: #e63939;
             transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 20px 40px rgba(255, 79, 79, 0.4);
         }
 
-        /* Super Button Effect - Visual Theme */
+        /* Super Button Effect - Brand Theme */
         .super-button {
             position: relative;
             display: inline-flex;
@@ -598,17 +632,17 @@
             justify-content: center;
             gap: 12px;
             padding: 14px 28px;
-            background: linear-gradient(145deg, #1a1a3e, #2d1b4e);
-            border: 2px solid rgba(0, 255, 204, 0.3);
+            background: #FF4F4F;
+            border: 2px solid rgba(255, 79, 79, 0.3);
             border-radius: 100px;
-            color: #fff;
+            color: #ffffff;
             font-size: 16px;
             font-weight: 600;
             letter-spacing: 0.5px;
             cursor: pointer;
             overflow: hidden;
             transition: all 0.4s ease-in-out;
-            box-shadow: 0 0 20px rgba(0, 255, 204, 0.15);
+            box-shadow: 0 0 20px rgba(255, 79, 79, 0.15);
             backdrop-filter: blur(8px);
             z-index: 1;
             text-decoration: none;
@@ -627,7 +661,7 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: conic-gradient(from 0deg, #00ffcc, #a200f7, #0168f8, #00ffcc);
+            background: conic-gradient(from 0deg, #18F1E1, #FF4F4F, #18F1E1, #FF4F4F);
             animation: rotateButton 4s linear infinite;
             z-index: -2;
         }
@@ -636,16 +670,17 @@
             content: "";
             position: absolute;
             inset: 2px;
-            background: linear-gradient(145deg, #1a1a3e, #2d1b4e);
+            background: #FF4F4F;
             border-radius: inherit;
             z-index: -1;
         }
 
         .super-button:hover {
             transform: scale(1.05);
-            box-shadow: 0 0 40px rgba(0, 255, 204, 0.3),
-                0 0 60px rgba(162, 0, 247, 0.2);
-            border-color: rgba(0, 255, 204, 0.5);
+            box-shadow: 0 0 40px rgba(255, 79, 79, 0.3),
+                0 0 60px rgba(24, 241, 225, 0.2);
+            border-color: rgba(24, 241, 225, 0.5);
+            background: #e63939;
         }
 
         .super-button:hover .arrow {
@@ -660,7 +695,7 @@
             width: 22px;
             height: 22px;
             transition: transform 0.3s ease-in-out;
-            color: #00ffcc;
+            color: #ffffff;
         }
 
         @keyframes phonePulse {
@@ -739,10 +774,10 @@
             display: grid;
             justify-content: center;
             align-content: center;
-            font-family: 'Audiowide', 'Orbitron', sans-serif;
-            font-weight: 800;
+            font-family: 'Azo Sans Uber', sans-serif;
+            font-weight: 400;
             font-size: clamp(0.9rem, 2vw, 1.3rem);
-            color: #eee;
+            color: #1F1F1F;
         }
 
         @media (max-width: 768px) {
@@ -770,29 +805,29 @@
         }
 
         .animated-black {
-            color: #eee;
-            background: #0a0321;
+            color: #1F1F1F;
+            background: #f8f9fa;
             width: 100%;
             height: calc(100% / 3);
         }
 
         .animated-black-2 {
-            color: #eee;
-            background: #1a1a3e;
+            color: #1F1F1F;
+            background: #e9ecef;
             width: 100%;
             height: calc(100% / 3);
         }
 
         .animated-bg-primary {
-            color: #eee;
-            background: #a200f7;
+            color: #ffffff;
+            background: #FF4F4F;
             width: 100%;
             height: calc(100% / 3);
         }
 
         .animated-bg-secondary {
-            background: #00ffcc;
-            color: #0a0321;
+            background: #18F1E1;
+            color: #1F1F1F;
             width: 100%;
             height: calc(100% / 3);
         }
@@ -854,17 +889,29 @@
             }
         }
 
-        /* Interactive Brochure Section Styles - Visual Theme */
+        /* Interactive Brochure Section Styles - Brand Theme */
         .brochure-section {
-            background: radial-gradient(circle, rgba(26, 26, 62, 0.95) 0%, rgba(10, 3, 33, 1) 100%);
+            background: linear-gradient(135deg, #1F1F1F 0%, #2a2a2a 50%, #1F1F1F 100%);
             position: relative;
             overflow: hidden;
-            font-family: 'Rajdhani', sans-serif;
+            font-family: 'Azo Sans Uber', sans-serif;
             min-height: 92vh;
             display: flex;
             align-items: center;
             padding-top: 0;
             padding-bottom: 0;
+        }
+
+        .brochure-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 20% 50%, rgba(255, 79, 79, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 50%, rgba(24, 241, 225, 0.15) 0%, transparent 50%);
+            pointer-events: none;
         }
 
         .brochure-section .container {
@@ -1048,40 +1095,33 @@
         }
 
         .brochure-section h2 {
-            font-family: 'Orbitron', sans-serif;
-            letter-spacing: 0.08em;
+            font-family: 'Azo Sans Uber', sans-serif;
+            letter-spacing: 0.02em;
             text-transform: uppercase;
+            color: #FFFEF7;
         }
 
         .brochure-section h3,
         .brochure-section .brochure-subtitle {
-            font-family: 'Orbitron', sans-serif;
-            letter-spacing: 0.06em;
+            font-family: 'Azo Sans Uber', sans-serif;
+            letter-spacing: 0.02em;
             text-transform: uppercase;
+            color: #FFFEF7;
         }
 
         .brochure-section p,
         .brochure-check-text,
         .brochure-check-description,
         .brochure-tag {
-            font-family: 'Rajdhani', sans-serif;
+            font-family: 'Azo Sans Uber', sans-serif;
             letter-spacing: 0.02em;
+            color: #FFFEF7;
         }
 
         .brochure-section .pill-label {
-            font-family: 'Orbitron', sans-serif;
-            letter-spacing: 0.12em;
+            font-family: 'Azo Sans Uber', sans-serif;
+            letter-spacing: 0.02em;
             text-transform: uppercase;
-        }
-
-        .brochure-section::before {
-            content: "";
-            position: absolute;
-            inset: 0;
-            background-image:
-                radial-gradient(circle at 20% 50%, rgba(162, 0, 247, 0.18) 0%, transparent 45%),
-                radial-gradient(circle at 80% 50%, rgba(0, 255, 204, 0.15) 0%, transparent 45%);
-            pointer-events: none;
         }
 
         #brochure-webgl-canvas {
@@ -1094,8 +1134,8 @@
         }
 
         .brochure-badge {
-            background: linear-gradient(135deg, #a200f7 0%, #7b11a9 100%);
-            color: #ffffff;
+            background: #FF4F4F;
+            color: #FFFEF7;
             padding: 0.5rem 1.5rem;
             border-radius: 50px;
             font-size: 0.875rem;
@@ -1103,24 +1143,25 @@
             letter-spacing: 0.05em;
             text-transform: uppercase;
             display: inline-block;
-            box-shadow: 0 4px 18px rgba(162, 0, 247, 0.35);
-            font-family: 'Orbitron', sans-serif;
+            box-shadow: 0 4px 18px rgba(255, 79, 79, 0.35);
+            font-family: 'Azo Sans Uber', sans-serif;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
         }
 
         .brochure-preview {
             position: relative;
-            background: #0f0a1f;
+            background: #ffffff;
             border-radius: 1.5rem;
-            box-shadow: 0 25px 55px -15px rgba(10, 3, 33, 0.85);
+            box-shadow: 0 25px 55px -15px rgba(31, 31, 31, 0.15);
             overflow: hidden;
             transition: transform 0.45s ease, box-shadow 0.45s ease;
-            border: 2px solid rgba(162, 0, 247, 0.35);
+            border: 2px solid rgba(255, 79, 79, 0.15);
         }
 
         .brochure-preview:hover {
             transform: translateY(-6px);
-            box-shadow: 0 35px 60px -20px rgba(162, 0, 247, 0.5);
-            border-color: rgba(0, 255, 204, 0.6);
+            box-shadow: 0 35px 60px -20px rgba(255, 79, 79, 0.25);
+            border-color: rgba(24, 241, 225, 0.3);
         }
 
         .brochure-preview::before {
@@ -1154,7 +1195,7 @@
             width: 1.5rem;
             height: 1.5rem;
             border-radius: 50%;
-            background: linear-gradient(135deg, #a200f7 0%, #7b11a9 100%);
+            background: #FF4F4F;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -1162,53 +1203,57 @@
 
         .brochure-check-text {
             font-weight: 600;
-            color: #e2e8f0;
+            color: #FFFEF7;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
         }
 
         .brochure-check-description {
-            color: #94a3b8;
+            color: #FFFEF7;
             margin-top: 0.25rem;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+            opacity: 0.95;
         }
 
         .brochure-button {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(135deg, #a200f7 0%, #7b11a9 100%);
+            background: #FF4F4F;
             color: #ffffff;
             padding: 0.85rem 1.75rem;
             border-radius: 9999px;
             font-weight: 700;
             font-size: 1rem;
-            font-family: 'Orbitron', sans-serif;
+            font-family: 'Azo Sans Uber', sans-serif;
             border: none;
             cursor: pointer;
-            box-shadow: 0 20px 35px -15px rgba(162, 0, 247, 0.65);
+            box-shadow: 0 20px 35px -15px rgba(255, 79, 79, 0.4);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
         .brochure-button:hover {
             transform: translateY(-2px) scale(1.02);
-            box-shadow: 0 30px 45px -20px rgba(162, 0, 247, 0.75);
+            box-shadow: 0 30px 45px -20px rgba(255, 79, 79, 0.5);
+            background: #e63939;
         }
 
         .brochure-download-button {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            border: 2px solid #a200f7;
-            color: #e2e8f0;
+            border: 2px solid #FF4F4F;
+            color: #1F1F1F;
             padding: 0.8rem 1.5rem;
             border-radius: 0.5rem;
             font-weight: 700;
-            font-family: 'Orbitron', sans-serif;
+            font-family: 'Azo Sans Uber', sans-serif;
             letter-spacing: 0.04em;
             transition: all 0.3s ease;
             text-decoration: none;
         }
 
         .brochure-download-button:hover {
-            background: linear-gradient(135deg, #a200f7 0%, #7b11a9 100%);
+            background: #FF4F4F;
             color: #ffffff;
             transform: translateY(-2px);
         }
@@ -1217,15 +1262,16 @@
             display: inline-flex;
             align-items: center;
             gap: 0.4rem;
-            color: #94a3b8;
+            color: #FFFEF7;
             font-size: 0.9rem;
             font-weight: 500;
             text-transform: uppercase;
             letter-spacing: 0.08em;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
         }
 
         .brochure-tag-icon {
-            color: #a200f7;
+            color: #FF4F4F;
             width: 1.15rem;
             height: 1.15rem;
         }
@@ -1236,7 +1282,7 @@
             z-index: 9999;
             display: none;
             background-color: rgba(0, 0, 0, 0.85);
-            font-family: 'Rajdhani', sans-serif;
+            font-family: 'Azo Sans Uber', sans-serif;
         }
 
         .brochure-modal.show {
@@ -1253,21 +1299,22 @@
             position: fixed;
             top: 1rem;
             right: 1rem;
-            background: rgba(10, 3, 33, 0.9);
-            color: #a200f7;
+            background: rgba(255, 255, 255, 0.95);
+            color: #FF4F4F;
             border: none;
             border-radius: 50%;
             padding: 0.6rem;
             cursor: pointer;
             transition: transform 0.2s ease, background 0.2s ease;
-            box-shadow: 0 8px 20px rgba(10, 3, 33, 0.7);
+            box-shadow: 0 8px 20px rgba(31, 31, 31, 0.2);
             z-index: 10001;
             pointer-events: auto;
         }
 
         .brochure-close-button:hover {
             transform: scale(1.08);
-            background: rgba(26, 26, 62, 0.95);
+            background: #FF4F4F;
+            color: #ffffff;
         }
 
         .brochure-iframe {
@@ -1289,9 +1336,9 @@
             width: 12em;
             height: 1.2em;
             font-size: 2.5rem;
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 900;
-            letter-spacing: 0.15em;
+            font-family: 'Azo Sans Uber', sans-serif;
+            font-weight: 400;
+            letter-spacing: 0.02em;
             position: relative;
             margin: 50px auto 40px auto;
             line-height: 1;
@@ -1311,9 +1358,9 @@
             position: absolute;
             text-transform: uppercase;
             display: block;
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 900;
-            letter-spacing: 0.25em;
+            font-family: 'Azo Sans Uber', sans-serif;
+            font-weight: 400;
+            letter-spacing: 0.02em;
             white-space: nowrap;
             line-height: 1;
             -webkit-font-smoothing: antialiased;
@@ -1387,19 +1434,19 @@
             text-align: center;
             z-index: 2;
             font-size: 1.5rem;
-            color: #ffffff;
-            font-weight: 800;
-            letter-spacing: 0.2em;
+            color: #FF4F4F;
+            font-weight: 400;
+            letter-spacing: 0.02em;
             line-height: 1;
             width: auto;
             opacity: 0;
             transition: opacity 0.5s ease-in-out, text-shadow 0.5s ease-in-out, color 0.5s ease-in-out;
             text-shadow:
-                0 0 1px #ffffff,
-                0 0 2px #ffffff,
-                0 0 2px rgba(255, 0, 255, 0.8),
-                0 0 4px rgba(255, 0, 255, 0.6),
-                0 0 6px rgba(255, 0, 255, 0.4);
+                0 0 1px #FF4F4F,
+                0 0 2px #FF4F4F,
+                0 0 2px rgba(255, 79, 79, 0.8),
+                0 0 4px rgba(255, 79, 79, 0.6),
+                0 0 6px rgba(255, 79, 79, 0.4);
         }
 
         .visual-services-container:hover .visual-upper {
@@ -1412,7 +1459,7 @@
 
         .visual-services-container:hover .services-inside {
             opacity: 1;
-            color: #ffffff;
+            color: #FF4F4F;
             animation: neonPulse 2s ease-in-out infinite;
         }
 
@@ -1421,36 +1468,36 @@
             0%,
             100% {
                 text-shadow:
-                    0 0 1px #ffffff,
-                    0 0 2px #ffffff,
-                    0 0 2px #ff00ff,
-                    0 0 4px #ff00ff,
-                    0 0 6px #ff00ff,
-                    0 0 8px #ff00ff,
-                    0 0 12px #ff00ff,
-                    0 0 18px #ff00ff,
-                    0 0 2px rgba(255, 0, 255, 1),
-                    0 0 4px rgba(255, 0, 255, 0.9),
-                    0 0 6px rgba(255, 0, 255, 0.8),
-                    0 0 8px rgba(255, 0, 255, 0.6),
-                    0 0 12px rgba(255, 0, 255, 0.4);
+                    0 0 1px #FF4F4F,
+                    0 0 2px #FF4F4F,
+                    0 0 2px #FF4F4F,
+                    0 0 4px #FF4F4F,
+                    0 0 6px #FF4F4F,
+                    0 0 8px #FF4F4F,
+                    0 0 12px #FF4F4F,
+                    0 0 18px #FF4F4F,
+                    0 0 2px rgba(255, 79, 79, 1),
+                    0 0 4px rgba(255, 79, 79, 0.9),
+                    0 0 6px rgba(255, 79, 79, 0.8),
+                    0 0 8px rgba(255, 79, 79, 0.6),
+                    0 0 12px rgba(255, 79, 79, 0.4);
             }
 
             50% {
                 text-shadow:
-                    0 0 1px #ffffff,
-                    0 0 2px #ffffff,
-                    0 0 1px #ff00ff,
-                    0 0 2px #ff00ff,
-                    0 0 3px #ff00ff,
-                    0 0 4px #ff00ff,
-                    0 0 6px #ff00ff,
-                    0 0 10px #ff00ff,
-                    0 0 1px rgba(255, 0, 255, 1),
-                    0 0 2px rgba(255, 0, 255, 0.9),
-                    0 0 3px rgba(255, 0, 255, 0.7),
-                    0 0 4px rgba(255, 0, 255, 0.5),
-                    0 0 6px rgba(255, 0, 255, 0.3);
+                    0 0 1px #18F1E1,
+                    0 0 2px #18F1E1,
+                    0 0 1px #18F1E1,
+                    0 0 2px #18F1E1,
+                    0 0 3px #18F1E1,
+                    0 0 4px #18F1E1,
+                    0 0 6px #18F1E1,
+                    0 0 10px #18F1E1,
+                    0 0 1px rgba(24, 241, 225, 1),
+                    0 0 2px rgba(24, 241, 225, 0.9),
+                    0 0 3px rgba(24, 241, 225, 0.7),
+                    0 0 4px rgba(24, 241, 225, 0.5),
+                    0 0 6px rgba(24, 241, 225, 0.3);
             }
         }
 
@@ -2086,7 +2133,7 @@
             display: inline-block;
             width: 50px;
             height: 50px;
-            border: 3px solid rgba(162, 0, 247, 0.5);
+            border: 3px solid rgba(255, 79, 79, 0.5);
             background-size: cover;
             background-position: center;
             box-sizing: border-box;
@@ -2116,9 +2163,9 @@
         }
 
         .slider-section .checkbox:checked+label {
-            box-shadow: 0 8px 25px 0 rgba(162, 0, 247, 0.4);
+            box-shadow: 0 8px 25px 0 rgba(255, 79, 79, 0.4);
             transform: scale(1.3);
-            border-color: #a200f7;
+            border-color: #FF4F4F;
             -webkit-animation-play-state: running;
             -moz-animation-play-state: running;
             animation-play-state: running;
@@ -2190,29 +2237,29 @@
             margin: 0;
             list-style: none;
             height: 340px;
-            border: 5px solid rgba(162, 0, 247, 0.3);
+            border: 5px solid rgba(255, 79, 79, 0.3);
             background-size: cover;
             background-position: center;
             background-image: url('../../assets/images/audivis/p1.jpg');
             border-radius: 50%;
             box-sizing: border-box;
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 700;
+            font-family: 'Azo Sans Uber', sans-serif;
+            font-weight: 400;
             font-size: 14px;
             letter-spacing: 3px;
             line-height: 2.7;
-            color: #ffffff;
+            color: #1F1F1F;
             writing-mode: vertical-rl;
             opacity: 0;
             pointer-events: none;
-            box-shadow: 0 8px 25px 0 rgba(162, 0, 247, 0.2);
+            box-shadow: 0 8px 25px 0 rgba(255, 79, 79, 0.2);
             -webkit-transition: all 0.5s ease;
             transition: all 0.5s ease;
         }
 
         .slider-section ul li span {
             mix-blend-mode: difference;
-            text-shadow: 0 0 10px rgba(162, 0, 247, 0.8);
+            text-shadow: 0 0 10px rgba(255, 79, 79, 0.8);
         }
 
         .slider-section ul li:nth-child(2) {
@@ -2231,28 +2278,28 @@
             opacity: 1;
             pointer-events: auto;
             border-radius: 16px;
-            border-color: #a200f7;
+            border-color: #FF4F4F;
         }
 
         .slider-section .checkbox.scnd:checked~ul li:nth-child(2) {
             opacity: 1;
             pointer-events: auto;
             border-radius: 16px;
-            border-color: #a200f7;
+            border-color: #FF4F4F;
         }
 
         .slider-section .checkbox.thrd:checked~ul li:nth-child(3) {
             opacity: 1;
             pointer-events: auto;
             border-radius: 16px;
-            border-color: #a200f7;
+            border-color: #FF4F4F;
         }
 
         .slider-section .checkbox.foth:checked~ul li:nth-child(4) {
             opacity: 1;
             pointer-events: auto;
             border-radius: 16px;
-            border-color: #a200f7;
+            border-color: #FF4F4F;
         }
 
         /* Right Column Content Styling */
@@ -2457,7 +2504,7 @@
             flex-direction: column;
             width: 100%;
             padding: 0.5rem 0;
-            font-family: 'Orbitron', sans-serif;
+            font-family: 'Azo Sans Uber', sans-serif;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
             user-select: none;
@@ -2478,22 +2525,22 @@
             position: relative;
             padding: 0 72px;
             height: 80px;
-            background: #a200f7 linear-gradient(to bottom, #a200f7 50%, #7b11a9 50%);
+            background: #FF4F4F linear-gradient(to bottom, #FF4F4F 50%, #e63939 50%);
             border-radius: 0px;
             box-shadow:
                 0px 15px 25px -10px rgba(0, 0, 0, 0.5),
-                inset 0px 0px 0px 0px rgba(162, 0, 247, 0),
-                inset 0px -40px 0px 0px #7b11a9;
+                inset 0px 0px 0px 0px rgba(255, 79, 79, 0),
+                inset 0px -40px 0px 0px #e63939;
             font-size: 24px;
-            font-family: 'Orbitron', sans-serif;
+            font-family: 'Azo Sans Uber', sans-serif;
             font-weight: 700;
             text-align: center;
             text-shadow:
-                0px 3px 5px #7b11a9,
-                0px 5px 10px #7b11a9,
-                0px 5px 10px #7b11a9,
-                0px 5px 10px #7b11a9,
-                0px 5px 10px #7b11a9;
+                0px 3px 5px #e63939,
+                0px 5px 10px #e63939,
+                0px 5px 10px #e63939,
+                0px 5px 10px #e63939,
+                0px 5px 10px #e63939;
             color: #fff;
             letter-spacing: 0.4px;
             overflow: hidden;
@@ -2517,44 +2564,44 @@
         .email-button-bevel:before {
             left: 0;
             background:
-                linear-gradient(45deg, transparent calc(200% / 3), rgba(162, 0, 247, 1) calc(200% / 3)),
-                linear-gradient(-45deg, rgba(123, 17, 169, 1) calc(100% / 3), transparent calc(100% / 3)),
-                linear-gradient(to right, #a200f7, #7b11a9);
+                linear-gradient(45deg, transparent calc(200% / 3), rgba(255, 79, 79, 1) calc(200% / 3)),
+                linear-gradient(-45deg, rgba(230, 57, 57, 1) calc(100% / 3), transparent calc(100% / 3)),
+                linear-gradient(to right, #FF4F4F, #e63939);
         }
 
         .email-button-bevel:after {
             right: 0;
             background:
-                linear-gradient(-45deg, transparent calc(200% / 3), rgba(162, 0, 247, 1) calc(200% / 3)),
-                linear-gradient(45deg, rgba(123, 17, 169, 1) calc(100% / 3), transparent calc(100% / 3)),
-                linear-gradient(to left, #a200f7, #7b11a9);
+                linear-gradient(-45deg, transparent calc(200% / 3), rgba(255, 79, 79, 1) calc(200% / 3)),
+                linear-gradient(45deg, rgba(230, 57, 57, 1) calc(100% / 3), transparent calc(100% / 3)),
+                linear-gradient(to left, #FF4F4F, #e63939);
         }
 
         .email-button-bevel:hover {
             transform: scale(1.07);
             box-shadow:
                 0px 25px 40px -5px rgba(0, 0, 0, 0.3),
-                inset 0px 0px 0px 0px rgba(162, 0, 247, 0),
-                inset 0px -40px 0px 0px #7b11a9;
+                inset 0px 0px 0px 0px rgba(255, 79, 79, 0),
+                inset 0px -40px 0px 0px #e63939;
         }
 
         #email-button:checked~.email-button-bevel {
             padding: 0 30px;
-            background: rgba(162, 0, 247, 0);
+            background: rgba(255, 79, 79, 0);
             box-shadow:
                 0px 5px 15px -5px rgba(0, 0, 0, 0.3),
-                inset 0px 0px 0px 4px #a200f7,
-                inset 0px 0px 0px 0px #7b11a9;
+                inset 0px 0px 0px 4px #FF4F4F,
+                inset 0px 0px 0px 0px #e63939;
             border-radius: 10px;
             font-size: 28px;
             font-weight: 700;
             text-shadow:
-                0px 3px 5px rgba(123, 17, 169, 0),
-                0px 5px 10px rgba(123, 17, 169, 0),
-                0px 5px 10px rgba(123, 17, 169, 0),
-                0px 5px 10px rgba(123, 17, 169, 0),
-                0px 5px 10px rgba(123, 17, 169, 0);
-            color: #a200f7;
+                0px 3px 5px rgba(230, 57, 57, 0),
+                0px 5px 10px rgba(230, 57, 57, 0),
+                0px 5px 10px rgba(230, 57, 57, 0),
+                0px 5px 10px rgba(230, 57, 57, 0),
+                0px 5px 10px rgba(230, 57, 57, 0);
+            color: #FF4F4F;
             transform: scale(0.7) rotate(-6deg);
             transition: all 0.45s cubic-bezier(0.6, -0.9, 0.39, 1.65), text-shadow 0s ease-in-out, box-shadow 0.45s cubic-bezier(0.6, -0.9, 0.39, 1.65);
             transition-delay: 0.135s;
@@ -2574,17 +2621,17 @@
         }
 
         #email-button:checked~.email-button-text {
-            color: rgba(162, 0, 247, 0.1875);
+            color: rgba(255, 79, 79, 0.1875);
             transform: translateY(80px);
         }
 
         .email-button-text {
             display: block;
             margin-bottom: 10px;
-            font-family: 'Rajdhani', sans-serif;
+            font-family: 'Azo Sans Uber', sans-serif;
             font-size: 28px;
             font-weight: 700;
-            color: #e2e8f0;
+            color: #1F1F1F;
             z-index: -1;
             transition: all 0.45s cubic-bezier(0.74, 0.16, 0.24, 0.92);
             transition-delay: 0.135s;
@@ -2731,15 +2778,15 @@
                         <div
                             class="flex flex-wrap items-center justify-center gap-4 sm:gap-8 mt-8 sm:mt-12 text-white/70 px-4">
                             <div class="flex items-center gap-2">
-                                <div class="w-2 h-2 bg-purple-400 rounded-full"></div>
+                                <div class="w-2 h-2 rounded-full" style="background: #FF4F4F;"></div>
                                 <span class="text-xs sm:text-sm font-medium">Video Solutions</span>
                             </div>
                             <div class="flex items-center gap-2">
-                                <div class="w-2 h-2 bg-fuchsia-400 rounded-full"></div>
+                                <div class="w-2 h-2 rounded-full" style="background: #FF4F4F;"></div>
                                 <span class="text-xs sm:text-sm font-medium">Innovative AV Services</span>
                             </div>
                             <div class="flex items-center gap-2">
-                                <div class="w-2 h-2 bg-cyan-400 rounded-full"></div>
+                                <div class="w-2 h-2 rounded-full" style="background: #18F1E1;"></div>
                                 <span class="text-xs sm:text-sm font-medium">Captivating Experiences</span>
                             </div>
                         </div>
@@ -2754,24 +2801,27 @@
                 <div class="container mx-auto px-4 sm:px-6 relative" style="z-index: 20;">
                     <div class="text-center mb-8 space-y-2 brochure-header">
                         <span class="brochure-badge">🎬 Visual Service Guide</span>
-                        <h2 class="text-3xl md:text-4xl font-bold text-white mb-3 leading-tight">
+                        <h2 class="text-3xl md:text-4xl font-bold mb-3 leading-tight"
+                            style="color: #FFFEF7; text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
                             Design Your Signature Visual Experience
                         </h2>
-                        <p class="text-lg text-purple-100 max-w-3xl mx-auto leading-relaxed">
-                            Explore our immersive <a href="../event-lighting.html"
-                                class="text-purple-300 hover:text-purple-200 underline">lighting</a>, video walls, and
+                        <p class="text-lg max-w-3xl mx-auto leading-relaxed"
+                            style="color: #FFFEF7; text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);">
+                            Explore our immersive <a href="../event-lighting.html" class="underline"
+                                style="color: #FF4F4F; text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);">lighting</a>,
+                            video walls, and
                             visual production solutions crafted to elevate
                             conferences, galas, concerts, and brand activations. Part of our comprehensive <a
-                                href="../../av-production.html"
-                                class="text-purple-300 hover:text-purple-200 underline font-semibold">AV production
+                                href="../../av-production.html" class="underline font-semibold"
+                                style="color: #FF4F4F; text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);">AV production
                                 services</a>.
                         </p>
                         <div class="flex items-center justify-center gap-2 pt-2">
-                            <div
-                                class="h-1 w-12 bg-gradient-to-r from-purple-400 via-fuchsia-500 to-cyan-400 rounded-full">
+                            <div class="h-1 w-12 rounded-full"
+                                style="background: linear-gradient(to right, #FF4F4F, #18F1E1);">
                             </div>
-                            <div class="h-1 w-1 bg-purple-400 rounded-full"></div>
-                            <div class="h-1 w-1 bg-cyan-400 rounded-full"></div>
+                            <div class="h-1 w-1 rounded-full" style="background: #FF4F4F;"></div>
+                            <div class="h-1 w-1 rounded-full" style="background: #18F1E1;"></div>
                         </div>
                     </div>
 
@@ -2780,29 +2830,29 @@
                             <div class="relative group">
                                 <div class="brochure-preview">
                                     <div
-                                        class="aspect-[4/3] bg-gradient-to-br from-slate-900 via-purple-950 to-slate-900 flex items-center justify-center p-4 relative overflow-hidden">
+                                        class="aspect-[4/3] bg-gradient-to-br from-white via-gray-50 to-white flex items-center justify-center p-4 relative overflow-hidden">
                                         <div class="absolute inset-0"
-                                            style="background-image: repeating-linear-gradient(45deg, transparent, transparent 2px, rgba(162, 0, 247, 0.08) 2px, rgba(162, 0, 247, 0.08) 4px);">
+                                            style="background-image: repeating-linear-gradient(45deg, transparent, transparent 2px, rgba(255, 79, 79, 0.08) 2px, rgba(255, 79, 79, 0.08) 4px);">
                                         </div>
-                                        <div
-                                            class="absolute inset-0 bg-gradient-to-br from-purple-400/15 via-transparent to-slate-900/40 pointer-events-none">
+                                        <div class="absolute inset-0 pointer-events-none"
+                                            style="background: linear-gradient(to bottom right, rgba(255, 79, 79, 0.15), transparent, rgba(24, 241, 225, 0.1));">
                                         </div>
                                         <div class="relative w-full h-full flex items-center justify-center">
                                             <div class="relative w-5/6 h-5/6 transform group-hover:scale-105 group-hover:-translate-y-2 transition-all duration-700"
                                                 style="transform-style: preserve-3d; perspective: 1000px;">
-                                                <div
-                                                    class="absolute -right-2 top-0 bottom-0 w-16 bg-gradient-to-l from-purple-400/25 to-transparent blur-sm skew-y-12 transform group-hover:scale-110">
+                                                <div class="absolute -right-2 top-0 bottom-0 w-16 blur-sm skew-y-12 transform group-hover:scale-110"
+                                                    style="background: linear-gradient(to left, rgba(255, 79, 79, 0.25), transparent);">
                                                 </div>
-                                                <div
-                                                    class="absolute inset-0 bg-gradient-to-br from-purple-300/20 via-transparent to-transparent rounded-lg pointer-events-none">
+                                                <div class="absolute inset-0 rounded-lg pointer-events-none"
+                                                    style="background: linear-gradient(to bottom right, rgba(255, 79, 79, 0.2), transparent);">
                                                 </div>
                                                 <div class="relative w-full h-full shadow-2xl rounded-lg overflow-hidden"
-                                                    style="box-shadow: 0 20px 60px rgba(162, 0, 247, 0.25), 0 0 25px rgba(123, 17, 169, 0.25);">
+                                                    style="box-shadow: 0 20px 60px rgba(255, 79, 79, 0.15), 0 0 25px rgba(24, 241, 225, 0.15);">
                                                     <img src="../../assets/images/audivis/avthumb.png"
                                                         alt="MiHi Entertainment Visual Services Brochure - LED Walls, Video Mapping, and Event Lighting Production Services"
                                                         class="brochure-image" loading="lazy">
-                                                    <div
-                                                        class="absolute inset-0 bg-gradient-to-br from-purple-400/20 via-transparent to-transparent pointer-events-none">
+                                                    <div class="absolute inset-0 pointer-events-none"
+                                                        style="background: linear-gradient(to bottom right, rgba(255, 79, 79, 0.2), transparent);">
                                                     </div>
                                                     <div
                                                         class="absolute bottom-0 left-0 right-0 h-1/3 bg-gradient-to-b from-transparent to-black/30">
@@ -2810,8 +2860,8 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div
-                                            class="absolute -inset-4 bg-gradient-to-r from-purple-400/15 via-fuchsia-500/25 to-cyan-400/15 blur-3xl group-hover:blur-2xl transition-all duration-700 rounded-full">
+                                        <div class="absolute -inset-4 blur-3xl group-hover:blur-2xl transition-all duration-700 rounded-full"
+                                            style="background: linear-gradient(to right, rgba(255, 79, 79, 0.15), rgba(24, 241, 225, 0.15));">
                                         </div>
                                     </div>
                                 </div>
@@ -2819,20 +2869,25 @@
                         </div>
 
                         <div class="order-1 lg:order-2">
-                            <div
-                                class="pill-label inline-block bg-gradient-to-r from-purple-400 via-fuchsia-500 to-cyan-400 text-slate-900 px-4 py-2 rounded-full text-sm font-bold mb-4 shadow-lg tracking-[0.2em]">
+                            <div class="pill-label inline-block px-4 py-2 rounded-full text-sm font-bold mb-4 shadow-lg tracking-[0.2em]"
+                                style="background: linear-gradient(to right, #FF4F4F, #18F1E1); color: #ffffff;">
                                 Full-Service Visual Packages
                             </div>
-                            <h3 class="brochure-subtitle text-3xl md:text-4xl font-bold mb-4 text-white">
+                            <h3 class="brochure-subtitle text-3xl md:text-4xl font-bold mb-4"
+                                style="color: #FFFEF7; text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
                                 Bring Visionary Production To Life
                             </h3>
-                            <p class="text-lg text-purple-100 mb-6 leading-relaxed">
+                            <p class="text-lg mb-6 leading-relaxed"
+                                style="color: #FFFEF7; text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);">
                                 From precision video engineering to cinematic <a href="../event-lighting.html"
-                                    class="text-purple-300 hover:text-purple-200 underline">lighting</a> and LED walls,
+                                    class="underline"
+                                    style="color: #FF4F4F; text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);">lighting</a>
+                                and LED walls,
                                 our team designs
                                 turnkey solutions tailored to your venue, audience, and brand goals. Our <a
-                                    href="../../corporate-events.html"
-                                    class="text-purple-300 hover:text-purple-200 underline">corporate event</a> visual
+                                    href="../../corporate-events.html" class="underline"
+                                    style="color: #FF4F4F; text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);">corporate
+                                    event</a> visual
                                 solutions combine LED displays, video mapping, and projection design for impactful
                                 presentations.
                             </p>
@@ -2907,8 +2962,8 @@
                                     Download PDF
                                 </a>
                             </div>
-                            <div
-                                class="flex flex-wrap items-center gap-4 pt-4 border-t border-slate-800/70 compact-tags">
+                            <div class="flex flex-wrap items-center gap-4 pt-4 compact-tags"
+                                style="border-top: 1px solid rgba(255, 254, 247, 0.3);">
                                 <div class="brochure-tag"><svg class="brochure-tag-icon" fill="currentColor"
                                         viewBox="0 0 20 20">
                                         <path fill-rule="evenodd"
@@ -2935,7 +2990,7 @@
 
             <!-- New Section with Slider -->
             <section class="section-padding slider-section slider-full-height slider-over-hide relative"
-                style="background: radial-gradient(circle, rgba(26, 26, 62, 0.95) 0%, rgba(10, 3, 33, 1) 100%); padding-bottom: 0; margin-bottom: -2rem;">
+                style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 50%, #f1f3f5 100%); padding-bottom: 0; margin-bottom: -2rem;">
                 <div class="container mx-auto px-6 relative" style="z-index: 20;">
                     <div class="grid lg:grid-cols-2 gap-4 sm:gap-6 items-center">
                         <!-- Left Side - Slider -->
@@ -2969,36 +3024,36 @@
                         <!-- First Section with Slider -->
                         <div class="flex items-center justify-center min-h-[250px] sm:min-h-[300px] order-1 lg:order-2">
                             <div class="w-full max-w-2xl text-left space-y-2 text-content px-2 sm:px-0">
-                                <h3 class="text-base md:text-lg text-purple-300 font-semibold tracking-wider uppercase"
-                                    style="font-family: 'Rajdhani', sans-serif; letter-spacing: 0.1em;">
+                                <h3 class="text-base md:text-lg font-semibold tracking-wider uppercase"
+                                    style="font-family: 'Azo Sans Uber', sans-serif; letter-spacing: 0.1em; color: #666666;">
                                     SHOW OFF STUNNING VISUALS WITH OUR
                                 </h3>
-                                <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight"
-                                    style="font-family: 'Orbitron', sans-serif; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 800;">
+                                <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight"
+                                    style="font-family: 'Azo Sans Uber', sans-serif; letter-spacing: 0.02em; text-transform: uppercase; font-weight: 400; color: #FF4F4F;">
                                     VISUAL EVENT SERVICES
                                 </h2>
-                                <p class="text-base md:text-lg text-purple-100 leading-normal"
-                                    style="font-family: 'Rajdhani', sans-serif;">
+                                <p class="text-base md:text-lg leading-normal"
+                                    style="font-family: 'Azo Sans Uber', sans-serif; color: #1F1F1F;">
                                     Boost your next event with MiHi Entertainment's Professional Visual Services. Our
                                     expert
                                     team ensures high-definition video quality for gatherings of all sizes, from
                                     intimate
                                     meetings to large-scale celebrations, including <a
-                                        href="../../corporate-events.html"
-                                        class="text-purple-300 hover:text-purple-200 underline">corporate events</a> and
+                                        href="../../corporate-events.html" class="underline"
+                                        style="color: #FF4F4F;">corporate events</a> and
                                     conferences.
                                 </p>
-                                <p class="text-base md:text-lg text-purple-100 leading-normal"
-                                    style="font-family: 'Rajdhani', sans-serif;">
+                                <p class="text-base md:text-lg leading-normal"
+                                    style="font-family: 'Azo Sans Uber', sans-serif; color: #1F1F1F;">
                                     With cutting-edge equipment like LED screens and projectors, we deliver impactful
                                     visuals that captivate your audience. Our <a href="../../av-production.html"
-                                        class="text-purple-300 hover:text-purple-200 underline">AV services</a> are
+                                        class="underline" style="color: #FF4F4F;">AV services</a> are
                                     tailored to meet your event's
                                     unique needs, ensuring your message is presented with clarity and style. Trust us
                                     for
                                     visual services that make your vision a reality. Pair our visual solutions with our
-                                    <a href="../audio-services.html"
-                                        class="text-purple-300 hover:text-purple-200 underline">professional audio
+                                    <a href="../audio-services.html" class="underline"
+                                        style="color: #FF4F4F;">professional audio
                                         services</a> for complete event production.
                                 </p>
                                 <div class="mt-6">
@@ -3019,18 +3074,18 @@
 
             <!-- Second Section with Slider -->
             <section class="section-padding slider-section slider-full-height slider-over-hide relative"
-                style="background: radial-gradient(circle, rgba(26, 26, 62, 0.95) 0%, rgba(10, 3, 33, 1) 100%); padding-top: 0; padding-bottom: 0; margin-top: -2rem; margin-bottom: -2rem;">
+                style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 50%, #f1f3f5 100%); padding-top: 0; padding-bottom: 0; margin-top: -2rem; margin-bottom: -2rem;">
                 <div class="container mx-auto px-6 relative" style="z-index: 20;">
                     <div class="grid lg:grid-cols-2 gap-6 items-center">
                         <!-- Left Side - Content -->
                         <div class="flex items-center justify-center min-h-[250px] sm:min-h-[300px] order-1 lg:order-1">
                             <div class="w-full max-w-2xl text-center sm:text-right space-y-2 text-content px-2 sm:px-0">
-                                <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight"
-                                    style="font-family: 'Orbitron', sans-serif; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 800;">
+                                <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold leading-tight"
+                                    style="font-family: 'Azo Sans Uber', sans-serif; letter-spacing: 0.02em; text-transform: uppercase; font-weight: 400; color: #FF4F4F;">
                                     EVENT PRODUCTION
                                 </h2>
-                                <p class="text-sm sm:text-base md:text-lg text-purple-100 leading-normal"
-                                    style="font-family: 'Rajdhani', sans-serif;">
+                                <p class="text-sm sm:text-base md:text-lg leading-normal"
+                                    style="font-family: 'Azo Sans Uber', sans-serif; color: #1F1F1F;">
                                     From pre-event, during the event, to post event..our video storytelling takes your
                                     ordinary event to that spectacular level.
                                 </p>
@@ -3053,7 +3108,7 @@
                             <div class="section mx-auto text-center slider-height-padding relative">
                                 <ul>
                                     <li
-                                        style="opacity: 1; pointer-events: auto; border-radius: 16px; border-color: #a200f7; background-image: url('../../assets/images/visuals/s1.jpg');">
+                                        style="opacity: 1; pointer-events: auto; border-radius: 16px; border-color: #FF4F4F; background-image: url('../../assets/images/visuals/s1.jpg');">
                                         <span>VISUAL PRODUCTION</span>
                                     </li>
                                 </ul>
@@ -3064,7 +3119,7 @@
 
             <!-- Third Section with Slider -->
             <section class="section-padding slider-section slider-full-height slider-over-hide relative"
-                style="background: radial-gradient(circle, rgba(26, 26, 62, 0.95) 0%, rgba(10, 3, 33, 1) 100%); padding-top: 0; padding-bottom: 0; margin-top: -2rem; margin-bottom: 0;">
+                style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 50%, #f1f3f5 100%); padding-top: 0; padding-bottom: 0; margin-top: -2rem; margin-bottom: 0;">
                 <div class="container mx-auto px-6 relative" style="z-index: 20;">
                     <div class="grid lg:grid-cols-2 gap-6 items-center">
                         <!-- Left Side - Single Image -->
@@ -3072,7 +3127,7 @@
                             <div class="section mx-auto text-center slider-height-padding relative">
                                 <ul>
                                     <li
-                                        style="opacity: 1; pointer-events: auto; border-radius: 16px; border-color: #a200f7; background-image: url('../../assets/images/visuals/s2.jpg');">
+                                        style="opacity: 1; pointer-events: auto; border-radius: 16px; border-color: #FF4F4F; background-image: url('../../assets/images/visuals/s2.jpg');">
                                         <span>VISUAL PRODUCTION</span>
                                     </li>
                                 </ul>
@@ -3083,12 +3138,12 @@
                         <div class="flex items-center justify-center min-h-[250px] sm:min-h-[300px] order-1 lg:order-2">
                             <div class="w-full max-w-2xl text-center sm:text-left space-y-2 text-content px-2 sm:px-4 lg:px-8"
                                 style="padding-left: 0; padding-right: 0;">
-                                <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight"
-                                    style="font-family: 'Orbitron', sans-serif; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 800;">
+                                <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold leading-tight"
+                                    style="font-family: 'Azo Sans Uber', sans-serif; letter-spacing: 0.02em; text-transform: uppercase; font-weight: 400; color: #FF4F4F;">
                                     TRADE SHOW
                                 </h2>
-                                <p class="text-sm sm:text-base md:text-lg text-purple-100 leading-normal"
-                                    style="font-family: 'Rajdhani', sans-serif;">
+                                <p class="text-sm sm:text-base md:text-lg leading-normal"
+                                    style="font-family: 'Azo Sans Uber', sans-serif; color: #1F1F1F;">
                                     Grab the attention of attendees from across the trade show floor with our expert
                                     video
                                     services.
@@ -3111,7 +3166,7 @@
 
             <!-- Email Button Section -->
             <section
-                style="background: radial-gradient(circle, rgba(26, 26, 62, 0.95) 0%, rgba(10, 3, 33, 1) 100%); padding: 0 0 0.5rem 0; min-height: auto; margin-top: -2rem;">
+                style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 50%, #f1f3f5 100%); padding: 0 0 0.5rem 0; min-height: auto; margin-top: -2rem;">
                 <div class="container mx-auto px-6 relative" style="z-index: 20;">
                     <div class="email-button-container">
                         <input type="checkbox" name="button" id="email-button">
@@ -3123,18 +3178,18 @@
 
             <!-- Fourth Section with Slider -->
             <section class="section-padding slider-section slider-full-height slider-over-hide relative"
-                style="background: radial-gradient(circle, rgba(26, 26, 62, 0.95) 0%, rgba(10, 3, 33, 1) 100%); padding-top: 0.3; padding-bottom: 0; margin-top: -2rem; margin-bottom: -2rem;">
+                style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 50%, #f1f3f5 100%); padding-top: 0.3; padding-bottom: 0; margin-top: -2rem; margin-bottom: -2rem;">
                 <div class="container mx-auto px-6 relative" style="z-index: 20;">
                     <div class="grid lg:grid-cols-2 gap-6 items-center">
                         <!-- Left Side - Content -->
                         <div class="flex items-center justify-center min-h-[250px] sm:min-h-[300px] order-1 lg:order-1">
                             <div class="w-full max-w-2xl text-center sm:text-right space-y-2 text-content px-2 sm:px-0">
-                                <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight"
-                                    style="font-family: 'Orbitron', sans-serif; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 800;">
+                                <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold leading-tight"
+                                    style="font-family: 'Azo Sans Uber', sans-serif; letter-spacing: 0.02em; text-transform: uppercase; font-weight: 400; color: #FF4F4F;">
                                     MEDIA PRODUCTION
                                 </h2>
-                                <p class="text-sm sm:text-base md:text-lg text-purple-100 leading-normal"
-                                    style="font-family: 'Rajdhani', sans-serif;">
+                                <p class="text-sm sm:text-base md:text-lg leading-normal"
+                                    style="font-family: 'Azo Sans Uber', sans-serif; color: #1F1F1F;">
                                     Event and meeting planners love our expert video team who excel in communicating
                                     brand
                                     through imagery.
@@ -3158,7 +3213,7 @@
                             <div class="section mx-auto text-center slider-height-padding relative">
                                 <ul>
                                     <li
-                                        style="opacity: 1; pointer-events: auto; border-radius: 16px; border-color: #a200f7; background-image: url('../../assets/images/visuals/s3.jpg');">
+                                        style="opacity: 1; pointer-events: auto; border-radius: 16px; border-color: #FF4F4F; background-image: url('../../assets/images/visuals/s3.jpg');">
                                         <span>VISUAL PRODUCTION</span>
                                     </li>
                                 </ul>
@@ -3169,7 +3224,7 @@
 
             <!-- Fifth Section with Slider -->
             <section class="section-padding slider-section slider-full-height slider-over-hide relative"
-                style="background: radial-gradient(circle, rgba(26, 26, 62, 0.95) 0%, rgba(10, 3, 33, 1) 100%); padding-top: 0; padding-bottom: 0; margin-top: -2rem; margin-bottom: 0;">
+                style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 50%, #f1f3f5 100%); padding-top: 0; padding-bottom: 0; margin-top: -2rem; margin-bottom: 0;">
                 <div class="container mx-auto px-6 relative" style="z-index: 20;">
                     <div class="grid lg:grid-cols-2 gap-6 items-center">
                         <!-- Left Side - Single Image -->
@@ -3177,7 +3232,7 @@
                             <div class="section mx-auto text-center slider-height-padding relative">
                                 <ul>
                                     <li
-                                        style="opacity: 1; pointer-events: auto; border-radius: 16px; border-color: #a200f7; background-image: url('../../assets/images/visuals/s4.jpg');">
+                                        style="opacity: 1; pointer-events: auto; border-radius: 16px; border-color: #FF4F4F; background-image: url('../../assets/images/visuals/s4.jpg');">
                                         <span>VISUAL PRODUCTION</span>
                                     </li>
                                 </ul>
@@ -3188,12 +3243,12 @@
                         <div class="flex items-center justify-center min-h-[250px] sm:min-h-[300px] order-1 lg:order-2">
                             <div class="w-full max-w-2xl text-center sm:text-left space-y-2 text-content px-2 sm:px-4 lg:px-8"
                                 style="padding-left: 0; padding-right: 0;">
-                                <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight"
-                                    style="font-family: 'Orbitron', sans-serif; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 800;">
+                                <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold leading-tight"
+                                    style="font-family: 'Azo Sans Uber', sans-serif; letter-spacing: 0.02em; text-transform: uppercase; font-weight: 400; color: #FF4F4F;">
                                     PROJECTION MAPPING
                                 </h2>
-                                <p class="text-sm sm:text-base md:text-lg text-purple-100 leading-normal"
-                                    style="font-family: 'Rajdhani', sans-serif;">
+                                <p class="text-sm sm:text-base md:text-lg leading-normal"
+                                    style="font-family: 'Azo Sans Uber', sans-serif; color: #1F1F1F;">
                                     Transform any location into an immersive event with our video and lighting services.
                                 </p>
                                 <div class="button-wrapper-mobile">
@@ -3214,7 +3269,7 @@
 
             <!-- Contact Section -->
             <section
-                style="background: radial-gradient(circle, rgba(26, 26, 62, 0.95) 0%, rgba(10, 3, 33, 1) 100%); padding-top: 0; padding-bottom: 0; margin-top: -2rem; margin-bottom: 0;">
+                style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 50%, #f1f3f5 100%); padding-top: 0; padding-bottom: 0; margin-top: -2rem; margin-bottom: 0;">
                 <div class="container mx-auto px-4 sm:px-6 relative"
                     style="z-index: 20; padding-top: 2rem; padding-bottom: 2rem;">
                     <div class="max-w-2xl mx-auto text-center space-y-2 sm:space-y-3">
@@ -3308,15 +3363,15 @@
                                 </div>
                             </div>
                         </div>
-                        <p class="text-xs sm:text-sm md:text-base text-purple-100 leading-normal px-2 sm:px-0"
-                            style="font-family: 'Rajdhani', sans-serif;">
+                        <p class="text-xs sm:text-sm md:text-base leading-normal px-2 sm:px-0"
+                            style="font-family: 'Azo Sans Uber', sans-serif; color: #1F1F1F;">
                             Learn more about our professional visual services including LED walls, video mapping,
                             projection design, and AV production for your next <a href="../../corporate-events.html"
-                                class="text-purple-300 hover:text-purple-200 underline">corporate event</a>, <a
-                                href="../../holiday-party.html"
-                                class="text-purple-300 hover:text-purple-200 underline">holiday party</a>, concert, or
-                            <a href="../tradeshow-booth.html"
-                                class="text-purple-300 hover:text-purple-200 underline">trade show</a>. Click the button
+                                class="underline" style="color: #FF4F4F;">corporate event</a>, <a
+                                href="../../holiday-party.html" class="underline" style="color: #FF4F4F;">holiday
+                                party</a>, concert, or
+                            <a href="../tradeshow-booth.html" class="underline" style="color: #FF4F4F;">trade show</a>.
+                            Click the button
                             below to email us and connect with our expert visual production team today.
                         </p>
                         <div class="flex justify-center mt-2 sm:mt-3 px-2 sm:px-0">
@@ -3353,9 +3408,9 @@
                 <div class="text-center">
                     <div class="inline-block relative w-16 h-16">
                         <div class="absolute inset-0 rounded-full border-4"
-                            style="border-color: rgba(162, 0, 247, 0.3);"></div>
+                            style="border-color: rgba(255, 79, 79, 0.3);"></div>
                         <div class="absolute inset-0 rounded-full border-4 border-transparent animate-spin"
-                            style="border-top-color: #a200f7;"></div>
+                            style="border-top-color: #FF4F4F;"></div>
                     </div>
                     <p class="mt-4 text-white text-lg font-medium">Loading Visual Guide...</p>
                 </div>
@@ -3426,13 +3481,13 @@
             try {
                 const bg = Grid1Background(canvas);
                 if (bg && bg.grid) {
-                    bg.grid.setColors([0xa200f7, 0x7b11a9, 0x00ffcc]);
+                    bg.grid.setColors([0xFF4F4F, 0xe63939, 0x18F1E1]);
                     if (bg.grid.light1) {
-                        bg.grid.light1.color.set(0xa200f7);
+                        bg.grid.light1.color.set(0xFF4F4F);
                         bg.grid.light1.intensity = 900;
                     }
                     if (bg.grid.light2) {
-                        bg.grid.light2.color.set(0x00ffcc);
+                        bg.grid.light2.color.set(0x18F1E1);
                         bg.grid.light2.intensity = 400;
                     }
                 }
