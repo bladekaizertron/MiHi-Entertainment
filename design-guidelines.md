@@ -24,6 +24,60 @@ This document outlines the color palette and font style standards that should be
 - **CMYK:** `55 | 0 | 24 | 0`
 - **Usage:** Secondary accent color, interactive elements, highlights
 
+## Color-in-Text Specifications
+
+### Light Theme
+
+**Background:**
+- White background with light gray border
+- Slightly rounded corners
+
+**Label/Tag:**
+- **Text:** Uppercase, white font
+- **Background:** Cyan/Turquoise (`#18F1E1`)
+- **Shape:** Pill-shaped with significantly rounded left and right edges
+- **Font:** Azo Sans (or Azo Sans Uber for emphasis)
+
+**Heading:**
+- **Text:** Very large, bold, uppercase
+- **Color:** Red/Coral (`#FF4F4F`)
+- **Font:** Azo Sans Uber
+
+**Body Text:**
+- **Text:** Regular weight, standard size
+- **Color:** Dark gray/black (`#1F1F1F`)
+- **Font:** Azo Sans
+
+### Dark Theme
+
+**Background:**
+- Dark charcoal gray/black background with light gray/white border
+- Slightly rounded corners
+
+**Label/Tag:**
+- **Text:** Uppercase, white font
+- **Background:** Red/Coral (`#FF4F4F`)
+- **Shape:** Pill-shaped with significantly rounded left and right edges
+- **Font:** Azo Sans (or Azo Sans Uber for emphasis)
+
+**Heading:**
+- **Text:** Very large, bold, uppercase
+- **Color:** Cyan/Turquoise (`#18F1E1`)
+- **Font:** Azo Sans Uber
+
+**Body Text:**
+- **Text:** Regular weight, standard size
+- **Color:** Light gray/white
+- **Font:** Azo Sans
+
+### Usage Notes
+
+- The label and heading colors are **inverted** between light and dark themes
+- In light theme: Label uses Cyan, Heading uses Red
+- In dark theme: Label uses Red, Heading uses Cyan
+- Body text always contrasts with the background for readability
+- All text elements maintain consistent font family usage (Azo Sans for body, Azo Sans Uber for headings)
+
 ## Font Style
 
 ### Typography
