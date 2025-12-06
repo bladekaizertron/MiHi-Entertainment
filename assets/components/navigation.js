@@ -38,34 +38,53 @@
 
     const assetsPrefix = pathPrefix + 'assets/';
 
-    // Add global style to fix gradient buttons - override page-specific CSS
+    // Add minimal global style to protect navigation from page-specific CSS
     const style = document.createElement('style');
     style.textContent = `
-        /* Fix for gradient buttons - allow Tailwind gradients to work on all pages */
-        .btn-primary.bg-gradient-to-r,
-        .btn-primary[class*="bg-gradient"],
-        header .btn-primary.bg-gradient-to-r,
-        header .btn-primary[class*="bg-gradient"],
-        nav .btn-primary.bg-gradient-to-r,
-        nav .btn-primary[class*="bg-gradient"],
-        a.btn-primary.bg-gradient-to-r,
-        a.btn-primary[class*="bg-gradient"] {
-            background: unset !important;
-            background-image: linear-gradient(to right, rgb(236, 72, 153), rgb(168, 85, 247), rgb(59, 130, 246)) !important;
+        /* Navigation Protection - Only essential positioning protection */
+        header {
+            z-index: 50 !important;
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            right: 0 !important;
+            /* Inherit fonts from page design */
+            font-family: inherit !important;
+            font-size: inherit !important;
         }
-        .btn-primary.bg-gradient-to-r:hover,
-        .btn-primary[class*="bg-gradient"]:hover,
-        header .btn-primary.bg-gradient-to-r:hover,
-        header .btn-primary[class*="bg-gradient"]:hover,
-        nav .btn-primary.bg-gradient-to-r:hover,
-        nav .btn-primary[class*="bg-gradient"]:hover,
-        a.btn-primary.bg-gradient-to-r:hover,
-        a.btn-primary[class*="bg-gradient"]:hover {
-            background-image: linear-gradient(to right, rgb(219, 39, 119), rgb(147, 51, 234), rgb(37, 99, 235)) !important;
+        
+        header nav,
+        header nav * {
+            /* Inherit all typography from page */
+            font-family: inherit !important;
+        }
+        
+        /* Protect mobile menu z-index */
+        #mobile-menu-overlay {
+            z-index: 40 !important;
+        }
+        
+        #mobile-menu {
+            z-index: 41 !important;
+        }
+        
+        /* Protect Contact Us button coral color from page overrides */
+        header .btn-primary[style*="#FF4F4F"],
+        nav .btn-primary[style*="#FF4F4F"],
+        #mobile-menu .btn-primary[style*="#FF4F4F"] {
+            background: #FF4F4F !important;
+            color: #ffffff !important;
+        }
+        
+        header .btn-primary[style*="#FF4F4F"]:hover,
+        nav .btn-primary[style*="#FF4F4F"]:hover,
+        #mobile-menu .btn-primary[style*="#FF4F4F"]:hover {
+            background: #FF4F4F !important;
+            opacity: 0.9 !important;
         }
     `;
-    if (!document.getElementById('gradient-button-fix')) {
-        style.id = 'gradient-button-fix';
+    if (!document.getElementById('navigation-protection')) {
+        style.id = 'navigation-protection';
         document.head.appendChild(style);
     }
 
@@ -395,7 +414,7 @@
 
 
                 <!-- CTA Button -->
-                <a href="${pathPrefix}contact-us.html" class="btn-primary text-white px-6 py-3 rounded-full font-semibold bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 hover:from-pink-600 hover:via-purple-600 hover:to-blue-600 transition-all duration-300 transform hover:scale-105">
+                <a href="${pathPrefix}contact-us.html" class="btn-primary text-white px-6 py-3 rounded-full font-semibold transition-all duration-300 transform hover:scale-105 hover:opacity-90" style="background: #FF4F4F;">
                     Contact Us
                 </a>
             </div>
@@ -619,7 +638,7 @@
 
                             <!-- Mobile Contact Button -->
                             <div class="pb-4 pt-2">
-                                <a href="${pathPrefix}contact-us.html" class="btn-primary text-white px-6 py-4 rounded-2xl font-bold bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 hover:from-pink-600 hover:via-purple-600 hover:to-blue-600 transition-all duration-300 text-center block shadow-xl hover:shadow-2xl transform hover:scale-[1.02] active:scale-[0.98] text-base">Contact Us</a>
+                                <a href="${pathPrefix}contact-us.html" class="btn-primary text-white px-6 py-4 rounded-2xl font-bold transition-all duration-300 text-center block shadow-xl hover:shadow-2xl transform hover:scale-[1.02] active:scale-[0.98] text-base hover:opacity-90" style="background: #FF4F4F;">Contact Us</a>
                             </div>
                         </div>
                     </div>
