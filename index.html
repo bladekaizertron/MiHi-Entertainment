@@ -241,34 +241,66 @@
     <!-- Performance Optimizations -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="dns-prefetch" href="https://images.unsplash.com">
     <link rel="dns-prefetch" href="https://cdn.tailwindcss.com">
     <link rel="dns-prefetch" href="https://www.youtube.com">
     
-    <!-- Google Fonts -->
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap"
-        rel="stylesheet" media="print" onload="this.media='all'">
-    <noscript>
-        <link
-            href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap"
-            rel="stylesheet">
-    </noscript>
-
+    <!-- Brand Guide Typography: Azo Sans Font Family -->
     <style>
-        /* Custom styles for modern luxury design */
-        body {
-            font-family: 'Inter', sans-serif;
-            color: #1a202c;
+        /* Azo Sans Font Face Declarations */
+        @font-face {
+            font-family: 'Azo Sans';
+            src: url('assets/fonts/AzoSans-Regular.woff2') format('woff2'),
+                 url('assets/fonts/AzoSans-Regular.woff') format('woff');
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
         }
 
-        h1,
-        h2,
-        h3,
-        h4,
-        h5,
-        h6 {
-            font-family: 'Playfair Display', serif;
+        @font-face {
+            font-family: 'Azo Sans Uber';
+            src: url('assets/fonts/AzoSansUber-Regular.woff2') format('woff2'),
+                 url('assets/fonts/AzoSansUber-Regular.woff') format('woff');
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        /* Brand Guide: Body Text - Azo Sans Regular */
+        body {
+            font-family: 'Azo Sans', sans-serif;
+            color: #1F1F1F;
+            overflow-x: hidden;
+            background: #ffffff;
+        }
+
+        p {
+            font-family: 'Azo Sans', sans-serif;
+            color: #1F1F1F;
+        }
+
+        /* Brand Guide: Headers - Azo Sans Uber (Uppercase) */
+        main h1, main h2, main h3, main h4, main h5, main h6 {
+            font-family: 'Azo Sans Uber', sans-serif;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 0.02em;
+            line-height: 1.2;
+            color: #FF4F4F;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Brand Guide: CTAs use Coral (#FF4F4F) */
+        main .btn-primary {
+            background: #FF4F4F;
+            color: #ffffff;
+            transition: all 0.3s ease;
+        }
+
+        main .btn-primary:hover {
+            background: #e63939;
+            transform: translateY(-2px);
+            box-shadow: 0 20px 40px rgba(255, 79, 79, 0.4);
         }
 
         /* Hero video styles */
@@ -675,14 +707,14 @@
                         <span class="inline-flex items-center gap-2 px-5 py-2 bg-gradient-to-r from-pink-500/10 via-purple-500/10 to-blue-500/10 border border-pink-500/20 rounded-full text-xs font-semibold tracking-[0.35em] uppercase text-pink-600 shadow-[0_0_20px_rgba(236,72,153,0.15)] mb-6 sm:mb-8 block">TRANSFORM YOUR EVENT WITH OUR TOP-TIER</span>
 
                         <!-- Main Heading -->
-                        <h1 class="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black mb-6 leading-tight tracking-tight text-center"
-                            style="text-shadow: 2px 2px 8px rgba(0,0,0,0.7);">
-                            <span class="block">Photo Booth Rentals</span>
+                        <h1 class="text-4xl sm:text-6xl md:text-7xl lg:text-8xl mb-6 leading-tight text-center"
+                            style="font-weight: 400; text-shadow: 2px 2px 8px rgba(0,0,0,0.7);">
+                            <span class="block">PHOTO BOOTH</span><span class="block" style="color: #18F1E1;">RENTALS</span>
                         </h1>
 
                         <!-- Description -->
                         <div class="max-w-7xl mx-auto mb-8 px-4">
-                            <p class="text-lg sm:text-xl md:text-2xl leading-relaxed text-white/95 font-light text-center"
+                            <p class="text-lg sm:text-xl md:text-2xl mb-8 text-white max-w-6xl mx-auto leading-relaxed px-4"
                                 style="text-shadow: 1px 1px 4px rgba(0,0,0,0.7);">
                                 AI Photo Booths, 360° Video Booths & Event Entertainment. Premium photo booth rentals and event entertainment services nationwide. From AI-powered photo booths to 360° video experiences, we create unforgettable moments for weddings, corporate events, and celebrations across the United States.
                             </p>
@@ -691,11 +723,13 @@
                         <!-- CTA Buttons -->
                         <div class="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center px-4">
                             <a href="contact-us.html"
-                                class="btn-primary inline-flex items-center justify-center text-white px-6 sm:px-10 py-3 sm:py-5 rounded-full text-base sm:text-lg font-semibold bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 hover:from-pink-600 hover:via-purple-600 hover:to-blue-600 shadow-[0_20px_45px_-15px_rgba(236,72,153,0.75)] hover:shadow-[0_25px_60px_-18px_rgba(59,130,246,0.7)] hover:scale-110 active:scale-95 transition-all duration-300 transform hover:-translate-y-1 focus:ring-4 focus:ring-pink-400/40 w-full sm:w-auto"
+                           class="btn-primary text-white px-8 py-4 rounded-full text-lg font-bold hover:scale-105 transition-all duration-300 shadow-2xl w-full sm:w-auto"
+                                style="background: #FF4F4F; color: #ffffff;"
                                 aria-label="Get a quote for your event">
                                 Get Your Quote
                             </a>
-                            <button type="button" data-click-to-call data-call-text="Call Us" class="inline-flex items-center justify-center gap-2 sm:gap-3 px-6 sm:px-10 py-3 sm:py-5 rounded-full text-base sm:text-lg font-semibold border-2 border-white/30 text-white bg-white/10 hover:bg-white/20 hover:border-white/50 hover:shadow-xl transition-all duration-300 transform hover:scale-110 hover:-translate-y-1 focus:ring-2 focus:ring-white/30 cursor-pointer w-full sm:w-auto" aria-label="Call us for your event">
+                            <button type="button" data-click-to-call data-call-text="Call Us"
+                            class="group inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full text-lg font-bold transition-all duration-300 shadow-xl hover:shadow-2xl hover:scale-105 w-full sm:w-auto" style="background: #18F1E1; color: #ffffff;" aria-label="Call us for your event">
                                 <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498A1 1 0 0121 17.72V21a2 2 0 01-2 2h-1C9.716 23 3 16.284 3 8V7a2 2 0 012-2z"/></svg>
                                 <span>Call Us</span>
                             </button>
@@ -756,7 +790,7 @@
                             Photo Booth Story Lab
                         </span>
                         <div class="space-y-5">
-                            <h2 id="brochure-heading" class="text-4xl md:text-5xl font-bold leading-tight">
+                            <h2 id="brochure-heading" class="text-3xl sm:text-4xl md:text-5xl mb-6">
                                 See How Our Booths Bring Events to Life
                             </h2>
                             <p class="text-base md:text-lg text-white/80 leading-relaxed">
@@ -826,10 +860,10 @@
                         What We Offer
                     </span>
                     <div class="space-y-5">
-                        <h2 id="products-heading" class="text-4xl md:text-5xl font-bold leading-tight text-gray-900">
+                        <h2 id="products-heading" class="text-3xl sm:text-4xl md:text-5xl mb-6">
                         Transform Your Event
                     </h2>
-                        <p class="text-base md:text-lg text-gray-600 leading-relaxed max-w-3xl mx-auto">
+                        <p class="text-lg leading-relaxed" style="color: #1F1F1F;">
                             From AI-powered experiences to classic elegance, we bring the perfect entertainment to every celebration
                     </p>
                     </div>
@@ -842,10 +876,10 @@
                             <div class="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-pink-500 to-purple-500 text-white text-xs uppercase tracking-[0.3em] rounded-full mb-6 shadow-lg">
                                 🔥 Most Popular
                             </div>
-                            <h3 class="text-4xl md:text-5xl font-bold mb-6 text-gray-900">
+                            <h3 class="text-2xl md:text-3xl mb-6">
                                 AI Photo Booth
                             </h3>
-                            <p class="text-base md:text-lg text-gray-600 mb-8 leading-relaxed">
+                            <p class="text-lg leading-relaxed mb-8" style="color: #1F1F1F;">
                                 Transform into anyone or anything with cutting-edge AI technology. Your guests will become superheroes, celebrities, or fantasy characters in seconds.
                             </p>
                             <div class="space-y-4 mb-8">
@@ -853,21 +887,21 @@
                                     <div class="w-10 h-10 rounded-full bg-pink-500/10 flex items-center justify-center text-pink-600 font-bold flex-shrink-0 border border-pink-500/20">1</div>
                                     <div>
                                         <p class="font-semibold text-gray-900">Instant AI Generation</p>
-                                        <p class="text-sm text-gray-600">Results in under 30 seconds</p>
+                                        <p class="text-sm style="color: #1F1F1F;"">Results in under 30 seconds</p>
                                     </div>
                                 </div>
                                 <div class="flex gap-3">
                                     <div class="w-10 h-10 rounded-full bg-purple-500/10 flex items-center justify-center text-purple-600 font-bold flex-shrink-0 border border-purple-500/20">2</div>
                                     <div>
                                         <p class="font-semibold text-gray-900">Unlimited Styles</p>
-                                        <p class="text-sm text-gray-600">50+ character themes available</p>
+                                        <p class="text-sm" style="color: #1F1F1F;">50+ character themes available</p>
                                     </div>
                                 </div>
                                 <div class="flex gap-3">
                                     <div class="w-10 h-10 rounded-full bg-blue-500/10 flex items-center justify-center text-blue-600 font-bold flex-shrink-0 border border-blue-500/20">3</div>
                                     <div>
                                         <p class="font-semibold text-gray-900">Share Instantly</p>
-                                        <p class="text-sm text-gray-600">Text, email, or QR code delivery</p>
+                                        <p class="text-sm" style="color: #1F1F1F;">Text, email, or QR code delivery</p>
                                     </div>
                                 </div>
                             </div>
@@ -900,7 +934,7 @@
                             <div
                                 class="absolute -bottom-6 -left-6 bg-white border border-gray-200/50 rounded-2xl shadow-xl p-6 max-w-[200px] hover:shadow-2xl hover:scale-110 transition-all duration-300 transform cursor-pointer">
                                 <div class="text-4xl font-bold bg-gradient-to-r from-pink-500 to-purple-500 bg-clip-text text-transparent mb-1">10k+</div>
-                                <div class="text-sm text-gray-600">AI Photos Created</div>
+                                <div class="text-sm" style="color: #1F1F1F;">AI Photos Created</div>
                             </div>
                         </div>
                     </div>
@@ -908,7 +942,7 @@
                     <!-- Other Photo Booths - Horizontal Scroll -->
                     <div class="mb-12 relative overflow-visible">
                         <div class="flex items-center justify-between mb-8">
-                            <h4 class="text-2xl md:text-3xl font-bold text-gray-900">More Photo Booth Options</h4>
+                            <h4 class="text-lg mb-2">MORE PHOTO BOOTH OPTIONS</h4>
                             <div class="hidden md:flex items-center gap-2 text-sm text-gray-500">
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -954,7 +988,7 @@
                                                 </path>
                                             </svg>
                                         </div>
-                                        <h5 class="text-xl font-bold mb-2 text-white">Green Screen</h5>
+                                        <h5 class="text-lg mb-2" style="color: #FF4F4F;">Green Screen</h5>
                                         <p class="text-gray-200 mb-4">Transport guests anywhere with custom backgrounds
                                         </p>
                                         <a href="product/green-screen-photo-booth.html"
@@ -988,7 +1022,7 @@
                                                 </path>
                                             </svg>
                                         </div>
-                                        <h5 class="text-xl font-bold mb-2 text-white">Professional Headshots</h5>
+                                        <h5 class="text-lg mb-2" style="color: #FF4F4F;">Professional Headshots</h5>
                                         <p class="text-gray-200 mb-4">Studio-quality headshots, on-site and effortless</p>
                                         <a href="product/professional-headshots.html"
                                             class="text-white font-semibold hover:text-gray-200 inline-flex items-center group transition-all pointer-events-auto"
@@ -1021,7 +1055,7 @@
                                                 </path>
                                             </svg>
                                         </div>
-                                        <h5 class="text-xl font-bold mb-2 text-white">Rosie The Robot</h5>
+                                        <h5 class="text-lg mb-2" style="color: #FF4F4F;">Rosie The Robot</h5>
                                         <p class="text-gray-200 mb-4">A roaming robot that roams and captures photos at your event</p>
                                         <a href="product/rosie-the-robot-photo-booth.html"
                                             class="text-white font-semibold hover:text-gray-200 inline-flex items-center group transition-all pointer-events-auto"
@@ -1054,7 +1088,7 @@
                                                 </path>
                                             </svg>
                                         </div>
-                                        <h5 class="text-xl font-bold mb-2 text-white">Graffiti Wall Photo Booth</h5>
+                                        <h5 class="text-lg mb-2" style="color: #FF4F4F;">Graffiti Wall Photo Booth</h5>
                                         <p class="text-gray-200 mb-4">Paint and create digital art with your photos</p>
                                         <a href="product/graffiti-wall-photo-booth.html"
                                             class="text-white font-semibold hover:text-gray-200 inline-flex items-center group transition-all pointer-events-auto"
@@ -1087,7 +1121,7 @@
                                                 </path>
                                             </svg>
                                         </div>
-                                        <h5 class="text-xl font-bold mb-2 text-white">Mosaic Photo Booth</h5>
+                                        <h5 class="text-lg mb-2" style="color: #FF4F4F;">Mosaic Photo Booth</h5>
                                         <p class="text-gray-200 mb-4">Your event's story, built tile-by-tile with guest photos</p>
                                         <a href="product/mosaic-photo-booth.html"
                                             class="text-white font-semibold hover:text-gray-200 inline-flex items-center group transition-all pointer-events-auto"
@@ -1119,7 +1153,7 @@
                                                     d="M13 10V3L4 14h7v7l9-11h-7z"></path>
                                             </svg>
                                         </div>
-                                        <h5 class="text-xl font-bold mb-2 text-white">Roaming Booth</h5>
+                                        <h5 class="text-lg mb-2" style="color: #FF4F4F;">Roaming Booth</h5>
                                         <p class="text-gray-200 mb-4">The party comes to your guests</p>
                                         <a href="product/roaming-photo-booth.html"
                                             class="text-white font-semibold hover:text-gray-200 inline-flex items-center group transition-all pointer-events-auto"
@@ -1152,7 +1186,7 @@
                                                 </path>
                                             </svg>
                                         </div>
-                                        <h5 class="text-xl font-bold mb-2 text-white">Virtual Photo Booth</h5>
+                                        <h5 class="text-lg mb-2" style="color: #FF4F4F;">Virtual Photo Booth</h5>
                                         <p class="text-gray-200 mb-4">Snap, pose, and share—no app required, all online</p>
                                         <a href="product/virtual-photo-booth.html"
                                             class="text-white font-semibold hover:text-gray-200 inline-flex items-center group transition-all pointer-events-auto"
@@ -1185,7 +1219,7 @@
                                                 </path>
                                             </svg>
                                         </div>
-                                        <h5 class="text-xl font-bold mb-2 text-white">Custom Photo Booth</h5>
+                                        <h5 class="text-lg mb-2" style="color: #FF4F4F;">Custom Photo Booth</h5>
                                         <p class="text-gray-200 mb-4">Snap, pose, and share—no app required, all online</p>
                                         <a href="services/photobooth/custom-photo-booth.html"
                                             class="text-white font-semibold hover:text-gray-200 inline-flex items-center group transition-all pointer-events-auto"
@@ -1242,8 +1276,8 @@
                         🎥 Video Experiences
                     </div>
                     <div class="space-y-6">
-                        <h2 class="text-4xl md:text-6xl font-black leading-tight">
-                        Video Booths
+                        <h2 class="text-3xl sm:text-4xl md:text-5xl mb-6">
+                        VIDEO BOOTHS
                     </h2>
                         <p class="text-lg md:text-2xl text-white/85 leading-relaxed max-w-3xl mx-auto">
                         Create share-worthy videos that capture the energy and emotion of your event
@@ -1265,7 +1299,7 @@
                         </video>
                         <div class="absolute inset-0 bg-gradient-to-tr from-black/30 via-transparent to-transparent pointer-events-none"></div>
                         <div class="absolute bottom-0 left-0 p-10 text-white">
-                            <h3 class="text-4xl md:text-5xl font-bold mb-4">360° Video Booth</h3>
+                            <h3 class="text-2xl md:text-3xl mb-4">360° VIDEO BOOTH</h3>
                             <p class="text-lg text-white/95 mb-6 max-w-md leading-relaxed">Watch as the camera rotates around you in
                                 stunning slow motion, capturing epic moments from every angle</p>
                             <a href="product/360-photo-booth.html"
@@ -1539,8 +1573,8 @@
 
             <div class="relative container mx-auto px-6">
                 <div class="text-center mb-12 space-y-4">
-                    <h4 class="text-3xl md:text-4xl font-bold mb-4 leading-tight">Complete Your Experience</h4>
-                    <p class="text-gray-600 text-lg max-w-2xl mx-auto">Professional services to elevate every moment</p>
+                    <h2 class="text-3xl sm:text-4xl md:text-5xl mb-6">COMPLETE YOUR EXPERIENCE</h2>
+                    <p class="style="color: #1F1F1F;" text-lg max-w-2xl mx-auto">Professional services to elevate every moment</p>
                     <!-- Visual separator -->
                     <div class="flex items-center justify-center gap-2 pt-2">
                         <div class="h-1 w-12 bg-gradient-to-r from-[#0050ff] to-[#0040d9] rounded-full"></div>
@@ -1564,7 +1598,7 @@
                                             <div
                                                 class="inline-block self-start bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-bold mb-4">
                                                 📸 Professional Coverage</div>
-                                            <h3 class="text-4xl md:text-5xl font-bold mb-4">Event Photography</h3>
+                                            <h3 class="text-2xl md:text-3xl mb-4">EVENT PHOTOGRAPHY</h3>
                                             <p class="text-xl text-white/90 mb-6 max-w-2xl">Capture every precious moment with our
                                                 professional photographers who blend seamlessly into your event</p>
                                             <a href="event-photography.html"
@@ -1589,7 +1623,7 @@
                                             <div
                                                 class="inline-block self-start bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-bold mb-4">
                                                 🎯 Brand Experience</div>
-                                            <h3 class="text-4xl md:text-5xl font-bold mb-4">Brand Activations</h3>
+                                            <h3 class="text-2xl md:text-3xl mb-4">BRAND ACTIVATIONS</h3>
                                             <p class="text-xl text-white/90 mb-6 max-w-2xl">Transform your brand into unforgettable experiences with immersive activations and custom installations</p>
                                             <a href="product/brand-activation.html"
                                                 class="inline-flex items-center bg-white text-red-600 px-8 py-4 rounded-full font-bold hover:bg-gray-100 hover:scale-110 hover:shadow-xl transition-all duration-300 transform w-fit">
@@ -1637,8 +1671,8 @@
                                 <div
                                     class="inline-block bg-gradient-to-r from-indigo-500 to-purple-500 text-white px-3 py-1 rounded-full text-sm font-bold mb-3">
                                     🤖 AI Artist</div>
-                                <h3 class="text-2xl font-bold mb-3">SketchBot</h3>
-                                <p class="text-gray-700 mb-4">Watch our robot artist create unique sketches of your
+                                <h4 class="text-lg mb-2" style="color: #FF4F4F;">SKETCHBOT</h4>
+                                <p class="mb-4" style="color: #1F1F1F;">Watch our robot artist create unique sketches of your
                                     guests in real-time</p>
                                 <a href="products/sketchbot-booth.html"
                                     class="inline-flex items-center text-[#0050ff] font-bold hover:text-indigo-700 transition">
@@ -1660,7 +1694,7 @@
                                 <img src="assets/images/cookie/cookie-hero.webp" alt="Cookie Printer" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
                             </div>
                             <h4 class="text-xl font-bold mb-2">Cookie Printer</h4>
-                            <p class="text-gray-600 mb-4">Edible memories! Print guest photos directly onto delicious
+                            <p class="style="color: #1F1F1F;" mb-4">Edible memories! Print guest photos directly onto delicious
                                 cookies</p>
                             <a href="products/cookie-printer.html"
                                 class="inline-flex items-center text-orange-600 font-semibold hover:text-orange-700 transition">
@@ -1681,7 +1715,7 @@
                                 <img src="assets/images/pose-flashcards/pose-flashcards-hero.webp" alt="Signature Pose Cards" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
                             </div>
                             <h4 class="text-xl font-bold mb-2">Signature Pose Cards</h4>
-                            <p class="text-gray-600 mb-4">Never run out of pose ideas with our fun flashcard collection
+                            <p class="style="color: #1F1F1F;" mb-4">Never run out of pose ideas with our fun flashcard collection
                             </p>
                             <a href="pose-flashcards.html"
                                 class="inline-flex items-center text-[#0050ff] font-semibold hover:text-[#0040d9] transition">
@@ -1701,8 +1735,8 @@
                             <div class="w-full h-48 mb-6 rounded-xl overflow-hidden bg-gradient-to-br from-amber-100 to-yellow-100">
                                 <img src="assets/images/lux/lux-hero.webp" alt="Lux Photography" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
                             </div>
-                            <h4 class="text-2xl font-bold mb-3">Lux Photography</h4>
-                            <p class="text-gray-700 mb-6 leading-relaxed">Elevated photography booth experience with
+                            <h4 class="text-lg mb-2" style="color: #FF4F4F;">Lux Photography</h4>
+                            <p class="text-lg leading-relaxed mb-6" style="color: #1F1F1F;">Elevated photography booth experience with
                                 luxury lighting and premium finishes</p>
                             <a href="lux-photography.html"
                                 class="inline-flex items-center text-amber-600 font-semibold hover:text-amber-700 transition">
@@ -1736,10 +1770,10 @@
                         Perfect for Every Occasion
                     </span>
                     <div class="space-y-5">
-                        <h2 id="event-types-heading" class="text-4xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight">
+                        <h2 id="event-types-heading" class="text-3xl sm:text-4xl md:text-5xl mb-6">
                             From Intimate to Grand
                         </h2>
-                        <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                        <p class="text-xl style="color: #1F1F1F;" max-w-3xl mx-auto leading-relaxed">
                             From intimate celebrations to grand corporate events, we tailor our services to your unique
                             vision
                         </p>
@@ -1757,7 +1791,7 @@
                             <div class="inline-flex items-center gap-2 px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full text-sm font-bold mb-3 text-white">
                                 💒 Wedding Events
                             </div>
-                            <h3 class="text-2xl font-bold text-white mb-2">Make Your Special Day Unforgettable</h3>
+                            <h3 class="text-2xl md:text-3xl mb-2" style="color: #FF4F4F;">MAKE YOUR SPECIAL DAY UNFORGETTABLE</h3>
                             <p class="text-white/90">Elegant photo booth experiences that capture every precious moment.</p>
                         </div>
                     </a>
@@ -1772,7 +1806,7 @@
                             <div class="inline-flex items-center gap-2 px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full text-sm font-bold mb-3 text-white">
                                 🏢 Corporate Events
                             </div>
-                            <h3 class="text-2xl font-bold text-white mb-2">Fully Branded Experiences</h3>
+                            <h3 class="text-2xl md:text-3xl mb-2" style="color: #FF4F4F;">FULLY BRANDED EXPERIENCES</h3>
                             <p class="text-white/90">Customized solutions that align perfectly with your brand identity.</p>
                         </div>
                     </a>
@@ -1787,7 +1821,7 @@
                             <div class="inline-flex items-center gap-2 px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full text-sm font-bold mb-3 text-white">
                                 🎉 Social Events
                             </div>
-                            <h3 class="text-2xl font-bold text-white mb-2">Birthday Parties & Celebrations</h3>
+                            <h3 class="text-2xl md:text-3xl mb-2" style="color: #FF4F4F;">BIRTHDAY PARTIES & CELEBRATIONS</h3>
                             <p class="text-white/90">Mitzvahs, anniversaries, and more - we make every celebration special.</p>
                         </div>
                     </a>
@@ -1802,7 +1836,7 @@
                             <div class="inline-flex items-center gap-2 px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full text-sm font-bold mb-3 text-white">
                                 🎪 Trade Shows
                             </div>
-                            <h3 class="text-2xl font-bold text-white mb-2">Engage Your Audience</h3>
+                            <h3 class="text-2xl md:text-3xl mb-2" style="color: #FF4F4F;">ENGAGE YOUR AUDIENCE</h3>
                             <p class="text-white/90">Interactive experiences that drive engagement and brand awareness.</p>
                         </div>
                     </a>
@@ -1832,7 +1866,7 @@
                             <div class="inline-flex items-center gap-2 px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full text-sm font-bold mb-3 text-white">
                                 🎰 Casino Parties
                             </div>
-                            <h3 class="text-2xl font-bold text-white mb-2">Full Casino Experience</h3>
+                            <h3 class="text-2xl md:text-3xl mb-2" style="color: #FF4F4F;">FULL CASINO EXPERIENCE</h3>
                             <p class="text-white/90">Professional tables, dealers, and authentic casino entertainment.</p>
                         </div>
                     </a>
@@ -1859,7 +1893,7 @@
                     </div>
                     
                         <div class="space-y-6">
-                            <h2 class="text-4xl md:text-6xl font-black leading-tight">
+                            <h2 class="text-3xl sm:text-4xl md:text-5xl mb-6">
                         Complete Event Solutions
                     </h2>
                             <p class="text-lg md:text-2xl text-white/85 leading-relaxed mx-auto max-w-3xl">
@@ -1877,31 +1911,31 @@
                             <p class="text-sm text-white/70 mt-2 mb-4">Professional sound systems, dynamic visuals, stunning lighting, custom signage, and event stages for events of all sizes.</p>
                             <ul class="space-y-2 mb-6 text-sm text-white/80">
                                 <li class="flex items-center gap-2">
-                                    <svg class="w-4 h-4 text-blue-300 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <svg class="w-4 h-4 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" style="color: #18F1E1;">
                                         <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
                                     </svg>
                                     <a href="../av-services/audio-services.html" class="hover:text-blue-300 transition-colors">Audio Services</a>
                                 </li>
                                 <li class="flex items-center gap-2">
-                                    <svg class="w-4 h-4 text-blue-300 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <svg class="w-4 h-4 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" style="color: #18F1E1;">
                                         <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
                                     </svg>
                                     <a href="../av-services/visual-services.html" class="hover:text-blue-300 transition-colors">Visual Services</a>
                                 </li>
                                 <li class="flex items-center gap-2">
-                                    <svg class="w-4 h-4 text-blue-300 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <svg class="w-4 h-4 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" style="color: #18F1E1;">
                                         <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
                                     </svg>
                                     <a href="../av-services/event-lighting.html" class="hover:text-blue-300 transition-colors">Lighting Services</a>
                                 </li>
                                 <li class="flex items-center gap-2">
-                                    <svg class="w-4 h-4 text-blue-300 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <svg class="w-4 h-4 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" style="color: #18F1E1;">
                                         <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
                                     </svg>
                                     <a href="../av-services/event-stages.html" class="hover:text-blue-300 transition-colors">Event Stages</a>
                                 </li>
                                 <li class="flex items-center gap-2">
-                                    <svg class="w-4 h-4 text-blue-300 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <svg class="w-4 h-4 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" style="color: #18F1E1;">
                                         <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
                                     </svg>
                                     <a href="../av-services/event-signage.html" class="hover:text-blue-300 transition-colors">Custom Signage</a>
@@ -1922,19 +1956,19 @@
                             <p class="text-sm text-white/70 mt-2 mb-4">Transform your venue with stunning decor, special effects, lighting designs, and premium furniture that creates unforgettable atmospheres.</p>
                             <ul class="space-y-2 mb-6 text-sm text-white/80">
                                 <li class="flex items-center gap-2">
-                                    <svg class="w-4 h-4 text-pink-300 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <svg class="w-4 h-4 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" style="color: #18F1E1;">
                                         <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
                                         </svg>
                                     <a href="../event-decor/special-effects.html" class="hover:text-pink-300 transition-colors">Special Effects</a>
                                     </li>
                                 <li class="flex items-center gap-2">
-                                    <svg class="w-4 h-4 text-pink-300 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <svg class="w-4 h-4 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" style="color: #18F1E1;">
                                         <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
                                     </svg>
                                     <a href="../event-decor/lighting-decor.html" class="hover:text-pink-300 transition-colors">Lighting Decor</a>
                                     </li>
                                 <li class="flex items-center gap-2">
-                                    <svg class="w-4 h-4 text-pink-300 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <svg class="w-4 h-4 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" style="color: #18F1E1;">
                                         <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
                                     </svg>
                                     <a href="../event-decor/event-decor.html" class="hover:text-pink-300 transition-colors">Event Decor</a>
@@ -1955,25 +1989,25 @@
                             <p class="text-sm text-white/70 mt-2 mb-4">Interactive entertainment that keeps guests engaged with VR experiences, arcade games, and unique interactive attractions for all ages.</p>
                             <ul class="space-y-2 mb-6 text-sm text-white/80">
                                 <li class="flex items-center gap-2">
-                                    <svg class="w-4 h-4 text-cyan-300 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <svg class="w-4 h-4 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" style="color: #18F1E1;">
                                         <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
                                         </svg>
                                     <a href="../game-rentals/claw-machine.html" class="hover:text-cyan-300 transition-colors">Claw Machine</a>
                                     </li>
                                 <li class="flex items-center gap-2">
-                                    <svg class="w-4 h-4 text-cyan-300 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <svg class="w-4 h-4 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" style="color: #18F1E1;">
                                         <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
                                         </svg>
                                     <a href="../game-rentals/stick-drop.html" class="hover:text-cyan-300 transition-colors">Stick Drop</a>
                                     </li>
                                 <li class="flex items-center gap-2">
-                                    <svg class="w-4 h-4 text-cyan-300 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <svg class="w-4 h-4 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" style="color: #18F1E1;">
                                         <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
                                     </svg>
                                     <a href="virtual-reality-rental.html" class="hover:text-cyan-300 transition-colors">VR Headset Rentals</a>
                                     </li>
                                 <li class="flex items-center gap-2">
-                                    <svg class="w-4 h-4 text-cyan-300 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <svg class="w-4 h-4 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" style="color: #18F1E1;">
                                         <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
                                     </svg>
                                     <a href="../product/money-booth.html" class="hover:text-cyan-300 transition-colors">Money Booth</a>
@@ -2014,10 +2048,10 @@
                         </div>
                         
                         <div class="space-y-6">
-                            <h2 class="text-4xl md:text-6xl font-black leading-tight text-gray-900">
-                        Explore Our Work
+                            <h2 class="text-3xl sm:text-4xl md:text-5xl mb-6">
+                        EXPLORE OUR WORK
                     </h2>
-                            <p class="text-lg md:text-2xl text-gray-600 leading-relaxed mx-auto max-w-3xl">
+                            <p class="text-lg md:text-2xl style="color: #1F1F1F;" leading-relaxed mx-auto max-w-3xl">
                         Discover our portfolio of successful events and creative installations
                     </p>
                     </div>
@@ -2034,8 +2068,8 @@
                                 <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                             </div>
                             <div class="p-6">
-                                <h3 class="text-xl font-semibold text-gray-900 mb-2">Our Work</h3>
-                                <p class="text-sm text-gray-600">View a collection of our work</p>
+                                <h4 class="text-lg mb-2" style="color: #FF4F4F;">Our Work</h3>
+                                <p class="text-sm style="color: #1F1F1F;"">View a collection of our work</p>
                         </div>
                     </a>
 
@@ -2048,8 +2082,8 @@
                                 <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                             </div>
                             <div class="p-6">
-                                <h3 class="text-xl font-semibold text-gray-900 mb-2">Our Services</h3>
-                                <p class="text-sm text-gray-600">Check out all of the services we offer for events</p>
+                                <h4 class="text-lg mb-2" style="color: #FF4F4F;">Our Services</h3>
+                                <p class="text-sm style="color: #1F1F1F;"">Check out all of the services we offer for events</p>
                         </div>
                     </a>
 
@@ -2062,8 +2096,8 @@
                                 <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                             </div>
                             <div class="p-6">
-                                <h3 class="text-xl font-semibold text-gray-900 mb-2">Our Booths</h3>
-                                <p class="text-sm text-gray-600">See all of our Photo Booths</p>
+                                <h4 class="text-lg mb-2" style="color: #FF4F4F;">Our Booths</h3>
+                                <p class="text-sm style="color: #1F1F1F;"">See all of our Photo Booths</p>
                         </div>
                     </a>
 
@@ -2076,8 +2110,8 @@
                                 <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                             </div>
                             <div class="p-6">
-                                <h3 class="text-xl font-semibold text-gray-900 mb-2">Our Props</h3>
-                                <p class="text-sm text-gray-600">Take a look at our prop collection</p>
+                                <h4 class="text-lg mb-2" style="color: #FF4F4F;">Our Props</h3>
+                                <p class="text-sm style="color: #1F1F1F;"">Take a look at our prop collection</p>
                         </div>
                     </a>
 
@@ -2090,8 +2124,8 @@
                                 <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                             </div>
                             <div class="p-6">
-                                <h3 class="text-xl font-semibold text-gray-900 mb-2">Our Themes</h3>
-                                <p class="text-sm text-gray-600">All events themes, curated for any event</p>
+                                <h4 class="text-lg mb-2" style="color: #FF4F4F;">Our Themes</h3>
+                                <p class="text-sm style="color: #1F1F1F;"">All events themes, curated for any event</p>
                         </div>
                     </a>
 
@@ -2104,8 +2138,8 @@
                                 <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                             </div>
                             <div class="p-6">
-                                <h3 class="text-xl font-semibold text-gray-900 mb-2">Our Add-Ons</h3>
-                                <p class="text-sm text-gray-600">See what we can add-on to your next rental</p>
+                                <h4 class="text-lg mb-2" style="color: #FF4F4F;">Our Add-Ons</h3>
+                                <p class="text-sm style="color: #1F1F1F;"">See what we can add-on to your next rental</p>
                         </div>
                     </a>
 
@@ -2118,8 +2152,8 @@
                                 <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                         </div>
                             <div class="p-6">
-                                <h3 class="text-xl font-semibold text-gray-900 mb-2">Our Design</h3>
-                                <p class="text-sm text-gray-600">Custom Branded Booth Wraps, Backdrops, and more</p>
+                                <h4 class="text-lg mb-2" style="color: #FF4F4F;">Our Design</h3>
+                                <p class="text-sm style="color: #1F1F1F;"">Custom Branded Booth Wraps, Backdrops, and more</p>
                             </div>
                         </a>
                     </div>
@@ -2159,8 +2193,8 @@
                     </div>
 
                     <div class="space-y-6 mt-8">
-                        <h2 class="text-5xl md:text-7xl font-black leading-tight" style="background: linear-gradient(135deg, #ff00ff 0%, #00f7ff 50%, #0050ff 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; text-shadow: 0 0 40px rgba(255, 0, 255, 0.5);">
-                            About MiHi
+                        <h2 class="text-3xl sm:text-4xl md:text-5xl mb-6">
+                            ABOUT MIHI
                         </h2>
                         <p class="text-lg md:text-2xl text-white/85 leading-relaxed mx-auto max-w-3xl">
                             Learn about our story, team, and commitment to creating <span class="text-cyan-400 font-semibold">unforgettable experiences</span>
@@ -2258,7 +2292,7 @@
                                 <div class="absolute inset-0 rounded-2xl border-2 border-purple-400/0 group-hover:border-purple-400/50 transition-all duration-500 transform group-hover:scale-125"></div>
                             </div>
                             
-                            <h3 class="text-2xl font-bold mb-4 text-white group-hover:text-purple-300 transition-colors duration-300">Case Studies</h3>
+                            <h3 class="text-2xl mb-4 text-white group-hover:text-purple-300 transition-colors duration-300" style="font-weight: 400;">CASE STUDIES</h3>
                             <p class="text-sm text-white/70 mb-6 leading-relaxed group-hover:text-white/90 transition-colors duration-300">
                                 Learn how our activations have helped create memorable events.
                             </p>
@@ -2544,10 +2578,10 @@
 
                     <!-- Header -->
                     <div class="space-y-6">
-                        <h2 class="text-4xl md:text-6xl font-black leading-tight text-gray-900">
-                            What Our Clients Say
+                        <h2 class="text-3xl sm:text-4xl md:text-5xl mb-6">
+                            WHAT OUR CLIENTS SAY
                     </h2>
-                        <p class="text-lg md:text-2xl text-gray-600 leading-relaxed mx-auto max-w-3xl">
+                        <p class="text-lg md:text-2xl style="color: #1F1F1F;" leading-relaxed mx-auto max-w-3xl">
                         Real experiences from our valued clients at MiHi Entertainment
                     </p>
                     <!-- Star Rating -->
@@ -2602,7 +2636,7 @@
                     </div>
 
                     <!-- Trust indicators -->
-                    <div class="flex flex-wrap items-center justify-center gap-6 mt-12 text-gray-600 text-sm">
+                    <div class="flex flex-wrap items-center justify-center gap-6 mt-12 style="color: #1F1F1F;" text-sm">
                         <div class="flex items-center gap-2"><svg class="w-4 h-4 text-blue-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>Verified Reviews</div>
                         <div class="flex items-center gap-2"><svg class="w-4 h-4 text-purple-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>Real Experiences</div>
                         <div class="flex items-center gap-2"><svg class="w-4 h-4 text-pink-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>Client Testimonials</div>
@@ -2636,10 +2670,10 @@
 
                     <!-- Header -->
                     <div class="space-y-6">
-                        <h2 class="text-4xl md:text-6xl font-black leading-tight text-gray-900">
-                            Where We Serve
+                        <h2 class="text-3xl sm:text-4xl md:text-5xl mb-6">
+                            WHERE WE SERVE
                         </h2>
-                        <p class="text-lg md:text-2xl text-gray-600 leading-relaxed mx-auto max-w-3xl">
+                        <p class="text-lg md:text-2xl style="color: #1F1F1F;" leading-relaxed mx-auto max-w-3xl">
                             Bringing legendary photo booth experiences across the nation
                         </p>
                     </div>
@@ -3306,7 +3340,7 @@
 
                     <!-- Contact CTA -->
                     <div class="pt-8">
-                        <p class="text-gray-600 mb-6">Want to see all our service locations?</p>
+                        <p class="style="color: #1F1F1F;" mb-6">Want to see all our service locations?</p>
                         <a href="our-locations.html" class="inline-flex items-center justify-center px-8 py-4 rounded-full font-semibold text-lg bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-white shadow-[0_22px_60px_-20px_rgba(0,80,255,0.4)] hover:shadow-[0_28px_70px_-20px_rgba(147,51,234,0.5)] transition-transform duration-300 hover:-translate-y-1 focus:ring-4 focus:ring-blue-400/40">
                             View All Locations
                         </a>
@@ -3332,8 +3366,8 @@
                     </div>
 
                     <div class="space-y-6">
-                        <h2 class="text-4xl md:text-6xl font-black leading-tight">
-                            Let's Capture Something Legendary
+                        <h2 class="text-3xl sm:text-4xl md:text-5xl mb-6">
+                            LET'S CAPTURE SOMETHING LEGENDARY
                         </h2>
                         <p class="text-lg md:text-2xl text-white/85 leading-relaxed mx-auto max-w-3xl">
                             Tell us the vibe, location, and guest list. We'll design a photobooth experience with custom backdrops, live print stations, and share stations that become the buzz of the night.
@@ -3359,12 +3393,12 @@
                     </div>
 
                     <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                        <a href="contact-us.html" class="group inline-flex items-center justify-center px-10 py-4 rounded-full font-semibold text-lg bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 hover:from-pink-600 hover:via-purple-600 hover:to-blue-600 text-white shadow-[0_22px_60px_-20px_rgba(236,72,153,0.8)] hover:shadow-[0_28px_70px_-20px_rgba(59,130,246,0.7)] transition-all duration-300 hover:-translate-y-1 hover:scale-105 focus:ring-4 focus:ring-pink-400/40" aria-label="Start photobooth design consultation">
+                        <a href="contact-us.html" class="btn-primary group inline-flex items-center justify-center px-10 py-4 rounded-full font-bold text-lg text-white shadow-2xl hover:scale-105 transition-all duration-300" style="background: #FF4F4F; color: #ffffff;" aria-label="Start photobooth design consultation">
                             <svg class="w-6 h-6 mr-2 opacity-90 group-hover:opacity-100" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
                             Design My Booth Experience
                             <svg class="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
                         </a>
-                        <button type="button" data-click-to-call data-call-text="Call Us" class="inline-flex items-center justify-center px-9 py-4 rounded-full font-semibold border border-white/30 text-white bg-white/5 hover:bg-white/15 hover:shadow-lg transition-all duration-300 focus:ring-2 focus:ring-white/30 cursor-pointer" aria-label="Call us for your event">
+                        <button type="button" data-click-to-call data-call-text="Call Us" class="inline-flex items-center justify-center px-9 py-4 rounded-full font-bold transition-all duration-300 shadow-xl hover:shadow-2xl hover:scale-105 cursor-pointer" style="background: #18F1E1; color: #ffffff;" aria-label="Call us for your event">
                             <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498A1 1 0 0121 17.72V21a2 2 0 01-2 2h-1C9.716 23 3 16.284 3 8V7a2 2 0 012-2z"/></svg>
                             <span>Call Us</span>
                         </button>

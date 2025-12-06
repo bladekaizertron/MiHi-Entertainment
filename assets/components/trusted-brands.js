@@ -111,8 +111,8 @@ function renderTrustedBrands(options = {}) {
                         ${config.badge}
                     </span>
                     <div class="space-y-5">
-                        <h2 class="text-4xl md:text-5xl font-bold leading-tight text-gray-900">
-                            ${config.title.part1} and ${config.title.part2}
+                        <h2 class="text-3xl sm:text-4xl md:text-5xl mb-6" style="font-weight: 400;">
+                            ${config.title.part1.toUpperCase()} AND ${config.title.part2.toUpperCase()}
                         </h2>
                         <p class="text-base md:text-lg text-gray-600 leading-relaxed">
                             ${config.description}
