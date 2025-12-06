@@ -45,37 +45,61 @@
     <link rel="preconnect" href="https://cdn.jsdelivr.net">
 
     <script src="https://cdn.tailwindcss.com"></script>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Arvo:wght@400;700&family=Cinzel:wght@500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800;900&family=Montserrat:wght@500;600;700&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap"
-        rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;600;700&display=swap"
-        rel="stylesheet">
+    <!-- Brand Guide Typography: Azo Sans Font Family -->
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@300;900&display=swap');
-        @import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
-
-        body {
-            font-family: 'Inter', sans-serif;
-            color: #1a202c;
+        /* Azo Sans Font Face Declarations */
+        @font-face {
+            font-family: 'Azo Sans';
+            src: url('assets/fonts/AzoSans-Regular.woff2') format('woff2'),
+                url('assets/fonts/AzoSans-Regular.woff') format('woff');
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
         }
 
+        @font-face {
+            font-family: 'Azo Sans Uber';
+            src: url('assets/fonts/AzoSansUber-Regular.woff2') format('woff2'),
+                url('assets/fonts/AzoSansUber-Regular.woff') format('woff');
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        /* Brand Guide: Body Text - Azo Sans Regular */
+        body {
+            font-family: 'Azo Sans', sans-serif;
+            color: #1F1F1F;
+        }
+
+        /* Brand Guide: Headers - Azo Sans Uber (Uppercase) */
         h1,
         h2,
         h3,
         h4,
         h5,
         h6 {
-            font-family: 'Playfair Display', serif;
+            font-family: 'Azo Sans Uber', sans-serif;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 0.02em;
+            line-height: 1.2;
+            color: #FF4F4F;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
+        /* Brand Guide: CTAs use Coral (#FF4F4F) */
         .btn-primary {
-            background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%);
+            background: #FF4F4F;
+            color: #ffffff;
             transition: all 0.3s ease;
         }
 
         .btn-primary:hover {
+            background: #e63939;
             transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(0, 80, 255, 0.4);
+            box-shadow: 0 10px 25px rgba(255, 79, 79, 0.4);
         }
 
         .section-padding {
@@ -126,7 +150,7 @@
         }
 
         .legacy-card-heading {
-            font-family: 'Playfair Display', serif;
+            font-family: 'Azo Sans Uber', sans-serif;
             letter-spacing: 0.05em;
             text-transform: none;
             font-size: clamp(1.05rem, 2.2vw, 1.4rem);
@@ -208,9 +232,9 @@
             left: clamp(1rem, 2vw, 1.75rem);
             margin: 0;
             color: #f8fafc;
-            font-family: 'Playfair Display', serif;
+            font-family: 'Azo Sans Uber', sans-serif;
             font-size: clamp(2rem, 4.5vw, 3.5rem);
-            font-weight: 300;
+            font-weight: 400;
             letter-spacing: 0.06em;
             transition: transform 0.3s ease, opacity 0.3s ease;
             z-index: 2;
@@ -412,13 +436,13 @@
 
         .legacy-face.front h2 {
             margin: 0;
-            font-family: 'Righteous', cursive;
+            font-family: 'Azo Sans Uber', sans-serif;
             font-size: clamp(1.25rem, 2vw, 1.6rem);
         }
 
         .legacy-face.front p {
             margin: 0;
-            font-family: 'Inter', sans-serif;
+            font-family: 'Azo Sans', sans-serif;
             font-size: 0.78rem;
             line-height: 1.5;
             color: rgba(255, 255, 255, 0.85);
@@ -531,14 +555,14 @@
         }
 
         .hero-section .corporate-text {
-            font-family: 'Montserrat', sans-serif;
+            font-family: 'Azo Sans Uber', sans-serif;
             letter-spacing: 0.3em;
         }
 
         .neon-sign {
             position: relative;
             display: inline-block;
-            font-family: 'Cinzel', 'Clip', 'Playfair Display', serif;
+            font-family: 'Azo Sans Uber', sans-serif;
             text-transform: uppercase;
             letter-spacing: 0.15em;
             color: #fff7d6;
@@ -747,7 +771,7 @@
             height: 100%;
             font-size: 19px;
             letter-spacing: 0.1em;
-            font-family: 'Montserrat', sans-serif;
+            font-family: 'Azo Sans Uber', sans-serif;
             text-transform: uppercase;
             text-decoration: none;
             transform-style: preserve-3d;
@@ -843,8 +867,8 @@
         }
 
         .roller-heading {
-            font-family: 'Arvo', serif;
-            font-weight: 700;
+            font-family: 'Azo Sans Uber', sans-serif;
+            font-weight: 400;
             text-transform: uppercase;
             color: #f8fafc;
             font-size: clamp(2.5rem, 5vw, 4rem);
@@ -852,8 +876,8 @@
         }
 
         .roller-subheading {
-            font-family: 'Arvo', serif;
-            font-weight: 700;
+            font-family: 'Azo Sans Uber', sans-serif;
+            font-weight: 400;
             text-transform: uppercase;
             color: #fcd34d;
             font-size: clamp(2rem, 4vw, 3.25rem);
@@ -1229,9 +1253,9 @@
         }
 
         .casino-card-date span:first-child {
-            font-family: 'Source Code Pro', monospace;
+            font-family: 'Azo Sans Uber', sans-serif;
             font-size: 20px;
-            font-weight: 700;
+            font-weight: 400;
         }
 
         .casino-card-date span:last-child {
@@ -1256,7 +1280,7 @@
 
         .casino-card figcaption h4 {
             margin: 0 0 5px;
-            font-family: 'Source Code Pro', monospace;
+            font-family: 'Azo Sans Uber', sans-serif;
             font-size: clamp(20px, 2vw, 24px);
             line-height: 1.35;
             text-shadow: 1px 1px rgba(0, 0, 0, 0.7);
@@ -1271,7 +1295,7 @@
             margin: 0;
             line-height: 1.5;
             font-size: clamp(14px, 1.5vw, 16px);
-            font-family: 'Inter', sans-serif;
+            font-family: 'Azo Sans', sans-serif;
         }
 
         @media (max-width: 1024px) {
@@ -1332,18 +1356,18 @@
             justify-content: center;
             color: #f8fafc;
             padding: clamp(1.75rem, 3vw, 2.5rem);
-            font-family: 'Merriweather', serif;
+            font-family: 'Azo Sans', sans-serif;
             pointer-events: none;
             z-index: 1;
         }
 
         .article-card-content h1 {
-            font-weight: 900;
+            font-weight: 400;
             text-align: center;
             font-size: clamp(2rem, 4vw, 2.75rem);
             margin-bottom: 1rem;
-            color: #facc15;
-            text-shadow: 0 0 10px rgba(250, 204, 21, 0.45);
+            color: #FF4F4F;
+            text-shadow: 0 0 10px rgba(255, 79, 79, 0.45);
         }
 
         .article-card-content h3 {
@@ -1937,17 +1961,18 @@
             margin-top: 0.25rem;
         }
 
+        /* Brand Guide: CTAs use Coral (#FF4F4F) */
         .brochure-button {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(135deg, #facc15 0%, #d97706 100%);
-            color: #0f172a;
+            background: #FF4F4F;
+            color: #ffffff;
             padding: 0.75rem 1.5rem;
             border-radius: 9999px;
             font-weight: 700;
             font-size: 1rem;
-            box-shadow: 0 20px 25px -5px rgba(250, 204, 21, 0.4);
+            box-shadow: 0 20px 25px -5px rgba(255, 79, 79, 0.4);
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             border: none;
             cursor: pointer;
@@ -1966,16 +1991,17 @@
 
         .brochure-button:hover {
             transform: scale(1.05) translateY(-2px);
-            box-shadow: 0 25px 50px -12px rgba(250, 204, 21, 0.5);
-            background: linear-gradient(135deg, #eab308 0%, #b45309 100%);
+            box-shadow: 0 25px 50px -12px rgba(255, 79, 79, 0.5);
+            background: #e63939;
         }
 
+        /* Brand Guide: Secondary accent buttons use Aqua (#18F1E1) */
         .brochure-download-button {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            border: 2px solid #facc15;
-            color: #facc15;
+            border: 2px solid #18F1E1;
+            color: #18F1E1;
             padding: 0.625rem 1.25rem;
             border-radius: 0.375rem;
             font-weight: 700;
@@ -1996,8 +2022,8 @@
         }
 
         .brochure-download-button:hover {
-            background: linear-gradient(135deg, #facc15 0%, #d97706 100%);
-            color: #0f172a;
+            background: #18F1E1;
+            color: #1F1F1F;
             transform: scale(1.05) translateY(-2px);
         }
 
@@ -2803,8 +2829,6 @@
     <section class="section-padding flip-cards-section">
         <style>
             /* Scoped Flip Cards styles */
-            @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Playfair+Display:wght@600;700&display=swap');
-
             .flip-cards-section {
                 /* Simple solid gradient background */
                 background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
@@ -2970,8 +2994,8 @@
                 width: auto;
                 margin-top: 12%;
                 padding: 8px 22px;
-                font-weight: bold;
-                font-family: "Cinzel", "Playfair Display", serif;
+                font-weight: 400;
+                font-family: 'Azo Sans', sans-serif;
                 font-size: 1rem;
                 line-height: 1.6;
                 letter-spacing: 2px;
@@ -3028,7 +3052,7 @@
                 padding: 12px 16px;
                 color: #fef3c7;
                 /* light gold */
-                font-family: "Playfair Display", "Cinzel", serif;
+                font-family: 'Azo Sans', sans-serif;
                 font-size: 0.95rem;
                 line-height: 1.6;
                 text-align: center;
@@ -3561,10 +3585,10 @@
             <div class="text-center max-w-2xl mx-auto mb-4">
                 <span
                     class="inline-block mb-2 px-3 py-0.5 rounded-full text-slate-900 font-bold text-xs bg-gradient-to-r from-yellow-400 via-amber-500 to-yellow-400 shadow-md"
-                    style="font-family: 'Montserrat', sans-serif;">Mihi-Slot Machine</span>
+                    style="font-family: 'Azo Sans Uber', sans-serif;">Mihi-Slot Machine</span>
                 <h2 class="text-2xl md:text-3xl font-extrabold text-white tracking-wide"
-                    style="font-family: 'Cinzel', 'Playfair Display', serif;">Test Your Luck</h2>
-                <p class="mt-1 text-slate-300 text-sm md:text-base" style="font-family: 'Montserrat', sans-serif;">Hit
+                    style="font-family: 'Azo Sans Uber', sans-serif;">Test Your Luck</h2>
+                <p class="mt-1 text-slate-300 text-sm md:text-base" style="font-family: 'Azo Sans', sans-serif;">Hit
                     777 and win bragging rights — and a burst of digital confetti.</p>
             </div>
 
@@ -3665,9 +3689,9 @@
                                 class="inline-flex h-2.5 w-2.5 rounded-full bg-yellow-300 shadow-[0_0_12px_2px_rgba(253,224,71,0.7)]"></span>
                         </div>
                         <div class="text-xs md:text-sm font-semibold tracking-widest text-yellow-300 uppercase"
-                            style="font-family: 'Cinzel', 'Playfair Display', serif;">Mihi-Entertainment</div>
+                            style="font-family: 'Azo Sans Uber', sans-serif;">Mihi-Entertainment</div>
                         <div class="text-[10px] md:text-xs text-amber-300/70"
-                            style="font-family: 'Montserrat', sans-serif;">Odds 1/1000</div>
+                            style="font-family: 'Azo Sans', sans-serif;">Odds 1/1000</div>
                     </div>
 
                     <!-- Reels -->
@@ -4129,7 +4153,7 @@
                             <button id="spin-button"
                                 class="brochure-button !px-4 !py-2 flex items-center text-sm md:text-base font-semibold"
                                 type="button" aria-label="Spin the slot machine"
-                                style="font-family: 'Montserrat', sans-serif;">
+                                style="font-family: 'Azo Sans Uber', sans-serif;">
                                 <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M12 6v12m6-6H6"></path>
@@ -4137,7 +4161,7 @@
                                 Spin
                             </button>
                             <p id="slot-message" class="text-xs md:text-sm text-slate-300"
-                                style="font-family: 'Montserrat', sans-serif;"></p>
+                                style="font-family: 'Azo Sans', sans-serif;"></p>
                         </div>
                     </div>
                 </div>
