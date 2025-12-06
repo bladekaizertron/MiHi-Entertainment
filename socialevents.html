@@ -46,9 +46,54 @@
 
     <link rel="preload" as="image" href="../assets/images/social/hero.jpg">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Fredoka+One&display=swap"
-        rel="stylesheet">
+    <!-- Azo Sans Font Family -->
+    <style>
+        /* Azo Sans Font Face Declarations */
+        @font-face {
+            font-family: 'Azo Sans';
+            src: url('../assets/fonts/AzoSans-Regular.woff2') format('woff2'),
+                url('../assets/fonts/AzoSans-Regular.woff') format('woff');
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'Azo Sans';
+            src: url('../assets/fonts/AzoSans-Medium.woff2') format('woff2'),
+                url('../assets/fonts/AzoSans-Medium.woff') format('woff');
+            font-weight: 500;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'Azo Sans';
+            src: url('../assets/fonts/AzoSans-Bold.woff2') format('woff2'),
+                url('../assets/fonts/AzoSans-Bold.woff') format('woff');
+            font-weight: 700;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'Azo Sans Uber';
+            src: url('../assets/fonts/AzoSansUber-Regular.woff2') format('woff2'),
+                url('../assets/fonts/AzoSansUber-Regular.woff') format('woff');
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'Azo Sans Uber';
+            src: url('../assets/fonts/AzoSansUber-Bold.woff2') format('woff2'),
+                url('../assets/fonts/AzoSansUber-Bold.woff') format('woff');
+            font-weight: 700;
+            font-style: normal;
+            font-display: swap;
+        }
+    </style>
     <style>
         /* Protect navigation button from page-specific styles - must override Tailwind utilities */
         header .btn-primary,
@@ -351,7 +396,7 @@
         }
 
         .social-heading {
-            font-family: 'Fredoka One', cursive;
+            font-family: 'Azo Sans Uber', sans-serif;
             font-weight: 400;
             letter-spacing: 0.5px;
             margin-bottom: 0.25rem;
@@ -382,7 +427,7 @@
 
         .social-heading:hover {
             animation: pulse 1s infinite;
-            color: #ffd700;
+            color: #18F1E1;
             cursor: default;
         }
 
@@ -402,7 +447,7 @@
         }
 
         .social-location {
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Azo Sans', sans-serif;
             letter-spacing: 0.1em;
             color: #fff;
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
@@ -411,8 +456,8 @@
         .attention-text {
             position: relative;
             display: inline-block;
-            color: #00f7ff;
-            text-shadow: 0 0 10px rgba(0, 247, 255, 0.5);
+            color: #18F1E1;
+            text-shadow: 0 0 10px rgba(24, 241, 225, 0.5);
         }
 
         .attention-text::after {
@@ -422,7 +467,7 @@
             left: 0;
             width: 100%;
             height: 2px;
-            background: linear-gradient(90deg, #00f7ff, #ff00ff);
+            background: linear-gradient(90deg, #18F1E1, #FF4F4F);
             transform: scaleX(0);
             transform-origin: right;
             transition: transform 0.3s ease;
@@ -436,6 +481,22 @@
         .loaded {
             opacity: 1;
             transition: opacity 0.5s ease-in-out;
+        }
+
+        /* Global Typography */
+        body {
+            font-family: 'Azo Sans', sans-serif;
+            color: #1F1F1F;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: 'Azo Sans Uber', sans-serif;
+            text-transform: uppercase;
         }
     </style>
 
@@ -574,12 +635,14 @@
         <div class="relative z-10 text-center text-white px-4 sm:px-6 w-full pt-20">
             <div class="max-w-6xl mx-auto">
                 <!-- Badge -->
-                <div
-                    class="inline-flex items-center gap-2 sm:gap-3 px-4 sm:px-6 py-2 bg-pink-500/20 backdrop-blur-md border border-pink-400/50 rounded-full shadow-lg shadow-pink-500/10 mb-6 sm:mb-8">
-                    <div class="w-2 h-2 bg-pink-400 rounded-full animate-pulse"></div>
-                    <span class="text-pink-300 text-xs sm:text-sm font-semibold tracking-wider uppercase">Fun Social
+                <div class="inline-flex items-center gap-2 sm:gap-3 px-4 sm:px-6 py-2 backdrop-blur-md border rounded-full shadow-lg mb-6 sm:mb-8"
+                    style="background-color: rgba(24, 241, 225, 0.2); border-color: rgba(24, 241, 225, 0.5); box-shadow: 0 10px 15px -3px rgba(24, 241, 225, 0.1);">
+                    <div class="w-2 h-2 rounded-full animate-pulse" style="background-color: #18F1E1;"></div>
+                    <span class="text-white text-xs sm:text-sm font-semibold tracking-wider uppercase"
+                        style="font-family: 'Azo Sans', sans-serif;">Fun Social
                         Celebrations</span>
-                    <div class="w-2 h-2 bg-pink-400 rounded-full animate-pulse" style="animation-delay: 0.5s;"></div>
+                    <div class="w-2 h-2 rounded-full animate-pulse"
+                        style="background-color: #18F1E1; animation-delay: 0.5s;"></div>
                 </div>
 
                 <div class="mb-6">
@@ -595,8 +658,8 @@
 
                 <!-- Description -->
                 <div class="max-w-3xl mx-auto mb-8 px-4">
-                    <p
-                        class="text-lg sm:text-xl md:text-2xl leading-relaxed text-white/95 tracking-normal font-medium drop-shadow-lg">
+                    <p class="text-lg sm:text-xl md:text-2xl leading-relaxed text-white/95 tracking-normal font-medium drop-shadow-lg"
+                        style="font-family: 'Azo Sans', sans-serif;">
                         From mitzvahs to birthdays and more, elevate your celebration with custom-branded photo
                         activations that delight guests and create shareable memories.
                     </p>
@@ -605,8 +668,10 @@
                 <!-- CTAs -->
                 <div class="flex flex-col sm:flex-row gap-4 sm:gap-6 items-center justify-center px-4">
                     <a href="../contact-us.html"
-                        class="w-full sm:w-auto bg-gradient-to-r from-pink-500 to-yellow-500 text-white hover:from-pink-600 hover:to-yellow-600 px-6 sm:px-10 py-3 sm:py-5 rounded-full text-xs sm:text-sm md:text-base font-bold tracking-wide uppercase inline-flex items-center justify-center gap-2 sm:gap-3 transform transition-all duration-200 hover:shadow-lg hover:scale-110 hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-pink-500 shadow-lg"
-                        aria-label="Contact us for social events">
+                        class="w-full sm:w-auto text-white px-6 sm:px-10 py-3 sm:py-5 rounded-full text-xs sm:text-sm md:text-base font-bold tracking-wide uppercase inline-flex items-center justify-center gap-2 sm:gap-3 transform transition-all duration-200 hover:shadow-lg hover:scale-110 hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 shadow-lg"
+                        style="background-color: #FF4F4F; font-family: 'Azo Sans Uber', sans-serif;"
+                        onmouseover="this.style.backgroundColor='#e63939'"
+                        onmouseout="this.style.backgroundColor='#FF4F4F'" aria-label="Contact us for social events">
                         <span>Get Your Quote</span>
                         <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                             xmlns="http://www.w3.org/2000/svg">
@@ -616,7 +681,7 @@
                     </a>
                     <button type="button" data-click-to-call data-call-text="Call Us"
                         class="w-full sm:w-auto bg-white/10 backdrop-blur-sm border border-white/30 text-white hover:bg-white/20 px-6 sm:px-10 py-3 sm:py-5 rounded-full text-xs sm:text-sm md:text-base font-bold tracking-wide uppercase inline-flex items-center justify-center gap-2 sm:gap-3 transform transition-all duration-200 hover:shadow-lg hover:scale-110 hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-transparent cursor-pointer"
-                        aria-label="Call us">
+                        style="font-family: 'Azo Sans Uber', sans-serif;" aria-label="Call us">
                         <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                             xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -630,16 +695,19 @@
                 <!-- Trust Indicators -->
                 <div class="flex flex-wrap items-center justify-center gap-4 sm:gap-8 mt-8 sm:mt-12 text-white/70 px-4">
                     <div class="flex items-center gap-2">
-                        <div class="w-2 h-2 bg-pink-400 rounded-full"></div>
-                        <span class="text-xs sm:text-sm font-medium">Versatile Event Solutions</span>
+                        <div class="w-2 h-2 rounded-full" style="background-color: #18F1E1;"></div>
+                        <span class="text-xs sm:text-sm font-medium"
+                            style="font-family: 'Azo Sans', sans-serif;">Versatile Event Solutions</span>
                     </div>
                     <div class="flex items-center gap-2">
-                        <div class="w-2 h-2 bg-yellow-400 rounded-full"></div>
-                        <span class="text-xs sm:text-sm font-medium">Custom Branding</span>
+                        <div class="w-2 h-2 rounded-full" style="background-color: #FF4F4F;"></div>
+                        <span class="text-xs sm:text-sm font-medium" style="font-family: 'Azo Sans', sans-serif;">Custom
+                            Branding</span>
                     </div>
                     <div class="flex items-center gap-2">
-                        <div class="w-2 h-2 bg-pink-300 rounded-full"></div>
-                        <span class="text-xs sm:text-sm font-medium">Instant Sharing</span>
+                        <div class="w-2 h-2 rounded-full" style="background-color: #18F1E1;"></div>
+                        <span class="text-xs sm:text-sm font-medium"
+                            style="font-family: 'Azo Sans', sans-serif;">Instant Sharing</span>
                     </div>
                 </div>
             </div>
@@ -655,33 +723,38 @@
         </div>
         <div id="confetti-canvas" class="absolute inset-0 pointer-events-none"></div>
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-            <h2
-                class="text-lg sm:text-xl md:text-2xl font-bold tracking-wide uppercase text-gray-800 mb-3 sm:mb-5 px-2">
+            <h2 class="text-lg sm:text-xl md:text-2xl font-bold tracking-wide uppercase mb-3 sm:mb-5 px-2"
+                style="color: #1F1F1F; font-family: 'Azo Sans Uber', sans-serif;">
                 <span class="relative inline-block">
                     <span class="relative z-10">PICTURE PERFECT FUN FOR</span>
                     <span
-                        class="absolute bottom-0 left-0 w-full h-1 sm:h-1.5 bg-yellow-300 opacity-50 -rotate-1 transform scale-x-110"></span>
+                        class="absolute bottom-0 left-0 w-full h-1 sm:h-1.5 opacity-50 -rotate-1 transform scale-x-110"
+                        style="background-color: #18F1E1;"></span>
                 </span>
             </h2>
-            <h1
-                class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-extrabold tracking-tight text-center px-2">
-                <span id="celebration-text"
-                    class="bg-clip-text text-transparent bg-gradient-to-r from-pink-500 via-yellow-400 to-pink-500 animate-gradient-x cursor-pointer hover:opacity-90 transition-opacity duration-200">
+            <div class="text-center px-2">
+                <h1 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-extrabold tracking-tight mb-4 sm:mb-6"
+                    style="font-family: 'Azo Sans Uber', sans-serif; color: #1F1F1F; text-transform: uppercase;">
                     EVERY CELEBRATION
-                </span>
-            </h1>
+                </h1>
+                <div class="w-full max-w-4xl mx-auto h-3 sm:h-4 md:h-5 rounded-sm"
+                    style="background: linear-gradient(to right, #18F1E1, #FF4F4F);">
+                </div>
+            </div>
             <div class="mt-6 sm:mt-8">
-                <p
-                    class="text-base sm:text-lg md:text-xl leading-relaxed text-gray-700 text-center animate-fade-in-up animate-delay-300 px-2 sm:px-4">
+                <p class="text-base sm:text-lg md:text-xl leading-relaxed text-center animate-fade-in-up animate-delay-300 px-2 sm:px-4"
+                    style="color: #1F1F1F; font-family: 'Azo Sans', sans-serif;">
                     Whether you're blowing out birthday candles, celebrating a mitzvah, or throwing the holiday bash of
                     the year, our Social Photo Booths bring energy, style, and non-stop entertainment to your event.
                     With sleek setups, custom overlays, and instant sharing capabilities, we're here to make your
-                    celebration <span class="font-semibold text-gray-900">truly memorable</span>.
+                    celebration <span class="font-semibold" style="color: #1F1F1F;">truly memorable</span>.
                 </p>
 
                 <!-- Card Carousel -->
                 <div class="mt-8 sm:mt-12 mb-2 relative group">
-                    <h3 class="text-xl sm:text-2xl font-bold text-center mb-6 sm:mb-8 text-gray-800 px-2">Our Social
+                    <h3 class="text-xl sm:text-2xl font-bold text-center mb-6 sm:mb-8 px-2"
+                        style="color: #1F1F1F; font-family: 'Azo Sans Uber', sans-serif; text-transform: uppercase;">Our
+                        Social
                         Event Gallery</h3>
 
                     <!-- Auto-scrolling Cards Container -->
@@ -693,7 +766,8 @@
                         </div>
                     </div>
 
-                    <p class="text-center text-xs sm:text-sm text-gray-500 mt-4 sm:mt-6 px-2">Hover to pause the
+                    <p class="text-center text-xs sm:text-sm mt-4 sm:mt-6 px-2"
+                        style="color: #1F1F1F; font-family: 'Azo Sans', sans-serif;">Hover to pause the
                         carousel</p>
                 </div>
 
@@ -790,13 +864,14 @@
 
                     .card-title {
                         font-weight: 600;
-                        color: #333;
+                        color: #1F1F1F;
                         margin: 0;
                         font-size: 0.75rem;
                         line-height: 1.2;
                         white-space: nowrap;
                         overflow: hidden;
                         text-overflow: ellipsis;
+                        font-family: 'Azo Sans', sans-serif;
                     }
 
                     @media (min-width: 640px) {
@@ -999,8 +1074,8 @@
                                         <img src="${card.image}" alt="${card.title} photo booth at social event" width="400" height="300" loading="lazy" class="card-image">
                                         ${badgeElement}
                                         <div class="card-overlay">
-                                            <h4 class="font-semibold text-white">${card.title}</h4>
-                                            <p class="text-sm text-gray-200">${card.description}</p>
+                                            <h4 class="font-semibold text-white" style="font-family: 'Azo Sans Uber', sans-serif; text-transform: uppercase;">${card.title}</h4>
+                                            <p class="text-sm" style="color: rgba(255, 255, 255, 0.9); font-family: 'Azo Sans', sans-serif;">${card.description}</p>
                                         </div>
                                     </div>
                                     <div class="card-content">
@@ -1076,17 +1151,18 @@
         </div>
     </section>
     <!-- Interactive Brochure Section - Festive Social Theme -->
-    <section class="py-8 sm:py-10 md:py-12 bg-gradient-to-b from-purple-50 to-pink-50 relative overflow-hidden">
+    <section class="py-8 sm:py-10 md:py-12 relative overflow-hidden"
+        style="background: linear-gradient(to bottom, #ffffff, #f5f5f5);">
         <!-- Decorative Elements -->
         <div class="absolute inset-0 opacity-20">
-            <div
-                class="absolute top-10 left-1/4 w-32 h-32 bg-pink-400 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-blob">
+            <div class="absolute top-10 left-1/4 w-32 h-32 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-blob"
+                style="background-color: #FF4F4F;">
             </div>
-            <div
-                class="absolute top-20 right-1/4 w-40 h-40 bg-yellow-300 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-blob animation-delay-2000">
+            <div class="absolute top-20 right-1/4 w-40 h-40 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-blob animation-delay-2000"
+                style="background-color: #18F1E1;">
             </div>
-            <div
-                class="absolute bottom-10 left-1/3 w-36 h-36 bg-blue-400 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-blob animation-delay-4000">
+            <div class="absolute bottom-10 left-1/3 w-36 h-36 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-blob animation-delay-4000"
+                style="background-color: #FF4F4F;">
             </div>
         </div>
 
@@ -1094,16 +1170,18 @@
             <!-- Section Header -->
             <div class="text-center pb-8 sm:pb-10 md:pb-12 pt-4 sm:pt-6">
                 <span
-                    class="inline-block bg-gradient-to-r from-pink-500 to-purple-600 text-white text-xs sm:text-sm font-bold px-4 sm:px-6 py-1 sm:py-1.5 rounded-full mb-4 sm:mb-6 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-300">
+                    class="inline-block text-white text-xs sm:text-sm font-bold px-4 sm:px-6 py-1 sm:py-1.5 rounded-full mb-4 sm:mb-6 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-300"
+                    style="background-color: #18F1E1; font-family: 'Azo Sans', sans-serif; text-transform: uppercase;">
                     🎉 Social Events Guide 🎊
                 </span>
-                <h2
-                    class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-500 mb-4 sm:mb-6 leading-[1.1] px-2 pb-2 sm:pb-2.5">
+                <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-extrabold mb-4 sm:mb-6 leading-[1.1] px-2 pb-2 sm:pb-2.5"
+                    style="color: #FF4F4F; font-family: 'Azo Sans Uber', sans-serif; text-transform: uppercase;">
                     Let's Celebrate Together!
                 </h2>
-                <p
-                    class="text-sm sm:text-base md:text-lg lg:text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed font-medium px-2 sm:px-4">
-                    Discover our <span class="text-pink-600 font-bold">vibrant social event packages</span> and create
+                <p class="text-sm sm:text-base md:text-lg lg:text-xl max-w-3xl mx-auto leading-relaxed font-medium px-2 sm:px-4"
+                    style="color: #1F1F1F; font-family: 'Azo Sans', sans-serif;">
+                    Discover our <span class="font-bold" style="color: #FF4F4F;">vibrant social event packages</span>
+                    and create
                     unforgettable moments that will be the talk of the town!
                 </p>
 
@@ -1140,8 +1218,8 @@
                                 <div class="relative w-full h-full flex items-center justify-center">
                                     <div class="relative w-5/6 h-5/6 transform group-hover:scale-105 group-hover:-translate-y-2 transition-all duration-700"
                                         style="transform-style: preserve-3d; perspective: 1000px;">
-                                        <div
-                                            class="absolute -right-2 top-0 bottom-0 w-16 bg-gradient-to-l from-blue-500/20 to-transparent blur-sm skew-y-12 transform group-hover:scale-110">
+                                        <div class="absolute -right-2 top-0 bottom-0 w-16 blur-sm skew-y-12 transform group-hover:scale-110"
+                                            style="background: linear-gradient(to left, rgba(24, 241, 225, 0.2), transparent);">
                                         </div>
                                         <div
                                             class="absolute inset-0 bg-gradient-to-br from-white/20 via-transparent to-transparent rounded-lg pointer-events-none">
@@ -1167,8 +1245,8 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div
-                                    class="absolute -inset-4 bg-gradient-to-r from-blue-500/10 via-purple-500/20 to-blue-500/10 blur-3xl group-hover:blur-2xl transition-all duration-700 rounded-full">
+                                <div class="absolute -inset-4 blur-3xl group-hover:blur-2xl transition-all duration-700 rounded-full"
+                                    style="background: linear-gradient(to right, rgba(24, 241, 225, 0.1), rgba(255, 79, 79, 0.2), rgba(24, 241, 225, 0.1));">
                                 </div>
                             </div>
                         </div>
@@ -1177,21 +1255,23 @@
 
                 <!-- Right: Content & CTA -->
                 <div class="order-1 lg:order-2 px-2 sm:px-0">
-                    <div
-                        class="inline-block bg-gradient-to-r from-blue-500 to-purple-600 text-white px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-bold mb-4 sm:mb-6 shadow-lg">
+                    <div class="inline-block text-white px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-bold mb-4 sm:mb-6 shadow-lg"
+                        style="background-color: #18F1E1; font-family: 'Azo Sans', sans-serif; text-transform: uppercase;">
                         Social Event Packages
                     </div>
-                    <h3 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 text-gray-900">
+                    <h3 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6"
+                        style="color: #1F1F1F; font-family: 'Azo Sans Uber', sans-serif; text-transform: uppercase;">
                         Make Your Event Unforgettable
                     </h3>
-                    <p class="text-base sm:text-lg md:text-xl text-gray-600 mb-6 sm:mb-8 leading-relaxed">
+                    <p class="text-base sm:text-lg md:text-xl mb-6 sm:mb-8 leading-relaxed"
+                        style="color: #1F1F1F; font-family: 'Azo Sans', sans-serif;">
                         Explore our curated social event packages designed to bring fun and excitement to any gathering
                     </p>
                     <div class="space-y-3 sm:space-y-4 mb-6 sm:mb-8">
                         <div class="flex items-start space-x-3 sm:space-x-4">
                             <div class="flex-shrink-0 mt-0.5 sm:mt-1">
-                                <div
-                                    class="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center">
+                                <div class="w-5 h-5 sm:w-6 sm:h-6 rounded-full flex items-center justify-center"
+                                    style="background-color: #18F1E1;">
                                     <svg class="w-2.5 h-2.5 sm:w-3 sm:h-3 text-white" fill="currentColor"
                                         viewBox="0 0 20 20">
                                         <path fill-rule="evenodd"
@@ -1201,15 +1281,19 @@
                                 </div>
                             </div>
                             <div>
-                                <p class="font-medium text-sm sm:text-base text-gray-900">Versatile Event Solutions</p>
-                                <p class="text-gray-600 text-xs sm:text-sm">Perfect for birthdays, anniversaries, and
+                                <p class="font-medium text-sm sm:text-base"
+                                    style="color: #1F1F1F; font-family: 'Azo Sans', sans-serif;">Versatile Event
+                                    Solutions</p>
+                                <p class="text-xs sm:text-sm"
+                                    style="color: #1F1F1F; font-family: 'Azo Sans', sans-serif;">Perfect for birthdays,
+                                    anniversaries, and
                                     all social gatherings</p>
                             </div>
                         </div>
                         <div class="flex items-start space-x-3 sm:space-x-4">
                             <div class="flex-shrink-0 mt-0.5 sm:mt-1">
-                                <div
-                                    class="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center">
+                                <div class="w-5 h-5 sm:w-6 sm:h-6 rounded-full flex items-center justify-center"
+                                    style="background-color: #FF4F4F;">
                                     <svg class="w-2.5 h-2.5 sm:w-3 sm:h-3 text-white" fill="currentColor"
                                         viewBox="0 0 20 20">
                                         <path fill-rule="evenodd"
@@ -1219,15 +1303,19 @@
                                 </div>
                             </div>
                             <div>
-                                <p class="font-medium text-sm sm:text-base text-gray-900">Interactive Experiences</p>
-                                <p class="text-gray-600 text-xs sm:text-sm">Engage your guests with fun photo
+                                <p class="font-medium text-sm sm:text-base"
+                                    style="color: #1F1F1F; font-family: 'Azo Sans', sans-serif;">Interactive Experiences
+                                </p>
+                                <p class="text-xs sm:text-sm"
+                                    style="color: #1F1F1F; font-family: 'Azo Sans', sans-serif;">Engage your guests with
+                                    fun photo
                                     opportunities and instant sharing</p>
                             </div>
                         </div>
                         <div class="flex items-start space-x-3 sm:space-x-4">
                             <div class="flex-shrink-0 mt-0.5 sm:mt-1">
-                                <div
-                                    class="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center">
+                                <div class="w-5 h-5 sm:w-6 sm:h-6 rounded-full flex items-center justify-center"
+                                    style="background-color: #18F1E1;">
                                     <svg class="w-2.5 h-2.5 sm:w-3 sm:h-3 text-white" fill="currentColor"
                                         viewBox="0 0 20 20">
                                         <path fill-rule="evenodd"
@@ -1237,16 +1325,21 @@
                                 </div>
                             </div>
                             <div>
-                                <p class="font-medium text-sm sm:text-base text-gray-900">Custom Branding</p>
-                                <p class="text-gray-600 text-xs sm:text-sm">Personalize with your event theme, colors,
+                                <p class="font-medium text-sm sm:text-base"
+                                    style="color: #1F1F1F; font-family: 'Azo Sans', sans-serif;">Custom Branding</p>
+                                <p class="text-xs sm:text-sm"
+                                    style="color: #1F1F1F; font-family: 'Azo Sans', sans-serif;">Personalize with your
+                                    event theme, colors,
                                     and branding</p>
                             </div>
                         </div>
                     </div>
                     <div class="flex flex-col sm:flex-row gap-3 sm:gap-4">
                         <button onclick="openBrochureModal()"
-                            class="w-full sm:w-auto inline-flex items-center justify-center px-5 sm:px-6 py-2.5 sm:py-3 border border-transparent text-sm sm:text-base font-medium rounded-md text-white bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-                            aria-label="View social event packages">
+                            class="w-full sm:w-auto inline-flex items-center justify-center px-5 sm:px-6 py-2.5 sm:py-3 border border-transparent text-sm sm:text-base font-medium rounded-md text-white shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-offset-2"
+                            style="background-color: #FF4F4F; font-family: 'Azo Sans Uber', sans-serif; text-transform: uppercase;"
+                            onmouseover="this.style.backgroundColor='#e63939'"
+                            onmouseout="this.style.backgroundColor='#FF4F4F'" aria-label="View social event packages">
                             <svg class="w-4 h-4 sm:w-5 sm:h-5 mr-2" fill="none" stroke="currentColor"
                                 viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -1261,7 +1354,10 @@
                             </svg>
                         </button>
                         <a href="../flipbook/examples/example-assets/books/social.pdf" download
-                            class="w-full sm:w-auto inline-flex items-center justify-center px-5 sm:px-6 py-2.5 sm:py-3 border border-gray-300 text-sm sm:text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200">
+                            class="w-full sm:w-auto inline-flex items-center justify-center px-5 sm:px-6 py-2.5 sm:py-3 border text-sm sm:text-base font-medium rounded-md bg-white transition-colors duration-200"
+                            style="border-color: #1F1F1F; color: #1F1F1F; font-family: 'Azo Sans', sans-serif;"
+                            onmouseover="this.style.backgroundColor='#f5f5f5'"
+                            onmouseout="this.style.backgroundColor='white'">
                             <svg class="w-4 h-4 sm:w-5 sm:h-5 mr-2" fill="none" stroke="currentColor"
                                 viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -1272,27 +1368,30 @@
                     </div>
                     <div
                         class="flex flex-wrap items-center gap-4 sm:gap-6 pt-4 sm:pt-6 border-t border-gray-200 mt-6 sm:mt-8">
-                        <div class="flex items-center text-xs sm:text-sm font-medium text-gray-600">
-                            <svg class="w-3 h-3 sm:w-4 sm:h-4 mr-1.5 sm:mr-2 text-green-500" fill="currentColor"
-                                viewBox="0 0 20 20">
+                        <div class="flex items-center text-xs sm:text-sm font-medium"
+                            style="color: #1F1F1F; font-family: 'Azo Sans', sans-serif;">
+                            <svg class="w-3 h-3 sm:w-4 sm:h-4 mr-1.5 sm:mr-2" style="color: #18F1E1;"
+                                fill="currentColor" viewBox="0 0 20 20">
                                 <path fill-rule="evenodd"
                                     d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
                                     clip-rule="evenodd" />
                             </svg>
                             <span>Perfect for Any Occasion</span>
                         </div>
-                        <div class="flex items-center text-xs sm:text-sm font-medium text-gray-600">
-                            <svg class="w-3 h-3 sm:w-4 sm:h-4 mr-1.5 sm:mr-2 text-green-500" fill="currentColor"
-                                viewBox="0 0 20 20">
+                        <div class="flex items-center text-xs sm:text-sm font-medium"
+                            style="color: #1F1F1F; font-family: 'Azo Sans', sans-serif;">
+                            <svg class="w-3 h-3 sm:w-4 sm:h-4 mr-1.5 sm:mr-2" style="color: #FF4F4F;"
+                                fill="currentColor" viewBox="0 0 20 20">
                                 <path fill-rule="evenodd"
                                     d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
                                     clip-rule="evenodd" />
                             </svg>
                             <span>Easy to Customize</span>
                         </div>
-                        <div class="flex items-center text-xs sm:text-sm font-medium text-gray-600">
-                            <svg class="w-3 h-3 sm:w-4 sm:h-4 mr-1.5 sm:mr-2 text-green-500" fill="currentColor"
-                                viewBox="0 0 20 20">
+                        <div class="flex items-center text-xs sm:text-sm font-medium"
+                            style="color: #1F1F1F; font-family: 'Azo Sans', sans-serif;">
+                            <svg class="w-3 h-3 sm:w-4 sm:h-4 mr-1.5 sm:mr-2" style="color: #18F1E1;"
+                                fill="currentColor" viewBox="0 0 20 20">
                                 <path fill-rule="evenodd"
                                     d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
                                     clip-rule="evenodd" />
