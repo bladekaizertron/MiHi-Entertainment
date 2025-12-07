@@ -261,15 +261,83 @@
     </script>
     
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Orbitron:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
-        /* Scoped Robot Theme Fonts */
-        main { 
-            font-family: 'Inter', sans-serif; 
+        /* Azo Sans Font Face Declarations */
+        @font-face {
+            font-family: 'Azo Sans';
+            src: url('../assets/fonts/AzoSans-Regular.woff2') format('woff2'),
+                 url('../assets/fonts/AzoSans-Regular.woff') format('woff');
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
         }
-        main h1, main h2, main h3, main h4, main h5, main h6 { 
-            font-family: 'Orbitron', sans-serif; 
+
+        @font-face {
+            font-family: 'Azo Sans Uber';
+            src: url('../assets/fonts/AzoSansUber-Regular.woff2') format('woff2'),
+                 url('../assets/fonts/AzoSansUber-Regular.woff') format('woff');
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        /* Brand Guide: Body Text - Azo Sans Regular */
+        body {
+            font-family: 'Azo Sans', sans-serif;
+            color: #1F1F1F;
+            overflow-x: hidden;
+            background: #ffffff;
+        }
+
+        p {
+            font-family: 'Azo Sans', sans-serif;
+            color: #1F1F1F;
+        }
+
+        /* Brand Guide: Headers - Azo Sans Uber (Uppercase) */
+        main h1, main h2, main h3, main h4, main h5, main h6 {
+            font-family: 'Azo Sans Uber', sans-serif;
+            font-weight: 400;
+            text-transform: uppercase;
             letter-spacing: 0.02em;
+            line-height: 1.2;
+            color: #FF4F4F;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Unified h2 size - matching index.html */
+        main h2 {
+            font-size: clamp(1.875rem, 4vw, 3rem); /* text-3xl sm:text-4xl md:text-5xl equivalent */
+            font-weight: 300 !important; /* Less bold */
+        }
+
+        /* Unified h3 size - matching index.html */
+        main h3 {
+            font-size: clamp(1.5rem, 3vw, 1.875rem); /* text-2xl md:text-3xl equivalent */
+        }
+
+        /* Unified h4 size - matching index.html */
+        main h4 {
+            font-size: 1.25rem; /* text-xl equivalent */
+        }
+
+        /* Unified h5 size - matching index.html */
+        main h5 {
+            font-size: 1.125rem; /* text-lg equivalent */
+        }
+
+        /* Brand Guide: CTAs use Coral (#FF4F4F) */
+        main .btn-primary {
+            background: #FF4F4F;
+            color: #ffffff;
+            transition: all 0.3s ease;
+        }
+
+        main .btn-primary:hover {
+            background: #e63939;
+            transform: translateY(-2px);
+            box-shadow: 0 20px 40px rgba(255, 79, 79, 0.4);
         }
         
         /* Minimal protection: only prevent transform from page-level hover effects */
@@ -419,6 +487,8 @@
         .hologram-text {
             background: linear-gradient(135deg, #06b6d4, #3b82f6, #8b5cf6);
             -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
@@ -506,18 +576,11 @@
             <!-- Content -->
             <div class="relative z-10 container mx-auto px-4 sm:px-6 pt-20">
                 <div class="max-w-7xl mx-auto text-center">
-                    <!-- Robot Badge -->
-                    <div class="inline-flex items-center gap-2 sm:gap-3 px-4 sm:px-6 py-2 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 border border-cyan-400/50 rounded-full shadow-lg shadow-cyan-500/10 mb-6 sm:mb-8 glow-pulse">
-                        <div class="w-2 h-2 bg-cyan-400 rounded-full animate-pulse"></div>
-                        <span class="text-cyan-300 text-xs sm:text-sm font-semibold tracking-wider uppercase">AI-Powered Robot Technology</span>
-                        <div class="w-2 h-2 bg-cyan-400 rounded-full animate-pulse" style="animation-delay: 0.5s;"></div>
-                    </div>
                     
                     <!-- Main Title -->
-                    <h1 class="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black mb-6 leading-tight">
-                        <span class="block text-white drop-shadow-2xl">
-                            Rosie the Robot<br><span class="hologram-text">Photo Booth Rentals</span>
-                        </span>
+                    <h1 class="text-4xl sm:text-6xl md:text-7xl lg:text-8xl mb-6 leading-tight text-center"
+                            style="font-weight: 400; text-shadow: 2px 2px 8px rgba(0,0,0,0.7);">
+                            <span class="block">ROSIE THE ROBOT</span><span class="block" style="color: #18F1E1;">PHOTO BOOTH RENTALS</span>
                     </h1>
                     
                     <!-- Description -->
@@ -530,11 +593,11 @@
                     <!-- CTA Buttons -->
                     <div class="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center px-4">
                         <a href="../contact-us.html" 
-                           class="group relative inline-flex items-center gap-2 sm:gap-3 bg-gradient-to-r from-cyan-500 to-blue-600 text-white px-6 sm:px-10 py-3 sm:py-5 rounded-full text-base sm:text-lg font-bold shadow-2xl hover:shadow-cyan-500/50 transition-all duration-500 transform hover:scale-110 hover:-translate-y-1 overflow-hidden w-full sm:w-auto justify-center">
+                           class="group relative inline-flex items-center gap-2 sm:gap-3 text-white px-6 sm:px-10 py-3 sm:py-5 rounded-full text-base sm:text-lg  shadow-2xl hover:shadow-[#FF4F4F]/50 transition-all duration-500 transform hover:scale-110 hover:-translate-y-1 overflow-hidden w-full sm:w-auto justify-center" style="background: #FF4F4F;">
                             <span class="relative z-10">Get Your Quote</span>
                         </a>
                         <button type="button" data-click-to-call data-call-text="Call Us" 
-                           class="group inline-flex items-center gap-2 sm:gap-3 px-6 sm:px-10 py-3 sm:py-5 rounded-full text-base sm:text-lg font-bold backdrop-blur-md bg-white/10 border-2 border-cyan-400/50 hover:bg-white/20 hover:border-cyan-400/70 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:scale-110 hover:-translate-y-1 text-white w-full sm:w-auto justify-center cursor-pointer">
+                           class="group inline-flex items-center gap-2 sm:gap-3 px-6 sm:px-10 py-3 sm:py-5 rounded-full text-base sm:text-lg  backdrop-blur-md bg-white/10 border-2 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:scale-110 hover:-translate-y-1 text-white w-full sm:w-auto justify-center cursor-pointer" style="border-color: rgba(24, 241, 225, 0.5);" onmouseover="this.style.borderColor='rgba(24, 241, 225, 0.7)'; this.style.background='rgba(24, 241, 225, 0.2)';" onmouseout="this.style.borderColor='rgba(24, 241, 225, 0.5)'; this.style.background='rgba(255, 255, 255, 0.1)';">
                             <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498A1 1 0 0121 17.72V21a2 2 0 01-2 2h-1C9.716 23 3 16.284 3 8V7a2 2 0 012-2z"></path>
                             </svg>
@@ -660,12 +723,8 @@
                 <div class="mx-auto">
                     <!-- Section Header -->
                     <div class="text-center mb-16">
-                        <div class="inline-flex items-center gap-2 px-4 py-2 bg-cyan-100 rounded-full mb-4">
-                            <div class="w-2 h-2 bg-cyan-500 rounded-full animate-pulse"></div>
-                            <span class="text-cyan-700 text-sm font-bold uppercase">Meet Rosie</span>
-                        </div>
-                        <h2 class="text-4xl md:text-5xl lg:text-6xl font-black mb-6 text-gray-900">
-                            AI-Powered Mobile <span class="hologram-text">Photo Booth</span>
+                        <h2 class="text-4xl md:text-5xl lg:text-6xl font-black mb-6" style="color: #FF4F4F;">
+                            AI-Powered Mobile <span style="color: #18F1E1;">Photo Booth</span>
                         </h2>
                         <div class="w-24 h-1 bg-gradient-to-r from-cyan-500 to-blue-500 mx-auto"></div>
                     </div>
@@ -675,11 +734,11 @@
                         <div class="grid md:grid-cols-2 gap-12 items-center">
                             <!-- Text Content -->
                             <div>
-                                <h3 class="text-3xl font-bold mb-6 text-gray-900">
+                                <h3 class="text-3xl  mb-6" style="color: #FF4F4F;">
                                     The Future of Event Photography
                                 </h3>
                                 <p class="text-lg text-gray-700 leading-relaxed mb-6">
-                                    Meet <span class="text-cyan-600 font-semibold">Rosie the Robot</span>, the world's first <span class="text-cyan-600 font-semibold">mobile photo booth on wheels</span>! Rosie interacts with guests, rolls up for photos, and delivers instant digital images—all while adding a futuristic, high-tech element to your event.
+                                    Meet <span class="font-semibold" style="color: #18F1E1;">Rosie the Robot</span>, the world's first <span class="font-semibold" style="color: #18F1E1;">mobile photo booth on wheels</span>! Rosie interacts with guests, rolls up for photos, and delivers instant digital images—all while adding a futuristic, high-tech element to your event.
                                 </p>
                                 <p class="text-lg text-gray-700 leading-relaxed">
                                     Perfect for <span class="font-semibold">corporate activations</span>, <span class="font-semibold">trade shows</span>, <span class="font-semibold">tech expos</span>, and <span class="font-semibold">luxury events</span>. Fully brandable and interactive, this robotic photo booth is an instant crowd magnet.
@@ -694,7 +753,7 @@
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
                                         </svg>
                                     </div>
-                                    <h4 class="font-bold text-gray-900">AI-Powered</h4>
+                                    <h4 class=" text-gray-900" style="color: #FF4F4F;">AI-Powered</h4>
                                 </div>
                                 
                                 <div class="text-center p-6 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl">
@@ -703,7 +762,7 @@
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
                                         </svg>
                                     </div>
-                                    <h4 class="font-bold text-gray-900">Fully Mobile</h4>
+                                    <h4 class=" text-gray-900" style="color: #FF4F4F;">Fully Mobile</h4>
                                 </div>
                                 
                                 <div class="text-center p-6 bg-gradient-to-br from-indigo-50 to-purple-50 rounded-2xl">
@@ -712,7 +771,7 @@
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"></path>
                                         </svg>
                                     </div>
-                                    <h4 class="font-bold text-gray-900">Interactive</h4>
+                                    <h4 class=" text-gray-900" style="color: #FF4F4F;">Interactive</h4>
                                 </div>
                                 
                                 <div class="text-center p-6 bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl">
@@ -721,7 +780,7 @@
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path>
                                         </svg>
                                     </div>
-                                    <h4 class="font-bold text-gray-900">Brandable</h4>
+                                    <h4 class=" text-gray-900" style="color: #FF4F4F;">Brandable</h4>
                                 </div>
                             </div>
                         </div>
@@ -730,8 +789,8 @@
                     <!-- Photo Gallery -->
                     <div class="mt-16">
                         <div class="text-center mb-12">
-                            <h3 class="text-3xl md:text-4xl font-bold mb-4 text-gray-900">
-                                See Rosie <span class="hologram-text">In Action</span>
+                            <h3 class="text-3xl md:text-4xl  mb-4" style="color: #FF4F4F;">
+                                See Rosie <span style="color: #18F1E1;">In Action</span>
                             </h3>
                             <p class="text-lg text-gray-600">Experience the future of event entertainment</p>
                         </div>
@@ -1025,12 +1084,8 @@
                 <div class="max-w-7xl mx-auto">
                     <!-- Section Header -->
                     <div class="text-center mb-16">
-                        <div class="inline-flex items-center gap-2 px-4 py-2 bg-blue-100 rounded-full mb-4">
-                            <div class="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></div>
-                            <span class="text-blue-700 text-sm font-bold uppercase">Trade Show Ready</span>
-                        </div>
-                        <h2 class="text-4xl md:text-5xl lg:text-6xl font-black mb-6 text-gray-900">
-                            Interactive <span class="hologram-text">Features</span>
+                        <h2 class="text-4xl md:text-5xl lg:text-6xl font-black mb-6" style="color: #FF4F4F;">
+                            Interactive <span style="color: #18F1E1;">Features</span>
                     </h2>
                         <p class="text-xl text-gray-600 max-w-3xl mx-auto">
                             Transform your booth experience with next-generation engagement technology
@@ -1047,7 +1102,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path>
                                 </svg>
                             </div>
-                            <h4 class="text-lg font-bold mb-2 text-gray-900">Custom Brand Messaging</h4>
+                            <h4 class="text-lg mb-2 text-gray-900" style="color: #FF4F4F;">Custom Brand Messaging</h4>
                             <p class="text-gray-600 text-sm">Fully customizable branding and messaging</p>
                         </div>
                         
@@ -1058,7 +1113,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"></path>
                                 </svg>
                             </div>
-                            <h4 class="text-lg font-bold mb-2 text-gray-900">Social Media Integration</h4>
+                            <h4 class="text-lg mb-2 text-gray-900" style="color: #FF4F4F;">Social Media Integration</h4>
                             <p class="text-gray-600 text-sm">Instant sharing to all platforms</p>
                         </div>
                         
@@ -1080,7 +1135,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                                 </svg>
                             </div>
-                            <h4 class="text-lg font-bold mb-2 text-gray-900">Interactive Entertainment</h4>
+                            <h4 class="text-lg mb-2 text-gray-900" style="color: #FF4F4F;">Interactive Entertainment</h4>
                             <p class="text-gray-600 text-sm">Engaging AI conversations</p>
                         </div>
                         
@@ -1091,7 +1146,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
                                 </svg>
                             </div>
-                            <h4 class="text-lg font-bold mb-2 text-gray-900">Lead Capture</h4>
+                            <h4 class="text-lg mb-2 text-gray-900" style="color: #FF4F4F;">Lead Capture</h4>
                             <p class="text-gray-600 text-sm">Automated lead qualification</p>
                         </div>
                         
@@ -1113,7 +1168,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
                                 </svg>
                             </div>
-                            <h4 class="text-lg font-bold mb-2 text-gray-900">Crowd Engagement</h4>
+                            <h4 class="text-lg mb-2 text-gray-900" style="color: #FF4F4F;">Crowd Engagement</h4>
                             <p class="text-gray-600 text-sm">Attract and entertain visitors</p>
                         </div>
                         
@@ -1124,7 +1179,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                                 </svg>
                             </div>
-                            <h4 class="text-lg font-bold mb-2 text-gray-900">Multi-Day Recognition</h4>
+                            <h4 class="text-lg mb-2 text-gray-900" style="color: #FF4F4F;">Multi-Day Recognition</h4>
                             <p class="text-gray-600 text-sm">Remembers returning attendees</p>
                         </div>
                         
@@ -1136,7 +1191,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path>
                                 </svg>
                             </div>
-                            <h4 class="text-lg font-bold mb-2 text-gray-900">Branded Printouts</h4>
+                            <h4 class="text-lg mb-2 text-gray-900" style="color: #FF4F4F;">Branded Printouts</h4>
                             <p class="text-gray-600 text-sm">Instant custom photo prints</p>
                         </div>
                         
@@ -1147,7 +1202,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
                                 </svg>
                             </div>
-                            <h4 class="text-lg font-bold mb-2 text-gray-900">Analytics & Reporting</h4>
+                            <h4 class="text-lg mb-2 text-gray-900" style="color: #FF4F4F;">Analytics & Reporting</h4>
                             <p class="text-gray-600 text-sm">Detailed engagement metrics</p>
                         </div>
                     </div>
@@ -1166,12 +1221,8 @@
                 <div class="max-w-7xl mx-auto">
                     <!-- Section Header -->
                     <div class="text-center mb-16">
-                        <div class="inline-flex items-center gap-2 px-4 py-2 bg-cyan-500/20 border border-cyan-400/30 rounded-full mb-4">
-                            <div class="w-2 h-2 bg-cyan-400 rounded-full animate-pulse"></div>
-                            <span class="text-cyan-300 text-sm font-bold uppercase">AI-Powered</span>
-                        </div>
-                        <h2 class="text-4xl md:text-5xl lg:text-6xl font-black mb-6">
-                            Rosie's <span class="hologram-text">Smart Features</span>
+                        <h2 class="text-4xl md:text-5xl lg:text-6xl font-black mb-6" style="color: #FF4F4F;">
+                            Rosie's <span style="color: #18F1E1;">Smart Features</span>
                     </h2>
                         <p class="text-xl text-gray-300 max-w-3xl mx-auto">
                             Advanced AI technology that creates memorable, branded experiences
@@ -1186,8 +1237,8 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
                                 </svg>
                             </div>
-                            <h4 class="text-lg font-bold mb-2">AI Conversations</h4>
-                            <p class="text-gray-400 text-sm">Natural language interactions</p>
+                            <h4 class="text-lg mb-2">AI Conversations</h4>
+                            <p class="text-sm text-white">Natural language interactions</p>
                         </div>
 
                         <div class="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 hover:border-blue-400/50 hover:bg-white/10 transition-all group">
@@ -1196,8 +1247,8 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 4v16M17 4v16M3 8h4m10 0h4M3 12h18M3 16h4m10 0h4M4 20h16a1 1 0 001-1V5a1 1 0 00-1-1H4a1 1 0 00-1 1v14a1 1 0 001 1z"></path>
                                 </svg>
                             </div>
-                            <h4 class="text-lg font-bold mb-2">Custom Animations</h4>
-                            <p class="text-gray-400 text-sm">Branded visual effects</p>
+                            <h4 class="text-lg mb-2">Custom Animations</h4>
+                            <p class="text-sm text-white">Branded visual effects</p>
                         </div>
 
                         <div class="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 hover:border-indigo-400/50 hover:bg-white/10 transition-all group">
@@ -1207,8 +1258,8 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path>
                                 </svg>
                             </div>
-                            <h4 class="text-lg font-bold mb-2">Photo Capture</h4>
-                            <p class="text-gray-400 text-sm">High-quality instant photos</p>
+                            <h4 class="text-lg mb-2">Photo Capture</h4>
+                            <p class="text-sm text-white">High-quality instant photos</p>
                         </div>
 
                         <div class="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 hover:border-purple-400/50 hover:bg-white/10 transition-all group">
@@ -1217,8 +1268,8 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
                                 </svg>
                             </div>
-                            <h4 class="text-lg font-bold mb-2">Touchscreen Interface</h4>
-                            <p class="text-gray-400 text-sm">Intuitive controls</p>
+                            <h4 class="text-lg mb-2">Touchscreen Interface</h4>
+                            <p class="text-sm text-white">Intuitive controls</p>
                         </div>
 
                         <div class="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 hover:border-pink-400/50 hover:bg-white/10 transition-all group">
@@ -1227,8 +1278,8 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path>
                                 </svg>
                             </div>
-                            <h4 class="text-lg font-bold mb-2">Branded Microsite</h4>
-                            <p class="text-gray-400 text-sm">Custom web gallery</p>
+                            <h4 class="text-lg mb-2">Branded Microsite</h4>
+                            <p class="text-sm text-white">Custom web gallery</p>
                         </div>
 
                         <div class="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 hover:border-rose-400/50 hover:bg-white/10 transition-all group">
@@ -1237,8 +1288,8 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
                                 </svg>
                             </div>
-                            <h4 class="text-lg font-bold mb-2">Live Slideshow</h4>
-                            <p class="text-gray-400 text-sm">Real-time photo display</p>
+                            <h4 class="text-lg mb-2">Live Slideshow</h4>
+                            <p class="text-sm text-white">Real-time photo display</p>
                         </div>
 
                         <div class="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 hover:border-orange-400/50 hover:bg-white/10 transition-all group">
@@ -1247,8 +1298,8 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
                                 </svg>
                             </div>
-                            <h4 class="text-lg font-bold mb-2">Email & SMS</h4>
-                            <p class="text-gray-400 text-sm">Instant photo delivery</p>
+                            <h4 class="text-lg mb-2">Email & SMS</h4>
+                            <p class="text-sm text-white">Instant photo delivery</p>
                         </div>
 
                         <div class="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 hover:border-amber-400/50 hover:bg-white/10 transition-all group">
@@ -1257,8 +1308,8 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                                 </svg>
                             </div>
-                            <h4 class="text-lg font-bold mb-2">Digital Props</h4>
-                            <p class="text-gray-400 text-sm">Custom branded overlays</p>
+                            <h4 class="text-lg mb-2">Digital Props</h4>
+                            <p class="text-sm text-white">Custom branded overlays</p>
                         </div>
                     </div>
                 </div>
@@ -1276,11 +1327,7 @@
             <div class="relative container mx-auto px-6">
                 <div class="max-w-7xl mx-auto">
                     <div class="text-center mb-20">
-                        <div class="inline-flex items-center gap-2 px-4 py-2 bg-cyan-100 rounded-full mb-4">
-                            <div class="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></div>
-                            <span class="text-blue-700 text-sm font-bold uppercase">PRICING PACKAGES</span>
-                        </div>
-                        <h2 class="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-cyan-600 via-purple-600 to-blue-600 bg-clip-text text-transparent">Rosie Packages</h2>
+                        <h2 class="text-4xl md:text-5xl lg:text-6xl font-black mb-6" style="color: #FF4F4F;">Rosie <span style="color: #18F1E1;">Packages</span></h2>
                         <p class="text-xl text-gray-700 max-w-2xl mx-auto">Choose the perfect package for your event and let Rosie roll into your event with the perfect package.</p>
                             </div>
                             
@@ -1294,9 +1341,9 @@
                                     <div class="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-2xl mb-4 shadow-[0_0_30px_rgba(56,189,248,0.3)]">
                                         <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20"><path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z"/></svg>
                                     </div>
-                                    <h3 class="text-3xl font-bold mb-2 text-gray-900">BASIC</h3>
+                                    <h3 class="text-3xl  mb-2 text-gray-900">BASIC</h3>
                                     <p class="text-gray-600 text-sm tracking-wider">Perfect for smaller events</p>
-                                    <div class="mt-2 text-cyan-600 font-bold">Up To 3 Hours</div>
+                                    <div class="mt-2 text-cyan-600 ">Up To 3 Hours</div>
                                 </div>
                             </div>
                             <div class="p-8 bg-white">
@@ -1339,7 +1386,7 @@
                         <!-- RECOMMENDED PACKAGE -->
                         <div class="relative bg-white rounded-3xl shadow-[0_35px_60px_-15px_rgba(129,140,248,0.25)] overflow-hidden transform lg:scale-110 border-4 border-purple-400 hover:border-purple-600 transition-all duration-500 hover:-translate-y-3">
                             <div class="absolute -top-1 -right-1 z-20">
-                                <div class="bg-gradient-to-r from-purple-500 to-cyan-600 text-white px-6 py-2 text-xs font-bold rounded-bl-2xl rounded-tr-2xl shadow-xl flex items-center gap-2">
+                                <div class="bg-gradient-to-r from-purple-500 to-cyan-600 text-white px-6 py-2 text-xs  rounded-bl-2xl rounded-tr-2xl shadow-xl flex items-center gap-2">
                                     <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
                                     MOST POPULAR
                                 </div>
@@ -1352,9 +1399,9 @@
                                     <div class="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-purple-500 to-indigo-600 rounded-2xl mb-4 shadow-[0_0_35px_rgba(168,85,247,0.4)]">
                                         <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
                                     </div>
-                                    <h3 class="text-3xl font-bold mb-2 text-gray-900">RECOMMENDED</h3>
+                                    <h3 class="text-3xl  mb-2 text-gray-900">RECOMMENDED</h3>
                                     <p class="text-gray-600 text-sm tracking-widest">Best value for trade shows</p>
-                                    <div class="mt-2 text-purple-600 font-bold">Up To 4 Hours</div>
+                                    <div class="mt-2 text-purple-600 ">Up To 4 Hours</div>
                                 </div>
                             </div>
                             <div class="p-8 bg-white">
@@ -1418,9 +1465,9 @@
                                     <div class="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl mb-4 shadow-[0_0_35px_rgba(59,130,246,0.4)]">
                                         <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd"/></svg>
                                     </div>
-                                    <h3 class="text-3xl font-bold mb-2 uppercase tracking-wider text-gray-900">PREMIUM</h3>
+                                    <h3 class="text-3xl  mb-2 uppercase tracking-wider text-gray-900">BRAND ACTIVATION</h3>
                                     <p class="text-gray-600 text-sm tracking-[0.4em]">Ultimate experience</p>
-                                    <div class="mt-2 text-blue-600 font-bold">Up To 6 Hours</div>
+                                    <div class="mt-2 text-blue-600 ">Up To 6 Hours</div>
                                 </div>
                             </div>
                             <div class="p-8 bg-white">
@@ -1500,12 +1547,8 @@
                 <div class="max-w-6xl mx-auto">
                     <!-- Section Header -->
                     <div class="text-center mb-16">
-                        <div class="inline-flex items-center gap-2 px-4 py-2 bg-gray-100 rounded-full mb-4">
-                            <div class="w-2 h-2 bg-gray-500 rounded-full animate-pulse"></div>
-                            <span class="text-gray-700 text-sm font-bold uppercase">Technical Specs</span>
-                        </div>
-                        <h2 class="text-4xl md:text-5xl font-black mb-6 text-gray-900">
-                            Rosie's <span class="hologram-text">Specifications</span>
+                        <h2 class="text-4xl md:text-5xl lg:text-6xl font-black mb-6" style="color: #FF4F4F;">
+                            Rosie's <span style="color: #18F1E1;">Specifications</span>
                     </h2>
                     </div>
 
@@ -1517,7 +1560,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"/>
                                 </svg>
                             </div>
-                            <h4 class="text-lg font-bold mb-2 text-cyan-600">Booth Space</h4>
+                            <h4 class="text-lg mb-2 text-cyan-600">Booth Space</h4>
                             <p class="text-gray-700">8' x 8' Optimal</p>
                         </div>
 
@@ -1527,7 +1570,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
                                 </svg>
                             </div>
-                            <h4 class="text-lg font-bold mb-2 text-blue-600">Power</h4>
+                            <h4 class="text-lg mb-2 text-blue-600">Power</h4>
                             <p class="text-gray-700">One 30-amp Circuit</p>
                         </div>
 
@@ -1537,7 +1580,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
                                 </svg>
                             </div>
-                            <h4 class="text-lg font-bold mb-2 text-indigo-600">Show Hours</h4>
+                            <h4 class="text-lg mb-2 text-indigo-600">Show Hours</h4>
                             <p class="text-gray-700">8-10 Hours/day</p>
                         </div>
 
@@ -1547,7 +1590,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
                                 </svg>
                             </div>
-                            <h4 class="text-lg font-bold mb-2 text-purple-600">Lead Generation</h4>
+                            <h4 class="text-lg mb-2 text-purple-600">Lead Generation</h4>
                             <p class="text-gray-700">100+ per Hour</p>
                         </div>
 
@@ -1557,7 +1600,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.111 16.404a5.5 5.5 0 017.778 0M12 20h.01m-7.08-7.071c3.904-3.905 10.236-3.905 14.141 0M1.394 9.393c5.857-5.857 15.355-5.857 21.213 0"/>
                                 </svg>
                             </div>
-                            <h4 class="text-lg font-bold mb-2 text-pink-600">Network</h4>
+                            <h4 class="text-lg mb-2 text-pink-600">Network</h4>
                             <p class="text-gray-700">5G or Hardline</p>
                         </div>
 
@@ -1567,7 +1610,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
                                 </svg>
                             </div>
-                            <h4 class="text-lg font-bold mb-2 text-rose-600">Setup Time</h4>
+                            <h4 class="text-lg mb-2 text-rose-600">Setup Time</h4>
                             <p class="text-gray-700">90 Minutes</p>
                         </div>
 
@@ -1577,7 +1620,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
                                 </svg>
                             </div>
-                            <h4 class="text-lg font-bold mb-2 text-orange-600">Engagement Duration</h4>
+                            <h4 class="text-lg mb-2 text-orange-600">Engagement Duration</h4>
                             <p class="text-gray-700">5-20 Min per Interaction</p>
                         </div>
 
@@ -1587,7 +1630,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
                                 </svg>
                             </div>
-                            <h4 class="text-lg font-bold mb-2 text-amber-600">Robot Height</h4>
+                            <h4 class="text-lg mb-2 text-amber-600">Robot Height</h4>
                             <p class="text-gray-700">5'4" (Optimal for Conversations)</p>
                         </div>
 
@@ -1597,7 +1640,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
                                 </svg>
                             </div>
-                            <h4 class="text-lg font-bold mb-2 text-yellow-600">Environment</h4>
+                            <h4 class="text-lg mb-2 text-yellow-600">Environment</h4>
                             <p class="text-gray-700">Indoor, Controlled</p>
                         </div>
 
@@ -1607,7 +1650,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"/>
                                 </svg>
                             </div>
-                            <h4 class="text-lg font-bold mb-2 text-lime-600">Technical Support</h4>
+                            <h4 class="text-lg mb-2 text-lime-600">Technical Support</h4>
                             <p class="text-gray-700">On-Site Staff Included</p>
                         </div>
 
@@ -1617,7 +1660,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
                                 </svg>
                             </div>
-                            <h4 class="text-lg font-bold mb-2 text-green-600">Analytics</h4>
+                            <h4 class="text-lg mb-2 text-green-600">Analytics</h4>
                             <p class="text-gray-700">Real-time Metrics</p>
                         </div>
 
@@ -1627,7 +1670,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
                                 </svg>
                             </div>
-                            <h4 class="text-lg font-bold mb-2 text-emerald-600">CRM Integration</h4>
+                            <h4 class="text-lg mb-2 text-emerald-600">CRM Integration</h4>
                             <p class="text-gray-700">All Major Platforms</p>
                         </div>
                     </div>
@@ -1643,18 +1686,18 @@
             <div class="container mx-auto px-6 text-center relative z-10">
                 <div class="max-w-4xl mx-auto">
                     <h2 class="text-4xl md:text-5xl lg:text-6xl font-black mb-6">
-                    Let Rosie Roll Into Your Event
+                    Let Rosie Roll Into <span class="block" style="color: #18F1E1;">Your Event</span>
                 </h2>
                     <p class="text-xl md:text-2xl mb-10 text-cyan-100">
                         Experience the future of event photography and trade show engagement with our AI-powered robot
                 </p>
                 <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
                     <a href="../contact-us.html" 
-                           class="inline-block bg-white text-cyan-600 px-12 py-5 rounded-full text-lg font-bold hover:scale-110 hover:shadow-2xl transition-all">
+                           class="inline-block px-12 py-5 rounded-full text-lg  hover:scale-110 hover:shadow-2xl transition-all text-white" style="background: #FF4F4F;">
                         Get Your Quote
                     </a>
                     <a href="#contact" 
-                           class="inline-flex items-center justify-center px-9 py-5 rounded-full font-semibold border-2 border-white/30 text-white bg-white/10 hover:bg-white/20 hover:shadow-lg transition-all duration-300">
+                           class="inline-flex items-center justify-center px-9 py-5 rounded-full font-semibold border-2 text-white bg-white/10 hover:bg-white/20 hover:shadow-lg transition-all duration-300" style="border-color: rgba(24, 241, 225, 0.5);" onmouseover="this.style.borderColor='rgba(24, 241, 225, 0.7)'; this.style.background='rgba(24, 241, 225, 0.2)';" onmouseout="this.style.borderColor='rgba(24, 241, 225, 0.5)'; this.style.background='rgba(255, 255, 255, 0.1)';">
                         <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498A1 1 0 0121 17.72V21a2 2 0 01-2 2h-1C9.716 23 3 16.284 3 8V7a2 2 0 012-2z"/>
                         </svg>
@@ -1670,8 +1713,8 @@
             <div class="container mx-auto px-6">
                 <div class="max-w-6xl mx-auto">
                     <div class="text-center mb-16">
-                        <h2 class="text-4xl md:text-5xl font-black mb-6 text-white">
-                            Discover Our <span class="hologram-text">Related Products</span>
+                        <h2 class="text-4xl md:text-5xl lg:text-6xl font-black mb-6" style="color: #FF4F4F;">
+                            Discover Our <span style="color: #18F1E1;">Related Products</span>
                     </h2>
                     </div>
                     
@@ -1688,7 +1731,7 @@
                                 <div class="absolute inset-0 bg-gradient-to-t from-cyan-900/80 via-cyan-900/40 to-transparent"></div>
                             </div>
                             <div class="p-6">
-                                <h3 class="text-xl font-bold mb-2 text-white group-hover:text-cyan-400 transition-colors">Trade Shows</h3>
+                                <h3 class="text-xl  mb-2 text-white group-hover:text-[#FF4F4F] transition-colors" style="color: #FF4F4F;">Trade Shows</h3>
                                 <p class="text-gray-400">Stand out with innovative engagement</p>
                             </div>
                         </a>
@@ -1705,7 +1748,7 @@
                                 <div class="absolute inset-0 bg-gradient-to-t from-blue-900/80 via-blue-900/40 to-transparent"></div>
                             </div>
                             <div class="p-6">
-                                <h3 class="text-xl font-bold mb-2 text-white group-hover:text-blue-400 transition-colors">Corporate Events</h3>
+                                <h3 class="text-xl  mb-2 text-white group-hover:text-[#FF4F4F] transition-colors" style="color: #FF4F4F;">Corporate Events</h3>
                                 <p class="text-gray-400">Elevate with AI-powered engagement</p>
                             </div>
                         </a>
@@ -1722,7 +1765,7 @@
                                 <div class="absolute inset-0 bg-gradient-to-t from-purple-900/80 via-purple-900/40 to-transparent"></div>
                             </div>
                             <div class="p-6">
-                                <h3 class="text-xl font-bold mb-2 text-white group-hover:text-purple-400 transition-colors">Bar/Bat Mitzvah</h3>
+                                <h3 class="text-xl  mb-2 text-white group-hover:text-[#FF4F4F] transition-colors" style="color: #FF4F4F;">Bar/Bat Mitzvah</h3>
                                 <p class="text-gray-400">Make celebrations unforgettable</p>
                             </div>
                         </a>
