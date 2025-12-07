@@ -7,15 +7,62 @@
     <link rel="icon" type="image/svg+xml" href="../../assets/images/favicon.svg">
     <meta name="description" content="Create viral-worthy moments with the same ultra slow-motion technology from the Met Gala. Professional GlamBot rentals for luxury events, galas, and brand activations nationwide.">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Brand Guide Typography: Azo Sans Font Family -->
     <style>
+        /* Azo Sans Font Face Declarations */
+        @font-face {
+            font-family: 'Azo Sans';
+            src: url('../../assets/fonts/AzoSans-Regular.woff2') format('woff2'),
+                 url('../../assets/fonts/AzoSans-Regular.woff') format('woff');
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'Azo Sans Uber';
+            src: url('../../assets/fonts/AzoSansUber-Regular.woff2') format('woff2'),
+                 url('../../assets/fonts/AzoSansUber-Regular.woff') format('woff');
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        /* Brand Guide: Body Text - Azo Sans Regular */
         body { 
-            font-family: 'Inter', sans-serif; 
-            color: #1a202c; 
+            font-family: 'Azo Sans', sans-serif; 
+            color: #1F1F1F; 
             overflow-x: hidden;
         }
-        h1, h2, h3, h4, h5, h6 { 
-            font-family: 'Playfair Display', serif; 
+
+        p {
+            font-family: 'Azo Sans', sans-serif;
+            color: #1F1F1F;
+        }
+
+        /* Brand Guide: Headers - Azo Sans Uber (Uppercase) */
+        main h1, main h2, main h3, main h4, main h5, main h6 {
+            font-family: 'Azo Sans Uber', sans-serif;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 0.02em;
+            line-height: 1.2;
+            color: #1F1F1F;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Brand Guide: CTAs use Coral (#FF4F4F) */
+        main .btn-primary {
+            background: #FF4F4F;
+            color: #ffffff;
+            transition: all 0.3s ease;
+        }
+
+        main .btn-primary:hover {
+            background: #e63939;
+            transform: translateY(-2px);
+            box-shadow: 0 20px 40px rgba(255, 79, 79, 0.4);
         }
         
         /* Navigation button styling - ensure it has proper background */
@@ -33,15 +80,6 @@
             box-shadow: 0 10px 25px rgba(0, 80, 255, 0.4);
         }
 
-        /* Scoped to main content only to avoid affecting navigation */
-        main .btn-primary { 
-            background: linear-gradient(135deg, #d4af37 0%, #f4d03f 100%);
-            transition: all 0.3s ease; 
-        }
-        main .btn-primary:hover { 
-            transform: translateY(-2px); 
-            box-shadow: 0 20px 40px rgba(212, 175, 55, 0.5);
-        }
         
         /* Gradient Backgrounds */
         .gradient-hero {
@@ -180,11 +218,6 @@
             } 
         }
         
-        /* Glowing Text Effect */
-        .glow-text {
-            text-shadow: 0 0 10px rgba(212, 175, 55, 0.4),
-                         0 0 20px rgba(244, 208, 63, 0.3);
-        }
         
         /* Premium Badge */
         .premium-badge {
@@ -200,7 +233,7 @@
         }
     </style>
 </head>
-<body class="bg-white text-gray-900">
+<body class="bg-white" style="color: #1F1F1F;">
     <script src="../../assets/components/navigation.js"></script>
     
     <main>
@@ -214,10 +247,10 @@
                         <span class="text-yellow-200 text-xs sm:text-sm font-semibold tracking-wider uppercase">Hollywood-Style Experience</span>
                         <div class="w-2 h-2 bg-yellow-400 rounded-full animate-pulse" style="animation-delay: 0.5s;"></div>
                     </div>
-                    <h1 class="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black mb-6 leading-tight glow-text text-white">
+                    <h1 class="text-4xl sm:text-6xl md:text-7xl lg:text-8xl mb-6 leading-tight text-white" style="font-weight: 400;">
                         GlamBot Booth Rentals
                     </h1>
-                    <p class="text-lg sm:text-xl md:text-2xl mb-8 text-gray-100 max-w-3xl mx-auto leading-relaxed px-4">
+                    <p class="text-lg sm:text-xl md:text-2xl mb-8 text-white max-w-3xl mx-auto leading-relaxed px-4">
                         Create viral-worthy moments with the same ultra slow-motion technology that made the Met Gala's red carpet coverage break the internet.
                     </p>
                     <div class="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center px-4">
@@ -258,18 +291,18 @@
             <div class="container mx-auto px-4 sm:px-6">
                 <div class="max-w-6xl mx-auto">
                     <div class="text-center mb-16">
-                        <h2 class="text-3xl sm:text-4xl md:text-5xl font-black mb-6 glow-text text-gray-900">
+                        <h2 class="text-3xl sm:text-4xl md:text-5xl mb-6" style="color: #1F1F1F;">
                             HOLLYWOOD-STYLE, CINEMATIC<br>SLOW-MO VIDEOS
                         </h2>
                         <div class="w-24 h-1 bg-gradient-to-r from-yellow-500 to-amber-500 mx-auto mb-8"></div>
                     </div>
                     
                     <div class="bg-white backdrop-blur-lg rounded-3xl p-8 md:p-12 border border-gray-200 shadow-lg">
-                        <h3 class="text-2xl md:text-3xl font-bold mb-6 text-center text-gray-900">GLAMBOT PHOTO BOOTH RENTALS</h3>
-                        <p class="text-lg text-gray-700 leading-relaxed mb-6">
+                        <h3 class="text-2xl md:text-3xl font-bold mb-6 text-center" style="color: #1F1F1F;">GLAMBOT PHOTO BOOTH RENTALS</h3>
+                        <p class="text-base md:text-lg leading-relaxed mb-6" style="color: #1F1F1F;">
                             Red carpets aren't just for Hollywood—bring the A-list experience to your event with our GlamBot Booth! Capturing high-speed, slow-motion cinematic shots, this booth makes every guest feel like a celebrity at an awards show. With robotic precision and ultra-HD video, it delivers jaw-dropping, ultra-smooth slow-motion content that looks straight out of a blockbuster film.
                         </p>
-                        <p class="text-lg text-gray-700 leading-relaxed">
+                        <p class="text-base md:text-lg leading-relaxed" style="color: #1F1F1F;">
                             Available nationwide, our GlamBot Booth is a must-have for luxury events, galas, fashion shows, corporate parties, and high-end brand activations. Customize it with branded outros, unique backdrops, and dramatic lighting effects to make every clip feel red-carpet ready.
                         </p>
                     </div>
@@ -281,17 +314,17 @@
         <section class="section-padding gradient-dark">
             <div class="container mx-auto px-4 sm:px-6">
                 <div class="max-w-6xl mx-auto">
-                    <h2 class="text-3xl sm:text-4xl md:text-5xl font-black text-center mb-12 glow-text text-gray-900">
+                    <h2 class="text-3xl sm:text-4xl md:text-5xl text-center mb-12" style="color: #1F1F1F;">
                         What is a GlamBot Photo Booth?
                     </h2>
                     <div class="bg-white backdrop-blur-lg rounded-3xl p-8 md:p-12 border border-gray-200 shadow-lg mb-12">
-                        <p class="text-lg text-gray-700 leading-relaxed">
+                        <p class="text-base md:text-lg leading-relaxed" style="color: #1F1F1F;">
                             This isn't just a slow-motion booth—it's a high-tech cinematic experience. Powered by a precision robotic arm and an ultra-high-quality camera, the GlamBot captures stunning, dynamic motion shots with unmatched clarity. While it's capable of slow-motion capture, we take it further by adding cinematic effects, dramatic zooms, and pro-level editing to create scroll-stopping, Hollywood-style content that looks straight off the red carpet.
                         </p>
                     </div>
 
                     <!-- Core Features Grid -->
-                    <h3 class="text-2xl md:text-3xl font-bold text-center mb-10 text-gray-900">Core GlamBot Features</h3>
+                    <h3 class="text-2xl md:text-3xl font-bold text-center mb-10" style="color: #1F1F1F;">Core GlamBot Features</h3>
                     <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
                         <div class="feature-card rounded-2xl p-6 text-center">
                             <div class="icon-wrapper">
@@ -299,7 +332,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
                                 </svg>
                             </div>
-                            <h4 class="text-lg font-bold mb-2 text-gray-900">Precision Robotic Movement</h4>
+                            <h4 class="text-lg font-bold mb-2" style="color: #1F1F1F;">Precision Robotic Movement</h4>
                         </div>
                         
                         <div class="feature-card rounded-2xl p-6 text-center">
@@ -308,7 +341,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                                 </svg>
                             </div>
-                            <h4 class="text-lg font-bold mb-2 text-gray-900">Slow-Motion Capture</h4>
+                            <h4 class="text-lg font-bold mb-2" style="color: #1F1F1F;">Slow-Motion Capture</h4>
                         </div>
                         
                         <div class="feature-card rounded-2xl p-6 text-center">
@@ -317,7 +350,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"></path>
                                 </svg>
                             </div>
-                            <h4 class="text-lg font-bold mb-2 text-gray-900">Real-Time Color Grading</h4>
+                            <h4 class="text-lg font-bold mb-2" style="color: #1F1F1F;">Real-Time Color Grading</h4>
                         </div>
                         
                         <div class="feature-card rounded-2xl p-6 text-center">
@@ -326,7 +359,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"></path>
                                 </svg>
                             </div>
-                            <h4 class="text-lg font-bold mb-2 text-gray-900">Instant Social Delivery</h4>
+                            <h4 class="text-lg font-bold mb-2" style="color: #1F1F1F;">Instant Social Delivery</h4>
                         </div>
                         
                         <div class="feature-card rounded-2xl p-6 text-center">
@@ -335,7 +368,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
                                 </svg>
                             </div>
-                            <h4 class="text-lg font-bold mb-2 text-gray-900">4K Video Resolution</h4>
+                            <h4 class="text-lg font-bold mb-2" style="color: #1F1F1F;">4K Video Resolution</h4>
                         </div>
                         
                         <div class="feature-card rounded-2xl p-6 text-center">
@@ -344,7 +377,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
                                 </svg>
                             </div>
-                            <h4 class="text-lg font-bold mb-2 text-gray-900">Live Preview Screens</h4>
+                            <h4 class="text-lg font-bold mb-2" style="color: #1F1F1F;">Live Preview Screens</h4>
                         </div>
                         
                         <div class="feature-card rounded-2xl p-6 text-center">
@@ -353,7 +386,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"></path>
                                 </svg>
                             </div>
-                            <h4 class="text-lg font-bold mb-2 text-gray-900">Wind Effect System Options</h4>
+                            <h4 class="text-lg font-bold mb-2" style="color: #1F1F1F;">Wind Effect System Options</h4>
                         </div>
                         
                         <div class="feature-card rounded-2xl p-6 text-center">
@@ -362,7 +395,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path>
                                 </svg>
                             </div>
-                            <h4 class="text-lg font-bold mb-2 text-gray-900">Fog Machine Integration</h4>
+                            <h4 class="text-lg font-bold mb-2" style="color: #1F1F1F;">Fog Machine Integration</h4>
                         </div>
                     </div>
                 </div>
@@ -373,12 +406,12 @@
         <section class="section-padding bg-gradient-to-b from-gray-50 to-white">
             <div class="container mx-auto px-4 sm:px-6">
                 <div class="max-w-6xl mx-auto">
-                    <h2 class="text-3xl sm:text-4xl md:text-5xl font-black text-center mb-12 glow-text text-gray-900">
+                    <h2 class="text-3xl sm:text-4xl md:text-5xl text-center mb-12" style="color: #1F1F1F;">
                         Branded GlamBot Photo Booth Experiences
                     </h2>
                     
                     <div class="bg-white backdrop-blur-lg rounded-3xl p-8 md:p-12 border border-gray-200 shadow-lg mb-12">
-                        <p class="text-xl text-gray-700 leading-relaxed text-center mb-8">
+                        <p class="text-base md:text-lg leading-relaxed text-center mb-8" style="color: #1F1F1F;">
                             Give guests their red carpet moment. Our GlamBot Booth captures every twirl, hair flip, and dramatic motion in stunning slow motion. Every clip is a high-fashion, cinematic masterpiece designed to dominate social feeds.
                         </p>
                     </div>
@@ -390,7 +423,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
                                 </svg>
                             </div>
-                            <h4 class="text-lg font-bold mb-2 text-center text-gray-900">Cinematic Slow-Motion Capture</h4>
+                            <h4 class="text-lg font-bold mb-2 text-center" style="color: #1F1F1F;">Cinematic Slow-Motion Capture</h4>
                         </div>
 
                         <div class="gradient-card rounded-2xl p-6 hover:scale-105 transition-transform duration-300">
@@ -399,7 +432,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                                 </svg>
                             </div>
-                            <h4 class="text-lg font-bold mb-2 text-center text-gray-900">Custom Video Overlay Graphics</h4>
+                            <h4 class="text-lg font-bold mb-2 text-center" style="color: #1F1F1F;">Custom Video Overlay Graphics</h4>
                         </div>
 
                         <div class="gradient-card rounded-2xl p-6 hover:scale-105 transition-transform duration-300">
@@ -408,7 +441,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path>
                                 </svg>
                             </div>
-                            <h4 class="text-lg font-bold mb-2 text-center text-gray-900">Branded Social Sharing Microsite</h4>
+                            <h4 class="text-lg font-bold mb-2 text-center" style="color: #1F1F1F;">Branded Social Sharing Microsite</h4>
                         </div>
 
                         <div class="gradient-card rounded-2xl p-6 hover:scale-105 transition-transform duration-300">
@@ -417,7 +450,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
                                 </svg>
                             </div>
-                            <h4 class="text-lg font-bold mb-2 text-center text-gray-900">Interactive Touchscreen Start Menu</h4>
+                            <h4 class="text-lg font-bold mb-2 text-center" style="color: #1F1F1F;">Interactive Touchscreen Start Menu</h4>
                         </div>
 
                         <div class="gradient-card rounded-2xl p-6 hover:scale-105 transition-transform duration-300">
@@ -426,7 +459,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
                                 </svg>
                             </div>
-                            <h4 class="text-lg font-bold mb-2 text-center text-gray-900">LED Lighting Customized To Brand Colors</h4>
+                            <h4 class="text-lg font-bold mb-2 text-center" style="color: #1F1F1F;">LED Lighting Customized To Brand Colors</h4>
                         </div>
 
                         <div class="gradient-card rounded-2xl p-6 hover:scale-105 transition-transform duration-300">
@@ -435,7 +468,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                                 </svg>
                             </div>
-                            <h4 class="text-lg font-bold mb-2 text-center text-gray-900">Branded Step-And-Repeat Backdrop</h4>
+                            <h4 class="text-lg font-bold mb-2 text-center" style="color: #1F1F1F;">Branded Step-And-Repeat Backdrop</h4>
                         </div>
 
                         <div class="gradient-card rounded-2xl p-6 hover:scale-105 transition-transform duration-300">
@@ -444,7 +477,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 20l4-16m2 16l4-16M6 9h14M4 15h14"></path>
                                 </svg>
                             </div>
-                            <h4 class="text-lg font-bold mb-2 text-center text-gray-900">Custom Event Hashtags For Sharing</h4>
+                            <h4 class="text-lg font-bold mb-2 text-center" style="color: #1F1F1F;">Custom Event Hashtags For Sharing</h4>
                         </div>
 
                         <div class="gradient-card rounded-2xl p-6 hover:scale-105 transition-transform duration-300">
@@ -453,7 +486,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
                                 </svg>
                             </div>
-                            <h4 class="text-lg font-bold mb-2 text-center text-gray-900">Personalized Branded Email Templates</h4>
+                            <h4 class="text-lg font-bold mb-2 text-center" style="color: #1F1F1F;">Personalized Branded Email Templates</h4>
                         </div>
                     </div>
                 </div>
@@ -464,10 +497,10 @@
         <section id="packages" class="section-padding gradient-dark">
             <div class="container mx-auto px-4 sm:px-6">
                 <div class="max-w-7xl mx-auto">
-                    <h2 class="text-3xl sm:text-4xl md:text-5xl font-black text-center mb-6 glow-text text-gray-900">
+                    <h2 class="text-3xl sm:text-4xl md:text-5xl text-center mb-6" style="color: #1F1F1F;">
                         GlamBot Booth Packages
                     </h2>
-                    <p class="text-xl text-gray-600 text-center mb-16 max-w-3xl mx-auto">
+                    <p class="text-base md:text-lg text-center mb-16 max-w-3xl mx-auto" style="color: #1F1F1F;">
                         Choose the perfect package for your red carpet moment
                     </p>
 
@@ -495,7 +528,7 @@
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
                                             </svg>
                                         </div>
-                                        <span class="text-gray-700 font-medium pt-2">Up To 3 Hours of Service</span>
+                                        <span class="font-medium pt-2" style="color: #1F1F1F;">Up To 3 Hours of Service</span>
                                     </li>
                                     <li class="flex items-start gap-4 group/item">
                                         <div class="flex-shrink-0 w-10 h-10 bg-yellow-500/20 rounded-xl flex items-center justify-center group-hover/item:bg-yellow-500/30 transition-colors">
@@ -503,7 +536,7 @@
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
                                             </svg>
                                         </div>
-                                        <span class="text-gray-700 font-medium pt-2">On-Site Director</span>
+                                        <span class="font-medium pt-2" style="color: #1F1F1F;">On-Site Director</span>
                                     </li>
                                     <li class="flex items-start gap-4 group/item">
                                         <div class="flex-shrink-0 w-10 h-10 bg-yellow-500/20 rounded-xl flex items-center justify-center group-hover/item:bg-yellow-500/30 transition-colors">
@@ -511,7 +544,7 @@
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
                                             </svg>
                                         </div>
-                                        <span class="text-gray-700 font-medium pt-2">1 On-Site Host</span>
+                                        <span class="font-medium pt-2" style="color: #1F1F1F;">1 On-Site Host</span>
                                     </li>
                                     <li class="flex items-start gap-4 group/item">
                                         <div class="flex-shrink-0 w-10 h-10 bg-yellow-500/20 rounded-xl flex items-center justify-center group-hover/item:bg-yellow-500/30 transition-colors">
@@ -519,7 +552,7 @@
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"/>
                                             </svg>
                                         </div>
-                                        <span class="text-gray-700 font-medium pt-2">Logo on Videos</span>
+                                        <span class="font-medium pt-2" style="color: #1F1F1F;">Logo on Videos</span>
                                     </li>
                                     <li class="flex items-start gap-4 group/item">
                                         <div class="flex-shrink-0 w-10 h-10 bg-yellow-500/20 rounded-xl flex items-center justify-center group-hover/item:bg-yellow-500/30 transition-colors">
@@ -527,7 +560,7 @@
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"/>
                                             </svg>
                                         </div>
-                                        <span class="text-gray-700 font-medium pt-2">Text and Email Sharing</span>
+                                        <span class="font-medium pt-2" style="color: #1F1F1F;">Text and Email Sharing</span>
                                     </li>
                                     <li class="flex items-start gap-4 group/item">
                                         <div class="flex-shrink-0 w-10 h-10 bg-yellow-500/20 rounded-xl flex items-center justify-center group-hover/item:bg-yellow-500/30 transition-colors">
@@ -535,7 +568,7 @@
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
                                             </svg>
                                         </div>
-                                        <span class="text-gray-700 font-medium pt-2">Venue as Backdrop</span>
+                                        <span class="font-medium pt-2" style="color: #1F1F1F;">Venue as Backdrop</span>
                                     </li>
                                     <li class="flex items-start gap-4 group/item">
                                         <div class="flex-shrink-0 w-10 h-10 bg-yellow-500/20 rounded-xl flex items-center justify-center group-hover/item:bg-yellow-500/30 transition-colors">
@@ -543,7 +576,7 @@
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
                                             </svg>
                                         </div>
-                                        <span class="text-gray-700 font-medium pt-2">4'x12' Red Carpet</span>
+                                        <span class="font-medium pt-2" style="color: #1F1F1F;">4'x12' Red Carpet</span>
                                     </li>
                                     <li class="flex items-start gap-4 group/item">
                                         <div class="flex-shrink-0 w-10 h-10 bg-yellow-500/20 rounded-xl flex items-center justify-center group-hover/item:bg-yellow-500/30 transition-colors">
@@ -551,7 +584,7 @@
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
                                             </svg>
                                         </div>
-                                        <span class="text-gray-700 font-medium pt-2">LED Video Lighting Set</span>
+                                        <span class="font-medium pt-2" style="color: #1F1F1F;">LED Video Lighting Set</span>
                                     </li>
                                 </ul>
                                 <a href="../contact-us.html" class="mt-8 w-full inline-flex items-center justify-center bg-gradient-to-r from-[#d4af37] to-[#f4d03f] text-white py-4 px-6 rounded-xl font-semibold hover:from-[#f4d03f] hover:to-[#d4af37] transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 text-center">
@@ -592,7 +625,7 @@
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
                                             </svg>
                                         </div>
-                                        <span class="text-gray-700 font-medium pt-2"><strong>Up To 4 Hours</strong> of Service</span>
+                                        <span class="font-medium pt-2" style="color: #1F1F1F;"><strong>Up To 4 Hours</strong> of Service</span>
                                     </li>
                                     <li class="flex items-start gap-4 group/item">
                                         <div class="flex-shrink-0 w-10 h-10 bg-amber-500/20 rounded-xl flex items-center justify-center group-hover/item:bg-amber-500/30 transition-colors">
@@ -600,7 +633,7 @@
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
                                             </svg>
                                         </div>
-                                        <span class="text-gray-700 font-medium pt-2">1 On-Site Director</span>
+                                        <span class="font-medium pt-2" style="color: #1F1F1F;">1 On-Site Director</span>
                                     </li>
                                     <li class="flex items-start gap-4 group/item">
                                         <div class="flex-shrink-0 w-10 h-10 bg-amber-500/20 rounded-xl flex items-center justify-center group-hover/item:bg-amber-500/30 transition-colors">
@@ -608,7 +641,7 @@
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
                                             </svg>
                                         </div>
-                                        <span class="text-gray-700 font-medium pt-2">1 On-Site Host</span>
+                                        <span class="font-medium pt-2" style="color: #1F1F1F;">1 On-Site Host</span>
                                     </li>
                                     <li class="flex items-start gap-4 group/item">
                                         <div class="flex-shrink-0 w-10 h-10 bg-amber-500/20 rounded-xl flex items-center justify-center group-hover/item:bg-amber-500/30 transition-colors">
@@ -616,7 +649,7 @@
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"/>
                                             </svg>
                                         </div>
-                                        <span class="text-gray-700 font-medium pt-2">Logo on Videos</span>
+                                        <span class="font-medium pt-2" style="color: #1F1F1F;">Logo on Videos</span>
                                     </li>
                                     <li class="flex items-start gap-4 group/item">
                                         <div class="flex-shrink-0 w-10 h-10 bg-amber-500/20 rounded-xl flex items-center justify-center group-hover/item:bg-amber-500/30 transition-colors">
@@ -624,7 +657,7 @@
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"/>
                                             </svg>
                                         </div>
-                                        <span class="text-gray-700 font-medium pt-2">Text and Email Sharing</span>
+                                        <span class="font-medium pt-2" style="color: #1F1F1F;">Text and Email Sharing</span>
                                     </li>
                                     <li class="flex items-start gap-4 group/item">
                                         <div class="flex-shrink-0 w-10 h-10 bg-amber-500/20 rounded-xl flex items-center justify-center group-hover/item:bg-amber-500/30 transition-colors">
@@ -632,7 +665,7 @@
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/>
                                             </svg>
                                         </div>
-                                        <span class="text-gray-700 font-medium pt-2"><strong>Live-Action Props</strong> (Confetti, Money, or Bubbles)</span>
+                                        <span class="font-medium pt-2" style="color: #1F1F1F;"><strong>Live-Action Props</strong> (Confetti, Money, or Bubbles)</span>
                                     </li>
                                     <li class="flex items-start gap-4 group/item">
                                         <div class="flex-shrink-0 w-10 h-10 bg-amber-500/20 rounded-xl flex items-center justify-center group-hover/item:bg-amber-500/30 transition-colors">
@@ -640,7 +673,7 @@
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
                                             </svg>
                                         </div>
-                                        <span class="text-gray-700 font-medium pt-2"><strong>Black 12x12' Curved Backdrop</strong></span>
+                                        <span class="font-medium pt-2" style="color: #1F1F1F;"><strong>Black 12x12' Curved Backdrop</strong></span>
                                     </li>
                                     <li class="flex items-start gap-4 group/item">
                                         <div class="flex-shrink-0 w-10 h-10 bg-amber-500/20 rounded-xl flex items-center justify-center group-hover/item:bg-amber-500/30 transition-colors">
@@ -648,7 +681,7 @@
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
                                             </svg>
                                         </div>
-                                        <span class="text-gray-700 font-medium pt-2">4'x12' Red Carpet</span>
+                                        <span class="font-medium pt-2" style="color: #1F1F1F;">4'x12' Red Carpet</span>
                                     </li>
                                     <li class="flex items-start gap-4 group/item">
                                         <div class="flex-shrink-0 w-10 h-10 bg-amber-500/20 rounded-xl flex items-center justify-center group-hover/item:bg-amber-500/30 transition-colors">
@@ -656,7 +689,7 @@
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/>
                                             </svg>
                                         </div>
-                                        <span class="text-gray-700 font-medium pt-2"><strong>Live Video Streaming</strong> to Event Screens</span>
+                                        <span class="font-medium pt-2" style="color: #1F1F1F;"><strong>Live Video Streaming</strong> to Event Screens</span>
                                     </li>
                                     <li class="flex items-start gap-4 group/item">
                                         <div class="flex-shrink-0 w-10 h-10 bg-amber-500/20 rounded-xl flex items-center justify-center group-hover/item:bg-amber-500/30 transition-colors">
@@ -664,7 +697,7 @@
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
                                             </svg>
                                         </div>
-                                        <span class="text-gray-700 font-medium pt-2">LED Video Lighting Set</span>
+                                        <span class="font-medium pt-2" style="color: #1F1F1F;">LED Video Lighting Set</span>
                                     </li>
                                 </ul>
                                 <a href="../contact-us.html" class="mt-8 w-full inline-flex items-center justify-center bg-gradient-to-r from-[#d4af37] via-[#f4d03f] to-[#d4af37] text-white py-4 px-6 rounded-xl font-semibold hover:from-[#f4d03f] hover:via-[#d4af37] hover:to-[#f4d03f] transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:-translate-y-1 text-center gap-2">
@@ -699,7 +732,7 @@
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
                                             </svg>
                                         </div>
-                                        <span class="text-gray-700 font-medium pt-2"><strong>Up To 6 Hours</strong> of Service</span>
+                                        <span class="font-medium pt-2" style="color: #1F1F1F;"><strong>Up To 6 Hours</strong> of Service</span>
                                     </li>
                                     <li class="flex items-start gap-4 group/item">
                                         <div class="flex-shrink-0 w-10 h-10 bg-yellow-500/20 rounded-xl flex items-center justify-center group-hover/item:bg-yellow-500/30 transition-colors">
@@ -707,7 +740,7 @@
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
                                             </svg>
                                         </div>
-                                        <span class="text-gray-700 font-medium pt-2">On-Site Director</span>
+                                        <span class="font-medium pt-2" style="color: #1F1F1F;">On-Site Director</span>
                                     </li>
                                     <li class="flex items-start gap-4 group/item">
                                         <div class="flex-shrink-0 w-10 h-10 bg-yellow-500/20 rounded-xl flex items-center justify-center group-hover/item:bg-yellow-500/30 transition-colors">
@@ -715,7 +748,7 @@
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
                                             </svg>
                                         </div>
-                                        <span class="text-gray-700 font-medium pt-2">1 On-Site Host</span>
+                                        <span class="font-medium pt-2" style="color: #1F1F1F;">1 On-Site Host</span>
                                     </li>
                                     <li class="flex items-start gap-4 group/item">
                                         <div class="flex-shrink-0 w-10 h-10 bg-yellow-500/20 rounded-xl flex items-center justify-center group-hover/item:bg-yellow-500/30 transition-colors">
@@ -723,7 +756,7 @@
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"/>
                                             </svg>
                                         </div>
-                                        <span class="text-gray-700 font-medium pt-2">Logo on Videos</span>
+                                        <span class="font-medium pt-2" style="color: #1F1F1F;">Logo on Videos</span>
                                     </li>
                                     <li class="flex items-start gap-4 group/item">
                                         <div class="flex-shrink-0 w-10 h-10 bg-yellow-500/20 rounded-xl flex items-center justify-center group-hover/item:bg-yellow-500/30 transition-colors">
@@ -731,7 +764,7 @@
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"/>
                                             </svg>
                                         </div>
-                                        <span class="text-gray-700 font-medium pt-2">Text and Email Sharing</span>
+                                        <span class="font-medium pt-2" style="color: #1F1F1F;">Text and Email Sharing</span>
                                     </li>
                                     <li class="flex items-start gap-4 group/item">
                                         <div class="flex-shrink-0 w-10 h-10 bg-yellow-500/20 rounded-xl flex items-center justify-center group-hover/item:bg-yellow-500/30 transition-colors">
@@ -739,7 +772,7 @@
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/>
                                             </svg>
                                         </div>
-                                        <span class="text-gray-700 font-medium pt-2">Live-Action Props (Confetti, Money, or Bubbles)</span>
+                                        <span class="font-medium pt-2" style="color: #1F1F1F;">Live-Action Props (Confetti, Money, or Bubbles)</span>
                                     </li>
                                     <li class="flex items-start gap-4 group/item">
                                         <div class="flex-shrink-0 w-10 h-10 bg-yellow-500/20 rounded-xl flex items-center justify-center group-hover/item:bg-yellow-500/30 transition-colors">
@@ -747,7 +780,7 @@
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
                                             </svg>
                                         </div>
-                                        <span class="text-gray-700 font-medium pt-2"><strong>Custom 12x12' Curved Backdrop</strong></span>
+                                        <span class="font-medium pt-2" style="color: #1F1F1F;"><strong>Custom 12x12' Curved Backdrop</strong></span>
                                     </li>
                                     <li class="flex items-start gap-4 group/item">
                                         <div class="flex-shrink-0 w-10 h-10 bg-yellow-500/20 rounded-xl flex items-center justify-center group-hover/item:bg-yellow-500/30 transition-colors">
@@ -755,7 +788,7 @@
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/>
                                             </svg>
                                         </div>
-                                        <span class="text-gray-700 font-medium pt-2"><strong>Custom Intro/Outro Video</strong></span>
+                                        <span class="font-medium pt-2" style="color: #1F1F1F;"><strong>Custom Intro/Outro Video</strong></span>
                                     </li>
                                     <li class="flex items-start gap-4 group/item">
                                         <div class="flex-shrink-0 w-10 h-10 bg-yellow-500/20 rounded-xl flex items-center justify-center group-hover/item:bg-yellow-500/30 transition-colors">
@@ -763,7 +796,7 @@
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"/>
                                             </svg>
                                         </div>
-                                        <span class="text-gray-700 font-medium pt-2"><strong>Enhanced Branding</strong> (Email/Text/Microsite)</span>
+                                        <span class="font-medium pt-2" style="color: #1F1F1F;"><strong>Enhanced Branding</strong> (Email/Text/Microsite)</span>
                                     </li>
                                     <li class="flex items-start gap-4 group/item">
                                         <div class="flex-shrink-0 w-10 h-10 bg-yellow-500/20 rounded-xl flex items-center justify-center group-hover/item:bg-yellow-500/30 transition-colors">
@@ -771,7 +804,7 @@
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
                                             </svg>
                                         </div>
-                                        <span class="text-gray-700 font-medium pt-2">4'x12' Red Carpet</span>
+                                        <span class="font-medium pt-2" style="color: #1F1F1F;">4'x12' Red Carpet</span>
                                     </li>
                                     <li class="flex items-start gap-4 group/item">
                                         <div class="flex-shrink-0 w-10 h-10 bg-yellow-500/20 rounded-xl flex items-center justify-center group-hover/item:bg-yellow-500/30 transition-colors">
@@ -779,7 +812,7 @@
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/>
                                             </svg>
                                         </div>
-                                        <span class="text-gray-700 font-medium pt-2">Live Video Streaming to Event Screens</span>
+                                        <span class="font-medium pt-2" style="color: #1F1F1F;">Live Video Streaming to Event Screens</span>
                                     </li>
                                     <li class="flex items-start gap-4 group/item">
                                         <div class="flex-shrink-0 w-10 h-10 bg-yellow-500/20 rounded-xl flex items-center justify-center group-hover/item:bg-yellow-500/30 transition-colors">
@@ -787,7 +820,7 @@
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
                                             </svg>
                                         </div>
-                                        <span class="text-gray-700 font-medium pt-2">LED Video Lighting Set</span>
+                                        <span class="font-medium pt-2" style="color: #1F1F1F;">LED Video Lighting Set</span>
                                     </li>
                                 </ul>
                                 <a href="../contact-us.html" class="mt-6 w-full inline-flex items-center justify-center bg-gradient-to-r from-[#b8860b] to-[#daa520] text-white py-4 px-6 rounded-xl font-semibold hover:from-[#daa520] hover:to-[#b8860b] transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 text-center">
@@ -804,7 +837,7 @@
         <section class="section-padding bg-gradient-to-b from-white to-gray-50">
             <div class="container mx-auto px-4 sm:px-6">
                 <div class="max-w-6xl mx-auto">
-                    <h2 class="text-3xl sm:text-4xl md:text-5xl font-black text-center mb-16 glow-text text-gray-900">
+                    <h2 class="text-3xl sm:text-4xl md:text-5xl text-center mb-16" style="color: #1F1F1F;">
                         Additional Options
                     </h2>
 
@@ -815,8 +848,8 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
                                 </svg>
                             </div>
-                            <h3 class="text-xl font-bold mb-3 text-gray-900">Branded Videos</h3>
-                            <p class="text-gray-600">Create fully branded videos with custom overlays, intros, and outros for a polished and professional look.</p>
+                            <h3 class="text-xl font-bold mb-3" style="color: #1F1F1F;">Branded Videos</h3>
+                            <p class="text-base md:text-lg" style="color: #1F1F1F;">Create fully branded videos with custom overlays, intros, and outros for a polished and professional look.</p>
                         </div>
 
                         <div class="gradient-card rounded-2xl p-8 hover:scale-105 transition-all duration-300">
@@ -825,8 +858,8 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"></path>
                                 </svg>
                             </div>
-                            <h3 class="text-xl font-bold mb-3 text-gray-900">Magazine Cover Set</h3>
-                            <p class="text-gray-600">Give guests the ultimate star treatment with a Magazine Cover Set designed for high-fashion photos.</p>
+                            <h3 class="text-xl font-bold mb-3" style="color: #1F1F1F;">Magazine Cover Set</h3>
+                            <p class="text-base md:text-lg" style="color: #1F1F1F;">Give guests the ultimate star treatment with a Magazine Cover Set designed for high-fashion photos.</p>
                         </div>
 
                         <div class="gradient-card rounded-2xl p-8 hover:scale-105 transition-all duration-300">
@@ -835,8 +868,8 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
                                 </svg>
                             </div>
-                            <h3 class="text-xl font-bold mb-3 text-gray-900">LED Backdrop Wall</h3>
-                            <p class="text-gray-600">Enhance the atmosphere with an LED backdrop wall that adds depth and vibrance to your space.</p>
+                            <h3 class="text-xl font-bold mb-3" style="color: #1F1F1F;">LED Backdrop Wall</h3>
+                            <p class="text-base md:text-lg" style="color: #1F1F1F;">Enhance the atmosphere with an LED backdrop wall that adds depth and vibrance to your space.</p>
                         </div>
 
                         <div class="gradient-card rounded-2xl p-8 hover:scale-105 transition-all duration-300">
@@ -845,8 +878,8 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                                 </svg>
                             </div>
-                            <h3 class="text-xl font-bold mb-3 text-gray-900">Step and Repeat Wall</h3>
-                            <p class="text-gray-600">Give guests a red carpet experience with a step and repeat wall featuring event or brand logos.</p>
+                            <h3 class="text-xl font-bold mb-3" style="color: #1F1F1F;">Step and Repeat Wall</h3>
+                            <p class="text-base md:text-lg" style="color: #1F1F1F;">Give guests a red carpet experience with a step and repeat wall featuring event or brand logos.</p>
                         </div>
 
                         <div class="gradient-card rounded-2xl p-8 hover:scale-105 transition-all duration-300">
@@ -855,8 +888,8 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
                                 </svg>
                             </div>
-                            <h3 class="text-xl font-bold mb-3 text-gray-900">Runway Configuration</h3>
-                            <p class="text-gray-600">Transform your space with a professional runway configuration for fashion shows or red carpet moments.</p>
+                            <h3 class="text-xl font-bold mb-3" style="color: #1F1F1F;">Runway Configuration</h3>
+                            <p class="text-base md:text-lg" style="color: #1F1F1F;">Transform your space with a professional runway configuration for fashion shows or red carpet moments.</p>
                         </div>
 
                         <div class="gradient-card rounded-2xl p-8 hover:scale-105 transition-all duration-300">
@@ -865,8 +898,8 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path>
                                 </svg>
                             </div>
-                            <h3 class="text-xl font-bold mb-3 text-gray-900">Red Carpet Setup</h3>
-                            <p class="text-gray-600">Give your guests the VIP treatment with a full red carpet setup, complete with stanchions and velvet ropes.</p>
+                            <h3 class="text-xl font-bold mb-3" style="color: #1F1F1F;">Red Carpet Setup</h3>
+                            <p class="text-base md:text-lg" style="color: #1F1F1F;">Give your guests the VIP treatment with a full red carpet setup, complete with stanchions and velvet ropes.</p>
                         </div>
                     </div>
                 </div>
@@ -877,64 +910,64 @@
         <section class="section-padding gradient-dark">
             <div class="container mx-auto px-4 sm:px-6">
                 <div class="max-w-6xl mx-auto">
-                    <h2 class="text-3xl sm:text-4xl md:text-5xl font-black text-center mb-16 glow-text text-gray-900">
+                    <h2 class="text-3xl sm:text-4xl md:text-5xl text-center mb-16" style="color: #1F1F1F;">
                         GlamBot Booth<br>Technical Specifications
                     </h2>
 
                     <div class="tech-grid">
                         <div class="bg-white backdrop-blur-lg rounded-2xl p-6 border border-gray-200 shadow-lg">
                             <h4 class="text-lg font-bold mb-2 text-yellow-600">Space Required:</h4>
-                            <p class="text-gray-700">15' x 20' Minimum</p>
+                            <p style="color: #1F1F1F;">15' x 20' Minimum</p>
                         </div>
 
                         <div class="bg-white backdrop-blur-lg rounded-2xl p-6 border border-gray-200 shadow-lg">
                             <h4 class="text-lg font-bold mb-2 text-amber-600">Power Needs:</h4>
-                            <p class="text-gray-700">20-amp Circuit Setup</p>
+                            <p style="color: #1F1F1F;">20-amp Circuit Setup</p>
                         </div>
 
                         <div class="bg-white backdrop-blur-lg rounded-2xl p-6 border border-gray-200 shadow-lg">
                             <h4 class="text-lg font-bold mb-2 text-yellow-600">Duration:</h4>
-                            <p class="text-gray-700">90-120 Minutes</p>
+                            <p style="color: #1F1F1F;">90-120 Minutes</p>
                         </div>
 
                         <div class="bg-white backdrop-blur-lg rounded-2xl p-6 border border-gray-200 shadow-lg">
                             <h4 class="text-lg font-bold mb-2 text-amber-600">Capture Rate:</h4>
-                            <p class="text-gray-700">30-40 Videos/hr</p>
+                            <p style="color: #1F1F1F;">30-40 Videos/hr</p>
                         </div>
 
                         <div class="bg-white backdrop-blur-lg rounded-2xl p-6 border border-gray-200 shadow-lg">
                             <h4 class="text-lg font-bold mb-2 text-yellow-600">Internet:</h4>
-                            <p class="text-gray-700">Hardwired Preferred</p>
+                            <p style="color: #1F1F1F;">Hardwired Preferred</p>
                         </div>
 
                         <div class="bg-white backdrop-blur-lg rounded-2xl p-6 border border-gray-200 shadow-lg">
                             <h4 class="text-lg font-bold mb-2 text-amber-600">Subject Capacity:</h4>
-                            <p class="text-gray-700">Solo or Pairs</p>
+                            <p style="color: #1F1F1F;">Solo or Pairs</p>
                         </div>
 
                         <div class="bg-white backdrop-blur-lg rounded-2xl p-6 border border-gray-200 shadow-lg">
                             <h4 class="text-lg font-bold mb-2 text-yellow-600">Content Delivery:</h4>
-                            <p class="text-gray-700">Instant social share</p>
+                            <p style="color: #1F1F1F;">Instant social share</p>
                         </div>
 
                         <div class="bg-white backdrop-blur-lg rounded-2xl p-6 border border-gray-200 shadow-lg">
                             <h4 class="text-lg font-bold mb-2 text-amber-600">Backup Systems:</h4>
-                            <p class="text-gray-700">Redundant storage</p>
+                            <p style="color: #1F1F1F;">Redundant storage</p>
                         </div>
 
                         <div class="bg-white backdrop-blur-lg rounded-2xl p-6 border border-gray-200 shadow-lg">
                             <h4 class="text-lg font-bold mb-2 text-yellow-600">Environment:</h4>
-                            <p class="text-gray-700">Indoor use only</p>
+                            <p style="color: #1F1F1F;">Indoor use only</p>
                         </div>
 
                         <div class="bg-white backdrop-blur-lg rounded-2xl p-6 border border-gray-200 shadow-lg">
                             <h4 class="text-lg font-bold mb-2 text-amber-600">Staff:</h4>
-                            <p class="text-gray-700">Two operators included</p>
+                            <p style="color: #1F1F1F;">Two operators included</p>
                         </div>
 
                         <div class="bg-white backdrop-blur-lg rounded-2xl p-6 border border-gray-200 shadow-lg">
                             <h4 class="text-lg font-bold mb-2 text-yellow-600">Standard Duration:</h4>
-                            <p class="text-gray-700">2-8 hours</p>
+                            <p style="color: #1F1F1F;">2-8 hours</p>
                         </div>
                     </div>
                 </div>
@@ -945,10 +978,10 @@
         <section class="section-padding bg-gradient-to-br from-yellow-600 via-amber-600 to-yellow-700 text-white relative overflow-hidden">
             <div class="absolute inset-0 bg-white/10"></div>
             <div class="container mx-auto px-4 sm:px-6 text-center relative z-10">
-                <h2 class="text-3xl sm:text-4xl md:text-5xl font-black mb-6 animate-fade-in-up">
+                <h2 class="text-3xl sm:text-4xl md:text-5xl mb-6 animate-fade-in-up">
                     Roll Out the Red Carpet
                 </h2>
-                <p class="text-xl mb-8 max-w-2xl mx-auto">
+                <p class="text-base md:text-lg mb-8 max-w-2xl mx-auto">
                     Give your guests the celebrity experience they deserve with our Hollywood-style GlamBot.
                 </p>
                 <a href="../contact-us.html" 
@@ -962,7 +995,7 @@
         <section class="section-padding bg-gray-50">
             <div class="container mx-auto px-4 sm:px-6">
                 <div class="max-w-6xl mx-auto">
-                    <h2 class="text-3xl sm:text-4xl font-black text-center mb-12 glow-text text-gray-900">
+                    <h2 class="text-3xl sm:text-4xl md:text-5xl text-center mb-12" style="color: #1F1F1F;">
                         Discover Our Related Products
                     </h2>
                     
@@ -976,8 +1009,8 @@
                                 <div class="absolute inset-0 bg-gradient-to-t from-yellow-900/80 via-yellow-900/40 to-transparent"></div>
                             </div>
                             <div class="p-6">
-                                <h3 class="text-xl font-bold mb-2 group-hover:text-yellow-600 transition-colors text-gray-900">Corporate Events</h3>
-                                <p class="text-gray-600">Premium entertainment solutions for corporate functions</p>
+                                <h3 class="text-xl font-bold mb-2 group-hover:text-yellow-600 transition-colors" style="color: #1F1F1F;">Corporate Events</h3>
+                                <p class="text-base md:text-lg" style="color: #1F1F1F;">Premium entertainment solutions for corporate functions</p>
                             </div>
                         </a>
 
@@ -991,8 +1024,8 @@
                                 <div class="absolute inset-0 bg-gradient-to-t from-amber-900/80 via-amber-900/40 to-transparent"></div>
                             </div>
                             <div class="p-6">
-                                <h3 class="text-xl font-bold mb-2 group-hover:text-amber-600 transition-colors text-gray-900">Weddings</h3>
-                                <p class="text-gray-600">Make your special day unforgettable with glamorous moments</p>
+                                <h3 class="text-xl font-bold mb-2 group-hover:text-amber-600 transition-colors" style="color: #1F1F1F;">Weddings</h3>
+                                <p class="text-base md:text-lg" style="color: #1F1F1F;">Make your special day unforgettable with glamorous moments</p>
                             </div>
                         </a>
 
@@ -1005,8 +1038,8 @@
                                 <div class="absolute inset-0 bg-gradient-to-t from-yellow-900/80 via-yellow-900/40 to-transparent"></div>
                             </div>
                             <div class="p-6">
-                                <h3 class="text-xl font-bold mb-2 group-hover:text-yellow-600 transition-colors text-gray-900">360 Booth Rentals</h3>
-                                <p class="text-gray-600">Experience dynamic 360-degree video capture</p>
+                                <h3 class="text-xl font-bold mb-2 group-hover:text-yellow-600 transition-colors" style="color: #1F1F1F;">360 Booth Rentals</h3>
+                                <p class="text-base md:text-lg" style="color: #1F1F1F;">Experience dynamic 360-degree video capture</p>
                             </div>
                         </a>
                     </div>
