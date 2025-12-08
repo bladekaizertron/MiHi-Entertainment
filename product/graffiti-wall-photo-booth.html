@@ -263,15 +263,47 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Bebas+Neue&family=Graduate&family=Righteous&display=swap" rel="stylesheet">
     <style>
+        /* Brand Guide Typography: Azo Sans Font Family */
+        @font-face {
+            font-family: 'Azo Sans';
+            src: url('../../assets/fonts/AzoSans-Regular.woff2') format('woff2'),
+                url('../../assets/fonts/AzoSans-Regular.woff') format('woff');
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'Azo Sans Uber';
+            src: url('../../assets/fonts/AzoSansUber-Regular.woff2') format('woff2'),
+                url('../../assets/fonts/AzoSansUber-Regular.woff') format('woff');
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+
         body { 
-            font-family: 'Inter', sans-serif; 
-            color: #1a202c; 
+            font-family: 'Azo Sans', sans-serif; 
+            color: #1F1F1F; 
             overflow-x: hidden;
             background: #1a0a0f;
         }
+
+        p {
+            font-family: 'Azo Sans', sans-serif;
+            color: #1F1F1F;
+        }
+
+        /* Brand Guide: Headers - Azo Sans Uber (Uppercase, Coral) */
         h1, h2, h3, h4, h5, h6 { 
-            font-family: 'Righteous', cursive;
-            letter-spacing: 0.05em;
+            font-family: 'Azo Sans Uber', sans-serif;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 0.02em;
+            line-height: 1.2;
+            color: #FF4F4F;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
         
         /* Navigation Button Protection */
@@ -786,14 +818,6 @@
             } 
         }
         
-        /* Glowing Text Effect */
-        .glow-text {
-            text-shadow: 0 0 20px rgba(249, 115, 22, 0.5),
-                         0 0 40px rgba(236, 72, 153, 0.3),
-                         2px 2px 0px rgba(0, 0, 0, 0.8),
-                         -1px -1px 0px rgba(249, 115, 22, 0.4);
-        }
-        
         /* Premium Badge */
         .premium-badge {
             background: linear-gradient(135deg, #f97316 0%, #ec4899 100%);
@@ -868,16 +892,9 @@
             <div class="hidden sm:block paint-splatter text-orange-400 absolute" style="bottom: 30%; right: 10%; animation-delay: 1.5s; z-index: 1;"></div>
             <div class="relative z-10 container mx-auto px-4 sm:px-6 pt-20">
                 <div class="max-w-6xl mx-auto text-center">
-                    <!-- Badge -->
-                    <div class="inline-flex items-center gap-2 sm:gap-3 px-4 sm:px-6 py-2 premium-badge tag-decoration text-orange-400 rounded-full shadow-lg shadow-orange-500/10 mb-6 sm:mb-8">
-                        <div class="w-2 h-2 bg-orange-400 rounded-full animate-pulse"></div>
-                        <span class="text-xs sm:text-sm font-semibold tracking-wider uppercase">Interactive Digital Art</span>
-                        <div class="w-2 h-2 bg-orange-400 rounded-full animate-pulse" style="animation-delay: 0.5s;"></div>
-                    </div>
-                    <h1 class="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black mb-6 leading-tight glow-text">
+                    <h1 class="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-normal mb-6 leading-tight">
                         <span class="block graffiti-text drop-shadow-2xl normal-case" data-text="Graffiti Wall" style="text-transform: none !important;">
-                            Graffiti Wall Photo Booth Rentals
-                        </span>
+                            Graffiti Wall</span><span class="block" style="color: #18F1E1;">Photo Booth Rentals</span>
                     </h1>
                     <p class="text-lg sm:text-xl md:text-2xl mb-8 text-gray-300 max-w-3xl mx-auto leading-relaxed px-4 font-light drop-shadow-lg">
                         Let guests unleash their creativity with an interactive digital graffiti wall that turns any photo into a unique, spray-painted masterpiece.
@@ -965,14 +982,14 @@
             <div class="container mx-auto px-4 sm:px-6 relative z-10">
                 <div class="mx-auto">
                     <div class="text-center mb-16">
-                        <h2 class="text-3xl sm:text-4xl md:text-5xl font-black mb-6 glow-text graffiti-text" data-text="INTERACTIVE DIGITAL">
-                            INTERACTIVE DIGITAL<br>SPRAY PAINTING EXPERIENCE
+                        <h2 class="text-3xl sm:text-4xl md:text-5xl font-normal mb-6" data-text="INTERACTIVE DIGITAL">
+                            INTERACTIVE DIGITAL<br><span style="color: #18F1E1;">SPRAY PAINTING EXPERIENCE</span> 
                         </h2>
                         <div class="w-24 h-1 bg-gradient-to-r from-orange-500 to-pink-500 mx-auto mb-8"></div>
                     </div>
                     
                     <div class="bg-white/5 backdrop-blur-lg rounded-3xl p-8 md:p-12 border border-white/10">
-                        <h3 class="text-2xl md:text-3xl font-bold mb-6 text-center">GRAFFITI WALL PHOTO BOOTH RENTALS</h3>
+                        <h3 class="text-2xl md:text-3xl font-normal mb-6 text-center">GRAFFITI WALL PHOTO BOOTH RENTALS</h3>
                         <p class="text-lg text-gray-300 leading-relaxed mb-6">
                             Ditch the ordinary and let creativity take over with our Graffiti Wall Photo Booth! Guests can snap a photo and then digitally "spray paint" their masterpiece using our interactive technology. With customizable colors, brushes, and branding, it's a modern twist on classic street art.
                         </p>
@@ -1059,7 +1076,7 @@
             <div class="container mx-auto px-4 sm:px-6 relative z-10">
                 <div class="max-w-6xl mx-auto">
                     <div class="text-center mb-12">
-                        <h2 class="text-3xl sm:text-4xl md:text-5xl font-black glow-text graffiti-text" data-text="What is a Graffiti Wall Photo Booth?">
+                        <h2 class="text-3xl sm:text-4xl md:text-5xl font-normal" data-text="What is a Graffiti Wall Photo Booth?">
                         What is a Graffiti Wall Photo Booth?
                     </h2>
                     </div>
@@ -1070,7 +1087,7 @@
                     </div>
 
                     <!-- Core Features Grid -->
-                    <h3 class="text-2xl md:text-3xl font-bold text-center mb-10">Core Graffiti Wall Features</h3>
+                    <h3 class="text-2xl md:text-3xl font-normal text-center mb-10">Core Graffiti Wall Features</h3>
                     <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
                         <div class="feature-card rounded-2xl p-6 text-center">
                             <div class="icon-wrapper">
@@ -1078,7 +1095,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path>
                                 </svg>
                             </div>
-                            <h4 class="text-lg font-bold mb-2">Motion-Tracking Spray Cans</h4>
+                            <h4 class="text-lg md:text-xl font-normal mb-2">Motion-Tracking Spray Cans</h4>
                         </div>
                         
                         <div class="feature-card rounded-2xl p-6 text-center">
@@ -1087,7 +1104,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"></path>
                                 </svg>
                             </div>
-                            <h4 class="text-lg font-bold mb-2">Real-Time Digital Effects</h4>
+                            <h4 class="text-lg md:text-xl font-normal mb-2">Real-Time Digital Effects</h4>
                         </div>
                         
                         <div class="feature-card rounded-2xl p-6 text-center">
@@ -1096,7 +1113,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"></path>
                                 </svg>
                             </div>
-                            <h4 class="text-lg font-bold mb-2">Instant Social Sharing</h4>
+                            <h4 class="text-lg md:text-xl font-normal mb-2">Instant Social Sharing</h4>
                         </div>
                         
                         <div class="feature-card rounded-2xl p-6 text-center">
@@ -1105,7 +1122,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path>
                                 </svg>
                             </div>
-                            <h4 class="text-lg font-bold mb-2">Custom Brand Templates</h4>
+                            <h4 class="text-lg md:text-xl font-normal mb-2">Custom Brand Templates</h4>
                         </div>
                         
                         <div class="feature-card rounded-2xl p-6 text-center">
@@ -1114,7 +1131,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
                                 </svg>
                             </div>
-                            <h4 class="text-lg font-bold mb-2">Live Preview Screen</h4>
+                            <h4 class="text-lg md:text-xl font-normal mb-2">Live Preview Screen</h4>
                         </div>
                         
                         <div class="feature-card rounded-2xl p-6 text-center">
@@ -1123,7 +1140,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                                 </svg>
                             </div>
-                            <h4 class="text-lg font-bold mb-2">Green Screen Capability</h4>
+                            <h4 class="text-lg md:text-xl font-normal mb-2">Green Screen Capability</h4>
                         </div>
                         
                         <div class="feature-card rounded-2xl p-6 text-center">
@@ -1132,7 +1149,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
                                 </svg>
                             </div>
-                            <h4 class="text-lg font-bold mb-2">Digital Props Library</h4>
+                            <h4 class="text-lg md:text-xl font-normal mb-2">Digital Props Library</h4>
                         </div>
                     </div>
                 </div>
@@ -1194,7 +1211,7 @@
             
             <div class="container mx-auto px-4 sm:px-6 relative z-10">
                 <div class="max-w-6xl mx-auto">
-                    <h2 class="text-3xl sm:text-4xl md:text-5xl font-black text-center mb-12 glow-text graffiti-text" data-text="Branded Digital Graffiti Wall Experiences">
+                    <h2 class="text-3xl sm:text-4xl md:text-5xl font-normal text-center mb-12" data-text="Branded Digital Graffiti Wall Experiences">
                         Branded Digital Graffiti Wall Experiences
                     </h2>
                     
@@ -1211,7 +1228,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"></path>
                                 </svg>
                             </div>
-                            <h4 class="text-lg font-bold mb-2 text-center">Digital Spray Paint Tools With Branded Colors</h4>
+                            <h4 class="text-lg md:text-xl font-normal mb-2 text-center">Digital Spray Paint Tools With Branded Colors</h4>
                         </div>
 
                         <div class="gradient-card rounded-2xl p-6 hover:scale-105 transition-transform duration-300">
@@ -1220,7 +1237,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path>
                                 </svg>
                             </div>
-                            <h4 class="text-lg font-bold mb-2 text-center">Custom Stencils Featuring Your Logo Or Product</h4>
+                            <h4 class="text-lg md:text-xl font-normal mb-2 text-center">Custom Stencils Featuring Your Logo Or Product</h4>
                         </div>
 
                         <div class="gradient-card rounded-2xl p-6 hover:scale-105 transition-transform duration-300">
@@ -1229,7 +1246,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
                                 </svg>
                             </div>
-                            <h4 class="text-lg font-bold mb-2 text-center">Interactive Touchscreen Graffiti Effects</h4>
+                            <h4 class="text-lg md:text-xl font-normal mb-2 text-center">Interactive Touchscreen Graffiti Effects</h4>
                         </div>
 
                         <div class="gradient-card rounded-2xl p-6 hover:scale-105 transition-transform duration-300">
@@ -1238,7 +1255,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
                                 </svg>
                             </div>
-                            <h4 class="text-lg font-bold mb-2 text-center">Live Event Projection Of Guest Creations</h4>
+                            <h4 class="text-lg md:text-xl font-normal mb-2 text-center">Live Event Projection Of Guest Creations</h4>
                         </div>
 
                         <div class="gradient-card rounded-2xl p-6 hover:scale-105 transition-transform duration-300">
@@ -1247,7 +1264,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
                                 </svg>
                             </div>
-                            <h4 class="text-lg font-bold mb-2 text-center">Branded Email And Text Sharing</h4>
+                            <h4 class="text-lg md:text-xl font-normal mb-2 text-center">Branded Email And Text Sharing</h4>
                         </div>
 
                         <div class="gradient-card rounded-2xl p-6 hover:scale-105 transition-transform duration-300">
@@ -1256,7 +1273,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
                                 </svg>
                             </div>
-                            <h4 class="text-lg font-bold mb-2 text-center">Instant Digital Downloads For Attendees</h4>
+                            <h4 class="text-lg md:text-xl font-normal mb-2 text-center">Instant Digital Downloads For Attendees</h4>
                         </div>
 
                         <div class="gradient-card rounded-2xl p-6 hover:scale-105 transition-transform duration-300">
@@ -1265,7 +1282,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"></path>
                                 </svg>
                             </div>
-                            <h4 class="text-lg font-bold mb-2 text-center">Social Media-Ready Image Exports</h4>
+                            <h4 class="text-lg md:text-xl font-normal mb-2 text-center">Social Media-Ready Image Exports</h4>
                         </div>
 
                         <div class="gradient-card rounded-2xl p-6 hover:scale-105 transition-transform duration-300">
@@ -1274,7 +1291,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                                 </svg>
                             </div>
-                            <h4 class="text-lg font-bold mb-2 text-center">Custom Event Backgrounds</h4>
+                            <h4 class="text-lg md:text-xl font-normal mb-2 text-center">Custom Event Backgrounds</h4>
                         </div>
                     </div>
                 </div>
@@ -1286,7 +1303,7 @@
             <div class="container mx-auto px-4 sm:px-6 relative z-10">
                 <div class="max-w-7xl mx-auto">
                     <div class="text-center mb-6">
-                        <h2 class="text-3xl sm:text-4xl md:text-5xl font-black glow-text graffiti-text" data-text="Sample Graffiti Wall Booth Packages">
+                        <h2 class="text-3xl sm:text-4xl md:text-5xl font-normal" data-text="Sample Graffiti Wall Booth Packages">
                             Graffiti Wall Booth Packages
                     </h2>
                     </div><br><br>
@@ -1306,7 +1323,7 @@
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
                                         </svg>
                             </div>
-                                    <h3 class="text-3xl font-bold mb-2 text-white">BASIC</h3>
+                                    <h3 class="text-2xl md:text-3xl font-normal mb-2 text-white">BASIC</h3>
                                     <p class="text-gray-300 text-sm tracking-wider">Perfect for smaller events</p>
                                     <div class="mt-2 text-orange-400 font-bold">Up To 3 Hours</div>
                                 </div>
@@ -1406,7 +1423,7 @@
                                             <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
                                         </svg>
                                     </div>
-                                    <h3 class="text-3xl font-bold mb-2 text-white">RECOMMENDED</h3>
+                                    <h3 class="text-2xl md:text-3xl font-normal mb-2 text-white">RECOMMENDED</h3>
                                     <p class="text-gray-300 text-sm tracking-widest">Best value for most events</p>
                                     <div class="mt-2 text-pink-400 font-bold">Up To 4 Hours</div>
                                 </div>
@@ -1516,7 +1533,7 @@
                                             <path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd"></path>
                                         </svg>
                             </div>
-                                    <h3 class="text-3xl font-bold mb-2 text-white uppercase tracking-wider">PREMIUM</h3>
+                                    <h3 class="text-2xl md:text-3xl font-normal mb-2 text-white uppercase tracking-wider">PREMIUM</h3>
                                     <p class="text-gray-300 text-sm tracking-[0.4em]">Ultimate creative experience</p>
                                     <div class="mt-2 text-orange-400 font-bold">Up To 6 Hours</div>
                                 </div>
@@ -1637,7 +1654,7 @@
             <div class="container mx-auto px-4 sm:px-6 relative z-10">
                 <div class="max-w-6xl mx-auto">
                     <div class="text-center mb-16">
-                        <h2 class="text-3xl sm:text-4xl md:text-5xl font-black glow-text graffiti-text" data-text="Additional Options">
+                        <h2 class="text-3xl sm:text-4xl md:text-5xl font-normal" data-text="Additional Options">
                         Additional Options
                     </h2>
                     </div>
@@ -1649,7 +1666,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
                                 </svg>
                             </div>
-                            <h3 class="text-xl font-bold mb-3">Brand Colored Uplighting</h3>
+                            <h3 class="text-2xl md:text-3xl font-normal mb-3">Brand Colored Uplighting</h3>
                             <p class="text-gray-400">Match the uplighting to your brand's colors for a fully customized event aesthetic.</p>
                         </div>
 
@@ -1659,7 +1676,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
                                 </svg>
                             </div>
-                            <h3 class="text-xl font-bold mb-3">Share Statistics</h3>
+                            <h3 class="text-2xl md:text-3xl font-normal mb-3">Share Statistics</h3>
                             <p class="text-gray-400">Track and analyze social sharing statistics to measure guest engagement and brand reach.</p>
                         </div>
 
@@ -1669,7 +1686,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h4a1 1 0 011 1v7a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM14 5a1 1 0 011-1h4a1 1 0 011 1v7a1 1 0 01-1 1h-4a1 1 0 01-1-1V5zM4 16a1 1 0 011-1h4a1 1 0 011 1v3a1 1 0 01-1 1H5a1 1 0 01-1-1v-3zM14 16a1 1 0 011-1h4a1 1 0 011 1v3a1 1 0 01-1 1h-4a1 1 0 01-1-1v-3z"></path>
                                 </svg>
                             </div>
-                            <h3 class="text-xl font-bold mb-3">Custom Branded Wall</h3>
+                            <h3 class="text-2xl md:text-3xl font-normal mb-3">Custom Branded Wall</h3>
                             <p class="text-gray-400">Showcase your brand in style with a custom-designed branded wall that makes a statement.</p>
                         </div>
                     </div>
@@ -1682,7 +1699,7 @@
             <div class="container mx-auto px-4 sm:px-6 relative z-10">
                 <div class="max-w-6xl mx-auto">
                     <div class="text-center mb-16">
-                        <h2 class="text-3xl sm:text-4xl md:text-5xl font-black glow-text graffiti-text" data-text="Graffiti Wall Technical Specifications">
+                        <h2 class="text-3xl sm:text-4xl md:text-5xl font-normal" data-text="Graffiti Wall Technical Specifications">
                         Graffiti Wall<br>Technical Specifications
                     </h2>
                     </div>
@@ -1694,7 +1711,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"/>
                                 </svg>
                             </div>
-                            <h4 class="text-lg font-bold mb-2 text-orange-400">Space Required:</h4>
+                            <h4 class="text-lg md:text-xl font-normal mb-2 text-orange-400">Space Required:</h4>
                             <p class="text-gray-300">8' x 11' minimum</p>
                         </div>
 
@@ -1704,7 +1721,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
                                 </svg>
                             </div>
-                            <h4 class="text-lg font-bold mb-2 text-pink-400">Power Needs:</h4>
+                            <h4 class="text-lg md:text-xl font-normal mb-2 text-pink-400">Power Needs:</h4>
                             <p class="text-gray-300">One 20-amp circuit</p>
                         </div>
 
@@ -1714,7 +1731,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
                                 </svg>
                             </div>
-                            <h4 class="text-lg font-bold mb-2 text-orange-400">Setup Duration:</h4>
+                            <h4 class="text-lg md:text-xl font-normal mb-2 text-orange-400">Setup Duration:</h4>
                             <p class="text-gray-300">90-150 minutes</p>
                         </div>
 
@@ -1724,7 +1741,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
                                 </svg>
                             </div>
-                            <h4 class="text-lg font-bold mb-2 text-pink-400">Average Engagement:</h4>
+                            <h4 class="text-lg md:text-xl font-normal mb-2 text-pink-400">Average Engagement:</h4>
                             <p class="text-gray-300">3-5 minutes per person</p>
                         </div>
 
@@ -1734,7 +1751,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.111 16.404a5.5 5.5 0 017.778 0M12 20h.01m-7.08-7.071c3.904-3.905 10.236-3.905 14.141 0M1.394 9.393c5.857-5.857 15.355-5.857 21.213 0"/>
                                 </svg>
                             </div>
-                            <h4 class="text-lg font-bold mb-2 text-orange-400">Internet:</h4>
+                            <h4 class="text-lg md:text-xl font-normal mb-2 text-orange-400">Internet:</h4>
                             <p class="text-gray-300">Wi-Fi or hardwired</p>
                         </div>
 
@@ -1744,7 +1761,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
                                 </svg>
                             </div>
-                            <h4 class="text-lg font-bold mb-2 text-pink-400">Group Size:</h4>
+                            <h4 class="text-lg md:text-xl font-normal mb-2 text-pink-400">Group Size:</h4>
                             <p class="text-gray-300">1-3 people at once</p>
                         </div>
 
@@ -1754,7 +1771,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"/>
                                 </svg>
                             </div>
-                            <h4 class="text-lg font-bold mb-2 text-orange-400">Content Delivery:</h4>
+                            <h4 class="text-lg md:text-xl font-normal mb-2 text-orange-400">Content Delivery:</h4>
                             <p class="text-gray-300">Instant email/social</p>
                         </div>
 
@@ -1764,7 +1781,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
                                 </svg>
                             </div>
-                            <h4 class="text-lg font-bold mb-2 text-pink-400">Lead Capture:</h4>
+                            <h4 class="text-lg md:text-xl font-normal mb-2 text-pink-400">Lead Capture:</h4>
                             <p class="text-gray-300">Built-in System</p>
                         </div>
 
@@ -1774,7 +1791,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
                                 </svg>
                             </div>
-                            <h4 class="text-lg font-bold mb-2 text-orange-400">Environment:</h4>
+                            <h4 class="text-lg md:text-xl font-normal mb-2 text-orange-400">Environment:</h4>
                             <p class="text-gray-300">Indoor Use</p>
                         </div>
 
@@ -1784,7 +1801,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zm-4 7a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
                                 </svg>
                             </div>
-                            <h4 class="text-lg font-bold mb-2 text-pink-400">Staff:</h4>
+                            <h4 class="text-lg md:text-xl font-normal mb-2 text-pink-400">Staff:</h4>
                             <p class="text-gray-300">One Operator Included</p>
                         </div>
 
@@ -1794,7 +1811,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
                                 </svg>
                             </div>
-                            <h4 class="text-lg font-bold mb-2 text-orange-400">Standard Duration:</h4>
+                            <h4 class="text-lg md:text-xl font-normal mb-2 text-orange-400">Standard Duration:</h4>
                             <p class="text-gray-300">Full show hours</p>
                         </div>
 
@@ -1804,7 +1821,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
                                 </svg>
                             </div>
-                            <h4 class="text-lg font-bold mb-2 text-pink-400">Data Collection:</h4>
+                            <h4 class="text-lg md:text-xl font-normal mb-2 text-pink-400">Data Collection:</h4>
                             <p class="text-gray-300">Real-time analytics</p>
                         </div>
 
@@ -1814,7 +1831,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3"/>
                                 </svg>
                             </div>
-                            <h4 class="text-lg font-bold mb-2 text-orange-400">Weight:</h4>
+                            <h4 class="text-lg md:text-xl font-normal mb-2 text-orange-400">Weight:</h4>
                             <p class="text-gray-300">75lbs</p>
                         </div>
                     </div>
@@ -1831,7 +1848,7 @@
             <div class="paint-splatter text-white" style="bottom: 15%; left: 25%; animation-delay: 2s; width: 30px; height: 30px; opacity: 0.3;"></div>
             
             <div class="container mx-auto px-4 sm:px-6 text-center relative z-10">
-                <h2 class="text-3xl sm:text-4xl md:text-5xl font-black mb-6 animate-fade-in-up glow-text graffiti-text" data-text="Unleash Creativity at Your Event">
+                <h2 class="text-3xl sm:text-4xl md:text-5xl font-normal mb-6 animate-fade-in-up" data-text="Unleash Creativity at Your Event">
                     Unleash Creativity at Your Event
                 </h2>
                 <p class="text-xl mb-8 max-w-2xl mx-auto">
@@ -1857,7 +1874,7 @@
         <section class="section-padding bg-black">
             <div class="container mx-auto px-4 sm:px-6">
                 <div class="max-w-6xl mx-auto">
-                    <h2 class="text-3xl sm:text-4xl font-black text-center mb-12 glow-text">
+                    <h2 class="text-3xl sm:text-4xl md:text-5xl font-normal text-center mb-12">
                         Discover Our Related Products
                     </h2>
                     
@@ -1873,7 +1890,7 @@
                                 <div class="absolute inset-0 bg-gradient-to-t from-orange-900/80 via-orange-900/40 to-transparent"></div>
                             </div>
                             <div class="p-6">
-                                <h3 class="text-xl font-bold mb-2 group-hover:text-orange-400 transition-colors">Corporate Events</h3>
+                                <h3 class="text-2xl md:text-3xl font-normal mb-2 group-hover:text-orange-400 transition-colors">Corporate Events</h3>
                                 <p class="text-gray-400">Engage employees and clients with creative activations</p>
                             </div>
                         </a>
@@ -1889,7 +1906,7 @@
                                 <div class="absolute inset-0 bg-gradient-to-t from-pink-900/80 via-pink-900/40 to-transparent"></div>
                             </div>
                             <div class="p-6">
-                                <h3 class="text-xl font-bold mb-2 group-hover:text-pink-400 transition-colors">Trade Shows</h3>
+                                <h3 class="text-2xl md:text-3xl font-normal mb-2 group-hover:text-pink-400 transition-colors">Trade Shows</h3>
                                 <p class="text-gray-400">Drive booth traffic with interactive experiences</p>
                             </div>
                         </a>
@@ -1905,7 +1922,7 @@
                                 <div class="absolute inset-0 bg-gradient-to-t from-orange-900/80 via-orange-900/40 to-transparent"></div>
                             </div>
                             <div class="p-6">
-                                <h3 class="text-xl font-bold mb-2 group-hover:text-orange-400 transition-colors">A/V Services</h3>
+                                <h3 class="text-2xl md:text-3xl font-normal mb-2 group-hover:text-orange-400 transition-colors">A/V Services</h3>
                                 <p class="text-gray-400">Complete audiovisual solutions for any event</p>
                             </div>
                         </a>
