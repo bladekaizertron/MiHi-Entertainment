@@ -462,7 +462,7 @@
         }
 
         .monitor-wrapper {
-            background: #ffffff;
+            background: #1F1F1F;
             width: 100%;
             height: 82px;
             border-radius: 2px;
@@ -489,7 +489,7 @@
         .monitor {
             width: 100%;
             height: 78px;
-            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            background: #1F1F1F;
             border-radius: 2px;
             overflow: hidden;
             white-space: nowrap;
@@ -632,8 +632,8 @@
             justify-content: center;
             gap: 12px;
             padding: 14px 28px;
-            background: #FF4F4F;
-            border: 2px solid rgba(255, 79, 79, 0.3);
+            background: #18F1E1;
+            border: 2px solid rgba(24, 241, 225, 0.3);
             border-radius: 100px;
             color: #ffffff;
             font-size: 16px;
@@ -642,7 +642,7 @@
             cursor: pointer;
             overflow: hidden;
             transition: all 0.4s ease-in-out;
-            box-shadow: 0 0 20px rgba(255, 79, 79, 0.15);
+            box-shadow: 0 0 20px rgba(24, 241, 225, 0.15);
             backdrop-filter: blur(8px);
             z-index: 1;
             text-decoration: none;
@@ -661,7 +661,7 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: conic-gradient(from 0deg, #18F1E1, #FF4F4F, #18F1E1, #FF4F4F);
+            background: conic-gradient(from 0deg, #18F1E1, #12C4B8, #18F1E1, #12C4B8);
             animation: rotateButton 4s linear infinite;
             z-index: -2;
         }
@@ -670,17 +670,17 @@
             content: "";
             position: absolute;
             inset: 2px;
-            background: #FF4F4F;
+            background: #18F1E1;
             border-radius: inherit;
             z-index: -1;
         }
 
         .super-button:hover {
             transform: scale(1.05);
-            box-shadow: 0 0 40px rgba(255, 79, 79, 0.3),
+            box-shadow: 0 0 40px rgba(24, 241, 225, 0.3),
                 0 0 60px rgba(24, 241, 225, 0.2);
             border-color: rgba(24, 241, 225, 0.5);
-            background: #e63939;
+            background: #12C4B8;
         }
 
         .super-button:hover .arrow {
@@ -724,6 +724,37 @@
             100% {
                 transform: rotate(360deg);
             }
+        }
+
+        /* Get Your Quote button - Coral variant */
+        button[data-click-to-call].super-button {
+            background: #FF4F4F;
+            border: 2px solid rgba(255, 79, 79, 0.3);
+            box-shadow: 0 0 20px rgba(255, 79, 79, 0.15);
+        }
+
+        button[data-click-to-call].super-button::before {
+            background: conic-gradient(from 0deg, #FF4F4F, #e63939, #FF4F4F, #e63939);
+        }
+
+        button[data-click-to-call].super-button::after {
+            background: #FF4F4F;
+        }
+
+        button[data-click-to-call].super-button:hover {
+            box-shadow: 0 0 40px rgba(255, 79, 79, 0.3),
+                0 0 60px rgba(255, 79, 79, 0.2);
+            border-color: rgba(255, 79, 79, 0.5);
+            background: #e63939;
+        }
+
+        /* Contact Us button - Aqua text color */
+        a.super-button {
+            color: #1F1F1F;
+        }
+
+        a.super-button .arrow {
+            color: #1F1F1F;
         }
 
         .section-padding {
@@ -1110,12 +1141,18 @@
         }
 
         .brochure-section p,
-        .brochure-check-text,
         .brochure-check-description,
         .brochure-tag {
             font-family: 'Azo Sans Uber', sans-serif;
             letter-spacing: 0.02em;
             color: #FFFEF7;
+            font-weight: 400;
+        }
+
+        .brochure-check-text {
+            font-family: 'Azo Sans Uber', sans-serif;
+            letter-spacing: 0.02em;
+            font-weight: 400;
         }
 
         .brochure-section .pill-label {
@@ -1202,8 +1239,8 @@
         }
 
         .brochure-check-text {
-            font-weight: 600;
-            color: #FFFEF7;
+            font-weight: 400;
+            color: #18F1E1 !important;
             text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
         }
 
@@ -1212,6 +1249,7 @@
             margin-top: 0.25rem;
             text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
             opacity: 0.95;
+            font-weight: 300;
         }
 
         .brochure-button {
@@ -1222,7 +1260,7 @@
             color: #ffffff;
             padding: 0.85rem 1.75rem;
             border-radius: 9999px;
-            font-weight: 700;
+            font-weight: 500;
             font-size: 1rem;
             font-family: 'Azo Sans Uber', sans-serif;
             border: none;
@@ -1242,7 +1280,7 @@
             align-items: center;
             justify-content: center;
             border: 2px solid #FF4F4F;
-            color: #1F1F1F;
+            color: #18F1E1;
             padding: 0.8rem 1.5rem;
             border-radius: 0.5rem;
             font-weight: 700;
@@ -3023,7 +3061,8 @@
 
                         <!-- First Section with Slider -->
                         <div class="flex items-center justify-center min-h-[250px] sm:min-h-[300px] order-1 lg:order-2">
-                            <div class="w-full max-w-2xl text-left space-y-2 text-content px-2 sm:px-0">
+                            <div class="w-full max-w-2xl text-left space-y-2 text-content px-2 sm:px-0 mx-auto"
+                                style="margin-right: 5rem;">
                                 <h3 class="text-base md:text-lg font-semibold tracking-wider uppercase"
                                     style="font-family: 'Azo Sans Uber', sans-serif; letter-spacing: 0.1em; color: #666666;">
                                     SHOW OFF STUNNING VISUALS WITH OUR
@@ -3033,7 +3072,7 @@
                                     VISUAL EVENT SERVICES
                                 </h2>
                                 <p class="text-base md:text-lg leading-normal"
-                                    style="font-family: 'Azo Sans Uber', sans-serif; color: #1F1F1F;">
+                                    style="font-family: 'Azo Sans Uber', sans-serif; color: #1F1F1F; font-weight: 300;">
                                     Boost your next event with MiHi Entertainment's Professional Visual Services. Our
                                     expert
                                     team ensures high-definition video quality for gatherings of all sizes, from
@@ -3044,7 +3083,7 @@
                                     conferences.
                                 </p>
                                 <p class="text-base md:text-lg leading-normal"
-                                    style="font-family: 'Azo Sans Uber', sans-serif; color: #1F1F1F;">
+                                    style="font-family: 'Azo Sans Uber', sans-serif; color: #1F1F1F; font-weight: 300;">
                                     With cutting-edge equipment like LED screens and projectors, we deliver impactful
                                     visuals that captivate your audience. Our <a href="../../av-production.html"
                                         class="underline" style="color: #FF4F4F;">AV services</a> are
@@ -3135,7 +3174,8 @@
                         </div>
 
                         <!-- Right Side - Content -->
-                        <div class="flex items-center justify-center min-h-[250px] sm:min-h-[300px] order-1 lg:order-2">
+                        <div class="flex items-center justify-center min-h-[250px] sm:min-h-[300px] order-1 lg:order-2"
+                            style="margin-right: 4rem;">
                             <div class="w-full max-w-2xl text-center sm:text-left space-y-2 text-content px-2 sm:px-4 lg:px-8"
                                 style="padding-left: 0; padding-right: 0;">
                                 <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold leading-tight"
