@@ -34,6 +34,20 @@ document.addEventListener('DOMContentLoaded', function() {
         pathPrefix = directoryDepth > 0 ? '../'.repeat(directoryDepth) : '';
     }
 
+    // Add style to ensure regular font-family and font-style for footer
+    const footerStyle = document.createElement('style');
+    footerStyle.textContent = `
+        footer,
+        footer * {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif !important;
+            font-style: normal !important;
+        }
+    `;
+    if (!document.getElementById('footer-font-style')) {
+        footerStyle.id = 'footer-font-style';
+        document.head.appendChild(footerStyle);
+    }
+
     const footerHTML = `
     <footer class="bg-gradient-to-b from-gray-900 to-black text-gray-400">
         <!-- Main Footer Content -->

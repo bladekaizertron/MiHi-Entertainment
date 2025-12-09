@@ -48,15 +48,16 @@
             top: 0 !important;
             left: 0 !important;
             right: 0 !important;
-            /* Inherit fonts from page design */
-            font-family: inherit !important;
+            /* Use standard font instead of inheriting page font */
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif !important;
             font-size: inherit !important;
         }
         
         header nav,
         header nav * {
-            /* Inherit all typography from page */
-            font-family: inherit !important;
+            /* Use standard font instead of inheriting page font */
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif !important;
+            font-style: normal !important;
         }
         
         /* Protect mobile menu z-index */
