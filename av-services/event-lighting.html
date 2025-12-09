@@ -289,6 +289,14 @@
             src: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/907368/liberty.otf');
         }
 
+        @font-face {
+            font-family: "Azo Sans Uber";
+            src: url('../assets/fonts/AzoSansUber-Regular.woff2') format('woff2'),
+                url('../assets/fonts/AzoSansUber-Regular.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+
         body {
             font-family: 'Inter', sans-serif;
             color: #1a202c;
@@ -654,6 +662,14 @@
             margin-top: 0;
         }
 
+        /* Coral button variant */
+        .rainbow-button.coral-button {
+            --primary-neon: rgba(255, 79, 79, 0.9);
+            --light-neon: rgba(255, 79, 79, 0.7);
+            --pulse-neon: rgba(255, 79, 79, 0.5);
+            --bright-neon: rgba(255, 79, 79, 1);
+        }
+
         @keyframes flicker-button {
             0% {
                 box-shadow: var(--neon-shadow);
@@ -766,6 +782,7 @@
             min-width: 240px;
             margin-top: 0.5rem;
             letter-spacing: 0.06em;
+            font-family: 'Azo Sans Uber', sans-serif;
         }
 
         @media (max-width: 768px) {
@@ -1024,7 +1041,7 @@
         }
 
         .brochure-badge {
-            background: linear-gradient(135deg, #00f0ff 0%, #0099ff 100%);
+            background: linear-gradient(135deg, #FF4F4F 0%, #FF4F4F 100%);
             color: #ffffff;
             padding: 0.4rem 1.25rem;
             border-radius: 50px;
@@ -1033,7 +1050,7 @@
             letter-spacing: 0.05em;
             text-transform: uppercase;
             display: inline-block;
-            box-shadow: 0 4px 18px rgba(0, 240, 255, 0.35);
+            box-shadow: 0 4px 18px rgba(255, 79, 79, 0.35);
             font-family: 'Orbitron', sans-serif;
         }
 
@@ -1106,7 +1123,7 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(135deg, #00f0ff 0%, #0099ff 100%);
+            background: linear-gradient(135deg, #FF4F4F 0%, #FF4F4F 100%);
             color: #ffffff;
             padding: 0.7rem 1.5rem;
             border-radius: 9999px;
@@ -1115,13 +1132,13 @@
             font-family: 'Orbitron', sans-serif;
             border: none;
             cursor: pointer;
-            box-shadow: 0 20px 35px -15px rgba(0, 240, 255, 0.65);
+            box-shadow: 0 20px 35px -15px rgba(255, 79, 79, 0.65);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
         .brochure-button:hover {
             transform: translateY(-2px) scale(1.02);
-            box-shadow: 0 30px 45px -20px rgba(0, 240, 255, 0.75);
+            box-shadow: 0 30px 45px -20px rgba(255, 79, 79, 0.75);
         }
 
         .brochure-download-button {
@@ -1440,7 +1457,7 @@
                     <div
                         class="hero-button-container flex flex-col sm:flex-row items-center justify-center gap-4 mt-6 px-4">
                         <button type="button" data-click-to-call data-call-text="Get A Quote"
-                            class="rainbow-button inline-flex items-center gap-2 cursor-pointer"
+                            class="rainbow-button coral-button inline-flex items-center gap-2 cursor-pointer"
                             aria-label="Get a quote for event lighting services">
                             <span>GET A QUOTE</span>
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
@@ -1488,7 +1505,8 @@
             <div class="container mx-auto px-6 relative" style="z-index: 20;">
                 <div class="text-center mb-4 space-y-1 brochure-header">
                     <span class="brochure-badge">💡 Lighting Service Guide</span>
-                    <h2 class="text-2xl md:text-3xl font-bold text-white mb-2 leading-tight">
+                    <h2 class="text-2xl md:text-3xl font-medium text-white mb-2 leading-tight"
+                        style="font-family: 'Azo Sans Uber', sans-serif;">
                         Design Your Signature Lighting Experience
                     </h2>
                     <p class="text-base text-cyan-100 max-w-3xl mx-auto leading-relaxed">
@@ -1552,10 +1570,11 @@
 
                     <div class="order-1 lg:order-2">
                         <div
-                            class="pill-label inline-block bg-gradient-to-r from-cyan-400 via-blue-500 to-cyan-300 text-slate-900 px-3 py-1.5 rounded-full text-xs font-bold mb-2 shadow-lg tracking-[0.2em]">
+                            class="pill-label inline-block bg-gradient-to-r from-cyan-400 via-blue-500 to-cyan-300 text-slate-900 px-3 py-1.5 rounded-full text-xs font-bold mb-2 shadow-lg tracking-[0.2em] text-[#18F1E1]">
                             Full-Service Lighting Packages
                         </div>
-                        <h3 class="brochure-subtitle text-2xl md:text-3xl font-bold mb-2 text-white">
+                        <h3 class="brochure-subtitle text-2xl md:text-3xl font-medium mb-2 text-white"
+                            style="font-family: 'Azo Sans Uber', sans-serif;">
                             Bring Visionary Lighting To Life
                         </h3>
                         <p class="text-base text-cyan-100 mb-4 leading-relaxed">
@@ -1668,12 +1687,12 @@
                     <!-- Left Column -->
                     <div class="bg-transparent flex items-center justify-end">
                         <div class="text-right max-w-lg left-column-content">
-                            <h3 class="text-base md:text-lg font-semibold text-cyan-300 mb-1"
-                                style="font-family: 'Rajdhani', sans-serif; letter-spacing: 0.05em;">
+                            <h3 class="text-base md:text-lg font-semibold mb-1"
+                                style="font-family: 'Azo Sans Uber', sans-serif; letter-spacing: 0.05em; color: #18F1E1;">
                                 ILLUMINATE YOUR SPACE WITH OUR
                             </h3>
-                            <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-3"
-                                style="font-family: 'Orbitron', sans-serif; letter-spacing: 0.1em; text-transform: uppercase; text-shadow: 0 0 20px rgba(0, 240, 255, 0.5);">
+                            <h2 class="text-2xl md:text-3xl lg:text-4xl font-medium mb-3"
+                                style="font-family: 'Azo Sans Uber', sans-serif; letter-spacing: 0.1em; text-transform: uppercase; color: #FF4F4F; text-shadow: 0 0 20px rgba(255, 79, 79, 0.5);">
                                 EVENT LIGHTING SERVICES
                             </h2>
                             <p class="text-sm md:text-base text-cyan-100 mb-2.5 leading-snug"
@@ -1725,7 +1744,7 @@
                             </p>
                             <a href="../contact-us.html"
                                 class="left-column-button text-white px-6 py-2 rounded-full font-bold text-sm transition-all duration-300 inline-block"
-                                style="background: linear-gradient(135deg, #00f0ff 0%, #0099ff 100%); font-family: 'Orbitron', sans-serif; letter-spacing: 0.05em; box-shadow: 0 20px 35px -15px rgba(0, 240, 255, 0.65);">
+                                style="background: linear-gradient(135deg, #FF4F4F 0%, #FF4F4F 100%); font-family: 'Orbitron', sans-serif; letter-spacing: 0.05em; box-shadow: 0 20px 35px -15px rgba(255, 79, 79, 0.65);">
                                 Interested in Hearing More?
                             </a>
                         </div>
@@ -1738,24 +1757,28 @@
                                 <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=1000&h=800&fit=crop"
                                     alt="Professional stage lighting systems for concerts, performances, and corporate events"
                                     loading="lazy">
-                                <span>Stage Lighting</span>
+                                <span style="font-family: 'Azo Sans Uber', sans-serif; font-weight: 400;">Stage
+                                    Lighting</span>
                             </div>
                             <div class="grid-effect-box">
                                 <img src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=1000&h=800&fit=crop"
                                     alt="Dynamic LED lighting systems for immersive event experiences" loading="lazy">
-                                <span>LED Systems</span>
+                                <span style="font-family: 'Azo Sans Uber', sans-serif; font-weight: 400;">LED
+                                </span>
                             </div>
                             <div class="grid-effect-box">
                                 <img src="https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=1000&h=800&fit=crop"
                                     alt="Professional event lighting services for weddings, galas, and brand activations"
                                     loading="lazy">
-                                <span>Event Lighting</span>
+                                <span style="font-family: 'Azo Sans Uber', sans-serif; font-weight: 400;">Event
+                                </span>
                             </div>
                             <div class="grid-effect-box">
                                 <img src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=1000&h=800&fit=crop"
                                     alt="Ambient lighting design and mood lighting for creating the perfect event atmosphere"
                                     loading="lazy">
-                                <span>Ambient Design</span>
+                                <span style="font-family: 'Azo Sans Uber', sans-serif; font-weight: 400;">Ambient
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -1780,11 +1803,12 @@
                     <!-- Right Column - Content -->
                     <div class="bg-transparent flex items-center justify-start">
                         <div class="text-left max-w-lg event-production-content">
-                            <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-4"
-                                style="font-family: 'Orbitron', sans-serif; letter-spacing: 0.1em; text-transform: uppercase; text-shadow: 0 0 20px rgba(0, 240, 255, 0.5);">
-                                <a href="../contact-us.html"
-                                    class="text-white hover:text-cyan-300 transition-colors duration-300">EVENT
-                                    PRODUCTION</a>
+                            <h2 class="text-2xl md:text-3xl lg:text-4xl font-medium text-white mb-4"
+                                style="font-family: 'Azo Sans Uber', sans-serif; letter-spacing: 0.1em; text-transform: uppercase; text-shadow: 0 0 20px rgba(0, 240, 255, 0.5);">
+                                <a href="../contact-us.html" class="transition-colors duration-300">
+                                    <span style="color: #FF4F4F;">EVENT</span>
+                                    <span style="color: #18F1E1;"> PRODUCTION</span>
+                                </a>
                             </h2>
                             <p class="text-sm md:text-base text-cyan-100 leading-relaxed"
                                 style="font-family: 'Rajdhani', sans-serif;">
@@ -1801,9 +1825,10 @@
                     <div class="bg-transparent flex items-center justify-end order-2 lg:order-1">
                         <div class="text-right max-w-lg concerts-content">
                             <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-4"
-                                style="font-family: 'Orbitron', sans-serif; letter-spacing: 0.1em; text-transform: uppercase; text-shadow: 0 0 20px rgba(0, 240, 255, 0.5);">
-                                <a href="../contact-us.html"
-                                    class="text-white hover:text-cyan-300 transition-colors duration-300">CONCERTS</a>
+                                style="font-family: 'Azo Sans Uber', sans-serif; letter-spacing: 0.1em; text-transform: uppercase; text-shadow: 0 0 20px rgba(0, 240, 255, 0.5);">
+                                <a href="../contact-us.html" class="transition-colors duration-300">
+                                    <span style="color: #FF4F4F;">CONCERTS</span>
+                                </a>
                             </h2>
                             <p class="text-sm md:text-base text-cyan-100 leading-relaxed"
                                 style="font-family: 'Rajdhani', sans-serif;">
@@ -1953,7 +1978,7 @@
             </div>
             <div class="container mx-auto px-6">
                 <div class="w-full flex items-center justify-center">
-                    <a href="mailto:info@mihientertainment.com" class="rainbow-button emphasized"
+                    <a href="mailto:info@mihientertainment.com" class="rainbow-button emphasized coral-button"
                         aria-label="Email our event lighting services team">Email Our Team</a>
                 </div>
             </div>
@@ -1976,11 +2001,12 @@
                     <!-- Right Column - Content -->
                     <div class="bg-transparent flex items-center justify-start">
                         <div class="text-left max-w-lg event-production-content">
-                            <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-2"
-                                style="font-family: 'Orbitron', sans-serif; letter-spacing: 0.1em; text-transform: uppercase; text-shadow: 0 0 20px rgba(0, 240, 255, 0.5);">
-                                <a href="../corporate-events.html"
-                                    class="text-white hover:text-cyan-300 transition-colors duration-300">CORPORATE
-                                    EVENTS</a>
+                            <h2 class="text-2xl md:text-3xl lg:text-4xl font-medium text-white mb-2"
+                                style="font-family: 'Azo Sans Uber', sans-serif; letter-spacing: 0.1em; text-transform: uppercase; text-shadow: 0 0 20px rgba(0, 240, 255, 0.5);">
+                                <a href="../corporate-events.html" class="transition-colors duration-300">
+                                    <span style="color: #FF4F4F;">CORPORATE</span>
+                                    <span style="color: #18F1E1;"> EVENTS</span>
+                                </a>
                             </h2>
                             <p class="text-sm md:text-base text-cyan-100 leading-snug"
                                 style="font-family: 'Rajdhani', sans-serif;">
@@ -1997,10 +2023,12 @@
                     <!-- Left Column - Content -->
                     <div class="bg-transparent flex items-center justify-end order-2 lg:order-1">
                         <div class="text-right max-w-lg concerts-content">
-                            <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-2"
-                                style="font-family: 'Orbitron', sans-serif; letter-spacing: 0.1em; text-transform: uppercase; text-shadow: 0 0 20px rgba(0, 240, 255, 0.5);">
-                                <a href="../contact-us.html"
-                                    class="text-white hover:text-cyan-300 transition-colors duration-300">GALAS</a>
+                            <h2 class="text-2xl md:text-3xl lg:text-4xl font-medium text-white mb-2"
+                                style="font-family: 'Azo Sans Uber', sans-serif; letter-spacing: 0.1em; text-transform: uppercase; text-shadow: 0 0 20px rgba(0, 240, 255, 0.5);">
+                                <a href="../contact-us.html" class="transition-colors duration-300">
+                                    <span style="color: #FF4F4F;">GALAS</span>
+                                    <span style="color: #18F1E1;"> EVENTS</span>
+                                </a>
                             </h2>
                             <p class="text-sm md:text-base text-cyan-100 leading-snug"
                                 style="font-family: 'Rajdhani', sans-serif;">
@@ -2235,8 +2263,8 @@
             </div>
             <div class="container mx-auto px-6">
                 <div class="text-center max-w-3xl mx-auto">
-                    <h2 class="text-2xl md:text-3xl font-bold text-white mb-2"
-                        style="font-family: 'Orbitron', sans-serif; letter-spacing: 0.1em; text-transform: uppercase; text-shadow: 0 0 16px rgba(0, 240, 255, 0.4);">
+                    <h2 class="text-2xl md:text-3xl font-medium text-white mb-2"
+                        style="font-family: 'Azo Sans Uber', sans-serif; letter-spacing: 0.1em; text-transform: uppercase; text-shadow: 0 0 16px rgba(0, 240, 255, 0.4);">
                         CONTACT US NOW
                     </h2>
                     <p class="text-base md:text-lg text-cyan-100 mb-4 leading-snug"
