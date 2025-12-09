@@ -220,6 +220,15 @@
             font-display: swap;
         }
 
+        /* Azo Sans Regular Font */
+        @font-face {
+            font-family: 'Azo Sans Regular';
+            src: url('../assets/fonts/AzoSans-Regular.woff2') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+
         /* Brand Guide: Body Text - Regular System Font */
         body {
             font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
@@ -405,21 +414,12 @@
         }
 
         #cards-sets-section {
-            background-color: #ffffff;
+            background-color: #1F1F1F;
             position: relative;
         }
 
         #cards-sets-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: repeating-conic-gradient(#FF4F4F 0 .00005%, #18F1E1 0 .00017%) 0 0/5000px 4000px;
-            opacity: 0.3;
-            z-index: 0;
-            pointer-events: none;
+            display: none;
         }
 
         #cards-sets-section>* {
@@ -438,9 +438,13 @@
             font-weight: 100;
             letter-spacing: 0.3em;
             text-transform: uppercase;
-            color: #1F1F1F;
+            color: #ffffff;
+            background-color: #FF4F4F;
+            display: inline-block;
+            padding: 0.5rem 2rem;
+            border-radius: 50px;
             margin-bottom: 0.25rem;
-            font-family: 'Azo Sans Uber', sans-serif !important;
+            font-family: 'Azo Sans Regular', sans-serif !important;
         }
 
         .holiday-banner-title {
@@ -475,7 +479,7 @@
         .holiday-banner-description {
             font-size: 1.05rem;
             line-height: 1.6;
-            color: #1F1F1F;
+            color: #FFF8E7;
             max-width: 980px;
             margin: 0 auto;
             font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !important;
@@ -776,6 +780,15 @@
             z-index: 1;
         }
 
+        #sets-section .holiday-banner-description {
+            color: #1F1F1F;
+        }
+
+        #sets-section .holiday-banner-top {
+            background-color: #18F1E1;
+            color: #1F1F1F;
+        }
+
         /* Banner Section Styles */
         .banner-hero-section {
             background-image: url('../assets/images/holiday/f5.webp');
@@ -954,23 +967,23 @@
             z-index: 1;
         }
 
+        #holiday-activations-section .holiday-banner-description {
+            color: #1F1F1F;
+        }
+
+        #holiday-activations-section .holiday-banner-top {
+            background-color: #18F1E1;
+            color: #1F1F1F;
+        }
+
         /* Holiday AV Services Section Background Design - Same as Cards Sets Section */
         #holiday-av-services-section {
-            background-color: #ffffff;
+            background-color: #1F1F1F;
             position: relative;
         }
 
         #holiday-av-services-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: repeating-conic-gradient(#FF4F4F 0 .00005%, #18F1E1 0 .00017%) 0 0/5000px 4000px;
-            opacity: 0.3;
-            z-index: 0;
-            pointer-events: none;
+            display: none;
         }
 
         #holiday-av-services-section>* {
@@ -1046,6 +1059,15 @@
         #mini-game-section .holiday-banner {
             padding: 1rem 1rem;
             margin-bottom: 1.5rem;
+        }
+
+        #mini-game-section .holiday-banner-description {
+            color: #1F1F1F;
+        }
+
+        #mini-game-section .holiday-banner-top {
+            background-color: #18F1E1;
+            color: #1F1F1F;
         }
 
         /* Santa Game Styles - Scoped to game container */
@@ -1341,7 +1363,7 @@
                     <p class="holiday-banner-top">STAND OUT THIS</p>
                     <h1 class="holiday-banner-title"
                         style="font-family: 'Azo Sans Uber', sans-serif; font-weight: 300; text-shadow: 2px 2px 4px rgba(14, 14, 14, 0.61), 0 0 10px rgba(3, 3, 3, 0.138);">
-                        <span style="color: #FF4F4F;">HOLIDAY</span> <span style="color: #18F1E1;">SEASON</span>
+                        <span style="color: #18F1E1;">HOLIDAY</span> <span style="color: #18F1E1;">SEASON</span>
                     </h1>
                     <p class="holiday-banner-description">
                         Make your holiday event unforgettable with MiHi Entertainment's one-of-a-kind holiday photo
@@ -1439,7 +1461,7 @@
                 <p class="holiday-banner-top">STAND OUT THIS</p>
                 <h1 class="holiday-banner-title"
                     style="font-family: 'Azo Sans Uber', sans-serif; font-weight: 300; text-shadow: 2px 2px 4px rgba(14, 14, 14, 0.61), 0 0 10px rgba(3, 3, 3, 0.138);">
-                    <span style="color: #FF4F4F;">HOLIDAY</span> <span style="color: #18F1E1;">SEASON</span>
+                    <span style="color: #FF4F4F;">HOLIDAY</span> <span style="color: #FF4F4F;">SEASON</span>
                 </h1>
                 <p class="holiday-banner-description">
                     Bring your holiday event to life with MiHi Entertainment's custom photo sets and seasonal photo
@@ -1556,13 +1578,8 @@
                     ENTERTAINMENT FOR YOUR</p>
                 <h1 class="holiday-banner-title"
                     style="font-family: 'Azo Sans Uber', sans-serif; font-weight: 300; text-shadow: 2px 2px 4px rgba(14, 14, 14, 0.61), 0 0 10px rgba(3, 3, 3, 0.138);">
-                    <span style="color: #FF4F4F;">MINI GAME</span> <span style="color: #18F1E1;">SECTION</span>
+                    <span style="color: #FF4F4F;">MINI GAME</span> <span style="color: #FF4F4F;">SECTION</span>
                 </h1>
-                <p class="holiday-banner-description">
-                    Add excitement and joy to your holiday event with our interactive mini games! Perfect for office
-                    holiday parties, corporate celebrations, and family gatherings, these engaging activities bring
-                    guests together and create unforgettable festive memories.
-                </p>
             </div>
 
             <!-- Santa Game Container -->
@@ -1578,7 +1595,7 @@
                 <p class="holiday-banner-top">PERSONALIZE YOUR EVENT WITH OUR</p>
                 <h1 class="holiday-banner-title"
                     style="font-family: 'Azo Sans Uber', sans-serif; font-weight: 300; text-shadow: 2px 2px 4px rgba(14, 14, 14, 0.61), 0 0 10px rgba(3, 3, 3, 0.138);">
-                    <span style="color: #FF4F4F;">HOLIDAY</span> <span style="color: #18F1E1;">ACTIVATIONS</span>
+                    <span style="color: #FF4F4F;">HOLIDAY</span> <span style="color: #FF4F4F;">ACTIVATIONS</span>
                 </h1>
                 <p class="holiday-banner-description">
                     Elevate your corporate holiday party, office holiday party, or office party with our festive holiday
@@ -1643,7 +1660,7 @@
                 <p class="holiday-banner-top">BRING FESTIVE CHEER TO LIFE WITH OUR</p>
                 <h1 class="holiday-banner-title"
                     style="font-family: 'Azo Sans Uber', sans-serif; font-weight: 300; text-shadow: 2px 2px 4px rgba(14, 14, 14, 0.61), 0 0 10px rgba(3, 3, 3, 0.138);">
-                    <span style="color: #FF4F4F;">HOLIDAY</span> <span style="color: #18F1E1;">AV SERVICES</span>
+                    <span style="color: #18F1E1;">HOLIDAY</span> <span style="color: #18F1E1;">AV SERVICES</span>
                 </h1>
                 <p class="holiday-banner-description">
                     Create an unforgettable atmosphere at your office holiday party or corporate holiday party with our
@@ -1707,7 +1724,7 @@
                 <div class="order-2 lg:order-1">
                     <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 md:mb-6 uppercase"
                         style="font-family: 'Azo Sans Uber', sans-serif; font-weight: 300; text-shadow: 2px 2px 4px rgba(14, 14, 14, 0.61), 0 0 10px rgba(3, 3, 3, 0.138);">
-                        SANTA AUDIO GUESTBOOK
+                        <span style="color: #FF4F4F;">SANTA AUDIO</span> <span style="color: #18F1E1;">GUESTBOOK</span>
                     </h2>
                     <p class="text-base md:text-lg leading-relaxed mb-6 md:mb-8">
                         This fun and festive phone acts as a direct connection to Santa Claus, allowing children to
@@ -1748,7 +1765,8 @@
             <div class="mt-12 md:mt-16 text-center">
                 <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 md:mb-8 text-center uppercase"
                     style="font-family: 'Azo Sans Uber', sans-serif; font-weight: 300; text-shadow: 2px 2px 4px rgba(14, 14, 14, 0.61), 0 0 10px rgba(3, 3, 3, 0.138);">
-                    READY TO MAKE YOUR HOLIDAY EVENT UNFORGETTABLE?
+                    <span style="color: #FF4F4F;">READY TO MAKE YOUR HOLIDAY EVENT</span> <span
+                        style="color: #18F1E1;">UNFORGETTABLE?</span>
                 </h2>
                 <p class="text-base md:text-lg leading-relaxed mb-8 md:mb-10 max-w-3xl mx-auto px-4">
                     Let's bring the festive magic to your celebration! Contact us today to discuss your holiday photo
