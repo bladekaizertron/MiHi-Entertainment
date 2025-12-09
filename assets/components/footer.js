@@ -86,7 +86,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 <!-- Column 2: Services -->
                 <div class="col-span-1">
-                    <h5 class="text-white font-bold text-base md:text-lg mb-3 md:mb-6">Services</h5>
+                    <h5 class="text-white font-bold text-base md:text-lg mb-3 md:mb-6" style="font-weight: 300;">Services</h5>
                     <ul class="space-y-2 md:space-y-3">
                         <li><a href="${pathPrefix}index.html#photo-booths" class="hover:text-white transition-colors duration-300 text-sm md:text-base">Photo Booths</a></li>
                         <li><a href="${pathPrefix}index.html#video-booths" class="hover:text-white transition-colors duration-300 text-sm md:text-base">Video Booths</a></li>
@@ -98,7 +98,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 <!-- Column 3: Events -->
                 <div class="col-span-1">
-                    <h5 class="text-white font-bold text-base md:text-lg mb-3 md:mb-6">Events</h5>
+                    <h5 class="text-white font-bold text-base md:text-lg mb-3 md:mb-6" style="font-weight: 300;">Events</h5>
                     <ul class="space-y-2 md:space-y-3">
                         <li><a href="${pathPrefix}events/weddings.html" class="hover:text-white transition-colors duration-300 text-sm md:text-base">Weddings</a></li>
                         <li><a href="${pathPrefix}events/corporate-events.html" class="hover:text-white transition-colors duration-300 text-sm md:text-base">Corporate</a></li>
@@ -110,7 +110,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 <!-- Column 4: Quick Links -->
                 <div class="col-span-2 md:col-span-1 mt-6 md:mt-0">
-                    <h5 class="text-white font-bold text-base md:text-lg mb-3 md:mb-6">Company</h5>
+                    <h5 class="text-white font-bold text-base md:text-lg mb-3 md:mb-6" style="font-weight: 300;">Company</h5>
                     <ul class="space-y-2 md:space-y-3">
                         <li><a href="${pathPrefix}index.html#about" class="hover:text-white transition-colors duration-300 text-sm md:text-base">About Us</a></li>
                         <li><a href="${pathPrefix}index.html#galleries" class="hover:text-white transition-colors duration-300 text-sm md:text-base">Gallery</a></li>
