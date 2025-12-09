@@ -52,6 +52,15 @@
         href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@300;400;500;600;700&family=Raleway:wght@300;400;500;600;700;800;900&family=Cinzel:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@200;300;400;500;600;700;800;900&family=Montserrat:wght@300;400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
     <style>
+        @font-face {
+            font-family: 'Azo Sans Uber';
+            src: url('../../assets/fonts/AzoSansUber-Regular.woff2') format('woff2'),
+                url('../../assets/fonts/AzoSansUber-Regular.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+
         @property --k {
             syntax: '<number>';
             initial-value: 0;
@@ -83,7 +92,7 @@
         }
 
         h3.av-title {
-            font-family: 'Oswald', sans-serif !important;
+            font-family: 'Azo Sans Uber', sans-serif !important;
             font-weight: 600;
             letter-spacing: 0.3em;
             text-transform: uppercase;
@@ -1032,8 +1041,8 @@
             padding: 1em 2em;
             -webkit-appearance: none;
             appearance: none;
-            background-color: #0050ff;
-            color: #fff;
+            background-color: #18F1E1;
+            color: #1F1F1F;
             border-radius: 4px;
             border: none;
             cursor: pointer;
@@ -1088,15 +1097,15 @@
             display: none;
             top: -75%;
             background-image:
-                radial-gradient(circle, #0050ff 20%, transparent 20%),
-                radial-gradient(circle, transparent 20%, #0050ff 20%, transparent 30%),
-                radial-gradient(circle, #0050ff 20%, transparent 20%),
-                radial-gradient(circle, #0050ff 20%, transparent 20%),
-                radial-gradient(circle, transparent 10%, #0050ff 15%, transparent 20%),
-                radial-gradient(circle, #0050ff 20%, transparent 20%),
-                radial-gradient(circle, #0050ff 20%, transparent 20%),
-                radial-gradient(circle, #0050ff 20%, transparent 20%),
-                radial-gradient(circle, #0050ff 20%, transparent 20%);
+                radial-gradient(circle, #FF4F4F 20%, transparent 20%),
+                radial-gradient(circle, transparent 20%, #18F1E1 20%, transparent 30%),
+                radial-gradient(circle, #FF4F4F 20%, transparent 20%),
+                radial-gradient(circle, #18F1E1 20%, transparent 20%),
+                radial-gradient(circle, transparent 10%, #FF4F4F 15%, transparent 20%),
+                radial-gradient(circle, #FF4F4F 20%, transparent 20%),
+                radial-gradient(circle, #FF4F4F 20%, transparent 20%),
+                radial-gradient(circle, #18F1E1 20%, transparent 20%),
+                radial-gradient(circle, #18F1E1 20%, transparent 20%);
             background-size: 10% 10%, 20% 20%, 15% 15%, 20% 20%, 18% 18%, 10% 10%, 15% 15%, 10% 10%, 18% 18%;
         }
 
@@ -1105,13 +1114,13 @@
             display: none;
             bottom: -75%;
             background-image:
-                radial-gradient(circle, #0050ff 20%, transparent 20%),
-                radial-gradient(circle, #0050ff 20%, transparent 20%),
-                radial-gradient(circle, transparent 10%, #0050ff 15%, transparent 20%),
-                radial-gradient(circle, #0050ff 20%, transparent 20%),
-                radial-gradient(circle, #0050ff 20%, transparent 20%),
-                radial-gradient(circle, #0050ff 20%, transparent 20%),
-                radial-gradient(circle, #0050ff 20%, transparent 20%);
+                radial-gradient(circle, #FF4F4F 20%, transparent 20%),
+                radial-gradient(circle, #18F1E1 20%, transparent 20%),
+                radial-gradient(circle, transparent 10%, #FF4F4F 15%, transparent 20%),
+                radial-gradient(circle, #18F1E1 20%, transparent 20%),
+                radial-gradient(circle, #FF4F4F 20%, transparent 20%),
+                radial-gradient(circle, #18F1E1 20%, transparent 20%),
+                radial-gradient(circle, #18F1E1 20%, transparent 20%);
             background-size: 15% 15%, 20% 20%, 18% 18%, 20% 20%, 15% 15%, 10% 10%, 20% 20%;
         }
 
@@ -1705,6 +1714,26 @@
             }
         }
 
+        /* Ensure section-f doesn't stick to top */
+        #section-f {
+            position: relative !important;
+            top: auto !important;
+            left: auto !important;
+            right: auto !important;
+            bottom: auto !important;
+            z-index: 1 !important;
+            margin-top: 0 !important;
+            margin-bottom: 0 !important;
+        }
+
+        #section-f .header-design {
+            position: relative !important;
+            top: auto !important;
+            left: auto !important;
+            right: auto !important;
+            bottom: auto !important;
+        }
+
         .header-design-text {
             text-align: center;
             color: #fff;
@@ -2268,6 +2297,710 @@
             white-space: nowrap;
             border-width: 0;
         }
+
+        /* ============================================
+           COMPREHENSIVE MOBILE OPTIMIZATIONS
+           ============================================ */
+
+        /* ============================================
+           ENHANCED HERO SECTION MOBILE OPTIMIZATIONS
+           ============================================ */
+
+        @media (max-width: 768px) {
+
+            /* Hero Section Container */
+            .hero-section {
+                min-height: 100vh;
+                min-height: 100dvh;
+                /* Dynamic viewport height for mobile */
+                padding: 1.5rem 0;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            /* Background Image Optimization */
+            .hero-background {
+                background-size: cover;
+                background-position: center center;
+                background-attachment: scroll;
+                /* Better performance on mobile */
+            }
+
+            /* Hero Gradient Overlay */
+            .hero-gradient {
+                background: linear-gradient(180deg,
+                        rgba(0, 0, 0, 0.4) 0%,
+                        rgba(0, 0, 0, 0.6) 50%,
+                        rgba(0, 0, 0, 0.7) 100%);
+            }
+
+            /* Hero Content Container */
+            .hero-content {
+                padding-top: 3.5rem !important;
+                padding-bottom: 2.5rem !important;
+                width: 100%;
+                max-width: 100%;
+            }
+
+            /* Badge Enhancement */
+            .inline-flex.items-center.gap-2 {
+                padding: 0.6rem 1.2rem !important;
+                margin-bottom: 1.25rem !important;
+                backdrop-filter: blur(12px);
+                -webkit-backdrop-filter: blur(12px);
+                border-width: 1.5px;
+            }
+
+            .inline-flex.items-center.gap-2 span {
+                font-size: 0.75rem !important;
+                letter-spacing: 0.05em;
+                font-weight: 600;
+            }
+
+            .inline-flex.items-center.gap-2 .w-2 {
+                width: 0.4rem;
+                height: 0.4rem;
+            }
+
+            /* AV Title Enhancement */
+            h3.av-title {
+                font-size: 1.15rem !important;
+                letter-spacing: 0.25em !important;
+                margin-bottom: 1rem !important;
+                line-height: 1.3 !important;
+                padding: 0 1rem;
+            }
+
+            /* Cosmic Text (EVENT STAGES) Enhancement */
+            .name {
+                margin-bottom: 1.5rem !important;
+                padding: 0 0.5rem;
+            }
+
+            .cosmic {
+                margin: 0 0.1rem;
+            }
+
+            /* Subtitle Enhancement */
+            .cinematic-subtitle {
+                font-size: 0.95rem !important;
+                line-height: 1.65 !important;
+                padding: 0 1.25rem !important;
+                margin-bottom: 2rem !important;
+                font-weight: 400;
+            }
+
+            .cinematic-subtitle a {
+                font-weight: 600;
+                text-decoration: underline;
+                text-underline-offset: 3px;
+            }
+
+            /* Buttons Container */
+            .hero-buttons-container {
+                flex-direction: column;
+                gap: 1.25rem;
+                align-items: stretch;
+                padding: 0 1rem !important;
+                margin-bottom: 2rem;
+            }
+
+            .button--bubble,
+            .button--call {
+                width: 100%;
+                max-width: 100%;
+                font-size: 15px;
+                padding: 14px 24px;
+                min-height: 48px;
+                /* Better touch target */
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 0.5rem;
+                font-weight: 600;
+                letter-spacing: 0.5px;
+                border-radius: 8px;
+                transition: all 0.3s ease;
+            }
+
+            .button--bubble:hover,
+            .button--call:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            }
+
+            .button-arrow {
+                font-size: 1.2em;
+                margin-left: 0.25rem;
+            }
+
+            .call-icon {
+                font-size: 1.1em;
+            }
+
+            /* Trust Indicators */
+            .flex.flex-wrap.items-center.justify-center.gap-4 {
+                flex-direction: column;
+                gap: 1rem !important;
+                margin-top: 2rem !important;
+                padding: 0 1rem;
+            }
+
+            .flex.flex-wrap.items-center.justify-center.gap-4>div {
+                display: flex;
+                align-items: center;
+                gap: 0.75rem;
+                padding: 0.5rem 1rem;
+                background: rgba(255, 255, 255, 0.1);
+                backdrop-filter: blur(8px);
+                -webkit-backdrop-filter: blur(8px);
+                border-radius: 20px;
+                border: 1px solid rgba(255, 255, 255, 0.2);
+            }
+
+            .flex.flex-wrap.items-center.justify-center.gap-4 span {
+                font-size: 0.8rem !important;
+                font-weight: 500;
+                color: rgba(255, 255, 255, 0.9);
+            }
+
+            .flex.flex-wrap.items-center.justify-center.gap-4 .w-2 {
+                width: 0.5rem;
+                height: 0.5rem;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .hero-section {
+                min-height: 100vh;
+                min-height: 100dvh;
+                padding: 1rem 0;
+            }
+
+            .hero-content {
+                padding-top: 3rem !important;
+                padding-bottom: 2rem !important;
+            }
+
+            /* Badge */
+            .inline-flex.items-center.gap-2 {
+                padding: 0.55rem 1rem !important;
+                margin-bottom: 1rem !important;
+            }
+
+            .inline-flex.items-center.gap-2 span {
+                font-size: 0.7rem !important;
+            }
+
+            /* AV Title */
+            h3.av-title {
+                font-size: 1.05rem !important;
+                letter-spacing: 0.2em !important;
+                margin-bottom: 0.875rem !important;
+            }
+
+            /* Subtitle */
+            .cinematic-subtitle {
+                font-size: 0.9rem !important;
+                line-height: 1.6 !important;
+                padding: 0 1rem !important;
+                margin-bottom: 1.75rem !important;
+            }
+
+            /* Buttons */
+            .button--bubble,
+            .button--call {
+                font-size: 14px;
+                padding: 13px 22px;
+                min-height: 46px;
+            }
+
+            /* Trust Indicators */
+            .flex.flex-wrap.items-center.justify-center.gap-4 {
+                gap: 0.875rem !important;
+                margin-top: 1.75rem !important;
+            }
+
+            .flex.flex-wrap.items-center.justify-center.gap-4 span {
+                font-size: 0.75rem !important;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-section {
+                min-height: 100vh;
+                min-height: 100dvh;
+                padding: 0.75rem 0;
+            }
+
+            .hero-content {
+                padding-top: 2.5rem !important;
+                padding-bottom: 1.75rem !important;
+            }
+
+            /* Badge */
+            .inline-flex.items-center.gap-2 {
+                padding: 0.5rem 0.9rem !important;
+                margin-bottom: 0.875rem !important;
+                gap: 0.5rem !important;
+            }
+
+            .inline-flex.items-center.gap-2 span {
+                font-size: 0.65rem !important;
+            }
+
+            .inline-flex.items-center.gap-2 .w-2 {
+                width: 0.35rem;
+                height: 0.35rem;
+            }
+
+            /* AV Title */
+            h3.av-title {
+                font-size: 0.95rem !important;
+                letter-spacing: 0.15em !important;
+                margin-bottom: 0.75rem !important;
+                padding: 0 0.75rem;
+            }
+
+            /* Subtitle */
+            .cinematic-subtitle {
+                font-size: 0.85rem !important;
+                line-height: 1.55 !important;
+                padding: 0 0.875rem !important;
+                margin-bottom: 1.5rem !important;
+            }
+
+            /* Buttons */
+            .button--bubble,
+            .button--call {
+                font-size: 13px;
+                padding: 12px 20px;
+                min-height: 44px;
+                letter-spacing: 0.3px;
+            }
+
+            .button-arrow {
+                font-size: 1.1em;
+            }
+
+            .call-icon {
+                font-size: 1em;
+            }
+
+            /* Trust Indicators */
+            .flex.flex-wrap.items-center.justify-center.gap-4 {
+                gap: 0.75rem !important;
+                margin-top: 1.5rem !important;
+                padding: 0 0.75rem;
+            }
+
+            .flex.flex-wrap.items-center.justify-center.gap-4>div {
+                padding: 0.45rem 0.875rem;
+                gap: 0.625rem;
+            }
+
+            .flex.flex-wrap.items-center.justify-center.gap-4 span {
+                font-size: 0.7rem !important;
+            }
+
+            .flex.flex-wrap.items-center.justify-center.gap-4 .w-2 {
+                width: 0.45rem;
+                height: 0.45rem;
+            }
+        }
+
+        /* Extra Small Devices (320px and below) */
+        @media (max-width: 360px) {
+            .hero-content {
+                padding-top: 2rem !important;
+                padding-bottom: 1.5rem !important;
+            }
+
+            h3.av-title {
+                font-size: 0.875rem !important;
+                letter-spacing: 0.1em !important;
+            }
+
+            .cinematic-subtitle {
+                font-size: 0.8rem !important;
+                padding: 0 0.75rem !important;
+            }
+
+            .button--bubble,
+            .button--call {
+                font-size: 12px;
+                padding: 11px 18px;
+                min-height: 42px;
+            }
+        }
+
+        /* Landscape Mobile Optimization */
+        @media (max-width: 768px) and (orientation: landscape) {
+            .hero-section {
+                min-height: auto;
+                padding: 1rem 0;
+            }
+
+            .hero-content {
+                padding-top: 2rem !important;
+                padding-bottom: 1.5rem !important;
+            }
+
+            .name {
+                margin-bottom: 0.75rem !important;
+            }
+
+            .cinematic-subtitle {
+                margin-bottom: 1.25rem !important;
+            }
+
+            .hero-buttons-container {
+                flex-direction: row;
+                gap: 1rem;
+                justify-content: center;
+            }
+
+            .button--bubble,
+            .button--call {
+                max-width: 200px;
+            }
+        }
+
+        /* Section Typography Mobile Optimizations */
+        @media (max-width: 768px) {
+
+            .left-column h2,
+            .left-column h3 {
+                font-size: 1.5rem !important;
+                line-height: 1.3 !important;
+                margin-bottom: 1rem !important;
+            }
+
+            .left-column h2 a,
+            .left-column h2 span {
+                font-size: 1.5rem !important;
+            }
+
+            .left-column p {
+                font-size: 0.95rem !important;
+                line-height: 1.7 !important;
+                margin-bottom: 1rem !important;
+            }
+
+            /* Section A specific headings */
+            #section-a .left-column h3 {
+                font-size: 1.1rem !important;
+                line-height: 1.4 !important;
+                margin-bottom: 0.75rem !important;
+            }
+
+            #section-a .left-column h2 {
+                font-size: 1.75rem !important;
+                line-height: 1.2 !important;
+                margin-bottom: 1rem !important;
+            }
+
+            #section-a .left-column h2 span,
+            #section-a .left-column h2 em {
+                font-size: 1.75rem !important;
+            }
+        }
+
+        @media (max-width: 640px) {
+
+            .left-column h2,
+            .left-column h3 {
+                font-size: 1.35rem !important;
+            }
+
+            .left-column h2 a,
+            .left-column h2 span {
+                font-size: 1.35rem !important;
+            }
+
+            .left-column p {
+                font-size: 0.9rem !important;
+                line-height: 1.65 !important;
+            }
+
+            #section-a .left-column h3 {
+                font-size: 1rem !important;
+            }
+
+            #section-a .left-column h2 {
+                font-size: 1.5rem !important;
+            }
+
+            #section-a .left-column h2 span,
+            #section-a .left-column h2 em {
+                font-size: 1.5rem !important;
+            }
+        }
+
+        @media (max-width: 480px) {
+
+            .left-column h2,
+            .left-column h3 {
+                font-size: 1.2rem !important;
+            }
+
+            .left-column h2 a,
+            .left-column h2 span {
+                font-size: 1.2rem !important;
+            }
+
+            .left-column p {
+                font-size: 0.85rem !important;
+                line-height: 1.6 !important;
+            }
+
+            #section-a .left-column h3 {
+                font-size: 0.95rem !important;
+            }
+
+            #section-a .left-column h2 {
+                font-size: 1.35rem !important;
+            }
+
+            #section-a .left-column h2 span,
+            #section-a .left-column h2 em {
+                font-size: 1.35rem !important;
+            }
+        }
+
+        /* Two-Column Sections Mobile Optimizations */
+        @media (max-width: 768px) {
+            .two-column-section {
+                padding: 2rem 0 !important;
+            }
+
+            .two-column-section .container {
+                padding-left: 1rem !important;
+                padding-right: 1rem !important;
+            }
+
+            .two-column-section .grid {
+                gap: 2rem !important;
+            }
+
+            .left-column,
+            .right-column {
+                margin-bottom: 1.5rem;
+            }
+
+            .btn-more {
+                font-size: 14px !important;
+                padding: 12px 24px !important;
+                width: 100%;
+                max-width: 100%;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .two-column-section {
+                padding: 1.5rem 0 !important;
+            }
+
+            .two-column-section .grid {
+                gap: 1.5rem !important;
+            }
+
+            .btn-more {
+                font-size: 13px !important;
+                padding: 11px 20px !important;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .two-column-section {
+                padding: 1.25rem 0 !important;
+            }
+
+            .two-column-section .container {
+                padding-left: 0.75rem !important;
+                padding-right: 0.75rem !important;
+            }
+
+            .two-column-section .grid {
+                gap: 1.25rem !important;
+            }
+
+            .btn-more {
+                font-size: 12px !important;
+                padding: 10px 18px !important;
+            }
+        }
+
+        /* Email Button Mobile Optimizations */
+        @media (max-width: 768px) {
+            .email-team-button {
+                font-size: 14px !important;
+                padding: 14px 28px !important;
+            }
+
+            .email-button-container {
+                padding: 1.5rem 0 !important;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .email-team-button {
+                font-size: 13px !important;
+                padding: 12px 24px !important;
+            }
+
+            .email-button-container {
+                padding: 1.25rem 0 !important;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .email-team-button {
+                font-size: 12px !important;
+                padding: 11px 20px !important;
+            }
+
+            .email-button-container {
+                padding: 1rem 0 !important;
+            }
+        }
+
+        /* Badge Mobile Optimizations */
+        @media (max-width: 768px) {
+            .inline-flex.items-center.gap-2 {
+                padding: 0.5rem 1rem !important;
+                margin-bottom: 1rem !important;
+            }
+
+            .inline-flex.items-center.gap-2 span {
+                font-size: 0.7rem !important;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .inline-flex.items-center.gap-2 {
+                padding: 0.45rem 0.9rem !important;
+            }
+
+            .inline-flex.items-center.gap-2 span {
+                font-size: 0.65rem !important;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .inline-flex.items-center.gap-2 {
+                padding: 0.4rem 0.8rem !important;
+            }
+
+            .inline-flex.items-center.gap-2 span {
+                font-size: 0.6rem !important;
+            }
+        }
+
+        /* AV Title Mobile Optimizations */
+        @media (max-width: 768px) {
+            h3.av-title {
+                font-size: 1.1rem !important;
+                letter-spacing: 0.2em !important;
+                margin-bottom: 0.75rem !important;
+            }
+        }
+
+        @media (max-width: 640px) {
+            h3.av-title {
+                font-size: 1rem !important;
+                letter-spacing: 0.15em !important;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h3.av-title {
+                font-size: 0.9rem !important;
+                letter-spacing: 0.1em !important;
+            }
+        }
+
+        /* Section F (Contact Section) Mobile Optimizations */
+        @media (max-width: 768px) {
+            #section-f {
+                margin-top: 0 !important;
+            }
+
+            #section-f .header-design {
+                padding: 1.5rem 1rem !important;
+                min-height: auto !important;
+            }
+
+            #section-f .listar-map-button {
+                margin-bottom: 1rem !important;
+            }
+        }
+
+        @media (max-width: 640px) {
+            #section-f .header-design {
+                padding: 1.25rem 0.9rem !important;
+            }
+        }
+
+        @media (max-width: 480px) {
+            #section-f .header-design {
+                padding: 1rem 0.75rem !important;
+            }
+        }
+
+        /* Portfolio Gallery Mobile Optimizations */
+        @media (max-width: 768px) {
+            #portfolio-gallery {
+                margin-top: 1rem;
+            }
+        }
+
+        @media (max-width: 640px) {
+            #portfolio-gallery {
+                margin-top: 0.75rem;
+            }
+        }
+
+        /* General Mobile Spacing Improvements */
+        @media (max-width: 768px) {
+            .section-padding {
+                padding-top: 2rem !important;
+                padding-bottom: 2rem !important;
+            }
+
+            .mb-4,
+            .mb-6,
+            .mb-8 {
+                margin-bottom: 1rem !important;
+            }
+
+            .mt-8,
+            .mt-12 {
+                margin-top: 1rem !important;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .section-padding {
+                padding-top: 1.5rem !important;
+                padding-bottom: 1.5rem !important;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .section-padding {
+                padding-top: 1.25rem !important;
+                padding-bottom: 1.25rem !important;
+            }
+        }
+
+        /* Ensure Azo Sans Uber font scales properly on mobile */
+        @media (max-width: 768px) {
+            [style*="font-family: 'Azo Sans Uber'"] {
+                font-size: inherit !important;
+            }
+        }
     </style>
 
     <!-- Structured Data - Service -->
@@ -2542,13 +3275,14 @@
                     <div
                         class="inline-flex items-center gap-2 sm:gap-3 px-4 sm:px-6 py-2 bg-pink-500/20 backdrop-blur-md border border-pink-400/50 rounded-full shadow-lg shadow-pink-500/10 mb-6 sm:mb-8">
                         <div class="w-2 h-2 bg-pink-400 rounded-full animate-pulse"></div>
-                        <span
-                            class="text-pink-300 text-xs sm:text-sm font-semibold tracking-wider uppercase">Professional
+                        <span class="text-pink-300 text-xs sm:text-sm font-semibold tracking-wider uppercase"
+                            style="font-family: 'Azo Sans Uber', sans-serif;">Professional
                             Event Staging</span>
                         <div class="w-2 h-2 bg-pink-400 rounded-full animate-pulse" style="animation-delay: 0.5s;">
                         </div>
                     </div>
-                    <h3 class="av-title text-xl sm:text-2xl md:text-3xl mb-3 md:mb-4 tracking-widest">A/V PRODUCTION
+                    <h3 class="av-title text-xl sm:text-2xl md:text-3xl mb-3 md:mb-4 tracking-widest"
+                        style="font-family: 'Azo Sans Uber', sans-serif;">A/V PRODUCTION
                     </h3>
                     <h1 class="name mb-4 sm:mb-6 md:mb-8"
                         aria-label="Event Stages - Professional Event Staging Services, Stage Rental & Custom Stage Design">
@@ -2652,8 +3386,12 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 md:gap-8 items-start md:items-center">
                     <!-- Left Column -->
                     <div class="left-column order-2 md:order-1">
-                        <h3>TAKE YOUR EVENT TO THE NEXT LEVEL WITH</h3>
-                        <h2>EVENT <em>STAGES</em></h2>
+                        <h3 style="font-family: 'Azo Sans Uber', sans-serif; color: #1F1F1F;">TAKE YOUR EVENT TO THE
+                            NEXT LEVEL WITH</h3>
+                        <h2 style="font-family: 'Azo Sans Uber', sans-serif; font-weight: 200;"><span
+                                style="color: #FF4F4F;">EVENT</span>
+                            <em style="color: #18F1E1; font-weight: 200;">STAGES</em>
+                        </h2>
                         <p>MiHi Entertainment provides professional event staging services including custom stage design
                             and stage rental to help your event stand out and
                             leave a lasting impression. From elegant stages for keynote speeches to dynamic setups for
@@ -2679,6 +3417,7 @@
                             staging
                             that blends function, style, and innovation for unforgettable experiences.</p>
                         <a href="../contact-us.html" class="btn-more bubbly-button"
+                            style="font-family: 'Azo Sans Uber', sans-serif; font-weight: 200;"
                             aria-label="Contact us about event staging services">Interested In Hearing More?</a>
                     </div>
 
@@ -2738,7 +3477,9 @@
 
                     <!-- Right Column -->
                     <div class="left-column left-aligned order-1 md:order-2">
-                        <h2><a href="../../corporate-events.html">CONFERENCES</a></h2>
+                        <h2><a href="../../corporate-events.html"><span
+                                    style="font-family: 'Azo Sans Uber', sans-serif; color: #FF4F4F;">CONFERENCES</span></a>
+                        </h2>
                         <p>Set the tone, increase audience engagement, and ensure speakers and presentations are
                             showcased
                             effectively with our professional <a href="../../corporate-events.html"
@@ -2757,7 +3498,9 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 md:gap-8 items-center">
                     <!-- Left Column -->
                     <div class="left-column">
-                        <h2><a href="../../wedding.html">WEDDINGS</a></h2>
+                        <h2><a href="../../wedding.html"><span
+                                    style="font-family: 'Azo Sans Uber', sans-serif; color: #FF4F4F;">WEDDINGS</span></a>
+                        </h2>
                         <p>Create a romantic and refined atmosphere for your <a href="../../wedding.html"
                                 class="text-blue-600 hover:text-blue-700 underline">wedding</a> with a beautifully
                             designed stage.
@@ -2794,7 +3537,7 @@
                     style="display: flex; align-items: center; justify-content: center; padding: 2rem 0;">
                     <button class="email-team-button" aria-label="Email our event staging team"
                         onclick="window.location.href='mailto:info@mihientertainment.com'">
-                        <span class="text">Email Our Team</span>
+                        <span class="text" style="font-family: 'Azo Sans Uber', sans-serif;">Email Our Team</span>
                         <span class="shimmer"></span>
                     </button>
                 </div>
@@ -2822,7 +3565,9 @@
 
                     <!-- Right Column -->
                     <div class="left-column left-aligned order-1 md:order-2">
-                        <h2><a href="../contact-us.html">PERFORMANCES</a></h2>
+                        <h2><a href="../contact-us.html"><span
+                                    style="font-family: 'Azo Sans Uber', sans-serif; color: #FF4F4F;">PERFORMANCES</span></a>
+                        </h2>
                         <p>Make your event performances shine with our customizable stages. Add branding or <a
                                 href="../event-lighting.html"
                                 class="text-blue-600 hover:text-blue-700 underline">lighting</a> to tie
@@ -2841,7 +3586,10 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 md:gap-8 items-center">
                     <!-- Left Column -->
                     <div class="left-column">
-                        <h2><a href="../../av-production.html">EVENT PRODUCTION</a></h2>
+                        <h2 style="font-family: 'Azo Sans Uber', sans-serif; font-weight: 200;"><span
+                                style="color: #FF4F4F;">EVENT</span>
+                            <em style="color: #18F1E1; font-weight: 200;">PRODUCTION</em>
+                        </h2>
                         <p>Transform your event with a stage that sets the perfect backdrop for every moment. From
                             dynamic
                             presentations to live performances, our stages provide a professional and polished setting
