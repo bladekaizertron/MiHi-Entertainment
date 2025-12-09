@@ -209,28 +209,45 @@
     </script>
 
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Azo Sans Uber from WebFontFree CDN -->
-    <script src="https://c.webfontfree.com/c.js?f=AzoSansUberW01-Regular" type="text/javascript"></script>
     <style>
-        * {
-            font-family: 'AzoSansUberW01-Regular', 'Azo Sans Uber', sans-serif !important;
+        /* Azo Sans Uber Font */
+        @font-face {
+            font-family: 'Azo Sans Uber';
+            src: url('../assets/fonts/AzoSansUber-Regular.woff2') format('woff2'),
+                url('../assets/fonts/AzoSansUber-Regular.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
         }
 
-        html,
+        /* Brand Guide: Body Text - Regular System Font */
         body {
-            font-family: 'AzoSansUberW01-Regular', 'Azo Sans Uber', sans-serif !important;
+            font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
             color: #1F1F1F;
+            line-height: 1.6;
+            font-weight: 100;
             overflow-x: hidden;
             max-width: 100vw;
         }
 
+        p {
+            font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+            color: #1F1F1F;
+        }
+
+        /* Brand Guide: Headers - Regular System Font */
         h1,
         h2,
         h3,
         h4,
         h5,
         h6 {
-            font-family: 'AzoSansUberW01-Regular', 'Azo Sans Uber', sans-serif !important;
+            font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+            font-weight: 100;
+            letter-spacing: 0.02em;
+            line-height: 1.2;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
         /* Animated Radial Gradient Button Effect */
@@ -238,7 +255,7 @@
             outline: none;
             user-select: none;
             color: #1F1F1F;
-            font-family: 'AzoSansUberW01-Regular', 'Azo Sans Uber', sans-serif !important;
+            font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !important;
             font-size: 1.125rem;
             letter-spacing: 0.04rem;
             padding: 1.5rem 3rem;
@@ -345,7 +362,7 @@
         }
 
         .hero-section .corporate-text {
-            font-family: 'AzoSansUberW01-Regular', 'Azo Sans Uber', sans-serif !important;
+            font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !important;
             letter-spacing: 0.3em;
         }
 
@@ -418,12 +435,12 @@
 
         .holiday-banner-top {
             font-size: 2rem;
-            font-weight: 400;
+            font-weight: 100;
             letter-spacing: 0.3em;
             text-transform: uppercase;
             color: #1F1F1F;
             margin-bottom: 0.25rem;
-            font-family: 'AzoSansUberW01-Regular', 'Azo Sans Uber', sans-serif !important;
+            font-family: 'Azo Sans Uber', sans-serif !important;
         }
 
         .holiday-banner-title {
@@ -432,7 +449,7 @@
             text-transform: uppercase;
             margin-bottom: 0.75rem;
             letter-spacing: 0.05em;
-            font-family: 'AzoSansUberW01-Regular', 'Azo Sans Uber', sans-serif !important;
+            font-family: 'Azo Sans Uber', sans-serif !important;
         }
 
         .gradient-text {
@@ -461,7 +478,7 @@
             color: #1F1F1F;
             max-width: 980px;
             margin: 0 auto;
-            font-family: 'AzoSansUberW01-Regular', 'Azo Sans Uber', sans-serif !important;
+            font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !important;
             font-weight: 500;
             letter-spacing: 0.01em;
         }
@@ -575,7 +592,7 @@
             letter-spacing: 1px;
             text-transform: capitalize;
             margin: 0px;
-            font-family: 'AzoSansUberW01-Regular', 'Azo Sans Uber', sans-serif !important;
+            font-family: 'Azo Sans Uber', sans-serif !important;
         }
 
         .card-grid-text {
@@ -583,8 +600,8 @@
             font-size: 0.875rem;
             line-height: 1.5;
             margin-bottom: 1.25rem;
-            font-weight: 400;
-            font-family: 'AzoSansUberW01-Regular', 'Azo Sans Uber', sans-serif !important;
+            font-weight: 100;
+            font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !important;
             flex: 1;
         }
 
@@ -595,13 +612,13 @@
             font-size: 14px;
             text-transform: uppercase;
             border-radius: 4px;
-            font-weight: 400;
+            font-weight: 100;
             display: block;
             width: 100%;
             cursor: pointer;
             border: 1px solid rgba(255, 255, 255, 0.2);
             background: transparent;
-            font-family: 'AzoSansUberW01-Regular', 'Azo Sans Uber', sans-serif !important;
+            font-family: 'Azo Sans Uber', sans-serif !important;
             transition: background-color 0.3s ease;
         }
 
@@ -688,7 +705,7 @@
 
         .carousel-items .card h3 {
             margin-bottom: 1rem;
-            font-family: 'AzoSansUberW01-Regular', 'Azo Sans Uber', sans-serif !important;
+            font-family: 'Azo Sans Uber', sans-serif !important;
             font-size: 1.5rem;
             color: #1F1F1F;
         }
@@ -864,7 +881,7 @@
             font-weight: 700;
             color: #FF4F4F;
             margin: 1.5rem 1.5rem 1rem 1.5rem;
-            font-family: 'AzoSansUberW01-Regular', 'Azo Sans Uber', sans-serif !important;
+            font-family: 'Azo Sans Uber', sans-serif !important;
             text-transform: uppercase;
         }
 
@@ -874,7 +891,7 @@
             color: #1F1F1F;
             margin: 0 1.5rem 1.5rem 1.5rem;
             flex: 1;
-            font-family: 'AzoSansUberW01-Regular', 'Azo Sans Uber', sans-serif !important;
+            font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !important;
         }
 
         @media (max-width: 768px) {
@@ -1248,16 +1265,17 @@
                 <div class="inline-flex items-center gap-2 sm:gap-3 px-4 sm:px-6 py-2 backdrop-blur-md border rounded-full shadow-lg mb-6 sm:mb-8"
                     style="background-color: rgba(255, 79, 79, 0.2); border-color: rgba(255, 79, 79, 0.5); box-shadow: 0 10px 15px -3px rgba(255, 79, 79, 0.1);">
                     <div class="w-2 h-2 rounded-full animate-pulse" style="background-color: #FF4F4F;"></div>
-                    <span class="text-xs sm:text-sm font-semibold tracking-wider uppercase"
-                        style="color: rgba(255, 79, 79, 0.9);">Festive Holiday
+                    <span class="text-xs sm:text-sm font-thin tracking-wider uppercase"
+                        style="color: rgba(255, 255, 255, 0.9); font-family: 'Azo Sans Uber', sans-serif;text-shadow: 2px 2px 4px rgba(14, 14, 14, 0.61), 0 0 10px rgba(3, 3, 3, 0.138);">Festive
+                        Holiday
                         Experiences</span>
                     <div class="w-2 h-2 rounded-full animate-pulse"
                         style="background-color: #FF4F4F; animation-delay: 0.5s;"></div>
                 </div>
 
                 <div class="mb-6">
-                    <h1
-                        class="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-semibold leading-tight mb-2 corporate-heading px-2">
+                    <h1 class="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-thin leading-tight mb-2 corporate-heading px-2"
+                        style="font-family: 'Azo Sans Uber', sans-serif; text-shadow: 2px 2px 4px rgba(14, 14, 14, 0.61), 0 0 10px rgba(3, 3, 3, 0.138);">
                         <span style="color: #FF4F4F;">HOLIDAY</span> <span style="color: #18F1E1;">PARTY</span>
                     </h1>
                 </div>
@@ -1276,8 +1294,8 @@
                 <!-- CTA -->
                 <div class="flex flex-col sm:flex-row gap-4 sm:gap-6 items-center justify-center px-4">
                     <a href="contact-us.html"
-                        class="inline-flex items-center justify-center gap-2 sm:gap-3 px-6 sm:px-10 py-3 sm:py-5 rounded-full text-base sm:text-lg font-semibold bg-white shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-110 hover:-translate-y-1 focus:ring-4 focus:ring-white/30 w-full sm:w-auto"
-                        style="color: #FF4F4F;"
+                        class="inline-flex items-center justify-center gap-2 sm:gap-3 px-6 sm:px-10 py-3 sm:py-5 rounded-full text-base sm:text-lg font-thin bg-white shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-110 hover:-translate-y-1 focus:ring-4 focus:ring-white/30 w-full sm:w-auto"
+                        style="font-family: 'Azo Sans Uber', sans-serif; color: #FF4F4F;"
                         onmouseover="this.style.backgroundColor='rgba(255, 79, 79, 0.1)'; this.style.color='#FF4F4F';"
                         onmouseout="this.style.backgroundColor='white'; this.style.color='#FF4F4F';"
                         aria-label="Get a quote for your holiday event">
@@ -1291,7 +1309,8 @@
                             <path stroke-linecap="round" stroke-linejoin="round"
                                 d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498A1 1 0 0121 17.72V21a2 2 0 01-2 2h-1C9.716 23 3 16.284 3 8V7a2 2 0 012-2z" />
                         </svg>
-                        <span>Call Us</span>
+                        <span style="font-family: 'Azo Sans Uber', sans-serif; font-weight: 300; color: #18F1E1;">Call
+                            Us</span>
                     </button>
                 </div>
 
@@ -1320,7 +1339,10 @@
             <div class="cards-grid-main">
                 <div class="holiday-banner">
                     <p class="holiday-banner-top">STAND OUT THIS</p>
-                    <h1 class="holiday-banner-title gradient-text">HOLIDAY SEASON</h1>
+                    <h1 class="holiday-banner-title"
+                        style="font-family: 'Azo Sans Uber', sans-serif; font-weight: 300; text-shadow: 2px 2px 4px rgba(14, 14, 14, 0.61), 0 0 10px rgba(3, 3, 3, 0.138);">
+                        <span style="color: #FF4F4F;">HOLIDAY</span> <span style="color: #18F1E1;">SEASON</span>
+                    </h1>
                     <p class="holiday-banner-description">
                         Make your holiday event unforgettable with MiHi Entertainment's one-of-a-kind holiday photo
                         booths and customized activations. Whether it's an office party, office holiday party, corporate
@@ -1337,10 +1359,14 @@
                                     width="400" height="300" loading="lazy">
                             </div>
                             <div class="card-grid-content">
-                                <h2 class="card-grid-title">360° Photo Booth</h2>
+                                <h2 class="card-grid-title"
+                                    style="font-family: 'Azo Sans Uber', sans-serif; font-weight: 300; text-shadow: 2px 2px 4px rgba(14, 14, 14, 0.61), 0 0 10px rgba(3, 3, 3, 0.138);">
+                                    360° Photo Booth</h2>
                                 <p class="card-grid-text">Capture the joy of the season from every angle with our
                                     immersive 360° Holiday Booth experience.</p>
-                                <a href="product/360-photo-booth.html" class="btn-card">Read More</a>
+                                <a href="product/360-photo-booth.html" class="btn-card"
+                                    style="font-family: 'Azo Sans Uber', sans-serif; font-weight: 300; text-shadow: 2px 2px 4px rgba(14, 14, 14, 0.61), 0 0 10px rgba(3, 3, 3, 0.138);">Read
+                                    More</a>
                             </div>
                         </div>
                     </li>
@@ -1352,10 +1378,14 @@
                                     width="400" height="300" loading="lazy">
                             </div>
                             <div class="card-grid-content">
-                                <h2 class="card-grid-title">ROAMING PHOTO BOOTH</h2>
+                                <h2 class="card-grid-title"
+                                    style="font-family: 'Azo Sans Uber', sans-serif; font-weight: 300; text-shadow: 2px 2px 4px rgba(14, 14, 14, 0.61), 0 0 10px rgba(3, 3, 3, 0.138);">
+                                    ROAMING PHOTO BOOTH</h2>
                                 <p class="card-grid-text">Spread the festive cheer as our Roaming Photo Booth captures
                                     candid holiday moments throughout your event.</p>
-                                <a href="product/roaming-photo-booth.html" class="btn-card">Read More</a>
+                                <a href="product/roaming-photo-booth.html" class="btn-card"
+                                    style="font-family: 'Azo Sans Uber', sans-serif; font-weight: 300; text-shadow: 2px 2px 4px rgba(14, 14, 14, 0.61), 0 0 10px rgba(3, 3, 3, 0.138);">Read
+                                    More</a>
                             </div>
                         </div>
                     </li>
@@ -1367,10 +1397,14 @@
                                     height="300" loading="lazy">
                             </div>
                             <div class="card-grid-content">
-                                <h2 class="card-grid-title">AUDIO GUESTBOOK</h2>
+                                <h2 class="card-grid-title"
+                                    style="font-family: 'Azo Sans Uber', sans-serif; font-weight: 300; text-shadow: 2px 2px 4px rgba(14, 14, 14, 0.61), 0 0 10px rgba(3, 3, 3, 0.138);">
+                                    AUDIO GUESTBOOK</h2>
                                 <p class="card-grid-text">Let your guests leave heartfelt holiday messages with our
                                     Audio Guestbook, creating memories you can listen to for years to come.</p>
-                                <a href="audio-guestbook.html" class="btn-card">Read More</a>
+                                <a href="audio-guestbook.html" class="btn-card"
+                                    style="font-family: 'Azo Sans Uber', sans-serif; font-weight: 300; text-shadow: 2px 2px 4px rgba(14, 14, 14, 0.61), 0 0 10px rgba(3, 3, 3, 0.138);">Read
+                                    More</a>
                             </div>
                         </div>
                     </li>
@@ -1382,10 +1416,14 @@
                                     height="300" loading="lazy">
                             </div>
                             <div class="card-grid-content">
-                                <h2 class="card-grid-title">A/V SERVICES</h2>
+                                <h2 class="card-grid-title"
+                                    style="font-family: 'Azo Sans Uber', sans-serif; font-weight: 300; text-shadow: 2px 2px 4px rgba(14, 14, 14, 0.61), 0 0 10px rgba(3, 3, 3, 0.138);">
+                                    A/V SERVICES</h2>
                                 <p class="card-grid-text">Transform your holiday event into a winter wonderland with
                                     stunning lighting, crystal-clear audio and festive custom displays.</p>
-                                <a href="av-production.html" class="btn-card">Read More</a>
+                                <a href="av-production.html" class="btn-card"
+                                    style="font-family: 'Azo Sans Uber', sans-serif; font-weight: 300; text-shadow: 2px 2px 4px rgba(14, 14, 14, 0.61), 0 0 10px rgba(3, 3, 3, 0.138);">Read
+                                    More</a>
                             </div>
                         </div>
                     </li>
@@ -1399,7 +1437,10 @@
         <div class="container mx-auto px-4">
             <div class="holiday-banner">
                 <p class="holiday-banner-top">STAND OUT THIS</p>
-                <h1 class="holiday-banner-title gradient-text">HOLIDAY SEASON</h1>
+                <h1 class="holiday-banner-title"
+                    style="font-family: 'Azo Sans Uber', sans-serif; font-weight: 300; text-shadow: 2px 2px 4px rgba(14, 14, 14, 0.61), 0 0 10px rgba(3, 3, 3, 0.138);">
+                    <span style="color: #FF4F4F;">HOLIDAY</span> <span style="color: #18F1E1;">SEASON</span>
+                </h1>
                 <p class="holiday-banner-description">
                     Bring your holiday event to life with MiHi Entertainment's custom photo sets and seasonal photo
                     booths. Perfect for an office gathering, company celebration, community event, or family
@@ -1417,10 +1458,13 @@
                                 alt="Ski lift themed photo set for winter holiday events and office parties" width="600"
                                 height="400" loading="lazy">
                         </div>
-                        <h3>SKI LIFT PHOTO SET</h3>
+                        <h3 style="font-family: 'Azo Sans Uber', sans-serif; font-weight: 300;">
+                            SKI LIFT PHOTO SET</h3>
                         <p>Capture the charm of winter with our Ski Lift photo set, a set perfect addition to any
                             holiday photo booth or office holiday party.</p>
-                        <a href="custom-sets/ski-lift-photo-set.html" class="btn-card">Read More</a>
+                        <a href="custom-sets/ski-lift-photo-set.html" class="btn-card"
+                            style="font-family: 'Azo Sans Uber', sans-serif; font-weight: 300; color: #FF4F4F;">Read
+                            More</a>
                     </li>
                     <li class="card">
                         <div class="image-content">
@@ -1431,7 +1475,9 @@
                         <h3>SKI GOGGLE PHOTO SET</h3>
                         <p> Step into a snowy adventure with our Ski Goggle set, bringing festive fun to corporate
                             holiday parties and holiday events alike.</p>
-                        <a href="custom-sets/ski-goggle-photo-set.html" class="btn-card">Read More</a>
+                        <a href="custom-sets/ski-goggle-photo-set.html" class="btn-card"
+                            style="font-family: 'Azo Sans Uber', sans-serif; font-weight: 300; color: #FF4F4F;">Read
+                            More</a>
                     </li>
                     <li class="card">
                         <div class="image-content">
@@ -1442,7 +1488,9 @@
                         <h3>SNOW GLOBE PHOTO SET</h3>
                         <p>Create magical memories inside our Snow Globe set, a stunning centerpiece for holiday photo
                             booths at family gatherings or office parties.</p>
-                        <a href="custom-sets/snow-globe-photo-set.html" class="btn-card">Read More</a>
+                        <a href="custom-sets/snow-globe-photo-set.html" class="btn-card"
+                            style="font-family: 'Azo Sans Uber', sans-serif; font-weight: 300; color: #FF4F4F;">Read
+                            More</a>
                     </li>
                     <li class="card">
                         <div class="image-content">
@@ -1453,7 +1501,9 @@
                         <h3>SLEIGH PHOTO SET</h3>
                         <p>Add a touch of holiday nostalgia with our Sleigh Set, ideal for photobooths and corporate
                             holiday celebrations.</p>
-                        <a href="custom-sets/sleigh-photo-set.html" class="btn-card">Read More</a>
+                        <a href="custom-sets/sleigh-photo-set.html" class="btn-card"
+                            style="font-family: 'Azo Sans Uber', sans-serif; font-weight: 300; color: #FF4F4F;">Read
+                            More</a>
                     </li>
                 </ul>
             </section>
@@ -1465,11 +1515,13 @@
         <div class="absolute inset-0 bg-black bg-opacity-40"></div>
         <div class="relative z-10 text-center text-white px-4 w-full">
             <div class="max-w-full mx-auto py-12 md:py-16">
-                <p class="text-sm md:text-base uppercase tracking-widest mb-3 text-white/90 font-medium">
+                <p class="text-sm md:text-base uppercase tracking-widest mb-3 text-white/90 font-size-large"
+                    style="font-family: 'Azo Sans Uber', sans-serif;">
                     VIEW MORE OF IDEAS FOR YOUR NEXT
                 </p>
-                <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 md:mb-8">
-                    HOLIDAY EVENT
+                <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-thin mb-6 md:mb-8"
+                    style="font-family: 'Azo Sans Uber', sans-serif;text-shadow: 2px 2px 4px rgba(14, 14, 14, 0.61), 0 0 10px rgba(3, 3, 3, 0.138);">
+                    <span style="color: #FF4F4F;">HOLIDAY</span> <span style="color: #18F1E1;">EVENT</span>
                 </h1>
                 <div class="mt-6 md:mt-8 flex flex-col sm:flex-row gap-4 sm:gap-6 items-center justify-center">
                     <a href="contact-us.html"
@@ -1478,7 +1530,7 @@
                         onmouseover="this.style.backgroundColor='rgba(255, 79, 79, 0.1)'; this.style.color='#FF4F4F';"
                         onmouseout="this.style.backgroundColor='white'; this.style.color='#FF4F4F';"
                         aria-label="Get a quote for your holiday event">
-                        <span>Get Your Quote</span>
+                        <span style="font-family: 'Azo Sans Uber', sans-serif; font-weight: 300;">Get Your Quote</span>
                     </a>
                     <button type="button" data-click-to-call data-call-text="Call Us"
                         class="inline-flex items-center justify-center gap-2 sm:gap-3 px-6 sm:px-10 py-3 sm:py-5 rounded-full text-base sm:text-lg font-semibold border-2 border-white/30 text-white bg-white/10 hover:bg-white/20 hover:border-white/50 hover:shadow-xl transition-all duration-300 transform hover:scale-110 hover:-translate-y-1 focus:ring-2 focus:ring-white/30 cursor-pointer w-full sm:w-auto"
@@ -1488,7 +1540,8 @@
                             <path stroke-linecap="round" stroke-linejoin="round"
                                 d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498A1 1 0 0121 17.72V21a2 2 0 01-2 2h-1C9.716 23 3 16.284 3 8V7a2 2 0 012-2z" />
                         </svg>
-                        <span>Call Us</span>
+                        <span style="font-family: 'Azo Sans Uber', sans-serif; font-weight: 300; color: #18F1E1;">Call
+                            Us</span>
                     </button>
                 </div>
             </div>
@@ -1499,8 +1552,12 @@
     <section id="mini-game-section" class="section-padding">
         <div class="container mx-auto px-4">
             <div class="holiday-banner">
-                <p class="holiday-banner-top">FUN & ENTERTAINMENT FOR YOUR</p>
-                <h1 class="holiday-banner-title gradient-text">MINI GAME SECTION</h1>
+                <p class="holiday-banner-top" style="font-family: 'Azo Sans Uber', sans-serif; font-weight: 300;">FUN &
+                    ENTERTAINMENT FOR YOUR</p>
+                <h1 class="holiday-banner-title"
+                    style="font-family: 'Azo Sans Uber', sans-serif; font-weight: 300; text-shadow: 2px 2px 4px rgba(14, 14, 14, 0.61), 0 0 10px rgba(3, 3, 3, 0.138);">
+                    <span style="color: #FF4F4F;">MINI GAME</span> <span style="color: #18F1E1;">SECTION</span>
+                </h1>
                 <p class="holiday-banner-description">
                     Add excitement and joy to your holiday event with our interactive mini games! Perfect for office
                     holiday parties, corporate celebrations, and family gatherings, these engaging activities bring
@@ -1519,7 +1576,10 @@
         <div class="container mx-auto px-4">
             <div class="holiday-banner">
                 <p class="holiday-banner-top">PERSONALIZE YOUR EVENT WITH OUR</p>
-                <h1 class="holiday-banner-title gradient-text">HOLIDAY ACTIVATIONS</h1>
+                <h1 class="holiday-banner-title"
+                    style="font-family: 'Azo Sans Uber', sans-serif; font-weight: 300; text-shadow: 2px 2px 4px rgba(14, 14, 14, 0.61), 0 0 10px rgba(3, 3, 3, 0.138);">
+                    <span style="color: #FF4F4F;">HOLIDAY</span> <span style="color: #18F1E1;">ACTIVATIONS</span>
+                </h1>
                 <p class="holiday-banner-description">
                     Elevate your corporate holiday party, office holiday party, or office party with our festive holiday
                     activations. From personalized Holiday Cards and our cutting-edge Holiday AI Booth to seamless
@@ -1535,7 +1595,8 @@
                             alt="Custom holiday cards for office parties and corporate holiday celebrations" width="400"
                             height="300" loading="lazy">
                     </div>
-                    <h3 class="activation-title">HOLIDAY CARDS</h3>
+                    <h3 class="activation-title" style="font-family: 'Azo Sans Uber', sans-serif; font-weight: 300;">
+                        HOLIDAY CARDS</h3>
                     <p class="activation-description">
                         Add a festive touch to your office holiday party or corporate holiday party with custom Holiday
                         Cards that guests can take home as a cherished keepsake, perfect for capturing the spirit of the
@@ -1580,7 +1641,10 @@
         <div class="container mx-auto px-4">
             <div class="holiday-banner">
                 <p class="holiday-banner-top">BRING FESTIVE CHEER TO LIFE WITH OUR</p>
-                <h1 class="holiday-banner-title gradient-text">HOLIDAY AV SERVICES</h1>
+                <h1 class="holiday-banner-title"
+                    style="font-family: 'Azo Sans Uber', sans-serif; font-weight: 300; text-shadow: 2px 2px 4px rgba(14, 14, 14, 0.61), 0 0 10px rgba(3, 3, 3, 0.138);">
+                    <span style="color: #FF4F4F;">HOLIDAY</span> <span style="color: #18F1E1;">AV SERVICES</span>
+                </h1>
                 <p class="holiday-banner-description">
                     Create an unforgettable atmosphere at your office holiday party or corporate holiday party with our
                     professional AV services. From stunning holiday event lighting and crystal-clear audio solutions to
@@ -1641,7 +1705,8 @@
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center">
                 <!-- Left Column - Text Content -->
                 <div class="order-2 lg:order-1">
-                    <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 md:mb-6 uppercase">
+                    <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 md:mb-6 uppercase"
+                        style="font-family: 'Azo Sans Uber', sans-serif; font-weight: 300; text-shadow: 2px 2px 4px rgba(14, 14, 14, 0.61), 0 0 10px rgba(3, 3, 3, 0.138);">
                         SANTA AUDIO GUESTBOOK
                     </h2>
                     <p class="text-base md:text-lg leading-relaxed mb-6 md:mb-8">
@@ -1663,7 +1728,8 @@
                                 <path stroke-linecap="round" stroke-linejoin="round"
                                     d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498A1 1 0 0121 17.72V21a2 2 0 01-2 2h-1C9.716 23 3 16.284 3 8V7a2 2 0 012-2z" />
                             </svg>
-                            <span>GIVE SANTA A CALL</span>
+                            <span style="font-family: 'Azo Sans Uber', sans-serif; font-weight: 300;">GIVE SANTA A
+                                CALL</span>
                         </button>
                     </div>
                 </div>
@@ -1680,7 +1746,8 @@
 
             <!-- CTA Section -->
             <div class="mt-12 md:mt-16 text-center">
-                <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 md:mb-8 text-center uppercase">
+                <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 md:mb-8 text-center uppercase"
+                    style="font-family: 'Azo Sans Uber', sans-serif; font-weight: 300; text-shadow: 2px 2px 4px rgba(14, 14, 14, 0.61), 0 0 10px rgba(3, 3, 3, 0.138);">
                     READY TO MAKE YOUR HOLIDAY EVENT UNFORGETTABLE?
                 </h2>
                 <p class="text-base md:text-lg leading-relaxed mb-8 md:mb-10 max-w-3xl mx-auto px-4">
@@ -1693,7 +1760,7 @@
                     <a href="contact-us.html"
                         class="inline-flex items-center justify-center gap-2 sm:gap-3 px-6 sm:px-10 py-3 sm:py-5 rounded-full text-base sm:text-lg font-semibold bg-white text-red-600 hover:bg-red-50 hover:text-red-700 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-110 hover:-translate-y-1 focus:ring-4 focus:ring-white/30"
                         aria-label="Get a quote for your holiday event">
-                        <span>Get Your Quote</span>
+                        <span style="font-family: 'Azo Sans Uber', sans-serif; font-weight: 300;">Get Your Quote</span>
                     </a>
                 </div>
             </div>
