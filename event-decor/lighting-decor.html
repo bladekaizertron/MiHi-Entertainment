@@ -56,6 +56,19 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <style>
+        @font-face {
+            font-family: 'Azo Sans Uber';
+            src: url('../../assets/fonts/AzoSansUber-Regular.woff2') format('woff2'),
+                url('../../assets/fonts/AzoSansUber-Regular.woff') format('woff');
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        .font-azo-uber {
+            font-family: 'Azo Sans Uber', sans-serif !important;
+        }
+
         html {
             scroll-behavior: smooth;
         }
@@ -81,7 +94,7 @@
 
         .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(0, 80, 255, 0.4);
+            box-shadow: 0 10px 25px rgba(255, 79, 79, 0.4);
         }
 
         .section-padding {
@@ -216,7 +229,7 @@
             display: inline-block;
             margin-top: 1rem;
             padding: 12px 28px;
-            background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%);
+            background: #1F1F1F;
             color: #ffffff;
             text-decoration: none;
             border-radius: 50px;
@@ -230,7 +243,7 @@
 
         .content-column .btn-content:hover {
             transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(0, 80, 255, 0.4);
+            box-shadow: 0 10px 25px rgba(31, 31, 31, 0.4);
         }
 
         @media (max-width: 767px) {
@@ -317,7 +330,7 @@
         .contact-section .btn-contact {
             display: inline-block;
             padding: 14px 32px;
-            background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%);
+            background: #1F1F1F;
             color: #ffffff;
             text-decoration: none;
             border-radius: 50px;
@@ -331,7 +344,7 @@
 
         .contact-section .btn-contact:hover {
             transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(0, 80, 255, 0.4);
+            box-shadow: 0 10px 25px rgba(31, 31, 31, 0.4);
         }
 
         /* Hero Button Container */
@@ -1358,17 +1371,17 @@
         }
 
         .brochure-badge {
-            background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%);
+            background: #1F1F1F;
             color: #ffffff;
             padding: 0.4rem 1.25rem;
             border-radius: 50px;
             font-size: 0.8rem;
-            font-weight: 700;
+            font-weight: 400;
             letter-spacing: 0.05em;
             text-transform: uppercase;
             display: inline-block;
-            box-shadow: 0 4px 18px rgba(0, 80, 255, 0.35);
-            font-family: 'Montserrat', sans-serif;
+            box-shadow: 0 4px 18px rgba(31, 31, 31, 0.35);
+            font-family: 'Azo Sans Uber', sans-serif;
         }
 
         .brochure-preview {
@@ -1418,7 +1431,7 @@
             width: 1.25rem;
             height: 1.25rem;
             border-radius: 50%;
-            background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%);
+            background: linear-gradient(135deg, #18F1E1 0%, #14d4c4 100%);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -1440,22 +1453,22 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%);
+            background: linear-gradient(135deg, #FF4F4F 0%, #e63939 100%);
             color: #ffffff;
             padding: 0.7rem 1.5rem;
             border-radius: 9999px;
-            font-weight: 700;
+            font-weight: 400;
             font-size: 0.9rem;
             font-family: 'Montserrat', sans-serif;
             border: none;
             cursor: pointer;
-            box-shadow: 0 20px 35px -15px rgba(0, 80, 255, 0.65);
+            box-shadow: 0 20px 35px -15px rgba(255, 79, 79, 0.65);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
         .brochure-button:hover {
             transform: translateY(-2px) scale(1.02);
-            box-shadow: 0 30px 45px -20px rgba(0, 80, 255, 0.75);
+            box-shadow: 0 30px 45px -20px rgba(255, 79, 79, 0.75);
         }
 
         .brochure-download-button {
@@ -1468,14 +1481,15 @@
             border-radius: 0.5rem;
             font-weight: 700;
             font-size: 0.9rem;
-            font-family: 'Montserrat', sans-serif;
+            font-family: 'Azo Sans Uber', sans-serif;
             letter-spacing: 0.04em;
             transition: all 0.3s ease;
             text-decoration: none;
         }
 
         .brochure-download-button:hover {
-            background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%);
+            background: linear-gradient(135deg, #18F1E1 0%, #14d4c4 100%);
+            border-color: #18F1E1;
             color: #ffffff;
             transform: translateY(-2px);
         }
@@ -1562,6 +1576,336 @@
             clip: rect(0, 0, 0, 0);
             white-space: nowrap;
             border-width: 0;
+        }
+
+        /* Balanced image layout for headline carousel - images only */
+        .headline-carousel .swiper-slide .relative.rounded-3xl {
+            aspect-ratio: 4 / 3;
+            min-height: 350px;
+        }
+
+        .headline-carousel .swiper-slide .relative.rounded-3xl img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        @media (min-width: 1024px) {
+            .headline-carousel .swiper-slide .relative.rounded-3xl {
+                min-height: 450px;
+            }
+        }
+
+        /* ============================================
+           COMPREHENSIVE MOBILE RESPONSIVENESS
+           ============================================ */
+
+        @media (max-width: 767px) {
+
+            /* Hero Section Mobile */
+            #hero {
+                min-height: 100vh;
+                padding-top: 4rem;
+                padding-bottom: 2rem;
+            }
+
+            #hero .container {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+
+            #hero h1 {
+                font-size: 2.5rem !important;
+                line-height: 1.1 !important;
+                margin-bottom: 1rem !important;
+            }
+
+            #hero h1 span {
+                display: block;
+            }
+
+            #hero .hero-paragraph {
+                font-size: 0.875rem !important;
+                padding: 0 0.5rem;
+                margin-bottom: 1.5rem;
+            }
+
+            #hero .btn-primary {
+                padding: 0.75rem 1.5rem !important;
+                font-size: 0.875rem !important;
+                width: 100%;
+                max-width: 280px;
+            }
+
+            /* Badge Mobile */
+            #hero .inline-flex.items-center {
+                padding: 0.5rem 1rem !important;
+                margin-bottom: 1.5rem !important;
+                font-size: 0.7rem !important;
+            }
+
+            /* Headline Carousel Mobile */
+            .headline-carousel {
+                padding: 1rem 0 !important;
+            }
+
+            .headline-carousel .swiper-slide {
+                padding: 0 0.5rem;
+            }
+
+            .headline-carousel .grid {
+                gap: 1.5rem !important;
+            }
+
+            .headline-carousel .relative.rounded-3xl {
+                min-height: 250px !important;
+                margin-bottom: 1rem;
+            }
+
+            .headline-carousel h2 {
+                font-size: 1.75rem !important;
+                margin-bottom: 1rem !important;
+                line-height: 1.2 !important;
+            }
+
+            .headline-carousel h2 span {
+                display: inline-block;
+            }
+
+            .headline-carousel p {
+                font-size: 0.875rem !important;
+                margin-bottom: 1.5rem !important;
+                line-height: 1.6 !important;
+            }
+
+            .headline-carousel .inline-block.px-4 {
+                font-size: 0.7rem !important;
+                padding: 0.35rem 0.75rem !important;
+                margin-bottom: 0.75rem !important;
+            }
+
+            .headline-carousel a.inline-flex {
+                padding: 0.75rem 1.5rem !important;
+                font-size: 0.875rem !important;
+                width: 100%;
+                max-width: 100%;
+            }
+
+            /* Brochure Section Mobile */
+            .brochure-section {
+                padding: 2rem 0 !important;
+            }
+
+            .brochure-section .container {
+                padding-left: 1rem !important;
+                padding-right: 1rem !important;
+            }
+
+            .brochure-header h2 {
+                font-size: 1.5rem !important;
+                margin-bottom: 0.75rem !important;
+                line-height: 1.3 !important;
+            }
+
+            .brochure-header p {
+                font-size: 0.875rem !important;
+                line-height: 1.6 !important;
+                margin-bottom: 1.5rem;
+            }
+
+            .brochure-badge {
+                font-size: 0.7rem !important;
+                padding: 0.35rem 0.875rem !important;
+                margin-bottom: 1rem !important;
+            }
+
+            .brochure-subtitle {
+                font-size: 1.25rem !important;
+                margin-bottom: 1rem !important;
+                line-height: 1.3 !important;
+            }
+
+            .brochure-check-text {
+                font-size: 0.875rem !important;
+            }
+
+            .brochure-check-description {
+                font-size: 0.8125rem !important;
+                line-height: 1.5 !important;
+            }
+
+            .brochure-button,
+            .brochure-download-button {
+                padding: 0.75rem 1.25rem !important;
+                font-size: 0.875rem !important;
+                width: 100%;
+                max-width: 100%;
+                margin-bottom: 0.75rem;
+            }
+
+            .brochure-cta-group {
+                flex-direction: column !important;
+                gap: 0.75rem !important;
+                width: 100%;
+            }
+
+            /* Content Column Mobile */
+            .content-column h3 {
+                font-size: 0.75rem !important;
+                margin-bottom: 0.5rem !important;
+            }
+
+            .content-column h2 {
+                font-size: 1.5rem !important;
+                margin-bottom: 1rem !important;
+                line-height: 1.3 !important;
+            }
+
+            .content-column p {
+                font-size: 0.875rem !important;
+                line-height: 1.6 !important;
+                margin-bottom: 1rem !important;
+            }
+
+            .content-column .btn-content {
+                padding: 0.75rem 1.5rem !important;
+                font-size: 0.875rem !important;
+                width: 100%;
+                max-width: 100%;
+            }
+
+            /* Contact Section Mobile */
+            .contact-section {
+                padding: 2rem 1rem !important;
+                text-align: center;
+            }
+
+            .contact-section h2 {
+                font-size: 1.5rem !important;
+                margin-bottom: 1rem !important;
+                line-height: 1.3 !important;
+            }
+
+            .contact-section h2 span {
+                display: inline-block;
+            }
+
+            .contact-section p {
+                font-size: 0.875rem !important;
+                line-height: 1.6 !important;
+                margin-bottom: 1.5rem !important;
+                padding: 0 0.5rem;
+            }
+
+            .contact-section .btn-contact {
+                padding: 0.875rem 2rem !important;
+                font-size: 0.875rem !important;
+                width: 100%;
+                max-width: 280px;
+            }
+
+            /* Section Padding Mobile */
+            section {
+                padding-top: 2rem !important;
+                padding-bottom: 2rem !important;
+            }
+
+            section.py-16,
+            section.py-20,
+            section.py-24 {
+                padding-top: 3rem !important;
+                padding-bottom: 3rem !important;
+            }
+
+            /* Container Padding Mobile */
+            .container {
+                padding-left: 1rem !important;
+                padding-right: 1rem !important;
+            }
+
+            /* Grid Gaps Mobile */
+            .grid.gap-8,
+            .grid.gap-12 {
+                gap: 1.5rem !important;
+            }
+
+            /* Swiper Navigation Mobile */
+            .headline-carousel .swiper-button-next,
+            .headline-carousel .swiper-button-prev {
+                width: 35px !important;
+                height: 35px !important;
+            }
+
+            .headline-carousel .swiper-button-next::after,
+            .headline-carousel .swiper-button-prev::after {
+                font-size: 16px !important;
+            }
+
+            /* Text Sizes Mobile */
+            .text-5xl,
+            .text-6xl,
+            .text-7xl,
+            .text-8xl {
+                font-size: 2rem !important;
+            }
+
+            .text-4xl {
+                font-size: 1.75rem !important;
+            }
+
+            .text-3xl {
+                font-size: 1.5rem !important;
+            }
+
+            .text-2xl {
+                font-size: 1.25rem !important;
+            }
+
+            .text-xl {
+                font-size: 1.125rem !important;
+            }
+
+            .text-lg {
+                font-size: 1rem !important;
+            }
+
+            /* Button Touch Targets */
+            button,
+            a.btn-primary,
+            a.btn-contact,
+            a.btn-content,
+            .brochure-button,
+            .brochure-download-button {
+                min-height: 44px;
+                min-width: 44px;
+            }
+        }
+
+        @media (max-width: 480px) {
+
+            /* Extra Small Devices */
+            #hero h1 {
+                font-size: 2rem !important;
+            }
+
+            .headline-carousel h2 {
+                font-size: 1.5rem !important;
+            }
+
+            .brochure-header h2,
+            .contact-section h2 {
+                font-size: 1.25rem !important;
+            }
+
+            .headline-carousel .relative.rounded-3xl {
+                min-height: 200px !important;
+            }
+
+            .container {
+                padding-left: 0.75rem !important;
+                padding-right: 0.75rem !important;
+            }
         }
     </style>
 
@@ -1833,18 +2177,19 @@
             <div class="relative z-10 container mx-auto px-4 sm:px-6 pt-20">
                 <div class="max-w-6xl mx-auto text-center">
                     <!-- Badge -->
-                    <div
-                        class="inline-flex items-center gap-2 sm:gap-3 px-4 sm:px-6 py-2 bg-cyan-500/20 backdrop-blur-md border border-cyan-400/30 rounded-full shadow-lg shadow-cyan-500/10 mb-6 sm:mb-8">
-                        <div class="w-2 h-2 bg-cyan-400 rounded-full animate-pulse"></div>
-                        <span
-                            class="text-cyan-200 text-xs sm:text-sm font-semibold tracking-wider uppercase">Professional
+                    <div class="inline-flex items-center gap-2 sm:gap-3 px-4 sm:px-6 py-2 backdrop-blur-md border rounded-full shadow-lg mb-6 sm:mb-8"
+                        style="background-color: rgba(31, 31, 31, 0.2); border-color: rgba(31, 31, 31, 0.3); box-shadow: 0 10px 15px -3px rgba(31, 31, 31, 0.1), 0 4px 6px -2px rgba(31, 31, 31, 0.05);">
+                        <div class="w-2 h-2 bg-white rounded-full animate-pulse"></div>
+                        <span class="text-white text-xs sm:text-sm font-light tracking-wider uppercase"
+                            style="font-family: 'Azo Sans Uber', sans-serif; padding: 0.25rem 0.5rem; border-radius: 0.25rem;">Professional
                             Lighting Decor Services</span>
-                        <div class="w-2 h-2 bg-cyan-400 rounded-full animate-pulse" style="animation-delay: 0.5s;">
+                        <div class="w-2 h-2 bg-white rounded-full animate-pulse" style="animation-delay: 0.5s;">
                         </div>
                     </div>
-                    <h1 class="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black mb-6 leading-tight text-white"
+                    <h1 class="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-light mb-6 leading-tight text-white font-azo-uber"
                         style="text-shadow: 2px 2px 8px rgba(0,0,0,0.7);">
-                        Lighting Decor<br>Services
+                        <span class="text-[#FF4F4F]">Lighting</span> <span class="text-[#FF4F4F]">Decor</span><br><span
+                            class="text-[#18F1E1]">Services</span>
                     </h1>
                     <p
                         class="text-lg sm:text-xl md:text-2xl mb-8 text-white max-w-7xl mx-auto leading-relaxed px-4 opacity-95">
@@ -1854,16 +2199,17 @@
                     </p>
                     <div class="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center px-4">
                         <a href="../../contact-us.html"
-                            class="btn-primary text-white px-8 py-4 rounded-full text-lg font-bold hover:scale-105 transition-all duration-300 shadow-2xl w-full sm:w-auto">
+                            class="btn-primary text-white px-8 py-4 rounded-full text-lg font-light hover:scale-105 transition-all duration-300 shadow-2xl w-full sm:w-auto font-azo-uber"
+                            style="background: linear-gradient(135deg, #FF4F4F 0%, #e63939 100%);">
                             Get Your Quote
                         </a>
                         <button type="button" data-click-to-call data-call-text="Call Us"
-                            class="group inline-flex items-center justify-center gap-3 bg-white hover:bg-gray-50 text-cyan-600 border-2 border-cyan-600 hover:border-cyan-700 px-8 py-4 rounded-full text-lg font-bold transition-all duration-300 shadow-xl hover:shadow-2xl hover:scale-105 w-full sm:w-auto">
+                            class="group inline-flex items-center justify-center gap-3 bg-[#1F1F1F] hover:bg-gray-50 text-[#18F1E1] border-2 border-[#18F1E1] hover:border-[#18F1E1] px-8 py-4 rounded-full text-lg font-light transition-all duration-300 shadow-xl hover:shadow-2xl hover:scale-105 w-full sm:w-auto font-azo-uber">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round"
                                     d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498A1 1 0 0121 17.72V21a2 2 0 01-2 2h-1C9.716 23 3 16.284 3 8V7a2 2 0 012-2z" />
                             </svg>
-                            <span>Call Us</span>
+                            <span class="font-azo-uber text-[#18F1E1]">Call Us</span>
                         </button>
                     </div>
 
@@ -1894,8 +2240,10 @@
             <div class="container mx-auto px-6 relative" style="z-index: 20;">
                 <div class="text-center mb-4 space-y-1 brochure-header">
                     <span class="brochure-badge">💡 Lighting Decor Service Guide</span>
-                    <h2 class="text-2xl md:text-3xl font-bold text-white mb-2 leading-tight">
-                        Design Your Signature Lighting Experience
+                    <h2 class="text-2xl md:text-3xl text-white mb-2 leading-tight font-azo-uber"
+                        style="font-family: 'Azo Sans Uber', sans-serif !important; font-weight: 400;">
+                        Design Your <span style="color: #FF4F4F;">Signature</span> <span
+                            style="color: #18F1E1;">Lighting</span> Experience
                     </h2>
                     <p class="text-base text-cyan-100 max-w-3xl mx-auto leading-relaxed">
                         Explore our immersive lighting decor solutions and professional lighting services crafted to
@@ -1954,11 +2302,13 @@
 
                     <div class="order-1 lg:order-2">
                         <div
-                            class="pill-label inline-block bg-gradient-to-r from-blue-400 via-blue-500 to-blue-300 text-slate-900 px-3 py-1.5 rounded-full text-xs font-bold mb-2 shadow-lg tracking-[0.2em]">
+                            class="pill-label inline-block bg-[#1F1F1F] text-white px-3 py-1.5 rounded-full text-xs font-light mb-2 shadow-lg tracking-[0.2em] font-azo-uber">
                             Full-Service Lighting Decor Packages
                         </div>
-                        <h3 class="brochure-subtitle text-2xl md:text-3xl font-bold mb-2 text-white">
-                            Bring Visionary Lighting To Life
+                        <h3 class="brochure-subtitle text-2xl md:text-3xl font-light mb-2 text-white font-azo-uber"
+                            style="font-family: 'Azo Sans Uber', sans-serif !important; font-weight: 400;">
+                            Bring <span style="color: #FF4F4F;">Visionary</span> <span
+                                style="color: #18F1E1;">Lighting</span> To Life
                         </h3>
                         <p class="text-base text-cyan-100 mb-4 leading-relaxed">
                             From precision lighting design to dynamic LED systems and ambient lighting, our team designs
@@ -2013,7 +2363,7 @@
                             </div>
                         </div>
                         <div class="flex flex-col sm:flex-row gap-4 brochure-cta-group">
-                            <button onclick="openLightingDecorBrochureModal()" class="brochure-button"
+                            <button onclick="openLightingDecorBrochureModal()" class="brochure-button font-azo-uber"
                                 aria-label="View Lighting decor services brochure">
                                 <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -2026,7 +2376,8 @@
                                 </svg>
                             </button>
                             <a href="../../flipbook/examples/example-assets/books/lighting.pdf" download
-                                class="brochure-download-button" aria-label="Download Lighting decor brochure PDF">
+                                class="brochure-download-button font-azo-uber"
+                                aria-label="Download Lighting decor brochure PDF">
                                 <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" stroke-width="2"
                                     viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -2068,30 +2419,43 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
                     <div class="col-span-1">
                         <div class="content-column">
-                            <h3>ILLUMINATE YOUR EVENT WITH OUR</h3>
-                            <h2>LIGHTING SERVICES</h2>
-                            <p>Lighting is more than just brightness; it's about creating the perfect ambiance. Whether
+                            <h3 class="font-azo-uber"
+                                style="color: #1F1F1F; font-family: 'Azo Sans Uber', sans-serif !important; font-weight: 400;">
+                                ILLUMINATE YOUR EVENT WITH OUR</h3>
+                            <h2 class="font-azo-uber"
+                                style="color: #1F1F1F; font-family: 'Azo Sans Uber', sans-serif !important; font-weight: 400; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1), 0 0 8px rgba(0, 0, 0, 0.1);">
+                                <span
+                                    style="color: #FF4F4F; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2), 0 0 8px rgba(255, 79, 79, 0.3);">LIGHTING</span>
+                                <span
+                                    style="color: #18F1E1; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2), 0 0 8px rgba(24, 241, 225, 0.3);">SERVICES</span>
+                            </h2>
+                            <p style="color: #1F1F1F;">Lighting is more than just brightness; it's about creating the
+                                perfect ambiance. Whether
                                 you're looking for whimsical Air Balloon Lights, glamorous Chandeliers, warm Market
                                 Lights,
                                 or bold Marquee Letters, our lighting decor sets the tone for an unforgettable
                                 experience.
                                 Each option is designed to complement your event theme and make your space shine for
                                 weddings, corporate events, and celebrations.</p>
-                            <p>Our experienced lighting designers combine technical expertise and creative passion to
+                            <p style="color: #1F1F1F;">Our experienced lighting designers combine technical expertise
+                                and creative passion to
                                 bring
                                 your vision to life. Whether you want a romantic glow for a wedding or dynamic lights
                                 for a
                                 high-energy corporate event, we have the skills to make it happen.</p>
-                            <p>Our services include adaptive intelligent lighting, pinpoint pin spots, atmospheric wash
+                            <p style="color: #1F1F1F;">Our services include adaptive intelligent lighting, pinpoint pin
+                                spots, atmospheric wash
                                 lighting, and dramatic uplighting to transform any venue. We also offer custom lighting
                                 solutions
                                 like pattern projections, stage lighting for concerts or performances, uplighting
                                 rentals to set the mood, and bistro lighting for a warm, rustic feel.</p>
-                            <p>We know every event is unique, so we offer a personalized approach. Our team collaborates
+                            <p style="color: #1F1F1F;">We know every event is unique, so we offer a personalized
+                                approach. Our team collaborates
                                 with you to understand your needs and venue details, creating a tailored lighting plan
                                 that
                                 exceeds your expectations.</p>
-                            <a href="../contact-us.html" class="btn-content"
+                            <a href="../contact-us.html" class="btn-content font-azo-uber"
+                                style="color: #ffffff; font-family: 'Azo Sans Uber', sans-serif !important; font-weight: 400;"
                                 aria-label="Contact us about lighting decor services">Interested In Hearing More?</a>
                         </div>
                     </div>
@@ -2144,20 +2508,22 @@
                                     </div>
                                 </div>
                                 <div class="order-1 lg:order-2">
-                                    <div
-                                        class="inline-block px-4 py-2 bg-blue-100 text-blue-700 rounded-full text-sm font-semibold mb-4">
+                                    <div class="inline-block px-4 py-2 rounded-full text-sm font-light mb-4 font-azo-uber"
+                                        style="background-color: #1F1F1F; color: #ffffff; font-family: 'Azo Sans Uber', sans-serif !important;">
                                         Lighting Decor
                                     </div>
-                                    <h2 class="text-4xl md:text-5xl lg:text-6xl font-black mb-6 text-gray-900 leading-tight"
-                                        style="font-family: 'Playfair Display', serif;">
-                                        Air Balloon Lights
+                                    <h2 class="text-4xl md:text-5xl lg:text-6xl font-normal mb-6 text-gray-900 leading-tight font-azo-uber"
+                                        style="color: #1F1F1F; font-family: 'Azo Sans Uber', sans-serif !important; font-weight: 400;">
+                                        <span style="color: #FF4F4F;">Air Balloon</span> <span
+                                            style="color: #18F1E1;">Lights</span>
                                     </h2>
                                     <p class="text-lg md:text-xl text-gray-600 mb-8 leading-relaxed">
                                         Add a whimsical touch with glowing Air Balloon Lights that bring charm to any
                                         venue. Perfect for weddings and celebrations.
                                     </p>
                                     <a href="../contact-us.html"
-                                        class="inline-flex items-center justify-center bg-gradient-to-r from-blue-600 to-cyan-600 text-white px-8 py-4 rounded-full text-base font-semibold hover:from-blue-700 hover:to-cyan-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
+                                        class="inline-flex items-center justify-center bg-[#1F1F1F] text-white px-8 py-4 rounded-full text-base font-light hover:from-[#1F1F1F] hover:to-[#1F1F1F] transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl font-azo-uber"
+                                        style="background: linear-gradient(135deg, #1F1F1F 0%, #1F1F1F 100%);"
                                         aria-label="Learn more about air balloon lights">
                                         Learn More
                                         <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -2184,20 +2550,22 @@
                                     </div>
                                 </div>
                                 <div class="order-1 lg:order-2">
-                                    <div
-                                        class="inline-block px-4 py-2 bg-blue-100 text-blue-700 rounded-full text-sm font-semibold mb-4">
+                                    <div class="inline-block px-4 py-2 bg-blue-100 text-blue-700 rounded-full text-sm font-light mb-4 font-azo-uber"
+                                        style="background-color: #1F1F1F; color: #ffffff; font-family: 'Azo Sans Uber', sans-serif !important;">
                                         Lighting Decor
                                     </div>
-                                    <h2 class="text-4xl md:text-5xl lg:text-6xl font-black mb-6 text-gray-900 leading-tight"
-                                        style="font-family: 'Playfair Display', serif;">
-                                        Chandeliers
+                                    <h2 class="text-4xl md:text-5xl lg:text-6xl font-normal mb-6 text-gray-900 leading-tight font-azo-uber"
+                                        style="color: #1F1F1F; font-family: 'Azo Sans Uber', sans-serif !important; font-weight: 400;">
+                                        <span style="color: #FF4F4F;">Chandelier</span>
+                                        <span style="color: #18F1E1;">Setup</span>
                                     </h2>
                                     <p class="text-lg md:text-xl text-gray-600 mb-8 leading-relaxed">
                                         Boost your event with luxurious Chandeliers that create an air of sophistication
                                         for corporate events and galas.
                                     </p>
                                     <a href="../contact-us.html"
-                                        class="inline-flex items-center justify-center bg-gradient-to-r from-blue-600 to-cyan-600 text-white px-8 py-4 rounded-full text-base font-semibold hover:from-blue-700 hover:to-cyan-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
+                                        class="inline-flex items-center justify-center bg-[#1F1F1F] text-white px-8 py-4 rounded-full text-base font-light hover:from-[#1F1F1F] hover:to-[#1F1F1F] transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl font-azo-uber"
+                                        style="background: linear-gradient(135deg, #1F1F1F 0%, #1F1F1F 100%);"
                                         aria-label="Learn more about chandeliers">
                                         Learn More
                                         <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -2224,20 +2592,22 @@
                                     </div>
                                 </div>
                                 <div class="order-1 lg:order-2">
-                                    <div
-                                        class="inline-block px-4 py-2 bg-blue-100 text-blue-700 rounded-full text-sm font-semibold mb-4">
+                                    <div class="inline-block px-4 py-2 bg-blue-100 text-blue-700 rounded-full text-sm font-light mb-4 font-azo-uber"
+                                        style="background-color: #1F1F1F; color: #ffffff; font-family: 'Azo Sans Uber', sans-serif !important;">
                                         Lighting Decor
                                     </div>
-                                    <h2 class="text-4xl md:text-5xl lg:text-6xl font-black mb-6 text-gray-900 leading-tight"
-                                        style="font-family: 'Playfair Display', serif;">
-                                        Market Lights
+                                    <h2 class="text-4xl md:text-5xl lg:text-6xl font-normal mb-6 text-gray-900 leading-tight font-azo-uber"
+                                        style="color: #1F1F1F; font-family: 'Azo Sans Uber', sans-serif !important; font-weight: 400;">
+                                        <span style="color: #FF4F4F;">Market</span> <span
+                                            style="color: #18F1E1;">Lights</span>
                                     </h2>
                                     <p class="text-lg md:text-xl text-gray-600 mb-8 leading-relaxed">
                                         Set a cozy and inviting mood with Market Lights perfect for any indoor or
                                         outdoor wedding or corporate event.
                                     </p>
                                     <a href="../contact-us.html"
-                                        class="inline-flex items-center justify-center bg-gradient-to-r from-blue-600 to-cyan-600 text-white px-8 py-4 rounded-full text-base font-semibold hover:from-blue-700 hover:to-cyan-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
+                                        class="inline-flex items-center justify-center bg-[#1F1F1F] text-white px-8 py-4 rounded-full text-base font-light hover:from-[#1F1F1F] hover:to-[#1F1F1F] transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl font-azo-uber"
+                                        style="background: linear-gradient(135deg, #1F1F1F 0%, #1F1F1F 100%);"
                                         aria-label="Learn more about market lights">
                                         Learn More
                                         <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -2264,20 +2634,22 @@
                                     </div>
                                 </div>
                                 <div class="order-1 lg:order-2">
-                                    <div
-                                        class="inline-block px-4 py-2 bg-blue-100 text-blue-700 rounded-full text-sm font-semibold mb-4">
+                                    <div class="inline-block px-4 py-2 bg-blue-100 text-blue-700 rounded-full text-sm font-light mb-4 font-azo-uber"
+                                        style="background-color: #1F1F1F; color: #ffffff; font-family: 'Azo Sans Uber', sans-serif !important;">
                                         Lighting Decor
                                     </div>
-                                    <h2 class="text-4xl md:text-5xl lg:text-6xl font-black mb-6 text-gray-900 leading-tight"
-                                        style="font-family: 'Playfair Display', serif;">
-                                        Marquee Letters
+                                    <h2 class="text-4xl md:text-5xl lg:text-6xl font-normal mb-6 text-gray-900 leading-tight font-azo-uber"
+                                        style="color: #1F1F1F; font-family: 'Azo Sans Uber', sans-serif !important; font-weight: 400;">
+                                        <span style="color: #FF4F4F;">Marquee</span> <span
+                                            style="color: #18F1E1;">Letters</span>
                                     </h2>
                                     <p class="text-lg md:text-xl text-gray-600 mb-8 leading-relaxed">
                                         Make a bold statement with custom Marquee Letters that light up your message in
                                         style for weddings and corporate events.
                                     </p>
                                     <a href="../contact-us.html"
-                                        class="inline-flex items-center justify-center bg-gradient-to-r from-blue-600 to-cyan-600 text-white px-8 py-4 rounded-full text-base font-semibold hover:from-blue-700 hover:to-cyan-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
+                                        class="inline-flex items-center justify-center bg-[#1F1F1F] text-white px-8 py-4 rounded-full text-base font-light hover:from-[#1F1F1F] hover:to-[#1F1F1F] transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl font-azo-uber"
+                                        style="background: linear-gradient(135deg, #1F1F1F 0%, #1F1F1F 100%);"
                                         aria-label="Learn more about marquee letters">
                                         Learn More
                                         <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -2302,12 +2674,17 @@
         <section id="contact" class="py-8 md:py-10 lg:py-12 contact-section-wrapper">
             <div class="container mx-auto px-6">
                 <div class="contact-section">
-                    <h2>CONTACT US NOW</h2>
+                    <h2 class="font-azo-uber"
+                        style="color: #1F1F1F; font-family: 'Azo Sans Uber', sans-serif !important; font-weight: 400;">
+                        <span style="color: #FF4F4F;">CONTACT</span> <span style="color: #FF4F4F;">US</span> <span
+                            style="color: #18F1E1;">NOW</span>
+                    </h2>
                     <p>Learn more about our professional lighting decor services including air balloon lights,
                         chandeliers, marquee letters, and event lighting for your next wedding, corporate event, or
                         holiday party. Click the button below to send us an
                         email and connect with our expert lighting decor team today.</p>
-                    <a href="mailto:info@mihientertainment.com" class="btn-contact"
+                    <a href="mailto:info@mihientertainment.com" class="btn-contact font-azo-uber"
+                        style="color: #ffffff; font-family: 'Azo Sans Uber', sans-serif !important; font-weight: 400;"
                         aria-label="Email our lighting decor team">Learn More Now</a>
                 </div>
             </div>
