@@ -54,6 +54,14 @@
     <link href="https://fonts.googleapis.com/css?family=Dosis:700" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet">
     <style>
+        @font-face {
+            font-family: 'Azo Sans Uber';
+            src: url('../assets/fonts/AzoSansUber-Regular.woff2') format('woff2');
+            font-weight: 300;
+            font-style: normal;
+            font-display: swap;
+        }
+
         body {
             font-family: 'Inter', sans-serif;
             color: #1a202c;
@@ -86,6 +94,67 @@
             background: linear-gradient(135deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.5) 100%);
         }
 
+        /* Hero Section Container Optimization */
+        #hero {
+            position: relative;
+        }
+
+        .hero-content-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: inherit;
+        }
+
+        @media (max-width: 639px) {
+            #hero {
+                min-height: 70vh;
+            }
+
+            .hero-content-container {
+                padding: clamp(1.5rem, 5vh, 2.5rem) clamp(1rem, 4vw, 1.5rem);
+            }
+        }
+
+        @media (min-width: 640px) {
+            #hero {
+                min-height: 80vh;
+            }
+
+            .hero-content-container {
+                padding: clamp(2rem, 6vh, 3rem) clamp(1.5rem, 5vw, 2rem);
+            }
+        }
+
+        @media (min-width: 768px) {
+            #hero {
+                min-height: 85vh;
+            }
+
+            .hero-content-container {
+                padding: clamp(2.5rem, 7vh, 4rem) clamp(2rem, 6vw, 2.5rem);
+            }
+        }
+
+        @media (min-width: 1024px) {
+            #hero {
+                height: 100vh;
+                min-height: 100vh;
+                max-height: 100vh;
+            }
+
+            .hero-content-container {
+                padding: clamp(3rem, 8vh, 5rem) clamp(2rem, 6vw, 3rem);
+            }
+        }
+
+        @media (min-width: 1280px) {
+            .hero-content-container {
+                padding: clamp(4rem, 10vh, 6rem) 3rem;
+            }
+        }
+
         /* Hero Section Typography with Shimmer Effect */
         .loading-text {
             place-self: center;
@@ -93,23 +162,42 @@
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            font-family: 'Anton', sans-serif;
-            font-weight: 400;
-            font-size: clamp(3rem, 10vw, 8rem);
-            letter-spacing: 0.3rem;
+            font-family: 'Azo Sans Uber', sans-serif;
+            font-weight: 300;
+            font-size: clamp(1.25rem, 4.5vw, 3.5rem);
+            letter-spacing: clamp(0.1rem, 0.8vw, 0.5rem);
             text-transform: uppercase;
             line-height: 1.1;
-            margin-bottom: 1.5rem;
+            margin: 0 auto;
+            margin-bottom: clamp(1rem, 2vw, 1.5rem);
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
             animation: shimmer 2s linear infinite;
             filter: drop-shadow(0 4px 20px rgba(0, 0, 0, 0.5)) drop-shadow(0 2px 10px rgba(0, 0, 0, 0.3));
+            width: 100%;
+            max-width: 100%;
+            word-break: break-word;
+        }
+
+        @media (min-width: 640px) {
+            .loading-text {
+                font-size: clamp(1.75rem, 5.5vw, 4.5rem);
+                letter-spacing: clamp(0.2rem, 1vw, 0.6rem);
+            }
         }
 
         @media (min-width: 768px) {
             .loading-text {
-                letter-spacing: 0.5rem;
-                font-size: clamp(4rem, 12vw, 10rem);
+                font-size: clamp(2.5rem, 7.5vw, 6rem);
+                letter-spacing: clamp(0.3rem, 1.2vw, 0.8rem);
+                margin-bottom: clamp(1.25rem, 2.5vw, 2rem);
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .loading-text {
+                font-size: clamp(3.5rem, 9vw, 7rem);
+                letter-spacing: clamp(0.4rem, 1.5vw, 1rem);
             }
         }
 
@@ -163,7 +251,8 @@
         }
 
         .brk-btn:hover {
-            color: rgb(2, 23, 255);
+            color: #FF4F4F;
+            border-color: #FF4F4F;
         }
 
         .brk-btn:hover::before {
@@ -178,16 +267,21 @@
         .hero-buttons {
             display: flex;
             flex-direction: column;
-            gap: 1rem;
+            gap: clamp(0.75rem, 2vw, 1rem);
             align-items: center;
-            margin-top: 2rem;
+            margin-top: clamp(1rem, 2.5vw, 1.5rem);
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         @media (min-width: 640px) {
             .hero-buttons {
                 flex-direction: row;
                 justify-content: center;
-                gap: 1.5rem;
+                gap: clamp(1rem, 2.5vw, 1.75rem);
+                margin-top: clamp(1.25rem, 3vw, 2rem);
             }
         }
 
@@ -247,34 +341,73 @@
         @media (max-width: 639px) {
             .hero-buttons {
                 width: 100%;
+                padding: 0 0.5rem;
             }
 
             .brk-btn,
             .btn-call {
                 width: 100%;
-                max-width: 300px;
+                max-width: 280px;
                 justify-content: center;
-                font-size: 1.1rem;
-                padding: 0.6em 1.2em;
+                font-size: clamp(0.875rem, 2.5vw, 1.1rem);
+                padding: clamp(0.55em, 2vw, 0.65em) clamp(1em, 3vw, 1.3em);
+            }
+        }
+
+        @media (min-width: 640px) {
+
+            .brk-btn,
+            .btn-call {
+                font-size: clamp(1rem, 1.5vw, 1.25rem);
+                padding: clamp(0.6em, 1.5vw, 0.65em) clamp(1.1em, 2.5vw, 1.3em);
+            }
+        }
+
+        @media (min-width: 1024px) {
+
+            .brk-btn,
+            .btn-call {
+                font-size: 1.25rem;
+                padding: 0.65em 1.3em;
             }
         }
 
         .hero-paragraph {
             font-family: 'Montserrat', sans-serif;
             font-weight: 300;
-            font-size: clamp(1rem, 2.5vw, 1.5rem);
+            font-size: clamp(0.875rem, 2.2vw, 1.375rem);
             letter-spacing: 0.05em;
-            line-height: 1.7;
+            line-height: 1.6;
             text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
-            max-width: 800px;
-            margin: 0 auto 2rem;
+            max-width: 2000px;
+            margin: 0 auto;
+            margin-bottom: clamp(1.5rem, 3vw, 2.5rem);
+            padding: 0 clamp(0.5rem, 2vw, 1rem);
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
         }
 
-        @media (min-width: 768px) {
+        @media (min-width: 50000px) {
+            .hero-paragraph {
+                font-size: clamp(1rem, 2.5vw, 1.5rem);
+                line-height: 1.7;
+                margin-bottom: clamp(1.75rem, 3.5vw, 2.75rem);
+                max-width: 50000px;
+            }
+        }
+
+        @media (min-width: 50000px) {
             .hero-paragraph {
                 font-size: clamp(1.125rem, 2.5vw, 1.75rem);
+                margin-bottom: clamp(2rem, 10vw, 3rem);
+                max-width: 50000px;
+            }
+        }
+
+        @media (min-width: 100000px) {
+            .hero-paragraph {
+                padding: 0 1.5rem;
+                max-width: 50000px;
             }
         }
 
@@ -543,7 +676,7 @@
             -ms-transform: translate(-10px, -10px);
             -o-transform: translate(-10px, -10px);
             transform: translate(-10px, -10px);
-            background: #0050ff;
+            background: #1F1F1F;
             z-index: -1;
         }
 
@@ -590,22 +723,22 @@
             border: none;
             outline: none;
             border-radius: 60px;
-            color: #FFFFFF;
-            background: -webkit-linear-gradient(top, #0050ff, #0040d9);
-            background: linear-gradient(to bottom, #0050ff, #0040d9);
-            box-shadow: 0px 3px 15px 2px rgba(0, 80, 255, 0.8);
+            color: #1F1F1F;
+            background: -webkit-linear-gradient(top, #18F1E1, #18F1E1);
+            background: linear-gradient(to bottom, #18F1E1, #18F1E1);
+            box-shadow: 0px 3px 15px 2px rgba(0, 0, 0, 0.8);
             cursor: pointer;
             font-size: 1.5em;
         }
 
         .buttons button:hover:not(:disabled) {
-            box-shadow: 0px 3px 30px 3px rgba(0, 80, 255, 0.8);
+            box-shadow: 0px 3px 30px 3px rgba(0, 0, 0, 0.8);
         }
 
         .buttons button:disabled {
-            box-shadow: 0px 1px 5px 0px rgba(0, 80, 255, 0.8);
-            background: -webkit-linear-gradient(top, #0040d9, #0050ff);
-            background: linear-gradient(to bottom, #0040d9, #0050ff);
+            box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.8);
+            background: -webkit-linear-gradient(top, #18F1E1, #18F1E1);
+            background: linear-gradient(to bottom, #18F1E1, #18F1E1);
             cursor: default;
             opacity: 0.6;
         }
@@ -649,30 +782,11 @@
             padding: 3rem 0;
             text-align: center;
             position: relative;
-            background: #ffffff;
+            background: #1F1F1F;
         }
 
         .contact-us-now-section::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image:
-                repeating-linear-gradient(45deg,
-                    rgba(0, 80, 255, 0.08) 0px,
-                    rgba(0, 80, 255, 0.08) 10px,
-                    transparent 10px,
-                    transparent 20px),
-                repeating-linear-gradient(-45deg,
-                    rgba(0, 80, 255, 0.08) 0px,
-                    rgba(0, 80, 255, 0.08) 10px,
-                    transparent 10px,
-                    transparent 20px);
-            opacity: 0.9;
-            pointer-events: none;
-            z-index: 0;
+            display: none;
         }
 
         .contact-us-now-section .container {
@@ -684,7 +798,7 @@
             font-family: 'Playfair Display', serif;
             font-size: 2.5rem;
             font-weight: 800;
-            color: #1a202c;
+            color: #ffffff;
             margin-bottom: 1rem;
             text-transform: uppercase;
             letter-spacing: 0.1em;
@@ -692,14 +806,15 @@
 
         .contact-us-now-section h2 em {
             font-style: normal;
-            font-weight: 900;
-            color: #0050ff;
+            font-weight: 500;
+            font-family: 'Azo Sans Uber', sans-serif;
+            color: #18F1E1;
         }
 
         .contact-us-now-section p {
-            font-family: 'Montserrat', sans-serif;
+            font-family: 'Azo Sans', sans-serif;
             font-size: 1.1rem;
-            color: #4b5563;
+            color: #ffffff;
             max-width: 700px;
             margin: 0 auto 2rem;
             line-height: 1.6;
@@ -708,12 +823,12 @@
         .contact-us-now-section .btn-learn-more {
             display: inline-block;
             padding: 14px 32px;
-            background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%);
+            background: linear-gradient(135deg, #FF4F4F 0%, #FF4F4F 100%);
             color: #ffffff;
             text-decoration: none;
             border-radius: 50px;
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 700;
+            font-family: 'Azo Sans', sans-serif;
+            font-weight: 400;
             font-size: 0.9375rem;
             letter-spacing: 0.5px;
             text-transform: uppercase;
@@ -722,7 +837,7 @@
 
         .contact-us-now-section .btn-learn-more:hover {
             transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(0, 80, 255, 0.4);
+            box-shadow: 0 10px 25px rgba(0, 238, 255, 0.947);
         }
 
         @media (max-width: 768px) {
@@ -986,16 +1101,18 @@
 
     <main role="main">
         <section id="hero"
-            class="relative h-[55vh] md:h-[90vh] lg:h-[90vh] flex items-center justify-center overflow-hidden"
+            class="relative min-h-[70vh] md:min-h-[85vh] lg:h-screen flex items-center justify-center overflow-hidden"
             aria-label="Event Decor Hero Section">
             <div class="absolute inset-0 bg-cover bg-center"
                 style="background-image: url('../assets/images/eventdecor/hero.jpg');" aria-hidden="true"
                 role="presentation"></div>
             <div class="absolute inset-0 hero-gradient" aria-hidden="true"></div>
-            <div class="relative z-10 text-center text-white px-6 max-w-5xl mx-auto">
+            <div
+                class="relative z-10 text-center text-white max-w-5xl mx-auto w-full flex flex-col items-center justify-center hero-content-container">
                 <h1 class="loading-text"
                     aria-label="Event Decor - Professional Event Decoration Services, Ceiling Fabric, Pipe & Drape & Shimmer Walls">
-                    EVENT DECOR</h1>
+                    <span style="color: #FF4F4F;">EVENT</span> <span style="color: #18F1E1;">DECOR</span>
+                </h1>
                 <!-- SEO-optimized visible h1 for search engines (screen reader only but indexed) -->
                 <h1 class="sr-only">Event Decor Services - Ceiling Fabric, Pipe & Drape, Shimmer Walls & Lounge
                     Furniture | MiHi Entertainment</h1>
@@ -1004,9 +1121,9 @@
                     weddings, and celebrations.</p>
                 <div class="hero-buttons">
                     <button type="button" data-click-to-call data-call-text="Call Us" class="brk-btn cursor-pointer"
-                        aria-label="Get a quote for event decor services">
-                        <span>Get A Quote</span>
-                        <span class="arrow">→</span>
+                        aria-label="Get a quote for event decor services" style="border-color: #FF4F4F;">
+                        <span style="color: #FF4F4F;">Get A Quote</span>
+                        <span class="arrow" style="color: #FF4F4F;">→</span>
                     </button>
                     <button type="button" data-click-to-call data-call-text="Call Us" class="btn-call cursor-pointer"
                         aria-label="Call us for event decor services">
@@ -1024,22 +1141,33 @@
             <div class="container mx-auto px-6">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
                     <div class="col-span-1">
-                        <div class="content-column">
-                            <h3>STYLE YOUR SPACE YOUR WAY</h3>
-                            <h2>EVENT DECOR</h2>
-                            <p>Transform any venue into a space that reflects your unique style and theme. Whether it's
+                        <div class="content-column"
+                            style="display: flex; flex-direction: column; justify-content: center;">
+                            <h3
+                                style="font-weight: bold; background-color: #18F1E1; color: #1F1F1F; border-radius: 9999px; padding: 0.5rem 0.5rem; display: inline-block; width: fit-content; margin: 0 0 1rem auto;">
+                                STYLE YOUR SPACE YOUR WAY</h3>
+                            <h2 style="color: #FF4F4F; font-weight: 300; font-family: 'Azo Sans Uber', sans-serif;">
+                                EVENT DECOR</h2>
+                            <p style="color: #1F1F1F;">Transform any venue into a space that reflects your unique style
+                                and theme. Whether it's
                                 elegant Ceiling Fabric, versatile Pipe and Drape, dazzling Shimmer Walls, or cozy Lounge
                                 Furniture Sets, our event decor options are tailored to create the perfect atmosphere
                                 for
                                 your <a href="../../corporate-events.html"
-                                    class="text-blue-600 hover:text-blue-700 underline">corporate event</a>, <a
-                                    href="../../wedding.html"
-                                    class="text-blue-600 hover:text-blue-700 underline">wedding</a>, or celebration.
+                                    style="font-weight:bold; color: #FF4F4F; text-decoration: underline;">corporate
+                                    event</a>, <a href="../../wedding.html"
+                                    style="font-weight:bold; color: #FF4F4F; text-decoration: underline;">wedding</a>,
+                                or
+                                celebration.
                                 Perfect for <a href="../../holiday-party.html"
-                                    class="text-blue-600 hover:text-blue-700 underline">holiday parties</a> and special
+                                    style="font-weight:bold; color: #FF4F4F; text-decoration: underline;">holiday
+                                    parties</a> and special
                                 occasions.</p>
                             <a href="../contact-us.html" class="btn-content"
-                                aria-label="Contact us about event decor services">Interested In Hearing More?</a>
+                                aria-label="Contact us about event decor services"
+                                style="font-weight:bold; background: #18F1E1 !important; color: #1F1F1F !important;">Interested
+                                In
+                                Hearing More?</a>
                         </div>
                     </div>
                     <div class="col-span-1">
@@ -1099,8 +1227,11 @@
                 <!-- Info -->
                 <div class="info">
                     <div class="inner">
-                        <h3 class="info-title">Lounge Furniture Sets</h3>
-                        <p class="info-description">Create comfortable VIP lounge areas with our premium furniture
+                        <h3 class="info-title" style="font-family: 'Azo Sans Uber', sans-serif; color: #FF4F4F;">Lounge
+                            Furniture Sets
+                        </h3>
+                        <p class="info-description" style="color: #1F1F1F;">Create comfortable VIP lounge areas with our
+                            premium furniture
                             collections. Perfect for networking and relaxation spaces.</p>
                     </div>
                     <div class="buttons">
@@ -1112,14 +1243,16 @@
         </section>
 
         <!-- Contact Us Now Section -->
-        <section id="contact" class="contact-us-now-section bg-white">
+        <section id="contact" class="contact-us-now-section">
             <div class="container mx-auto px-6">
                 <h2><em>CONTACT US NOW</em></h2>
                 <p>Learn more about our professional event decor services including ceiling fabric, pipe and drape,
                     shimmer walls, and lounge furniture for your next <a href="../../corporate-events.html"
-                        class="text-blue-600 hover:text-blue-700 underline">corporate event</a>, <a
-                        href="../../wedding.html" class="text-blue-600 hover:text-blue-700 underline">wedding</a>, <a
-                        href="../../holiday-party.html" class="text-blue-600 hover:text-blue-700 underline">holiday
+                        style="font-weight:bold; color: #FF4F4F; text-decoration: underline;">corporate event</a>, <a
+                        href="../../wedding.html"
+                        style="font-weight:bold; color: #FF4F4F; text-decoration: underline;">wedding</a>, <a
+                        href="../../holiday-party.html"
+                        style="font-weight:bold; color: #FF4F4F; text-decoration: underline;">holiday
                         party</a>, or celebration. Click the button below to send us an email and
                     connect with our expert decor team today.</p>
                 <a href="mailto:info@mihientertainment.com" class="btn-learn-more"
