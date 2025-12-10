@@ -152,12 +152,138 @@
             .hero-section {
                 min-height: 85vh;
                 background-attachment: scroll;
+                padding: 2rem 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-section {
+                min-height: 75vh;
+                padding: 1.5rem 0;
             }
         }
 
         .hero-section .corporate-text {
             font-family: 'Montserrat', sans-serif;
             letter-spacing: 0.3em;
+        }
+
+        @media (max-width: 640px) {
+            .hero-section .corporate-text {
+                letter-spacing: 0.15em;
+            }
+        }
+
+        /* Hero Heading Responsive */
+        .hero-heading {
+            font-size: 6rem;
+            line-height: 1.1;
+        }
+
+        @media (max-width: 1024px) {
+            .hero-heading {
+                font-size: 4.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-heading {
+                font-size: 3rem;
+                line-height: 1.15;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-heading {
+                font-size: 2.25rem;
+                line-height: 1.2;
+            }
+        }
+
+        /* Hero Badge Responsive */
+        .hero-badge {
+            font-size: 15px;
+        }
+
+        @media (max-width: 768px) {
+            .hero-badge {
+                font-size: 12px;
+                padding: 0.5rem 0.75rem !important;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-badge {
+                font-size: 11px;
+                padding: 0.375rem 0.625rem !important;
+            }
+        }
+
+        /* Hero Description Responsive */
+        .hero-description {
+            font-size: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero-description {
+                font-size: 0.875rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-description {
+                font-size: 0.8125rem;
+            }
+        }
+
+        /* Hero Button Responsive */
+        .hero-button {
+            font-size: 1.125rem;
+            padding: 0.75rem 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero-button {
+                font-size: 1rem;
+                padding: 0.625rem 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-button {
+                font-size: 0.875rem;
+                padding: 0.5rem 1.25rem;
+            }
+        }
+
+        /* Hero Location Text Responsive */
+        .hero-location {
+            font-size: 0.75rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero-location {
+                font-size: 0.6875rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-location {
+                font-size: 0.625rem;
+            }
+        }
+
+        /* Enhanced overlay for mobile readability */
+        @media (max-width: 768px) {
+            .hero-section .bg-opacity-50 {
+                background-color: rgba(0, 0, 0, 0.6) !important;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-section .bg-opacity-50 {
+                background-color: rgba(0, 0, 0, 0.65) !important;
+            }
         }
 
         @media (max-width: 640px) {
@@ -601,39 +727,40 @@
     <div id="nav-placeholder"></div>
 
     <!-- Hero Section -->
-    <section class="relative flex items-center justify-center overflow-hidden py-8 hero-section">
+    <section class="relative flex items-center justify-center overflow-hidden py-4 sm:py-6 md:py-8 hero-section">
         <div class="absolute inset-0 bg-black bg-opacity-50"></div>
-        <div class="relative z-10 text-center text-white px-4 w-full">
+        <div class="relative z-10 text-center text-white px-3 sm:px-4 md:px-6 w-full">
             <div class="max-w-3xl mx-auto">
-                <div class="mb-2">
-                    <p class="inline-block text-sm md:text-base leading-tight mb-1 px-4 py-1 text-white tracking-[0.2em] animate-fade-in-up animate-delay-200 corporate-text rounded-full"
-                        style="font-size: 15px; font-weight: 800; background-color: #FF4F4F; font-family: 'AzoSans', sans-serif;">
+                <div class="mb-2 sm:mb-3">
+                    <p class="inline-block hero-badge leading-tight mb-2 sm:mb-3 px-3 sm:px-4 py-1 sm:py-1.5 text-white tracking-[0.15em] sm:tracking-[0.2em] animate-fade-in-up animate-delay-200 corporate-text rounded-full"
+                        style="font-weight: 800; background-color: #FF4F4F; font-family: 'AzoSans', sans-serif;">
                         DISCOVER OUR
                     </p>
-                    <h1 class="mt-2 text-8xl sm:text-8xl md:text-8xl lg:text-8xl font-light leading-tight animate-fade-in-up corporate-heading px-2"
+                    <h1 class="mt-2 sm:mt-3 hero-heading font-light leading-tight animate-fade-in-up corporate-heading px-2 sm:px-4"
                         style="text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5), 0 0 20px rgba(10, 10, 10, 0.3); font-family: 'AzoSansUber', sans-serif;">
                         <span style="color: #FF4F4F;">PORT</span><span style="color: #18F1E1;">FOLIO</span>
                     </h1>
                 </div>
 
-                <div class="h-px w-20 bg-white mx-auto my-3 animate-fade-in-up animate-delay-200"></div>
+                <div class="h-px w-16 sm:w-20 bg-white mx-auto my-2 sm:my-3 animate-fade-in-up animate-delay-200"></div>
 
                 <p
-                    class="font-style-AzoSans mx-auto text-sm md:text-base leading-relaxed mb-4 px-4 sm:px-0 text-white/80 tracking-normal animate-fade-in-up animate-delay-200 corporate-text">
+                    class="font-style-AzoSans mx-auto hero-description leading-relaxed mb-4 sm:mb-6 px-3 sm:px-4 md:px-0 text-white/80 tracking-normal animate-fade-in-up animate-delay-200 corporate-text">
                     Discover our stunning range of photo booth experiences, featuring the GIF Booth, Video Booth,
                     Classic Booth, and more, all presented below.
                 </p>
-                <div class="mt-8 mb-8 animate-fade-in-up animate-delay-300">
+                <div class="mt-6 sm:mt-8 mb-6 sm:mb-8 animate-fade-in-up animate-delay-300">
                     <a href="./contact-us.html"
-                        class="font-style-AzoSans btn btn-bubble btn-primary inline-block px-8 py-3 rounded-lg text-white font-semibold text-lg"
+                        class="font-style-AzoSans btn btn-bubble btn-primary hero-button inline-block rounded-lg text-white font-semibold"
                         aria-label="Contact us to view our work">
                         Contact Us
                     </a>
                 </div>
 
                 <div class="text-center opacity-90 animate-fade-in-up animate-delay-400">
-                    <div class="h-px w-12 bg-white/70 mx-auto mb-3 transition-all duration-500"></div>
-                    <p class="text-white/80 tracking-wider text-xs font-medium uppercase corporate-location px-4">
+                    <div class="h-px w-10 sm:w-12 bg-white/70 mx-auto mb-2 sm:mb-3 transition-all duration-500"></div>
+                    <p
+                        class="text-white/80 tracking-wider hero-location font-medium uppercase corporate-location px-3 sm:px-4">
                         SERVICING DENVER, COLORADO, AND NATIONWIDE CORPORATE EVENTS
                     </p>
                 </div>
