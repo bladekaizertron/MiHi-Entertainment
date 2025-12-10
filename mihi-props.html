@@ -17,6 +17,18 @@
         @import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@300;900&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
 
+        @font-face {
+            font-family: 'AzoSansUber';
+            src: url('assets/fonts/AzoSansUber-Regular.woff2') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        .font-style-AzoSans {
+            font-family: 'AzoSansUber', sans-serif;
+        }
+
         body {
             font-family: 'Inter', sans-serif;
             color: #1a202c;
@@ -33,7 +45,7 @@
         }
 
         .btn-primary {
-            background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%);
+            background: linear-gradient(135deg, #FF4F4F 0%, #FF4F4F 100%);
             transition: all 0.3s ease;
         }
 
@@ -55,7 +67,7 @@
         }
 
         .btn-bubble:not(:hover):not(:focus) {
-            background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%);
+            background: linear-gradient(135deg, #FF4F4F 0%, #FF4F4F 100%);
         }
 
         .btn-bubble:hover,
@@ -73,7 +85,9 @@
                 radial-gradient(circle at center, transparent 30%, rgba(238, 238, 255, 0.8) 60%, rgba(238, 238, 255, 0.8) 65%, transparent 70%) 85% 120% / 0.65em 0.65em,
                 radial-gradient(circle at center, transparent 30%, rgba(238, 238, 255, 0.8) 60%, rgba(238, 238, 255, 0.8) 65%, transparent 70%) 95% 110% / 0.95em 0.95em,
                 radial-gradient(circle at center, transparent 30%, rgba(238, 238, 255, 0.8) 60%, rgba(238, 238, 255, 0.8) 65%, transparent 70%) 105% 130% / 0.55em 0.55em;
-            background-color: #0050ff;
+
+            color: #1f1f1f;
+            background-color: #18F1E1;
             background-repeat: no-repeat;
         }
 
@@ -91,7 +105,27 @@
                     88% -300%,
                     98% -220%,
                     102% -360%;
-                box-shadow: inset 0 -6.5em 0 #0040d9;
+                box-shadow: inset 0 -6.5em 0 #FF4F4F;
+            }
+        }
+
+        /* Hero Button Responsive */
+        .hero-button {
+            font-size: 1.125rem;
+            padding: 0.75rem 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero-button {
+                font-size: 1rem;
+                padding: 0.625rem 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-button {
+                font-size: 0.875rem;
+                padding: 0.5rem 1.25rem;
             }
         }
 
@@ -354,21 +388,19 @@
         }
 
         .props-cta-heading {
-            font-family: 'Montserrat', sans-serif;
+            font-family: 'AzoSansUber', sans-serif;
             font-size: clamp(2rem, 4vw + 1rem, 3.5rem);
-            font-weight: 700;
+            font-weight: 500;
             color: #0050ff;
             margin-top: 0;
             margin-bottom: 1.5rem;
             letter-spacing: -0.02em;
             line-height: 1.1;
             text-transform: uppercase;
-            background: linear-gradient(135deg, #0050ff 0%, #0080ff 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            position: relative;
-            z-index: 1;
+        }
+
+        .props-cta-heading span {
+            color: inherit;
         }
 
         .props-cta-description {
@@ -393,7 +425,7 @@
             text-transform: uppercase;
             letter-spacing: 0.1em;
             padding: 1rem 2.5rem;
-            background: linear-gradient(135deg, #0050ff 0%, #0080ff 100%);
+            background: linear-gradient(135deg, #1f1f1f 0%, #1f1f1f 100%);
             border-radius: 50px;
             text-decoration: none;
             transition: all 0.3s ease;
@@ -542,12 +574,12 @@
             <div class="max-w-3xl mx-auto">
                 <div class="mb-2">
                     <p
-                        class="max-w-3xl mx-auto text-sm md:text-base leading-tight mb-2 px-0 text-gray-100 tracking-[0.2em] animate-fade-in-up animate-delay-200 corporate-text">
+                        class="max-w-3xl mx-auto text-sm md:text-base leading-tight mb-2 px-4 py-2 text-gray-100 tracking-[0.2em] animate-fade-in-up animate-delay-200 corporate-text rounded-full bg-[#FF4F4F] inline-block">
                         BROWSE OUR
                     </p>
-                    <h1
-                        class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold leading-tight animate-fade-in-up corporate-heading px-2">
-                        PROP COLLECTIONS
+                    <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light leading-tight animate-fade-in-up corporate-heading px-2"
+                        style="font-family: 'AzoSansUber', sans-serif;">
+                        <span style="color: #FF4F4F;">PROP</span> <span style="color: #18F1E1;">COLLECTIONS</span>
                     </h1>
                 </div>
 
@@ -560,7 +592,7 @@
                 </p>
                 <div class="mt-8 mb-8 animate-fade-in-up animate-delay-300">
                     <a href="./contact-us.html"
-                        class="btn btn-bubble btn-primary inline-block px-8 py-3 rounded-lg text-white font-semibold text-lg"
+                        class="font-style-AzoSans btn btn-bubble btn-primary hero-button inline-block rounded-lg text-white font-light"
                         aria-label="Contact us for props">
                         Contact Us
                     </a>
@@ -601,8 +633,9 @@
             </div>
             <div class="container mx-auto px-4 pt-4 pb-8">
                 <div class="max-w-4xl mx-auto text-center">
-                    <h2 class="props-cta-heading">
-                        NEED PROPS? WE'VE GOT 'EM ALL
+                    <h2 class="props-cta-heading" style="color: transparent;">
+                        <span style="color: #FF4F4F;">NEED PROPS?</span> <span style="color: #18F1E1;">WE'VE GOT 'EM
+                            ALL</span>
                     </h2>
                     <p class="props-cta-description">
                         Got a photo booth but don't know what props you want? From wigs and hats to glasses in every
@@ -642,8 +675,8 @@
             </div>
             <div class="container mx-auto px-4 pt-4 pb-8">
                 <div class="max-w-4xl mx-auto text-center">
-                    <h2 class="props-cta-heading">
-                        SIGNS FOR EVERYONE
+                    <h2 class="props-cta-heading" style="color: transparent;">
+                        <span style="color: #FF4F4F;">SIGNS FOR</span> <span style="color: #18F1E1;">EVERYONE</span>
                     </h2>
                     <p class="props-cta-description">
                         Word signs are great for every event but especially great for these: Weddings, Quinceaneras,
@@ -683,8 +716,9 @@
             </div>
             <div class="container mx-auto px-4 pt-4 pb-8">
                 <div class="max-w-4xl mx-auto text-center">
-                    <h2 class="props-cta-heading">
-                        HOLIDAY PROPS TO LAST ALL WINTER
+                    <h2 class="props-cta-heading" style="color: transparent;">
+                        <span style="color: #FF4F4F;">HOLIDAY PROPS</span> <span style="color: #18F1E1;">TO LAST ALL
+                            WINTER</span>
                     </h2>
                     <p class="props-cta-description">
                         You have to nail those much-anticipated holiday parties - so go all out with our winter-themed
@@ -724,8 +758,9 @@
             </div>
             <div class="container mx-auto px-4 pt-4 pb-8">
                 <div class="max-w-4xl mx-auto text-center">
-                    <h2 class="props-cta-heading">
-                        GUN-SLINGERS, COWBOYS, BANDITS UNITE
+                    <h2 class="props-cta-heading" style="color: transparent;">
+                        <span style="color: #FF4F4F;">GUN-SLINGERS, COWBOYS</span> <span
+                            style="color: #18F1E1;">BANDITS, UNITE</span>
                     </h2>
                     <p class="props-cta-description">
                         We have the goods to make your Western theme complete! Take a look at our Rustic Booth to match
@@ -765,8 +800,9 @@
             </div>
             <div class="container mx-auto px-4 pt-4 pb-8">
                 <div class="max-w-4xl mx-auto text-center">
-                    <h2 class="props-cta-heading">
-                        ROARIN' 20S PROPS FOR YOUR NEXT SHINDIG
+                    <h2 class="props-cta-heading" style="color: transparent;">
+                        <span style="color: #FF4F4F;">ROARIN' 20S PROPS</span> <span style="color: #18F1E1;">FOR YOUR
+                            NEXT SHINDIG</span>
                     </h2>
                     <p class="props-cta-description">
                         Had enough of Gatsby-inspired galas and references to the new Roarin' 20s? Not us!
