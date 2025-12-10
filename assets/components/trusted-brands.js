@@ -31,10 +31,10 @@ function renderTrustedBrands(options = {}) {
     // Determine the correct path prefix based on current page location
     const currentPath = window.location.pathname;
     let assetsPrefix = '';
-    
+
     // Very simple path detection - always use 'assets/' for root, '../assets/' for everything else
     console.log('Determining assets prefix for path:', currentPath);
-    
+
     // Check if we're in a subdirectory (like /product/)
     if (currentPath.includes('/product/') || currentPath.includes('/locations/') || currentPath.includes('/av-services/') || currentPath.includes('/event-decor/') || currentPath.includes('/game-rentals/') || currentPath.includes('/products/')) {
         assetsPrefix = '../assets/';
@@ -44,11 +44,11 @@ function renderTrustedBrands(options = {}) {
         assetsPrefix = 'assets/';
         console.log('Using root path prefix: assets/');
     }
-    
+
     // Test a sample image path
     const testImagePath = `${assetsPrefix}images/trusted_by_brands/adidas.png`;
     console.log('Test image path:', testImagePath);
-    
+
     // Debug logging to help troubleshoot path issues
     console.log('Current path:', currentPath);
     console.log('Assets prefix:', assetsPrefix);
@@ -72,7 +72,7 @@ function renderTrustedBrands(options = {}) {
     function generateLogoHTML(brand, assetsPrefix) {
         const imagePath = `${assetsPrefix}images/trusted_by_brands/${brand.image}`;
         console.log('Generated image path:', imagePath);
-        
+
         return `
             <div class="flex-shrink-0 h-20 w-40 flex items-center justify-center opacity-70 hover:opacity-100 transition-all duration-300 hover:scale-110">
                 <img src="${imagePath}" alt="${brand.name}" class="max-h-full max-w-full object-contain" onerror="console.error('Failed to load image:', '${imagePath}'); 
@@ -107,7 +107,7 @@ function renderTrustedBrands(options = {}) {
             <div class="relative container mx-auto px-6">
                 <!-- Premium Header -->
                 <div class="text-center mb-12 max-w-4xl mx-auto space-y-10">
-                    <span class="inline-flex items-center gap-2 px-5 py-2 bg-gradient-to-r from-[#FF4F4F]/10 via-[#FF4F4F]/10 to-[#FF4F4F]/10 border border-[#FF4F4F]/20 rounded-full text-xs font-semibold tracking-[0.35em] uppercase text-[#FF4F4F] shadow-[0_0_20px_rgba(255,79,79,0.15)]">
+                    <span class="inline-flex items-center gap-2 px-5 py-2 bg-[#00FFFF] rounded-full text-xs font-semibold tracking-[0.35em] uppercase text-[#1f1f1f]">
                         ${config.badge}
                     </span>
                     <div class="space-y-5">
@@ -153,19 +153,19 @@ function renderTrustedBrands(options = {}) {
     console.log('Looking for container with id:', config.containerId);
     const container = document.getElementById(config.containerId);
     console.log('Container found:', container);
-    
+
     if (container) {
         console.log('Rendering trusted brands section');
         container.innerHTML = trustedBrandsHTML;
         console.log('Trusted brands HTML inserted');
-        
+
         // Initialize the JavaScript-based scrolling
         setTimeout(() => {
             initializeScrolling(config.animationSpeed);
         }, 100);
     } else {
         console.error(`Container with id "${config.containerId}" not found. Please add <div id="${config.containerId}"></div> to your page.`);
-        
+
         // Try to find all elements with this id
         const allElements = document.querySelectorAll(`[id="${config.containerId}"]`);
         console.log('All elements with this id:', allElements.length, allElements);
@@ -178,55 +178,55 @@ function initializeScrolling(speed) {
     const track = document.getElementById('trusted-brands-track');
     const set1 = document.getElementById('trusted-brands-set1');
     const set2 = document.getElementById('trusted-brands-set2');
-    
+
     if (!container || !track || !set1 || !set2) {
         console.error('Trusted brands elements not found');
         return;
     }
-    
+
     // Set initial styles
     track.style.display = 'flex';
     track.style.transition = 'none';
-    
+
     // Get the width of one set
     const setWidth = set1.offsetWidth;
-    
+
     // Set initial position
     let position = 0;
     let animationId = null;
     let isPaused = false;
-    
+
     // Calculate pixels per frame (assuming 60fps)
     const pixelsPerFrame = speed / 60;
-    
+
     // Animation function
     function animate() {
         if (!isPaused) {
             position -= pixelsPerFrame;
-            
+
             // Reset position when we've scrolled one full set
             if (position <= -setWidth) {
                 position = 0;
             }
-            
+
             track.style.transform = `translateX(${position}px)`;
         }
-        
+
         animationId = requestAnimationFrame(animate);
     }
-    
+
     // Start animation
     animationId = requestAnimationFrame(animate);
-    
+
     // Pause on hover
     container.addEventListener('mouseenter', () => {
         isPaused = true;
     });
-    
+
     container.addEventListener('mouseleave', () => {
         isPaused = false;
     });
-    
+
     // Handle window resize
     window.addEventListener('resize', () => {
         // Restart animation on resize
@@ -240,41 +240,41 @@ function initializeScrolling(speed) {
 }
 
 // Polyfill for requestAnimationFrame
-window.requestAnimationFrame = window.requestAnimationFrame || 
-                             window.webkitRequestAnimationFrame || 
-                             window.mozRequestAnimationFrame || 
-                             function(callback) { return setTimeout(callback, 1000 / 60); };
+window.requestAnimationFrame = window.requestAnimationFrame ||
+    window.webkitRequestAnimationFrame ||
+    window.mozRequestAnimationFrame ||
+    function (callback) { return setTimeout(callback, 1000 / 60); };
 
-window.cancelAnimationFrame = window.cancelAnimationFrame || 
-                              window.webkitCancelAnimationFrame || 
-                              window.mozCancelAnimationFrame || 
-                              function(id) { clearTimeout(id); };
+window.cancelAnimationFrame = window.cancelAnimationFrame ||
+    window.webkitCancelAnimationFrame ||
+    window.mozCancelAnimationFrame ||
+    function (id) { clearTimeout(id); };
 
 // Auto-render on page load if container exists
 function initTrustedBrands() {
     console.log('Initializing trusted brands component');
-    
+
     // Try multiple ways to find the container
     let container = document.getElementById('trusted-brands-container');
     console.log('Container by ID:', container);
-    
+
     if (!container) {
         // Try query selector
         container = document.querySelector('#trusted-brands-container');
         console.log('Container by query selector:', container);
     }
-    
+
     if (!container) {
         // Try to find all elements with this ID
         const allContainers = document.querySelectorAll('[id="trusted-brands-container"]');
         console.log('All containers with this ID:', allContainers.length, allContainers);
-        
+
         if (allContainers.length > 0) {
             container = allContainers[0];
             console.log('Using first container found');
         }
     }
-    
+
     if (container) {
         console.log('Trusted brands container found');
         // Small delay to ensure all resources are loaded
@@ -298,13 +298,13 @@ if (document.readyState === 'loading') {
 }
 
 // Also listen for window load event
-window.addEventListener('load', function() {
+window.addEventListener('load', function () {
     console.log('Window load event fired');
     initTrustedBrands();
 });
 
 // Additional check to ensure component loads even if other events fail
-setTimeout(function() {
+setTimeout(function () {
     const container = document.getElementById('trusted-brands-container');
     if (container && !container.hasChildNodes()) {
         console.log('Fallback initialization triggered');
@@ -313,17 +313,17 @@ setTimeout(function() {
 }, 3000);
 
 // Manual initialization function for testing
-window.initTrustedBrandsManually = function() {
+window.initTrustedBrandsManually = function () {
     console.log('Manual initialization called');
     renderTrustedBrands();
 };
 
 // Test function to verify the component is working
-window.testTrustedBrands = function() {
+window.testTrustedBrands = function () {
     console.log('Testing trusted brands component');
     const container = document.getElementById('trusted-brands-container');
     console.log('Container:', container);
-    
+
     if (container) {
         console.log('Container found, rendering brands');
         renderTrustedBrands();
