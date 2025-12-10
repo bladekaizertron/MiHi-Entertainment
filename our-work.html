@@ -15,6 +15,22 @@
         @import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@300;900&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
 
+        @font-face {
+            font-family: 'AzoSans';
+            src: url('assets/fonts/AzoSans-Regular.woff2') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'AzoSansUber';
+            src: url('assets/fonts/AzoSansUber-Regular.woff2') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+
         * {
             box-sizing: border-box;
         }
@@ -43,7 +59,7 @@
         }
 
         .btn-primary {
-            background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%);
+            background: linear-gradient(135deg, #FF4F4F 0%, #FF4F4F 100%);
             transition: all 0.3s ease;
         }
 
@@ -65,7 +81,7 @@
         }
 
         .btn-bubble:not(:hover):not(:focus) {
-            background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%);
+            background: linear-gradient(135deg, #FF4F4F 0%, #FF4F4F 100%);
         }
 
         .btn-bubble:hover,
@@ -83,7 +99,9 @@
                 radial-gradient(circle at center, transparent 30%, rgba(238, 238, 255, 0.8) 60%, rgba(238, 238, 255, 0.8) 65%, transparent 70%) 85% 120% / 0.65em 0.65em,
                 radial-gradient(circle at center, transparent 30%, rgba(238, 238, 255, 0.8) 60%, rgba(238, 238, 255, 0.8) 65%, transparent 70%) 95% 110% / 0.95em 0.95em,
                 radial-gradient(circle at center, transparent 30%, rgba(238, 238, 255, 0.8) 60%, rgba(238, 238, 255, 0.8) 65%, transparent 70%) 105% 130% / 0.55em 0.55em;
-            background-color: #0050ff;
+
+            color: #1f1f1f;
+            background-color: #18F1E1;
             background-repeat: no-repeat;
         }
 
@@ -101,7 +119,7 @@
                     88% -300%,
                     98% -220%,
                     102% -360%;
-                box-shadow: inset 0 -6.5em 0 #0040d9;
+                box-shadow: inset 0 -6.5em 0 #FF4F4F;
             }
         }
 
@@ -588,26 +606,26 @@
         <div class="relative z-10 text-center text-white px-4 w-full">
             <div class="max-w-3xl mx-auto">
                 <div class="mb-2">
-                    <p
-                        class="max-w-3xl mx-auto text-sm md:text-base leading-tight mb-2 px-0 text-gray-100 tracking-[0.2em] animate-fade-in-up animate-delay-200 corporate-text">
+                    <p class="inline-block text-sm md:text-base leading-tight mb-1 px-4 py-1 text-white tracking-[0.2em] animate-fade-in-up animate-delay-200 corporate-text rounded-full"
+                        style="font-size: 15px; font-weight: 800; background-color: #FF4F4F; font-family: 'AzoSans', sans-serif;">
                         DISCOVER OUR
                     </p>
-                    <h1
-                        class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold leading-tight animate-fade-in-up corporate-heading px-2">
-                        PORTFOLIO
+                    <h1 class="mt-2 text-8xl sm:text-8xl md:text-8xl lg:text-8xl font-light leading-tight animate-fade-in-up corporate-heading px-2"
+                        style="text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5), 0 0 20px rgba(10, 10, 10, 0.3); font-family: 'AzoSansUber', sans-serif;">
+                        <span style="color: #FF4F4F;">PORT</span><span style="color: #18F1E1;">FOLIO</span>
                     </h1>
                 </div>
 
-                <div class="h-px w-12 bg-white mx-auto my-3 animate-fade-in-up animate-delay-200"></div>
+                <div class="h-px w-20 bg-white mx-auto my-3 animate-fade-in-up animate-delay-200"></div>
 
                 <p
-                    class="max-w-3xl mx-auto text-sm md:text-base leading-relaxed mb-4 px-4 sm:px-0 text-gray-100 tracking-normal animate-fade-in-up animate-delay-200 corporate-text">
+                    class="font-style-AzoSans mx-auto text-sm md:text-base leading-relaxed mb-4 px-4 sm:px-0 text-white/80 tracking-normal animate-fade-in-up animate-delay-200 corporate-text">
                     Discover our stunning range of photo booth experiences, featuring the GIF Booth, Video Booth,
                     Classic Booth, and more, all presented below.
                 </p>
                 <div class="mt-8 mb-8 animate-fade-in-up animate-delay-300">
                     <a href="./contact-us.html"
-                        class="btn btn-bubble btn-primary inline-block px-8 py-3 rounded-lg text-white font-semibold text-lg"
+                        class="font-style-AzoSans btn btn-bubble btn-primary inline-block px-8 py-3 rounded-lg text-white font-semibold text-lg"
                         aria-label="Contact us to view our work">
                         Contact Us
                     </a>
@@ -629,16 +647,16 @@
         <div class="container mx-auto px-4">
             <div class="max-w-4xl mx-auto text-center">
                 <!-- Main Heading with Alternating Colors -->
-                <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6 animate-fade-in-up"
-                    style="text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5), 0 0 20px rgba(0, 80, 255, 0.3);">
+                <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light leading-tight mb-6 animate-fade-in-up"
+                    style="text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5), 0 0 20px rgba(0, 80, 255, 0.3); font-family: 'AzoSansUber', sans-serif;">
                     <span class="text-white">A </span>
-                    <span class="text-[#4da6ff]"
-                        style="text-shadow: 0 0 20px rgba(77, 166, 255, 0.8), 0 0 40px rgba(77, 166, 255, 0.4);">LOOKBOOK</span>
+                    <span class="text-[#FF4F4F]"
+                        style="text-shadow: 0 0 20px rgba(0, 0, 0, 0.8), 0 0 40px rgba(255, 79, 79, 0.4);">LOOKBOOK</span>
                     <span class="text-white"> THAT'S NEVER</span>
                     <br class="hidden sm:block">
                     <span class="text-white">LOOKED </span>
-                    <span class="text-[#4da6ff]"
-                        style="text-shadow: 0 0 20px rgba(77, 166, 255, 0.8), 0 0 40px rgba(77, 166, 255, 0.4);">QUITE
+                    <span class="text-[#18F1E1]"
+                        style="text-shadow: 0 0 20px rgba(2, 2, 2, 0.8), 0 0 40px rgba(77, 219, 255, 0.4);">QUITE
                         THIS GOOD</span>
                 </h2>
 
@@ -651,11 +669,11 @@
 
                 <!-- Secondary Heading with Underline -->
                 <div class="animate-fade-in-up animate-delay-300">
-                    <h3 class="text-xl sm:text-2xl md:text-3xl font-bold text-[#4da6ff] mb-3"
-                        style="text-shadow: 0 0 15px rgba(77, 166, 255, 0.6), 0 2px 10px rgba(0, 0, 0, 0.5);">
+                    <h3 class="text-xl sm:text-2xl md:text-3xl font-light text-[#18F1E1] mb-3"
+                        style="text-shadow: 0 0 15px rgba(77, 166, 255, 0.6), 0 2px 10px rgba(0, 0, 0, 0.5); font-family: 'AzoSansUber', sans-serif;">
                         ALL ACTIVATIONS
                     </h3>
-                    <div class="h-1 w-24 bg-[#4da6ff] mx-auto" style="box-shadow: 0 0 10px rgba(77, 166, 255, 0.6);">
+                    <div class="h-1 w-24 bg-[#18F1E1] mx-auto" style="box-shadow: 0 0 10px rgba(77, 166, 255, 0.6);">
                     </div>
                 </div>
             </div>
