@@ -743,665 +743,378 @@
                     With sleek setups, custom overlays, and instant sharing capabilities, we're here to make your
                     celebration <span class="font-semibold" style="color: #1F1F1F;">truly memorable</span>.
                 </p>
-
-                <!-- Card Carousel -->
-                <div class="mt-8 sm:mt-12 mb-2 relative group">
-                    <h3 class="text-xl sm:text-2xl font-bold text-center mb-6 sm:mb-8 px-2"
-                        style="color: #1F1F1F; font-family: 'Azo Sans Uber', sans-serif; font-weight: 300; text-transform: uppercase;">
-                        Our
-                        Social
-                        Event Gallery</h3>
-
-                    <!-- Auto-scrolling Cards Container -->
-                    <div class="relative">
-                        <div class="overflow-hidden py-4">
-                            <div id="cards-container" class="flex gap-4 sm:gap-6">
-                                <!-- Cards will be inserted here by JavaScript -->
-                            </div>
-                        </div>
-                    </div>
-
-                    <p class="text-center text-xs sm:text-sm mt-4 sm:mt-6 px-2"
-                        style="color: #1F1F1F; font-family: 'Azo Sans', sans-serif;">Hover to pause the
-                        carousel</p>
-                </div>
-
-                <!-- Card Carousel Styles -->
-                <style>
-                    .card {
-                        flex: 0 0 calc(100% - 1rem);
-                        min-width: 200px;
-                        max-width: 280px;
-                        height: auto;
-                        min-height: 200px;
-                        border-radius: 0.5rem;
-                        overflow: hidden;
-                        transition: all 0.3s ease;
-                        position: relative;
-                        background: white;
-                        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-                        padding: 0;
-                    }
-
-                    .card-image {
-                        width: 100%;
-                        height: 150px;
-                        object-fit: cover;
-                        object-position: center;
-                        display: block;
-                        transition: transform 0.3s ease;
-                    }
-
-                    .card:nth-child(even) {
-                        transform: rotate(1deg);
-                    }
-
-                    .card:hover {
-                        transform: translateY(-4px);
-                        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-                    }
-
-                    .card:nth-child(even):hover {
-                        transform: rotate(1deg) translateY(-4px);
-                    }
-
-                    @media (min-width: 480px) {
-                        .card {
-                            flex: 0 0 calc(50% - 1rem);
-                            min-width: 220px;
-                        }
-
-                        .card-image {
-                            height: 180px;
-                        }
-                    }
-
-                    @media (min-width: 640px) {
-                        .card {
-                            flex: 0 0 calc(50% - 1rem);
-                        }
-
-                        .card-image {
-                            height: 220px;
-                        }
-                    }
-
-                    @media (min-width: 1024px) {
-                        .card {
-                            flex: 0 0 calc(33.333% - 1.5rem);
-                        }
-
-                        .card-image {
-                            height: 300px;
-                        }
-
-                        .card:hover {
-                            transform: translateY(-5px);
-                            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-                        }
-                    }
-
-                    .card:hover .card-image {
-                        transform: scale(1.03);
-                    }
-
-                    .card-content {
-                        padding: 0.625rem 0.75rem;
-                        background: white;
-                        border-top: 1px solid #f0f0f0;
-                    }
-
-                    @media (min-width: 640px) {
-                        .card-content {
-                            padding: 0.75rem 1rem;
-                        }
-                    }
-
-                    .card-title {
-                        font-weight: 300;
-                        color: #1F1F1F;
-                        margin: 0;
-                        font-size: 0.75rem;
-                        line-height: 1.2;
-                        white-space: nowrap;
-                        overflow: hidden;
-                        text-overflow: ellipsis;
-                        font-family: 'Azo Sans', sans-serif;
-                    }
-
-                    @media (min-width: 640px) {
-                        .card-title {
-                            font-size: 0.875rem;
-                        }
-                    }
-
-                    .card-text {
-                        display: none;
-                        /* Hide the description in the main content */
-                    }
-
-                    .card-overlay {
-                        position: absolute;
-                        top: 0;
-                        left: 0;
-                        right: 0;
-                        bottom: 0;
-                        background: rgba(0, 0, 0, 0.85);
-                        padding: 1rem 0.875rem;
-                        color: white;
-                        opacity: 0;
-                        display: flex;
-                        flex-direction: column;
-                        justify-content: center;
-                        transition: opacity 0.3s ease;
-                    }
-
-                    @media (min-width: 640px) {
-                        .card-overlay {
-                            padding: 1.5rem 1.25rem;
-                        }
-                    }
-
-                    .card-overlay h4 {
-                        font-size: 1rem;
-                        margin-bottom: 0.5rem;
-                    }
-
-                    @media (min-width: 640px) {
-                        .card-overlay h4 {
-                            font-size: 1.25rem;
-                            margin-bottom: 0.75rem;
-                        }
-                    }
-
-                    .card-overlay p {
-                        font-size: 0.75rem;
-                        line-height: 1.4;
-                        margin: 0;
-                    }
-
-                    @media (min-width: 640px) {
-                        .card-overlay p {
-                            font-size: 0.875rem;
-                            line-height: 1.5;
-                        }
-                    }
-
-                    .card:hover .card-overlay {
-                        opacity: 1;
-                    }
-
-                    .card-button {
-                        position: absolute;
-                        top: 0.75rem;
-                        right: 0.75rem;
-                        background: rgba(255, 255, 255, 0.15);
-                        backdrop-filter: blur(5px);
-                        -webkit-backdrop-filter: blur(5px);
-                        color: white;
-                        padding: 0.375rem 0.5rem;
-                        border-radius: 4px;
-                        font-size: 0.625rem;
-                        font-weight: 600;
-                        text-transform: uppercase;
-                        letter-spacing: 0.5px;
-                        border: 1px solid rgba(255, 255, 255, 0.3);
-                        cursor: pointer;
-                        transition: all 0.3s ease;
-                        z-index: 10;
-                        text-decoration: none;
-                        display: inline-block;
-                    }
-
-                    @media (min-width: 640px) {
-                        .card-button {
-                            top: 1rem;
-                            right: 1rem;
-                            padding: 0.5rem 0.75rem;
-                            font-size: 0.7rem;
-                        }
-                    }
-
-                    .card-button:hover {
-                        background: rgba(255, 255, 255, 0.25);
-                        transform: translateY(-1px);
-                        backdrop-filter: blur(8px);
-                        -webkit-backdrop-filter: blur(8px);
-                    }
-
-                    .card-button:active {
-                        transform: translateY(0);
-                        background: rgba(255, 255, 255, 0.1);
-                    }
-                </style>
-
-                <!-- Auto-scrolling Cards Script -->
-                <script>
-                    document.addEventListener('DOMContentLoaded', function () {
-                        const cardsData = [
-                            {
-                                image: '../assets/images/social/imc1.jpg',
-                                title: 'Birthday Parties',
-                                description: 'From sweet sixteens to 60th soirées, our booths keep guests smiling, snapping, and sharing. Add custom props or a themed overlay to match the party vibe.',
-                                badge: 'Lets Party',
-                                link: 'event-type/birthday-party.html'
-                            },
-                            {
-                                image: '../assets/images/social/imc2.jpg',
-                                title: 'BAR/BAT Mitzvahs',
-                                description: 'Our interactive booths are perfect for Mitzvahs. Kids, teens, and adults love the instant prints and digital keepsakes, plus, we can personalize everything to match your theme.',
-                                badge: 'Mazel Tov',
-                                link: 'event-type/bar-%26-bat-mitzvah.html'
-                            },
-                            {
-                                image: '../assets/images/social/imc3.jpg',
-                                title: 'Graduation Parties',
-                                description: 'Cap off the achievement with a photo booth that turns tassels into timeless memories. From school logos to class mottos, every detail can be customized.',
-                                badge: 'Lets Celebrate',
-                                link: 'event-type/graduation.html'
-                            },
-                            {
-                                image: '../assets/images/social/imc4.jpg',
-                                title: 'Holiday Parties',
-                                description: 'Bring the festive cheer with holiday-themed booths and backdrops—from company Christmas parties to cozy winter gatherings. Add a little snow (or glitter) to the memories.',
-                                badge: 'Book the Cheer',
-                                link: 'event-type/holiday-party.html'
-                            },
-                            {
-                                image: '../assets/images/social/imc5.png',
-                                title: 'Christmas Parties',
-                                description: 'Go full North Pole with Christmas-themed sets, overlays, and props. Great for friends, families, or even Santa meet-and-greets!',
-                                badge: 'Snap with Santa',
-                                link: 'event-type/christmas-party.html'
-                            },
-                            {
-                                image: '../assets/images/social/imc6.jpeg',
-                                title: 'Thanksgiving Parties',
-                                description: 'Whether it’s a family gathering or a Friendsgiving feast, our booths capture those cozy fall vibes with seasonal props and festive frames.',
-                                badge: 'Feast and Pose',
-                                link: 'event-type/thanksgiving.html'
-                            },
-                            {
-                                image: '../assets/images/social/imc7.jpeg',
-                                title: 'Anniversaries',
-                                description: 'Whether it’s one year or fifty, every love story deserves the spotlight. Our booths help you toast to your time together with timeless designs and shareable keepsakes.',
-                                badge: 'Lets Make a Toast',
-                                link: 'event-type/anniversary.html'
-                            },
-                            {
-                                image: '../assets/images/social/imc8.jpg',
-                                title: 'Non-profit Events',
-                                description: 'From galas to fundraising dinners, our booths add engagement and fun while keeping your mission front and center. Customize the experience to reflect your cause.',
-                                badge: 'Capture Impact',
-                                link: 'event-type/nonprofit-event.html'
-                            },
-                            {
-                                image: '../assets/images/social/imc9.jpg',
-                                title: '4th of July Parties',
-                                description: 'Celebrate Independence Day with patriotic props and festive overlays. From backyard BBQs to community block parties, our booths are the spark your event needs.',
-                                badge: 'Sparkle and Snap',
-                                link: 'event-type/4th-of-july.html'
-                            }
-                        ];
-
-                        const cardsContainer = document.getElementById('cards-container');
-                        let scrollPosition = 0;
-                        let scrollSpeed = 0.8; // pixels per frame
-                        let animationId;
-                        let isPaused = false;
-
-                        // Duplicate cards for infinite scrolling
-                        const duplicatedCards = [...cardsData, ...cardsData, ...cardsData];
-
-                        // Create cards
-                        function createCards() {
-                            cardsContainer.innerHTML = ''; // Clear existing cards
-
-                            duplicatedCards.forEach((card, index) => {
-                                const cardElement = document.createElement('div');
-                                cardElement.className = 'card group flex-shrink-0';
-                                const badgeElement = card.link
-                                    ? `<a href="${card.link}" class="card-button">${card.badge}</a>`
-                                    : `<button class="card-button">${card.badge}</button>`;
-
-                                cardElement.innerHTML = `
-                                    <div class="relative overflow-hidden">
-                                        <img src="${card.image}" alt="${card.title} photo booth at social event" width="400" height="300" loading="lazy" class="card-image">
-                                        ${badgeElement}
-                                        <div class="card-overlay">
-                                            <h4 class="font-semibold text-white" style="font-family: 'Azo Sans Uber', sans-serif; font-weight: 300; text-transform: uppercase;">${card.title}</h4>
-                                            <p class="text-sm" style="color: rgba(255, 255, 255, 0.9); font-family: 'Azo Sans', sans-serif;">${card.description}</p>
-                                        </div>
-                                    </div>
-                                    <div class="card-content">
-                                        <h4 class="card-title">${card.title}</h4>
-                                    </div>
-                                `;
-                                cardsContainer.appendChild(cardElement);
-                            });
-
-                            // Set initial position to the middle of the duplicated cards
-                            const card = document.querySelector('.card');
-                            const gap = window.innerWidth >= 640 ? 24 : 16; // 16px gap on mobile, 24px on larger screens
-                            const cardWidth = card.offsetWidth + gap;
-                            scrollPosition = (cardsData.length * cardWidth);
-                            updateCarousel();
-                        }
-
-                        function updateCarousel() {
-                            const card = document.querySelector('.card');
-                            if (!card) return;
-
-                            const gap = window.innerWidth >= 640 ? 24 : 16; // 16px gap on mobile, 24px on larger screens
-                            const cardWidth = card.offsetWidth + gap;
-                            const containerWidth = cardsData.length * cardWidth;
-
-                            // Reset position when reaching the end of the duplicated cards
-                            if (scrollPosition >= (duplicatedCards.length - 3) * cardWidth) {
-                                scrollPosition = cardsData.length * cardWidth;
-                            } else if (scrollPosition <= 0) {
-                                scrollPosition = (duplicatedCards.length - cardsData.length - 3) * cardWidth;
-                            }
-
-                            // Apply the transform
-                            cardsContainer.style.transform = `translateX(-${scrollPosition}px)`;
-
-                            // Continue the animation
-                            if (!isPaused) {
-                                scrollPosition += scrollSpeed;
-                            }
-
-                            animationId = requestAnimationFrame(updateCarousel);
-                        }
-
-                        // Handle window resize
-                        let resizeTimer;
-                        window.addEventListener('resize', () => {
-                            clearTimeout(resizeTimer);
-                            resizeTimer = setTimeout(() => {
-                                cancelAnimationFrame(animationId);
-                                createCards();
-                                animationId = requestAnimationFrame(updateCarousel);
-                            }, 250);
-                        });
-
-                        // Pause on hover
-                        const overflowContainer = cardsContainer.closest('.overflow-hidden');
-                        if (overflowContainer) {
-                            overflowContainer.addEventListener('mouseenter', () => {
-                                isPaused = true;
-                            });
-
-                            overflowContainer.addEventListener('mouseleave', () => {
-                                isPaused = false;
-                            });
-                        }
-
-                        // Initialize
-                        createCards();
-                        animationId = requestAnimationFrame(updateCarousel);
-                    });
-                </script>
             </div>
         </div>
     </section>
-    <!-- Interactive Brochure Section - Festive Social Theme -->
-    <section class="py-8 sm:py-10 md:py-12 relative overflow-hidden"
-        style="background: linear-gradient(to bottom, #ffffff, #f5f5f5);">
-        <!-- Decorative Elements -->
-        <div class="absolute inset-0 opacity-20">
-            <div class="absolute top-10 left-1/4 w-32 h-32 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-blob"
-                style="background-color: #FF4F4F;">
-            </div>
-            <div class="absolute top-20 right-1/4 w-40 h-40 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-blob animation-delay-2000"
-                style="background-color: #18F1E1;">
-            </div>
-            <div class="absolute bottom-10 left-1/3 w-36 h-36 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-blob animation-delay-4000"
-                style="background-color: #FF4F4F;">
-            </div>
-        </div>
 
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 md:px-8 relative z-10">
-            <!-- Section Header -->
-            <div class="text-center pb-8 sm:pb-10 md:pb-12 pt-4 sm:pt-6">
-                <span
-                    class="inline-block text-white text-xs sm:text-sm font-bold px-4 sm:px-6 py-1 sm:py-1.5 rounded-full mb-4 sm:mb-6 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-300"
-                    style="color: #1F1F1F; background-color: #18F1E1; font-family: 'Azo Sans Uber', sans-serif; font-weight: 300; text-transform: uppercase;">
-                    🎉 Social Events Guide 🎊
-                </span>
-                <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-extrabold mb-4 sm:mb-6 leading-[1.1] px-2 pb-2 sm:pb-2.5"
+    <!-- Card Grid Section -->
+    <section class="py-8 sm:py-12 bg-white">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="mt-8 sm:mt-12 mb-2 relative group">
+                <h3 class="text-xl sm:text-5xl font-bold text-center mb-6 sm:mb-8 px-2"
                     style="color: #FF4F4F; font-family: 'Azo Sans Uber', sans-serif; font-weight: 300; text-transform: uppercase;">
-                    Let's Celebrate Together!
-                </h2>
-                <p class="text-sm sm:text-base md:text-lg lg:text-xl max-w-3xl mx-auto leading-relaxed font-medium px-2 sm:px-4"
-                    style="color: #1F1F1F; font-family: 'Azo Sans', sans-serif;">
-                    Discover our <span class="font-bold" style="color: #FF4F4F;">vibrant social event packages</span>
-                    and create
-                    unforgettable moments that will be the talk of the town!
-                </p>
+                    Our
+                    Social
+                    Event Gallery</h3>
 
-                <!-- Animated Confetti Separator -->
-                <div class="flex items-center justify-center gap-2 sm:gap-3 mt-6 sm:mt-8 px-2">
-                    <div
-                        class="h-1 sm:h-1.5 w-8 sm:w-12 md:w-16 bg-gradient-to-r from-yellow-400 to-pink-500 rounded-full transform rotate-1">
-                    </div>
-                    <div class="flex space-x-1">
-                        <span class="text-yellow-500 text-sm sm:text-base">✦</span>
-                        <span class="text-pink-500 text-sm sm:text-base">✧</span>
-                        <span class="text-purple-500 text-sm sm:text-base">✦</span>
-                    </div>
-                    <div
-                        class="h-1 sm:h-1.5 w-8 sm:w-12 md:w-16 bg-gradient-to-r from-pink-500 to-purple-500 rounded-full transform -rotate-1">
+                <!-- Card Grid Container -->
+                <div class="relative">
+                    <div class="py-4">
+                        <div id="cards-grid-container">
+                            <!-- Cards will be inserted here by JavaScript -->
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Main Content Grid -->
-            <div class="grid lg:grid-cols-2 gap-8 sm:gap-10 md:gap-12 items-center">
-                <!-- Left: Visual Preview -->
-                <div class="order-2 lg:order-1 px-2 sm:px-0">
-                    <div class="relative group">
-                        <div class="brochure-preview">
-                            <div
-                                class="aspect-[4/3] bg-gradient-to-br from-gray-50 via-gray-100 to-gray-50 flex items-center justify-center p-4 sm:p-6 md:p-8 relative overflow-hidden rounded-xl">
-                                <div class="absolute inset-0"
-                                    style="background-image: repeating-linear-gradient(45deg, transparent, transparent 2px, rgba(0,0,0,0.03) 2px, rgba(0,0,0,0.03) 4px);">
-                                </div>
-                                <div
-                                    class="absolute inset-0 bg-gradient-to-br from-white/50 via-transparent to-gray-900/20 pointer-events-none">
-                                </div>
-                                <div class="relative w-full h-full flex items-center justify-center">
-                                    <div class="relative w-5/6 h-5/6 transform group-hover:scale-105 group-hover:-translate-y-2 transition-all duration-700"
-                                        style="transform-style: preserve-3d; perspective: 1000px;">
-                                        <div class="absolute -right-2 top-0 bottom-0 w-16 blur-sm skew-y-12 transform group-hover:scale-110"
-                                            style="background: linear-gradient(to left, rgba(24, 241, 225, 0.2), transparent);">
-                                        </div>
-                                        <div
-                                            class="absolute inset-0 bg-gradient-to-br from-white/20 via-transparent to-transparent rounded-lg pointer-events-none">
-                                        </div>
-                                        <div class="relative w-full h-full shadow-2xl rounded-lg overflow-hidden"
-                                            style="box-shadow: 0 20px 60px rgba(0,0,0,0.15), 0 0 20px rgba(0,0,0,0.05);">
-                                            <img src="../assets/images/social/socialthumb.png"
-                                                alt="Social events brochure preview showcasing fun photo booth packages"
-                                                width="800" height="600" loading="lazy"
-                                                class="w-full h-full object-cover">
-                                            <div
-                                                class="absolute inset-0 bg-gradient-to-br from-white/40 via-transparent to-transparent pointer-events-none">
-                                            </div>
-                                            <div
-                                                class="absolute bottom-0 left-0 right-0 h-1/3 bg-gradient-to-t from-black/30 to-transparent">
-                                            </div>
-                                        </div>
-                                        <div
-                                            class="absolute -top-2 -left-2 w-8 h-8 bg-white/50 rounded-br-full shadow-lg">
-                                        </div>
-                                        <div
-                                            class="absolute -top-2 -right-2 w-8 h-8 bg-white/50 rounded-bl-full shadow-lg">
-                                        </div>
+            <!-- Card Grid Styles -->
+            <style>
+                #cards-grid-container {
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: 1rem;
+                    justify-content: flex-start;
+                    width: 100%;
+                    box-sizing: border-box;
+                }
+
+                @media (min-width: 640px) {
+                    #cards-grid-container {
+                        gap: 1.5rem;
+                    }
+                }
+
+                .grid-card {
+                    flex: 0 0 100%;
+                    width: 100%;
+                    max-width: 100%;
+                    min-width: 200px;
+                    height: auto;
+                    min-height: 200px;
+                    border-radius: 0.5rem;
+                    overflow: hidden;
+                    transition: all 0.3s ease;
+                    position: relative;
+                    background: white;
+                    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+                    padding: 0;
+                    box-sizing: border-box;
+                }
+
+                .grid-card-image {
+                    width: 100%;
+                    height: 150px;
+                    object-fit: cover;
+                    object-position: center;
+                    display: block;
+                    transition: transform 0.3s ease;
+                }
+
+                .grid-card:nth-child(even) {
+                    transform: rotate(1deg);
+                }
+
+                .grid-card:hover {
+                    transform: translateY(-4px);
+                    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+                }
+
+                .grid-card:nth-child(even):hover {
+                    transform: rotate(1deg) translateY(-4px);
+                }
+
+                @media (min-width: 640px) {
+                    .grid-card {
+                        flex: 0 0 calc(50% - 0.75rem);
+                        max-width: calc(50% - 0.75rem);
+                    }
+
+                    .grid-card-image {
+                        height: 220px;
+                    }
+                }
+
+                @media (min-width: 1024px) {
+                    .grid-card {
+                        flex: 0 0 calc(33.333% - 1rem);
+                        max-width: calc(33.333% - 1rem);
+                    }
+
+                    .grid-card-image {
+                        height: 300px;
+                    }
+
+                    .grid-card:hover {
+                        transform: translateY(-5px);
+                        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+                    }
+                }
+
+                .grid-card:hover .grid-card-image {
+                    transform: scale(1.03);
+                }
+
+                .grid-card-content {
+                    padding: 0.625rem 0.75rem;
+                    background: white;
+                    border-top: 1px solid #f0f0f0;
+                }
+
+                @media (min-width: 640px) {
+                    .grid-card-content {
+                        padding: 0.75rem 1rem;
+                    }
+                }
+
+                .grid-card-title {
+                    font-weight: 300;
+                    color: #1F1F1F;
+                    margin: 0;
+                    font-size: 0.75rem;
+                    line-height: 1.2;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    font-family: 'Azo Sans', sans-serif;
+                }
+
+                @media (min-width: 640px) {
+                    .grid-card-title {
+                        font-size: 0.875rem;
+                    }
+                }
+
+                .grid-card-overlay {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    background: rgba(0, 0, 0, 0.85);
+                    padding: 1rem 0.875rem;
+                    color: white;
+                    opacity: 0;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    transition: opacity 0.3s ease;
+                }
+
+                @media (min-width: 640px) {
+                    .grid-card-overlay {
+                        padding: 1.5rem 1.25rem;
+                    }
+                }
+
+                .grid-card-overlay h4 {
+                    font-size: 1rem;
+                    margin-bottom: 0.5rem;
+                }
+
+                @media (min-width: 640px) {
+                    .grid-card-overlay h4 {
+                        font-size: 1.25rem;
+                        margin-bottom: 0.75rem;
+                    }
+                }
+
+                .grid-card-overlay p {
+                    font-size: 0.75rem;
+                    line-height: 1.4;
+                    margin: 0;
+                }
+
+                @media (min-width: 640px) {
+                    .grid-card-overlay p {
+                        font-size: 0.875rem;
+                        line-height: 1.5;
+                    }
+                }
+
+                .grid-card:hover .grid-card-overlay {
+                    opacity: 1;
+                }
+
+                .grid-card-button {
+                    position: absolute;
+                    top: 0.75rem;
+                    right: 0.75rem;
+                    background: rgba(255, 255, 255, 0.15);
+                    backdrop-filter: blur(5px);
+                    -webkit-backdrop-filter: blur(5px);
+                    color: white;
+                    padding: 0.375rem 0.5rem;
+                    border-radius: 4px;
+                    font-size: 0.625rem;
+                    font-weight: 600;
+                    text-transform: uppercase;
+                    letter-spacing: 0.5px;
+                    border: 1px solid rgba(255, 255, 255, 0.3);
+                    cursor: pointer;
+                    transition: all 0.3s ease;
+                    z-index: 10;
+                    text-decoration: none;
+                    display: inline-block;
+                }
+
+                @media (min-width: 640px) {
+                    .grid-card-button {
+                        top: 1rem;
+                        right: 1rem;
+                        padding: 0.5rem 0.75rem;
+                        font-size: 0.7rem;
+                    }
+                }
+
+                .grid-card-button:hover {
+                    background: rgba(255, 255, 255, 0.25);
+                    transform: translateY(-1px);
+                    backdrop-filter: blur(8px);
+                    -webkit-backdrop-filter: blur(8px);
+                }
+
+                .grid-card-button:active {
+                    transform: translateY(0);
+                    background: rgba(255, 255, 255, 0.1);
+                }
+            </style>
+
+            <!-- Card Grid Script -->
+            <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                    const gridCardsData = [
+                        {
+                            image: '../assets/images/social/imc1.jpg',
+                            title: 'Birthday Parties',
+                            description: 'From sweet sixteens to 60th soirées, our booths keep guests smiling, snapping, and sharing. Add custom props or a themed overlay to match the party vibe.',
+                            badge: 'Lets Party',
+                            link: 'event-type/birthday-party.html'
+                        },
+                        {
+                            image: '../assets/images/social/imc2.jpg',
+                            title: 'BAR/BAT Mitzvahs',
+                            description: 'Our interactive booths are perfect for Mitzvahs. Kids, teens, and adults love the instant prints and digital keepsakes, plus, we can personalize everything to match your theme.',
+                            badge: 'Mazel Tov',
+                            link: 'event-type/bar-%26-bat-mitzvah.html'
+                        },
+                        {
+                            image: '../assets/images/social/imc3.jpg',
+                            title: 'Graduation Parties',
+                            description: 'Cap off the achievement with a photo booth that turns tassels into timeless memories. From school logos to class mottos, every detail can be customized.',
+                            badge: 'Lets Celebrate',
+                            link: 'event-type/graduation.html'
+                        },
+                        {
+                            image: '../assets/images/social/imc4.jpg',
+                            title: 'Holiday Parties',
+                            description: 'Bring the festive cheer with holiday-themed booths and backdrops—from company Christmas parties to cozy winter gatherings. Add a little snow (or glitter) to the memories.',
+                            badge: 'Book the Cheer',
+                            link: 'event-type/holiday-party.html'
+                        },
+                        {
+                            image: '../assets/images/social/imc5.png',
+                            title: 'Christmas Parties',
+                            description: 'Go full North Pole with Christmas-themed sets, overlays, and props. Great for friends, families, or even Santa meet-and-greets!',
+                            badge: 'Snap with Santa',
+                            link: 'event-type/christmas-party.html'
+                        },
+                        {
+                            image: '../assets/images/social/imc6.jpeg',
+                            title: 'Thanksgiving Parties',
+                            description: 'Whether it\'s a family gathering or a Friendsgiving feast, our booths capture those cozy fall vibes with seasonal props and festive frames.',
+                            badge: 'Feast and Pose',
+                            link: 'event-type/thanksgiving.html'
+                        },
+                        {
+                            image: '../assets/images/social/imc7.jpeg',
+                            title: 'Anniversaries',
+                            description: 'Whether it\'s one year or fifty, every love story deserves the spotlight. Our booths help you toast to your time together with timeless designs and shareable keepsakes.',
+                            badge: 'Lets Make a Toast',
+                            link: 'event-type/anniversary.html'
+                        },
+                        {
+                            image: '../assets/images/social/imc8.jpg',
+                            title: 'Non-profit Events',
+                            description: 'From galas to fundraising dinners, our booths add engagement and fun while keeping your mission front and center. Customize the experience to reflect your cause.',
+                            badge: 'Capture Impact',
+                            link: 'event-type/nonprofit-event.html'
+                        },
+                        {
+                            image: '../assets/images/social/imc9.jpg',
+                            title: '4th of July Parties',
+                            description: 'Celebrate Independence Day with patriotic props and festive overlays. From backyard BBQs to community block parties, our booths are the spark your event needs.',
+                            badge: 'Sparkle and Snap',
+                            link: 'event-type/4th-of-july.html'
+                        }
+                    ];
+
+                    const gridCardsContainer = document.getElementById('cards-grid-container');
+
+                    // Create grid cards
+                    function createGridCards() {
+                        gridCardsContainer.innerHTML = ''; // Clear existing cards
+
+                        gridCardsData.forEach((card, index) => {
+                            const cardElement = document.createElement('div');
+                            cardElement.className = 'grid-card group';
+                            const badgeElement = card.link
+                                ? `<a href="${card.link}" class="grid-card-button">${card.badge}</a>`
+                                : `<button class="grid-card-button">${card.badge}</button>`;
+
+                            // Format title with colors
+                            let formattedTitle = card.title;
+                            let formattedTitleOverlay = card.title;
+
+                            if (card.title === 'Birthday Parties') {
+                                formattedTitle = '<span style="color: #FF4F4F;">Birthday</span> <span style="color: #18F1E1;">Parties</span>';
+                                formattedTitleOverlay = '<span style="color: #FF4F4F;">Birthday</span> <span style="color: #18F1E1;">Parties</span>';
+                            } else if (card.title === 'BAR/BAT Mitzvahs') {
+                                formattedTitle = '<span style="color: #FF4F4F;">BAR/BAT</span> <span style="color: #18F1E1;">Mitzvahs</span>';
+                                formattedTitleOverlay = '<span style="color: #FF4F4F;">BAR/BAT</span> <span style="color: #18F1E1;">Mitzvahs</span>';
+                            } else if (card.title === 'Graduation Parties') {
+                                formattedTitle = '<span style="color: #FF4F4F;">Graduation</span> <span style="color: #18F1E1;">Parties</span>';
+                                formattedTitleOverlay = '<span style="color: #FF4F4F;">Graduation</span> <span style="color: #18F1E1;">Parties</span>';
+                            } else if (card.title === 'Holiday Parties') {
+                                formattedTitle = '<span style="color: #FF4F4F;">Holiday</span> <span style="color: #18F1E1;">Parties</span>';
+                                formattedTitleOverlay = '<span style="color: #FF4F4F;">Holiday</span> <span style="color: #18F1E1;">Parties</span>';
+                            } else if (card.title === 'Christmas Parties') {
+                                formattedTitle = '<span style="color: #FF4F4F;">Christmas</span> <span style="color: #18F1E1;">Parties</span>';
+                                formattedTitleOverlay = '<span style="color: #FF4F4F;">Christmas</span> <span style="color: #18F1E1;">Parties</span>';
+                            } else if (card.title === 'Thanksgiving Parties') {
+                                formattedTitle = '<span style="color: #FF4F4F;">Thanksgiving</span> <span style="color: #18F1E1;">Parties</span>';
+                                formattedTitleOverlay = '<span style="color: #FF4F4F;">Thanksgiving</span> <span style="color: #18F1E1;">Parties</span>';
+                            } else if (card.title === 'Anniversaries') {
+                                formattedTitle = '<span style="color: #FF4F4F;">Anni</span><span style="color: #18F1E1;">Versaries</span>';
+                                formattedTitleOverlay = '<span style="color: #FF4F4F;">Anni</span><span style="color: #18F1E1;">Versaries</span>';
+                            } else if (card.title === 'Non-profit Events') {
+                                formattedTitle = '<span style="color: #FF4F4F;">Non-profit</span> <span style="color: #18F1E1;">Events</span>';
+                                formattedTitleOverlay = '<span style="color: #FF4F4F;">Non-profit</span> <span style="color: #18F1E1;">Events</span>';
+                            } else if (card.title === '4th of July Parties') {
+                                formattedTitle = '<span style="color: #FF4F4F;">4th of</span> <span style="color: #18F1E1;">July Parties</span>';
+                                formattedTitleOverlay = '<span style="color: #FF4F4F;">4th of</span> <span style="color: #18F1E1;">July Parties</span>';
+                            }
+
+                            cardElement.innerHTML = `
+                                <div class="relative overflow-hidden">
+                                    <img src="${card.image}" alt="${card.title} photo booth at social event" width="400" height="300" loading="lazy" class="grid-card-image">
+                                    ${badgeElement}
+                                    <div class="grid-card-overlay">
+                                        <h4 class="font-semibold text-white" style="font-family: 'Azo Sans Uber', sans-serif; font-weight: 300; text-transform: uppercase;">${formattedTitleOverlay}</h4>
+                                        <p class="text-sm" style="color: rgba(255, 255, 255, 0.9); font-family: 'Azo Sans', sans-serif;">${card.description}</p>
                                     </div>
                                 </div>
-                                <div class="absolute -inset-4 blur-3xl group-hover:blur-2xl transition-all duration-700 rounded-full"
-                                    style="background: linear-gradient(to right, rgba(24, 241, 225, 0.1), rgba(255, 79, 79, 0.2), rgba(24, 241, 225, 0.1));">
+                                <div class="grid-card-content">
+                                    <h4 class="grid-card-title">${formattedTitle}</h4>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                            `;
+                            gridCardsContainer.appendChild(cardElement);
+                        });
+                    }
 
-                <!-- Right: Content & CTA -->
-                <div class="order-1 lg:order-2 px-2 sm:px-0">
-                    <div class="inline-block text-white px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-bold mb-4 sm:mb-6 shadow-lg"
-                        style="color: #1F1F1F; background-color: #18F1E1; font-family: 'Azo Sans Uber', sans-serif; font-weight: 300; text-transform: uppercase;">
-                        Social Event Packages
-                    </div>
-                    <h3 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6"
-                        style="color: #FF4F4F; font-family: 'Azo Sans Uber', sans-serif; font-weight: 300; text-transform: uppercase;">
-                        Make Your Event Unforgettable
-                    </h3>
-                    <p class="text-base sm:text-lg md:text-xl mb-6 sm:mb-8 leading-relaxed"
-                        style="color: #1F1F1F; font-family: 'Azo Sans', sans-serif;">
-                        Explore our curated social event packages designed to bring fun and excitement to any gathering
-                    </p>
-                    <div class="space-y-3 sm:space-y-4 mb-6 sm:mb-8">
-                        <div class="flex items-start space-x-3 sm:space-x-4">
-                            <div class="flex-shrink-0 mt-0.5 sm:mt-1">
-                                <div class="w-5 h-5 sm:w-6 sm:h-6 rounded-full flex items-center justify-center"
-                                    style="background-color: #18F1E1;">
-                                    <svg class="w-2.5 h-2.5 sm:w-3 sm:h-3 text-white" fill="currentColor"
-                                        viewBox="0 0 20 20">
-                                        <path fill-rule="evenodd"
-                                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                                            clip-rule="evenodd" />
-                                    </svg>
-                                </div>
-                            </div>
-                            <div>
-                                <p class="font-medium text-sm sm:text-base"
-                                    style="color: #1F1F1F; font-family: 'Azo Sans', sans-serif;">Versatile Event
-                                    Solutions</p>
-                                <p class="text-xs sm:text-sm"
-                                    style="color: #1F1F1F; font-family: 'Azo Sans', sans-serif;">Perfect for birthdays,
-                                    anniversaries, and
-                                    all social gatherings</p>
-                            </div>
-                        </div>
-                        <div class="flex items-start space-x-3 sm:space-x-4">
-                            <div class="flex-shrink-0 mt-0.5 sm:mt-1">
-                                <div class="w-5 h-5 sm:w-6 sm:h-6 rounded-full flex items-center justify-center"
-                                    style="background-color: #18F1E1;">
-                                    <svg class="w-2.5 h-2.5 sm:w-3 sm:h-3 text-white" fill="currentColor"
-                                        viewBox="0 0 20 20">
-                                        <path fill-rule="evenodd"
-                                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                                            clip-rule="evenodd" />
-                                    </svg>
-                                </div>
-                            </div>
-                            <div>
-                                <p class="font-medium text-sm sm:text-base"
-                                    style="color: #1F1F1F; font-family: 'Azo Sans', sans-serif;">Interactive Experiences
-                                </p>
-                                <p class="text-xs sm:text-sm"
-                                    style="color: #1F1F1F; font-family: 'Azo Sans', sans-serif;">Engage your guests with
-                                    fun photo
-                                    opportunities and instant sharing</p>
-                            </div>
-                        </div>
-                        <div class="flex items-start space-x-3 sm:space-x-4">
-                            <div class="flex-shrink-0 mt-0.5 sm:mt-1">
-                                <div class="w-5 h-5 sm:w-6 sm:h-6 rounded-full flex items-center justify-center"
-                                    style="background-color: #18F1E1;">
-                                    <svg class="w-2.5 h-2.5 sm:w-3 sm:h-3 text-white" fill="currentColor"
-                                        viewBox="0 0 20 20">
-                                        <path fill-rule="evenodd"
-                                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                                            clip-rule="evenodd" />
-                                    </svg>
-                                </div>
-                            </div>
-                            <div>
-                                <p class="font-medium text-sm sm:text-base"
-                                    style="color: #1F1F1F; font-family: 'Azo Sans', sans-serif;">Custom Branding</p>
-                                <p class="text-xs sm:text-sm"
-                                    style="color: #1F1F1F; font-family: 'Azo Sans', sans-serif;">Personalize with your
-                                    event theme, colors,
-                                    and branding</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="flex flex-col sm:flex-row gap-3 sm:gap-4">
-                        <button onclick="openBrochureModal()"
-                            class="w-full sm:w-auto inline-flex items-center justify-center px-5 sm:px-6 py-2.5 sm:py-3 border border-transparent text-sm sm:text-base font-medium rounded-md text-white shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-offset-2"
-                            style="background-color: #FF4F4F; font-family: 'Azo Sans Uber', sans-serif; text-transform: uppercase;"
-                            onmouseover="this.style.backgroundColor='#e63939'"
-                            onmouseout="this.style.backgroundColor='#FF4F4F'" aria-label="View social event packages">
-                            <svg class="w-4 h-4 sm:w-5 sm:h-5 mr-2" fill="none" stroke="currentColor"
-                                viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253">
-                                </path>
-                            </svg>
-                            <span
-                                style="font-family: 'Azo Sans Uber', sans-serif; font-weight: 300; color: #ffffff;">View
-                                Packages</span>
-                            <svg class="w-4 h-4 sm:w-5 sm:h-5 ml-2" fill="none" stroke="currentColor"
-                                viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
-                            </svg>
-                        </button>
-                        <a href="../flipbook/examples/example-assets/books/social.pdf" download
-                            class="w-full sm:w-auto inline-flex items-center justify-center px-5 sm:px-6 py-2.5 sm:py-3 border text-sm sm:text-base font-medium rounded-md bg-white transition-colors duration-200"
-                            style="border-color: #1F1F1F; color: #1F1F1F; font-family: 'Azo Sans', sans-serif;"
-                            onmouseover="this.style.backgroundColor='#f5f5f5'"
-                            onmouseout="this.style.backgroundColor='white'">
-                            <svg class="w-4 h-4 sm:w-5 sm:h-5 mr-2" fill="none" stroke="currentColor"
-                                viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
-                            </svg>
-                            <span
-                                style="font-family: 'Azo Sans Uber', sans-serif; font-weight: 300; color: #1F1F1F;">Download
-                                <span
-                                    style="font-family: 'Azo Sans Uber', sans-serif; font-weight: 300; color: #1F1F1F;">PDF</span>
-                            </span>
-                        </a>
-                    </div>
-                    <div
-                        class="flex flex-wrap items-center gap-4 sm:gap-6 pt-4 sm:pt-6 border-t border-gray-200 mt-6 sm:mt-8">
-                        <div class="flex items-center text-xs sm:text-sm font-medium"
-                            style="color: #1F1F1F; font-family: 'Azo Sans', sans-serif;">
-                            <svg class="w-3 h-3 sm:w-4 sm:h-4 mr-1.5 sm:mr-2" style="color: #18F1E1;"
-                                fill="currentColor" viewBox="0 0 20 20">
-                                <path fill-rule="evenodd"
-                                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                                    clip-rule="evenodd" />
-                            </svg>
-                            <span>Perfect for Any Occasion</span>
-                        </div>
-                        <div class="flex items-center text-xs sm:text-sm font-medium"
-                            style="color: #1F1F1F; font-family: 'Azo Sans', sans-serif;">
-                            <svg class="w-3 h-3 sm:w-4 sm:h-4 mr-1.5 sm:mr-2" style="color: #FF4F4F;"
-                                fill="currentColor" viewBox="0 0 20 20">
-                                <path fill-rule="evenodd"
-                                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                                    clip-rule="evenodd" />
-                            </svg>
-                            <span>Easy to Customize</span>
-                        </div>
-                        <div class="flex items-center text-xs sm:text-sm font-medium"
-                            style="color: #1F1F1F; font-family: 'Azo Sans', sans-serif;">
-                            <svg class="w-3 h-3 sm:w-4 sm:h-4 mr-1.5 sm:mr-2" style="color: #18F1E1;"
-                                fill="currentColor" viewBox="0 0 20 20">
-                                <path fill-rule="evenodd"
-                                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                                    clip-rule="evenodd" />
-                            </svg>
-                            <span>Instant Sharing</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                    // Initialize
+                    createGridCards();
+                });
+            </script>
         </div>
     </section>
 
