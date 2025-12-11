@@ -140,13 +140,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 <div class="flex flex-col h-full">
                     <!-- Author Info -->
                     <div class="flex items-center mb-4">
-                        <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-500 rounded-full flex items-center justify-center flex-shrink-0 shadow-md">
+                        <div class="w-12 h-12 bg-[#FF4F4F] rounded-full flex items-center justify-center flex-shrink-0 shadow-md">
                             <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
                             </svg>
                         </div>
                         <div class="ml-3 flex-1">
-                            <h4 class="text-gray-900 font-semibold text-base">${review.author_name}</h4>
+                            <h4 class="text-[#FF4F4F] font-semibold text-base">${review.author_name}</h4>
                         </div>
                     </div>
                     
