@@ -17,6 +17,20 @@
         @import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@300;900&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
 
+        @font-face {
+            font-family: 'AzoSans';
+            src: url('../assets/fonts/AzoSans-Regular.woff2') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'AzoSansUber';
+            src: url('../assets/fonts/AzoSansUber-Regular.woff2') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+        }
+
         html,
         body {
             overflow-x: hidden;
@@ -39,13 +53,13 @@
         }
 
         .btn-primary {
-            background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%);
+            background: linear-gradient(135deg, #FF4F4F 0%, #FF4F4F 100%);
             transition: all 0.3s ease;
         }
 
         .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(0, 80, 255, 0.4);
+            box-shadow: 0 10px 25px rgba(255, 79, 79, 0.4);
         }
 
         /* Bubble Button Animation */
@@ -61,7 +75,7 @@
         }
 
         .btn-bubble:not(:hover):not(:focus) {
-            background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%);
+            background: linear-gradient(135deg, #FF4F4F 0%, #FF4F4F 100%);
         }
 
         .btn-bubble:hover,
@@ -79,7 +93,7 @@
                 radial-gradient(circle at center, transparent 30%, rgba(238, 238, 255, 0.8) 60%, rgba(238, 238, 255, 0.8) 65%, transparent 70%) 85% 120% / 0.65em 0.65em,
                 radial-gradient(circle at center, transparent 30%, rgba(238, 238, 255, 0.8) 60%, rgba(238, 238, 255, 0.8) 65%, transparent 70%) 95% 110% / 0.95em 0.95em,
                 radial-gradient(circle at center, transparent 30%, rgba(238, 238, 255, 0.8) 60%, rgba(238, 238, 255, 0.8) 65%, transparent 70%) 105% 130% / 0.55em 0.55em;
-            background-color: #0050ff;
+            background-color: #FF4F4F;
             background-repeat: no-repeat;
         }
 
@@ -97,7 +111,30 @@
                     88% -300%,
                     98% -220%,
                     102% -360%;
-                box-shadow: inset 0 -6.5em 0 #0040d9;
+                box-shadow: inset 0 -6.5em 0 #FF4F4F;
+            }
+        }
+
+        .font-style-AzoSans {
+            font-family: 'AzoSans', sans-serif;
+        }
+
+        .hero-button {
+            font-size: 1.125rem;
+            padding: 0.75rem 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero-button {
+                font-size: 1rem;
+                padding: 0.625rem 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-button {
+                font-size: 0.875rem;
+                padding: 0.5rem 1.25rem;
             }
         }
 
@@ -138,6 +175,91 @@
             letter-spacing: 0.3em;
         }
 
+        /* Hero Badge Responsive */
+        .hero-badge {
+            font-size: 0.875rem;
+            font-family: 'AzoSans', sans-serif;
+        }
+
+        @media (max-width: 768px) {
+            .hero-badge {
+                font-size: 0.75rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-badge {
+                font-size: 0.6875rem;
+            }
+        }
+
+        /* Hero Heading Responsive */
+        .hero-heading {
+            font-size: 4rem;
+            line-height: 1.1;
+        }
+
+        @media (max-width: 1024px) {
+            .hero-heading {
+                font-size: 3.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-heading {
+                font-size: 2.5rem;
+                line-height: 1.15;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-heading {
+                font-size: 2rem;
+                line-height: 1.2;
+            }
+        }
+
+        /* Hero Description Responsive */
+        .hero-description {
+            font-size: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero-description {
+                font-size: 0.875rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-description {
+                font-size: 0.8125rem;
+            }
+        }
+
+        /* Hero Location Text Responsive */
+        .hero-location {
+            font-size: 0.75rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero-location {
+                font-size: 0.6875rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-location {
+                font-size: 0.625rem;
+            }
+        }
+
+        /* Enhanced overlay for mobile readability */
+        @media (max-width: 768px) {
+            .hero-section .bg-opacity-50 {
+                background-color: rgba(0, 0, 0, 0.6) !important;
+            }
+        }
+
         @media (max-width: 640px) {
             .container {
                 padding-left: 1rem;
@@ -176,11 +298,11 @@
 
         .addons-heading {
             font-family: 'Montserrat', sans-serif;
-            font-weight: 700;
+            font-weight: 500;
             font-size: 2.5rem;
             letter-spacing: 0.15em;
             text-transform: uppercase;
-            background: linear-gradient(135deg, #0050ff 0%, #0040d9 50%, #0066ff 100%);
+            background: linear-gradient(135deg, #FF4F4F 0%, #FF4F4F 50%, #FF4F4F 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -203,7 +325,8 @@
         }
 
         .addons-subtext {
-            color: #374151;
+            color: #1F1F1F;
+            font-family: 'AzoSans', sans-serif;
             line-height: 1.6;
             font-size: 1rem;
             text-align: center;
@@ -212,14 +335,14 @@
         }
 
         .addons-subtext a {
-            color: #0050ff;
+            color: #FF4F4F;
             text-decoration: underline;
             text-underline-offset: 4px;
             transition: color 0.3s ease;
         }
 
         .addons-subtext a:hover {
-            color: #0040d9;
+            color: #18F1E1;
         }
 
         /* Card Styles */
@@ -271,8 +394,9 @@
         .addon-card ul li {
             text-transform: uppercase;
             background: var(--clr-tag);
-            color: #282828;
-            font-weight: 700;
+            color: #FF4F4F;
+            font-weight: 500;
+            font-family: 'AzoSans', sans-serif;
             font-size: 0.8rem;
             padding: 0.375rem 0.625rem;
             border-radius: 0.188rem;
@@ -291,7 +415,8 @@
 
         .addon-card .content p {
             margin: 0.625rem 0 1.25rem;
-            color: #565656;
+            color: #1F1F1F;
+            font-family: 'AzoSans', sans-serif;
             line-height: 1.6;
         }
 
@@ -368,7 +493,7 @@
         .addon-card-inner .icon .iconBox {
             position: absolute;
             inset: 0.625rem;
-            background: #282828;
+            background: #FF4F4F;
             border-radius: 50%;
             display: flex;
             justify-content: center;
@@ -384,43 +509,43 @@
 
         /* Card color variations for 10 cards */
         .addon-card:nth-child(1) .addon-card-inner .icon .iconBox {
-            background: #d3b19a;
+            background: #FF4F4F;
         }
 
         .addon-card:nth-child(2) .addon-card-inner .icon .iconBox {
-            background: #70b3b1;
+            background: #FF4F4F;
         }
 
         .addon-card:nth-child(3) .addon-card-inner .icon .iconBox {
-            background: #d05fa2;
+            background: #FF4F4F;
         }
 
         .addon-card:nth-child(4) .addon-card-inner .icon .iconBox {
-            background: #0050ff;
+            background: #FF4F4F;
         }
 
         .addon-card:nth-child(5) .addon-card-inner .icon .iconBox {
-            background: #ff6b6b;
+            background: #FF4F4F;
         }
 
         .addon-card:nth-child(6) .addon-card-inner .icon .iconBox {
-            background: #4ecdc4;
+            background: #FF4F4F;
         }
 
         .addon-card:nth-child(7) .addon-card-inner .icon .iconBox {
-            background: #ffe66d;
+            background: #FF4F4F;
         }
 
         .addon-card:nth-child(8) .addon-card-inner .icon .iconBox {
-            background: #a8e6cf;
+            background: #FF4F4F;
         }
 
         .addon-card:nth-child(9) .addon-card-inner .icon .iconBox {
-            background: #ff8b94;
+            background: #FF4F4F;
         }
 
         .addon-card:nth-child(10) .addon-card-inner .icon .iconBox {
-            background: #95a5a6;
+            background: #FF4F4F;
         }
     </style>
 </head>
@@ -429,39 +554,40 @@
     <div id="nav-placeholder"></div>
 
     <!-- Hero Section -->
-    <section class="relative flex items-center justify-center overflow-hidden py-8 hero-section">
+    <section class="relative flex items-center justify-center overflow-hidden py-4 sm:py-6 md:py-8 hero-section">
         <div class="absolute inset-0 bg-black bg-opacity-50"></div>
-        <div class="relative z-10 text-center text-white px-4 w-full">
+        <div class="relative z-10 text-center text-white px-3 sm:px-4 md:px-6 w-full">
             <div class="max-w-3xl mx-auto">
-                <div class="mb-2">
-                    <p
-                        class="max-w-3xl mx-auto text-sm md:text-base leading-tight mb-2 px-0 text-gray-100 tracking-[0.2em] animate-fade-in-up animate-delay-200 corporate-text">
+                <div class="mb-2 sm:mb-3 text-center">
+                    <p class="hero-badge inline-block leading-tight mb-2 sm:mb-3 px-3 sm:px-4 py-1.5 sm:py-2 text-gray-100 tracking-[0.15em] sm:tracking-[0.2em] animate-fade-in-up animate-delay-200 corporate-text rounded-full"
+                        style="font-weight: 600; background-color: #FF4F4F; font-family: 'AzoSans', sans-serif; display: inline-block;">
                         ENHANCE YOUR EVENT WITH OUR
                     </p>
-                    <h1
-                        class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold leading-tight animate-fade-in-up corporate-heading px-2">
-                        OUR ADD-ONS
+                    <h1 class="mt-2 sm:mt-3 hero-heading font-light leading-tight animate-fade-in-up corporate-heading px-2 sm:px-4"
+                        style="font-family: 'AzoSansUber', sans-serif; text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5), 0 0 20px rgba(10, 10, 10, 0.3);">
+                        <span style="color: #FF4F4F;">OUR</span> <span style="color: #18F1E1;">ADD-ONS</span>
                     </h1>
                 </div>
 
-                <div class="h-px w-12 bg-white mx-auto my-3 animate-fade-in-up animate-delay-200"></div>
+                <div class="h-px w-12 sm:w-16 bg-white mx-auto my-2 sm:my-3 animate-fade-in-up animate-delay-200"></div>
 
                 <p
-                    class="max-w-3xl mx-auto text-sm md:text-base leading-relaxed mb-4 px-4 sm:px-0 text-gray-100 tracking-normal animate-fade-in-up animate-delay-200 corporate-text">
+                    class="font-style-AzoSans mx-auto hero-description leading-relaxed mb-4 sm:mb-6 px-3 sm:px-4 md:px-0 text-white/80 tracking-normal animate-fade-in-up animate-delay-200 corporate-text">
                     Scroll down to view all of the package add-ons available for any event! Contact us for more
                     information on how to add any of these amazing additions to your next photo booth rental.
                 </p>
-                <div class="mt-8 mb-8 animate-fade-in-up animate-delay-300">
+                <div class="mt-6 sm:mt-8 mb-6 sm:mb-8 animate-fade-in-up animate-delay-300">
                     <a href="contact-us.html"
-                        class="btn btn-bubble btn-primary inline-block px-8 py-3 rounded-lg text-white font-semibold text-lg"
+                        class="font-style-AzoSans btn btn-bubble btn-primary hero-button inline-block rounded-lg text-white font-semibold"
                         aria-label="Contact us for add-ons">
                         Contact Us
                     </a>
                 </div>
 
                 <div class="text-center opacity-90 animate-fade-in-up animate-delay-400">
-                    <div class="h-px w-12 bg-white/70 mx-auto mb-3 transition-all duration-500"></div>
-                    <p class="text-white/80 tracking-wider text-xs font-medium uppercase corporate-location px-4">
+                    <div class="h-px w-10 sm:w-12 bg-white/70 mx-auto mb-2 sm:mb-3 transition-all duration-500"></div>
+                    <p
+                        class="text-white/80 tracking-wider hero-location font-medium uppercase corporate-location px-3 sm:px-4">
                         SERVICING DENVER, COLORADO, AND NATIONWIDE CORPORATE EVENTS
                     </p>
                 </div>
@@ -473,7 +599,8 @@
     <section id="addons-section" class="py-8 md:py-12 bg-white overflow-hidden">
         <div class="container mx-auto px-4 max-w-full">
             <div class="max-w-4xl mx-auto">
-                <h2 class="addons-heading animate-fade-in-up">
+                <h2 class="addons-heading animate-fade-in-up"
+                    style="color: #FF4F4F; -webkit-text-fill-color: #FF4F4F; background: none; -webkit-background-clip: unset; background-clip: unset; font-family: 'AzoSansUber', sans-serif;">
                     OUR ADD-ONS INCLUDE:
                 </h2>
                 <p class="addons-subtext animate-fade-in-up animate-delay-200">
@@ -496,7 +623,9 @@
                         </div>
                     </div>
                     <div class="content">
-                        <h3>Additional Hours</h3>
+                        <h3 style="color: #FF4F4F; font-family: 'AzoSansUber', sans-serif;">
+                            <span style="color: #FF4F4F;">ADDITIONAL</span> <span style="color: #18F1E1;">HOURS</span>
+                        </h3>
                         <p>Need we say more? Your guests will be having so much fun with our booth, that you'll want to
                             add more time!</p>
                     </div>
@@ -516,7 +645,9 @@
                         </div>
                     </div>
                     <div class="content">
-                        <h3>Idle Hours</h3>
+                        <h3 style="color: #FF4F4F; font-family: 'AzoSansUber', sans-serif;">
+                            <span style="color: #FF4F4F;">IDLE</span> <span style="color: #18F1E1;">HOURS</span>
+                        </h3>
                         <p>If you're wanting to shut down the booth for those important speeches, or other times when
                             your guests’ attention will be elsewhere, we won't charge you the full price for our
                             operational hours.</p>
@@ -537,7 +668,9 @@
                         </div>
                     </div>
                     <div class="content">
-                        <h3>Digital Sharing</h3>
+                        <h3 style="color: #FF4F4F; font-family: 'AzoSansUber', sans-serif;">
+                            <span style="color: #FF4F4F;">DIGITAL</span> <span style="color: #18F1E1;">SHARING</span>
+                        </h3>
                         <p>Let your guests share their photos via text or email! Wi-Fi is required for these to send
                             instantly, otherwise they'll be delivered after your event.</p>
                     </div>
@@ -557,7 +690,9 @@
                         </div>
                     </div>
                     <div class="content">
-                        <h3>Social Sharing Kiosk</h3>
+                        <h3 style="color: #FF4F4F; font-family: 'AzoSansUber', sans-serif;">
+                            <span style="color: #FF4F4F;">SOCIAL</span> <span style="color: #18F1E1;">SHARING</span>
+                        </h3>
                         <p>Have a large number of attendees? After your guests take their pictures at the photo booth,
                             the pictures are automatically sent to the kiosk where guests can then share their pictures
                             online.</p>
@@ -579,7 +714,10 @@
                         </div>
                     </div>
                     <div class="content">
-                        <h3>Green Screen Background</h3>
+                        <h3 style="color: #FF4F4F; font-family: 'AzoSansUber', sans-serif;">
+                            <span style="color: #FF4F4F;">GREEN</span> <span style="color: #FF4F4F;">SCREEN</span> <span
+                                style="color: #18F1E1;">BACKGROUND</span>
+                        </h3>
                         <p>Instead of picking just one backdrop, why not 6? We'll set up a green screen and work with
                             you to choose or create images that your guests can pick from!</p>
                     </div>
@@ -600,7 +738,10 @@
                         </div>
                     </div>
                     <div class="content">
-                        <h3>VIP Red Carpet Setting</h3>
+                        <h3 style="color: #FF4F4F; font-family: 'AzoSansUber', sans-serif;">
+                            <span style="color: #FF4F4F;">VIP</span> <span style="color: #FF4F4F;">RED</span> <span
+                                style="color: #FF4F4F;">CARPET</span> <span style="color: #18F1E1;">SETTING</span>
+                        </h3>
                         <p>We will bring along our red carpet and rope off the photo booth area, creating the feel of
                             exclusivity and glamour!</p>
                     </div>
@@ -621,7 +762,10 @@
                         </div>
                     </div>
                     <div class="content">
-                        <h3>Additional Photo Filters</h3>
+                        <h3 style="color: #FF4F4F; font-family: 'AzoSansUber', sans-serif;">
+                            <span style="color: #FF4F4F;">ADDITIONAL</span> <span style="color: #18F1E1;">PHOTO</span>
+                            <span style="color: #18F1E1;">FILTERS</span>
+                        </h3>
                         <p>Guests can choose to add a filter to their photos. Ranging from black and white, sepia, comic
                             book, and plenty more!</p>
                     </div>
@@ -641,7 +785,9 @@
                         </div>
                     </div>
                     <div class="content">
-                        <h3>Custom Backdrop</h3>
+                        <h3 style="color: #FF4F4F; font-family: 'AzoSansUber', sans-serif;">
+                            <span style="color: #FF4F4F;">CUSTOM</span> <span style="color: #18F1E1;">BACKDROP</span>
+                        </h3>
                         <p>Want to give your event the feeling of an VIP party? You can do so by choosing a custom step
                             and repeat backdrop. We'll design and perfect it just for you!</p>
                     </div>
@@ -661,7 +807,10 @@
                         </div>
                     </div>
                     <div class="content">
-                        <h3>Memory Album Book</h3>
+                        <h3 style="color: #FF4F4F; font-family: 'AzoSansUber', sans-serif;">
+                            <span style="color: #FF4F4F;">MEMORY</span> <span style="color: #FF4F4F;">ALBUM</span> <span
+                                style="color: #18F1E1;">BOOK</span>
+                        </h3>
                         <p>In addition to the photos your guests receives, one will be placed into a beautiful memory
                             book, where your guests are encouraged to write their well wishes by the picture.</p>
                     </div>
@@ -682,7 +831,10 @@
                         </div>
                     </div>
                     <div class="content">
-                        <h3>Unlimited Photo Prints</h3>
+                        <h3 style="color: #FF4F4F; font-family: 'AzoSansUber', sans-serif;">
+                            <span style="color: #FF4F4F;">UNLIMITED</span> <span style="color: #FF4F4F;">PHOTO</span>
+                            <span style="color: #18F1E1;">PRINTS</span>
+                        </h3>
                         <p>Make sure everyone in the picture is able to get a great printout of the fun they are having.
                         </p>
                     </div>
@@ -702,7 +854,10 @@
                         </div>
                     </div>
                     <div class="content">
-                        <h3>Single Photo Layout</h3>
+                        <h3 style="color: #FF4F4F; font-family: 'AzoSansUber', sans-serif;">
+                            <span style="color: #FF4F4F;">SINGLE</span> <span style="color: #FF4F4F;">PHOTO</span> <span
+                                style="color: #18F1E1;">LAYOUT</span>
+                        </h3>
                         <p>Our standard photo strips come with every package, but why not add a full single 4x6 Photo to
                             your event? Customize the design, and make it your own.</p>
                     </div>
