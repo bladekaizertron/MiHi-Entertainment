@@ -334,6 +334,380 @@
             min-width: auto !important;
         }
 
+        /* Ensure Events dropdown menu displays correctly */
+        header .group>div[class*="grid"] {
+            display: grid !important;
+        }
+
+        header .group .grid-cols-2 {
+            grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+            display: grid !important;
+            gap: 1rem !important;
+        }
+
+        header .group .space-y-3 {
+            display: flex !important;
+            flex-direction: column !important;
+            gap: 0.75rem !important;
+        }
+
+        header .group .space-y-3>a {
+            display: block !important;
+            width: 100% !important;
+            text-align: left !important;
+            line-height: 1.5 !important;
+        }
+
+        header .group .space-y-3>a span {
+            display: block !important;
+            line-height: 1.4 !important;
+        }
+
+        header .group .space-y-3>a span.font-medium {
+            display: block !important;
+            margin-bottom: 0.25rem !important;
+            font-weight: 600 !important;
+        }
+
+        header .group .space-y-3>a span.text-xs {
+            display: block !important;
+            margin-top: 0 !important;
+            line-height: 1.3 !important;
+        }
+
+        /* Fix floating text in Events dropdown */
+        header .group .absolute {
+            position: absolute !important;
+        }
+
+        header .group .absolute>div {
+            position: relative !important;
+        }
+
+        header .group .absolute .p-6 {
+            padding: 1.5rem !important;
+        }
+
+        header .group .absolute .grid {
+            align-items: start !important;
+        }
+
+        header .group .absolute .space-y-3>a {
+            position: relative !important;
+            float: none !important;
+            clear: both !important;
+        }
+
+        /* Ensure Events dropdown text doesn't float - proper alignment */
+        header .group .absolute a {
+            display: block !important;
+            width: 100% !important;
+            text-align: left !important;
+            float: none !important;
+            clear: none !important;
+        }
+
+        header .group .absolute a br {
+            display: block !important;
+            content: "" !important;
+            margin-top: 0.25rem !important;
+        }
+
+        header .group .absolute .grid>div {
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: stretch !important;
+        }
+
+        header .group .absolute .grid>div>a {
+            align-self: stretch !important;
+        }
+
+        /* Protect mobile navigation menu from page styles */
+        #mobile-menu-overlay {
+            z-index: 9999 !important;
+        }
+
+        #mobile-menu {
+            display: flex !important;
+            flex-direction: column !important;
+            height: 100% !important;
+            overflow: hidden !important;
+        }
+
+        #mobile-menu .flex.flex-col.h-full {
+            display: flex !important;
+            flex-direction: column !important;
+            height: 100% !important;
+        }
+
+        #mobile-menu .flex-1.overflow-y-auto {
+            flex: 1 1 0% !important;
+            overflow-y: auto !important;
+        }
+
+        #mobile-menu .space-y-3>div {
+            display: block !important;
+        }
+
+        #mobile-menu .mobile-menu-toggle {
+            display: flex !important;
+            align-items: center !important;
+            justify-content: space-between !important;
+            width: 100% !important;
+        }
+
+        #mobile-menu .mobile-menu-toggle svg {
+            display: block !important;
+        }
+
+        #mobile-menu [id$="-content"] {
+            display: block !important;
+        }
+
+        #mobile-menu [id$="-content"].hidden {
+            display: none !important;
+        }
+
+        #mobile-menu .space-y-1>a,
+        #mobile-menu .space-y-4>div {
+            display: block !important;
+        }
+
+        #mobile-menu a {
+            display: block !important;
+            text-decoration: none !important;
+        }
+
+        #mobile-menu button {
+            display: flex !important;
+            cursor: pointer !important;
+            background: transparent !important;
+            border: none !important;
+        }
+
+        /* Ensure mobile menu sections are properly arranged */
+        #mobile-menu .px-5.py-6 {
+            padding-left: 1.25rem !important;
+            padding-right: 1.25rem !important;
+            padding-top: 1.5rem !important;
+            padding-bottom: 1.5rem !important;
+        }
+
+        #mobile-menu .space-y-3 {
+            display: flex !important;
+            flex-direction: column !important;
+            gap: 0.75rem !important;
+        }
+
+        /* Ensure Events section items are properly arranged */
+        #mobile-menu #events-content {
+            display: block !important;
+        }
+
+        #mobile-menu #events-content.hidden {
+            display: none !important;
+        }
+
+        #mobile-menu #events-content .px-5.pb-4 {
+            padding-left: 1.25rem !important;
+            padding-right: 1.25rem !important;
+            padding-bottom: 1rem !important;
+        }
+
+        #mobile-menu #events-content .space-y-1 {
+            display: flex !important;
+            flex-direction: column !important;
+            gap: 0.25rem !important;
+        }
+
+        #mobile-menu #events-content .space-y-1>a {
+            display: block !important;
+            width: 100% !important;
+            padding: 0.625rem 0.75rem !important;
+            margin: 0 !important;
+        }
+
+        /* Ensure mobile menu buttons and links maintain proper layout */
+        #mobile-menu .flex.items-center.gap-3 {
+            display: flex !important;
+            align-items: center !important;
+            gap: 0.75rem !important;
+        }
+
+        #mobile-menu .w-full.flex.items-center.justify-between {
+            display: flex !important;
+            align-items: center !important;
+            justify-content: space-between !important;
+            width: 100% !important;
+        }
+
+        /* Fix text cropping and ensure all menu items are fully visible */
+        #mobile-menu * {
+            box-sizing: border-box !important;
+        }
+
+        #mobile-menu {
+            overflow-x: hidden !important;
+            overflow-y: auto !important;
+        }
+
+        #mobile-menu .mobile-menu-toggle {
+            white-space: nowrap !important;
+            overflow: visible !important;
+            text-overflow: clip !important;
+        }
+
+        #mobile-menu .mobile-menu-toggle span {
+            white-space: normal !important;
+            word-wrap: break-word !important;
+            overflow-wrap: break-word !important;
+            overflow: visible !important;
+            text-overflow: clip !important;
+            max-width: 100% !important;
+        }
+
+        #mobile-menu a {
+            white-space: normal !important;
+            word-wrap: break-word !important;
+            overflow-wrap: break-word !important;
+            overflow: visible !important;
+            text-overflow: clip !important;
+            max-width: 100% !important;
+            min-width: 0 !important;
+        }
+
+        #mobile-menu .text-sm,
+        #mobile-menu .text-base {
+            white-space: normal !important;
+            word-wrap: break-word !important;
+            overflow-wrap: break-word !important;
+            overflow: visible !important;
+            text-overflow: clip !important;
+        }
+
+        /* Ensure menu sections don't crop content */
+        #mobile-menu .rounded-2xl {
+            overflow: visible !important;
+        }
+
+        #mobile-menu [id$="-content"] {
+            overflow: visible !important;
+        }
+
+        #mobile-menu [id$="-content"]>div {
+            overflow: visible !important;
+        }
+
+        /* Ensure proper padding to prevent text from touching edges */
+        #mobile-menu .px-5 {
+            padding-left: 1.25rem !important;
+            padding-right: 1.25rem !important;
+        }
+
+        #mobile-menu .px-6 {
+            padding-left: 1.5rem !important;
+            padding-right: 1.5rem !important;
+        }
+
+        #mobile-menu .py-2\.5,
+        #mobile-menu .py-2 {
+            padding-top: 0.625rem !important;
+            padding-bottom: 0.625rem !important;
+        }
+
+        #mobile-menu .py-4 {
+            padding-top: 1rem !important;
+            padding-bottom: 1rem !important;
+        }
+
+        /* Ensure flex items don't shrink too much */
+        #mobile-menu .flex.items-center.gap-3 {
+            flex-shrink: 0 !important;
+            min-width: 0 !important;
+        }
+
+        #mobile-menu .mobile-menu-toggle>div {
+            flex: 1 1 auto !important;
+            min-width: 0 !important;
+            overflow: visible !important;
+        }
+
+        /* Ensure SVG icons don't get cut off */
+        #mobile-menu svg {
+            flex-shrink: 0 !important;
+        }
+
+        /* Fix overflow-hidden that might crop content */
+        #mobile-menu .overflow-hidden {
+            overflow: visible !important;
+        }
+
+        #mobile-menu .bg-white.rounded-2xl {
+            overflow: visible !important;
+        }
+
+        /* Ensure menu content containers have proper width */
+        #mobile-menu .w-\[88vw\] {
+            width: 88vw !important;
+            max-width: 24rem !important;
+            min-width: 280px !important;
+        }
+
+        /* Ensure text in buttons and links is fully visible */
+        #mobile-menu button span,
+        #mobile-menu a span {
+            display: inline-block !important;
+            max-width: 100% !important;
+            word-break: break-word !important;
+        }
+
+        /* Fix any text truncation */
+        #mobile-menu .truncate {
+            white-space: normal !important;
+            overflow: visible !important;
+            text-overflow: clip !important;
+        }
+
+        /* Ensure category labels are fully visible */
+        #mobile-menu .text-xs {
+            white-space: normal !important;
+            word-wrap: break-word !important;
+            overflow: visible !important;
+        }
+
+        /* Fix nested content areas */
+        #mobile-menu [id$="-content"] .px-5,
+        #mobile-menu [id$="-content"] .pb-4 {
+            padding-left: 1.25rem !important;
+            padding-right: 1.25rem !important;
+            padding-bottom: 1rem !important;
+        }
+
+        #mobile-menu [id$="-content"] .space-y-1,
+        #mobile-menu [id$="-content"] .space-y-4 {
+            padding-left: 0 !important;
+            padding-right: 0 !important;
+        }
+
+        /* Ensure all text elements wrap properly */
+        #mobile-menu .font-medium,
+        #mobile-menu .font-bold,
+        #mobile-menu .font-semibold {
+            white-space: normal !important;
+            word-wrap: break-word !important;
+            overflow-wrap: break-word !important;
+        }
+
+        /* Ensure proper spacing for menu items */
+        #mobile-menu .space-y-1>*+* {
+            margin-top: 0.25rem !important;
+        }
+
+        #mobile-menu .space-y-4>*+* {
+            margin-top: 1rem !important;
+        }
+
         /* Brand Guide: CTAs use Coral (#FF4F4F) */
         main a.btn-primary:not(header a):not(nav a),
         main .btn-primary:not(header .btn-primary):not(nav .btn-primary),
