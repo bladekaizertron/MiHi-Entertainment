@@ -73,7 +73,7 @@ function renderStaticPageHtml($pageData) {
 		.hero-section .eyebrow { text-transform: uppercase; letter-spacing: .15em; font-size: 12px; margin-bottom: 10px; opacity: .75; }
 		.hero-section h1 { font-size: clamp(2.2rem, 4vw, 3.5rem); margin-bottom: 16px; }
 		.hero-section p { font-size: 1.1rem; max-width: 640px; }
-		.hero-section .hero-btn { display: inline-flex; align-items: center; padding: 12px 22px; border-radius: 999px; background: #4f46e5; color: #fff; text-decoration: none; margin-top: 20px; font-weight: 600; }
+		.hero-section .hero-btn { display: inline-flex; align-items: center; padding: 12px 22px; border-radius: 999px; background: #FF4F4F; color: #fff; text-decoration: none; margin-top: 20px; font-weight: 600; }
 		.text-image { display: flex; gap: 28px; align-items: center; padding: 36px; border-radius: 20px; background: #f8fafc; margin-bottom: 32px; flex-wrap: wrap; }
 		.text-image.reverse { flex-direction: row-reverse; }
 		.text-image img { width: 42%; border-radius: 18px; object-fit: cover; flex: 1 1 320px; }
@@ -234,12 +234,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'export_static') {
 		.preview { background:#ffffff; border:1px solid #e5e7eb; border-radius:12px; overflow:hidden; position:sticky; top:24px; max-height:calc(100vh - 120px); display:flex; flex-direction:column; }
 		.preview-header { padding:8px 12px; border-bottom:1px solid #e5e7eb; color:#6b7280; font-size:12px; background:#f8fafc; display:flex; justify-content:space-between; align-items:center; }
 		.preview-body { padding:16px; overflow:auto; flex:1; }
+		/* Modal Popup for Live Preview */
+		.preview-modal { display:none; position:fixed; z-index:9999; left:0; top:0; width:100%; height:100%; background:rgba(0,0,0,0.75); backdrop-filter:blur(4px); }
+		.preview-modal.active { display:flex; align-items:center; justify-content:center; }
+		.preview-modal-content { background:#ffffff; border-radius:16px; width:95%; max-width:1400px; height:90vh; max-height:900px; display:flex; flex-direction:column; box-shadow:0 20px 60px rgba(0,0,0,0.3); animation:modalSlideIn 0.3s ease-out; }
+		@keyframes modalSlideIn { from { opacity:0; transform:scale(0.95) translateY(-20px); } to { opacity:1; transform:scale(1) translateY(0); } }
+		.preview-modal-header { padding:16px 20px; border-bottom:1px solid #e5e7eb; background:#f8fafc; display:flex; justify-content:space-between; align-items:center; border-radius:16px 16px 0 0; }
+		.preview-modal-header h3 { margin:0; font-size:16px; font-weight:600; color:#111827; }
+		.preview-modal-close { background:none; border:none; font-size:24px; color:#6b7280; cursor:pointer; padding:0; width:32px; height:32px; display:flex; align-items:center; justify-content:center; border-radius:6px; transition:all 0.2s; }
+		.preview-modal-close:hover { background:#e5e7eb; color:#111827; }
+		.preview-modal-body { padding:24px; overflow:auto; flex:1; background:#ffffff; }
+		.preview-modal-actions { padding:12px 20px; border-top:1px solid #e5e7eb; background:#f8fafc; display:flex; gap:8px; justify-content:flex-end; border-radius:0 0 16px 16px; }
 		/* Blocks */
 		.builder-toolbar { margin-bottom:16px; }
 		.builder-toolbar h4 { margin:0 0 8px; font-size:13px; color:#64748b; letter-spacing:.04em; text-transform:uppercase; }
 		.block-palette { display:grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap:8px; }
 		.block-palette button { display:flex; align-items:center; gap:6px; padding:10px 12px; border-radius:10px; border:1px dashed #cbd5e1; background:#f8fafc; cursor:pointer; font-size:13px; color:#0f172a; transition:all .2s ease; }
-		.block-palette button:hover { border-color:#6366f1; background:#eef2ff; color:#312e81; }
+		.block-palette button:hover { border-color:#FF4F4F; background:#fff5f5; color:#991b1b; }
 		.preset-gallery { display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap:12px; margin-bottom:20px; }
 		.preset-card { border:1px solid #e5e7eb; border-radius:12px; padding:12px; background:#fff; display:flex; flex-direction:column; gap:8px; }
 		.preset-card h5 { margin:0; font-size:14px; }
@@ -264,7 +275,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'export_static') {
 		.hero-section { border-radius:20px; padding:48px; position:relative; overflow:hidden; }
 		.hero-section.dark { background:#0f172a; color:#f8fafc; }
 		.hero-section.light { background:#f8fafc; color:#0f172a; }
-		.hero-section .hero-btn { display:inline-flex; align-items:center; padding:10px 18px; border-radius:999px; background:#4f46e5; color:#fff; text-decoration:none; margin-top:16px; }
+		.hero-section .hero-btn { display:inline-flex; align-items:center; padding:10px 18px; border-radius:999px; background:#FF4F4F; color:#fff; text-decoration:none; margin-top:16px; }
 		.text-image { display:flex; gap:24px; align-items:center; padding:32px; border-radius:16px; background:#f8fafc; }
 		.text-image .text { flex:1; }
 		.text-image.reverse { flex-direction:row-reverse; }
@@ -319,19 +330,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'export_static') {
 						<h4>MiHi Presets</h4>
 						<div class="preset-gallery">
 							<div class="preset-card">
-								<h5>🏠 Homepage Snapshot</h5>
-								<p>Hero + service highlights inspired by MiHi’s homepage.</p>
+								<h5>🏠 Homepage Overview</h5>
+								<p>Complete brand introduction with signature services and nationwide coverage.</p>
 								<button type="button" class="btn-sm" onclick="applyPreset('mihiHome')">Use preset</button>
 							</div>
 							<div class="preset-card">
-								<h5>🎥 Video Booth Focus</h5>
-								<p>Showcase multiple booth types with CTA.</p>
+								<h5>📸 Photo Booth Services</h5>
+								<p>Comprehensive photo booth lineup with AI, 360°, and classic options.</p>
+								<button type="button" class="btn-sm" onclick="applyPreset('photoBooths')">Use preset</button>
+							</div>
+							<div class="preset-card">
+								<h5>🎥 Video Booth Experiences</h5>
+								<p>Showcase cinematic video booths including GlamBot and bullet-time.</p>
 								<button type="button" class="btn-sm" onclick="applyPreset('videoBooths')">Use preset</button>
 							</div>
 							<div class="preset-card">
-								<h5>✨ Event Services Grid</h5>
-								<p>Highlight A/V, decor, and themes.</p>
+								<h5>✨ Complete Event Solutions</h5>
+								<p>Highlight A/V services, event decor, and themed experiences.</p>
 								<button type="button" class="btn-sm" onclick="applyPreset('eventServices')">Use preset</button>
+							</div>
+							<div class="preset-card">
+								<h5>📍 Locations Page</h5>
+								<p>Nationwide coverage with popular service locations.</p>
+								<button type="button" class="btn-sm" onclick="applyPreset('locations')">Use preset</button>
 							</div>
 						</div>
 					</div>
@@ -371,13 +392,38 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'export_static') {
 						<?php endif; ?>
 					</div>
 				</div>
-				<div class="preview">
+				<div class="preview" style="display:none;">
 					<div class="preview-header">
 						<span>Live Preview</span>
 						<button type="button" class="btn-sm" onclick="togglePreviewBackground()">Toggle BG</button>
 					</div>
 					<div class="preview-body" id="preview-body"><?php echo $page['content_html']; ?></div>
 				</div>
+				<div style="text-align:center; padding:20px; border:2px dashed #e5e7eb; border-radius:12px; background:#f8fafc;">
+					<button type="button" class="btn" onclick="openPreviewModal()" style="background:#FF4F4F; color:#fff; padding:12px 24px; font-size:14px; font-weight:600;">
+						<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="margin-right:8px;"><path d="M14 3h7v7M5 5h5M5 10v9h9v-5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+						Open Live Preview
+					</button>
+					<p style="margin-top:12px; font-size:12px; color:#6b7280;">Click to view your page in a full-screen popup</p>
+				</div>
+			</div>
+			
+			<!-- Preview Modal Popup -->
+			<div id="preview-modal" class="preview-modal" onclick="if(event.target===this) closePreviewModal()">
+				<div class="preview-modal-content">
+					<div class="preview-modal-header">
+						<h3>Live Preview</h3>
+						<div style="display:flex; gap:8px; align-items:center;">
+							<button type="button" class="btn-sm" onclick="togglePreviewBackground()" style="font-size:12px;">Toggle BG</button>
+							<button type="button" class="preview-modal-close" onclick="closePreviewModal()" title="Close (Esc)">×</button>
+						</div>
+					</div>
+					<div class="preview-modal-body" id="preview-modal-body"><?php echo $page['content_html']; ?></div>
+					<div class="preview-modal-actions">
+						<button type="button" class="btn-sm" onclick="closePreviewModal()">Close</button>
+					</div>
+				</div>
+			</div>
 			</div>
 		</form>
 	</div>
@@ -389,13 +435,34 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'export_static') {
 		var html = document.getElementById('content_html').value;
 		var css = document.getElementById('custom_css').value;
 		var body = document.getElementById('preview-body');
+		var modalBody = document.getElementById('preview-modal-body');
 		// If using blocks, render with wrappers for drag; otherwise, fallback to raw html
 		if (blocks.length > 0) {
 			renderPreviewFromBlocks();
 		} else {
-			body.innerHTML = html + (css ? ('<style>' + css + '</style>') : '');
+			var content = html + (css ? ('<style>' + css + '</style>') : '');
+			body.innerHTML = content;
+			if (modalBody) modalBody.innerHTML = content;
 		}
 	}
+	
+	function openPreviewModal() {
+		updatePreview(); // Ensure preview is up to date
+		document.getElementById('preview-modal').classList.add('active');
+		document.body.style.overflow = 'hidden';
+	}
+	
+	function closePreviewModal() {
+		document.getElementById('preview-modal').classList.remove('active');
+		document.body.style.overflow = '';
+	}
+	
+	// Close modal on Escape key
+	document.addEventListener('keydown', function(e) {
+		if (e.key === 'Escape') {
+			closePreviewModal();
+		}
+	});
 
 	// Simple block editor
 	const blockDefaults = {
@@ -412,22 +479,33 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'export_static') {
 
 	const presets = {
 		mihiHome: [
-			{ type:'hero', eyebrow:'MIHI ENTERTAINMENT', title:'Immersive photo & video activations nationwide', subtitle:'Discover one-of-a-kind designs, studio-quality production, and curated experiences for every event.', buttonText:'Contact MiHi', buttonUrl:'https://www.mihiphotobooth.com/#contact', background:'image', backgroundImage:'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f', align:'center' },
-			{ type:'featureGrid', title:'Top video booth experiences', intro:'Bring guests into cinematic, high-fashion, and slow-motion moments.', columns:3, items:"360 Video Booth|Turn guests into a custom AI-generated character with cinematic shots.\nGlamBot Video Booth|Deliver dramatic, red-carpet slow motion clips.\nVogue Video Booth|High-fashion visuals with dramatic lighting." },
-			{ type:'textImage', title:'Nationwide locations', body:'From Boston to Las Vegas, our team delivers branded activations, event rentals, and themed experiences coast to coast.', image:'https://images.unsplash.com/photo-1500534314209-a25ddb2bd429', imagePosition:'right', background:'#ffffff', buttonText:'View all locations', buttonUrl:'https://www.mihiphotobooth.com/locations' },
-			{ type:'button', label:'View services', href:'https://www.mihiphotobooth.com/', style:'secondary', align:'center' }
+			{ type:'hero', eyebrow:'MIHI ENTERTAINMENT', title:'PREMIUM PHOTO & VIDEO BOOTH RENTALS NATIONWIDE', subtitle:'Transform your event with cutting-edge AI experiences, cinematic 360° video booths, and unforgettable activations. From weddings to corporate events, we deliver studio-quality production coast to coast.', buttonText:'GET STARTED', buttonUrl:'/contact-us.html', background:'dark', align:'center' },
+			{ type:'featureGrid', title:'SIGNATURE PHOTO BOOTH EXPERIENCES', intro:'Elevate your event with our most popular booth rentals.', columns:3, items:"AI Photo Booth|Transform guests into superheroes, celebrities, or fantasy characters with cutting-edge AI technology.\n360° Video Booth|Cinematic slow-motion videos captured from every angle with full 360° rotation.\nGreen Screen Booth|Transport guests anywhere with custom backgrounds and professional green screen technology.\nGlamBot Video Booth|Automated cinematic slow-motion videos with red-carpet treatment.\nMosaic Wall|Build your event story photo by photo with interactive displays.\nRoaming Booth|The party comes to your guests with our mobile photo booth experience." },
+			{ type:'textImage', title:'NATIONWIDE COVERAGE', body:'From Denver to Las Vegas, Boston to Los Angeles—MiHi Entertainment delivers premium photo booth rentals and event services across the United States. Our professional team ensures flawless setup and unforgettable experiences at every location.', image:'https://images.unsplash.com/photo-1500534314209-a25ddb2bd429', imagePosition:'right', background:'#1F1F1F', buttonText:'VIEW LOCATIONS', buttonUrl:'/locations' },
+			{ type:'button', label:'EXPLORE ALL SERVICES', href:'/booth-services.html', style:'primary', align:'center' }
+		],
+		photoBooths: [
+			{ type:'hero', eyebrow:'PHOTO BOOTH RENTALS', title:'CREATE UNFORGETTABLE MOMENTS', subtitle:'From AI-powered transformations to classic photo prints, our photo booths are rated #1 for weddings, corporate events, and parties nationwide.', buttonText:'GET PRICING', buttonUrl:'/contact-us.html', background:'dark', align:'center' },
+			{ type:'featureGrid', title:'PREMIUM PHOTO BOOTH OPTIONS', intro:'Choose from our complete lineup of photo booth experiences.', columns:3, items:"AI Photo Booth|Transform guests into superheroes, celebrities, or fantasy characters.\n360° Photo Booth|Capture stunning 360° rotating photos with instant prints.\nGreen Screen Booth|Custom backgrounds and professional green screen technology.\nMosaic Wall|Interactive photo displays that build your event story.\nRoaming Booth|Mobile photo booth that goes where your guests are.\nClassic Photo Booth|Traditional photo booth with instant prints and custom overlays." },
+			{ type:'textImage', title:'WHY CHOOSE MIHI PHOTO BOOTHS', body:'MiHi Entertainment sets the gold standard for photo booth rentals. Our state-of-the-art equipment, professional attendants, and customizable options ensure every detail is perfect. Rated #1 in customer satisfaction with seamless setup and unforgettable experiences.', image:'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f', imagePosition:'left', background:'#1F1F1F', buttonText:'VIEW PHOTO BOOTHS', buttonUrl:'/product/photo-booth.html' },
+			{ type:'button', label:'BOOK YOUR PHOTO BOOTH', href:'/contact-us.html', style:'primary', align:'center' }
 		],
 		videoBooths: [
-			{ type:'hero', eyebrow:'VIDEO BOOTHS', title:'Give your event the red carpet treatment', subtitle:'High-speed GlamBot clips, bullet-time arrays, slow-motion captures, and testimonial studios—all fully branded.', buttonText:'View all video booths', buttonUrl:'https://www.mihiphotobooth.com/video-booths', background:'dark', align:'center' },
-			{ type:'featureGrid', title:'Signature activations', intro:'Curated to match MiHi’s most requested booth lineup.', columns:3, items:"GlamBot Booth|Capture cinematic, slow-motion glamour shots.\nBullet-Time Array|Multi-angle, freeze-frame experiences.\nSlow-Motion Booth|High-speed footage with dramatic flair." },
-			{ type:'textImage', title:'Video testimonial suites', body:'Collect authentic guest reactions with on-brand backdrops, lighting, and instant delivery.', image:'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f', imagePosition:'left', background:'#f8fafc', buttonText:'See testimonial booths', buttonUrl:'https://www.mihiphotobooth.com/video-booths' },
-			{ type:'button', label:'Book a video booth', href:'https://www.mihiphotobooth.com/contact', style:'primary', align:'center' }
+			{ type:'hero', eyebrow:'VIDEO BOOTH EXPERIENCES', title:'CINEMATIC SLOW-MOTION VIDEO BOOTHS', subtitle:'Give your event the red carpet treatment with high-speed GlamBot clips, bullet-time arrays, and fully branded video experiences.', buttonText:'VIEW VIDEO BOOTHS', buttonUrl:'/video-booths.html', background:'dark', align:'center' },
+			{ type:'featureGrid', title:'SIGNATURE VIDEO BOOTH ACTIVATIONS', intro:'Professional video production for events of all sizes.', columns:3, items:"360° Video Booth|Cinematic slow-motion videos from every angle with full rotation.\nGlamBot Video Booth|Automated red-carpet slow-motion clips with dramatic flair.\nBullet-Time Array|Matrix-style multi-camera freeze-frame experiences.\nVideo Testimonial Studio|Collect authentic guest reactions with branded backdrops.\nSlow-Motion Booth|High-speed footage with cinematic quality and instant delivery." },
+			{ type:'textImage', title:'FULLY BRANDED VIDEO EXPERIENCES', body:'Every video includes your custom branding, logos, music, and effects. Our professional team handles setup, operation, and instant delivery of high-quality video content that your guests will share for years to come.', image:'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f', imagePosition:'right', background:'#1F1F1F', buttonText:'SEE VIDEO SAMPLES', buttonUrl:'/video-booths.html' },
+			{ type:'button', label:'BOOK A VIDEO BOOTH', href:'/contact-us.html', style:'primary', align:'center' }
 		],
 		eventServices: [
-			{ type:'hero', eyebrow:'EVENT SERVICES', title:'Audio, visual, decor & themed experiences', subtitle:'Transform corporate, social, holiday, and casino events with MiHi’s A/V rentals, decor, and immersive themes.', buttonText:'Explore services', buttonUrl:'https://www.mihiphotobooth.com/rentals', background:'light', align:'left' },
-			{ type:'featureGrid', title:'A/V production', intro:'Professional audio, LED walls, and lighting for any venue.', columns:3, items:"Audio Services|Crisp sound systems, mics, and mixing.\nVisual Services|LED screens, projectors, and digital signage.\nLighting Services|Set the mood with dynamic effects." },
-			{ type:'featureGrid', title:'Event decor & rentals', intro:'Special effects, lounge furniture, custom signage, casino setups, VR and more.', columns:3, items:"Special Effects|Sparkular displays, confetti cannons, champagne walls.\nEvent Decor|Ceiling fabric, shimmer walls, themed lounges.\nGame Rentals|Claw machines, VR headsets, money booth experiences." },
-			{ type:'textImage', title:'Immersive themes', body:'Western saloons, luxe holiday parties, trade show installations—choose from curated sets or custom builds.', image:'https://images.unsplash.com/photo-1500534314209-a25ddb2bd429', imagePosition:'right', background:'#ffffff', buttonText:'View event themes', buttonUrl:'https://www.mihiphotobooth.com/themes' }
+			{ type:'hero', eyebrow:'COMPLETE EVENT SOLUTIONS', title:'AUDIO, VISUAL, DECOR & THEMED EXPERIENCES', subtitle:'Transform corporate, social, holiday, and casino events with MiHi\'s comprehensive A/V rentals, event decor, and immersive themed experiences.', buttonText:'EXPLORE SERVICES', buttonUrl:'/av-services', background:'dark', align:'left' },
+			{ type:'featureGrid', title:'A/V PRODUCTION SERVICES', intro:'Professional audio-visual solutions for any venue size.', columns:3, items:"Audio Services|Crisp sound systems, wireless microphones, and professional mixing.\nVisual Services|LED screens, projectors, digital signage, and video walls.\nLighting Services|Dynamic lighting effects, stage lighting, and mood-setting ambiance.\nEvent Stages|Professional staging solutions for presentations and performances." },
+			{ type:'featureGrid', title:'EVENT DECOR & RENTALS', intro:'Special effects, themed decor, and interactive experiences.', columns:3, items:"Special Effects|Sparkular displays, confetti cannons, champagne walls, and fog machines.\nEvent Decor|Ceiling fabric, shimmer walls, themed lounges, and custom signage.\nGame Rentals|Claw machines, VR headsets, money booth experiences, and arcade games.\nCasino Rentals|Professional casino setups with tables, dealers, and themed experiences." },
+			{ type:'textImage', title:'IMMERSIVE THEMED EXPERIENCES', body:'From Western saloons to luxe holiday parties, trade show installations to corporate activations—choose from our curated themed sets or work with our team to create custom builds that perfectly match your event vision.', image:'https://images.unsplash.com/photo-1500534314209-a25ddb2bd429', imagePosition:'left', background:'#1F1F1F', buttonText:'VIEW THEMES', buttonUrl:'/event-decor' }
+		],
+		locations: [
+			{ type:'hero', eyebrow:'NATIONWIDE COVERAGE', title:'PHOTO BOOTH RENTALS ACROSS AMERICA', subtitle:'MiHi Entertainment delivers premium photo booth and event services to major cities nationwide. Find our services in Denver, Las Vegas, Los Angeles, Boston, and 50+ locations.', buttonText:'FIND YOUR LOCATION', buttonUrl:'/locations', background:'dark', align:'center' },
+			{ type:'featureGrid', title:'POPULAR SERVICE LOCATIONS', intro:'We serve events in major metropolitan areas across the United States.', columns:3, items:"Denver, Colorado|Premium photo booth rentals for weddings and corporate events.\nLas Vegas, Nevada|Casino parties, trade shows, and high-end event activations.\nLos Angeles, California|Red-carpet events, celebrity parties, and luxury experiences.\nBoston, Massachusetts|Corporate events, weddings, and social gatherings.\nNew York, New York|High-profile events, product launches, and exclusive parties." },
+			{ type:'textImage', title:'SERVING EVENTS NATIONWIDE', body:'No matter where your event is located, MiHi Entertainment brings the same level of professionalism, quality equipment, and unforgettable experiences. Our nationwide network ensures consistent service excellence from coast to coast.', image:'https://images.unsplash.com/photo-1500534314209-a25ddb2bd429', imagePosition:'right', background:'#1F1F1F', buttonText:'VIEW ALL LOCATIONS', buttonUrl:'/locations' }
 		]
 	};
 
@@ -688,12 +766,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'export_static') {
 
 	function renderPreviewFromBlocks() {
 		var body = document.getElementById('preview-body');
+		var modalBody = document.getElementById('preview-modal-body');
 		var pieces = blocksToHtmlArray();
 		var wrapped = pieces.map(function(piece, idx){
 			return '<div class="preview-block" draggable="true" data-index="'+idx+'">'+piece+'</div>';
 		}).join('');
 		var css = document.getElementById('custom_css').value;
-		body.innerHTML = wrapped + (css ? ('<style>' + css + '</style>') : '');
+		var content = wrapped + (css ? ('<style>' + css + '</style>') : '');
+		body.innerHTML = content;
+		if (modalBody) modalBody.innerHTML = content;
 		attachDnD();
 	}
 
@@ -730,7 +811,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'export_static') {
 
 	// Minimal styles for buttons used by blocks (preview only)
 	document.addEventListener('DOMContentLoaded', function() {
-		var css = '.btn-primary{display:inline-block;background:#4f46e5;color:#fff;padding:10px 14px;border-radius:8px;text-decoration:none} .btn-primary:hover{background:#4338ca} .btn-secondary{display:inline-block;background:#f3f4f6;color:#111827;padding:10px 14px;border-radius:8px;text-decoration:none;border:1px solid #e5e7eb} .btn-secondary:hover{background:#e5e7eb} .btn-link{color:#4f46e5;text-decoration:underline}';
+		var css = '.btn-primary{display:inline-block;background:#FF4F4F;color:#fff;padding:10px 14px;border-radius:8px;text-decoration:none} .btn-primary:hover{background:#FF6347} .btn-secondary{display:inline-block;background:#f3f4f6;color:#111827;padding:10px 14px;border-radius:8px;text-decoration:none;border:1px solid #e5e7eb} .btn-secondary:hover{background:#e5e7eb} .btn-link{color:#FF4F4F;text-decoration:underline}';
 		var style = document.createElement('style');
 		style.innerHTML = css;
 		document.head.appendChild(style);
@@ -739,8 +820,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'export_static') {
 	function togglePreviewBackground() {
 		previewDark = !previewDark;
 		var body = document.getElementById('preview-body');
-		body.style.background = previewDark ? '#0f172a' : '#ffffff';
-		body.style.color = previewDark ? '#f8fafc' : '#111827';
+		var modalBody = document.getElementById('preview-modal-body');
+		var bg = previewDark ? '#0f172a' : '#ffffff';
+		var color = previewDark ? '#f8fafc' : '#111827';
+		if (body) {
+			body.style.background = bg;
+			body.style.color = color;
+		}
+		if (modalBody) {
+			modalBody.style.background = bg;
+			modalBody.style.color = color;
+		}
 	}
 
 	function exportStaticPage() {

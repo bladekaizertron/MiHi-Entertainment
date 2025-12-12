@@ -37,6 +37,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $errors[] = 'Content is required';
     }
     
+    // Check content size (warn if very large - over 200MB)
+    $contentSize = strlen($content);
+    $maxRecommendedSize = 200 * 1024 * 1024; // 200MB
+    if ($contentSize > $maxRecommendedSize) {
+        $sizeMB = round($contentSize / 1048576, 2);
+        $errors[] = 'Content is very large (' . $sizeMB . ' MB). Please reduce the content size, especially images embedded in the editor. Consider using external image URLs instead of embedding images directly.';
+    }
+    
     // Generate slug if not provided
     if (empty($slug)) {
         $slug = generateSlug($title);
@@ -106,21 +114,89 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $db->commit();
             
             // Generate static HTML page for the post (only if published)
+            $pageGenerationError = null;
+            if ($status === 'published') {
             require_once __DIR__ . '/../includes/generate_post_page.php';
             $pageGenerated = generatePostPage($post_id);
-            if ($pageGenerated) {
-                // Success - page generated
-            } else if ($status === 'published') {
+                if (!$pageGenerated) {
                 // Error generating page for published post
+                    $pageGenerationError = "Post created successfully, but failed to generate HTML page. ";
                 error_log("Failed to generate HTML page for post ID: " . $post_id);
+                    
+                    // Check common issues
+                    $baseDir = dirname(__DIR__);
+                    $postsDir = $baseDir . DIRECTORY_SEPARATOR . 'post' . DIRECTORY_SEPARATOR;
+                    $normalizedBase = realpath($baseDir);
+                    if ($normalizedBase !== false) {
+                        $postsDir = $normalizedBase . DIRECTORY_SEPARATOR . 'post' . DIRECTORY_SEPARATOR;
+                    }
+                    
+                    if (!is_dir($postsDir)) {
+                        $pageGenerationError .= "Post directory does not exist at: " . $postsDir . " ";
+                    } elseif (!is_writable($postsDir)) {
+                        $pageGenerationError .= "Post directory is not writable. ";
+                        $pageGenerationError .= "PHP is running as user: " . getmyuid() . ", ";
+                        $pageGenerationError .= "Directory owner: " . (is_dir($postsDir) ? fileowner($postsDir) : 'unknown') . ". ";
+                        $pageGenerationError .= "Try: chmod 777 " . $postsDir . " ";
+                    } else {
+                        $pageGenerationError .= "Check error logs for details. ";
+                    }
+                    $pageGenerationError .= "You can try regenerating from the edit page or use: <a href='regenerate_post.php?slug=" . urlencode($post['slug']) . "'>Regenerate Post</a>";
+                }
             }
             
             $success = true;
-            header('Location: edit.php?id=' . $post_id . '&success=1');
+            $redirectUrl = 'edit.php?id=' . $post_id . '&success=1';
+            if ($pageGenerationError) {
+                $redirectUrl .= '&page_error=' . urlencode($pageGenerationError);
+            }
+            header('Location: ' . $redirectUrl);
             exit;
         } catch (Exception $e) {
-            $db->rollBack();
-            $errors[] = 'Error creating post: ' . $e->getMessage();
+            // Try to rollback, but handle case where connection is lost
+            try {
+                // Check if connection is still valid before attempting rollback
+                if ($db && $db->inTransaction()) {
+                    $db->rollBack();
+                }
+            } catch (PDOException $rollbackException) {
+                // Connection lost - can't rollback, but that's okay
+                // The transaction will be automatically rolled back by MySQL
+                error_log("Could not rollback transaction: " . $rollbackException->getMessage());
+            }
+            
+            // Provide user-friendly error messages for common issues
+            $errorMessage = $e->getMessage();
+            if (strpos($errorMessage, 'max_allowed_packet') !== false) {
+                $contentSize = isset($content) ? strlen($content) : 0;
+                $sizeMB = round($contentSize / 1048576, 2);
+                
+                // Get current MySQL setting using helper function (uses fresh connection)
+                $maxPacket = getMaxAllowedPacket();
+                $currentSetting = 'unknown';
+                if ($maxPacket !== null) {
+                    $currentSettingMB = round($maxPacket / 1048576, 2);
+                    $currentSetting = $currentSettingMB . ' MB';
+                }
+                
+                $helpText = 'The content is too large for the database. Content size: ' . $sizeMB . ' MB.';
+                if ($currentSetting !== 'unknown') {
+                    $helpText .= ' Current MySQL max_allowed_packet: ' . $currentSetting . '.';
+                } else {
+                    $helpText .= ' Unable to check current MySQL setting.';
+                }
+                
+                if ($maxPacket !== null && $maxPacket < $contentSize) {
+                    $helpText .= ' The content (' . $sizeMB . ' MB) exceeds the current limit (' . round($maxPacket / 1048576, 2) . ' MB).';
+                }
+                
+                $helpText .= ' Solutions: (1) Reduce content size, especially embedded images, (2) Use external image URLs instead of embedding, (3) <a href="fix_mysql_packet.php" style="color: #007bff; text-decoration: underline;">Click here for step-by-step instructions to fix this</a>.';
+                
+                $errors[] = $helpText;
+                error_log("Max packet size error - Content: " . $sizeMB . " MB, MySQL setting: " . $currentSetting . ", Error: " . $errorMessage);
+            } else {
+                $errors[] = 'Error creating post: ' . $errorMessage;
+            }
         }
     }
 }
@@ -209,7 +285,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <input type="file" id="thumbnail_upload" accept="image/*" style="display: none;">
                     <button type="button" id="upload_thumbnail_btn" class="btn btn-secondary" style="white-space: nowrap;">Upload Image</button>
                 </div>
-                <small>Enter image URL or click "Upload Image" to upload directly</small>
+                <small>Enter image URL or click "Upload Image" to upload directly. <strong>Note:</strong> Images are automatically resized and optimized to reduce file size.</small>
                 <div id="thumbnail_preview" style="margin-top: 10px;">
                     <?php if (!empty($_POST['featured_image'])): ?>
                         <img src="<?php echo escape($_POST['featured_image']); ?>" alt="Thumbnail preview" style="max-width: 300px; height: auto; border-radius: 8px; border: 2px solid #e2e8f0;">

@@ -45,8 +45,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 				$success = 'User set to editor.';
 			} elseif ($action === 'set_pending') {
 				$stmt = $db->prepare("UPDATE users SET role = 'pending' WHERE id = ?");
-				$stmt->execute([$userId]);
-				$success = 'User set to pending.';
+				$result = $stmt->execute([$userId]);
+				if ($result && $stmt->rowCount() > 0) {
+					$success = 'User set to pending.';
+				} else {
+					$error = 'Failed to update user. User may not exist or role may already be pending.';
+					error_log("Set pending failed - User ID: $userId, Rows affected: " . $stmt->rowCount());
+				}
 			} elseif ($action === 'delete') {
 				// Prevent deleting yourself
 				if ($userId === (int)$currentUser['id']) {
@@ -60,7 +65,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 				$error = 'Unknown action.';
 			}
 		} catch (Throwable $e) {
-			$error = 'Update failed.';
+			$errorMsg = $e->getMessage();
+			
+			// Check if it's the ENUM issue
+			if (strpos($errorMsg, 'Data truncated') !== false || strpos($errorMsg, '1265') !== false) {
+				$error = 'Update failed: The database role ENUM does not include "pending" yet. ';
+				$error .= '<a href="quick_fix_role_enum.php" style="color: #0050ff; text-decoration: underline; font-weight: 600;">Click here to fix this</a> - ';
+				$error .= 'This will update the database to allow "pending" status.';
+			} else {
+				$error = 'Update failed: ' . $errorMsg;
+			}
+			
+			error_log("User update error: " . $errorMsg);
+			error_log("Stack trace: " . $e->getTraceAsString());
 		}
 	}
 }
@@ -100,7 +117,16 @@ $users = $db->query("SELECT id, username, email, full_name, role, created_at FRO
 			<h2>Users</h2>
 		</div>
 		<?php if ($error): ?>
-			<div class="alert alert-error"><?php echo escape($error); ?></div>
+			<div class="alert alert-error">
+				<?php 
+				// Check if error contains HTML (like our fix link)
+				if (strpos($error, '<a href') !== false || strpos($error, '<br>') !== false) {
+					echo $error; // Don't escape if it contains HTML links
+				} else {
+					echo escape($error); // Escape for security
+				}
+				?>
+			</div>
 		<?php endif; ?>
 		<?php if ($success): ?>
 			<div class="alert alert-success"><?php echo escape($success); ?></div>

@@ -155,7 +155,17 @@ try {
 
 	$db->commit();
 } catch (Throwable $e) {
+	// Try to rollback, but handle case where connection is lost
+	try {
+		// Check if connection is still valid before attempting rollback
+		if ($db && $db->inTransaction()) {
 	$db->rollBack();
+		}
+	} catch (PDOException $rollbackException) {
+		// Connection lost - can't rollback, but that's okay
+		// The transaction will be automatically rolled back by MySQL
+		error_log("Could not rollback transaction: " . $rollbackException->getMessage());
+	}
 	$_SESSION['oauth_error'] = 'Account provisioning failed.';
 	header('Location: login.php');
 	exit;

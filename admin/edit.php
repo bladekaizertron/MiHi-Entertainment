@@ -61,6 +61,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Validation
     if (empty($title)) $errors[] = 'Title is required';
     if (empty($content)) $errors[] = 'Content is required';
+    
+    // Check content size (warn if very large - over 200MB)
+    $contentSize = strlen($content);
+    $maxRecommendedSize = 200 * 1024 * 1024; // 200MB
+    if ($contentSize > $maxRecommendedSize) {
+        $sizeMB = round($contentSize / 1048576, 2);
+        $errors[] = 'Content is very large (' . $sizeMB . ' MB). Please reduce the content size, especially images embedded in the editor. Consider using external image URLs instead of embedding images directly.';
+    }
 
     // Slug generation/checking
     if (empty($slug)) {
@@ -138,12 +146,59 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             $db->commit();
             
-            // Generate HTML page
+            // Generate HTML page (only if published)
+            $pageGenerationError = null;
+            if ($status === 'published') {
             require_once __DIR__ . '/../includes/generate_post_page.php';
-            generatePostPage($post_id);
+                $pageGenerated = generatePostPage($post_id);
+                if (!$pageGenerated) {
+                    // Error generating page
+                    $pageGenerationError = "Post updated successfully, but failed to generate HTML page. ";
+                    error_log("Failed to generate HTML page for post ID: " . $post_id);
+                    
+                    // Check common issues
+                    $baseDir = dirname(__DIR__);
+                    $postsDir = $baseDir . DIRECTORY_SEPARATOR . 'post' . DIRECTORY_SEPARATOR;
+                    $normalizedBase = realpath($baseDir);
+                    if ($normalizedBase !== false) {
+                        $postsDir = $normalizedBase . DIRECTORY_SEPARATOR . 'post' . DIRECTORY_SEPARATOR;
+                    }
+                    
+                    if (!is_dir($postsDir)) {
+                        $pageGenerationError .= "Post directory does not exist at: " . $postsDir . " ";
+                    } elseif (!is_writable($postsDir)) {
+                        $pageGenerationError .= "Post directory is not writable. ";
+                        $pageGenerationError .= "PHP is running as user: " . getmyuid() . ", ";
+                        $pageGenerationError .= "Directory owner: " . (is_dir($postsDir) ? fileowner($postsDir) : 'unknown') . ". ";
+                        $pageGenerationError .= "Try: chmod 777 " . $postsDir . " ";
+                    } else {
+                        $pageGenerationError .= "Check error logs for details. ";
+                    }
+                    $pageGenerationError .= "You can try regenerating from this page or use: <a href='regenerate_post.php?slug=" . urlencode($post['slug']) . "'>Regenerate Post</a>";
+                }
+            } else {
+                // If status changed to draft, delete the HTML file
+                require_once __DIR__ . '/../includes/generate_post_page.php';
+                $postsDir = __DIR__ . '/../post/';
+                $htmlFile = $postsDir . $post['slug'] . '.html';
+                if (file_exists($htmlFile)) {
+                    @unlink($htmlFile);
+                }
+            }
 
             // Refresh data for the form
             $success = true;
+            
+            // Redirect with success/error messages
+            $redirectUrl = 'edit.php?id=' . $post_id;
+            if ($success) {
+                $redirectUrl .= '&success=1';
+            }
+            if ($pageGenerationError) {
+                $redirectUrl .= '&page_error=' . urlencode($pageGenerationError);
+            }
+            header('Location: ' . $redirectUrl);
+            exit;
             // Refetch data to show updated values
             $stmt = $db->prepare("SELECT * FROM posts WHERE id = ?");
             $stmt->execute([$post_id]);
@@ -158,8 +213,50 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $selected_tags = $stmt->fetchAll(PDO::FETCH_COLUMN);
 
         } catch (Exception $e) {
-            $db->rollBack();
-            $errors[] = 'Error updating post: ' . $e->getMessage();
+            // Try to rollback, but handle case where connection is lost
+            try {
+                // Check if connection is still valid before attempting rollback
+                if ($db && $db->inTransaction()) {
+                    $db->rollBack();
+                }
+            } catch (PDOException $rollbackException) {
+                // Connection lost - can't rollback, but that's okay
+                // The transaction will be automatically rolled back by MySQL
+                error_log("Could not rollback transaction: " . $rollbackException->getMessage());
+            }
+            
+            // Provide user-friendly error messages for common issues
+            $errorMessage = $e->getMessage();
+            if (strpos($errorMessage, 'max_allowed_packet') !== false) {
+                $contentSize = isset($content) ? strlen($content) : 0;
+                $sizeMB = round($contentSize / 1048576, 2);
+                
+                // Get current MySQL setting using helper function (uses fresh connection)
+                $maxPacket = getMaxAllowedPacket();
+                $currentSetting = 'unknown';
+                if ($maxPacket !== null) {
+                    $currentSettingMB = round($maxPacket / 1048576, 2);
+                    $currentSetting = $currentSettingMB . ' MB';
+                }
+                
+                $helpText = 'The content is too large for the database. Content size: ' . $sizeMB . ' MB.';
+                if ($currentSetting !== 'unknown') {
+                    $helpText .= ' Current MySQL max_allowed_packet: ' . $currentSetting . '.';
+                } else {
+                    $helpText .= ' Unable to check current MySQL setting.';
+                }
+                
+                if ($maxPacket !== null && $maxPacket < $contentSize) {
+                    $helpText .= ' The content (' . $sizeMB . ' MB) exceeds the current limit (' . round($maxPacket / 1048576, 2) . ' MB).';
+                }
+                
+                $helpText .= ' Solutions: (1) Reduce content size, especially embedded images, (2) Use external image URLs instead of embedding, (3) <a href="fix_mysql_packet.php" style="color: #007bff; text-decoration: underline;">Click here for step-by-step instructions to fix this</a>.';
+                
+                $errors[] = $helpText;
+                error_log("Max packet size error - Content: " . $sizeMB . " MB, MySQL setting: " . $currentSetting . ", Error: " . $errorMessage);
+            } else {
+                $errors[] = 'Error updating post: ' . $errorMessage;
+            }
         }
     }
 }
@@ -186,7 +283,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
         
         <?php if ($success || isset($_GET['success'])): ?>
-            <div class="alert alert-success">Post updated successfully!</div>
+            <div class="alert alert-success">
+                Post updated successfully!
+                <?php if (isset($_GET['page_error'])): ?>
+                    <br><br>
+                    <strong>⚠️ Warning:</strong> <?php echo escape($_GET['page_error']); ?>
+                    <br>
+                    <a href="regenerate_post.php?slug=<?php echo escape($post['slug']); ?>" class="btn btn-primary" style="margin-top: 10px;">Regenerate Post Page</a>
+                <?php endif; ?>
+            </div>
+        <?php endif; ?>
+        
+        <?php if (isset($_GET['page_error']) && !isset($_GET['success'])): ?>
+            <div class="alert alert-error">
+                <strong>⚠️ Page Generation Error:</strong> <?php echo escape($_GET['page_error']); ?>
+                <br>
+                <a href="regenerate_post.php?slug=<?php echo escape($post['slug']); ?>" class="btn btn-primary" style="margin-top: 10px;">Try to Regenerate</a>
+            </div>
         <?php endif; ?>
 
         <?php if (!empty($errors)): ?>
