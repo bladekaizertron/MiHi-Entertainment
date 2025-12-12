@@ -8,34 +8,53 @@
     <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap"
-        rel="stylesheet">
-
+    <!-- Brand Guide Typography: Azo Sans Font Family -->
     <style>
+        /* Azo Sans Font Face Declarations */
         @font-face {
-            font-family: 'AzoSansUber';
-            src: url('assets/fonts/AzoSansUber-Regular.woff2') format('woff2');
-            font-weight: normal;
+            font-family: 'Azo Sans';
+            src: url('assets/fonts/AzoSans-Regular.woff2') format('woff2'),
+                url('assets/fonts/AzoSans-Regular.woff') format('woff');
+            font-weight: 400;
             font-style: normal;
+            font-display: swap;
         }
 
-        /* Custom styles for modern luxury design */
+        @font-face {
+            font-family: 'Azo Sans Uber';
+            src: url('assets/fonts/AzoSansUber-Regular.woff2') format('woff2'),
+                url('assets/fonts/AzoSansUber-Regular.woff') format('woff');
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        /* Brand Guide: Body Text - Azo Sans Regular */
         body {
-            font-family: 'Inter', sans-serif;
-            color: #1a202c;
+            font-family: 'Azo Sans', sans-serif;
+            color: #1F1F1F;
         }
 
-        h1,
-        h2,
-        h3,
-        h4,
-        h5,
-        h6 {
-            font-family: 'Playfair Display', serif;
+        p {
+            font-family: 'Azo Sans', sans-serif;
+            color: #1F1F1F;
+        }
+
+        /* Brand Guide: Headers - Azo Sans Uber (Uppercase) */
+        main h1,
+        main h2,
+        main h3,
+        main h4,
+        main h5,
+        main h6 {
+            font-family: 'Azo Sans Uber', sans-serif;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 0.02em;
+            line-height: 1.2;
+            color: #FF4F4F;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
         /* Hero section */
@@ -241,7 +260,7 @@
             <div class="hero-overlay"></div>
             <div class="hero-content container mx-auto px-6 text-center">
                 <h1 class="text-5xl md:text-7xl font-black text-white mb-6 mx-auto text-center"
-                    style="font-weight: 500; font-family: 'AzoSansUber', sans-serif;">
+                    style="font-weight: 400; font-family: 'Azo Sans Uber', sans-serif; text-transform: uppercase; letter-spacing: 0.02em;">
                     <span style="color: #FF4F4F;">CONTACT</span> <span style="color: #18F1E1;">US</span>
                 </h1>
             </div>
@@ -259,7 +278,7 @@
                     <style>
                         /* Scoped styles - only affects form wrapper */
                         #djeventplanner-form-wrapper {
-                            font-family: 'Inter', sans-serif;
+                            font-family: 'Azo Sans', sans-serif;
                         }
 
                         /* Prevent external CSS from affecting navigation and footer */
@@ -269,19 +288,29 @@
                         footer * {
                             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif !important;
                         }
+                        /* Honeypot field - completely hidden */
+                        #website_url {
+                            position: absolute !important;
+                            left: -9999px !important;
+                            opacity: 0 !important;
+                            pointer-events: none !important;
+                            visibility: hidden !important;
+                            height: 0 !important;
+                            width: 0 !important;
+                        }
                     </style>
 
                     <form target="_top" method="post"
                         action="https://planning.mihiphotobooth.com/request_information.asp"
-                        onSubmit="return submitIt(this);" name="reqinfoform"
-                        class="bg-white rounded-lg shadow-xl p-6 md:p-8 lg:p-10">
+                        onSubmit="return validateFormAndSubmit(this);" name="reqinfoform"
+                        class="bg-white rounded-lg shadow-xl p-6 md:p-8 lg:p-10" id="contactForm">
                         <!-- Form Header -->
                         <div class="mb-8 text-center">
                             <h2 class="text-3xl md:text-4xl font-black text-gray-900 mb-2"
-                                style="font-weight: 500; font-family: 'AzoSansUber', sans-serif;"><span
+                                style="font-weight: 400; font-family: 'Azo Sans Uber', sans-serif; text-transform: uppercase; letter-spacing: 0.02em;"><span
                                     style="color: #FF4F4F;">GET A</span> <span style="color: #FF4F4F;">QUOTE</span></h2>
                             <p class="text-lg text-gray-600"
-                                style="font-family: 'AzoSans', sans-serif; color: #1F1F1F;">Tell us about your event by
+                                style="font-family: 'Azo Sans', sans-serif; color: #1F1F1F;">Tell us about your event by
                                 filling out the form below, and
                                 our team will be in touch as soon as possible.</p>
                         </div>
@@ -457,8 +486,22 @@
                             <label for="req_source" class="block text-sm font-semibold text-gray-700 mb-2">
                                 How did you hear about us?
                             </label>
-                            <input type="text" name="req_source" id="req_source" maxlength="50"
+                            <select name="req_source" id="req_source"
                                 class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900 bg-white">
+                                <option value="">Please select...</option>
+                                <option value="Google Search">Google Search</option>
+                                <option value="Facebook">Facebook</option>
+                                <option value="Instagram">Instagram</option>
+                                <option value="LinkedIn">LinkedIn</option>
+                                <option value="Referral / Friend">Referral / Friend</option>
+                                <option value="Previous Customer">Previous Customer</option>
+                                <option value="Website">Website</option>
+                                <option value="Event / Tradeshow">Event / Tradeshow</option>
+                                <option value="Advertisement">Advertisement</option>
+                                <option value="Yelp">Yelp</option>
+                                <option value="Wedding Wire / The Knot">Wedding Wire / The Knot</option>
+                                <option value="Other">Other</option>
+                            </select>
                         </div>
 
                         <!-- Venue Name -->
@@ -489,67 +532,67 @@
                             <label class="block text-sm font-semibold text-gray-700 mb-3">
                                 Products/Services You're Interested In
                             </label>
-                            <div class="space-y-2">
+                            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
                                 <label class="flex items-center">
                                     <input type="checkbox" name="question_6" value="photo booths - with printing"
                                         class="mr-3 w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
-                                    <span class="text-gray-700">photo booths - with printing</span>
+                                    <span class="text-gray-700 text-sm">photo booths - with printing</span>
                                 </label>
                                 <label class="flex items-center">
                                     <input type="checkbox" name="question_6" value="photo booths - without printing"
                                         class="mr-3 w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
-                                    <span class="text-gray-700">photo booths - without printing</span>
+                                    <span class="text-gray-700 text-sm">photo booths - without printing</span>
                                 </label>
                                 <label class="flex items-center">
                                     <input type="checkbox" name="question_6" value="video booths"
                                         class="mr-3 w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
-                                    <span class="text-gray-700">video booths</span>
+                                    <span class="text-gray-700 text-sm">video booths</span>
                                 </label>
                                 <label class="flex items-center">
                                     <input type="checkbox" name="question_6" value="ai experiences"
                                         class="mr-3 w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
-                                    <span class="text-gray-700">ai experiences</span>
+                                    <span class="text-gray-700 text-sm">ai experiences</span>
                                 </label>
                                 <label class="flex items-center">
                                     <input type="checkbox" name="question_6"
                                         value="Draping/Lighting & Decor, mosaic wall"
                                         class="mr-3 w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
-                                    <span class="text-gray-700">Draping/Lighting & Decor, mosaic wall</span>
+                                    <span class="text-gray-700 text-sm">Draping/Lighting & Decor, mosaic wall</span>
                                 </label>
                                 <label class="flex items-center">
                                     <input type="checkbox" name="question_6" value="virtual reality"
                                         class="mr-3 w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
-                                    <span class="text-gray-700">virtual reality</span>
+                                    <span class="text-gray-700 text-sm">virtual reality</span>
                                 </label>
                                 <label class="flex items-center">
                                     <input type="checkbox" name="question_6" value="professional headshots"
                                         class="mr-3 w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
-                                    <span class="text-gray-700">professional headshots</span>
+                                    <span class="text-gray-700 text-sm">professional headshots</span>
                                 </label>
                                 <label class="flex items-center">
                                     <input type="checkbox" name="question_6" value="professional event photography"
                                         class="mr-3 w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
-                                    <span class="text-gray-700">professional event photography</span>
+                                    <span class="text-gray-700 text-sm">professional event photography</span>
                                 </label>
                                 <label class="flex items-center">
                                     <input type="checkbox" name="question_6" value="AV & DJ services"
                                         class="mr-3 w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
-                                    <span class="text-gray-700">AV & DJ services</span>
+                                    <span class="text-gray-700 text-sm">AV & DJ services</span>
                                 </label>
                                 <label class="flex items-center">
                                     <input type="checkbox" name="question_6" value="casino services"
                                         class="mr-3 w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
-                                    <span class="text-gray-700">casino services</span>
+                                    <span class="text-gray-700 text-sm">casino services</span>
                                 </label>
                                 <label class="flex items-center">
                                     <input type="checkbox" name="question_6" value="dancefloor"
                                         class="mr-3 w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
-                                    <span class="text-gray-700">dancefloor</span>
+                                    <span class="text-gray-700 text-sm">dancefloor</span>
                                 </label>
                                 <label class="flex items-center">
                                     <input type="checkbox" name="question_6" value="staging, claw machine/stick drop"
                                         class="mr-3 w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
-                                    <span class="text-gray-700">staging, claw machine/stick drop</span>
+                                    <span class="text-gray-700 text-sm">staging, claw machine/stick drop</span>
                                 </label>
                             </div>
                         </div>
@@ -590,6 +633,14 @@
                             </label>
                         </div>
 
+                        <!-- Anti-Spam Protection -->
+                        <!-- Honeypot field - hidden from users but visible to bots -->
+                        <div style="position: absolute; left: -9999px; opacity: 0; pointer-events: none;" aria-hidden="true">
+                            <label for="website_url">Please leave this field blank</label>
+                            <input type="text" id="website_url" name="website_url" tabindex="-1" autocomplete="off">
+                        </div>
+                        <input type="hidden" id="form_timestamp" name="form_timestamp" value="">
+
                         <!-- Hidden Fields -->
                         <input type="hidden" name="checkdate" value="">
                         <input type="hidden" name="djidnumber" value="25077">
@@ -598,7 +649,7 @@
                         <!-- Submit Button -->
                         <div class="text-center mt-8">
                             <button type="submit" name="submit"
-                                class="inline-flex items-center justify-center px-10 py-4 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-blue-300"
+                                class="inline-flex items-center justify-center w-full md:w-auto min-w-[280px] px-10 py-4 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-blue-300"
                                 style="background: linear-gradient(135deg, #FF4F4F 0%, #FF4F4F 100%);">
                                 Submit
                             </button>
@@ -608,6 +659,53 @@
                 <!-- END DJEVENTPLANNER CODE -->
             </div>
         </section>
+
+        <!-- Anti-Spam Script -->
+        <script>
+            // Set form timestamp when page loads
+            document.addEventListener('DOMContentLoaded', function() {
+                const form = document.getElementById('contactForm');
+                if (form) {
+                    const timestampField = document.getElementById('form_timestamp');
+                    if (timestampField) {
+                        timestampField.value = Date.now().toString();
+                    }
+                }
+            });
+
+            // Validate form before submission
+            function validateFormAndSubmit(form) {
+                // Check honeypot field - if filled, it's a bot
+                const honeypot = document.getElementById('website_url');
+                if (honeypot && honeypot.value !== '') {
+                    console.warn('Spam detected: Honeypot field filled');
+                    alert('Spam detected. Please try again.');
+                    return false;
+                }
+
+                // Check form submission time - if submitted too quickly (< 3 seconds), likely a bot
+                const timestampField = document.getElementById('form_timestamp');
+                if (timestampField && timestampField.value) {
+                    const submitTime = Date.now();
+                    const formLoadTime = parseInt(timestampField.value);
+                    const timeDiff = (submitTime - formLoadTime) / 1000; // in seconds
+                    
+                    if (timeDiff < 3) {
+                        console.warn('Spam detected: Form submitted too quickly');
+                        alert('Please take your time filling out the form.');
+                        return false;
+                    }
+                }
+
+                // If validation passes, call the original submitIt function
+                if (typeof submitIt === 'function') {
+                    return submitIt(form);
+                }
+                
+                // If submitIt doesn't exist, allow normal submission
+                return true;
+            }
+        </script>
 
 
         <!-- Image Gallery Section -->
@@ -674,27 +772,27 @@
 
                     <div class="space-y-8 md:space-y-10">
                         <h2 class="text-4xl md:text-5xl lg:text-6xl font-black leading-tight"
-                            style="font-weight: 500; font-family: 'AzoSansUber', sans-serif;">
+                            style="font-weight: 400; font-family: 'Azo Sans Uber', sans-serif; text-transform: uppercase; letter-spacing: 0.02em;">
                             <span class="block" style="color: #18F1E1;">INFINITE POSSIBILITIES.</span>
                             <span class="block mt-2" style="color: #18F1E1;">ENDLESS FUN.</span>
                         </h2>
-                        <div class="space-y-6 max-w-4xl mx-auto">
+                        <div class="space-y-6 max-w-6xl mx-auto">
                             <p class="text-lg md:text-xl text-white/90 leading-relaxed"
-                                style="font-family: 'AzoSans', sans-serif; color: #ffffff;">
+                                style="font-family: 'Azo Sans', sans-serif; color: #ffffff;">
                                 MiHi Entertainment is your ultimate partner for unforgettable event entertainment.
                                 Whether you're looking for a state-of-the-art photo booth, professional photography,
                                 cutting-edge A/V services, or a completely custom idea, we're here to make your vision a
                                 reality.
                             </p>
                             <p class="text-base md:text-lg text-white/80 leading-relaxed"
-                                style="font-family: 'AzoSans', sans-serif; color: #ffffff;">
+                                style="font-family: 'Azo Sans', sans-serif; color: #ffffff;">
                                 Our team specializes in crafting tailored solutions to meet your unique needs, ensuring
                                 every detail aligns with your event goals. From concept to execution, we collaborate
                                 with you to deliver exceptional experiences that leave a lasting impression on your
                                 guests.
                             </p>
                             <p class="text-base md:text-lg text-white/80 leading-relaxed"
-                                style="font-family: 'AzoSans', sans-serif; color: #ffffff;">
+                                style="font-family: 'Azo Sans', sans-serif; color: #ffffff;">
                                 It's no wonder we've been recognized as Denver's best for Photo Booth Services and more.
                                 Ready to see what we can create together? Click below to explore all the incredible
                                 options we offer!
@@ -706,7 +804,7 @@
                         <a href="index.html#gallery"
                             class="group inline-flex items-center justify-center px-10 py-4 rounded-full font-semibold text-lg bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 hover:from-pink-600 hover:via-purple-600 hover:to-blue-600 text-white shadow-[0_22px_60px_-20px_rgba(236,72,153,0.8)] hover:shadow-[0_28px_70px_-20px_rgba(59,130,246,0.7)] transition-all duration-300 hover:-translate-y-1 hover:scale-105 focus:ring-4 focus:ring-pink-400/40"
                             style="background: linear-gradient(135deg, #FF4F4F 0%, #FF4F4F 100%);">
-                            CHECK OUT OUR WORK
+                            Check Out Our Work
                             <svg class="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none"
                                 stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -716,7 +814,7 @@
                         <a href="index.html#products"
                             class="inline-flex items-center justify-center px-9 py-4 rounded-full font-semibold border border-white/30 text-[#1F1F1F] bg-white/5 hover:bg-white/15 hover:shadow-lg transition-all duration-300 focus:ring-2 focus:ring-white/30"
                             style="background: linear-gradient(135deg, #18F1E1 0%, #18F1E1 100%);">
-                            VIEW OUR PRODUCTS
+                            View Our Products
                         </a>
                     </div>
 

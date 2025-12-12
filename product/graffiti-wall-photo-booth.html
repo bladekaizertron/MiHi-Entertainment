@@ -627,6 +627,26 @@
         
         .gradient-card:hover {
             border-color: rgba(249, 115, 22, 0.4);
+        }
+        
+        /* Digital Grid Background with Neon Effect */
+        .digital-grid {
+            background-image: 
+                linear-gradient(rgba(0, 255, 255, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(138, 43, 226, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: grid-pulse 4s ease-in-out infinite;
+            z-index: 1;
+        }
+
+        @keyframes grid-pulse {
+            0%, 100% {
+                opacity: 0.3;
+            }
+            50% {
+                opacity: 0.6;
+            }
+        }
             box-shadow: 6px 6px 0px rgba(249, 115, 22, 0.4);
         }
         
@@ -885,6 +905,7 @@
         <!-- Hero Section -->
         <section class="gradient-hero brick-wall relative h-screen flex items-center justify-center overflow-hidden text-white" style="background-image: url('../../assets/images/graffiti/graffiti-hero.webp'); background-size: cover; background-position: center; background-repeat: no-repeat;">
             <div class="absolute inset-0 bg-gradient-to-br from-black/70 via-black/60 to-black/70"></div>
+            <div class="absolute inset-0 digital-grid"></div>
             <!-- Paint Splatters -->
             <div class="hidden sm:block paint-splatter text-orange-500 absolute" style="top: 15%; left: 10%; animation-delay: 0s; z-index: 1;"></div>
             <div class="hidden sm:block paint-splatter text-pink-500 absolute" style="top: 25%; right: 15%; animation-delay: 1s; width: 30px; height: 30px; z-index: 1;"></div>
