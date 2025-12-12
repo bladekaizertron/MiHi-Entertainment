@@ -2546,14 +2546,8 @@
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
             user-select: none;
-        }
-
-        .email-button-container input {
-            display: none;
-        }
-
-        .email-button-container label {
-            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
         }
 
         .email-button-bevel {
@@ -2585,6 +2579,7 @@
             outline: 0 !important;
             transform: scale(1.01);
             transition: all 0.2s ease-in-out;
+            cursor: pointer;
         }
 
         .email-button-bevel:before,
@@ -2615,7 +2610,7 @@
                 linear-gradient(to left, #FF4F4F, #e63939);
         }
 
-        .email-button-bevel:hover {
+        .email-button-container:hover .email-button-bevel {
             transform: scale(1.07);
             box-shadow:
                 0px 25px 40px -5px rgba(0, 0, 0, 0.3),
@@ -2623,45 +2618,10 @@
                 inset 0px -40px 0px 0px #e63939;
         }
 
-        #email-button:checked~.email-button-bevel {
-            padding: 0 30px;
-            background: rgba(255, 79, 79, 0);
-            box-shadow:
-                0px 5px 15px -5px rgba(0, 0, 0, 0.3),
-                inset 0px 0px 0px 4px #FF4F4F,
-                inset 0px 0px 0px 0px #e63939;
-            border-radius: 10px;
-            font-size: 28px;
-            font-weight: 700;
-            text-shadow:
-                0px 3px 5px rgba(230, 57, 57, 0),
-                0px 5px 10px rgba(230, 57, 57, 0),
-                0px 5px 10px rgba(230, 57, 57, 0),
-                0px 5px 10px rgba(230, 57, 57, 0),
-                0px 5px 10px rgba(230, 57, 57, 0);
-            color: #FF4F4F;
-            transform: scale(0.7) rotate(-6deg);
-            transition: all 0.45s cubic-bezier(0.6, -0.9, 0.39, 1.65), text-shadow 0s ease-in-out, box-shadow 0.45s cubic-bezier(0.6, -0.9, 0.39, 1.65);
-            transition-delay: 0.135s;
+        .email-button-container:active .email-button-bevel {
+            transform: scale(1.02);
         }
 
-        #email-button:checked~.email-button-bevel:before,
-        #email-button:checked~.email-button-bevel:after {
-            transition-delay: 0s;
-        }
-
-        #email-button:checked~.email-button-bevel:before {
-            transform: translateX(-100%);
-        }
-
-        #email-button:checked~.email-button-bevel:after {
-            transform: translateX(100%);
-        }
-
-        #email-button:checked~.email-button-text {
-            color: rgba(255, 79, 79, 0.1875);
-            transform: translateY(80px);
-        }
 
         .email-button-text {
             display: block;
@@ -2709,10 +2669,6 @@
                 margin-bottom: 6px;
             }
 
-            #email-button:checked~.email-button-bevel {
-                padding: 0 24px;
-                font-size: 20px;
-            }
         }
 
         @media (max-width: 375px) {
@@ -2726,9 +2682,6 @@
                 font-size: 18px;
             }
 
-            #email-button:checked~.email-button-bevel {
-                font-size: 18px;
-            }
         }
     </style>
 </head>
@@ -3020,11 +2973,10 @@
             <section
                 style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 50%, #f1f3f5 100%); padding: 0 0 0.5rem 0; min-height: auto; margin-top: -2rem;">
                 <div class="container mx-auto px-6 relative" style="z-index: 20;">
-                    <div class="email-button-container">
-                        <input type="checkbox" name="button" id="email-button">
+                    <a href="../contact-us.html" class="email-button-container" aria-label="Email our team">
                         <span class="email-button-text">EMAIL</span>
-                        <label class="email-button-bevel" for="email-button">OUR TEAM</label>
-                    </div>
+                        <span class="email-button-bevel">OUR TEAM</span>
+                    </a>
                 </div>
             </section>
 
