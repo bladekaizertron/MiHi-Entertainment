@@ -1,7 +1,7 @@
 // Shared Footer Component
 // This script will load the same footer on all pages
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     // Determine the correct path prefix by finding the footer script's location
     const scripts = document.getElementsByTagName('script');
     let footerScriptSrc = '';
@@ -114,11 +114,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 <div class="col-span-1">
                     <h5 class="text-white font-bold text-base md:text-lg mb-3 md:mb-6" style="font-weight: 300;">Events</h5>
                     <ul class="space-y-2 md:space-y-3">
-                        <li><a href="${pathPrefix}events/weddings.html" class="hover:text-white transition-colors duration-300 text-sm md:text-base">Weddings</a></li>
-                        <li><a href="${pathPrefix}events/corporate-events.html" class="hover:text-white transition-colors duration-300 text-sm md:text-base">Corporate</a></li>
-                        <li><a href="${pathPrefix}events/social-events.html" class="hover:text-white transition-colors duration-300 text-sm md:text-base">Social Events</a></li>
-                        <li><a href="${pathPrefix}events/trade-shows.html" class="hover:text-white transition-colors duration-300 text-sm md:text-base">Trade Shows</a></li>
-                        <li><a href="${pathPrefix}events/holiday-parties.html" class="hover:text-white transition-colors duration-300 text-sm md:text-base">Holiday Parties</a></li>
+                        <li><a href="${pathPrefix}wedding.html" class="hover:text-white transition-colors duration-300 text-sm md:text-base">Weddings</a></li>
+                        <li><a href="${pathPrefix}index.html#corporate-events" class="hover:text-white transition-colors duration-300 text-sm md:text-base">Corporate</a></li>
+                        <li><a href="${pathPrefix}index.html#social-events" class="hover:text-white transition-colors duration-300 text-sm md:text-base">Social Events</a></li>
+                        <li><a href="${pathPrefix}index.html#trade-shows" class="hover:text-white transition-colors duration-300 text-sm md:text-base">Trade Shows</a></li>
+                        <li><a href="${pathPrefix}index.html#holiday-parties" class="hover:text-white transition-colors duration-300 text-sm md:text-base">Holiday Parties</a></li>
                     </ul>
                 </div>
                 
@@ -129,8 +129,8 @@ document.addEventListener('DOMContentLoaded', function() {
                         <li><a href="${pathPrefix}index.html#about" class="hover:text-white transition-colors duration-300 text-sm md:text-base">About Us</a></li>
                         <li><a href="${pathPrefix}index.html#galleries" class="hover:text-white transition-colors duration-300 text-sm md:text-base">Gallery</a></li>
                         <li><a href="${pathPrefix}index.html#contact" class="hover:text-white transition-colors duration-300 text-sm md:text-base">Get a Quote</a></li>
-                        <li><a href="${pathPrefix}about/blog.html" class="hover:text-white transition-colors duration-300 text-sm md:text-base">Blog</a></li>
-                        <li><a href="${pathPrefix}about/faq.html" class="hover:text-white transition-colors duration-300 text-sm md:text-base">FAQ</a></li>
+                        <li><a href="${pathPrefix}blog.html" class="hover:text-white transition-colors duration-300 text-sm md:text-base">Blog</a></li>
+                        <li><a href="${pathPrefix}faq.html" class="hover:text-white transition-colors duration-300 text-sm md:text-base">FAQ</a></li>
                     </ul>
                 </div>
             </div>
@@ -189,7 +189,54 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Insert footer before closing body tag
     document.body.insertAdjacentHTML('beforeend', footerHTML);
-    
+
+    // Handle anchor links to prevent redirects - fix hrefs and add click handlers
+    function fixAnchorLinks() {
+        const anchorLinks = document.querySelectorAll('footer a[href*="index.html#"]');
+        anchorLinks.forEach(link => {
+            // Fix the href attribute directly to point to root index.html with absolute URL
+            const href = link.getAttribute('href');
+            if (href && href.includes('index.html#')) {
+                const anchor = href.split('#')[1];
+                // Update href to point directly to root index.html with absolute URL
+                const origin = window.location.origin;
+                const absoluteUrl = origin + '/index.html#' + anchor;
+                link.setAttribute('href', absoluteUrl);
+            }
+
+            // Add event listener to prevent any redirects (only add once)
+            if (!link.hasAttribute('data-anchor-fixed')) {
+                link.setAttribute('data-anchor-fixed', 'true');
+                link.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    e.stopImmediatePropagation();
+
+                    const currentHref = this.getAttribute('href');
+                    if (currentHref && currentHref.includes('index.html#')) {
+                        // Extract the anchor
+                        const anchor = currentHref.split('#')[1];
+
+                        // Get the current origin and construct absolute URL to root index.html
+                        const origin = window.location.origin;
+                        const targetUrl = origin + '/index.html#' + anchor;
+
+                        // Use replace to prevent redirect loops and ensure we go directly to index.html
+                        // This bypasses any server-side redirects
+                        window.location.replace(targetUrl);
+                    }
+                    return false;
+                }, true); // Use capture phase to intercept early - before any other handlers
+            }
+        });
+    }
+
+    // Run immediately
+    fixAnchorLinks();
+
+    // Also run after a short delay to catch any dynamically added links
+    setTimeout(fixAnchorLinks, 100);
+
     // Load phone protection script if not already loaded
     if (!document.querySelector('script[src*="phone-protection.js"]')) {
         const phoneScript = document.createElement('script');
