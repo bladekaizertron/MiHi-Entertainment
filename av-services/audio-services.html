@@ -1986,31 +1986,28 @@
 
         @media (max-width: 768px) {
             .keyboard-section {
-                padding: 2.5rem 1rem 5rem 1rem;
+                padding: 2rem 1rem 4rem 1rem;
+                overflow: hidden;
+            }
+
+            /* Optimize particles for mobile - reduce opacity and simplify */
+            .keyboard-particles .particle {
+                opacity: 0.4;
+                animation-duration: calc(var(--duration, 18s) * 1.2);
+            }
+
+            /* Hide some particles on mobile for better performance */
+            .keyboard-particles .particle:nth-child(n+15) {
+                display: none;
             }
 
             .keyboard-wrapper {
-                padding: 0 0.5rem 1.5rem 0.5rem;
-                gap: 2rem;
+                padding: 0 0.75rem 1.5rem 0.75rem;
+                gap: 1.75rem;
             }
 
             .keyboard-content {
                 min-height: auto;
-            }
-
-            .keyboard {
-                gap: 0.2rem;
-                margin-bottom: 0;
-                justify-content: center;
-                width: 100%;
-            }
-
-            .keyboard .key {
-                font-size: clamp(1.2rem, 5vw, 1.8rem);
-                padding: 0.3rem 0.4rem;
-            }
-
-            .keyboard-content {
                 flex-direction: column;
                 align-items: center;
                 justify-content: center;
@@ -2019,30 +2016,69 @@
                 padding: 0;
             }
 
+            .keyboard {
+                gap: 0.25rem;
+                margin-bottom: 0;
+                justify-content: center;
+                width: 100%;
+                flex-wrap: wrap;
+            }
+
+            .keyboard .key {
+                font-size: clamp(1.25rem, 5.5vw, 1.9rem);
+                padding: 0.35rem 0.5rem;
+                min-width: 44px;
+                min-height: 44px;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .keyboard .key-space {
+                width: clamp(1rem, 3.5vw, 1.5rem);
+            }
+
             .keyboard-message {
-                font-size: clamp(0.9rem, 3vw, 1rem);
-                line-height: 1.7;
+                font-size: clamp(0.9rem, 3.2vw, 1.05rem);
+                line-height: 1.75;
                 margin-bottom: 0;
                 text-align: center;
                 max-width: 100%;
                 flex: 1 1 100%;
+                padding: 0 0.5rem;
+                word-wrap: break-word;
+            }
+
+            .keyboard-message a {
+                display: inline-block;
+                min-height: 44px;
+                padding: 0.25rem 0.5rem;
+                margin: 0.125rem;
             }
 
             .keyboard-mail {
                 position: relative;
                 transform: none;
                 animation: keyboardMailFloat 4s ease-in-out infinite;
-                margin: 0;
+                margin: 0 auto;
                 width: 150px;
                 height: 150px;
+                min-width: 150px;
+                min-height: 150px;
+                touch-action: manipulation;
             }
 
             .keyboard-mail-label {
-                font-size: clamp(0.75rem, 2.5vw, 0.85rem);
-                padding: 0.6rem 1rem;
+                font-size: clamp(0.75rem, 2.8vw, 0.9rem);
+                padding: 0.65rem 1.1rem;
                 transform: translate(-35px, 140px);
                 white-space: normal;
-                max-width: 120px;
+                max-width: 130px;
+                min-height: 44px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
             }
 
             .keyboard-section .jux-linx {
@@ -2054,44 +2090,147 @@
 
         @media (max-width: 480px) {
             .keyboard-section {
-                padding: 2rem 0.75rem 4.5rem 0.75rem;
+                padding: 1.75rem 0.75rem 3.5rem 0.75rem;
+            }
+
+            /* Further reduce particles on small screens */
+            .keyboard-particles .particle:nth-child(n+10) {
+                display: none;
+            }
+
+            .keyboard-particles .particle {
+                opacity: 0.3;
             }
 
             .keyboard-wrapper {
-                padding: 0 0.25rem 1.25rem 0.25rem;
+                padding: 0 0.5rem 1.25rem 0.5rem;
+                gap: 1.5rem;
+            }
+
+            .keyboard {
+                gap: 0.2rem;
+                margin-bottom: 0;
+            }
+
+            .keyboard .key {
+                font-size: clamp(1.1rem, 6.5vw, 1.5rem);
+                padding: 0.3rem 0.4rem;
+                min-width: 44px;
+                min-height: 44px;
+            }
+
+            .keyboard .key-space {
+                width: clamp(0.75rem, 3vw, 1.25rem);
+            }
+
+            .keyboard-content {
+                gap: 1.75rem;
+            }
+
+            .keyboard-message {
+                font-size: clamp(0.875rem, 3.8vw, 1rem);
+                line-height: 1.7;
+                padding: 0 0.75rem;
+            }
+
+            .keyboard-mail {
+                width: 140px;
+                height: 140px;
+                min-width: 140px;
+                min-height: 140px;
+            }
+
+            .keyboard-mail-label {
+                font-size: clamp(0.7rem, 3.2vw, 0.85rem);
+                padding: 0.6rem 1rem;
+                transform: translate(-32px, 130px);
+                max-width: 120px;
+                min-height: 44px;
+            }
+
+            .animated-mail {
+                height: 130px;
+                width: 170px;
+            }
+
+            .animated-mail .body {
+                border-width: 0 0 85px 170px;
+            }
+
+            .animated-mail .top-fold {
+                border-width: 42px 85px 0 85px;
+                top: 42px;
+            }
+
+            .animated-mail .back-fold {
+                width: 170px;
+                height: 85px;
+            }
+
+            .animated-mail .left-fold {
+                border-width: 42px 0 42px 85px;
+            }
+
+            .animated-mail .letter {
+                left: 17px;
+                width: 136px;
+                height: 51px;
+            }
+        }
+
+        @media (max-width: 375px) {
+            .keyboard-section {
+                padding: 1.5rem 0.5rem 3rem 0.5rem;
+            }
+
+            /* Hide even more particles on very small screens */
+            .keyboard-particles .particle:nth-child(n+8) {
+                display: none;
+            }
+
+            .keyboard-particles .particle {
+                opacity: 0.25;
+            }
+
+            .keyboard-wrapper {
+                padding: 0 0.5rem 1rem 0.5rem;
                 gap: 1.5rem;
             }
 
             .keyboard {
                 gap: 0.15rem;
-                margin-bottom: 0;
             }
 
             .keyboard .key {
-                font-size: clamp(1rem, 6vw, 1.4rem);
-                padding: 0.25rem 0.3rem;
+                font-size: clamp(1rem, 7.5vw, 1.3rem);
+                padding: 0.3rem 0.35rem;
+                min-width: 44px;
+                min-height: 44px;
             }
 
-            .keyboard-content {
-                gap: 1.5rem;
+            .keyboard .key-space {
+                width: clamp(0.5rem, 2.5vw, 1rem);
             }
 
             .keyboard-message {
-                font-size: clamp(0.85rem, 3.5vw, 0.95rem);
-                line-height: 1.6;
+                font-size: clamp(0.8rem, 4vw, 0.95rem);
+                line-height: 1.65;
                 padding: 0 0.5rem;
             }
 
             .keyboard-mail {
                 width: 130px;
                 height: 130px;
+                min-width: 130px;
+                min-height: 130px;
             }
 
             .keyboard-mail-label {
-                font-size: clamp(0.7rem, 3vw, 0.8rem);
-                padding: 0.5rem 0.875rem;
                 transform: translate(-30px, 120px);
                 max-width: 110px;
+                font-size: clamp(0.65rem, 3.5vw, 0.8rem);
+                padding: 0.55rem 0.9rem;
+                min-height: 44px;
             }
 
             .animated-mail {
@@ -2124,38 +2263,72 @@
             }
         }
 
-        @media (max-width: 375px) {
+        /* Very small screens (320px and below) */
+        @media (max-width: 320px) {
             .keyboard-section {
-                padding: 1.75rem 0.5rem 4rem 0.5rem;
+                padding: 1.25rem 0.5rem 2.5rem 0.5rem;
+            }
+
+            .keyboard-particles .particle:nth-child(n+6) {
+                display: none;
             }
 
             .keyboard-wrapper {
-                padding-bottom: 1rem;
+                padding: 0 0.5rem 0.75rem 0.5rem;
                 gap: 1.25rem;
             }
 
             .keyboard .key {
-                font-size: clamp(0.9rem, 7vw, 1.2rem);
+                font-size: clamp(0.95rem, 8vw, 1.2rem);
+                padding: 0.25rem 0.3rem;
             }
 
             .keyboard-message {
-                font-size: 0.8rem;
+                font-size: clamp(0.75rem, 4.5vw, 0.9rem);
                 padding: 0 0.25rem;
             }
 
             .keyboard-mail {
                 width: 120px;
                 height: 120px;
+                min-width: 120px;
+                min-height: 120px;
             }
 
             .keyboard-mail-label {
                 transform: translate(-28px, 110px);
                 max-width: 100px;
-                font-size: 0.7rem;
-                padding: 0.45rem 0.75rem;
+                font-size: clamp(0.65rem, 4vw, 0.75rem);
+                padding: 0.5rem 0.8rem;
             }
         }
 
+        /* Reduced motion support for accessibility */
+        @media (prefers-reduced-motion: reduce) {
+            .keyboard-particles .particle {
+                animation: none;
+                opacity: 0.2;
+            }
+
+            .keyboard-mail {
+                animation: none;
+            }
+        }
+
+        /* Performance optimizations for mobile */
+        @media (max-width: 768px) {
+            .keyboard-section {
+                will-change: auto;
+            }
+
+            .keyboard-particles {
+                will-change: transform;
+            }
+
+            .keyboard-mail {
+                will-change: transform;
+            }
+        }
 
         @media (max-width: 1024px) {
             .brochure-section {
@@ -4626,12 +4799,12 @@
                     <img src="../assets/images/audivis/eicon.png" alt="Email icon for contacting audio services team"
                         loading="lazy">
                 </div>
-                <button class="email-button" onclick="window.location.href='mailto:saras@mihientertainment.com'"
+                <a href="mailto:saras@mihientertainment.com" class="email-button"
                     aria-label="Email our audio services team">
                     <span class="email-button-layer" aria-hidden="true"></span>
                     <span class="email-button-layer" aria-hidden="true"></span>
                     <span class="email-button-text">Email Our Team</span>
-                </button>
+                </a>
             </div>
         </section>
 
