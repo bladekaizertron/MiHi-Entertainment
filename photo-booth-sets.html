@@ -273,6 +273,22 @@
         rel="stylesheet">
 
     <style>
+        @font-face {
+            font-family: 'AzoSans';
+            src: url('assets/fonts/AzoSans-Regular.woff2') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'AzoSansUber';
+            src: url('assets/fonts/AzoSansUber-Regular.woff2') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+
         body {
             font-family: 'Inter', sans-serif;
             color: #1a202c;
@@ -375,7 +391,7 @@
         }
 
         .theme-card:hover::before {
-            opacity: 1;
+            opacity: 0;
         }
 
         .theme-card:hover {
@@ -417,13 +433,36 @@
             right: 0;
             height: 8px;
             background: linear-gradient(90deg,
-                    #FF6B6B 0%,
-                    #4ECDC4 25%,
-                    #45B7D1 50%,
-                    #FFA07A 75%,
-                    #FF6B6B 100%);
+                    #18F1E1 0%,
+                    #18F1E1 25%,
+                    #18F1E1 50%,
+                    #18F1E1 75%,
+                    #18F1E1 100%);
             border-radius: 4px;
             opacity: 0.7;
+        }
+
+        .brush-stroke-cyan::after {
+            background: #18F1E1;
+        }
+
+        .btn-start-designing {
+            background-color: #FF4F4F !important;
+        }
+
+        .btn-start-designing::before {
+            display: none !important;
+        }
+
+        .btn-start-designing:hover {
+            background-color: #18F1E1 !important;
+            color: #1F1F1F !important;
+            transform: none !important;
+            box-shadow: none !important;
+        }
+
+        .btn-start-designing:hover::before {
+            display: none !important;
         }
 
         /* Gradient Text with Multiple Colors */
@@ -444,7 +483,7 @@
 
         /* Creative Button */
         .btn-creative {
-            background: linear-gradient(135deg, #FF6B6B 0%, #4ECDC4 50%, #45B7D1 100%);
+            background: linear-gradient(135deg, #FF4F4F 0%, #FF4F4F 50%, #FF4F4F 100%);
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
@@ -454,7 +493,7 @@
             content: '';
             position: absolute;
             inset: 0;
-            background: linear-gradient(135deg, #45B7D1 0%, #4ECDC4 50%, #FF6B6B 100%);
+            background: linear-gradient(135deg, #FF4F4F 0%, #FF4F4F 50%, #FF4F4F 100%);
             opacity: 0;
             transition: opacity 0.3s ease;
         }
@@ -489,7 +528,7 @@
 
         /* Set Badge */
         .set-badge {
-            background: linear-gradient(135deg, rgba(255, 107, 107, 0.9) 0%, rgba(78, 205, 196, 0.9) 100%);
+            background: linear-gradient(135deg, #18F1E1 0%, #18F1E1 100%);
             backdrop-filter: blur(10px);
             border: 2px solid rgba(255, 255, 255, 0.3);
         }
@@ -504,7 +543,7 @@
             content: 'VIEW DETAILS';
             position: absolute;
             inset: 0;
-            background: linear-gradient(135deg, rgba(255, 107, 107, 0.9), rgba(78, 205, 196, 0.9));
+            background: transparent;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -516,7 +555,7 @@
         }
 
         .theme-card:hover .theme-card-image::after {
-            opacity: 1;
+            opacity: 0;
         }
 
         /* Confetti Dots */
@@ -725,7 +764,7 @@
             content: '';
             position: absolute;
             inset: -4px;
-            background: linear-gradient(45deg, #FF6B6B, #4ECDC4, #45B7D1, #FFA07A, #FF6B6B);
+            background: linear-gradient(45deg, #18F1E1, #18F1E1, #18F1E1, #18F1E1, #18F1E1);
             background-size: 300% 300%;
             border-radius: 26px;
             z-index: -1;
@@ -790,29 +829,25 @@
             <div class="container mx-auto px-4 sm:px-6 pt-20 relative z-10 w-full">
                 <div class="max-w-7xl mx-auto text-center">
                     <!-- Badge -->
-                    <div
-                        class="inline-flex items-center gap-2 sm:gap-3 px-4 sm:px-6 py-2 bg-white/20 backdrop-blur-md rounded-full border-2 border-white/40 set-badge dancing-border shadow-lg mb-6 sm:mb-8">
-                        <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="currentColor" viewBox="0 0 20 20">
-                            <path
-                                d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z">
-                            </path>
-                        </svg>
-                        <span class="text-white text-xs sm:text-sm font-bold tracking-wider uppercase">When A Backdrop
-                            Isn't Enough</span>
-                    </div>
+                    <span
+                        class="inline-block text-white text-xs sm:text-sm font-bold tracking-wider uppercase rounded-full px-3 sm:px-4 py-1 sm:py-1.5 mb-6 sm:mb-8"
+                        style="background-color: #FF4F4F; font-family: 'AzoSans', sans-serif;">When A Backdrop
+                        Isn't Enough</span>
 
                     <!-- Main Title -->
-                    <h1 class="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black mb-6 leading-tight">
-                        <span class="block text-white drop-shadow-2xl"
-                            style="text-shadow: 0 0 40px rgba(255, 255, 255, 0.3);">
-                            Custom-Themed Photo Booth Sets
+                    <h1 class="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black mb-6 leading-tight"
+                        style="font-family: 'AzoSansUber', sans-serif;">
+                        <span class="block drop-shadow-2xl"
+                            style="font-weight: 300; text-shadow: 0 0 40px rgba(0, 0, 0, 0.5);">
+                            <span style="color: #FF4F4F;">Custom-Themed</span> <span style="color: #18F1E1;">Photo Booth
+                                Sets</span>
                         </span>
                     </h1>
 
                     <!-- Description -->
                     <div class="max-w-3xl mx-auto mb-8">
-                        <p
-                            class="text-lg sm:text-xl md:text-2xl leading-relaxed text-white/90 font-light drop-shadow-lg">
+                        <p class="text-lg sm:text-xl md:text-2xl leading-relaxed text-white font-light drop-shadow-lg"
+                            style="font-family: 'AzoSans', sans-serif;">
                             Fully branded, immersive photo set designs made just for you. Transform your event with
                             custom-built sets that bring your theme to life!
                         </p>
@@ -821,7 +856,8 @@
                     <!-- CTA Buttons -->
                     <div class="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center px-4">
                         <a href="contact-us.html"
-                            class="group relative inline-flex items-center gap-2 sm:gap-3 btn-creative text-white px-6 sm:px-10 py-3 sm:py-5 rounded-full text-base sm:text-lg font-bold shadow-2xl transition-all duration-500 transform hover:scale-110 hover:-translate-y-1 w-full sm:w-auto justify-center">
+                            class="group relative inline-flex items-center gap-2 sm:gap-3 text-white px-6 sm:px-10 py-3 sm:py-5 rounded-full text-base sm:text-lg font-bold shadow-2xl transition-all duration-500 transform hover:scale-110 hover:-translate-y-1 w-full sm:w-auto justify-center"
+                            style="background-color: #FF4F4F;">
                             <span class="relative z-10">Get Your Quote</span>
                             <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -829,7 +865,7 @@
                             </svg>
                         </a>
                         <button type="button" data-click-to-call data-call-text="Call Us"
-                            class="group inline-flex items-center gap-2 sm:gap-3 px-6 sm:px-10 py-3 sm:py-5 rounded-full text-base sm:text-lg font-bold border-2 border-white text-white bg-white/10 hover:bg-white hover:text-pink-600 transition-all duration-500 transform hover:scale-110 hover:-translate-y-1 backdrop-blur-sm cursor-pointer w-full sm:w-auto justify-center">
+                            class="group inline-flex items-center gap-2 sm:gap-3 px-6 sm:px-10 py-3 sm:py-5 rounded-full text-base sm:text-lg font-bold border-2 border-white text-white bg-white/10 hover:bg-white hover:text-[#1F1F1F] transition-all duration-500 transform hover:scale-110 hover:-translate-y-1 backdrop-blur-sm cursor-pointer w-full sm:w-auto justify-center">
                             <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="currentColor" viewBox="0 0 20 20">
                                 <path
                                     d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z">
@@ -907,10 +943,11 @@
                         </div>
                     </div>
                     <div class="text-center mb-16">
-                        <h2 class="text-4xl md:text-5xl font-bold mb-6 brush-stroke inline-block pb-4">
-                            <span class="rainbow-text">Immersive Set Experiences</span>
+                        <h2 class="text-4xl md:text-5xl font-light mb-6 brush-stroke brush-stroke-cyan inline-block pb-4"
+                            style="font-family: 'AzoSansUber', sans-serif;">
+                            <span style="color: #FF4F4F;">Immersive Set Experiences</span>
                         </h2>
-                        <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                        <p class="text-xl max-w-3xl mx-auto leading-relaxed" style="color: #1F1F1F;">
                             We can customize almost every aspect of your event, so why wouldn't we have a custom photo
                             shoot set that your party guests can enjoy?
                         </p>
@@ -921,15 +958,17 @@
                         <div
                             class="gradient-border p-8 rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-300 text-center card-3d">
                             <div
-                                class="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-pink-500 to-rose-500 rounded-3xl flex items-center justify-center transform hover:rotate-12 transition-transform duration-300">
+                                class="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-[#FF4F4F] to-[#FF4F4F] rounded-3xl flex items-center justify-center transform hover:rotate-12 transition-transform duration-300">
                                 <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01">
                                     </path>
                                 </svg>
                             </div>
-                            <h3 class="text-xl font-bold mb-3">Fully Custom Designs</h3>
-                            <p class="text-gray-600">Every set is built from scratch to match your exact vision and
+                            <h3 class="text-xl font-light mb-3"
+                                style="color: #1F1F1F/50;font-family: 'AzoSansUber', sans-serif;">Fully
+                                Custom Designs</h3>
+                            <p class="text-[#1F1F1F]-600">Every set is built from scratch to match your exact vision and
                                 theme</p>
                         </div>
 
@@ -937,15 +976,18 @@
                         <div
                             class="gradient-border p-8 rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-300 text-center card-3d">
                             <div
-                                class="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-3xl flex items-center justify-center transform hover:rotate-12 transition-transform duration-300">
+                                class="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-[#FF4F4F] to-[#FF4F4F] rounded-3xl flex items-center justify-center transform hover:rotate-12 transition-transform duration-300">
                                 <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4">
                                     </path>
                                 </svg>
                             </div>
-                            <h3 class="text-xl font-bold mb-3">Professional Build</h3>
-                            <p class="text-gray-600">High-quality materials and expert construction for stunning results
+                            <h3 class="text-xl font-light mb-3"
+                                style="color: #1F1F1F/50;font-family: 'AzoSansUber', sans-serif;">Professional Build
+                            </h3>
+                            <p class="text-[#1F1F1F]-600">High-quality materials and expert construction for stunning
+                                results
                             </p>
                         </div>
 
@@ -953,15 +995,18 @@
                         <div
                             class="gradient-border p-8 rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-300 text-center card-3d">
                             <div
-                                class="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-purple-500 to-pink-500 rounded-3xl flex items-center justify-center transform hover:rotate-12 transition-transform duration-300">
+                                class="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-[#FF4F4F] to-[#FF4F4F] rounded-3xl flex items-center justify-center transform hover:rotate-12 transition-transform duration-300">
                                 <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M14 10l-2 1m0 0l-2-1m2 1v2.5M20 7l-2 1m2-1l-2-1m2 1v2.5M14 4l-2-1-2 1M4 7l2-1M4 7l2 1M4 7v2.5M12 21l-2-1m2 1l2-1m-2 1v-2.5M6 18l-2-1v-2.5M18 18l2-1v-2.5">
                                     </path>
                                 </svg>
                             </div>
-                            <h3 class="text-xl font-bold mb-3">Full Service Setup</h3>
-                            <p class="text-gray-600">We handle delivery, setup, and teardown so you can focus on your
+                            <h3 class="text-xl font-light mb-3"
+                                style="color: #1F1F1F/50;font-family: 'AzoSansUber', sans-serif;">Full Service Setup
+                            </h3>
+                            <p class="text-[#1F1F1F]-600">We handle delivery, setup, and teardown so you can focus on
+                                your
                                 event</p>
                         </div>
                     </div>
@@ -999,10 +1044,11 @@
                         </div>
                     </div>
                     <div class="text-center mb-16">
-                        <h2 class="text-4xl md:text-5xl font-bold mb-6 brush-stroke inline-block pb-4">
-                            Our Themed Sets
+                        <h2 class="text-4xl md:text-5xl font-light mb-6 brush-stroke brush-stroke-cyan inline-block pb-4"
+                            style="font-family: 'AzoSansUber', sans-serif;">
+                            <span style="color: #FF4F4F;">Our Themed Sets</span>
                         </h2>
-                        <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                        <p class="text-xl max-w-3xl mx-auto leading-relaxed" style="color: #1F1F1F;">
                             Check out some of the sets we have for your themed event below. Not seeing what you're
                             wanting? Let us know and we'll start designing!
                         </p>
@@ -1012,17 +1058,23 @@
                         <!-- Set 1: Snow Globe -->
                         <a href="../../custom-sets/snow-globe-photo-set.html"
                             class="theme-card bg-white rounded-3xl shadow-2xl overflow-hidden block hover:shadow-3xl transition-all duration-300 hover:-translate-y-1">
-                            <div class="theme-card-image h-80 bg-gradient-to-br from-blue-100 to-white relative">
+                            <div class="theme-card-image h-80 bg-gradient-to-br from-[#FF4F4F] to-[#FF4F4F] relative">
                                 <img src="../../assets/images/custom-sets/snow-globe-set.webp"
                                     alt="Snow globe themed photo booth set for winter events" width="600" height="400"
                                     class="w-full h-full object-cover" loading="lazy">
                                 <div class="absolute top-4 right-4 set-badge px-4 py-2 rounded-full">
-                                    <span class="text-white font-bold text-sm">WINTER</span>
+                                    <span class="text-white font-bold text-sm" style="color: #1F1F1F;">WINTER</span>
                                 </div>
                             </div>
                             <div class="p-6">
-                                <h3 class="text-2xl font-bold mb-3">Snow Globe Set</h3>
-                                <p class="text-gray-600">Step inside a magical winter wonderland with our enchanting
+                                <h3 class="text-2xl font-light mb-3"
+                                    style="color: #FF4F4F;font-family: 'AzoSansUber', sans-serif;">
+                                    Snow
+                                    Globe Set</h3>
+                                <p class="text-[#1F1F1F]-600" style="font-family: 'AzoSans', sans-serif;">Step inside a
+                                    magical winter
+                                    wonderland with our
+                                    enchanting
                                     snow globe themed set</p>
                             </div>
                         </a>
@@ -1035,12 +1087,14 @@
                                     alt="Ski lift themed photo booth set for alpine and winter events" width="600"
                                     height="400" class="w-full h-full object-cover" loading="lazy">
                                 <div class="absolute top-4 right-4 set-badge px-4 py-2 rounded-full">
-                                    <span class="text-white font-bold text-sm">ALPINE</span>
+                                    <span class="text-white font-bold text-sm" style="color: #1F1F1F;">ALPINE</span>
                                 </div>
                             </div>
                             <div class="p-6">
-                                <h3 class="text-2xl font-bold mb-3">Ski Lift Set</h3>
-                                <p class="text-gray-600">Feel the mountain vibes with an authentic ski lift experience
+                                <h3 class="text-2xl font-light mb-3"
+                                    style="color: #FF4F4F;font-family: 'AzoSansUber', sans-serif;">Ski Lift Set</h3>
+                                <p class="text-[#1F1F1F]-600" style="font-family: 'AzoSans', sans-serif;">Feel the
+                                    mountain vibes with an authentic ski lift experience
                                     perfect for winter events</p>
                             </div>
                         </a>
@@ -1053,12 +1107,15 @@
                                     alt="White water raft themed photo booth set for adventure events" width="600"
                                     height="400" class="w-full h-full object-cover" loading="lazy">
                                 <div class="absolute top-4 right-4 set-badge px-4 py-2 rounded-full">
-                                    <span class="text-white font-bold text-sm">ADVENTURE</span>
+                                    <span class="text-white font-bold text-sm" style="color: #1F1F1F;">ADVENTURE</span>
                                 </div>
                             </div>
                             <div class="p-6">
-                                <h3 class="text-2xl font-bold mb-3">White Water Raft Set</h3>
-                                <p class="text-gray-600">Capture the thrill of adventure with our exciting white water
+                                <h3 class="text-2xl font-light mb-3"
+                                    style="color: #FF4F4F;font-family: 'AzoSansUber', sans-serif;">White Water Raft Set
+                                </h3>
+                                <p class="text-[#1F1F1F]-600" style="font-family: 'AzoSans', sans-serif;">Capture the
+                                    thrill of adventure with our exciting white water
                                     rafting themed set</p>
                             </div>
                         </a>
@@ -1071,12 +1128,15 @@
                                     alt="Great Gatsby themed photo booth set for 1920s events" width="600" height="400"
                                     class="w-full h-full object-cover" loading="lazy">
                                 <div class="absolute top-4 right-4 set-badge px-4 py-2 rounded-full">
-                                    <span class="text-white font-bold text-sm">1920s</span>
+                                    <span class="text-white font-bold text-sm" style="color: #1F1F1F;">1920s</span>
                                 </div>
                             </div>
                             <div class="p-6">
-                                <h3 class="text-2xl font-bold mb-3">Gatsby Themed Set</h3>
-                                <p class="text-gray-600">Bring the roaring twenties to life with our elegant Great
+                                <h3 class="text-2xl font-light mb-3"
+                                    style="color: #FF4F4F;font-family: 'AzoSansUber', sans-serif;">Gatsby Themed Set
+                                </h3>
+                                <p class="text-[#1F1F1F]-600" style="font-family: 'AzoSans', sans-serif;">Bring the
+                                    roaring twenties to life with our elegant Great
                                     Gatsby inspired set</p>
                             </div>
                         </a>
@@ -1089,12 +1149,14 @@
                                     alt="Holiday sleigh themed photo booth set for seasonal celebrations" width="600"
                                     height="400" class="w-full h-full object-cover" loading="lazy">
                                 <div class="absolute top-4 right-4 set-badge px-4 py-2 rounded-full">
-                                    <span class="text-white font-bold text-sm">HOLIDAY</span>
+                                    <span class="text-white font-bold text-sm" style="color: #1F1F1F;">HOLIDAY</span>
                                 </div>
                             </div>
                             <div class="p-6">
-                                <h3 class="text-2xl font-bold mb-3">Sleigh Set</h3>
-                                <p class="text-gray-600">Create holiday magic with our festive sleigh set perfect for
+                                <h3 class="text-2xl font-light mb-3"
+                                    style="color: #FF4F4F;font-family: 'AzoSansUber', sans-serif;">Sleigh Set</h3>
+                                <p class="text-[#1F1F1F]-600" style="font-family: 'AzoSans', sans-serif;">Create holiday
+                                    magic with our festive sleigh set perfect for
                                     seasonal celebrations</p>
                             </div>
                         </a>
@@ -1107,12 +1169,14 @@
                                     alt="Wild West saloon door themed photo booth set" width="600" height="400"
                                     class="w-full h-full object-cover" loading="lazy">
                                 <div class="absolute top-4 right-4 set-badge px-4 py-2 rounded-full">
-                                    <span class="text-white font-bold text-sm">WESTERN</span>
+                                    <span class="text-white font-bold text-sm" style="color: #1F1F1F;">WESTERN</span>
                                 </div>
                             </div>
                             <div class="p-6">
-                                <h3 class="text-2xl font-bold mb-3">Saloon Door Set</h3>
-                                <p class="text-gray-600">Step into the Wild West with our authentic saloon-style photo
+                                <h3 class="text-2xl font-light mb-3"
+                                    style="color: #FF4F4F;font-family: 'AzoSansUber', sans-serif;">Saloon Door Set</h3>
+                                <p class="text-[#1F1F1F]-600" style="font-family: 'AzoSans', sans-serif;">Step into the
+                                    Wild West with our authentic saloon-style photo
                                     set</p>
                             </div>
                         </a>
@@ -1125,12 +1189,16 @@
                                     alt="Ski goggle themed photo booth set for winter sports events and trade shows"
                                     width="600" height="400" class="w-full h-full object-cover" loading="lazy">
                                 <div class="absolute top-4 right-4 set-badge px-4 py-2 rounded-full">
-                                    <span class="text-white font-bold text-sm">WINTER SPORTS</span>
+                                    <span class="text-white font-bold text-sm" style="color: #1F1F1F;">WINTER
+                                        SPORTS</span>
                                 </div>
                             </div>
                             <div class="p-6">
-                                <h3 class="text-2xl font-bold mb-3">Ski Goggle Photo Set</h3>
-                                <p class="text-gray-600">Hit the slopes with style! Capture the excitement of winter
+                                <h3 class="text-2xl font-light mb-3"
+                                    style="color: #FF4F4F;font-family: 'AzoSansUber', sans-serif;">Ski Goggle Photo Set
+                                </h3>
+                                <p class="text-[#1F1F1F]-600" style="font-family: 'AzoSans', sans-serif;">Hit the slopes
+                                    with style! Capture the excitement of winter
                                     sports with our dynamic ski goggle set, perfect for trade shows and branded
                                     activations</p>
                             </div>
@@ -1149,10 +1217,13 @@
                                                 d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
                                         </svg>
                                     </div>
-                                    <h3 class="text-2xl font-bold mb-3">Your Custom Design</h3>
-                                    <p class="text-gray-600 mb-4">Don't see your theme? We'll design it!</p>
+                                    <h3 class="text-2xl font-light mb-3"
+                                        style="color: #FF4F4F;font-family: 'AzoSansUber', sans-serif;">Your Custom
+                                        Design</h3>
+                                    <p class="text-[#1F1F1F]-600 mb-4" style="font-family: 'AzoSans', sans-serif;">Don't
+                                        see your theme? We'll design it!</p>
                                     <a href="contact-us.html"
-                                        class="inline-block btn-creative text-white px-8 py-3 rounded-full font-semibold">
+                                        class="inline-block btn-creative text-white px-8 py-3 rounded-full font-semibold btn-start-designing transition-colors duration-300">
                                         Start Designing
                                     </a>
                                 </div>
@@ -1194,10 +1265,12 @@
                         </div>
                     </div>
                     <div class="text-center mb-16">
-                        <h2 class="text-4xl md:text-5xl font-bold mb-6 brush-stroke inline-block pb-4">
-                            How It <span class="rainbow-text">Works</span>
+                        <h2 class="text-4xl md:text-5xl font-light mb-6 brush-stroke inline-block pb-4"
+                            style="color: #FF4F4F;font-family: 'AzoSansUber', sans-serif;">
+                            How It Works
                         </h2>
-                        <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                        <p class="text-xl text-[#1F1F1F]-600 max-w-3xl mx-auto"
+                            style="font-family: 'AzoSans', sans-serif;">
                             From concept to completion, we make the process seamless
                         </p>
                     </div>
@@ -1206,41 +1279,50 @@
                         <!-- Step 1 -->
                         <div class="text-center">
                             <div
-                                class="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-pink-500 to-rose-500 rounded-full flex items-center justify-center text-white text-2xl font-bold shadow-xl colorful-glow">
+                                class="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-[#18F1E1] to-[#18F1E1] rounded-full flex items-center justify-center text-[#1F1F1F] text-2xl font-bold shadow-xl colorful-glow">
                                 1
                             </div>
-                            <h3 class="text-xl font-bold mb-3">Share Your Vision</h3>
-                            <p class="text-gray-600">Tell us about your theme, event, and creative ideas</p>
+                            <h3 class="text-xl font-light mb-3"
+                                style="color: #FF4F4F;font-family: 'AzoSansUber', sans-serif;">Share Your Vision</h3>
+                            <p class="text-[#1F1F1F]-600" style="font-family: 'AzoSans', sans-serif;">Tell us about your
+                                theme, event, and creative ideas</p>
                         </div>
 
                         <!-- Step 2 -->
                         <div class="text-center">
                             <div
-                                class="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-full flex items-center justify-center text-white text-2xl font-bold shadow-xl colorful-glow">
+                                class="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-[#18F1E1] to-[#18F1E1] rounded-full flex items-center justify-center text-[#1F1F1F] text-2xl font-bold shadow-xl colorful-glow">
                                 2
                             </div>
-                            <h3 class="text-xl font-bold mb-3">Design & Approval</h3>
-                            <p class="text-gray-600">We create mockups and refine until it's perfect</p>
+                            <h3 class="text-xl font-light mb-3"
+                                style="color: #FF4F4F;font-family: 'AzoSansUber', sans-serif;">Design & Approval</h3>
+                            <p class="text-[#1F1F1F]-600" style="font-family: 'AzoSans', sans-serif;">We create mockups
+                                and
+                                refine until it's perfect</p>
                         </div>
 
                         <!-- Step 3 -->
                         <div class="text-center">
                             <div
-                                class="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center text-white text-2xl font-bold shadow-xl colorful-glow">
+                                class="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-[#18F1E1] to-[#18F1E1] rounded-full flex items-center justify-center text-[#1F1F1F] text-2xl font-bold shadow-xl colorful-glow">
                                 3
                             </div>
-                            <h3 class="text-xl font-bold mb-3">Build & Prepare</h3>
-                            <p class="text-gray-600">Our team constructs your set with precision and care</p>
+                            <h3 class="text-xl font-light mb-3"
+                                style="color: #FF4F4F;font-family: 'AzoSansUber', sans-serif;">Build & Prepare</h3>
+                            <p class="text-[#1F1F1F]-600" style="font-family: 'AzoSans', sans-serif;">Our team
+                                constructs your set with precision and care</p>
                         </div>
 
                         <!-- Step 4 -->
                         <div class="text-center">
                             <div
-                                class="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-green-500 to-teal-500 rounded-full flex items-center justify-center text-white text-2xl font-bold shadow-xl colorful-glow">
+                                class="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-[#18F1E1] to-[#18F1E1] rounded-full flex items-center justify-center text-[#1F1F1F] text-2xl font-bold shadow-xl colorful-glow">
                                 4
                             </div>
-                            <h3 class="text-xl font-bold mb-3">Deliver & Setup</h3>
-                            <p class="text-gray-600">We install at your venue and ensure everything is perfect</p>
+                            <h3 class="text-xl font-light mb-3"
+                                style="color: #FF4F4F;font-family: 'AzoSansUber', sans-serif;">Deliver & Setup</h3>
+                            <p class="text-[#1F1F1F]-600" style="font-family: 'AzoSans', sans-serif;">We install at your
+                                venue and ensure everything is perfect</p>
                         </div>
                     </div>
                 </div>
@@ -1277,8 +1359,9 @@
                         </div>
                     </div>
                     <div class="text-center mb-16">
-                        <h2 class="text-4xl md:text-5xl font-bold mb-6 brush-stroke inline-block pb-4">
-                            Why Choose <span class="rainbow-text">Custom Sets</span>?
+                        <h2 class="text-4xl md:text-5xl font-light mb-6 brush-stroke inline-block pb-4"
+                            style="color: #FF4F4F;font-family: 'AzoSansUber', sans-serif;">
+                            Why Choose Custom Sets?
                         </h2>
                     </div>
 
@@ -1287,8 +1370,8 @@
                             <div class="flex items-start space-x-4">
                                 <div class="flex-shrink-0">
                                     <div
-                                        class="w-14 h-14 bg-gradient-to-br from-pink-500 to-rose-500 rounded-2xl flex items-center justify-center">
-                                        <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor"
+                                        class="w-14 h-14 bg-gradient-to-br from-[#18F1E1] to-[#18F1E1] rounded-2xl flex items-center justify-center">
+                                        <svg class="w-7 h-7 text-[#1F1F1F]" fill="none" stroke="currentColor"
                                             viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                 d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z">
@@ -1297,8 +1380,11 @@
                                     </div>
                                 </div>
                                 <div>
-                                    <h3 class="text-xl font-bold mb-2">Memorable Photo Moments</h3>
-                                    <p class="text-gray-600">Create Instagram-worthy moments your guests will never
+                                    <h3 class="text-xl font-light mb-2"
+                                        style="color: #FF4F4F;font-family: 'AzoSansUber', sans-serif;">Memorable Photo
+                                        Moments</h3>
+                                    <p class="text-[#1F1F1F]-600" style="font-family: 'AzoSans', sans-serif;">Create
+                                        Instagram-worthy moments your guests will never
                                         forget</p>
                                 </div>
                             </div>
@@ -1308,8 +1394,8 @@
                             <div class="flex items-start space-x-4">
                                 <div class="flex-shrink-0">
                                     <div
-                                        class="w-14 h-14 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-2xl flex items-center justify-center">
-                                        <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor"
+                                        class="w-14 h-14 bg-gradient-to-br from-[#18F1E1] to-[#18F1E1] rounded-2xl flex items-center justify-center">
+                                        <svg class="w-7 h-7 text-[#1F1F1F]" fill="none" stroke="currentColor"
                                             viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                 d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01">
@@ -1318,8 +1404,11 @@
                                     </div>
                                 </div>
                                 <div>
-                                    <h3 class="text-xl font-bold mb-2">Fully Branded Experience</h3>
-                                    <p class="text-gray-600">Incorporate your logo, colors, and branding throughout the
+                                    <h3 class="text-xl font-light mb-2"
+                                        style="color: #FF4F4F;font-family: 'AzoSansUber', sans-serif;">Fully Branded
+                                        Experience</h3>
+                                    <p class="text-[#1F1F1F]-600" style="font-family: 'AzoSans', sans-serif;">
+                                        Incorporate your logo, colors, and branding throughout the
                                         set</p>
                                 </div>
                             </div>
@@ -1329,8 +1418,8 @@
                             <div class="flex items-start space-x-4">
                                 <div class="flex-shrink-0">
                                     <div
-                                        class="w-14 h-14 bg-gradient-to-br from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center">
-                                        <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor"
+                                        class="w-14 h-14 bg-gradient-to-br from-[#18F1E1] to-[#18F1E1] rounded-2xl flex items-center justify-center">
+                                        <svg class="w-7 h-7 text-[#1F1F1F]" fill="none" stroke="currentColor"
                                             viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                 d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7">
@@ -1339,8 +1428,11 @@
                                     </div>
                                 </div>
                                 <div>
-                                    <h3 class="text-xl font-bold mb-2">Perfect for Any Event</h3>
-                                    <p class="text-gray-600">Corporate events, weddings, trade shows, parties, and more
+                                    <h3 class="text-xl font-light mb-2"
+                                        style="color: #FF4F4F;font-family: 'AzoSansUber', sans-serif;">Perfect for Any
+                                        Event</h3>
+                                    <p class="text-[#1F1F1F]-600" style="font-family: 'AzoSans', sans-serif;">Corporate
+                                        events, weddings, trade shows, parties, and more
                                     </p>
                                 </div>
                             </div>
@@ -1350,8 +1442,8 @@
                             <div class="flex items-start space-x-4">
                                 <div class="flex-shrink-0">
                                     <div
-                                        class="w-14 h-14 bg-gradient-to-br from-green-500 to-teal-500 rounded-2xl flex items-center justify-center">
-                                        <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor"
+                                        class="w-14 h-14 bg-gradient-to-br from-[#18F1E1] to-[#18F1E1] rounded-2xl flex items-center justify-center">
+                                        <svg class="w-7 h-7 text-[#1F1F1F]" fill="none" stroke="currentColor"
                                             viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                 d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z">
@@ -1360,8 +1452,11 @@
                                     </div>
                                 </div>
                                 <div>
-                                    <h3 class="text-xl font-bold mb-2">Professional Quality</h3>
-                                    <p class="text-gray-600">High-end materials and expert craftsmanship guaranteed</p>
+                                    <h3 class="text-xl font-light mb-2"
+                                        style="color: #FF4F4F;font-family: 'AzoSansUber', sans-serif;">Professional
+                                        Quality</h3>
+                                    <p class="text-[#1F1F1F]-600" style="font-family: 'AzoSans', sans-serif;">High-end
+                                        materials and expert craftsmanship guaranteed</p>
                                 </div>
                             </div>
                         </div>
@@ -1374,7 +1469,7 @@
         <div class="section-divider"></div>
 
         <!-- CTA Section -->
-        <section class="section-padding animated-rainbow-gradient text-white relative overflow-hidden">
+        <section class="section-padding text-white relative overflow-hidden" style="background-color: #1F1F1F;">
             <!-- Paint Splatters -->
             <div class="paint-splatter" style="top: 15%; left: 10%;"></div>
             <div class="paint-splatter"
@@ -1386,20 +1481,23 @@
 
             <div class="container mx-auto px-6 relative z-10">
                 <div class="max-w-4xl mx-auto text-center">
-                    <h2 class="text-4xl md:text-5xl font-bold mb-6">
+                    <h2 class="text-4xl md:text-5xl font-light mb-6"
+                        style="color: #18F1E1;font-family: 'AzoSansUber', sans-serif;">
                         Ready to Design Your Dream Set?
                     </h2>
-                    <p class="text-xl mb-8 text-white/90 leading-relaxed">
+                    <p class="text-xl mb-8 text-white/90 leading-relaxed" style="font-family: 'AzoSans', sans-serif;">
                         Let's bring your vision to life! Our team is ready to create a one-of-a-kind photo booth set
                         that will wow your guests and make your event unforgettable.
                     </p>
                     <div class="flex flex-col sm:flex-row gap-4 justify-center">
                         <a href="contact-us.html"
-                            class="bg-white text-pink-600 px-10 py-4 rounded-full font-semibold hover:bg-gray-100 transition-all duration-300 text-lg shadow-2xl">
+                            class="bg-[#FF4F4F] text-[#FFFFFF] px-10 py-4 rounded-full font-semibold hover:bg-gray-100 transition-all duration-300 text-lg shadow-2xl hover:bg-white hover:text-[#FF4F4F]"
+                            style="font-family: 'AzoSans', sans-serif;">
                             Get Your Quote
                         </a>
                         <button type="button" data-click-to-call data-call-text="Call Us"
-                            class="border-3 border-white text-white px-10 py-4 rounded-full font-semibold bg-white/10 hover:bg-white hover:text-pink-600 transition-all duration-300 text-lg backdrop-blur-sm cursor-pointer flex items-center gap-2">
+                            class="border-3 border-white text-white px-10 py-4 rounded-full font-semibold bg-white/10 hover:bg-white hover:text-[#FF4F4F] transition-all duration-300 text-lg backdrop-blur-sm cursor-pointer flex items-center gap-2"
+                            style="font-family: 'AzoSans', sans-serif;">
                             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                                 <path
                                     d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z">
