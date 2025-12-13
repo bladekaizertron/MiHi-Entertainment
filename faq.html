@@ -12,6 +12,22 @@
         href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Open+Sans:wght@400;500;600;700;800&display=swap"
         rel="stylesheet">
     <style>
+        @font-face {
+            font-family: 'AzoSans';
+            src: url('assets/fonts/AzoSans-Regular.woff2') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'AzoSansUber';
+            src: url('assets/fonts/AzoSansUber-Regular.woff2') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+
         body {
             font-family: 'Open Sans', sans-serif;
             color: #1a202c;
@@ -71,11 +87,12 @@
 
         /* Modernized FAQ Heading Styles */
         .faq-heading-modern {
-            background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%);
+            font-family: 'AzoSansUber', sans-serif;
+            background: linear-gradient(135deg, #FF4F4F 0%, #FF4F4F 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            font-weight: 900;
+            font-weight: 500;
             letter-spacing: -0.02em;
             line-height: 0.95;
         }
@@ -90,7 +107,7 @@
             font-size: clamp(1.75rem, 6vw, 3.5rem);
             display: block;
             margin-bottom: 0.1em;
-            background: linear-gradient(135deg, #0050ff 0%, #0040d9 50%, #0050ff 100%);
+            background: linear-gradient(135deg, #FF4F4F 0%, #FF4F4F 50%, #FF4F4F 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -257,7 +274,7 @@
             background-color: transparent;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
-            color: #9287bf;
+            color: #FF4F4F;
             white-space: nowrap;
             text-overflow: ellipsis;
             font-family: 'Montserrat', sans-serif;
@@ -302,7 +319,7 @@
             .faq-page .categories a {
                 padding: 1rem 1rem;
                 font-size: 0.9rem;
-                color: #68689F;
+                color: #FF4F4F;
                 border-bottom: 1px solid #e5e7eb;
                 min-height: 48px;
                 display: flex;
@@ -505,6 +522,7 @@
             }
 
             .faq-page .categories a {
+                font-family: 'AzoSans', sans-serif;
                 text-align: right;
                 font-size: 18px;
                 color: #A2A2C9;
@@ -521,7 +539,7 @@
             }
 
             .faq-page .categories a:hover {
-                color: #0050ff;
+                color: #FF4F4F;
             }
         }
 
@@ -549,7 +567,7 @@
                 z-index: 5;
                 height: 100%;
                 max-height: 800px;
-                border-left: 3px solid #0050ff;
+                border-left: 3px solid #18F1E1;
                 border-radius: 25px;
                 top: 0;
             }
@@ -565,8 +583,8 @@
             }
 
             .faq-page .categories .selected {
-                color: #0050ff !important;
-                border-right: 3px solid #0050ff;
+                color: #FF4F4F !important;
+                border-right: 3px solid #FF4F4F;
                 opacity: 1;
                 -webkit-transition: opacity 0.2s;
                 -moz-transition: opacity 0.2s;
@@ -665,7 +683,7 @@
             display: inline-block;
             height: 3px;
             width: 18px;
-            background: #6c7d8e;
+            background: #1F1F1F;
         }
 
         .faq-page .cd-close-panel::before {
@@ -846,13 +864,14 @@
         }
 
         .faq-page .trigger {
+            font-family: 'AzoSans', sans-serif;
             position: relative;
             display: block;
             margin: 1.6em 0 .4em;
             line-height: 1.2;
             font-family: 'Montserrat', sans-serif;
             font-size: 15px;
-            color: #68689F;
+            color: #1F1F1F;
             font-weight: 600;
             text-decoration: none;
             cursor: pointer;
@@ -874,7 +893,7 @@
                 top: 50%;
                 height: 2px;
                 width: 13px;
-                background: #0050ff;
+                background: #FF4F4F;
                 -webkit-backface-visibility: hidden;
                 backface-visibility: hidden;
                 -webkit-transition-property: -webkit-transform;
@@ -928,7 +947,7 @@
             font-size: 0.875rem;
             line-height: 1.4;
             font-size: 15px;
-            color: #909090;
+            color: #000000;
         }
 
         .faq-page .faq-content ul {
@@ -940,7 +959,7 @@
         .faq-page .faq-content li {
             font-family: 'Open Sans', sans-serif;
             font-size: 15px;
-            color: #909090;
+            color: #FF4F4F;
             line-height: 1.6;
             margin-bottom: 0.5em;
         }
@@ -967,7 +986,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(78, 83, 89, 0.8);
+            background-color: #FF4F4F;
             visibility: visible;
             opacity: 1;
             -webkit-transition: opacity .3s 0s, visibility 0s 0s;
@@ -1338,12 +1357,16 @@
         </div>
         <div class="absolute inset-0 bg-black/60"></div>
         <div class="relative z-10 text-center text-white px-6 max-w-5xl mx-auto py-20">
-            <h1 class="text-5xl md:text-6xl font-bold mb-4"
-                style="text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5), 0 0 20px rgba(0, 0, 0, 0.3);">GOT QUESTIONS?</h1>
-            <h1 class="text-5xl md:text-6xl font-bold mb-4"
-                style="text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5), 0 0 20px rgba(0, 0, 0, 0.3);">WE'VE GOT ANSWERS!
+            <h1 class="text-5xl md:text-6xl font-light mb-4"
+                style="font-family: 'AzoSansUber', sans-serif; text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5), 0 0 20px rgba(0, 0, 0, 0.3);">
+                <span style="color: #FF4F4F;">GOT QUESTIONS?</span>
             </h1>
-            <p class="text-xl md:text-2xl mb-8">Keep scrolling to view our most commonly asked questions and get the
+            <h1 class="text-5xl md:text-6xl font-light mb-4"
+                style="font-family: 'AzoSansUber', sans-serif; text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5), 0 0 20px rgba(0, 0, 0, 0.3);">
+                <span style="color: #18F1E1;">WE'VE GOT ANSWERS!</span>
+            </h1>
+            <p class="text-xl md:text-2xl mb-8" style="font-family: 'AzoSans', sans-serif;">Keep scrolling to view our
+                most commonly asked questions and get the
                 answers you're looking for! Have a question that's not on this page? Reach out now and we'd be more than
                 happy to help!</p>
         </div>
