@@ -1283,7 +1283,7 @@
                                     <!-- Virtual Photo Booth -->
                                     <div class="flex-shrink-0 w-80 snap-start">
                                         <div class="group relative bg-gradient-to-br from-indigo-50 to-purple-50 rounded-2xl p-6 h-full border border-indigo-100 hover:shadow-xl hover:scale-105 hover:border-indigo-300 transition-all duration-300 transform cursor-pointer overflow-hidden"
-                                            style="background-image: url('https://images.unsplash.com/photo-1518709268805-4e9042af2176?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'); background-size: cover; background-position: center;">
+                                            style="background-image: url('../assets/images/virtual/virtual-1.webp?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'); background-size: cover; background-position: center;">
                                             <a href="product/virtual-photo-booth.html"
                                                 class="absolute inset-0 bg-black/30 rounded-2xl z-10"
                                                 aria-label="Learn more about Virtual Photo Booth"></a>
@@ -1721,7 +1721,7 @@
                                     class="carousel-slide absolute inset-0 transition-opacity duration-500 opacity-100">
                                     <div
                                         class="group relative bg-gradient-to-r from-[#0050ff] to-[#0040d9] rounded-3xl overflow-hidden h-full cursor-pointer">
-                                        <img src="https://images.unsplash.com/photo-1606800052052-a08af7148866?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
+                                        <img src="../assets/images/event-photography/event-photography-1.webp?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
                                             alt="Professional event photography services for weddings, corporate events, and parties by MiHi Entertainment"
                                             class="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:opacity-50 transition"
                                             loading="lazy" width="1000" height="600">
@@ -1752,7 +1752,7 @@
                                 <div class="carousel-slide absolute inset-0 transition-opacity duration-500 opacity-0">
                                     <div
                                         class="group relative bg-gradient-to-r from-red-600 to-orange-600 rounded-3xl overflow-hidden h-full cursor-pointer">
-                                        <img src="assets/images/ai/ai-photo-booth-hero.jpg"
+                                        <img src="assets/images/brand-activation/brand-activation-1.webp"
                                             alt="Brand activation services with immersive experiences and custom installations"
                                             class="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:opacity-50 transition"
                                             loading="lazy">
@@ -4317,6 +4317,7 @@
                 slides.forEach((slide, i) => {
                     slide.classList.remove('opacity-100');
                     slide.classList.add('opacity-0');
+                    slide.style.pointerEvents = 'none'; // Disable clicks on hidden slides
                 });
                 dots.forEach((dot, i) => {
                     dot.classList.remove('active', 'bg-white');
@@ -4326,6 +4327,7 @@
                 // Add active class to current slide and dot
                 slides[index].classList.remove('opacity-0');
                 slides[index].classList.add('opacity-100');
+                slides[index].style.pointerEvents = 'auto'; // Enable clicks on visible slide
                 dots[index].classList.add('active', 'bg-white');
                 dots[index].classList.remove('bg-white/60');
 
@@ -4374,6 +4376,15 @@
             // Pause autoplay on hover
             carousel.addEventListener('mouseenter', stopAutoplay);
             carousel.addEventListener('mouseleave', startAutoplay);
+
+            // Initialize pointer-events for initial slide state
+            slides.forEach((slide, i) => {
+                if (slide.classList.contains('opacity-100')) {
+                    slide.style.pointerEvents = 'auto';
+                } else {
+                    slide.style.pointerEvents = 'none';
+                }
+            });
 
             // Start autoplay
             startAutoplay();
