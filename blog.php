@@ -498,13 +498,13 @@ $siteDescription = getSetting(
         }
         
         .blog-card-title {
-            font-size: 1.375rem;
-            font-weight: 400;
+            font-size: 1rem;
+            font-weight: 200;
             line-height: 1.4;
             margin-bottom: 0.75rem;
             color: #1F1F1F;
             transition: color 0.3s ease;
-            font-family: 'Azo Sans Uber', sans-serif;
+            font-family: 'Azo Sans', sans-serif;
         }
         
         .blog-card-title a {

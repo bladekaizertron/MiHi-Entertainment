@@ -84,3 +84,40 @@ RewriteCond %{REQUEST_URI} ^/wedding\.html$ [NC]
 RewriteCond %{REQUEST_FILENAME} -f
 RewriteRule ^wedding\.html$ - [L]
 
+# ============================================
+# EXTENSION REMOVAL (Clean URLs)
+# ============================================
+# Note: These rules must come AFTER specific redirects
+# to avoid conflicts with custom redirect rules above
+
+# --- PHP Handling ---
+
+# 1. Redirect external requests from /file.php to /file (except blog.php)
+# Skip blog.php since it has special handling above
+RewriteCond %{THE_REQUEST} \s/+(.+?)\.php[\s?] [NC]
+RewriteCond %{REQUEST_URI} !^/blog\.php [NC]
+RewriteRule ^ /%1 [R=301,L,NE]
+
+# 2. Internally rewrite /file to /file.php (if the file exists)
+# Skip /blog since it's handled above
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteCond %{REQUEST_URI} !^/blog/?$ [NC]
+RewriteRule ^(.+?)/?$ $1.php [L]
+
+# --- HTML Handling ---
+
+# 3. Redirect external requests from /file.html to /file
+# Skip blog.html and wedding.html since they have special handling
+RewriteCond %{THE_REQUEST} \s/+(.+?)\.html[\s?] [NC]
+RewriteCond %{REQUEST_URI} !^/blog\.html [NC]
+RewriteCond %{REQUEST_URI} !^/wedding\.html [NC]
+RewriteCond %{REQUEST_URI} !^/events/weddings\.html [NC]
+RewriteRule ^ /%1 [R=301,L,NE]
+
+# 4. Internally rewrite /file to /file.html (if the file exists)
+# Skip /wedding since it's handled above
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}.html -f
+RewriteCond %{REQUEST_URI} !^/wedding/?$ [NC]
+RewriteRule ^(.+?)/?$ $1.html [L]
