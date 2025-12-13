@@ -129,7 +129,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         <li><a href="${pathPrefix}index.html#about" class="hover:text-white transition-colors duration-300 text-sm md:text-base">About Us</a></li>
                         <li><a href="${pathPrefix}index.html#galleries" class="hover:text-white transition-colors duration-300 text-sm md:text-base">Gallery</a></li>
                         <li><a href="${pathPrefix}index.html#contact" class="hover:text-white transition-colors duration-300 text-sm md:text-base">Get a Quote</a></li>
-                        <li><a href="${pathPrefix}blog.html" class="hover:text-white transition-colors duration-300 text-sm md:text-base">Blog</a></li>
+                        <li><a href="${pathPrefix}blog.php" class="hover:text-white transition-colors duration-300 text-sm md:text-base">Blog</a></li>
                         <li><a href="${pathPrefix}faq.html" class="hover:text-white transition-colors duration-300 text-sm md:text-base">FAQ</a></li>
                     </ul>
                 </div>
