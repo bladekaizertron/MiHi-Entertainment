@@ -15,6 +15,20 @@
     <!-- lightGallery JS -->
     <script src="https://cdn.jsdelivr.net/npm/lightgallery@2.7.2/lightgallery.min.js"></script>
     <style>
+        @font-face {
+            font-family: 'AzoSans';
+            src: url('assets/fonts/AzoSans-Regular.woff2') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'AzoSansUber';
+            src: url('assets/fonts/AzoSansUber-Regular.woff2') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+        }
+
         body {
             font-family: 'Inter', sans-serif;
             color: #1a202c;
@@ -35,13 +49,13 @@
         }
 
         .btn-primary {
-            background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%);
+            background: linear-gradient(135deg, #FF4F4F 0%, #FF4F4F 100%);
             transition: all 0.3s ease;
         }
 
         .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(0, 80, 255, 0.4);
+            box-shadow: 0 10px 25px rgba(255, 64, 0, 0.4);
         }
 
         .section-padding {
@@ -179,11 +193,11 @@
 
         .btn-primary:hover {
             background-color: #fff;
-            color: #152836;
+            color: #1F1F1F;
         }
 
         .btn-primary {
-            background-color: #152836;
+            background-color: #FF4F4F;
             border-color: #0e1a24;
             color: #ffffff;
         }
@@ -464,7 +478,7 @@
 
         /* Icon Section Styles */
         .icon-section {
-            background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 50%, #0f1629 100%);
+            background: linear-gradient(135deg, #ffffff 0%, #ffffff 50%, #ffffff 100%);
             padding: 100px 0;
             position: relative;
             overflow: hidden;
@@ -505,16 +519,16 @@
         }
 
         .icon-section-header h2 {
+            font-family: 'AzoSansUber', sans-serif;
             font-size: 48px;
             font-weight: 900;
-            background: linear-gradient(135deg, #00d4ff 0%, #0050ff 50%, #7c3aed 100%);
+            background: linear-gradient(135deg, #FF4F4F 0%, #FF4F4F 50%, #FF4F4F 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
             margin-bottom: 0;
             text-transform: uppercase;
             letter-spacing: 2px;
-            text-shadow: 0 0 30px rgba(0, 212, 255, 0.5);
             animation: gradient-shift 5s ease infinite;
             background-size: 200% 200%;
         }
@@ -600,7 +614,7 @@
             bottom: 0;
             border-radius: 20px;
             padding: 2px;
-            background: linear-gradient(135deg, rgba(0, 212, 255, 0.3), rgba(124, 58, 237, 0.3));
+            background: linear-gradient(135deg, rgba(4, 4, 4, 0.3), rgba(124, 58, 237, 0.3));
             -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
             -webkit-mask-composite: xor;
             mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
@@ -616,7 +630,7 @@
                 0 0 60px rgba(0, 212, 255, 0.3),
                 inset 0 1px 0 rgba(255, 255, 255, 0.2);
             border-color: rgba(0, 212, 255, 0.5);
-            background: rgba(255, 255, 255, 0.08);
+            background: #18F1E1;
         }
 
         .icon-item:hover::before {
@@ -795,9 +809,10 @@
         }
 
         .section-three-content h2 {
+            font-family: 'AzoSansUber', sans-serif;
             font-size: 36px;
-            font-weight: 900;
-            background: linear-gradient(135deg, #152836 0%, #1e293b 100%);
+            font-weight: 300;
+            background: linear-gradient(135deg, #FF4F4F 0%, #FF4F4F 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -815,14 +830,15 @@
             left: 0;
             width: 60px;
             height: 4px;
-            background: linear-gradient(90deg, #0050ff 0%, #7c3aed 100%);
+            background: linear-gradient(90deg, #18F1E1 0%, #18F1E1 100%);
             border-radius: 2px;
         }
 
         .section-three-content p {
+            font-family: 'AzoSans', sans-serif;
             font-size: 16px;
             line-height: 1.75;
-            color: #475569;
+            color: #1F1F1F;
             margin-bottom: 22px;
             font-weight: 400;
         }
@@ -848,7 +864,7 @@
             flex: 1;
             min-width: 200px;
             padding: 16px 32px;
-            background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%);
+            background: linear-gradient(135deg, #FF4F4F 0%, #FF4F4F 100%);
             color: white;
             text-decoration: none;
             border-radius: 12px;
@@ -884,25 +900,26 @@
         }
 
         .section-three-btn:hover {
-            transform: translateY(-4px);
+            color: #1F1F1F;
             box-shadow:
-                0 12px 30px rgba(0, 80, 255, 0.45),
+                0 12px 30px rgba(124, 58, 237, 0.45),
                 0 0 0 1px rgba(255, 255, 255, 0.2) inset;
-            background: linear-gradient(135deg, #0040d9 0%, #0033b3 100%);
+            background: linear-gradient(135deg, #18F1E1 0%, #18F1E1 100%);
         }
 
         .section-three-btn.secondary {
-            background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%);
+            background: linear-gradient(135deg, #1F1F1F 0%, #1F1F1F 100%);
             box-shadow:
                 0 6px 20px rgba(124, 58, 237, 0.35),
                 0 0 0 1px rgba(255, 255, 255, 0.1) inset;
         }
 
         .section-three-btn.secondary:hover {
+            color: #1F1F1F;
             box-shadow:
                 0 12px 30px rgba(124, 58, 237, 0.45),
                 0 0 0 1px rgba(255, 255, 255, 0.2) inset;
-            background: linear-gradient(135deg, #6d28d9 0%, #5b21b6 100%);
+            background: linear-gradient(135deg, #18F1E1 0%, #18F1E1 100%);
         }
 
         /* Cards Carousel Section Styles */
@@ -993,7 +1010,7 @@
         .testimonial-star {
             width: 28px;
             height: 28px;
-            fill: #0050ff;
+            fill: #FF4F4F;
         }
 
         .testimonial-star.half {
@@ -1001,9 +1018,10 @@
         }
 
         .testimonial-text {
+            font-family: 'AzoSans', sans-serif;
             font-size: 20px;
             line-height: 1.7;
-            color: #1e293b;
+            color: #1F1F1F;
             text-align: center;
             margin-bottom: 30px;
             font-weight: 400;
@@ -1016,9 +1034,10 @@
         }
 
         .testimonial-author-name {
+            font-family: 'AzoSansUber', sans-serif;
             font-size: 24px;
-            font-weight: 800;
-            color: #0f172a;
+            font-weight: 500;
+            color: #FF4F4F;
             text-transform: uppercase;
             letter-spacing: 1px;
             margin-bottom: 5px;
@@ -1037,7 +1056,7 @@
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            background: rgba(0, 80, 255, 0.9);
+            background: #FF4F4F;
             color: white;
             border: none;
             width: 50px;
@@ -1054,9 +1073,10 @@
         }
 
         .carousel-nav:hover {
-            background: rgba(0, 80, 255, 1);
+            color: #1F1F1F;
+            background: #18F1E1;
             transform: translateY(-50%) scale(1.1);
-            box-shadow: 0 6px 20px rgba(0, 80, 255, 0.6);
+            box-shadow: 0 6px 20px rgba(28, 168, 233, 0.6);
         }
 
         .carousel-nav.prev {
@@ -1087,8 +1107,8 @@
         }
 
         .carousel-dot.active {
-            background: #0050ff;
-            border-color: #0050ff;
+            background: #18F1E1;
+            border-color: #18F1E1;
             transform: scale(1.2);
         }
 
@@ -1159,16 +1179,19 @@
         <div class="relative z-10 container mx-auto px-4 sm:px-6 pt-20">
             <div class="max-w-6xl mx-auto text-center">
                 <!-- Badge -->
-                <div
-                    class="inline-flex items-center gap-2 sm:gap-3 px-4 sm:px-6 py-2 bg-white/20 backdrop-blur-md border border-white/30 rounded-full shadow-lg shadow-white/10 mb-6 sm:mb-8">
+                <div class="inline-flex items-center gap-2 sm:gap-3 px-4 sm:px-6 py-2 rounded-full shadow-lg mb-6 sm:mb-8"
+                    style="background-color: #FF4F4F;">
                     <div class="w-2 h-2 bg-white rounded-full animate-pulse"></div>
-                    <span class="text-white text-xs sm:text-sm font-semibold tracking-wider uppercase">Nationwide Photo
+                    <span class="text-white text-xs sm:text-sm font-semibold tracking-wider uppercase"
+                        style="font-family: 'AzoSans', sans-serif;">Nationwide Photo
                         Booth Services</span>
                     <div class="w-2 h-2 bg-white rounded-full animate-pulse" style="animation-delay: 0.5s;"></div>
                 </div>
-                <h1 class="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold mb-6 leading-tight text-white">ABOUT
-                    US</h1>
-                <p class="text-lg sm:text-xl md:text-2xl mb-8 text-white max-w-3xl mx-auto leading-relaxed px-4">We are
+                <h1 class="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-light mb-6 leading-tight"
+                    style="font-family: 'AzoSansUber', sans-serif;"><span style="color: #FF4F4F;">ABOUT</span> <span
+                        style="color: #18F1E1;">US</span></h1>
+                <p class="text-lg sm:text-xl md:text-2xl mb-8 text-white max-w-3xl mx-auto leading-relaxed px-4"
+                    style="font-family: 'AzoSans', sans-serif;">We are
                     a Nationwide Photo Booth
                     Rental company based in Denver, Colorado</p>
                 <div class="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center px-4">
@@ -1206,10 +1229,15 @@
     </section>
 
     <!-- Infinite Carousel Section -->
-    <section class="cont" style="background-color: #152836; color: #eee; padding: 50px 0;">
+    <section class="cont" style="background-color: #1F1F1F; color: #eee; padding: 50px 0;">
         <div class="page-head">
-            <h3>What Can We Do For You At</h3>
-            <h1>MIHI ENTERTAINMENT?</h1>
+            <h3 class="inline-block rounded-full px-4 py-2"
+                style="font-weight: 900; font-family: 'AzoSans', sans-serif; background-color: #FF4F4F; color: #ffffff;">
+                What Can
+                We Do For You At</h3>
+            <br>
+            <h1 style="font-weight: 300; font-family: 'AzoSansUber', sans-serif;"><span
+                    style="color: #18F1E1;">MIHI</span> <span style="color: #18F1E1;">ENTERTAINMENT?</span></h1>
             <p class="lead">At MiHi Entertainment, we specialize in exceptional photo booth rentals that infuse
                 boundless creativity and unforgettable memories into every event. Our mission is to provide an engaging,
                 interactive, and personalized experience for guests through our diverse range of photo booths, video
