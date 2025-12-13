@@ -198,7 +198,7 @@
 
         /* Graphite Gradient Text */
         .graphite-gradient {
-            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 25%, #404040 50%, #d4a017 75%, #daa520 100%);
+            background: linear-gradient(135deg, #FF4F4F 0%, #FF4F4F 25%, #FF4F4F 50%, #FF4F4F 75%, #FF4F4F 100%);
             background-size: 200% 200%;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -208,7 +208,7 @@
 
         /* Light Graphite Gradient for Dark Backgrounds */
         .graphite-gradient-light {
-            background: linear-gradient(135deg, #ffffff 0%, #f3f4f6 15%, #e5e7eb 30%, #fef3c7 50%, #fde68a 70%, #fcd34d 85%, #fbbf24 100%);
+            background: linear-gradient(135deg, #FF4F4F 0%, #FF4F4F 15%, #FF4F4F 30%, #FF4F4F 50%, #FF4F4F 70%, #FF4F4F 85%, #FF4F4F 100%);
             background-size: 200% 200%;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -550,6 +550,24 @@
                 padding: 3rem 0;
             }
         }
+
+        /* AzoSans Font */
+        @font-face {
+            font-family: 'AzoSans';
+            src: url('../../assets/fonts/AzoSans-Regular.woff2') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        /* AzoSansUber Font */
+        @font-face {
+            font-family: 'AzoSansUber';
+            src: url('../../assets/fonts/AzoSansUber-Regular.woff2') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
     </style>
 </head>
 
@@ -598,27 +616,28 @@
             <div class="relative z-10 container mx-auto px-4 sm:px-6 pt-20">
                 <div class="max-w-6xl mx-auto text-center">
                     <!-- Badge -->
-                    <div
-                        class="inline-flex items-center gap-2 sm:gap-3 px-4 sm:px-6 py-2 bg-gray-500/20 backdrop-blur-md border border-gray-400/50 rounded-full shadow-lg shadow-gray-500/10 mb-6 sm:mb-8">
+                    <div class="inline-flex items-center gap-2 sm:gap-3 px-4 sm:px-6 py-2 backdrop-blur-md border border-gray-400/50 rounded-full shadow-lg shadow-gray-500/10 mb-6 sm:mb-8"
+                        style="background-color: #FF4F4F;">
                         <div class="w-2 h-2 bg-gray-400 rounded-full animate-pulse"></div>
-                        <span class="text-gray-300 text-xs sm:text-sm font-semibold tracking-wider uppercase">Turn
+                        <span class="text-[#FFFFFF] text-xs sm:text-sm font-semibold tracking-wider uppercase"
+                            style="font-family: 'AzoSans', sans-serif;">Turn
                             Moments into Art</span>
                         <div class="w-2 h-2 bg-gray-400 rounded-full animate-pulse" style="animation-delay: 0.5s;">
                         </div>
                     </div>
 
                     <!-- Main Title -->
-                    <h1
-                        class="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black mb-6 leading-tight tracking-tight px-2 drop-shadow-2xl">
-                        <span class="block graphite-gradient-light mb-2">
-                            SKETCHBOT BOOTH
+                    <h1 class="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-light mb-6 leading-tight tracking-tight px-2 drop-shadow-2xl"
+                        style="font-family: 'AzoSansUber', sans-serif;">
+                        <span class="block mb-2">
+                            <span style="color: #FF4F4F;">SKETCHBOT</span> <span style="color: #18F1E1;">BOOTH</span>
                         </span>
                     </h1>
 
                     <!-- Description -->
                     <div class="max-w-3xl mx-auto mb-8 px-4">
-                        <p
-                            class="text-lg sm:text-xl md:text-2xl leading-relaxed text-white/95 font-light drop-shadow-lg">
+                        <p class="text-lg sm:text-xl md:text-2xl leading-relaxed text-white/95 font-light drop-shadow-lg"
+                            style="font-family: 'AzoSans', sans-serif;">
                             A one-of-a-kind activation that turns photos into hand-drawn digital sketches in real time.
                         </p>
                     </div>
@@ -626,7 +645,8 @@
                     <!-- CTA Buttons -->
                     <div class="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center px-4">
                         <a href="../contact-us.html"
-                            class="group relative inline-flex items-center gap-2 sm:gap-3 bg-gradient-to-r from-gray-900 to-gray-800 text-white px-6 sm:px-10 py-3 sm:py-5 rounded-full text-base sm:text-lg font-bold shadow-2xl hover:shadow-gray-900/50 transition-all duration-500 transform hover:scale-110 hover:-translate-y-1 overflow-hidden w-full sm:w-auto justify-center">
+                            class="group relative inline-flex items-center gap-2 sm:gap-3 bg-gradient-to-r from-[#FF4F4F] to-[#FF4F4F] text-white px-6 sm:px-10 py-3 sm:py-5 rounded-full text-base sm:text-lg font-bold shadow-2xl hover:shadow-gray-900/50 transition-all duration-500 transform hover:scale-110 hover:-translate-y-1 overflow-hidden w-full sm:w-auto justify-center"
+                            style="font-family: 'AzoSans', sans-serif;">
                             <span class="relative z-10">Get Your Quote</span>
                             <svg class="w-4 h-4 sm:w-5 sm:h-5 relative z-10 transform group-hover:translate-x-1 transition-transform"
                                 fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -671,21 +691,22 @@
             <div class="container mx-auto px-4 sm:px-6 relative z-10">
                 <div class="max-w-5xl mx-auto text-center">
                     <div
-                        class="inline-block mb-6 sm:mb-8 px-6 sm:px-8 py-2 sm:py-3 bg-white/80 backdrop-blur-md rounded-full border-2 border-gray-800/20 shadow-md">
-                        <span class="text-gray-800 text-xs sm:text-sm font-bold tracking-wider flex items-center gap-2">
+                        class="inline-block mb-6 sm:mb-8 px-6 sm:px-8 py-2 sm:py-3 bg-[#18F1E1] backdrop-blur-md rounded-full border-2 border-gray-800/20 shadow-md">
+                        <span
+                            class="text-[#1F1F1F] text-xs sm:text-sm font-bold tracking-wider flex items-center gap-2">
                             SKETCHBOT RENTALS
                         </span>
                     </div>
 
-                    <h2
-                        class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6 sm:mb-8 text-gray-900 leading-tight">
+                    <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6 sm:mb-8 text-gray-900 leading-tight"
+                        style="font-weight: 400; font-family: 'AzoSansUber', sans-serif;">
                         <span class="graphite-gradient">Robotic Artistry</span>
                         <br>
-                        <span class="text-gray-800/90">Meets Creative Vision</span>
+                        <span class="font-weight-light text-[#FF4F4F]">Meets Creative Vision</span>
                     </h2>
 
-                    <p
-                        class="text-base sm:text-lg md:text-xl mb-8 sm:mb-12 text-gray-700 max-w-3xl mx-auto leading-relaxed px-4">
+                    <p class="text-base sm:text-lg md:text-xl mb-8 sm:mb-12 text-gray-700 max-w-3xl mx-auto leading-relaxed px-4"
+                        style="font-family: 'AzoSans', sans-serif;">
                         SketchBot brings digital creativity to life by transforming guest photos into custom digital
                         sketches using robotic precision. Whether you're hosting a corporate event, wedding, or brand
                         activation, SketchBot adds an artistic touch that makes every interaction unforgettable.
@@ -792,13 +813,15 @@
                 <div class="max-w-6xl mx-auto">
                     <div class="text-center mb-12 sm:mb-16">
                         <div
-                            class="inline-block mb-4 sm:mb-6 px-6 sm:px-8 py-2 sm:py-3 bg-white/80 backdrop-blur-md rounded-full border-2 border-gray-800/20 shadow-md">
-                            <span class="text-gray-800 text-xs sm:text-sm font-bold tracking-wider uppercase">
+                            class="inline-block mb-4 sm:mb-6 px-6 sm:px-8 py-2 sm:py-3 bg-[#18F1E1] backdrop-blur-md rounded-full border-2 border-gray-800/20 shadow-md">
+                            <span class="text-[#1F1F1F] text-xs sm:text-sm font-bold tracking-wider uppercase">
                                 FEATURES
                             </span>
                         </div>
-                        <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 text-gray-900">
-                            <span class="graphite-gradient">What SketchBot Offers</span>
+                        <h2 class="text-3xl sm:text-4xl md:text-5xl font-light mb-4 sm:mb-6 text-gray-900"
+                            style="font-family: 'AzoSansUber', sans-serif;">
+                            <span class="graphite-gradient" style="font-family: 'AzoSansUber', sans-serif;">What
+                                SketchBot Offers</span>
                         </h2>
                     </div>
 
@@ -807,7 +830,8 @@
                         <div
                             class="sketch-card sketch-border bg-gradient-to-br from-gray-50 to-slate-50 p-6 sm:p-8 rounded-2xl border border-gray-200/50">
                             <div class="text-4xl sm:text-5xl mb-4 text-center">👁️</div>
-                            <h3 class="text-xl sm:text-2xl font-bold mb-3 sm:mb-4 text-gray-900 text-center">
+                            <h3 class="text-xl sm:text-2xl font-bold mb-3 sm:mb-4 text-gray-900 text-center"
+                                style="font-family: 'AzoSans', sans-serif;">
                                 Live Sketching Experience
                             </h3>
                             <p class="text-gray-700 text-center leading-relaxed">
@@ -820,7 +844,8 @@
                         <div
                             class="sketch-card sketch-border bg-gradient-to-br from-slate-50 to-amber-50/30 p-6 sm:p-8 rounded-2xl border border-slate-200/50">
                             <div class="text-4xl sm:text-5xl mb-4 text-center">✨</div>
-                            <h3 class="text-xl sm:text-2xl font-bold mb-3 sm:mb-4 text-gray-900 text-center">
+                            <h3 class="text-xl sm:text-2xl font-bold mb-3 sm:mb-4 text-gray-900 text-center"
+                                style="font-family: 'AzoSans', sans-serif;">
                                 Customizable Output
                             </h3>
                             <p class="text-gray-700 text-center leading-relaxed">
@@ -833,7 +858,8 @@
                         <div
                             class="sketch-card sketch-border bg-gradient-to-br from-amber-50/30 to-gray-50 p-6 sm:p-8 rounded-2xl border border-amber-200/50">
                             <div class="text-4xl sm:text-5xl mb-4 text-center">📸</div>
-                            <h3 class="text-xl sm:text-2xl font-bold mb-3 sm:mb-4 text-gray-900 text-center">
+                            <h3 class="text-xl sm:text-2xl font-bold mb-3 sm:mb-4 text-gray-900 text-center"
+                                style="font-family: 'AzoSans', sans-serif;">
                                 Photo-to-Sketch Integration
                             </h3>
                             <p class="text-gray-700 text-center leading-relaxed">
@@ -856,19 +882,20 @@
             <div class="container mx-auto px-4 sm:px-6 relative z-10">
                 <div class="max-w-5xl mx-auto text-center">
                     <div
-                        class="inline-block mb-6 sm:mb-8 px-6 sm:px-8 py-2 sm:py-3 bg-white/80 backdrop-blur-md rounded-full border-2 border-gray-800/20 shadow-md">
-                        <span class="text-gray-800 text-xs sm:text-sm font-bold tracking-wider uppercase">
+                        class="inline-block mb-6 sm:mb-8 px-6 sm:px-8 py-2 sm:py-3 bg-[#18F1E1] backdrop-blur-md rounded-full border-2 border-gray-800/20 shadow-md">
+                        <span class="text-[#1F1F1F] text-xs sm:text-sm font-bold tracking-wider uppercase">
                             WHY CHOOSE OUR
                         </span>
                     </div>
 
-                    <h2
-                        class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black mb-6 sm:mb-8 text-gray-900 leading-tight">
-                        <span class="graphite-gradient">SKETCHBOT BOOTH?</span>
+                    <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light mb-6 sm:mb-8 text-gray-900 leading-tight"
+                        style="font-family: 'AzoSansUber', sans-serif;">
+                        <span class="graphite-gradient" style="font-family: 'AzoSansUber', sans-serif;">SKETCHBOT
+                            BOOTH?</span>
                     </h2>
 
-                    <p
-                        class="text-base sm:text-lg md:text-xl mb-8 sm:mb-12 text-gray-700 max-w-4xl mx-auto leading-relaxed px-4">
+                    <p class="text-base sm:text-lg md:text-xl mb-8 sm:mb-12 text-gray-700 max-w-4xl mx-auto leading-relaxed px-4"
+                        style="font-family: 'AzoSans', sans-serif;">
                         SketchBot offers a memorable twist on traditional photo booths by giving your guests a
                         personalized art piece they can watch come to life. With seamless integration with other photo
                         activations and the ability to customize every detail, this booth brings tech, creativity, and
@@ -876,7 +903,8 @@
                     </p>
 
                     <a href="../contact-us.html"
-                        class="inline-flex items-center gap-3 bg-gradient-to-r from-gray-900 to-gray-800 text-white px-8 sm:px-10 py-4 sm:py-5 rounded-full text-base sm:text-lg font-bold shadow-2xl hover:shadow-gray-900/50 transition-all duration-500 transform hover:scale-110 hover:-translate-y-1">
+                        class="inline-flex items-center gap-3 bg-gradient-to-r from-[#18F1E1] to-[#18F1E1] text-[#1F1F1F] px-8 sm:px-10 py-4 sm:py-5 rounded-full text-base sm:text-lg font-bold shadow-2xl hover:shadow-gray-900/50 transition-all duration-500 transform hover:scale-110 hover:-translate-y-1"
+                        style="font-family: 'AzoSans', sans-serif;">
                         <span>Get Your Quote →</span>
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -893,13 +921,15 @@
                 <div class="max-w-6xl mx-auto">
                     <div class="text-center mb-12 sm:mb-16">
                         <div
-                            class="inline-block mb-6 sm:mb-8 px-6 sm:px-8 py-2 sm:py-3 bg-white/80 backdrop-blur-md rounded-full border-2 border-gray-800/20 shadow-md">
-                            <span class="text-gray-800 text-xs sm:text-sm font-bold tracking-wider uppercase">
+                            class="inline-block mb-6 sm:mb-8 px-6 sm:px-8 py-2 sm:py-3 bg-[#18F1E1] backdrop-blur-md rounded-full border-2 border-gray-800/20 shadow-md">
+                            <span class="text-[#1F1F1F] text-xs sm:text-sm font-bold tracking-wider uppercase">
                                 TECHNICAL SPECIFICATIONS
                             </span>
                         </div>
-                        <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 text-gray-900">
-                            <span class="graphite-gradient">SKETCHBOT BOOTHS</span>
+                        <h2 class="text-3xl sm:text-4xl md:text-5xl font-light mb-4 sm:mb-6 text-gray-900"
+                            style="font-family: 'AzoSansUber', sans-serif;">
+                            <span class="graphite-gradient" style="font-family: 'AzoSansUber', sans-serif;">SKETCHBOT
+                                BOOTHS</span>
                         </h2>
                     </div>
 
@@ -910,7 +940,8 @@
                             <div class="flex items-start gap-4">
                                 <div class="text-3xl sm:text-4xl flex-shrink-0">📐</div>
                                 <div>
-                                    <h4 class="text-lg sm:text-xl font-bold mb-2 text-gray-900">Standard Options</h4>
+                                    <h4 class="text-lg sm:text-xl font-bold mb-2 text-gray-900"
+                                        style="font-family: 'AzoSans', sans-serif;">Standard Options</h4>
                                     <p class="text-gray-700">4x6 Portrait Images</p>
                                 </div>
                             </div>
@@ -921,7 +952,8 @@
                             <div class="flex items-start gap-4">
                                 <div class="text-3xl sm:text-4xl flex-shrink-0">🏷️</div>
                                 <div>
-                                    <h4 class="text-lg sm:text-xl font-bold mb-2 text-gray-900">Premium Options</h4>
+                                    <h4 class="text-lg sm:text-xl font-bold mb-2 text-gray-900"
+                                        style="font-family: 'AzoSans', sans-serif;">Premium Options</h4>
                                     <p class="text-gray-700">Branded Overlays</p>
                                 </div>
                             </div>
@@ -932,7 +964,8 @@
                             <div class="flex items-start gap-4">
                                 <div class="text-3xl sm:text-4xl flex-shrink-0">⚡</div>
                                 <div>
-                                    <h4 class="text-lg sm:text-xl font-bold mb-2 text-gray-900">Print Speed</h4>
+                                    <h4 class="text-lg sm:text-xl font-bold mb-2 text-gray-900"
+                                        style="font-family: 'AzoSans', sans-serif;">Print Speed</h4>
                                     <p class="text-gray-700">About 20-30 Seconds Per Photo</p>
                                 </div>
                             </div>
@@ -943,7 +976,8 @@
                             <div class="flex items-start gap-4">
                                 <div class="text-3xl sm:text-4xl flex-shrink-0">📄</div>
                                 <div>
-                                    <h4 class="text-lg sm:text-xl font-bold mb-2 text-gray-900">Print Finish</h4>
+                                    <h4 class="text-lg sm:text-xl font-bold mb-2 text-gray-900"
+                                        style="font-family: 'AzoSans', sans-serif;">Print Finish</h4>
                                     <p class="text-gray-700">Glossy Paper</p>
                                 </div>
                             </div>
@@ -954,7 +988,8 @@
                             <div class="flex items-start gap-4">
                                 <div class="text-3xl sm:text-4xl flex-shrink-0">🎨</div>
                                 <div>
-                                    <h4 class="text-lg sm:text-xl font-bold mb-2 text-gray-900">Customization</h4>
+                                    <h4 class="text-lg sm:text-xl font-bold mb-2 text-gray-900"
+                                        style="font-family: 'AzoSans', sans-serif;">Customization</h4>
                                     <p class="text-gray-700">Custom Drawing Styles</p>
                                 </div>
                             </div>
@@ -965,7 +1000,8 @@
                             <div class="flex items-start gap-4">
                                 <div class="text-3xl sm:text-4xl flex-shrink-0">🖼️</div>
                                 <div>
-                                    <h4 class="text-lg sm:text-xl font-bold mb-2 text-gray-900">Display Add-Ons</h4>
+                                    <h4 class="text-lg sm:text-xl font-bold mb-2 text-gray-900"
+                                        style="font-family: 'AzoSans', sans-serif;">Display Add-Ons</h4>
                                     <p class="text-gray-700">LED frames, Branded Sleeves</p>
                                 </div>
                             </div>
@@ -982,13 +1018,15 @@
                 <div class="max-w-4xl mx-auto">
                     <div class="text-center mb-12 sm:mb-16">
                         <div
-                            class="inline-block mb-6 sm:mb-8 px-6 sm:px-8 py-2 sm:py-3 bg-white/80 backdrop-blur-md rounded-full border-2 border-gray-800/20 shadow-md">
-                            <span class="text-gray-800 text-xs sm:text-sm font-bold tracking-wider uppercase">
+                            class="inline-block mb-6 sm:mb-8 px-6 sm:px-8 py-2 sm:py-3 bg-[#18F1E1] backdrop-blur-md rounded-full border-2 border-gray-800/20 shadow-md">
+                            <span class="text-[#1F1F1F] text-xs sm:text-sm font-bold tracking-wider uppercase">
                                 FAQ
                             </span>
                         </div>
-                        <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 text-gray-900">
-                            <span class="graphite-gradient">FREQUENTLY ASKED QUESTIONS</span>
+                        <h2 class="text-3xl sm:text-4xl md:text-5xl font-light mb-4 sm:mb-6 text-gray-900"
+                            style="font-family: 'AzoSansUber', sans-serif;">
+                            <span class="graphite-gradient" style="font-family: 'AzoSansUber', sans-serif;">FREQUENTLY
+                                ASKED QUESTIONS</span>
                         </h2>
                     </div>
 
@@ -999,15 +1037,17 @@
                             <div class="faq-question flex justify-between items-start gap-4 mb-0"
                                 onclick="toggleFAQ(this)">
                                 <div class="flex items-start gap-3 flex-1">
-                                    <span class="text-amber-600 font-bold text-xl sm:text-2xl mt-1">Q:</span>
-                                    <h3 class="text-lg sm:text-xl font-bold text-gray-900 leading-tight">How does our
+                                    <span class="text-[#FF4F4F] font-bold text-xl sm:text-2xl mt-1">Q:</span>
+                                    <h3 class="text-lg sm:text-xl font-bold text-gray-900 leading-tight"
+                                        style="font-family: 'AzoSans', sans-serif;">How does our
                                         SketchBot Work?</h3>
                                 </div>
                                 <div class="faq-icon text-2xl sm:text-3xl text-gray-400 font-light">+</div>
                             </div>
                             <div class="faq-answer mt-4">
                                 <div class="flex items-start gap-3 pl-8 sm:pl-10">
-                                    <span class="text-gray-600 font-semibold text-xl sm:text-2xl mt-1">A:</span>
+                                    <span class="text-gray-600 font-semibold text-xl sm:text-2xl mt-1"
+                                        style="font-family: 'AzoSans', sans-serif;">A:</span>
                                     <p class="text-gray-700 leading-relaxed flex-1">Guests take a photo, and our
                                         SketchBot transforms it into a custom line-art sketch drawn live with a robotic
                                         arm. The entire process happens in real-time, allowing guests to watch as their
@@ -1022,15 +1062,17 @@
                             <div class="faq-question flex justify-between items-start gap-4 mb-0"
                                 onclick="toggleFAQ(this)">
                                 <div class="flex items-start gap-3 flex-1">
-                                    <span class="text-amber-600 font-bold text-xl sm:text-2xl mt-1">Q:</span>
-                                    <h3 class="text-lg sm:text-xl font-bold text-gray-900 leading-tight">Can SketchBot
+                                    <span class="text-[#FF4F4F] font-bold text-xl sm:text-2xl mt-1">Q:</span>
+                                    <h3 class="text-lg sm:text-xl font-bold text-gray-900 leading-tight"
+                                        style="font-family: 'AzoSans', sans-serif;">Can SketchBot
                                         work with photos from other booths?</h3>
                                 </div>
                                 <div class="faq-icon text-2xl sm:text-3xl text-gray-400 font-light">+</div>
                             </div>
                             <div class="faq-answer mt-4">
                                 <div class="flex items-start gap-3 pl-8 sm:pl-10">
-                                    <span class="text-gray-600 font-semibold text-xl sm:text-2xl mt-1">A:</span>
+                                    <span class="text-gray-600 font-semibold text-xl sm:text-2xl mt-1"
+                                        style="font-family: 'AzoSans', sans-serif;">A:</span>
                                     <p class="text-gray-700 leading-relaxed flex-1">Absolutely! Our Photo Activations,
                                         AI Booth, and Roaming Booth can send images directly to SketchBot for instant
                                         artistic transformation. This seamless integration allows you to create a
@@ -1045,15 +1087,17 @@
                             <div class="faq-question flex justify-between items-start gap-4 mb-0"
                                 onclick="toggleFAQ(this)">
                                 <div class="flex items-start gap-3 flex-1">
-                                    <span class="text-amber-600 font-bold text-xl sm:text-2xl mt-1">Q:</span>
-                                    <h3 class="text-lg sm:text-xl font-bold text-gray-900 leading-tight">How Long Does
+                                    <span class="text-[#FF4F4F] font-bold text-xl sm:text-2xl mt-1">Q:</span>
+                                    <h3 class="text-lg sm:text-xl font-bold text-gray-900 leading-tight"
+                                        style="font-family: 'AzoSans', sans-serif;">How Long Does
                                         Each Sketch Take?</h3>
                                 </div>
                                 <div class="faq-icon text-2xl sm:text-3xl text-gray-400 font-light">+</div>
                             </div>
                             <div class="faq-answer mt-4">
                                 <div class="flex items-start gap-3 pl-8 sm:pl-10">
-                                    <span class="text-gray-600 font-semibold text-xl sm:text-2xl mt-1">A:</span>
+                                    <span class="text-gray-600 font-semibold text-xl sm:text-2xl mt-1"
+                                        style="font-family: 'AzoSans', sans-serif;">A:</span>
                                     <p class="text-gray-700 leading-relaxed flex-1">On average, each sketch takes 30
                                         seconds to 1 minute depending on detail and style. Simpler line-art sketches are
                                         faster, while more detailed or stylized sketches may take closer to a minute.
@@ -1068,15 +1112,17 @@
                             <div class="faq-question flex justify-between items-start gap-4 mb-0"
                                 onclick="toggleFAQ(this)">
                                 <div class="flex items-start gap-3 flex-1">
-                                    <span class="text-amber-600 font-bold text-xl sm:text-2xl mt-1">Q:</span>
-                                    <h3 class="text-lg sm:text-xl font-bold text-gray-900 leading-tight">Do guests get
+                                    <span class="text-[#FF4F4F] font-bold text-xl sm:text-2xl mt-1">Q:</span>
+                                    <h3 class="text-lg sm:text-xl font-bold text-gray-900 leading-tight"
+                                        style="font-family: 'AzoSans', sans-serif;">Do guests get
                                         to keep the sketches?</h3>
                                 </div>
                                 <div class="faq-icon text-2xl sm:text-3xl text-gray-400 font-light">+</div>
                             </div>
                             <div class="faq-answer mt-4">
                                 <div class="flex items-start gap-3 pl-8 sm:pl-10">
-                                    <span class="text-gray-600 font-semibold text-xl sm:text-2xl mt-1">A:</span>
+                                    <span class="text-gray-600 font-semibold text-xl sm:text-2xl mt-1"
+                                        style="font-family: 'AzoSans', sans-serif;">A:</span>
                                     <p class="text-gray-700 leading-relaxed flex-1">Yes! Each guest receives a physical
                                         copy of their sketch as a unique keepsake. Digital versions can also be shared
                                         via email or SMS for easy sharing on social media. It's the perfect combination
@@ -1091,15 +1137,17 @@
                             <div class="faq-question flex justify-between items-start gap-4 mb-0"
                                 onclick="toggleFAQ(this)">
                                 <div class="flex items-start gap-3 flex-1">
-                                    <span class="text-amber-600 font-bold text-xl sm:text-2xl mt-1">Q:</span>
-                                    <h3 class="text-lg sm:text-xl font-bold text-gray-900 leading-tight">Can we
+                                    <span class="text-[#FF4F4F] font-bold text-xl sm:text-2xl mt-1">Q:</span>
+                                    <h3 class="text-lg sm:text-xl font-bold text-gray-900 leading-tight"
+                                        style="font-family: 'AzoSans', sans-serif;">Can we
                                         customize the sketches with branding or logos?</h3>
                                 </div>
                                 <div class="faq-icon text-2xl sm:text-3xl text-gray-400 font-light">+</div>
                             </div>
                             <div class="faq-answer mt-4">
                                 <div class="flex items-start gap-3 pl-8 sm:pl-10">
-                                    <span class="text-gray-600 font-semibold text-xl sm:text-2xl mt-1">A:</span>
+                                    <span class="text-gray-600 font-semibold text-xl sm:text-2xl mt-1"
+                                        style="font-family: 'AzoSans', sans-serif;">A:</span>
                                     <p class="text-gray-700 leading-relaxed flex-1">Yes, each sketch can include a
                                         branded overlay, logo, or custom template that matches your event theme. We can
                                         incorporate your company colors, event branding, or special messaging directly
@@ -1115,7 +1163,7 @@
                             <div class="faq-question flex justify-between items-start gap-4 mb-0"
                                 onclick="toggleFAQ(this)">
                                 <div class="flex items-start gap-3 flex-1">
-                                    <span class="text-amber-600 font-bold text-xl sm:text-2xl mt-1">Q:</span>
+                                    <span class="text-[#FF4F4F] font-bold text-xl sm:text-2xl mt-1">Q:</span>
                                     <h3 class="text-lg sm:text-xl font-bold text-gray-900 leading-tight">Is SketchBot
                                         suitable for large events?</h3>
                                 </div>
@@ -1143,10 +1191,13 @@
             <div class="container mx-auto px-4 sm:px-6">
                 <div class="max-w-6xl mx-auto">
                     <div class="text-center mb-12 sm:mb-16">
-                        <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 text-gray-900">
-                            <span class="graphite-gradient">OUR SKETCHBOT</span>
+                        <h2 class="text-3xl sm:text-4xl md:text-5xl font-light mb-4 sm:mb-6 text-gray-900"
+                            style="font-family: 'AzoSansUber', sans-serif;">
+                            <span class="graphite-gradient" style="font-family: 'AzoSansUber', sans-serif;">OUR
+                                SKETCHBOT</span>
                         </h2>
-                        <h3 class="text-xl sm:text-2xl md:text-3xl font-semibold text-gray-800">IS GREAT FOR</h3>
+                        <h3 class="text-xl sm:text-2xl md:text-3xl font-semibold text-gray-800"
+                            style="font-family: 'AzoSans', sans-serif;">IS GREAT FOR</h3>
                     </div>
 
                     <div class="grid md:grid-cols-3 gap-6 sm:gap-8">
@@ -1154,7 +1205,8 @@
                         <div
                             class="sketch-card sketch-border bg-white/90 backdrop-blur-sm p-6 sm:p-8 rounded-2xl border border-gray-200/50 shadow-lg">
                             <div class="text-4xl sm:text-5xl mb-4 text-center">📸</div>
-                            <h3 class="text-xl sm:text-2xl font-bold mb-3 sm:mb-4 text-gray-900 text-center">
+                            <h3 class="text-xl sm:text-2xl font-bold mb-3 sm:mb-4 text-gray-900 text-center"
+                                style="font-family: 'AzoSans', sans-serif;">
                                 Photo Activations
                             </h3>
                             <p class="text-gray-700 text-center leading-relaxed mb-4">
@@ -1163,7 +1215,7 @@
                                 glam shot or candid capture.
                             </p>
                             <a href="../../product/ai-photo-booth.html"
-                                class="inline-block w-full text-center bg-gradient-to-r from-gray-900 to-gray-800 text-white px-6 py-3 rounded-full text-sm sm:text-base font-semibold hover:shadow-lg transition-all">
+                                class="inline-block w-full text-center bg-gradient-to-r from-[#18F1E1] to-[#18F1E1] text-[#1F1F1F] px-6 py-3 rounded-full text-sm sm:text-base font-semibold hover:shadow-lg transition-all">
                                 LEARN MORE
                             </a>
                         </div>
@@ -1172,7 +1224,8 @@
                         <div
                             class="sketch-card sketch-border bg-white/90 backdrop-blur-sm p-6 sm:p-8 rounded-2xl border border-gray-200/50 shadow-lg">
                             <div class="text-4xl sm:text-5xl mb-4 text-center">🏢</div>
-                            <h3 class="text-xl sm:text-2xl font-bold mb-3 sm:mb-4 text-gray-900 text-center">
+                            <h3 class="text-xl sm:text-2xl font-bold mb-3 sm:mb-4 text-gray-900 text-center"
+                                style="font-family: 'AzoSans', sans-serif;">
                                 Brand Activations
                             </h3>
                             <p class="text-gray-700 text-center leading-relaxed mb-4">
@@ -1181,7 +1234,7 @@
                                 in their hands.
                             </p>
                             <a href="../../events/corporate-events.html"
-                                class="inline-block w-full text-center bg-gradient-to-r from-gray-800 to-slate-700 text-white px-6 py-3 rounded-full text-sm sm:text-base font-semibold hover:shadow-lg transition-all">
+                                class="inline-block w-full text-center bg-gradient-to-r from-[#18F1E1] to-[#18F1E1] text-[#1F1F1F] px-6 py-3 rounded-full text-sm sm:text-base font-semibold hover:shadow-lg transition-all">
                                 LEARN MORE
                             </a>
                         </div>
@@ -1190,7 +1243,8 @@
                         <div
                             class="sketch-card sketch-border bg-white/90 backdrop-blur-sm p-6 sm:p-8 rounded-2xl border border-gray-200/50 shadow-lg">
                             <div class="text-4xl sm:text-5xl mb-4 text-center">🎪</div>
-                            <h3 class="text-xl sm:text-2xl font-bold mb-3 sm:mb-4 text-gray-900 text-center">
+                            <h3 class="text-xl sm:text-2xl font-bold mb-3 sm:mb-4 text-gray-900 text-center"
+                                style="font-family: 'AzoSans', sans-serif;">
                                 Tradeshows
                             </h3>
                             <p class="text-gray-700 text-center leading-relaxed mb-4">
@@ -1199,7 +1253,7 @@
                                 them—complete with your branding.
                             </p>
                             <a href="../../events/corporate-events.html"
-                                class="inline-block w-full text-center bg-gradient-to-r from-slate-700 to-gray-900 text-white px-6 py-3 rounded-full text-sm sm:text-base font-semibold hover:shadow-lg transition-all">
+                                class="inline-block w-full text-center bg-gradient-to-r from-[#18F1E1] to-[#18F1E1] text-[#1F1F1F] px-6 py-3 rounded-full text-sm sm:text-base font-semibold hover:shadow-lg transition-all">
                                 LEARN MORE
                             </a>
                         </div>
@@ -1223,7 +1277,7 @@
             <div class="container mx-auto px-4 sm:px-6 relative z-10">
                 <div class="max-w-4xl mx-auto text-center">
                     <div
-                        class="inline-block mb-6 sm:mb-8 px-6 sm:px-8 py-2 sm:py-3 bg-white/10 backdrop-blur-md rounded-full border-2 border-white/20">
+                        class="inline-block mb-6 sm:mb-8 px-6 sm:px-8 py-2 sm:py-3 bg-[#FF4F4F] backdrop-blur-md rounded-full border-2 border-white/20">
                         <span class="text-white text-xs sm:text-sm font-bold tracking-wider uppercase">
                             LET'S MAKE YOUR EVENT ONE TO REMEMBER!
                         </span>
@@ -1231,20 +1285,21 @@
 
                     <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black mb-6 sm:mb-8 leading-tight">
                         <span
-                            class="bg-gradient-to-r from-gray-100 via-amber-100 to-gray-100 bg-clip-text text-transparent">
+                            class="bg-gradient-to-r from-[#18F1E1] via-[#18F1E1] to-[#18F1E1] bg-clip-text text-transparent"
+                            style="font-family: 'AzoSansUber', sans-serif;">
                             Turn Moments into Art
                         </span>
                     </h2>
 
-                    <p
-                        class="text-base sm:text-lg md:text-xl mb-8 sm:mb-12 text-white/90 max-w-3xl mx-auto leading-relaxed px-4">
+                    <p class="text-base sm:text-lg md:text-xl mb-8 sm:mb-12 text-white/90 max-w-3xl mx-auto leading-relaxed px-4"
+                        style="font-family: 'AzoSans', sans-serif;">
                         Let's create something unmatched. Reach out today to explore how our immersive photo, video, and
                         event experiences can bring your vision to life and leave a lasting impact on your guests.
                     </p>
 
                     <div class="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center">
                         <a href="../contact-us.html"
-                            class="inline-flex items-center gap-3 bg-white text-gray-900 px-8 sm:px-10 py-4 sm:py-5 rounded-full text-base sm:text-lg font-bold shadow-2xl hover:shadow-white/50 transition-all duration-500 transform hover:scale-110 hover:-translate-y-1">
+                            class="inline-flex items-center gap-3 bg-[#18F1E1] text-[#1F1F1F] px-8 sm:px-10 py-4 sm:py-5 rounded-full text-base sm:text-lg font-bold shadow-2xl hover:shadow-white/50 transition-all duration-500 transform hover:scale-110 hover:-translate-y-1">
                             <span>Get Your Quote</span>
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -1278,15 +1333,18 @@
                 <div class="max-w-6xl mx-auto">
                     <div class="text-center mb-12 sm:mb-16">
                         <div
-                            class="inline-block mb-6 sm:mb-8 px-6 sm:px-8 py-2 sm:py-3 bg-white/80 backdrop-blur-md rounded-full border-2 border-gray-800/20 shadow-md">
+                            class="inline-block mb-6 sm:mb-8 px-6 sm:px-8 py-2 sm:py-3 bg-[#18F1E1] backdrop-blur-md rounded-full border-2 border-gray-800/20 shadow-md">
                             <span class="text-gray-800 text-xs sm:text-sm font-bold tracking-wider uppercase">
                                 RELATED PRODUCTS
                             </span>
                         </div>
-                        <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6">
-                            <span class="graphite-gradient">Discover Our Related Products</span>
+                        <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6"
+                            style="font-family: 'AzoSansUber', sans-serif;">
+                            <span class="graphite-gradient" style="font-family: 'AzoSansUber', sans-serif;">Discover Our
+                                Related Products</span>
                         </h2>
-                        <p class="text-base sm:text-lg md:text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed">
+                        <p class="text-base sm:text-lg md:text-xl text-[#1F1F1F] max-w-3xl mx-auto leading-relaxed"
+                            style="font-family: 'AzoSans', sans-serif;">
                             Explore more premium photo and video booth experiences
                         </p>
                     </div>
@@ -1301,15 +1359,16 @@
                                 <div
                                     class="absolute inset-0 bg-gradient-to-t from-gray-900/60 via-gray-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                                 </div>
-                                <div
-                                    class="absolute top-4 right-4 text-2xl sm:text-3xl opacity-0 group-hover:opacity-100 transition-opacity">
+                                <div class="absolute top-4 right-4 text-2xl sm:text-3xl opacity-0 group-hover:opacity-100 transition-opacity"
+                                    style="font-family: 'AzoSansUber', sans-serif;">
                                     🍪</div>
                             </div>
                             <div class="p-4 sm:p-6">
-                                <h3
-                                    class="text-lg sm:text-xl font-bold text-gray-900 mb-2 group-hover:text-amber-600 transition-colors">
+                                <h3 class="text-lg sm:text-xl font-bold text-gray-900 mb-2 group-hover:text-[#FF4F4F] transition-colors"
+                                    style="font-family: 'AzoSans', sans-serif;">
                                     Cookie Printer</h3>
-                                <p class="text-sm sm:text-base text-gray-600 leading-relaxed">Print photos, logos, or
+                                <p class="text-sm sm:text-base text-gray-600 leading-relaxed"
+                                    style="font-family: 'AzoSans', sans-serif;">Print photos, logos, or
                                     designs directly onto edible cookies in seconds</p>
                                 <div class="mt-4 flex items-center gap-2 text-gray-800 font-semibold text-sm">
                                     <span>Learn More</span>
@@ -1336,8 +1395,8 @@
                                     🤖</div>
                             </div>
                             <div class="p-4 sm:p-6">
-                                <h3
-                                    class="text-lg sm:text-xl font-bold text-gray-900 mb-2 group-hover:text-gray-700 transition-colors">
+                                <h3 class="text-lg sm:text-xl font-bold text-gray-900 mb-2 group-hover:text-[#FF4F4F] transition-colors"
+                                    style="font-family: 'AzoSans', sans-serif;">
                                     AI Photo Booth</h3>
                                 <p class="text-sm sm:text-base text-gray-600 leading-relaxed">Turn your photo into a
                                     custom AI-generated character</p>
@@ -1366,10 +1425,11 @@
                                     🎨</div>
                             </div>
                             <div class="p-4 sm:p-6">
-                                <h3
-                                    class="text-lg sm:text-xl font-bold text-gray-900 mb-2 group-hover:text-orange-600 transition-colors">
+                                <h3 class="text-lg sm:text-xl font-bold text-gray-900 mb-2 group-hover:text-[#FF4F4F] transition-colors"
+                                    style="font-family: 'AzoSans', sans-serif;">
                                     Graffiti Wall Photo Booth</h3>
-                                <p class="text-sm sm:text-base text-gray-600 leading-relaxed">Paint and create digital
+                                <p class="text-sm sm:text-base text-gray-600 leading-relaxed"
+                                    style="font-family: 'AzoSans', sans-serif;">Paint and create digital
                                     art with your photos</p>
                                 <div class="mt-4 flex items-center gap-2 text-gray-800 font-semibold text-sm">
                                     <span>Learn More</span>
