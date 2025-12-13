@@ -398,20 +398,11 @@
 
         /* Colorful Grid Gradient */
         .gradient-mosaic {
-            background: linear-gradient(135deg, 
-                #667eea 0%, 
-                #764ba2 25%, 
-                #f093fb 50%, 
-                #4facfe 75%, 
-                #00f2fe 100%);
+            background: #FF4F4F;
         }
 
         .gradient-mosaic-light {
-            background: linear-gradient(135deg, 
-                #a8edea 0%, 
-                #fed6e3 33%, 
-                #fbc2eb 66%, 
-                #a6c1ee 100%);
+            background: #1a1a1a;
         }
 
         /* Tile Pattern */
@@ -424,61 +415,16 @@
         .mosaic-text {
             position: relative;
             display: inline-block;
-            background: linear-gradient(135deg, 
-                #667eea 0%, 
-                #764ba2 20%, 
-                #f093fb 40%, 
-                #4facfe 60%, 
-                #00f2fe 80%,
-                #667eea 100%);
-            background-size: 200% 200%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: gradient-shift 5s ease infinite;
-            filter: drop-shadow(2px 2px 4px rgba(102, 126, 234, 0.4))
-                    drop-shadow(4px 4px 8px rgba(118, 75, 162, 0.3))
-                    drop-shadow(0 0 20px rgba(102, 126, 234, 0.3))
-                    drop-shadow(0 0 40px rgba(118, 75, 162, 0.2));
+            color: #FF4F4F;
             letter-spacing: 0.05em;
         }
 
         .mosaic-text::before {
-            content: attr(data-text);
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: 
-                linear-gradient(45deg, rgba(102, 126, 234, 0.15) 25%, transparent 25%),
-                linear-gradient(-45deg, rgba(118, 75, 162, 0.15) 25%, transparent 25%),
-                linear-gradient(45deg, transparent 75%, rgba(240, 147, 251, 0.15) 75%),
-                linear-gradient(-45deg, transparent 75%, rgba(79, 172, 254, 0.15) 75%);
-            background-size: 12px 12px;
-            background-position: 0 0, 0 6px, 6px -6px, -6px 0px;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            opacity: 0.7;
-            mix-blend-mode: multiply;
-            z-index: -1;
+            display: none;
         }
 
         .mosaic-text::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: 
-                repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255, 255, 255, 0.1) 2px, rgba(255, 255, 255, 0.1) 4px),
-                repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(255, 255, 255, 0.1) 2px, rgba(255, 255, 255, 0.1) 4px);
-            background-size: 8px 8px;
-            pointer-events: none;
-            opacity: 0.3;
-            mix-blend-mode: overlay;
+            display: none;
         }
 
         @keyframes gradient-shift {
@@ -498,15 +444,15 @@
 
         header nav .btn-primary,
         nav .btn-primary {
-            background-color: #0050ff !important;
-            background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%) !important;
+            background-color: #FF4F4F !important;
+            background: #FF4F4F !important;
             color: white !important;
         }
 
         header nav .btn-primary:hover,
         nav .btn-primary:hover {
-            background-color: #0040d9 !important;
-            background: linear-gradient(135deg, #0040d9 0%, #0050ff 100%) !important;
+            background-color: #e63939 !important;
+            background: #e63939 !important;
         }
 
         .section-padding {
@@ -829,33 +775,7 @@
                  class="w-full h-full object-cover" 
                  loading="eager" 
                  fetchpriority="high">
-            <div class="absolute inset-0 bg-gradient-to-br from-black/60 via-black/50 to-black/60"></div>
-        </div>
-        
-        <!-- Animated Mosaic Background -->
-        <div class="absolute inset-0 gradient-mosaic opacity-25"></div>
-        <div class="absolute inset-0 mosaic-bg-dark opacity-25"></div>
-        <div class="absolute inset-0 mosaic-grid-overlay z-10"></div>
-        
-        <!-- Floating Mosaic Tiles -->
-        <div class="absolute inset-0 overflow-hidden z-10">
-            <!-- Large Glowing Tiles -->
-            <div class="absolute top-10 left-10 w-24 h-24 bg-gradient-to-br from-purple-500/30 to-pink-500/30 rounded-lg pixel-animate tile-glow border border-white/20" style="animation-delay: 0s;"></div>
-            <div class="absolute top-32 right-20 w-32 h-32 bg-gradient-to-br from-blue-500/25 to-cyan-500/25 rounded-lg pixel-animate tile-bounce border border-white/15" style="animation-delay: 0.5s;"></div>
-            <div class="absolute bottom-20 left-32 w-28 h-28 bg-gradient-to-br from-pink-500/30 to-purple-500/30 rounded-lg pixel-animate tile-glow border border-white/20" style="animation-delay: 1s;"></div>
-            <div class="absolute bottom-40 right-40 w-20 h-20 bg-gradient-to-br from-indigo-500/25 to-blue-500/25 rounded-lg pixel-animate tile-bounce border border-white/15" style="animation-delay: 1.5s;"></div>
-            
-            <!-- Medium Tiles -->
-            <div class="absolute top-1/2 left-20 w-16 h-16 bg-gradient-to-br from-violet-500/30 to-fuchsia-500/30 rounded-lg pixel-animate tile-glow" style="animation-delay: 2s;"></div>
-            <div class="absolute top-1/3 right-1/4 w-20 h-20 bg-gradient-to-br from-cyan-500/25 to-blue-500/25 rounded-lg pixel-animate tile-bounce" style="animation-delay: 2.5s;"></div>
-            <div class="absolute top-1/4 left-1/3 bg-gradient-to-br from-purple-500/30 to-indigo-500/30 rounded-lg pixel-animate tile-glow" style="animation-delay: 3s; width: 4.5rem; height: 4.5rem;"></div>
-            <div class="absolute bottom-1/3 right-1/3 bg-gradient-to-br from-pink-500/25 to-rose-500/25 rounded-lg pixel-animate tile-bounce" style="animation-delay: 3.5s; width: 5.5rem; height: 5.5rem;"></div>
-            
-            <!-- Small Accent Tiles -->
-            <div class="absolute top-20 right-1/4 w-12 h-12 bg-white/20 rounded-lg pixel-animate" style="animation-delay: 0.3s;"></div>
-            <div class="absolute bottom-1/4 left-1/4 w-14 h-14 bg-white/15 rounded-lg pixel-animate" style="animation-delay: 1.2s;"></div>
-            <div class="absolute top-2/3 left-10 w-10 h-10 bg-white/25 rounded-lg pixel-animate" style="animation-delay: 2.3s;"></div>
-            <div class="absolute top-1/5 right-10 w-16 h-16 bg-white/18 rounded-lg pixel-animate" style="animation-delay: 1.8s;"></div>
+            <div class="absolute inset-0 bg-black/60"></div>
         </div>
         
         <!-- Large Decorative Grid Pattern -->
@@ -865,17 +785,12 @@
 
         <div class="container mx-auto px-4 sm:px-6 relative z-20 pt-20">
             <div class="max-w-6xl mx-auto text-center">
-                <!-- Badge -->
-                <div class="inline-flex items-center gap-2 sm:gap-3 px-4 sm:px-6 py-2 bg-white/10 backdrop-blur-md border border-purple-400/50 rounded-full shadow-lg shadow-purple-500/10 mb-6 sm:mb-8">
-                    <div class="w-2 h-2 bg-purple-400 rounded-full animate-pulse"></div>
-                    <span class="text-purple-200 text-xs sm:text-sm font-semibold tracking-wider uppercase">Collaborative Art Experience</span>
-                    <div class="w-2 h-2 bg-purple-400 rounded-full animate-pulse" style="animation-delay: 0.5s;"></div>
-                </div>
 
                 <!-- Main Title -->
                 <h1 class="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-normal mb-6 leading-tight">
                     <span class="block mosaic-text" data-text="Mosaic Photo Booth Rentals">
-                        Mosaic Photo Booth Rentals
+                        Mosaic Photo <span class="block"
+                        style="color: #18F1E1;">Booth Rentals</span>
                     </span>
                 </h1>
 
@@ -921,13 +836,10 @@
     </section>
 
     <!-- What is Mosaic Photo Booth Section -->
-    <section class="section-padding bg-gradient-to-br from-white via-purple-50 to-blue-50 mosaic-bg">
+    <section class="section-padding bg-white mosaic-bg">
         <div class="container mx-auto px-6">
             <div class="mx-auto">
                 <div class="text-center mb-16">
-                    <div class="inline-block px-6 py-2 bg-gradient-to-r from-purple-100 to-blue-100 rounded-full mb-6 border border-purple-200">
-                        <span class="text-sm font-bold tracking-wider text-purple-700">HOW IT WORKS</span>
-                    </div>
                     <h2 class="text-4xl md:text-5xl font-normal mb-6">
                         What is a Mosaic Photo Booth?
                     </h2>
@@ -978,10 +890,10 @@
         <div class="container mx-auto px-6">
             <div class="max-w-6xl mx-auto">
                 <div class="text-center mb-16">
-                    <h2 class="text-4xl md:text-5xl font-normal mb-6">
+                    <h2 class="text-4xl md:text-5xl font-normal mb-6 text-[#18F1E1]">
                         Where Quality Meets Fun
                     </h2>
-                    <p class="text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed">
+                    <p class="text-xl text-white/90 max-w-3xl mx-auto leading-relaxed">
                         We built this system for people who appreciate the difference between a photo and a photograph. Every detail - from the premium backdrop materials to our signature Pose Flashcards - is crafted to deliver exceptional results.
                     </p>
                 </div>
@@ -989,7 +901,7 @@
                 <!-- Features Grid -->
                 <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
                     <div class="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all border-l-4 border-purple-500 group">
-                        <div class="w-12 h-12 bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                        <div class="w-12 h-12 bg-[#FF4F4F] rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                             <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path>
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path>
@@ -999,7 +911,7 @@
                     </div>
 
                     <div class="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all border-l-4 border-pink-500 group">
-                        <div class="w-12 h-12 bg-gradient-to-br from-pink-500 to-pink-600 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                        <div class="w-12 h-12 bg-[#FF4F4F] rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                             <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
                             </svg>
@@ -1008,7 +920,7 @@
                     </div>
 
                     <div class="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all border-l-4 border-blue-500 group">
-                        <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                        <div class="w-12 h-12 bg-[#FF4F4F] rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                             <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                             </svg>
@@ -1017,7 +929,7 @@
                     </div>
 
                     <div class="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all border-l-4 border-cyan-500 group">
-                        <div class="w-12 h-12 bg-gradient-to-br from-cyan-500 to-cyan-600 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                        <div class="w-12 h-12 bg-[#FF4F4F] rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                             <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path>
                             </svg>
@@ -1026,7 +938,7 @@
                     </div>
 
                     <div class="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all border-l-4 border-indigo-500 group">
-                        <div class="w-12 h-12 bg-gradient-to-br from-indigo-500 to-indigo-600 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                        <div class="w-12 h-12 bg-[#FF4F4F] rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                             <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
                             </svg>
@@ -1035,7 +947,7 @@
                     </div>
 
                     <div class="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all border-l-4 border-violet-500 group">
-                        <div class="w-12 h-12 bg-gradient-to-br from-violet-500 to-violet-600 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                        <div class="w-12 h-12 bg-[#FF4F4F] rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                             <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"></path>
                             </svg>
@@ -1044,7 +956,7 @@
                     </div>
 
                     <div class="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all border-l-4 border-fuchsia-500 group">
-                        <div class="w-12 h-12 bg-gradient-to-br from-fuchsia-500 to-fuchsia-600 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                        <div class="w-12 h-12 bg-[#FF4F4F] rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                             <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"></path>
                             </svg>
@@ -1053,7 +965,7 @@
                     </div>
 
                     <div class="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all border-l-4 border-purple-500 group">
-                        <div class="w-12 h-12 bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                        <div class="w-12 h-12 bg-[#FF4F4F] rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                             <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                             </svg>
@@ -1062,7 +974,7 @@
                     </div>
 
                     <div class="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all border-l-4 border-pink-500 group">
-                        <div class="w-12 h-12 bg-gradient-to-br from-pink-500 to-pink-600 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                        <div class="w-12 h-12 bg-[#FF4F4F] rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                             <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
                             </svg>
@@ -1071,7 +983,7 @@
                     </div>
 
                     <div class="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all border-l-4 border-blue-500 group">
-                        <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                        <div class="w-12 h-12 bg-[#FF4F4F] rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                             <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
                             </svg>
@@ -1080,7 +992,7 @@
                     </div>
 
                     <div class="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all border-l-4 border-cyan-500 group">
-                        <div class="w-12 h-12 bg-gradient-to-br from-cyan-500 to-cyan-600 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                        <div class="w-12 h-12 bg-[#FF4F4F] rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                             <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path>
                             </svg>
@@ -1089,7 +1001,7 @@
                     </div>
 
                     <div class="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all border-l-4 border-indigo-500 group">
-                        <div class="w-12 h-12 bg-gradient-to-br from-indigo-500 to-indigo-600 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                        <div class="w-12 h-12 bg-[#FF4F4F] rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                             <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                             </svg>
@@ -1097,31 +1009,33 @@
                         <h4 class="text-lg font-normal mb-2 text-gray-800">High-Res Outputs</h4>
                     </div>
                 </div>
+            </div>
+        </div>
+    </section>
 
-                <!-- Branded Experiences Subsection -->
-                <div class="mt-20 pt-16 border-t border-purple-200/50">
-                    <div class="text-center mb-16">
-                        <div class="inline-block px-6 py-2 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full mb-6 border border-purple-400">
-                            <span class="text-sm font-bold tracking-wider text-white">BRANDED EXPERIENCES</span>
-                        </div>
-                        <h2 class="text-4xl md:text-5xl font-normal mb-6">
-                            Branded Digital & Print Mosaic Photo Booth Experiences
-                        </h2>
-                        <p class="text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed">
-                            Turn individual snapshots into branded artwork. Our Mosaic Photo Booth compiles real-time event photos into a larger image, transforming guest interactions into a stunning, high-impact visual display.
-                        </p>
-                    </div>
+    <!-- Branded Experiences Section -->
+    <section class="section-padding bg-white relative overflow-hidden">
+        <div class="container mx-auto px-6">
+            <div class="max-w-6xl mx-auto">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl md:text-5xl font-normal mb-6 text-[FF4F4F]">
+                        Branded Digital & Print Mosaic Photo Booth Experiences
+                    </h2>
+                    <p class="text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed">
+                        Turn individual snapshots into branded artwork. Our Mosaic Photo Booth compiles real-time event photos into a larger image, transforming guest interactions into a stunning, high-impact visual display.
+                    </p>
+                </div>
 
-                    <div class="mb-12 text-center">
-                        <h3 class="text-2xl md:text-3xl font-normal mb-8 text-gray-800">
-                            Customize your Mosaic Photo Booth with:
-                        </h3>
-                    </div>
+                <div class="mb-12 text-center">
+                    <h3 class="text-2xl md:text-3xl font-normal mb-8 text-gray-800">
+                        Customize your Mosaic Photo Booth with:
+                    </h3>
+                </div>
 
-                    <!-- Branded Features Grid -->
-                    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                    <div class="bg-white/80 backdrop-blur-lg rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all border border-purple-200/50 group">
-                        <div class="w-12 h-12 bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                <!-- Branded Features Grid -->
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="bg-[#FF7F7F]/80 backdrop-blur-lg rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all border border-[#FF6B6B]/50 group">
+                        <div class="w-12 h-12 bg-[#FF4F4F] rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                             <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                             </svg>
@@ -1129,8 +1043,8 @@
                         <h4 class="text-lg font-normal mb-2 text-gray-800">Live Photo Mosaic Building</h4>
                     </div>
 
-                    <div class="bg-white/80 backdrop-blur-lg rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all border border-pink-200/50 group">
-                        <div class="w-12 h-12 bg-gradient-to-br from-pink-500 to-pink-600 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                    <div class="bg-white/80 backdrop-blur-lg rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all border border-[#FF6B6B]/50 group">
+                        <div class="w-12 h-12 bg-[#FF4F4F] rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                             <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
                             </svg>
@@ -1138,8 +1052,8 @@
                         <h4 class="text-lg font-normal mb-2 text-gray-800">Custom Event Branding And Overlays</h4>
                     </div>
 
-                    <div class="bg-white/80 backdrop-blur-lg rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all border border-blue-200/50 group">
-                        <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                    <div class="bg-white/80 backdrop-blur-lg rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all border border-[#FF6B6B]/50 group">
+                        <div class="w-12 h-12 bg-[#FF4F4F] rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                             <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
                             </svg>
@@ -1147,8 +1061,8 @@
                         <h4 class="text-lg font-normal mb-2 text-gray-800">Interactive Touchscreen Gallery</h4>
                     </div>
 
-                    <div class="bg-white/80 backdrop-blur-lg rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all border border-cyan-200/50 group">
-                        <div class="w-12 h-12 bg-gradient-to-br from-cyan-500 to-cyan-600 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                    <div class="bg-white/80 backdrop-blur-lg rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all border border-[#FF6B6B]/50 group">
+                        <div class="w-12 h-12 bg-[#FF4F4F] rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                             <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path>
                             </svg>
@@ -1156,8 +1070,8 @@
                         <h4 class="text-lg font-normal mb-2 text-gray-800">Personalized Printed Mosaic Takeaway</h4>
                     </div>
 
-                    <div class="bg-white/80 backdrop-blur-lg rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all border border-indigo-200/50 group">
-                        <div class="w-12 h-12 bg-gradient-to-br from-indigo-500 to-indigo-600 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                    <div class="bg-white/80 backdrop-blur-lg rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all border border-[#FF6B6B]/50 group">
+                        <div class="w-12 h-12 bg-[#FF4F4F] rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                             <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path>
                             </svg>
@@ -1165,8 +1079,8 @@
                         <h4 class="text-lg font-normal mb-2 text-gray-800">Branded Microsite With Event Recap</h4>
                     </div>
 
-                    <div class="bg-white/80 backdrop-blur-lg rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all border border-violet-200/50 group">
-                        <div class="w-12 h-12 bg-gradient-to-br from-violet-500 to-violet-600 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                    <div class="bg-white/80 backdrop-blur-lg rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all border border-[#FF6B6B]/50 group">
+                        <div class="w-12 h-12 bg-[#FF4F4F] rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                             <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"></path>
                             </svg>
@@ -1174,8 +1088,8 @@
                         <h4 class="text-lg font-normal mb-2 text-gray-800">Custom Logo Integration</h4>
                     </div>
 
-                    <div class="bg-white/80 backdrop-blur-lg rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all border border-fuchsia-200/50 group">
-                        <div class="w-12 h-12 bg-gradient-to-br from-fuchsia-500 to-fuchsia-600 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                    <div class="bg-white/80 backdrop-blur-lg rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all border border-[#FF6B6B]/50 group">
+                        <div class="w-12 h-12 bg-[#FF4F4F] rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                             <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"></path>
                             </svg>
@@ -1183,8 +1097,8 @@
                         <h4 class="text-lg font-normal mb-2 text-gray-800">Social Sharing Options</h4>
                     </div>
 
-                    <div class="bg-white/80 backdrop-blur-lg rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all border border-purple-200/50 group">
-                        <div class="w-12 h-12 bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                    <div class="bg-white/80 backdrop-blur-lg rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all border border-[#FF6B6B]/50 group">
+                        <div class="w-12 h-12 bg-[#FF4F4F] rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                             <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
                             </svg>
@@ -1198,25 +1112,23 @@
 
     <!-- Packages Section -->
     <section id="packages" class="section-padding gradient-mosaic-light relative overflow-hidden">
-        <!-- Decorative Tiles -->
-        <div class="absolute top-0 right-0 w-64 h-64 bg-white/20 rounded-full blur-3xl"></div>
-        <div class="absolute bottom-0 left-0 w-96 h-96 bg-purple-200/20 rounded-full blur-3xl"></div>
+       
         
         <div class="container mx-auto px-6 relative z-10">
             <div class="max-w-7xl mx-auto">
                 <div class="text-center mb-6">
-                    <h2 class="text-4xl md:text-5xl font-normal mb-6">
+                    <h2 class="text-4xl md:text-5xl font-normal mb-6 text-[#18F1E1]">
                         Mosaic Booth Packages
                     </h2>
                 </div>
-                <p class="text-xl text-gray-700 text-center mb-16 max-w-3xl mx-auto">
+                <p class="text-xl text-white text-center mb-16 max-w-3xl mx-auto">
                     Choose the perfect package to create your stunning mosaic masterpiece
                 </p>
 
                 <div class="grid lg:grid-cols-3 gap-8">
                     <!-- Basic Package -->
                     <div class="group bg-white rounded-3xl shadow-xl overflow-hidden border-2 border-purple-200 hover:border-purple-400 transition-all duration-500 hover:-translate-y-2">
-                        <div class="relative bg-gradient-to-br from-purple-500 via-purple-600 to-purple-700 p-8 text-center overflow-hidden tile-pattern">
+                        <div class="relative bg-[#FF4F4F] p-8 text-center overflow-hidden tile-pattern">
                             <div class="absolute top-0 right-0 w-40 h-40 bg-white/10 rounded-full -mr-20 -mt-20"></div>
                             <div class="absolute bottom-0 left-0 w-32 h-32 bg-white/10 rounded-full -ml-16 -mb-16"></div>
                             <div class="relative z-10">
@@ -1283,7 +1195,7 @@
                             </ul>
                             
                             <a href="../contact-us.html" 
-                               class="block text-center bg-gradient-to-r from-purple-500 to-purple-600 text-white px-6 py-4 rounded-full font-bold hover:from-purple-600 hover:to-purple-700 transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1">
+                               class="block text-center bg-[#FF4F4F] text-white px-6 py-4 rounded-full font-bold hover:bg-[#e63939] transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1">
                                 Get Quote
                             </a>
                         </div>
@@ -1292,14 +1204,14 @@
                     <!-- Recommended Package -->
                     <div class="relative bg-white rounded-3xl shadow-2xl overflow-hidden transform lg:scale-110 border-4 border-pink-400 hover:border-pink-600 transition-all duration-500 hover:-translate-y-3">
                         <div class="absolute -top-1 -right-1 z-20">
-                            <div class="bg-gradient-to-r from-pink-500 to-purple-600 text-white px-6 py-2 text-xs font-bold rounded-bl-2xl rounded-tr-2xl shadow-xl flex items-center gap-2">
+                            <div class="bg-[#FF4F4F] text-white px-6 py-2 text-xs font-bold rounded-bl-2xl rounded-tr-2xl shadow-xl flex items-center gap-2">
                                 <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                                     <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
                                 </svg>
                                 MOST POPULAR
                             </div>
                         </div>
-                        <div class="relative bg-gradient-to-br from-pink-500 via-purple-600 to-pink-700 p-8 text-center overflow-hidden tile-pattern">
+                        <div class="relative bg-[#FF4F4F] p-8 text-center overflow-hidden tile-pattern">
                             <div class="absolute top-0 right-0 w-48 h-48 bg-white/10 rounded-full -mr-20 -mt-20"></div>
                             <div class="absolute bottom-0 left-0 w-40 h-40 bg-white/10 rounded-full -ml-20 -mb-20"></div>
                             <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-white/5 rounded-full blur-3xl"></div>
@@ -1375,7 +1287,7 @@
                             </ul>
                             
                             <a href="../contact-us.html" 
-                               class="block text-center bg-gradient-to-r from-pink-500 via-pink-600 to-purple-500 text-white px-6 py-4 rounded-full font-bold hover:from-pink-600 hover:via-pink-700 hover:to-purple-600 transition-all duration-300 shadow-xl hover:shadow-2xl hover:-translate-y-1 flex items-center justify-center gap-2">
+                               class="block text-center bg-[#FF4F4F] text-white px-6 py-4 rounded-full font-bold hover:bg-[#e63939] transition-all duration-300 shadow-xl hover:shadow-2xl hover:-translate-y-1 flex items-center justify-center gap-2">
                                 <span>Get Started</span>
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
@@ -1386,7 +1298,7 @@
 
                     <!-- Brand Activation Package -->
                     <div class="group bg-white rounded-3xl shadow-xl overflow-hidden border-2 border-blue-200 hover:border-blue-400 transition-all duration-500 hover:-translate-y-2">
-                        <div class="relative bg-gradient-to-br from-blue-500 via-indigo-600 to-blue-700 p-8 text-center overflow-hidden tile-pattern">
+                        <div class="relative bg-[#FF4F4F] p-8 text-center overflow-hidden tile-pattern">
                             <div class="absolute top-0 right-0 w-44 h-44 bg-white/10 rounded-full -mr-20 -mt-20"></div>
                             <div class="absolute bottom-0 left-0 w-36 h-36 bg-white/10 rounded-full -ml-16 -mb-16"></div>
                             <div class="relative z-10">
@@ -1461,7 +1373,7 @@
                             </ul>
                             
                             <a href="../contact-us.html" 
-                               class="block text-center bg-gradient-to-r from-blue-500 via-indigo-600 to-blue-600 text-white px-6 py-4 rounded-full font-bold hover:from-blue-600 hover:via-indigo-700 hover:to-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1">
+                               class="block text-center bg-[#FF4F4F] text-white px-6 py-4 rounded-full font-bold hover:bg-[#e63939] transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1">
                                 Contact Us
                             </a>
                         </div>
@@ -1472,7 +1384,7 @@
     </section>
 
     <!-- Technical Specifications -->
-    <section class="section-padding bg-white mosaic-bg">
+    <section class="section-padding bg-white">
         <div class="container mx-auto px-6">
             <div class="max-w-7xl mx-auto">
                 <div class="text-center mb-16">
@@ -1482,8 +1394,8 @@
                 </div>
 
                 <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <div class="bg-gradient-to-br from-purple-50 to-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all border-l-4 border-purple-500">
-                        <div class="w-12 h-12 bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl flex items-center justify-center mb-4">
+                    <div class="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all border-l-4 border-[#FF4F4F]">
+                        <div class="w-12 h-12 bg-[#FF4F4F] rounded-xl flex items-center justify-center mb-4">
                             <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"></path>
                             </svg>
@@ -1492,8 +1404,8 @@
                         <p class="text-gray-700">4' x 4' Minimum<br>8' x 8' Preferred</p>
                     </div>
 
-                    <div class="bg-gradient-to-br from-pink-50 to-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all border-l-4 border-pink-500">
-                        <div class="w-12 h-12 bg-gradient-to-br from-pink-500 to-pink-600 rounded-xl flex items-center justify-center mb-4">
+                    <div class="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all border-l-4 border-[#FF4F4F]">
+                        <div class="w-12 h-12 bg-[#FF4F4F] rounded-xl flex items-center justify-center mb-4">
                             <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
                             </svg>
@@ -1502,8 +1414,8 @@
                         <p class="text-gray-700">One 20-Amp Circuit</p>
                     </div>
 
-                    <div class="bg-gradient-to-br from-blue-50 to-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all border-l-4 border-blue-500">
-                        <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center mb-4">
+                    <div class="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all border-l-4 border-[#FF4F4F]">
+                        <div class="w-12 h-12 bg-[#FF4F4F] rounded-xl flex items-center justify-center mb-4">
                             <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                             </svg>
@@ -1512,8 +1424,8 @@
                         <p class="text-gray-700">60-90 Minutes</p>
                     </div>
 
-                    <div class="bg-gradient-to-br from-indigo-50 to-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all border-l-4 border-indigo-500">
-                        <div class="w-12 h-12 bg-gradient-to-br from-indigo-500 to-indigo-600 rounded-xl flex items-center justify-center mb-4">
+                    <div class="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all border-l-4 border-[#FF4F4F]">
+                        <div class="w-12 h-12 bg-[#FF4F4F] rounded-xl flex items-center justify-center mb-4">
                             <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path>
                             </svg>
@@ -1522,8 +1434,8 @@
                         <p class="text-gray-700">30-60 Photos</p>
                     </div>
 
-                    <div class="bg-gradient-to-br from-cyan-50 to-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all border-l-4 border-cyan-500">
-                        <div class="w-12 h-12 bg-gradient-to-br from-cyan-500 to-cyan-600 rounded-xl flex items-center justify-center mb-4">
+                    <div class="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all border-l-4 border-[#FF4F4F]">
+                        <div class="w-12 h-12 bg-[#FF4F4F] rounded-xl flex items-center justify-center mb-4">
                             <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.111 16.404a5.5 5.5 0 017.778 0M12 20h.01m-7.08-7.071c3.904-3.905 10.236-3.905 14.141 0M1.394 9.393c5.857-5.857 15.355-5.857 21.213 0"></path>
                             </svg>
@@ -1532,8 +1444,8 @@
                         <p class="text-gray-700">Not Required<br>Wi-Fi or Hotspot Recommended</p>
                     </div>
 
-                    <div class="bg-gradient-to-br from-violet-50 to-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all border-l-4 border-violet-500">
-                        <div class="w-12 h-12 bg-gradient-to-br from-violet-500 to-violet-600 rounded-xl flex items-center justify-center mb-4">
+                    <div class="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all border-l-4 border-[#FF4F4F]">
+                        <div class="w-12 h-12 bg-[#FF4F4F] rounded-xl flex items-center justify-center mb-4">
                             <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
                             </svg>
@@ -1547,14 +1459,14 @@
     </section>
 
     <!-- CTA Section -->
-    <section class="section-padding gradient-mosaic relative overflow-hidden">
-        <div class="absolute inset-0 mosaic-bg-dark opacity-20"></div>
+    <section class="section-padding bg-gray-900 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 opacity-100"></div>
         <div class="container mx-auto px-6 relative z-10">
             <div class="max-w-4xl mx-auto text-center text-white">
-                <h2 class="text-4xl md:text-5xl font-black mb-6">
+                <h2 class="text-4xl md:text-5xl font-black mb-6 text-[#18F1E1]">
                     Ready to Create Your Mosaic Masterpiece?
                 </h2>
-                <p class="text-xl mb-12 opacity-90">
+                <p class="text-xl mb-12 opacity-90 text-white">
                     Transform your event with a stunning visual experience that brings every guest together
                 </p>
                 
@@ -1575,200 +1487,11 @@
         </div>
     </section>
 
-    <!-- Lightbox Modal -->
-    <div id="mosaicLightbox" class="fixed inset-0 bg-black/90 backdrop-blur-sm z-50 hidden items-center justify-center p-6">
-        <button id="mosaicClose" class="absolute top-6 right-6 w-11 h-11 rounded-full bg-white/15 border border-white/30 text-white flex items-center justify-center hover:bg-white/25 transition">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-            </svg>
-        </button>
-        <div class="relative max-w-5xl w-full flex flex-col items-center gap-5">
-            <div class="max-h-[80vh] w-full flex items-center justify-center">
-                <img id="mosaicLightboxImage" src="" alt="Mosaic full view" class="max-h-[80vh] w-full object-contain rounded-2xl shadow-2xl transition-transform duration-200 ease-out" style="transform: scale(1); transform-origin: center;"></img>
-            </div>
-            <div class="flex items-center gap-3 bg-white/10 border border-white/20 rounded-full px-5 py-3 text-white shadow-lg">
-                <button id="mosaicZoomOut" class="w-10 h-10 rounded-full bg-white/15 hover:bg-white/25 flex items-center justify-center transition">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM13 10H7"></path>
-                    </svg>
-                </button>
-                <button id="mosaicZoomReset" class="px-4 h-10 rounded-full bg-white/15 hover:bg-white/25 text-sm font-semibold tracking-wide transition">
-                    Reset
-                </button>
-                <button id="mosaicZoomIn" class="w-10 h-10 rounded-full bg-white/15 hover:bg-white/25 flex items-center justify-center transition">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"></path>
-                    </svg>
-                </button>
-                <span id="mosaicZoomLevel" class="text-xs uppercase tracking-[0.25em] text-white/80">100%</span>
-            </div>
-        </div>
-    </div>
-
     <!-- Navigation and Footer Scripts -->
     <script src="../../assets/components/navigation.js"></script>
     <script src="../../assets/components/footer.js"></script>
     
-    <!-- Lightbox JavaScript -->
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const lightbox = document.getElementById('mosaicLightbox');
-            const lightboxImg = document.getElementById('mosaicLightboxImage');
-            const closeBtn = document.getElementById('mosaicClose');
-            const galleryImages = document.querySelectorAll('.mosaic-gallery-item .gallery-image');
-            const zoomInBtn = document.getElementById('mosaicZoomIn');
-            const zoomOutBtn = document.getElementById('mosaicZoomOut');
-            const zoomResetBtn = document.getElementById('mosaicZoomReset');
-            const zoomLevelDisplay = document.getElementById('mosaicZoomLevel');
 
-            let currentZoom = 1;
-            const zoomStep = 0.25;
-            const minZoom = 0.75;
-            const maxZoom = 4;
-
-            const applyZoom = () => {
-                if (!lightboxImg) return;
-                lightboxImg.style.transform = `scale(${currentZoom})`;
-                if (zoomLevelDisplay) {
-                    zoomLevelDisplay.textContent = `${Math.round(currentZoom * 100)}%`;
-                }
-            };
-
-            const zoomIn = () => {
-                currentZoom = Math.min(maxZoom, currentZoom + zoomStep);
-                applyZoom();
-            };
-
-            const zoomOut = () => {
-                currentZoom = Math.max(minZoom, currentZoom - zoomStep);
-                applyZoom();
-            };
-
-            const resetZoom = () => {
-                currentZoom = 1;
-                applyZoom();
-            };
-
-            const openLightbox = (src, alt) => {
-                if (!lightbox || !lightboxImg) return;
-                lightboxImg.src = src;
-                lightboxImg.alt = alt || 'Mosaic full view';
-                resetZoom();
-                lightbox.classList.remove('hidden');
-                lightbox.classList.add('flex');
-                document.body.style.overflow = 'hidden';
-            };
-
-            const closeLightbox = () => {
-                if (!lightbox) return;
-                lightbox.classList.add('hidden');
-                lightbox.classList.remove('flex');
-                if (lightboxImg) {
-                    lightboxImg.src = '';
-                }
-                document.body.style.overflow = '';
-                resetZoom();
-            };
-
-            galleryImages.forEach(img => {
-                img.addEventListener('click', () => openLightbox(img.src, img.alt));
-            });
-
-            if (zoomInBtn) {
-                zoomInBtn.addEventListener('click', zoomIn);
-            }
-
-            if (zoomOutBtn) {
-                zoomOutBtn.addEventListener('click', zoomOut);
-            }
-
-            if (zoomResetBtn) {
-                zoomResetBtn.addEventListener('click', resetZoom);
-            }
-
-            if (closeBtn) {
-                closeBtn.addEventListener('click', closeLightbox);
-            }
-
-            if (lightbox) {
-                lightbox.addEventListener('click', (event) => {
-                    if (event.target === lightbox) {
-                        closeLightbox();
-                    }
-                });
-
-                lightbox.addEventListener('wheel', (event) => {
-                    if (!lightbox.classList.contains('flex')) return;
-                    event.preventDefault();
-                    if (event.deltaY < 0) {
-                        zoomIn();
-                    } else {
-                        zoomOut();
-                    }
-                }, { passive: false });
-            }
-
-            document.addEventListener('keydown', (event) => {
-                if (event.key === 'Escape') {
-                    closeLightbox();
-                } else if (event.key === '+' || event.key === '=') {
-                    zoomIn();
-                } else if (event.key === '-' || event.key === '_') {
-                    zoomOut();
-                } else if (event.key === '0') {
-                    resetZoom();
-                }
-            });
-        });
-
-        // Phone Verification Modal and CAPTCHA
-        let phoneVerified = false;
-
-        function openPhoneVerification() {
-            if (phoneVerified) {
-                // If already verified, directly open phone
-                window.location.href = '#contact';
-                return;
-            }
-            document.getElementById('verification-modal').classList.remove('hidden');
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeVerificationModal() {
-            document.getElementById('verification-modal').classList.add('hidden');
-            document.body.style.overflow = 'auto';
-        }
-
-        function onCaptchaVerified(token) {
-            // CAPTCHA verified successfully
-            phoneVerified = true;
-            closeVerificationModal();
-            revealPhoneNumber();
-        }
-
-        function revealPhoneNumber() {
-            const button = document.querySelector('[onclick="openPhoneVerification()"]');
-            const buttonText = document.getElementById('phone-button-text');
-            
-            // Change button to actual phone link
-            button.outerHTML = `
-                <button type="button" data-click-to-call data-call-text="Call Us" 
-                   class="inline-flex items-center justify-center px-9 py-5 rounded-full font-semibold border-2 border-white/30 text-white bg-white/10 hover:bg-white/20 hover:shadow-lg transition-all duration-300 cursor-pointer">
-                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498A1 1 0 0121 17.72V21a2 2 0 01-2 2h-1C9.716 23 3 16.284 3 8V7a2 2 0 012-2z"/>
-                    </svg>
-                    <span>Call Us</span>
-                </button>
-            `;
-        }
-
-        // Close modal on escape key
-        document.addEventListener('keydown', function(event) {
-            if (event.key === 'Escape') {
-                closeVerificationModal();
-            }
-        });
-    </script>
 
     <!-- Phone Verification Modal -->
     <div id="verification-modal" class="hidden fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
