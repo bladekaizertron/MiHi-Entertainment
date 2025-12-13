@@ -213,6 +213,22 @@
         href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap"
         rel="stylesheet">
     <style>
+        @font-face {
+            font-family: 'AzoSansUber';
+            src: url('../../assets/fonts/AzoSansUber-Regular.woff2') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'AzoSans';
+            src: url('../../assets/fonts/AzoSans-Regular.woff2') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+
         body {
             font-family: 'Inter', sans-serif;
         }
@@ -229,6 +245,10 @@
         h5,
         h6 {
             font-family: 'Playfair Display', serif;
+        }
+
+        .hero-title {
+            font-family: 'AzoSansUber', sans-serif;
         }
 
         /* Animated blob effect */
@@ -376,6 +396,216 @@
         .gallery-item:hover img {
             transform: scale(1.1);
         }
+
+        /* Mobile Responsive Styles */
+        @media (max-width: 767px) {
+
+            /* Hero Section Mobile */
+            section.relative.h-screen {
+                min-height: 80vh;
+                height: auto;
+                padding: 2rem 0;
+            }
+
+            /* Reduce blob sizes on mobile */
+            .animate-blob {
+                width: 200px !important;
+                height: 200px !important;
+            }
+
+            /* Hero Title Mobile */
+            .hero-title {
+                font-size: 2.5rem !important;
+                line-height: 1.2 !important;
+            }
+
+            h1.text-5xl,
+            h1.text-6xl,
+            h1.text-7xl {
+                font-size: 2.5rem !important;
+                line-height: 1.2 !important;
+                margin-bottom: 1.5rem !important;
+            }
+
+            /* Section Headings Mobile */
+            h2.text-5xl,
+            h2.text-6xl {
+                font-size: 2rem !important;
+                line-height: 1.2 !important;
+                margin-bottom: 1.5rem !important;
+            }
+
+            /* Article Section Mobile */
+            article .grid {
+                gap: 2rem !important;
+            }
+
+            article h2 {
+                font-size: 2rem !important;
+                line-height: 1.2 !important;
+                margin-bottom: 1.5rem !important;
+            }
+
+            article p {
+                font-size: 1rem !important;
+                margin-bottom: 1rem !important;
+            }
+
+            /* Container padding mobile */
+            .container.mx-auto.px-6 {
+                padding-left: 1rem !important;
+                padding-right: 1rem !important;
+            }
+
+            .container.mx-auto.px-4 {
+                padding-left: 1rem !important;
+                padding-right: 1rem !important;
+            }
+
+            /* Max width containers mobile */
+            .max-w-6xl,
+            .max-w-7xl,
+            .max-w-5xl,
+            .max-w-4xl,
+            .max-w-3xl {
+                padding: 0 0.5rem;
+            }
+
+            /* Text sizes mobile */
+            .text-xl {
+                font-size: 1rem !important;
+            }
+
+            .text-2xl {
+                font-size: 1.25rem !important;
+            }
+
+            .text-lg {
+                font-size: 0.95rem !important;
+            }
+
+            /* Badge/span labels mobile */
+            span.inline-block.px-6,
+            div.inline-block.px-6 {
+                padding: 0.5rem 1rem !important;
+                font-size: 0.75rem !important;
+            }
+
+            /* Section padding mobile */
+            .section-padding {
+                padding: 3rem 0 !important;
+            }
+
+            /* Margins mobile */
+            .mb-16,
+            .mb-20 {
+                margin-bottom: 2rem !important;
+            }
+
+            .mt-20,
+            .mt-12 {
+                margin-top: 1.5rem !important;
+            }
+
+            /* Grid gaps mobile */
+            .grid.gap-8,
+            .grid.gap-12 {
+                gap: 1.5rem !important;
+            }
+
+            /* Features Grid Mobile */
+            .grid.md\:grid-cols-2,
+            .grid.md\:grid-cols-3 {
+                grid-template-columns: 1fr !important;
+            }
+
+            /* Image cards mobile */
+            .h-80 {
+                height: 200px !important;
+            }
+
+            /* Button padding mobile */
+            .px-8,
+            .px-10 {
+                padding-left: 1rem !important;
+                padding-right: 1rem !important;
+            }
+
+            .py-4,
+            .py-5 {
+                padding-top: 0.75rem !important;
+                padding-bottom: 0.75rem !important;
+            }
+
+            /* Gallery items mobile */
+            .gallery-item {
+                width: 250px !important;
+                height: 250px !important;
+            }
+
+            /* Card padding mobile */
+            .p-8 {
+                padding: 1.5rem !important;
+            }
+
+            .p-6 {
+                padding: 1rem !important;
+            }
+
+            /* Icon sizes mobile */
+            .w-14.h-14,
+            .w-12.h-12 {
+                width: 2.5rem !important;
+                height: 2.5rem !important;
+            }
+
+            /* Trust indicators mobile */
+            .gap-8 {
+                gap: 1rem !important;
+            }
+        }
+
+        @media (max-width: 640px) {
+
+            /* Extra small devices */
+            .hero-title {
+                font-size: 2rem !important;
+            }
+
+            h1.text-5xl,
+            h1.text-6xl,
+            h1.text-7xl {
+                font-size: 2rem !important;
+            }
+
+            article h2,
+            h2.text-5xl,
+            h2.text-6xl {
+                font-size: 1.75rem !important;
+            }
+
+            .section-padding {
+                padding: 2.5rem 0 !important;
+            }
+
+            .mb-16,
+            .mb-20 {
+                margin-bottom: 1.5rem !important;
+            }
+
+            .text-lg {
+                font-size: 0.9rem !important;
+            }
+
+            .text-xl {
+                font-size: 0.95rem !important;
+            }
+
+            .gallery-item {
+                width: 200px !important;
+                height: 200px !important;
+            }
+        }
     </style>
 </head>
 
@@ -402,29 +632,30 @@
             <div class="relative z-10 container mx-auto px-4 sm:px-6 pt-20">
                 <div class="max-w-6xl mx-auto text-center">
                     <!-- Badge -->
-                    <div
-                        class="inline-flex items-center gap-2 sm:gap-3 px-4 sm:px-6 py-2 bg-[#0050ff]/20 backdrop-blur-md border border-[#0050ff]/50 rounded-full shadow-lg shadow-[#0050ff]/10 mb-6 sm:mb-8">
-                        <div class="w-2 h-2 bg-[#0050ff] rounded-full animate-pulse"></div>
-                        <span
-                            class="text-blue-300 text-xs sm:text-sm font-semibold tracking-wider uppercase">Professional
+                    <div class="inline-flex items-center gap-2 sm:gap-3 px-4 sm:px-6 py-2 rounded-full shadow-lg mb-6 sm:mb-8"
+                        style="background-color: #FF4F4F;">
+                        <div class="w-2 h-2 bg-white rounded-full animate-pulse"></div>
+                        <span class="text-white text-xs sm:text-sm font-semibold tracking-wider uppercase">Professional
                             Event Photography</span>
-                        <div class="w-2 h-2 bg-[#0050ff] rounded-full animate-pulse" style="animation-delay: 0.5s;">
+                        <div class="w-2 h-2 bg-white rounded-full animate-pulse" style="animation-delay: 0.5s;">
                         </div>
                     </div>
 
                     <!-- Main Headline -->
                     <h1
-                        class="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black mb-6 leading-[1.1] tracking-tight">
-                        <span
-                            class="bg-gradient-to-r from-white via-[#ccddff] to-white bg-clip-text text-transparent drop-shadow-2xl">
-                            EVENT PHOTOGRAPHY SERVICES
+                        class="hero-title text-5xl sm:text-6xl md:text-7xl lg:text-7xl font-medium mb-6 leading-[1.1] tracking-tight">
+                        <span class="inline-block drop-shadow-2xl" style="color: #FF4F4F;">
+                            EVENT PHOTOGRAPHY
+                        </span>
+                        <span class="block drop-shadow-2xl mt-2" style="color: #18F1E1;">
+                            SERVICES
                         </span>
                     </h1>
 
                     <!-- Description -->
                     <div class="max-w-3xl mx-auto mb-8 px-4">
-                        <p
-                            class="text-lg sm:text-xl md:text-2xl leading-relaxed text-white/95 font-light tracking-wide drop-shadow-lg">
+                        <p class="text-lg sm:text-xl md:text-2xl leading-relaxed text-white font-medium tracking-wide drop-shadow-lg"
+                            style="font-family: 'AzoSans', sans-serif;">
                             Here's the thing about corporate event photography - everyone has a camera, but not everyone
                             can tell your story. We're not just taking photos; we're skillfully crafting narratives
                             through light, timing, and capturing the moments that truly matter.
@@ -434,7 +665,7 @@
                     <!-- CTA Buttons -->
                     <div class="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center px-4">
                         <a href="../contact-us.html"
-                            class="group relative inline-flex items-center gap-2 sm:gap-3 bg-gradient-to-r from-white to-[#e6f0ff] text-[#0040d9] px-6 sm:px-10 py-3 sm:py-5 rounded-full text-base sm:text-lg font-bold shadow-2xl hover:shadow-[#0050ff]/50 transition-all duration-500 transform hover:scale-110 hover:-translate-y-1 overflow-hidden w-full sm:w-auto justify-center focus:ring-4 focus:ring-[#0050ff]/30"
+                            class="group relative inline-flex items-center gap-2 sm:gap-3 bg-gradient-to-r from-[#FF4F4F] to-[#FF4F4F] text-[#FFFFF] px-6 sm:px-10 py-3 sm:py-5 rounded-full text-base sm:text-lg font-bold shadow-2xl hover:shadow-[#0050ff]/50 transition-all duration-500 transform hover:scale-110 hover:-translate-y-1 overflow-hidden w-full sm:w-auto justify-center focus:ring-4 focus:ring-[#0050ff]/30"
                             aria-label="Get your quote for event photography">
                             <span class="relative z-10">Get Your Quote</span>
                         </a>
@@ -477,20 +708,22 @@
                     <div class="grid md:grid-cols-2 gap-12 items-center mb-20">
                         <div>
                             <div
-                                class="inline-block px-6 py-2 bg-gradient-to-r from-[#0050ff] to-[#0040d9] text-white rounded-full text-sm font-bold mb-6">
+                                class="inline-block px-6 py-2 bg-gradient-to-r from-[#18F1E1] to-[#18F1E1] text-[#1F1F1F] rounded-full text-sm font-bold mb-6">
                                 HIGH-TECH EVENT PHOTOGRAPHY
                             </div>
-                            <h2
-                                class="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-gray-900 via-[#0050ff] to-gray-900 bg-clip-text text-transparent">
+                            <h2 class="text-5xl md:text-5xl font-light mb-6 bg-gradient-to-r from-[#FF4F4F] via-[#FF4F4F] to-[#FF4F4F] bg-clip-text text-transparent"
+                                style="font-family: 'AzoSansUber', sans-serif;">
                                 High-tech event photography
                             </h2>
-                            <p class="text-lg text-gray-700 mb-6 leading-relaxed">
+                            <p class="text-lg text-[#1F1F1F] mb-6 leading-relaxed"
+                                style="font-family: 'AzoSans', sans-serif;">
                                 Our photographers harness cutting-edge technology with SpotMyPhotos, delivering instant,
                                 personalized photo experiences at events. This advanced system uses facial recognition
                                 and AI to automatically identify guests, allowing for seamless photo delivery to
                                 attendees' phones in as little as 13 seconds.
                             </p>
-                            <p class="text-lg text-gray-700 leading-relaxed">
+                            <p class="text-lg text-[#1F1F1F] leading-relaxed"
+                                style="font-family: 'AzoSans', sans-serif;">
                                 Experience the future of event photography where technology meets artistry, ensuring
                                 every guest receives their perfect moments instantly and effortlessly.
                             </p>
@@ -528,14 +761,15 @@
                             </div>
                             <div class="order-1 md:order-2">
                                 <div
-                                    class="inline-block px-6 py-2 bg-gradient-to-r from-[#0050ff] to-[#0040d9] text-white rounded-full text-sm font-bold mb-6">
+                                    class="inline-block px-6 py-2 bg-gradient-to-r from-[#18F1E1] to-[#18F1E1] text-[#1F1F1F] rounded-full text-sm font-bold mb-6">
                                     REAL TIME BRANDED PHOTOS
                                 </div>
-                                <h2
-                                    class="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-gray-900 via-[#0050ff] to-gray-900 bg-clip-text text-transparent">
+                                <h2 class="text-5xl md:text-5xl font-light mb-6 bg-gradient-to-r from-[#FF4F4F] via-[#FF4F4F] to-[#FF4F4F] bg-clip-text text-transparent"
+                                    style="font-family: 'AzoSansUber', sans-serif;">
                                     Real Time Branded Photos - PRINTED
                                 </h2>
-                                <p class="text-lg text-gray-700 mb-6 leading-relaxed">
+                                <p class="text-lg text-[#1F1F1F] mb-6 leading-relaxed"
+                                    style="font-family: 'AzoSans', sans-serif;">
                                     Tired of event photos that blend into the crowd? With your logo, custom filters, and
                                     signature brand colors, your content hits Instagram before competitors even open
                                     Photoshop. Every snapshot is designed to amplify your brand, ensuring your event
@@ -544,46 +778,49 @@
                                 <div class="space-y-4">
                                     <div class="flex items-start gap-4">
                                         <div
-                                            class="w-12 h-12 bg-gradient-to-br from-[#0050ff] to-[#0040d9] rounded-xl flex items-center justify-center flex-shrink-0">
-                                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor"
+                                            class="w-12 h-12 bg-gradient-to-br from-[#18F1E1] to-[#18F1E1] rounded-xl flex items-center justify-center flex-shrink-0">
+                                            <svg class="w-6 h-6 text-[#1F1F1F]" fill="none" stroke="currentColor"
                                                 viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                     d="M5 13l4 4L19 7"></path>
                                             </svg>
                                         </div>
                                         <div>
-                                            <h4 class="font-bold text-gray-900 mb-1">Instant Branding</h4>
-                                            <p class="text-gray-600">Your logo and brand colors applied instantly to
+                                            <h4 class="font-bold text-[#FF4F4F] mb-1"
+                                                style="font-family: 'AzoSans', sans-serif;">Instant Branding</h4>
+                                            <p class="text-[#1F1F1F]">Your logo and brand colors applied instantly to
                                                 every photo</p>
                                         </div>
                                     </div>
                                     <div class="flex items-start gap-4">
                                         <div
-                                            class="w-12 h-12 bg-gradient-to-br from-[#0050ff] to-[#0040d9] rounded-xl flex items-center justify-center flex-shrink-0">
-                                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor"
+                                            class="w-12 h-12 bg-gradient-to-br from-[#18F1E1] to-[#18F1E1] rounded-xl flex items-center justify-center flex-shrink-0">
+                                            <svg class="w-6 h-6 text-[#1F1F1F]" fill="none" stroke="currentColor"
                                                 viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                     d="M5 13l4 4L19 7"></path>
                                             </svg>
                                         </div>
                                         <div>
-                                            <h4 class="font-bold text-gray-900 mb-1">Social Media Ready</h4>
-                                            <p class="text-gray-600">Photos optimized for instant sharing across all
+                                            <h4 class="font-bold text-[#FF4F4F] mb-1"
+                                                style="font-family: 'AzoSans', sans-serif;">Social Media Ready</h4>
+                                            <p class="text-[#1F1F1F]">Photos optimized for instant sharing across all
                                                 platforms</p>
                                         </div>
                                     </div>
                                     <div class="flex items-start gap-4">
                                         <div
-                                            class="w-12 h-12 bg-gradient-to-br from-[#0050ff] to-[#0040d9] rounded-xl flex items-center justify-center flex-shrink-0">
-                                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor"
+                                            class="w-12 h-12 bg-gradient-to-br from-[#18F1E1] to-[#18F1E1] rounded-xl flex items-center justify-center flex-shrink-0">
+                                            <svg class="w-6 h-6 text-[#1F1F1F]" fill="none" stroke="currentColor"
                                                 viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                     d="M5 13l4 4L19 7"></path>
                                             </svg>
                                         </div>
                                         <div>
-                                            <h4 class="font-bold text-gray-900 mb-1">Physical Prints</h4>
-                                            <p class="text-gray-600">High-quality printed photos available on-site</p>
+                                            <h4 class="font-bold text-[#FF4F4F] mb-1"
+                                                style="font-family: 'AzoSans', sans-serif;">Physical Prints</h4>
+                                            <p class="text-[#1F1F1F]">High-quality printed photos available on-site</p>
                                         </div>
                                     </div>
                                 </div>
@@ -600,20 +837,22 @@
                         <div class="grid md:grid-cols-2 gap-12 items-center">
                             <div>
                                 <div
-                                    class="inline-block px-6 py-2 bg-gradient-to-r from-[#0050ff] to-[#0040d9] text-white rounded-full text-sm font-bold mb-6">
+                                    class="inline-block px-6 py-2 bg-gradient-to-r from-[#18F1E1] to-[#18F1E1] text-[#1F1F1F] rounded-full text-sm font-bold mb-6">
                                     IMMERSIVE EXPERIENCES
                                 </div>
-                                <h2
-                                    class="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-gray-900 via-[#0050ff] to-gray-900 bg-clip-text text-transparent">
+                                <h2 class="text-5xl md:text-5xl font-light mb-6 bg-gradient-to-r from-[#FF4F4F] via-[#FF4F4F] to-[#FF4F4F] bg-clip-text text-transparent"
+                                    style="font-family: 'AzoSansUber', sans-serif;">
                                     High-tech event photography
                                 </h2>
-                                <p class="text-lg text-gray-700 mb-6 leading-relaxed">
+                                <p class="text-lg text-[#1F1F1F] mb-6 leading-relaxed"
+                                    style="font-family: 'AzoSans', sans-serif;">
                                     While others rely on basic slideshows, we take things further. We transform entire
                                     venues into immersive, real-time visual experiences where every guest plays a
                                     starring role. They're not just taking photos—they're stepping into a dynamic,
                                     interactive brand story that unfolds live, making your event unforgettable.
                                 </p>
-                                <p class="text-lg text-gray-700 leading-relaxed">
+                                <p class="text-lg text-[#1F1F1F] leading-relaxed"
+                                    style="font-family: 'AzoSans', sans-serif;">
                                     From interactive displays to live photo walls, we create engaging experiences that
                                     keep guests connected and your brand top-of-mind throughout the entire event.
                                 </p>
@@ -643,14 +882,15 @@
                     <div class="max-w-full mx-auto">
                         <div class="text-center mb-16">
                             <div
-                                class="inline-block px-6 py-2 bg-gradient-to-r from-[#0050ff] to-[#0040d9] text-white rounded-full text-sm font-bold mb-6">
+                                class="inline-block px-6 py-2 bg-gradient-to-r from-[#18F1E1] to-[#18F1E1] text-[#1F1F1F] rounded-full text-sm font-bold mb-6">
                                 OUR WORK
                             </div>
-                            <h2
-                                class="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-gray-900 via-[#0050ff] to-gray-900 bg-clip-text text-transparent">
+                            <h2 class="text-5xl md:text-5xl font-light mb-6 bg-gradient-to-r from-[#FF4F4F] via-[#FF4F4F] to-[#FF4F4F] bg-clip-text text-transparent"
+                                style="font-family: 'AzoSansUber', sans-serif;">
                                 Event Photography Gallery
                             </h2>
-                            <p class="text-xl text-gray-600 max-w-2xl mx-auto">See our professional photography in
+                            <p class="text-xl text-[#1F1F1F] max-w-2xl mx-auto"
+                                style="font-family: 'AzoSans', sans-serif;">See our professional photography in
                                 action</p>
                         </div>
                     </div>
@@ -913,58 +1153,65 @@
                 <div class="container mx-auto px-6">
                     <div class="max-w-6xl mx-auto">
                         <div class="text-center mb-16">
-                            <h2
-                                class="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-gray-900 via-[#0050ff] to-gray-900 bg-clip-text text-transparent">
+                            <h2 class="text-5xl md:text-5xl font-light mb-6 bg-gradient-to-r from-[#FF4F4F] via-[#FF4F4F] to-[#FF4F4F] bg-clip-text text-transparent"
+                                style="font-family: 'AzoSansUber', sans-serif;">
                                 Why Choose Our Event Photography
                             </h2>
-                            <p class="text-xl text-gray-600 max-w-2xl mx-auto">Professional photography services that
+                            <p class="text-xl text-[#1F1F1F] max-w-2xl mx-auto"
+                                style="font-family: 'AzoSans', sans-serif;">Professional photography services that
                                 tell your story</p>
                         </div>
 
                         <div class="grid md:grid-cols-3 gap-8">
                             <div
-                                class="bg-white p-8 rounded-2xl shadow-lg border-l-4 border-[#0050ff] hover:shadow-xl transition-all duration-300">
+                                class="bg-white p-8 rounded-2xl shadow-lg border-l-4 border-[#FF4F4F] hover:shadow-xl transition-all duration-300">
                                 <div
-                                    class="w-14 h-14 bg-gradient-to-br from-[#0050ff] to-[#0040d9] rounded-xl flex items-center justify-center mb-6">
-                                    <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor"
+                                    class="w-14 h-14 bg-gradient-to-br from-[#18F1E1] to-[#18F1E1] rounded-xl flex items-center justify-center mb-6">
+                                    <svg class="w-7 h-7 text-[#1F1F1F]" fill="none" stroke="currentColor"
                                         viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                             d="M13 10V3L4 14h7v7l9-11h-7z"></path>
                                     </svg>
                                 </div>
-                                <h3 class="text-xl font-bold mb-3 text-gray-900">Professional Team</h3>
-                                <p class="text-gray-600 leading-relaxed">Experienced photographers who know how to
+                                <h3 class="text-xl font-bold mb-3 text-[#FF4F4F]"
+                                    style="font-family: 'AzoSans', sans-serif;">Professional Team</h3>
+                                <p class="text-[#1F1F1F] leading-relaxed" style="font-family: 'AzoSans', sans-serif;">
+                                    Experienced photographers who know how to
                                     capture the perfect shot and work seamlessly with your event timeline.</p>
                             </div>
 
                             <div
-                                class="bg-white p-8 rounded-2xl shadow-lg border-l-4 border-[#0050ff] hover:shadow-xl transition-all duration-300">
+                                class="bg-white p-8 rounded-2xl shadow-lg border-l-4 border-[#FF4F4F] hover:shadow-xl transition-all duration-300">
                                 <div
-                                    class="w-14 h-14 bg-gradient-to-br from-[#0050ff] to-[#0040d9] rounded-xl flex items-center justify-center mb-6">
-                                    <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor"
+                                    class="w-14 h-14 bg-gradient-to-br from-[#18F1E1] to-[#18F1E1] rounded-xl flex items-center justify-center mb-6">
+                                    <svg class="w-7 h-7 text-[#1F1F1F]" fill="none" stroke="currentColor"
                                         viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                             d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z">
                                         </path>
                                     </svg>
                                 </div>
-                                <h3 class="text-xl font-bold mb-3 text-gray-900">High-Quality Images</h3>
-                                <p class="text-gray-600 leading-relaxed">Professional-grade equipment ensures stunning,
+                                <h3 class="text-xl font-bold mb-3 text-[#FF4F4F]"
+                                    style="font-family: 'AzoSans', sans-serif;">High-Quality Images</h3>
+                                <p class="text-[#1F1F1F] leading-relaxed" style="font-family: 'AzoSans', sans-serif;">
+                                    Professional-grade equipment ensures stunning,
                                     high-resolution photos with perfect lighting and composition.</p>
                             </div>
 
                             <div
-                                class="bg-white p-8 rounded-2xl shadow-lg border-l-4 border-[#0050ff] hover:shadow-xl transition-all duration-300">
+                                class="bg-white p-8 rounded-2xl shadow-lg border-l-4 border-[#FF4F4F] hover:shadow-xl transition-all duration-300">
                                 <div
-                                    class="w-14 h-14 bg-gradient-to-br from-[#0050ff] to-[#0040d9] rounded-xl flex items-center justify-center mb-6">
-                                    <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor"
+                                    class="w-14 h-14 bg-gradient-to-br from-[#18F1E1] to-[#18F1E1] rounded-xl flex items-center justify-center mb-6">
+                                    <svg class="w-7 h-7 text-[#1F1F1F]" fill="none" stroke="currentColor"
                                         viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                             d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                                     </svg>
                                 </div>
-                                <h3 class="text-xl font-bold mb-3 text-gray-900">Fast Delivery</h3>
-                                <p class="text-gray-600 leading-relaxed">Receive your edited photos quickly after your
+                                <h3 class="text-xl font-bold mb-3 text-[#FF4F4F]"
+                                    style="font-family: 'AzoSans', sans-serif;">Fast Delivery</h3>
+                                <p class="text-[#1F1F1F] leading-relaxed" style="font-family: 'AzoSans', sans-serif;">
+                                    Receive your edited photos quickly after your
                                     event with both digital and print options available.</p>
                             </div>
                         </div>
@@ -974,7 +1221,7 @@
 
             <!-- Final CTA Section -->
             <section
-                class="section-padding bg-gradient-to-br from-[#0050ff] via-[#0040d9] to-[#0033cc] text-white relative overflow-hidden">
+                class="section-padding from-[#1F1F1F] via-[#1F1F1F] to-[#1F1F1F] text-[#1F1F1F] relative overflow-hidden">
                 <!-- Background Image -->
                 <div class="absolute inset-0 z-0 overflow-hidden">
                     <img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80"
@@ -982,7 +1229,7 @@
                         class="w-full h-full object-cover" style="object-position: center 20%;" loading="lazy">
                 </div>
                 <!-- Background Overlay -->
-                <div class="absolute inset-0 bg-gradient-to-br from-black/70 via-[#0050ff]/75 to-black/70 z-[1]"></div>
+                <div class="absolute inset-0 bg-black/70 z-[1]"></div>
                 <!-- Decorative Elements -->
                 <div class="absolute inset-0 opacity-10 z-[2]">
                     <div
@@ -996,28 +1243,32 @@
                 <div class="container mx-auto px-4 sm:px-6 relative z-10">
                     <div class="max-w-4xl mx-auto text-center">
                         <div
-                            class="inline-block mb-6 sm:mb-8 px-6 sm:px-8 py-2 sm:py-3 bg-white/10 backdrop-blur-md rounded-full border-2 border-white/20">
+                            class="inline-block mb-6 sm:mb-8 px-6 sm:px-8 py-2 sm:py-3 bg-[#FF4F4F] backdrop-blur-md rounded-full border-2 border-[#18F1E1]/20">
                             <span class="text-white text-xs sm:text-sm font-bold tracking-wider uppercase">
                                 READY TO CAPTURE YOUR EVENT
                             </span>
                         </div>
 
-                        <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black mb-6 sm:mb-8 leading-tight">
-                            <span class="text-white"
-                                style="text-shadow: 0 4px 20px rgba(0, 0, 0, 0.9), 0 2px 10px rgba(0, 0, 0, 0.8), 0 0 30px rgba(0, 80, 255, 0.6);">
-                                Preserve Your Memories
+                        <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium mb-6 sm:mb-8 leading-tight">
+                            <span class="inline-block"
+                                style="font-family: 'AzoSansUber', sans-serif; color: #FF4F4F; text-shadow: 0 4px 20px rgba(0, 0, 0, 0.9), 0 2px 10px rgba(0, 0, 0, 0.8), 0 0 30px rgba(255, 79, 79, 0.6);">
+                                Preserve Your
+                            </span>
+                            <span class="block"
+                                style="font-family: 'AzoSansUber', sans-serif; color: #18F1E1; text-shadow: 0 4px 20px rgba(0, 0, 0, 0.9), 0 2px 10px rgba(0, 0, 0, 0.8), 0 0 30px rgba(24, 241, 225, 0.6);">
+                                Memories
                             </span>
                         </h2>
 
-                        <p
-                            class="text-base sm:text-lg md:text-xl mb-8 sm:mb-12 text-white/90 max-w-3xl mx-auto leading-relaxed px-4">
+                        <p class="text-base sm:text-lg md:text-xl mb-8 sm:mb-12 text-[#FFFFFF] max-w-3xl mx-auto leading-relaxed px-4"
+                            style="font-family: 'AzoSans', sans-serif;">
                             Professional event photography to remember your special day forever with stunning visuals
                             that capture the emotion and atmosphere.
                         </p>
 
                         <div class="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center">
                             <a href="contact-us.html"
-                                class="inline-flex items-center gap-3 bg-white text-[#0050ff] px-8 sm:px-10 py-4 sm:py-5 rounded-full text-base sm:text-lg font-bold shadow-2xl hover:shadow-white/50 transition-all duration-500 transform hover:scale-110 hover:-translate-y-1">
+                                class="inline-flex items-center gap-3 bg-white text-[#FF4F4F] px-8 sm:px-10 py-4 sm:py-5 rounded-full text-base sm:text-lg font-bold shadow-2xl hover:shadow-white/50 transition-all duration-500 transform hover:scale-110 hover:-translate-y-1">
                                 <span>Get Your Quote</span>
                             </a>
                             <button type="button" data-click-to-call data-call-text="Call Us"
@@ -1041,14 +1292,15 @@
                     <div class="max-w-7xl mx-auto">
                         <div class="text-center mb-16">
                             <div
-                                class="inline-block px-6 py-2 bg-gradient-to-r from-[#0050ff] to-[#0040d9] text-white rounded-full text-sm font-bold mb-6">
+                                class="inline-block px-6 py-2 bg-gradient-to-r from-[#18F1E1] to-[#18F1E1] text-[#1F1F1F] rounded-full text-sm font-bold mb-6">
                                 RELATED PRODUCTS
                             </div>
-                            <h2
-                                class="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-gray-900 via-[#0050ff] to-gray-900 bg-clip-text text-transparent">
+                            <h2 class="text-5xl md:text-5xl font-light mb-6 bg-gradient-to-r from-[#FF4F4F] via-[#FF4F4F] to-[#FF4F4F] bg-clip-text text-transparent"
+                                style="font-family: 'AzoSansUber', sans-serif;">
                                 Discover Our Related Products
                             </h2>
-                            <p class="text-xl text-gray-600 max-w-2xl mx-auto">Enhance your event with our premium
+                            <p class="text-xl text-[#1F1F1F] max-w-2xl mx-auto"
+                                style="font-family: 'AzoSans', sans-serif;">Enhance your event with our premium
                                 services and experiences</p>
                         </div>
 
@@ -1057,14 +1309,17 @@
                             <a href="../../index.html#photo-booths"
                                 class="group relative rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 cursor-pointer">
                                 <div
-                                    class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent z-10">
+                                    class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/60 to-black/30 z-10">
                                 </div>
                                 <img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
                                     alt="Photo booth rental services for corporate events, weddings, and parties"
                                     class="w-full h-80 object-cover" loading="lazy">
                                 <div class="absolute bottom-0 left-0 right-0 p-8 z-20">
-                                    <h3 class="text-2xl font-bold text-white mb-2">Photo Booths</h3>
-                                    <p class="text-white/90">Interactive photo booth experiences that capture
+                                    <h3 class="text-2xl font-bold text-[#FF4F4F] mb-2"
+                                        style="font-family: 'AzoSansUber', sans-serif;">Photo Booths</h3>
+                                    <p class="text-[#FFFFFF] leading-relaxed"
+                                        style="font-family: 'AzoSans', sans-serif;">
+                                        Interactive photo booth experiences that capture
                                         unforgettable moments at your event</p>
                                 </div>
                             </a>
@@ -1073,14 +1328,17 @@
                             <a href="../../index.html#video-booths"
                                 class="group relative rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 cursor-pointer">
                                 <div
-                                    class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent z-10">
+                                    class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/60 to-black/30 z-10">
                                 </div>
                                 <img src="https://images.unsplash.com/photo-1511578314322-379afb476865?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
                                     alt="Video booth rental services for corporate events, weddings, and parties"
                                     class="w-full h-80 object-cover" loading="lazy">
                                 <div class="absolute bottom-0 left-0 right-0 p-8 z-20">
-                                    <h3 class="text-2xl font-bold text-white mb-2">Video Booths</h3>
-                                    <p class="text-white/90">Create engaging video content with our state-of-the-art
+                                    <h3 class="text-2xl font-bold text-[#FF4F4F] mb-2"
+                                        style="font-family: 'AzoSansUber', sans-serif;">Video Booths</h3>
+                                    <p class="text-[#FFFFFF] leading-relaxed"
+                                        style="font-family: 'AzoSans', sans-serif;">
+                                        Create engaging video content with our state-of-the-art
                                         video booth technology</p>
                                 </div>
                             </a>
@@ -1089,14 +1347,17 @@
                             <a href="lux-photography.html"
                                 class="group relative rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 cursor-pointer">
                                 <div
-                                    class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent z-10">
+                                    class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/60 to-black/30 z-10">
                                 </div>
                                 <img src="https://images.unsplash.com/photo-1543269865-cbf427effbad?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
                                     alt="Luxury photography services with custom sets and professional photographers for high-end events"
                                     class="w-full h-80 object-cover" loading="lazy">
                                 <div class="absolute bottom-0 left-0 right-0 p-8 z-20">
-                                    <h3 class="text-2xl font-bold text-white mb-2">Lux Photography</h3>
-                                    <p class="text-white/90">Premium photography with custom sets and professional
+                                    <h3 class="text-2xl font-bold text-[#FF4F4F] mb-2"
+                                        style="font-family: 'AzoSansUber', sans-serif;">Lux Photography</h3>
+                                    <p class="text-[#FFFFFF] leading-relaxed"
+                                        style="font-family: 'AzoSans', sans-serif;">
+                                        Premium photography with custom sets and professional
                                         photographers for luxury events</p>
                                 </div>
                             </a>
