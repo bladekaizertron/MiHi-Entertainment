@@ -13,7 +13,10 @@ $db = getDB();
 $error = '';
 $success = '';
 $id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
+$filePath = isset($_GET['file']) ? $_GET['file'] : '';
+$originalFilePath = $filePath; // Preserve original for form submission
 $isEdit = $id > 0;
+$isFileEdit = !empty($filePath);
 
 // CSRF
 if (empty($_SESSION['csrf_token'])) {
@@ -30,6 +33,10 @@ $page = [
 	'status' => 'draft',
 ];
 $originalSlug = '';
+$fileContent = '';
+$fileFullPath = '';
+
+// Load from database
 if ($isEdit) {
 	try {
 		$stmt = $db->prepare("SELECT * FROM pages WHERE id = ?");
@@ -41,6 +48,129 @@ if ($isEdit) {
 		}
 	} catch (Throwable $e) {
 		$error = 'Failed to load page. Ensure the pages table exists.';
+	}
+}
+
+// Load from HTML file
+if ($isFileEdit) {
+	$rootDir = dirname(__DIR__);
+	// Try to get realpath, but if it fails, use the original (case-insensitive filesystem)
+	$realRoot = @realpath($rootDir);
+	if (!$realRoot) {
+		// If realpath fails, try to find the actual case of the directory
+		$realRoot = $rootDir;
+		// On case-insensitive filesystems, we can still use the path
+		if (!is_dir($realRoot)) {
+			$error = 'Root directory not found: ' . htmlspecialchars($rootDir);
+			$isFileEdit = false;
+		}
+	}
+	
+	if ($isFileEdit) {
+		// Decode URL encoding and normalize path
+		$filePath = urldecode($filePath);
+		$filePath = str_replace('\\', '/', $filePath); // Normalize to forward slashes
+		$filePath = ltrim($filePath, '/');
+		
+		// Ensure .html extension is present
+		if (substr($filePath, -5) !== '.html') {
+			$filePath .= '.html';
+		}
+		
+		// Try multiple path construction methods
+		$possiblePaths = [
+			$realRoot . DIRECTORY_SEPARATOR . str_replace('/', DIRECTORY_SEPARATOR, $filePath),
+			$rootDir . DIRECTORY_SEPARATOR . str_replace('/', DIRECTORY_SEPARATOR, $filePath),
+			$realRoot . '/' . $filePath,
+			$rootDir . '/' . $filePath,
+		];
+		
+		$realFile = null;
+		$rootNormalized = strtolower(str_replace('\\', '/', $realRoot));
+		$rootDirNormalized = strtolower(str_replace('\\', '/', $rootDir));
+		
+		foreach ($possiblePaths as $tryPath) {
+			// Check if file exists (works on case-insensitive filesystems)
+			if (file_exists($tryPath) && is_file($tryPath)) {
+				// Security check: ensure file is within root directory (case-insensitive)
+				$tryPathNormalized = strtolower(str_replace('\\', '/', $tryPath));
+				
+				$isWithinRoot = (strpos($tryPathNormalized, $rootNormalized) === 0) || 
+				                (strpos($tryPathNormalized, $rootDirNormalized) === 0);
+				
+				if ($isWithinRoot) {
+					$ext = strtolower(pathinfo($tryPath, PATHINFO_EXTENSION));
+					if ($ext === 'html') {
+						$realFile = $tryPath;
+						break;
+					}
+				}
+			}
+			
+			// Also try with realpath for more accurate resolution
+			$resolved = @realpath($tryPath);
+			if ($resolved && is_file($resolved)) {
+				$resolvedNormalized = strtolower(str_replace('\\', '/', $resolved));
+				$isWithinRoot = (strpos($resolvedNormalized, $rootNormalized) === 0) || 
+				                (strpos($resolvedNormalized, $rootDirNormalized) === 0);
+				
+				if ($isWithinRoot) {
+					$ext = strtolower(pathinfo($resolved, PATHINFO_EXTENSION));
+					if ($ext === 'html') {
+						$realFile = $resolved;
+						break;
+					}
+				}
+			}
+		}
+		
+			if ($realFile) {
+				$fileContent = @file_get_contents($realFile);
+				if ($fileContent !== false) {
+					$page['title'] = pathinfo($filePath, PATHINFO_FILENAME);
+					$page['slug'] = str_replace('.html', '', $filePath);
+					
+					// Extract body content from full HTML document
+					$bodyContent = $fileContent;
+					if (stripos($fileContent, '<body') !== false) {
+						// Try regex first (faster and more reliable for large files)
+						if (preg_match('/<body[^>]*>(.*?)<\/body>/is', $fileContent, $matches)) {
+							$bodyContent = $matches[1];
+						} else {
+							// Fallback to DOMDocument if regex fails
+							libxml_use_internal_errors(true);
+							$dom = new DOMDocument();
+							@$dom->loadHTML('<?xml encoding="UTF-8">' . $fileContent, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+							libxml_clear_errors();
+							
+							$body = $dom->getElementsByTagName('body')->item(0);
+							if ($body) {
+								$bodyContent = '';
+								foreach ($body->childNodes as $child) {
+									$bodyContent .= $dom->saveHTML($child);
+								}
+							}
+						}
+					}
+					
+					$page['content_html'] = $bodyContent;
+					$fileFullPath = $realFile; // Store for saving
+				} else {
+					$error = 'Unable to read file: ' . htmlspecialchars($filePath);
+					$isFileEdit = false;
+				}
+			} else {
+			// Provide helpful error message with debugging info
+			$error = 'File not found: ' . htmlspecialchars($filePath);
+			$error .= '<br><small style="color:#6b7280;">Root: ' . htmlspecialchars($realRoot) . '</small>';
+			$error .= '<br><small style="color:#6b7280;">Tried paths:<br>';
+			foreach ($possiblePaths as $idx => $tryPath) {
+				$exists = file_exists($tryPath) ? '✓' : '✗';
+				$error .= ($idx + 1) . '. ' . $exists . ' ' . htmlspecialchars($tryPath) . '<br>';
+			}
+			$error .= '</small>';
+			$isFileEdit = false;
+		}
 	}
 }
 
@@ -133,54 +263,172 @@ function deleteStaticPage($slug) {
 		$content = $_POST['content_html'] ?? '';
 		$customCss = $_POST['custom_css'] ?? '';
 		$status = in_array($_POST['status'] ?? 'draft', ['draft','published'], true) ? $_POST['status'] : 'draft';
-		if ($title === '') {
-			$error = 'Title is required.';
-		} else {
-			if ($slug === '') $slug = slugify($title);
-			// Ensure slug does not conflict with existing static file outside of this page
-			$staticPath = __DIR__ . '/../' . $slug . '.html';
-			if (file_exists($staticPath) && (!$isEdit || $slug !== $originalSlug)) {
-				$error = 'A static file with that slug already exists. Please choose a different slug.';
-			} else {
-			// Unique slug
-			$check = $db->prepare("SELECT id FROM pages WHERE slug = ? AND id <> ?");
-			try {
-				$check->execute([$slug, $id]);
-				if ($check->fetch()) {
-					$error = 'Slug already exists.';
-				} else {
-					if ($isEdit) {
-						$stmt = $db->prepare("UPDATE pages SET title = ?, slug = ?, content_html = ?, custom_css = ?, status = ?, published_at = CASE WHEN ? = 'published' AND published_at IS NULL THEN NOW() ELSE published_at END WHERE id = ?");
-						$stmt->execute([$title, $slug, $content, $customCss ?: null, $status, $status, $id]);
-						$success = 'Page updated.';
-					} else {
-						$stmt = $db->prepare("INSERT INTO pages (title, slug, content_html, custom_css, status, published_at) VALUES (?, ?, ?, ?, ?, ?)");
-						$publishedAt = $status === 'published' ? date('Y-m-d H:i:s') : null;
-						$stmt->execute([$title, $slug, $content, $customCss ?: null, $status, $publishedAt]);
-						$id = (int)$db->lastInsertId();
-						$isEdit = true;
-						$success = 'Page created.';
-					}
-					// reload
-					$page = ['title'=>$title,'slug'=>$slug,'content_html'=>$content,'custom_css'=>$customCss,'status'=>$status];
-					$pageDataForExport = [
-						'title' => $title,
-						'slug' => $slug,
-						'content_html' => $content,
-						'custom_css' => $customCss
-					];
-					if ($status === 'published') {
-						writeStaticPage($pageDataForExport);
-					} else {
-						deleteStaticPage($slug);
-					}
-					if ($originalSlug && $originalSlug !== $slug) {
-						deleteStaticPage($originalSlug);
+		
+		// Handle HTML file save
+		$postFilePath = $_POST['file_path'] ?? '';
+		$saveAsFile = !empty($postFilePath) || ($isFileEdit && !empty($filePath));
+		$filePathToUse = !empty($postFilePath) ? $postFilePath : $filePath;
+		
+		if ($saveAsFile && !empty($filePathToUse)) {
+			$rootDir = dirname(__DIR__);
+			$realRoot = realpath($rootDir);
+			
+			if ($realRoot) {
+				// Decode and normalize path (same as loading)
+				$normalizedPath = urldecode($filePathToUse);
+				$normalizedPath = str_replace('\\', '/', $normalizedPath);
+				$normalizedPath = ltrim($normalizedPath, '/');
+				
+				// Ensure .html extension is present
+				if (substr($normalizedPath, -5) !== '.html') {
+					$normalizedPath .= '.html';
+				}
+				
+				// Try to find the file using same method as loading
+				$possiblePaths = [
+					$realRoot . DIRECTORY_SEPARATOR . str_replace('/', DIRECTORY_SEPARATOR, $normalizedPath),
+					$rootDir . DIRECTORY_SEPARATOR . str_replace('/', DIRECTORY_SEPARATOR, $normalizedPath),
+					$realRoot . '/' . $normalizedPath,
+					$rootDir . '/' . $normalizedPath,
+				];
+				
+				$targetFile = null;
+				foreach ($possiblePaths as $tryPath) {
+					$resolved = realpath(dirname($tryPath));
+					if ($resolved && stripos($resolved, $realRoot) === 0) {
+						// Directory exists and is within root, use this path
+						$targetFile = $tryPath;
+						break;
 					}
 				}
-			} catch (Throwable $e) {
-				$error = 'Save failed. Ensure the pages table exists.';
+				
+				// If no existing file found, use the first valid path
+				if (!$targetFile) {
+					$targetFile = $realRoot . DIRECTORY_SEPARATOR . str_replace('/', DIRECTORY_SEPARATOR, $normalizedPath);
+				}
+				
+				// Final security check
+				$targetDir = realpath(dirname($targetFile));
+				if ($targetDir && stripos($targetDir, $realRoot) === 0) {
+					// Ensure directory exists
+					if (!is_dir($targetDir)) {
+						@mkdir($targetDir, 0755, true);
+					}
+					
+					// If file exists, preserve HTML structure and only update body
+					$finalContent = $content;
+					if (file_exists($targetFile)) {
+						$originalContent = @file_get_contents($targetFile);
+						if ($originalContent !== false && preg_match('/<body[^>]*>/i', $originalContent)) {
+							// Replace body content using regex (preserve body tag attributes)
+							$finalContent = preg_replace(
+								'/(<body[^>]*>)(.*?)(<\/body>)/is',
+								'$1' . $content . '$3',
+								$originalContent
+							);
+							
+							// If regex didn't match (unlikely), fall back to DOMDocument
+							if ($finalContent === $originalContent) {
+								libxml_use_internal_errors(true);
+								$dom = new DOMDocument();
+								@$dom->loadHTML('<?xml encoding="UTF-8">' . $originalContent, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+								libxml_clear_errors();
+								
+								$body = $dom->getElementsByTagName('body')->item(0);
+								if ($body) {
+									// Clear existing body content
+									while ($body->firstChild) {
+										$body->removeChild($body->firstChild);
+									}
+									
+									// Parse new content into a temporary DOM
+									$tempDom = new DOMDocument();
+									libxml_use_internal_errors(true);
+									@$tempDom->loadHTML('<?xml encoding="UTF-8"><body>' . $content . '</body>', LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+									libxml_clear_errors();
+									
+									// Import nodes from temp DOM
+									$tempBody = $tempDom->getElementsByTagName('body')->item(0);
+									if ($tempBody) {
+										foreach ($tempBody->childNodes as $node) {
+											$importedNode = $dom->importNode($node, true);
+											$body->appendChild($importedNode);
+										}
+									}
+									
+									// Get the full HTML
+									$finalContent = $dom->saveHTML();
+								}
+							}
+						}
+					}
+					
+					// Save file
+					if (@file_put_contents($targetFile, $finalContent) !== false) {
+						$success = 'File saved successfully.';
+						$page['content_html'] = $content; // Keep body content for editor
+						// Update fileFullPath for potential reload
+						$fileFullPath = $targetFile;
+					} else {
+						$error = 'Unable to write to file: ' . htmlspecialchars($normalizedPath);
+					}
+				} else {
+					$error = 'Invalid file path (security check failed).';
+				}
+			} else {
+				$error = 'Root directory not found.';
 			}
+		} else {
+			// Handle database page save
+			if ($title === '') {
+				$error = 'Title is required.';
+			} else {
+				if ($slug === '') $slug = slugify($title);
+				// Ensure slug does not conflict with existing static file outside of this page
+				$staticPath = __DIR__ . '/../' . $slug . '.html';
+				if (file_exists($staticPath) && (!$isEdit || $slug !== $originalSlug)) {
+					$error = 'A static file with that slug already exists. Please choose a different slug.';
+				} else {
+				// Unique slug
+				$check = $db->prepare("SELECT id FROM pages WHERE slug = ? AND id <> ?");
+				try {
+					$check->execute([$slug, $id]);
+					if ($check->fetch()) {
+						$error = 'Slug already exists.';
+					} else {
+						if ($isEdit) {
+							$stmt = $db->prepare("UPDATE pages SET title = ?, slug = ?, content_html = ?, custom_css = ?, status = ?, published_at = CASE WHEN ? = 'published' AND published_at IS NULL THEN NOW() ELSE published_at END WHERE id = ?");
+							$stmt->execute([$title, $slug, $content, $customCss ?: null, $status, $status, $id]);
+							$success = 'Page updated.';
+						} else {
+							$stmt = $db->prepare("INSERT INTO pages (title, slug, content_html, custom_css, status, published_at) VALUES (?, ?, ?, ?, ?, ?)");
+							$publishedAt = $status === 'published' ? date('Y-m-d H:i:s') : null;
+							$stmt->execute([$title, $slug, $content, $customCss ?: null, $status, $publishedAt]);
+							$id = (int)$db->lastInsertId();
+							$isEdit = true;
+							$success = 'Page created.';
+						}
+						// reload
+						$page = ['title'=>$title,'slug'=>$slug,'content_html'=>$content,'custom_css'=>$customCss,'status'=>$status];
+						$pageDataForExport = [
+							'title' => $title,
+							'slug' => $slug,
+							'content_html' => $content,
+							'custom_css' => $customCss
+						];
+						if ($status === 'published') {
+							writeStaticPage($pageDataForExport);
+						} else {
+							deleteStaticPage($slug);
+						}
+						if ($originalSlug && $originalSlug !== $slug) {
+							deleteStaticPage($originalSlug);
+						}
+					}
+				} catch (Throwable $e) {
+					$error = 'Save failed. Ensure the pages table exists.';
+				}
+				}
 			}
 		}
 	}
@@ -218,19 +466,76 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'export_static') {
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title><?php echo $isEdit ? 'Edit Page' : 'New Page'; ?> - Admin</title>
+	<title><?php echo $isEdit || $isFileEdit ? 'Edit Page' : 'New Page'; ?> - Admin</title>
 	<link rel="stylesheet" href="../assets/css/admin.css">
+	<!-- Live Preview Editor Styles -->
 	<style>
 		.admin-content { padding: 24px; }
 		.form-grid { display:grid; grid-template-columns: 2fr 1fr; gap:16px; }
 		.card { background:#ffffff; border:1px solid #e5e7eb; border-radius:12px; padding:16px; }
 		.form-group { margin-bottom:12px; }
-		label { display:block; font-size:13px; color:#374151; margin-bottom:6px; }
-		input[type="text"], select, textarea { width:100%; padding:10px 12px; border:1px solid #cbd5e1; border-radius:8px; outline:none; }
+		label { display:block; font-size:13px; color:#374151; margin-bottom:6px; font-weight:500; }
+		input[type="text"], select, textarea { width:100%; padding:10px 12px; border:1px solid #cbd5e1; border-radius:8px; outline:none; font-size:14px; transition:border-color 0.2s; }
+		input[type="text"]:focus, select:focus, textarea:focus { border-color:#667eea; box-shadow:0 0 0 3px rgba(102,126,234,0.1); }
 		textarea { min-height: 280px; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
 		.actions { display:flex; gap:8px; }
-		.btn { display:inline-flex; align-items:center; gap:8px; padding:8px 12px; border:1px solid #e5e7eb; border-radius:8px; background:#ffffff; cursor:pointer; text-decoration:none; }
-		.btn:hover { background:#f8fafc; }
+		.btn { display:inline-flex; align-items:center; gap:8px; padding:8px 12px; border:1px solid #e5e7eb; border-radius:8px; background:#ffffff; cursor:pointer; text-decoration:none; transition:all 0.2s; }
+		.btn:hover { background:#f8fafc; transform:translateY(-1px); box-shadow:0 2px 4px rgba(0,0,0,0.1); }
+		/* Live Preview Editor Styles */
+		.editor-container { position: relative; border: 1px solid #e5e7eb; border-radius: 12px; overflow: hidden; background: #fff; }
+		.editor-toolbar { background: #fff; border-bottom: 1px solid #e5e7eb; padding: 12px 16px; display: flex; align-items: center; gap: 12px; }
+		.editor-toolbar button { padding: 8px 16px; border: 1px solid #e5e7eb; border-radius: 6px; background: #fff; cursor: pointer; font-size: 14px; transition: all 0.2s; }
+		.editor-toolbar button:hover { background: #f8fafc; border-color: #667eea; }
+		.editor-toolbar button.active { background: #667eea; color: #fff; border-color: #667eea; }
+		.preview-iframe { width: 100%; height: calc(100vh - 400px); min-height: 600px; border: none; background: #fff; }
+		.editor-overlay { position: absolute; top: 0; left: 0; right: 0; bottom: 0; pointer-events: none; z-index: 1000; }
+		.editable-highlight { outline: 2px dashed #667eea; outline-offset: 2px; background: rgba(102, 126, 234, 0.1) !important; cursor: text !important; }
+		.media-editable { position: relative; }
+		.media-editable:hover::after { content: 'Click to change image/video'; position: absolute; top: 10px; left: 10px; background: #667eea; color: #fff; padding: 6px 12px; border-radius: 6px; font-size: 12px; z-index: 1001; pointer-events: none; }
+		.media-editable:hover { outline: 3px solid #667eea; cursor: pointer; }
+		.edit-mode-indicator { position: fixed; top: 20px; right: 20px; background: #667eea; color: #fff; padding: 12px 20px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 10000; font-size: 14px; font-weight: 600; }
+		.gjs-block-category { 
+			background:#667eea; 
+			color:white; 
+			padding:8px 12px; 
+			margin:12px 0 8px 0; 
+			border-radius:6px; 
+			font-size:12px; 
+			font-weight:600; 
+			text-transform:uppercase; 
+			letter-spacing:0.5px;
+		}
+		.gjs-block-category:first-child { margin-top:0; }
+		.gjs-cv-canvas { background:#f8fafc; }
+		.gjs-frame { background:#ffffff; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.1); margin:20px; }
+		.gjs-cv-canvas__frames { padding:20px; }
+		.gjs-sm-sector { border-bottom:1px solid #e5e7eb; padding:12px 0; }
+		.gjs-sm-sector .gjs-sm-title { font-weight:600; color:#111827; font-size:13px; text-transform:uppercase; letter-spacing:0.5px; margin-bottom:12px; }
+		.gjs-sm-label { font-weight:500; color:#374151; font-size:12px; }
+		.gjs-sm-property { border-bottom:1px solid #f3f4f6; padding:8px 0; }
+		.gjs-sm-property input, .gjs-sm-property select { border:1px solid #cbd5e1; border-radius:6px; padding:8px 10px; font-size:13px; width:100%; }
+		.gjs-sm-property input:focus, .gjs-sm-property select:focus { border-color:#667eea; outline:none; box-shadow:0 0 0 3px rgba(102,126,234,0.1); }
+		.gjs-clm-tags { background:#f8fafc; border-radius:6px; padding:4px; }
+		.gjs-clm-tag { background:#667eea; color:white; border-radius:4px; padding:4px 8px; font-size:11px; }
+		.gjs-selected { outline:2px solid #667eea !important; outline-offset:2px; }
+		.panel__devices button, .panel__switcher button { 
+			padding:8px 12px; 
+			border:1px solid #e5e7eb; 
+			background:#ffffff; 
+			border-radius:6px; 
+			cursor:pointer; 
+			transition:all 0.2s;
+			font-size:16px;
+		}
+		.panel__devices button:hover, .panel__switcher button:hover { 
+			background:#f8fafc; 
+			border-color:#667eea; 
+		}
+		.panel__devices button.active, .panel__switcher button.active { 
+			background:#667eea; 
+			color:#ffffff; 
+			border-color:#667eea; 
+		}
 		.preview { background:#ffffff; border:1px solid #e5e7eb; border-radius:12px; overflow:hidden; position:sticky; top:24px; max-height:calc(100vh - 120px); display:flex; flex-direction:column; }
 		.preview-header { padding:8px 12px; border-bottom:1px solid #e5e7eb; color:#6b7280; font-size:12px; background:#f8fafc; display:flex; justify-content:space-between; align-items:center; }
 		.preview-body { padding:16px; overflow:auto; flex:1; }
@@ -307,538 +612,297 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'export_static') {
 			<div class="alert alert-success" style="background:#ecfdf5;color:#065f46;border:1px solid #a7f3d0;padding:10px 12px;border-radius:8px;margin-bottom:14px;">&nbsp;<?php echo escape($success); ?></div>
 		<?php endif; ?>
 
-		<form method="POST" action="">
+		<form method="POST" action="" id="page-form">
 			<input type="hidden" name="csrf_token" value="<?php echo $csrf; ?>">
-			<div class="form-grid">
-				<div class="card">
-					<div class="helper-note">Use the block editor to design from scratch, or edit the HTML directly below.</div>
-					<div class="builder-toolbar">
-						<h4>Block Palette</h4>
-						<div class="block-palette">
-							<button type="button" onclick="addBlock('hero')">✨ Hero Section</button>
-							<button type="button" onclick="addBlock('heading')">H Heading</button>
-							<button type="button" onclick="addBlock('paragraph')">¶ Paragraph</button>
-							<button type="button" onclick="addBlock('textImage')">🖼 Text + Image</button>
-							<button type="button" onclick="addBlock('featureGrid')">⭐ Feature Grid</button>
-							<button type="button" onclick="addBlock('image')">🖼 Standalone Image</button>
-							<button type="button" onclick="addBlock('button')">🔘 Button</button>
-							<button type="button" onclick="addBlock('divider')">— Divider</button>
-							<button type="button" onclick="addBlock('html')">&lt;/&gt; Custom HTML</button>
-						</div>
-					</div>
-					<div class="builder-toolbar">
-						<h4>MiHi Presets</h4>
-						<div class="preset-gallery">
-							<div class="preset-card">
-								<h5>🏠 Homepage Overview</h5>
-								<p>Complete brand introduction with signature services and nationwide coverage.</p>
-								<button type="button" class="btn-sm" onclick="applyPreset('mihiHome')">Use preset</button>
-							</div>
-							<div class="preset-card">
-								<h5>📸 Photo Booth Services</h5>
-								<p>Comprehensive photo booth lineup with AI, 360°, and classic options.</p>
-								<button type="button" class="btn-sm" onclick="applyPreset('photoBooths')">Use preset</button>
-							</div>
-							<div class="preset-card">
-								<h5>🎥 Video Booth Experiences</h5>
-								<p>Showcase cinematic video booths including GlamBot and bullet-time.</p>
-								<button type="button" class="btn-sm" onclick="applyPreset('videoBooths')">Use preset</button>
-							</div>
-							<div class="preset-card">
-								<h5>✨ Complete Event Solutions</h5>
-								<p>Highlight A/V services, event decor, and themed experiences.</p>
-								<button type="button" class="btn-sm" onclick="applyPreset('eventServices')">Use preset</button>
-							</div>
-							<div class="preset-card">
-								<h5>📍 Locations Page</h5>
-								<p>Nationwide coverage with popular service locations.</p>
-								<button type="button" class="btn-sm" onclick="applyPreset('locations')">Use preset</button>
-							</div>
-						</div>
-					</div>
-					<div id="blocks-container"></div>
-					<hr style="border:none;border-top:1px solid #e5e7eb;margin:16px 0;">
+			<?php if ($isFileEdit): ?>
+			<input type="hidden" name="file_path" value="<?php echo escape($originalFilePath); ?>">
+			<?php endif; ?>
+			
+			<div style="margin-bottom:16px; background:#fff; border:1px solid #e5e7eb; border-radius:12px; padding:16px;">
+				<div class="form-grid" style="grid-template-columns: 1fr 1fr; gap:16px;">
 					<div class="form-group">
 						<label for="title">Title</label>
 						<input type="text" id="title" name="title" value="<?php echo escape($page['title']); ?>" required>
 					</div>
+					<?php if (!$isFileEdit): ?>
 					<div class="form-group">
 						<label for="slug">Slug</label>
 						<input type="text" id="slug" name="slug" value="<?php echo escape($page['slug']); ?>" placeholder="auto-from-title">
 					</div>
-					<div class="form-group">
-						<label for="content_html">Content (HTML allowed)</label>
-						<textarea id="content_html" name="content_html" oninput="updatePreview()"><?php echo htmlspecialchars($page['content_html'] ?? '', ENT_NOQUOTES, 'UTF-8'); ?></textarea>
-					</div>
-					<div class="form-group">
-						<label for="custom_css">Custom CSS</label>
-						<textarea id="custom_css" name="custom_css" style="min-height:140px;" oninput="updatePreview()"><?php echo htmlspecialchars($page['custom_css'] ?? '', ENT_NOQUOTES, 'UTF-8'); ?></textarea>
-					</div>
-					<div class="actions">
-						<button class="btn" type="submit" onclick="document.getElementById('status').value='draft'">
-							<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 7h18M3 12h18M3 17h18" stroke-width="2" stroke-linecap="round"/></svg>
-							<span>Save Draft</span>
-						</button>
-						<button class="btn" type="submit" onclick="document.getElementById('status').value='published'">
-							<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M5 12l5 5L20 7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-							<span>Publish</span>
-						</button>
-						<input type="hidden" id="status" name="status" value="<?php echo escape($page['status']); ?>">
-						<?php if ($isEdit): ?>
-						<a class="btn" href="../page.php?slug=<?php echo urlencode($page['slug']); ?>" target="_blank">
-							<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M14 3h7v7m-1-6L10 14M5 5h5M5 10v9h9v-5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-							<span>View</span>
-						</a>
-						<?php endif; ?>
-					</div>
+					<?php endif; ?>
 				</div>
-				<div class="preview" style="display:none;">
-					<div class="preview-header">
-						<span>Live Preview</span>
-						<button type="button" class="btn-sm" onclick="togglePreviewBackground()">Toggle BG</button>
-					</div>
-					<div class="preview-body" id="preview-body"><?php echo $page['content_html']; ?></div>
+				<?php if (!$isFileEdit): ?>
+				<div class="form-group" style="margin-top:12px;">
+					<label for="status">Status</label>
+					<select id="status" name="status">
+						<option value="draft" <?php echo $page['status'] === 'draft' ? 'selected' : ''; ?>>Draft</option>
+						<option value="published" <?php echo $page['status'] === 'published' ? 'selected' : ''; ?>>Published</option>
+					</select>
 				</div>
-				<div style="text-align:center; padding:20px; border:2px dashed #e5e7eb; border-radius:12px; background:#f8fafc;">
-					<button type="button" class="btn" onclick="openPreviewModal()" style="background:#FF4F4F; color:#fff; padding:12px 24px; font-size:14px; font-weight:600;">
-						<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="margin-right:8px;"><path d="M14 3h7v7M5 5h5M5 10v9h9v-5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-						Open Live Preview
-					</button>
-					<p style="margin-top:12px; font-size:12px; color:#6b7280;">Click to view your page in a full-screen popup</p>
-				</div>
+				<?php endif; ?>
 			</div>
 			
-			<!-- Preview Modal Popup -->
-			<div id="preview-modal" class="preview-modal" onclick="if(event.target===this) closePreviewModal()">
-				<div class="preview-modal-content">
-					<div class="preview-modal-header">
-						<h3>Live Preview</h3>
-						<div style="display:flex; gap:8px; align-items:center;">
-							<button type="button" class="btn-sm" onclick="togglePreviewBackground()" style="font-size:12px;">Toggle BG</button>
-							<button type="button" class="preview-modal-close" onclick="closePreviewModal()" title="Close (Esc)">×</button>
-						</div>
-					</div>
-					<div class="preview-modal-body" id="preview-modal-body"><?php echo $page['content_html']; ?></div>
-					<div class="preview-modal-actions">
-						<button type="button" class="btn-sm" onclick="closePreviewModal()">Close</button>
-					</div>
-				</div>
+			<!-- Live Preview Editor -->
+			<div style="margin-bottom:16px; padding:12px; background:linear-gradient(135deg, #667eea 0%, #764ba2 100%); border:1px solid #e5e7eb; border-radius:8px; color:white;">
+				<p style="margin:0; font-size:13px;">
+					<strong>💡 Live Preview Editor:</strong> Click on any text to edit it directly. Click on images or videos to replace them. Your changes are saved when you click "Save Page".
+				</p>
 			</div>
+			<div class="editor-container">
+				<div class="editor-toolbar">
+					<button type="button" id="edit-mode-btn" class="active">✏️ Edit Mode</button>
+					<button type="button" id="preview-mode-btn">👁️ Preview Mode</button>
+					<div style="flex: 1;"></div>
+					<button type="button" id="mobile-preview-btn">📱 Mobile</button>
+					<button type="button" id="tablet-preview-btn">📱 Tablet</button>
+					<button type="button" id="desktop-preview-btn" class="active">🖥️ Desktop</button>
+				</div>
+				<div id="edit-mode-indicator" class="edit-mode-indicator" style="display: none;">✏️ Edit Mode Active - Click text to edit</div>
+				<iframe id="preview-iframe" class="preview-iframe" src="<?php 
+					if ($isFileEdit && !empty($originalFilePath)) {
+						// Use the original file path and ensure it's a proper relative URL
+						$iframePath = $originalFilePath;
+						// Remove leading slash if present, then add ../
+						$iframePath = ltrim($iframePath, '/');
+						$iframePath = '../' . $iframePath;
+						// Ensure .html extension is present
+						if (substr($iframePath, -5) !== '.html') {
+							$iframePath .= '.html';
+						}
+						echo htmlspecialchars($iframePath, ENT_QUOTES, 'UTF-8');
+					} elseif ($isFileEdit) {
+						// Fallback: construct from current filePath
+						$iframePath = '../' . ltrim($filePath, '/');
+						if (substr($iframePath, -5) !== '.html') {
+							$iframePath .= '.html';
+						}
+						echo htmlspecialchars($iframePath, ENT_QUOTES, 'UTF-8');
+					} else {
+						echo '../page.php?slug=' . urlencode($page['slug']);
+					}
+				?>"></iframe>
+			</div>
+			
+			<!-- Hidden inputs for form submission -->
+			<textarea id="content_html" name="content_html" style="display:none;"><?php echo htmlspecialchars($page['content_html'] ?? '', ENT_NOQUOTES, 'UTF-8'); ?></textarea>
+			<textarea id="custom_css" name="custom_css" style="display:none;"><?php echo htmlspecialchars($page['custom_css'] ?? '', ENT_NOQUOTES, 'UTF-8'); ?></textarea>
+			
+			<div class="actions" style="margin-top:16px;">
+				<button class="btn" type="submit" style="background:#667eea; color:#fff; border-color:#667eea;">
+					<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><polyline points="17 21 17 13 7 13 7 21" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><line x1="7" y1="3" x2="7" y2="8" x1="15" y2="8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+					<span>Save Page</span>
+				</button>
+				<?php if ($isEdit && !$isFileEdit): ?>
+				<a class="btn" href="../page.php?slug=<?php echo urlencode($page['slug']); ?>" target="_blank">
+					<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M14 3h7v7m-1-6L10 14M5 5h5M5 10v9h9v-5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+					<span>View</span>
+				</a>
+				<?php elseif ($isFileEdit): ?>
+				<a class="btn" href="<?php echo escape($filePath); ?>" target="_blank">
+					<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M14 3h7v7m-1-6L10 14M5 5h5M5 10v9h9v-5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+					<span>View</span>
+				</a>
+				<?php endif; ?>
 			</div>
 		</form>
 	</div>
+	<!-- Live Preview Editor JS -->
 	<script>
 	const csrfToken = '<?php echo $csrf; ?>';
 	const currentPageId = <?php echo $isEdit ? (int)$id : 'null'; ?>;
+	const isFileEdit = <?php echo $isFileEdit ? 'true' : 'false'; ?>;
+	const pageUrl = <?php echo json_encode($isFileEdit ? $filePath : '../page.php?slug=' . urlencode($page['slug'])); ?>;
+	let editMode = true;
+	let changes = {};
 
-	function updatePreview() {
-		var html = document.getElementById('content_html').value;
-		var css = document.getElementById('custom_css').value;
-		var body = document.getElementById('preview-body');
-		var modalBody = document.getElementById('preview-modal-body');
-		// If using blocks, render with wrappers for drag; otherwise, fallback to raw html
-		if (blocks.length > 0) {
-			renderPreviewFromBlocks();
-		} else {
-			var content = html + (css ? ('<style>' + css + '</style>') : '');
-			body.innerHTML = content;
-			if (modalBody) modalBody.innerHTML = content;
-		}
-	}
-	
-	function openPreviewModal() {
-		updatePreview(); // Ensure preview is up to date
-		document.getElementById('preview-modal').classList.add('active');
-		document.body.style.overflow = 'hidden';
-	}
-	
-	function closePreviewModal() {
-		document.getElementById('preview-modal').classList.remove('active');
-		document.body.style.overflow = '';
-	}
-	
-	// Close modal on Escape key
-	document.addEventListener('keydown', function(e) {
-		if (e.key === 'Escape') {
-			closePreviewModal();
-		}
-	});
-
-	// Simple block editor
-	const blockDefaults = {
-		heading: { type:'heading', level:'h2', text:'Heading text', align:'left' },
-		paragraph: { type:'paragraph', text:'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' },
-		image: { type:'image', src:'', alt:'', width:'', align:'center' },
-		button: { type:'button', label:'Learn more', href:'#', style:'primary', align:'left' },
-		divider: { type:'divider' },
-		html: { type:'html', markup:'<div class="custom-section">Your HTML here</div>' },
-		hero: { type:'hero', eyebrow:'Our Services', title:'Create unforgettable experiences', subtitle:'Design sections quickly with the block builder.', buttonText:'Get Started', buttonUrl:'#', background:'light', align:'left', backgroundImage:'' },
-		textImage: { type:'textImage', title:'Tell your story', body:'Pair rich text with imagery to highlight key moments.', image:'', imagePosition:'right', background:'#f8fafc', buttonText:'Read More', buttonUrl:'#' },
-		featureGrid: { type:'featureGrid', title:'Why choose us', intro:'Delivering wow-worthy experiences with every event.', columns:3, items:"Concept + Design|Collaborate with our creative team to plan remarkable experiences.\nPremium Talent|Connect with world-class performers and entertainers.\nOn-Site Execution|Relax while we manage every detail flawlessly." }
-	};
-
-	const presets = {
-		mihiHome: [
-			{ type:'hero', eyebrow:'MIHI ENTERTAINMENT', title:'PREMIUM PHOTO & VIDEO BOOTH RENTALS NATIONWIDE', subtitle:'Transform your event with cutting-edge AI experiences, cinematic 360° video booths, and unforgettable activations. From weddings to corporate events, we deliver studio-quality production coast to coast.', buttonText:'GET STARTED', buttonUrl:'/contact-us.html', background:'dark', align:'center' },
-			{ type:'featureGrid', title:'SIGNATURE PHOTO BOOTH EXPERIENCES', intro:'Elevate your event with our most popular booth rentals.', columns:3, items:"AI Photo Booth|Transform guests into superheroes, celebrities, or fantasy characters with cutting-edge AI technology.\n360° Video Booth|Cinematic slow-motion videos captured from every angle with full 360° rotation.\nGreen Screen Booth|Transport guests anywhere with custom backgrounds and professional green screen technology.\nGlamBot Video Booth|Automated cinematic slow-motion videos with red-carpet treatment.\nMosaic Wall|Build your event story photo by photo with interactive displays.\nRoaming Booth|The party comes to your guests with our mobile photo booth experience." },
-			{ type:'textImage', title:'NATIONWIDE COVERAGE', body:'From Denver to Las Vegas, Boston to Los Angeles—MiHi Entertainment delivers premium photo booth rentals and event services across the United States. Our professional team ensures flawless setup and unforgettable experiences at every location.', image:'https://images.unsplash.com/photo-1500534314209-a25ddb2bd429', imagePosition:'right', background:'#1F1F1F', buttonText:'VIEW LOCATIONS', buttonUrl:'/locations' },
-			{ type:'button', label:'EXPLORE ALL SERVICES', href:'/booth-services.html', style:'primary', align:'center' }
-		],
-		photoBooths: [
-			{ type:'hero', eyebrow:'PHOTO BOOTH RENTALS', title:'CREATE UNFORGETTABLE MOMENTS', subtitle:'From AI-powered transformations to classic photo prints, our photo booths are rated #1 for weddings, corporate events, and parties nationwide.', buttonText:'GET PRICING', buttonUrl:'/contact-us.html', background:'dark', align:'center' },
-			{ type:'featureGrid', title:'PREMIUM PHOTO BOOTH OPTIONS', intro:'Choose from our complete lineup of photo booth experiences.', columns:3, items:"AI Photo Booth|Transform guests into superheroes, celebrities, or fantasy characters.\n360° Photo Booth|Capture stunning 360° rotating photos with instant prints.\nGreen Screen Booth|Custom backgrounds and professional green screen technology.\nMosaic Wall|Interactive photo displays that build your event story.\nRoaming Booth|Mobile photo booth that goes where your guests are.\nClassic Photo Booth|Traditional photo booth with instant prints and custom overlays." },
-			{ type:'textImage', title:'WHY CHOOSE MIHI PHOTO BOOTHS', body:'MiHi Entertainment sets the gold standard for photo booth rentals. Our state-of-the-art equipment, professional attendants, and customizable options ensure every detail is perfect. Rated #1 in customer satisfaction with seamless setup and unforgettable experiences.', image:'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f', imagePosition:'left', background:'#1F1F1F', buttonText:'VIEW PHOTO BOOTHS', buttonUrl:'/product/photo-booth.html' },
-			{ type:'button', label:'BOOK YOUR PHOTO BOOTH', href:'/contact-us.html', style:'primary', align:'center' }
-		],
-		videoBooths: [
-			{ type:'hero', eyebrow:'VIDEO BOOTH EXPERIENCES', title:'CINEMATIC SLOW-MOTION VIDEO BOOTHS', subtitle:'Give your event the red carpet treatment with high-speed GlamBot clips, bullet-time arrays, and fully branded video experiences.', buttonText:'VIEW VIDEO BOOTHS', buttonUrl:'/video-booths.html', background:'dark', align:'center' },
-			{ type:'featureGrid', title:'SIGNATURE VIDEO BOOTH ACTIVATIONS', intro:'Professional video production for events of all sizes.', columns:3, items:"360° Video Booth|Cinematic slow-motion videos from every angle with full rotation.\nGlamBot Video Booth|Automated red-carpet slow-motion clips with dramatic flair.\nBullet-Time Array|Matrix-style multi-camera freeze-frame experiences.\nVideo Testimonial Studio|Collect authentic guest reactions with branded backdrops.\nSlow-Motion Booth|High-speed footage with cinematic quality and instant delivery." },
-			{ type:'textImage', title:'FULLY BRANDED VIDEO EXPERIENCES', body:'Every video includes your custom branding, logos, music, and effects. Our professional team handles setup, operation, and instant delivery of high-quality video content that your guests will share for years to come.', image:'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f', imagePosition:'right', background:'#1F1F1F', buttonText:'SEE VIDEO SAMPLES', buttonUrl:'/video-booths.html' },
-			{ type:'button', label:'BOOK A VIDEO BOOTH', href:'/contact-us.html', style:'primary', align:'center' }
-		],
-		eventServices: [
-			{ type:'hero', eyebrow:'COMPLETE EVENT SOLUTIONS', title:'AUDIO, VISUAL, DECOR & THEMED EXPERIENCES', subtitle:'Transform corporate, social, holiday, and casino events with MiHi\'s comprehensive A/V rentals, event decor, and immersive themed experiences.', buttonText:'EXPLORE SERVICES', buttonUrl:'/av-services', background:'dark', align:'left' },
-			{ type:'featureGrid', title:'A/V PRODUCTION SERVICES', intro:'Professional audio-visual solutions for any venue size.', columns:3, items:"Audio Services|Crisp sound systems, wireless microphones, and professional mixing.\nVisual Services|LED screens, projectors, digital signage, and video walls.\nLighting Services|Dynamic lighting effects, stage lighting, and mood-setting ambiance.\nEvent Stages|Professional staging solutions for presentations and performances." },
-			{ type:'featureGrid', title:'EVENT DECOR & RENTALS', intro:'Special effects, themed decor, and interactive experiences.', columns:3, items:"Special Effects|Sparkular displays, confetti cannons, champagne walls, and fog machines.\nEvent Decor|Ceiling fabric, shimmer walls, themed lounges, and custom signage.\nGame Rentals|Claw machines, VR headsets, money booth experiences, and arcade games.\nCasino Rentals|Professional casino setups with tables, dealers, and themed experiences." },
-			{ type:'textImage', title:'IMMERSIVE THEMED EXPERIENCES', body:'From Western saloons to luxe holiday parties, trade show installations to corporate activations—choose from our curated themed sets or work with our team to create custom builds that perfectly match your event vision.', image:'https://images.unsplash.com/photo-1500534314209-a25ddb2bd429', imagePosition:'left', background:'#1F1F1F', buttonText:'VIEW THEMES', buttonUrl:'/event-decor' }
-		],
-		locations: [
-			{ type:'hero', eyebrow:'NATIONWIDE COVERAGE', title:'PHOTO BOOTH RENTALS ACROSS AMERICA', subtitle:'MiHi Entertainment delivers premium photo booth and event services to major cities nationwide. Find our services in Denver, Las Vegas, Los Angeles, Boston, and 50+ locations.', buttonText:'FIND YOUR LOCATION', buttonUrl:'/locations', background:'dark', align:'center' },
-			{ type:'featureGrid', title:'POPULAR SERVICE LOCATIONS', intro:'We serve events in major metropolitan areas across the United States.', columns:3, items:"Denver, Colorado|Premium photo booth rentals for weddings and corporate events.\nLas Vegas, Nevada|Casino parties, trade shows, and high-end event activations.\nLos Angeles, California|Red-carpet events, celebrity parties, and luxury experiences.\nBoston, Massachusetts|Corporate events, weddings, and social gatherings.\nNew York, New York|High-profile events, product launches, and exclusive parties." },
-			{ type:'textImage', title:'SERVING EVENTS NATIONWIDE', body:'No matter where your event is located, MiHi Entertainment brings the same level of professionalism, quality equipment, and unforgettable experiences. Our nationwide network ensures consistent service excellence from coast to coast.', image:'https://images.unsplash.com/photo-1500534314209-a25ddb2bd429', imagePosition:'right', background:'#1F1F1F', buttonText:'VIEW ALL LOCATIONS', buttonUrl:'/locations' }
-		]
-	};
-
-	function createBlock(type) {
-		var template = blockDefaults[type];
-		if (!template) return { type:type };
-		var clone = JSON.parse(JSON.stringify(template));
-		clone.id = 'block-' + Date.now() + '-' + Math.floor(Math.random()*1000);
-		clone.collapsed = false;
-		return clone;
-	}
-
-	var blocks = [];
-	var dragSrcIndex = null;
-	var previewDark = false;
-
-	function addBlock(type) {
-		var block = createBlock(type);
-		if (!block) return;
-		blocks.push(block);
-		renderBlocksEditor();
-		syncBlocksToHtml();
-	}
-
-	function applyPreset(key) {
-		if (!presets[key]) return;
-		if (blocks.length > 0 && !confirm('Replace current layout with this preset?')) {
+	// Live Preview Editor
+	document.addEventListener('DOMContentLoaded', function() {
+		const iframe = document.getElementById('preview-iframe');
+		const editModeBtn = document.getElementById('edit-mode-btn');
+		const previewModeBtn = document.getElementById('preview-mode-btn');
+		const mobileBtn = document.getElementById('mobile-preview-btn');
+		const tabletBtn = document.getElementById('tablet-preview-btn');
+		const desktopBtn = document.getElementById('desktop-preview-btn');
+		const indicator = document.getElementById('edit-mode-indicator');
+		
+		if (!iframe) {
+			console.error('Preview iframe not found!');
 			return;
 		}
-		blocks = presets[key].map(function(b) {
-			var template = createBlock(b.type);
-			return Object.assign(template, b);
+		
+		// Wait for iframe to load
+		iframe.addEventListener('load', function() {
+			initEditor();
 		});
-		renderBlocksEditor();
-		syncBlocksToHtml();
-		window.scrollTo({ top: document.querySelector('.builder-toolbar').offsetTop - 20, behavior: 'smooth' });
-	}
-
-	function moveBlock(idx, dir) {
-		var newIdx = idx + dir;
-		if (newIdx < 0 || newIdx >= blocks.length) return;
-		var temp = blocks[idx];
-		blocks[idx] = blocks[newIdx];
-		blocks[newIdx] = temp;
-		renderBlocksEditor();
-		syncBlocksToHtml();
-	}
-
-	function deleteBlock(idx) {
-		if (!confirm('Remove this block?')) return;
-		blocks.splice(idx, 1);
-		renderBlocksEditor();
-		syncBlocksToHtml();
-	}
-
-	function duplicateBlock(idx) {
-		var copy = JSON.parse(JSON.stringify(blocks[idx]));
-		copy.collapsed = blocks[idx].collapsed || false;
-		blocks.splice(idx + 1, 0, copy);
-		renderBlocksEditor();
-		syncBlocksToHtml();
-	}
-
-	function toggleCollapse(idx) {
-		blocks[idx].collapsed = !blocks[idx].collapsed;
-		renderBlocksEditor();
-	}
-
-	function onFieldChange(idx, field, value) {
-		blocks[idx][field] = value;
-		syncBlocksToHtml();
-	}
-
-	function renderBlocksEditor() {
-		var cont = document.getElementById('blocks-container');
-		cont.innerHTML = '';
-		blocks.forEach(function(b, i) {
-			var wrapper = document.createElement('div');
-			wrapper.className = 'block-item' + (b.collapsed ? ' collapsed' : '');
-			var head = document.createElement('div');
-			head.className = 'block-head';
-			var title = document.createElement('div');
-			title.className = 'block-title';
-			title.textContent = (b.type.charAt(0).toUpperCase() + b.type.slice(1));
-			var actions = document.createElement('div');
-			actions.className = 'block-actions';
-			actions.innerHTML = '' +
-				'<button type="button" class="btn-sm" onclick="moveBlock('+i+', -1)">↑</button>' +
-				'<button type="button" class="btn-sm" onclick="moveBlock('+i+', 1)">↓</button>' +
-				'<button type="button" class="btn-sm" onclick="duplicateBlock('+i+')">Duplicate</button>' +
-				'<button type="button" class="btn-sm" onclick="toggleCollapse('+i+')">'+(b.collapsed ? 'Expand' : 'Collapse')+'</button>' +
-				'<button type="button" class="btn-sm" onclick="deleteBlock('+i+')">Delete</button>';
-			head.appendChild(title);
-			head.appendChild(actions);
-
-			var fields = document.createElement('div');
-			fields.className = 'block-fields';
-
-			if (b.type === 'heading') {
-				fields.innerHTML = '' +
-					'<div class="row-2">' +
-					'  <div><label>Level</label><select onchange="onFieldChange('+i+', \'level\', this.value)">' +
-					['h1','h2','h3','h4','h5','h6'].map(function(l){return '<option '+(b.level===l?'selected':'')+' value="'+l+'">'+l.toUpperCase()+'</option>';}).join('') +
-					'  </select></div>' +
-					'  <div><label>Align</label><select onchange="onFieldChange('+i+', \'align\', this.value)">' +
-					['left','center','right'].map(function(a){return '<option '+(b.align===a?'selected':'')+' value="'+a+'">'+a+'</option>';}).join('') +
-					'</select></div>' +
-					'</div>' +
-					'<div><label>Text</label><input type="text" value="'+escapeHtml(b.text)+'" oninput="onFieldChange('+i+', \'text\', this.value)"></div>';
-			} else if (b.type === 'paragraph') {
-				fields.innerHTML = '' +
-					'<div><label>Text</label><textarea oninput="onFieldChange('+i+', \'text\', this.value)">'+escapeHtml(b.text)+'</textarea></div>';
-			} else if (b.type === 'image') {
-				fields.innerHTML = '' +
-					'<div class="row-2"><div><label>Image URL</label><input type="text" value="'+escapeHtml(b.src)+'" oninput="onFieldChange('+i+', \'src\', this.value)"></div>' +
-					'<div><label>Alt text</label><input type="text" value="'+escapeHtml(b.alt)+'" oninput="onFieldChange('+i+', \'alt\', this.value)"></div></div>' +
-					'<div class="row-2"><div><label>Width (e.g. 600px or 50%)</label><input type="text" value="'+escapeHtml(b.width)+'" oninput="onFieldChange('+i+', \'width\', this.value)"></div>' +
-					'<div><label>Align</label><select onchange="onFieldChange('+i+', \'align\', this.value)">' +
-					['left','center','right'].map(function(a){return '<option '+(b.align===a?'selected':'')+' value="'+a+'">'+a+'</option>';}).join('') +
-					'</select></div></div>';
-			} else if (b.type === 'button') {
-				fields.innerHTML = '' +
-					'<div class="row-2"><div><label>Label</label><input type="text" value="'+escapeHtml(b.label)+'" oninput="onFieldChange('+i+', \'label\', this.value)"></div>' +
-					'<div><label>Link</label><input type="text" value="'+escapeHtml(b.href)+'" oninput="onFieldChange('+i+', \'href\', this.value)"></div></div>' +
-					'<div class="row-2"><div><label>Style</label><select onchange="onFieldChange('+i+', \'style\', this.value)">' +
-					['primary','secondary','link'].map(function(s){return '<option '+(b.style===s?'selected':'')+' value="'+s+'">'+s+'</option>';}).join('') +
-					'</select></div>' +
-					'<div><label>Align</label><select onchange="onFieldChange('+i+', \'align\', this.value)">' +
-					['left','center','right'].map(function(a){return '<option '+(b.align===a?'selected':'')+' value="'+a+'">'+a+'</option>';}).join('') +
-					'</select></div></div>';
-			} else if (b.type === 'divider') {
-				fields.innerHTML = '<div class="helper-note">A horizontal line divider.</div>';
-			} else if (b.type === 'html') {
-				fields.innerHTML = '<div><label>Custom HTML</label><textarea oninput="onFieldChange('+i+', \'markup\', this.value)">'+escapeHtml(b.markup || '')+'</textarea></div>';
-			} else if (b.type === 'hero') {
-				fields.innerHTML = '' +
-					'<div class="row-2"><div><label>Eyebrow</label><input type="text" value="'+escapeHtml(b.eyebrow||'')+'" oninput="onFieldChange('+i+', \'eyebrow\', this.value)"></div>' +
-					'<div><label>Align</label><select onchange="onFieldChange('+i+', \'align\', this.value)">' +
-					['left','center'].map(function(a){return '<option '+((b.align||'left')===a?'selected':'')+' value="'+a+'">'+a+'</option>';}).join('') +
-					'</select></div></div>' +
-					'<div><label>Title</label><textarea oninput="onFieldChange('+i+', \'title\', this.value)">'+escapeHtml(b.title||'')+'</textarea></div>' +
-					'<div><label>Subtitle</label><textarea oninput="onFieldChange('+i+', \'subtitle\', this.value)">'+escapeHtml(b.subtitle||'')+'</textarea></div>' +
-					'<div class="row-2"><div><label>Button Text</label><input type="text" value="'+escapeHtml(b.buttonText||'')+'" oninput="onFieldChange('+i+', \'buttonText\', this.value)"></div>' +
-					'<div><label>Button URL</label><input type="text" value="'+escapeHtml(b.buttonUrl||'')+'" oninput="onFieldChange('+i+', \'buttonUrl\', this.value)"></div></div>' +
-					'<div class="row-2"><div><label>Background Style</label><select onchange="onFieldChange('+i+', \'background\', this.value)">' +
-					['light','dark','image'].map(function(a){return '<option '+((b.background||'light')===a?'selected':'')+' value="'+a+'">'+a+'</option>';}).join('') +
-					'</select></div>' +
-					'<div><label>Background Image (if image)</label><input type="text" value="'+escapeHtml(b.backgroundImage||'')+'" oninput="onFieldChange('+i+', \'backgroundImage\', this.value)"></div></div>';
-			} else if (b.type === 'textImage') {
-				fields.innerHTML = '' +
-					'<div class="row-2"><div><label>Title</label><input type="text" value="'+escapeHtml(b.title||'')+'" oninput="onFieldChange('+i+', \'title\', this.value)"></div>' +
-					'<div><label>Image Position</label><select onchange="onFieldChange('+i+', \'imagePosition\', this.value)">' +
-					['left','right'].map(function(a){return '<option '+((b.imagePosition||'right')===a?'selected':'')+' value="'+a+'">'+a+'</option>';}).join('') +
-					'</select></div></div>' +
-					'<div><label>Body</label><textarea oninput="onFieldChange('+i+', \'body\', this.value)">'+escapeHtml(b.body||'')+'</textarea></div>' +
-					'<div class="row-2"><div><label>Image URL</label><input type="text" value="'+escapeHtml(b.image||'')+'" oninput="onFieldChange('+i+', \'image\', this.value)"></div>' +
-					'<div><label>Background</label><input type="text" value="'+escapeHtml(b.background||'#f8fafc')+'" oninput="onFieldChange('+i+', \'background\', this.value)"></div></div>' +
-					'<div class="row-2"><div><label>Button Text</label><input type="text" value="'+escapeHtml(b.buttonText||'')+'" oninput="onFieldChange('+i+', \'buttonText\', this.value)"></div>' +
-					'<div><label>Button URL</label><input type="text" value="'+escapeHtml(b.buttonUrl||'')+'" oninput="onFieldChange('+i+', \'buttonUrl\', this.value)"></div></div>';
-			} else if (b.type === 'featureGrid') {
-				fields.innerHTML = '' +
-					'<div><label>Title</label><input type="text" value="'+escapeHtml(b.title||'')+'" oninput="onFieldChange('+i+', \'title\', this.value)"></div>' +
-					'<div><label>Intro</label><textarea oninput="onFieldChange('+i+', \'intro\', this.value)">'+escapeHtml(b.intro||'')+'</textarea></div>' +
-					'<div class="row-2"><div><label>Columns</label><select onchange="onFieldChange('+i+', \'columns\', this.value)">' +
-					[2,3,4].map(function(a){return '<option '+((parseInt(b.columns,10)||3)===a?'selected':'')+' value="'+a+'">'+a+'</option>';}).join('') +
-					'</select></div>' +
-					'<div><label>Items (one per line: Title|Description)</label><textarea oninput="onFieldChange('+i+', \'items\', this.value)">'+escapeHtml(b.items||'')+'</textarea></div></div>';
-			}
-
-			wrapper.appendChild(head);
-			wrapper.appendChild(fields);
-			cont.appendChild(wrapper);
-		});
-	}
-
-	function escapeHtml(s) {
-		return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\"/g,'&quot;').replace(/'/g,'&#039;');
-	}
-
-	function blocksToHtmlArray() {
-		return blocks.map(function(b) {
-			if (b.type === 'heading') {
-				var tag = b.level || 'h2';
-				var alignStyle = b.align && b.align !== 'left' ? ' style="text-align:'+b.align+';"' : '';
-				return '<'+tag+alignStyle+'>'+escapeHtml(b.text)+'</'+tag+'>';
-			}
-			if (b.type === 'paragraph') {
-				return '<p>'+escapeHtml(b.text)+'</p>';
-			}
-			if (b.type === 'image') {
-				var styles = [];
-				if (b.width) styles.push('width:'+b.width);
-				var wrapStyle = '';
-				if (b.align === 'center') wrapStyle = 'text-align:center;';
-				if (b.align === 'right') wrapStyle = 'text-align:right;';
-				var imgTag = '<img src="'+escapeHtml(b.src)+'" alt="'+escapeHtml(b.alt)+'"'+(styles.length?' style="'+styles.join(';')+'"':'')+'>';
-				return '<div style="'+wrapStyle+'">'+imgTag+'</div>';
-			}
-			if (b.type === 'button') {
-				var cls = (b.style==='secondary') ? 'btn-secondary' : (b.style==='link' ? 'btn-link' : 'btn-primary');
-				var wrapStyle = '';
-				if (b.align === 'center') wrapStyle = 'text-align:center;';
-				if (b.align === 'right') wrapStyle = 'text-align:right;';
-				return '<div style="'+wrapStyle+'"><a href="'+escapeHtml(b.href)+'" class="'+cls+'">'+escapeHtml(b.label)+'</a></div>';
-			}
-			if (b.type === 'divider') {
-				return '<hr>';
-			}
-			if (b.type === 'html') {
-				return b.markup || '';
-			}
-			if (b.type === 'hero') {
-				var heroClass = 'hero-section '+(b.background || 'light')+' align-'+(b.align || 'left');
-				var style = '';
-				if ((b.background || '') === 'image' && b.backgroundImage) {
-					style = ' style="background-image:url('+escapeHtml(b.backgroundImage)+');background-size:cover;background-position:center;"';
-					heroClass += ' hero-image';
+		
+		// Initialize editor if iframe is already loaded
+		if (iframe.contentDocument && iframe.contentDocument.readyState === 'complete') {
+			initEditor();
+		}
+		
+		function initEditor() {
+			try {
+				const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+				const iframeBody = iframeDoc.body;
+				
+				if (!iframeBody) {
+					console.error('Iframe body not found');
+					return;
 				}
-				return '<section class="'+heroClass+'"'+style+'>' +
-					(b.eyebrow ? '<p class="eyebrow">'+escapeHtml(b.eyebrow)+'</p>' : '') +
-					(b.title ? '<h1>'+escapeHtml(b.title)+'</h1>' : '') +
-					(b.subtitle ? '<p>'+escapeHtml(b.subtitle)+'</p>' : '') +
-					(b.buttonText ? '<a href="'+escapeHtml(b.buttonUrl||'#')+'" class="hero-btn">'+escapeHtml(b.buttonText)+'</a>' : '') +
-					'</section>';
-			}
-			if (b.type === 'textImage') {
-				var reverse = (b.imagePosition || 'right') === 'left' ? ' reverse' : '';
-				var bg = b.background ? ' style="background:'+escapeHtml(b.background)+';"' : '';
-				var buttonHtml = b.buttonText ? '<a href="'+escapeHtml(b.buttonUrl||'#')+'" class="btn-primary">'+escapeHtml(b.buttonText)+'</a>' : '';
-				var imageHtml = b.image ? '<img src="'+escapeHtml(b.image)+'" alt="'+escapeHtml(b.title||'')+'">' : '';
-				return '<section class="text-image'+reverse+'"'+bg+'>'+imageHtml+'<div class="text">'+
-					(b.title ? '<h3>'+escapeHtml(b.title)+'</h3>' : '') +
-					(b.body ? '<p>'+escapeHtml(b.body)+'</p>' : '') +
-					buttonHtml +
-					'</div></section>';
-			}
-			if (b.type === 'featureGrid') {
-				var cols = parseInt(b.columns, 10) || 3;
-				var items = (b.items || '').split('\n').filter(Boolean).map(function(line){
-					var parts = line.split('|');
-					return { title: parts[0] ? parts[0].trim() : '', desc: parts[1] ? parts[1].trim() : '' };
+				
+				// Make text elements editable
+				function makeEditable(element) {
+					if (element.tagName && ['SCRIPT', 'STYLE', 'NOSCRIPT'].includes(element.tagName)) {
+						return;
+					}
+					
+					// Make text nodes editable
+					if (element.nodeType === 3 && element.textContent.trim()) {
+						const parent = element.parentNode;
+						if (parent && !parent.isContentEditable) {
+							parent.contentEditable = 'true';
+							parent.classList.add('editable-text');
+							parent.addEventListener('blur', function() {
+								const newText = this.textContent;
+								const oldText = this.getAttribute('data-original-text');
+								if (newText !== oldText) {
+									changes[this.getAttribute('data-id') || this.outerHTML.substring(0, 50)] = {
+										old: oldText,
+										new: newText,
+										element: this
+									};
+								}
+							});
+							parent.setAttribute('data-original-text', element.textContent);
+							parent.setAttribute('data-id', 'text-' + Date.now() + '-' + Math.random());
+						}
+					}
+					
+					// Make images and videos editable
+					if (element.tagName === 'IMG' || element.tagName === 'VIDEO') {
+						element.classList.add('media-editable');
+						element.setAttribute('data-id', 'media-' + Date.now() + '-' + Math.random());
+						element.addEventListener('click', function(e) {
+							if (editMode) {
+								e.preventDefault();
+								editMedia(this);
+							}
+						});
+					}
+					
+					// Recursively process children
+					for (let child of element.childNodes) {
+						makeEditable(child);
+					}
+				}
+				
+				// Initialize editing on all elements
+				makeEditable(iframeBody);
+				
+				// Add hover effects in edit mode
+				iframeDoc.addEventListener('mouseover', function(e) {
+					if (editMode && (e.target.classList.contains('editable-text') || e.target.classList.contains('media-editable'))) {
+						e.target.classList.add('editable-highlight');
+					}
 				});
-				var cards = items.map(function(item){
-					return '<div class="feature-card"><h4>'+escapeHtml(item.title)+'</h4><p>'+escapeHtml(item.desc)+'</p></div>';
-				}).join('');
-				return '<section class="feature-section"><h3>'+escapeHtml(b.title || '')+'</h3><p>'+escapeHtml(b.intro || '')+'</p><div class="feature-grid columns-'+cols+'">'+cards+'</div></section>';
+				
+				iframeDoc.addEventListener('mouseout', function(e) {
+					e.target.classList.remove('editable-highlight');
+				});
+				
+				console.log('Editor initialized');
+			} catch(e) {
+				console.error('Error initializing editor:', e);
 			}
-			return '';
+		}
+		
+		// Edit mode toggle
+		editModeBtn.addEventListener('click', function() {
+			editMode = true;
+			editModeBtn.classList.add('active');
+			previewModeBtn.classList.remove('active');
+			indicator.style.display = 'block';
+			initEditor();
 		});
-	}
-
-	function syncBlocksToHtml() {
-		var html = blocksToHtmlArray().join('\n');
-		var textarea = document.getElementById('content_html');
-		textarea.value = html;
-		renderPreviewFromBlocks();
-	}
-
-	function renderPreviewFromBlocks() {
-		var body = document.getElementById('preview-body');
-		var modalBody = document.getElementById('preview-modal-body');
-		var pieces = blocksToHtmlArray();
-		var wrapped = pieces.map(function(piece, idx){
-			return '<div class="preview-block" draggable="true" data-index="'+idx+'">'+piece+'</div>';
-		}).join('');
-		var css = document.getElementById('custom_css').value;
-		var content = wrapped + (css ? ('<style>' + css + '</style>') : '');
-		body.innerHTML = content;
-		if (modalBody) modalBody.innerHTML = content;
-		attachDnD();
-	}
-
-	function attachDnD() {
-		var body = document.getElementById('preview-body');
-		var items = body.querySelectorAll('.preview-block');
-		items.forEach(function(el){
-			el.addEventListener('dragstart', function(e){
-				dragSrcIndex = parseInt(el.getAttribute('data-index'));
-				e.dataTransfer.effectAllowed = 'move';
-				e.dataTransfer.setData('text/plain', dragSrcIndex);
-			});
-			el.addEventListener('dragover', function(e){
-				e.preventDefault();
-				el.classList.add('drag-over');
-			});
-			el.addEventListener('dragleave', function(){
-				el.classList.remove('drag-over');
-			});
-			el.addEventListener('drop', function(e){
-				e.preventDefault();
-				el.classList.remove('drag-over');
-				var targetIdx = parseInt(el.getAttribute('data-index'));
-				var src = dragSrcIndex;
-				if (isNaN(src) || isNaN(targetIdx) || src === targetIdx) return;
-				var item = blocks[src];
-				blocks.splice(src, 1);
-				blocks.splice(targetIdx, 0, item);
-				renderBlocksEditor();
-				syncBlocksToHtml();
-			});
+		
+		previewModeBtn.addEventListener('click', function() {
+			editMode = false;
+			previewModeBtn.classList.add('active');
+			editModeBtn.classList.remove('active');
+			indicator.style.display = 'none';
 		});
-	}
-
-	// Minimal styles for buttons used by blocks (preview only)
-	document.addEventListener('DOMContentLoaded', function() {
-		var css = '.btn-primary{display:inline-block;background:#FF4F4F;color:#fff;padding:10px 14px;border-radius:8px;text-decoration:none} .btn-primary:hover{background:#FF6347} .btn-secondary{display:inline-block;background:#f3f4f6;color:#111827;padding:10px 14px;border-radius:8px;text-decoration:none;border:1px solid #e5e7eb} .btn-secondary:hover{background:#e5e7eb} .btn-link{color:#FF4F4F;text-decoration:underline}';
-		var style = document.createElement('style');
-		style.innerHTML = css;
-		document.head.appendChild(style);
+		
+		// Device preview buttons
+		desktopBtn.addEventListener('click', function() {
+			iframe.style.width = '100%';
+			desktopBtn.classList.add('active');
+			tabletBtn.classList.remove('active');
+			mobileBtn.classList.remove('active');
+		});
+		
+		tabletBtn.addEventListener('click', function() {
+			iframe.style.width = '768px';
+			tabletBtn.classList.add('active');
+			desktopBtn.classList.remove('active');
+			mobileBtn.classList.remove('active');
+		});
+		
+		mobileBtn.addEventListener('click', function() {
+			iframe.style.width = '375px';
+			mobileBtn.classList.add('active');
+			desktopBtn.classList.remove('active');
+			tabletBtn.classList.remove('active');
+		});
+		
+		// Media editor function
+		function editMedia(element) {
+			const input = document.createElement('input');
+			input.type = 'file';
+			input.accept = element.tagName === 'IMG' ? 'image/*' : 'video/*';
+			input.onchange = function(e) {
+				const file = e.target.files[0];
+				if (file) {
+					const reader = new FileReader();
+					reader.onload = function(e) {
+						if (element.tagName === 'IMG') {
+							element.src = e.target.result;
+						} else {
+							element.src = e.target.result;
+						}
+						changes[element.getAttribute('data-id')] = {
+							old: element.src,
+							new: e.target.result,
+							element: element
+						};
+					};
+					reader.readAsDataURL(file);
+				}
+			};
+			input.click();
+		}
+		
+		// Save changes on form submit
+		document.getElementById('page-form').addEventListener('submit', function(e) {
+			if (Object.keys(changes).length > 0) {
+				try {
+					const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+					const newHtml = iframeDoc.documentElement.outerHTML;
+					document.getElementById('content_html').value = newHtml;
+				} catch(err) {
+					console.error('Error getting iframe content:', err);
+				}
+			}
+		});
+		
 	});
-
-	function togglePreviewBackground() {
-		previewDark = !previewDark;
-		var body = document.getElementById('preview-body');
-		var modalBody = document.getElementById('preview-modal-body');
-		var bg = previewDark ? '#0f172a' : '#ffffff';
-		var color = previewDark ? '#f8fafc' : '#111827';
-		if (body) {
-			body.style.background = bg;
-			body.style.color = color;
-		}
-		if (modalBody) {
-			modalBody.style.background = bg;
-			modalBody.style.color = color;
-		}
-	}
-
+	
+	// Export static page function
 	function exportStaticPage() {
 		if (!currentPageId) {
 			alert('Please save this page first.');
 			return;
 		}
-		var formData = new FormData();
+		const formData = new FormData();
 		formData.append('csrf_token', csrfToken);
 		formData.append('page_id', currentPageId);
 		formData.append('action', 'export_static');
@@ -852,9 +916,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'export_static') {
 				alert(data.message || 'Export failed.');
 				return;
 			}
-			var blob = new Blob([data.html], { type: 'text/html' });
-			var url = URL.createObjectURL(blob);
-			var a = document.createElement('a');
+			const blob = new Blob([data.html], { type: 'text/html' });
+			const url = URL.createObjectURL(blob);
+			const a = document.createElement('a');
 			a.href = url;
 			a.download = (data.slug || 'page') + '.html';
 			document.body.appendChild(a);
@@ -869,5 +933,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'export_static') {
 	</script>
 </body>
 </html>
-
-

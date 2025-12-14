@@ -52,6 +52,77 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 					$error = 'Delete failed. Ensure the pages table exists.';
 				}
 			}
+		} elseif ($action === 'sync_to_db') {
+			// Sync directory pages to database
+			$rootDir = dirname(__DIR__);
+			try {
+				$websitePages = scanWebsitePages($rootDir);
+				$synced = 0;
+				$skipped = 0;
+				$errors = [];
+				
+				// Get existing slugs from database
+				$existingSlugs = [];
+				try {
+					$existingPages = $db->query("SELECT slug FROM pages")->fetchAll();
+					foreach ($existingPages as $ep) {
+						$existingSlugs[$ep['slug']] = true;
+					}
+				} catch (Throwable $e) {
+					// Table might not exist
+				}
+				
+				foreach ($websitePages as $page) {
+					// Generate slug from path (remove .html, replace / with -)
+					$slug = str_replace('.html', '', $page['path']);
+					$slug = str_replace('/', '-', $slug);
+					$slug = preg_replace('/[^a-z0-9\-]/i', '-', $slug);
+					$slug = preg_replace('/-+/', '-', $slug);
+					$slug = trim($slug, '-');
+					
+					// Skip if already exists
+					if (isset($existingSlugs[$slug])) {
+						$skipped++;
+						continue;
+					}
+					
+					// Generate title from filename
+					$title = str_replace('.html', '', $page['name']);
+					$title = str_replace(['-', '_'], ' ', $title);
+					$title = ucwords($title);
+					
+					// Read file content
+					$filePath = $rootDir . '/' . $page['path'];
+					$content = '';
+					if (file_exists($filePath)) {
+						$content = file_get_contents($filePath);
+					}
+					
+					// Insert into database
+					try {
+						$stmt = $db->prepare("INSERT INTO pages (title, slug, content_html, status, created_at, updated_at) VALUES (?, ?, ?, 'published', NOW(), NOW())");
+						$stmt->execute([$title, $slug, $content]);
+						$synced++;
+					} catch (Throwable $e) {
+						$errors[] = "Failed to sync {$page['name']}: " . $e->getMessage();
+					}
+				}
+				
+				if ($synced > 0) {
+					$success = "Successfully synced {$synced} page(s) to database.";
+					if ($skipped > 0) {
+						$success .= " {$skipped} page(s) already existed and were skipped.";
+					}
+				} else {
+					$success = "No new pages to sync. {$skipped} page(s) already exist in database.";
+				}
+				
+				if (!empty($errors)) {
+					$error = implode('<br>', $errors);
+				}
+			} catch (Throwable $e) {
+				$error = 'Sync failed: ' . $e->getMessage();
+			}
 		}
 	}
 }
@@ -68,7 +139,6 @@ try {
 function scanWebsitePages($rootDir) {
 	$pages = [];
 	$excludeDirs = ['admin', 'config', 'database', 'includes', 'uploads', '__MACOSX', 'flipbook', 'node_modules', '.git'];
-	$excludeFiles = ['index.html']; // We'll handle index separately
 	
 	$iterator = new RecursiveIteratorIterator(
 		new RecursiveDirectoryIterator($rootDir, RecursiveDirectoryIterator::SKIP_DOTS),
@@ -165,6 +235,32 @@ try {
 } catch (Throwable $e) {
 	// Silently fail if scanning fails
 }
+
+// Check which pages are in directory but not in database
+$pagesToSync = [];
+$existingSlugs = [];
+try {
+	$existingPages = $db->query("SELECT slug FROM pages")->fetchAll();
+	foreach ($existingPages as $ep) {
+		$existingSlugs[$ep['slug']] = true;
+	}
+	
+	// Check each website page
+	foreach ($websitePages as $page) {
+		$slug = str_replace('.html', '', $page['path']);
+		$slug = str_replace('/', '-', $slug);
+		$slug = preg_replace('/[^a-z0-9\-]/i', '-', $slug);
+		$slug = preg_replace('/-+/', '-', $slug);
+		$slug = trim($slug, '-');
+		
+		if (!isset($existingSlugs[$slug])) {
+			$pagesToSync[] = $page;
+		}
+	}
+} catch (Throwable $e) {
+	// If table doesn't exist, all pages can be synced
+	$pagesToSync = $websitePages;
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -185,12 +281,20 @@ try {
 		.badge.published { color:#065f46; background:#ecfdf5; border-color:#10b981; }
 		.badge.draft { color:#92400e; background:#fffbeb; border-color:#fcd34d; }
 		.actions { display:flex; gap:8px; flex-wrap:wrap; }
-		.category-section { margin-top: 32px; }
-		.category-header { background:#f8fafc; padding:12px 16px; border:1px solid #e5e7eb; border-radius:8px 8px 0 0; font-weight:600; color:#111827; font-size:16px; }
-		.category-content { border:1px solid #e5e7eb; border-top:none; border-radius:0 0 8px 8px; overflow:hidden; }
+		.category-section { margin-top: 16px; }
+		.category-header { background:#f8fafc; padding:12px 16px; border:1px solid #e5e7eb; border-radius:8px; font-weight:600; color:#111827; font-size:16px; cursor:pointer; display:flex; align-items:center; justify-content:space-between; user-select:none; transition:background-color 0.2s; }
+		.category-header:hover { background:#f1f5f9; }
+		.category-header.collapsed { border-radius:8px; }
+		.category-header .category-title { display:flex; align-items:center; gap:8px; flex:1; }
+		.category-header .category-arrow { transition:transform 0.3s ease; width:20px; height:20px; display:flex; align-items:center; justify-content:center; }
+		.category-header.collapsed .category-arrow { transform:rotate(-90deg); }
+		.category-content { border:1px solid #e5e7eb; border-top:none; border-radius:0 0 8px 8px; overflow:hidden; max-height:5000px; transition:max-height 0.3s ease, opacity 0.2s ease; opacity:1; }
+		.category-content.collapsed { max-height:0; opacity:0; overflow:hidden; border:none; }
 		.page-item { display:flex; align-items:center; justify-content:space-between; padding:12px 16px; border-bottom:1px solid #e5e7eb; }
 		.page-item:last-child { border-bottom:none; }
 		.page-item:hover { background:#f8fafc; }
+		.page-item.sync-available { background:#fef3c7; }
+		.page-item.sync-available:hover { background:#fde68a; }
 		.page-info { flex:1; }
 		.page-name { font-weight:500; color:#111827; margin-bottom:4px; }
 		.page-path { font-size:12px; color:#6b7280; font-family:monospace; }
@@ -206,11 +310,49 @@ try {
 		.tab:hover { color:#111827; }
 	</style>
 	<script>
-		function showTab(tabName) {
+		function showTab(tabName, element) {
 			document.querySelectorAll('.tab-content').forEach(el => el.style.display = 'none');
 			document.querySelectorAll('.tab').forEach(el => el.classList.remove('active'));
 			document.getElementById('tab-' + tabName).style.display = 'block';
-			event.target.classList.add('active');
+			if (element) {
+				element.classList.add('active');
+			}
+			// Show/hide category controls based on active tab
+			const controls = document.getElementById('category-controls');
+			if (controls) {
+				controls.style.display = tabName === 'all' ? 'flex' : 'none';
+			}
+		}
+		
+		function toggleCategory(categoryId) {
+			const header = document.getElementById('category-header-' + categoryId);
+			const content = document.getElementById('category-content-' + categoryId);
+			
+			if (content.classList.contains('collapsed')) {
+				content.classList.remove('collapsed');
+				header.classList.remove('collapsed');
+			} else {
+				content.classList.add('collapsed');
+				header.classList.add('collapsed');
+			}
+		}
+		
+		function expandAllCategories() {
+			document.querySelectorAll('.category-content').forEach(content => {
+				content.classList.remove('collapsed');
+			});
+			document.querySelectorAll('.category-header').forEach(header => {
+				header.classList.remove('collapsed');
+			});
+		}
+		
+		function collapseAllCategories() {
+			document.querySelectorAll('.category-content').forEach(content => {
+				content.classList.add('collapsed');
+			});
+			document.querySelectorAll('.category-header').forEach(header => {
+				header.classList.add('collapsed');
+			});
 		}
 	</script>
 </head>
@@ -260,11 +402,31 @@ try {
 		}
 		$totalCategories = count($categories);
 		$totalDbPages = count($pages);
+		$totalPagesToSync = count($pagesToSync);
 		?>
 
 		<!-- Statistics -->
 		<div class="stats">
-			<h3 style="margin:0 0 12px 0; font-size:16px; font-weight:600; color:#111827;">Website Statistics</h3>
+			<div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; flex-wrap:wrap; gap:12px;">
+				<h3 style="margin:0; font-size:16px; font-weight:600; color:#111827;">Website Statistics</h3>
+				<?php if ($totalPagesToSync > 0): ?>
+				<div style="display:flex; align-items:center; gap:12px;">
+					<span style="font-size:12px; color:#6b7280;">Pages highlighted in yellow are not in the database</span>
+					<form method="POST" action="" onsubmit="return confirm('This will import <?php echo $totalPagesToSync; ?> page(s) from the directory into the database. Continue?')" style="display:inline;">
+						<input type="hidden" name="csrf_token" value="<?php echo $csrf; ?>">
+						<input type="hidden" name="action" value="sync_to_db">
+						<button type="submit" class="btn" style="background:#667eea; color:#ffffff; border-color:#667eea;">
+							<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+								<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+								<polyline points="7 10 12 15 17 10"></polyline>
+								<line x1="12" y1="15" x2="12" y2="3"></line>
+							</svg>
+							<span>Sync <?php echo $totalPagesToSync; ?> Page(s) to Database</span>
+						</button>
+					</form>
+				</div>
+				<?php endif; ?>
+			</div>
 			<div class="stats-grid">
 				<div class="stat-item">
 					<div class="stat-value"><?php echo $totalWebsitePages; ?></div>
@@ -278,15 +440,33 @@ try {
 					<div class="stat-value"><?php echo $totalDbPages; ?></div>
 					<div class="stat-label">Database Pages</div>
 				</div>
+				<?php if ($totalPagesToSync > 0): ?>
+				<div class="stat-item" style="background:#fef3c7; border:1px solid #fcd34d; border-radius:8px; padding:12px;">
+					<div class="stat-value" style="color:#92400e;"><?php echo $totalPagesToSync; ?></div>
+					<div class="stat-label" style="color:#92400e;">Pages to Sync</div>
+				</div>
+				<?php endif; ?>
 			</div>
 		</div>
 
 		<!-- Tabs -->
 		<div class="tabs">
-			<button class="tab active" onclick="showTab('all')">All Website Pages</button>
+			<button class="tab active" onclick="showTab('all', this)">All Website Pages</button>
 			<?php if ($pages): ?>
-			<button class="tab" onclick="showTab('database')">Database Pages</button>
+			<button class="tab" onclick="showTab('database', this)">Database Pages</button>
 			<?php endif; ?>
+		</div>
+		
+		<!-- Expand/Collapse Controls -->
+		<div id="category-controls" style="margin-bottom:16px; display:flex; gap:8px; align-items:center;">
+			<button class="btn" onclick="expandAllCategories()" style="font-size:12px;">
+				<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="18 15 12 9 6 15"></polyline></svg>
+				<span>Expand All</span>
+			</button>
+			<button class="btn" onclick="collapseAllCategories()" style="font-size:12px;">
+				<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+				<span>Collapse All</span>
+			</button>
 		</div>
 
 		<!-- All Website Pages Tab -->
@@ -294,22 +474,46 @@ try {
 			<?php if ($websitePages): ?>
 				<?php
 				$currentCategory = '';
+				$categoryIndex = 0;
 				foreach ($websitePages as $page):
 					if ($page['category'] !== $currentCategory):
 						if ($currentCategory !== ''):
 							echo '</div></div>';
 						endif;
 						$currentCategory = $page['category'];
+						$categoryId = 'cat-' . $categoryIndex++;
 				?>
 				<div class="category-section">
-					<div class="category-header">
-						<?php echo escape($currentCategory); ?> (<?php echo $categories[$currentCategory]; ?>)
+					<div class="category-header" id="category-header-<?php echo $categoryId; ?>" onclick="toggleCategory('<?php echo $categoryId; ?>')">
+						<div class="category-title">
+							<svg class="category-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+								<polyline points="6 9 12 15 18 9"></polyline>
+							</svg>
+							<span><?php echo escape($currentCategory); ?> (<?php echo $categories[$currentCategory]; ?>)</span>
+						</div>
 					</div>
-					<div class="category-content">
+					<div class="category-content" id="category-content-<?php echo $categoryId; ?>">
 				<?php endif; ?>
-						<div class="page-item">
+						<?php
+						// Check if this page can be synced
+						$canSync = false;
+						$pageSlug = str_replace('.html', '', $page['path']);
+						$pageSlug = str_replace('/', '-', $pageSlug);
+						$pageSlug = preg_replace('/[^a-z0-9\-]/i', '-', $pageSlug);
+						$pageSlug = preg_replace('/-+/', '-', $pageSlug);
+						$pageSlug = trim($pageSlug, '-');
+						$canSync = !isset($existingSlugs[$pageSlug]);
+						?>
+						<div class="page-item <?php if ($canSync): ?>sync-available<?php endif; ?>">
 							<div class="page-info">
-								<div class="page-name"><?php echo escape($page['name']); ?></div>
+								<div class="page-name" style="display:flex; align-items:center; gap:8px;">
+									<?php echo escape($page['name']); ?>
+									<?php if ($canSync): ?>
+									<span class="badge" style="background:#fbbf24; color:#78350f; border-color:#f59e0b; font-size:10px; padding:2px 6px;">
+										Not in DB
+									</span>
+									<?php endif; ?>
+								</div>
 								<div class="page-path"><?php echo escape($page['path']); ?></div>
 								<div class="page-meta">
 									<span>Modified: <?php echo date('Y-m-d H:i', $page['modified']); ?></span>
@@ -320,6 +524,10 @@ try {
 								</div>
 							</div>
 							<div class="actions">
+								<a class="btn" href="pages_edit.php?file=<?php echo urlencode($page['path']); ?>">
+									<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+									<span>Edit</span>
+								</a>
 								<a class="btn" href="<?php echo escape($page['url']); ?>" target="_blank">
 									<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M14 3h7v7m-1-6L10 14M5 5h5M5 10v9h9v-5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
 									<span>View</span>
