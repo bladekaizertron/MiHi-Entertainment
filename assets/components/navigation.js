@@ -283,6 +283,10 @@
                                         <span class="font-semibold block mb-0.5">Lighting</span>
                                         <span class="text-xs text-gray-500 leading-relaxed">Transform spaces with lighting</span>
                                     </a>
+                                    <a href="${pathPrefix}av-services/dance-floors.html" class="block text-sm text-gray-700 hover:text-blue-600 transition py-1.5 hover:bg-blue-50 rounded-md px-2 -mx-2">
+                                        <span class="font-semibold block mb-0.5">Dance Floors</span>
+                                        <span class="text-xs text-gray-500 leading-relaxed">LED dance floors with custom lighting</span>
+                                    </a>
                                     <a href="${pathPrefix}av-services/event-stages.html" class="block text-sm text-gray-700 hover:text-blue-600 transition py-1.5 hover:bg-blue-50 rounded-md px-2 -mx-2">
                                         <span class="font-semibold block mb-0.5">Event Stages</span>
                                         <span class="text-xs text-gray-500 leading-relaxed">Professional stage setups</span>
@@ -558,6 +562,7 @@
                                                 <a href="${pathPrefix}av-services/audio-services.html" class="block text-sm text-gray-700 hover:text-blue-700 hover:bg-blue-50/50 transition-all rounded-lg py-2.5 px-3 font-medium">Audio</a>
                                                 <a href="${pathPrefix}av-services/visual-services.html" class="block text-sm text-gray-700 hover:text-blue-700 hover:bg-blue-50/50 transition-all rounded-lg py-2.5 px-3 font-medium">Visual</a>
                                                 <a href="${pathPrefix}av-services/event-lighting.html" class="block text-sm text-gray-700 hover:text-blue-700 hover:bg-blue-50/50 transition-all rounded-lg py-2.5 px-3 font-medium">Lighting</a>
+                                                <a href="${pathPrefix}av-services/dance-floors.html" class="block text-sm text-gray-700 hover:text-blue-700 hover:bg-blue-50/50 transition-all rounded-lg py-2.5 px-3 font-medium">Dance Floors</a>
                                                 <a href="${pathPrefix}av-services/event-stages.html" class="block text-sm text-gray-700 hover:text-blue-700 hover:bg-blue-50/50 transition-all rounded-lg py-2.5 px-3 font-medium">Event Stages</a>
                                                 <a href="${pathPrefix}av-services/event-signage.html" class="block text-sm text-gray-700 hover:text-blue-700 hover:bg-blue-50/50 transition-all rounded-lg py-2.5 px-3 font-medium">Custom Signage</a>
                                             </div>
