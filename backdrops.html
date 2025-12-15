@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photo Booth Backdrops - MiHi Entertainment</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&family=Montserrat:wght@500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        @font-face {
+            font-family: 'Azo Sans';
+            src: url('assets/fonts/AzoSans-Regular.woff2') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'Azo Sans Uber';
+            src: url('assets/fonts/AzoSansUber-Regular.woff2') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #1a202c;
+            overflow-x: hidden;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background-image: url('assets/images/backdrops/hero.jpeg');
+            background-attachment: fixed;
+            background-position: center 5%;
+            background-size: cover;
+            background-repeat: no-repeat;
+            min-height: 70vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Small Desktop (1024px and up) */
+        @media (min-width: 1024px) {
+            .hero-section {
+                min-height: 80vh;
+            }
+        }
+
+        /* Medium Desktop (1280px and up) */
+        @media (min-width: 1280px) {
+            .hero-section {
+                min-height: 85vh;
+            }
+        }
+
+        /* Large Desktop (1920px and up) */
+        @media (min-width: 1920px) {
+            .hero-section {
+                min-height: 90vh;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-section {
+                min-height: 70vh;
+                background-attachment: scroll;
+            }
+        }
+
+        .hero-overlay {
+            background: rgba(0, 0, 0, 0.6);
+            position: absolute;
+            inset: 0;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            color: white;
+            padding: 2rem 1rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        /* Small Desktop (1024px and up) */
+        @media (min-width: 1024px) {
+            .hero-content {
+                max-width: 1000px;
+                padding: 3rem 2rem;
+            }
+        }
+
+        /* Medium Desktop (1280px and up) */
+        @media (min-width: 1280px) {
+            .hero-content {
+                max-width: 1100px;
+                padding: 4rem 2rem;
+            }
+        }
+
+        /* Large Desktop (1920px and up) */
+        @media (min-width: 1920px) {
+            .hero-content {
+                max-width: 1200px;
+                padding: 5rem 2rem;
+            }
+        }
+
+        .hero-title {
+            font-family: 'Azo Sans Uber', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 2rem;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero-title .photo-booth {
+            color: #FF4F4F;
+        }
+
+        .hero-title .backdrops {
+            color: #18F1E1;
+        }
+
+        /* Small Desktop (1024px and up) */
+        @media (min-width: 1024px) {
+            .hero-title {
+                font-size: 4rem;
+                margin-bottom: 2.5rem;
+            }
+        }
+
+        /* Medium Desktop (1280px and up) */
+        @media (min-width: 1280px) {
+            .hero-title {
+                font-size: 4.5rem;
+                margin-bottom: 3rem;
+            }
+        }
+
+        /* Large Desktop (1920px and up) */
+        @media (min-width: 1920px) {
+            .hero-title {
+                font-size: 5.5rem;
+                margin-bottom: 3.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+        }
+
+        .hero-description {
+            font-family: 'Azo Sans', sans-serif;
+            font-size: 1.125rem;
+            line-height: 1.7;
+            margin-bottom: 2.5rem;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Small Desktop (1024px and up) */
+        @media (min-width: 1024px) {
+            .hero-description {
+                font-size: 1.25rem;
+                margin-bottom: 3rem;
+            }
+        }
+
+        /* Medium Desktop (1280px and up) */
+        @media (min-width: 1280px) {
+            .hero-description {
+                font-size: 1.375rem;
+                margin-bottom: 3.5rem;
+            }
+        }
+
+        /* Large Desktop (1920px and up) */
+        @media (min-width: 1920px) {
+            .hero-description {
+                font-size: 1.5rem;
+                margin-bottom: 4rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-description {
+                font-size: 1rem;
+            }
+        }
+
+        .hero-button {
+            font-family: 'Azo Sans', sans-serif;
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: #FF4F4F;
+            color: white;
+            font-size: 1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-button:hover {
+            color: #1F1F1F;
+            background: #18F1E1;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Small Desktop (1024px and up) */
+        @media (min-width: 1024px) {
+            .hero-button {
+                padding: 1.125rem 3rem;
+                font-size: 1.1rem;
+            }
+        }
+
+        /* Medium Desktop (1280px and up) */
+        @media (min-width: 1280px) {
+            .hero-button {
+                padding: 1.25rem 3.5rem;
+                font-size: 1.2rem;
+            }
+        }
+
+        /* Large Desktop (1920px and up) */
+        @media (min-width: 1920px) {
+            .hero-button {
+                padding: 1.5rem 4rem;
+                font-size: 1.3rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-button {
+                padding: 0.875rem 2rem;
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Backdrops Section */
+        .backdrops-section {
+            background: #FFFFFF;
+            padding: 5rem 2rem;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .backdrops-section {
+                padding: 3rem 1.5rem;
+            }
+        }
+
+        .backdrops-section h2 {
+            font-family: 'Azo Sans Uber', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #FF4F4F;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 2.5rem;
+            line-height: 1.2;
+        }
+
+        @media (min-width: 768px) {
+            .backdrops-section h2 {
+                font-size: 3.5rem;
+                margin-bottom: 3rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .backdrops-section h2 {
+                font-size: 4rem;
+            }
+        }
+
+        .backdrops-section .description {
+            font-family: 'Azo Sans', sans-serif;
+            font-size: 1.125rem;
+            color: #1F1F1F;
+            line-height: 1.7;
+            max-width: 900px;
+            margin: 0 auto 2rem;
+        }
+
+        @media (min-width: 768px) {
+            .backdrops-section .description {
+                font-size: 1.25rem;
+                margin-bottom: 2.5rem;
+            }
+        }
+
+        .backdrops-section .instruction {
+            font-family: 'Azo Sans', sans-serif;
+            font-size: 1rem;
+            color: #1F1F1F;
+            margin-bottom: 1.5rem;
+        }
+
+        @media (min-width: 768px) {
+            .backdrops-section .instruction {
+                font-size: 1.125rem;
+                margin-bottom: 2rem;
+            }
+        }
+
+        .backdrops-section .availability {
+            font-family: 'Azo Sans', sans-serif;
+            font-size: 1rem;
+            color: #1F1F1F;
+            font-style: italic;
+            margin-bottom: 1.5rem;
+        }
+
+        @media (min-width: 768px) {
+            .backdrops-section .availability {
+                font-size: 1.125rem;
+                margin-bottom: 2rem;
+            }
+        }
+
+        .backdrops-section .disclaimer {
+            font-family: 'Azo Sans', sans-serif;
+            font-size: 0.875rem;
+            color: #1F1F1F;
+            font-style: italic;
+        }
+
+        @media (min-width: 768px) {
+            .backdrops-section .disclaimer {
+                font-size: 1rem;
+            }
+        }
+
+        /* Backdrops Gallery Section */
+        .backdrops-gallery-section {
+            background: #FFFFFF;
+            padding: 5rem 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .backdrops-gallery-section {
+                padding: 3rem 1.5rem;
+            }
+        }
+
+        .gallery-filters {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .filter-button {
+            font-family: 'Azo Sans', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            padding: 0.875rem 2.5rem;
+            border: 2px solid #1F1F1F;
+            background: #FFFFFF;
+            color: #1F1F1F;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            border-radius: 4px;
+        }
+
+        .filter-button:hover {
+            background: #1F1F1F;
+            color: #FFFFFF;
+        }
+
+        .filter-button.active {
+            background: #FF4F4F;
+            color: #FFFFFF;
+            border-color: #FF4F4F;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+
+        @media (min-width: 640px) {
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .gallery-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 2rem;
+            }
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            cursor: pointer;
+            aspect-ratio: 1;
+            background: #f5f5f5;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .gallery-item.hidden {
+            display: none;
+        }
+
+        /* Lightbox Modal */
+        .lightbox-modal {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            overflow: auto;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .lightbox-modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .lightbox-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90vh;
+            margin: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lightbox-image {
+            max-width: 100%;
+            max-height: 90vh;
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 35px;
+            color: #FFFFFF;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 10000;
+            transition: color 0.3s ease;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 50%;
+        }
+
+        .lightbox-close:hover {
+            color: #FF4F4F;
+            background: rgba(0, 0, 0, 0.7);
+        }
+
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #FFFFFF;
+            font-size: 30px;
+            font-weight: bold;
+            cursor: pointer;
+            padding: 15px 20px;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            z-index: 10000;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lightbox-nav:hover {
+            background: rgba(0, 0, 0, 0.8);
+            color: #18F1E1;
+        }
+
+        .lightbox-prev {
+            left: 20px;
+        }
+
+        .lightbox-next {
+            right: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .lightbox-close {
+                top: 10px;
+                right: 15px;
+                font-size: 30px;
+                width: 40px;
+                height: 40px;
+            }
+
+            .lightbox-nav {
+                font-size: 24px;
+                width: 50px;
+                height: 50px;
+                padding: 10px 15px;
+            }
+
+            .lightbox-prev {
+                left: 10px;
+            }
+
+            .lightbox-next {
+                right: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="nav-placeholder"></div>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1 class="hero-title"><span class="photo-booth">PHOTO BOOTH</span> <span class="backdrops">BACKDROPS</span>
+            </h1>
+            <p class="hero-description">
+                Our selection of backdrops is continually growing. If you aren't seeing something you like, let us know
+                and we can come up with something amazing for your event.
+            </p>
+            <a href="./contact-us.html" class="hero-button">CONTACT US</a>
+        </div>
+    </section>
+
+    <!-- Backdrops Section -->
+    <section class="backdrops-section">
+        <div class="container mx-auto max-w-6xl">
+            <h2>VIEW OUR PHOTO BOOTH BACKDROP SELECTIONS</h2>
+            <p class="description" style="font-family: 'Azo Sans', sans-serif;">
+                The keepsakes your guests take home should remind them of your exact theme and how much fun they had at
+                the party! A backdrop completes your party theme like nothing else. With MiHi Entertainment, you can
+                rent a backdrop for your own needs, have us design a custom backdrop for your brand event, and so much
+                more.
+            </p>
+            <p class="instruction" style="font-family: 'Azo Sans', sans-serif;">Click on any image to get more details
+            </p>
+            <p class="availability" style="font-family: 'Azo Sans', sans-serif;">
+                We have limited availability outside of Colorado, please contact us for a full list of backdrops
+                available in your area.
+            </p>
+            <p class="disclaimer" style="font-family: 'Azo Sans', sans-serif;">*Additional Fees May Apply for marked
+                backdrops</p>
+        </div>
+    </section>
+
+    <!-- Backdrops Gallery Section -->
+    <section class="backdrops-gallery-section">
+        <div class="container mx-auto max-w-7xl">
+            <div class="gallery-filters">
+                <button class="filter-button active" data-filter="indoor">Indoor</button>
+                <button class="filter-button" data-filter="outdoor">Outdoor</button>
+            </div>
+            <div class="gallery-grid" id="backdrops-gallery">
+                <!-- Gallery items will be generated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox-modal" class="lightbox-modal">
+        <span class="lightbox-close" id="lightbox-close">&times;</span>
+        <span class="lightbox-nav lightbox-prev" id="lightbox-prev">&#10094;</span>
+        <span class="lightbox-nav lightbox-next" id="lightbox-next">&#10095;</span>
+        <div class="lightbox-content">
+            <img class="lightbox-image" id="lightbox-image" src="" alt="Backdrop">
+        </div>
+    </div>
+
+    <script src="assets/components/navigation.js"></script>
+    <script src="assets/components/footer.js"></script>
+    <script>
+        // Backdrop images data
+        // Note: You can categorize images as 'indoor' or 'outdoor' by changing the category property
+        const backdropImages = [
+            { src: 'assets/images/backdrops/img1.png', category: 'indoor' },
+            { src: 'assets/images/backdrops/img2.png', category: 'outdoor' },
+            { src: 'assets/images/backdrops/img3.png', category: 'indoor' },
+            { src: 'assets/images/backdrops/img4.png', category: 'outdoor' },
+            { src: 'assets/images/backdrops/img5.png', category: 'indoor' },
+            { src: 'assets/images/backdrops/img6.png', category: 'outdoor' },
+            { src: 'assets/images/backdrops/img7.png', category: 'indoor' },
+            { src: 'assets/images/backdrops/img8.png', category: 'outdoor' },
+            { src: 'assets/images/backdrops/img9.png', category: 'indoor' },
+            { src: 'assets/images/backdrops/img10.png', category: 'outdoor' },
+            { src: 'assets/images/backdrops/img11.png', category: 'indoor' },
+            { src: 'assets/images/backdrops/img12.png', category: 'outdoor' },
+            { src: 'assets/images/backdrops/img13.png', category: 'indoor' },
+            { src: 'assets/images/backdrops/img14.png', category: 'outdoor' },
+            { src: 'assets/images/backdrops/img15.png', category: 'indoor' },
+            { src: 'assets/images/backdrops/img16.png', category: 'outdoor' },
+            { src: 'assets/images/backdrops/img17.png', category: 'indoor' },
+            { src: 'assets/images/backdrops/img18.png', category: 'outdoor' },
+            { src: 'assets/images/backdrops/img19.png', category: 'indoor' },
+            { src: 'assets/images/backdrops/img20.png', category: 'outdoor' },
+            { src: 'assets/images/backdrops/img21.png', category: 'indoor' },
+            { src: 'assets/images/backdrops/img22.png', category: 'outdoor' },
+            { src: 'assets/images/backdrops/img23.png', category: 'indoor' },
+            { src: 'assets/images/backdrops/img25.png', category: 'outdoor' },
+            { src: 'assets/images/backdrops/img26.png', category: 'indoor' },
+            { src: 'assets/images/backdrops/img27.png', category: 'outdoor' },
+            { src: 'assets/images/backdrops/img28.png', category: 'indoor' },
+            { src: 'assets/images/backdrops/img29.png', category: 'outdoor' },
+            { src: 'assets/images/backdrops/img30.png', category: 'indoor' },
+            { src: 'assets/images/backdrops/img31.png', category: 'outdoor' },
+            { src: 'assets/images/backdrops/img32.png', category: 'indoor' },
+            { src: 'assets/images/backdrops/img33.png', category: 'outdoor' },
+            { src: 'assets/images/backdrops/img34.png', category: 'indoor' },
+            { src: 'assets/images/backdrops/img35.png', category: 'outdoor' },
+            { src: 'assets/images/backdrops/img36.png', category: 'indoor' },
+            { src: 'assets/images/backdrops/img37.png', category: 'outdoor' },
+            { src: 'assets/images/backdrops/img38.png', category: 'indoor' },
+            { src: 'assets/images/backdrops/img39.png', category: 'outdoor' },
+            { src: 'assets/images/backdrops/img40.png', category: 'indoor' },
+            { src: 'assets/images/backdrops/img41.png', category: 'outdoor' },
+            { src: 'assets/images/backdrops/img42.png', category: 'indoor' },
+            { src: 'assets/images/backdrops/img43.png', category: 'outdoor' },
+            { src: 'assets/images/backdrops/img44.png', category: 'indoor' },
+            { src: 'assets/images/backdrops/img45.png', category: 'outdoor' },
+            { src: 'assets/images/backdrops/img46.png', category: 'indoor' },
+            { src: 'assets/images/backdrops/img47.png', category: 'outdoor' },
+            { src: 'assets/images/backdrops/img48.png', category: 'indoor' },
+            { src: 'assets/images/backdrops/img49.png', category: 'outdoor' },
+            { src: 'assets/images/backdrops/img50.png', category: 'indoor' },
+            { src: 'assets/images/backdrops/img51.png', category: 'outdoor' },
+            { src: 'assets/images/backdrops/img52.png', category: 'indoor' },
+            { src: 'assets/images/backdrops/img53.png', category: 'outdoor' },
+            { src: 'assets/images/backdrops/img54.png', category: 'indoor' },
+            { src: 'assets/images/backdrops/img55.png', category: 'outdoor' },
+            { src: 'assets/images/backdrops/img56.png', category: 'indoor' },
+            { src: 'assets/images/backdrops/img57.png', category: 'outdoor' },
+            { src: 'assets/images/backdrops/img58.png', category: 'indoor' },
+            { src: 'assets/images/backdrops/img59.png', category: 'outdoor' },
+            { src: 'assets/images/backdrops/img60.png', category: 'indoor' },
+            { src: 'assets/images/backdrops/img61.png', category: 'outdoor' },
+            { src: 'assets/images/backdrops/img62.png', category: 'indoor' },
+            { src: 'assets/images/backdrops/img63.png', category: 'outdoor' },
+            { src: 'assets/images/backdrops/img64.png', category: 'indoor' },
+            { src: 'assets/images/backdrops/img65.png', category: 'outdoor' },
+            { src: 'assets/images/backdrops/img66.png', category: 'indoor' },
+            { src: 'assets/images/backdrops/img67.png', category: 'outdoor' },
+            { src: 'assets/images/backdrops/img68.png', category: 'indoor' },
+            { src: 'assets/images/backdrops/img69.png', category: 'outdoor' },
+            { src: 'assets/images/backdrops/img70.png', category: 'indoor' },
+            { src: 'assets/images/backdrops/img71.png', category: 'outdoor' },
+            { src: 'assets/images/backdrops/img72.png', category: 'indoor' },
+            { src: 'assets/images/backdrops/img73.png', category: 'outdoor' },
+            { src: 'assets/images/backdrops/img74.png', category: 'indoor' },
+            { src: 'assets/images/backdrops/img75.png', category: 'outdoor' },
+            { src: 'assets/images/backdrops/img76.png', category: 'indoor' },
+            { src: 'assets/images/backdrops/img77.png', category: 'outdoor' },
+            { src: 'assets/images/backdrops/img78.png', category: 'indoor' },
+            { src: 'assets/images/backdrops/img79.png', category: 'outdoor' },
+            { src: 'assets/images/backdrops/img80.png', category: 'indoor' },
+            { src: 'assets/images/backdrops/img81.png', category: 'outdoor' },
+            { src: 'assets/images/backdrops/img82.png', category: 'indoor' },
+            { src: 'assets/images/backdrops/img83.png', category: 'outdoor' },
+            { src: 'assets/images/backdrops/img84.png', category: 'indoor' },
+            { src: 'assets/images/backdrops/img85.png', category: 'outdoor' },
+            { src: 'assets/images/backdrops/img86.png', category: 'indoor' },
+            { src: 'assets/images/backdrops/img87.png', category: 'outdoor' },
+            { src: 'assets/images/backdrops/img88.png', category: 'indoor' },
+            { src: 'assets/images/backdrops/img89.png', category: 'outdoor' },
+            { src: 'assets/images/backdrops/img90.png', category: 'indoor' },
+            { src: 'assets/images/backdrops/img91.png', category: 'outdoor' },
+            { src: 'assets/images/backdrops/img92.png', category: 'indoor' },
+            { src: 'assets/images/backdrops/img93.png', category: 'outdoor' },
+            { src: 'assets/images/backdrops/img94.png', category: 'indoor' },
+            { src: 'assets/images/backdrops/img95.png', category: 'outdoor' },
+            { src: 'assets/images/backdrops/img96.png', category: 'indoor' },
+            { src: 'assets/images/backdrops/img97.png', category: 'outdoor' },
+            { src: 'assets/images/backdrops/img98.png', category: 'indoor' },
+            { src: 'assets/images/backdrops/img99.png', category: 'outdoor' },
+            { src: 'assets/images/backdrops/img100.png', category: 'indoor' },
+            { src: 'assets/images/backdrops/img101.png', category: 'outdoor' },
+            { src: 'assets/images/backdrops/img102.png', category: 'indoor' },
+            { src: 'assets/images/backdrops/img103.png', category: 'outdoor' }
+        ];
+
+        // Lightbox functionality
+        let currentImageIndex = 0;
+        let currentFilteredImages = [];
+
+        function openLightbox(imageIndex, filteredImages) {
+            currentImageIndex = imageIndex;
+            currentFilteredImages = filteredImages;
+            const modal = document.getElementById('lightbox-modal');
+            const lightboxImage = document.getElementById('lightbox-image');
+            lightboxImage.src = filteredImages[imageIndex].src;
+            lightboxImage.alt = `Backdrop ${filteredImages[imageIndex].src.split('/').pop()}`;
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            const modal = document.getElementById('lightbox-modal');
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        function showNextImage() {
+            if (currentFilteredImages.length === 0) return;
+            currentImageIndex = (currentImageIndex + 1) % currentFilteredImages.length;
+            const lightboxImage = document.getElementById('lightbox-image');
+            lightboxImage.src = currentFilteredImages[currentImageIndex].src;
+            lightboxImage.alt = `Backdrop ${currentFilteredImages[currentImageIndex].src.split('/').pop()}`;
+        }
+
+        function showPrevImage() {
+            if (currentFilteredImages.length === 0) return;
+            currentImageIndex = (currentImageIndex - 1 + currentFilteredImages.length) % currentFilteredImages.length;
+            const lightboxImage = document.getElementById('lightbox-image');
+            lightboxImage.src = currentFilteredImages[currentImageIndex].src;
+            lightboxImage.alt = `Backdrop ${currentFilteredImages[currentImageIndex].src.split('/').pop()}`;
+        }
+
+        // Function to create gallery item
+        function createGalleryItem(image, index, filteredImages) {
+            const item = document.createElement('div');
+            item.className = `gallery-item ${image.category}`;
+            item.setAttribute('data-category', image.category);
+            item.innerHTML = `<img src="${image.src}" alt="Backdrop ${image.src.split('/').pop()}" loading="lazy">`;
+
+            // Add click handler to open lightbox
+            item.addEventListener('click', function () {
+                openLightbox(index, filteredImages);
+            });
+
+            return item;
+        }
+
+        // Function to render gallery
+        function renderGallery(filter = 'indoor') {
+            const gallery = document.getElementById('backdrops-gallery');
+            if (!gallery) return;
+
+            gallery.innerHTML = '';
+
+            const filteredImages = backdropImages.filter(img => img.category === filter);
+
+            filteredImages.forEach((image, index) => {
+                const item = createGalleryItem(image, index, filteredImages);
+                gallery.appendChild(item);
+            });
+        }
+
+        // Filter button functionality and lightbox event listeners
+        document.addEventListener('DOMContentLoaded', function () {
+            renderGallery('indoor');
+
+            const filterButtons = document.querySelectorAll('.filter-button');
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function () {
+                    // Remove active class from all buttons
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    // Add active class to clicked button
+                    this.classList.add('active');
+                    // Get filter value
+                    const filter = this.getAttribute('data-filter');
+                    // Render gallery with filter
+                    renderGallery(filter);
+                });
+            });
+
+            // Lightbox event listeners
+            const lightboxClose = document.getElementById('lightbox-close');
+            const lightboxNext = document.getElementById('lightbox-next');
+            const lightboxPrev = document.getElementById('lightbox-prev');
+            const lightboxModal = document.getElementById('lightbox-modal');
+
+            if (lightboxClose) {
+                lightboxClose.addEventListener('click', closeLightbox);
+            }
+
+            if (lightboxNext) {
+                lightboxNext.addEventListener('click', showNextImage);
+            }
+
+            if (lightboxPrev) {
+                lightboxPrev.addEventListener('click', showPrevImage);
+            }
+
+            // Close lightbox when clicking outside the image
+            if (lightboxModal) {
+                lightboxModal.addEventListener('click', function (e) {
+                    if (e.target === lightboxModal) {
+                        closeLightbox();
+                    }
+                });
+            }
+
+            // Keyboard navigation
+            document.addEventListener('keydown', function (e) {
+                if (lightboxModal.classList.contains('active')) {
+                    if (e.key === 'Escape') {
+                        closeLightbox();
+                    } else if (e.key === 'ArrowRight') {
+                        showNextImage();
+                    } else if (e.key === 'ArrowLeft') {
+                        showPrevImage();
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
