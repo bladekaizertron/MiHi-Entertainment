@@ -148,7 +148,7 @@
                                         <span class="font-semibold block mb-0.5">Custom Photo Booth</span>
                                         <span class="text-xs text-gray-500 leading-relaxed">Fully branded, immersive photo set designs made just for you</span>
                                     </a>
-                                    <a href="${pathPrefix}index.html#photo-booths" class="block text-xs text-blue-600 hover:text-blue-700 transition font-semibold mt-3 pt-3 border-t border-gray-200">View All →</a>
+                                    <a href="${pathPrefix}photo-activations.html" class="block text-xs text-blue-600 hover:text-blue-700 transition font-semibold mt-3 pt-3 border-t border-gray-200">View All →</a>
                                 </div>
                                 
                                 <!-- Video Booths Column -->
@@ -180,7 +180,7 @@
                                         <span class="font-semibold block mb-0.5">Video Testimonial Booth</span>
                                         <span class="text-xs text-gray-500 leading-relaxed">Authentic customer testimonials, captured on-site</span>
                                     </a>
-                                    <a href="${pathPrefix}index.html#video-booths" class="block text-xs text-purple-600 hover:text-purple-700 transition font-semibold mt-3 pt-3 border-t border-gray-200">View All →</a>
+                                    <a href="${pathPrefix}video-activations.html" class="block text-xs text-purple-600 hover:text-purple-700 transition font-semibold mt-3 pt-3 border-t border-gray-200">View All →</a>
                                 </div>
                                 
                                 <!-- Additional Experiences Column -->
@@ -480,6 +480,7 @@
                                                 <a href="${pathPrefix}product/virtual-photo-booth.html" class="block text-sm text-gray-700 hover:text-blue-700 hover:bg-blue-50/50 transition-all rounded-lg py-2.5 px-3 font-medium">Virtual Photo Booth</a>
                                                 <a href="${pathPrefix}product/professional-headshots.html" class="block text-sm text-gray-700 hover:text-blue-700 hover:bg-blue-50/50 transition-all rounded-lg py-2.5 px-3 font-medium">Professional Headshots</a>
                                                 <a href="${pathPrefix}photo-booth-sets.html" class="block text-sm text-gray-700 hover:text-blue-700 hover:bg-blue-50/50 transition-all rounded-lg py-2.5 px-3 font-medium">Custom Photo Booth</a>
+                                                <a href="${pathPrefix}photo-activations.html" class="block text-xs text-blue-600 hover:text-blue-700 transition font-semibold mt-3 pt-3 border-t border-gray-200 rounded-lg py-2.5 px-3">View All →</a>
                                             </div>
                                         </div>
                                         <!-- Video Booths Category -->
@@ -495,6 +496,7 @@
                                                 <a href="${pathPrefix}product/vogue-photo-booth.html" class="block text-sm text-gray-700 hover:text-purple-700 hover:bg-purple-50/50 transition-all rounded-lg py-2.5 px-3 font-medium">Vogue Video Booth</a>
                                                 <a href="${pathPrefix}product/slow-motion-booth.html" class="block text-sm text-gray-700 hover:text-purple-700 hover:bg-purple-50/50 transition-all rounded-lg py-2.5 px-3 font-medium">Slow Motion Video Booth</a>
                                                 <a href="${pathPrefix}product/video-testimonial-booth.html" class="block text-sm text-gray-700 hover:text-purple-700 hover:bg-purple-50/50 transition-all rounded-lg py-2.5 px-3 font-medium">Video Testimonial Booth</a>
+                                                <a href="${pathPrefix}video-activations.html" class="block text-xs text-purple-600 hover:text-purple-700 transition font-semibold mt-3 pt-3 border-t border-gray-200 rounded-lg py-2.5 px-3">View All →</a>
                                             </div>
                                         </div>
                                         <!-- Additional Experiences Category -->
