@@ -3,7 +3,8 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="mobile-web-app-capable" content="yes">
     <title>Photo Booth Backdrops - MiHi Entertainment</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link
@@ -30,6 +31,18 @@
             font-family: 'Inter', sans-serif;
             color: #1a202c;
             overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Prevent text selection on mobile for better UX */
+        @media (max-width: 768px) {
+
+            .gallery-item,
+            .filter-button {
+                -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
+                -webkit-touch-callout: none;
+            }
         }
 
         h1,
@@ -61,7 +74,9 @@
             .hero-section {
                 height: 100vh;
                 min-height: 100vh;
+                max-height: 100vh;
                 background-attachment: scroll;
+                background-position: center center;
             }
         }
 
@@ -80,6 +95,20 @@
             max-width: 900px;
             margin: 0 auto;
             transform: translateY(10%);
+        }
+
+        @media (max-width: 768px) {
+            .hero-content {
+                padding: 1.5rem 1rem;
+                transform: translateY(5%);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-content {
+                padding: 1rem 0.75rem;
+                transform: translateY(0%);
+            }
         }
 
         /* Small Desktop (1024px and up) */
@@ -150,7 +179,16 @@
 
         @media (max-width: 768px) {
             .hero-title {
-                font-size: 2.5rem;
+                font-size: 2rem;
+                margin-bottom: 1.5rem;
+                line-height: 1.2;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 1.75rem;
+                margin-bottom: 1.25rem;
             }
         }
 
@@ -188,7 +226,17 @@
 
         @media (max-width: 768px) {
             .hero-description {
-                font-size: 1rem;
+                font-size: 0.95rem;
+                margin-bottom: 2rem;
+                line-height: 1.6;
+                padding: 0 0.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-description {
+                font-size: 0.875rem;
+                margin-bottom: 1.5rem;
             }
         }
 
@@ -242,6 +290,18 @@
             .hero-button {
                 padding: 0.875rem 2rem;
                 font-size: 0.9rem;
+                min-height: 44px;
+                width: auto;
+                display: inline-block;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-button {
+                padding: 0.75rem 1.75rem;
+                font-size: 0.85rem;
+                width: 100%;
+                max-width: 280px;
             }
         }
 
@@ -255,6 +315,12 @@
         @media (max-width: 768px) {
             .backdrops-section {
                 padding: 3rem 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .backdrops-section {
+                padding: 2rem 1rem;
             }
         }
 
@@ -282,6 +348,14 @@
             }
         }
 
+        @media (max-width: 480px) {
+            .backdrops-section h2 {
+                font-size: 1.75rem;
+                margin-bottom: 1.5rem;
+                line-height: 1.3;
+            }
+        }
+
         .backdrops-section .description {
             font-family: 'Azo Sans', sans-serif;
             font-size: 1.125rem;
@@ -298,6 +372,14 @@
             }
         }
 
+        @media (max-width: 480px) {
+            .backdrops-section .description {
+                font-size: 0.95rem;
+                margin-bottom: 1.5rem;
+                line-height: 1.6;
+            }
+        }
+
         .backdrops-section .instruction {
             font-family: 'Azo Sans', sans-serif;
             font-size: 1rem;
@@ -309,6 +391,13 @@
             .backdrops-section .instruction {
                 font-size: 1.125rem;
                 margin-bottom: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .backdrops-section .instruction {
+                font-size: 0.9rem;
+                margin-bottom: 1.25rem;
             }
         }
 
@@ -327,6 +416,13 @@
             }
         }
 
+        @media (max-width: 480px) {
+            .backdrops-section .availability {
+                font-size: 0.9rem;
+                margin-bottom: 1.25rem;
+            }
+        }
+
         .backdrops-section .disclaimer {
             font-family: 'Azo Sans', sans-serif;
             font-size: 0.875rem;
@@ -337,6 +433,12 @@
         @media (min-width: 768px) {
             .backdrops-section .disclaimer {
                 font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .backdrops-section .disclaimer {
+                font-size: 0.8rem;
             }
         }
 
@@ -352,11 +454,78 @@
             }
         }
 
+        @media (max-width: 480px) {
+            .backdrops-gallery-section {
+                padding: 2rem 1rem;
+            }
+        }
+
         .gallery-filters {
             display: flex;
             justify-content: center;
             gap: 1rem;
             margin-bottom: 3rem;
+            flex-wrap: wrap;
+            padding: 0 1rem;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Desktop: Single row layout */
+        @media (min-width: 769px) {
+            .gallery-filters {
+                flex-wrap: nowrap;
+                gap: 1rem;
+            }
+        }
+
+        /* Large Desktop: Adjust spacing */
+        @media (min-width: 1024px) {
+            .gallery-filters {
+                gap: 1.25rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .gallery-filters {
+                justify-content: flex-start;
+                gap: 0.75rem;
+                margin-bottom: 2rem;
+                padding: 0.5rem 1rem;
+                overflow-x: auto;
+                overflow-y: hidden;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+                -ms-overflow-style: none;
+                flex-wrap: nowrap;
+                scroll-behavior: smooth;
+                position: relative;
+                scroll-snap-type: x proximity;
+            }
+
+            .gallery-filters::before {
+                content: '';
+                flex-shrink: 0;
+                width: 0.5rem;
+            }
+
+            .gallery-filters::after {
+                content: '';
+                flex-shrink: 0;
+                width: 0.5rem;
+            }
+
+            .gallery-filters::-webkit-scrollbar {
+                display: none;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .gallery-filters {
+                padding: 0 0.5rem;
+                gap: 0.5rem;
+            }
         }
 
         .filter-button {
@@ -372,6 +541,27 @@
             text-transform: uppercase;
             letter-spacing: 0.05em;
             border-radius: 4px;
+            white-space: nowrap;
+            min-height: 44px;
+            touch-action: manipulation;
+        }
+
+        @media (max-width: 768px) {
+            .filter-button {
+                font-size: 0.875rem;
+                padding: 0.75rem 1.5rem;
+                min-height: 44px;
+                flex-shrink: 0;
+                scroll-snap-align: start;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .filter-button {
+                font-size: 0.8rem;
+                padding: 0.7rem 1.25rem;
+                min-width: auto;
+            }
         }
 
         .filter-button:hover {
@@ -394,6 +584,7 @@
         @media (min-width: 640px) {
             .gallery-grid {
                 grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem;
             }
         }
 
@@ -401,6 +592,12 @@
             .gallery-grid {
                 grid-template-columns: repeat(3, 1fr);
                 gap: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .gallery-grid {
+                gap: 1rem;
             }
         }
 
@@ -417,6 +614,16 @@
         .gallery-item:hover {
             transform: translateY(-5px);
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        @media (max-width: 768px) {
+            .gallery-item:hover {
+                transform: none;
+            }
+
+            .gallery-item:active {
+                transform: scale(0.98);
+            }
         }
 
         .gallery-item img {
@@ -455,6 +662,18 @@
             .gallery-item-label {
                 font-size: 1.125rem;
                 padding: 2rem 1rem 1.25rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .gallery-item-label {
+                font-size: 0.75rem;
+                padding: 1rem 0.75rem 0.75rem;
+                letter-spacing: 0.03em;
+            }
+
+            .gallery-item:hover .gallery-item-label {
+                padding: 1rem 0.75rem 0.75rem;
             }
         }
 
@@ -500,6 +719,23 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            padding: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .lightbox-content {
+                max-width: 95%;
+                max-height: 85vh;
+                padding: 0.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .lightbox-content {
+                max-width: 100%;
+                max-height: 80vh;
+                padding: 0.25rem;
+            }
         }
 
         .lightbox-image {
@@ -508,6 +744,19 @@
             object-fit: contain;
             border-radius: 8px;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        @media (max-width: 768px) {
+            .lightbox-image {
+                max-height: 85vh;
+                border-radius: 4px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .lightbox-image {
+                max-height: 80vh;
+            }
         }
 
         .lightbox-close {
@@ -567,20 +816,82 @@
             right: 20px;
         }
 
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 56px;
+            height: 56px;
+            background: #FF4F4F;
+            color: #FFFFFF;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .back-to-top.show {
+            display: flex;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .back-to-top:hover {
+            background: #18F1E1;
+            color: #1F1F1F;
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .back-to-top:active {
+            transform: translateY(0);
+        }
+
+        .back-to-top svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        @media (max-width: 768px) {
+            .back-to-top {
+                bottom: 1.5rem;
+                right: 1.5rem;
+                width: 50px;
+                height: 50px;
+            }
+
+            .back-to-top svg {
+                width: 20px;
+                height: 20px;
+            }
+        }
+
         @media (max-width: 768px) {
             .lightbox-close {
                 top: 10px;
                 right: 15px;
                 font-size: 30px;
-                width: 40px;
-                height: 40px;
+                width: 44px;
+                height: 44px;
+                min-width: 44px;
+                min-height: 44px;
             }
 
             .lightbox-nav {
                 font-size: 24px;
-                width: 50px;
-                height: 50px;
-                padding: 10px 15px;
+                width: 44px;
+                height: 44px;
+                min-width: 44px;
+                min-height: 44px;
+                padding: 0;
             }
 
             .lightbox-prev {
@@ -589,6 +900,30 @@
 
             .lightbox-next {
                 right: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .lightbox-close {
+                top: 5px;
+                right: 10px;
+                font-size: 28px;
+                width: 44px;
+                height: 44px;
+            }
+
+            .lightbox-nav {
+                font-size: 20px;
+                width: 44px;
+                height: 44px;
+            }
+
+            .lightbox-prev {
+                left: 5px;
+            }
+
+            .lightbox-next {
+                right: 5px;
             }
         }
     </style>
@@ -635,7 +970,7 @@
     <!-- Backdrops Gallery Section -->
     <section class="backdrops-gallery-section">
         <div class="container mx-auto max-w-7xl">
-            <div class="gallery-filters">
+            <div class="gallery-filters" id="gallery-filters">
                 <button class="filter-button active" data-filter="all">All</button>
                 <button class="filter-button" data-filter="sequin">Sequin</button>
                 <button class="filter-button" data-filter="floral">Floral & Nature</button>
@@ -649,6 +984,13 @@
             </div>
         </div>
     </section>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="back-to-top" aria-label="Back to top">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 4L4 12H8V20H16V12H20L12 4Z" fill="currentColor" />
+        </svg>
+    </button>
 
     <!-- Lightbox Modal -->
     <div id="lightbox-modal" class="lightbox-modal">
@@ -1109,7 +1451,50 @@
         document.addEventListener('DOMContentLoaded', function () {
             renderGallery('all');
 
+            // Scroll to active button on mobile if needed
+            if (window.innerWidth <= 768) {
+                const activeButton = document.querySelector('.filter-button.active');
+                const galleryFilters = document.querySelector('.gallery-filters');
+                if (activeButton && galleryFilters) {
+                    setTimeout(() => {
+                        activeButton.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+                    }, 100);
+                }
+            }
+
+            // Back to Top Button functionality
+            const backToTopButton = document.getElementById('back-to-top');
+            const galleryFiltersSection = document.getElementById('gallery-filters');
+
+            if (backToTopButton && galleryFiltersSection) {
+                // Show/hide button based on scroll position
+                function toggleBackToTop() {
+                    const galleryFiltersRect = galleryFiltersSection.getBoundingClientRect();
+                    // Show button when user has scrolled past the filter buttons
+                    if (galleryFiltersRect.top < -100) {
+                        backToTopButton.classList.add('show');
+                    } else {
+                        backToTopButton.classList.remove('show');
+                    }
+                }
+
+                // Check scroll position on scroll
+                window.addEventListener('scroll', toggleBackToTop);
+                // Initial check
+                toggleBackToTop();
+
+                // Scroll to filter buttons when clicked
+                backToTopButton.addEventListener('click', function () {
+                    galleryFiltersSection.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                });
+            }
+
             const filterButtons = document.querySelectorAll('.filter-button');
+            const galleryFilters = document.querySelector('.gallery-filters');
+
             filterButtons.forEach(button => {
                 button.addEventListener('click', function () {
                     // Remove active class from all buttons
@@ -1120,6 +1505,22 @@
                     const filter = this.getAttribute('data-filter');
                     // Render gallery with filter
                     renderGallery(filter);
+
+                    // Scroll active button into view on mobile
+                    if (window.innerWidth <= 768 && galleryFilters) {
+                        const buttonRect = this.getBoundingClientRect();
+                        const containerRect = galleryFilters.getBoundingClientRect();
+                        const scrollLeft = galleryFilters.scrollLeft;
+                        const buttonLeft = buttonRect.left - containerRect.left + scrollLeft;
+                        const buttonWidth = buttonRect.width;
+                        const containerWidth = containerRect.width;
+                        const scrollPosition = buttonLeft - (containerWidth / 2) + (buttonWidth / 2);
+
+                        galleryFilters.scrollTo({
+                            left: scrollPosition,
+                            behavior: 'smooth'
+                        });
+                    }
                 });
             });
 
