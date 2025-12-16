@@ -1,0 +1,15 @@
+# Prevent PHP execution in uploads directory (security)
+<FilesMatch "\.php$">
+    Deny from all
+</FilesMatch>
+
+# Allow PDF files
+<FilesMatch "\.pdf$">
+    Allow from all
+</FilesMatch>
+
+# Optional: Limit access to PDFs only
+<FilesMatch "\.(?!pdf$)[^.]+$">
+    Deny from all
+</FilesMatch>
+
