@@ -124,11 +124,9 @@
         "@type": "AggregateOffer",
         "url": "https://www.mihientertainment.com/product/ai-photo-booth.html",
         "priceCurrency": "USD",
+        "lowPrice": "0",
+        "highPrice": "0",
         "availability": "https://schema.org/InStock",
-        "priceSpecification": {
-          "@type": "UnitPriceSpecification",
-          "price": "Contact for pricing"
-        },
         "offerCount": "3"
       },
       "aggregateRating": {
@@ -173,10 +171,19 @@
         "name": "United States"
       },
       "description": "AI-powered photo booth rental service. Real-time AI transformations that turn guests into superheroes, celebrities, or fantasy characters. Instant digital images with custom branding and sharing.",
-      "serviceOutput": "Digital photos with custom branding and instant sharing",
+      "serviceOutput": {
+        "@type": "DigitalDocument",
+        "name": "Digital photos with custom branding and instant sharing"
+      },
       "offers": {
         "@type": "Offer",
         "priceCurrency": "USD",
+        "price": "0",
+        "priceSpecification": {
+          "@type": "UnitPriceSpecification",
+          "priceCurrency": "USD",
+          "valueAddedTaxIncluded": false
+        },
         "availability": "https://schema.org/InStock"
       },
       "aggregateRating": {
@@ -189,27 +196,45 @@
         "name": "AI Photo Booth Packages",
         "itemListElement": [
           {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Basic Package",
-              "description": "Up to 4 hours of intelligent capture and AI styling with AI specialist attendant"
+            "@type": "ListItem",
+            "position": 1,
+            "item": {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Basic Package",
+                "description": "Up to 4 hours of intelligent capture and AI styling with AI specialist attendant"
+              },
+              "priceCurrency": "USD",
+              "price": "0"
             }
           },
           {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Recommended Package",
-              "description": "Up to 4 hours with multi-style AI render cycles, lead AI curator, and advanced booth styling"
+            "@type": "ListItem",
+            "position": 2,
+            "item": {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Recommended Package",
+                "description": "Up to 4 hours with multi-style AI render cycles, lead AI curator, and advanced booth styling"
+              },
+              "priceCurrency": "USD",
+              "price": "0"
             }
           },
           {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Brand Activation Package",
-              "description": "Up to 8 hours with pre-event consultation, custom scenic build, and live social wall"
+            "@type": "ListItem",
+            "position": 3,
+            "item": {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Brand Activation Package",
+                "description": "Up to 8 hours with pre-event consultation, custom scenic build, and live social wall"
+              },
+              "priceCurrency": "USD",
+              "price": "0"
             }
           }
         ]
