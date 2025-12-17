@@ -21,6 +21,8 @@ if (!function_exists('admin_nav_icon')) {
                 return '<svg class="sidebar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M5 5h14v14H5z" stroke-width="2"/><path d="M9 3v4m6-4v4M9 17h6" stroke-width="2" stroke-linecap="round"/></svg>';
             case 'flipbooks':
                 return '<svg class="sidebar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 7h8M8 11h8M8 15h4" stroke-width="2" stroke-linecap="round"/></svg>';
+            case 'password':
+                return '<svg class="sidebar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="11" width="18" height="11" rx="2" ry="2" stroke-width="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4" stroke-width="2"/></svg>';
             default:
                 return '<svg class="sidebar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="9" stroke-width="2"/></svg>';
         }
@@ -82,7 +84,7 @@ $email = $currentUser['email'] ?? 'admin@example.com';
             <?php endif; ?>
             <?php $isActive = ($currentPath === 'change_password.php'); ?>
             <a href="change_password.php" class="<?php echo $isActive ? 'active' : ''; ?>">
-                <svg class="sidebar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="11" width="18" height="11" rx="2" ry="2" stroke-width="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <?php echo admin_nav_icon('password'); ?>
                 <span>Change Password</span>
             </a>
             <a href="../blog.php" target="_blank" class="external-link">
