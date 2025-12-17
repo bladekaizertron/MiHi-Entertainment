@@ -60,6 +60,18 @@
             font-style: normal !important;
         }
         
+        /* Add padding-top to body to account for fixed header */
+        body {
+            padding-top: 80px !important;
+        }
+        
+        /* Desktop: larger header height */
+        @media (min-width: 1024px) {
+            body {
+                padding-top: 96px !important;
+            }
+        }
+        
         /* Protect mobile menu z-index */
         #mobile-menu-overlay {
             z-index: 40 !important;
