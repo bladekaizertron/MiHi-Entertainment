@@ -882,12 +882,14 @@
         }
 
         .cards-text-primary {
+            font-family: 'AzoSans', sans-serif;
             color: #f9f9f9;
             line-height: 1.8;
             font-size: 1.0625rem;
         }
 
         .cards-text-secondary {
+            font-family: 'AzoSans', sans-serif;
             color: #f6f8fd;
             line-height: 1.8;
             font-size: 1.0625rem;
@@ -895,6 +897,7 @@
         }
 
         .cards-pricing-btn {
+            font-family: 'AzoSans', sans-serif;
             position: relative;
             display: inline-block;
             padding: 1.5rem 3rem;
@@ -1377,13 +1380,254 @@
             }
         }
 
+        /* Enclosed Booth Section Styles */
+        .enclosed-section {
+            background: linear-gradient(135deg, #1f1f1f 0%, #1f1f1f 20%, #1f1f1f 40%, #1f1f1f 60%, #1f1f1f 80%, #1f1f1f 100%);
+            position: relative;
+            overflow: visible;
+            min-height: 400px;
+        }
+
+        .enclosed-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                radial-gradient(circle at 20% 30%, rgba(0, 80, 255, 0.15) 0%, rgba(0, 80, 255, 0.08) 40%, transparent 70%),
+                radial-gradient(circle at 80% 70%, rgba(102, 51, 153, 0.12) 0%, rgba(102, 51, 153, 0.06) 40%, transparent 70%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .enclosed-section::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image:
+                linear-gradient(rgba(0, 80, 255, 0.08) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 80, 255, 0.08) 1px, transparent 1px);
+            background-size: 50px 50px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @media (max-width: 768px) {
+            .enclosed-section {
+                overflow: visible;
+                min-height: auto;
+            }
+        }
+
+        .enclosed-content {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            min-height: 200px;
+        }
+
+        @media (max-width: 768px) {
+            .enclosed-content {
+                min-height: auto;
+            }
+        }
+
+        .enclosed-heading {
+            font-family: 'AzoSansUber', sans-serif;
+            font-weight: 700;
+            font-size: 3.5rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            background: linear-gradient(135deg, #18F1E1 0%, #18F1E1 50%, #18F1E1 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.2;
+        }
+
+        @media (max-width: 768px) {
+            .enclosed-heading {
+                font-size: 1.875rem;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .enclosed-heading {
+                font-size: 1.5rem;
+            }
+        }
+
+        .enclosed-text-primary {
+            color: #ffffff;
+            line-height: 1.8;
+            font-size: 1.0625rem;
+        }
+
+        .enclosed-pricing-btn {
+            position: relative;
+            display: inline-block;
+            padding: 1.5rem 3rem;
+            border: 2px solid #FF4F4F;
+            color: #ffffff;
+            background: linear-gradient(135deg, #FF4F4F 0%, #FF4F4F 100%);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            font-size: 1rem;
+            text-decoration: none;
+            -webkit-font-smoothing: antialiased;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .enclosed-pricing-btn:hover {
+            border: none;
+            color: #ffffff;
+            box-shadow: 0 6px 30px rgba(0, 0, 0, 0.4);
+            transform: translateY(-2px);
+            background: linear-gradient(135deg, #FF4F4F 0%, #FF4F4F 100%);
+        }
+
+        .enclosed-pricing-btn .line-1 {
+            content: "";
+            display: block;
+            position: absolute;
+            width: 2px;
+            background-color: #FF4F4F;
+            left: 0;
+            bottom: 0;
+            height: 100%;
+        }
+
+        .enclosed-pricing-btn .line-2 {
+            content: "";
+            display: block;
+            position: absolute;
+            height: 2px;
+            background-color: #FF4F4F;
+            left: 0;
+            top: 0;
+            width: 0;
+        }
+
+        .enclosed-pricing-btn .line-3 {
+            content: "";
+            display: block;
+            position: absolute;
+            width: 2px;
+            background-color: #FF4F4F;
+            right: 0;
+            top: 0;
+            height: 100%;
+        }
+
+        .enclosed-pricing-btn .line-4 {
+            content: "";
+            display: block;
+            position: absolute;
+            height: 2px;
+            background-color: #FF4F4F;
+            right: 0;
+            bottom: 0;
+            width: 0;
+        }
+
+        .enclosed-pricing-btn:hover .line-1 {
+            animation: move1 1500ms infinite ease;
+        }
+
+        .enclosed-pricing-btn:hover .line-2 {
+            animation: move2 1500ms infinite ease;
+        }
+
+        .enclosed-pricing-btn:hover .line-3 {
+            animation: move3 1500ms infinite ease;
+        }
+
+        .enclosed-pricing-btn:hover .line-4 {
+            animation: move4 1500ms infinite ease;
+        }
+
+        .enclosed-content-wrapper {
+            visibility: visible;
+        }
+
+        @media (max-width: 768px) {
+            .enclosed-section .enclosed-content-wrapper {
+                opacity: 1 !important;
+                visibility: visible !important;
+            }
+
+            .enclosed-section .animate-fade-in-up {
+                opacity: 1 !important;
+                animation: fadeInUp 0.5s ease-out forwards;
+            }
+
+            .enclosed-section .enclosed-heading,
+            .enclosed-section .enclosed-text-primary,
+            .enclosed-section .enclosed-pricing-btn {
+                opacity: 1 !important;
+                visibility: visible !important;
+            }
+        }
+
         /* Inverted Border Radius Card Styles */
         .inverted-card-section {
             padding: 2rem 0;
             width: 100%;
-            max-width: 76.5rem;
+            max-width: 100%;
             margin: 0 auto;
             color: #111;
+        }
+
+        /* Two Column Layout for VW Bus & Enclosed Booth */
+        .vwbus-section .grid {
+            align-items: stretch;
+        }
+
+        .vwbus-content-wrapper,
+        .enclosed-content-wrapper {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .vwbus-content-wrapper .inverted-card-section,
+        .enclosed-content-wrapper .inverted-card-section {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            margin-top: auto;
+        }
+
+        .vwbus-content-wrapper .inverted-card-container,
+        .enclosed-content-wrapper .inverted-card-container {
+            flex: 1;
+            display: flex;
+            align-items: stretch;
+        }
+
+        .vwbus-content-wrapper .inverted-card,
+        .enclosed-content-wrapper .inverted-card {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        @media (max-width: 768px) {
+            .vwbus-section .grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .vwbus-content-wrapper,
+            .enclosed-content-wrapper {
+                height: auto;
+            }
         }
 
         .inverted-card-container {
@@ -1804,43 +2048,57 @@
             }
         }
 
-        /* Blog Slider Styles */
+        /* Blog Slider Styles - Horizontal Auto-Scrolling Gallery */
         .blog-slider {
-            width: 95%;
+            width: 100%;
             position: relative;
-            max-width: 800px;
-            margin: 50px auto;
-            background: #fff;
-            box-shadow: 0px 14px 80px rgba(34, 35, 58, 0.2);
-            padding: 25px;
-            border-radius: 25px;
-            height: 400px;
+            max-width: 100%;
+            margin: 50px auto 2px auto;
+            background: transparent;
+            padding: 25px 0;
+            border-radius: 0;
+            height: auto;
+            min-height: 500px;
             transition: all .3s;
-            overflow: visible;
+            overflow: hidden;
         }
 
         .blog-slider .swiper-wrapper {
-            height: 100%;
+            height: auto;
+            align-items: stretch;
         }
 
         .blog-slider .swiper-slide {
-            height: 100%;
+            height: auto;
             overflow: visible;
+            display: flex;
+            width: auto;
+            max-width: 450px;
+        }
+
+        @media screen and (max-width: 768px) {
+            .blog-slider .swiper-slide {
+                max-width: 350px;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .blog-slider .swiper-slide {
+                max-width: 300px;
+            }
         }
 
         @media screen and (max-width: 992px) {
             .blog-slider {
-                max-width: 680px;
-                height: 400px;
+                min-height: 450px;
             }
         }
 
         @media screen and (max-width: 768px) {
             .blog-slider {
                 min-height: auto;
-                height: auto;
-                margin: 30px auto;
-                padding: 20px 15px;
+                margin: 30px auto 2px auto;
+                padding: 20px 0;
                 width: 100%;
                 max-width: 100%;
             }
@@ -1848,73 +2106,61 @@
 
         @media screen and (max-width: 576px) {
             .blog-slider {
-                margin: 20px auto;
-                padding: 15px 10px;
-                border-radius: 20px;
-            }
-        }
-
-        @media screen and (max-height: 500px) and (min-width: 992px) {
-            .blog-slider {
-                height: 350px;
+                margin: 20px auto 2px auto;
+                padding: 15px 0;
             }
         }
 
         .blog-slider__item {
             display: flex;
+            flex-direction: column;
             align-items: center;
             width: 100%;
             height: 100%;
+            background: #fff;
+            box-shadow: 0px 14px 80px rgba(34, 35, 58, 0.2);
+            border-radius: 25px;
+            padding: 25px;
+            margin: 0 10px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .blog-slider__item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0px 20px 100px rgba(34, 35, 58, 0.3);
         }
 
         @media screen and (max-width: 768px) {
             .blog-slider__item {
-                flex-direction: column;
-                align-items: center;
-                gap: 20px;
+                padding: 20px 15px;
+                margin: 0 5px;
             }
         }
 
-        .blog-slider__item.swiper-slide-active .blog-slider__img img {
+        .blog-slider__item .blog-slider__img img {
             opacity: 1;
-            transition-delay: .3s;
         }
 
-        .blog-slider__item.swiper-slide-active .blog-slider__content>* {
+        .blog-slider__item .blog-slider__content>* {
             opacity: 1;
             transform: none;
         }
 
-        .blog-slider__item.swiper-slide-active .blog-slider__content>*:nth-child(1) {
-            transition-delay: 0.3s;
-        }
-
-        .blog-slider__item.swiper-slide-active .blog-slider__content>*:nth-child(2) {
-            transition-delay: 0.4s;
-        }
-
-        .blog-slider__item.swiper-slide-active .blog-slider__content>*:nth-child(3) {
-            transition-delay: 0.5s;
-        }
-
-        .blog-slider__item.swiper-slide-active .blog-slider__content>*:nth-child(4) {
-            transition-delay: 0.6s;
-        }
-
         .blog-slider__img {
-            width: 300px;
+            width: 100%;
             flex-shrink: 0;
             height: 300px;
             background: linear-gradient(135deg, #18F1E1 0%, #18F1E1 100%);
             box-shadow: 4px 13px 30px 1px rgba(3, 3, 3, 0.2);
             border-radius: 20px;
-            transform: translateX(-80px);
-            overflow: visible;
+            transform: none;
+            overflow: hidden;
             position: relative;
             display: flex;
             align-items: center;
             justify-content: center;
             padding: 1.5rem;
+            margin-bottom: 20px;
         }
 
         .blog-slider__img::after {
@@ -1924,7 +2170,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, #18F1E1 0%, #18F1E1 100%);
+            background: linear-gradient(135deg, #FF4F4F 0%, #FF4F4F 100%);
             border-radius: 20px;
             opacity: 0.8;
             z-index: 0;
@@ -1932,12 +2178,12 @@
 
         .blog-slider__img img {
             width: 100%;
-            height: auto;
+            height: 100%;
             max-width: 100%;
             max-height: 100%;
             object-fit: contain;
             display: block;
-            opacity: 0;
+            opacity: 1;
             border-radius: 20px;
             transition: all .3s;
             position: relative;
@@ -1946,74 +2192,53 @@
 
         @media screen and (max-width: 768px) {
             .blog-slider__img {
-                transform: none;
-                width: 100%;
-                max-width: 280px;
-                height: 280px;
-                margin: 0 auto;
+                height: 250px;
                 padding: 1rem;
             }
         }
 
         @media screen and (max-width: 576px) {
             .blog-slider__img {
-                width: 100%;
-                max-width: 250px;
-                height: 250px;
+                height: 220px;
                 padding: 0.75rem;
             }
         }
 
         @media screen and (max-width: 480px) {
             .blog-slider__img {
-                max-width: 220px;
-                height: 220px;
+                height: 200px;
                 padding: 0.5rem;
             }
         }
 
-        @media screen and (max-height: 500px) and (min-width: 992px) {
-            .blog-slider__img {
-                height: 270px;
-            }
-        }
-
         .blog-slider__content {
-            padding-right: 25px;
+            padding: 0;
             flex: 1;
             min-width: 0;
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            justify-content: flex-start;
             overflow: visible;
+            text-align: center;
+            width: 100%;
         }
 
         @media screen and (max-width: 768px) {
             .blog-slider__content {
-                margin-top: 0;
-                text-align: center;
-                padding: 0 20px;
-                width: 100%;
-                flex: none;
+                padding: 0;
             }
         }
 
         @media screen and (max-width: 576px) {
             .blog-slider__content {
-                padding: 0 15px;
+                padding: 0;
             }
         }
 
         @media screen and (max-width: 480px) {
             .blog-slider__content {
-                padding: 0 10px;
+                padding: 0;
             }
-        }
-
-        .blog-slider__content>* {
-            opacity: 0;
-            transform: translateY(25px);
-            transition: all .4s;
         }
 
         .blog-slider__code {
@@ -2132,34 +2357,27 @@
         }
 
         .blog-slider__pagination {
-            position: absolute;
+            position: relative;
             z-index: 21;
-            right: 20px;
-            width: 11px !important;
+            width: 100% !important;
             text-align: center;
             left: auto !important;
-            top: 50%;
+            right: auto !important;
+            top: auto !important;
             bottom: auto !important;
-            transform: translateY(-50%);
+            transform: none;
+            margin-top: 30px;
         }
 
         @media screen and (max-width: 768px) {
             .blog-slider__pagination {
-                transform: translateX(-50%);
-                left: 50% !important;
-                top: auto !important;
-                bottom: 15px !important;
-                width: 100% !important;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                right: auto !important;
+                margin-top: 20px;
             }
         }
 
         @media screen and (max-width: 576px) {
             .blog-slider__pagination {
-                bottom: 10px !important;
+                margin-top: 15px;
             }
         }
 
@@ -2194,6 +2412,90 @@
             .blog-slider__pagination .swiper-pagination-bullet-active {
                 height: 11px;
                 width: 30px;
+            }
+        }
+
+        /* Navigation Arrows - Desktop Only */
+        .blog-slider__button-prev,
+        .blog-slider__button-next {
+            display: none;
+        }
+
+        @media screen and (min-width: 1024px) {
+
+            .blog-slider__button-prev,
+            .blog-slider__button-next {
+                display: flex;
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+                width: 50px;
+                height: 50px;
+                background: #ffffff;
+                border-radius: 50%;
+                box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.15);
+                z-index: 10;
+                cursor: pointer;
+                align-items: center;
+                justify-content: center;
+                transition: all 0.3s ease;
+                color: #1f1f1f;
+            }
+
+            .blog-slider__button-prev:hover,
+            .blog-slider__button-next:hover {
+                background: #FF4F4F;
+                color: #ffffff;
+                box-shadow: 0px 6px 30px rgba(255, 79, 79, 0.4);
+                transform: translateY(-50%) scale(1.1);
+            }
+
+            .blog-slider__button-prev {
+                left: 20px;
+            }
+
+            .blog-slider__button-next {
+                right: 20px;
+            }
+
+            .blog-slider__button-prev::after,
+            .blog-slider__button-next::after {
+                font-family: 'Material Symbols Outlined';
+                font-size: 28px;
+                font-weight: 400;
+                font-style: normal;
+                line-height: 1;
+                letter-spacing: normal;
+                text-transform: none;
+                display: inline-block;
+                white-space: nowrap;
+                word-wrap: normal;
+                direction: ltr;
+            }
+
+            .blog-slider__button-prev::after {
+                content: 'chevron_left';
+            }
+
+            .blog-slider__button-next::after {
+                content: 'chevron_right';
+            }
+
+            .blog-slider__button-prev.swiper-button-disabled,
+            .blog-slider__button-next.swiper-button-disabled {
+                opacity: 0.35;
+                cursor: auto;
+                pointer-events: none;
+            }
+        }
+
+        @media screen and (min-width: 1280px) {
+            .blog-slider__button-prev {
+                left: 30px;
+            }
+
+            .blog-slider__button-next {
+                right: 30px;
             }
         }
     </style>
@@ -2326,7 +2628,7 @@
     </section>
 
     <!-- Cards Section -->
-    <section class="cards-section py-8 md:py-12" id="cards-section">
+    <section class="cards-section py-8 md:py-12" id="cards-section" style="overflow-x: hidden;">
         <div class="cards-content container mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center max-w-4xl mx-auto animate-fade-in-up">
                 <h2 class="cards-heading mb-6">
@@ -2355,20 +2657,26 @@
                     </a>
                 </div>
             </div>
+            <br>
+            <br>
+            <br>
 
-            <!-- Premium Booths Slider -->
-            <div class="blog-slider swiper">
-                <div class="blog-slider__wrp swiper-wrapper">
+            <!-- Premium Booths Auto-Scrolling Gallery -->
+            <div class="blog-slider swiper my-2">
+                <div class="blog-slider__wrp swiper-wrapper" style="display: flex;">
                     <div class="blog-slider__item swiper-slide">
                         <div class="blog-slider__img">
                             <img src="../assets/images/galleries/ourbooths/blog1.jpeg" alt="Premium Photo Booth 1">
                         </div>
                         <div class="blog-slider__content">
-                            <div class="blog-slider__title">Vintage Photo Booth</div>
-                            <div class="blog-slider__text">This booth may look old but don't let its outer shell fool
+                            <div class="blog-slider__title" style="font-family: 'AzoSans', sans-serif;">Vintage Photo
+                                Booth</div>
+                            <div class="blog-slider__text" style="font-family: 'AzoSans', sans-serif;">This booth may
+                                look old but don't let its outer shell fool
                                 you. It is stuffed with professional photo booth components for your vintage and
                                 Gatsby-themed events.</div>
-                            <a href="./vintage-booth.html" class="blog-slider__button">LEARN MORE</a>
+                            <a href="./vintage-booth.html" class="blog-slider__button"
+                                style="font-family: 'AzoSans', sans-serif;">LEARN MORE</a>
                         </div>
                     </div>
                     <div class="blog-slider__item swiper-slide">
@@ -2376,11 +2684,14 @@
                             <img src="../assets/images/galleries/ourbooths/blog2.jpg" alt="Premium Photo Booth 2">
                         </div>
                         <div class="blog-slider__content">
-                            <div class="blog-slider__title">Tigerwood Photo Booth</div>
-                            <div class="blog-slider__text">This booth is made of beautiful tiger-striped grain wood.
+                            <div class="blog-slider__title" style="font-family: 'AzoSans', sans-serif;">Tigerwood Photo
+                                Booth</div>
+                            <div class="blog-slider__text" style="font-family: 'AzoSans', sans-serif;">This booth is
+                                made of beautiful tiger-striped grain wood.
                                 Perfect if you can’t decide between vintage and modern and want an in-between that goes
                                 with any type of decor.</div>
-                            <a href="./tigerwood-photo-booth.html" class="blog-slider__button">LEARN MORE</a>
+                            <a href="./tigerwood-photo-booth.html" class="blog-slider__button"
+                                style="font-family: 'AzoSans', sans-serif;">LEARN MORE</a>
                         </div>
                     </div>
                     <div class="blog-slider__item swiper-slide">
@@ -2388,11 +2699,14 @@
                             <img src="../assets/images/galleries/ourbooths/blog3.jpeg" alt="Premium Photo Booth 3">
                         </div>
                         <div class="blog-slider__content">
-                            <div class="blog-slider__title">Rustic Photo Booth</div>
-                            <div class="blog-slider__text">Fit perfectly in Colorado's rustic and barn wood style
+                            <div class="blog-slider__title" style="font-family: 'AzoSans', sans-serif;">Rustic Photo
+                                Booth</div>
+                            <div class="blog-slider__text" style="font-family: 'AzoSans', sans-serif;">Fit perfectly in
+                                Colorado's rustic and barn wood style
                                 weddings, our rustic booth is loved by brides and their guests alike for its
                                 industrial-chic charm.</div>
-                            <a href="./rustic-photo-booth.html" class="blog-slider__button">LEARN MORE</a>
+                            <a href="./rustic-photo-booth.html" class="blog-slider__button"
+                                style="font-family: 'AzoSans', sans-serif;">LEARN MORE</a>
                         </div>
                     </div>
                     <div class="blog-slider__item swiper-slide">
@@ -2400,11 +2714,14 @@
                             <img src="../assets/images/galleries/ourbooths/blog4.jpeg" alt="Premium Photo Booth 4">
                         </div>
                         <div class="blog-slider__content">
-                            <div class="blog-slider__title">Guitar Photo Booth</div>
-                            <div class="blog-slider__text">Turn your party up with our coolest booth for rock-n-roll
+                            <div class="blog-slider__title" style="font-family: 'AzoSans', sans-serif;">Guitar Photo
+                                Booth</div>
+                            <div class="blog-slider__text" style="font-family: 'AzoSans', sans-serif;">Turn your party
+                                up with our coolest booth for rock-n-roll
                                 events or just something unique. The printer is in an amp! Perfect for any music theme.
                             </div>
-                            <a href="./guitar-photo-booth.html" class="blog-slider__button">LEARN MORE</a>
+                            <a href="./guitar-photo-booth.html" class="blog-slider__button"
+                                style="font-family: 'AzoSans', sans-serif;">LEARN MORE</a>
                         </div>
                     </div>
                     <div class="blog-slider__item swiper-slide">
@@ -2412,22 +2729,14 @@
                             <img src="../assets/images/galleries/ourbooths/blog5.jpg" alt="Premium Photo Booth 5">
                         </div>
                         <div class="blog-slider__content">
-                            <div class="blog-slider__title">Groovy Photo Booth</div>
-                            <div class="blog-slider__text">Whether you're going for the 50's, 60's, 70’s, 80’s or 90’s
+                            <div class="blog-slider__title" style="font-family: 'AzoSans', sans-serif;">Groovy Photo
+                                Booth</div>
+                            <div class="blog-slider__text" style="font-family: 'AzoSans', sans-serif;">Whether you're
+                                going for the 50's, 60's, 70’s, 80’s or 90’s
                                 our retro photo booth fits perfectly with throw back parties celebrating any of these
                                 eras!</div>
-                            <a href="./groovy-photo-booth.html" class="blog-slider__button">LEARN MORE</a>
-                        </div>
-                    </div>
-                    <div class="blog-slider__item swiper-slide">
-                        <div class="blog-slider__img">
-                            <img src="../assets/images/galleries/ourbooths/blog6.jpg" alt="Premium Photo Booth 6">
-                        </div>
-                        <div class="blog-slider__content">
-                            <div class="blog-slider__title">Enclosed Photo Booth</div>
-                            <div class="blog-slider__text">The Enclosed Photo Booth provides a private photo experience
-                                where guests can let loose without the spotlight on them.</div>
-                            <a href="./products/enclosed-booth.html" class="blog-slider__button">LEARN MORE</a>
+                            <a href="./groovy-photo-booth.html" class="blog-slider__button"
+                                style="font-family: 'AzoSans', sans-serif;">LEARN MORE</a>
                         </div>
                     </div>
                     <div class="blog-slider__item swiper-slide">
@@ -2435,14 +2744,20 @@
                             <img src="../assets/images/galleries/ourbooths/blog7.jpg" alt="Premium Photo Booth 7">
                         </div>
                         <div class="blog-slider__content">
-                            <div class="blog-slider__title">Reflection Photo Booth</div>
-                            <div class="blog-slider__text">Our Reflection Booth includes a large screen display right on
+                            <div class="blog-slider__title" style="font-family: 'AzoSans', sans-serif;">Reflection Photo
+                                Booth</div>
+                            <div class="blog-slider__text" style="font-family: 'AzoSans', sans-serif;">Our Reflection
+                                Booth includes a large screen display right on
                                 the booth leg! Show off your brand, display photos from your event, and more.</div>
-                            <a href="./contact-us.html" class="blog-slider__button">LEARN MORE</a>
+                            <a href="./contact-us.html" class="blog-slider__button"
+                                style="font-family: 'AzoSans', sans-serif;">LEARN MORE</a>
                         </div>
                     </div>
                 </div>
                 <div class="blog-slider__pagination"></div>
+                <!-- Navigation arrows - Desktop only -->
+                <div class="blog-slider__button-prev swiper-button-prev"></div>
+                <div class="blog-slider__button-next swiper-button-next"></div>
             </div>
         </div>
     </section>
@@ -2519,58 +2834,134 @@
         </div>
     </section>
 
-    <!-- VW Bus Section -->
+    <!-- VW Bus & Enclosed Booth Section -->
     <section class="vwbus-section py-8 md:py-12" id="vwbus-section">
         <div class="vwbus-content container mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center max-w-4xl mx-auto animate-fade-in-up vwbus-content-wrapper">
-                <h2 class="vwbus-heading mb-6">
-                    VW BUS PHOTO BOOTH
-                </h2>
+            <!-- Two Column Layout -->
+            <div class="grid md:grid-cols-2 gap-8 lg:gap-12 items-start">
+                <!-- Left Column - VW Bus -->
+                <div class="animate-fade-in-up vwbus-content-wrapper flex flex-col h-full">
+                    <div class="text-center mb-6">
+                        <h2 class="vwbus-heading mb-6">
+                            VW BUS PHOTO BOOTH
+                        </h2>
 
-                <div class="space-y-4 mb-8">
-                    <p class="vwbus-text-primary">
-                        Want to take your photo booth game to the next level? Well, we've brought it! Get the chance to
-                        sit inside an old-fashioned VW bus to take some amazing and unforgettable pictures.
-                    </p>
-                </div>
+                        <div class="space-y-4 mb-8">
+                            <p class="vwbus-text-primary">
+                                Want to take your photo booth game to the next level? Well, we've brought it! Get the
+                                chance to
+                                sit inside an old-fashioned VW bus to take some amazing and unforgettable pictures.
+                            </p>
+                            <p class="vwbus-text-primary">
+                                Our VW Bus booth is an additional cost on all of our basic and premium packages.
+                            </p>
+                        </div>
 
-                <div class="mt-8 animate-fade-in-up animate-delay-300">
-                    <a href="./contact-us.html" class="vwbus-pricing-btn"
-                        aria-label="Get pricing information for VW bus photo booth">
-                        Get Pricing Information
-                        <span class="line-1"></span>
-                        <span class="line-2"></span>
-                        <span class="line-3"></span>
-                        <span class="line-4"></span>
-                    </a>
-                </div>
-            </div>
-        </div>
+                        <div class="mt-8 animate-fade-in-up animate-delay-300">
+                            <a href="./contact-us.html" class="vwbus-pricing-btn"
+                                aria-label="Get pricing information for VW bus photo booth">
+                                Get Pricing Information
+                                <span class="line-1"></span>
+                                <span class="line-2"></span>
+                                <span class="line-3"></span>
+                                <span class="line-4"></span>
+                            </a>
+                        </div>
+                    </div>
 
-        <!-- Inverted Border Radius Card -->
-        <div class="inverted-card-section">
-            <div class="inverted-card-container">
-                <div class="inverted-card">
-                    <div class="inverted-card-inner">
-                        <div class="inverted-card-box">
-                            <div class="inverted-card-imgBox">
-                                <img src="../assets/images/galleries/ourbooths/vwbus.jpg" alt="VW Bus Photo Booth">
-                            </div>
-                            <div class="inverted-card-icon">
-                                <a href="./photo-booth-bus.html" class="inverted-card-iconBox">
-                                    <span class="material-symbols-outlined">arrow_outward</span>
-                                </a>
+                    <!-- Inverted Border Radius Card -->
+                    <div class="inverted-card-section">
+                        <div class="inverted-card-container">
+                            <div class="inverted-card">
+                                <div class="inverted-card-inner">
+                                    <div class="inverted-card-box">
+                                        <div class="inverted-card-imgBox">
+                                            <img src="../assets/images/galleries/ourbooths/vwbus.jpg"
+                                                alt="VW Bus Photo Booth">
+                                        </div>
+                                        <div class="inverted-card-icon">
+                                            <a href="./photo-booth-bus.html" class="inverted-card-iconBox">
+                                                <span class="material-symbols-outlined">arrow_outward</span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="inverted-card-content">
+                                    <h3>VW Bus Photo Booth</h3>
+                                    <p>Our VW Bus Booth will steal the show at your event as your guests climb inside
+                                        for some
+                                        photos on the go! Our VW Bus booth is an additional cost on all of our basic and
+                                        premium
+                                        packages.</p>
+                                    <ul>
+                                        <li class="tag-unique">Unique</li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="inverted-card-content">
-                        <h3>VW Bus Photo Booth</h3>
-                        <p>Our VW Bus Booth will steal the show at your event as your guests climb inside for some
-                            photos on the go! Our VW Bus booth is an additional cost on all of our basic and premium
-                            packages.</p>
-                        <ul>
-                            <li class="tag-unique">Unique</li>
-                        </ul>
+                </div>
+
+                <!-- Right Column - Enclosed Booth -->
+                <div class="animate-fade-in-up enclosed-content-wrapper flex flex-col h-full">
+                    <div class="text-center mb-6">
+                        <h2 class="enclosed-heading mb-6">
+                            ENCLOSED PHOTO BOOTH
+                        </h2>
+
+                        <div class="space-y-4 mb-8">
+                            <p class="enclosed-text-primary">
+                                The Enclosed Photo Booth provides a private photo experience where guests can let loose
+                                without
+                                the spotlight on them.
+                            </p>
+                            <p class="enclosed-text-primary">
+                                Our Enclosed Photo Booth is an additional cost on all of our basic and premium packages.
+                            </p>
+                        </div>
+
+                        <div class="mt-8 animate-fade-in-up animate-delay-300">
+                            <a href="./products/enclosed-booth.html" class="enclosed-pricing-btn"
+                                aria-label="Get pricing information for enclosed photo booth">
+                                Get Pricing Information
+                                <span class="line-1"></span>
+                                <span class="line-2"></span>
+                                <span class="line-3"></span>
+                                <span class="line-4"></span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Inverted Border Radius Card -->
+                    <div class="inverted-card-section">
+                        <div class="inverted-card-container">
+                            <div class="inverted-card">
+                                <div class="inverted-card-inner">
+                                    <div class="inverted-card-box">
+                                        <div class="inverted-card-imgBox">
+                                            <img src="../assets/images/galleries/ourbooths/blog6.jpg"
+                                                alt="Enclosed Photo Booth">
+                                        </div>
+                                        <div class="inverted-card-icon">
+                                            <a href="./products/enclosed-booth.html" class="inverted-card-iconBox">
+                                                <span class="material-symbols-outlined">arrow_outward</span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="inverted-card-content">
+                                    <h3>Enclosed Photo Booth</h3>
+                                    <p>Our Enclosed Photo Booth provides a private photo experience where guests can let
+                                        loose
+                                        without the spotlight on them. This booth is an additional cost on all of our
+                                        basic and
+                                        premium packages.</p>
+                                    <ul>
+                                        <li class="tag-unique">Unique</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -2581,17 +2972,63 @@
     <script src="../assets/components/footer.js"></script>
 
     <script>
-        // Initialize Blog Slider
+        // Initialize Premium Booths Auto-Scrolling Gallery
         var swiper = new Swiper('.blog-slider', {
+            slidesPerView: 'auto',
             spaceBetween: 30,
-            effect: 'fade',
             loop: true,
-            mousewheel: {
-                invert: false,
+            loopAdditionalSlides: 3,
+            loopedSlides: 4,
+            loopPreventsSliding: false,
+            autoplay: {
+                delay: 3000,
+                disableOnInteraction: false,
+                pauseOnMouseEnter: true,
+            },
+            speed: 1000,
+            freeMode: false,
+            grabCursor: true,
+            watchSlidesProgress: true,
+            breakpoints: {
+                320: {
+                    slidesPerView: 1,
+                    spaceBetween: 20,
+                    loopedSlides: 3,
+                    loopAdditionalSlides: 2,
+                },
+                640: {
+                    slidesPerView: 1.2,
+                    spaceBetween: 25,
+                    loopedSlides: 3,
+                    loopAdditionalSlides: 2,
+                },
+                768: {
+                    slidesPerView: 1.5,
+                    spaceBetween: 30,
+                    loopedSlides: 4,
+                    loopAdditionalSlides: 3,
+                },
+                1024: {
+                    slidesPerView: 2,
+                    spaceBetween: 30,
+                    loopedSlides: 4,
+                    loopAdditionalSlides: 3,
+                },
+                1280: {
+                    slidesPerView: 2.5,
+                    spaceBetween: 40,
+                    loopedSlides: 5,
+                    loopAdditionalSlides: 4,
+                }
             },
             pagination: {
                 el: '.blog-slider__pagination',
                 clickable: true,
+                dynamicBullets: true,
+            },
+            navigation: {
+                nextEl: '.blog-slider__button-next',
+                prevEl: '.blog-slider__button-prev',
             }
         });
     </script>
