@@ -151,6 +151,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&family=Montserrat:wght@500;600;700&display=swap"
         rel="stylesheet">
+    <link rel="preload" as="image" href="assets/images/backdrops/hero.jpeg">
     <style>
         @font-face {
             font-family: 'Azo Sans';
@@ -850,6 +851,31 @@
             height: 100%;
             object-fit: cover;
             display: block;
+            transition: opacity 0.3s ease;
+        }
+
+        .gallery-item img[data-src] {
+            opacity: 0;
+        }
+
+        .gallery-item img.loaded {
+            opacity: 1;
+        }
+
+        .gallery-item img.loading {
+            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+            background-size: 200% 100%;
+            animation: loading 1.5s infinite;
+        }
+
+        @keyframes loading {
+            0% {
+                background-position: 200% 0;
+            }
+
+            100% {
+                background-position: -200% 0;
+            }
         }
 
         .gallery-item-label {
@@ -1220,7 +1246,7 @@
             { src: 'assets/images/backdrops/img11.png', category: 'indoor', label: 'Printed Pink Sequin' },
             { src: 'assets/images/backdrops/img12.png', category: 'outdoor', label: 'Red/White Mermaid Sequin' },
             { src: 'assets/images/backdrops/img13.png', category: 'indoor', label: 'Gold/White Mermaid Sequin' },
-            { src: 'assets/images/backdrops/img14.png', category: 'outdoor', label: 'Silver/White Mermaid Sequin' },
+            { src: 'assets/images/backdrops/img14.jpg', category: 'outdoor', label: 'Silver/White Mermaid Sequin' },
             { src: 'assets/images/backdrops/img15.png', category: 'indoor', label: 'Solid White' },
             { src: 'assets/images/backdrops/img16.png', category: 'outdoor', label: 'Solid Black' },
             { src: 'assets/images/backdrops/img17.png', category: 'indoor', label: 'Solid Pink' },
@@ -1273,7 +1299,6 @@
             { src: 'assets/images/backdrops/img65.png', category: 'outdoor', label: 'White Brick Twinkle' },
             { src: 'assets/images/backdrops/img66.png', category: 'indoor', label: 'Water Color' },
             { src: 'assets/images/backdrops/img67.png', category: 'outdoor', label: 'Vintage Cream' },
-            { src: 'assets/images/backdrops/img67.png', category: 'indoor', label: 'Vintage Cream' },
             { src: 'assets/images/backdrops/img68.png', category: 'outdoor', label: 'Tropical Leaf: 10 ft' },
             { src: 'assets/images/backdrops/img69.png', category: 'indoor', label: 'Spooky Woods' },
             { src: 'assets/images/backdrops/img71.png', category: 'indoor', label: 'String-Lit Sky' },
@@ -1289,7 +1314,7 @@
             { src: 'assets/images/backdrops/img81.png', category: 'indoor', label: 'Emerald Waves' },
             { src: 'assets/images/backdrops/img82.png', category: 'outdoor', label: 'Great Outdoors' },
             { src: 'assets/images/backdrops/img83.png', category: 'indoor', label: 'Friday Night Lights' },
-            { src: 'assets/images/backdrops/img84.png', category: 'outdoor', label: 'Chirstmas in the City' },
+            { src: 'assets/images/backdrops/img84.png', category: 'indoor', label: 'Christmas in the City' },
             { src: 'assets/images/backdrops/img85.png', category: 'indoor', label: 'Champagne Glitter' },
             { src: 'assets/images/backdrops/img86.png', category: 'outdoor', label: 'Boho Wallpaper' },
             { src: 'assets/images/backdrops/img87.png', category: 'indoor', label: 'Blue Minimalist Mountain' },
@@ -1566,7 +1591,7 @@
             }
 
             item.innerHTML = `
-                <img src="${image.src}" alt="${image.label || 'Backdrop ' + image.src.split('/').pop()}" loading="lazy">
+                <img data-src="${image.src}" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E" alt="${image.label || 'Backdrop ' + image.src.split('/').pop()}" class="loading">
                 ${labelHTML}
             `;
 
@@ -1648,11 +1673,87 @@
                 const item = createGalleryItem(image, index, filteredImages);
                 gallery.appendChild(item);
             });
+
+            // Setup lazy loading for newly rendered images
+            setTimeout(() => {
+                setupLazyLoading();
+            }, 0);
+        }
+
+        // Lazy loading with Intersection Observer
+        function setupLazyLoading() {
+            const lazyImages = document.querySelectorAll('img[data-src]');
+
+            if ('IntersectionObserver' in window) {
+                const imageObserver = new IntersectionObserver((entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const img = entry.target;
+                            const dataSrc = img.getAttribute('data-src');
+
+                            if (dataSrc) {
+                                // Create a new image to preload
+                                const imageLoader = new Image();
+                                imageLoader.onload = function () {
+                                    img.src = dataSrc;
+                                    img.classList.remove('loading');
+                                    img.classList.add('loaded');
+                                    img.removeAttribute('data-src');
+                                };
+                                imageLoader.onerror = function () {
+                                    img.classList.remove('loading');
+                                    img.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="400"%3E%3Crect fill="%23f0f0f0" width="400" height="400"/%3E%3Ctext x="50%25" y="50%25" text-anchor="middle" dy=".3em" fill="%23999" font-family="Arial" font-size="14"%3EImage not found%3C/text%3E%3C/svg%3E';
+                                };
+                                imageLoader.src = dataSrc;
+                            }
+
+                            observer.unobserve(img);
+                        }
+                    });
+                }, {
+                    rootMargin: '50px' // Start loading 50px before image enters viewport
+                });
+
+                lazyImages.forEach((img, index) => {
+                    // Load first 6 images immediately (above the fold)
+                    if (index < 6) {
+                        const dataSrc = img.getAttribute('data-src');
+                        if (dataSrc) {
+                            const imageLoader = new Image();
+                            imageLoader.onload = function () {
+                                img.src = dataSrc;
+                                img.classList.remove('loading');
+                                img.classList.add('loaded');
+                                img.removeAttribute('data-src');
+                            };
+                            imageLoader.onerror = function () {
+                                img.classList.remove('loading');
+                                img.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="400"%3E%3Crect fill="%23f0f0f0" width="400" height="400"/%3E%3Ctext x="50%25" y="50%25" text-anchor="middle" dy=".3em" fill="%23999" font-family="Arial" font-size="14"%3EImage not found%3C/text%3E%3C/svg%3E';
+                            };
+                            imageLoader.src = dataSrc;
+                        }
+                    } else {
+                        imageObserver.observe(img);
+                    }
+                });
+            } else {
+                // Fallback for browsers without Intersection Observer
+                lazyImages.forEach(img => {
+                    const dataSrc = img.getAttribute('data-src');
+                    if (dataSrc) {
+                        img.src = dataSrc;
+                        img.classList.remove('loading');
+                        img.classList.add('loaded');
+                        img.removeAttribute('data-src');
+                    }
+                });
+            }
         }
 
         // Filter button functionality and lightbox event listeners
         document.addEventListener('DOMContentLoaded', function () {
             renderGallery('all');
+            setupLazyLoading();
 
             // Scroll to active button on mobile if needed
             if (window.innerWidth <= 768) {
