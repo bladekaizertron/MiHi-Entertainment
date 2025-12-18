@@ -140,8 +140,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 <div class="flex flex-col h-full">
                     <!-- Author Info -->
                     <div class="flex items-center mb-4">
-                        <div class="w-12 h-12 bg-[#FF4F4F] rounded-full flex items-center justify-center flex-shrink-0 shadow-md">
-                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <div class="w-12 h-12 bg-[#18F1E1] rounded-full flex items-center justify-center flex-shrink-0 shadow-md">
+                            <svg class="w-6 h-6 text-[#1F1F1F]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
                             </svg>
                         </div>
