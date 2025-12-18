@@ -700,28 +700,33 @@
         }
 
         .filter-button {
-            font-family: 'Azo Sans', sans-serif;
-            font-size: 1rem;
-            font-weight: 600;
-            padding: 0.875rem 2.5rem;
-            border: 2px solid #1F1F1F;
-            background: #FFFFFF;
-            color: #1F1F1F;
+            font-family: 'Azo Sans Uber', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 400;
+            padding: 1.15rem 3.25rem;
+            border: 2px solid #FF4F4F;
+            background: #FF4F4F;
+            color: #FFFFFF;
             cursor: pointer;
             transition: all 0.3s ease;
             text-transform: uppercase;
             letter-spacing: 0.05em;
-            border-radius: 4px;
+            border-radius: 9999px;
             white-space: nowrap;
-            min-height: 44px;
+            min-height: 60px;
             touch-action: manipulation;
+            box-shadow:
+                0 10px 20px rgba(0, 0, 0, 0.12),
+                0 2px 0 rgba(0, 0, 0, 0.08),
+                inset 0 1px 0 rgba(255, 255, 255, 0.7);
+            transform: translateY(0);
         }
 
         @media (max-width: 768px) {
             .filter-button {
-                font-size: 0.875rem;
-                padding: 0.75rem 1.5rem;
-                min-height: 44px;
+                font-size: 1.05rem;
+                padding: 1rem 2.25rem;
+                min-height: 54px;
                 flex-shrink: 0;
                 scroll-snap-align: start;
             }
@@ -729,8 +734,8 @@
 
         @media (max-width: 480px) {
             .filter-button {
-                font-size: 0.8rem;
-                padding: 0.7rem 1.25rem;
+                font-size: 1rem;
+                padding: 0.95rem 2rem;
                 min-width: auto;
             }
         }
@@ -738,12 +743,51 @@
         .filter-button:hover {
             background: #18F1E1;
             color: #1F1F1F;
+            border-color: #18F1E1;
+            transform: translateY(-1px);
+            box-shadow:
+                0 14px 26px rgba(0, 0, 0, 0.16),
+                0 2px 0 rgba(0, 0, 0, 0.08),
+                inset 0 1px 0 rgba(255, 255, 255, 0.6);
+        }
+
+        .filter-button:active {
+            transform: translateY(1px);
+            box-shadow:
+                0 6px 14px rgba(0, 0, 0, 0.14),
+                0 1px 0 rgba(0, 0, 0, 0.08),
+                inset 0 1px 0 rgba(255, 255, 255, 0.5);
+        }
+
+        .filter-button:focus-visible {
+            outline: none;
+            box-shadow:
+                0 0 0 4px rgba(24, 241, 225, 0.35),
+                0 10px 20px rgba(0, 0, 0, 0.12),
+                0 2px 0 rgba(0, 0, 0, 0.08),
+                inset 0 1px 0 rgba(255, 255, 255, 0.7);
         }
 
         .filter-button.active {
             background: #FF4F4F;
             color: #FFFFFF;
             border-color: #FF4F4F;
+            box-shadow:
+                0 14px 26px rgba(255, 79, 79, 0.28),
+                0 3px 0 rgba(0, 0, 0, 0.10),
+                inset 0 1px 0 rgba(255, 255, 255, 0.35);
+        }
+
+        /* Ensure hover colors still apply even when the button is active (Indoor is default active) */
+        .filter-button.active:hover {
+            background: #18F1E1;
+            color: #1F1F1F;
+            border-color: #18F1E1;
+            transform: translateY(-1px);
+            box-shadow:
+                0 14px 26px rgba(0, 0, 0, 0.16),
+                0 2px 0 rgba(0, 0, 0, 0.08),
+                inset 0 1px 0 rgba(255, 255, 255, 0.6);
         }
 
         .filter-dropdown {
@@ -1204,25 +1248,9 @@
     <!-- Backdrops Gallery Section -->
     <section class="backdrops-gallery-section" aria-label="Photo booth backdrop gallery">
         <div class="container mx-auto max-w-7xl">
-            <div class="gallery-filters" id="gallery-filters" role="tablist" aria-label="Filter backdrop categories">
-                <button class="filter-button active" data-filter="all" role="tab" aria-selected="true"
-                    aria-controls="backdrops-gallery">All</button>
-                <button class="filter-button" data-filter="indoor" role="tab" aria-selected="false"
-                    aria-controls="backdrops-gallery">Indoor</button>
-                <button class="filter-button" data-filter="outdoor" role="tab" aria-selected="false"
-                    aria-controls="backdrops-gallery">Outdoor</button>
-                <button class="filter-button" data-filter="sequin" role="tab" aria-selected="false"
-                    aria-controls="backdrops-gallery">Sequin</button>
-                <button class="filter-button" data-filter="floral" role="tab" aria-selected="false"
-                    aria-controls="backdrops-gallery">Floral & Nature</button>
-                <button class="filter-button" data-filter="holiday" role="tab" aria-selected="false"
-                    aria-controls="backdrops-gallery">Holiday</button>
-                <select id="additional-filters" class="filter-dropdown" aria-label="Additional filter options">
-                    <option value="">More Filters</option>
-                    <option value="geometric">Geometric</option>
-                    <option value="themed">Themed</option>
-                    <option value="solid">Solid Colors</option>
-                </select>
+            <div class="gallery-filters" id="gallery-filters" aria-label="Filter backdrop categories">
+                <button class="filter-button" data-filter="indoor" type="button" aria-pressed="false">Indoor</button>
+                <button class="filter-button" data-filter="outdoor" type="button" aria-pressed="false">Outdoor</button>
             </div>
             <div class="gallery-grid" id="backdrops-gallery" role="tabpanel" aria-label="Backdrop gallery">
                 <!-- Gallery items will be generated by JavaScript -->
@@ -1664,25 +1692,51 @@
             return 'themed';
         }
 
+        // Outdoor filter whitelist (label match is case/space-insensitive)
+        const OUTDOOR_BACKDROP_LABELS = new Set([
+            'Gold Luxe Sequin',
+            'Red Luxe Sequin',
+            'Peacock Luxe Sequin',
+            'RoseGold Luxe Sequin',
+            'Silver Luxe Sequin',
+            'Pink Luxe Sequin',
+            'Charcoal Luxe Sequin',
+            'Unicorn Luxe Sequin',
+            'RoyalBlue Luxe Sequin',
+            'American Flag',
+            'Beach Scene',
+            'Blue Geometric',
+            'Blue Tan Geometric',
+            'Candy Cane',
+            'Custom Printed Backdrops',
+            'Custom Step and Repeat Backdrops',
+            'Green Chevron',
+            'Grinch Green',
+            'Pastel Retro',
+            'Rockstar Photobooth',
+            'Pink Array',
+            'Yellow and White',
+            'Vintage Cream'
+        ].map(label => (label || '').trim().toLowerCase()));
+
+        function normalizeLabel(label) {
+            return (label || '').trim().toLowerCase();
+        }
+
         // Function to render gallery
-        function renderGallery(filter = 'all') {
+        // Indoor = all images, Outdoor = whitelist above
+        function renderGallery(filter = 'indoor') {
             const gallery = document.getElementById('backdrops-gallery');
             if (!gallery) return;
 
             gallery.innerHTML = '';
 
             let filteredImages;
-            if (filter === 'all') {
-                filteredImages = backdropImages;
-            } else if (filter === 'indoor' || filter === 'outdoor') {
-                // Filter by indoor/outdoor category directly
-                filteredImages = backdropImages.filter(img => img.category === filter);
+            if (filter === 'outdoor') {
+                filteredImages = backdropImages.filter(img => OUTDOOR_BACKDROP_LABELS.has(normalizeLabel(img.label)));
             } else {
-                // Filter by label-based category (sequin, floral, holiday, etc.)
-                filteredImages = backdropImages.filter(img => {
-                    const category = getCategoryFromLabel(img.label);
-                    return category === filter;
-                });
+                // Indoor (and any unknown filter) shows all images
+                filteredImages = backdropImages;
             }
 
             filteredImages.forEach((image, index) => {
@@ -1768,13 +1822,29 @@
 
         // Filter button functionality and lightbox event listeners
         document.addEventListener('DOMContentLoaded', function () {
-            renderGallery('all');
+            const filterButtons = document.querySelectorAll('.filter-button');
+            const galleryFilters = document.querySelector('.gallery-filters');
+            const indoorButton = document.querySelector('.filter-button[data-filter="indoor"]');
+
+            function setActiveButton(buttonEl) {
+                filterButtons.forEach(btn => {
+                    btn.classList.remove('active');
+                    btn.setAttribute('aria-pressed', 'false');
+                });
+                if (buttonEl) {
+                    buttonEl.classList.add('active');
+                    buttonEl.setAttribute('aria-pressed', 'true');
+                }
+            }
+
+            // Default state: Indoor selected (shows all images)
+            setActiveButton(indoorButton);
+            renderGallery('indoor');
             setupLazyLoading();
 
             // Scroll to active button on mobile if needed
             if (window.innerWidth <= 768) {
                 const activeButton = document.querySelector('.filter-button.active');
-                const galleryFilters = document.querySelector('.gallery-filters');
                 if (activeButton && galleryFilters) {
                     setTimeout(() => {
                         activeButton.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
@@ -1782,29 +1852,22 @@
                 }
             }
 
-
-            const filterButtons = document.querySelectorAll('.filter-button');
-            const galleryFilters = document.querySelector('.gallery-filters');
-            const filterDropdown = document.getElementById('additional-filters');
-
             filterButtons.forEach(button => {
                 button.addEventListener('click', function () {
-                    // Remove active class and aria-selected from all buttons
-                    filterButtons.forEach(btn => {
-                        btn.classList.remove('active');
-                        btn.setAttribute('aria-selected', 'false');
-                    });
-                    // Add active class and aria-selected to clicked button
-                    this.classList.add('active');
-                    this.setAttribute('aria-selected', 'true');
-                    // Reset dropdown
-                    if (filterDropdown) {
-                        filterDropdown.value = '';
+                    const isAlreadyActive = this.classList.contains('active');
+
+                    if (isAlreadyActive) {
+                        // Clicking the active filter again resets to Indoor (all images)
+                        setActiveButton(indoorButton);
+                        renderGallery('indoor');
+                    } else {
+                        // Activate clicked button
+                        setActiveButton(this);
+
+                        // Render gallery with filter
+                        const filter = this.getAttribute('data-filter');
+                        renderGallery(filter);
                     }
-                    // Get filter value
-                    const filter = this.getAttribute('data-filter');
-                    // Render gallery with filter
-                    renderGallery(filter);
 
                     // Scroll active button into view on mobile
                     if (window.innerWidth <= 768 && galleryFilters) {
@@ -1823,24 +1886,6 @@
                     }
                 });
             });
-
-            // Dropdown filter functionality
-            if (filterDropdown) {
-                filterDropdown.addEventListener('change', function () {
-                    const filter = this.value;
-                    if (filter) {
-                        // Remove active class from all buttons
-                        filterButtons.forEach(btn => {
-                            btn.classList.remove('active');
-                            btn.setAttribute('aria-selected', 'false');
-                        });
-                        // Render gallery with selected filter
-                        renderGallery(filter);
-                        // Reset dropdown to default
-                        this.value = '';
-                    }
-                });
-            }
 
             // Lightbox event listeners
             const lightboxClose = document.getElementById('lightbox-close');
