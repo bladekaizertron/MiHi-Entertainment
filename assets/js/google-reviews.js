@@ -1,9 +1,9 @@
 // Google Reviews with Sample Data
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const reviewsContainer = document.getElementById('google-reviews');
     const averageRatingElement = document.querySelector('.average-rating');
     const totalRatingsElement = document.querySelector('.total-ratings');
-    
+
     // Sample reviews data with Google review links
     const sampleReviews = [
         {
@@ -48,10 +48,10 @@ document.addEventListener('DOMContentLoaded', function() {
     // Format date
     function formatDate(timestamp) {
         const date = new Date(timestamp);
-        return date.toLocaleDateString('en-US', { 
-            year: 'numeric', 
-            month: 'long', 
-            day: 'numeric' 
+        return date.toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
         });
     }
 
@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function toggleLike(reviewId) {
         const likedReviews = getLikedReviews();
         const isLiked = likedReviews.includes(reviewId);
-        
+
         if (isLiked) {
             // Remove like
             const updatedLikes = likedReviews.filter(id => id !== reviewId);
@@ -80,7 +80,7 @@ document.addEventListener('DOMContentLoaded', function() {
             likedReviews.push(reviewId);
             saveLikedReviews(likedReviews);
         }
-        
+
         // Update the like button appearance
         updateLikeButton(reviewId, !isLiked);
     }
@@ -90,7 +90,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const likeButton = document.querySelector(`[data-review-id="${reviewId}"] .like-button`);
         const likeIcon = likeButton.querySelector('svg');
         const likeCount = likeButton.querySelector('.like-count');
-        
+
         if (isLiked) {
             likeButton.classList.add('liked');
             likeIcon.classList.add('text-red-500');
@@ -107,7 +107,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Display reviews
     function displayReviews(reviews) {
         reviewsContainer.innerHTML = ''; // Clear existing content
-        
+
         if (!reviews || reviews.length === 0) {
             reviewsContainer.innerHTML = '<p class="text-gray-600 text-center py-4">No reviews found.</p>';
             return;
@@ -129,10 +129,10 @@ document.addEventListener('DOMContentLoaded', function() {
             const shadowColor = shadowColors[index % shadowColors.length];
             reviewElement.className = 'bg-white border border-gray-200/60 rounded-3xl p-6 transition-all duration-300 hover:-translate-y-1';
             reviewElement.style.boxShadow = `0 20px 45px -20px ${shadowColor}`;
-            reviewElement.addEventListener('mouseenter', function() {
+            reviewElement.addEventListener('mouseenter', function () {
                 this.style.boxShadow = `0 25px 55px -20px ${shadowColor}`;
             });
-            reviewElement.addEventListener('mouseleave', function() {
+            reviewElement.addEventListener('mouseleave', function () {
                 this.style.boxShadow = `0 20px 45px -20px ${shadowColor}`;
             });
             reviewElement.setAttribute('data-review-id', review.id);
@@ -146,7 +146,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             </svg>
                         </div>
                         <div class="ml-3 flex-1">
-                            <h4 class="text-[#FF4F4F] font-semibold text-base">${review.author_name}</h4>
+                            <h4 class="text-[#FF4F4F] text-base" style="font-family: 'Azo Sans', sans-serif; font-weight: 600; text-transform: none;">${review.author_name}</h4>
                         </div>
                     </div>
                     
@@ -197,7 +197,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // Set to 4.9 as shown in the Google reviews
             averageRatingElement.textContent = '4.9';
         }
-        
+
         if (totalRatingsElement) {
             // Set to 156 as shown in the Google reviews
             totalRatingsElement.textContent = '194';
