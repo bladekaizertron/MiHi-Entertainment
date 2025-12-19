@@ -403,6 +403,14 @@
                         <div class="p-8">
                             <div class="grid grid-cols-3 gap-5">
                                 <div class="space-y-2.5">
+                                    <a href="${pathPrefix}about.html" class="block text-sm text-gray-700 hover:text-blue-600 transition py-1.5 hover:bg-blue-50 rounded-md px-3 -mx-3">
+                                        <span class="font-semibold block mb-0.5 whitespace-nowrap">About MiHi</span>
+                                        <span class="text-xs text-gray-500 leading-relaxed block whitespace-nowrap">Learn about MiHi, see our hardworking team, and more</span>
+                                    </a>
+                                    <a href="${pathPrefix}faq.html" class="block text-sm text-gray-700 hover:text-blue-600 transition py-1.5 hover:bg-blue-50 rounded-md px-3 -mx-3">
+                                        <span class="font-semibold block mb-0.5 whitespace-nowrap">FAQ</span>
+                                        <span class="text-xs text-gray-500 leading-relaxed block whitespace-nowrap">View our most commonly asked questions</span>
+                                    </a>
                                     <a href="${pathPrefix}blog.php" class="block text-sm text-gray-700 hover:text-blue-600 transition py-1.5 hover:bg-blue-50 rounded-md px-3 -mx-3">
                                         <span class="font-semibold block mb-0.5 whitespace-nowrap">Read Our Blogs</span>
                                         <span class="text-xs text-gray-500 leading-relaxed block whitespace-nowrap">Read about our events, activations, and more</span>
@@ -414,14 +422,6 @@
                                     <a href="${pathPrefix}case-studies.html" class="block text-sm text-gray-700 hover:text-blue-600 transition py-1.5 hover:bg-blue-50 rounded-md px-3 -mx-3">
                                         <span class="font-semibold block mb-0.5 whitespace-nowrap">Case Studies</span>
                                         <span class="text-xs text-gray-500 leading-relaxed block whitespace-nowrap">Learn how our activations have helped create memorable events</span>
-                                    </a>
-                                    <a href="${pathPrefix}faq.html" class="block text-sm text-gray-700 hover:text-blue-600 transition py-1.5 hover:bg-blue-50 rounded-md px-3 -mx-3">
-                                        <span class="font-semibold block mb-0.5 whitespace-nowrap">FAQ</span>
-                                        <span class="text-xs text-gray-500 leading-relaxed block whitespace-nowrap">View our most commonly asked questions</span>
-                                    </a>
-                                    <a href="${pathPrefix}about.html" class="block text-sm text-gray-700 hover:text-blue-600 transition py-1.5 hover:bg-blue-50 rounded-md px-3 -mx-3">
-                                        <span class="font-semibold block mb-0.5 whitespace-nowrap">About MiHi</span>
-                                        <span class="text-xs text-gray-500 leading-relaxed block whitespace-nowrap">Learn about MiHi, see our hardworking team, and more</span>
                                     </a>
                                 </div>
                             </div>
@@ -647,11 +647,11 @@
                                 </button>
                                 <div id="about-content" class="hidden overflow-hidden transition-all duration-300 ease-in-out" style="max-height: 0px;">
                                     <div class="px-5 pb-4 space-y-1">
+                                        <a href="${pathPrefix}about.html" class="block text-sm text-gray-700 hover:text-purple-700 hover:bg-purple-50/50 transition-all rounded-lg py-2.5 px-3 font-medium">About MiHi</a>
+                                        <a href="${pathPrefix}faq.html" class="block text-sm text-gray-700 hover:text-purple-700 hover:bg-purple-50/50 transition-all rounded-lg py-2.5 px-3 font-medium">FAQ</a>
                                         <a href="${pathPrefix}blog.php" class="block text-sm text-gray-700 hover:text-purple-700 hover:bg-purple-50/50 transition-all rounded-lg py-2.5 px-3 font-medium">Read Our Blogs</a>
                                         <a href="${pathPrefix}our-locations.html" class="block text-sm text-gray-700 hover:text-purple-700 hover:bg-purple-50/50 transition-all rounded-lg py-2.5 px-3 font-medium">Our Locations</a>
                                         <a href="${pathPrefix}case-studies.html" class="block text-sm text-gray-700 hover:text-purple-700 hover:bg-purple-50/50 transition-all rounded-lg py-2.5 px-3 font-medium">Case Studies</a>
-                                        <a href="${pathPrefix}faq.html" class="block text-sm text-gray-700 hover:text-purple-700 hover:bg-purple-50/50 transition-all rounded-lg py-2.5 px-3 font-medium">FAQ</a>
-                                        <a href="${pathPrefix}about.html" class="block text-sm text-gray-700 hover:text-purple-700 hover:bg-purple-50/50 transition-all rounded-lg py-2.5 px-3 font-medium">About MiHi</a>
                                     </div>
                                 </div>
                             </div>
