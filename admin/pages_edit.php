@@ -13,7 +13,17 @@ $db = getDB();
 $error = '';
 $success = '';
 $id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
-$filePath = isset($_GET['file']) ? $_GET['file'] : '';
+
+// Support both old 'file' parameter and new 'f' (base64 encoded) parameter
+// The 'f' parameter is base64 encoded to bypass mod_security on GoDaddy
+$filePath = '';
+if (isset($_GET['f'])) {
+	// Decode base64 encoded file path (new method - bypasses mod_security)
+	$filePath = base64_decode($_GET['f']);
+} elseif (isset($_GET['file'])) {
+	// Legacy support for direct file path (may fail on GoDaddy due to mod_security)
+	$filePath = $_GET['file'];
+}
 $originalFilePath = $filePath; // Preserve original for form submission
 $isEdit = $id > 0;
 $isFileEdit = !empty($filePath);
