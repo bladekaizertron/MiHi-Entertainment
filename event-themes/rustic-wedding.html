@@ -10,6 +10,22 @@
         href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap"
         rel="stylesheet">
     <style>
+        @font-face {
+            font-family: 'AzoSansUber';
+            src: url('../assets/fonts/AzoSansUber-Regular.woff2') format('woff2');
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'AzoSans';
+            src: url('../assets/fonts/AzoSans-Regular.woff2') format('woff2');
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+
         html,
         body {
             overflow-x: hidden;
@@ -18,9 +34,9 @@
         }
 
         body {
-            font-family: 'Inter', sans-serif;
-            color: #1a202c;
-            background: #0a0a0a;
+            font-family: 'AzoSans', sans-serif;
+            color: #1F1F1F;
+            background: #1F1F1F;
             padding-top: 80px;
         }
 
@@ -30,7 +46,8 @@
         h4,
         h5,
         h6 {
-            font-family: 'Playfair Display', serif;
+            font-family: 'AzoSansUber', sans-serif;
+            text-transform: uppercase;
         }
 
         .section-padding {
@@ -77,35 +94,42 @@
         }
 
         .hero-title {
-            font-size: clamp(3rem, 8vw, 8rem);
-            font-weight: 800;
+            font-family: 'AzoSansUber', sans-serif;
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 400;
             color: #ffffff;
             letter-spacing: -0.02em;
             margin-bottom: 1rem;
             line-height: 0.95;
-            text-shadow: 0 0 40px rgba(201, 168, 108, 0.5);
+            text-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
             text-align: center;
             width: 100%;
         }
 
         .hero-subtitle {
+            font-family: 'AzoSans', sans-serif;
             font-size: clamp(0.75rem, 1.5vw, 1rem);
-            color: rgba(255, 255, 255, 0.8);
+            color: #ffffff;
+            background-color: #FF4F4F;
+            padding: 0.5rem 1.5rem;
+            border-radius: 9999px;
             letter-spacing: 0.3em;
             text-transform: uppercase;
             margin-bottom: 2rem;
-            font-weight: 500;
+            font-weight: 400;
             text-align: center;
-            width: 100%;
+            display: inline-block;
+            width: auto;
         }
 
         .hero-description {
+            font-family: 'AzoSans', sans-serif;
             font-size: clamp(1rem, 2vw, 1.25rem);
             color: rgba(255, 255, 255, 0.9);
             max-width: 600px;
             margin: 0 auto 3rem;
             line-height: 1.6;
-            font-weight: 300;
+            font-weight: 400;
             text-align: center;
             width: 100%;
         }
@@ -121,39 +145,22 @@
             letter-spacing: 0.1em;
             text-transform: uppercase;
             color: #ffffff;
-            background: linear-gradient(135deg, rgba(201, 168, 108, 0.9) 0%, rgba(139, 105, 20, 0.9) 100%);
+            background: #FF4F4F;
             border: 1px solid rgba(255, 255, 255, 0.2);
             border-radius: 50px;
             text-decoration: none;
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             backdrop-filter: blur(10px);
-            box-shadow: 0 8px 32px rgba(201, 168, 108, 0.3),
-                0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+            box-shadow: 0 8px 32px rgba(255, 79, 79, 0.3);
             position: relative;
             overflow: hidden;
         }
 
-        .modern-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.6s ease;
-        }
-
         .modern-btn:hover {
             transform: translateY(-3px) scale(1.02);
-            box-shadow: 0 15px 40px rgba(201, 168, 108, 0.5),
-                0 0 0 1px rgba(255, 255, 255, 0.2) inset,
-                0 0 60px rgba(201, 168, 108, 0.4);
-            background: linear-gradient(135deg, rgba(201, 168, 108, 1) 0%, rgba(139, 105, 20, 1) 100%);
-        }
-
-        .modern-btn:hover::before {
-            left: 100%;
+            box-shadow: 0 15px 40px rgba(255, 79, 79, 0.5);
+            background: #18F1E1;
+            color: #1F1F1F;
         }
 
         .modern-btn:active {
@@ -184,27 +191,12 @@
             overflow: hidden;
         }
 
-        .modern-btn-call::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.6s ease;
-        }
-
         .modern-btn-call:hover {
             transform: translateY(-3px) scale(1.02);
-            background: rgba(255, 255, 255, 0.2);
-            border-color: rgba(255, 255, 255, 0.5);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3),
-                0 0 0 1px rgba(255, 255, 255, 0.2) inset;
-        }
-
-        .modern-btn-call:hover::before {
-            left: 100%;
+            background: #18F1E1;
+            color: #1F1F1F;
+            border-color: #18F1E1;
+            box-shadow: 0 15px 40px rgba(24, 241, 225, 0.3);
         }
 
         .modern-btn-call:active {
@@ -219,11 +211,11 @@
         .modern-section {
             position: relative;
             padding: 6rem 0;
-            background: linear-gradient(180deg, #0a0a0a 0%, #1a1208 50%, #0a0a0a 100%);
+            background: #ffffff;
         }
 
         .modern-section-light {
-            background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 50%, #ffffff 100%);
+            background: #ffffff;
         }
 
         /* Parallax Section */
@@ -245,9 +237,10 @@
         }
 
         .section-title {
+            font-family: 'AzoSansUber', sans-serif;
             font-size: clamp(2.5rem, 6vw, 5rem);
-            font-weight: 700;
-            color: #ffffff;
+            font-weight: 400;
+            color: #FF4F4F;
             text-align: center;
             margin-bottom: 1rem;
             letter-spacing: -0.02em;
@@ -255,21 +248,22 @@
         }
 
         .section-title-light {
-            color: #1a202c;
+            color: #FF4F4F;
         }
 
         .section-subtitle {
+            font-family: 'AzoSans', sans-serif;
             font-size: clamp(1rem, 2vw, 1.25rem);
-            color: rgba(255, 255, 255, 0.7);
+            color: #1F1F1F;
             text-align: center;
             max-width: 700px;
             margin: 0 auto 4rem;
             line-height: 1.7;
-            font-weight: 300;
+            font-weight: 400;
         }
 
         .section-subtitle-light {
-            color: #6b7280;
+            color: #1F1F1F;
         }
 
         /* Feature Cards */
@@ -281,14 +275,15 @@
         }
 
         .feature-card {
-            background: rgba(255, 255, 255, 0.03);
+            background: #ffffff;
             backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(0, 0, 0, 0.1);
             border-radius: 24px;
             padding: 2.5rem;
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             position: relative;
             overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
         }
 
         .feature-card::before {
@@ -298,16 +293,15 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, rgba(201, 168, 108, 0.1) 0%, rgba(139, 105, 20, 0.1) 100%);
+            background: #ffffff;
             opacity: 0;
             transition: opacity 0.4s ease;
         }
 
         .feature-card:hover {
             transform: translateY(-8px);
-            border-color: rgba(201, 168, 108, 0.5);
-            box-shadow: 0 20px 60px rgba(201, 168, 108, 0.2),
-                0 0 0 1px rgba(201, 168, 108, 0.1) inset;
+            border-color: rgba(0, 0, 0, 0.5);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
         }
 
         .feature-card:hover::before {
@@ -322,34 +316,36 @@
         .feature-icon {
             width: 60px;
             height: 60px;
-            background: linear-gradient(135deg, rgba(201, 168, 108, 0.2) 0%, rgba(139, 105, 20, 0.2) 100%);
+            background: #18F1E1;
             border-radius: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
             margin-bottom: 1.5rem;
-            border: 1px solid rgba(201, 168, 108, 0.3);
-            color: #ffffff;
+            border: #18F1E1 1px solid;
+            color: #1F1F1F;
         }
 
         .feature-icon svg {
-            color: #ffffff;
-            stroke: #ffffff;
+            color: #1F1F1F;
+            stroke: #1F1F1F;
         }
 
         .feature-card h3 {
+            font-family: 'AzoSansUber', sans-serif;
             font-size: 1.5rem;
-            font-weight: 700;
-            color: #ffffff;
+            font-weight: 400;
+            color: #FF4F4F;
             margin-bottom: 1rem;
             letter-spacing: -0.01em;
         }
 
         .feature-card p {
-            color: rgba(255, 255, 255, 0.7);
+            font-family: 'AzoSans', sans-serif;
+            color: #1F1F1F;
             line-height: 1.7;
             font-size: 0.95rem;
-            font-weight: 300;
+            font-weight: 400;
         }
 
         /* Content Section */
@@ -361,20 +357,22 @@
         }
 
         .content-text h2 {
+            font-family: 'AzoSansUber', sans-serif;
             font-size: clamp(2.5rem, 5vw, 4rem);
-            font-weight: 700;
-            color: #ffffff;
+            font-weight: 400;
+            color: #FF4F4F;
             margin-bottom: 1.5rem;
             letter-spacing: -0.02em;
             line-height: 1.1;
         }
 
         .content-text p {
-            color: rgba(255, 255, 255, 0.8);
+            font-family: 'AzoSans', sans-serif;
+            color: #1F1F1F;
             line-height: 1.8;
             font-size: 1.05rem;
             margin-bottom: 2rem;
-            font-weight: 300;
+            font-weight: 400;
         }
 
         .content-image {
@@ -431,40 +429,43 @@
         .feature-item-icon {
             width: 32px;
             height: 32px;
-            background: linear-gradient(135deg, rgba(201, 168, 108, 0.8) 0%, rgba(139, 105, 20, 0.8) 100%);
+            background: #18F1E1;
             border-radius: 50%;
             flex-shrink: 0;
             margin-top: 0.25rem;
             display: flex;
             align-items: center;
             justify-content: center;
-            border: 2px solid rgba(201, 168, 108, 0.5);
-            box-shadow: 0 0 15px rgba(201, 168, 108, 0.4);
+            border: 2px solid #18F1E1;
+            box-shadow: 0 0 15px rgba(24, 241, 225, 0.4);
             position: relative;
         }
 
         .feature-item-icon::before {
             content: '✓';
-            color: #ffffff;
+            color: #1F1F1F;
             font-size: 16px;
             font-weight: bold;
             line-height: 1;
         }
 
         .feature-item-content h4 {
+            font-family: 'AzoSans', sans-serif;
             font-size: 1.25rem;
-            font-weight: 600;
-            color: #ffffff;
+            font-weight: 800;
+            color: #FF4F4F;
             margin-bottom: 0.5rem;
             letter-spacing: -0.01em;
+            text-transform: none;
         }
 
         .feature-item-content p {
-            color: rgba(255, 255, 255, 0.7);
+            font-family: 'AzoSans', sans-serif;
+            color: #1F1F1F;
             line-height: 1.7;
             font-size: 0.95rem;
             margin: 0;
-            font-weight: 300;
+            font-weight: 400;
         }
 
         /* Responsive Design */
@@ -518,13 +519,35 @@
 
         /* Button Primary Styles for Navigation */
         .btn-primary {
-            background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%);
-            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.875rem 2rem;
+            font-size: 0.95rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            color: #ffffff;
+            background: #FF4F4F;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50px;
+            text-decoration: none;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(255, 79, 79, 0.3);
+            position: relative;
+            overflow: hidden;
         }
 
         .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(0, 80, 255, 0.4);
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 15px 40px rgba(255, 79, 79, 0.5);
+            background: #18F1E1;
+            color: #1F1F1F;
+        }
+
+        .btn-primary:active {
+            transform: translateY(-1px) scale(1);
         }
     </style>
 </head>
@@ -536,7 +559,7 @@
             style="background-image: url('../assets/images/rustic-wedding/rustic-wedding-hero.webp');"></div>
         <div class="hero-overlay"></div>
         <div class="hero-content">
-            <h1 class="hero-title animate-fade-in">Rustic Wedding</h1>
+            <h1 class="hero-title animate-fade-in"><span style="color: #FF4F4F;">Rustic </span><span style="color: #18F1E1;">Wedding</span></h1>
             <p class="hero-subtitle animate-fade-in" style="animation-delay: 0.2s;">Event Theme</p>
             <p class="hero-description animate-fade-in" style="animation-delay: 0.4s;">
                 Timeless elegance meets natural beauty—this theme captures the warmth and romance of a countryside
@@ -704,10 +727,10 @@
         </div>
         <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl" style="position: relative; z-index: 2;">
             <div class="text-center">
-                <h2 class="section-title">View Our Other Event Themes</h2>
-                <p class="section-subtitle mb-8">Scroll to see all of our themes</p>
+                <h2 class="section-title" style="color: #ffffff;"><span style="color: #FF4F4F;">View Our Other Event </span><span style="color: #18F1E1;">Themes</span></h2>
+                <p class="section-subtitle mb-8" style="color: #ffffff;">Scroll to see all of our themes</p>
                 <a href="../booth-themes.html" class="modern-btn"
-                    style="background: linear-gradient(135deg, rgba(201, 168, 108, 0.9) 0%, rgba(139, 105, 20, 0.9) 100%);">
+                    style="background: #FF4F4F;">
                     View All Themes
                 </a>
             </div>

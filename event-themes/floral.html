@@ -35,19 +35,20 @@
         }
 
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: 'AzoSans', sans-serif;
             color: #1a202c;
-            background: #0a0a0a;
+            background: #1F1F1F;
         }
 
-        /* Headings use Playfair Display */
+        /* Headings use AzoSansUber */
         h1,
         h2,
         h3,
         h4,
         h5,
         h6 {
-            font-family: 'Playfair Display', serif;
+            font-family: 'AzoSansUber', sans-serif;
+            text-transform: uppercase;
         }
 
         /* Navigation uses default Tailwind styles from navigation.js - no CSS overrides */
@@ -132,29 +133,36 @@
         }
 
         .hero-title {
-            font-size: clamp(3rem, 8vw, 8rem);
-            font-weight: 800;
+            font-family: 'AzoSansUber', sans-serif;
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 400;
             color: #ffffff;
             letter-spacing: -0.02em;
             margin-bottom: 1rem;
             line-height: 0.95;
-            text-shadow: 0 0 40px rgba(236, 72, 153, 0.5);
+            text-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
             text-align: center;
             width: 100%;
         }
 
         .hero-subtitle {
+            font-family: 'AzoSans', sans-serif;
             font-size: clamp(0.75rem, 1.5vw, 1rem);
-            color: rgba(255, 255, 255, 0.8);
+            color: #ffffff;
+            background-color: #FF4F4F;
+            padding: 0.5rem 1.5rem;
+            border-radius: 9999px;
             letter-spacing: 0.3em;
             text-transform: uppercase;
             margin-bottom: 2rem;
-            font-weight: 500;
+            font-weight: 400;
             text-align: center;
-            width: 100%;
+            display: inline-block;
+            width: auto;
         }
 
         .hero-description {
+            font-family: 'AzoSans', sans-serif;
             font-size: clamp(1rem, 2vw, 1.25rem);
             color: rgba(255, 255, 255, 0.9);
             max-width: 600px;
@@ -176,13 +184,13 @@
             letter-spacing: 0.1em;
             text-transform: uppercase;
             color: #ffffff;
-            background: linear-gradient(135deg, rgba(236, 72, 153, 0.9) 0%, rgba(34, 197, 94, 0.9) 100%);
+            background: #FF4F4F;
             border: 1px solid rgba(255, 255, 255, 0.2);
             border-radius: 50px;
             text-decoration: none;
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             backdrop-filter: blur(10px);
-            box-shadow: 0 8px 32px rgba(236, 72, 153, 0.3),
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3),
                 0 0 0 1px rgba(255, 255, 255, 0.1) inset;
             position: relative;
             overflow: hidden;
@@ -200,11 +208,12 @@
         }
 
         .modern-btn:hover {
+            color: #1F1F1F;
             transform: translateY(-3px) scale(1.02);
-            box-shadow: 0 15px 40px rgba(236, 72, 153, 0.5),
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5),
                 0 0 0 1px rgba(255, 255, 255, 0.2) inset,
-                0 0 60px rgba(236, 72, 153, 0.4);
-            background: linear-gradient(135deg, rgba(236, 72, 153, 1) 0%, rgba(34, 197, 94, 1) 100%);
+                0 0 60px rgba(3, 3, 3, 0.4);
+            background: #18F1E1;
         }
 
         .modern-btn:hover::before {
@@ -274,7 +283,7 @@
         .modern-section {
             position: relative;
             padding: 6rem 0;
-            background: linear-gradient(180deg, #0a0a0a 0%, #1a0f1a 50%, #0a0a0a 100%);
+            background: white;
         }
 
         .modern-section-light {
@@ -282,9 +291,10 @@
         }
 
         .section-title {
+            font-family: 'AzoSansUber', sans-serif;
             font-size: clamp(2.5rem, 6vw, 5rem);
-            font-weight: 700;
-            color: #ffffff;
+            font-weight: 400;
+            color: #FF4F4F;
             text-align: center;
             margin-bottom: 1rem;
             letter-spacing: -0.02em;
@@ -296,8 +306,9 @@
         }
 
         .section-subtitle {
+            font-family: 'AzoSans', sans-serif;
             font-size: clamp(1rem, 2vw, 1.25rem);
-            color: rgba(255, 255, 255, 0.7);
+            color: #1F1F1F;
             text-align: center;
             max-width: 700px;
             margin: 0 auto 4rem;
@@ -306,7 +317,7 @@
         }
 
         .section-subtitle-light {
-            color: #6b7280;
+            color: #1F1F1F;
         }
 
         /* Feature Cards */
@@ -318,7 +329,7 @@
         }
 
         .feature-card {
-            background: rgba(255, 255, 255, 0.03);
+            background: #ffffff;
             backdrop-filter: blur(20px);
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 24px;
@@ -335,16 +346,16 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, rgba(236, 72, 153, 0.1) 0%, rgba(34, 197, 94, 0.1) 100%);
+            background: #ffffff;
             opacity: 0;
             transition: opacity 0.4s ease;
         }
 
         .feature-card:hover {
             transform: translateY(-8px);
-            border-color: rgba(236, 72, 153, 0.5);
-            box-shadow: 0 20px 60px rgba(236, 72, 153, 0.2),
-                0 0 0 1px rgba(236, 72, 153, 0.1) inset;
+            border-color: rgba(0, 0, 0, 0.5);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2),
+                0 0 0 1px rgba(0, 0, 0, 0.1) inset;
         }
 
         .feature-card:hover::before {
@@ -359,19 +370,19 @@
         .feature-icon {
             width: 60px;
             height: 60px;
-            background: linear-gradient(135deg, rgba(236, 72, 153, 0.2) 0%, rgba(34, 197, 94, 0.2) 100%);
+            background: #18F1E1;
             border-radius: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
             margin-bottom: 1.5rem;
-            border: 1px solid rgba(236, 72, 153, 0.3);
-            color: #ffffff;
+            border: #18F1E1 1px solid;
+            color: #1F1F1F;
         }
 
         .feature-icon svg {
-            color: #ffffff;
-            stroke: #ffffff;
+            color: #1F1F1F;
+            stroke: #1F1F1F;
         }
 
         .feature-card h3 {
@@ -432,10 +443,21 @@
             content: '';
             position: absolute;
             inset: 0;
-            background: linear-gradient(135deg, rgba(236, 72, 153, 0.2) 0%, rgba(34, 197, 94, 0.2) 100%);
+            background: linear-gradient(135deg, rgba(255, 79, 79, 0.2) 0%, rgba(24, 241, 225, 0.2) 100%);
             opacity: 0;
             transition: opacity 0.4s ease;
             z-index: 1;
+        }
+        
+        .content-text h2 {
+            font-family: 'AzoSansUber', sans-serif;
+            font-weight: 400;
+            color: #FF4F4F;
+        }
+        
+        .content-text p {
+            font-family: 'AzoSans', sans-serif;
+            color: #1F1F1F;
         }
 
         .content-image:hover img {
@@ -571,21 +593,21 @@
         .feature-item-icon {
             width: 32px;
             height: 32px;
-            background: linear-gradient(135deg, rgba(236, 72, 153, 0.8) 0%, rgba(34, 197, 94, 0.8) 100%);
+            background: #18F1E1;
             border-radius: 50%;
             flex-shrink: 0;
             margin-top: 0.25rem;
             display: flex;
             align-items: center;
             justify-content: center;
-            border: 2px solid rgba(236, 72, 153, 0.5);
-            box-shadow: 0 0 15px rgba(236, 72, 153, 0.4);
+            border: #18F1E1 2px solid;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
             position: relative;
         }
 
         .feature-item-icon::before {
             content: '✓';
-            color: #ffffff;
+            color: #1F1F1F;
             font-size: 16px;
             font-weight: bold;
             line-height: 1;
@@ -717,7 +739,7 @@
             style="background-image: url('../assets/images/floral/floral-hero.webp');"></div>
         <div class="hero-overlay"></div>
         <div class="hero-content">
-            <h1 class="hero-title animate-fade-in">Floral</h1>
+            <h1 class="hero-title animate-fade-in"><span style="color: #FF4F4F;">Flo</span><span style="color: #18F1E1;">ral</span></h1>
             <p class="hero-subtitle animate-fade-in" style="animation-delay: 0.2s;">Event Theme</p>
             <p class="hero-description animate-fade-in" style="animation-delay: 0.4s;">
                 A bloom-filled celebration full of color, charm, and natural beauty.
@@ -773,8 +795,8 @@
                             <line x1="9" y1="3" x2="9" y2="21"></line>
                         </svg>
                     </div>
-                    <h3>Backdrops</h3>
-                    <p>While a 3D Floral Wall isn't something we offer directly, we can partner with your florist to
+                    <h3 style="font-weight: 800; font-family: 'AzoSansUber', sans-serif; color: #FF4F4F;">Backdrops</h3>
+                    <p style="font-family: 'AzoSans', sans-serif; color: #1F1F1F;">While a 3D Floral Wall isn't something we offer directly, we can partner with your florist to
                         make magical botanical backdrops happen, or use our garden-inspired options!</p>
                 </div>
 
@@ -785,8 +807,8 @@
                             <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
                         </svg>
                     </div>
-                    <h3>Props</h3>
-                    <p>Stop and smell the giant roses! Our oversized floral props and botanical accessories create that
+                    <h3 style="font-weight: 800; font-family: 'AzoSansUber', sans-serif; color: #FF4F4F;">Props</h3>
+                    <p style="font-family: 'AzoSans', sans-serif; color: #1F1F1F;">Stop and smell the giant roses! Our oversized floral props and botanical accessories create that
                         perfect garden party atmosphere your guests will love.</p>
                 </div>
 
@@ -800,8 +822,8 @@
                             <rect x="3" y="14" width="7" height="7"></rect>
                         </svg>
                     </div>
-                    <h3>Custom Layouts</h3>
-                    <p>Design photo layouts with beautiful floral frames and botanical borders that complement your
+                    <h3 style="font-weight: 800; font-family: 'AzoSansUber', sans-serif; color: #FF4F4F;">Custom Layouts</h3>
+                    <p style="font-family: 'AzoSans', sans-serif; color: #1F1F1F;">Design photo layouts with beautiful floral frames and botanical borders that complement your
                         garden theme.</p>
                 </div>
 
@@ -814,8 +836,8 @@
                             </polygon>
                         </svg>
                     </div>
-                    <h3>Add-Ons</h3>
-                    <p>Enhance your floral experience with additional botanical touches and garden-inspired elements.
+                    <h3 style="font-weight: 800; font-family: 'AzoSansUber', sans-serif; color: #FF4F4F;">Add-Ons</h3>
+                    <p style="font-family: 'AzoSans', sans-serif; color: #1F1F1F;">Enhance your floral experience with additional botanical touches and garden-inspired elements.
                     </p>
                 </div>
             </div>
@@ -836,13 +858,13 @@
         <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
             <div class="content-section">
                 <div class="content-text">
-                    <h2>Experience the Garden</h2>
-                    <p>
+                    <h2 style="font-weight: 400; font-family: 'AzoSansUber', sans-serif; color: #FF4F4F;">Experience the Garden</h2>
+                    <p style="font-family: 'AzoSans', sans-serif; color: #1F1F1F;">
                         Transform your event into a blooming paradise with our Floral Theme. From elegant rose
                         arrangements to vibrant garden backdrops, every detail is designed to bring the beauty of nature
                         to your celebration.
                     </p>
-                    <p>
+                    <p style="font-family: 'AzoSans', sans-serif; color: #1F1F1F;">
                         Perfect for weddings, bridal showers, spring parties, or any event where you want to capture the
                         fresh, vibrant energy of a garden in full bloom.
                     </p>
@@ -850,22 +872,22 @@
                         <li class="feature-item">
                             <div class="feature-item-icon"></div>
                             <div class="feature-item-content">
-                                <h4>Garden-Inspired Backdrops</h4>
-                                <p>Beautiful botanical settings that bring the garden to your event</p>
+                                <h4 style="font-weight: 800; font-family: 'AzoSansUber', sans-serif; color: #FF4F4F;">Garden-Inspired Backdrops</h4>
+                                <p style="font-family: 'AzoSans', sans-serif; color: #1F1F1F;">Beautiful botanical settings that bring the garden to your event</p>
                             </div>
                         </li>
                         <li class="feature-item">
                             <div class="feature-item-icon"></div>
                             <div class="feature-item-content">
-                                <h4>Oversized Floral Props</h4>
-                                <p>Giant roses and botanical accessories for that perfect garden party feel</p>
+                                <h4 style="font-weight: 800; font-family: 'AzoSansUber', sans-serif; color: #FF4F4F;">Oversized Floral Props</h4>
+                                <p style="font-family: 'AzoSans', sans-serif; color: #1F1F1F;">Giant roses and botanical accessories for that perfect garden party feel</p>
                             </div>
                         </li>
                         <li class="feature-item">
                             <div class="feature-item-icon"></div>
                             <div class="feature-item-content">
-                                <h4>Custom Floral Designs</h4>
-                                <p>Personalized layouts with floral frames and botanical borders</p>
+                                <h4 style="font-weight: 800; font-family: 'AzoSansUber', sans-serif; color: #FF4F4F;">Custom Floral Designs</h4>
+                                <p style="font-family: 'AzoSans', sans-serif; color: #1F1F1F;">Personalized layouts with floral frames and botanical borders</p>
                             </div>
                         </li>
                     </ul>
@@ -906,10 +928,10 @@
         <div style="position: absolute; inset: 0; background: rgba(0, 0, 0, 0.5); z-index: 1;"></div>
         <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl" style="position: relative; z-index: 2;">
             <div class="text-center">
-                <h2 class="section-title">View Our Other Event Themes</h2>
-                <p class="section-subtitle mb-8">Scroll to see all of our themes</p>
+                <h2 class="section-title"><span style="color: #FF4F4F;">View Our Other Event </span><span style="color: #18F1E1;">Themes</span></h2>
+                <p class="section-subtitle mb-8" style="color: #ffffff;">Scroll to see all of our themes</p>
                 <a href="../booth-themes.html" class="modern-btn"
-                    style="background: linear-gradient(135deg, rgba(236, 72, 153, 0.9) 0%, rgba(34, 197, 94, 0.9) 100%);">
+                    style="background: #FF4F4F;">
                     View All Themes
                 </a>
             </div>

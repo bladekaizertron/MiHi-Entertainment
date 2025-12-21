@@ -11,6 +11,22 @@
         href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap"
         rel="stylesheet">
     <style>
+        @font-face {
+            font-family: 'AzoSansUber';
+            src: url('../assets/fonts/AzoSansUber-Regular.woff2') format('woff2');
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'AzoSans';
+            src: url('../assets/fonts/AzoSans-Regular.woff2') format('woff2');
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+
         html,
         body {
             overflow-x: hidden;
@@ -19,19 +35,20 @@
         }
 
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: 'AzoSans', sans-serif;
             color: #1a202c;
-            background: #0a0a0a;
+            background: #1F1F1F;
         }
 
-        /* Headings use Playfair Display */
+        /* Headings use AzoSansUber */
         h1,
         h2,
         h3,
         h4,
         h5,
         h6 {
-            font-family: 'Playfair Display', serif;
+            font-family: 'AzoSansUber', sans-serif;
+            text-transform: uppercase;
         }
 
         /* Navigation uses default Tailwind styles from navigation.js - no CSS overrides */
@@ -115,29 +132,36 @@
         }
 
         .hero-title {
-            font-size: clamp(3rem, 8vw, 8rem);
-            font-weight: 800;
+            font-family: 'AzoSansUber', sans-serif;
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 400;
             color: #ffffff;
             letter-spacing: -0.02em;
             margin-bottom: 1rem;
             line-height: 0.95;
-            text-shadow: 0 0 40px rgba(220, 38, 38, 0.5);
+            text-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
             text-align: center;
             width: 100%;
         }
 
         .hero-subtitle {
+            font-family: 'AzoSans', sans-serif;
             font-size: clamp(0.75rem, 1.5vw, 1rem);
-            color: rgba(255, 255, 255, 0.8);
+            color: #ffffff;
+            background-color: #FF4F4F;
+            padding: 0.5rem 1.5rem;
+            border-radius: 9999px;
             letter-spacing: 0.3em;
             text-transform: uppercase;
             margin-bottom: 2rem;
-            font-weight: 500;
+            font-weight: 400;
             text-align: center;
-            width: 100%;
+            display: inline-block;
+            width: auto;
         }
 
         .hero-description {
+            font-family: 'AzoSans', sans-serif;
             font-size: clamp(1rem, 2vw, 1.25rem);
             color: rgba(255, 255, 255, 0.9);
             max-width: 600px;
@@ -159,13 +183,13 @@
             letter-spacing: 0.1em;
             text-transform: uppercase;
             color: #ffffff;
-            background: linear-gradient(135deg, rgba(220, 38, 38, 0.9) 0%, rgba(185, 28, 28, 0.9) 100%);
+            background: #FF4F4F;
             border: 1px solid rgba(255, 255, 255, 0.2);
             border-radius: 50px;
             text-decoration: none;
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             backdrop-filter: blur(10px);
-            box-shadow: 0 8px 32px rgba(220, 38, 38, 0.3),
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3),
                 0 0 0 1px rgba(255, 255, 255, 0.1) inset;
             position: relative;
             overflow: hidden;
@@ -183,11 +207,12 @@
         }
 
         .modern-btn:hover {
+            color: #1F1F1F;
             transform: translateY(-3px) scale(1.02);
-            box-shadow: 0 15px 40px rgba(220, 38, 38, 0.5),
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5),
                 0 0 0 1px rgba(255, 255, 255, 0.2) inset,
-                0 0 60px rgba(220, 38, 38, 0.4);
-            background: linear-gradient(135deg, rgba(220, 38, 38, 1) 0%, rgba(185, 28, 28, 1) 100%);
+                0 0 60px rgba(3, 3, 3, 0.4);
+            background: #18F1E1;
         }
 
         .modern-btn:hover::before {
@@ -283,9 +308,10 @@
         }
 
         .section-title {
+            font-family: 'AzoSansUber', sans-serif;
             font-size: clamp(2.5rem, 6vw, 5rem);
-            font-weight: 700;
-            color: #ffffff;
+            font-weight: 400;
+            color: #FF4F4F;
             text-align: center;
             margin-bottom: 1rem;
             letter-spacing: -0.02em;
@@ -293,12 +319,13 @@
         }
 
         .section-title-light {
-            color: #1a202c;
+            color: #1F1F1F;
         }
 
         .section-subtitle {
+            font-family: 'AzoSans', sans-serif;
             font-size: clamp(1rem, 2vw, 1.25rem);
-            color: rgba(255, 255, 255, 0.7);
+            color: #1F1F1F;
             text-align: center;
             max-width: 700px;
             margin: 0 auto 4rem;
@@ -307,7 +334,7 @@
         }
 
         .section-subtitle-light {
-            color: #6b7280;
+            color: #1F1F1F;
         }
 
         /* Feature Cards */
@@ -319,7 +346,7 @@
         }
 
         .feature-card {
-            background: rgba(255, 255, 255, 0.03);
+            background: #ffffff;
             backdrop-filter: blur(20px);
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 24px;
@@ -336,16 +363,16 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, rgba(220, 38, 38, 0.1) 0%, rgba(30, 64, 175, 0.1) 100%);
+            background: #ffffff;
             opacity: 0;
             transition: opacity 0.4s ease;
         }
 
         .feature-card:hover {
             transform: translateY(-8px);
-            border-color: rgba(220, 38, 38, 0.5);
-            box-shadow: 0 20px 60px rgba(220, 38, 38, 0.2),
-                0 0 0 1px rgba(220, 38, 38, 0.1) inset;
+            border-color: rgba(0, 0, 0, 0.5);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2),
+                0 0 0 1px rgba(0, 0, 0, 0.1) inset;
         }
 
         .feature-card:hover::before {
@@ -360,31 +387,34 @@
         .feature-icon {
             width: 60px;
             height: 60px;
-            background: linear-gradient(135deg, rgba(220, 38, 38, 0.2) 0%, rgba(30, 64, 175, 0.2) 100%);
+            background: #18F1E1;
             border-radius: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
             margin-bottom: 1.5rem;
-            border: 1px solid rgba(220, 38, 38, 0.3);
-            color: #ffffff;
+            border: #18F1E1 1px solid;
+            color: #1F1F1F;
         }
 
         .feature-icon svg {
-            color: #ffffff;
-            stroke: #ffffff;
+            color: #1F1F1F;
+            stroke: #1F1F1F;
         }
 
         .feature-card h3 {
+            font-family: 'AzoSansUber', sans-serif;
             font-size: 1.5rem;
-            font-weight: 700;
-            color: #ffffff;
+            font-weight: 400;
+            color: #FF4F4F;
             margin-bottom: 1rem;
             letter-spacing: -0.01em;
+            text-transform: uppercase;
         }
 
         .feature-card p {
-            color: rgba(255, 255, 255, 0.7);
+            font-family: 'AzoSans', sans-serif;
+            color: #1F1F1F;
             line-height: 1.7;
             font-size: 0.95rem;
             font-weight: 300;
@@ -399,16 +429,19 @@
         }
 
         .content-text h2 {
+            font-family: 'AzoSansUber', sans-serif;
             font-size: clamp(2.5rem, 5vw, 4rem);
-            font-weight: 700;
-            color: #ffffff;
+            font-weight: 400;
+            color: #FF4F4F;
             margin-bottom: 1.5rem;
             letter-spacing: -0.02em;
             line-height: 1.1;
+            text-transform: uppercase;
         }
 
         .content-text p {
-            color: rgba(255, 255, 255, 0.8);
+            font-family: 'AzoSans', sans-serif;
+            color: #1F1F1F;
             line-height: 1.8;
             font-size: 1.05rem;
             margin-bottom: 2rem;
@@ -572,36 +605,39 @@
         .feature-item-icon {
             width: 32px;
             height: 32px;
-            background: linear-gradient(135deg, rgba(220, 38, 38, 0.8) 0%, rgba(185, 28, 28, 0.8) 100%);
+            background: #18F1E1;
             border-radius: 50%;
             flex-shrink: 0;
             margin-top: 0.25rem;
             display: flex;
             align-items: center;
             justify-content: center;
-            border: 2px solid rgba(220, 38, 38, 0.5);
-            box-shadow: 0 0 15px rgba(220, 38, 38, 0.4);
+            border: #18F1E1 2px solid;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
             position: relative;
         }
 
         .feature-item-icon::before {
             content: '✓';
-            color: #ffffff;
+            color: #1F1F1F;
             font-size: 16px;
             font-weight: bold;
             line-height: 1;
         }
 
         .feature-item-content h4 {
+            font-family: 'AzoSansUber', sans-serif;
             font-size: 1.25rem;
-            font-weight: 600;
-            color: #ffffff;
+            font-weight: 400;
+            color: #FF4F4F;
             margin-bottom: 0.5rem;
             letter-spacing: -0.01em;
+            text-transform: uppercase;
         }
 
         .feature-item-content p {
-            color: rgba(255, 255, 255, 0.7);
+            font-family: 'AzoSans', sans-serif;
+            color: #1F1F1F;
             line-height: 1.7;
             font-size: 0.95rem;
             margin: 0;
@@ -717,8 +753,8 @@
             style="background-image: url('../assets/images/sports/sports-hero.webp');"></div>
         <div class="hero-overlay"></div>
         <div class="hero-content">
-            <h1 class="hero-title animate-fade-in">Sports</h1>
-            <p class="hero-subtitle animate-fade-in" style="animation-delay: 0.2s;">Event Theme</p>
+            <h1 class="hero-title animate-fade-in"><span style="color: #FF4F4F;">Spo</span><span style="color: #18F1E1;">rts</span></h1>
+            <p class="hero-subtitle animate-fade-in" style="animation-delay: 0.2s; background-color: #FF4F4F;">Event Theme</p>
             <p class="hero-description animate-fade-in" style="animation-delay: 0.4s;">
                 Bring the energy of the stadium to your event—celebrate champions, team spirit, and unforgettable
                 victories.
@@ -743,14 +779,14 @@
     <!-- Intro Section -->
     <section class="modern-section">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
-            <h2 class="section-title">Game Day Energy</h2>
+            <h2 class="section-title">Game Day <span style="color: #18F1E1;">Energy</span></h2>
             <p class="section-subtitle">
                 From tailgate parties to championship celebrations, our Sports Theme captures all the excitement of game
                 day. Perfect for corporate team-building events, sports banquets, watch parties, or any occasion that
                 calls for athletic spirit and competitive fun.
             </p>
             <div class="text-center">
-                <a href="../contact-us.html" class="modern-btn">Get Your Quote</a>
+                <a href="../contact-us.html" class="modern-btn" style="background: #FF4F4F;">Get Your Quote</a>
             </div>
         </div>
     </section>
@@ -772,7 +808,7 @@
                             <line x1="9" y1="3" x2="9" y2="21"></line>
                         </svg>
                     </div>
-                    <h3>Backdrops</h3>
+                    <h3 style="font-family: 'AzoSansUber', sans-serif; font-weight: 400; color: #FF4F4F;">Backdrops</h3>
                     <p>Choose from our exciting collection of sports-themed backdrops featuring stadium lights, locker
                         rooms, championship fields, and team colors that match your favorite sport!</p>
                 </div>
@@ -786,7 +822,7 @@
                             <path d="M2 12h20"></path>
                         </svg>
                     </div>
-                    <h3>Props</h3>
+                    <h3 style="font-family: 'AzoSansUber', sans-serif; font-weight: 400; color: #FF4F4F;">Props</h3>
                     <p>Get in the game with our selection of sports props! From foam fingers to jerseys, helmets to
                         trophies, we've got all the gear to make your guests feel like MVPs!</p>
                 </div>
@@ -801,7 +837,7 @@
                             <rect x="3" y="14" width="7" height="7"></rect>
                         </svg>
                     </div>
-                    <h3>Custom Layouts</h3>
+                    <h3 style="font-family: 'AzoSansUber', sans-serif; font-weight: 400; color: #FF4F4F;">Custom Layouts</h3>
                     <p>Create photo layouts with that authentic sports broadcast feel, featuring scoreboards, team
                         logos, and dynamic action styling.</p>
                 </div>
@@ -815,7 +851,7 @@
                             </polygon>
                         </svg>
                     </div>
-                    <h3>Add-Ons</h3>
+                    <h3 style="font-family: 'AzoSansUber', sans-serif; font-weight: 400; color: #FF4F4F;">Add-Ons</h3>
                     <p>Enhance your sports experience with trading card prints, instant replays, highlight reels, and
                         championship-style photo packages.</p>
                 </div>
@@ -901,15 +937,15 @@
 
     <!-- View Other Themes Section -->
     <section class="modern-section parallax-section"
-        style="background-image: url('../assets/images/sports/sports-3.webp'); background-size: cover; background-position: center 20%; background-repeat: no-repeat; position: relative;">
+        style="background-image: url('../assets/images/sports/sports-3.webp'); background-size: cover; background-position: center 20%; background-repeat: no-repeat; position: relative; background-color: #1F1F1F;">
         <div class="parallax-overlay" style="position: absolute; inset: 0; background: rgba(0, 0, 0, 0.5); z-index: 1;">
         </div>
         <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl" style="position: relative; z-index: 2;">
             <div class="text-center">
-                <h2 class="section-title">View Our Other Event Themes</h2>
-                <p class="section-subtitle mb-8">Scroll to see all of our themes</p>
+                <h2 class="section-title"><span style="color: #FF4F4F;">View Our Other Event </span><span style="color: #18F1E1;">Themes</span></h2>
+                <p class="section-subtitle mb-8" style="color: #ffffff;">Scroll to see all of our themes</p>
                 <a href="../booth-themes.html" class="modern-btn"
-                    style="background: linear-gradient(135deg, rgba(220, 38, 38, 0.9) 0%, rgba(185, 28, 28, 0.9) 100%);">
+                    style="background: #FF4F4F;">
                     View All Themes
                 </a>
             </div>
