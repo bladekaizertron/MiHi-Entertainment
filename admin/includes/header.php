@@ -67,7 +67,7 @@ $email = $currentUser['email'] ?? 'admin@example.com';
                 <?php $isActive = ($currentPath === 'pages.php' || $currentPath === 'pages_edit.php'); ?>
                 <a href="pages.php" class="<?php echo $isActive ? 'active' : ''; ?>">
                     <svg class="sidebar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="4" width="18" height="16" rx="2" ry="2" stroke-width="2"/><path d="M7 8h10M7 12h10M7 16h6" stroke-width="2" stroke-linecap="round"/></svg>
-                    <span>Pages</span>
+                    <span>Website Pages</span>
                 </a>
                 <?php $isActive = ($currentPath === 'flipbooks.php' || $currentPath === 'flipbook_create.php' || $currentPath === 'flipbook_edit.php'); ?>
                 <a href="flipbooks.php" class="<?php echo $isActive ? 'active' : ''; ?>">
