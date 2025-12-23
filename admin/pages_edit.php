@@ -150,7 +150,7 @@ if ($isFileEdit) {
 							// Fallback to DOMDocument if regex fails
 							libxml_use_internal_errors(true);
 							$dom = new DOMDocument();
-							@$dom->loadHTML('<?xml encoding="UTF-8">' . $fileContent, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+							@$dom->loadHTML($fileContent, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
 							libxml_clear_errors();
 							
 							$body = $dom->getElementsByTagName('body')->item(0);
@@ -272,7 +272,10 @@ function deleteStaticPage($slug) {
 		$slug = trim($_POST['slug'] ?? '');
 		$content = $_POST['content_html'] ?? '';
 		$customCss = $_POST['custom_css'] ?? '';
-		$status = in_array($_POST['status'] ?? 'draft', ['draft','published'], true) ? $_POST['status'] : 'draft';
+		$status = $_POST['status'] ?? 'draft';
+		if (!in_array($status, ['draft', 'published'], true)) {
+			$status = 'draft';
+		}
 		
 		// Handle HTML file save
 		$postFilePath = $_POST['file_path'] ?? '';
@@ -329,52 +332,25 @@ function deleteStaticPage($slug) {
 					$finalContent = $content;
 					if (file_exists($targetFile)) {
 						$originalContent = @file_get_contents($targetFile);
-						if ($originalContent !== false && preg_match('/<body[^>]*>/i', $originalContent)) {
-							// Replace body content using regex (preserve body tag attributes)
-							$finalContent = preg_replace(
-								'/(<body[^>]*>)(.*?)(<\/body>)/is',
-								'$1' . $content . '$3',
-								$originalContent
-							);
-							
-							// If regex didn't match (unlikely), fall back to DOMDocument
-							if ($finalContent === $originalContent) {
-								libxml_use_internal_errors(true);
-								$dom = new DOMDocument();
-								@$dom->loadHTML('<?xml encoding="UTF-8">' . $originalContent, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
-								libxml_clear_errors();
+						if ($originalContent !== false && !empty($content)) {
+							// Split by body tags to preserve everything else (head, attributes, etc)
+							// This is much safer than DOMDocument or complex regex for large files
+							$bodyStartPos = stripos($originalContent, '<body');
+							if ($bodyStartPos !== false) {
+								$bodyTagEndPos = strpos($originalContent, '>', $bodyStartPos);
+								$bodyEndTagPos = stripos($originalContent, '</body>');
 								
-								$body = $dom->getElementsByTagName('body')->item(0);
-								if ($body) {
-									// Clear existing body content
-									while ($body->firstChild) {
-										$body->removeChild($body->firstChild);
-									}
-									
-									// Parse new content into a temporary DOM
-									$tempDom = new DOMDocument();
-									libxml_use_internal_errors(true);
-									@$tempDom->loadHTML('<?xml encoding="UTF-8"><body>' . $content . '</body>', LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
-									libxml_clear_errors();
-									
-									// Import nodes from temp DOM
-									$tempBody = $tempDom->getElementsByTagName('body')->item(0);
-									if ($tempBody) {
-										foreach ($tempBody->childNodes as $node) {
-											$importedNode = $dom->importNode($node, true);
-											$body->appendChild($importedNode);
-										}
-									}
-									
-									// Get the full HTML
-									$finalContent = $dom->saveHTML();
+								if ($bodyTagEndPos !== false && $bodyEndTagPos !== false) {
+									$head = substr($originalContent, 0, $bodyTagEndPos + 1);
+									$tail = substr($originalContent, $bodyEndTagPos);
+									$finalContent = $head . $content . $tail;
 								}
 							}
 						}
 					}
 					
-					// Save file
-					if (@file_put_contents($targetFile, $finalContent) !== false) {
+					// Save file if we have content
+					if (!empty($finalContent) && @file_put_contents($targetFile, $finalContent) !== false) {
 						$success = 'File saved successfully.';
 						$page['content_html'] = $content; // Keep body content for editor
 						// Update fileFullPath for potential reload
@@ -443,6 +419,61 @@ function deleteStaticPage($slug) {
 		}
 	}
 }
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'gallery_upload') {
+	$token = $_POST['csrf_token'] ?? '';
+	if (!hash_equals($csrf, $token)) {
+		http_response_code(400);
+		echo json_encode(['success' => false, 'message' => 'Invalid token']);
+		exit;
+	}
+
+	if (!isset($_FILES['file'])) {
+		http_response_code(400);
+		echo json_encode(['success' => false, 'message' => 'No file uploaded']);
+		exit;
+	}
+
+	$file = $_FILES['file'];
+	$maxSize = 50 * 1024 * 1024; // 50MB
+	if ($file['size'] > $maxSize) {
+		http_response_code(400);
+		echo json_encode(['success' => false, 'message' => 'File too large. Max 50MB.']);
+		exit;
+	}
+
+	$allowedImageExt = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
+	$allowedVideoExt = ['mp4', 'webm', 'ogg'];
+	$ext = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
+	
+	$type = '';
+	if (in_array($ext, $allowedImageExt)) {
+		$type = 'image';
+	} elseif (in_array($ext, $allowedVideoExt)) {
+		$type = 'video';
+	} else {
+		http_response_code(400);
+		echo json_encode(['success' => false, 'message' => 'Invalid file type.']);
+		exit;
+	}
+
+	$uploadDir = __DIR__ . '/../uploads/gallery/';
+	if (!file_exists($uploadDir)) {
+		@mkdir($uploadDir, 0755, true);
+	}
+
+	$filename = 'gal_' . uniqid() . '.' . $ext;
+	$destination = $uploadDir . $filename;
+
+	if (move_uploaded_file($file['tmp_name'], $destination)) {
+		$url = SITE_URL . '/uploads/gallery/' . $filename;
+		echo json_encode(['success' => true, 'url' => $url, 'type' => $type]);
+	} else {
+		http_response_code(500);
+		echo json_encode(['success' => false, 'message' => 'Failed to save file.']);
+	}
+	exit;
+}
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'export_static') {
 	$token = $_POST['csrf_token'] ?? '';
 	if (!hash_equals($csrf, $token)) {
@@ -662,6 +693,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'export_static') {
 				<div class="editor-toolbar">
 					<button type="button" id="edit-mode-btn" class="active">✏️ Edit Mode</button>
 					<button type="button" id="preview-mode-btn">👁️ Preview Mode</button>
+					<button type="button" id="toggle-gallery-btn" style="display: none; margin-left: 8px; border-color: #18F1E1; color: #1F1F1F; font-weight: 600;">🖼️ Add Gallery</button>
 					<div style="flex: 1;"></div>
 					<button type="button" id="mobile-preview-btn">📱 Mobile</button>
 					<button type="button" id="tablet-preview-btn">📱 Tablet</button>
@@ -679,16 +711,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'export_static') {
 						if (substr($iframePath, -5) !== '.html') {
 							$iframePath .= '.html';
 						}
-						echo htmlspecialchars($iframePath, ENT_QUOTES, 'UTF-8');
+						$iframeUrl = htmlspecialchars($iframePath, ENT_QUOTES, 'UTF-8');
+						echo $iframeUrl . (strpos($iframeUrl, '?') !== false ? '&' : '?') . 'v=' . time();
 					} elseif ($isFileEdit) {
 						// Fallback: construct from current filePath
 						$iframePath = '../' . ltrim($filePath, '/');
 						if (substr($iframePath, -5) !== '.html') {
 							$iframePath .= '.html';
 						}
-						echo htmlspecialchars($iframePath, ENT_QUOTES, 'UTF-8');
+						$iframeUrl = htmlspecialchars($iframePath, ENT_QUOTES, 'UTF-8');
+						echo $iframeUrl . (strpos($iframeUrl, '?') !== false ? '&' : '?') . 'v=' . time();
 					} else {
-						echo '../page.php?slug=' . urlencode($page['slug']);
+						echo '../page.php?slug=' . urlencode($page['slug']) . '&v=' . time();
 					}
 				?>"></iframe>
 			</div>
@@ -759,10 +793,193 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'export_static') {
 					console.error('Iframe body not found');
 					return;
 				}
+
+				// Check for Gallery Section
+				const galleryBtn = document.getElementById('toggle-gallery-btn');
+				let gallerySection = null;
+				
+				// Look for section with Gallery heading
+				const sections = iframeDoc.querySelectorAll('section');
+				sections.forEach(sec => {
+					const h2 = sec.querySelector('h2');
+					if (h2 && h2.textContent.trim().toLowerCase() === 'gallery') {
+						gallerySection = sec;
+					}
+				});
+
+				if (gallerySection && galleryBtn) {
+					galleryBtn.style.display = 'inline-flex';
+					const computedStyle = iframeDoc.defaultView.getComputedStyle(gallerySection);
+					const isHidden = computedStyle.display === 'none';
+					galleryBtn.innerHTML = isHidden ? '🖼️ Add Gallery' : '🖼️ Hide Gallery';
+					
+					// Add "Add Item" button if it doesn't exist
+					let galleryGrid = gallerySection.querySelector('.gallery-grid');
+					if (galleryGrid) {
+						// Add hover action to gallery items for removal
+						const setupGalleryItems = () => {
+							galleryGrid.querySelectorAll('.gallery-item-container').forEach(item => {
+								if (item.querySelector('.remove-item-btn')) return;
+								
+								item.style.position = 'relative';
+								const removeBtn = iframeDoc.createElement('button');
+								removeBtn.innerHTML = '×';
+								removeBtn.className = 'remove-item-btn';
+								removeBtn.style.cssText = 'position:absolute; top:5px; right:5px; background:rgba(255,0,0,0.7); color:white; border:none; border-radius:50%; width:24px; height:24px; cursor:pointer; z-index:10; display:none; align-items:center; justify-content:center; font-size:18px; font-weight:bold;';
+								
+								item.appendChild(removeBtn);
+								
+								item.addEventListener('mouseenter', () => { if(editMode) removeBtn.style.display = 'flex'; });
+								item.addEventListener('mouseleave', () => { removeBtn.style.display = 'none'; });
+								
+								removeBtn.onclick = (e) => {
+									e.stopPropagation();
+									if (confirm('Remove this item from gallery?')) {
+										item.remove();
+										changes['gallery-update'] = { type: 'gallery', action: 'update' };
+									}
+								};
+							});
+						};
+						
+						setupGalleryItems();
+
+						// Global Add Item logic
+						galleryBtn.onclick = function() {
+							const currentStyle = gallerySection.getAttribute('style') || '';
+							if (gallerySection.style.display === 'none' || computedStyle.display === 'none') {
+								gallerySection.style.display = 'block';
+								gallerySection.setAttribute('style', currentStyle.replace(/display:\s*none;?/gi, '').trim());
+								galleryBtn.innerHTML = '🖼️ Hide Gallery';
+								changes['gallery-visibility'] = { type: 'visibility', value: 'block' };
+								
+								// If it was hidden, show the "Add Media" prompt
+								if (galleryGrid.children.length === 0 || (galleryGrid.children.length === 3 && galleryGrid.querySelector('svg'))) {
+									// Clear placeholders if they exist
+									if (galleryGrid.querySelector('svg')) {
+										galleryGrid.innerHTML = '';
+									}
+									promptAddMedia();
+								}
+							} else {
+								gallerySection.style.display = 'none';
+								if (!gallerySection.getAttribute('style')?.includes('display: none')) {
+									const style = gallerySection.getAttribute('style') || '';
+									gallerySection.setAttribute('style', (style.endsWith(';') ? style : style + (style ? ';' : '')) + ' display: none;');
+								}
+								galleryBtn.innerHTML = '🖼️ Add Gallery';
+								changes['gallery-visibility'] = { type: 'visibility', value: 'none' };
+							}
+						};
+
+						// Add a second button specifically for adding media if gallery is visible
+						let addMediaBtn = document.getElementById('add-gallery-item-btn');
+						if (!addMediaBtn) {
+							addMediaBtn = document.createElement('button');
+							addMediaBtn.id = 'add-gallery-item-btn';
+							addMediaBtn.type = 'button';
+							addMediaBtn.innerHTML = '➕ Add Photo/Video';
+							addMediaBtn.style.cssText = 'display:none; margin-left:8px; border-color:#FF4F4F; color:#1F1F1F; font-weight:600;';
+							galleryBtn.parentNode.insertBefore(addMediaBtn, galleryBtn.nextSibling);
+						}
+						
+						const updateAddMediaBtnVisibility = () => {
+							const isVisible = gallerySection.style.display !== 'none' && computedStyle.display !== 'none';
+							addMediaBtn.style.display = isVisible ? 'inline-flex' : 'none';
+						};
+						
+						updateAddMediaBtnVisibility();
+						
+						// Observe visibility changes to update addMediaBtn
+						const observer = new MutationObserver(updateAddMediaBtnVisibility);
+						observer.observe(gallerySection, { attributes: true, attributeFilter: ['style'] });
+
+						function promptAddMedia() {
+							const input = document.createElement('input');
+							input.type = 'file';
+							input.accept = 'image/*,video/*';
+							input.onchange = function(e) {
+								const file = e.target.files[0];
+								if (file) {
+									uploadGalleryFile(file);
+								}
+							};
+							input.click();
+						}
+
+						addMediaBtn.onclick = promptAddMedia;
+
+						function uploadGalleryFile(file) {
+							const formData = new FormData();
+							formData.append('file', file);
+							formData.append('action', 'gallery_upload');
+							formData.append('csrf_token', csrfToken);
+
+							addMediaBtn.disabled = true;
+							addMediaBtn.innerHTML = '⏳ Uploading...';
+
+							fetch(window.location.href, {
+								method: 'POST',
+								body: formData
+							})
+							.then(res => res.json())
+							.then(data => {
+								if (data.success) {
+									const container = iframeDoc.createElement('div');
+									container.className = 'gallery-item-container';
+									
+									let media;
+									const filename = data.url.split('/').pop();
+									// Use relative path for static files, absolute for DB pages
+									const finalUrl = isFileEdit ? '../uploads/gallery/' + filename : data.url;
+									
+									if (data.type === 'image') {
+										media = iframeDoc.createElement('img');
+										media.src = finalUrl;
+									} else {
+										media = iframeDoc.createElement('video');
+										media.src = finalUrl;
+										media.controls = true;
+									}
+									
+									container.appendChild(media);
+									
+									// Remove placeholders if they are still there
+									if (galleryGrid.querySelector('svg')) {
+										galleryGrid.innerHTML = '';
+									}
+									
+									galleryGrid.appendChild(container);
+									setupGalleryItems();
+									changes['gallery-update'] = { type: 'gallery', action: 'add' };
+								} else {
+									alert('Upload failed: ' + (data.message || 'Unknown error'));
+								}
+							})
+							.catch(err => {
+								console.error(err);
+								alert('Upload failed. Please check file size and try again.');
+							})
+							.finally(() => {
+								addMediaBtn.disabled = false;
+								addMediaBtn.innerHTML = '➕ Add Photo/Video';
+							});
+						}
+					}
+				}
 				
 				// Make text elements editable
 				function makeEditable(element) {
-					if (element.tagName && ['SCRIPT', 'STYLE', 'NOSCRIPT'].includes(element.tagName)) {
+					if (element.tagName && ['SCRIPT', 'STYLE', 'NOSCRIPT', 'SVG'].includes(element.tagName)) {
+						return;
+					}
+
+					// Skip elements that are likely used for icons or specific functional components
+					if (element.classList && (
+						element.classList.contains('feature-item-icon') || 
+						element.classList.contains('feature-icon') ||
+						element.classList.contains('modern-btn-call')
+					)) {
 						return;
 					}
 					
@@ -896,8 +1113,70 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'export_static') {
 			if (Object.keys(changes).length > 0) {
 				try {
 					const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
-					const newHtml = iframeDoc.documentElement.outerHTML;
-					document.getElementById('content_html').value = newHtml;
+					let contentToSave = '';
+					
+					if (isFileEdit) {
+						// For static files, we want to exclude components injected by JS (header, footer, etc)
+						const bodyClone = iframeDoc.body.cloneNode(true);
+						
+						// Remove elements injected by components
+						// These are identified by common tags/IDs or if they don't exist in the original source
+						const injectedSelectors = [
+							'header', 
+							'footer', 
+							'#mobile-menu-overlay',
+							'.back-to-top'
+						];
+						
+						injectedSelectors.forEach(selector => {
+							bodyClone.querySelectorAll(selector).forEach(el => el.remove());
+						});
+						
+						contentToSave = bodyClone.innerHTML;
+					} else {
+						// For DB pages, try to get the specific article content if it exists
+						const contentArticle = iframeDoc.querySelector('article.page-content') || 
+						                     iframeDoc.querySelector('.page-content') || 
+						                     iframeDoc.querySelector('main') || 
+						                     iframeDoc.body;
+						contentToSave = contentArticle.innerHTML;
+					}
+
+					// Clean up editor-specific attributes and classes
+					const tempDiv = document.createElement('div');
+					tempDiv.innerHTML = contentToSave;
+					
+					// Remove editor-specific elements
+					tempDiv.querySelectorAll('.remove-item-btn').forEach(el => el.remove());
+					
+					const editorElements = tempDiv.querySelectorAll('*');
+					editorElements.forEach(el => {
+						el.classList.remove('editable-text', 'media-editable', 'editable-highlight', 'gjs-selected');
+						el.removeAttribute('data-original-text');
+						el.removeAttribute('data-id');
+						el.removeAttribute('contenteditable');
+						el.removeAttribute('data-initialized'); // Remove phone-protection artifact
+						
+						// Fix common style artifacts like &:hover or empty class
+						if (el.hasAttribute('style')) {
+							let style = el.getAttribute('style');
+							style = style.replace(/&amp;:hover\s*\{[^}]*\}/g, ''); // Fix hover artifact
+							style = style.replace(/&:hover\s*\{[^}]*\}/g, '');
+							el.setAttribute('style', style);
+						}
+						
+						if (el.getAttribute('class') === '') el.removeAttribute('class');
+					});
+					
+					// Final cleanup for the HTML string (fix encoding artifacts)
+					let finalHtml = tempDiv.innerHTML;
+					finalHtml = finalHtml.replace(/â€”/g, '—');
+					finalHtml = finalHtml.replace(/â€“/g, '–');
+					finalHtml = finalHtml.replace(/â€™/g, "'");
+					finalHtml = finalHtml.replace(/â€œ/g, '"');
+					finalHtml = finalHtml.replace(/â€\?/g, '"');
+					
+					document.getElementById('content_html').value = finalHtml;
 				} catch(err) {
 					console.error('Error getting iframe content:', err);
 				}
