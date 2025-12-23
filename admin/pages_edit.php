@@ -1038,9 +1038,57 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'export_static') {
 						return;
 					}
 					
+					// Handle links and buttons specially to prevent navigation in edit mode
+					if (element.tagName === 'A' || element.tagName === 'BUTTON') {
+						if (!element.hasAttribute('data-link-editable')) {
+							element.setAttribute('data-link-editable', 'true');
+							element.classList.add('editable-link');
+							
+							// Prevent navigation/action in edit mode
+							element.addEventListener('click', function(e) {
+								if (editMode) {
+									e.preventDefault();
+									e.stopPropagation();
+									e.stopImmediatePropagation();
+									// Make it editable on click
+									this.contentEditable = 'true';
+									this.focus();
+									// Select all text for easy editing
+									const range = iframeDoc.createRange();
+									range.selectNodeContents(this);
+									const selection = iframeDoc.defaultView.getSelection();
+									selection.removeAllRanges();
+									selection.addRange(range);
+								}
+							}, true); // Use capture phase to catch before navigation
+							
+							// Track changes when editing is done
+							element.addEventListener('blur', function() {
+								this.contentEditable = 'false';
+								const newText = this.textContent;
+								const oldText = this.getAttribute('data-original-text') || this.textContent;
+								if (newText !== oldText) {
+									changes[this.getAttribute('data-id') || this.outerHTML.substring(0, 50)] = {
+										old: oldText,
+										new: newText,
+										element: this
+									};
+								}
+							});
+							
+							element.setAttribute('data-original-text', element.textContent);
+							element.setAttribute('data-id', 'link-' + Date.now() + '-' + Math.random());
+						}
+						return; // Don't process children of links/buttons to avoid double processing
+					}
+					
 					// Make text nodes editable
 					if (element.nodeType === 3 && element.textContent.trim()) {
 						const parent = element.parentNode;
+						// Skip if parent is a link or button (handled separately)
+						if (parent && (parent.tagName === 'A' || parent.tagName === 'BUTTON')) {
+							return;
+						}
 						if (parent && !parent.isContentEditable) {
 							parent.contentEditable = 'true';
 							parent.classList.add('editable-text');
@@ -1087,15 +1135,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'export_static') {
 					const heroSections = iframeDoc.querySelectorAll('section#hero, section[class*="hero"], .hero-section, .hero-video-container');
 					
 					heroSections.forEach(heroSection => {
-						// Skip if already set up
-						if (heroSection.hasAttribute('data-hero-editable')) {
-							return;
+						// Remove existing button if present (to allow re-initialization)
+						const existingButton = heroSection.querySelector('.hero-change-bg-btn');
+						if (existingButton) {
+							existingButton.remove();
 						}
+						
+						// Remove the data attribute to allow re-initialization
+						heroSection.removeAttribute('data-hero-editable');
+						heroSection.removeAttribute('data-hero-hover-handler');
 						heroSection.setAttribute('data-hero-editable', 'true');
 						
 						// Find background container - could be a div with background-image or a video element
-						// First check for video
-						let bgContainer = heroSection.querySelector('video.hero-video, video');
+						// First check for video (including newly added ones)
+						let bgContainer = heroSection.querySelector('video.hero-video, video[class*="hero"], video');
 						
 						// If no video, look for div with background-image style
 						if (!bgContainer) {
@@ -1113,10 +1166,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'export_static') {
 									const style = div.getAttribute('style') || '';
 									const computedStyle = iframeDoc.defaultView.getComputedStyle(div);
 									// Check if it has background-image and is not the overlay
-									if ((style.includes('background-image') || computedStyle.backgroundImage !== 'none') && 
-									    !div.classList.contains('hero-overlay') && 
-									    !div.classList.contains('overlay') &&
-									    div.getAttribute('role') !== 'presentation' || style.includes('background-image')) {
+									const hasBgImage = style.includes('background-image') || computedStyle.backgroundImage !== 'none';
+									const isNotOverlay = !div.classList.contains('hero-overlay') && !div.classList.contains('overlay');
+									
+									if (hasBgImage && isNotOverlay) {
 										bgContainer = div;
 										break;
 									}
@@ -1145,82 +1198,116 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'export_static') {
 								heroSection.style.position = 'relative';
 							}
 							
-							// Create "Change Background" button (only if not already present)
+							// Always create a fresh button (remove old one first)
 							let changeBgButton = heroSection.querySelector('.hero-change-bg-btn');
-							if (!changeBgButton) {
-								changeBgButton = iframeDoc.createElement('button');
-								changeBgButton.className = 'hero-change-bg-btn';
-								changeBgButton.innerHTML = '🖼️ Change Background';
-								changeBgButton.style.cssText = `
-									position: absolute;
-									top: 20px;
-									right: 20px;
-									background: rgba(102, 126, 234, 0.95);
-									color: white;
-									border: 2px solid white;
-									padding: 12px 20px;
-									border-radius: 8px;
-									font-size: 14px;
-									font-weight: 600;
-									cursor: pointer;
-									z-index: 10001;
-									display: none;
-									box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-									transition: all 0.3s ease;
-									pointer-events: auto;
-								`;
-								changeBgButton.onmouseenter = function() {
-									this.style.background = 'rgba(102, 126, 234, 1)';
-									this.style.transform = 'scale(1.05)';
-								};
-								changeBgButton.onmouseleave = function() {
-									this.style.background = 'rgba(102, 126, 234, 0.95)';
-									this.style.transform = 'scale(1)';
-								};
-								heroSection.appendChild(changeBgButton);
+							if (changeBgButton) {
+								changeBgButton.remove();
 							}
 							
-							// Check if already has listeners
+							// Create new button
+							changeBgButton = iframeDoc.createElement('button');
+							changeBgButton.className = 'hero-change-bg-btn';
+							changeBgButton.innerHTML = '🖼️ Change Background';
+							changeBgButton.style.cssText = `
+								position: absolute;
+								top: 20px;
+								right: 20px;
+								background: rgba(102, 126, 234, 0.95);
+								color: white;
+								border: 2px solid white;
+								padding: 12px 20px;
+								border-radius: 8px;
+								font-size: 14px;
+								font-weight: 600;
+								cursor: pointer;
+								z-index: 10001;
+								display: none;
+								box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+								transition: all 0.3s ease;
+								pointer-events: auto;
+							`;
+							changeBgButton.onmouseenter = function() {
+								this.style.background = 'rgba(102, 126, 234, 1)';
+								this.style.transform = 'scale(1.05)';
+							};
+							changeBgButton.onmouseleave = function() {
+								this.style.background = 'rgba(102, 126, 234, 0.95)';
+								this.style.transform = 'scale(1)';
+							};
+							heroSection.appendChild(changeBgButton);
+							
+							// Remove old event listeners by cloning (clean way to remove all listeners)
+							// But we'll use a flag to prevent duplicate listeners instead
 							if (!heroSection.hasAttribute('data-hero-hover-handler')) {
 								heroSection.setAttribute('data-hero-hover-handler', 'true');
-								
-								// Show button on hover over hero section (when in edit mode)
-								heroSection.addEventListener('mouseenter', function() {
-									if (editMode && changeBgButton) {
-										changeBgButton.style.display = 'block';
-										// Add subtle outline to background
-										if (bgContainer) {
-											bgContainer.style.outline = '3px solid rgba(102, 126, 234, 0.5)';
-											bgContainer.style.outlineOffset = '2px';
-										}
-									}
-								});
-							
-								heroSection.addEventListener('mouseleave', function(e) {
-									// Only hide if not hovering over the button itself
-									if (changeBgButton && !changeBgButton.contains(e.relatedTarget)) {
-										changeBgButton.style.display = 'none';
-										if (bgContainer) {
-											bgContainer.style.outline = '';
-											bgContainer.style.outlineOffset = '';
-										}
-									}
-								});
-								
-								// Keep button visible when hovering over it
-								changeBgButton.addEventListener('mouseenter', function() {
-									this.style.display = 'block';
-								});
-								
-								// Button click handler
-								changeBgButton.addEventListener('click', function(e) {
-									if (editMode) {
-										e.preventDefault();
-										e.stopPropagation();
-										editHeroBackground(heroSection, bgContainer);
-									}
-								});
+							} else {
+								// If already has handler, remove and re-add to ensure fresh listeners
+								heroSection.removeAttribute('data-hero-hover-handler');
+								heroSection.setAttribute('data-hero-hover-handler', 'true');
 							}
+							
+							// Remove any existing listeners by using a new function wrapper
+							const mouseEnterHandler = function() {
+								if (editMode && changeBgButton) {
+									changeBgButton.style.display = 'block';
+									// Add subtle outline to background
+									if (bgContainer) {
+										bgContainer.style.outline = '3px solid rgba(102, 126, 234, 0.5)';
+										bgContainer.style.outlineOffset = '2px';
+									}
+								}
+							};
+							
+							const mouseLeaveHandler = function(e) {
+								// Only hide if not hovering over the button itself
+								if (changeBgButton && !changeBgButton.contains(e.relatedTarget)) {
+									changeBgButton.style.display = 'none';
+									if (bgContainer) {
+										bgContainer.style.outline = '';
+										bgContainer.style.outlineOffset = '';
+									}
+								}
+							};
+							
+							const buttonMouseEnterHandler = function() {
+								this.style.display = 'block';
+							};
+							
+							const buttonClickHandler = function(e) {
+								if (editMode) {
+									e.preventDefault();
+									e.stopPropagation();
+									editHeroBackground(heroSection, bgContainer);
+								}
+							};
+							
+							// Store handlers on element for potential cleanup
+							heroSection._heroMouseEnter = mouseEnterHandler;
+							heroSection._heroMouseLeave = mouseLeaveHandler;
+							changeBgButton._buttonMouseEnter = buttonMouseEnterHandler;
+							changeBgButton._buttonClick = buttonClickHandler;
+							
+							// Remove old listeners if they exist, then add new ones
+							if (heroSection._oldMouseEnter) {
+								heroSection.removeEventListener('mouseenter', heroSection._oldMouseEnter);
+							}
+							if (heroSection._oldMouseLeave) {
+								heroSection.removeEventListener('mouseleave', heroSection._oldMouseLeave);
+							}
+							
+							// Show button on hover over hero section (when in edit mode)
+							heroSection.addEventListener('mouseenter', mouseEnterHandler);
+							heroSection.addEventListener('mouseleave', mouseLeaveHandler);
+							
+							// Keep button visible when hovering over it
+							changeBgButton.addEventListener('mouseenter', buttonMouseEnterHandler);
+							
+							// Button click handler
+							changeBgButton.addEventListener('click', buttonClickHandler);
+							
+							// Store for potential cleanup
+							heroSection._oldMouseEnter = mouseEnterHandler;
+							heroSection._oldMouseLeave = mouseLeaveHandler;
 						}
 					});
 				}
@@ -1472,13 +1559,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'export_static') {
 				
 				// Add hover effects in edit mode
 				iframeDoc.addEventListener('mouseover', function(e) {
-					if (editMode && (e.target.classList.contains('editable-text') || e.target.classList.contains('media-editable') || e.target.classList.contains('hero-bg-editable'))) {
+					if (editMode && (e.target.classList.contains('editable-text') || e.target.classList.contains('media-editable') || e.target.classList.contains('hero-bg-editable') || e.target.classList.contains('editable-link'))) {
 						e.target.classList.add('editable-highlight');
+						// Add special styling for editable links/buttons
+						if (e.target.classList.contains('editable-link')) {
+							e.target.style.cursor = 'text';
+							e.target.style.outline = '2px dashed #667eea';
+							e.target.style.outlineOffset = '2px';
+						}
 					}
 				});
 				
 				iframeDoc.addEventListener('mouseout', function(e) {
 					e.target.classList.remove('editable-highlight');
+					if (e.target.classList.contains('editable-link') && !e.target.isContentEditable) {
+						e.target.style.cursor = '';
+						e.target.style.outline = '';
+						e.target.style.outlineOffset = '';
+					}
 				});
 				
 				console.log('Editor initialized');
@@ -1601,11 +1699,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'export_static') {
 					
 					const editorElements = tempDiv.querySelectorAll('*');
 					editorElements.forEach(el => {
-						el.classList.remove('editable-text', 'media-editable', 'editable-highlight', 'gjs-selected');
+						el.classList.remove('editable-text', 'media-editable', 'editable-highlight', 'editable-link', 'gjs-selected');
 						el.removeAttribute('data-original-text');
 						el.removeAttribute('data-id');
 						el.removeAttribute('contenteditable');
+						el.removeAttribute('data-link-editable');
 						el.removeAttribute('data-initialized'); // Remove phone-protection artifact
+						// Remove inline styles added by editor
+						if (el.hasAttribute('style')) {
+							let style = el.getAttribute('style');
+							style = style.replace(/cursor:\s*text;?/gi, '');
+							style = style.replace(/outline:\s*[^;]+;?/gi, '');
+							style = style.replace(/outline-offset:\s*[^;]+;?/gi, '');
+							style = style.replace(/;\s*;/g, ';');
+							style = style.trim();
+							if (style && !style.endsWith(';')) style += ';';
+							if (style === ';' || !style) {
+								el.removeAttribute('style');
+							} else {
+								el.setAttribute('style', style);
+							}
+						}
 						
 						// Fix common style artifacts like &:hover or empty class
 						if (el.hasAttribute('style')) {
