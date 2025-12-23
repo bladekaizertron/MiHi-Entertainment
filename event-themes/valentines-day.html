@@ -693,6 +693,34 @@
             animation: fadeInUp 0.8s ease-out forwards;
         }
 
+        /* Gallery Grid Styles */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .gallery-item-container {
+            aspect-ratio: 1;
+            background-color: #1F1F1F;
+            border-radius: 16px;
+            overflow: hidden;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item-container:hover {
+            transform: scale(1.02);
+        }
+
+        .gallery-item-container img,
+        .gallery-item-container video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
         /* btn-primary styling */
         .btn-primary {
             display: inline-flex;
@@ -931,6 +959,36 @@
                         <button class="carousel-indicator active" data-slide="0" aria-label="Go to slide 1"></button>
                         <button class="carousel-indicator" data-slide="1" aria-label="Go to slide 2"></button>
                     </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section (hidden until photos are ready) -->
+    <section class="modern-section" style="background-color: #1F1F1F; display: none;">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
+            <h2 class="section-title" style="font-weight: 400; font-family: 'AzoSansUber', sans-serif; color: #18F1E1;">Gallery</h2>
+            <p class="section-subtitle" style="font-family: 'AzoSans', sans-serif; color: #ffffff;">
+                Photos coming soon! Check back shortly to see our romantic Valentine's Day moments in action.
+            </p>
+            <div class="gallery-grid">
+                <div style="aspect-ratio: 1; background-color: #f3f4f6; border-radius: 16px; display: flex; align-items: center; justify-content: center; border: 2px dashed #d1d5db;">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
+                        <circle cx="12" cy="13" r="4"></circle>
+                    </svg>
+                </div>
+                <div style="aspect-ratio: 1; background-color: #f3f4f6; border-radius: 16px; display: flex; align-items: center; justify-content: center; border: 2px dashed #d1d5db;">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"></rect>
+                        <line x1="7" y1="2" x2="7" y2="22"></line>
+                        <line x1="17" y1="2" x2="17" y2="22"></line>
+                        <line x1="2" y1="12" x2="22" y2="12"></line>
+                        <line x1="2" y1="7" x2="7" y2="7"></line>
+                        <line x1="2" y1="17" x2="7" y2="17"></line>
+                        <line x1="17" y1="17" x2="22" y2="17"></line>
+                        <line x1="17" y1="7" x2="22" y2="7"></line>
+                    </svg>
                 </div>
             </div>
         </div>
