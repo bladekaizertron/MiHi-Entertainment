@@ -474,6 +474,61 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'gallery_upload') {
 	exit;
 }
 
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'hero_background_upload') {
+	$token = $_POST['csrf_token'] ?? '';
+	if (!hash_equals($csrf, $token)) {
+		http_response_code(400);
+		echo json_encode(['success' => false, 'message' => 'Invalid token']);
+		exit;
+	}
+
+	if (!isset($_FILES['file'])) {
+		http_response_code(400);
+		echo json_encode(['success' => false, 'message' => 'No file uploaded']);
+		exit;
+	}
+
+	$file = $_FILES['file'];
+	$maxSize = 100 * 1024 * 1024; // 100MB for hero backgrounds (videos can be larger)
+	if ($file['size'] > $maxSize) {
+		http_response_code(400);
+		echo json_encode(['success' => false, 'message' => 'File too large. Max 100MB.']);
+		exit;
+	}
+
+	$allowedImageExt = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
+	$allowedVideoExt = ['mp4', 'webm', 'ogg'];
+	$ext = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
+	
+	$type = '';
+	if (in_array($ext, $allowedImageExt)) {
+		$type = 'image';
+	} elseif (in_array($ext, $allowedVideoExt)) {
+		$type = 'video';
+	} else {
+		http_response_code(400);
+		echo json_encode(['success' => false, 'message' => 'Invalid file type. Only images and videos allowed.']);
+		exit;
+	}
+
+	$uploadDir = __DIR__ . '/../uploads/hero/';
+	if (!file_exists($uploadDir)) {
+		@mkdir($uploadDir, 0755, true);
+	}
+
+	$filename = 'hero_' . uniqid() . '.' . $ext;
+	$destination = $uploadDir . $filename;
+
+	if (move_uploaded_file($file['tmp_name'], $destination)) {
+		$url = SITE_URL . '/uploads/hero/' . $filename;
+		echo json_encode(['success' => true, 'url' => $url, 'type' => $type]);
+	} else {
+		http_response_code(500);
+		echo json_encode(['success' => false, 'message' => 'Failed to save file.']);
+	}
+	exit;
+}
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'export_static') {
 	$token = $_POST['csrf_token'] ?? '';
 	if (!hash_equals($csrf, $token)) {
@@ -1026,9 +1081,398 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'export_static') {
 				// Initialize editing on all elements
 				makeEditable(iframeBody);
 				
+				// Make hero backgrounds editable
+				function setupHeroBackgroundEditing() {
+					// Find hero sections - look for sections with id="hero" or class containing "hero"
+					const heroSections = iframeDoc.querySelectorAll('section#hero, section[class*="hero"], .hero-section, .hero-video-container');
+					
+					heroSections.forEach(heroSection => {
+						// Skip if already set up
+						if (heroSection.hasAttribute('data-hero-editable')) {
+							return;
+						}
+						heroSection.setAttribute('data-hero-editable', 'true');
+						
+						// Find background container - could be a div with background-image or a video element
+						// First check for video
+						let bgContainer = heroSection.querySelector('video.hero-video, video');
+						
+						// If no video, look for div with background-image style
+						if (!bgContainer) {
+							// Try multiple selectors to find the background div
+							const possibleSelectors = [
+								'.absolute.inset-0[style*="background-image"]',
+								'.absolute.inset-0.bg-cover',
+								'div[style*="background-image"]',
+								'.absolute.inset-0'
+							];
+							
+							for (let selector of possibleSelectors) {
+								const divs = heroSection.querySelectorAll(selector);
+								for (let div of divs) {
+									const style = div.getAttribute('style') || '';
+									const computedStyle = iframeDoc.defaultView.getComputedStyle(div);
+									// Check if it has background-image and is not the overlay
+									if ((style.includes('background-image') || computedStyle.backgroundImage !== 'none') && 
+									    !div.classList.contains('hero-overlay') && 
+									    !div.classList.contains('overlay') &&
+									    div.getAttribute('role') !== 'presentation' || style.includes('background-image')) {
+										bgContainer = div;
+										break;
+									}
+								}
+								if (bgContainer) break;
+							}
+						}
+						
+						// If still no container found, check if section itself has background
+						if (!bgContainer) {
+							const computedStyle = iframeDoc.defaultView.getComputedStyle(heroSection);
+							if (computedStyle.backgroundImage && computedStyle.backgroundImage !== 'none') {
+								bgContainer = heroSection;
+							}
+						}
+						
+						if (bgContainer) {
+							bgContainer.classList.add('hero-bg-editable');
+							if (!bgContainer.getAttribute('data-hero-id')) {
+								bgContainer.setAttribute('data-hero-id', 'hero-' + Date.now() + '-' + Math.random());
+							}
+							
+							// Ensure hero section has relative positioning for button placement
+							const heroPosition = iframeDoc.defaultView.getComputedStyle(heroSection).position;
+							if (heroPosition === 'static') {
+								heroSection.style.position = 'relative';
+							}
+							
+							// Create "Change Background" button (only if not already present)
+							let changeBgButton = heroSection.querySelector('.hero-change-bg-btn');
+							if (!changeBgButton) {
+								changeBgButton = iframeDoc.createElement('button');
+								changeBgButton.className = 'hero-change-bg-btn';
+								changeBgButton.innerHTML = '🖼️ Change Background';
+								changeBgButton.style.cssText = `
+									position: absolute;
+									top: 20px;
+									right: 20px;
+									background: rgba(102, 126, 234, 0.95);
+									color: white;
+									border: 2px solid white;
+									padding: 12px 20px;
+									border-radius: 8px;
+									font-size: 14px;
+									font-weight: 600;
+									cursor: pointer;
+									z-index: 10001;
+									display: none;
+									box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+									transition: all 0.3s ease;
+									pointer-events: auto;
+								`;
+								changeBgButton.onmouseenter = function() {
+									this.style.background = 'rgba(102, 126, 234, 1)';
+									this.style.transform = 'scale(1.05)';
+								};
+								changeBgButton.onmouseleave = function() {
+									this.style.background = 'rgba(102, 126, 234, 0.95)';
+									this.style.transform = 'scale(1)';
+								};
+								heroSection.appendChild(changeBgButton);
+							}
+							
+							// Check if already has listeners
+							if (!heroSection.hasAttribute('data-hero-hover-handler')) {
+								heroSection.setAttribute('data-hero-hover-handler', 'true');
+								
+								// Show button on hover over hero section (when in edit mode)
+								heroSection.addEventListener('mouseenter', function() {
+									if (editMode && changeBgButton) {
+										changeBgButton.style.display = 'block';
+										// Add subtle outline to background
+										if (bgContainer) {
+											bgContainer.style.outline = '3px solid rgba(102, 126, 234, 0.5)';
+											bgContainer.style.outlineOffset = '2px';
+										}
+									}
+								});
+							
+								heroSection.addEventListener('mouseleave', function(e) {
+									// Only hide if not hovering over the button itself
+									if (changeBgButton && !changeBgButton.contains(e.relatedTarget)) {
+										changeBgButton.style.display = 'none';
+										if (bgContainer) {
+											bgContainer.style.outline = '';
+											bgContainer.style.outlineOffset = '';
+										}
+									}
+								});
+								
+								// Keep button visible when hovering over it
+								changeBgButton.addEventListener('mouseenter', function() {
+									this.style.display = 'block';
+								});
+								
+								// Button click handler
+								changeBgButton.addEventListener('click', function(e) {
+									if (editMode) {
+										e.preventDefault();
+										e.stopPropagation();
+										editHeroBackground(heroSection, bgContainer);
+									}
+								});
+							}
+						}
+					});
+				}
+				
+				// Function to edit hero background
+				function editHeroBackground(heroSection, bgContainer) {
+					
+					// Remove any existing modal first
+					const existingModal = document.getElementById('hero-upload-modal');
+					if (existingModal) {
+						existingModal.remove();
+					}
+					
+					// Create modal in parent document (we're in parent window context)
+					const modal = document.createElement('div');
+					modal.id = 'hero-upload-modal';
+					modal.style.cssText = 'position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.75); z-index:100000; display:flex; align-items:center; justify-content:center;';
+					
+					const modalContent = document.createElement('div');
+					modalContent.style.cssText = 'background:white; padding:24px; border-radius:12px; max-width:500px; width:90%; box-shadow:0 20px 60px rgba(0,0,0,0.3);';
+					
+					const imageBtnId = 'hero-upload-image-' + Date.now();
+					const videoBtnId = 'hero-upload-video-' + Date.now();
+					const cancelBtnId = 'hero-upload-cancel-' + Date.now();
+					
+					modalContent.innerHTML = `
+						<h3 style="margin:0 0 16px 0; font-size:18px; font-weight:600;">Change Hero Background</h3>
+						<p style="margin:0 0 20px 0; color:#6b7280; font-size:14px;">Choose to upload an image or video for the hero background.</p>
+						<div style="display:flex; gap:12px;">
+							<button id="${imageBtnId}" style="flex:1; padding:12px; border:2px solid #667eea; background:#667eea; color:white; border-radius:8px; cursor:pointer; font-weight:600;">📷 Image</button>
+							<button id="${videoBtnId}" style="flex:1; padding:12px; border:2px solid #667eea; background:white; color:#667eea; border-radius:8px; cursor:pointer; font-weight:600;">🎥 Video</button>
+						</div>
+						<button id="${cancelBtnId}" style="margin-top:12px; width:100%; padding:10px; border:1px solid #e5e7eb; background:white; color:#6b7280; border-radius:8px; cursor:pointer;">Cancel</button>
+					`;
+					
+					modal.appendChild(modalContent);
+					document.body.appendChild(modal);
+					
+					// Store references for the handlers
+					const heroSectionRef = heroSection;
+					const bgContainerRef = bgContainer;
+					
+					// Use setTimeout to ensure DOM is ready
+					setTimeout(() => {
+						const imageBtn = document.getElementById(imageBtnId);
+						const videoBtn = document.getElementById(videoBtnId);
+						const cancelBtn = document.getElementById(cancelBtnId);
+						
+						if (imageBtn) {
+							imageBtn.onclick = function() {
+								uploadHeroBackground(heroSectionRef, bgContainerRef, 'image');
+								if (document.body.contains(modal)) {
+									document.body.removeChild(modal);
+								}
+							};
+						}
+						
+						if (videoBtn) {
+							videoBtn.onclick = function() {
+								uploadHeroBackground(heroSectionRef, bgContainerRef, 'video');
+								if (document.body.contains(modal)) {
+									document.body.removeChild(modal);
+								}
+							};
+						}
+						
+						if (cancelBtn) {
+							cancelBtn.onclick = function() {
+								if (document.body.contains(modal)) {
+									document.body.removeChild(modal);
+								}
+							};
+						}
+					}, 10);
+					
+					modal.onclick = function(e) {
+						if (e.target === modal) {
+							if (document.body.contains(modal)) {
+								document.body.removeChild(modal);
+							}
+						}
+					};
+				}
+				
+				// Function to upload hero background
+				function uploadHeroBackground(heroSection, bgContainer, type) {
+					// Create input in parent document
+					const input = document.createElement('input');
+					input.type = 'file';
+					input.accept = type === 'image' ? 'image/*' : 'video/*';
+					input.style.display = 'none';
+					document.body.appendChild(input);
+					
+					input.onchange = function(e) {
+						const file = e.target.files[0];
+						if (file) {
+							uploadHeroFile(file, heroSection, bgContainer, type);
+						}
+						// Clean up
+						if (document.body.contains(input)) {
+							document.body.removeChild(input);
+						}
+					};
+					
+					// Trigger click
+					setTimeout(() => {
+						input.click();
+					}, 100);
+				}
+				
+				// Function to handle file upload
+				function uploadHeroFile(file, heroSection, bgContainer, expectedType) {
+					const formData = new FormData();
+					formData.append('file', file);
+					formData.append('action', 'hero_background_upload');
+					formData.append('csrf_token', csrfToken);
+					
+					// Show loading indicator
+					const loadingIndicator = iframeDoc.createElement('div');
+					loadingIndicator.style.cssText = 'position:absolute; top:50%; left:50%; transform:translate(-50%, -50%); background:rgba(102,126,234,0.9); color:white; padding:12px 20px; border-radius:8px; z-index:10001; font-weight:600;';
+					loadingIndicator.textContent = 'Uploading...';
+					heroSection.appendChild(loadingIndicator);
+					
+					fetch(window.location.href, {
+						method: 'POST',
+						body: formData
+					})
+					.then(res => res.json())
+					.then(data => {
+						if (data.success) {
+							updateHeroBackground(heroSection, bgContainer, data.url, data.type);
+							changes['hero-background'] = { type: 'hero-background', url: data.url, mediaType: data.type };
+						} else {
+							alert('Upload failed: ' + (data.message || 'Unknown error'));
+						}
+					})
+					.catch(err => {
+						console.error(err);
+						alert('Upload failed. Please check file size and try again.');
+					})
+					.finally(() => {
+						if (loadingIndicator.parentNode) {
+							loadingIndicator.parentNode.removeChild(loadingIndicator);
+						}
+					});
+				}
+				
+				// Function to update hero background in DOM
+				function updateHeroBackground(heroSection, bgContainer, url, mediaType) {
+					const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+					
+					// Use relative path for static files, absolute for DB pages
+					const filename = url.split('/').pop();
+					const finalUrl = isFileEdit ? '../uploads/hero/' + filename : url;
+					
+					if (mediaType === 'video') {
+						// Remove existing background image if present
+						if (bgContainer.tagName === 'DIV' || bgContainer.tagName === 'SECTION') {
+							bgContainer.style.backgroundImage = 'none';
+							bgContainer.style.background = 'none';
+						}
+						
+						// Check if video already exists
+						let videoEl = heroSection.querySelector('video.hero-video, video');
+						if (!videoEl) {
+							// Create new video element
+							videoEl = iframeDoc.createElement('video');
+							videoEl.className = 'hero-video';
+							videoEl.style.cssText = 'position:absolute; top:50%; left:50%; width:100%; height:100%; object-fit:cover; transform:translate(-50%, -50%); z-index:1; filter:brightness(0.4);';
+							videoEl.autoplay = true;
+							videoEl.muted = true;
+							videoEl.loop = true;
+							videoEl.playsInline = true;
+							videoEl.setAttribute('aria-label', 'Hero background video');
+							
+							// Insert before the overlay or first content div
+							const overlay = heroSection.querySelector('.hero-overlay, .absolute.inset-0[class*="overlay"]');
+							const firstContent = heroSection.querySelector('.relative.z-10, .hero-content, [class*="z-10"]');
+							
+							if (overlay) {
+								heroSection.insertBefore(videoEl, overlay);
+							} else if (firstContent) {
+								heroSection.insertBefore(videoEl, firstContent);
+							} else {
+								heroSection.insertBefore(videoEl, heroSection.firstChild);
+							}
+						}
+						
+						videoEl.src = finalUrl;
+						const source = iframeDoc.createElement('source');
+						source.src = finalUrl;
+						const ext = filename.split('.').pop().toLowerCase();
+						if (ext === 'mp4') {
+							source.type = 'video/mp4';
+						} else if (ext === 'webm') {
+							source.type = 'video/webm';
+						} else if (ext === 'ogg') {
+							source.type = 'video/ogg';
+						}
+						videoEl.innerHTML = '';
+						videoEl.appendChild(source);
+						
+						// Make video editable
+						videoEl.classList.add('hero-bg-editable');
+						videoEl.setAttribute('data-hero-id', bgContainer.getAttribute('data-hero-id') || 'hero-' + Date.now());
+						
+						// Keep the original bgContainer for editing purposes but hide it
+						if (bgContainer.tagName === 'DIV' && bgContainer !== videoEl) {
+							bgContainer.style.display = 'none';
+						}
+						
+					} else {
+						// Remove video if present
+						const existingVideo = heroSection.querySelector('video.hero-video, video');
+						if (existingVideo) {
+							existingVideo.remove();
+						}
+						
+						// Update background image
+						if (bgContainer.tagName === 'VIDEO') {
+							// Replace video with div (restore original structure)
+							const newDiv = iframeDoc.createElement('div');
+							newDiv.className = 'absolute inset-0 bg-cover bg-center';
+							newDiv.style.cssText = 'position:absolute; inset:0; background-size:cover; background-position:center; background-image:url(' + finalUrl + ');';
+							newDiv.setAttribute('aria-hidden', 'true');
+							newDiv.setAttribute('role', 'presentation');
+							newDiv.classList.add('hero-bg-editable');
+							newDiv.setAttribute('data-hero-id', bgContainer.getAttribute('data-hero-id') || 'hero-' + Date.now());
+							bgContainer.parentNode.replaceChild(newDiv, bgContainer);
+							bgContainer = newDiv;
+						} else {
+							// Update existing div background
+							if (bgContainer.style.display === 'none') {
+								bgContainer.style.display = '';
+							}
+							bgContainer.style.backgroundImage = 'url(' + finalUrl + ')';
+							bgContainer.style.backgroundSize = 'cover';
+							bgContainer.style.backgroundPosition = 'center';
+							bgContainer.style.backgroundRepeat = 'no-repeat';
+						}
+					}
+					
+					// Re-setup editing for the updated element
+					setupHeroBackgroundEditing();
+				}
+				
+				// Setup hero background editing
+				setupHeroBackgroundEditing();
+				
 				// Add hover effects in edit mode
 				iframeDoc.addEventListener('mouseover', function(e) {
-					if (editMode && (e.target.classList.contains('editable-text') || e.target.classList.contains('media-editable'))) {
+					if (editMode && (e.target.classList.contains('editable-text') || e.target.classList.contains('media-editable') || e.target.classList.contains('hero-bg-editable'))) {
 						e.target.classList.add('editable-highlight');
 					}
 				});
@@ -1057,6 +1501,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'export_static') {
 			previewModeBtn.classList.add('active');
 			editModeBtn.classList.remove('active');
 			indicator.style.display = 'none';
+			// Hide all change background buttons when exiting edit mode
+			try {
+				const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+				const buttons = iframeDoc.querySelectorAll('.hero-change-bg-btn');
+				buttons.forEach(btn => btn.style.display = 'none');
+			} catch(e) {}
 		});
 		
 		// Device preview buttons
