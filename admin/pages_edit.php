@@ -2039,74 +2039,85 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'export_static') {
 								}, true);
 							});
 							
-							// Change Background button
-							const changeBgBtn = iframeDoc.createElement('button');
-							changeBgBtn.className = 'change-section-bg-btn';
-							changeBgBtn.innerHTML = '🎨 Change Background';
-							changeBgBtn.title = 'Change Section Background';
-							changeBgBtn.type = 'button';
-							changeBgBtn.setAttribute('contenteditable', 'false');
-							changeBgBtn.contentEditable = false;
-							changeBgBtn.setAttribute('data-non-editable', 'true');
-							changeBgBtn.style.cssText = `
-								background: linear-gradient(135deg, #FF4F4F 0%, #e63946 100%);
-								color: white;
-								border: 2px solid rgba(255, 255, 255, 0.3);
-								padding: 8px 14px;
-								border-radius: 6px;
-								font-size: 12px;
-								font-weight: 600;
-								cursor: pointer;
-								box-shadow: 0 2px 8px rgba(255, 79, 79, 0.4);
-								transition: all 0.2s ease;
-								white-space: nowrap;
-								user-select: none;
-								-webkit-user-select: none;
-								-moz-user-select: none;
-								-ms-user-select: none;
-							`;
+							// Check if this is a hero section (skip change background button for hero sections)
+							const isHeroSection = section.id === 'hero' || 
+							                      section.classList.contains('hero-section') || 
+							                      section.classList.contains('hero-video-container') ||
+							                      section.className.includes('hero');
 							
-							// Hover effects for change background button
-							changeBgBtn.addEventListener('mouseenter', function() {
-								this.style.transform = 'scale(1.05)';
-								this.style.boxShadow = '0 4px 12px rgba(255, 79, 79, 0.6)';
-							});
-							changeBgBtn.addEventListener('mouseleave', function() {
-								this.style.transform = 'scale(1)';
-								this.style.boxShadow = '0 2px 8px rgba(255, 79, 79, 0.4)';
-							});
-							
-							// Change background functionality
-							changeBgBtn.addEventListener('click', function(e) {
-								e.stopPropagation();
-								e.stopImmediatePropagation();
-								e.preventDefault();
-								editSectionBackground(section);
-								return false;
-							}, true);
-							
-							// Prevent editing interactions on button
-							changeBgBtn.addEventListener('mousedown', function(e) {
-								e.stopPropagation();
-								e.stopImmediatePropagation();
-							}, true);
-							
-							changeBgBtn.addEventListener('dblclick', function(e) {
-								e.stopPropagation();
-								e.stopImmediatePropagation();
-								e.preventDefault();
-								return false;
-							}, true);
-							
-							changeBgBtn.addEventListener('contextmenu', function(e) {
-								e.stopPropagation();
-								e.preventDefault();
-								return false;
-							}, true);
+							// Change Background button (skip for hero sections as they have their own button)
+							let changeBgBtn = null;
+							if (!isHeroSection) {
+								changeBgBtn = iframeDoc.createElement('button');
+								changeBgBtn.className = 'change-section-bg-btn';
+								changeBgBtn.innerHTML = '🎨 Change Background';
+								changeBgBtn.title = 'Change Section Background';
+								changeBgBtn.type = 'button';
+								changeBgBtn.setAttribute('contenteditable', 'false');
+								changeBgBtn.contentEditable = false;
+								changeBgBtn.setAttribute('data-non-editable', 'true');
+								changeBgBtn.style.cssText = `
+									background: linear-gradient(135deg, #FF4F4F 0%, #e63946 100%);
+									color: white;
+									border: 2px solid rgba(255, 255, 255, 0.3);
+									padding: 8px 14px;
+									border-radius: 6px;
+									font-size: 12px;
+									font-weight: 600;
+									cursor: pointer;
+									box-shadow: 0 2px 8px rgba(255, 79, 79, 0.4);
+									transition: all 0.2s ease;
+									white-space: nowrap;
+									user-select: none;
+									-webkit-user-select: none;
+									-moz-user-select: none;
+									-ms-user-select: none;
+								`;
+								
+								// Hover effects for change background button
+								changeBgBtn.addEventListener('mouseenter', function() {
+									this.style.transform = 'scale(1.05)';
+									this.style.boxShadow = '0 4px 12px rgba(255, 79, 79, 0.6)';
+								});
+								changeBgBtn.addEventListener('mouseleave', function() {
+									this.style.transform = 'scale(1)';
+									this.style.boxShadow = '0 2px 8px rgba(255, 79, 79, 0.4)';
+								});
+								
+								// Change background functionality
+								changeBgBtn.addEventListener('click', function(e) {
+									e.stopPropagation();
+									e.stopImmediatePropagation();
+									e.preventDefault();
+									editSectionBackground(section);
+									return false;
+								}, true);
+								
+								// Prevent editing interactions on button
+								changeBgBtn.addEventListener('mousedown', function(e) {
+									e.stopPropagation();
+									e.stopImmediatePropagation();
+								}, true);
+								
+								changeBgBtn.addEventListener('dblclick', function(e) {
+									e.stopPropagation();
+									e.stopImmediatePropagation();
+									e.preventDefault();
+									return false;
+								}, true);
+								
+								changeBgBtn.addEventListener('contextmenu', function(e) {
+									e.stopPropagation();
+									e.preventDefault();
+									return false;
+								}, true);
+							}
 							
 							controlsContainer.appendChild(moveUpBtn);
 							controlsContainer.appendChild(moveDownBtn);
-							controlsContainer.appendChild(changeBgBtn);
+							if (changeBgBtn) {
+								controlsContainer.appendChild(changeBgBtn);
+							}
 							
 							// Ensure section has relative positioning
 							const sectionPosition = iframeDoc.defaultView.getComputedStyle(section).position;
@@ -2426,6 +2437,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'export_static') {
 					tempDiv.querySelectorAll('.remove-item-btn').forEach(el => el.remove());
 					tempDiv.querySelectorAll('.section-controls').forEach(el => el.remove());
 					tempDiv.querySelectorAll('.move-section-btn').forEach(el => el.remove());
+					tempDiv.querySelectorAll('.change-section-bg-btn').forEach(el => el.remove());
 					tempDiv.querySelectorAll('.hero-change-bg-btn').forEach(el => el.remove());
 					tempDiv.querySelectorAll('.drag-handle').forEach(el => el.remove());
 					tempDiv.querySelectorAll('.drop-indicator').forEach(el => el.remove());
