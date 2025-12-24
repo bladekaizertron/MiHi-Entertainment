@@ -1245,7 +1245,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'export_static') {
 								font-size: 14px;
 								font-weight: 600;
 								cursor: pointer;
-								z-index: 10001;
+								z-index: 40;
 								display: none;
 								box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 								transition: all 0.3s ease;
@@ -1452,7 +1452,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'export_static') {
 					
 					// Show loading indicator
 					const loadingIndicator = iframeDoc.createElement('div');
-					loadingIndicator.style.cssText = 'position:absolute; top:50%; left:50%; transform:translate(-50%, -50%); background:rgba(102,126,234,0.9); color:white; padding:12px 20px; border-radius:8px; z-index:10001; font-weight:600;';
+					loadingIndicator.style.cssText = 'position:absolute; top:50%; left:50%; transform:translate(-50%, -50%); background:rgba(102,126,234,0.9); color:white; padding:12px 20px; border-radius:8px; z-index:40; font-weight:600;';
 					loadingIndicator.textContent = 'Uploading...';
 					heroSection.appendChild(loadingIndicator);
 					
@@ -1582,6 +1582,285 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'export_static') {
 				// Setup hero background editing
 				setupHeroBackgroundEditing();
 				
+				// Function to edit section background
+				function editSectionBackground(section) {
+					// Remove any existing modal first
+					const existingModal = document.getElementById('section-bg-modal');
+					if (existingModal) {
+						existingModal.remove();
+					}
+					
+					// Create modal in parent document
+					const modal = document.createElement('div');
+					modal.id = 'section-bg-modal';
+					modal.style.cssText = 'position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.75); z-index:100000; display:flex; align-items:center; justify-content:center;';
+					
+					const modalContent = document.createElement('div');
+					modalContent.style.cssText = 'background:white; padding:24px; border-radius:12px; max-width:600px; width:90%; box-shadow:0 20px 60px rgba(0,0,0,0.3);';
+					
+					const colorBtnId = 'section-bg-color-' + Date.now();
+					const imageBtnId = 'section-bg-image-' + Date.now();
+					const videoBtnId = 'section-bg-video-' + Date.now();
+					const cancelBtnId = 'section-bg-cancel-' + Date.now();
+					
+					// Color options
+					const colors = [
+						{ name: 'Carbon Black', value: '#1F1F1F' },
+						{ name: 'Canvas White', value: '#FFFFFF' },
+						{ name: 'Vibrant Coral', value: '#FF4F4F' },
+						{ name: 'Electric Aqua', value: '#18F1E1' }
+					];
+					
+					const colorOptionsHtml = colors.map(color => 
+						`<button class="color-option-btn" data-color="${color.value}" style="width:80px; height:80px; border-radius:8px; border:3px solid #e5e7eb; cursor:pointer; background:${color.value}; transition:all 0.2s; box-shadow:0 2px 4px rgba(0,0,0,0.1);" title="${color.name}"></button>`
+					).join('');
+					
+					modalContent.innerHTML = `
+						<h3 style="margin:0 0 16px 0; font-size:18px; font-weight:600;">Change Section Background</h3>
+						<p style="margin:0 0 20px 0; color:#6b7280; font-size:14px;">Choose a color, image, or video for the section background.</p>
+						
+						<div style="margin-bottom:20px;">
+							<label style="display:block; font-size:14px; font-weight:600; margin-bottom:12px; color:#111827;">Color Options</label>
+							<div style="display:flex; gap:12px; flex-wrap:wrap;">
+								${colorOptionsHtml}
+							</div>
+						</div>
+						
+						<div style="display:flex; gap:12px; margin-top:20px;">
+							<button id="${imageBtnId}" style="flex:1; padding:12px; border:2px solid #667eea; background:#667eea; color:white; border-radius:8px; cursor:pointer; font-weight:600;">📷 Image</button>
+							<button id="${videoBtnId}" style="flex:1; padding:12px; border:2px solid #667eea; background:white; color:#667eea; border-radius:8px; cursor:pointer; font-weight:600;">🎥 Video</button>
+						</div>
+						<button id="${cancelBtnId}" style="margin-top:12px; width:100%; padding:10px; border:1px solid #e5e7eb; background:white; color:#6b7280; border-radius:8px; cursor:pointer;">Cancel</button>
+					`;
+					
+					modal.appendChild(modalContent);
+					document.body.appendChild(modal);
+					
+					// Store section reference
+					const sectionRef = section;
+					
+					// Use setTimeout to ensure DOM is ready
+					setTimeout(() => {
+						// Color option buttons
+						modalContent.querySelectorAll('.color-option-btn').forEach(btn => {
+							btn.addEventListener('mouseenter', function() {
+								this.style.transform = 'scale(1.1)';
+								this.style.borderColor = '#667eea';
+								this.style.boxShadow = '0 4px 12px rgba(102, 126, 234, 0.4)';
+							});
+							btn.addEventListener('mouseleave', function() {
+								this.style.transform = 'scale(1)';
+								this.style.borderColor = '#e5e7eb';
+								this.style.boxShadow = '0 2px 4px rgba(0,0,0,0.1)';
+							});
+							btn.addEventListener('click', function() {
+								const color = this.getAttribute('data-color');
+								updateSectionBackground(sectionRef, color, 'color');
+								if (document.body.contains(modal)) {
+									document.body.removeChild(modal);
+								}
+							});
+						});
+						
+						const imageBtn = document.getElementById(imageBtnId);
+						const videoBtn = document.getElementById(videoBtnId);
+						const cancelBtn = document.getElementById(cancelBtnId);
+						
+						if (imageBtn) {
+							imageBtn.onclick = function() {
+								uploadSectionBackground(sectionRef, 'image');
+								if (document.body.contains(modal)) {
+									document.body.removeChild(modal);
+								}
+							};
+						}
+						
+						if (videoBtn) {
+							videoBtn.onclick = function() {
+								uploadSectionBackground(sectionRef, 'video');
+								if (document.body.contains(modal)) {
+									document.body.removeChild(modal);
+								}
+							};
+						}
+						
+						if (cancelBtn) {
+							cancelBtn.onclick = function() {
+								if (document.body.contains(modal)) {
+									document.body.removeChild(modal);
+								}
+							};
+						}
+					}, 10);
+					
+					modal.onclick = function(e) {
+						if (e.target === modal) {
+							if (document.body.contains(modal)) {
+								document.body.removeChild(modal);
+							}
+						}
+					};
+				}
+				
+				// Function to upload section background
+				function uploadSectionBackground(section, type) {
+					// Create input in parent document
+					const input = document.createElement('input');
+					input.type = 'file';
+					input.accept = type === 'image' ? 'image/*' : 'video/*';
+					input.style.display = 'none';
+					document.body.appendChild(input);
+					
+					input.onchange = function(e) {
+						const file = e.target.files[0];
+						if (file) {
+							uploadSectionFile(file, section, type);
+						}
+						// Clean up
+						if (document.body.contains(input)) {
+							document.body.removeChild(input);
+						}
+					};
+					
+					// Trigger click
+					setTimeout(() => {
+						input.click();
+					}, 100);
+				}
+				
+				// Function to handle section file upload
+				function uploadSectionFile(file, section, expectedType) {
+					const formData = new FormData();
+					formData.append('file', file);
+					formData.append('action', 'hero_background_upload'); // Reuse hero upload endpoint
+					formData.append('csrf_token', csrfToken);
+					
+					// Show loading indicator
+					const loadingIndicator = iframeDoc.createElement('div');
+					loadingIndicator.style.cssText = 'position:absolute; top:50%; left:50%; transform:translate(-50%, -50%); background:rgba(102,126,234,0.9); color:white; padding:12px 20px; border-radius:8px; z-index:40; font-weight:600;';
+					loadingIndicator.textContent = 'Uploading...';
+					section.appendChild(loadingIndicator);
+					
+					fetch(window.location.href, {
+						method: 'POST',
+						body: formData
+					})
+					.then(res => res.json())
+					.then(data => {
+						if (data.success) {
+							updateSectionBackground(section, data.url, data.type);
+							changes['section-background-' + Date.now()] = { type: 'section-background', url: data.url, mediaType: data.type, section: section };
+						} else {
+							alert('Upload failed: ' + (data.message || 'Unknown error'));
+						}
+					})
+					.catch(err => {
+						console.error(err);
+						alert('Upload failed. Please check file size and try again.');
+					})
+					.finally(() => {
+						if (loadingIndicator.parentNode) {
+							loadingIndicator.parentNode.removeChild(loadingIndicator);
+						}
+					});
+				}
+				
+				// Function to update section background
+				function updateSectionBackground(section, value, backgroundType) {
+					const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+					
+					// Remove existing video background if present
+					const existingVideo = section.querySelector('video.section-bg-video');
+					if (existingVideo) {
+						existingVideo.remove();
+					}
+					
+					if (backgroundType === 'color') {
+						// Set background color
+						section.style.backgroundColor = value;
+						section.style.backgroundImage = 'none';
+						section.style.background = value;
+						
+						// Remove any background image/video containers
+						const bgContainer = section.querySelector('.section-bg-container');
+						if (bgContainer) {
+							bgContainer.remove();
+						}
+						
+						changes['section-background-' + Date.now()] = { type: 'section-background', value: value, backgroundType: 'color', section: section };
+					} else if (backgroundType === 'image') {
+						// Use relative path for static files, absolute for DB pages
+						const filename = value.split('/').pop();
+						const finalUrl = isFileEdit ? '../uploads/hero/' + filename : value;
+						
+						// Set background image
+						section.style.backgroundImage = `url(${finalUrl})`;
+						section.style.backgroundSize = 'cover';
+						section.style.backgroundPosition = 'center';
+						section.style.backgroundRepeat = 'no-repeat';
+						section.style.backgroundColor = ''; // Clear color if set
+						
+						// Remove video if present
+						const existingVideo = section.querySelector('video.section-bg-video');
+						if (existingVideo) {
+							existingVideo.remove();
+						}
+						
+						changes['section-background-' + Date.now()] = { type: 'section-background', url: finalUrl, backgroundType: 'image', section: section };
+					} else if (backgroundType === 'video') {
+						// Use relative path for static files, absolute for DB pages
+						const filename = value.split('/').pop();
+						const finalUrl = isFileEdit ? '../uploads/hero/' + filename : value;
+						
+						// Remove existing background image/color
+						section.style.backgroundImage = 'none';
+						section.style.backgroundColor = '';
+						
+						// Check if video already exists
+						let videoEl = section.querySelector('video.section-bg-video');
+						if (!videoEl) {
+							// Create new video element
+							videoEl = iframeDoc.createElement('video');
+							videoEl.className = 'section-bg-video';
+							videoEl.style.cssText = 'position:absolute; top:0; left:0; width:100%; height:100%; object-fit:cover; z-index:0; pointer-events:none;';
+							videoEl.autoplay = true;
+							videoEl.muted = true;
+							videoEl.loop = true;
+							videoEl.playsInline = true;
+							videoEl.setAttribute('aria-hidden', 'true');
+							
+							// Insert as first child
+							section.insertBefore(videoEl, section.firstChild);
+						}
+						
+						videoEl.src = finalUrl;
+						const source = iframeDoc.createElement('source');
+						source.src = finalUrl;
+						const ext = filename.split('.').pop().toLowerCase();
+						if (ext === 'mp4') {
+							source.type = 'video/mp4';
+						} else if (ext === 'webm') {
+							source.type = 'video/webm';
+						} else if (ext === 'ogg') {
+							source.type = 'video/ogg';
+						}
+						videoEl.innerHTML = '';
+						videoEl.appendChild(source);
+						
+						// Ensure section content is above video
+						const sectionChildren = Array.from(section.children).filter(child => !child.classList.contains('section-bg-video'));
+						sectionChildren.forEach(child => {
+							const childStyle = iframeDoc.defaultView.getComputedStyle(child);
+							if (childStyle.position === 'static' || childStyle.position === 'relative') {
+								child.style.position = 'relative';
+								child.style.zIndex = '1';
+							}
+						});
+						
+						changes['section-background-' + Date.now()] = { type: 'section-background', url: finalUrl, backgroundType: 'video', section: section };
+					}
+				}
+				
 				// Setup drag and drop for sections
 				function setupSectionDragDrop() {
 					// Find all main sections (exclude header, footer, nav)
@@ -1629,7 +1908,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'export_static') {
 								display: none;
 								flex-direction: column;
 								gap: 6px;
-								z-index: 10002;
+								z-index: 40;
 							`;
 							
 							// Move Up button
@@ -1760,8 +2039,74 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'export_static') {
 								}, true);
 							});
 							
+							// Change Background button
+							const changeBgBtn = iframeDoc.createElement('button');
+							changeBgBtn.className = 'change-section-bg-btn';
+							changeBgBtn.innerHTML = '🎨 Change Background';
+							changeBgBtn.title = 'Change Section Background';
+							changeBgBtn.type = 'button';
+							changeBgBtn.setAttribute('contenteditable', 'false');
+							changeBgBtn.contentEditable = false;
+							changeBgBtn.setAttribute('data-non-editable', 'true');
+							changeBgBtn.style.cssText = `
+								background: linear-gradient(135deg, #FF4F4F 0%, #e63946 100%);
+								color: white;
+								border: 2px solid rgba(255, 255, 255, 0.3);
+								padding: 8px 14px;
+								border-radius: 6px;
+								font-size: 12px;
+								font-weight: 600;
+								cursor: pointer;
+								box-shadow: 0 2px 8px rgba(255, 79, 79, 0.4);
+								transition: all 0.2s ease;
+								white-space: nowrap;
+								user-select: none;
+								-webkit-user-select: none;
+								-moz-user-select: none;
+								-ms-user-select: none;
+							`;
+							
+							// Hover effects for change background button
+							changeBgBtn.addEventListener('mouseenter', function() {
+								this.style.transform = 'scale(1.05)';
+								this.style.boxShadow = '0 4px 12px rgba(255, 79, 79, 0.6)';
+							});
+							changeBgBtn.addEventListener('mouseleave', function() {
+								this.style.transform = 'scale(1)';
+								this.style.boxShadow = '0 2px 8px rgba(255, 79, 79, 0.4)';
+							});
+							
+							// Change background functionality
+							changeBgBtn.addEventListener('click', function(e) {
+								e.stopPropagation();
+								e.stopImmediatePropagation();
+								e.preventDefault();
+								editSectionBackground(section);
+								return false;
+							}, true);
+							
+							// Prevent editing interactions on button
+							changeBgBtn.addEventListener('mousedown', function(e) {
+								e.stopPropagation();
+								e.stopImmediatePropagation();
+							}, true);
+							
+							changeBgBtn.addEventListener('dblclick', function(e) {
+								e.stopPropagation();
+								e.stopImmediatePropagation();
+								e.preventDefault();
+								return false;
+							}, true);
+							
+							changeBgBtn.addEventListener('contextmenu', function(e) {
+								e.stopPropagation();
+								e.preventDefault();
+								return false;
+							}, true);
+							
 							controlsContainer.appendChild(moveUpBtn);
 							controlsContainer.appendChild(moveDownBtn);
+							controlsContainer.appendChild(changeBgBtn);
 							
 							// Ensure section has relative positioning
 							const sectionPosition = iframeDoc.defaultView.getComputedStyle(section).position;
