@@ -901,20 +901,41 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'export_static') {
 								const removeBtn = iframeDoc.createElement('button');
 								removeBtn.innerHTML = '×';
 								removeBtn.className = 'remove-item-btn';
-								removeBtn.style.cssText = 'position:absolute; top:5px; right:5px; background:rgba(255,0,0,0.7); color:white; border:none; border-radius:50%; width:24px; height:24px; cursor:pointer; z-index:10; display:none; align-items:center; justify-content:center; font-size:18px; font-weight:bold;';
+								removeBtn.setAttribute('data-non-editable', 'true');
+								removeBtn.setAttribute('contenteditable', 'false');
+								removeBtn.contentEditable = false;
+								removeBtn.type = 'button'; // Prevent form submission
+								removeBtn.style.cssText = 'position:absolute; top:5px; right:5px; background:rgba(255,0,0,0.7); color:white; border:none; border-radius:50%; width:24px; height:24px; cursor:pointer; z-index:10; display:none; align-items:center; justify-content:center; font-size:18px; font-weight:bold; pointer-events:auto;';
 								
 								item.appendChild(removeBtn);
 								
 								item.addEventListener('mouseenter', () => { if(editMode) removeBtn.style.display = 'flex'; });
 								item.addEventListener('mouseleave', () => { removeBtn.style.display = 'none'; });
 								
-								removeBtn.onclick = (e) => {
+								// Use capture phase to ensure this handler runs first
+								removeBtn.addEventListener('click', function(e) {
 									e.stopPropagation();
+									e.stopImmediatePropagation();
+									e.preventDefault();
 									if (confirm('Remove this item from gallery?')) {
 										item.remove();
 										changes['gallery-update'] = { type: 'gallery', action: 'update' };
 									}
-								};
+									return false;
+								}, true); // Use capture phase
+								
+								// Also prevent text editing interactions
+								removeBtn.addEventListener('mousedown', function(e) {
+									e.stopPropagation();
+									e.stopImmediatePropagation();
+								}, true);
+								
+								removeBtn.addEventListener('dblclick', function(e) {
+									e.stopPropagation();
+									e.stopImmediatePropagation();
+									e.preventDefault();
+									return false;
+								}, true);
 							});
 						};
 						
@@ -1099,20 +1120,33 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'export_static') {
 					}
 					
 					// Skip section controls and their children completely
+					// Also skip gallery remove buttons and their containers
 					if (element.closest && (
 						element.closest('.drag-handle') ||
 						element.closest('.section-controls') ||
 						element.closest('.move-section-btn') ||
+						element.closest('.remove-item-btn') ||
+						element.closest('.gallery-item-container') ||
 						element.closest('[data-non-editable]')
 					)) {
 						return;
 					}
 					
+					// Skip gallery remove buttons directly
+					if (element.classList && (
+						element.classList.contains('remove-item-btn') ||
+						element.classList.contains('gallery-item-container')
+					)) {
+						return;
+					}
+					
 					// Handle links and buttons specially to prevent navigation in edit mode
-					// BUT skip section control buttons - they should not be editable
+					// BUT skip section control buttons and gallery remove buttons - they should not be editable
 					if ((element.tagName === 'A' || element.tagName === 'BUTTON') && 
 					    !element.classList.contains('move-section-btn') &&
-					    !element.closest('.section-controls')) {
+					    !element.classList.contains('remove-item-btn') &&
+					    !element.closest('.section-controls') &&
+					    !element.closest('.gallery-item-container')) {
 						if (!element.hasAttribute('data-link-editable')) {
 							element.setAttribute('data-link-editable', 'true');
 							element.classList.add('editable-link');
@@ -1254,7 +1288,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'export_static') {
 						// Skip if already editable or in non-editable areas
 						if (el.classList.contains('editable-text') || 
 						    el.classList.contains('editable-link') ||
-						    el.closest('header, footer, nav, script, style, .section-controls, .icon-editable, .media-editable')) {
+						    el.classList.contains('remove-item-btn') ||
+						    el.classList.contains('gallery-item-container') ||
+						    el.closest('header, footer, nav, script, style, .section-controls, .icon-editable, .media-editable, .remove-item-btn, .gallery-item-container')) {
 							return;
 						}
 						
@@ -1407,8 +1443,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'export_static') {
 					if (element.closest('.section-controls') || 
 					    element.closest('.hero-change-bg-btn') ||
 					    element.closest('.change-section-bg-btn') ||
+					    element.closest('.remove-item-btn') ||
+					    element.closest('.gallery-item-container') ||
 					    element.closest('svg') ||
-					    element.closest('.icon-editable')) {
+					    element.closest('.icon-editable') ||
+					    element.classList.contains('remove-item-btn') ||
+					    element.classList.contains('gallery-item-container')) {
 						return;
 					}
 					
@@ -1575,7 +1615,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'export_static') {
 					    e.target.closest('.hero-change-bg-btn') ||
 					    e.target.closest('.change-section-bg-btn') ||
 					    e.target.closest('.icon-editable') ||
-					    e.target.closest('svg')) {
+					    e.target.closest('.remove-item-btn') ||
+					    e.target.closest('.gallery-item-container') ||
+					    e.target.closest('svg') ||
+					    e.target.classList.contains('remove-item-btn') ||
+					    e.target.classList.contains('gallery-item-container')) {
 						return;
 					}
 					
