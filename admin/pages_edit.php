@@ -1190,7 +1190,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'export_static') {
 							element.setAttribute('data-original-text', element.textContent);
 							element.setAttribute('data-id', 'link-' + Date.now() + '-' + Math.random());
 						}
-						return; // Don't process children of links/buttons to avoid double processing
+						
+						// Process media elements inside links/buttons before returning
+						const mediaInside = element.querySelectorAll('img, video');
+						mediaInside.forEach(mediaEl => {
+							if (!mediaEl.classList.contains('media-editable') && 
+							    !mediaEl.hasAttribute('data-media-editable-handler')) {
+								mediaEl.classList.add('media-editable');
+								if (!mediaEl.hasAttribute('data-id')) {
+									mediaEl.setAttribute('data-id', 'media-' + Date.now() + '-' + Math.random());
+								}
+								mediaEl.setAttribute('data-media-editable-handler', 'true');
+								mediaEl.addEventListener('click', function(e) {
+									if (editMode) {
+										e.preventDefault();
+										e.stopPropagation();
+										e.stopImmediatePropagation();
+										editMedia(this);
+									}
+								}, true);
+							}
+						});
+						
+						return; // Don't process text children of links/buttons to avoid double processing
 					}
 					
 					// Make text nodes editable
@@ -1343,6 +1365,84 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'export_static') {
 				setTimeout(() => {
 					markAllTextElementsEditable();
 				}, 500);
+				
+				// Additional pass to ensure ALL media elements are marked as editable
+				function markAllMediaElementsEditable() {
+					// Find all images and videos, regardless of nesting
+					const mediaElements = iframeDoc.querySelectorAll('img, video');
+					mediaElements.forEach(el => {
+						// Skip if already has the editable handler (check for data attribute)
+						if (el.hasAttribute('data-media-editable-handler')) {
+							return;
+						}
+						
+						// Skip if in non-editable areas
+						if (el.closest('header, footer, nav, script, style, .section-controls, .section-menu-dropdown, .section-menu-toggle')) {
+							return;
+						}
+						
+						// Skip if it's a background video or hero video (those have their own editing)
+						if (el.classList.contains('hero-video') || 
+						    el.classList.contains('section-bg-video') ||
+						    el.closest('.hero-video-container')) {
+							return;
+						}
+						
+						// Make it editable
+						el.classList.add('media-editable');
+						if (!el.hasAttribute('data-id')) {
+							el.setAttribute('data-id', 'media-' + Date.now() + '-' + Math.random());
+						}
+						
+						// Mark that we've added the handler
+						el.setAttribute('data-media-editable-handler', 'true');
+						
+						// Add click handler for editing (use capture phase to ensure it runs first)
+						el.addEventListener('click', function(e) {
+							if (editMode) {
+								e.preventDefault();
+								e.stopPropagation();
+								e.stopImmediatePropagation();
+								editMedia(this);
+							}
+						}, true); // Use capture phase to ensure it runs first
+					});
+				}
+				
+				// Mark all media elements as editable after a short delay to catch dynamically loaded content
+				setTimeout(() => {
+					markAllMediaElementsEditable();
+				}, 500);
+				
+				// Also mark media elements when new content is added (e.g., carousel items)
+				const mediaObserver = new MutationObserver(function(mutations) {
+					let shouldCheck = false;
+					mutations.forEach(function(mutation) {
+						if (mutation.addedNodes.length > 0) {
+							mutation.addedNodes.forEach(function(node) {
+								if (node.nodeType === 1) { // Element node
+									if (node.tagName === 'IMG' || node.tagName === 'VIDEO' || 
+									    node.querySelector('img, video')) {
+										shouldCheck = true;
+									}
+								}
+							});
+						}
+					});
+					if (shouldCheck) {
+						setTimeout(() => {
+							markAllMediaElementsEditable();
+						}, 100);
+					}
+				});
+				
+				// Observe the body for changes
+				if (iframeBody) {
+					mediaObserver.observe(iframeBody, {
+						childList: true,
+						subtree: true
+					});
+				}
 				
 				// Setup text formatting toolbar
 				let textFormatToolbar = null;
@@ -3348,6 +3448,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'export_static') {
 						el.removeAttribute('contenteditable');
 						el.removeAttribute('data-link-editable');
 						el.removeAttribute('data-initialized'); // Remove phone-protection artifact
+						el.removeAttribute('data-media-editable-handler');
 						el.removeAttribute('data-draggable-setup');
 						el.removeAttribute('data-section-index');
 						el.removeAttribute('data-hero-editable');
