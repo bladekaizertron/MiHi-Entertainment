@@ -5,7 +5,7 @@ $db = getDB();
 
 // Get pagination
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
-$perPage = 6;
+$perPage = 8;
 $offset = ($page - 1) * $perPage;
 
 // Category filter
