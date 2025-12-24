@@ -590,6 +590,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'export_static') {
 		.media-editable:hover::after { content: 'Click to change image/video'; position: absolute; top: 10px; left: 10px; background: #667eea; color: #fff; padding: 6px 12px; border-radius: 6px; font-size: 12px; z-index: 1001; pointer-events: none; }
 		.media-editable:hover { outline: 3px solid #667eea; cursor: pointer; }
 		.edit-mode-indicator { position: fixed; top: 20px; right: 20px; background: #667eea; color: #fff; padding: 12px 20px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 10000; font-size: 14px; font-weight: 600; }
+		.draggable-section { cursor: move !important; }
+		.draggable-section.dragging { opacity: 0.5; cursor: grabbing !important; }
+		.draggable-section .drag-handle { cursor: grab !important; }
+		.draggable-section .drag-handle:active { cursor: grabbing !important; }
 		.gjs-block-category { 
 			background:#667eea; 
 			color:white; 
@@ -1033,13 +1037,34 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'export_static') {
 					if (element.classList && (
 						element.classList.contains('feature-item-icon') || 
 						element.classList.contains('feature-icon') ||
-						element.classList.contains('modern-btn-call')
+						element.classList.contains('modern-btn-call') ||
+						element.classList.contains('drag-handle') ||
+						element.classList.contains('move-section-btn') ||
+						element.classList.contains('section-controls')
+					)) {
+						return;
+					}
+					
+					// Skip elements with data-non-editable attribute
+					if (element.hasAttribute && element.hasAttribute('data-non-editable')) {
+						return;
+					}
+					
+					// Skip section controls and their children completely
+					if (element.closest && (
+						element.closest('.drag-handle') ||
+						element.closest('.section-controls') ||
+						element.closest('.move-section-btn') ||
+						element.closest('[data-non-editable]')
 					)) {
 						return;
 					}
 					
 					// Handle links and buttons specially to prevent navigation in edit mode
-					if (element.tagName === 'A' || element.tagName === 'BUTTON') {
+					// BUT skip section control buttons - they should not be editable
+					if ((element.tagName === 'A' || element.tagName === 'BUTTON') && 
+					    !element.classList.contains('move-section-btn') &&
+					    !element.closest('.section-controls')) {
 						if (!element.hasAttribute('data-link-editable')) {
 							element.setAttribute('data-link-editable', 'true');
 							element.classList.add('editable-link');
@@ -1557,6 +1582,347 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'export_static') {
 				// Setup hero background editing
 				setupHeroBackgroundEditing();
 				
+				// Setup drag and drop for sections
+				function setupSectionDragDrop() {
+					// Find all main sections (exclude header, footer, nav)
+					const allSections = iframeDoc.querySelectorAll('main section, body > section, .section-padding, [class*="section"]');
+					const sections = Array.from(allSections).filter(section => {
+						// Exclude sections that are inside other sections (nested)
+						const parentSection = section.closest('section');
+						return !parentSection || parentSection === section;
+					});
+					
+					sections.forEach((section, index) => {
+						// Skip if already set up
+						if (section.hasAttribute('data-draggable-setup')) {
+							return;
+						}
+						section.setAttribute('data-draggable-setup', 'true');
+						section.setAttribute('data-section-index', index);
+						
+						// Make section draggable
+						section.draggable = editMode;
+						section.classList.add('draggable-section');
+						
+						// Ensure child elements don't block dragging
+						// Make links, buttons, and other interactive elements not draggable
+						const interactiveElements = section.querySelectorAll('a, button, input, select, textarea, [contenteditable="true"]');
+						interactiveElements.forEach(el => {
+							el.setAttribute('draggable', 'false');
+						});
+						
+						// Add section controls with up/down buttons for easier navigation
+						if (!section.querySelector('.section-controls')) {
+							const controlsContainer = iframeDoc.createElement('div');
+							controlsContainer.className = 'section-controls';
+							controlsContainer.style.cssText = `
+								position: absolute;
+								top: 15px;
+								left: 15px;
+								display: none;
+								flex-direction: column;
+								gap: 6px;
+								z-index: 10002;
+							`;
+							
+							// Move Up button
+							const moveUpBtn = iframeDoc.createElement('button');
+							moveUpBtn.className = 'move-section-btn move-up';
+							moveUpBtn.innerHTML = '↑ Move Up';
+							moveUpBtn.title = 'Move Section Up';
+							moveUpBtn.type = 'button'; // Prevent form submission
+							moveUpBtn.setAttribute('contenteditable', 'false');
+							moveUpBtn.contentEditable = false;
+							moveUpBtn.setAttribute('data-non-editable', 'true');
+							moveUpBtn.style.cssText = `
+								background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+								color: white;
+								border: 2px solid rgba(255, 255, 255, 0.3);
+								padding: 8px 14px;
+								border-radius: 6px;
+								font-size: 12px;
+								font-weight: 600;
+								cursor: pointer;
+								box-shadow: 0 2px 8px rgba(102, 126, 234, 0.4);
+								transition: all 0.2s ease;
+								white-space: nowrap;
+								user-select: none;
+								-webkit-user-select: none;
+								-moz-user-select: none;
+								-ms-user-select: none;
+							`;
+							if (index === 0) {
+								moveUpBtn.disabled = true;
+								moveUpBtn.style.opacity = '0.5';
+								moveUpBtn.style.cursor = 'not-allowed';
+							}
+							
+							// Move Down button
+							const moveDownBtn = iframeDoc.createElement('button');
+							moveDownBtn.className = 'move-section-btn move-down';
+							moveDownBtn.innerHTML = '↓ Move Down';
+							moveDownBtn.title = 'Move Section Down';
+							moveDownBtn.type = 'button'; // Prevent form submission
+							moveDownBtn.setAttribute('contenteditable', 'false');
+							moveDownBtn.contentEditable = false;
+							moveDownBtn.setAttribute('data-non-editable', 'true');
+							moveDownBtn.style.cssText = moveUpBtn.style.cssText;
+							if (index === sections.length - 1) {
+								moveDownBtn.disabled = true;
+								moveDownBtn.style.opacity = '0.5';
+								moveDownBtn.style.cursor = 'not-allowed';
+							}
+							
+							// Hover effects
+							[moveUpBtn, moveDownBtn].forEach(btn => {
+								btn.addEventListener('mouseenter', function() {
+									if (!this.disabled) {
+										this.style.transform = 'scale(1.05)';
+										this.style.boxShadow = '0 4px 12px rgba(102, 126, 234, 0.6)';
+									}
+								});
+								btn.addEventListener('mouseleave', function() {
+									this.style.transform = 'scale(1)';
+									this.style.boxShadow = '0 2px 8px rgba(102, 126, 234, 0.4)';
+								});
+							});
+							
+							// Move up functionality - use capture phase to catch before text editing
+							moveUpBtn.addEventListener('click', function(e) {
+								e.stopPropagation();
+								e.stopImmediatePropagation();
+								e.preventDefault();
+								if (index > 0 && !this.disabled) {
+									const parent = section.parentNode;
+									parent.insertBefore(section, sections[index - 1]);
+									changes['sections-reordered'] = { type: 'sections', action: 'reorder' };
+									// Re-setup immediately
+									iframeDoc.querySelectorAll('[data-draggable-setup]').forEach(el => {
+										el.removeAttribute('data-draggable-setup');
+										el.removeAttribute('data-section-index');
+									});
+									iframeDoc.querySelectorAll('.section-controls').forEach(c => c.remove());
+									setupSectionDragDrop();
+								}
+								return false;
+							}, true);
+							
+							// Move down functionality - use capture phase
+							moveDownBtn.addEventListener('click', function(e) {
+								e.stopPropagation();
+								e.stopImmediatePropagation();
+								e.preventDefault();
+								if (index < sections.length - 1 && !this.disabled) {
+									const parent = section.parentNode;
+									const nextSibling = sections[index + 1].nextSibling;
+									if (nextSibling) {
+										parent.insertBefore(section, nextSibling);
+									} else {
+										parent.appendChild(section);
+									}
+									changes['sections-reordered'] = { type: 'sections', action: 'reorder' };
+									// Re-setup immediately
+									iframeDoc.querySelectorAll('[data-draggable-setup]').forEach(el => {
+										el.removeAttribute('data-draggable-setup');
+										el.removeAttribute('data-section-index');
+									});
+									iframeDoc.querySelectorAll('.section-controls').forEach(c => c.remove());
+									setupSectionDragDrop();
+								}
+								return false;
+							}, true);
+							
+							// Prevent all editing interactions on buttons
+							[moveUpBtn, moveDownBtn].forEach(btn => {
+								btn.addEventListener('mousedown', function(e) {
+									e.stopPropagation();
+									e.stopImmediatePropagation();
+								}, true);
+								
+								btn.addEventListener('dblclick', function(e) {
+									e.stopPropagation();
+									e.stopImmediatePropagation();
+									e.preventDefault();
+									return false;
+								}, true);
+								
+								btn.addEventListener('contextmenu', function(e) {
+									e.stopPropagation();
+									e.preventDefault();
+									return false;
+								}, true);
+							});
+							
+							controlsContainer.appendChild(moveUpBtn);
+							controlsContainer.appendChild(moveDownBtn);
+							
+							// Ensure section has relative positioning
+							const sectionPosition = iframeDoc.defaultView.getComputedStyle(section).position;
+							if (sectionPosition === 'static') {
+								section.style.position = 'relative';
+							}
+							
+							section.appendChild(controlsContainer);
+							
+							// Show controls always in edit mode for better UX
+							if (editMode) {
+								controlsContainer.style.display = 'flex';
+							}
+							
+							section.addEventListener('mouseenter', function() {
+								if (editMode) {
+									controlsContainer.style.display = 'flex';
+									controlsContainer.style.opacity = '1';
+									section.style.outline = '2px dashed rgba(102, 126, 234, 0.6)';
+									section.style.outlineOffset = '2px';
+								}
+							});
+							
+							section.addEventListener('mouseleave', function(e) {
+								if (!section.classList.contains('dragging') && editMode) {
+									controlsContainer.style.opacity = '0.8';
+									section.style.outline = '2px dashed rgba(102, 126, 234, 0.3)';
+								}
+							});
+						}
+						
+						// Drag start
+						section.addEventListener('dragstart', function(e) {
+							if (!editMode) {
+								e.preventDefault();
+								return false;
+							}
+							
+							// Allow drag from anywhere on section or handle
+							this.classList.add('dragging');
+							e.dataTransfer.effectAllowed = 'move';
+							e.dataTransfer.setData('text/html', this.outerHTML);
+							e.dataTransfer.setData('text/plain', index.toString());
+							
+							// Create a semi-transparent clone for visual feedback
+							this.style.opacity = '0.5';
+							
+							return true;
+						});
+						
+						// Drag end
+						section.addEventListener('dragend', function(e) {
+							this.classList.remove('dragging');
+							this.style.opacity = '';
+							this.style.outline = '';
+							this.style.outlineOffset = '';
+							
+							// Remove all drop indicators
+							iframeDoc.querySelectorAll('.drop-indicator').forEach(ind => ind.remove());
+						});
+						
+						// Drag over - allow drop
+						section.addEventListener('dragover', function(e) {
+							if (!editMode) return;
+							
+							e.preventDefault();
+							e.dataTransfer.dropEffect = 'move';
+							
+							// Show drop indicator
+							const rect = this.getBoundingClientRect();
+							const y = e.clientY - rect.top;
+							const height = rect.height;
+							
+							// Remove existing indicators
+							iframeDoc.querySelectorAll('.drop-indicator').forEach(ind => ind.remove());
+							
+							// Create drop indicator
+							const indicator = iframeDoc.createElement('div');
+							indicator.className = 'drop-indicator';
+							indicator.style.cssText = `
+								position: absolute;
+								left: 0;
+								right: 0;
+								height: 4px;
+								background: #667eea;
+								z-index: 10003;
+								pointer-events: none;
+								box-shadow: 0 0 10px rgba(102, 126, 234, 0.8);
+							`;
+							
+							// Position indicator above or below based on mouse position
+							if (y < height / 2) {
+								indicator.style.top = '0';
+								this.insertBefore(indicator, this.firstChild);
+							} else {
+								indicator.style.bottom = '0';
+								this.appendChild(indicator);
+							}
+						});
+						
+						// Drag leave
+						section.addEventListener('dragleave', function(e) {
+							// Only remove indicator if we're actually leaving the section
+							if (!this.contains(e.relatedTarget)) {
+								iframeDoc.querySelectorAll('.drop-indicator').forEach(ind => {
+									if (ind.parentNode === this) ind.remove();
+								});
+								// Remove highlight
+								this.style.backgroundColor = '';
+							}
+						});
+						
+						// Drop
+						section.addEventListener('drop', function(e) {
+							if (!editMode) return;
+							
+							e.preventDefault();
+							e.stopPropagation();
+							
+							// Remove all indicators
+							iframeDoc.querySelectorAll('.drop-indicator').forEach(ind => ind.remove());
+							
+							const draggedIndex = parseInt(e.dataTransfer.getData('text/plain'));
+							const draggedSection = sections[draggedIndex];
+							
+							if (!draggedSection || draggedSection === this) {
+								return;
+							}
+							
+							// Determine drop position
+							const rect = this.getBoundingClientRect();
+							const y = e.clientY - rect.top;
+							const height = rect.height;
+							
+							// Get parent container
+							const parent = this.parentNode;
+							
+							if (y < height / 2) {
+								// Insert before this section
+								parent.insertBefore(draggedSection, this);
+							} else {
+								// Insert after this section
+								if (this.nextSibling) {
+									parent.insertBefore(draggedSection, this.nextSibling);
+								} else {
+									parent.appendChild(draggedSection);
+								}
+							}
+							
+							// Mark that sections were reordered
+							changes['sections-reordered'] = { type: 'sections', action: 'reorder' };
+							
+							// Re-setup immediately for better responsiveness
+							iframeDoc.querySelectorAll('[data-draggable-setup]').forEach(el => {
+								el.removeAttribute('data-draggable-setup');
+								el.removeAttribute('data-section-index');
+							});
+							iframeDoc.querySelectorAll('.section-controls').forEach(c => c.remove());
+							setupSectionDragDrop();
+						});
+					});
+				}
+				
+				// Setup section drag and drop (only in edit mode)
+				if (editMode) {
+					setupSectionDragDrop();
+				}
+				
 				// Add hover effects in edit mode
 				iframeDoc.addEventListener('mouseover', function(e) {
 					if (editMode && (e.target.classList.contains('editable-text') || e.target.classList.contains('media-editable') || e.target.classList.contains('hero-bg-editable') || e.target.classList.contains('editable-link'))) {
@@ -1604,6 +1970,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'export_static') {
 				const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
 				const buttons = iframeDoc.querySelectorAll('.hero-change-bg-btn');
 				buttons.forEach(btn => btn.style.display = 'none');
+				
+				// Disable drag and drop
+				const sections = iframeDoc.querySelectorAll('.draggable-section');
+				sections.forEach(section => {
+					section.draggable = false;
+					const controls = section.querySelector('.section-controls');
+					if (controls) controls.style.display = 'none';
+					section.style.outline = '';
+					section.style.outlineOffset = '';
+				});
 			} catch(e) {}
 		});
 		
