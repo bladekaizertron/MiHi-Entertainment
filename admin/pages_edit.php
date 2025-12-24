@@ -1593,10 +1593,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'export_static') {
 					});
 					
 					sections.forEach((section, index) => {
-						// Skip if already set up
-						if (section.hasAttribute('data-draggable-setup')) {
-							return;
+						// Remove any existing controls first (to allow re-initialization)
+						// This ensures buttons work properly after page reload
+						const existingControls = section.querySelector('.section-controls');
+						if (existingControls) {
+							existingControls.remove();
 						}
+						
+						// Remove old setup attributes to allow fresh initialization
+						section.removeAttribute('data-draggable-setup');
+						section.removeAttribute('data-section-index');
+						
 						section.setAttribute('data-draggable-setup', 'true');
 						section.setAttribute('data-section-index', index);
 						
@@ -2072,15 +2079,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'export_static') {
 					
 					// Remove editor-specific elements
 					tempDiv.querySelectorAll('.remove-item-btn').forEach(el => el.remove());
+					tempDiv.querySelectorAll('.section-controls').forEach(el => el.remove());
+					tempDiv.querySelectorAll('.move-section-btn').forEach(el => el.remove());
+					tempDiv.querySelectorAll('.hero-change-bg-btn').forEach(el => el.remove());
+					tempDiv.querySelectorAll('.drag-handle').forEach(el => el.remove());
+					tempDiv.querySelectorAll('.drop-indicator').forEach(el => el.remove());
+					tempDiv.querySelectorAll('.hero-bg-indicator').forEach(el => el.remove());
 					
 					const editorElements = tempDiv.querySelectorAll('*');
 					editorElements.forEach(el => {
-						el.classList.remove('editable-text', 'media-editable', 'editable-highlight', 'editable-link', 'gjs-selected');
+						el.classList.remove('editable-text', 'media-editable', 'editable-highlight', 'editable-link', 'gjs-selected', 'draggable-section', 'dragging', 'hero-bg-editable');
 						el.removeAttribute('data-original-text');
 						el.removeAttribute('data-id');
 						el.removeAttribute('contenteditable');
 						el.removeAttribute('data-link-editable');
 						el.removeAttribute('data-initialized'); // Remove phone-protection artifact
+						el.removeAttribute('data-draggable-setup');
+						el.removeAttribute('data-section-index');
+						el.removeAttribute('data-hero-editable');
+						el.removeAttribute('data-hero-hover-handler');
+						el.removeAttribute('data-hero-listener');
+						el.removeAttribute('data-hero-id');
+						el.removeAttribute('data-non-editable');
+						el.removeAttribute('draggable');
 						// Remove inline styles added by editor
 						if (el.hasAttribute('style')) {
 							let style = el.getAttribute('style');
