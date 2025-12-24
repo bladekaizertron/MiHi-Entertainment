@@ -586,6 +586,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'export_static') {
 		.preview-iframe { width: 100%; height: calc(100vh - 400px); min-height: 600px; border: none; background: #fff; }
 		.editor-overlay { position: absolute; top: 0; left: 0; right: 0; bottom: 0; pointer-events: none; z-index: 1000; }
 		.editable-highlight { outline: 2px dashed #667eea; outline-offset: 2px; background: rgba(102, 126, 234, 0.1) !important; cursor: text !important; }
+		/* Text Formatting Toolbar */
+		.text-format-toolbar { position: fixed; background: white; border: 1px solid #e5e7eb; border-radius: 8px; padding: 10px 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 100001; display: none; flex-wrap: wrap; gap: 8px; align-items: center; font-size: 12px; min-width: 400px; }
+		.text-format-toolbar.active { display: flex; }
+		.text-format-group { display: flex; align-items: center; gap: 6px; padding: 4px 8px; border-right: 1px solid #e5e7eb; }
+		.text-format-group:last-child { border-right: none; }
+		.text-format-label { font-weight: 600; color: #374151; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; white-space: nowrap; }
+		.text-format-color-container { display: flex; gap: 4px; }
+		.text-format-color-btn { width: 28px; height: 28px; border-radius: 4px; border: 2px solid #e5e7eb; cursor: pointer; transition: all 0.2s; flex-shrink: 0; }
+		.text-format-color-btn:hover { transform: scale(1.15); border-color: #667eea; box-shadow: 0 2px 4px rgba(0,0,0,0.2); }
+		.text-format-color-btn.active { border-color: #667eea; border-width: 3px; box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.2); }
+		.text-format-select, .text-format-input { padding: 4px 8px; border: 1px solid #cbd5e1; border-radius: 4px; font-size: 12px; background: white; cursor: pointer; }
+		.text-format-select:focus, .text-format-input:focus { outline: none; border-color: #667eea; box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1); }
+		.text-format-input { width: 70px; }
 		.media-editable { position: relative; }
 		.media-editable:hover::after { content: 'Click to change image/video'; position: absolute; top: 10px; left: 10px; background: #667eea; color: #fff; padding: 6px 12px; border-radius: 6px; font-size: 12px; z-index: 1001; pointer-events: none; }
 		.media-editable:hover { outline: 3px solid #667eea; cursor: pointer; }
@@ -1153,6 +1166,291 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'export_static') {
 				
 				// Initialize editing on all elements
 				makeEditable(iframeBody);
+				
+				// Setup text formatting toolbar
+				let textFormatToolbar = null;
+				let currentFormattedElement = null;
+				
+				function createTextFormatToolbar() {
+					if (textFormatToolbar) return textFormatToolbar;
+					
+					// Create toolbar in parent document (not iframe)
+					textFormatToolbar = document.createElement('div');
+					textFormatToolbar.className = 'text-format-toolbar';
+					textFormatToolbar.id = 'text-format-toolbar';
+					
+					// Color options
+					const colors = [
+						{ name: 'Carbon Black', value: '#1F1F1F' },
+						{ name: 'Canvas White', value: '#FFFFFF' },
+						{ name: 'Vibrant Coral', value: '#FF4F4F' },
+						{ name: 'Electric Aqua', value: '#18F1E1' }
+					];
+					
+					const colorButtons = colors.map(color => 
+						`<button class="text-format-color-btn" data-color="${color.value}" style="background:${color.value};" title="${color.name}"></button>`
+					).join('');
+					
+					textFormatToolbar.innerHTML = `
+						<div class="text-format-group">
+							<span class="text-format-label">Color</span>
+							<div class="text-format-color-container">
+								${colorButtons}
+							</div>
+						</div>
+						<div class="text-format-group">
+							<span class="text-format-label">Font</span>
+							<select class="text-format-select" id="text-format-font-family">
+								<option value="Azo Sans">Azo Sans</option>
+								<option value="Azo Sans Uber">Azo Sans Uber</option>
+							</select>
+						</div>
+						<div class="text-format-group">
+							<span class="text-format-label">Size</span>
+							<input type="number" class="text-format-input" id="text-format-font-size" min="8" max="120" value="16" step="1">
+						</div>
+						<div class="text-format-group">
+							<span class="text-format-label">Weight</span>
+							<select class="text-format-select" id="text-format-font-weight">
+								<option value="300">Light (300)</option>
+								<option value="400" selected>Regular (400)</option>
+								<option value="500">Medium (500)</option>
+								<option value="600">Semi Bold (600)</option>
+								<option value="700">Bold (700)</option>
+								<option value="800">Extra Bold (800)</option>
+								<option value="900">Black (900)</option>
+							</select>
+						</div>
+					`;
+					
+					document.body.appendChild(textFormatToolbar);
+					
+					// Color button handlers
+					textFormatToolbar.querySelectorAll('.text-format-color-btn').forEach(btn => {
+						btn.addEventListener('click', function() {
+							const color = this.getAttribute('data-color');
+							applyTextFormatting('color', color);
+							// Update active state
+							textFormatToolbar.querySelectorAll('.text-format-color-btn').forEach(b => b.classList.remove('active'));
+							this.classList.add('active');
+						});
+					});
+					
+					// Font family handler
+					const fontFamilySelect = textFormatToolbar.querySelector('#text-format-font-family');
+					fontFamilySelect.addEventListener('change', function() {
+						applyTextFormatting('fontFamily', this.value);
+					});
+					
+					// Font size handler
+					const fontSizeInput = textFormatToolbar.querySelector('#text-format-font-size');
+					fontSizeInput.addEventListener('change', function() {
+						applyTextFormatting('fontSize', this.value + 'px');
+					});
+					
+					// Font weight handler
+					const fontWeightSelect = textFormatToolbar.querySelector('#text-format-font-weight');
+					fontWeightSelect.addEventListener('change', function() {
+						applyTextFormatting('fontWeight', this.value);
+					});
+					
+					// Keep toolbar visible when hovering over it
+					textFormatToolbar.addEventListener('mouseenter', function() {
+						// Keep it visible
+					});
+					textFormatToolbar.addEventListener('mouseleave', function() {
+						hideTextFormatToolbar();
+					});
+					
+					return textFormatToolbar;
+				}
+				
+				function showTextFormatToolbar(element, event) {
+					if (!editMode) return;
+					
+					// Only show for editable text elements
+					if (!element.classList.contains('editable-text') && 
+					    !element.classList.contains('editable-link') &&
+					    !element.closest('.editable-text') &&
+					    !element.closest('.editable-link')) {
+						return;
+					}
+					
+					// Skip if element is inside section controls or other non-editable areas
+					if (element.closest('.section-controls') || 
+					    element.closest('.hero-change-bg-btn') ||
+					    element.closest('.change-section-bg-btn')) {
+						return;
+					}
+					
+					// Get the actual editable element
+					const editableEl = element.classList.contains('editable-text') || element.classList.contains('editable-link') 
+						? element 
+						: element.closest('.editable-text, .editable-link');
+					
+					if (!editableEl) return;
+					
+					currentFormattedElement = editableEl;
+					
+					// Create toolbar if it doesn't exist
+					if (!textFormatToolbar) {
+						createTextFormatToolbar();
+					}
+					
+					// Get current formatting
+					const computedStyle = iframeDoc.defaultView.getComputedStyle(editableEl);
+					const currentColor = computedStyle.color;
+					const currentFontSize = computedStyle.fontSize;
+					const currentFontWeight = computedStyle.fontWeight;
+					const currentFontFamily = computedStyle.fontFamily;
+					
+					// Update toolbar with current values
+					const fontSizeInput = textFormatToolbar.querySelector('#text-format-font-size');
+					const fontWeightSelect = textFormatToolbar.querySelector('#text-format-font-weight');
+					const fontFamilySelect = textFormatToolbar.querySelector('#text-format-font-family');
+					
+					// Extract numeric font size
+					const fontSizeNum = parseInt(currentFontSize);
+					if (!isNaN(fontSizeNum)) {
+						fontSizeInput.value = fontSizeNum;
+					}
+					
+					// Set font weight
+					fontWeightSelect.value = currentFontWeight;
+					
+					// Set font family (check if it contains Azo Sans Uber)
+					if (currentFontFamily.includes('Azo Sans Uber') || currentFontFamily.includes('AzoSansUber')) {
+						fontFamilySelect.value = 'Azo Sans Uber';
+					} else {
+						fontFamilySelect.value = 'Azo Sans';
+					}
+					
+					// Update active color button
+					textFormatToolbar.querySelectorAll('.text-format-color-btn').forEach(btn => {
+						btn.classList.remove('active');
+						const btnColor = btn.getAttribute('data-color');
+						// Convert current color to hex for comparison
+						const rgbToHex = (rgb) => {
+							if (rgb.startsWith('#')) return rgb.toUpperCase();
+							const match = rgb.match(/rgb\((\d+),\s*(\d+),\s*(\d+)\)/);
+							if (!match) return null;
+							const toHex = (n) => {
+								const hex = parseInt(n).toString(16);
+								return hex.length === 1 ? '0' + hex : hex;
+							};
+							return '#' + toHex(match[1]) + toHex(match[2]) + toHex(match[3]);
+						};
+						const currentHex = rgbToHex(currentColor);
+						if (currentHex && currentHex.toUpperCase() === btnColor.toUpperCase()) {
+							btn.classList.add('active');
+						}
+					});
+					
+					// Position toolbar near the element
+					// Get element position relative to iframe
+					const rect = editableEl.getBoundingClientRect();
+					// Get iframe position relative to viewport
+					const iframeRect = iframe.getBoundingClientRect();
+					
+					// Calculate position relative to viewport (parent document)
+					const toolbarWidth = 450;
+					const toolbarX = iframeRect.left + rect.left + (rect.width / 2) - (toolbarWidth / 2);
+					const toolbarY = iframeRect.top + rect.top - 65; // Above the element
+					
+					// Ensure toolbar stays within viewport
+					const finalX = Math.max(10, Math.min(toolbarX, window.innerWidth - toolbarWidth - 10));
+					const finalY = Math.max(10, Math.min(toolbarY, window.innerHeight - 60));
+					
+					textFormatToolbar.style.left = finalX + 'px';
+					textFormatToolbar.style.top = finalY + 'px';
+					textFormatToolbar.classList.add('active');
+				}
+				
+				function hideTextFormatToolbar() {
+					if (textFormatToolbar) {
+						textFormatToolbar.classList.remove('active');
+						currentFormattedElement = null;
+					}
+				}
+				
+				function applyTextFormatting(property, value) {
+					if (!currentFormattedElement) return;
+					
+					const element = currentFormattedElement;
+					
+					// Apply formatting
+					if (property === 'color') {
+						element.style.color = value;
+					} else if (property === 'fontFamily') {
+						if (value === 'Azo Sans Uber') {
+							element.style.fontFamily = '"Azo Sans Uber", "AzoSansUber-Regular", sans-serif';
+						} else {
+							element.style.fontFamily = '"Azo Sans", "AzoSans-Regular", sans-serif';
+						}
+					} else if (property === 'fontSize') {
+						element.style.fontSize = value;
+					} else if (property === 'fontWeight') {
+						element.style.fontWeight = value;
+					}
+					
+					// Track changes
+					const elementId = element.getAttribute('data-id') || 'text-' + Date.now();
+					changes[elementId] = {
+						type: 'text-formatting',
+						property: property,
+						value: value,
+						element: element
+					};
+				}
+				
+				// Add hover listeners for formatting toolbar
+				let hoverTimeout = null;
+				
+				iframeDoc.addEventListener('mouseover', function(e) {
+					if (!editMode) return;
+					
+					// Clear any existing timeout
+					if (hoverTimeout) {
+						clearTimeout(hoverTimeout);
+					}
+					
+					// Check if element is editable text
+					const isEditable = e.target.classList.contains('editable-text') || 
+					                  e.target.classList.contains('editable-link') ||
+					                  e.target.closest('.editable-text') ||
+					                  e.target.closest('.editable-link');
+					
+					if (isEditable && !e.target.closest('.section-controls')) {
+						// Small delay to avoid flickering
+						hoverTimeout = setTimeout(() => {
+							showTextFormatToolbar(e.target, e);
+						}, 200);
+					}
+				});
+				
+				iframeDoc.addEventListener('mouseout', function(e) {
+					// Clear show timeout
+					if (hoverTimeout) {
+						clearTimeout(hoverTimeout);
+						hoverTimeout = null;
+					}
+					
+					// Hide toolbar when mouse leaves editable elements (unless moving to toolbar)
+					const relatedTarget = e.relatedTarget;
+					const isMovingToToolbar = textFormatToolbar && 
+					                         (relatedTarget === textFormatToolbar || 
+					                          (relatedTarget && textFormatToolbar.contains(relatedTarget)));
+					
+					if (!isMovingToToolbar) {
+						setTimeout(() => {
+							// Double check that mouse is not over toolbar
+							if (!textFormatToolbar || !textFormatToolbar.matches(':hover')) {
+								hideTextFormatToolbar();
+							}
+						}, 150);
+					}
+				});
+				
 				
 				// Make hero backgrounds editable
 				function setupHeroBackgroundEditing() {
@@ -2308,6 +2606,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'export_static') {
 					}
 				});
 				
+				// Initialize formatting toolbar after a short delay
+				setTimeout(() => {
+					createTextFormatToolbar();
+				}, 500);
+				
 				console.log('Editor initialized');
 			} catch(e) {
 				console.error('Error initializing editor:', e);
@@ -2328,6 +2631,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'export_static') {
 			previewModeBtn.classList.add('active');
 			editModeBtn.classList.remove('active');
 			indicator.style.display = 'none';
+			// Hide formatting toolbar
+			const toolbar = document.getElementById('text-format-toolbar');
+			if (toolbar) {
+				toolbar.classList.remove('active');
+			}
 			// Hide all change background buttons when exiting edit mode
 			try {
 				const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
