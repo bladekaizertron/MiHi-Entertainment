@@ -1124,6 +1124,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'export_static') {
 					if (element.closest && (
 						element.closest('.drag-handle') ||
 						element.closest('.section-controls') ||
+						element.closest('.section-menu-dropdown') ||
+						element.closest('.section-menu-toggle') ||
 						element.closest('.move-section-btn') ||
 						element.closest('.remove-item-btn') ||
 						element.closest('.gallery-item-container') ||
@@ -1132,10 +1134,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'export_static') {
 						return;
 					}
 					
-					// Skip gallery remove buttons directly
+					// Skip gallery remove buttons and menu elements directly
 					if (element.classList && (
 						element.classList.contains('remove-item-btn') ||
-						element.classList.contains('gallery-item-container')
+						element.classList.contains('gallery-item-container') ||
+						element.classList.contains('section-menu-dropdown') ||
+						element.classList.contains('section-menu-toggle')
 					)) {
 						return;
 					}
@@ -1290,7 +1294,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'export_static') {
 						    el.classList.contains('editable-link') ||
 						    el.classList.contains('remove-item-btn') ||
 						    el.classList.contains('gallery-item-container') ||
-						    el.closest('header, footer, nav, script, style, .section-controls, .icon-editable, .media-editable, .remove-item-btn, .gallery-item-container')) {
+						    el.classList.contains('section-menu-dropdown') ||
+						    el.classList.contains('section-menu-toggle') ||
+						    el.closest('header, footer, nav, script, style, .section-controls, .section-menu-dropdown, .section-menu-toggle, .icon-editable, .media-editable, .remove-item-btn, .gallery-item-container')) {
 							return;
 						}
 						
@@ -1441,6 +1447,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'export_static') {
 					
 					// Skip if element is inside section controls or other non-editable areas
 					if (element.closest('.section-controls') || 
+					    element.closest('.section-menu-dropdown') ||
+					    element.closest('.section-menu-toggle') ||
 					    element.closest('.hero-change-bg-btn') ||
 					    element.closest('.change-section-bg-btn') ||
 					    element.closest('.remove-item-btn') ||
@@ -1448,7 +1456,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'export_static') {
 					    element.closest('svg') ||
 					    element.closest('.icon-editable') ||
 					    element.classList.contains('remove-item-btn') ||
-					    element.classList.contains('gallery-item-container')) {
+					    element.classList.contains('gallery-item-container') ||
+					    element.classList.contains('section-menu-dropdown') ||
+					    element.classList.contains('section-menu-toggle')) {
 						return;
 					}
 					
@@ -1612,6 +1622,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'export_static') {
 					
 					// Skip if element is inside non-editable areas
 					if (e.target.closest('.section-controls') || 
+					    e.target.closest('.section-menu-dropdown') ||
+					    e.target.closest('.section-menu-toggle') ||
 					    e.target.closest('.hero-change-bg-btn') ||
 					    e.target.closest('.change-section-bg-btn') ||
 					    e.target.closest('.icon-editable') ||
@@ -1619,7 +1631,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'export_static') {
 					    e.target.closest('.gallery-item-container') ||
 					    e.target.closest('svg') ||
 					    e.target.classList.contains('remove-item-btn') ||
-					    e.target.classList.contains('gallery-item-container')) {
+					    e.target.classList.contains('gallery-item-container') ||
+					    e.target.classList.contains('section-menu-dropdown') ||
+					    e.target.classList.contains('section-menu-toggle')) {
 						return;
 					}
 					
@@ -2412,7 +2426,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'export_static') {
 							el.setAttribute('draggable', 'false');
 						});
 						
-						// Add section controls with up/down buttons for easier navigation
+						// Add section controls with hamburger menu
 						if (!section.querySelector('.section-controls')) {
 							const controlsContainer = iframeDoc.createElement('div');
 							controlsContainer.className = 'section-controls';
@@ -2420,33 +2434,95 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'export_static') {
 								position: absolute;
 								top: 15px;
 								left: 15px;
+								z-index: 40;
+							`;
+							
+							// Hamburger menu button
+							const hamburgerBtn = iframeDoc.createElement('button');
+							hamburgerBtn.className = 'section-menu-toggle';
+							hamburgerBtn.type = 'button';
+							hamburgerBtn.setAttribute('contenteditable', 'false');
+							hamburgerBtn.contentEditable = false;
+							hamburgerBtn.setAttribute('data-non-editable', 'true');
+							hamburgerBtn.setAttribute('aria-label', 'Section Menu');
+							hamburgerBtn.style.cssText = `
+								width: 40px;
+								height: 40px;
+								background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+								border: 2px solid rgba(255, 255, 255, 0.3);
+								border-radius: 8px;
+								cursor: pointer;
+								display: flex;
+								flex-direction: column;
+								align-items: center;
+								justify-content: center;
+								gap: 4px;
+								padding: 8px;
+								box-shadow: 0 2px 8px rgba(102, 126, 234, 0.4);
+								transition: all 0.2s ease;
+								user-select: none;
+								-webkit-user-select: none;
+								-moz-user-select: none;
+								-ms-user-select: none;
+							`;
+							
+							// Hamburger icon (3 lines)
+							for (let i = 0; i < 3; i++) {
+								const line = iframeDoc.createElement('span');
+								line.style.cssText = `
+									width: 20px;
+									height: 2px;
+									background: white;
+									border-radius: 2px;
+									transition: all 0.3s ease;
+								`;
+								hamburgerBtn.appendChild(line);
+							}
+							
+							// Dropdown menu container
+							const menuDropdown = iframeDoc.createElement('div');
+							menuDropdown.className = 'section-menu-dropdown';
+							menuDropdown.style.cssText = `
+								position: absolute;
+								top: 48px;
+								left: 0;
+								background: white;
+								border-radius: 8px;
+								box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+								padding: 8px;
+								min-width: 180px;
 								display: none;
 								flex-direction: column;
-								gap: 6px;
-								z-index: 40;
+								gap: 4px;
+								opacity: 0;
+								transform: translateY(-10px);
+								transition: all 0.2s ease;
+								z-index: 1000;
 							`;
 							
 							// Move Up button
 							const moveUpBtn = iframeDoc.createElement('button');
 							moveUpBtn.className = 'move-section-btn move-up';
-							moveUpBtn.innerHTML = '↑ Move Up';
+							moveUpBtn.innerHTML = '<span style="margin-right: 8px;">↑</span> Move Up';
 							moveUpBtn.title = 'Move Section Up';
-							moveUpBtn.type = 'button'; // Prevent form submission
+							moveUpBtn.type = 'button';
 							moveUpBtn.setAttribute('contenteditable', 'false');
 							moveUpBtn.contentEditable = false;
 							moveUpBtn.setAttribute('data-non-editable', 'true');
 							moveUpBtn.style.cssText = `
-								background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-								color: white;
-								border: 2px solid rgba(255, 255, 255, 0.3);
-								padding: 8px 14px;
+								background: white;
+								color: #374151;
+								border: 1px solid #e5e7eb;
+								padding: 10px 14px;
 								border-radius: 6px;
-								font-size: 12px;
-								font-weight: 600;
+								font-size: 13px;
+								font-weight: 500;
 								cursor: pointer;
-								box-shadow: 0 2px 8px rgba(102, 126, 234, 0.4);
 								transition: all 0.2s ease;
 								white-space: nowrap;
+								text-align: left;
+								display: flex;
+								align-items: center;
 								user-select: none;
 								-webkit-user-select: none;
 								-moz-user-select: none;
@@ -2456,14 +2532,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'export_static') {
 								moveUpBtn.disabled = true;
 								moveUpBtn.style.opacity = '0.5';
 								moveUpBtn.style.cursor = 'not-allowed';
+								moveUpBtn.style.background = '#f3f4f6';
 							}
 							
 							// Move Down button
 							const moveDownBtn = iframeDoc.createElement('button');
 							moveDownBtn.className = 'move-section-btn move-down';
-							moveDownBtn.innerHTML = '↓ Move Down';
+							moveDownBtn.innerHTML = '<span style="margin-right: 8px;">↓</span> Move Down';
 							moveDownBtn.title = 'Move Section Down';
-							moveDownBtn.type = 'button'; // Prevent form submission
+							moveDownBtn.type = 'button';
 							moveDownBtn.setAttribute('contenteditable', 'false');
 							moveDownBtn.contentEditable = false;
 							moveDownBtn.setAttribute('data-non-editable', 'true');
@@ -2472,20 +2549,83 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'export_static') {
 								moveDownBtn.disabled = true;
 								moveDownBtn.style.opacity = '0.5';
 								moveDownBtn.style.cursor = 'not-allowed';
+								moveDownBtn.style.background = '#f3f4f6';
 							}
 							
-							// Hover effects
+							// Hover effects for menu buttons
 							[moveUpBtn, moveDownBtn].forEach(btn => {
 								btn.addEventListener('mouseenter', function() {
 									if (!this.disabled) {
-										this.style.transform = 'scale(1.05)';
-										this.style.boxShadow = '0 4px 12px rgba(102, 126, 234, 0.6)';
+										this.style.background = '#f3f4f6';
+										this.style.borderColor = '#667eea';
 									}
 								});
 								btn.addEventListener('mouseleave', function() {
-									this.style.transform = 'scale(1)';
-									this.style.boxShadow = '0 2px 8px rgba(102, 126, 234, 0.4)';
+									if (!this.disabled) {
+										this.style.background = 'white';
+										this.style.borderColor = '#e5e7eb';
+									}
 								});
+							});
+							
+							// Hamburger button hover effect
+							hamburgerBtn.addEventListener('mouseenter', function() {
+								this.style.transform = 'scale(1.05)';
+								this.style.boxShadow = '0 4px 12px rgba(102, 126, 234, 0.6)';
+							});
+							hamburgerBtn.addEventListener('mouseleave', function() {
+								this.style.transform = 'scale(1)';
+								this.style.boxShadow = '0 2px 8px rgba(102, 126, 234, 0.4)';
+							});
+							
+							// Toggle menu on hamburger click
+							let menuOpen = false;
+							hamburgerBtn.addEventListener('click', function(e) {
+								e.stopPropagation();
+								e.stopImmediatePropagation();
+								e.preventDefault();
+								
+								menuOpen = !menuOpen;
+								if (menuOpen) {
+									menuDropdown.style.display = 'flex';
+									setTimeout(() => {
+										menuDropdown.style.opacity = '1';
+										menuDropdown.style.transform = 'translateY(0)';
+									}, 10);
+									// Animate hamburger to X
+									const lines = hamburgerBtn.querySelectorAll('span');
+									lines[0].style.transform = 'rotate(45deg) translate(6px, 6px)';
+									lines[1].style.opacity = '0';
+									lines[2].style.transform = 'rotate(-45deg) translate(6px, -6px)';
+								} else {
+									menuDropdown.style.opacity = '0';
+									menuDropdown.style.transform = 'translateY(-10px)';
+									setTimeout(() => {
+										menuDropdown.style.display = 'none';
+									}, 200);
+									// Reset hamburger icon
+									const lines = hamburgerBtn.querySelectorAll('span');
+									lines[0].style.transform = 'none';
+									lines[1].style.opacity = '1';
+									lines[2].style.transform = 'none';
+								}
+								return false;
+							}, true);
+							
+							// Close menu when clicking outside (use iframe document)
+							iframeDoc.addEventListener('click', function closeMenu(e) {
+								if (menuOpen && !controlsContainer.contains(e.target)) {
+									menuOpen = false;
+									menuDropdown.style.opacity = '0';
+									menuDropdown.style.transform = 'translateY(-10px)';
+									setTimeout(() => {
+										menuDropdown.style.display = 'none';
+									}, 200);
+									const lines = hamburgerBtn.querySelectorAll('span');
+									lines[0].style.transform = 'none';
+									lines[1].style.opacity = '1';
+									lines[2].style.transform = 'none';
+								}
 							});
 							
 							// Move up functionality - use capture phase to catch before text editing
@@ -2494,6 +2634,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'export_static') {
 								e.stopImmediatePropagation();
 								e.preventDefault();
 								if (index > 0 && !this.disabled) {
+									// Close menu
+									menuOpen = false;
+									menuDropdown.style.opacity = '0';
+									menuDropdown.style.transform = 'translateY(-10px)';
+									setTimeout(() => {
+										menuDropdown.style.display = 'none';
+									}, 200);
+									const lines = hamburgerBtn.querySelectorAll('span');
+									lines[0].style.transform = 'none';
+									lines[1].style.opacity = '1';
+									lines[2].style.transform = 'none';
+									
 									const parent = section.parentNode;
 									parent.insertBefore(section, sections[index - 1]);
 									changes['sections-reordered'] = { type: 'sections', action: 'reorder' };
@@ -2514,6 +2666,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'export_static') {
 								e.stopImmediatePropagation();
 								e.preventDefault();
 								if (index < sections.length - 1 && !this.disabled) {
+									// Close menu
+									menuOpen = false;
+									menuDropdown.style.opacity = '0';
+									menuDropdown.style.transform = 'translateY(-10px)';
+									setTimeout(() => {
+										menuDropdown.style.display = 'none';
+									}, 200);
+									const lines = hamburgerBtn.querySelectorAll('span');
+									lines[0].style.transform = 'none';
+									lines[1].style.opacity = '1';
+									lines[2].style.transform = 'none';
+									
 									const parent = section.parentNode;
 									const nextSibling = sections[index + 1].nextSibling;
 									if (nextSibling) {
@@ -2534,7 +2698,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'export_static') {
 							}, true);
 							
 							// Prevent all editing interactions on buttons
-							[moveUpBtn, moveDownBtn].forEach(btn => {
+							[moveUpBtn, moveDownBtn, hamburgerBtn].forEach(btn => {
 								btn.addEventListener('mousedown', function(e) {
 									e.stopPropagation();
 									e.stopImmediatePropagation();
@@ -2565,24 +2729,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'export_static') {
 							if (!isHeroSection) {
 								changeBgBtn = iframeDoc.createElement('button');
 								changeBgBtn.className = 'change-section-bg-btn';
-								changeBgBtn.innerHTML = '🎨 Change Background';
+								changeBgBtn.innerHTML = '<span style="margin-right: 8px;">🎨</span> Change Background';
 								changeBgBtn.title = 'Change Section Background';
 								changeBgBtn.type = 'button';
 								changeBgBtn.setAttribute('contenteditable', 'false');
 								changeBgBtn.contentEditable = false;
 								changeBgBtn.setAttribute('data-non-editable', 'true');
 								changeBgBtn.style.cssText = `
-									background: linear-gradient(135deg, #FF4F4F 0%, #e63946 100%);
-									color: white;
-									border: 2px solid rgba(255, 255, 255, 0.3);
-									padding: 8px 14px;
+									background: white;
+									color: #374151;
+									border: 1px solid #e5e7eb;
+									padding: 10px 14px;
 									border-radius: 6px;
-									font-size: 12px;
-									font-weight: 600;
+									font-size: 13px;
+									font-weight: 500;
 									cursor: pointer;
-									box-shadow: 0 2px 8px rgba(255, 79, 79, 0.4);
 									transition: all 0.2s ease;
 									white-space: nowrap;
+									text-align: left;
+									display: flex;
+									align-items: center;
 									user-select: none;
 									-webkit-user-select: none;
 									-moz-user-select: none;
@@ -2591,12 +2757,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'export_static') {
 								
 								// Hover effects for change background button
 								changeBgBtn.addEventListener('mouseenter', function() {
-									this.style.transform = 'scale(1.05)';
-									this.style.boxShadow = '0 4px 12px rgba(255, 79, 79, 0.6)';
+									this.style.background = '#fef2f2';
+									this.style.borderColor = '#FF4F4F';
+									this.style.color = '#FF4F4F';
 								});
 								changeBgBtn.addEventListener('mouseleave', function() {
-									this.style.transform = 'scale(1)';
-									this.style.boxShadow = '0 2px 8px rgba(255, 79, 79, 0.4)';
+									this.style.background = 'white';
+									this.style.borderColor = '#e5e7eb';
+									this.style.color = '#374151';
 								});
 								
 								// Change background functionality
@@ -2604,6 +2772,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'export_static') {
 									e.stopPropagation();
 									e.stopImmediatePropagation();
 									e.preventDefault();
+									
+									// Close menu
+									menuOpen = false;
+									menuDropdown.style.opacity = '0';
+									menuDropdown.style.transform = 'translateY(-10px)';
+									setTimeout(() => {
+										menuDropdown.style.display = 'none';
+									}, 200);
+									const lines = hamburgerBtn.querySelectorAll('span');
+									lines[0].style.transform = 'none';
+									lines[1].style.opacity = '1';
+									lines[2].style.transform = 'none';
+									
 									editSectionBackground(section);
 									return false;
 								}, true);
@@ -2628,11 +2809,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'export_static') {
 								}, true);
 							}
 							
-							controlsContainer.appendChild(moveUpBtn);
-							controlsContainer.appendChild(moveDownBtn);
+							// Append buttons to dropdown menu
+							menuDropdown.appendChild(moveUpBtn);
+							menuDropdown.appendChild(moveDownBtn);
 							if (changeBgBtn) {
-								controlsContainer.appendChild(changeBgBtn);
+								menuDropdown.appendChild(changeBgBtn);
 							}
+							
+							// Append hamburger and dropdown to container
+							controlsContainer.appendChild(hamburgerBtn);
+							controlsContainer.appendChild(menuDropdown);
 							
 							// Ensure section has relative positioning
 							const sectionPosition = iframeDoc.defaultView.getComputedStyle(section).position;
@@ -2642,15 +2828,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'export_static') {
 							
 							section.appendChild(controlsContainer);
 							
-							// Show controls always in edit mode for better UX
+							// Show hamburger button always in edit mode
 							if (editMode) {
-								controlsContainer.style.display = 'flex';
+								hamburgerBtn.style.display = 'flex';
+							} else {
+								hamburgerBtn.style.display = 'none';
 							}
 							
 							section.addEventListener('mouseenter', function() {
 								if (editMode) {
-									controlsContainer.style.display = 'flex';
-									controlsContainer.style.opacity = '1';
+									hamburgerBtn.style.display = 'flex';
 									section.style.outline = '2px dashed rgba(102, 126, 234, 0.6)';
 									section.style.outlineOffset = '2px';
 								}
@@ -2658,7 +2845,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'export_static') {
 							
 							section.addEventListener('mouseleave', function(e) {
 								if (!section.classList.contains('dragging') && editMode) {
-									controlsContainer.style.opacity = '0.8';
+									// Don't hide hamburger on mouse leave, keep it visible
 									section.style.outline = '2px dashed rgba(102, 126, 234, 0.3)';
 								}
 							});
