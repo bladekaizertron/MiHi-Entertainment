@@ -602,6 +602,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'export_static') {
 		.media-editable { position: relative; }
 		.media-editable:hover::after { content: 'Click to change image/video'; position: absolute; top: 10px; left: 10px; background: #667eea; color: #fff; padding: 6px 12px; border-radius: 6px; font-size: 12px; z-index: 1001; pointer-events: none; }
 		.media-editable:hover { outline: 3px solid #667eea; cursor: pointer; }
+		/* Icon Editable Styles */
+		.icon-editable { position: relative; cursor: pointer; }
+		.icon-editable:hover { outline: 3px solid #18F1E1; outline-offset: 2px; }
+		.icon-editable:hover::after { content: '🎨 Edit Icon Colors'; position: absolute; top: -35px; left: 50%; transform: translateX(-50%); background: #18F1E1; color: #1F1F1F; padding: 6px 12px; border-radius: 6px; font-size: 12px; font-weight: 600; z-index: 1001; pointer-events: none; white-space: nowrap; box-shadow: 0 2px 8px rgba(0,0,0,0.2); }
 		.edit-mode-indicator { position: fixed; top: 20px; right: 20px; background: #667eea; color: #fff; padding: 12px 20px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 10000; font-size: 14px; font-weight: 600; }
 		.draggable-section { cursor: move !important; }
 		.draggable-section.dragging { opacity: 0.5; cursor: grabbing !important; }
@@ -1042,20 +1046,51 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'export_static') {
 				
 				// Make text elements editable
 				function makeEditable(element) {
-					if (element.tagName && ['SCRIPT', 'STYLE', 'NOSCRIPT', 'SVG'].includes(element.tagName)) {
+					if (element.tagName && ['SCRIPT', 'STYLE', 'NOSCRIPT'].includes(element.tagName)) {
 						return;
 					}
+					
+					// Handle SVG elements for icon editing (before other checks)
+					if (element.tagName === 'svg') {
+						element.classList.add('icon-editable');
+						element.setAttribute('data-icon-id', 'icon-' + Date.now() + '-' + Math.random());
+						element.addEventListener('click', function(e) {
+							if (editMode) {
+								e.preventDefault();
+								e.stopPropagation();
+								editIconColors(this);
+							}
+						});
+						return; // Don't process children of SVG
+					}
 
-					// Skip elements that are likely used for icons or specific functional components
+					// Skip elements that are likely used for icons or specific functional components (but allow icon editing)
 					if (element.classList && (
-						element.classList.contains('feature-item-icon') || 
-						element.classList.contains('feature-icon') ||
 						element.classList.contains('modern-btn-call') ||
 						element.classList.contains('drag-handle') ||
 						element.classList.contains('move-section-btn') ||
 						element.classList.contains('section-controls')
 					)) {
 						return;
+					}
+					
+					// Make icon containers editable
+					if (element.classList && (
+					    	element.classList.contains('feature-item-icon') || 
+					    	element.classList.contains('feature-icon') ||
+					    	element.classList.contains('icon-item') ||
+					    	element.classList.contains('icon-item-icon')
+					    )) {
+						element.classList.add('icon-editable');
+						element.setAttribute('data-icon-id', 'icon-' + Date.now() + '-' + Math.random());
+						element.addEventListener('click', function(e) {
+							if (editMode) {
+								e.preventDefault();
+								e.stopPropagation();
+								editIconColors(this);
+							}
+						});
+						return; // Don't process children of icon containers
 					}
 					
 					// Skip elements with data-non-editable attribute
@@ -1157,6 +1192,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'export_static') {
 							}
 						});
 					}
+					
 					
 					// Recursively process children
 					for (let child of element.childNodes) {
@@ -2586,13 +2622,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'export_static') {
 				
 				// Add hover effects in edit mode
 				iframeDoc.addEventListener('mouseover', function(e) {
-					if (editMode && (e.target.classList.contains('editable-text') || e.target.classList.contains('media-editable') || e.target.classList.contains('hero-bg-editable') || e.target.classList.contains('editable-link'))) {
-						e.target.classList.add('editable-highlight');
-						// Add special styling for editable links/buttons
-						if (e.target.classList.contains('editable-link')) {
-							e.target.style.cursor = 'text';
-							e.target.style.outline = '2px dashed #667eea';
+					if (editMode && (e.target.classList.contains('editable-text') || e.target.classList.contains('media-editable') || e.target.classList.contains('hero-bg-editable') || e.target.classList.contains('editable-link') || e.target.classList.contains('icon-editable'))) {
+						if (e.target.classList.contains('icon-editable')) {
+							// Icons get special hover styling
+							e.target.style.outline = '3px solid #18F1E1';
 							e.target.style.outlineOffset = '2px';
+						} else {
+							e.target.classList.add('editable-highlight');
+							// Add special styling for editable links/buttons
+							if (e.target.classList.contains('editable-link')) {
+								e.target.style.cursor = 'text';
+								e.target.style.outline = '2px dashed #667eea';
+								e.target.style.outlineOffset = '2px';
+							}
 						}
 					}
 				});
@@ -2601,6 +2643,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'export_static') {
 					e.target.classList.remove('editable-highlight');
 					if (e.target.classList.contains('editable-link') && !e.target.isContentEditable) {
 						e.target.style.cursor = '';
+						e.target.style.outline = '';
+						e.target.style.outlineOffset = '';
+					}
+					if (e.target.classList.contains('icon-editable')) {
 						e.target.style.outline = '';
 						e.target.style.outlineOffset = '';
 					}
@@ -2701,6 +2747,181 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'export_static') {
 				}
 			};
 			input.click();
+		}
+		
+		// Icon color editor function
+		function editIconColors(iconElement) {
+			// Remove any existing modal first
+			const existingModal = document.getElementById('icon-color-modal');
+			if (existingModal) {
+				existingModal.remove();
+			}
+			
+			// Create modal in parent document
+			const modal = document.createElement('div');
+			modal.id = 'icon-color-modal';
+			modal.style.cssText = 'position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.75); z-index:100000; display:flex; align-items:center; justify-content:center;';
+			
+			const modalContent = document.createElement('div');
+			modalContent.style.cssText = 'background:white; padding:24px; border-radius:12px; max-width:500px; width:90%; box-shadow:0 20px 60px rgba(0,0,0,0.3);';
+			
+			// Background color options
+			const bgColors = [
+				{ name: 'Carbon Black', value: '#1F1F1F' },
+				{ name: 'Canvas White', value: '#FFFFFF' },
+				{ name: 'Vibrant Coral', value: '#FF4F4F' },
+				{ name: 'Electric Aqua', value: '#18F1E1' }
+			];
+			
+			// Stroke color options
+			const strokeColors = [
+				{ name: 'Carbon Black', value: '#1F1F1F' },
+				{ name: 'Canvas White', value: '#FFFFFF' }
+			];
+			
+			const bgColorButtons = bgColors.map(color => 
+				`<button class="icon-color-btn" data-type="background" data-color="${color.value}" style="width:60px; height:60px; border-radius:8px; border:3px solid #e5e7eb; cursor:pointer; background:${color.value}; transition:all 0.2s; box-shadow:0 2px 4px rgba(0,0,0,0.1);" title="${color.name}"></button>`
+			).join('');
+			
+			const strokeColorButtons = strokeColors.map(color => 
+				`<button class="icon-color-btn" data-type="stroke" data-color="${color.value}" style="width:60px; height:60px; border-radius:8px; border:3px solid #e5e7eb; cursor:pointer; background:${color.value}; transition:all 0.2s; box-shadow:0 2px 4px rgba(0,0,0,0.1);" title="${color.name}"></button>`
+			).join('');
+			
+			const cancelBtnId = 'icon-color-cancel-' + Date.now();
+			
+			modalContent.innerHTML = `
+				<h3 style="margin:0 0 20px 0; font-size:18px; font-weight:600;">Edit Icon Colors</h3>
+				
+				<div style="margin-bottom:24px;">
+					<label style="display:block; font-size:14px; font-weight:600; margin-bottom:12px; color:#111827;">Background Color</label>
+					<div style="display:flex; gap:12px; flex-wrap:wrap;">
+						${bgColorButtons}
+					</div>
+				</div>
+				
+				<div style="margin-bottom:24px;">
+					<label style="display:block; font-size:14px; font-weight:600; margin-bottom:12px; color:#111827;">Stroke Color</label>
+					<div style="display:flex; gap:12px; flex-wrap:wrap;">
+						${strokeColorButtons}
+					</div>
+				</div>
+				
+				<button id="${cancelBtnId}" style="width:100%; padding:10px; border:1px solid #e5e7eb; background:white; color:#6b7280; border-radius:8px; cursor:pointer;">Close</button>
+			`;
+			
+			modal.appendChild(modalContent);
+			document.body.appendChild(modal);
+			
+			// Store icon element reference
+			const iconRef = iconElement;
+			
+			// Use setTimeout to ensure DOM is ready
+			setTimeout(() => {
+				// Color button handlers
+				modalContent.querySelectorAll('.icon-color-btn').forEach(btn => {
+					btn.addEventListener('mouseenter', function() {
+						this.style.transform = 'scale(1.1)';
+						this.style.borderColor = '#667eea';
+						this.style.boxShadow = '0 4px 12px rgba(102, 126, 234, 0.4)';
+					});
+					btn.addEventListener('mouseleave', function() {
+						this.style.transform = 'scale(1)';
+						this.style.borderColor = '#e5e7eb';
+						this.style.boxShadow = '0 2px 4px rgba(0,0,0,0.1)';
+					});
+					btn.addEventListener('click', function() {
+						const colorType = this.getAttribute('data-type');
+						const color = this.getAttribute('data-color');
+						applyIconColor(iconRef, colorType, color);
+					});
+				});
+				
+				const cancelBtn = document.getElementById(cancelBtnId);
+				if (cancelBtn) {
+					cancelBtn.onclick = function() {
+						if (document.body.contains(modal)) {
+							document.body.removeChild(modal);
+						}
+					};
+				}
+			}, 10);
+			
+			modal.onclick = function(e) {
+				if (e.target === modal) {
+					if (document.body.contains(modal)) {
+						document.body.removeChild(modal);
+					}
+				}
+			};
+		}
+		
+		// Function to apply icon colors
+		function applyIconColor(iconElement, colorType, color) {
+			const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+			
+			if (colorType === 'background') {
+				// Apply background color to icon container
+				// Check if it's an SVG or icon container
+				if (iconElement.tagName === 'svg') {
+					// For SVG, we might need to find the parent container
+					const container = iconElement.closest('.icon-item, .feature-item-icon, .feature-icon, .icon-item-icon') || iconElement.parentElement;
+					if (container) {
+						container.style.backgroundColor = color;
+						changes['icon-background-' + Date.now()] = {
+							type: 'icon-background',
+							element: container,
+							color: color
+						};
+					}
+				} else {
+					// For icon containers
+					iconElement.style.backgroundColor = color;
+					changes['icon-background-' + Date.now()] = {
+						type: 'icon-background',
+						element: iconElement,
+						color: color
+					};
+				}
+			} else if (colorType === 'stroke') {
+				// Apply stroke color to SVG elements
+				if (iconElement.tagName === 'svg') {
+					// Set stroke on SVG and all path/circle/rect elements inside
+					iconElement.style.stroke = color;
+					iconElement.setAttribute('stroke', color);
+					
+					// Apply to all child elements
+					const paths = iconElement.querySelectorAll('path, circle, rect, line, polyline, polygon');
+					paths.forEach(path => {
+						path.style.stroke = color;
+						path.setAttribute('stroke', color);
+					});
+					
+					changes['icon-stroke-' + Date.now()] = {
+						type: 'icon-stroke',
+						element: iconElement,
+						color: color
+					};
+				} else {
+					// If it's a container, find SVG inside
+					const svg = iconElement.querySelector('svg');
+					if (svg) {
+						svg.style.stroke = color;
+						svg.setAttribute('stroke', color);
+						
+						const paths = svg.querySelectorAll('path, circle, rect, line, polyline, polygon');
+						paths.forEach(path => {
+							path.style.stroke = color;
+							path.setAttribute('stroke', color);
+						});
+						
+						changes['icon-stroke-' + Date.now()] = {
+							type: 'icon-stroke',
+							element: svg,
+							color: color
+						};
+					}
+				}
+			}
 		}
 		
 		// Save changes on form submit
