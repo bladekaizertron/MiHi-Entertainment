@@ -1181,6 +1181,50 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'export_static') {
 						}
 					}
 					
+					// Also mark text-containing elements as editable (even if they don't have direct text nodes)
+					if (element.tagName && !element.hasAttribute('data-non-editable')) {
+						const textElements = ['P', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'SPAN', 'DIV', 'LI', 'TD', 'TH', 'LABEL', 'STRONG', 'EM', 'B', 'I', 'SMALL', 'BIG', 'SUB', 'SUP', 'BLOCKQUOTE', 'PRE', 'CODE'];
+						if (textElements.includes(element.tagName)) {
+							// Check if element has text content (directly or in children)
+							const hasText = element.textContent && element.textContent.trim().length > 0;
+							// Skip if it's inside a non-editable area
+							const isInNonEditable = element.closest('header, footer, nav, script, style, .section-controls, .hero-change-bg-btn, .change-section-bg-btn');
+							// Skip if it's an icon or media element
+							const isIconOrMedia = element.classList.contains('icon-editable') || 
+							                      element.classList.contains('media-editable') ||
+							                      element.closest('.icon-editable, .media-editable');
+							
+							if (hasText && !isInNonEditable && !isIconOrMedia) {
+								// Only add if not already editable and not a link/button (those are handled separately)
+								if (!element.classList.contains('editable-text') && 
+								    !element.classList.contains('editable-link') &&
+								    element.tagName !== 'A' && 
+								    element.tagName !== 'BUTTON') {
+									element.classList.add('editable-text');
+									if (!element.hasAttribute('data-id')) {
+										element.setAttribute('data-id', 'text-' + Date.now() + '-' + Math.random());
+									}
+									// Make it contentEditable for editing
+									if (!element.isContentEditable) {
+										element.contentEditable = 'true';
+										element.addEventListener('blur', function() {
+											const newText = this.textContent;
+											const oldText = this.getAttribute('data-original-text');
+											if (newText !== oldText) {
+												changes[this.getAttribute('data-id')] = {
+													old: oldText,
+													new: newText,
+													element: this
+												};
+											}
+										});
+										element.setAttribute('data-original-text', element.textContent);
+									}
+								}
+							}
+						}
+					}
+					
 					// Make images and videos editable
 					if (element.tagName === 'IMG' || element.tagName === 'VIDEO') {
 						element.classList.add('media-editable');
@@ -1202,6 +1246,61 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'export_static') {
 				
 				// Initialize editing on all elements
 				makeEditable(iframeBody);
+				
+				// Additional pass to ensure ALL text elements are marked as editable
+				function markAllTextElementsEditable() {
+					const textElements = iframeDoc.querySelectorAll('p, h1, h2, h3, h4, h5, h6, span, div, li, td, th, label, strong, em, b, i, small, big, sub, sup, blockquote, pre, code, a, button');
+					textElements.forEach(el => {
+						// Skip if already editable or in non-editable areas
+						if (el.classList.contains('editable-text') || 
+						    el.classList.contains('editable-link') ||
+						    el.closest('header, footer, nav, script, style, .section-controls, .icon-editable, .media-editable')) {
+							return;
+						}
+						
+						// Check if element has text content
+						const hasText = el.textContent && el.textContent.trim().length > 0;
+						if (hasText) {
+							// Mark as editable
+							if (el.tagName === 'A' || el.tagName === 'BUTTON') {
+								if (!el.classList.contains('editable-link')) {
+									el.classList.add('editable-link');
+								}
+							} else {
+								if (!el.classList.contains('editable-text')) {
+									el.classList.add('editable-text');
+								}
+							}
+							
+							// Add data-id if not present
+							if (!el.hasAttribute('data-id')) {
+								el.setAttribute('data-id', 'text-' + Date.now() + '-' + Math.random());
+							}
+							
+							// Make contentEditable if not already
+							if (!el.isContentEditable && el.tagName !== 'A' && el.tagName !== 'BUTTON') {
+								el.contentEditable = 'true';
+								el.addEventListener('blur', function() {
+									const newText = this.textContent;
+									const oldText = this.getAttribute('data-original-text');
+									if (newText !== oldText) {
+										changes[this.getAttribute('data-id')] = {
+											old: oldText,
+											new: newText,
+											element: this
+										};
+									}
+								});
+								el.setAttribute('data-original-text', el.textContent);
+							}
+						}
+					});
+				}
+				
+				// Mark all text elements as editable after a short delay to catch dynamically loaded content
+				setTimeout(() => {
+					markAllTextElementsEditable();
+				}, 500);
 				
 				// Setup text formatting toolbar
 				let textFormatToolbar = null;
@@ -1304,25 +1403,46 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'export_static') {
 				function showTextFormatToolbar(element, event) {
 					if (!editMode) return;
 					
-					// Only show for editable text elements
-					if (!element.classList.contains('editable-text') && 
-					    !element.classList.contains('editable-link') &&
-					    !element.closest('.editable-text') &&
-					    !element.closest('.editable-link')) {
-						return;
-					}
-					
 					// Skip if element is inside section controls or other non-editable areas
 					if (element.closest('.section-controls') || 
 					    element.closest('.hero-change-bg-btn') ||
-					    element.closest('.change-section-bg-btn')) {
+					    element.closest('.change-section-bg-btn') ||
+					    element.closest('svg') ||
+					    element.closest('.icon-editable')) {
 						return;
 					}
 					
-					// Get the actual editable element
-					const editableEl = element.classList.contains('editable-text') || element.classList.contains('editable-link') 
-						? element 
-						: element.closest('.editable-text, .editable-link');
+					// Get the actual editable element - be more flexible
+					let editableEl = null;
+					
+					// First try to find element with editable classes
+					if (element.classList.contains('editable-text') || element.classList.contains('editable-link')) {
+						editableEl = element;
+					} else {
+						editableEl = element.closest('.editable-text, .editable-link');
+					}
+					
+					// If not found, check if it's a text-containing element that should be editable
+					if (!editableEl && element.tagName) {
+						const textElements = ['P', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'SPAN', 'DIV', 'A', 'BUTTON', 'LABEL', 'LI', 'TD', 'TH', 'STRONG', 'EM', 'B', 'I', 'SMALL', 'BIG', 'SUB', 'SUP', 'BLOCKQUOTE', 'PRE', 'CODE'];
+						if (textElements.includes(element.tagName)) {
+							// Check if it has text content
+							const hasText = element.textContent && element.textContent.trim().length > 0;
+							// Check if it's not inside a non-editable container
+							const isInNonEditable = element.closest('header, footer, nav, script, style, .section-controls');
+							
+							if (hasText && !isInNonEditable) {
+								editableEl = element;
+								// Make sure it has the editable class for future reference
+								if (!editableEl.classList.contains('editable-text') && !editableEl.classList.contains('editable-link')) {
+									editableEl.classList.add('editable-text');
+									if (!editableEl.hasAttribute('data-id')) {
+										editableEl.setAttribute('data-id', 'text-' + Date.now() + '-' + Math.random());
+									}
+								}
+							}
+						}
+					}
 					
 					if (!editableEl) return;
 					
@@ -1450,13 +1570,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'export_static') {
 						clearTimeout(hoverTimeout);
 					}
 					
-					// Check if element is editable text
-					const isEditable = e.target.classList.contains('editable-text') || 
-					                  e.target.classList.contains('editable-link') ||
-					                  e.target.closest('.editable-text') ||
-					                  e.target.closest('.editable-link');
+					// Skip if element is inside non-editable areas
+					if (e.target.closest('.section-controls') || 
+					    e.target.closest('.hero-change-bg-btn') ||
+					    e.target.closest('.change-section-bg-btn') ||
+					    e.target.closest('.icon-editable') ||
+					    e.target.closest('svg')) {
+						return;
+					}
 					
-					if (isEditable && !e.target.closest('.section-controls')) {
+					// Check if element is editable text - be more lenient
+					const hasEditableClass = e.target.classList.contains('editable-text') || 
+					                        e.target.classList.contains('editable-link') ||
+					                        e.target.closest('.editable-text') ||
+					                        e.target.closest('.editable-link');
+					
+					// Also check if it's a text-containing element
+					const textElements = ['P', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'SPAN', 'DIV', 'A', 'BUTTON', 'LABEL', 'LI', 'TD', 'TH', 'STRONG', 'EM', 'B', 'I', 'SMALL', 'BIG', 'SUB', 'SUP', 'BLOCKQUOTE', 'PRE', 'CODE'];
+					const isTextElement = e.target.tagName && textElements.includes(e.target.tagName);
+					const hasText = e.target.textContent && e.target.textContent.trim().length > 0;
+					const isInNonEditable = e.target.closest('header, footer, nav, script, style');
+					
+					const isEditable = hasEditableClass || (isTextElement && hasText && !isInNonEditable);
+					
+					if (isEditable) {
 						// Small delay to avoid flickering
 						hoverTimeout = setTimeout(() => {
 							showTextFormatToolbar(e.target, e);
