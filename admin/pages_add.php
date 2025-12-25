@@ -163,7 +163,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <textarea name="content_html" id="hiddenContent"></textarea>
     </form>
 
-    <!-- Media Insertion Modal -->
     <div id="mediaModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center">
         <div class="bg-zinc-900 rounded-lg shadow-xl w-full max-w-md mx-4 border border-zinc-700">
             <div class="p-4 border-b border-zinc-700 flex justify-between items-center">
@@ -184,7 +183,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </div>
                 
                 <div id="mediaModalContent">
-                    <!-- Upload Tab -->
                     <div id="mediaTabUpload" class="media-tab-content">
                         <label class="block text-xs text-zinc-500 mb-2">Select file to upload</label>
                         <input type="file" id="mediaFileInput" class="w-full bg-zinc-800 border border-zinc-700 text-white px-3 py-2 rounded text-sm mb-3">
@@ -197,7 +195,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         </button>
                     </div>
                     
-                    <!-- URL Tab -->
                     <div id="mediaTabUrl" class="media-tab-content hidden">
                         <label class="block text-xs text-zinc-500 mb-2">Enter media URL</label>
                         <input type="text" id="mediaUrlInput" placeholder="https://example.com/image.jpg" class="w-full bg-zinc-800 border border-zinc-700 text-white px-3 py-2 rounded text-sm mb-3">
@@ -210,7 +207,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         </button>
                     </div>
                     
-                    <!-- Embed Tab -->
                     <div id="mediaTabEmbed" class="media-tab-content hidden">
                         <label class="block text-xs text-zinc-500 mb-2">Paste embed code (HTML/iframe)</label>
                         <textarea id="mediaEmbedInput" placeholder='<iframe src="..."></iframe>' rows="4" class="w-full bg-zinc-800 border border-zinc-700 text-white px-3 py-2 rounded text-sm mb-3 font-mono text-xs"></textarea>
@@ -435,7 +431,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
                                     </svg>
-                        </div>
+                                </div>
                                 <h3 contenteditable="true" class="text-xl font-bold mb-2 outline-none" style="color: #FF4F4F;">Feature One</h3>
                                 <p contenteditable="true" class="outline-none" style="color: #1F1F1F;">Description of the feature.</p>
                             </div>
@@ -502,7 +498,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     <video src="" controls class="w-full h-full object-cover hidden" id="split-screen-video"></video>
                                     <span class="text-gray-400" id="split-screen-placeholder">Media Placeholder</span>
                                     
-                                    <!-- Media Change Overlay -->
                                     <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-center justify-center z-10" id="split-screen-media-overlay">
                                         <div class="flex flex-col gap-3 px-4">
                                             <button data-action="change-media" data-type="photo" class="bg-white hover:bg-gray-100 text-gray-900 px-6 py-3 rounded-lg font-semibold text-sm flex items-center gap-2 transition-colors shadow-lg">
@@ -593,7 +588,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         function setupIframeListeners(doc) {
             const root = doc.getElementById('canvas-root');
             
-            // Expose functions to iframe window for overlay buttons (will be set after functions are defined)
+            // Expose functions to iframe window for overlay buttons
             exposeFunctionsToIframe();
 
             // Handle Drag Over (Visual Feedback)
@@ -732,10 +727,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         document.querySelectorAll('.component-item').forEach(item => {
             item.addEventListener('dragstart', (e) => {
                 e.dataTransfer.setData('type', item.dataset.type);
-                
-                // We need to pass event to iframe... 
-                // Since we can't drag directly into iframe easily cross-origin/window,
-                // we use a simplified approach: The iframe listens for 'dragover' on itself.
             });
         });
 
@@ -998,8 +989,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             <button onclick="updateBackgroundColor('#F3F4F6')" class="h-6 rounded border border-zinc-600" style="background: #F3F4F6;" title="Light Gray"></button>
                             <button onclick="updateBackgroundColor('#0f0a1a')" class="h-6 rounded" style="background: #0f0a1a;" title="Dark Purple"></button>
                             <button onclick="updateBackgroundColor('#1d1130')" class="h-6 rounded" style="background: #1d1130;" title="Purple"></button>
+                        </div>
                     </div>
-                </div>
                     
                     <div id="bgGradientOptions" style="display: ${currentBgType === 'gradient' ? 'block' : 'none'};">
                         <div class="mb-2">
@@ -2228,7 +2219,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'fa-sparkles': 'M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z',
             'fa-users': 'M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z',
             'fa-trophy': 'M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z',
-            'fa-award': 'M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z',
+            'fa-award': 'M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z',
             'fa-fire': 'M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0120 13a7.975 7.975 0 01-2.343 5.657z',
             'fa-bolt': 'M13 10V3L4 14h7v7l9-11h-7z',
             'fa-rocket': 'M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z',
@@ -2377,13 +2368,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             const empty = body.querySelector('.empty-canvas');
             if(empty) empty.remove();
             
+            // Remove delete buttons from feature points
+            body.querySelectorAll('button[data-action="remove-feature"]').forEach(btn => btn.remove());
+            
+            // Remove media change overlay and other editor-only elements
+            body.querySelectorAll('#split-screen-media-overlay').forEach(el => el.remove());
+            
             // Get final HTML - extract just the canvas content
             const canvasContent = body.querySelector('#canvas-root');
             const canvasHTML = canvasContent ? canvasContent.innerHTML : body.innerHTML;
             
             // Add navigation and footer scripts
-            const navigationScript = '<script src="assets/components/navigation.js"><\/script>';
-            const footerScript = '<script src="assets/components/footer.js"><\/script>';
+            const navigationScript = '<script src="../assets/components/navigation.js"><\/script>';
+            const footerScript = '<script src="../assets/components/footer.js"><\/script>';
             
             // Combine canvas content with navigation and footer scripts
             const finalContent = canvasHTML + '\n' + navigationScript + '\n' + footerScript;
