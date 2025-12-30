@@ -277,6 +277,16 @@ function deleteStaticPage($slug) {
 			$status = 'draft';
 		}
 		
+		// SEO fields
+		$meta_title = trim($_POST['meta_title'] ?? '');
+		$meta_description = trim($_POST['meta_description'] ?? '');
+		$meta_keywords = trim($_POST['meta_keywords'] ?? '');
+		$og_title = trim($_POST['og_title'] ?? '');
+		$og_description = trim($_POST['og_description'] ?? '');
+		$og_image = trim($_POST['og_image'] ?? '');
+		$canonical_url = trim($_POST['canonical_url'] ?? '');
+		$robots = trim($_POST['robots'] ?? 'index, follow');
+		
 		// Handle HTML file save
 		$postFilePath = $_POST['file_path'] ?? '';
 		$saveAsFile = !empty($postFilePath) || ($isFileEdit && !empty($filePath));
@@ -383,8 +393,27 @@ function deleteStaticPage($slug) {
 						$error = 'Slug already exists.';
 					} else {
 						if ($isEdit) {
-							$stmt = $db->prepare("UPDATE pages SET title = ?, slug = ?, content_html = ?, custom_css = ?, status = ?, published_at = CASE WHEN ? = 'published' AND published_at IS NULL THEN NOW() ELSE published_at END WHERE id = ?");
-							$stmt->execute([$title, $slug, $content, $customCss ?: null, $status, $status, $id]);
+							$stmt = $db->prepare("
+								UPDATE pages 
+								SET title = ?, slug = ?, content_html = ?, custom_css = ?, status = ?, 
+								    meta_title = ?, meta_description = ?, meta_keywords = ?,
+								    og_title = ?, og_description = ?, og_image = ?,
+								    canonical_url = ?, robots = ?,
+								    published_at = CASE WHEN ? = 'published' AND published_at IS NULL THEN NOW() ELSE published_at END 
+								WHERE id = ?
+							");
+							$stmt->execute([
+								$title, $slug, $content, $customCss ?: null, $status,
+								$meta_title ?: $title,
+								$meta_description,
+								$meta_keywords,
+								$og_title ?: $title,
+								$og_description,
+								$og_image,
+								$canonical_url,
+								$robots,
+								$status, $id
+							]);
 							$success = 'Page updated.';
 						} else {
 							$stmt = $db->prepare("INSERT INTO pages (title, slug, content_html, custom_css, status, published_at) VALUES (?, ?, ?, ?, ?, ?)");
@@ -806,6 +835,73 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'export_static') {
 			<!-- Hidden inputs for form submission -->
 			<textarea id="content_html" name="content_html" style="display:none;"><?php echo htmlspecialchars($page['content_html'] ?? '', ENT_NOQUOTES, 'UTF-8'); ?></textarea>
 			<textarea id="custom_css" name="custom_css" style="display:none;"><?php echo htmlspecialchars($page['custom_css'] ?? '', ENT_NOQUOTES, 'UTF-8'); ?></textarea>
+			
+			<!-- SEO Hidden Fields -->
+			<input type="hidden" name="meta_title" id="meta_title" value="<?php echo escape($page['meta_title'] ?? ''); ?>">
+			<input type="hidden" name="meta_description" id="meta_description" value="<?php echo escape($page['meta_description'] ?? ''); ?>">
+			<input type="hidden" name="meta_keywords" id="meta_keywords" value="<?php echo escape($page['meta_keywords'] ?? ''); ?>">
+			<input type="hidden" name="og_title" id="og_title" value="<?php echo escape($page['og_title'] ?? ''); ?>">
+			<input type="hidden" name="og_description" id="og_description" value="<?php echo escape($page['og_description'] ?? ''); ?>">
+			<input type="hidden" name="og_image" id="og_image" value="<?php echo escape($page['og_image'] ?? ''); ?>">
+			<input type="hidden" name="canonical_url" id="canonical_url" value="<?php echo escape($page['canonical_url'] ?? ''); ?>">
+			<input type="hidden" name="robots" id="robots" value="<?php echo escape($page['robots'] ?? 'index, follow'); ?>">
+			
+			<!-- SEO Settings Section -->
+			<?php if (!$isFileEdit): ?>
+			<div style="margin-bottom:16px; background:#fff; border:1px solid #e5e7eb; border-radius:12px; padding:16px;">
+				<h3 style="margin:0 0 12px 0; font-size:14px; color:#111827; display:flex; align-items:center; gap:8px;">
+					<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+						<circle cx="11" cy="11" r="8"></circle>
+						<path d="m21 21-4.35-4.35"></path>
+					</svg>
+					Google SEO Settings
+				</h3>
+				<div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(250px, 1fr)); gap:12px;">
+					<div>
+						<label style="font-size:12px; color:#6b7280; margin-bottom:4px; display:block;">Meta Title</label>
+						<input type="text" value="<?php echo escape($page['meta_title'] ?? ''); ?>" placeholder="Leave empty to use page title" style="width:100%; padding:8px; border:1px solid #e5e7eb; border-radius:6px; font-size:13px;" onchange="document.getElementById('meta_title').value = this.value">
+					</div>
+					<div>
+						<label style="font-size:12px; color:#6b7280; margin-bottom:4px; display:block;">OG Image URL</label>
+						<input type="url" value="<?php echo escape($page['og_image'] ?? ''); ?>" placeholder="https://example.com/image.jpg" style="width:100%; padding:8px; border:1px solid #e5e7eb; border-radius:6px; font-size:13px;" onchange="document.getElementById('og_image').value = this.value">
+					</div>
+					<div>
+						<label style="font-size:12px; color:#6b7280; margin-bottom:4px; display:block;">Robots</label>
+						<select style="width:100%; padding:8px; border:1px solid #e5e7eb; border-radius:6px; font-size:13px;" onchange="document.getElementById('robots').value = this.value">
+							<option value="index, follow" <?php echo ($page['robots'] ??  'index, follow') === 'index, follow' ? 'selected' : ''; ?>>index, follow</option>
+							<option value="noindex, follow" <?php echo ($page['robots'] ?? '') === 'noindex, follow' ? 'selected' : ''; ?>>noindex, follow</option>
+							<option value="index, nofollow" <?php echo ($page['robots'] ?? '') === 'index, nofollow' ? 'selected' : ''; ?>>index, nofollow</option>
+							<option value="noindex, nofollow" <?php echo ($page['robots'] ?? '') === 'noindex, nofollow' ? 'selected' : ''; ?>>noindex, nofollow</option>
+						</select>
+					</div>
+				</div>
+				<div style="margin-top:12px;">
+					<label style="font-size:12px; color:#6b7280; margin-bottom:4px; display:block;">Meta Description</label>
+					<textarea placeholder="Brief description for search engines (150-160 chars recommended)" rows="2" style="width:100%; padding:8px; border:1px solid #e5e7eb; border-radius:6px; font-size:13px; resize:vertical;" onchange="document.getElementById('meta_description').value = this.value"><?php echo escape($page['meta_description'] ?? ''); ?></textarea>
+				</div>
+				<details style="margin-top:8px;">
+					<summary style="cursor:pointer; font-size:12px; color:#6b7280; padding:4px 0;">Advanced SEO Settings</summary>
+					<div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(250px, 1fr)); gap:12px; margin-top:12px;">
+						<div>
+							<label style="font-size:12px; color:#6b7280; margin-bottom:4px; display:block;">Meta Keywords</label>
+							<input type="text" value="<?php echo escape($page['meta_keywords'] ?? ''); ?>" placeholder="keyword1, keyword2, keyword3" style="width:100%; padding:8px; border:1px solid #e5e7eb; border-radius:6px; font-size:13px;" onchange="document.getElementById('meta_keywords').value = this.value">
+						</div>
+						<div>
+							<label style="font-size:12px; color:#6b7280; margin-bottom:4px; display:block;">OG Title</label>
+							<input type="text" value="<?php echo escape($page['og_title'] ?? ''); ?>" placeholder="Leave empty to use page title" style="width:100%; padding:8px; border:1px solid #e5e7eb; border-radius:6px; font-size:13px;" onchange="document.getElementById('og_title').value = this.value">
+						</div>
+						<div>
+							<label style="font-size:12px; color:#6b7280; margin-bottom:4px; display:block;">OG Description</label>
+							<input type="text" value="<?php echo escape($page['og_description'] ?? ''); ?>" placeholder="Description for social media" style="width:100%; padding:8px; border:1px solid #e5e7eb; border-radius:6px; font-size:13px;" onchange="document.getElementById('og_description').value = this.value">
+						</div>
+						<div>
+							<label style="font-size:12px; color:#6b7280; margin-bottom:4px; display:block;">Canonical URL</label>
+							<input type="url" value="<?php echo escape($page['canonical_url'] ?? ''); ?>" placeholder="https://example.com/page" style="width:100%; padding:8px; border:1px solid #e5e7eb; border-radius:6px; font-size:13px;" onchange="document.getElementById('canonical_url').value = this.value">
+						</div>
+					</div>
+				</details>
+			</div>
+			<?php endif; ?>
 			
 			<div class="actions" style="margin-top:16px;">
 				<button class="btn" type="submit" style="background:#667eea; color:#fff; border-color:#667eea;">

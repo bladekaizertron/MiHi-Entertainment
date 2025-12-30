@@ -24,9 +24,36 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $slug = trim($_POST['slug']) ?: strtolower(preg_replace('/[^a-z0-9]+/', '-', $title));
         $content = $_POST['content_html']; // This is now the full HTML body
         
+        // SEO fields
+        $meta_title = trim($_POST['meta_title'] ?? '');
+        $meta_description = trim($_POST['meta_description'] ?? '');
+        $meta_keywords = trim($_POST['meta_keywords'] ?? '');
+        $og_title = trim($_POST['og_title'] ?? '');
+        $og_description = trim($_POST['og_description'] ?? '');
+        $og_image = trim($_POST['og_image'] ?? '');
+        $canonical_url = trim($_POST['canonical_url'] ?? '');
+        $robots = trim($_POST['robots'] ?? 'index, follow');
+        
         try {
-            $stmt = $db->prepare("INSERT INTO pages (title, slug, content_html, status, created_at, updated_at) VALUES (?, ?, ?, 'draft', NOW(), NOW())");
-            $stmt->execute([$title, $slug, $content]);
+            $stmt = $db->prepare("
+                INSERT INTO pages (title, slug, content_html, status, 
+                    meta_title, meta_description, meta_keywords, 
+                    og_title, og_description, og_image, 
+                    canonical_url, robots, 
+                    created_at, updated_at) 
+                VALUES (?, ?, ?, 'draft', ?, ?, ?, ?, ?, ?, ?, ?, NOW(), NOW())
+            ");
+            $stmt->execute([
+                $title, $slug, $content,
+                $meta_title ?: $title,
+                $meta_description,
+                $meta_keywords,
+                $og_title ?: $title,
+                $og_description,
+                $og_image,
+                $canonical_url,
+                $robots
+            ]);
             header("Location: pages_edit.php?id=" . $db->lastInsertId());
             exit;
         } catch (Exception $e) {
@@ -101,6 +128,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
 
         <div class="flex gap-3 shrink-0">
+            <button onclick="openSeoModal()" class="bg-zinc-700 hover:bg-zinc-600 text-white px-5 py-1.5 rounded text-sm font-medium transition shadow-lg hover:shadow-xl whitespace-nowrap"><i class="fas fa-search mr-1"></i>SEO Settings</button>
             <button onclick="exportHTML()" class="bg-[#FF4F4F] hover:bg-[#FF3838] text-white px-5 py-1.5 rounded text-sm font-medium transition shadow-lg hover:shadow-xl whitespace-nowrap">Save Page</button>
         </div>
     </header>
@@ -161,6 +189,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <input type="hidden" name="title" id="hiddenTitle">
         <input type="hidden" name="slug" id="hiddenSlug">
         <textarea name="content_html" id="hiddenContent"></textarea>
+        
+        <!-- SEO Fields -->
+        <input type="hidden" name="meta_title" id="hiddenMetaTitle">
+        <input type="hidden" name="meta_description" id="hiddenMetaDescription">
+        <input type="hidden" name="meta_keywords" id="hiddenMetaKeywords">
+        <input type="hidden" name="og_title" id="hiddenOgTitle">
+        <input type="hidden" name="og_description" id="hiddenOgDescription">
+        <input type="hidden" name="og_image" id="hiddenOgImage">
+        <input type="hidden" name="canonical_url" id="hiddenCanonicalUrl">
+        <input type="hidden" name="robots" id="hiddenRobots">
     </form>
 
     <div id="mediaModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center">
@@ -215,6 +253,99 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         </button>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SEO Settings Modal -->
+    <div id="seoModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center">
+        <div class="bg-zinc-900 rounded-lg shadow-xl w-full max-w-2xl mx-4 border border-zinc-700 max-h-[90vh] overflow-y-auto">
+            <div class="p-4 border-b border-zinc-700 flex justify-between items-center sticky top-0 bg-zinc-900 z-10">
+                <h3 class="text-white font-semibold flex items-center gap-2">
+                    <i class="fas fa-search text-[#18F1E1]"></i>
+                    SEO Settings
+                </h3>
+                <button onclick="closeSeoModal()" class="text-zinc-400 hover:text-white"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="p-6">
+                <!-- Meta Tags Section -->
+                <div class="mb-6">
+                    <h4 class="text-white font-semibold mb-3 flex items-center gap-2">
+                        <i class="fas fa-tag text-[#FF4F4F]"></i>
+                        Meta Tags
+                    </h4>
+                    
+                    <div class="mb-4">
+                        <label class="block text-xs text-zinc-400 mb-2">Meta Title</label>
+                        <input type="text" id="seoMetaTitle" placeholder="Leave empty to use page title" class="w-full bg-zinc-800 border border-zinc-700 text-white px-3 py-2 rounded text-sm">
+                        <small class="text-zinc-500 text-xs">Recommended: 50-60 characters</small>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label class="block text-xs text-zinc-400 mb-2">Meta Description</label>
+                        <textarea id="seoMetaDescription" rows="3" placeholder="Brief description of the page" class="w-full bg-zinc-800 border border-zinc-700 text-white px-3 py-2 rounded text-sm"></textarea>
+                        <small class="text-zinc-500 text-xs">Recommended: 150-160 characters</small>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label class="block text-xs text-zinc-400 mb-2">Meta Keywords</label>
+                        <input type="text" id="seoMetaKeywords" placeholder="keyword1, keyword2, keyword3" class="w-full bg-zinc-800 border border-zinc-700 text-white px-3 py-2 rounded text-sm">
+                        <small class="text-zinc-500 text-xs">Comma-separated keywords</small>
+                    </div>
+                </div>
+                
+                <!-- Open Graph Tags Section -->
+                <div class="mb-6 pb-6 border-b border-zinc-700">
+                    <h4 class="text-white font-semibold mb-3 flex items-center gap-2">
+                        <i class="fab fa-facebook text-[#18F1E1]"></i>
+                        Open Graph (Social Media)
+                    </h4>
+                    
+                    <div class="mb-4">
+                        <label class="block text-xs text-zinc-400 mb-2">OG Title</label>
+                        <input type="text" id="seoOgTitle" placeholder="Leave empty to use page title" class="w-full bg-zinc-800 border border-zinc-700 text-white px-3 py-2 rounded text-sm">
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label class="block text-xs text-zinc-400 mb-2">OG Description</label>
+                        <textarea id="seoOgDescription" rows="2" placeholder="Description for social media shares" class="w-full bg-zinc-800 border border-zinc-700 text-white px-3 py-2 rounded text-sm"></textarea>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label class="block text-xs text-zinc-400 mb-2">OG Image URL</label>
+                        <input type="url" id="seoOgImage" placeholder="https://example.com/image.jpg" class="w-full bg-zinc-800 border border-zinc-700 text-white px-3 py-2 rounded text-sm">
+                        <small class="text-zinc-500 text-xs">Recommended: 1200x630px</small>
+                    </div>
+                </div>
+                
+                <!-- Advanced Settings -->
+                <div class="mb-4">
+                    <h4 class="text-white font-semibold mb-3 flex items-center gap-2">
+                        <i class="fas fa-cog text-[#FF4F4F]"></i>
+                        Advanced
+                    </h4>
+                    
+                    <div class="mb-4">
+                        <label class="block text-xs text-zinc-400 mb-2">Canonical URL</label>
+                        <input type="url" id="seoCanonicalUrl" placeholder="https://example.com/page" class="w-full bg-zinc-800 border border-zinc-700 text-white px-3 py-2 rounded text-sm">
+                        <small class="text-zinc-500 text-xs">Preferred URL for this page</small>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label class="block text-xs text-zinc-400 mb-2">Robots Meta Tag</label>
+                        <select id="seoRobots" class="w-full bg-zinc-800 border border-zinc-700 text-white px-3 py-2 rounded text-sm">
+                            <option value="index, follow">index, follow (Default - Allow search engines)</option>
+                            <option value="noindex, follow">noindex, follow (Don't index, but follow links)</option>
+                            <option value="index, nofollow">index, nofollow (Index page, don't follow links)</option>
+                            <option value="noindex, nofollow">noindex, nofollow (Don't index or follow)</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <!-- Save Button -->
+                <button onclick="saveSeoSettings()" class="w-full bg-[#18F1E1] hover:bg-[#15D9C9] text-zinc-900 px-4 py-3 rounded font-semibold transition-colors">
+                    <i class="fas fa-save mr-2"></i>Save SEO Settings
+                </button>
             </div>
         </div>
     </div>
@@ -485,6 +616,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                         <i class="fas fa-times"></i>
                                     </button>
                                 </div>
+                                <div class="flex gap-3 split-screen-feature-item group" data-feature-index="2">
+                                    <div class="w-10 h-10 rounded-full bg-red-500/10 flex items-center justify-center text-red-600 font-bold flex-shrink-0 border border-purple-500/20 split-screen-feature-number">3</div>
+                                    <div class="flex-1">
+                                        <p contenteditable="true" class="font-semibold outline-none" style="color: #1F1F1F;">Feature Point Three</p>
+                                        <p contenteditable="true" class="text-sm outline-none" style="color: #1F1F1F;">Description of feature</p>
+                                    </div>
+                                    <button data-action="remove-feature" class="text-red-600 hover:text-red-700 opacity-0 group-hover:opacity-100 transition-opacity p-1" title="Remove feature point">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
                             </div>
                             <div class="flex flex-col sm:flex-row gap-4">
                                 <a href="#" class="inline-flex items-center justify-center px-8 py-4 rounded-full font-semibold text-lg bg-[#FF4F4F] hover:bg-[#FF3838] text-white transition-all duration-300 hover:-translate-y-1 hover:scale-105">Get Your Quote</a>
@@ -527,7 +668,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     </div>
                     <div class="relative max-w-4xl mx-auto">
                         <span class="inline-flex items-center gap-2 px-5 py-2 bg-[#FF4F4F] rounded-full text-xs font-bold tracking-[0.35em] uppercase text-white mb-6">Call to Action</span>
-                        <h2 contenteditable="true" class="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 outline-none" style="color: #18F1E1;">Ready to Begin?</h2>
+                        <h2 contenteditable="true" class="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 outline-none" style="font-family: 'Azo Sans Uber', sans-serif; font-weight: 400; color: #18F1E1; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;">Ready to Begin?</h2>
                         <p contenteditable="true" class="text-base md:text-lg text-white/85 leading-relaxed mb-8 max-w-2xl mx-auto outline-none">Get started with our premium services today.</p>
                         <div class="flex flex-col sm:flex-row gap-4 justify-center">
                             <a href="#" class="inline-flex items-center justify-center px-8 py-4 rounded-full font-semibold text-lg bg-[#FF4F4F] hover:bg-[#FF3838] text-white transition-all duration-300 hover:-translate-y-1 hover:scale-105">Contact Us</a>
@@ -544,7 +685,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <div class="relative max-w-6xl mx-auto">
                         <div class="text-center mb-16">
                             <span class="inline-flex items-center gap-2 px-5 py-2 bg-[#FF4F4F] rounded-full text-xs font-bold tracking-[0.35em] uppercase text-white mb-6">Video Section</span>
-                            <h2 contenteditable="true" class="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 outline-none" style="color: #18F1E1;">Video Showcase</h2>
+                            <h2 contenteditable="true" class="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 outline-none" style="font-family: 'Azo Sans Uber', sans-serif; font-weight: 400; color: #18F1E1; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;">Video Showcase</h2>
                             <p contenteditable="true" class="text-base md:text-lg text-white/85 leading-relaxed max-w-3xl mx-auto outline-none">Create share-worthy videos that capture the energy and emotion of your event.</p>
                         </div>
                         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -1169,6 +1310,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </div>
                 `}
             `;
+
+            // Add event listeners for inspector panel buttons
+            const inspectorPanel = document.getElementById('inspectorPanel');
+            if (inspectorPanel) {
+                // Add event listener for add feature point button
+                const addFeatureBtn = inspectorPanel.querySelector('button[onclick*="addSplitScreenFeaturePoint"]');
+                if (addFeatureBtn) {
+                    addFeatureBtn.onclick = function(e) {
+                        e.preventDefault();
+                        addSplitScreenFeaturePoint();
+                    };
+                }
+            }
         }
 
         function deselectAll() {
@@ -1818,19 +1972,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         function addSplitScreenFeaturePoint() {
             const doc = iframe.contentDocument;
             if (!doc) return;
-            
-            // Find the split screen section
+
+            // Find the split screen section - search all sections for one with feature points
             let splitScreenSection = null;
-            if (selectedElement) {
-                splitScreenSection = selectedElement.closest('[data-editable]')?.querySelector('.lg\\:grid-cols-2')?.closest('[data-editable]');
-                if (!splitScreenSection) {
-                    const sections = doc.querySelectorAll('[data-editable]');
-                    sections.forEach(sec => {
-                        if (sec.querySelector('.lg\\:grid-cols-2') && sec.querySelector('#split-screen-feature-points')) {
-                            splitScreenSection = sec;
-                        }
-                    });
+            const sections = doc.querySelectorAll('[data-editable]');
+            sections.forEach(sec => {
+                if (sec.querySelector('#split-screen-feature-points')) {
+                    splitScreenSection = sec;
                 }
+            });
+
+            if (!splitScreenSection) {
+                alert('Could not find split screen section with feature points. Please make sure a split-screen section is added to the page.');
+                return;
+            }
+
+            // Select the split screen section if not already selected
+            if (splitScreenSection !== selectedElement) {
+                selectElement(splitScreenSection);
             }
             
             if (splitScreenSection) {
@@ -2395,6 +2554,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             document.getElementById('hiddenSlug').value = slug;
             document.getElementById('hiddenContent').value = finalContent;
             
+            // Fill SEO fields
+            document.getElementById('hiddenMetaTitle').value = document.getElementById('seoMetaTitle').value || '';
+            document.getElementById('hiddenMetaDescription').value = document.getElementById('seoMetaDescription').value || '';
+            document.getElementById('hiddenMetaKeywords').value = document.getElementById('seoMetaKeywords').value || '';
+            document.getElementById('hiddenOgTitle').value = document.getElementById('seoOgTitle').value || '';
+            document.getElementById('hiddenOgDescription').value = document.getElementById('seoOgDescription').value || '';
+            document.getElementById('hiddenOgImage').value = document.getElementById('seoOgImage').value || '';
+            document.getElementById('hiddenCanonicalUrl').value = document.getElementById('seoCanonicalUrl').value || '';
+            document.getElementById('hiddenRobots').value = document.getElementById('seoRobots').value || 'index, follow';
+            
             // Show loading state
             const saveBtn = document.querySelector('button[onclick="exportHTML()"]');
             const originalText = saveBtn.innerHTML;
@@ -2421,6 +2590,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Helper: Resize Iframe
         function resizeCanvas(width) {
             document.getElementById('editorFrame').style.width = width;
+        }
+
+        // SEO Modal Functions
+        function openSeoModal() {
+            document.getElementById('seoModal').classList.remove('hidden');
+        }
+
+        function closeSeoModal() {
+            document.getElementById('seoModal').classList.add('hidden');
+        }
+
+        function saveSeoSettings() {
+            // No need to do anything - values are already in the fields
+            closeSeoModal();
+            // Show confirmation
+            const saveBtn = event.target;
+            const originalText = saveBtn.innerHTML;
+            saveBtn.innerHTML = '\u003ci class="fas fa-check mr-2"\u003e\u003c/i\u003eSaved!';
+            setTimeout(() => {
+                saveBtn.innerHTML = originalText;
+            }, 1500);
         }
 
         // Auto-generate slug from title
