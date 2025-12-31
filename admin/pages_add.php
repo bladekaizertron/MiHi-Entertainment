@@ -497,8 +497,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <body class="bg-white" style="display: flex; flex-direction: column; min-height: 100vh;">
                     <main style="flex: 1;">
                         <div id="canvas-root">
-                        <div class="empty-canvas">Drop Components Here</div>
-                    </div>
+                            <div class="empty-canvas">Drop Components Here</div>
+                        </div>
                     </main>
                     <script src="../assets/components/navigation.js"><\/script>
                     <script src="../assets/components/footer.js"><\/script>
