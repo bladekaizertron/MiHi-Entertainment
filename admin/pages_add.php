@@ -1,4 +1,11 @@
 <?php
+// Ensure no output before headers - prevent BOM issues
+ob_start();
+
+// Set proper headers to prevent caching and encoding issues
+header('Content-Type: text/html; charset=UTF-8');
+header('X-Content-Type-Options: nosniff');
+
 require_once __DIR__ . '/../config/config.php';
 
 if (!function_exists('escape')) {
@@ -350,6 +357,377 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
     </div>
 
+    <!-- Hidden templates for page builder - avoids template literal issues on some servers -->
+    
+    <!-- Hero Section Template -->
+    <script type="text/template" id="tpl-hero">
+<section data-editable class="relative bg-gradient-to-br from-[#0f0a1a] via-[#1d1130] to-[#2a133d] text-white py-24 px-6 text-center overflow-hidden">
+    <div class="absolute inset-0 pointer-events-none">
+        <div class="absolute -top-40 -right-20 w-80 h-80 bg-pink-500/25 rounded-full blur-3xl"></div>
+        <div class="absolute top-1/2 -left-32 w-72 h-72 bg-purple-500/20 rounded-full blur-[110px]"></div>
+    </div>
+    <div class="relative max-w-6xl mx-auto">
+        <span class="inline-flex items-center gap-2 px-5 py-2 bg-gradient-to-r from-[#FF4F4F]/10 via-[#FF4F4F]/10 to-[#FF4F4F]/10 border border-[#FF4F4F]/20 rounded-full text-xs font-semibold tracking-[0.35em] uppercase text-white mb-6">Premium Experience</span>
+        <h1 contenteditable="true" class="text-5xl md:text-7xl font-bold mb-6 outline-none leading-tight" style="font-family: 'Azo Sans Uber', sans-serif; font-weight: 400; text-transform: uppercase; letter-spacing: 0.02em; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;">
+            <span class="block" style="color: #FF4F4F;">PHOTO BOOTH</span>
+            <span class="block" style="color: #18F1E1;">RENTALS</span>
+        </h1>
+        <p contenteditable="true" class="text-xl text-white/90 mb-8 max-w-3xl mx-auto outline-none leading-relaxed" style="font-family: 'Azo Sans', sans-serif;">Premium photo booth rentals and event entertainment services nationwide. From AI-powered photo booths to 360 video experiences.</p>
+        <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 md:gap-6 justify-center items-center px-2 sm:px-4 w-full max-w-md sm:max-w-none mx-auto">
+            <a href="#" class="group relative inline-flex items-center justify-center gap-2 sm:gap-3 text-white px-5 sm:px-8 md:px-10 py-3 sm:py-4 md:py-5 rounded-full text-sm sm:text-base md:text-lg font-medium shadow-2xl hover:shadow-[#FF4F4F]/50 transition-all duration-500 transform hover:scale-105 sm:hover:scale-110 hover:-translate-y-1 overflow-hidden w-full sm:w-auto min-w-[140px] sm:min-w-0 touch-manipulation" style="background: #FF4F4F;">
+                <span class="relative z-10">Get Your Quote</span>
+            </a>
+            <button type="button" class="group inline-flex items-center justify-center gap-2 sm:gap-3 px-5 sm:px-8 md:px-10 py-3 sm:py-4 md:py-5 rounded-full text-sm sm:text-base md:text-lg font-medium backdrop-blur-md bg-white/10 border-2 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:scale-105 sm:hover:scale-110 hover:-translate-y-1 text-white w-full sm:w-auto min-w-[140px] sm:min-w-0 cursor-pointer touch-manipulation" style="border-color: rgba(24, 241, 225, 0.5);" onmouseover="this.style.borderColor='rgba(24, 241, 225, 0.7)'; this.style.background='rgba(24, 241, 225, 0.2)';" onmouseout="this.style.borderColor='rgba(24, 241, 225, 0.5)'; this.style.background='rgba(255, 255, 255, 0.1)';">
+                <svg class="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498A1 1 0 0121 17.72V21a2 2 0 01-2 2h-1C9.716 23 3 16.284 3 8V7a2 2 0 012-2z"></path>
+                </svg>
+                <span>Call Us</span>
+            </button>
+        </div>
+    </div>
+</section>
+    </script>
+
+    <!-- Text Section Template -->
+    <script type="text/template" id="tpl-text">
+<section data-editable class="w-full py-16 px-6" style="color: #1F1F1F;">
+    <div class="max-w-4xl mx-auto text-center mb-12">
+        <span class="inline-flex items-center gap-2 px-5 py-2 bg-[#00FFFF] rounded-full text-xs font-semibold tracking-[0.35em] uppercase text-[#1f1f1f] mb-6">Section Badge</span>
+        <h2 contenteditable="true" class="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 outline-none" style="font-family: 'Azo Sans Uber', sans-serif; font-weight: 400; text-transform: uppercase; letter-spacing: 0.02em; color: #FF4F4F; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;">Section Heading</h2>
+        <p contenteditable="true" class="text-base md:text-lg leading-relaxed outline-none" style="font-family: 'Azo Sans', sans-serif;">This is a paragraph. You can type directly here. We use contenteditable to make this feel like a real document editor.</p>
+    </div>
+</section>
+    </script>
+
+    <!-- Cards Section Template -->
+    <script type="text/template" id="tpl-cards">
+<section data-editable class="py-16 px-6 bg-white">
+    <div class="max-w-6xl mx-auto">
+        <div class="text-center mb-12">
+            <span class="inline-flex items-center gap-2 px-5 py-2 bg-[#00FFFF] rounded-full text-xs font-semibold tracking-[0.35em] uppercase text-[#1f1f1f] mb-6">What We Offer</span>
+            <h2 contenteditable="true" class="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 outline-none" style="font-family: 'Azo Sans Uber', sans-serif; font-weight: 400; text-transform: uppercase; letter-spacing: 0.02em; color: #FF4F4F; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;">Feature Cards</h2>
+        </div>
+        <div class="grid md:grid-cols-3 gap-8">
+            <div class="bg-white p-6 rounded-2xl shadow-lg border border-gray-100 hover:shadow-xl hover:scale-105 transition-all duration-300">
+                <div class="w-12 h-12 bg-pink-500 rounded-xl flex items-center justify-center mb-4">
+                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                    </svg>
+                </div>
+                <h3 contenteditable="true" class="text-xl font-bold mb-2 outline-none" style="color: #FF4F4F;">Feature One</h3>
+                <p contenteditable="true" class="outline-none" style="color: #1F1F1F;">Description of the feature.</p>
+            </div>
+            <div class="bg-white p-6 rounded-2xl shadow-lg border border-gray-100 hover:shadow-xl hover:scale-105 transition-all duration-300">
+                <div class="w-12 h-12 bg-blue-500 rounded-xl flex items-center justify-center mb-4">
+                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                    </svg>
+                </div>
+                <h3 contenteditable="true" class="text-xl font-bold mb-2 outline-none" style="color: #FF4F4F;">Feature Two</h3>
+                <p contenteditable="true" class="outline-none" style="color: #1F1F1F;">Description of the feature.</p>
+            </div>
+            <div class="bg-white p-6 rounded-2xl shadow-lg border border-gray-100 hover:shadow-xl hover:scale-105 transition-all duration-300">
+                <div class="w-12 h-12 bg-purple-500 rounded-xl flex items-center justify-center mb-4">
+                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                    </svg>
+                </div>
+                <h3 contenteditable="true" class="text-xl font-bold mb-2 outline-none" style="color: #FF4F4F;">Feature Three</h3>
+                <p contenteditable="true" class="outline-none" style="color: #1F1F1F;">Description of the feature.</p>
+            </div>
+        </div>
+    </div>
+</section>
+    </script>
+
+    <!-- Split Screen Template -->
+    <script type="text/template" id="tpl-split">
+<section data-editable class="py-20 px-6 bg-white">
+    <div class="max-w-6xl mx-auto grid lg:grid-cols-2 gap-12 items-center" id="split-screen-grid">
+        <div id="split-screen-text-content">
+            <span class="inline-flex items-center gap-2 px-4 py-2 bg-[#00FFFF] text-[#1f1f1f] text-xs uppercase tracking-[0.3em] rounded-full mb-6">Featured</span>
+            <h2 contenteditable="true" class="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 outline-none" style="font-family: 'Azo Sans Uber', sans-serif; font-weight: 400; text-transform: uppercase; letter-spacing: 0.02em; color: #FF4F4F; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;">Split Screen Section</h2>
+            <p contenteditable="true" class="text-base md:text-lg leading-relaxed mb-8 outline-none" style="color: #1F1F1F;">This is a split screen layout with content on one side and an image placeholder on the other.</p>
+            <div class="space-y-4 mb-8" id="split-screen-feature-points">
+                <div class="flex gap-3 split-screen-feature-item group" data-feature-index="1">
+                    <div class="w-10 h-10 rounded-full bg-pink-500/10 flex items-center justify-center text-pink-600 font-bold flex-shrink-0 border border-pink-500/20 split-screen-feature-number">1</div>
+                    <div class="flex-1">
+                        <p contenteditable="true" class="font-semibold outline-none" style="color: #1F1F1F;">Feature Point One</p>
+                        <p contenteditable="true" class="text-sm outline-none" style="color: #1F1F1F;">Description of feature</p>
+                    </div>
+                    <button data-action="remove-feature" class="text-red-600 hover:text-red-700 opacity-0 group-hover:opacity-100 transition-opacity p-1" title="Remove feature point">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="flex gap-3 split-screen-feature-item group" data-feature-index="2">
+                    <div class="w-10 h-10 rounded-full bg-purple-500/10 flex items-center justify-center text-purple-600 font-bold flex-shrink-0 border border-purple-500/20 split-screen-feature-number">2</div>
+                    <div class="flex-1">
+                        <p contenteditable="true" class="font-semibold outline-none" style="color: #1F1F1F;">Feature Point Two</p>
+                        <p contenteditable="true" class="text-sm outline-none" style="color: #1F1F1F;">Description of feature</p>
+                    </div>
+                    <button data-action="remove-feature" class="text-red-600 hover:text-red-700 opacity-0 group-hover:opacity-100 transition-opacity p-1" title="Remove feature point">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="flex gap-3 split-screen-feature-item group" data-feature-index="3">
+                    <div class="w-10 h-10 rounded-full bg-red-500/10 flex items-center justify-center text-red-600 font-bold flex-shrink-0 border border-red-500/20 split-screen-feature-number">3</div>
+                    <div class="flex-1">
+                        <p contenteditable="true" class="font-semibold outline-none" style="color: #1F1F1F;">Feature Point Three</p>
+                        <p contenteditable="true" class="text-sm outline-none" style="color: #1F1F1F;">Description of feature</p>
+                    </div>
+                    <button data-action="remove-feature" class="text-red-600 hover:text-red-700 opacity-0 group-hover:opacity-100 transition-opacity p-1" title="Remove feature point">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="flex flex-col sm:flex-row gap-4">
+                <a href="#" class="inline-flex items-center justify-center px-8 py-4 rounded-full font-semibold text-lg bg-[#FF4F4F] hover:bg-[#FF3838] text-white transition-all duration-300 hover:-translate-y-1 hover:scale-105">Get Your Quote</a>
+                <a href="#" class="inline-flex items-center justify-center px-7 py-3 rounded-full font-semibold border-2 border-[#18F1E1] text-[#18F1E1] bg-white hover:bg-[#18F1E1] hover:text-black transition-all duration-300">Call Us</a>
+            </div>
+        </div>
+        <div class="relative" data-editable="true" id="split-screen-media-content">
+            <div class="relative bg-white border border-gray-200/50 rounded-[28px] overflow-hidden shadow-[0_24px_60px_-18px_rgba(0,0,0,0.12)] group">
+                <div class="w-full h-[500px] bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center relative" id="split-screen-media-container">
+                    <img src="" alt="" class="w-full h-full object-cover hidden" id="split-screen-image">
+                    <video src="" controls class="w-full h-full object-cover hidden" id="split-screen-video"></video>
+                    <span class="text-gray-400" id="split-screen-placeholder">Media Placeholder</span>
+                    
+                    <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-center justify-center z-10" id="split-screen-media-overlay">
+                        <div class="flex flex-col gap-3 px-4">
+                            <button data-action="change-media" data-type="photo" class="bg-white hover:bg-gray-100 text-gray-900 px-6 py-3 rounded-lg font-semibold text-sm flex items-center gap-2 transition-colors shadow-lg">
+                                <i class="fas fa-image"></i>
+                                <span>Change Photo</span>
+                            </button>
+                            <button data-action="change-media" data-type="video" class="bg-white hover:bg-gray-100 text-gray-900 px-6 py-3 rounded-lg font-semibold text-sm flex items-center gap-2 transition-colors shadow-lg">
+                                <i class="fas fa-video"></i>
+                                <span>Change Video</span>
+                            </button>
+                            <button data-action="remove-media" class="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-lg font-semibold text-sm flex items-center gap-2 transition-colors shadow-lg" id="split-screen-remove-btn" style="display: none;">
+                                <i class="fas fa-trash"></i>
+                                <span>Remove Media</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+    </script>
+
+    <!-- CTA Section Template -->
+    <script type="text/template" id="tpl-cta">
+<section data-editable class="bg-gradient-to-r from-[#1F1F1F] via-[#1F1F1F] to-[#1F1F1F] py-20 px-6 text-center text-white relative overflow-hidden">
+    <div class="absolute inset-0 pointer-events-none">
+        <div class="absolute top-10 left-1/2 -translate-x-1/2 w-[90%] h-full bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.15),transparent_60%)]"></div>
+    </div>
+    <div class="relative max-w-4xl mx-auto">
+        <span class="inline-flex items-center gap-2 px-5 py-2 bg-[#FF4F4F] rounded-full text-xs font-bold tracking-[0.35em] uppercase text-white mb-6">Call to Action</span>
+        <h2 contenteditable="true" class="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 outline-none" style="font-family: 'Azo Sans Uber', sans-serif; font-weight: 400; color: #18F1E1; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;">Ready to Begin?</h2>
+        <p contenteditable="true" class="text-base md:text-lg text-white/85 leading-relaxed mb-8 max-w-2xl mx-auto outline-none">Get started with our premium services today.</p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="#" class="inline-flex items-center justify-center px-8 py-4 rounded-full font-semibold text-lg bg-[#FF4F4F] hover:bg-[#FF3838] text-white transition-all duration-300 hover:-translate-y-1 hover:scale-105">Contact Us</a>
+            <a href="#" class="inline-flex items-center justify-center px-7 py-3 rounded-full font-semibold border-2 border-[#18F1E1] text-[#18F1E1] bg-transparent hover:bg-[#18F1E1] hover:text-black transition-all duration-300">Call Us</a>
+        </div>
+    </div>
+</section>
+    </script>
+
+    <!-- Video Section Template -->
+    <script type="text/template" id="tpl-video">
+<section data-editable class="relative overflow-hidden bg-gradient-to-r from-[#1F1F1F] via-[#1F1F1F] to-[#1F1F1F] text-white py-20 px-6">
+    <div class="absolute inset-0 pointer-events-none">
+        <div class="absolute top-10 left-1/2 -translate-x-1/2 w-[90%] h-full bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.15),transparent_60%)]"></div>
+    </div>
+    <div class="relative max-w-6xl mx-auto">
+        <div class="text-center mb-16">
+            <span class="inline-flex items-center gap-2 px-5 py-2 bg-[#FF4F4F] rounded-full text-xs font-bold tracking-[0.35em] uppercase text-white mb-6">Video Section</span>
+            <h2 contenteditable="true" class="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 outline-none" style="font-family: 'Azo Sans Uber', sans-serif; font-weight: 400; color: #18F1E1; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;">Video Showcase</h2>
+            <p contenteditable="true" class="text-base md:text-lg text-white/85 leading-relaxed max-w-3xl mx-auto outline-none">Create share-worthy videos that capture the energy and emotion of your event.</p>
+        </div>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="bg-white/10 border border-white/15 rounded-3xl overflow-hidden backdrop-blur transition-all duration-300 hover:-translate-y-1">
+                <div class="aspect-video overflow-hidden bg-black/50 flex items-center justify-center">
+                    <span class="text-white/50">Video Placeholder</span>
+                </div>
+                <div class="p-6">
+                    <h4 contenteditable="true" class="text-xl font-semibold mb-2 outline-none" style="color: #18F1E1;">Video Title</h4>
+                    <p contenteditable="true" class="text-sm text-white/70 mb-4 leading-relaxed outline-none">Video description goes here.</p>
+                    <a href="#" class="inline-flex items-center rounded-full bg-[#FF4F4F] px-5 py-2 text-white font-semibold hover:bg-[#FF3838] transition-colors">Watch Now</a>
+                </div>
+            </div>
+            <div class="bg-white/10 border border-white/15 rounded-3xl overflow-hidden backdrop-blur transition-all duration-300 hover:-translate-y-1">
+                <div class="aspect-video overflow-hidden bg-black/50 flex items-center justify-center">
+                    <span class="text-white/50">Video Placeholder</span>
+                </div>
+                <div class="p-6">
+                    <h4 contenteditable="true" class="text-xl font-semibold mb-2 outline-none" style="color: #18F1E1;">Video Title</h4>
+                    <p contenteditable="true" class="text-sm text-white/70 mb-4 leading-relaxed outline-none">Video description goes here.</p>
+                    <a href="#" class="inline-flex items-center rounded-full bg-[#FF4F4F] px-5 py-2 text-white font-semibold hover:bg-[#FF3838] transition-colors">Watch Now</a>
+                </div>
+            </div>
+            <div class="bg-white/10 border border-white/15 rounded-3xl overflow-hidden backdrop-blur transition-all duration-300 hover:-translate-y-1">
+                <div class="aspect-video overflow-hidden bg-black/50 flex items-center justify-center">
+                    <span class="text-white/50">Video Placeholder</span>
+                </div>
+                <div class="p-6">
+                    <h4 contenteditable="true" class="text-xl font-semibold mb-2 outline-none" style="color: #18F1E1;">Video Title</h4>
+                    <p contenteditable="true" class="text-sm text-white/70 mb-4 leading-relaxed outline-none">Video description goes here.</p>
+                    <a href="#" class="inline-flex items-center rounded-full bg-[#FF4F4F] px-5 py-2 text-white font-semibold hover:bg-[#FF3838] transition-colors">Watch Now</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+    </script>
+
+    <!-- Iframe Template -->
+    <script type="text/template" id="iframeTemplate">
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://cdn.tailwindcss.com"><##SCRIPT_END##>
+    <style>
+        /* Azo Sans Font Face Declarations */
+        @font-face {
+            font-family: 'Azo Sans';
+            src: url('../assets/fonts/AzoSans-Regular.woff2') format('woff2'),
+                 url('../assets/fonts/AzoSans-Regular.woff') format('woff');
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'Azo Sans Uber';
+            src: url('../assets/fonts/AzoSansUber-Regular.woff2') format('woff2'),
+                 url('../assets/fonts/AzoSansUber-Regular.woff') format('woff');
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        * { box-sizing: border-box; }
+        body { 
+            min-height: 100vh; 
+            margin: 0;
+            padding: 0;
+            font-family: 'Azo Sans', sans-serif;
+            color: #1F1F1F;
+        }
+        
+        /* Remove extra padding when footer is present */
+        body:has(footer) {
+            padding-bottom: 0;
+        }
+        
+        /* Ensure footer is at the bottom */
+        footer {
+            margin-top: auto;
+        }
+        /* Hover effect to show editable areas */
+        [data-editable]:hover { 
+            outline: 2px dashed #18F1E1; 
+            cursor: pointer; 
+            position: relative; 
+            outline-offset: 4px;
+        }
+        [data-editable].selected { 
+            outline: 2px solid #FF4F4F; 
+            outline-offset: 2px;
+        }
+        
+        /* Text elements can be selected individually */
+        h1, h2, h3, h4, h5, h6, p, span, a, button, label, li {
+            position: relative;
+        }
+        h1:hover, h2:hover, h3:hover, h4:hover, h5:hover, h6:hover, 
+        p:hover, span:hover, a:hover, button:hover {
+            outline: 2px dashed #18F1E1;
+            outline-offset: 2px;
+            cursor: pointer;
+        }
+        h1.selected, h2.selected, h3.selected, h4.selected, h5.selected, h6.selected,
+        p.selected, span.selected, a.selected, button.selected {
+            outline: 2px solid #FF4F4F;
+            outline-offset: 2px;
+        }
+        
+        /* Media elements can be selected */
+        img, video, iframe, [data-editable] img, [data-editable] video, [data-editable] iframe {
+            position: relative;
+        }
+        img:hover, video:hover, iframe:hover,
+        [data-editable]:has(img):hover, [data-editable]:has(video):hover, [data-editable]:has(iframe):hover {
+            outline: 2px dashed #18F1E1;
+            outline-offset: 2px;
+            cursor: pointer;
+        }
+        img.selected, video.selected, iframe.selected,
+        [data-editable]:has(img).selected, [data-editable]:has(video).selected, [data-editable]:has(iframe).selected {
+            outline: 2px solid #FF4F4F;
+            outline-offset: 2px;
+        }
+        
+        /* Card icon selection */
+        .rounded-xl:hover {
+            outline: 2px dashed #18F1E1;
+            outline-offset: 2px;
+            cursor: pointer;
+        }
+        .rounded-xl.selected {
+            outline: 2px solid #FF4F4F;
+            outline-offset: 2px;
+        }
+        
+        /* Drag Helper */
+        .drop-zone { 
+            height: 10px; 
+            background: transparent; 
+            transition: height 0.2s; 
+        }
+        .drop-zone.active { 
+            height: 40px; 
+            background: rgba(24, 241, 225, 0.1); 
+            border: 2px dashed #18F1E1; 
+        }
+        
+        /* Empty State */
+        .empty-canvas { 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            height: 300px; 
+            color: #9ca3af; 
+            font-size: 1.5rem; 
+            border: 4px dashed #e5e7eb; 
+            margin: 20px; 
+            border-radius: 10px; 
+            background: #f9fafb;
+        }
+        
+        /* Smooth transitions */
+        * { transition: all 0.2s ease; }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: #888; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #555; }
+    </style>
+</head>
+<body class="bg-white" style="display: flex; flex-direction: column; min-height: 100vh;">
+    <main style="flex: 1;">
+        <div id="canvas-root">
+        <div class="empty-canvas">Drop Components Here</div>
+    </div>
+    </main>
+    <script src="../assets/components/navigation.js"><##SCRIPT_END##>
+    <script src="../assets/components/footer.js"><##SCRIPT_END##>
+</body>
+</html>
+    </script>
+
     <script>
         const iframe = document.getElementById('editorFrame');
         let selectedElement = null; // The DOM element inside the iframe currently selected
@@ -358,372 +736,53 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         window.onload = function() {
             const doc = iframe.contentDocument || iframe.contentWindow.document;
             
+            // Get iframe template from hidden script tag - more robust than template literals
+            var iframeContent = document.getElementById('iframeTemplate').innerHTML;
+            // Replace placeholder with actual script closing tag
+            iframeContent = iframeContent.replace(/\<##SCRIPT_END##\>/g, '</' + 'script>');
+            
             // Inject Tailwind & Base Styles into Iframe
             doc.open();
-            doc.write(`
-                <!DOCTYPE html>
-                <html>
-                <head>
-                    <script src="https://cdn.tailwindcss.com"><\/script>
-                    <style>
-                        /* Azo Sans Font Face Declarations */
-                        @font-face {
-                            font-family: 'Azo Sans';
-                            src: url('../assets/fonts/AzoSans-Regular.woff2') format('woff2'),
-                                 url('../assets/fonts/AzoSans-Regular.woff') format('woff');
-                            font-weight: 400;
-                            font-style: normal;
-                            font-display: swap;
-                        }
-
-                        @font-face {
-                            font-family: 'Azo Sans Uber';
-                            src: url('../assets/fonts/AzoSansUber-Regular.woff2') format('woff2'),
-                                 url('../assets/fonts/AzoSansUber-Regular.woff') format('woff');
-                            font-weight: 400;
-                            font-style: normal;
-                            font-display: swap;
-                        }
-
-                        * { box-sizing: border-box; }
-                        body { 
-                            min-height: 100vh; 
-                            margin: 0;
-                            padding: 0;
-                            font-family: 'Azo Sans', sans-serif;
-                            color: #1F1F1F;
-                        }
-                        
-                        /* Remove extra padding when footer is present */
-                        body:has(footer) {
-                            padding-bottom: 0;
-                        }
-                        
-                        /* Ensure footer is at the bottom */
-                        footer {
-                            margin-top: auto;
-                        }
-                        /* Hover effect to show editable areas */
-                        [data-editable]:hover { 
-                            outline: 2px dashed #18F1E1; 
-                            cursor: pointer; 
-                            position: relative; 
-                            outline-offset: 4px;
-                        }
-                        [data-editable].selected { 
-                            outline: 2px solid #FF4F4F; 
-                            outline-offset: 2px;
-                        }
-                        
-                        /* Text elements can be selected individually */
-                        h1, h2, h3, h4, h5, h6, p, span, a, button, label, li {
-                            position: relative;
-                        }
-                        h1:hover, h2:hover, h3:hover, h4:hover, h5:hover, h6:hover, 
-                        p:hover, span:hover, a:hover, button:hover {
-                            outline: 2px dashed #18F1E1;
-                            outline-offset: 2px;
-                            cursor: pointer;
-                        }
-                        h1.selected, h2.selected, h3.selected, h4.selected, h5.selected, h6.selected,
-                        p.selected, span.selected, a.selected, button.selected {
-                            outline: 2px solid #FF4F4F;
-                            outline-offset: 2px;
-                        }
-                        
-                        /* Media elements can be selected */
-                        img, video, iframe, [data-editable] img, [data-editable] video, [data-editable] iframe {
-                            position: relative;
-                        }
-                        img:hover, video:hover, iframe:hover,
-                        [data-editable]:has(img):hover, [data-editable]:has(video):hover, [data-editable]:has(iframe):hover {
-                            outline: 2px dashed #18F1E1;
-                            outline-offset: 2px;
-                            cursor: pointer;
-                        }
-                        img.selected, video.selected, iframe.selected,
-                        [data-editable]:has(img).selected, [data-editable]:has(video).selected, [data-editable]:has(iframe).selected {
-                            outline: 2px solid #FF4F4F;
-                            outline-offset: 2px;
-                        }
-                        
-                        /* Card icon selection */
-                        .rounded-xl:hover {
-                            outline: 2px dashed #18F1E1;
-                            outline-offset: 2px;
-                            cursor: pointer;
-                        }
-                        .rounded-xl.selected {
-                            outline: 2px solid #FF4F4F;
-                            outline-offset: 2px;
-                        }
-                        
-                        /* Drag Helper */
-                        .drop-zone { 
-                            height: 10px; 
-                            background: transparent; 
-                            transition: height 0.2s; 
-                        }
-                        .drop-zone.active { 
-                            height: 40px; 
-                            background: rgba(24, 241, 225, 0.1); 
-                            border: 2px dashed #18F1E1; 
-                        }
-                        
-                        /* Empty State */
-                        .empty-canvas { 
-                            display: flex; 
-                            align-items: center; 
-                            justify-content: center; 
-                            height: 300px; 
-                            color: #9ca3af; 
-                            font-size: 1.5rem; 
-                            border: 4px dashed #e5e7eb; 
-                            margin: 20px; 
-                            border-radius: 10px; 
-                            background: #f9fafb;
-                        }
-                        
-                        /* Smooth transitions */
-                        * { transition: all 0.2s ease; }
-                        
-                        /* Custom scrollbar */
-                        ::-webkit-scrollbar { width: 8px; height: 8px; }
-                        ::-webkit-scrollbar-track { background: #f1f1f1; }
-                        ::-webkit-scrollbar-thumb { background: #888; border-radius: 4px; }
-                        ::-webkit-scrollbar-thumb:hover { background: #555; }
-                    </style>
-                </head>
-                <body class="bg-white" style="display: flex; flex-direction: column; min-height: 100vh;">
-                    <main style="flex: 1;">
-                        <div id="canvas-root">
-                        <div class="empty-canvas">Drop Components Here</div>
-                    </div>
-                    </main>
-                    <script src="../assets/components/navigation.js"><\/script>
-                    <script src="../assets/components/footer.js"><\/script>
-                </body>
-                </html>
-            `);
+            doc.write(iframeContent);
             doc.close();
 
             // Setup Listeners inside Iframe
             setupIframeListeners(doc);
         };
 
-        // --- 2. HTML Templates (The Blocks) - Matching Main Website ---
-        const templates = {
-            hero: `
-                <section data-editable class="relative bg-gradient-to-br from-[#0f0a1a] via-[#1d1130] to-[#2a133d] text-white py-24 px-6 text-center overflow-hidden">
-                    <div class="absolute inset-0 pointer-events-none">
-                        <div class="absolute -top-40 -right-20 w-80 h-80 bg-pink-500/25 rounded-full blur-3xl"></div>
-                        <div class="absolute top-1/2 -left-32 w-72 h-72 bg-purple-500/20 rounded-full blur-[110px]"></div>
-                    </div>
-                    <div class="relative max-w-6xl mx-auto">
-                        <span class="inline-flex items-center gap-2 px-5 py-2 bg-gradient-to-r from-[#FF4F4F]/10 via-[#FF4F4F]/10 to-[#FF4F4F]/10 border border-[#FF4F4F]/20 rounded-full text-xs font-semibold tracking-[0.35em] uppercase text-white mb-6">Premium Experience</span>
-                        <h1 contenteditable="true" class="text-5xl md:text-7xl font-bold mb-6 outline-none leading-tight" style="font-family: 'Azo Sans Uber', sans-serif; font-weight: 400; text-transform: uppercase; letter-spacing: 0.02em; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;">
-                            <span class="block" style="color: #FF4F4F;">PHOTO BOOTH</span>
-                            <span class="block" style="color: #18F1E1;">RENTALS</span>
-                        </h1>
-                        <p contenteditable="true" class="text-xl text-white/90 mb-8 max-w-3xl mx-auto outline-none leading-relaxed" style="font-family: 'Azo Sans', sans-serif;">Premium photo booth rentals and event entertainment services nationwide. From AI-powered photo booths to 360° video experiences.</p>
-                        <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 md:gap-6 justify-center items-center px-2 sm:px-4 w-full max-w-md sm:max-w-none mx-auto">
-                            <a href="#" class="group relative inline-flex items-center justify-center gap-2 sm:gap-3 text-white px-5 sm:px-8 md:px-10 py-3 sm:py-4 md:py-5 rounded-full text-sm sm:text-base md:text-lg font-medium shadow-2xl hover:shadow-[#FF4F4F]/50 transition-all duration-500 transform hover:scale-105 sm:hover:scale-110 hover:-translate-y-1 overflow-hidden w-full sm:w-auto min-w-[140px] sm:min-w-0 touch-manipulation" style="background: #FF4F4F;">
-                                <span class="relative z-10">Get Your Quote</span>
-                            </a>
-                            <button type="button" class="group inline-flex items-center justify-center gap-2 sm:gap-3 px-5 sm:px-8 md:px-10 py-3 sm:py-4 md:py-5 rounded-full text-sm sm:text-base md:text-lg font-medium backdrop-blur-md bg-white/10 border-2 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:scale-105 sm:hover:scale-110 hover:-translate-y-1 text-white w-full sm:w-auto min-w-[140px] sm:min-w-0 cursor-pointer touch-manipulation" style="border-color: rgba(24, 241, 225, 0.5);" onmouseover="this.style.borderColor='rgba(24, 241, 225, 0.7)'; this.style.background='rgba(24, 241, 225, 0.2)';" onmouseout="this.style.borderColor='rgba(24, 241, 225, 0.5)'; this.style.background='rgba(255, 255, 255, 0.1)';">
-                                <svg class="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498A1 1 0 0121 17.72V21a2 2 0 01-2 2h-1C9.716 23 3 16.284 3 8V7a2 2 0 012-2z"></path>
-                                </svg>
-                                <span>Call Us</span>
-                            </button>
-                        </div>
-                    </div>
-                </section>
-            `,
-            text: `
-                <section data-editable class="w-full py-16 px-6" style="color: #1F1F1F;">
-                    <div class="max-w-4xl mx-auto text-center mb-12">
-                        <span class="inline-flex items-center gap-2 px-5 py-2 bg-[#00FFFF] rounded-full text-xs font-semibold tracking-[0.35em] uppercase text-[#1f1f1f] mb-6">Section Badge</span>
-                        <h2 contenteditable="true" class="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 outline-none" style="font-family: 'Azo Sans Uber', sans-serif; font-weight: 400; text-transform: uppercase; letter-spacing: 0.02em; color: #FF4F4F; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;">Section Heading</h2>
-                        <p contenteditable="true" class="text-base md:text-lg leading-relaxed outline-none" style="font-family: 'Azo Sans', sans-serif;">This is a paragraph. You can type directly here. We use contenteditable to make this feel like a real document editor.</p>
-                    </div>
-                </section>
-            `,
-            cards: `
-                <section data-editable class="py-16 px-6 bg-white">
-                    <div class="max-w-6xl mx-auto">
-                        <div class="text-center mb-12">
-                            <span class="inline-flex items-center gap-2 px-5 py-2 bg-[#00FFFF] rounded-full text-xs font-semibold tracking-[0.35em] uppercase text-[#1f1f1f] mb-6">What We Offer</span>
-                            <h2 contenteditable="true" class="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 outline-none" style="font-family: 'Azo Sans Uber', sans-serif; font-weight: 400; text-transform: uppercase; letter-spacing: 0.02em; color: #FF4F4F; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;">Feature Cards</h2>
-                        </div>
-                        <div class="grid md:grid-cols-3 gap-8">
-                            <div class="bg-white p-6 rounded-2xl shadow-lg border border-gray-100 hover:shadow-xl hover:scale-105 transition-all duration-300">
-                                <div class="w-12 h-12 bg-pink-500 rounded-xl flex items-center justify-center mb-4">
-                                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
-                                    </svg>
-                                </div>
-                                <h3 contenteditable="true" class="text-xl font-bold mb-2 outline-none" style="color: #FF4F4F;">Feature One</h3>
-                                <p contenteditable="true" class="outline-none" style="color: #1F1F1F;">Description of the feature.</p>
-                            </div>
-                            <div class="bg-white p-6 rounded-2xl shadow-lg border border-gray-100 hover:shadow-xl hover:scale-105 transition-all duration-300">
-                                <div class="w-12 h-12 bg-blue-500 rounded-xl flex items-center justify-center mb-4">
-                                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
-                                    </svg>
-                                </div>
-                                <h3 contenteditable="true" class="text-xl font-bold mb-2 outline-none" style="color: #FF4F4F;">Feature Two</h3>
-                                <p contenteditable="true" class="outline-none" style="color: #1F1F1F;">Description of the feature.</p>
-                            </div>
-                            <div class="bg-white p-6 rounded-2xl shadow-lg border border-gray-100 hover:shadow-xl hover:scale-105 transition-all duration-300">
-                                <div class="w-12 h-12 bg-purple-500 rounded-xl flex items-center justify-center mb-4">
-                                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
-                                    </svg>
-                                </div>
-                                <h3 contenteditable="true" class="text-xl font-bold mb-2 outline-none" style="color: #FF4F4F;">Feature Three</h3>
-                                <p contenteditable="true" class="outline-none" style="color: #1F1F1F;">Description of the feature.</p>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-            `,
-            split: `
-                <section data-editable class="py-20 px-6 bg-white">
-                    <div class="max-w-6xl mx-auto grid lg:grid-cols-2 gap-12 items-center" id="split-screen-grid">
-                        <div id="split-screen-text-content">
-                            <span class="inline-flex items-center gap-2 px-4 py-2 bg-[#00FFFF] text-[#1f1f1f] text-xs uppercase tracking-[0.3em] rounded-full mb-6">Featured</span>
-                            <h2 contenteditable="true" class="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 outline-none" style="font-family: 'Azo Sans Uber', sans-serif; font-weight: 400; text-transform: uppercase; letter-spacing: 0.02em; color: #FF4F4F; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;">Split Screen Section</h2>
-                            <p contenteditable="true" class="text-base md:text-lg leading-relaxed mb-8 outline-none" style="color: #1F1F1F;">This is a split screen layout with content on one side and an image placeholder on the other.</p>
-                            <div class="space-y-4 mb-8" id="split-screen-feature-points">
-                                <div class="flex gap-3 split-screen-feature-item group" data-feature-index="1">
-                                    <div class="w-10 h-10 rounded-full bg-pink-500/10 flex items-center justify-center text-pink-600 font-bold flex-shrink-0 border border-pink-500/20 split-screen-feature-number">1</div>
-                                    <div class="flex-1">
-                                        <p contenteditable="true" class="font-semibold outline-none" style="color: #1F1F1F;">Feature Point One</p>
-                                        <p contenteditable="true" class="text-sm outline-none" style="color: #1F1F1F;">Description of feature</p>
-                                    </div>
-                                    <button data-action="remove-feature" class="text-red-600 hover:text-red-700 opacity-0 group-hover:opacity-100 transition-opacity p-1" title="Remove feature point">
-                                        <i class="fas fa-times"></i>
-                                    </button>
-                                </div>
-                                <div class="flex gap-3 split-screen-feature-item group" data-feature-index="2">
-                                    <div class="w-10 h-10 rounded-full bg-purple-500/10 flex items-center justify-center text-purple-600 font-bold flex-shrink-0 border border-purple-500/20 split-screen-feature-number">2</div>
-                                    <div class="flex-1">
-                                        <p contenteditable="true" class="font-semibold outline-none" style="color: #1F1F1F;">Feature Point Two</p>
-                                        <p contenteditable="true" class="text-sm outline-none" style="color: #1F1F1F;">Description of feature</p>
-                                    </div>
-                                    <button data-action="remove-feature" class="text-red-600 hover:text-red-700 opacity-0 group-hover:opacity-100 transition-opacity p-1" title="Remove feature point">
-                                        <i class="fas fa-times"></i>
-                                    </button>
-                                </div>
-                                <div class="flex gap-3 split-screen-feature-item group" data-feature-index="2">
-                                    <div class="w-10 h-10 rounded-full bg-red-500/10 flex items-center justify-center text-red-600 font-bold flex-shrink-0 border border-purple-500/20 split-screen-feature-number">3</div>
-                                    <div class="flex-1">
-                                        <p contenteditable="true" class="font-semibold outline-none" style="color: #1F1F1F;">Feature Point Three</p>
-                                        <p contenteditable="true" class="text-sm outline-none" style="color: #1F1F1F;">Description of feature</p>
-                                    </div>
-                                    <button data-action="remove-feature" class="text-red-600 hover:text-red-700 opacity-0 group-hover:opacity-100 transition-opacity p-1" title="Remove feature point">
-                                        <i class="fas fa-times"></i>
-                                    </button>
-                                </div>
-                            </div>
-                            <div class="flex flex-col sm:flex-row gap-4">
-                                <a href="#" class="inline-flex items-center justify-center px-8 py-4 rounded-full font-semibold text-lg bg-[#FF4F4F] hover:bg-[#FF3838] text-white transition-all duration-300 hover:-translate-y-1 hover:scale-105">Get Your Quote</a>
-                                <a href="#" class="inline-flex items-center justify-center px-7 py-3 rounded-full font-semibold border-2 border-[#18F1E1] text-[#18F1E1] bg-white hover:bg-[#18F1E1] hover:text-black transition-all duration-300">Call Us</a>
-                            </div>
-                        </div>
-                        <div class="relative" data-editable="true" id="split-screen-media-content">
-                            <div class="relative bg-white border border-gray-200/50 rounded-[28px] overflow-hidden shadow-[0_24px_60px_-18px_rgba(0,0,0,0.12)] group">
-                                <div class="w-full h-[500px] bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center relative" id="split-screen-media-container">
-                                    <img src="" alt="" class="w-full h-full object-cover hidden" id="split-screen-image">
-                                    <video src="" controls class="w-full h-full object-cover hidden" id="split-screen-video"></video>
-                                    <span class="text-gray-400" id="split-screen-placeholder">Media Placeholder</span>
-                                    
-                                    <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-center justify-center z-10" id="split-screen-media-overlay">
-                                        <div class="flex flex-col gap-3 px-4">
-                                            <button data-action="change-media" data-type="photo" class="bg-white hover:bg-gray-100 text-gray-900 px-6 py-3 rounded-lg font-semibold text-sm flex items-center gap-2 transition-colors shadow-lg">
-                                                <i class="fas fa-image"></i>
-                                                <span>Change Photo</span>
-                                            </button>
-                                            <button data-action="change-media" data-type="video" class="bg-white hover:bg-gray-100 text-gray-900 px-6 py-3 rounded-lg font-semibold text-sm flex items-center gap-2 transition-colors shadow-lg">
-                                                <i class="fas fa-video"></i>
-                                                <span>Change Video</span>
-                                            </button>
-                                            <button data-action="remove-media" class="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-lg font-semibold text-sm flex items-center gap-2 transition-colors shadow-lg" id="split-screen-remove-btn" style="display: none;">
-                                                <i class="fas fa-trash"></i>
-                                                <span>Remove Media</span>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-            `,
-            cta: `
-                <section data-editable class="bg-gradient-to-r from-[#1F1F1F] via-[#1F1F1F] to-[#1F1F1F] py-20 px-6 text-center text-white relative overflow-hidden">
-                    <div class="absolute inset-0 pointer-events-none">
-                        <div class="absolute top-10 left-1/2 -translate-x-1/2 w-[90%] h-full bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.15),transparent_60%)]"></div>
-                    </div>
-                    <div class="relative max-w-4xl mx-auto">
-                        <span class="inline-flex items-center gap-2 px-5 py-2 bg-[#FF4F4F] rounded-full text-xs font-bold tracking-[0.35em] uppercase text-white mb-6">Call to Action</span>
-                        <h2 contenteditable="true" class="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 outline-none" style="font-family: 'Azo Sans Uber', sans-serif; font-weight: 400; color: #18F1E1; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;">Ready to Begin?</h2>
-                        <p contenteditable="true" class="text-base md:text-lg text-white/85 leading-relaxed mb-8 max-w-2xl mx-auto outline-none">Get started with our premium services today.</p>
-                        <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                            <a href="#" class="inline-flex items-center justify-center px-8 py-4 rounded-full font-semibold text-lg bg-[#FF4F4F] hover:bg-[#FF3838] text-white transition-all duration-300 hover:-translate-y-1 hover:scale-105">Contact Us</a>
-                            <a href="#" class="inline-flex items-center justify-center px-7 py-3 rounded-full font-semibold border-2 border-[#18F1E1] text-[#18F1E1] bg-transparent hover:bg-[#18F1E1] hover:text-black transition-all duration-300">Call Us</a>
-                        </div>
-                    </div>
-                </section>
-            `,
-            video: `
-                <section data-editable class="relative overflow-hidden bg-gradient-to-r from-[#1F1F1F] via-[#1F1F1F] to-[#1F1F1F] text-white py-20 px-6">
-                    <div class="absolute inset-0 pointer-events-none">
-                        <div class="absolute top-10 left-1/2 -translate-x-1/2 w-[90%] h-full bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.15),transparent_60%)]"></div>
-                    </div>
-                    <div class="relative max-w-6xl mx-auto">
-                        <div class="text-center mb-16">
-                            <span class="inline-flex items-center gap-2 px-5 py-2 bg-[#FF4F4F] rounded-full text-xs font-bold tracking-[0.35em] uppercase text-white mb-6">Video Section</span>
-                            <h2 contenteditable="true" class="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 outline-none" style="font-family: 'Azo Sans Uber', sans-serif; font-weight: 400; color: #18F1E1; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;">Video Showcase</h2>
-                            <p contenteditable="true" class="text-base md:text-lg text-white/85 leading-relaxed max-w-3xl mx-auto outline-none">Create share-worthy videos that capture the energy and emotion of your event.</p>
-                        </div>
-                        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                            <div class="bg-white/10 border border-white/15 rounded-3xl overflow-hidden backdrop-blur transition-all duration-300 hover:-translate-y-1">
-                                <div class="aspect-video overflow-hidden bg-black/50 flex items-center justify-center">
-                                    <span class="text-white/50">Video Placeholder</span>
-                                </div>
-                                <div class="p-6">
-                                    <h4 contenteditable="true" class="text-xl font-semibold mb-2 outline-none" style="color: #18F1E1;">Video Title</h4>
-                                    <p contenteditable="true" class="text-sm text-white/70 mb-4 leading-relaxed outline-none">Video description goes here.</p>
-                                    <a href="#" class="inline-flex items-center rounded-full bg-[#FF4F4F] px-5 py-2 text-white font-semibold hover:bg-[#FF3838] transition-colors">Watch Now</a>
-                                </div>
-                            </div>
-                            <div class="bg-white/10 border border-white/15 rounded-3xl overflow-hidden backdrop-blur transition-all duration-300 hover:-translate-y-1">
-                                <div class="aspect-video overflow-hidden bg-black/50 flex items-center justify-center">
-                                    <span class="text-white/50">Video Placeholder</span>
-                                </div>
-                                <div class="p-6">
-                                    <h4 contenteditable="true" class="text-xl font-semibold mb-2 outline-none" style="color: #18F1E1;">Video Title</h4>
-                                    <p contenteditable="true" class="text-sm text-white/70 mb-4 leading-relaxed outline-none">Video description goes here.</p>
-                                    <a href="#" class="inline-flex items-center rounded-full bg-[#FF4F4F] px-5 py-2 text-white font-semibold hover:bg-[#FF3838] transition-colors">Watch Now</a>
-                                </div>
-                            </div>
-                            <div class="bg-white/10 border border-white/15 rounded-3xl overflow-hidden backdrop-blur transition-all duration-300 hover:-translate-y-1">
-                                <div class="aspect-video overflow-hidden bg-black/50 flex items-center justify-center">
-                                    <span class="text-white/50">Video Placeholder</span>
-                                </div>
-                                <div class="p-6">
-                                    <h4 contenteditable="true" class="text-xl font-semibold mb-2 outline-none" style="color: #18F1E1;">Video Title</h4>
-                                    <p contenteditable="true" class="text-sm text-white/70 mb-4 leading-relaxed outline-none">Video description goes here.</p>
-                                    <a href="#" class="inline-flex items-center rounded-full bg-[#FF4F4F] px-5 py-2 text-white font-semibold hover:bg-[#FF3838] transition-colors">Watch Now</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-            `
+        // --- 2. HTML Templates (The Blocks) - Load from hidden script tags for cross-server compatibility ---
+        // Helper function to get template content from hidden script tags
+        function getTemplate(id) {
+            var tpl = document.getElementById('tpl-' + id);
+            if (!tpl) {
+                console.error('Template not found: tpl-' + id);
+                return '';
+            }
+            return tpl.innerHTML.trim();
+        }
+        
+        // Templates object - reads from hidden script tags instead of using template literals
+        var templates = {
+            hero: getTemplate('hero'),
+            text: getTemplate('text'),
+            cards: getTemplate('cards'),
+            split: getTemplate('split'),
+            cta: getTemplate('cta'),
+            video: getTemplate('video')
         };
+        
+        // Verify templates loaded correctly
+        (function() {
+            var missing = [];
+            for (var key in templates) {
+                if (!templates[key] || templates[key].length < 10) {
+                    missing.push(key);
+                }
+            }
+            if (missing.length > 0) {
+                console.error('PageBuilder: Some templates failed to load:', missing);
+            }
+        })();
 
         // --- 3. Drag & Drop Logic ---
         function setupIframeListeners(doc) {
@@ -2627,3 +2686,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </script>
 </body>
 </html>
+<?php
+// Flush output buffer to ensure proper content delivery
+if (ob_get_level() > 0) {
+    ob_end_flush();
+}
+?>
