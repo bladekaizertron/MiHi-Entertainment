@@ -34,8 +34,20 @@ $csrf = $_SESSION['csrf_token'];
 
 // Handle form submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+	$postMaxBytes = return_bytes(ini_get('post_max_size') ?: '0');
+	$contentLength = (int)($_SERVER['CONTENT_LENGTH'] ?? $_SERVER['HTTP_CONTENT_LENGTH'] ?? 0);
+	$postLimitExceeded = $postMaxBytes > 0 && $contentLength > $postMaxBytes;
+	$postMaxLabel = ini_get('post_max_size') ?: 'Unknown';
+
 	$token = $_POST['csrf_token'] ?? '';
-	if (!hash_equals($csrf, $token)) {
+	if ($token === '') {
+		if ($postLimitExceeded) {
+			$limitMB = $postMaxBytes ? round($postMaxBytes / (1024 * 1024), 1) . 'MB' : $postMaxLabel;
+			$error = 'The upload probably exceeds the server post_max_size limit (' . $limitMB . '). Please upload a smaller PDF or ask your host to increase that limit.';
+		} else {
+			$error = 'Security token invalid.';
+		}
+	} elseif (!hash_equals($csrf, $token)) {
 		$error = 'Security token invalid.';
 	} else {
 		$title = trim($_POST['title'] ?? '');
