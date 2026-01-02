@@ -743,6 +743,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'export_static') {
 				<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M15 18l-6-6 6-6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
 				<span>Back to Pages</span>
 			</a>
+			<button type="button" class="btn" onclick="openSeoModal()" title="Adjust SEO metadata">
+				<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M11 19a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm9 2-5-5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+				<span>SEO Settings</span>
+			</button>
 			<?php if ($isEdit): ?>
 			<button type="button" class="btn" onclick="exportStaticPage()" title="Generate and download static HTML">
 				<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 5v14M5 12h14" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -922,6 +926,87 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'export_static') {
 			</div>
 		</form>
 	</div>
+
+	<!-- SEO Settings Modal -->
+	<div id="seoModal" style="display:none; position:fixed; inset:0; background:rgba(15,23,42,0.85); backdrop-filter:blur(6px); z-index:10050; align-items:center; justify-content:center;">
+		<div style="background:#0f172a; border:1px solid #1f2937; border-radius:16px; width:min(92vw,900px); max-height:90vh; overflow-y:auto; box-shadow:0 25px 80px rgba(15,23,42,0.8);">
+			<div style="padding:16px 20px; border-bottom:1px solid #1f2937; display:flex; justify-content:space-between; align-items:center; position:sticky; top:0; background:#0f172a; z-index:10;">
+				<h3 style="margin:0; font-size:16px; font-weight:600; color:#f8fafc; display:flex; align-items:center; gap:8px;">
+					<i class="fas fa-search" style="color:#18F1E1;"></i>
+					SEO Settings
+				</h3>
+				<button type="button" onclick="closeSeoModal()" style="border:none; background:none; color:#94a3b8; font-size:18px; cursor:pointer;">&times;</button>
+			</div>
+			<div style="padding:20px;">
+				<div style="margin-bottom:28px;">
+					<h4 style="margin:0 0 8px; font-size:14px; font-weight:600; color:#f8fafc; display:flex; align-items:center; gap:6px;">
+						<i class="fas fa-tag" style="color:#FF4F4F;"></i>
+						Meta Tags
+					</h4>
+					<div style="margin-bottom:14px;">
+						<label style="display:block; font-size:12px; color:#94a3b8; margin-bottom:4px;">Meta Title</label>
+						<input id="seoMetaTitle" type="text" placeholder="Leave empty to use page title" style="width:100%; background:#111827; border:1px solid #1f2937; border-radius:8px; color:#f8fafc; padding:10px;">
+						<small style="color:#9ca3af;">50-60 characters recommended</small>
+					</div>
+					<div style="margin-bottom:14px;">
+						<label style="display:block; font-size:12px; color:#94a3b8; margin-bottom:4px;">Meta Description</label>
+						<textarea id="seoMetaDescription" rows="3" placeholder="Brief description for search engines" style="width:100%; background:#111827; border:1px solid #1f2937; border-radius:8px; color:#f8fafc; padding:10px;"></textarea>
+						<small style="color:#9ca3af;">150-160 characters recommended</small>
+					</div>
+					<div>
+						<label style="display:block; font-size:12px; color:#94a3b8; margin-bottom:4px;">Meta Keywords</label>
+						<input id="seoMetaKeywords" type="text" placeholder="keyword1, keyword2, keyword3" style="width:100%; background:#111827; border:1px solid #1f2937; border-radius:8px; color:#f8fafc; padding:10px;">
+						<small style="color:#9ca3af;">Comma separated keywords</small>
+					</div>
+				</div>
+
+				<div style="margin-bottom:28px; border-bottom:1px solid #1f2937; padding-bottom:24px;">
+					<h4 style="margin:0 0 8px; font-size:14px; font-weight:600; color:#f8fafc; display:flex; align-items:center; gap:6px;">
+						<i class="fab fa-facebook" style="color:#18F1E1;"></i>
+						Open Graph (Social)
+					</h4>
+					<div style="margin-bottom:14px;">
+						<label style="display:block; font-size:12px; color:#94a3b8; margin-bottom:4px;">OG Title</label>
+						<input id="seoOgTitle" type="text" placeholder="Leave empty to use page title" style="width:100%; background:#111827; border:1px solid #1f2937; border-radius:8px; color:#f8fafc; padding:10px;">
+					</div>
+					<div style="margin-bottom:14px;">
+						<label style="display:block; font-size:12px; color:#94a3b8; margin-bottom:4px;">OG Description</label>
+						<textarea id="seoOgDescription" rows="2" placeholder="Description for social media shares" style="width:100%; background:#111827; border:1px solid #1f2937; border-radius:8px; color:#f8fafc; padding:10px;"></textarea>
+					</div>
+					<div>
+						<label style="display:block; font-size:12px; color:#94a3b8; margin-bottom:4px;">OG Image URL</label>
+						<input id="seoOgImage" type="url" placeholder="https://example.com/image.jpg" style="width:100%; background:#111827; border:1px solid #1f2937; border-radius:8px; color:#f8fafc; padding:10px;">
+						<small style="color:#9ca3af;">Recommended 1200x630px</small>
+					</div>
+				</div>
+
+				<div style="margin-bottom:20px;">
+					<h4 style="margin:0 0 8px; font-size:14px; font-weight:600; color:#f8fafc; display:flex; align-items:center; gap:6px;">
+						<i class="fas fa-cog" style="color:#FF4F4F;"></i>
+						Advanced
+					</h4>
+					<div style="margin-bottom:14px;">
+						<label style="display:block; font-size:12px; color:#94a3b8; margin-bottom:4px;">Canonical URL</label>
+						<input id="seoCanonicalUrl" type="url" placeholder="https://example.com/page" style="width:100%; background:#111827; border:1px solid #1f2937; border-radius:8px; color:#f8fafc; padding:10px;">
+					</div>
+					<div>
+						<label style="display:block; font-size:12px; color:#94a3b8; margin-bottom:4px;">Robots Meta Tag</label>
+						<select id="seoRobots" style="width:100%; background:#111827; border:1px solid #1f2937; border-radius:8px; color:#f8fafc; padding:10px;">
+							<option value="index, follow">index, follow (default)</option>
+							<option value="noindex, follow">noindex, follow</option>
+							<option value="index, nofollow">index, nofollow</option>
+							<option value="noindex, nofollow">noindex, nofollow</option>
+						</select>
+					</div>
+				</div>
+
+				<button id="seoModalSaveButton" type="button" onclick="saveSeoSettings()" style="width:100%; background:#18F1E1; color:#0f172a; padding:12px; border:none; border-radius:10px; font-weight:600; cursor:pointer; font-size:14px;">
+					<i class="fas fa-save mr-2"></i>Save SEO Settings
+				</button>
+			</div>
+		</div>
+	</div>
+
 	<!-- Live Preview Editor JS -->
 	<script>
 	const csrfToken = '<?php echo $csrf; ?>';
@@ -3794,7 +3879,67 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'export_static') {
 		});
 		
 	});
-	
+	const seoFieldMap = {
+		'seoMetaTitle': 'meta_title',
+		'seoMetaDescription': 'meta_description',
+		'seoMetaKeywords': 'meta_keywords',
+		'seoOgTitle': 'og_title',
+		'seoOgDescription': 'og_description',
+		'seoOgImage': 'og_image',
+		'seoCanonicalUrl': 'canonical_url',
+		'seoRobots': 'robots'
+	};
+
+	const seoFieldDefaults = {
+		'robots': 'index, follow'
+	};
+
+	function syncSeoModalFields(copyToModal) {
+		Object.entries(seoFieldMap).forEach(([modalId, hiddenId]) => {
+			const modalEl = document.getElementById(modalId);
+			const hiddenEl = document.getElementById(hiddenId);
+			if (!modalEl || !hiddenEl) return;
+
+			if (copyToModal) {
+				modalEl.value = hiddenEl.value || '';
+				if (modalId === 'seoRobots') {
+					modalEl.value = modalEl.value || (hiddenEl.value || seoFieldDefaults.robots);
+				}
+			} else {
+				const defaultValue = hiddenId === 'robots' ? seoFieldDefaults.robots : '';
+				hiddenEl.value = modalEl.value || defaultValue;
+			}
+		});
+	}
+
+	function openSeoModal() {
+		syncSeoModalFields(true);
+		const modal = document.getElementById('seoModal');
+		if (modal) {
+			modal.style.display = 'flex';
+		}
+	}
+
+	function closeSeoModal() {
+		const modal = document.getElementById('seoModal');
+		if (modal) {
+			modal.style.display = 'none';
+		}
+	}
+
+	function saveSeoSettings() {
+		syncSeoModalFields(false);
+		const saveBtn = document.getElementById('seoModalSaveButton');
+		if (saveBtn) {
+			const originalText = saveBtn.innerHTML;
+			saveBtn.innerHTML = '<i class="fas fa-check mr-2"></i>Saved!';
+			setTimeout(() => {
+				saveBtn.innerHTML = originalText;
+			}, 1500);
+		}
+		closeSeoModal();
+	}
+
 	// Export static page function
 	function exportStaticPage() {
 		if (!currentPageId) {
