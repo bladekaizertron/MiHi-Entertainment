@@ -1403,6 +1403,73 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'export_static') {
 				// Initialize editing on all elements
 				makeEditable(iframeBody);
 				
+				// Add explicit click handlers for headings to ensure they're editable
+				iframeDoc.addEventListener('click', function(e) {
+					if (!editMode) return;
+					
+					// Skip if clicking on non-editable elements
+					if (e.target.closest('.section-controls, .hero-change-bg-btn, .change-section-bg-btn, .remove-item-btn')) {
+						return;
+					}
+					
+					// Check if clicked element is a heading
+					const heading = e.target.closest('h1, h2, h3, h4, h5, h6');
+					if (heading) {
+						// Skip if already editable or in non-editable area
+						if (heading.classList.contains('editable-text') || heading.classList.contains('editable-link')) {
+							return;
+						}
+						
+						// Skip if in non-editable container
+						if (heading.closest('header, footer, nav, script, style, .section-controls')) {
+							return;
+						}
+						
+						// Make it editable immediately
+						heading.classList.add('editable-text');
+						if (!heading.hasAttribute('data-id')) {
+							heading.setAttribute('data-id', 'text-' + Date.now() + '-' + Math.random());
+						}
+						
+						// Only set contentEditable if not already set
+						if (!heading.isContentEditable) {
+							heading.contentEditable = 'true';
+							
+							// Add blur handler if not already present
+							if (!heading.hasAttribute('data-blur-handler')) {
+								heading.setAttribute('data-blur-handler', 'true');
+								heading.addEventListener('blur', function() {
+									const newText = this.textContent;
+									const oldText = this.getAttribute('data-original-text');
+									if (newText !== oldText) {
+										changes[this.getAttribute('data-id')] = {
+											old: oldText,
+											new: newText,
+											element: this
+										};
+									}
+								});
+								heading.setAttribute('data-original-text', heading.textContent);
+							}
+						}
+						
+						// Focus and select text for immediate editing
+						setTimeout(() => {
+							heading.focus();
+							const range = iframeDoc.createRange();
+							range.selectNodeContents(heading);
+							const selection = iframeDoc.defaultView.getSelection();
+							selection.removeAllRanges();
+							selection.addRange(range);
+							
+							// Show formatting toolbar for headings
+							if (textFormatToolbar) {
+								showTextFormatToolbar(heading, null);
+							}
+						}, 10);
+					}
+				}, true); // Use capture phase
+				
 				// Additional pass to ensure ALL text elements are marked as editable
 				function markAllTextElementsEditable() {
 					const textElements = iframeDoc.querySelectorAll('p, h1, h2, h3, h4, h5, h6, span, div, li, td, th, label, strong, em, b, i, small, big, sub, sup, blockquote, pre, code, a, button');
@@ -1460,6 +1527,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'export_static') {
 				// Mark all text elements as editable after a short delay to catch dynamically loaded content
 				setTimeout(() => {
 					markAllTextElementsEditable();
+					
+					// Explicitly ensure hero section headings are editable
+					const heroHeadings = iframeDoc.querySelectorAll('section h1, section h2, section h3, .hero-content-wrapper h1, .hero-content-wrapper h2, .hero-content-wrapper h3');
+					heroHeadings.forEach(heading => {
+						if (!heading.classList.contains('editable-text') && !heading.classList.contains('editable-link')) {
+							heading.classList.add('editable-text');
+							if (!heading.hasAttribute('data-id')) {
+								heading.setAttribute('data-id', 'text-' + Date.now() + '-' + Math.random());
+							}
+							if (!heading.isContentEditable) {
+								heading.contentEditable = 'true';
+								heading.addEventListener('blur', function() {
+									const newText = this.textContent;
+									const oldText = this.getAttribute('data-original-text');
+									if (newText !== oldText) {
+										changes[this.getAttribute('data-id')] = {
+											old: oldText,
+											new: newText,
+											element: this
+										};
+									}
+								});
+								heading.setAttribute('data-original-text', heading.textContent);
+							}
+						}
+					});
 				}, 500);
 				
 				// Additional pass to ensure ALL media elements are marked as editable
@@ -1594,6 +1687,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'export_static') {
 								<option value="900">Black (900)</option>
 							</select>
 						</div>
+						<div class="text-format-group">
+							<span class="text-format-label">Style</span>
+							<select class="text-format-select" id="text-format-font-style">
+								<option value="normal" selected>Normal</option>
+								<option value="italic">Italic</option>
+								<option value="oblique">Oblique</option>
+							</select>
+						</div>
 					`;
 					
 					document.body.appendChild(textFormatToolbar);
@@ -1625,6 +1726,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'export_static') {
 					const fontWeightSelect = textFormatToolbar.querySelector('#text-format-font-weight');
 					fontWeightSelect.addEventListener('change', function() {
 						applyTextFormatting('fontWeight', this.value);
+					});
+					
+					// Font style handler
+					const fontStyleSelect = textFormatToolbar.querySelector('#text-format-font-style');
+					fontStyleSelect.addEventListener('change', function() {
+						applyTextFormatting('fontStyle', this.value);
 					});
 					
 					// Keep toolbar visible when hovering over it
@@ -1705,11 +1812,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'export_static') {
 					const currentFontSize = computedStyle.fontSize;
 					const currentFontWeight = computedStyle.fontWeight;
 					const currentFontFamily = computedStyle.fontFamily;
+					const currentFontStyle = computedStyle.fontStyle;
 					
 					// Update toolbar with current values
 					const fontSizeInput = textFormatToolbar.querySelector('#text-format-font-size');
 					const fontWeightSelect = textFormatToolbar.querySelector('#text-format-font-weight');
 					const fontFamilySelect = textFormatToolbar.querySelector('#text-format-font-family');
+					const fontStyleSelect = textFormatToolbar.querySelector('#text-format-font-style');
 					
 					// Extract numeric font size
 					const fontSizeNum = parseInt(currentFontSize);
@@ -1719,6 +1828,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'export_static') {
 					
 					// Set font weight
 					fontWeightSelect.value = currentFontWeight;
+					
+					// Set font style
+					fontStyleSelect.value = currentFontStyle || 'normal';
 					
 					// Set font family (check if it contains Azo Sans Uber)
 					if (currentFontFamily.includes('Azo Sans Uber') || currentFontFamily.includes('AzoSansUber')) {
@@ -1780,19 +1892,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'export_static') {
 					
 					const element = currentFormattedElement;
 					
-					// Apply formatting
+					// Apply formatting - use !important to override inline styles if needed
 					if (property === 'color') {
-						element.style.color = value;
+						element.style.setProperty('color', value, 'important');
 					} else if (property === 'fontFamily') {
 						if (value === 'Azo Sans Uber') {
-							element.style.fontFamily = '"Azo Sans Uber", "AzoSansUber-Regular", sans-serif';
+							element.style.setProperty('font-family', '"Azo Sans Uber", "AzoSansUber-Regular", sans-serif', 'important');
 						} else {
-							element.style.fontFamily = '"Azo Sans", "AzoSans-Regular", sans-serif';
+							element.style.setProperty('font-family', '"Azo Sans", "AzoSans-Regular", sans-serif', 'important');
 						}
 					} else if (property === 'fontSize') {
-						element.style.fontSize = value;
+						element.style.setProperty('font-size', value, 'important');
 					} else if (property === 'fontWeight') {
-						element.style.fontWeight = value;
+						element.style.setProperty('font-weight', value, 'important');
+					} else if (property === 'fontStyle') {
+						element.style.setProperty('font-style', value, 'important');
 					}
 					
 					// Track changes
@@ -1834,23 +1948,55 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'export_static') {
 					}
 					
 					// Check if element is editable text - be more lenient
-					const hasEditableClass = e.target.classList.contains('editable-text') || 
-					                        e.target.classList.contains('editable-link') ||
-					                        e.target.closest('.editable-text') ||
-					                        e.target.closest('.editable-link');
+					let targetEl = e.target;
+					
+					// For h1-h6 elements, check the element itself first
+					if (['H1', 'H2', 'H3', 'H4', 'H5', 'H6'].includes(targetEl.tagName)) {
+						// If it's a heading, use it directly
+						if (!targetEl.classList.contains('editable-text') && !targetEl.classList.contains('editable-link')) {
+							// Make it editable if not already
+							targetEl.classList.add('editable-text');
+							if (!targetEl.hasAttribute('data-id')) {
+								targetEl.setAttribute('data-id', 'text-' + Date.now() + '-' + Math.random());
+							}
+							if (!targetEl.isContentEditable) {
+								targetEl.contentEditable = 'true';
+								if (!targetEl.hasAttribute('data-blur-handler')) {
+									targetEl.setAttribute('data-blur-handler', 'true');
+									targetEl.addEventListener('blur', function() {
+										const newText = this.textContent;
+										const oldText = this.getAttribute('data-original-text');
+										if (newText !== oldText) {
+											changes[this.getAttribute('data-id')] = {
+												old: oldText,
+												new: newText,
+												element: this
+											};
+										}
+									});
+									targetEl.setAttribute('data-original-text', targetEl.textContent);
+								}
+							}
+						}
+					}
+					
+					const hasEditableClass = targetEl.classList.contains('editable-text') || 
+					                        targetEl.classList.contains('editable-link') ||
+					                        targetEl.closest('.editable-text') ||
+					                        targetEl.closest('.editable-link');
 					
 					// Also check if it's a text-containing element
 					const textElements = ['P', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'SPAN', 'DIV', 'A', 'BUTTON', 'LABEL', 'LI', 'TD', 'TH', 'STRONG', 'EM', 'B', 'I', 'SMALL', 'BIG', 'SUB', 'SUP', 'BLOCKQUOTE', 'PRE', 'CODE'];
-					const isTextElement = e.target.tagName && textElements.includes(e.target.tagName);
-					const hasText = e.target.textContent && e.target.textContent.trim().length > 0;
-					const isInNonEditable = e.target.closest('header, footer, nav, script, style');
+					const isTextElement = targetEl.tagName && textElements.includes(targetEl.tagName);
+					const hasText = targetEl.textContent && targetEl.textContent.trim().length > 0;
+					const isInNonEditable = targetEl.closest('header, footer, nav, script, style');
 					
 					const isEditable = hasEditableClass || (isTextElement && hasText && !isInNonEditable);
 					
 					if (isEditable) {
 						// Small delay to avoid flickering
 						hoverTimeout = setTimeout(() => {
-							showTextFormatToolbar(e.target, e);
+							showTextFormatToolbar(targetEl, e);
 						}, 200);
 					}
 				});
@@ -3186,33 +3332,85 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'export_static') {
 				
 				// Add hover effects in edit mode
 				iframeDoc.addEventListener('mouseover', function(e) {
-					if (editMode && (e.target.classList.contains('editable-text') || e.target.classList.contains('media-editable') || e.target.classList.contains('hero-bg-editable') || e.target.classList.contains('editable-link') || e.target.classList.contains('icon-editable'))) {
-						if (e.target.classList.contains('icon-editable')) {
+					if (!editMode) return;
+					
+					let targetEl = e.target;
+					
+					// Check if it's a heading element (h1-h6)
+					if (['H1', 'H2', 'H3', 'H4', 'H5', 'H6'].includes(targetEl.tagName)) {
+						// Ensure heading is marked as editable
+						if (!targetEl.classList.contains('editable-text') && !targetEl.classList.contains('editable-link')) {
+							targetEl.classList.add('editable-text');
+							if (!targetEl.hasAttribute('data-id')) {
+								targetEl.setAttribute('data-id', 'text-' + Date.now() + '-' + Math.random());
+							}
+							if (!targetEl.isContentEditable) {
+								targetEl.contentEditable = 'true';
+								if (!targetEl.hasAttribute('data-blur-handler')) {
+									targetEl.setAttribute('data-blur-handler', 'true');
+									targetEl.addEventListener('blur', function() {
+										const newText = this.textContent;
+										const oldText = this.getAttribute('data-original-text');
+										if (newText !== oldText) {
+											changes[this.getAttribute('data-id')] = {
+												old: oldText,
+												new: newText,
+												element: this
+											};
+										}
+									});
+									targetEl.setAttribute('data-original-text', targetEl.textContent);
+								}
+							}
+						}
+						// Add visual feedback for headings
+						targetEl.classList.add('editable-highlight');
+						targetEl.style.cursor = 'text';
+						targetEl.style.outline = '2px dashed #667eea';
+						targetEl.style.outlineOffset = '2px';
+						return;
+					}
+					
+					if (targetEl.classList.contains('editable-text') || targetEl.classList.contains('media-editable') || targetEl.classList.contains('hero-bg-editable') || targetEl.classList.contains('editable-link') || targetEl.classList.contains('icon-editable')) {
+						if (targetEl.classList.contains('icon-editable')) {
 							// Icons get special hover styling
-							e.target.style.outline = '3px solid #18F1E1';
-							e.target.style.outlineOffset = '2px';
+							targetEl.style.outline = '3px solid #18F1E1';
+							targetEl.style.outlineOffset = '2px';
 						} else {
-							e.target.classList.add('editable-highlight');
+							targetEl.classList.add('editable-highlight');
 							// Add special styling for editable links/buttons
-							if (e.target.classList.contains('editable-link')) {
-								e.target.style.cursor = 'text';
-								e.target.style.outline = '2px dashed #667eea';
-								e.target.style.outlineOffset = '2px';
+							if (targetEl.classList.contains('editable-link')) {
+								targetEl.style.cursor = 'text';
+								targetEl.style.outline = '2px dashed #667eea';
+								targetEl.style.outlineOffset = '2px';
 							}
 						}
 					}
 				});
 				
 				iframeDoc.addEventListener('mouseout', function(e) {
-					e.target.classList.remove('editable-highlight');
-					if (e.target.classList.contains('editable-link') && !e.target.isContentEditable) {
-						e.target.style.cursor = '';
-						e.target.style.outline = '';
-						e.target.style.outlineOffset = '';
+					let targetEl = e.target;
+					
+					// Handle headings
+					if (['H1', 'H2', 'H3', 'H4', 'H5', 'H6'].includes(targetEl.tagName)) {
+						targetEl.classList.remove('editable-highlight');
+						if (!targetEl.isContentEditable) {
+							targetEl.style.cursor = '';
+							targetEl.style.outline = '';
+							targetEl.style.outlineOffset = '';
+						}
+						return;
 					}
-					if (e.target.classList.contains('icon-editable')) {
-						e.target.style.outline = '';
-						e.target.style.outlineOffset = '';
+					
+					targetEl.classList.remove('editable-highlight');
+					if (targetEl.classList.contains('editable-link') && !targetEl.isContentEditable) {
+						targetEl.style.cursor = '';
+						targetEl.style.outline = '';
+						targetEl.style.outlineOffset = '';
+					}
+					if (targetEl.classList.contains('icon-editable')) {
+						targetEl.style.outline = '';
+						targetEl.style.outlineOffset = '';
 					}
 				});
 				
