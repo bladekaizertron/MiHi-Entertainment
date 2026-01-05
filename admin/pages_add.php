@@ -22,6 +22,104 @@ $db = getDB();
 $csrf = $_SESSION['csrf_token'] ?? ($_SESSION['csrf_token'] = bin2hex(random_bytes(32)));
 $error = '';
 
+// Function to build complete HTML document
+function buildCompleteHTML($title, $content, $meta_title, $meta_description, $meta_keywords, $og_title, $og_description, $og_image, $canonical_url, $robots) {
+    $meta_title = $meta_title ?: $title;
+    $og_title = $og_title ?: $title;
+    $canonical_tag = $canonical_url ? "<link rel=\"canonical\" href=\"" . htmlspecialchars($canonical_url) . "\">" : '';
+    $og_image_tag = $og_image ? "<meta property=\"og:image\" content=\"" . htmlspecialchars($og_image) . "\">" : '';
+    
+    return "<!DOCTYPE html>
+<html lang=\"en\">
+<head>
+    <meta charset=\"UTF-8\">
+    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">
+    <title>" . htmlspecialchars($meta_title) . "</title>
+    <meta name=\"description\" content=\"" . htmlspecialchars($meta_description) . "\">
+    <meta name=\"keywords\" content=\"" . htmlspecialchars($meta_keywords) . "\">
+    <meta name=\"robots\" content=\"" . htmlspecialchars($robots) . "\">
+    $canonical_tag
+    
+    <!-- Open Graph / Social Media -->
+    <meta property=\"og:title\" content=\"" . htmlspecialchars($og_title) . "\">
+    <meta property=\"og:description\" content=\"" . htmlspecialchars($og_description) . "\">
+    $og_image_tag
+    <meta property=\"og:type\" content=\"website\">
+    
+    <!-- Favicon -->
+    <link rel=\"icon\" type=\"image/svg+xml\" href=\"assets/images/favicon.svg\">
+    
+    <!-- Tailwind CSS -->
+    <script src=\"https://cdn.tailwindcss.com\"></script>
+    
+    <style>
+        @font-face {
+            font-family: 'Azo Sans Uber';
+            src: url('assets/fonts/AzoSansUber-Regular.woff2') format('woff2'),
+                 url('assets/fonts/AzoSansUber-Regular.woff') format('woff');
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'Azo Sans';
+            src: url('assets/fonts/AzoSans-Regular.woff2') format('woff2'),
+                 url('assets/fonts/AzoSans-Regular.woff') format('woff');
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        html, body {
+            overflow-x: hidden;
+            width: 100%;
+            max-width: 100%;
+        }
+
+        body {
+            font-family: 'Azo Sans', sans-serif;
+            color: #1a202c;
+            background: #0a0a0a;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Azo Sans Uber', sans-serif;
+        }
+
+        /* Fixed navigation positioning */
+        header {
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            right: 0 !important;
+            width: 100% !important;
+            z-index: 50 !important;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+    <div id=\"nav-placeholder\"></div>
+    
+    $content
+    
+    <div id=\"footer-placeholder\"></div>
+    
+    <script src=\"assets/components/navigation.js\"></script>
+    <script src=\"assets/components/footer.js\"></script>
+</body>
+</html>";
+}
+
 // --- Handle Save ---
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!hash_equals($csrf, $_POST['csrf_token'] ?? '')) {
@@ -41,28 +139,49 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $canonical_url = trim($_POST['canonical_url'] ?? '');
         $robots = trim($_POST['robots'] ?? 'index, follow');
         
+        
         try {
-            $stmt = $db->prepare("
-                INSERT INTO pages (title, slug, content_html, status, 
-                    meta_title, meta_description, meta_keywords, 
-                    og_title, og_description, og_image, 
-                    canonical_url, robots, 
-                    created_at, updated_at) 
-                VALUES (?, ?, ?, 'draft', ?, ?, ?, ?, ?, ?, ?, ?, NOW(), NOW())
-            ");
-            $stmt->execute([
-                $title, $slug, $content,
-                $meta_title ?: $title,
-                $meta_description,
-                $meta_keywords,
-                $og_title ?: $title,
-                $og_description,
-                $og_image,
-                $canonical_url,
-                $robots
-            ]);
-            header("Location: pages_edit.php?id=" . $db->lastInsertId());
-            exit;
+            // Sanitize filename
+            $filename = $slug . '.html';
+            $filepath = __DIR__ . '/../' . $filename;
+            
+            // Check if file already exists
+            if (file_exists($filepath)) {
+                $error = "A page with slug '$slug' already exists. Please choose a different slug.";
+            } else {
+                // Build complete HTML document
+                $html = buildCompleteHTML($title, $content, $meta_title, $meta_description, $meta_keywords, $og_title, $og_description, $og_image, $canonical_url, $robots);
+                
+                // Write file to root directory
+                if (file_put_contents($filepath, $html) === false) {
+                    throw new Exception("Failed to write HTML file. Check directory permissions.");
+                }
+                
+                // Also save to database for management
+                $stmt = $db->prepare("
+                    INSERT INTO pages (title, slug, content_html, status, 
+                        meta_title, meta_description, meta_keywords, 
+                        og_title, og_description, og_image, 
+                        canonical_url, robots, 
+                        created_at, updated_at) 
+                    VALUES (?, ?, ?, 'published', ?, ?, ?, ?, ?, ?, ?, ?, NOW(), NOW())
+                ");
+                $stmt->execute([
+                    $title, $slug, $content,
+                    $meta_title ?: $title,
+                    $meta_description,
+                    $meta_keywords,
+                    $og_title ?: $title,
+                    $og_description,
+                    $og_image,
+                    $canonical_url,
+                    $robots
+                ]);
+                
+                // Redirect to the generated page
+                header("Location: ../$filename");
+                exit;
+            }
         } catch (Exception $e) {
             $error = $e->getMessage();
         }
@@ -282,6 +401,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         Meta Tags
                     </h4>
                     
+                    
+                    <div class="mb-4">
+                        <label class="block text-xs text-zinc-400 mb-2">Page Slug (URL)</label>
+                        <input type="text" id="seoSlug" placeholder="Leave empty to auto-generate from title" class="w-full bg-zinc-800 border border-zinc-700 text-white px-3 py-2 rounded text-sm font-mono">
+                        <small class="text-zinc-500 text-xs">URL-friendly version (e.g., "my-page-name")</small>
+                    </div>
+                    
                     <div class="mb-4">
                         <label class="block text-xs text-zinc-400 mb-2">Meta Title</label>
                         <input type="text" id="seoMetaTitle" placeholder="Leave empty to use page title" class="w-full bg-zinc-800 border border-zinc-700 text-white px-3 py-2 rounded text-sm">
@@ -367,7 +493,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <div class="absolute top-1/2 -left-32 w-72 h-72 bg-purple-500/20 rounded-full blur-[110px]"></div>
     </div>
     <div class="relative max-w-6xl mx-auto">
-        <span class="inline-flex items-center gap-2 px-5 py-2 bg-gradient-to-r from-[#FF4F4F]/10 via-[#FF4F4F]/10 to-[#FF4F4F]/10 border border-[#FF4F4F]/20 rounded-full text-xs font-semibold tracking-[0.35em] uppercase text-white mb-6">Premium Experience</span>
+        
         <h1 contenteditable="true" class="text-5xl md:text-7xl font-bold mb-6 outline-none leading-tight" style="font-family: 'Azo Sans Uber', sans-serif; font-weight: 400; text-transform: uppercase; letter-spacing: 0.02em; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;">
             <span class="block" style="color: #FF4F4F;">PHOTO BOOTH</span>
             <span class="block" style="color: #18F1E1;">RENTALS</span>
@@ -392,7 +518,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <script type="text/template" id="tpl-text">
 <section data-editable class="w-full py-16 px-6" style="color: #1F1F1F;">
     <div class="max-w-4xl mx-auto text-center mb-12">
-        <span class="inline-flex items-center gap-2 px-5 py-2 bg-[#00FFFF] rounded-full text-xs font-semibold tracking-[0.35em] uppercase text-[#1f1f1f] mb-6">Section Badge</span>
         <h2 contenteditable="true" class="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 outline-none" style="font-family: 'Azo Sans Uber', sans-serif; font-weight: 400; text-transform: uppercase; letter-spacing: 0.02em; color: #FF4F4F; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;">Section Heading</h2>
         <p contenteditable="true" class="text-base md:text-lg leading-relaxed outline-none" style="font-family: 'Azo Sans', sans-serif;">This is a paragraph. You can type directly here. We use contenteditable to make this feel like a real document editor.</p>
     </div>
@@ -404,7 +529,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <section data-editable class="py-16 px-6 bg-white">
     <div class="max-w-6xl mx-auto">
         <div class="text-center mb-12">
-            <span class="inline-flex items-center gap-2 px-5 py-2 bg-[#00FFFF] rounded-full text-xs font-semibold tracking-[0.35em] uppercase text-[#1f1f1f] mb-6">What We Offer</span>
             <h2 contenteditable="true" class="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 outline-none" style="font-family: 'Azo Sans Uber', sans-serif; font-weight: 400; text-transform: uppercase; letter-spacing: 0.02em; color: #FF4F4F; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;">Feature Cards</h2>
         </div>
         <div class="grid md:grid-cols-3 gap-8">
@@ -445,7 +569,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <section data-editable class="py-20 px-6 bg-white">
     <div class="max-w-6xl mx-auto grid lg:grid-cols-2 gap-12 items-center" id="split-screen-grid">
         <div id="split-screen-text-content">
-            <span class="inline-flex items-center gap-2 px-4 py-2 bg-[#00FFFF] text-[#1f1f1f] text-xs uppercase tracking-[0.3em] rounded-full mb-6">Featured</span>
             <h2 contenteditable="true" class="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 outline-none" style="font-family: 'Azo Sans Uber', sans-serif; font-weight: 400; text-transform: uppercase; letter-spacing: 0.02em; color: #FF4F4F; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;">Split Screen Section</h2>
             <p contenteditable="true" class="text-base md:text-lg leading-relaxed mb-8 outline-none" style="color: #1F1F1F;">This is a split screen layout with content on one side and an image placeholder on the other.</p>
             <div class="space-y-4 mb-8" id="split-screen-feature-points">
@@ -522,7 +645,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <div class="absolute top-10 left-1/2 -translate-x-1/2 w-[90%] h-full bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.15),transparent_60%)]"></div>
     </div>
     <div class="relative max-w-4xl mx-auto">
-        <span class="inline-flex items-center gap-2 px-5 py-2 bg-[#FF4F4F] rounded-full text-xs font-bold tracking-[0.35em] uppercase text-white mb-6">Call to Action</span>
         <h2 contenteditable="true" class="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 outline-none" style="font-family: 'Azo Sans Uber', sans-serif; font-weight: 400; color: #18F1E1; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;">Ready to Begin?</h2>
         <p contenteditable="true" class="text-base md:text-lg text-white/85 leading-relaxed mb-8 max-w-2xl mx-auto outline-none">Get started with our premium services today.</p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
@@ -541,7 +663,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
     <div class="relative max-w-6xl mx-auto">
         <div class="text-center mb-16">
-            <span class="inline-flex items-center gap-2 px-5 py-2 bg-[#FF4F4F] rounded-full text-xs font-bold tracking-[0.35em] uppercase text-white mb-6">Video Section</span>
             <h2 contenteditable="true" class="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 outline-none" style="font-family: 'Azo Sans Uber', sans-serif; font-weight: 400; color: #18F1E1; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;">Video Showcase</h2>
             <p contenteditable="true" class="text-base md:text-lg text-white/85 leading-relaxed max-w-3xl mx-auto outline-none">Create share-worthy videos that capture the energy and emotion of your event.</p>
         </div>
@@ -1845,7 +1966,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             btn.disabled = true;
             btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Uploading...';
             
-            fetch('upload_image.php', {
+            fetch('/MiHi-Entertainment/admin/upload_image.php', {
                 method: 'POST',
                 body: formData,
                 credentials: 'same-origin'
@@ -2594,19 +2715,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             
             // Get final HTML - extract just the canvas content
             const canvasContent = body.querySelector('#canvas-root');
-            const canvasHTML = canvasContent ? canvasContent.innerHTML : body.innerHTML;
+            const finalContent = canvasContent ? canvasContent.innerHTML : body.innerHTML;
             
-            // Add navigation and footer scripts
-            const navigationScript = '<script src="../assets/components/navigation.js"><\/script>';
-            const footerScript = '<script src="../assets/components/footer.js"><\/script>';
             
-            // Combine canvas content with navigation and footer scripts
-            const finalContent = canvasHTML + '\n' + navigationScript + '\n' + footerScript;
-            
-            // Generate slug from title
-            const slug = title.toLowerCase()
-                .replace(/[^a-z0-9]+/g, '-')
-                .replace(/^-+|-+$/g, '') || 'untitled-page';
+            // Get slug from SEO settings or generate from title
+            let slug = document.getElementById('seoSlug').value.trim();
+            if (!slug) {
+                slug = title.toLowerCase()
+                    .replace(/[^a-z0-9]+/g, '-')
+                    .replace(/^-+|-+$/g, '') || 'untitled-page';
+            } else {
+                // Sanitize user-provided slug
+                slug = slug.toLowerCase()
+                    .replace(/[^a-z0-9-]/g, '-')
+                    .replace(/^-+|-+$/g, '');
+            }
             
             // Fill Hidden Form
             document.getElementById('hiddenTitle').value = title;

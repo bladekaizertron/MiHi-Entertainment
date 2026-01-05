@@ -743,6 +743,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'export_static') {
 				<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M15 18l-6-6 6-6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
 				<span>Back to Pages</span>
 			</a>
+			<button type="button" class="btn" onclick="openSeoModal()" title="Adjust SEO metadata">
+				<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M11 19a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm9 2-5-5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+				<span>SEO Settings</span>
+			</button>
 			<?php if ($isEdit): ?>
 			<button type="button" class="btn" onclick="exportStaticPage()" title="Generate and download static HTML">
 				<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 5v14M5 12h14" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -922,6 +926,87 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'export_static') {
 			</div>
 		</form>
 	</div>
+
+	<!-- SEO Settings Modal -->
+	<div id="seoModal" style="display:none; position:fixed; inset:0; background:rgba(15,23,42,0.85); backdrop-filter:blur(6px); z-index:10050; align-items:center; justify-content:center;">
+		<div style="background:#0f172a; border:1px solid #1f2937; border-radius:16px; width:min(92vw,900px); max-height:90vh; overflow-y:auto; box-shadow:0 25px 80px rgba(15,23,42,0.8);">
+			<div style="padding:16px 20px; border-bottom:1px solid #1f2937; display:flex; justify-content:space-between; align-items:center; position:sticky; top:0; background:#0f172a; z-index:10;">
+				<h3 style="margin:0; font-size:16px; font-weight:600; color:#f8fafc; display:flex; align-items:center; gap:8px;">
+					<i class="fas fa-search" style="color:#18F1E1;"></i>
+					SEO Settings
+				</h3>
+				<button type="button" onclick="closeSeoModal()" style="border:none; background:none; color:#94a3b8; font-size:18px; cursor:pointer;">&times;</button>
+			</div>
+			<div style="padding:20px;">
+				<div style="margin-bottom:28px;">
+					<h4 style="margin:0 0 8px; font-size:14px; font-weight:600; color:#f8fafc; display:flex; align-items:center; gap:6px;">
+						<i class="fas fa-tag" style="color:#FF4F4F;"></i>
+						Meta Tags
+					</h4>
+					<div style="margin-bottom:14px;">
+						<label style="display:block; font-size:12px; color:#94a3b8; margin-bottom:4px;">Meta Title</label>
+						<input id="seoMetaTitle" type="text" placeholder="Leave empty to use page title" style="width:100%; background:#111827; border:1px solid #1f2937; border-radius:8px; color:#f8fafc; padding:10px;">
+						<small style="color:#9ca3af;">50-60 characters recommended</small>
+					</div>
+					<div style="margin-bottom:14px;">
+						<label style="display:block; font-size:12px; color:#94a3b8; margin-bottom:4px;">Meta Description</label>
+						<textarea id="seoMetaDescription" rows="3" placeholder="Brief description for search engines" style="width:100%; background:#111827; border:1px solid #1f2937; border-radius:8px; color:#f8fafc; padding:10px;"></textarea>
+						<small style="color:#9ca3af;">150-160 characters recommended</small>
+					</div>
+					<div>
+						<label style="display:block; font-size:12px; color:#94a3b8; margin-bottom:4px;">Meta Keywords</label>
+						<input id="seoMetaKeywords" type="text" placeholder="keyword1, keyword2, keyword3" style="width:100%; background:#111827; border:1px solid #1f2937; border-radius:8px; color:#f8fafc; padding:10px;">
+						<small style="color:#9ca3af;">Comma separated keywords</small>
+					</div>
+				</div>
+
+				<div style="margin-bottom:28px; border-bottom:1px solid #1f2937; padding-bottom:24px;">
+					<h4 style="margin:0 0 8px; font-size:14px; font-weight:600; color:#f8fafc; display:flex; align-items:center; gap:6px;">
+						<i class="fab fa-facebook" style="color:#18F1E1;"></i>
+						Open Graph (Social)
+					</h4>
+					<div style="margin-bottom:14px;">
+						<label style="display:block; font-size:12px; color:#94a3b8; margin-bottom:4px;">OG Title</label>
+						<input id="seoOgTitle" type="text" placeholder="Leave empty to use page title" style="width:100%; background:#111827; border:1px solid #1f2937; border-radius:8px; color:#f8fafc; padding:10px;">
+					</div>
+					<div style="margin-bottom:14px;">
+						<label style="display:block; font-size:12px; color:#94a3b8; margin-bottom:4px;">OG Description</label>
+						<textarea id="seoOgDescription" rows="2" placeholder="Description for social media shares" style="width:100%; background:#111827; border:1px solid #1f2937; border-radius:8px; color:#f8fafc; padding:10px;"></textarea>
+					</div>
+					<div>
+						<label style="display:block; font-size:12px; color:#94a3b8; margin-bottom:4px;">OG Image URL</label>
+						<input id="seoOgImage" type="url" placeholder="https://example.com/image.jpg" style="width:100%; background:#111827; border:1px solid #1f2937; border-radius:8px; color:#f8fafc; padding:10px;">
+						<small style="color:#9ca3af;">Recommended 1200x630px</small>
+					</div>
+				</div>
+
+				<div style="margin-bottom:20px;">
+					<h4 style="margin:0 0 8px; font-size:14px; font-weight:600; color:#f8fafc; display:flex; align-items:center; gap:6px;">
+						<i class="fas fa-cog" style="color:#FF4F4F;"></i>
+						Advanced
+					</h4>
+					<div style="margin-bottom:14px;">
+						<label style="display:block; font-size:12px; color:#94a3b8; margin-bottom:4px;">Canonical URL</label>
+						<input id="seoCanonicalUrl" type="url" placeholder="https://example.com/page" style="width:100%; background:#111827; border:1px solid #1f2937; border-radius:8px; color:#f8fafc; padding:10px;">
+					</div>
+					<div>
+						<label style="display:block; font-size:12px; color:#94a3b8; margin-bottom:4px;">Robots Meta Tag</label>
+						<select id="seoRobots" style="width:100%; background:#111827; border:1px solid #1f2937; border-radius:8px; color:#f8fafc; padding:10px;">
+							<option value="index, follow">index, follow (default)</option>
+							<option value="noindex, follow">noindex, follow</option>
+							<option value="index, nofollow">index, nofollow</option>
+							<option value="noindex, nofollow">noindex, nofollow</option>
+						</select>
+					</div>
+				</div>
+
+				<button id="seoModalSaveButton" type="button" onclick="saveSeoSettings()" style="width:100%; background:#18F1E1; color:#0f172a; padding:12px; border:none; border-radius:10px; font-weight:600; cursor:pointer; font-size:14px;">
+					<i class="fas fa-save mr-2"></i>Save SEO Settings
+				</button>
+			</div>
+		</div>
+	</div>
+
 	<!-- Live Preview Editor JS -->
 	<script>
 	const csrfToken = '<?php echo $csrf; ?>';
@@ -1403,6 +1488,73 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'export_static') {
 				// Initialize editing on all elements
 				makeEditable(iframeBody);
 				
+				// Add explicit click handlers for headings to ensure they're editable
+				iframeDoc.addEventListener('click', function(e) {
+					if (!editMode) return;
+					
+					// Skip if clicking on non-editable elements
+					if (e.target.closest('.section-controls, .hero-change-bg-btn, .change-section-bg-btn, .remove-item-btn')) {
+						return;
+					}
+					
+					// Check if clicked element is a heading
+					const heading = e.target.closest('h1, h2, h3, h4, h5, h6');
+					if (heading) {
+						// Skip if already editable or in non-editable area
+						if (heading.classList.contains('editable-text') || heading.classList.contains('editable-link')) {
+							return;
+						}
+						
+						// Skip if in non-editable container
+						if (heading.closest('header, footer, nav, script, style, .section-controls')) {
+							return;
+						}
+						
+						// Make it editable immediately
+						heading.classList.add('editable-text');
+						if (!heading.hasAttribute('data-id')) {
+							heading.setAttribute('data-id', 'text-' + Date.now() + '-' + Math.random());
+						}
+						
+						// Only set contentEditable if not already set
+						if (!heading.isContentEditable) {
+							heading.contentEditable = 'true';
+							
+							// Add blur handler if not already present
+							if (!heading.hasAttribute('data-blur-handler')) {
+								heading.setAttribute('data-blur-handler', 'true');
+								heading.addEventListener('blur', function() {
+									const newText = this.textContent;
+									const oldText = this.getAttribute('data-original-text');
+									if (newText !== oldText) {
+										changes[this.getAttribute('data-id')] = {
+											old: oldText,
+											new: newText,
+											element: this
+										};
+									}
+								});
+								heading.setAttribute('data-original-text', heading.textContent);
+							}
+						}
+						
+						// Focus and select text for immediate editing
+						setTimeout(() => {
+							heading.focus();
+							const range = iframeDoc.createRange();
+							range.selectNodeContents(heading);
+							const selection = iframeDoc.defaultView.getSelection();
+							selection.removeAllRanges();
+							selection.addRange(range);
+							
+							// Show formatting toolbar for headings
+							if (textFormatToolbar) {
+								showTextFormatToolbar(heading, null);
+							}
+						}, 10);
+					}
+				}, true); // Use capture phase
+				
 				// Additional pass to ensure ALL text elements are marked as editable
 				function markAllTextElementsEditable() {
 					const textElements = iframeDoc.querySelectorAll('p, h1, h2, h3, h4, h5, h6, span, div, li, td, th, label, strong, em, b, i, small, big, sub, sup, blockquote, pre, code, a, button');
@@ -1460,6 +1612,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'export_static') {
 				// Mark all text elements as editable after a short delay to catch dynamically loaded content
 				setTimeout(() => {
 					markAllTextElementsEditable();
+					
+					// Explicitly ensure hero section headings are editable
+					const heroHeadings = iframeDoc.querySelectorAll('section h1, section h2, section h3, .hero-content-wrapper h1, .hero-content-wrapper h2, .hero-content-wrapper h3');
+					heroHeadings.forEach(heading => {
+						if (!heading.classList.contains('editable-text') && !heading.classList.contains('editable-link')) {
+							heading.classList.add('editable-text');
+							if (!heading.hasAttribute('data-id')) {
+								heading.setAttribute('data-id', 'text-' + Date.now() + '-' + Math.random());
+							}
+							if (!heading.isContentEditable) {
+								heading.contentEditable = 'true';
+								heading.addEventListener('blur', function() {
+									const newText = this.textContent;
+									const oldText = this.getAttribute('data-original-text');
+									if (newText !== oldText) {
+										changes[this.getAttribute('data-id')] = {
+											old: oldText,
+											new: newText,
+											element: this
+										};
+									}
+								});
+								heading.setAttribute('data-original-text', heading.textContent);
+							}
+						}
+					});
 				}, 500);
 				
 				// Additional pass to ensure ALL media elements are marked as editable
@@ -1594,6 +1772,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'export_static') {
 								<option value="900">Black (900)</option>
 							</select>
 						</div>
+						<div class="text-format-group">
+							<span class="text-format-label">Style</span>
+							<select class="text-format-select" id="text-format-font-style">
+								<option value="normal" selected>Normal</option>
+								<option value="italic">Italic</option>
+								<option value="oblique">Oblique</option>
+							</select>
+						</div>
 					`;
 					
 					document.body.appendChild(textFormatToolbar);
@@ -1625,6 +1811,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'export_static') {
 					const fontWeightSelect = textFormatToolbar.querySelector('#text-format-font-weight');
 					fontWeightSelect.addEventListener('change', function() {
 						applyTextFormatting('fontWeight', this.value);
+					});
+					
+					// Font style handler
+					const fontStyleSelect = textFormatToolbar.querySelector('#text-format-font-style');
+					fontStyleSelect.addEventListener('change', function() {
+						applyTextFormatting('fontStyle', this.value);
 					});
 					
 					// Keep toolbar visible when hovering over it
@@ -1705,11 +1897,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'export_static') {
 					const currentFontSize = computedStyle.fontSize;
 					const currentFontWeight = computedStyle.fontWeight;
 					const currentFontFamily = computedStyle.fontFamily;
+					const currentFontStyle = computedStyle.fontStyle;
 					
 					// Update toolbar with current values
 					const fontSizeInput = textFormatToolbar.querySelector('#text-format-font-size');
 					const fontWeightSelect = textFormatToolbar.querySelector('#text-format-font-weight');
 					const fontFamilySelect = textFormatToolbar.querySelector('#text-format-font-family');
+					const fontStyleSelect = textFormatToolbar.querySelector('#text-format-font-style');
 					
 					// Extract numeric font size
 					const fontSizeNum = parseInt(currentFontSize);
@@ -1719,6 +1913,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'export_static') {
 					
 					// Set font weight
 					fontWeightSelect.value = currentFontWeight;
+					
+					// Set font style
+					fontStyleSelect.value = currentFontStyle || 'normal';
 					
 					// Set font family (check if it contains Azo Sans Uber)
 					if (currentFontFamily.includes('Azo Sans Uber') || currentFontFamily.includes('AzoSansUber')) {
@@ -1780,19 +1977,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'export_static') {
 					
 					const element = currentFormattedElement;
 					
-					// Apply formatting
+					// Apply formatting - use !important to override inline styles if needed
 					if (property === 'color') {
-						element.style.color = value;
+						element.style.setProperty('color', value, 'important');
 					} else if (property === 'fontFamily') {
 						if (value === 'Azo Sans Uber') {
-							element.style.fontFamily = '"Azo Sans Uber", "AzoSansUber-Regular", sans-serif';
+							element.style.setProperty('font-family', '"Azo Sans Uber", "AzoSansUber-Regular", sans-serif', 'important');
 						} else {
-							element.style.fontFamily = '"Azo Sans", "AzoSans-Regular", sans-serif';
+							element.style.setProperty('font-family', '"Azo Sans", "AzoSans-Regular", sans-serif', 'important');
 						}
 					} else if (property === 'fontSize') {
-						element.style.fontSize = value;
+						element.style.setProperty('font-size', value, 'important');
 					} else if (property === 'fontWeight') {
-						element.style.fontWeight = value;
+						element.style.setProperty('font-weight', value, 'important');
+					} else if (property === 'fontStyle') {
+						element.style.setProperty('font-style', value, 'important');
 					}
 					
 					// Track changes
@@ -1834,23 +2033,55 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'export_static') {
 					}
 					
 					// Check if element is editable text - be more lenient
-					const hasEditableClass = e.target.classList.contains('editable-text') || 
-					                        e.target.classList.contains('editable-link') ||
-					                        e.target.closest('.editable-text') ||
-					                        e.target.closest('.editable-link');
+					let targetEl = e.target;
+					
+					// For h1-h6 elements, check the element itself first
+					if (['H1', 'H2', 'H3', 'H4', 'H5', 'H6'].includes(targetEl.tagName)) {
+						// If it's a heading, use it directly
+						if (!targetEl.classList.contains('editable-text') && !targetEl.classList.contains('editable-link')) {
+							// Make it editable if not already
+							targetEl.classList.add('editable-text');
+							if (!targetEl.hasAttribute('data-id')) {
+								targetEl.setAttribute('data-id', 'text-' + Date.now() + '-' + Math.random());
+							}
+							if (!targetEl.isContentEditable) {
+								targetEl.contentEditable = 'true';
+								if (!targetEl.hasAttribute('data-blur-handler')) {
+									targetEl.setAttribute('data-blur-handler', 'true');
+									targetEl.addEventListener('blur', function() {
+										const newText = this.textContent;
+										const oldText = this.getAttribute('data-original-text');
+										if (newText !== oldText) {
+											changes[this.getAttribute('data-id')] = {
+												old: oldText,
+												new: newText,
+												element: this
+											};
+										}
+									});
+									targetEl.setAttribute('data-original-text', targetEl.textContent);
+								}
+							}
+						}
+					}
+					
+					const hasEditableClass = targetEl.classList.contains('editable-text') || 
+					                        targetEl.classList.contains('editable-link') ||
+					                        targetEl.closest('.editable-text') ||
+					                        targetEl.closest('.editable-link');
 					
 					// Also check if it's a text-containing element
 					const textElements = ['P', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'SPAN', 'DIV', 'A', 'BUTTON', 'LABEL', 'LI', 'TD', 'TH', 'STRONG', 'EM', 'B', 'I', 'SMALL', 'BIG', 'SUB', 'SUP', 'BLOCKQUOTE', 'PRE', 'CODE'];
-					const isTextElement = e.target.tagName && textElements.includes(e.target.tagName);
-					const hasText = e.target.textContent && e.target.textContent.trim().length > 0;
-					const isInNonEditable = e.target.closest('header, footer, nav, script, style');
+					const isTextElement = targetEl.tagName && textElements.includes(targetEl.tagName);
+					const hasText = targetEl.textContent && targetEl.textContent.trim().length > 0;
+					const isInNonEditable = targetEl.closest('header, footer, nav, script, style');
 					
 					const isEditable = hasEditableClass || (isTextElement && hasText && !isInNonEditable);
 					
 					if (isEditable) {
 						// Small delay to avoid flickering
 						hoverTimeout = setTimeout(() => {
-							showTextFormatToolbar(e.target, e);
+							showTextFormatToolbar(targetEl, e);
 						}, 200);
 					}
 				});
@@ -3186,33 +3417,85 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'export_static') {
 				
 				// Add hover effects in edit mode
 				iframeDoc.addEventListener('mouseover', function(e) {
-					if (editMode && (e.target.classList.contains('editable-text') || e.target.classList.contains('media-editable') || e.target.classList.contains('hero-bg-editable') || e.target.classList.contains('editable-link') || e.target.classList.contains('icon-editable'))) {
-						if (e.target.classList.contains('icon-editable')) {
+					if (!editMode) return;
+					
+					let targetEl = e.target;
+					
+					// Check if it's a heading element (h1-h6)
+					if (['H1', 'H2', 'H3', 'H4', 'H5', 'H6'].includes(targetEl.tagName)) {
+						// Ensure heading is marked as editable
+						if (!targetEl.classList.contains('editable-text') && !targetEl.classList.contains('editable-link')) {
+							targetEl.classList.add('editable-text');
+							if (!targetEl.hasAttribute('data-id')) {
+								targetEl.setAttribute('data-id', 'text-' + Date.now() + '-' + Math.random());
+							}
+							if (!targetEl.isContentEditable) {
+								targetEl.contentEditable = 'true';
+								if (!targetEl.hasAttribute('data-blur-handler')) {
+									targetEl.setAttribute('data-blur-handler', 'true');
+									targetEl.addEventListener('blur', function() {
+										const newText = this.textContent;
+										const oldText = this.getAttribute('data-original-text');
+										if (newText !== oldText) {
+											changes[this.getAttribute('data-id')] = {
+												old: oldText,
+												new: newText,
+												element: this
+											};
+										}
+									});
+									targetEl.setAttribute('data-original-text', targetEl.textContent);
+								}
+							}
+						}
+						// Add visual feedback for headings
+						targetEl.classList.add('editable-highlight');
+						targetEl.style.cursor = 'text';
+						targetEl.style.outline = '2px dashed #667eea';
+						targetEl.style.outlineOffset = '2px';
+						return;
+					}
+					
+					if (targetEl.classList.contains('editable-text') || targetEl.classList.contains('media-editable') || targetEl.classList.contains('hero-bg-editable') || targetEl.classList.contains('editable-link') || targetEl.classList.contains('icon-editable')) {
+						if (targetEl.classList.contains('icon-editable')) {
 							// Icons get special hover styling
-							e.target.style.outline = '3px solid #18F1E1';
-							e.target.style.outlineOffset = '2px';
+							targetEl.style.outline = '3px solid #18F1E1';
+							targetEl.style.outlineOffset = '2px';
 						} else {
-							e.target.classList.add('editable-highlight');
+							targetEl.classList.add('editable-highlight');
 							// Add special styling for editable links/buttons
-							if (e.target.classList.contains('editable-link')) {
-								e.target.style.cursor = 'text';
-								e.target.style.outline = '2px dashed #667eea';
-								e.target.style.outlineOffset = '2px';
+							if (targetEl.classList.contains('editable-link')) {
+								targetEl.style.cursor = 'text';
+								targetEl.style.outline = '2px dashed #667eea';
+								targetEl.style.outlineOffset = '2px';
 							}
 						}
 					}
 				});
 				
 				iframeDoc.addEventListener('mouseout', function(e) {
-					e.target.classList.remove('editable-highlight');
-					if (e.target.classList.contains('editable-link') && !e.target.isContentEditable) {
-						e.target.style.cursor = '';
-						e.target.style.outline = '';
-						e.target.style.outlineOffset = '';
+					let targetEl = e.target;
+					
+					// Handle headings
+					if (['H1', 'H2', 'H3', 'H4', 'H5', 'H6'].includes(targetEl.tagName)) {
+						targetEl.classList.remove('editable-highlight');
+						if (!targetEl.isContentEditable) {
+							targetEl.style.cursor = '';
+							targetEl.style.outline = '';
+							targetEl.style.outlineOffset = '';
+						}
+						return;
 					}
-					if (e.target.classList.contains('icon-editable')) {
-						e.target.style.outline = '';
-						e.target.style.outlineOffset = '';
+					
+					targetEl.classList.remove('editable-highlight');
+					if (targetEl.classList.contains('editable-link') && !targetEl.isContentEditable) {
+						targetEl.style.cursor = '';
+						targetEl.style.outline = '';
+						targetEl.style.outlineOffset = '';
+					}
+					if (targetEl.classList.contains('icon-editable')) {
+						targetEl.style.outline = '';
+						targetEl.style.outlineOffset = '';
 					}
 				});
 				
@@ -3596,7 +3879,67 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'export_static') {
 		});
 		
 	});
-	
+	const seoFieldMap = {
+		'seoMetaTitle': 'meta_title',
+		'seoMetaDescription': 'meta_description',
+		'seoMetaKeywords': 'meta_keywords',
+		'seoOgTitle': 'og_title',
+		'seoOgDescription': 'og_description',
+		'seoOgImage': 'og_image',
+		'seoCanonicalUrl': 'canonical_url',
+		'seoRobots': 'robots'
+	};
+
+	const seoFieldDefaults = {
+		'robots': 'index, follow'
+	};
+
+	function syncSeoModalFields(copyToModal) {
+		Object.entries(seoFieldMap).forEach(([modalId, hiddenId]) => {
+			const modalEl = document.getElementById(modalId);
+			const hiddenEl = document.getElementById(hiddenId);
+			if (!modalEl || !hiddenEl) return;
+
+			if (copyToModal) {
+				modalEl.value = hiddenEl.value || '';
+				if (modalId === 'seoRobots') {
+					modalEl.value = modalEl.value || (hiddenEl.value || seoFieldDefaults.robots);
+				}
+			} else {
+				const defaultValue = hiddenId === 'robots' ? seoFieldDefaults.robots : '';
+				hiddenEl.value = modalEl.value || defaultValue;
+			}
+		});
+	}
+
+	function openSeoModal() {
+		syncSeoModalFields(true);
+		const modal = document.getElementById('seoModal');
+		if (modal) {
+			modal.style.display = 'flex';
+		}
+	}
+
+	function closeSeoModal() {
+		const modal = document.getElementById('seoModal');
+		if (modal) {
+			modal.style.display = 'none';
+		}
+	}
+
+	function saveSeoSettings() {
+		syncSeoModalFields(false);
+		const saveBtn = document.getElementById('seoModalSaveButton');
+		if (saveBtn) {
+			const originalText = saveBtn.innerHTML;
+			saveBtn.innerHTML = '<i class="fas fa-check mr-2"></i>Saved!';
+			setTimeout(() => {
+				saveBtn.innerHTML = originalText;
+			}, 1500);
+		}
+		closeSeoModal();
+	}
+
 	// Export static page function
 	function exportStaticPage() {
 		if (!currentPageId) {

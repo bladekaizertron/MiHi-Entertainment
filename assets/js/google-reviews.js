@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const sampleReviews = [
         {
             id: 'review-1',
-            author_name: 'Tricia O Mahen Dickey',
+            author_name: 'TRICIA O MAHEN DICKEY',
             rating: 5,
             text: 'The custom photobooth with mosaic wall was a great way to pull through our conference theme, elevate the attendee experience and give our clients a memorable keepsake. I appreciated all of the options available to meet our specific event needs and the staff was wonderful. Highly recommend!',
             time: Date.now() / 1000 - 1551400, // 21 days ago
@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function () {
         },
         {
             id: 'review-2',
-            author_name: 'Ashlee Wagoner',
+            author_name: 'ASHLEE WAGONER',
             rating: 5,
             text: 'We were so pleased to have MiHi at our wedding with their photobooth set up! All our guests loved it, it was a huge hit. The attendant was fabulous as well :)',
             time: Date.now() / 1000 - 2592000, // 1 month ago
@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', function () {
         },
         {
             id: 'review-3',
-            author_name: 'Jill Nord',
+            author_name: 'JILL NORD',
             rating: 5,
             text: 'If I could give more than 5 stars I definitely would!!! Mihi was such a positive addition to our daughter’s wedding! The guests loved it, the attendants were soooo friendly and accommodating, the pics came out quickly and were such great quality!  Absolutely fabulous experience all the way around! There were a few pics of the bride and groom that are totally worthy of hanging on the wall as “the” wedding photo!! Thanks so much!!',
             time: Date.now() / 1000 - 22000, // 1 month ago
