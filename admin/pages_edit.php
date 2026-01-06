@@ -196,13 +196,79 @@ function renderStaticPageHtml($pageData) {
 	$title = htmlspecialchars($pageData['title'] ?? '', ENT_QUOTES, 'UTF-8');
 	$content = $pageData['content_html'] ?? '';
 	$customCss = $pageData['custom_css'] ?? '';
+	
+	// SEO metadata with fallbacks
+	$metaTitle = htmlspecialchars($pageData['meta_title'] ?? $pageData['title'] ?? '', ENT_QUOTES, 'UTF-8');
+	$metaDescription = htmlspecialchars($pageData['meta_description'] ?? '', ENT_QUOTES, 'UTF-8');
+	$metaKeywords = htmlspecialchars($pageData['meta_keywords'] ?? '', ENT_QUOTES, 'UTF-8');
+	$ogTitle = htmlspecialchars($pageData['og_title'] ?? $pageData['title'] ?? '', ENT_QUOTES, 'UTF-8');
+	$ogDescription = htmlspecialchars($pageData['og_description'] ?? $pageData['meta_description'] ?? '', ENT_QUOTES, 'UTF-8');
+	$ogImage = htmlspecialchars($pageData['og_image'] ?? '', ENT_QUOTES, 'UTF-8');
+	$canonicalUrl = htmlspecialchars($pageData['canonical_url'] ?? '', ENT_QUOTES, 'UTF-8');
+	$robots = htmlspecialchars($pageData['robots'] ?? 'index, follow', ENT_QUOTES, 'UTF-8');
+	
 	ob_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title><?php echo $title; ?></title>
+	<title><?php echo $metaTitle; ?></title>
+	
+	<!-- SEO Meta Tags -->
+	<?php if (!empty($metaDescription)): ?>
+	<meta name="description" content="<?php echo $metaDescription; ?>">
+	<?php endif; ?>
+	<?php if (!empty($metaKeywords)): ?>
+	<meta name="keywords" content="<?php echo $metaKeywords; ?>">
+	<?php endif; ?>
+	<meta name="robots" content="<?php echo $robots; ?>">
+	<?php if (!empty($canonicalUrl)): ?>
+	<link rel="canonical" href="<?php echo $canonicalUrl; ?>">
+	<?php endif; ?>
+	
+	<!-- Open Graph / Social Media Meta Tags -->
+	<meta property="og:type" content="website">
+	<meta property="og:title" content="<?php echo $ogTitle; ?>">
+	<?php if (!empty($ogDescription)): ?>
+	<meta property="og:description" content="<?php echo $ogDescription; ?>">
+	<?php endif; ?>
+	<?php if (!empty($ogImage)): ?>
+	<meta property="og:image" content="<?php echo $ogImage; ?>">
+	<?php endif; ?>
+	
+	<!-- Twitter Card Meta Tags -->
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:title" content="<?php echo $ogTitle; ?>">
+	<?php if (!empty($ogDescription)): ?>
+	<meta name="twitter:description" content="<?php echo $ogDescription; ?>">
+	<?php endif; ?>
+	<?php if (!empty($ogImage)): ?>
+	<meta name="twitter:image" content="<?php echo $ogImage; ?>">
+	<?php endif; ?>
+	
+	<?php 
+	// Structured Data (JSON-LD)
+	$structuredData = $pageData['structured_data'] ?? '';
+	if (!empty($structuredData)): 
+		// Validate and output JSON-LD
+		$jsonData = json_decode($structuredData, true);
+		if (json_last_error() === JSON_ERROR_NONE && $jsonData): 
+			// Support both single schema and array of schemas
+			$schemas = isset($jsonData['@type']) ? [$jsonData] : $jsonData;
+			foreach ($schemas as $schema):
+				if (is_array($schema) && isset($schema['@type'])):
+	?>
+	<script type="application/ld+json">
+<?php echo json_encode($schema, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES); ?>
+	</script>
+	<?php 
+				endif;
+			endforeach;
+		endif;
+	endif; 
+	?>
+	
 	<link rel="stylesheet" href="<?php echo $cssHref; ?>">
 	<style>
 		.page-container { max-width: 1280px; margin: 0 auto; padding: 40px 20px 80px; }
@@ -286,6 +352,7 @@ function deleteStaticPage($slug) {
 		$og_image = trim($_POST['og_image'] ?? '');
 		$canonical_url = trim($_POST['canonical_url'] ?? '');
 		$robots = trim($_POST['robots'] ?? 'index, follow');
+		$structured_data = trim($_POST['structured_data'] ?? '');
 		
 		// Handle HTML file save
 		$postFilePath = $_POST['file_path'] ?? '';
@@ -398,7 +465,7 @@ function deleteStaticPage($slug) {
 								SET title = ?, slug = ?, content_html = ?, custom_css = ?, status = ?, 
 								    meta_title = ?, meta_description = ?, meta_keywords = ?,
 								    og_title = ?, og_description = ?, og_image = ?,
-								    canonical_url = ?, robots = ?,
+								    canonical_url = ?, robots = ?, structured_data = ?,
 								    published_at = CASE WHEN ? = 'published' AND published_at IS NULL THEN NOW() ELSE published_at END 
 								WHERE id = ?
 							");
@@ -412,6 +479,7 @@ function deleteStaticPage($slug) {
 								$og_image,
 								$canonical_url,
 								$robots,
+								$structured_data ?: null,
 								$status, $id
 							]);
 							$success = 'Page updated.';
@@ -585,6 +653,232 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'export_static') {
 	exit;
 }
 
+// Save SEO settings to HTML file
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'save_seo_to_html') {
+	header('Content-Type: application/json');
+	$token = $_POST['csrf_token'] ?? '';
+	if (!hash_equals($csrf, $token)) {
+		http_response_code(400);
+		echo json_encode(['success' => false, 'message' => 'Invalid token']);
+		exit;
+	}
+	
+	$filePath = $_POST['file_path'] ?? '';
+	if (empty($filePath)) {
+		http_response_code(400);
+		echo json_encode(['success' => false, 'message' => 'No file path provided']);
+		exit;
+	}
+	
+	// Get SEO data
+	$metaTitle = trim($_POST['meta_title'] ?? '');
+	$metaDescription = trim($_POST['meta_description'] ?? '');
+	$metaKeywords = trim($_POST['meta_keywords'] ?? '');
+	$ogTitle = trim($_POST['og_title'] ?? '');
+	$ogDescription = trim($_POST['og_description'] ?? '');
+	$ogImage = trim($_POST['og_image'] ?? '');
+	$canonicalUrl = trim($_POST['canonical_url'] ?? '');
+	$robots = trim($_POST['robots'] ?? 'index, follow');
+	$structuredData = trim($_POST['structured_data'] ?? '');
+	
+	// Resolve file path
+	$rootDir = dirname(__DIR__);
+	$realRoot = realpath($rootDir);
+	
+	if (!$realRoot) {
+		http_response_code(500);
+		echo json_encode(['success' => false, 'message' => 'Root directory not found']);
+		exit;
+	}
+	
+	// Decode and normalize path
+	$normalizedPath = urldecode($filePath);
+	$normalizedPath = str_replace('\\', '/', $normalizedPath);
+	$normalizedPath = ltrim($normalizedPath, '/');
+	
+	// Ensure .html extension
+	if (substr($normalizedPath, -5) !== '.html') {
+		$normalizedPath .= '.html';
+	}
+	
+	// Try to find the file
+	$possiblePaths = [
+		$realRoot . DIRECTORY_SEPARATOR . str_replace('/', DIRECTORY_SEPARATOR, $normalizedPath),
+		$rootDir . DIRECTORY_SEPARATOR . str_replace('/', DIRECTORY_SEPARATOR, $normalizedPath),
+	];
+	
+	$targetFile = null;
+	foreach ($possiblePaths as $tryPath) {
+		if (file_exists($tryPath) && is_file($tryPath)) {
+			$tryPathNormalized = strtolower(str_replace('\\', '/', $tryPath));
+			$rootNormalized = strtolower(str_replace('\\', '/', $realRoot));
+			if (strpos($tryPathNormalized, $rootNormalized) === 0) {
+				$targetFile = $tryPath;
+				break;
+			}
+		}
+	}
+	
+	if (!$targetFile) {
+		http_response_code(404);
+		echo json_encode(['success' => false, 'message' => 'File not found: ' . htmlspecialchars($normalizedPath)]);
+		exit;
+	}
+	
+	// Read the HTML file
+	$htmlContent = @file_get_contents($targetFile);
+	if ($htmlContent === false) {
+		http_response_code(500);
+		echo json_encode(['success' => false, 'message' => 'Failed to read file']);
+		exit;
+	}
+	
+	// Parse HTML using DOMDocument
+	libxml_use_internal_errors(true);
+	$dom = new DOMDocument();
+	$dom->loadHTML($htmlContent, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+	libxml_clear_errors();
+	
+	$head = $dom->getElementsByTagName('head')->item(0);
+	if (!$head) {
+		http_response_code(500);
+		echo json_encode(['success' => false, 'message' => 'No <head> tag found in HTML']);
+		exit;
+	}
+	
+	// Helper function to update or create meta tag
+	function updateOrCreateMetaTag($dom, $head, $name, $content, $isProperty = false) {
+		if (empty($content)) {
+			// Remove tag if content is empty
+			$attr = $isProperty ? 'property' : 'name';
+			$xpath = new DOMXPath($dom);
+			$nodes = $xpath->query("//meta[@{$attr}='{$name}']");
+			foreach ($nodes as $node) {
+				$node->parentNode->removeChild($node);
+			}
+			return;
+		}
+		
+		$attr = $isProperty ? 'property' : 'name';
+		$xpath = new DOMXPath($dom);
+		$nodes = $xpath->query("//meta[@{$attr}='{$name}']");
+		
+		if ($nodes->length > 0) {
+			// Update existing
+			$nodes->item(0)->setAttribute('content', $content);
+		} else {
+			// Create new
+			$meta = $dom->createElement('meta');
+			$meta->setAttribute($attr, $name);
+			$meta->setAttribute('content', $content);
+			$head->appendChild($dom->createTextNode("\n\t"));
+			$head->appendChild($meta);
+		}
+	}
+	
+	// Update title tag
+	if (!empty($metaTitle)) {
+		$titleTags = $dom->getElementsByTagName('title');
+		if ($titleTags->length > 0) {
+			$titleTags->item(0)->nodeValue = htmlspecialchars($metaTitle, ENT_QUOTES, 'UTF-8');
+		} else {
+			$title = $dom->createElement('title', htmlspecialchars($metaTitle, ENT_QUOTES, 'UTF-8'));
+			$head->insertBefore($title, $head->firstChild);
+			$head->insertBefore($dom->createTextNode("\n\t"), $head->firstChild);
+		}
+	}
+	
+	// Update meta tags
+	updateOrCreateMetaTag($dom, $head, 'description', $metaDescription);
+	updateOrCreateMetaTag($dom, $head, 'keywords', $metaKeywords);
+	updateOrCreateMetaTag($dom, $head, 'robots', $robots);
+	
+	// Update Open Graph tags
+	updateOrCreateMetaTag($dom, $head, 'og:title', $ogTitle, true);
+	updateOrCreateMetaTag($dom, $head, 'og:description', $ogDescription, true);
+	updateOrCreateMetaTag($dom, $head, 'og:image', $ogImage, true);
+	updateOrCreateMetaTag($dom, $head, 'og:type', 'website', true);
+	
+	// Update Twitter Card tags
+	updateOrCreateMetaTag($dom, $head, 'twitter:card', 'summary_large_image');
+	updateOrCreateMetaTag($dom, $head, 'twitter:title', $ogTitle ?: $metaTitle);
+	updateOrCreateMetaTag($dom, $head, 'twitter:description', $ogDescription ?: $metaDescription);
+	updateOrCreateMetaTag($dom, $head, 'twitter:image', $ogImage);
+	
+	// Update canonical URL
+	if (!empty($canonicalUrl)) {
+		$xpath = new DOMXPath($dom);
+		$canonicalTags = $xpath->query("//link[@rel='canonical']");
+		if ($canonicalTags->length > 0) {
+			$canonicalTags->item(0)->setAttribute('href', $canonicalUrl);
+		} else {
+			$link = $dom->createElement('link');
+			$link->setAttribute('rel', 'canonical');
+			$link->setAttribute('href', $canonicalUrl);
+			$head->appendChild($dom->createTextNode("\n\t"));
+			$head->appendChild($link);
+		}
+	}
+	
+	// Update structured data (JSON-LD)
+	// Remove existing JSON-LD scripts
+	$xpath = new DOMXPath($dom);
+	$jsonLdScripts = $xpath->query("//script[@type='application/ld+json']");
+	foreach ($jsonLdScripts as $script) {
+		$script->parentNode->removeChild($script);
+	}
+	
+	// Add new JSON-LD if provided
+	if (!empty($structuredData)) {
+		try {
+			$jsonData = json_decode($structuredData, true);
+			if (json_last_error() === JSON_ERROR_NONE && $jsonData) {
+				// Support both single schema and array of schemas
+				$schemas = isset($jsonData['@type']) ? [$jsonData] : $jsonData;
+				foreach ($schemas as $schema) {
+					if (is_array($schema) && isset($schema['@type'])) {
+						$script = $dom->createElement('script');
+						$script->setAttribute('type', 'application/ld+json');
+						$jsonText = json_encode($schema, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
+						$script->appendChild($dom->createTextNode("\n" . $jsonText . "\n\t"));
+						$head->appendChild($dom->createTextNode("\n\t"));
+						$head->appendChild($script);
+					}
+				}
+			}
+		} catch (Exception $e) {
+			// Invalid JSON, skip
+		}
+	}
+	
+	// Check if file is writable
+	if (!is_writable($targetFile)) {
+		http_response_code(500);
+		echo json_encode([
+			'success' => false, 
+			'message' => 'File is not writable. Please check file permissions: ' . basename($targetFile)
+		]);
+		exit;
+	}
+	
+	// Save the updated HTML
+	$updatedHtml = $dom->saveHTML();
+	$writeResult = @file_put_contents($targetFile, $updatedHtml);
+	
+	if ($writeResult === false) {
+		$error = error_get_last();
+		http_response_code(500);
+		echo json_encode([
+			'success' => false, 
+			'message' => 'Failed to write to file: ' . ($error['message'] ?? 'Unknown error')
+		]);
+		exit;
+	}
+	
+	echo json_encode(['success' => true, 'message' => 'SEO settings saved to HTML file']);
+	exit;
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -733,6 +1027,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'export_static') {
 		.text-image img { width:45%; border-radius:16px; object-fit:cover; flex:1; }
 		.feature-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:16px; }
 		.feature-card { border:1px solid #e5e7eb; border-radius:12px; padding:16px; background:#fff; }
+		/* Notification Toast */
+		.notification-toast { position:fixed; bottom:24px; right:24px; background:#111827; color:#f8fafc; padding:16px 20px; border-radius:12px; box-shadow:0 10px 40px rgba(0,0,0,0.3); z-index:10000; display:flex; align-items:center; gap:12px; min-width:300px; animation:slideIn 0.3s ease-out; }
+		.notification-toast.success { border-left:4px solid #10b981; }
+		.notification-toast.error { border-left:4px solid #ef4444; }
+		.notification-toast.info { border-left:4px solid #3b82f6; }
+		.notification-toast .icon { font-size:20px; }
+		.notification-toast.success .icon { color:#10b981; }
+		.notification-toast.error .icon { color:#ef4444; }
+		.notification-toast.info .icon { color:#3b82f6; }
+		@keyframes slideIn { from { opacity:0; transform:translateX(100px); } to { opacity:1; transform:translateX(0); } }
 	</style>
 </head>
 <body>
@@ -849,6 +1153,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'export_static') {
 			<input type="hidden" name="og_image" id="og_image" value="<?php echo escape($page['og_image'] ?? ''); ?>">
 			<input type="hidden" name="canonical_url" id="canonical_url" value="<?php echo escape($page['canonical_url'] ?? ''); ?>">
 			<input type="hidden" name="robots" id="robots" value="<?php echo escape($page['robots'] ?? 'index, follow'); ?>">
+			<input type="hidden" name="structured_data" id="structured_data" value="<?php echo escape($page['structured_data'] ?? ''); ?>">
 			
 			<!-- SEO Settings Section -->
 			<?php if (!$isFileEdit): ?>
@@ -998,6 +1303,35 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'export_static') {
 							<option value="noindex, nofollow">noindex, nofollow</option>
 						</select>
 					</div>
+				</div>
+
+				<div style="margin-bottom:20px;">
+					<h4 style="margin:0 0 8px; font-size:14px; font-weight:600; color:#f8fafc; display:flex; align-items:center; gap:6px;">
+						<i class="fas fa-code" style="color:#FF4F4F;"></i>
+						Structured Data (JSON-LD)
+					</h4>
+					<p style="font-size:11px; color:#9ca3af; margin:0 0 12px;">Schema.org markup for rich snippets (auto-filled from page)</p>
+					
+					<div style="margin-bottom:14px;">
+						<label style="display:block; font-size:12px; color:#94a3b8; margin-bottom:4px;">JSON-LD Editor</label>
+						<textarea id="structuredDataEditor" rows="10" placeholder='Click "Auto-Fill from Content" to extract existing structured data' style="width:100%; background:#111827; border:1px solid #1f2937; border-radius:8px; color:#f8fafc; padding:10px; font-family:monospace; font-size:11px; resize:vertical;"></textarea>
+						<div style="margin-top:6px; padding:8px; background:#1f2937; border-radius:6px; border-left:3px solid #18F1E1;">
+							<small style="color:#94a3b8; font-size:10px;">
+								<i class="fas fa-info-circle" style="color:#18F1E1;"></i> 
+								<strong>Multiple Schemas:</strong> Wrap multiple schemas in an array: <code style="background:#111827; padding:2px 4px; border-radius:3px;">[{schema1}, {schema2}]</code>
+							</small>
+						</div>
+					</div>
+					
+					<button type="button" onclick="clearStructuredData()" style="width:100%; background:#1f2937; color:#f8fafc; padding:6px 10px; border:1px solid #374151; border-radius:6px; font-size:11px; cursor:pointer;">
+						<i class="fas fa-trash"></i> Clear
+					</button>
+				</div>
+
+				<div style="display:flex; gap:8px; margin-bottom:12px;">
+					<button type="button" onclick="autoFillSeoFromContent()" style="flex:1; background:#667eea; color:#fff; padding:12px; border:none; border-radius:10px; font-weight:600; cursor:pointer; font-size:14px;">
+						<i class="fas fa-magic mr-2"></i>Auto-Fill from Content
+					</button>
 				</div>
 
 				<button id="seoModalSaveButton" type="button" onclick="saveSeoSettings()" style="width:100%; background:#18F1E1; color:#0f172a; padding:12px; border:none; border-radius:10px; font-weight:600; cursor:pointer; font-size:14px;">
@@ -3912,8 +4246,172 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'export_static') {
 		});
 	}
 
+	// Auto-fill SEO from existing meta tags in the page
+	function autoFillSeoFromContent() {
+		try {
+			// Get content from iframe or textarea
+			let contentHtml = '';
+			const iframe = document.getElementById('preview-iframe');
+			if (iframe && iframe.contentDocument) {
+				const iframeDoc = iframe.contentDocument;
+				// Get the entire HTML including head
+				contentHtml = iframeDoc.documentElement.outerHTML;
+			}
+			
+			// Fallback to textarea if iframe is not available
+			if (!contentHtml) {
+				contentHtml = document.getElementById('content_html').value;
+			}
+			
+			// Create a temporary div to parse HTML
+			const parser = new DOMParser();
+			const doc = parser.parseFromString(contentHtml, 'text/html');
+			
+			// Extract existing meta tags from head (NO FALLBACKS - only existing tags)
+			let metaTitle = '';
+			let metaDescription = '';
+			let metaKeywords = '';
+			let ogTitle = '';
+			let ogDescription = '';
+			let ogImage = '';
+			let canonicalUrl = '';
+			let robots = '';
+			
+			// Extract meta title from <title> tag
+			const titleTag = doc.querySelector('title');
+			if (titleTag) {
+				metaTitle = titleTag.textContent.trim();
+			}
+			
+			// Extract meta description
+			const metaDescTag = doc.querySelector('meta[name="description"]');
+			if (metaDescTag) {
+				metaDescription = metaDescTag.getAttribute('content') || '';
+			}
+			
+			// Extract meta keywords
+			const metaKeywordsTag = doc.querySelector('meta[name="keywords"]');
+			if (metaKeywordsTag) {
+				metaKeywords = metaKeywordsTag.getAttribute('content') || '';
+			}
+			
+			// Extract robots meta tag
+			const robotsTag = doc.querySelector('meta[name="robots"]');
+			if (robotsTag) {
+				robots = robotsTag.getAttribute('content') || '';
+			}
+			
+			// Extract canonical URL
+			const canonicalTag = doc.querySelector('link[rel="canonical"]');
+			if (canonicalTag) {
+				canonicalUrl = canonicalTag.getAttribute('href') || '';
+			}
+			
+			// Extract Open Graph tags
+			const ogTitleTag = doc.querySelector('meta[property="og:title"]');
+			if (ogTitleTag) {
+				ogTitle = ogTitleTag.getAttribute('content') || '';
+			}
+			
+			const ogDescTag = doc.querySelector('meta[property="og:description"]');
+			if (ogDescTag) {
+				ogDescription = ogDescTag.getAttribute('content') || '';
+			}
+			
+			const ogImageTag = doc.querySelector('meta[property="og:image"]');
+			if (ogImageTag) {
+				ogImage = ogImageTag.getAttribute('content') || '';
+			}
+			
+			// Extract Structured Data (JSON-LD)
+			let structuredData = '';
+			const jsonLdScripts = doc.querySelectorAll('script[type="application/ld+json"]');
+			if (jsonLdScripts.length > 0) {
+				const schemas = [];
+				jsonLdScripts.forEach(script => {
+					try {
+						const jsonText = script.textContent.trim();
+						if (jsonText) {
+							const parsed = JSON.parse(jsonText);
+							schemas.push(parsed);
+						}
+					} catch (e) {
+						console.warn('Failed to parse JSON-LD:', e);
+					}
+				});
+				
+				if (schemas.length > 0) {
+					// If single schema, store as object; if multiple, store as array
+					structuredData = schemas.length === 1 ? JSON.stringify(schemas[0]) : JSON.stringify(schemas);
+				}
+			}
+			
+			// Populate modal fields with ONLY existing values (no generation)
+			document.getElementById('seoMetaTitle').value = metaTitle;
+			document.getElementById('seoMetaDescription').value = metaDescription;
+			document.getElementById('seoMetaKeywords').value = metaKeywords;
+			document.getElementById('seoOgTitle').value = ogTitle;
+			document.getElementById('seoOgDescription').value = ogDescription;
+			document.getElementById('seoOgImage').value = ogImage;
+			document.getElementById('seoCanonicalUrl').value = canonicalUrl;
+			document.getElementById('seoRobots').value = robots || 'index, follow';
+			
+			// Populate structured data editor
+			const structuredDataEditor = document.getElementById('structuredDataEditor');
+			if (structuredDataEditor && structuredData) {
+				try {
+					const parsed = JSON.parse(structuredData);
+					structuredDataEditor.value = JSON.stringify(parsed, null, 2);
+				} catch (e) {
+					structuredDataEditor.value = structuredData;
+				}
+			}
+			
+			// Show success feedback
+			const btn = event.target.closest('button');
+			if (btn) {
+				const originalText = btn.innerHTML;
+				btn.innerHTML = '<i class="fas fa-check mr-2"></i>Retrieved!';
+				btn.style.background = '#10b981';
+				setTimeout(() => {
+					btn.innerHTML = originalText;
+					btn.style.background = '#667eea';
+				}, 1500);
+			}
+			
+		} catch (err) {
+			console.error('Error retrieving SEO:', err);
+			alert('Could not retrieve SEO fields from page.');
+		}
+	}
+
 	function openSeoModal() {
+		// First sync existing saved values
 		syncSeoModalFields(true);
+		
+		// Load structured data into editor
+		const structuredDataField = document.getElementById('structured_data');
+		const structuredDataEditor = document.getElementById('structuredDataEditor');
+		if (structuredDataField && structuredDataEditor) {
+			const data = structuredDataField.value;
+			if (data) {
+				try {
+					// Pretty print the JSON
+					const parsed = JSON.parse(data);
+					structuredDataEditor.value = JSON.stringify(parsed, null, 2);
+				} catch (e) {
+					structuredDataEditor.value = data;
+				}
+			}
+		}
+		
+		// Auto-fill from page content if fields are empty
+		const metaTitleField = document.getElementById('seoMetaTitle');
+		if (metaTitleField && !metaTitleField.value.trim()) {
+			// If SEO fields are empty, auto-extract from page
+			autoExtractSeoFromPage();
+		}
+		
 		const modal = document.getElementById('seoModal');
 		if (modal) {
 			modal.style.display = 'flex';
@@ -3927,17 +4425,339 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'export_static') {
 		}
 	}
 
-	function saveSeoSettings() {
-		syncSeoModalFields(false);
-		const saveBtn = document.getElementById('seoModalSaveButton');
-		if (saveBtn) {
-			const originalText = saveBtn.innerHTML;
-			saveBtn.innerHTML = '<i class="fas fa-check mr-2"></i>Saved!';
-			setTimeout(() => {
-				saveBtn.innerHTML = originalText;
-			}, 1500);
+	// Auto-extract SEO from page (called automatically on modal open)
+	function autoExtractSeoFromPage() {
+		try {
+			// Get content from iframe or textarea
+			let contentHtml = '';
+			const iframe = document.getElementById('preview-iframe');
+			if (iframe && iframe.contentDocument) {
+				const iframeDoc = iframe.contentDocument;
+				// Get the entire HTML including head
+				contentHtml = iframeDoc.documentElement.outerHTML;
+			}
+			
+			// Fallback to textarea if iframe is not available
+			if (!contentHtml) {
+				contentHtml = document.getElementById('content_html').value;
+			}
+			
+			// Create a temporary div to parse HTML
+			const parser = new DOMParser();
+			const doc = parser.parseFromString(contentHtml, 'text/html');
+			
+			// Extract existing meta tags from head (NO FALLBACKS - only existing tags)
+			let metaTitle = '';
+			let metaDescription = '';
+			let metaKeywords = '';
+			let ogTitle = '';
+			let ogDescription = '';
+			let ogImage = '';
+			let canonicalUrl = '';
+			let robots = '';
+			
+			// Extract meta title from <title> tag
+			const titleTag = doc.querySelector('title');
+			if (titleTag) {
+				metaTitle = titleTag.textContent.trim();
+			}
+			
+			// Extract meta description
+			const metaDescTag = doc.querySelector('meta[name="description"]');
+			if (metaDescTag) {
+				metaDescription = metaDescTag.getAttribute('content') || '';
+			}
+			
+			// Extract meta keywords
+			const metaKeywordsTag = doc.querySelector('meta[name="keywords"]');
+			if (metaKeywordsTag) {
+				metaKeywords = metaKeywordsTag.getAttribute('content') || '';
+			}
+			
+			// Extract robots meta tag
+			const robotsTag = doc.querySelector('meta[name="robots"]');
+			if (robotsTag) {
+				robots = robotsTag.getAttribute('content') || '';
+			}
+			
+			// Extract canonical URL
+			const canonicalTag = doc.querySelector('link[rel="canonical"]');
+			if (canonicalTag) {
+				canonicalUrl = canonicalTag.getAttribute('href') || '';
+			}
+			
+			// Extract Open Graph tags
+			const ogTitleTag = doc.querySelector('meta[property="og:title"]');
+			if (ogTitleTag) {
+				ogTitle = ogTitleTag.getAttribute('content') || '';
+			}
+			
+			const ogDescTag = doc.querySelector('meta[property="og:description"]');
+			if (ogDescTag) {
+				ogDescription = ogDescTag.getAttribute('content') || '';
+			}
+			
+			const ogImageTag = doc.querySelector('meta[property="og:image"]');
+			if (ogImageTag) {
+				ogImage = ogImageTag.getAttribute('content') || '';
+			}
+			
+			// Extract Structured Data (JSON-LD)
+			let structuredData = '';
+			const jsonLdScripts = doc.querySelectorAll('script[type="application/ld+json"]');
+			if (jsonLdScripts.length > 0) {
+				const schemas = [];
+				jsonLdScripts.forEach(script => {
+					try {
+						const jsonText = script.textContent.trim();
+						if (jsonText) {
+							const parsed = JSON.parse(jsonText);
+							schemas.push(parsed);
+						}
+					} catch (e) {
+						console.warn('Failed to parse JSON-LD:', e);
+					}
+				});
+				
+				if (schemas.length > 0) {
+					// If single schema, store as object; if multiple, store as array
+					structuredData = schemas.length === 1 ? JSON.stringify(schemas[0]) : JSON.stringify(schemas);
+				}
+			}
+			
+			// Populate modal fields with ONLY existing values (no generation)
+			if (metaTitle) document.getElementById('seoMetaTitle').value = metaTitle;
+			if (metaDescription) document.getElementById('seoMetaDescription').value = metaDescription;
+			if (metaKeywords) document.getElementById('seoMetaKeywords').value = metaKeywords;
+			if (ogTitle) document.getElementById('seoOgTitle').value = ogTitle;
+			if (ogDescription) document.getElementById('seoOgDescription').value = ogDescription;
+			if (ogImage) document.getElementById('seoOgImage').value = ogImage;
+			if (canonicalUrl) document.getElementById('seoCanonicalUrl').value = canonicalUrl;
+			if (robots) document.getElementById('seoRobots').value = robots;
+			
+			// Populate structured data editor
+			const structuredDataEditor = document.getElementById('structuredDataEditor');
+			if (structuredDataEditor && structuredData) {
+				try {
+					const parsed = JSON.parse(structuredData);
+					structuredDataEditor.value = JSON.stringify(parsed, null, 2);
+				} catch (e) {
+					structuredDataEditor.value = structuredData;
+				}
+			}
+			
+		} catch (err) {
+			console.error('Error auto-extracting SEO:', err);
 		}
-		closeSeoModal();
+	}
+
+	// Notification System
+	function showNotification(message, type = 'info') {
+		const notification = document.createElement('div');
+		notification.className = `notification-toast ${type}`;
+		
+		const iconMap = {
+			'success': 'fa-check-circle',
+			'error': 'fa-exclamation-circle',
+			'info': 'fa-info-circle'
+		};
+		
+		notification.innerHTML = `
+			<div class="icon"><i class="fas ${iconMap[type]}"></i></div>
+			<div>${message}</div>
+		`;
+		
+		document.body.appendChild(notification);
+		
+		// Auto-dismiss after 3 seconds
+		setTimeout(() => {
+			notification.style.opacity = '0';
+			notification.style.transform = 'translateX(100px)';
+			setTimeout(() => {
+				document.body.removeChild(notification);
+			}, 300);
+		}, 3000);
+	}
+
+	// Structured Data Functions
+	function insertSchemaTemplate(schemaType) {
+		if (!schemaType) return;
+		
+		const templates = {
+			'Service': {
+				"@context": "https://schema.org",
+				"@type": "Service",
+				"name": "Service Name",
+				"description": "Service description",
+				"provider": {
+					"@type": "Organization",
+					"name": "MiHi Entertainment"
+				},
+				"serviceType": "Audio Visual Services",
+				"areaServed": "Philippines"
+			},
+			'BreadcrumbList': {
+				"@context": "https://schema.org",
+				"@type": "BreadcrumbList",
+				"itemListElement": [
+					{
+						"@type": "ListItem",
+						"position": 1,
+						"name": "Home",
+						"item": "<?php echo SITE_URL; ?>"
+					},
+					{
+						"@type": "ListItem",
+						"position": 2,
+						"name": "Page Name",
+						"item": "<?php echo SITE_URL; ?>/page-url"
+					}
+				]
+			},
+			'Organization': {
+				"@context": "https://schema.org",
+				"@type": "Organization",
+				"name": "MiHi Entertainment",
+				"url": "<?php echo SITE_URL; ?>",
+				"logo": "<?php echo SITE_URL; ?>/path/to/logo.png",
+				"contactPoint": {
+					"@type": "ContactPoint",
+					"telephone": "+63-XXX-XXX-XXXX",
+					"contactType": "customer service"
+				},
+				"sameAs": [
+					"https://www.facebook.com/yourpage",
+					"https://www.instagram.com/yourpage"
+				]
+			},
+			'WebPage': {
+				"@context": "https://schema.org",
+				"@type": "WebPage",
+				"name": "Page Title",
+				"description": "Page description",
+				"url": "<?php echo SITE_URL; ?>/page-url"
+			},
+			'FAQPage': {
+				"@context": "https://schema.org",
+				"@type": "FAQPage",
+				"mainEntity": [
+					{
+						"@type": "Question",
+						"name": "What services do you offer?",
+						"acceptedAnswer": {
+							"@type": "Answer",
+							"text": "We offer comprehensive audio-visual services including..."
+						}
+					},
+					{
+						"@type": "Question",
+						"name": "How can I contact you?",
+						"acceptedAnswer": {
+							"@type": "Answer",
+							"text": "You can contact us via phone, email, or our contact form..."
+						}
+					}
+				]
+			}
+		};
+		
+		const template = templates[schemaType];
+		if (template) {
+			document.getElementById('structuredDataEditor').value = JSON.stringify(template, null, 2);
+		}
+	}
+	
+	function validateStructuredData() {
+		const editor = document.getElementById('structuredDataEditor');
+		const jsonText = editor.value.trim();
+		
+		if (!jsonText) {
+			alert('No structured data to validate');
+			return;
+		}
+		
+		try {
+			const parsed = JSON.parse(jsonText);
+			
+			// Basic validation
+			if (!parsed['@context'] || !parsed['@type']) {
+				alert('Warning: JSON-LD should include @context and @type properties');
+				return;
+			}
+			
+			alert('✓ Valid JSON-LD!\n\nSchema Type: ' + parsed['@type']);
+		} catch (e) {
+			alert('✗ Invalid JSON:\n\n' + e.message);
+		}
+	}
+	
+	function clearStructuredData() {
+		if (confirm('Clear all structured data?')) {
+			document.getElementById('structuredDataEditor').value = '';
+		}
+	}
+
+	function saveSeoSettings() {
+		// Save structured data from editor to hidden field first
+		const structuredDataEditor = document.getElementById('structuredDataEditor');
+		const structuredDataField = document.getElementById('structured_data');
+		let structuredDataJson = '';
+		
+		if (structuredDataEditor && structuredDataField) {
+			const jsonText = structuredDataEditor.value.trim();
+			if (jsonText) {
+				try {
+					// Validate and minify JSON before saving
+					const parsed = JSON.parse(jsonText);
+					structuredDataJson = JSON.stringify(parsed);
+					structuredDataField.value = structuredDataJson;
+				} catch (e) {
+					showNotification('Invalid JSON in structured data. Please fix and try again.', 'error');
+					return;
+				}
+			} else {
+				structuredDataField.value = '';
+			}
+		}
+		
+		// Show loading notification
+		showNotification('Saving SEO settings...', 'info');
+		
+		// Prepare form data
+		const formData = new FormData();
+		formData.append('csrf_token', csrfToken);
+		formData.append('action', 'save_seo_to_html');
+		formData.append('file_path', pageUrl);
+		formData.append('meta_title', document.getElementById('seoMetaTitle').value);
+		formData.append('meta_description', document.getElementById('seoMetaDescription').value);
+		formData.append('meta_keywords', document.getElementById('seoMetaKeywords').value);
+		formData.append('og_title', document.getElementById('seoOgTitle').value);
+		formData.append('og_description', document.getElementById('seoOgDescription').value);
+		formData.append('og_image', document.getElementById('seoOgImage').value);
+		formData.append('canonical_url', document.getElementById('seoCanonicalUrl').value);
+		formData.append('robots', document.getElementById('seoRobots').value);
+		formData.append('structured_data', structuredDataJson);
+		
+		// Send AJAX request
+		fetch(window.location.href, {
+			method: 'POST',
+			body: formData
+		})
+		.then(response => response.json())
+		.then(data => {
+			if (data.success) {
+				showNotification('✓ SEO settings saved successfully!', 'success');
+				// Sync to hidden fields for form submission
+				syncSeoModalFields(false);
+				closeSeoModal();
+			} else {
+				showNotification('Error: ' + (data.message || 'Failed to save SEO settings'), 'error');
+			}
+		})
+		.catch(error => {
+			console.error('Error saving SEO:', error);
+			showNotification('Failed to save SEO settings. Check console for details.', 'error');
+		});
 	}
 
 	// Export static page function

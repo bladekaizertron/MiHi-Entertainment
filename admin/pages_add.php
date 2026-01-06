@@ -9,7 +9,9 @@ header('X-Content-Type-Options: nosniff');
 require_once __DIR__ . '/../config/config.php';
 
 if (!function_exists('escape')) {
-    function escape($string) { return htmlspecialchars($string ?? '', ENT_QUOTES, 'UTF-8'); }
+    function escape($string) {
+        return htmlspecialchars($string, ENT_QUOTES, 'UTF-8');
+    }
 }
 
 requireLogin();
@@ -21,6 +23,87 @@ if (!in_array(strtolower($currentUser['role'] ?? ''), ['admin','editor'], true))
 $db = getDB();
 $csrf = $_SESSION['csrf_token'] ?? ($_SESSION['csrf_token'] = bin2hex(random_bytes(32)));
 $error = '';
+
+// Handle video upload
+$action = $_POST['action'] ?? $_GET['action'] ?? '';
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'upload_video') {
+    // Suppress all errors and warnings for clean JSON output
+    error_reporting(0);
+    ini_set('display_errors', 0);
+    
+    // Clear and disable output buffering
+    while (ob_get_level()) {
+        ob_end_clean();
+    }
+    
+    header('Content-Type: application/json');
+    
+    try {
+        $token = $_POST['csrf_token'] ?? '';
+        if (!hash_equals($csrf, $token)) {
+            http_response_code(400);
+            echo json_encode(['success' => false, 'message' => 'Invalid token']);
+            exit;
+        }
+        
+        if (!isset($_FILES['file']) || $_FILES['file']['error'] !== UPLOAD_ERR_OK) {
+            http_response_code(400);
+            echo json_encode(['success' => false, 'message' => 'No file uploaded or upload error']);
+            exit;
+        }
+        
+        $file = $_FILES['file'];
+        $finfo = finfo_open(FILEINFO_MIME_TYPE);
+        $mimeType = finfo_file($finfo, $file['tmp_name']);
+        finfo_close($finfo);
+        
+        // Validate video file type
+        $allowedTypes = ['video/mp4', 'video/webm', 'video/ogg', 'video/quicktime', 'video/x-msvideo'];
+        if (!in_array($mimeType, $allowedTypes)) {
+            http_response_code(400);
+            echo json_encode(['success' => false, 'message' => 'Invalid file type. Only video files allowed (MP4, WebM, OGG, MOV, AVI).']);
+            exit;
+        }
+        
+        // Check file size (max 100MB)
+        $maxSize = 100 * 1024 * 1024; // 100MB in bytes
+        if ($file['size'] > $maxSize) {
+            http_response_code(400);
+            echo json_encode(['success' => false, 'message' => 'File too large. Maximum size is 100MB.']);
+            exit;
+        }
+        
+        // Get file extension
+        $ext = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
+        if (!in_array($ext, ['mp4', 'webm', 'ogg', 'mov', 'avi'])) {
+            $ext = 'mp4'; // Default to mp4
+        }
+        
+        // Create upload directory if it doesn't exist
+        $uploadDir = __DIR__ . '/../uploads/videos/';
+        if (!file_exists($uploadDir)) {
+            mkdir($uploadDir, 0755, true);
+        }
+        
+        // Generate unique filename
+        $filename = 'video_' . uniqid() . '.' . $ext;
+        $destination = $uploadDir . $filename;
+        
+        // Move uploaded file
+        if (move_uploaded_file($file['tmp_name'], $destination)) {
+            // Use relative path from project root instead of SITE_URL
+            $url = '/MiHi-Entertainment/uploads/videos/' . $filename;
+            echo json_encode(['success' => true, 'url' => $url, 'type' => 'video']);
+        } else {
+            http_response_code(500);
+            echo json_encode(['success' => false, 'message' => 'Failed to save file.']);
+        }
+    } catch (Exception $e) {
+        http_response_code(500);
+        echo json_encode(['success' => false, 'message' => 'Server error: ' . $e->getMessage()]);
+    }
+    exit;
+}
 
 // Function to build complete HTML document
 function buildCompleteHTML($title, $content, $meta_title, $meta_description, $meta_keywords, $og_title, $og_description, $og_image, $canonical_url, $robots) {
@@ -487,11 +570,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     <!-- Hero Section Template -->
     <script type="text/template" id="tpl-hero">
-<section data-editable class="relative bg-gradient-to-br from-[#0f0a1a] via-[#1d1130] to-[#2a133d] text-white py-24 px-6 text-center overflow-hidden">
+<section data-editable class="relative text-white py-24 px-6 text-center overflow-hidden">
+    <!-- Background Image Container -->
+    <div class="absolute inset-0 hero-background-container">
+        <!-- Default gradient background -->
+        <div class="absolute inset-0 bg-gradient-to-br from-[#0f0a1a] via-[#1d1130] to-[#2a133d]"></div>
+        <!-- Background image (hidden by default) -->
+        <img src="" alt="" class="absolute inset-0 w-full h-full object-cover hidden hero-background-image">
+    </div>
+    
+    <!-- Gradient overlay for text readability -->
+    <div class="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/40"></div>
+    
+    <!-- Decorative blobs -->
     <div class="absolute inset-0 pointer-events-none">
         <div class="absolute -top-40 -right-20 w-80 h-80 bg-pink-500/25 rounded-full blur-3xl"></div>
         <div class="absolute top-1/2 -left-32 w-72 h-72 bg-purple-500/20 rounded-full blur-[110px]"></div>
     </div>
+    
     <div class="relative max-w-6xl mx-auto">
         
         <h1 contenteditable="true" class="text-5xl md:text-7xl font-bold mb-6 outline-none leading-tight" style="font-family: 'Azo Sans Uber', sans-serif; font-weight: 400; text-transform: uppercase; letter-spacing: 0.02em; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;">
@@ -657,7 +753,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <!-- Video Section Template -->
     <script type="text/template" id="tpl-video">
-<section data-editable class="relative overflow-hidden bg-gradient-to-r from-[#1F1F1F] via-[#1F1F1F] to-[#1F1F1F] text-white py-20 px-6">
+<section data-editable class="relative overflow-hidden bg-gradient-to-r from-[#1F1F1F] via-[#1F1F1F] to-[#1F1F1F] text-white py-20 px-6" data-video-section>
     <div class="absolute inset-0 pointer-events-none">
         <div class="absolute top-10 left-1/2 -translate-x-1/2 w-[90%] h-full bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.15),transparent_60%)]"></div>
     </div>
@@ -666,41 +762,150 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <h2 contenteditable="true" class="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 outline-none" style="font-family: 'Azo Sans Uber', sans-serif; font-weight: 400; color: #18F1E1; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;">Video Showcase</h2>
             <p contenteditable="true" class="text-base md:text-lg text-white/85 leading-relaxed max-w-3xl mx-auto outline-none">Create share-worthy videos that capture the energy and emotion of your event.</p>
         </div>
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <div class="bg-white/10 border border-white/15 rounded-3xl overflow-hidden backdrop-blur transition-all duration-300 hover:-translate-y-1">
-                <div class="aspect-video overflow-hidden bg-black/50 flex items-center justify-center">
-                    <span class="text-white/50">Video Placeholder</span>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6" id="video-cards-container">
+            <!-- Initial video card -->
+            <div class="video-card-item bg-white/10 border border-white/15 rounded-3xl overflow-hidden backdrop-blur transition-all duration-300 hover:-translate-y-1 relative group">
+                <div class="aspect-video overflow-hidden bg-black/50 flex items-center justify-center relative video-player-container">
+                    <span class="text-white/50 video-placeholder">Video Placeholder</span>
+                    <video class="w-full h-full object-cover hidden video-element" controls></video>
+                    <div class="w-full h-full hidden iframe-wrapper absolute inset-0"></div>
+                    
+                    <!-- Hover overlay for changing/removing video -->
+                    <div class="absolute inset-0 bg-black/70 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-center justify-center gap-3 z-10">
+                        <button onclick="changeVideoInCard(this)" class="bg-[#18F1E1] hover:bg-[#15D9C9] text-black px-4 py-2 rounded-lg font-semibold text-sm flex items-center gap-2 transition-colors">
+                            <i class="fas fa-video"></i> Change Video
+                        </button>
+                        <button onclick="removeVideoCard(this)" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg font-semibold text-sm flex items-center gap-2 transition-colors">
+                            <i class="fas fa-trash"></i> Remove
+                        </button>
+                    </div>
                 </div>
                 <div class="p-6">
-                    <h4 contenteditable="true" class="text-xl font-semibold mb-2 outline-none" style="color: #18F1E1;">Video Title</h4>
+                    <h4 contenteditable="true" class="text-xl font-semibold mb-2 outline-none" style="color: #18F1E1; font-family: 'Azo Sans', sans-serif;">Video Title</h4>
                     <p contenteditable="true" class="text-sm text-white/70 mb-4 leading-relaxed outline-none">Video description goes here.</p>
-                    <a href="#" class="inline-flex items-center rounded-full bg-[#FF4F4F] px-5 py-2 text-white font-semibold hover:bg-[#FF3838] transition-colors">Watch Now</a>
-                </div>
-            </div>
-            <div class="bg-white/10 border border-white/15 rounded-3xl overflow-hidden backdrop-blur transition-all duration-300 hover:-translate-y-1">
-                <div class="aspect-video overflow-hidden bg-black/50 flex items-center justify-center">
-                    <span class="text-white/50">Video Placeholder</span>
-                </div>
-                <div class="p-6">
-                    <h4 contenteditable="true" class="text-xl font-semibold mb-2 outline-none" style="color: #18F1E1;">Video Title</h4>
-                    <p contenteditable="true" class="text-sm text-white/70 mb-4 leading-relaxed outline-none">Video description goes here.</p>
-                    <a href="#" class="inline-flex items-center rounded-full bg-[#FF4F4F] px-5 py-2 text-white font-semibold hover:bg-[#FF3838] transition-colors">Watch Now</a>
-                </div>
-            </div>
-            <div class="bg-white/10 border border-white/15 rounded-3xl overflow-hidden backdrop-blur transition-all duration-300 hover:-translate-y-1">
-                <div class="aspect-video overflow-hidden bg-black/50 flex items-center justify-center">
-                    <span class="text-white/50">Video Placeholder</span>
-                </div>
-                <div class="p-6">
-                    <h4 contenteditable="true" class="text-xl font-semibold mb-2 outline-none" style="color: #18F1E1;">Video Title</h4>
-                    <p contenteditable="true" class="text-sm text-white/70 mb-4 leading-relaxed outline-none">Video description goes here.</p>
-                    <a href="#" class="inline-flex items-center rounded-full bg-[#FF4F4F] px-5 py-2 text-white font-semibold hover:bg-[#FF3838] transition-colors">Watch Now</a>
+                    <a href="#" onclick="openVideoModal(event, this)" class="inline-flex items-center rounded-full bg-[#FF4F4F] px-5 py-2 text-white font-semibold hover:bg-[#FF3838] transition-colors">Watch Now</a>
                 </div>
             </div>
         </div>
+        
+        <!-- Add Video Card Button -->
+        <div class="mt-8 text-center">
+            <button onclick="addVideoCard(this)" class="inline-flex items-center gap-2 px-6 py-3 rounded-full border-2 border-dashed border-[#18F1E1]/50 text-[#18F1E1] hover:bg-[#18F1E1]/10 hover:border-[#18F1E1] transition-all duration-300">
+                <i class="fas fa-plus-circle"></i>
+                <span>Add Video Card</span>
+            </button>
+        </div>
     </div>
+    
+    <!-- Fullscreen Video Modal -->
+    <div id="videoModal" class="fixed inset-0 bg-black/95 z-50 hidden flex items-center justify-center p-4" onclick="closeVideoModal(event)">
+        <button onclick="closeVideoModal(event)" class="absolute top-4 right-4 text-white hover:text-[#18F1E1] transition-colors z-10">
+            <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+        </button>
+        <div class="w-full max-w-6xl aspect-video" onclick="event.stopPropagation()">
+            <div id="videoModalContent" class="w-full h-full"></div>
+        </div>
+    </div>
+    
+    <script>
+        function openVideoModal(event, button) {
+            event.preventDefault();
+            
+            // Find the video card
+            const card = button.closest('.video-card-item');
+            if (!card) return;
+            
+            // Get the video element or iframe
+            const videoElement = card.querySelector('.video-element');
+            const iframeWrapper = card.querySelector('.iframe-wrapper');
+            const modal = document.getElementById('videoModal');
+            const modalContent = document.getElementById('videoModalContent');
+            
+            // Clear previous content
+            modalContent.innerHTML = '';
+            
+            console.log('=== DEBUG: openVideoModal ===');
+            console.log('videoElement:', videoElement);
+            console.log('videoElement.src:', videoElement?.src);
+            console.log('videoElement.getAttribute("src"):', videoElement?.getAttribute('src'));
+            console.log('iframeWrapper:', iframeWrapper);
+            console.log('iframeWrapper.innerHTML:', iframeWrapper?.innerHTML);
+            
+            // Clone and insert the video or iframe
+            // Check the actual src attribute, not the resolved property
+            const videoSrc = videoElement?.getAttribute('src');
+            if (videoElement && videoSrc && videoSrc.trim() !== '') {
+                console.log('Using VIDEO element');
+                const videoClone = videoElement.cloneNode(true);
+                videoClone.classList.remove('hidden');
+                videoClone.classList.add('w-full', 'h-full');
+                videoClone.autoplay = true;
+                modalContent.appendChild(videoClone);
+            } else if (iframeWrapper && iframeWrapper.innerHTML.trim()) {
+                console.log('Using IFRAME wrapper');
+                // Get the iframe from the wrapper
+                const iframe = iframeWrapper.querySelector('iframe');
+                console.log('Found iframe:', iframe);
+                if (iframe) {
+                    const iframeClone = iframe.cloneNode(true);
+                    iframeClone.classList.add('w-full', 'h-full');
+                    // Enable autoplay for YouTube/Vimeo
+                    const src = iframeClone.src;
+                    console.log('iframe src:', src);
+                    if (src.includes('youtube.com')) {
+                        iframeClone.src = src + (src.includes('?') ? '&' : '?') + 'autoplay=1';
+                    } else if (src.includes('vimeo.com')) {
+                        iframeClone.src = src + (src.includes('?') ? '&' : '?') + 'autoplay=1';
+                    }
+                    console.log('Appending iframe to modal');
+                    modalContent.appendChild(iframeClone);
+                } else {
+                    console.log('ERROR: No iframe found in wrapper!');
+                }
+            } else {
+                console.log('ERROR: No valid video or iframe found!');
+            }
+            
+            console.log('modalContent after:', modalContent.innerHTML);
+            
+            // Show modal
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeVideoModal(event) {
+            if (event) event.preventDefault();
+            
+            const modal = document.getElementById('videoModal');
+            const modalContent = document.getElementById('videoModalContent');
+            
+            // Stop video playback
+            const video = modalContent.querySelector('video');
+            if (video) {
+                video.pause();
+                video.currentTime = 0;
+            }
+            
+            // Clear content
+            modalContent.innerHTML = '';
+            
+            // Hide modal
+            modal.classList.add('hidden');
+            document.body.style.overflow = '';
+        }
+        
+        // Close on Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeVideoModal();
+            }
+        });
+    </script>
 </section>
     </script>
+
 
     <!-- Iframe Template -->
     <script type="text/template" id="iframeTemplate">
@@ -850,6 +1055,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </script>
 
     <script>
+        const csrfToken = '<?php echo $csrf; ?>';
         const iframe = document.getElementById('editorFrame');
         let selectedElement = null; // The DOM element inside the iframe currently selected
 
@@ -1188,6 +1394,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <span class="text-xs font-bold text-[#18F1E1] uppercase">${typeLabel}</span>
                     <button onclick="deleteSelected()" class="text-xs text-[#FF4F4F] hover:text-red-300"><i class="fas fa-trash"></i> Delete</button>
                 </div>
+
+                ${typeLabel === "Hero Section" ? `
+                <div class="mb-4 border-t border-zinc-700 pt-4">
+                    <label class="block text-xs text-zinc-500 mb-2">Background</label>
+                    <button onclick="changeHeroBackgroundFromInspector()" class="w-full bg-[#18F1E1] hover:bg-[#15D9C9] text-black px-3 py-2 rounded text-xs font-semibold transition-colors flex items-center justify-center gap-2">
+                        <i class="fas fa-image"></i> Change Background
+                    </button>
+                </div>
+                ` : ''}
 
                 ${isMediaElement ? `
                 <div class="mb-4 border-t border-zinc-700 pt-4">
@@ -1939,45 +2154,52 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
             
             const file = fileInput.files[0];
-            const maxSize = 10 * 1024 * 1024; // 10MB
+            const isVideo = file.type.startsWith('video/');
+            const isImage = file.type.startsWith('image/');
             
+            if (!isVideo && !isImage) {
+                alert('Only image and video files are supported for upload.');
+                return;
+            }
+            
+            // Different size limits for images and videos
+            const maxSize = isVideo ? (100 * 1024 * 1024) : (10 * 1024 * 1024); // 100MB for videos, 10MB for images
             if (file.size > maxSize) {
-                alert('File is too large. Maximum size is 10MB.');
-                return;
-            }
-            
-            // Check if it's a video file - videos should use URL tab instead
-            if (file.type.startsWith('video/')) {
-                alert('Video uploads are not supported. Please use the URL tab to insert videos from YouTube, Vimeo, or direct video URLs.');
-                return;
-            }
-            
-            // Only images are supported for upload
-            if (!file.type.startsWith('image/')) {
-                alert('Only image files are supported for upload. Please use the URL tab for other media types.');
+                alert(`File is too large. Maximum size is ${isVideo ? '100MB' : '10MB'}.`);
                 return;
             }
             
             const formData = new FormData();
-            formData.append('upload', file);
+            // Use 'upload' for images (upload_image.php expects this), 'file' for videos
+            formData.append(isVideo ? 'file' : 'upload', file);
+            formData.append('csrf_token', csrfToken);
+            formData.append('action', isVideo ? 'upload_video' : 'upload_image');
             
-            const btn = event.target;
+            const btn = document.querySelector('#mediaTabUpload button[onclick="handleMediaUpload()"]');
+            if (!btn) {
+                alert('Upload button not found');
+                return;
+            }
+            
             const originalHTML = btn.innerHTML;
             btn.disabled = true;
             btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Uploading...';
             
-            fetch('/MiHi-Entertainment/admin/upload_image.php', {
+            // Use different endpoint based on file type
+            const uploadUrl = isVideo ? window.location.href : '/MiHi-Entertainment/admin/upload_image.php';
+            
+            fetch(uploadUrl, {
                 method: 'POST',
                 body: formData,
                 credentials: 'same-origin'
             })
             .then(response => response.json())
             .then(data => {
-                if (data.url) {
-                    insertMediaElement(data.url, currentMediaType);
+                if (data.success && data.url) {
+                    insertMediaElement(data.url, isVideo ? 'video' : 'image');
                     closeMediaModal();
                 } else {
-                    throw new Error(data.error?.message || 'Upload failed');
+                    throw new Error(data.message || 'Upload failed');
                 }
             })
             .catch(error => {
@@ -2254,6 +2476,99 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
         
         // Expose functions to iframe window for overlay buttons
+        
+        // Video Card Management Functions
+        function addVideoCard(button) {
+            const doc = iframe.contentDocument;
+            if (!doc) return;
+            
+            // Find the video cards container
+            const container = doc.querySelector('#video-cards-container');
+            if (!container) {
+                alert('Video cards container not found');
+                return;
+            }
+            
+            // Create new video card
+            const newCard = doc.createElement('div');
+            newCard.className = 'video-card-item bg-white/10 border border-white/15 rounded-3xl overflow-hidden backdrop-blur transition-all duration-300 hover:-translate-y-1 relative group';
+            newCard.innerHTML = `
+                <div class="aspect-video overflow-hidden bg-black/50 flex items-center justify-center relative video-player-container">
+                    <span class="text-white/50 video-placeholder">Video Placeholder</span>
+                    <video class="w-full h-full object-cover hidden video-element" controls></video>
+                    <div class="w-full h-full hidden iframe-wrapper absolute inset-0"></div>
+                    
+                    <!-- Hover overlay for changing/removing video -->
+                    <div class="absolute inset-0 bg-black/70 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-center justify-center gap-3 z-10">
+                        <button onclick="changeVideoInCard(this)" class="bg-[#18F1E1] hover:bg-[#15D9C9] text-black px-4 py-2 rounded-lg font-semibold text-sm flex items-center gap-2 transition-colors">
+                            <i class="fas fa-video"></i> Change Video
+                        </button>
+                        <button onclick="removeVideoCard(this)" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg font-semibold text-sm flex items-center gap-2 transition-colors">
+                            <i class="fas fa-trash"></i> Remove
+                        </button>
+                    </div>
+                </div>
+                <div class="p-6">
+                    <h4 contenteditable="true" class="text-xl font-semibold mb-2 outline-none" style="color: #18F1E1; font-family: 'Azo Sans', sans-serif;">Video Title</h4>
+                    <p contenteditable="true" class="text-sm text-white/70 mb-4 leading-relaxed outline-none">Video description goes here.</p>
+                    <a href="#" onclick="openVideoModal(event, this)" class="inline-flex items-center rounded-full bg-[#FF4F4F] px-5 py-2 text-white font-semibold hover:bg-[#FF3838] transition-colors">Watch Now</a>
+                </div>
+            `;
+            
+            container.appendChild(newCard);
+        }
+        
+        function removeVideoCard(button) {
+            const doc = iframe.contentDocument;
+            if (!doc) return;
+            
+            // Find the card to remove
+            const card = button.closest('.video-card-item');
+            if (!card) return;
+            
+            // Confirm removal
+            if (confirm('Remove this video card?')) {
+                card.remove();
+            }
+        }
+        
+        let currentVideoCard = null; // Track which card is being edited
+        let currentHeroSection = null; // Track which hero section is being edited
+        
+        function changeVideoInCard(button) {
+            const doc = iframe.contentDocument;
+            if (!doc) return;
+            
+            // Find the card being edited
+            currentVideoCard = button.closest('.video-card-item');
+            if (!currentVideoCard) return;
+            
+            // Open media modal for video
+            openMediaModal('video');
+        }
+        
+        function changeHeroBackground(button) {
+            const doc = iframe.contentDocument;
+            if (!doc) return;
+            
+            // Find the hero section being edited
+            currentHeroSection = button.closest('section[data-editable]');
+            if (!currentHeroSection) return;
+            
+            // Open media modal for image only
+            openMediaModal('image');
+        }
+        
+        function changeHeroBackgroundFromInspector() {
+            // Use the currently selected element as the hero section
+            if (!selectedElement) return;
+            
+            currentHeroSection = selectedElement;
+            
+            // Open media modal for image only
+            openMediaModal('image');
+        }
+        
         function exposeFunctionsToIframe() {
             if (iframe.contentWindow) {
                 iframe.contentWindow.changeSplitScreenMedia = changeSplitScreenMedia;
@@ -2261,14 +2576,87 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 iframe.contentWindow.switchSplitScreenPosition = switchSplitScreenPosition;
                 iframe.contentWindow.addSplitScreenFeaturePoint = addSplitScreenFeaturePoint;
                 iframe.contentWindow.removeSplitScreenFeaturePoint = removeSplitScreenFeaturePoint;
+                // Video card functions
+                iframe.contentWindow.addVideoCard = addVideoCard;
+                iframe.contentWindow.removeVideoCard = removeVideoCard;
+                iframe.contentWindow.changeVideoInCard = changeVideoInCard;
+                // Hero background function
+                iframe.contentWindow.changeHeroBackground = changeHeroBackground;
             }
         }
         
         function insertMediaElement(source, type) {
+            const doc = iframe.contentDocument;
+            
+            // Check if we're inserting into a video card
+            if (currentVideoCard) {
+                const playerContainer = currentVideoCard.querySelector('.video-player-container');
+                const placeholder = currentVideoCard.querySelector('.video-placeholder');
+                const videoElement = currentVideoCard.querySelector('.video-element');
+                const iframeWrapper = currentVideoCard.querySelector('.iframe-wrapper');
+                
+                if (playerContainer) {
+                    // Hide placeholder
+                    if (placeholder) placeholder.classList.add('hidden');
+                    
+                    // Clear previous content
+                    if (videoElement) {
+                        videoElement.src = '';
+                        videoElement.classList.add('hidden');
+                    }
+                    if (iframeWrapper) {
+                        iframeWrapper.innerHTML = '';
+                        iframeWrapper.classList.add('hidden');
+                    }
+                    
+                    if (type === 'video') {
+                        // Check if it's YouTube or Vimeo
+                        if (source.includes('youtube.com') || source.includes('youtu.be')) {
+                            const videoId = extractYouTubeId(source);
+                            if (videoId) {
+                                iframeWrapper.innerHTML = `<iframe class="w-full h-full" src="https://www.youtube.com/embed/${videoId}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+                                iframeWrapper.classList.remove('hidden');
+                            }
+                        } else if (source.includes('vimeo.com')) {
+                            const videoId = extractVimeoId(source);
+                            if (videoId) {
+                                iframeWrapper.innerHTML = `<iframe class="w-full h-full" src="https://player.vimeo.com/video/${videoId}" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>`;
+                                iframeWrapper.classList.remove('hidden');
+                            }
+                        } else {
+                            // Direct video URL
+                            if (videoElement) {
+                                videoElement.src = source;
+                                videoElement.classList.remove('hidden');
+                            }
+                        }
+                    }
+                }
+                
+                // Clear the current video card reference
+                currentVideoCard = null;
+                closeMediaModal();
+                return;
+            }
+            
+            // Check if we're inserting into a hero section background
+            if (currentHeroSection && type === 'image') {
+                const backgroundImage = currentHeroSection.querySelector('.hero-background-image');
+                if (backgroundImage) {
+                    // Set the background image
+                    backgroundImage.src = source;
+                    backgroundImage.classList.remove('hidden');
+                }
+                
+                // Clear the current hero section reference
+                currentHeroSection = null;
+                closeMediaModal();
+                return;
+            }
+            
             if (!currentMediaTarget) {
                 // Try to find split screen section from selected element
                 if (selectedElement) {
-                    const doc = iframe.contentDocument;
                     const splitScreenSection = selectedElement.closest('[data-editable]')?.querySelector('.lg\\:grid-cols-2')?.closest('[data-editable]');
                     if (splitScreenSection) {
                         currentMediaTarget = splitScreenSection;
@@ -2280,8 +2668,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 }
             }
             if (!currentMediaTarget) return;
-            
-            const doc = iframe.contentDocument;
             
             // Check if this is a split screen section - look for the grid with lg:grid-cols-2
             let isSplitScreen = false;
@@ -2712,6 +3098,48 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             
             // Remove media change overlay and other editor-only elements
             body.querySelectorAll('#split-screen-media-overlay').forEach(el => el.remove());
+            
+            // Remove hero section "Change Background" button
+            body.querySelectorAll('button[onclick*="changeHeroBackground"]').forEach(btn => {
+                const overlay = btn.closest('.absolute.inset-0.bg-black\\/60');
+                if (overlay) overlay.remove();
+            });
+            
+            // Remove video card editor controls
+            // Remove hover overlays with "Change Video" and "Remove" buttons
+            body.querySelectorAll('.video-card-item .absolute.inset-0.bg-black\\/70').forEach(el => el.remove());
+            
+            // Remove "Add Video Card" button
+            body.querySelectorAll('button[onclick*="addVideoCard"]').forEach(btn => {
+                // Remove the entire container div that has the button
+                const container = btn.closest('div.mt-8.text-center');
+                if (container) container.remove();
+            });
+            
+            // Remove group class from video cards (used for hover effects)
+            body.querySelectorAll('.video-card-item').forEach(card => {
+                card.classList.remove('group');
+                
+                // Make sure videos/iframes are visible and remove placeholders
+                const placeholder = card.querySelector('.video-placeholder');
+                const videoElement = card.querySelector('.video-element');
+                const iframeWrapper = card.querySelector('.iframe-wrapper');
+                
+                // If there's a video or iframe, remove the placeholder
+                if ((videoElement && videoElement.src) || (iframeWrapper && iframeWrapper.innerHTML.trim())) {
+                    if (placeholder) placeholder.remove();
+                    
+                    // Make video visible
+                    if (videoElement && videoElement.src) {
+                        videoElement.classList.remove('hidden');
+                    }
+                    
+                    // Make iframe visible
+                    if (iframeWrapper && iframeWrapper.innerHTML.trim()) {
+                        iframeWrapper.classList.remove('hidden');
+                    }
+                }
+            });
             
             // Get final HTML - extract just the canvas content
             const canvasContent = body.querySelector('#canvas-root');
