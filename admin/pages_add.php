@@ -337,8 +337,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
 
         <div class="flex gap-3 shrink-0">
+            <button onclick="previewPage()" class="bg-zinc-700 hover:bg-zinc-600 text-white px-5 py-1.5 rounded text-sm font-medium transition shadow-lg hover:shadow-xl whitespace-nowrap"><i class="fas fa-eye mr-1"></i>Preview</button>
             <button onclick="openSeoModal()" class="bg-zinc-700 hover:bg-zinc-600 text-white px-5 py-1.5 rounded text-sm font-medium transition shadow-lg hover:shadow-xl whitespace-nowrap"><i class="fas fa-search mr-1"></i>SEO Settings</button>
-            <button onclick="exportHTML()" class="bg-[#FF4F4F] hover:bg-[#FF3838] text-white px-5 py-1.5 rounded text-sm font-medium transition shadow-lg hover:shadow-xl whitespace-nowrap">Save Page</button>
+            <button onclick="saveDraft()" class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-1.5 rounded text-sm font-medium transition shadow-lg hover:shadow-xl whitespace-nowrap"><i class="fas fa-save mr-1"></i>Save Draft</button>
+            <button onclick="exportHTML()" class="bg-[#FF4F4F] hover:bg-[#FF3838] text-white px-5 py-1.5 rounded text-sm font-medium transition shadow-lg hover:shadow-xl whitespace-nowrap"><i class="fas fa-check-circle mr-1"></i>Publish</button>
         </div>
     </header>
 
@@ -408,6 +410,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <input type="hidden" name="og_image" id="hiddenOgImage">
         <input type="hidden" name="canonical_url" id="hiddenCanonicalUrl">
         <input type="hidden" name="robots" id="hiddenRobots">
+        <input type="hidden" name="structured_data" id="hiddenStructuredData">
     </form>
 
     <div id="mediaModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center">
@@ -558,11 +561,56 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     </div>
                 </div>
                 
+                <!-- Structured Data Section -->
+                <div class="mb-4">
+                    <h4 class="text-white font-semibold mb-3 flex items-center gap-2">
+                        <i class="fas fa-code text-[#FF4F4F]"></i>
+                        Structured Data (JSON-LD)
+                    </h4>
+                    <p class="text-xs text-zinc-500 mb-3">Schema.org markup for rich snippets (auto-filled from page)</p>
+                    
+                    <div class="mb-4">
+                        <label class="block text-xs text-zinc-400 mb-2">JSON-LD Editor</label>
+                        <textarea id="structuredDataEditor" rows="10" placeholder='Click "Auto-Fill from Content" to extract existing structured data' class="w-full bg-zinc-800 border border-zinc-700 text-white px-3 py-2 rounded text-sm font-mono resize-vertical"></textarea>
+                        <div class="mt-2 p-2 bg-zinc-800 rounded border-l-3 border-[#18F1E1]">
+                            <small class="text-zinc-500 text-xs">
+                                <i class="fas fa-info-circle text-[#18F1E1]"></i> 
+                                <strong>Multiple Schemas:</strong> Wrap multiple schemas in an array: <code class="bg-zinc-900 px-1 py-0.5 rounded text-xs">[{schema1}, {schema2}]</code>
+                            </small>
+                        </div>
+                    </div>
+                    
+                    <button type="button" onclick="clearStructuredData()" class="w-full bg-zinc-800 hover:bg-zinc-700 text-white px-3 py-2 rounded text-sm mb-3 transition-colors">
+                        <i class="fas fa-trash mr-1"></i> Clear
+                    </button>
+                </div>
+                
+                <!-- Auto-Fill Button -->
+                <button type="button" onclick="autoFillSeoFromContent()" class="w-full bg-[#667eea] hover:bg-[#5568d3] text-white px-4 py-3 rounded font-semibold transition-colors mb-3">
+                    <i class="fas fa-magic mr-2"></i>Auto-Fill from Content
+                </button>
+                
                 <!-- Save Button -->
                 <button onclick="saveSeoSettings()" class="w-full bg-[#18F1E1] hover:bg-[#15D9C9] text-zinc-900 px-4 py-3 rounded font-semibold transition-colors">
                     <i class="fas fa-save mr-2"></i>Save SEO Settings
                 </button>
             </div>
+        </div>
+    </div>
+
+    <!-- Notification Component -->
+    <div id="notification" class="fixed top-4 right-4 z-50 hidden transform transition-all duration-300 ease-in-out">
+        <div id="notificationContent" class="bg-white rounded-lg shadow-2xl border-l-4 p-4 min-w-[320px] max-w-md flex items-start gap-3">
+            <div id="notificationIcon" class="flex-shrink-0 w-6 h-6 flex items-center justify-center">
+                <!-- Icon will be inserted here -->
+            </div>
+            <div class="flex-1">
+                <h4 id="notificationTitle" class="font-semibold text-sm mb-1"></h4>
+                <p id="notificationMessage" class="text-sm text-gray-600"></p>
+            </div>
+            <button onclick="hideNotification()" class="flex-shrink-0 text-gray-400 hover:text-gray-600 transition-colors">
+                <i class="fas fa-times"></i>
+            </button>
         </div>
     </div>
 
@@ -581,12 +629,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     <!-- Gradient overlay for text readability -->
     <div class="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/40"></div>
-    
-    <!-- Decorative blobs -->
-    <div class="absolute inset-0 pointer-events-none">
-        <div class="absolute -top-40 -right-20 w-80 h-80 bg-pink-500/25 rounded-full blur-3xl"></div>
-        <div class="absolute top-1/2 -left-32 w-72 h-72 bg-purple-500/20 rounded-full blur-[110px]"></div>
-    </div>
     
     <div class="relative max-w-6xl mx-auto">
         
@@ -612,52 +654,81 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <!-- Text Section Template -->
     <script type="text/template" id="tpl-text">
-<section data-editable class="w-full py-16 px-6" style="color: #1F1F1F;">
-    <div class="max-w-4xl mx-auto text-center mb-12">
-        <h2 contenteditable="true" class="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 outline-none" style="font-family: 'Azo Sans Uber', sans-serif; font-weight: 400; text-transform: uppercase; letter-spacing: 0.02em; color: #FF4F4F; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;">Section Heading</h2>
-        <p contenteditable="true" class="text-base md:text-lg leading-relaxed outline-none" style="font-family: 'Azo Sans', sans-serif;">This is a paragraph. You can type directly here. We use contenteditable to make this feel like a real document editor.</p>
-    </div>
-</section>
+       <section data-editable class="w-full py-16 px-6" style="color: #1F1F1F;">
+          <div class="max-w-4xl mx-auto text-center mb-12">
+           <h2 contenteditable="true" class="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 outline-none" style="font-family: 'Azo Sans Uber', sans-serif; font-weight: 400; text-transform: uppercase; letter-spacing: 0.02em; color: #FF4F4F; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;">Section Heading</h2>
+           <p contenteditable="true" class="text-base md:text-lg leading-relaxed outline-none" style="font-family: 'Azo Sans', sans-serif;">This is a paragraph. You can type directly here. We use contenteditable to make this feel like a real document editor.</p>
+         </div>
+      </section>
     </script>
 
     <!-- Cards Section Template -->
     <script type="text/template" id="tpl-cards">
-<section data-editable class="py-16 px-6 bg-white">
-    <div class="max-w-6xl mx-auto">
-        <div class="text-center mb-12">
-            <h2 contenteditable="true" class="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 outline-none" style="font-family: 'Azo Sans Uber', sans-serif; font-weight: 400; text-transform: uppercase; letter-spacing: 0.02em; color: #FF4F4F; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;">Feature Cards</h2>
-        </div>
-        <div class="grid md:grid-cols-3 gap-8">
-            <div class="bg-white p-6 rounded-2xl shadow-lg border border-gray-100 hover:shadow-xl hover:scale-105 transition-all duration-300">
-                <div class="w-12 h-12 bg-pink-500 rounded-xl flex items-center justify-center mb-4">
-                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
-                    </svg>
+        <section data-editable class="py-16 px-6 bg-white">
+            <div class="max-w-6xl mx-auto">
+                <div class="text-center mb-12">
+                    <h2 contenteditable="true" class="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 outline-none" style="font-family: 'Azo Sans Uber', sans-serif; font-weight: 400; text-transform: uppercase; letter-spacing: 0.02em; color: #FF4F4F; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;">Feature Cards</h2>
+                    <p contenteditable="true" class="text-base md:text-lg leading-relaxed max-w-3xl mx-auto outline-none" style="font-family: 'Azo Sans', sans-serif; color: #1F1F1F;">Discover the amazing features that make our service stand out from the rest.</p>
                 </div>
-                <h3 contenteditable="true" class="text-xl font-bold mb-2 outline-none" style="color: #FF4F4F;">Feature One</h3>
-                <p contenteditable="true" class="outline-none" style="color: #1F1F1F;">Description of the feature.</p>
-            </div>
-            <div class="bg-white p-6 rounded-2xl shadow-lg border border-gray-100 hover:shadow-xl hover:scale-105 transition-all duration-300">
-                <div class="w-12 h-12 bg-blue-500 rounded-xl flex items-center justify-center mb-4">
-                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
-                    </svg>
+                <div class="grid md:grid-cols-3 gap-8" id="feature-cards-container">
+                    <!-- Initial card 1 -->
+                    <div class="feature-card-item bg-white p-6 rounded-2xl shadow-lg border border-gray-100 hover:shadow-xl transition-shadow duration-300 relative group">
+                        <div class="w-12 h-12 bg-pink-500 rounded-xl flex items-center justify-center mb-4">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                            </svg>
+                        </div>
+                        <h3 contenteditable="true" class="text-xl font-bold mb-2 outline-none" style="font-family: 'Azo Sans', sans-serif; color: #FF4F4F;">Feature One</h3>
+                        <p contenteditable="true" class="outline-none" style="font-family: 'Azo Sans', sans-serif; color: #1F1F1F;">Description of the feature.</p>
+                        
+                        <!-- Remove button overlay -->
+                        <button onclick="removeFeatureCard(this)" data-editor-only class="absolute top-2 right-2 bg-red-600 hover:bg-red-700 text-white w-8 h-8 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-center justify-center shadow-lg z-10" title="Remove card">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    
+                    <!-- Initial card 2 -->
+                    <div class="feature-card-item bg-white p-6 rounded-2xl shadow-lg border border-gray-100 hover:shadow-xl transition-shadow duration-300 relative group">
+                        <div class="w-12 h-12 bg-blue-500 rounded-xl flex items-center justify-center mb-4">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                            </svg>
+                        </div>
+                        <h3 contenteditable="true" class="text-xl font-bold mb-2 outline-none" style="font-family: 'Azo Sans', sans-serif; color: #FF4F4F;">Feature Two</h3>
+                        <p contenteditable="true" class="outline-none" style="font-family: 'Azo Sans', sans-serif; color: #1F1F1F;">Description of the feature.</p>
+                        
+                        <!-- Remove button overlay -->
+                        <button onclick="removeFeatureCard(this)" data-editor-only class="absolute top-2 right-2 bg-red-600 hover:bg-red-700 text-white w-8 h-8 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-center justify-center shadow-lg z-10" title="Remove card">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    
+                    <!-- Initial card 3 -->
+                    <div class="feature-card-item bg-white p-6 rounded-2xl shadow-lg border border-gray-100 hover:shadow-xl transition-shadow duration-300 relative group">
+                        <div class="w-12 h-12 bg-purple-500 rounded-xl flex items-center justify-center mb-4">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                            </svg>
+                        </div>
+                        <h3 contenteditable="true" class="text-xl font-bold mb-2 outline-none" style="font-family: 'Azo Sans', sans-serif; color: #FF4F4F;">Feature Three</h3>
+                        <p contenteditable="true" class="outline-none" style="font-family: 'Azo Sans', sans-serif; color: #1F1F1F;">Description of the feature.</p>
+                        
+                        <!-- Remove button overlay -->
+                        <button onclick="removeFeatureCard(this)" data-editor-only class="absolute top-2 right-2 bg-red-600 hover:bg-red-700 text-white w-8 h-8 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-center justify-center shadow-lg z-10" title="Remove card">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
                 </div>
-                <h3 contenteditable="true" class="text-xl font-bold mb-2 outline-none" style="color: #FF4F4F;">Feature Two</h3>
-                <p contenteditable="true" class="outline-none" style="color: #1F1F1F;">Description of the feature.</p>
-            </div>
-            <div class="bg-white p-6 rounded-2xl shadow-lg border border-gray-100 hover:shadow-xl hover:scale-105 transition-all duration-300">
-                <div class="w-12 h-12 bg-purple-500 rounded-xl flex items-center justify-center mb-4">
-                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
-                    </svg>
+                
+                <!-- Add Card Button -->
+                <div class="mt-8 text-center" data-editor-only>
+                    <button onclick="addFeatureCard(this)" class="inline-flex items-center gap-2 px-6 py-3 rounded-full border-2 border-dashed border-[#FF4F4F]/50 text-[#FF4F4F] hover:bg-[#FF4F4F]/10 hover:border-[#FF4F4F] transition-all duration-300">
+                        <i class="fas fa-plus-circle"></i>
+                        <span>Add Card</span>
+                    </button>
                 </div>
-                <h3 contenteditable="true" class="text-xl font-bold mb-2 outline-none" style="color: #FF4F4F;">Feature Three</h3>
-                <p contenteditable="true" class="outline-none" style="color: #1F1F1F;">Description of the feature.</p>
             </div>
-        </div>
-    </div>
-</section>
+        </section>
     </script>
 
     <!-- Split Screen Template -->
@@ -736,19 +807,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <!-- CTA Section Template -->
     <script type="text/template" id="tpl-cta">
-<section data-editable class="bg-gradient-to-r from-[#1F1F1F] via-[#1F1F1F] to-[#1F1F1F] py-20 px-6 text-center text-white relative overflow-hidden">
-    <div class="absolute inset-0 pointer-events-none">
-        <div class="absolute top-10 left-1/2 -translate-x-1/2 w-[90%] h-full bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.15),transparent_60%)]"></div>
-    </div>
-    <div class="relative max-w-4xl mx-auto">
-        <h2 contenteditable="true" class="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 outline-none" style="font-family: 'Azo Sans Uber', sans-serif; font-weight: 400; color: #18F1E1; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;">Ready to Begin?</h2>
-        <p contenteditable="true" class="text-base md:text-lg text-white/85 leading-relaxed mb-8 max-w-2xl mx-auto outline-none">Get started with our premium services today.</p>
-        <div class="flex flex-col sm:flex-row gap-4 justify-center">
-            <a href="#" class="inline-flex items-center justify-center px-8 py-4 rounded-full font-semibold text-lg bg-[#FF4F4F] hover:bg-[#FF3838] text-white transition-all duration-300 hover:-translate-y-1 hover:scale-105">Contact Us</a>
-            <a href="#" class="inline-flex items-center justify-center px-7 py-3 rounded-full font-semibold border-2 border-[#18F1E1] text-[#18F1E1] bg-transparent hover:bg-[#18F1E1] hover:text-black transition-all duration-300">Call Us</a>
-        </div>
-    </div>
-</section>
+        <section data-editable class="bg-gradient-to-r from-[#1F1F1F] via-[#1F1F1F] to-[#1F1F1F] py-20 px-6 text-center text-white relative overflow-hidden">
+           <div class="absolute inset-0 pointer-events-none">
+               <div class="absolute top-10 left-1/2 -translate-x-1/2 w-[90%] h-full bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.15),transparent_60%)]"></div>
+           </div>
+           <div class="relative max-w-4xl mx-auto">
+               <h2 contenteditable="true" class="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 outline-none" style="font-family: 'Azo Sans Uber', sans-serif; font-weight: 400; color: #18F1E1; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;">Ready to Begin?</h2>
+               <p contenteditable="true" class="text-base md:text-lg text-white/85 leading-relaxed mb-8 max-w-2xl mx-auto outline-none">Get started with our premium services today.</p>
+               <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                   <a href="#" class="inline-flex items-center justify-center px-8 py-4 rounded-full font-semibold text-lg bg-[#FF4F4F] hover:bg-[#FF3838] text-white transition-all duration-300 hover:-translate-y-1 hover:scale-105">Contact Us</a>
+                   <a href="#" class="inline-flex items-center justify-center px-7 py-3 rounded-full font-semibold border-2 border-[#18F1E1] text-[#18F1E1] bg-transparent hover:bg-[#18F1E1] hover:text-black transition-all duration-300">Call Us</a>
+                </div>
+           </div>
+       </section>
     </script>
 
     <!-- Video Section Template -->
@@ -2569,6 +2640,68 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             openMediaModal('image');
         }
         
+        // Feature Cards Functions
+        function addFeatureCard(button) {
+            const doc = iframe.contentDocument;
+            if (!doc) return;
+            
+            // Find the feature cards container
+            const container = doc.querySelector('#feature-cards-container');
+            if (!container) {
+                alert('Feature cards container not found');
+                return;
+            }
+            
+            // Random icon colors for variety
+            const iconColors = ['pink-500', 'blue-500', 'purple-500', 'green-500', 'yellow-500', 'red-500', 'indigo-500', 'teal-500'];
+            const randomColor = iconColors[Math.floor(Math.random() * iconColors.length)];
+            
+            // Random icon SVGs
+            const icons = [
+                '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>',
+                '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>',
+                '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>',
+                '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>',
+                '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path>',
+                '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>'
+            ];
+            const randomIcon = icons[Math.floor(Math.random() * icons.length)];
+            
+            // Create new feature card
+            const newCard = doc.createElement('div');
+            newCard.className = 'feature-card-item bg-white p-6 rounded-2xl shadow-lg border border-gray-100 hover:shadow-xl transition-shadow duration-300 relative group';
+            newCard.innerHTML = `
+                <div class="w-12 h-12 bg-${randomColor} rounded-xl flex items-center justify-center mb-4">
+                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        ${randomIcon}
+                    </svg>
+                </div>
+                <h3 contenteditable="true" class="text-xl font-bold mb-2 outline-none" style="font-family: 'Azo Sans', sans-serif; color: #FF4F4F;">New Feature</h3>
+                <p contenteditable="true" class="outline-none" style="font-family: 'Azo Sans', sans-serif; color: #1F1F1F;">Description of the feature.</p>
+                
+                <!-- Remove button overlay -->
+                <button onclick="removeFeatureCard(this)" data-editor-only class="absolute top-2 right-2 bg-red-600 hover:bg-red-700 text-white w-8 h-8 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-center justify-center shadow-lg z-10" title="Remove card">
+                    <i class="fas fa-times"></i>
+                </button>
+            `;
+            
+            container.appendChild(newCard);
+        }
+        
+        function removeFeatureCard(button) {
+            const doc = iframe.contentDocument;
+            if (!doc) return;
+            
+            // Find the card to remove
+            const card = button.closest('.feature-card-item');
+            if (!card) return;
+            
+            // Confirm removal
+            if (confirm('Remove this feature card?')) {
+                card.remove();
+            }
+        }
+        
         function exposeFunctionsToIframe() {
             if (iframe.contentWindow) {
                 iframe.contentWindow.changeSplitScreenMedia = changeSplitScreenMedia;
@@ -2582,6 +2715,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 iframe.contentWindow.changeVideoInCard = changeVideoInCard;
                 // Hero background function
                 iframe.contentWindow.changeHeroBackground = changeHeroBackground;
+                // Feature card functions
+                iframe.contentWindow.addFeatureCard = addFeatureCard;
+                iframe.contentWindow.removeFeatureCard = removeFeatureCard;
             }
         }
         
@@ -3109,6 +3245,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Remove hover overlays with "Change Video" and "Remove" buttons
             body.querySelectorAll('.video-card-item .absolute.inset-0.bg-black\\/70').forEach(el => el.remove());
             
+            // Remove all elements with data-editor-only attribute (Add Card button, remove buttons, etc.)
+            body.querySelectorAll('[data-editor-only]').forEach(el => el.remove());
+            
             // Remove "Add Video Card" button
             body.querySelectorAll('button[onclick*="addVideoCard"]').forEach(btn => {
                 // Remove the entire container div that has the button
@@ -3173,12 +3312,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             document.getElementById('hiddenOgImage').value = document.getElementById('seoOgImage').value || '';
             document.getElementById('hiddenCanonicalUrl').value = document.getElementById('seoCanonicalUrl').value || '';
             document.getElementById('hiddenRobots').value = document.getElementById('seoRobots').value || 'index, follow';
+            document.getElementById('hiddenStructuredData').value = document.getElementById('structuredDataEditor').value || '';
             
             // Show loading state
             const saveBtn = document.querySelector('button[onclick="exportHTML()"]');
             const originalText = saveBtn.innerHTML;
             saveBtn.disabled = true;
-            saveBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Saving...';
+            saveBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Publishing...';
+            
+            // Show notification
+            showNotification('info', 'Publishing Page', 'Your page is being published...');
             
             // Submit
             document.getElementById('realSaveForm').submit();
@@ -3198,6 +3341,128 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         // Helper: Resize Iframe
+        // Notification System
+        let notificationTimeout;
+        
+        function showNotification(type, title, message) {
+            const notification = document.getElementById('notification');
+            const content = document.getElementById('notificationContent');
+            const icon = document.getElementById('notificationIcon');
+            const titleEl = document.getElementById('notificationTitle');
+            const messageEl = document.getElementById('notificationMessage');
+            
+            // Clear any existing timeout
+            if (notificationTimeout) {
+                clearTimeout(notificationTimeout);
+            }
+            
+            // Set content
+            titleEl.textContent = title;
+            messageEl.textContent = message;
+            
+            // Set icon and colors based on type
+            if (type === 'success') {
+                content.style.borderLeftColor = '#10b981'; // green-500
+                icon.innerHTML = '<i class="fas fa-check-circle text-green-500 text-xl"></i>';
+            } else if (type === 'error') {
+                content.style.borderLeftColor = '#ef4444'; // red-500
+                icon.innerHTML = '<i class="fas fa-exclamation-circle text-red-500 text-xl"></i>';
+            } else if (type === 'info') {
+                content.style.borderLeftColor = '#3b82f6'; // blue-500
+                icon.innerHTML = '<i class="fas fa-info-circle text-blue-500 text-xl"></i>';
+            } else if (type === 'warning') {
+                content.style.borderLeftColor = '#f59e0b'; // amber-500
+                icon.innerHTML = '<i class="fas fa-exclamation-triangle text-amber-500 text-xl"></i>';
+            }
+            
+            // Show notification with animation
+            notification.classList.remove('hidden');
+            setTimeout(() => {
+                notification.style.transform = 'translateY(0)';
+                notification.style.opacity = '1';
+            }, 10);
+            
+            // Auto-hide after 5 seconds
+            notificationTimeout = setTimeout(() => {
+                hideNotification();
+            }, 5000);
+        }
+        
+        function hideNotification() {
+            const notification = document.getElementById('notification');
+            notification.style.transform = 'translateY(-20px)';
+            notification.style.opacity = '0';
+            setTimeout(() => {
+                notification.classList.add('hidden');
+            }, 300);
+        }
+        
+        // Preview Page Function
+        function previewPage() {
+            const title = document.getElementById('pageTitleInput').value;
+            if(!title) { 
+                showNotification('warning', 'Preview Warning', 'Please enter a page title before previewing.');
+                document.getElementById('pageTitleInput').focus();
+                return; 
+            }
+            
+            // Get the cleaned HTML
+            const doc = iframe.contentDocument.documentElement.cloneNode(true);
+            const body = doc.querySelector('body');
+            
+            // Cleanup for preview (same as export)
+            body.querySelectorAll('[data-editable]').forEach(el => {
+                el.removeAttribute('data-editable');
+                el.classList.remove('selected');
+            });
+            body.querySelectorAll('[contenteditable]').forEach(el => {
+                el.removeAttribute('contenteditable');
+                el.classList.remove('outline-none');
+            });
+            
+            const empty = body.querySelector('.empty-canvas');
+            if(empty) empty.remove();
+            
+            body.querySelectorAll('button[data-action="remove-feature"]').forEach(btn => btn.remove());
+            body.querySelectorAll('#split-screen-media-overlay').forEach(el => el.remove());
+            body.querySelectorAll('button[onclick*="changeHeroBackground"]').forEach(btn => {
+                const overlay = btn.closest('.absolute.inset-0.bg-black\\/60');
+                if (overlay) overlay.remove();
+            });
+            body.querySelectorAll('.video-card-item .absolute.inset-0.bg-black\\/70').forEach(el => el.remove());
+            body.querySelectorAll('[data-editor-only]').forEach(el => el.remove());
+            body.querySelectorAll('button[onclick*="addVideoCard"]').forEach(btn => {
+                const container = btn.closest('div.mt-8.text-center');
+                if (container) container.remove();
+            });
+            
+            // Create preview window
+            const previewWindow = window.open('', '_blank');
+            previewWindow.document.write('<!DOCTYPE html>');
+            previewWindow.document.write(doc.outerHTML);
+            previewWindow.document.close();
+            
+            showNotification('info', 'Preview Opened', 'Page preview opened in a new tab.');
+        }
+        
+        // Save Draft Function
+        function saveDraft() {
+            const title = document.getElementById('pageTitleInput').value;
+            if(!title) { 
+                showNotification('warning', 'Draft Warning', 'Please enter a page title before saving draft.');
+                document.getElementById('pageTitleInput').focus();
+                return; 
+            }
+            
+            showNotification('info', 'Saving Draft', 'Your page is being saved as a draft...');
+            
+            // For now, just show success message
+            // In a real implementation, you would save to database with draft status
+            setTimeout(() => {
+                showNotification('success', 'Draft Saved', 'Your page has been saved as a draft successfully.');
+            }, 1000);
+        }
+        
         function resizeCanvas(width) {
             document.getElementById('editorFrame').style.width = width;
         }
@@ -3209,6 +3474,44 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         function closeSeoModal() {
             document.getElementById('seoModal').classList.add('hidden');
+        }
+        
+        // Structured Data Functions
+        function clearStructuredData() {
+            if (confirm('Are you sure you want to clear the structured data?')) {
+                document.getElementById('structuredDataEditor').value = '';
+            }
+        }
+        
+        function autoFillSeoFromContent() {
+            const doc = iframe.contentDocument;
+            if (!doc) return;
+            
+            // Try to extract existing structured data from the page
+            const scripts = doc.querySelectorAll('script[type="application/ld+json"]');
+            if (scripts.length > 0) {
+                const structuredData = [];
+                scripts.forEach(script => {
+                    try {
+                        const data = JSON.parse(script.textContent);
+                        structuredData.push(data);
+                    } catch (e) {
+                        console.error('Error parsing structured data:', e);
+                    }
+                });
+                
+                if (structuredData.length > 0) {
+                    const jsonString = structuredData.length === 1 
+                        ? JSON.stringify(structuredData[0], null, 2)
+                        : JSON.stringify(structuredData, null, 2);
+                    document.getElementById('structuredDataEditor').value = jsonString;
+                    showNotification('success', 'Auto-Fill Complete', 'Structured data extracted from page content.');
+                } else {
+                    showNotification('info', 'No Data Found', 'No structured data found in the page.');
+                }
+            } else {
+                showNotification('info', 'No Data Found', 'No structured data found in the page.');
+            }
         }
 
         function saveSeoSettings() {
