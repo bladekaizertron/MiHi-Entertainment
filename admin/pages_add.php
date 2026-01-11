@@ -3436,6 +3436,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 if (container) container.remove();
             });
             
+            // Remove navigation and footer to prevent duplication (scripts will re-add them)
+            const header = body.querySelector('header.fixed.top-0');
+            if (header) header.remove();
+            
+            const footer = body.querySelector('footer');
+            if (footer) footer.remove();
+            
+            // Remove injected styles to prevent duplication
+            const navStyle = doc.querySelector('#navigation-protection');
+            if (navStyle) navStyle.remove();
+            
+            const footerStyle = doc.querySelector('#footer-font-style');
+            if (footerStyle) footerStyle.remove();
+            
             // Create preview window
             const previewWindow = window.open('', '_blank');
             previewWindow.document.write('<!DOCTYPE html>');
