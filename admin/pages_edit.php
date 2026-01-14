@@ -137,7 +137,13 @@ if ($isFileEdit) {
 			if ($realFile) {
 				$fileContent = @file_get_contents($realFile);
 				if ($fileContent !== false) {
-					$page['title'] = pathinfo($filePath, PATHINFO_FILENAME);
+					// Extract title from <title> tag
+					$pageTitle = '';
+					if (preg_match('/<title>(.*?)<\/title>/is', $fileContent, $matches)) {
+						$pageTitle = trim($matches[1]);
+					}
+					
+					$page['title'] = $pageTitle ?: pathinfo($filePath, PATHINFO_FILENAME);
 					$page['slug'] = str_replace('.html', '', $filePath);
 					
 					// Extract body content from full HTML document
@@ -420,6 +426,17 @@ function deleteStaticPage($slug) {
 								if ($bodyTagEndPos !== false && $bodyEndTagPos !== false) {
 									$head = substr($originalContent, 0, $bodyTagEndPos + 1);
 									$tail = substr($originalContent, $bodyEndTagPos);
+									
+									// Also update <title> tag in the head if title was provided
+									if (!empty($title)) {
+										if (preg_match('/<title>.*?<\/title>/is', $head)) {
+											$head = preg_replace('/<title>.*?<\/title>/is', '<title>' . htmlspecialchars($title) . '</title>', $head);
+										} else {
+											// Insert title if missing
+											$head = preg_replace('/<head>/i', '<head>' . "\n\t" . '<title>' . htmlspecialchars($title) . '</title>', $head);
+										}
+									}
+									
 									$finalContent = $head . $content . $tail;
 								}
 							}
@@ -429,6 +446,7 @@ function deleteStaticPage($slug) {
 					// Save file if we have content
 					if (!empty($finalContent) && @file_put_contents($targetFile, $finalContent) !== false) {
 						$success = 'File saved successfully.';
+						$page['title'] = $title; // Update title in reloaded page
 						$page['content_html'] = $content; // Keep body content for editor
 						// Update fileFullPath for potential reload
 						$fileFullPath = $targetFile;
@@ -492,7 +510,24 @@ function deleteStaticPage($slug) {
 							$success = 'Page created.';
 						}
 						// reload
-						$page = ['title'=>$title,'slug'=>$slug,'content_html'=>$content,'custom_css'=>$customCss,'status'=>$status];
+						// reload
+						$page = [
+							'id' => $id,
+							'title' => $title,
+							'slug' => $slug,
+							'content_html' => $content,
+							'custom_css' => $customCss,
+							'status' => $status,
+							'meta_title' => $meta_title,
+							'meta_description' => $meta_description,
+							'meta_keywords' => $meta_keywords,
+							'og_title' => $og_title,
+							'og_description' => $og_description,
+							'og_image' => $og_image,
+							'canonical_url' => $canonical_url,
+							'robots' => $robots,
+							'structured_data' => $structured_data
+						];
 						$pageDataForExport = [
 							'title' => $title,
 							'slug' => $slug,
