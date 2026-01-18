@@ -52,6 +52,85 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 					$error = 'Delete failed. Ensure the pages table exists.';
 				}
 			}
+		} elseif ($action === 'duplicate_file') {
+			$f = $_POST['f'] ?? '';
+			if ($f) {
+				$filePath = base64_decode($f);
+				$rootDir = dirname(__DIR__);
+				$sourcePath = $rootDir . '/' . ltrim($filePath, '/');
+				
+				if (file_exists($sourcePath) && is_file($sourcePath)) {
+					$info = pathinfo($sourcePath);
+					$newName = $info['filename'] . '-copy.' . $info['extension'];
+					$targetPath = $info['dirname'] . '/' . $newName;
+					
+					// Avoid overwriting existing copy
+					$counter = 1;
+					while (file_exists($targetPath)) {
+						$newName = $info['filename'] . '-copy-' . $counter . '.' . $info['extension'];
+						$targetPath = $info['dirname'] . '/' . $newName;
+						$counter++;
+					}
+					
+					if (copy($sourcePath, $targetPath)) {
+						$success = 'File duplicated successfully: ' . $newName;
+						// Refresh scan
+						$websitePages = scanWebsitePages($rootDir);
+					} else {
+						$error = 'Failed to copy file.';
+					}
+				} else {
+					$error = 'Source file not found.';
+				}
+			}
+		} elseif ($action === 'duplicate_db') {
+			$id = (int)($_POST['id'] ?? 0);
+			if ($id > 0) {
+				try {
+					// Get existing page data
+					$stmt = $db->prepare("SELECT * FROM pages WHERE id = ?");
+					$stmt->execute([$id]);
+					$page = $stmt->fetch(PDO::FETCH_ASSOC);
+					
+					if ($page) {
+						$newTitle = $page['title'] . ' (Copy)';
+						$newSlug = $page['slug'] . '-copy';
+						
+						// Ensure unique slug
+						$check = $db->prepare("SELECT id FROM pages WHERE slug = ?");
+						$check->execute([$newSlug]);
+						$counter = 1;
+						while ($check->fetch()) {
+							$newSlug = $page['slug'] . '-copy-' . $counter;
+							$check->execute([$newSlug]);
+							$counter++;
+						}
+						
+						// Prepare clone data (exclude ID, set status to draft, nullify published_at)
+						unset($page['id']);
+						$page['title'] = $newTitle;
+						$page['slug'] = $newSlug;
+						$page['status'] = 'draft';
+						$page['published_at'] = null;
+						$page['created_at'] = date('Y-m-d H:i:s');
+						$page['updated_at'] = date('Y-m-d H:i:s');
+						
+						$cols = implode(', ', array_keys($page));
+						$placeholders = implode(', ', array_fill(0, count($page), '?'));
+						
+						$insert = $db->prepare("INSERT INTO pages ($cols) VALUES ($placeholders)");
+						$insert->execute(array_values($page));
+						
+						$success = 'Page duplicated in database as draft.';
+						// Refresh pages list
+						$pages = $db->query("SELECT id, title, slug, status, updated_at, created_at FROM pages ORDER BY updated_at DESC, created_at DESC")->fetchAll();
+					} else {
+						$error = 'Source page not found.';
+					}
+				} catch (Throwable $e) {
+					$error = 'Duplication failed: ' . $e->getMessage();
+				}
+			}
 		} elseif ($action === 'sync_to_db') {
 			// Sync directory pages to database
 			$rootDir = dirname(__DIR__);
@@ -123,6 +202,49 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 			} catch (Throwable $e) {
 				$error = 'Sync failed: ' . $e->getMessage();
 			}
+		} elseif ($action === 'sync_single_page') {
+			$f = $_POST['f'] ?? '';
+			if ($f) {
+				$filePath = base64_decode($f);
+				$rootDir = dirname(__DIR__);
+				$sourcePath = $rootDir . '/' . ltrim($filePath, '/');
+				
+				if (file_exists($sourcePath) && is_file($sourcePath)) {
+					// Generate metadata same as batch sync
+					$fileName = basename($sourcePath);
+					$slug = str_replace('.html', '', ltrim($filePath, '/'));
+					$slug = str_replace('/', '-', $slug);
+					$slug = preg_replace('/[^a-z0-9\-]/i', '-', $slug);
+					$slug = preg_replace('/-+/', '-', $slug);
+					$slug = trim($slug, '-');
+					
+					// Check if already exists in database
+					$check = $db->prepare("SELECT id FROM pages WHERE slug = ?");
+					$check->execute([$slug]);
+					if ($check->fetch()) {
+						$error = "A page with the slug '{$slug}' already exists in the database.";
+					} else {
+						$title = str_replace('.html', '', $fileName);
+						$title = str_replace(['-', '_'], ' ', $title);
+						$title = ucwords($title);
+						
+						$content = file_get_contents($sourcePath);
+						
+						try {
+							$stmt = $db->prepare("INSERT INTO pages (title, slug, content_html, status, created_at, updated_at) VALUES (?, ?, ?, 'published', NOW(), NOW())");
+							$stmt->execute([$title, $slug, $content]);
+							$success = "Successfully synced '{$fileName}' to database.";
+							// Refresh scan
+							$websitePages = scanWebsitePages($rootDir);
+							$pages = $db->query("SELECT id, title, slug, status, updated_at, created_at FROM pages ORDER BY updated_at DESC, created_at DESC")->fetchAll();
+						} catch (Throwable $e) {
+							$error = "Failed to sync file: " . $e->getMessage();
+						}
+					}
+				} else {
+					$error = 'Source file not found.';
+				}
+			}
 		}
 	}
 }
@@ -169,6 +291,24 @@ function scanWebsitePages($rootDir) {
 			$modified = filemtime($path);
 			$size = filesize($path);
 			
+			// Try to get title from HTML content
+			$extractedTitle = '';
+			$handle = @fopen($path, 'r');
+			if ($handle) {
+				$chunk = fread($handle, 4096); // Read 4KB to be safe for title
+				fclose($handle);
+				if (preg_match('/<title>(.*?)<\/title>/is', $chunk, $matches)) {
+					$extractedTitle = trim(strip_tags($matches[1]));
+				}
+			}
+			
+			if (!$extractedTitle) {
+				// Fallback to filename
+				$extractedTitle = str_replace('.html', '', $fileName);
+				$extractedTitle = str_replace(['-', '_'], ' ', $extractedTitle);
+				$extractedTitle = ucwords($extractedTitle);
+			}
+			
 			// Determine category
 			$category = 'Other';
 			if ($dir === '.' || $dir === '') {
@@ -198,7 +338,8 @@ function scanWebsitePages($rootDir) {
 			$pages[] = [
 				'path' => $relativePath,
 				'url' => $url,
-				'name' => $fileName,
+				'name' => $extractedTitle, // Use extracted title as name
+				'filename' => $fileName, // Keep original filename
 				'category' => $category,
 				'directory' => $dir === '.' ? 'Root' : $dir,
 				'modified' => $modified,
@@ -308,6 +449,26 @@ try {
 		.tab { padding:12px 20px; background:transparent; border:none; border-bottom:2px solid transparent; cursor:pointer; font-size:14px; color:#6b7280; margin-bottom:-2px; }
 		.tab.active { color:#111827; border-bottom-color:#667eea; font-weight:600; }
 		.tab:hover { color:#111827; }
+
+		/* Modal Styles */
+		.modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); display: none; align-items: center; justify-content: center; z-index: 1000; animation: fadeIn 0.2s ease-out; }
+		.modal { background: #ffffff; border-radius: 12px; width: 90%; max-width: 800px; max-height: 85vh; display: flex; flex-direction: column; overflow: hidden; box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1); }
+		.modal-header { padding: 16px 20px; border-bottom: 1px solid #e5e7eb; display: flex; align-items: center; justify-content: space-between; background: #f8fafc; }
+		.modal-header h3 { margin: 0; font-size: 18px; color: #111827; }
+		.modal-close { background: transparent; border: none; cursor: pointer; color: #6b7280; display: flex; align-items: center; justify-content: center; padding: 4px; border-radius: 4px; }
+		.modal-close:hover { background: #f1f5f9; color: #111827; }
+		.modal-body { padding: 0; overflow-y: auto; flex: 1; }
+		.modal-footer { padding: 16px 20px; border-top: 1px solid #e5e7eb; display: flex; justify-content: flex-end; gap: 12px; background: #f8fafc; }
+		
+		.sync-list-item { display: flex; align-items: center; justify-content: space-between; padding: 12px 20px; border-bottom: 1px solid #e5e7eb; transition: background 0.1s; }
+		.sync-list-item:hover { background: #f9fafb; }
+		.sync-list-item:last-child { border-bottom: none; }
+		
+		@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+		
+		.clickable-stat { cursor: pointer; transition: transform 0.1s, box-shadow 0.1s; position: relative; }
+		.clickable-stat:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(251, 191, 36, 0.3); border-color: #fbbf24 !important; }
+		.clickable-stat::after { content: 'Click to view'; position: absolute; bottom: 4px; right: 8px; font-size: 10px; color: #92400e; opacity: 0.7; font-weight: 500; }
 	</style>
 	<script>
 		function showTab(tabName, element) {
@@ -337,6 +498,21 @@ try {
 			}
 		}
 		
+		function openSyncModal() {
+			document.getElementById('sync-modal-overlay').style.display = 'flex';
+			document.body.style.overflow = 'hidden';
+		}
+		
+		function closeSyncModal() {
+			document.getElementById('sync-modal-overlay').style.display = 'none';
+			document.body.style.overflow = 'auto';
+		}
+		
+		// Close modal on escape key
+		document.addEventListener('keydown', (e) => {
+			if (e.key === 'Escape') closeSyncModal();
+		});
+
 		function expandAllCategories() {
 			document.querySelectorAll('.category-content').forEach(content => {
 				content.classList.remove('collapsed');
@@ -370,6 +546,7 @@ try {
 			<div class="alert alert-error" style="background:#fef2f2;color:#991b1b;border:1px solid #fecaca;padding:10px 12px;border-radius:8px;margin-bottom:14px;">
 				<?php echo escape($error); ?>
 			</div>
+			<?php if (strpos($error, 'table not found') !== false || strpos($error, 'Ensure the pages table exists') !== false): ?>
 			<pre style="white-space:pre-wrap;background:#fff;border:1px solid #e5e7eb;border-radius:8px;padding:12px;font-size:12px;color:#111827;">CREATE TABLE pages (
   id INT AUTO_INCREMENT PRIMARY KEY,
   title VARCHAR(255) NOT NULL,
@@ -379,8 +556,18 @@ try {
   status ENUM('draft','published') NOT NULL DEFAULT 'draft',
   published_at DATETIME NULL,
   created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  meta_title VARCHAR(255) NULL,
+  meta_description TEXT NULL,
+  meta_keywords TEXT NULL,
+  og_title VARCHAR(255) NULL,
+  og_description TEXT NULL,
+  og_image VARCHAR(255) NULL,
+  canonical_url VARCHAR(255) NULL,
+  robots VARCHAR(50) DEFAULT 'index, follow',
+  structured_data TEXT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;</pre>
+			<?php endif; ?>
 		<?php endif; ?>
 
 		<?php if ($success): ?>
@@ -441,7 +628,7 @@ try {
 					<div class="stat-label">Database Pages</div>
 				</div>
 				<?php if ($totalPagesToSync > 0): ?>
-				<div class="stat-item" style="background:#fef3c7; border:1px solid #fcd34d; border-radius:8px; padding:12px;">
+				<div class="stat-item clickable-stat" onclick="openSyncModal()" style="background:#fef3c7; border:1px solid #fcd34d; border-radius:8px; padding:12px;">
 					<div class="stat-value" style="color:#92400e;"><?php echo $totalPagesToSync; ?></div>
 					<div class="stat-label" style="color:#92400e;">Pages to Sync</div>
 				</div>
@@ -452,6 +639,9 @@ try {
 		<!-- Tabs -->
 		<div class="tabs">
 			<button class="tab active" onclick="showTab('all', this)">All Website Pages</button>
+			<?php if ($pages): ?>
+			<button class="tab" onclick="showTab('database', this)">Database Pages</button>
+			<?php endif; ?>
 		</div>
 		
 		<!-- Expand/Collapse Controls -->
@@ -525,16 +715,18 @@ try {
 									<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
 									<span>Edit</span>
 								</a>
+								<form method="POST" action="" style="display:inline;">
+									<input type="hidden" name="csrf_token" value="<?php echo $csrf; ?>">
+									<input type="hidden" name="action" value="duplicate_file">
+									<input type="hidden" name="f" value="<?php echo base64_encode($page['path']); ?>">
+									<button type="submit" class="btn" title="Duplicate file">
+										<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+										<span>Duplicate</span>
+									</button>
+								</form>
 								<a class="btn" href="<?php echo escape($page['url']); ?>" target="_blank">
 									<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M14 3h7v7m-1-6L10 14M5 5h5M5 10v9h9v-5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
 									<span>View</span>
-								</a>
-								<a class="btn" href="pages_edit.php?duplicate=<?php echo urlencode(base64_encode($page['path'])); ?>">
-									<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-										<rect x="9" y="9" width="13" height="13" rx="2" ry="2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-										<path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-									</svg>
-									<span>Duplicate</span>
 								</a>
 							</div>
 						</div>
@@ -550,7 +742,113 @@ try {
 			<?php endif; ?>
 		</div>
 
+		<!-- Database Pages Tab -->
+		<?php if ($pages): ?>
+		<div id="tab-database" class="tab-content" style="display:none;">
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Title</th>
+						<th>Slug</th>
+						<th>Status</th>
+						<th>Updated</th>
+						<th>Actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					<?php foreach ($pages as $p): ?>
+					<tr>
+						<td><?php echo escape($p['title']); ?></td>
+						<td><?php echo escape($p['slug']); ?></td>
+						<td><span class="badge <?php echo $p['status'] === 'published' ? 'published' : 'draft'; ?>"><?php echo escape(ucfirst($p['status'])); ?></span></td>
+						<td><?php echo escape(date('Y-m-d H:i', strtotime($p['updated_at'] ?: $p['created_at']))); ?></td>
+						<td>
+							<div class="actions">
+								<a class="btn" href="pages_edit.php?id=<?php echo (int)$p['id']; ?>">
+									<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+									<span>Edit</span>
+								</a>
+								<form method="POST" action="" style="display:inline;">
+									<input type="hidden" name="csrf_token" value="<?php echo $csrf; ?>">
+									<input type="hidden" name="action" value="duplicate_db">
+									<input type="hidden" name="id" value="<?php echo (int)$p['id']; ?>">
+									<button type="submit" class="btn" title="Duplicate database page">
+										<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+										<span>Duplicate</span>
+									</button>
+								</form>
+								<form method="POST" action="" onsubmit="return confirm('Delete this page? This cannot be undone.')" style="display:inline;">
+									<input type="hidden" name="csrf_token" value="<?php echo $csrf; ?>">
+									<input type="hidden" name="action" value="delete">
+									<input type="hidden" name="id" value="<?php echo (int)$p['id']; ?>">
+									<button class="btn" type="submit" style="border-color:#fecaca;color:#991b1b;background:#fef2f2;">
+										<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+											<polyline points="3 6 5 6 21 6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+											<path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+											<path d="M10 11v6M14 11v6" stroke-width="2" stroke-linecap="round"/>
+											<path d="M9 6V4a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+										</svg>
+										<span>Delete</span>
+									</button>
+								</form>
+								<a class="btn" href="../page.php?slug=<?php echo urlencode($p['slug']); ?>" target="_blank">
+									<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M14 3h7v7m-1-6L10 14M5 5h5M5 10v9h9v-5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+									<span>View</span>
+								</a>
+							</div>
+						</td>
+					</tr>
+					<?php endforeach; ?>
+				</tbody>
+			</table>
+		</div>
+		<?php endif; ?>
 	</div>
+
+	<!-- Sync Modal -->
+	<?php if ($totalPagesToSync > 0): ?>
+	<div id="sync-modal-overlay" class="modal-overlay" onclick="if(event.target === this) closeSyncModal()">
+		<div class="modal">
+			<div class="modal-header">
+				<h3>Select Pages to Sync</h3>
+				<button class="modal-close" onclick="closeSyncModal()">
+					<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+				</button>
+			</div>
+			<div class="modal-body">
+				<div style="padding: 12px 20px; background: #fffbeb; border-bottom: 1px solid #fef3c7; font-size: 13px; color: #92400e; display: flex; align-items: center; gap: 8px;">
+					<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+					Syncing will create a database record for the selected HTML file.
+				</div>
+				<?php foreach ($pagesToSync as $page): ?>
+				<div class="sync-list-item">
+					<div class="page-info">
+						<div class="page-name"><?php echo escape($page['name']); ?></div>
+						<div class="page-path" style="font-size: 11px;"><?php echo escape($page['path']); ?></div>
+					</div>
+					<form method="POST" action="">
+						<input type="hidden" name="csrf_token" value="<?php echo $csrf; ?>">
+						<input type="hidden" name="action" value="sync_single_page">
+						<input type="hidden" name="f" value="<?php echo base64_encode($page['path']); ?>">
+						<button type="submit" class="btn" style="background:#667eea; color:#fff; border-color:#667eea; padding: 4px 12px; font-size: 12px;">
+							<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+							<span>Sync</span>
+						</button>
+					</form>
+				</div>
+				<?php endforeach; ?>
+			</div>
+			<div class="modal-footer">
+				<button class="btn" onclick="closeSyncModal()">Close</button>
+				<form method="POST" action="" onsubmit="return confirm('Sync all <?php echo $totalPagesToSync; ?> pages to database?')">
+					<input type="hidden" name="csrf_token" value="<?php echo $csrf; ?>">
+					<input type="hidden" name="action" value="sync_to_db">
+					<button type="submit" class="btn" style="background:#667eea; color:#fff; border-color:#667eea;">Sync All</button>
+				</form>
+			</div>
+		</div>
+	</div>
+	<?php endif; ?>
 </body>
 </html>
 
