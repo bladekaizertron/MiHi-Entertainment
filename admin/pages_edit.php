@@ -24,9 +24,15 @@ if (isset($_GET['f'])) {
 	// Legacy support for direct file path (may fail on GoDaddy due to mod_security)
 	$filePath = $_GET['file'];
 }
-$originalFilePath = $filePath; // Preserve original for form submission
+if (isset($_GET['duplicate'])) {
+	$duplicatePath = base64_decode($_GET['duplicate']);
+	// If duplicating, we treat it similarly to editing a file but will change the save path
+	$filePath = $duplicatePath;
+}
+$originalFilePath = $filePath; // Preserve source path for template usage
 $isEdit = $id > 0;
 $isFileEdit = !empty($filePath);
+$isDuplicate = !empty($duplicatePath);
 
 // CSRF
 if (empty($_SESSION['csrf_token'])) {
@@ -139,6 +145,26 @@ if ($isFileEdit) {
 				if ($fileContent !== false) {
 					$page['title'] = pathinfo($filePath, PATHINFO_FILENAME);
 					$page['slug'] = str_replace('.html', '', $filePath);
+					
+					if ($isDuplicate) {
+						$page['title'] .= ' (Copy)';
+						
+						// Generate unique copy filename
+						$pathInfo = pathinfo($filePath);
+						$dir = $pathInfo['dirname'] === '.' ? '' : $pathInfo['dirname'] . '/';
+						$filename = $pathInfo['filename'];
+						$ext = $pathInfo['extension'];
+						
+						$counter = 1;
+						do {
+							$suffix = $counter === 1 ? '-copy' : '-copy-' . $counter;
+							$newRelativePath = $dir . $filename . $suffix . '.' . $ext;
+							$newPath = $rootDir . '/' . $newRelativePath;
+							$counter++;
+						} while (file_exists($newPath));
+						
+						$page['slug'] = $newRelativePath; // Pre-fill with new suggested path
+					}
 					
 					// Extract body content from full HTML document
 					$bodyContent = $fileContent;
@@ -356,6 +382,7 @@ function deleteStaticPage($slug) {
 		
 		// Handle HTML file save
 		$postFilePath = $_POST['file_path'] ?? '';
+		$templateSource = $_POST['template_source'] ?? '';
 		$saveAsFile = !empty($postFilePath) || ($isFileEdit && !empty($filePath));
 		$filePathToUse = !empty($postFilePath) ? $postFilePath : $filePath;
 		
@@ -407,8 +434,42 @@ function deleteStaticPage($slug) {
 					
 					// If file exists, preserve HTML structure and only update body
 					$finalContent = $content;
-					if (file_exists($targetFile)) {
+					
+					// If duplicating/new file, try to use template source
+					if (!file_exists($targetFile) && !empty($templateSource)) {
+						// Resolve template path
+						$tplPath = str_replace('\\', '/', $templateSource); // Basic normalization
+						$tplPath = ltrim($tplPath, '/');
+						
+						// Ensure valid extension (case-insensitive check)
+						$ext = pathinfo($tplPath, PATHINFO_EXTENSION);
+						if (strtolower($ext) !== 'html') {
+							$tplPath .= '.html';
+						}
+						
+						// Try to locate the template file
+						$tplRealPath = $realRoot . DIRECTORY_SEPARATOR . str_replace('/', DIRECTORY_SEPARATOR, $tplPath);
+						
+						if (!file_exists($tplRealPath)) {
+							// Try looking in root if not found
+							$tplRealPath = $realRoot . DIRECTORY_SEPARATOR . basename($tplPath);
+						}
+
+						if (file_exists($tplRealPath)) {
+							$originalContent = @file_get_contents($tplRealPath);
+						} else {
+							// If we can't find the template, we shouldn't save a broken partial file
+							// But we'll try to reconstruct a basic HTML skeleton if all else fails
+							$originalContent = "<!DOCTYPE html>\n<html>\n<head>\n<title>" . htmlspecialchars($title) . "</title>\n</head>\n<body>\n</body>\n</html>";
+						}
+					} elseif (file_exists($targetFile)) {
 						$originalContent = @file_get_contents($targetFile);
+					} else {
+						// New file without template
+						$originalContent = "<!DOCTYPE html>\n<html>\n<head>\n<title>" . htmlspecialchars($title) . "</title>\n</head>\n<body>\n</body>\n</html>";
+					}
+
+					if (isset($originalContent) && $originalContent !== false) {
 						if ($originalContent !== false && !empty($content)) {
 							// Split by body tags to preserve everything else (head, attributes, etc)
 							// This is much safer than DOMDocument or complex regex for large files
@@ -1068,7 +1129,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'save_seo_to_html') {
 
 		<form method="POST" action="" id="page-form">
 			<input type="hidden" name="csrf_token" value="<?php echo $csrf; ?>">
-			<?php if ($isFileEdit): ?>
+			<?php if ($isFileEdit && !$isDuplicate): ?>
 			<input type="hidden" name="file_path" value="<?php echo escape($originalFilePath); ?>">
 			<?php endif; ?>
 			
@@ -1083,6 +1144,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'save_seo_to_html') {
 						<label for="slug">Slug</label>
 						<input type="text" id="slug" name="slug" value="<?php echo escape($page['slug']); ?>" placeholder="auto-from-title">
 					</div>
+					<?php endif; ?>
+					<?php if ($isDuplicate): ?>
+					<div class="form-group">
+						<label for="duplicate_filename">New Filename / Path (e.g. <?php echo escape($page['slug']); ?>.html)</label>
+						<input type="text" id="duplicate_filename" name="file_path" value="<?php echo escape($page['slug']); ?>.html" required>
+					</div>
+					<input type="hidden" name="template_source" value="<?php echo escape($originalFilePath); ?>">
 					<?php endif; ?>
 				</div>
 				<?php if (!$isFileEdit): ?>

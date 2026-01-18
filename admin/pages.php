@@ -452,9 +452,6 @@ try {
 		<!-- Tabs -->
 		<div class="tabs">
 			<button class="tab active" onclick="showTab('all', this)">All Website Pages</button>
-			<?php if ($pages): ?>
-			<button class="tab" onclick="showTab('database', this)">Database Pages</button>
-			<?php endif; ?>
 		</div>
 		
 		<!-- Expand/Collapse Controls -->
@@ -532,6 +529,13 @@ try {
 									<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M14 3h7v7m-1-6L10 14M5 5h5M5 10v9h9v-5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
 									<span>View</span>
 								</a>
+								<a class="btn" href="pages_edit.php?duplicate=<?php echo urlencode(base64_encode($page['path'])); ?>">
+									<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+										<rect x="9" y="9" width="13" height="13" rx="2" ry="2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+										<path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+									</svg>
+									<span>Duplicate</span>
+								</a>
 							</div>
 						</div>
 				<?php endforeach; ?>
@@ -546,58 +550,6 @@ try {
 			<?php endif; ?>
 		</div>
 
-		<!-- Database Pages Tab -->
-		<?php if ($pages): ?>
-		<div id="tab-database" class="tab-content" style="display:none;">
-			<table class="table">
-				<thead>
-					<tr>
-						<th>Title</th>
-						<th>Slug</th>
-						<th>Status</th>
-						<th>Updated</th>
-						<th>Actions</th>
-					</tr>
-				</thead>
-				<tbody>
-					<?php foreach ($pages as $p): ?>
-					<tr>
-						<td><?php echo escape($p['title']); ?></td>
-						<td><?php echo escape($p['slug']); ?></td>
-						<td><span class="badge <?php echo $p['status'] === 'published' ? 'published' : 'draft'; ?>"><?php echo escape(ucfirst($p['status'])); ?></span></td>
-						<td><?php echo escape(date('Y-m-d H:i', strtotime($p['updated_at'] ?: $p['created_at']))); ?></td>
-						<td>
-							<div class="actions">
-								<a class="btn" href="pages_edit.php?id=<?php echo (int)$p['id']; ?>">
-									<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-									<span>Edit</span>
-								</a>
-								<form method="POST" action="" onsubmit="return confirm('Delete this page? This cannot be undone.')" style="display:inline;">
-									<input type="hidden" name="csrf_token" value="<?php echo $csrf; ?>">
-									<input type="hidden" name="action" value="delete">
-									<input type="hidden" name="id" value="<?php echo (int)$p['id']; ?>">
-									<button class="btn" type="submit" style="border-color:#fecaca;color:#991b1b;background:#fef2f2;">
-										<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-											<polyline points="3 6 5 6 21 6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-											<path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-											<path d="M10 11v6M14 11v6" stroke-width="2" stroke-linecap="round"/>
-											<path d="M9 6V4a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-										</svg>
-										<span>Delete</span>
-									</button>
-								</form>
-								<a class="btn" href="../page.php?slug=<?php echo urlencode($p['slug']); ?>" target="_blank">
-									<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M14 3h7v7m-1-6L10 14M5 5h5M5 10v9h9v-5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-									<span>View</span>
-								</a>
-							</div>
-						</td>
-					</tr>
-					<?php endforeach; ?>
-				</tbody>
-			</table>
-		</div>
-		<?php endif; ?>
 	</div>
 </body>
 </html>
