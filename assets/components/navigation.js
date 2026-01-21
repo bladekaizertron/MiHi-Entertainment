@@ -152,10 +152,14 @@
                                         <span class="font-semibold block mb-0.5">Virtual Photo Booth</span>
                                         <span class="text-xs text-gray-500 leading-relaxed">Snap, pose, and share—no app required, all online</span>
                                     </a>
+                                    <a href="${pathPrefix}photo-booth-bus.html" class="block text-sm text-gray-700 hover:text-blue-600 transition py-1.5 hover:bg-blue-50 rounded-md px-2 -mx-2">
+                                        <span class="font-semibold block mb-0.5">VW Bus Photo Booth</span>
+                                        <span class="text-xs text-gray-500 leading-relaxed">Snap, pose, and share—no app required, all online</span>
+                                    </a>
 
                                     <a href="${pathPrefix}photo-booth-sets.html" class="block text-sm text-gray-700 hover:text-blue-600 transition py-1.5 hover:bg-blue-50 rounded-md px-2 -mx-2">
-                                        <span class="font-semibold block mb-0.5">Custom Photo Booth</span>
-                                        <span class="text-xs text-gray-500 leading-relaxed">Fully branded, immersive photo set designs made just for you</span>
+                                        <span class="font-semibold block mb-0.5">Photo Booth Sets</span>
+                                        <span class="text-xs text-gray-500 leading-relaxed">Fun and immersive photo booth sets designed to fit your event vision</span>
                                     </a>
                                     <a href="${pathPrefix}photo-activations.html" class="block text-xs text-blue-600 hover:text-blue-700 transition font-semibold mt-3 pt-3 border-t border-gray-200">View All →</a>
                                 </div>
@@ -201,6 +205,10 @@
                                         <span class="font-semibold block mb-0.5">Event Photography</span>
                                         <span class="text-xs text-gray-500 leading-relaxed">Professional coverage of every moment</span>
                                     </a>
+                                    <a href="${pathPrefix}product/professional-headshots.html" class="block text-sm text-gray-700 hover:text-green-600 transition py-1.5 hover:bg-green-50 rounded-md px-2 -mx-2">
+                                        <span class="font-semibold block mb-0.5">Professional Headshots</span>
+                                        <span class="text-xs text-gray-500 leading-relaxed">Studio-quality headshots, on-site and effortless</span>
+                                    </a>
                                     <a href="${pathPrefix}product/brand-activation.html" class="block text-sm text-gray-700 hover:text-green-600 transition py-1.5 hover:bg-green-50 rounded-md px-2 -mx-2">
                                         <span class="font-semibold block mb-0.5">Brand Activation</span>
                                         <span class="text-xs text-gray-500 leading-relaxed">Immersive brand experiences and activations</span>
@@ -213,17 +221,9 @@
                                         <span class="font-semibold block mb-0.5">Cookie Printer</span>
                                         <span class="text-xs text-gray-500 leading-relaxed">Edible photo cookies on demand</span>
                                     </a>
-                                    <a href="${pathPrefix}pose-flashcards.html" class="block text-sm text-gray-700 hover:text-green-600 transition py-1.5 hover:bg-green-50 rounded-md px-2 -mx-2">
-                                        <span class="font-semibold block mb-0.5">Pose Cards</span>
-                                        <span class="text-xs text-gray-500 leading-relaxed">Signature pose flashcards for guests</span>
-                                    </a>
                                     <a href="${pathPrefix}lux-photography.html" class="block text-sm text-gray-700 hover:text-green-600 transition py-1.5 hover:bg-green-50 rounded-md px-2 -mx-2">
                                         <span class="font-semibold block mb-0.5">Lux Photography</span>
                                         <span class="text-xs text-gray-500 leading-relaxed">An elevated photography booth that leaves you and your guests feeling luxurious</span>
-                                    </a>
-                                    <a href="${pathPrefix}product/professional-headshots.html" class="block text-sm text-gray-700 hover:text-green-600 transition py-1.5 hover:bg-green-50 rounded-md px-2 -mx-2">
-                                        <span class="font-semibold block mb-0.5">Professional Headshots</span>
-                                        <span class="text-xs text-gray-500 leading-relaxed">Studio-quality headshots, on-site and effortless</span>
                                     </a>
                                 </div>
                             </div>
@@ -491,8 +491,8 @@
                                                 <a href="${pathPrefix}product/mosaic-photo-booth.html" class="block text-sm text-gray-700 hover:text-blue-700 hover:bg-blue-50/50 transition-all rounded-lg py-2.5 px-3 font-medium">Mosaic Photo Booth</a>
                                                 <a href="${pathPrefix}product/roaming-photo-booth.html" class="block text-sm text-gray-700 hover:text-blue-700 hover:bg-blue-50/50 transition-all rounded-lg py-2.5 px-3 font-medium">Roaming Photo Booth</a>
                                                 <a href="${pathPrefix}product/virtual-photo-booth.html" class="block text-sm text-gray-700 hover:text-blue-700 hover:bg-blue-50/50 transition-all rounded-lg py-2.5 px-3 font-medium">Virtual Photo Booth</a>
-
-                                                <a href="${pathPrefix}photo-booth-sets.html" class="block text-sm text-gray-700 hover:text-blue-700 hover:bg-blue-50/50 transition-all rounded-lg py-2.5 px-3 font-medium">Custom Photo Booth</a>
+                                                <a href="${pathPrefix}photo-booth-bus.html" class="block text-sm text-gray-700 hover:text-blue-700 hover:bg-blue-50/50 transition-all rounded-lg py-2.5 px-3 font-medium">VW Bus Photo Booth</a>
+                                                <a href="${pathPrefix}photo-booth-sets.html" class="block text-sm text-gray-700 hover:text-blue-700 hover:bg-blue-50/50 transition-all rounded-lg py-2.5 px-3 font-medium">Photo Booth Sets</a>
                                                 <a href="${pathPrefix}photo-activations.html" class="block text-xs text-blue-600 hover:text-blue-700 transition font-semibold mt-3 pt-3 border-t border-gray-200 rounded-lg py-2.5 px-3">View All →</a>
                                             </div>
                                         </div>
@@ -520,12 +520,11 @@
                                             </div>
                                             <div class="space-y-1 pl-1">
                                                 <a href="${pathPrefix}event-photography.html" class="block text-sm text-gray-700 hover:text-green-700 hover:bg-green-50/50 transition-all rounded-lg py-2.5 px-3 font-medium">Event Photography</a>
+                                                <a href="${pathPrefix}product/professional-headshots.html" class="block text-sm text-gray-700 hover:text-green-700 hover:bg-green-50/50 transition-all rounded-lg py-2.5 px-3 font-medium">Professional Headshots</a>
                                                 <a href="${pathPrefix}product/brand-activation.html" class="block text-sm text-gray-700 hover:text-green-700 hover:bg-green-50/50 transition-all rounded-lg py-2.5 px-3 font-medium">Brand Activation</a>
                                                 <a href="${pathPrefix}products/sketchbot-booth.html" class="block text-sm text-gray-700 hover:text-green-700 hover:bg-green-50/50 transition-all rounded-lg py-2.5 px-3 font-medium">SketchBot</a>
                                                 <a href="${pathPrefix}products/cookie-printer.html" class="block text-sm text-gray-700 hover:text-green-700 hover:bg-green-50/50 transition-all rounded-lg py-2.5 px-3 font-medium">Cookie Printer</a>
-                                                <a href="${pathPrefix}pose-flashcards.html" class="block text-sm text-gray-700 hover:text-green-700 hover:bg-green-50/50 transition-all rounded-lg py-2.5 px-3 font-medium">Pose Cards</a>
                                                 <a href="${pathPrefix}lux-photography.html" class="block text-sm text-gray-700 hover:text-green-700 hover:bg-green-50/50 transition-all rounded-lg py-2.5 px-3 font-medium">Lux Photography</a>
-                                                <a href="${pathPrefix}product/professional-headshots.html" class="block text-sm text-gray-700 hover:text-green-700 hover:bg-green-50/50 transition-all rounded-lg py-2.5 px-3 font-medium">Professional Headshots</a>
                                             </div>
                                         </div>
                                     </div>
