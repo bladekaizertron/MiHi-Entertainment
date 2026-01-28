@@ -722,6 +722,55 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'hero_background_upload
 	exit;
 }
 
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'icon_upload') {
+	$token = $_POST['csrf_token'] ?? '';
+	if (!hash_equals($csrf, $token)) {
+		http_response_code(400);
+		echo json_encode(['success' => false, 'message' => 'Invalid token']);
+		exit;
+	}
+
+	if (!isset($_FILES['file'])) {
+		http_response_code(400);
+		echo json_encode(['success' => false, 'message' => 'No file uploaded']);
+		exit;
+	}
+
+	$file = $_FILES['file'];
+	$maxSize = 2 * 1024 * 1024; // 2MB for icons
+	if ($file['size'] > $maxSize) {
+		http_response_code(400);
+		echo json_encode(['success' => false, 'message' => 'File too large. Max 2MB.']);
+		exit;
+	}
+
+	$allowedExt = ['svg', 'png', 'jpg', 'jpeg', 'webp'];
+	$ext = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
+	
+	if (!in_array($ext, $allowedExt)) {
+		http_response_code(400);
+		echo json_encode(['success' => false, 'message' => 'Invalid file type. Allowed: SVG, PNG, JPG, WEBP']);
+		exit;
+	}
+
+	$uploadDir = __DIR__ . '/../uploads/icons/';
+	if (!file_exists($uploadDir)) {
+		@mkdir($uploadDir, 0755, true);
+	}
+
+	$filename = 'icon_' . uniqid() . '.' . $ext;
+	$destination = $uploadDir . $filename;
+
+	if (move_uploaded_file($file['tmp_name'], $destination)) {
+		$url = SITE_URL . '/uploads/icons/' . $filename;
+		echo json_encode(['success' => true, 'url' => $url, 'type' => 'image']);
+	} else {
+		http_response_code(500);
+		echo json_encode(['success' => false, 'message' => 'Failed to save file.']);
+	}
+	exit;
+}
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'export_static') {
 	$token = $_POST['csrf_token'] ?? '';
 	if (!hash_equals($csrf, $token)) {
@@ -1697,7 +1746,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'save_seo_to_html') {
 							if (editMode) {
 								e.preventDefault();
 								e.stopPropagation();
-								editIconColors(this);
+								editIcon(this);
 							}
 						});
 						return; // Don't process children of SVG
@@ -1718,7 +1767,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'save_seo_to_html') {
 					    	element.classList.contains('feature-item-icon') || 
 					    	element.classList.contains('feature-icon') ||
 					    	element.classList.contains('icon-item') ||
-					    	element.classList.contains('icon-item-icon')
+					    	element.classList.contains('icon-item-icon') ||
+							// Add generic checks for icon containers often found in packages
+							(element.tagName === 'DIV' && element.querySelector('svg') && element.className.includes('w-') && element.className.includes('h-'))
 					    )) {
 						element.classList.add('icon-editable');
 						element.setAttribute('data-icon-id', 'icon-' + Date.now() + '-' + Math.random());
@@ -1726,7 +1777,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'save_seo_to_html') {
 							if (editMode) {
 								e.preventDefault();
 								e.stopPropagation();
-								editIconColors(this);
+								editIcon(this);
 							}
 						});
 						return; // Don't process children of icon containers
@@ -1747,6 +1798,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'save_seo_to_html') {
 						element.closest('.move-section-btn') ||
 						element.closest('.remove-item-btn') ||
 						element.closest('.gallery-item-container') ||
+						element.closest('.add-package-item-btn') ||
+						element.closest('.remove-package-item-btn') ||
 						element.closest('[data-non-editable]')
 					)) {
 						return;
@@ -1930,7 +1983,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'save_seo_to_html') {
 					if (!editMode) return;
 					
 					// Skip if clicking on non-editable elements
-					if (e.target.closest('.section-controls, .hero-change-bg-btn, .change-section-bg-btn, .remove-item-btn')) {
+					if (e.target.closest('.section-controls, .hero-change-bg-btn, .change-section-bg-btn, .remove-item-btn, .add-package-item-btn, .remove-package-item-btn')) {
 						return;
 					}
 					
@@ -2003,7 +2056,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'save_seo_to_html') {
 						    el.classList.contains('gallery-item-container') ||
 						    el.classList.contains('section-menu-dropdown') ||
 						    el.classList.contains('section-menu-toggle') ||
-						    el.closest('header, footer, nav, script, style, .section-controls, .section-menu-dropdown, .section-menu-toggle, .icon-editable, .media-editable, .remove-item-btn, .gallery-item-container')) {
+						    el.classList.contains('add-package-item-btn') ||
+						    el.classList.contains('remove-package-item-btn') ||
+						    el.closest('header, footer, nav, script, style, .section-controls, .section-menu-dropdown, .section-menu-toggle, .icon-editable, .media-editable, .remove-item-btn, .gallery-item-container, .add-package-item-btn, .remove-package-item-btn')) {
 							return;
 						}
 						
@@ -2280,10 +2335,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'save_seo_to_html') {
 					    element.closest('.gallery-item-container') ||
 					    element.closest('svg') ||
 					    element.closest('.icon-editable') ||
+					    element.closest('.add-package-item-btn') ||
+					    element.closest('.remove-package-item-btn') ||
 					    element.classList.contains('remove-item-btn') ||
 					    element.classList.contains('gallery-item-container') ||
 					    element.classList.contains('section-menu-dropdown') ||
-					    element.classList.contains('section-menu-toggle')) {
+					    element.classList.contains('section-menu-toggle') ||
+					    element.classList.contains('add-package-item-btn') ||
+					    element.classList.contains('remove-package-item-btn')) {
 						return;
 					}
 					
@@ -2462,10 +2521,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'save_seo_to_html') {
 					    e.target.closest('.remove-item-btn') ||
 					    e.target.closest('.gallery-item-container') ||
 					    e.target.closest('svg') ||
+					    e.target.closest('.add-package-item-btn') ||
+					    e.target.closest('.remove-package-item-btn') ||
 					    e.target.classList.contains('remove-item-btn') ||
 					    e.target.classList.contains('gallery-item-container') ||
 					    e.target.classList.contains('section-menu-dropdown') ||
-					    e.target.classList.contains('section-menu-toggle')) {
+					    e.target.classList.contains('section-menu-toggle') ||
+					    e.target.classList.contains('add-package-item-btn') ||
+					    e.target.classList.contains('remove-package-item-btn')) {
 						return;
 					}
 					
@@ -2974,6 +3037,221 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'save_seo_to_html') {
 				
 				// Setup hero background editing
 				setupHeroBackgroundEditing();
+				
+				// Function to edit icons
+				function editIcon(element) {
+					// Remove existing modal
+					const existingModal = document.getElementById('icon-picker-modal');
+					if (existingModal) existingModal.remove();
+					
+					// Common icons dictionary
+					const icons = {
+						'Check': '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>',
+						'Camera': '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path>',
+						'Video': '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path>',
+						'Star': '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"></path>',
+						'Sparkles': '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path>',
+						'Share': '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"></path>',
+						'Gallery': '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>',
+						'Lightning': '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>',
+						'User': '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>',
+						'WiFi': '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.111 16.404a5.5 5.5 0 017.778 0M12 20h.01m-6.08-7.071c3.904-3.905 10.236-3.905 14.141 0M1.394 9.393c5.857-5.857 15.355-5.857 21.213 0"></path>',
+						'Clock': '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>',
+						'LightBulb': '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>',
+						'Music': '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"></path>',
+						'Settings': '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>',
+						'Mail': '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>',
+						'Tag': '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path>',
+						'ColorPalette': '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"></path>',
+						'MagicWand': '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path>',
+						'Heart': '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>'
+					};
+					
+					// Create modal structure
+					const modal = document.createElement('div');
+					modal.id = 'icon-picker-modal';
+					modal.style.cssText = 'position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.75); z-index:100000; display:flex; align-items:center; justify-content:center;';
+					
+					const modalContent = document.createElement('div');
+					modalContent.style.cssText = 'background:white; padding:24px; border-radius:12px; max-width:600px; width:90%; height:500px; display:flex; flex-direction:column; box-shadow:0 20px 60px rgba(0,0,0,0.3);';
+					
+					modalContent.innerHTML = `
+						<div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
+							<h3 style="margin:0; font-size:18px; font-weight:600;">Select Icon</h3>
+							<button id="close-icon-picker" style="background:none; border:none; font-size:20px; cursor:pointer;">&times;</button>
+						</div>
+						<div style="flex:1; overflow-y:auto; display:grid; grid-template-columns:repeat(auto-fill, minmax(80px, 1fr)); gap:12px; padding:4px;">
+							${Object.entries(icons).map(([name, svgPath]) => `
+								<div class="icon-option" data-name="${name}" style="aspect-ratio:1; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8px; border:2px solid #e5e7eb; border-radius:8px; cursor:pointer; transition:all 0.2s;">
+									<svg class="icon-preview" style="width:24px; height:24px; color:#4b5563;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+										${svgPath}
+									</svg>
+									<span style="font-size:11px; color:#6b7280; text-align:center;">${name}</span>
+								</div>
+							`).join('')}
+						</div>
+						<div style="margin-top:20px; text-align:right; display:flex; justify-content:space-between; align-items:center;">
+							<button id="icon-picker-upload-btn" style="padding:10px 16px; border:2px dashed #667eea; background:#eff6ff; color:#667eea; border-radius:8px; cursor:pointer; font-weight:600; display:flex; align-items:center; gap:6px;">
+								<span>📤</span> Upload Icon
+							</button>
+							<button id="icon-picker-cancel" style="padding:10px 16px; border:1px solid #e5e7eb; background:white; color:#6b7280; border-radius:8px; cursor:pointer;">Cancel</button>
+						</div>
+					`;
+					
+					modal.appendChild(modalContent);
+					document.body.appendChild(modal);
+					
+					// Upload Icon Handler
+					document.getElementById('icon-picker-upload-btn').onclick = function() {
+						const input = document.createElement('input');
+						input.type = 'file';
+						input.accept = '.svg, .png, .jpg, .jpeg, .webp';
+						input.onchange = function(e) {
+							const file = e.target.files[0];
+							if (!file) return;
+							
+							const formData = new FormData();
+							formData.append('file', file);
+							formData.append('action', 'icon_upload');
+							formData.append('csrf_token', csrfToken);
+							
+							const btn = document.getElementById('icon-picker-upload-btn');
+							const originalText = btn.innerHTML;
+							btn.innerHTML = '⏳ Uploading...';
+							btn.disabled = true;
+							
+							fetch(window.location.href, {
+								method: 'POST',
+								body: formData
+							})
+							.then(res => res.json())
+							.then(data => {
+								if (data.success) {
+									// Replace icon with new image/svg
+									const finalUrl = isFileEdit ? '../uploads/icons/' + data.url.split('/').pop() : data.url;
+									
+									// If it's an SVG file, we might want to fetch and inject it inline? 
+									// But simplest is to use an IMG tag or replace content.
+									// For compatibility with the existing system (which expects SVG mostly), 
+									// let's try to detect if it's SVG and fetch it content, otherwise use IMG tag.
+									
+									if (data.url.toLowerCase().endsWith('.svg')) {
+										// Fetch content to inline it
+										fetch(data.url)
+											.then(r => r.text())
+											.then(svgContent => {
+												// Sanitize/Clean up SVG? For now direct injection
+												// Find target
+												let target = element.tagName === 'DIV' ? element : (element.tagName === 'svg' ? element.parentNode : element);
+												
+												// If element is SVG, we replace it with new SVG
+												if (element.tagName === 'svg') {
+													const wrapper = document.createElement('div');
+													wrapper.innerHTML = svgContent;
+													const newSvg = wrapper.querySelector('svg');
+													if (newSvg) {
+														// Copy classes/attributes
+														Array.from(element.attributes).forEach(attr => {
+															if (!newSvg.hasAttribute(attr.name)) {
+																newSvg.setAttribute(attr.name, attr.value);
+															}
+														});
+														element.parentNode.replaceChild(newSvg, element);
+														// Re-bind click
+														makeEditable(newSvg);
+														newSvg.addEventListener('click', function(e) {
+															if(editMode) { e.preventDefault(); e.stopPropagation(); editIcon(this); }
+														});
+														changes['icon-update-' + Date.now()] = { type: 'icon', action: 'replace', element: newSvg, content: svgContent };
+													}
+												} else {
+													// Container
+													element.innerHTML = svgContent;
+													const newSvg = element.querySelector('svg');
+													if(newSvg) {
+														newSvg.classList.add('w-5', 'h-5', 'text-[#FF4F4F]'); // Default styles if missing
+													}
+													changes['icon-update-' + Date.now()] = { type: 'icon', action: 'create', element: element, content: svgContent };
+												}
+												modal.remove();
+											});
+									} else {
+										// Image
+										const imgHtml = `<img src="${finalUrl}" class="w-5 h-5 object-contain" alt="Icon">`;
+										if (element.tagName === 'svg') {
+											const wrapper = document.createElement('span'); // Temp wrapper
+											element.parentNode.replaceChild(wrapper, element);
+											wrapper.outerHTML = imgHtml;
+											// We lost the reference to re-bind edit?
+											// We need to bind edit on the new IMG
+											// Actually the parent container usually handles it? 
+											// Or we should wrap it.
+										} else {
+											element.innerHTML = imgHtml;
+										}
+										// Since we might have replaced the element, update bindings?
+										// For now, let's assume the mutation observer or re-init handles it, 
+										// OR we just set innerHTML of container if possible.
+										
+										changes['icon-update-' + Date.now()] = { type: 'icon', action: 'image', element: element, url: finalUrl };
+										modal.remove();
+									}
+								} else {
+									alert('Upload failed: ' + data.message);
+								}
+							})
+							.catch(err => {
+								console.error(err);
+								alert('Upload failed.');
+							})
+							.finally(() => {
+								btn.innerHTML = originalText;
+								btn.disabled = false;
+							});
+						};
+						input.click();
+					};
+					const iconOptions = modal.querySelectorAll('.icon-option');
+					iconOptions.forEach(opt => {
+						opt.onmouseenter = function() {
+							this.style.borderColor = '#667eea';
+							this.style.background = '#f3f4f6';
+							this.querySelector('svg').style.color = '#667eea';
+						};
+						opt.onmouseleave = function() {
+							this.style.borderColor = '#e5e7eb';
+							this.style.background = 'white';
+							this.querySelector('svg').style.color = '#4b5563';
+						};
+						opt.onclick = function() {
+							const name = this.getAttribute('data-name');
+							const newPath = icons[name];
+							
+							// Find the target SVG
+							let targetSvg = element.tagName === 'svg' ? element : element.querySelector('svg');
+							
+							if (targetSvg) {
+								targetSvg.innerHTML = newPath;
+								changes['icon-update-' + Date.now()] = { type: 'icon', action: 'update', element: targetSvg, path: newPath };
+							} else {
+								// If element is a container but empty, insert generic SVG structure
+								if (element.tagName === 'DIV') {
+									element.innerHTML = `<svg class="w-5 h-5 text-[#FF4F4F]" fill="none" stroke="currentColor" viewBox="0 0 24 24">${newPath}</svg>`;
+									changes['icon-update-' + Date.now()] = { type: 'icon', action: 'create', element: element, path: newPath };
+								}
+							}
+							
+							modal.remove();
+						};
+					});
+					
+					document.getElementById('close-icon-picker').onclick = () => modal.remove();
+					document.getElementById('icon-picker-cancel').onclick = () => modal.remove();
+					
+					modal.onclick = (e) => {
+						if (e.target === modal) modal.remove();
+					};
+				}
 				
 				// Function to edit section background
 				function editSectionBackground(section) {
@@ -3847,9 +4125,227 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'save_seo_to_html') {
 					});
 				}
 				
-				// Setup section drag and drop (only in edit mode)
+				// Setup booth packages editing (Add/Remove items + Icon Picker)
+				function setupPackagesEditing() {
+					// Find package lists - look for ULs in package-related containers
+					const packageLists = iframeDoc.querySelectorAll('#packages ul, .package-card ul, [class*="package"] ul, div[class*="rounded"] ul');
+					
+					packageLists.forEach(ul => {
+						// Check if we've already set up this list
+						if (ul.hasAttribute('data-package-list-setup')) return;
+						ul.setAttribute('data-package-list-setup', 'true');
+						
+						// Add "Add Feature" button after the list
+						// Check if button already exists (in case of re-run)
+						let existingBtn = ul.parentNode.querySelector('.add-package-item-btn');
+						if (existingBtn) existingBtn.remove();
+
+						const addBtn = iframeDoc.createElement('button');
+						addBtn.className = 'add-package-item-btn';
+						addBtn.innerHTML = '➕ Add Feature';
+						addBtn.style.cssText = `
+							display: ${editMode ? 'block' : 'none'};
+							margin-top: 12px;
+							width: 100%;
+							padding: 8px;
+							border: 2px dashed #e5e7eb;
+							background: rgba(255, 255, 255, 0.5);
+							color: #6b7280;
+							border-radius: 8px;
+							cursor: pointer;
+							font-size: 13px;
+							font-weight: 500;
+							transition: all 0.2s ease;
+							text-align: center;
+						`;
+						
+						addBtn.onmouseenter = function() {
+							this.style.background = '#f3f4f6';
+							this.style.borderColor = '#667eea';
+							this.style.color = '#4b5563';
+						};
+						addBtn.onmouseleave = function() {
+							this.style.background = 'rgba(255, 255, 255, 0.5)';
+							this.style.borderColor = '#e5e7eb';
+							this.style.color = '#6b7280';
+						};
+						
+						// Insert after UL
+						if (ul.nextSibling) {
+							ul.parentNode.insertBefore(addBtn, ul.nextSibling);
+						} else {
+							ul.parentNode.appendChild(addBtn);
+						}
+						
+						// Add listener
+						addBtn.addEventListener('click', function(e) {
+							if (!editMode) return;
+							e.preventDefault();
+							e.stopPropagation(); // Stop propagation to prevent dragstart of parent
+							addPackageItem(ul);
+						});
+						
+						// Setup existing items
+						const items = ul.querySelectorAll('li');
+						items.forEach(li => setupPackageItem(li));
+					});
+				}
+
+				function setupPackageItem(li) {
+					if (li.hasAttribute('data-package-item-setup')) return;
+					li.setAttribute('data-package-item-setup', 'true');
+					
+					// Ensure relative positioning
+					const computedStyle = iframeDoc.defaultView.getComputedStyle(li);
+					if (computedStyle.position === 'static') {
+						li.style.position = 'relative';
+					}
+					
+					// Create remove button
+					const removeBtn = iframeDoc.createElement('button');
+					removeBtn.className = 'remove-package-item-btn';
+					removeBtn.innerHTML = '🗑️';
+					removeBtn.title = 'Remove Feature';
+					removeBtn.type = 'button';
+					removeBtn.setAttribute('contenteditable', 'false');
+					removeBtn.contentEditable = false;
+					removeBtn.setAttribute('data-non-editable', 'true');
+					removeBtn.style.cssText = `
+						display: none;
+						position: absolute;
+						right: 10px;
+						top: 50%;
+						transform: translateY(-50%);
+						background: #EF4444;
+						color: white;
+						border: none;
+						border-radius: 4px;
+						width: 24px;
+						height: 24px;
+						font-size: 14px;
+						cursor: pointer;
+						z-index: 50;
+						align-items: center;
+						justify-content: center;
+						box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+						transition: all 0.2s;
+					`;
+					
+					li.appendChild(removeBtn);
+					
+					// Show/hide on hover (only in edit mode)
+					li.addEventListener('mouseenter', function() {
+						if (editMode) {
+							removeBtn.style.display = 'flex';
+							// Make sure parent is relative/has space
+							if (getComputedStyle(li).position === 'static') li.style.position = 'relative';
+						}
+					});
+					
+					// Use a small timeout or check bounding box to prevent flickering
+					li.addEventListener('mouseleave', function(e) {
+						// Don't hide if we moved to the child button
+						if (e.relatedTarget === removeBtn || removeBtn.contains(e.relatedTarget)) return;
+						removeBtn.style.display = 'none';
+					});
+					
+					removeBtn.addEventListener('mouseleave', function(e) {
+						// Don't hide if we moved back to parent LI
+						if (e.relatedTarget === li || li.contains(e.relatedTarget)) return;
+						removeBtn.style.display = 'none';
+					});
+					
+					// Remove functionality
+					removeBtn.addEventListener('click', function(e) {
+						e.preventDefault();
+						e.stopPropagation();
+						if (confirm('Remove this feature?')) {
+							li.remove();
+							changes['package-update-' + Date.now()] = { type: 'package', action: 'remove' };
+						}
+					});
+					
+					// Ensure existing icons are editable
+					const icon = li.querySelector('svg, .icon-container, .feature-icon');
+					if (icon) {
+						makeEditable(icon);
+					}
+					// Ensure text is editable
+					makeEditable(li);
+				}
+
+				function addPackageItem(ul) {
+					// Clone the first item to keep styling matches
+					const firstItem = ul.querySelector('li');
+					let newItem;
+					
+					if (firstItem) {
+						newItem = firstItem.cloneNode(true);
+						
+						// Clean up the cloned item
+						newItem.removeAttribute('data-package-item-setup');
+						newItem.removeAttribute('data-id');
+						newItem.style.background = '';
+						newItem.style.borderRadius = '';
+						
+						// Remove any existing remove button
+						const existingRemove = newItem.querySelector('.remove-package-item-btn');
+						if (existingRemove) existingRemove.remove();
+						
+						// Reset text content
+						// Try to find the text container
+						// Common pattern: SVG then Text
+						const textNodes = [];
+						const walker = iframeDoc.createTreeWalker(newItem, NodeFilter.SHOW_TEXT, null, false);
+						let node;
+						while(node = walker.nextNode()) {
+							if (node.textContent.trim().length > 0) {
+								textNodes.push(node);
+							}
+						}
+						
+						if (textNodes.length > 0) {
+							// Update the last substantial text node (assuming it's the label)
+							textNodes[textNodes.length - 1].textContent = 'New Feature';
+						} else {
+							// Try finding specific tags
+							const span = newItem.querySelector('span, p, div:not(:first-child)');
+							if (span) span.textContent = 'New Feature';
+						}
+						
+						// Clean up editable attributes from clone
+						newItem.querySelectorAll('[data-id]').forEach(el => el.removeAttribute('data-id'));
+						newItem.classList.remove('editable-text', 'editable-highlight', 'icon-editable');
+						
+					} else {
+						// Create from scratch if list is empty
+						newItem = iframeDoc.createElement('li');
+						newItem.className = 'flex items-start gap-4 group/item';
+						newItem.innerHTML = `
+							<div class="flex-shrink-0 w-10 h-10 bg-[#FF4F4F]/20 rounded-xl flex items-center justify-center transition-colors">
+								<svg class="w-5 h-5 text-[#FF4F4F]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+								</svg>
+							</div>
+							<span class="text-black font-medium pt-2">New Feature</span>
+						`;
+					}
+					
+					ul.appendChild(newItem);
+					setupPackageItem(newItem);
+					
+					// Make everything inside editable immediately
+					setTimeout(() => {
+						makeEditable(newItem);
+					}, 10);
+					
+					changes['package-update-' + Date.now()] = { type: 'package', action: 'add' };
+				}
+				
+				// Setup Booth Packages (and section drag drop)
 				if (editMode) {
 					setupSectionDragDrop();
+					setupPackagesEditing();
 				}
 				
 				// Add hover effects in edit mode
@@ -3953,6 +4449,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'save_seo_to_html') {
 			editModeBtn.classList.add('active');
 			previewModeBtn.classList.remove('active');
 			indicator.style.display = 'block';
+			
+			// Re-enable package buttons explicitly
+			try {
+				const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+				const pkgButtons = iframeDoc.querySelectorAll('.add-package-item-btn');
+				pkgButtons.forEach(btn => btn.style.display = 'block');
+			} catch(e) {}
+			
 			initEditor();
 		});
 		
@@ -3966,22 +4470,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'save_seo_to_html') {
 			if (toolbar) {
 				toolbar.classList.remove('active');
 			}
-			// Hide all change background buttons when exiting edit mode
-			try {
-				const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
-				const buttons = iframeDoc.querySelectorAll('.hero-change-bg-btn');
-				buttons.forEach(btn => btn.style.display = 'none');
-				
-				// Disable drag and drop
-				const sections = iframeDoc.querySelectorAll('.draggable-section');
-				sections.forEach(section => {
-					section.draggable = false;
-					const controls = section.querySelector('.section-controls');
-					if (controls) controls.style.display = 'none';
-					section.style.outline = '';
-					section.style.outlineOffset = '';
-				});
-			} catch(e) {}
+				// Hide all change background buttons and package buttons when exiting edit mode
+				try {
+					const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+					const bgButtons = iframeDoc.querySelectorAll('.hero-change-bg-btn, .change-section-bg-btn');
+					bgButtons.forEach(btn => btn.style.display = 'none');
+					
+					const pkgButtons = iframeDoc.querySelectorAll('.add-package-item-btn, .remove-package-item-btn');
+					pkgButtons.forEach(btn => btn.style.display = 'none');
+					
+					// Disable drag and drop
+					const sections = iframeDoc.querySelectorAll('.draggable-section');
+					sections.forEach(section => {
+						section.draggable = false;
+						const controls = section.querySelector('.section-controls');
+						if (controls) controls.style.display = 'none';
+						section.style.outline = '';
+						section.style.outlineOffset = '';
+					});
+				} catch(e) {}
 		});
 		
 		// Device preview buttons
