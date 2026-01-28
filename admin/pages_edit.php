@@ -3098,8 +3098,122 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'save_seo_to_html') {
 						</div>
 					`;
 					
+					// Use a 2-column layout for the modal content if possible, or just append style section
+					modalContent.style.width = '800px'; 
+					modalContent.style.maxWidth = '95%';
+					modalContent.style.flexDirection = 'row';
+					modalContent.style.padding = '0';
+					modalContent.style.overflow = 'hidden';
+					
+					modalContent.innerHTML = `
+						<!-- Left Side: Icons -->
+						<div style="flex:1; padding:24px; border-right:1px solid #e5e7eb; display:flex; flex-direction:column; overflow-y:auto;">
+							<div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+								<h3 style="margin:0; font-size:18px; font-weight:600;">Select Icon</h3>
+							</div>
+							<div style="flex:1; overflow-y:auto; display:grid; grid-template-columns:repeat(auto-fill, minmax(60px, 1fr)); gap:8px; padding-bottom:12px;">
+								${Object.entries(icons).map(([name, svgPath]) => `
+									<div class="icon-option" data-name="${name}" style="aspect-ratio:1; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px; border:1px solid #e5e7eb; border-radius:8px; cursor:pointer; transition:all 0.2s;">
+										<svg class="icon-preview" style="width:20px; height:20px; color:#4b5563;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+											${svgPath}
+										</svg>
+										<span style="font-size:10px; color:#6b7280; text-align:center; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; width:100%; padding:0 2px;">${name}</span>
+									</div>
+								`).join('')}
+							</div>
+							<div style="margin-top:12px;">
+								<button id="icon-picker-upload-btn" style="width:100%; padding:10px; border:2px dashed #667eea; background:#eff6ff; color:#667eea; border-radius:8px; cursor:pointer; font-weight:600; display:flex; align-items:center; justify-content:center; gap:6px;">
+									<span>📤</span> Upload Custom Icon
+								</button>
+							</div>
+						</div>
+						
+						<!-- Right Side: Styles -->
+						<div style="width:300px; padding:24px; background:#f9fafb; display:flex; flex-direction:column; overflow-y:auto;">
+							<div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
+								<h3 style="margin:0; font-size:18px; font-weight:600;">Customize Style</h3>
+								<button id="close-icon-picker" style="background:none; border:none; font-size:24px; cursor:pointer; color:#9ca3af;">&times;</button>
+							</div>
+							
+							<!-- Icon Color -->
+							<div style="margin-bottom:24px;">
+								<label style="display:block; font-size:13px; font-weight:600; color:#374151; margin-bottom:8px;">Icon Color (Stroke)</label>
+								<div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:8px;">
+									${['#1F1F1F', '#FFFFFF', '#FF4F4F', '#18F1E1'].map(c => `
+										<button class="style-color-btn" data-target="icon" data-color="${c}" style="width:32px; height:32px; border-radius:50%; background:${c}; border:2px solid #e5e7eb; cursor:pointer; box-shadow:0 1px 2px rgba(0,0,0,0.05);"></button>
+									`).join('')}
+								</div>
+								<div style="display:flex; align-items:center; gap:8px;">
+									<input type="color" id="custom-icon-color" style="width:40px; height:32px; padding:0; border:1px solid #e5e7eb; border-radius:4px; cursor:pointer;">
+									<span style="font-size:12px; color:#6b7280;">Custom Color</span>
+								</div>
+							</div>
+							
+							<!-- Background Color -->
+							<div style="margin-bottom:24px;">
+								<label style="display:block; font-size:13px; font-weight:600; color:#374151; margin-bottom:8px;">Background Color</label>
+								<div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:8px;">
+									${[
+										'rgba(31,31,31,0.1)', 'rgba(31,31,31,1)', 
+										'rgba(255,255,255,0.1)', 'rgba(255,255,255,1)',
+										'rgba(255,79,79,0.1)', 'rgba(255,79,79,1)',
+										'rgba(24,241,225,0.1)', 'rgba(24,241,225,1)'
+									].map(c => `
+										<button class="style-color-btn" data-target="bg" data-color="${c}" style="width:32px; height:32px; border-radius:6px; background:${c}; border:2px solid #e5e7eb; cursor:pointer; box-shadow:0 1px 2px rgba(0,0,0,0.05);"></button>
+									`).join('')}
+								</div>
+								<div style="display:flex; align-items:center; gap:8px;">
+									<input type="color" id="custom-bg-color" style="width:40px; height:32px; padding:0; border:1px solid #e5e7eb; border-radius:4px; cursor:pointer;">
+									<span style="font-size:12px; color:#6b7280;">Custom Color</span>
+								</div>
+							</div>
+							
+							<div style="margin-top:auto;">
+								<button id="icon-picker-cancel" style="width:100%; padding:10px; border:1px solid #d1d5db; background:white; color:#374151; border-radius:8px; cursor:pointer; font-weight:500; margin-bottom:8px;">Close</button>
+							</div>
+						</div>
+					`;
+					
 					modal.appendChild(modalContent);
 					document.body.appendChild(modal);
+					
+					// Determine target elements
+					let targetSvg = element.tagName === 'svg' ? element : element.querySelector('svg');
+					let targetContainer = (element.tagName === 'svg' ? element.parentNode : element);
+					
+					// Helper to apply changes
+					const applyStyle = (type, val) => {
+						if (type === 'icon' && targetSvg) {
+							targetSvg.style.color = val;
+							targetSvg.style.setProperty('color', val, 'important');
+							// Also try stroke/fill directly if needed
+							// targetSvg.style.stroke = val; 
+							changes['icon-style-' + Date.now()] = { type: 'icon-style', subType: 'color', value: val, element: targetSvg };
+						} else if (type === 'bg' && targetContainer) {
+							targetContainer.style.backgroundColor = val;
+							targetContainer.style.setProperty('background-color', val, 'important');
+							// Remove bg-* classes if present to avoid conflicts? 
+							// Inline style with !important usually wins, but for cleanliness:
+							// targetContainer.className = targetContainer.className.replace(/bg-\[[^\]]+\]\/\d+/g, '');
+							changes['icon-style-' + Date.now()] = { type: 'icon-style', subType: 'bg', value: val, element: targetContainer };
+						}
+					};
+					
+					// Style Buttons
+					modal.querySelectorAll('.style-color-btn').forEach(btn => {
+						btn.onclick = function() {
+							const type = this.getAttribute('data-target');
+							const color = this.getAttribute('data-color');
+							applyStyle(type, color);
+						};
+					});
+					
+					// Custom Pickers
+					const iconColorPicker = document.getElementById('custom-icon-color');
+					iconColorPicker.oninput = function() { applyStyle('icon', this.value); };
+					
+					const bgColorPicker = document.getElementById('custom-bg-color');
+					bgColorPicker.oninput = function() { applyStyle('bg', this.value); };
 					
 					// Upload Icon Handler
 					document.getElementById('icon-picker-upload-btn').onclick = function() {
@@ -3127,74 +3241,53 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'save_seo_to_html') {
 							.then(res => res.json())
 							.then(data => {
 								if (data.success) {
-									// Replace icon with new image/svg
 									const finalUrl = isFileEdit ? '../uploads/icons/' + data.url.split('/').pop() : data.url;
 									
-									// If it's an SVG file, we might want to fetch and inject it inline? 
-									// But simplest is to use an IMG tag or replace content.
-									// For compatibility with the existing system (which expects SVG mostly), 
-									// let's try to detect if it's SVG and fetch it content, otherwise use IMG tag.
-									
 									if (data.url.toLowerCase().endsWith('.svg')) {
-										// Fetch content to inline it
 										fetch(data.url)
 											.then(r => r.text())
 											.then(svgContent => {
-												// Sanitize/Clean up SVG? For now direct injection
-												// Find target
 												let target = element.tagName === 'DIV' ? element : (element.tagName === 'svg' ? element.parentNode : element);
-												
-												// If element is SVG, we replace it with new SVG
 												if (element.tagName === 'svg') {
 													const wrapper = document.createElement('div');
 													wrapper.innerHTML = svgContent;
 													const newSvg = wrapper.querySelector('svg');
 													if (newSvg) {
-														// Copy classes/attributes
 														Array.from(element.attributes).forEach(attr => {
 															if (!newSvg.hasAttribute(attr.name)) {
 																newSvg.setAttribute(attr.name, attr.value);
 															}
 														});
 														element.parentNode.replaceChild(newSvg, element);
-														// Re-bind click
 														makeEditable(newSvg);
 														newSvg.addEventListener('click', function(e) {
 															if(editMode) { e.preventDefault(); e.stopPropagation(); editIcon(this); }
 														});
+														// Update reference for styling
+														targetSvg = newSvg;
 														changes['icon-update-' + Date.now()] = { type: 'icon', action: 'replace', element: newSvg, content: svgContent };
 													}
 												} else {
-													// Container
 													element.innerHTML = svgContent;
 													const newSvg = element.querySelector('svg');
 													if(newSvg) {
-														newSvg.classList.add('w-5', 'h-5', 'text-[#FF4F4F]'); // Default styles if missing
+														newSvg.classList.add('w-5', 'h-5', 'text-[#FF4F4F]'); 
+														// Update reference for styling
+														targetSvg = newSvg;
 													}
 													changes['icon-update-' + Date.now()] = { type: 'icon', action: 'create', element: element, content: svgContent };
 												}
-												modal.remove();
 											});
 									} else {
-										// Image
 										const imgHtml = `<img src="${finalUrl}" class="w-5 h-5 object-contain" alt="Icon">`;
 										if (element.tagName === 'svg') {
-											const wrapper = document.createElement('span'); // Temp wrapper
+											const wrapper = document.createElement('span'); 
 											element.parentNode.replaceChild(wrapper, element);
 											wrapper.outerHTML = imgHtml;
-											// We lost the reference to re-bind edit?
-											// We need to bind edit on the new IMG
-											// Actually the parent container usually handles it? 
-											// Or we should wrap it.
 										} else {
 											element.innerHTML = imgHtml;
 										}
-										// Since we might have replaced the element, update bindings?
-										// For now, let's assume the mutation observer or re-init handles it, 
-										// OR we just set innerHTML of container if possible.
-										
 										changes['icon-update-' + Date.now()] = { type: 'icon', action: 'image', element: element, url: finalUrl };
-										modal.remove();
 									}
 								} else {
 									alert('Upload failed: ' + data.message);
@@ -3211,6 +3304,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'save_seo_to_html') {
 						};
 						input.click();
 					};
+					
 					const iconOptions = modal.querySelectorAll('.icon-option');
 					iconOptions.forEach(opt => {
 						opt.onmouseenter = function() {
@@ -3227,21 +3321,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'save_seo_to_html') {
 							const name = this.getAttribute('data-name');
 							const newPath = icons[name];
 							
-							// Find the target SVG
-							let targetSvg = element.tagName === 'svg' ? element : element.querySelector('svg');
-							
 							if (targetSvg) {
 								targetSvg.innerHTML = newPath;
 								changes['icon-update-' + Date.now()] = { type: 'icon', action: 'update', element: targetSvg, path: newPath };
-							} else {
-								// If element is a container but empty, insert generic SVG structure
-								if (element.tagName === 'DIV') {
-									element.innerHTML = `<svg class="w-5 h-5 text-[#FF4F4F]" fill="none" stroke="currentColor" viewBox="0 0 24 24">${newPath}</svg>`;
-									changes['icon-update-' + Date.now()] = { type: 'icon', action: 'create', element: element, path: newPath };
-								}
+							} else if (targetContainer && targetContainer.tagName === 'DIV') {
+								targetContainer.innerHTML = `<svg class="w-5 h-5 text-[#FF4F4F]" fill="none" stroke="currentColor" viewBox="0 0 24 24">${newPath}</svg>`;
+								targetSvg = targetContainer.querySelector('svg');
+								changes['icon-update-' + Date.now()] = { type: 'icon', action: 'create', element: targetContainer, path: newPath };
 							}
-							
-							modal.remove();
 						};
 					});
 					
