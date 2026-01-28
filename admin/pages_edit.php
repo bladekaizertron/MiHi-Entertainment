@@ -3192,9 +3192,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'save_seo_to_html') {
 						} else if (type === 'bg' && targetContainer) {
 							targetContainer.style.backgroundColor = val;
 							targetContainer.style.setProperty('background-color', val, 'important');
-							// Remove bg-* classes if present to avoid conflicts? 
-							// Inline style with !important usually wins, but for cleanliness:
-							// targetContainer.className = targetContainer.className.replace(/bg-\[[^\]]+\]\/\d+/g, '');
+							
+							// Fix for hover state reversion: Enforce persistence
+							targetContainer.setAttribute('data-custom-bg', val);
+							
+							// Remove conflicting classes that might cause hover issues
+							targetContainer.classList.remove('transition-colors');
+							
+							// Add listener to enforce color on hover interactions if not already added
+							if (!targetContainer.hasAttribute('data-bg-listener-attached')) {
+								targetContainer.setAttribute('data-bg-listener-attached', 'true');
+								
+								// Force color on mouse events to override any CSS hover effects
+								const enforceColor = () => {
+									const customBg = targetContainer.getAttribute('data-custom-bg');
+									if (customBg) {
+										targetContainer.style.setProperty('background-color', customBg, 'important');
+									}
+								};
+								
+								targetContainer.addEventListener('mouseenter', enforceColor);
+								targetContainer.addEventListener('mouseleave', enforceColor);
+								targetContainer.addEventListener('mouseover', enforceColor);
+							}
+							
 							changes['icon-style-' + Date.now()] = { type: 'icon-style', subType: 'bg', value: val, element: targetContainer };
 						}
 					};
@@ -4279,154 +4300,173 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'save_seo_to_html') {
 				}
 
 				function setupPackageItem(li) {
-					if (li.hasAttribute('data-package-item-setup')) return;
-					li.setAttribute('data-package-item-setup', 'true');
-					
-					// Ensure relative positioning
-					const computedStyle = iframeDoc.defaultView.getComputedStyle(li);
-					if (computedStyle.position === 'static') {
-						li.style.position = 'relative';
-					}
-					
-					// Create remove button
-					const removeBtn = iframeDoc.createElement('button');
-					removeBtn.className = 'remove-package-item-btn';
-					removeBtn.innerHTML = '🗑️';
-					removeBtn.title = 'Remove Feature';
-					removeBtn.type = 'button';
-					removeBtn.setAttribute('contenteditable', 'false');
-					removeBtn.contentEditable = false;
-					removeBtn.setAttribute('data-non-editable', 'true');
-					removeBtn.style.cssText = `
-						display: none;
-						position: absolute;
-						right: 10px;
-						top: 50%;
-						transform: translateY(-50%);
-						background: #EF4444;
-						color: white;
-						border: none;
-						border-radius: 4px;
-						width: 24px;
-						height: 24px;
-						font-size: 14px;
-						cursor: pointer;
-						z-index: 50;
-						align-items: center;
-						justify-content: center;
-						box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-						transition: all 0.2s;
-					`;
-					
-					li.appendChild(removeBtn);
-					
-					// Show/hide on hover (only in edit mode)
-					li.addEventListener('mouseenter', function() {
-						if (editMode) {
-							removeBtn.style.display = 'flex';
-							// Make sure parent is relative/has space
-							if (getComputedStyle(li).position === 'static') li.style.position = 'relative';
+					try {
+						if (li.hasAttribute('data-package-item-setup')) return;
+						li.setAttribute('data-package-item-setup', 'true');
+						
+						// Ensure relative positioning
+						const computedStyle = iframeDoc.defaultView.getComputedStyle(li);
+						if (computedStyle.position === 'static') {
+							li.style.position = 'relative';
 						}
-					});
-					
-					// Use a small timeout or check bounding box to prevent flickering
-					li.addEventListener('mouseleave', function(e) {
-						// Don't hide if we moved to the child button
-						if (e.relatedTarget === removeBtn || removeBtn.contains(e.relatedTarget)) return;
-						removeBtn.style.display = 'none';
-					});
-					
-					removeBtn.addEventListener('mouseleave', function(e) {
-						// Don't hide if we moved back to parent LI
-						if (e.relatedTarget === li || li.contains(e.relatedTarget)) return;
-						removeBtn.style.display = 'none';
-					});
-					
-					// Remove functionality
-					removeBtn.addEventListener('click', function(e) {
-						e.preventDefault();
-						e.stopPropagation();
-						if (confirm('Remove this feature?')) {
-							li.remove();
-							changes['package-update-' + Date.now()] = { type: 'package', action: 'remove' };
+						
+						// Create remove button
+						const removeBtn = iframeDoc.createElement('button');
+						removeBtn.className = 'remove-package-item-btn';
+						removeBtn.innerHTML = '🗑️';
+						removeBtn.title = 'Remove Feature';
+						removeBtn.type = 'button';
+						removeBtn.setAttribute('contenteditable', 'false');
+						removeBtn.contentEditable = false;
+						removeBtn.setAttribute('data-non-editable', 'true');
+						removeBtn.style.cssText = `
+							display: none;
+							position: absolute;
+							right: 10px;
+							top: 50%;
+							transform: translateY(-50%);
+							background: #EF4444;
+							color: white;
+							border: none;
+							border-radius: 4px;
+							width: 24px;
+							height: 24px;
+							font-size: 14px;
+							cursor: pointer;
+							z-index: 50;
+							align-items: center;
+							justify-content: center;
+							box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+							transition: all 0.2s;
+						`;
+						
+						li.appendChild(removeBtn);
+						
+						// Show/hide on hover (only in edit mode)
+						li.addEventListener('mouseenter', function() {
+							if (editMode) {
+								removeBtn.style.display = 'flex';
+								// Make sure parent is relative/has space
+								if (getComputedStyle(li).position === 'static') li.style.position = 'relative';
+							}
+						});
+						
+						// Use a small timeout or check bounding box to prevent flickering
+						li.addEventListener('mouseleave', function(e) {
+							// Don't hide if we moved to the child button
+							if (e.relatedTarget === removeBtn || removeBtn.contains(e.relatedTarget)) return;
+							removeBtn.style.display = 'none';
+						});
+						
+						removeBtn.addEventListener('mouseleave', function(e) {
+							// Don't hide if we moved back to parent LI
+							if (e.relatedTarget === li || li.contains(e.relatedTarget)) return;
+							removeBtn.style.display = 'none';
+						});
+						
+						// Remove functionality
+						removeBtn.addEventListener('click', function(e) {
+							e.preventDefault();
+							e.stopPropagation();
+							if (confirm('Remove this feature?')) {
+								li.remove();
+								changes['package-update-' + Date.now()] = { type: 'package', action: 'remove' };
+							}
+						});
+						
+						// Ensure existing icons are editable
+						const icon = li.querySelector('svg, .icon-container, .feature-icon');
+						if (icon) {
+							makeEditable(icon);
 						}
-					});
-					
-					// Ensure existing icons are editable
-					const icon = li.querySelector('svg, .icon-container, .feature-icon');
-					if (icon) {
-						makeEditable(icon);
+						// Ensure text is editable
+						makeEditable(li);
+					} catch(e) {
+						console.error('Error in setupPackageItem:', e);
 					}
-					// Ensure text is editable
-					makeEditable(li);
 				}
 
 				function addPackageItem(ul) {
-					// Clone the first item to keep styling matches
-					const firstItem = ul.querySelector('li');
-					let newItem;
-					
-					if (firstItem) {
-						newItem = firstItem.cloneNode(true);
+					try {
+						// Clone the first item to keep styling matches
+						const firstItem = ul.querySelector('li');
+						let newItem;
 						
-						// Clean up the cloned item
-						newItem.removeAttribute('data-package-item-setup');
-						newItem.removeAttribute('data-id');
-						newItem.style.background = '';
-						newItem.style.borderRadius = '';
-						
-						// Remove any existing remove button
-						const existingRemove = newItem.querySelector('.remove-package-item-btn');
-						if (existingRemove) existingRemove.remove();
-						
-						// Reset text content
-						// Try to find the text container
-						// Common pattern: SVG then Text
-						const textNodes = [];
-						const walker = iframeDoc.createTreeWalker(newItem, NodeFilter.SHOW_TEXT, null, false);
-						let node;
-						while(node = walker.nextNode()) {
-							if (node.textContent.trim().length > 0) {
-								textNodes.push(node);
+						if (firstItem) {
+							newItem = firstItem.cloneNode(true);
+							
+							// Clean up the cloned item
+							newItem.removeAttribute('data-package-item-setup');
+							newItem.removeAttribute('data-id');
+							newItem.style.background = '';
+							newItem.style.borderRadius = '';
+							
+							// Remove any existing remove button
+							const existingRemove = newItem.querySelector('.remove-package-item-btn');
+							if (existingRemove) existingRemove.remove();
+							
+							// Reset text content
+							// Try to find the text container
+							// Common pattern: SVG then Text
+							const textNodes = [];
+							const walker = iframeDoc.createTreeWalker(newItem, NodeFilter.SHOW_TEXT, null, false);
+							let node;
+							while(node = walker.nextNode()) {
+								if (node.textContent.trim().length > 0) {
+									textNodes.push(node);
+								}
 							}
-						}
-						
-						if (textNodes.length > 0) {
-							// Update the last substantial text node (assuming it's the label)
-							textNodes[textNodes.length - 1].textContent = 'New Feature';
+							
+							if (textNodes.length > 0) {
+								// Update the last substantial text node (assuming it's the label)
+								textNodes[textNodes.length - 1].textContent = 'New Feature';
+							} else {
+								// Try finding specific tags
+								const span = newItem.querySelector('span, p, div:not(:first-child)');
+								if (span) span.textContent = 'New Feature';
+							}
+							
+							// Clean up editable attributes from clone
+							newItem.querySelectorAll('[data-id]').forEach(el => el.removeAttribute('data-id'));
+							
+							// Ensure deep cleanup of listener attributes on clone and all its children
+							newItem.removeAttribute('data-bg-listener-attached');
+							newItem.removeAttribute('data-custom-bg');
+							newItem.querySelectorAll('*').forEach(el => {
+								el.removeAttribute('data-bg-listener-attached');
+								el.removeAttribute('data-custom-bg');
+								el.classList.add('transition-colors'); // Restore transition class
+							});
+							
+							newItem.classList.remove('editable-text', 'editable-highlight', 'icon-editable');
+							
 						} else {
-							// Try finding specific tags
-							const span = newItem.querySelector('span, p, div:not(:first-child)');
-							if (span) span.textContent = 'New Feature';
+							// Create from scratch if list is empty
+							newItem = iframeDoc.createElement('li');
+							newItem.className = 'flex items-start gap-4 group/item';
+							newItem.innerHTML = `
+								<div class="flex-shrink-0 w-10 h-10 bg-[#FF4F4F]/20 rounded-xl flex items-center justify-center transition-colors">
+									<svg class="w-5 h-5 text-[#FF4F4F]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+									</svg>
+								</div>
+								<span class="text-black font-medium pt-2">New Feature</span>
+							`;
 						}
 						
-						// Clean up editable attributes from clone
-						newItem.querySelectorAll('[data-id]').forEach(el => el.removeAttribute('data-id'));
-						newItem.classList.remove('editable-text', 'editable-highlight', 'icon-editable');
+						ul.appendChild(newItem);
+						setupPackageItem(newItem);
 						
-					} else {
-						// Create from scratch if list is empty
-						newItem = iframeDoc.createElement('li');
-						newItem.className = 'flex items-start gap-4 group/item';
-						newItem.innerHTML = `
-							<div class="flex-shrink-0 w-10 h-10 bg-[#FF4F4F]/20 rounded-xl flex items-center justify-center transition-colors">
-								<svg class="w-5 h-5 text-[#FF4F4F]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-								</svg>
-							</div>
-							<span class="text-black font-medium pt-2">New Feature</span>
-						`;
+						// Make everything inside editable immediately
+						setTimeout(() => {
+							makeEditable(newItem);
+						}, 10);
+						
+						console.log('Package item added successfully');
+						changes['package-update-' + Date.now()] = { type: 'package', action: 'add' };
+					} catch(e) {
+						console.error('Error in addPackageItem:', e);
 					}
-					
-					ul.appendChild(newItem);
-					setupPackageItem(newItem);
-					
-					// Make everything inside editable immediately
-					setTimeout(() => {
-						makeEditable(newItem);
-					}, 10);
-					
-					changes['package-update-' + Date.now()] = { type: 'package', action: 'add' };
 				}
 				
 				// Setup Booth Packages (and section drag drop)
@@ -4542,6 +4582,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'save_seo_to_html') {
 				const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
 				const pkgButtons = iframeDoc.querySelectorAll('.add-package-item-btn');
 				pkgButtons.forEach(btn => btn.style.display = 'block');
+				
+				// Re-enable contentEditable for all editable text elements
+				const editableElements = iframeDoc.querySelectorAll('.editable-text, .editable-link');
+				editableElements.forEach(el => {
+					if (el.tagName !== 'A' && el.tagName !== 'BUTTON') { // Links/buttons handled by click listener
+						el.contentEditable = 'true';
+					}
+				});
+				
+				// Re-instantiate dragging if needed
+				// initEditor() calls makeEditable which handles most things, but explicit contentEditable restoration is safer
 			} catch(e) {}
 			
 			initEditor();
@@ -4575,6 +4626,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'save_seo_to_html') {
 						section.style.outline = '';
 						section.style.outlineOffset = '';
 					});
+					
+					// Disable contentEditable for all editable elements
+					const editableElements = iframeDoc.querySelectorAll('[contenteditable="true"]');
+					editableElements.forEach(el => {
+						el.contentEditable = 'false';
+						el.classList.remove('editable-highlight');
+						// Remove outline styles
+						el.style.outline = '';
+						el.style.outlineOffset = '';
+						el.style.cursor = '';
+					});
+					
 				} catch(e) {}
 		});
 		
