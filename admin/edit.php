@@ -456,6 +456,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 menubar: 'file edit view insert format tools table help',
                 toolbar: 'undo redo | bold italic underline strikethrough | fontfamily fontsize blocks | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist | forecolor backcolor removeformat | pagebreak | charmap emoticons | fullscreen  preview save print | insertfile image media template link anchor codesample | ltr rtl',
                 toolbar_sticky: true,
+                // Image formats for alignment
+                formats: {
+                    alignleft: { selector: 'p,h1,h2,h3,h4,h5,h6,td,th,div,ul,ol,li,table,img', classes: 'alignleft' },
+                    aligncenter: { selector: 'p,h1,h2,h3,h4,h5,h6,td,th,div,ul,ol,li,table,img', classes: 'aligncenter' },
+                    alignright: { selector: 'p,h1,h2,h3,h4,h5,h6,td,th,div,ul,ol,li,table,img', classes: 'alignright' },
+                },
+
                 images_upload_url: 'upload_image.php',
                 automatic_uploads: true,
                 file_picker_types: 'image',
@@ -478,7 +485,69 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     xhr.send(formData);
                 }),
                 image_caption: true,
-                content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:16px }'
+                content_style: `
+                    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Montserrat:wght@400;500;600;700;800;900&display=swap');
+                    
+                    body { 
+                        font-family: 'Inter', sans-serif; 
+                        font-size: 1.125rem;
+                        line-height: 1.75;
+                        color: #374151;
+                        padding: 1rem;
+                    }
+                    
+                    h1, h2, h3, h4, h5, h6 {
+                        font-family: 'Montserrat', sans-serif;
+                        font-weight: 700;
+                        letter-spacing: -0.02em;
+                        color: #1f2937;
+                        margin-top: 2em;
+                        margin-bottom: 1em;
+                    }
+                    
+                    h2 { font-size: 2rem; }
+                    h3 { font-size: 1.5rem; }
+                    
+                    p { margin-bottom: 1.5rem; }
+                    
+                    a { color: #0050ff; text-decoration: underline; }
+                    
+                    blockquote {
+                        border-left: 4px solid #0050ff;
+                        padding-left: 1.5rem;
+                        margin: 2rem 0;
+                        font-style: italic;
+                        color: #6b7280;
+                    }
+                    
+                    img {
+                        max-width: 100%;
+                        height: auto;
+                        border-radius: 0.5rem;
+                    }
+                    
+                    /* Image Alignment */
+                    .alignleft {
+                        display: inline;
+                        float: left;
+                        margin-right: 1.5em;
+                        margin-bottom: 1em;
+                    }
+                    
+                    .alignright {
+                        display: inline;
+                        float: right;
+                        margin-left: 1.5em;
+                        margin-bottom: 1em;
+                    }
+                    
+                    .aligncenter {
+                        display: block;
+                        margin-left: auto;
+                        margin-right: auto;
+                        margin-bottom: 1em;
+                    }
+                `
             });
         });
 

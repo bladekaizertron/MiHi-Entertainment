@@ -183,7 +183,6 @@ function generatePostPage($postId) {
             max-width: 100%;
             height: auto;
             border-radius: 0.5rem;
-            margin: 2rem 0;
         }
         
         .post-content h2 {
@@ -260,6 +259,36 @@ function generatePostPage($postId) {
             background: #e5e7eb;
             color: #0050ff;
         }
+
+        .post-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 0.5rem;
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Image Alignment Support - High Specificity */
+        .post-content .alignleft, .post-content img.alignleft {
+            display: inline;
+            float: left;
+            margin-right: 1.5em;
+            margin-bottom: 1em;
+        }
+
+        .post-content .alignright, .post-content img.alignright {
+            display: inline;
+            float: right;
+            margin-left: 1.5em;
+            margin-bottom: 1em;
+        }
+
+        .post-content .aligncenter, .post-content img.aligncenter {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            margin-bottom: 2rem;
+        }
     </style>
 </head>
 <body class="bg-gray-50">
@@ -268,7 +297,7 @@ function generatePostPage($postId) {
     
     <!-- Hero Section -->
     <section class="bg-gradient-to-br from-blue-50 via-white to-purple-50 py-12 md:py-20">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
             <div class="text-center mb-8">';
     
     if ($post['category_name']) {
@@ -340,7 +369,7 @@ function generatePostPage($postId) {
     </section>
             
     <!-- Main Content -->
-    <main class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl py-12">
+    <main class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl py-12">
         <article class="bg-white rounded-2xl shadow-lg p-8 md:p-12">
             <div class="post-content prose prose-lg max-w-none">
                 ' . $post['content'] . '
