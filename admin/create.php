@@ -387,7 +387,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 },
                 
                 // Image Upload Configuration
-                images_upload_url: 'upload_image.php',
+                images_upload_url: 'upload_image',
                 automatic_uploads: true,
                 file_picker_types: 'image',
                 
@@ -395,7 +395,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 images_upload_handler: (blobInfo, progress) => new Promise((resolve, reject) => {
                     const xhr = new XMLHttpRequest();
                     xhr.withCredentials = false;
-                    xhr.open('POST', 'upload_image.php');
+                    xhr.open('POST', 'upload_image');
 
                     xhr.upload.onprogress = (e) => {
                         progress(e.loaded / e.total * 100);
@@ -540,7 +540,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             const formData = new FormData();
             formData.append('thumbnail', file);
             
-            fetch('upload_thumbnail.php', {
+            fetch('upload_thumbnail', {
                 method: 'POST',
                 body: formData
             })
