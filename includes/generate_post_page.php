@@ -165,7 +165,7 @@ function generatePostPage($postId) {
         
         h1, h2, h3, h4, h5, h6 {
             font-family: \'Montserrat\', sans-serif;
-            font-weight: 700;
+            font-weight: 700 !important;
             letter-spacing: -0.02em;
         }
         
