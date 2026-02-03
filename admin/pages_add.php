@@ -641,12 +641,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <a href="#" class="group relative inline-flex items-center justify-center gap-2 sm:gap-3 text-white px-5 sm:px-8 md:px-10 py-3 sm:py-4 md:py-5 rounded-full text-sm sm:text-base md:text-lg font-medium shadow-2xl hover:shadow-[#FF4F4F]/50 transition-all duration-500 transform hover:scale-105 sm:hover:scale-110 hover:-translate-y-1 overflow-hidden w-full sm:w-auto min-w-[140px] sm:min-w-0 touch-manipulation" style="background: #FF4F4F;">
                 <span class="relative z-10">Get Your Quote</span>
             </a>
-            <button type="button" class="group inline-flex items-center justify-center gap-2 sm:gap-3 px-5 sm:px-8 md:px-10 py-3 sm:py-4 md:py-5 rounded-full text-sm sm:text-base md:text-lg font-medium backdrop-blur-md bg-white/10 border-2 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:scale-105 sm:hover:scale-110 hover:-translate-y-1 text-white w-full sm:w-auto min-w-[140px] sm:min-w-0 cursor-pointer touch-manipulation" style="border-color: rgba(24, 241, 225, 0.5);" onmouseover="this.style.borderColor='rgba(24, 241, 225, 0.7)'; this.style.background='rgba(24, 241, 225, 0.2)';" onmouseout="this.style.borderColor='rgba(24, 241, 225, 0.5)'; this.style.background='rgba(255, 255, 255, 0.1)';">
+            <a href="#" class="group inline-flex items-center justify-center gap-2 sm:gap-3 px-5 sm:px-8 md:px-10 py-3 sm:py-4 md:py-5 rounded-full text-sm sm:text-base md:text-lg font-medium backdrop-blur-md bg-white/10 border-2 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:scale-105 sm:hover:scale-110 hover:-translate-y-1 text-white w-full sm:w-auto min-w-[140px] sm:min-w-0 cursor-pointer touch-manipulation" style="border-color: rgba(24, 241, 225, 0.5);" onmouseover="this.style.borderColor='rgba(24, 241, 225, 0.7)'; this.style.background='rgba(24, 241, 225, 0.2)';" onmouseout="this.style.borderColor='rgba(24, 241, 225, 0.5)'; this.style.background='rgba(255, 255, 255, 0.1)';">
                 <svg class="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498A1 1 0 0121 17.72V21a2 2 0 01-2 2h-1C9.716 23 3 16.284 3 8V7a2 2 0 012-2z"></path>
                 </svg>
                 <span>Call Us</span>
-            </button>
+            </a>
         </div>
     </div>
 </section>

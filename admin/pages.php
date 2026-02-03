@@ -429,7 +429,7 @@ try {
 		.category-header .category-title { display:flex; align-items:center; gap:8px; flex:1; }
 		.category-header .category-arrow { transition:transform 0.3s ease; width:20px; height:20px; display:flex; align-items:center; justify-content:center; }
 		.category-header.collapsed .category-arrow { transform:rotate(-90deg); }
-		.category-content { border:1px solid #e5e7eb; border-top:none; border-radius:0 0 8px 8px; overflow:hidden; max-height:5000px; transition:max-height 0.3s ease, opacity 0.2s ease; opacity:1; }
+		.category-content { border:1px solid #e5e7eb; border-top:none; border-radius:0 0 8px 8px; overflow:hidden; max-height:50000px; transition:max-height 0.3s ease, opacity 0.2s ease; opacity:1; }
 		.category-content.collapsed { max-height:0; opacity:0; overflow:hidden; border:none; }
 		.page-item { display:flex; align-items:center; justify-content:space-between; padding:12px 16px; border-bottom:1px solid #e5e7eb; }
 		.page-item:last-child { border-bottom:none; }
