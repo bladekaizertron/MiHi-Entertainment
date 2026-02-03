@@ -1743,6 +1743,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <div class="mb-4">
                     <label class="block text-xs text-zinc-500 mb-1">Button Text</label>
                     <input type="text" value="${el.textContent.trim()}" onchange="updateButtonText(this.value)" placeholder="Enter button text..." class="bg-zinc-800 border border-zinc-700 text-white px-2 py-1.5 rounded text-xs w-full">
+                    
+                ${tagName === 'A' ? (() => {
+                    const isCallButton = (el.textContent.trim().toLowerCase().includes('call') || (el.getAttribute('href') && el.getAttribute('href').startsWith('tel:')));
+                    return `
+                    <label class="block text-xs text-zinc-500 mb-1 mt-3">${isCallButton ? 'Telephone Number' : 'Link URL'}</label>
+                    <input type="text" 
+                           value="${el.getAttribute('href') ? (isCallButton ? el.getAttribute('href').replace('tel:', '') : el.getAttribute('href')) : '#'}" 
+                           onchange="${isCallButton ? 'updatePhoneNumber(this.value)' : 'updateButtonLink(this.value)'}" 
+                           placeholder="${isCallButton ? '720-555-1234' : 'https://example.com'}" 
+                           class="bg-zinc-800 border border-zinc-700 text-white px-2 py-1.5 rounded text-xs w-full">
+                    ${!isCallButton ? `<div class="text-[10px] text-zinc-500 mt-1">For calls, use <strong>tel:1234567890</strong></div>` : ''}
+                    `;
+                })() : ''}
+
                     <div class="mt-2 flex gap-2">
                         <button onclick="updateButtonText('Get Your Quote')" class="flex-1 bg-zinc-700 hover:bg-zinc-600 text-xs py-1.5 rounded transition-colors">Get Your Quote</button>
                         <button onclick="updateButtonText('Call Us')" class="flex-1 bg-zinc-700 hover:bg-zinc-600 text-xs py-1.5 rounded transition-colors">Call Us</button>
@@ -1836,7 +1850,44 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         function updateButtonText(text) {
             if (selectedElement && (selectedElement.tagName === 'A' || selectedElement.tagName === 'BUTTON')) {
-                selectedElement.textContent = text;
+                // Preserve internal structure if it contains SVG icon
+                if (selectedElement.querySelector('svg')) {
+                    // Update only text node
+                    let textNode = null;
+                    selectedElement.childNodes.forEach(node => {
+                        if (node.nodeType === Node.TEXT_NODE && node.textContent.trim() !== '') {
+                            textNode = node;
+                        }
+                    });
+                    
+                    if (textNode) {
+                        textNode.textContent = ' ' + text;
+                    } else {
+                        // If no text node found, append one
+                         selectedElement.appendChild(document.createTextNode(text));
+                    }
+                } else {
+                    selectedElement.textContent = text;
+                }
+            }
+        }
+        
+        function updateButtonLink(url) {
+            if (selectedElement && selectedElement.tagName === 'A') {
+                selectedElement.setAttribute('href', url.trim());
+            }
+        }
+
+        function updatePhoneNumber(value) {
+            if (selectedElement && selectedElement.tagName === 'A') {
+                // Remove existing tel: if user typed it, then clean up
+                let number = value.replace('tel:', '').trim();
+                // Ensure it's not empty/hash
+                if (number === '' || number === '#') {
+                    selectedElement.setAttribute('href', '#');
+                } else {
+                    selectedElement.setAttribute('href', 'tel:' + number);
+                }
             }
         }
 
