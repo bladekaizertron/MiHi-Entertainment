@@ -3038,7 +3038,316 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'save_seo_to_html') {
 				// Setup hero background editing
 				setupHeroBackgroundEditing();
 				
-				// Function to edit icons
+				// Setup generic text section editing
+				setupSectionSpecificEditing();
+
+				function setupSectionSpecificEditing() {
+					const sections = iframeDoc.querySelectorAll('section');
+					sections.forEach(section => {
+						// Detection Logic:
+						// 1. Must have an H2
+						// 2. Must NOT be a complex component (Cards, Split, Video, Hero)
+						// 3. We want standard "Text Block" style sections
+						
+						const h2 = section.querySelector('h2');
+						if (!h2) return;
+
+						// Exclude known complex types
+						if (section.querySelector('.feature-card-item') || 
+							section.querySelector('.video-card-item') || 
+							section.querySelector('.split-screen-feature-item') ||
+							section.querySelector('#split-screen-grid') ||
+							section.querySelector('.hero-background-image') ||
+							section.getAttribute('data-type') === 'hero' // if marked
+						) {
+							return;
+						}
+
+						// This is likely a text block.
+						// The structure is usually section > div > h2
+						// We want to control the direct parent of H2 (the content container)
+						const parentContainer = h2.parentElement;
+						
+						if (parentContainer) {
+							// Ensure relative positioning for controls
+							if (getComputedStyle(section).position === 'static') section.style.position = 'relative';
+							if (getComputedStyle(parentContainer).position === 'static') parentContainer.style.position = 'relative';
+
+							// STRUCTURAL PREP (Idempotent)
+							// We want independent control, so we need to ensure the parent isn't constraining everything strictly
+							// But we should respect existing classes if possible, just override with style.
+							
+							// Check if we've already processed this one (marker class?)
+							if (parentContainer.classList.contains('layout-controls-enabled')) return;
+							parentContainer.classList.add('layout-controls-enabled');
+
+						// Check if we should? If it's a "max-w-4xl" standard block, yes.
+							if (parentContainer.classList.contains('max-w-4xl') || parentContainer.style.maxWidth) {
+								// We will let the slider control this
+								// We don't remove the class, but we set style to override
+                                parentContainer.classList.remove('max-w-4xl');
+                                parentContainer.style.maxWidth = '1200px'; // Increase default from 4xl (896px) to 1200px
+							}
+
+							// 2. Identify/Create Content Wrapper (siblings after H2)
+							// If H2 is mixed with content, we separate them.
+							
+							// Find nodes after H2 (paragraphs, lists, divs)
+							// But only if they are not already wrapped in our manual wrapper
+							let contentWrapper = parentContainer.querySelector('.manual-content-wrapper');
+							
+							if (!contentWrapper) {
+								const siblings = [];
+								let next = h2.nextSibling;
+								while (next) {
+									siblings.push(next);
+									next = next.nextSibling;
+								}
+								
+								// Perform wrapping if there are substantive siblings
+								const hasContent = siblings.some(n => n.nodeType === 1 || (n.nodeType === 3 && n.textContent.trim().length > 0));
+								
+								if (hasContent) {
+									contentWrapper = iframeDoc.createElement('div');
+									contentWrapper.className = 'manual-content-wrapper';
+									contentWrapper.style.position = 'relative';
+									// Default styles to match what we expect
+									contentWrapper.style.maxWidth = '1200px'; // Increase default
+									contentWrapper.style.margin = '0 auto';  // Default center
+									
+									siblings.forEach(node => contentWrapper.appendChild(node));
+									parentContainer.appendChild(contentWrapper);
+								}
+							}
+
+							// --- TITLE CONTROLS ---
+							// Ensure H2 behaves nicely
+							h2.style.display = 'block';
+							h2.style.position = 'relative';
+							if (!h2.style.marginLeft) h2.style.marginLeft = 'auto';
+							if (!h2.style.marginRight) h2.style.marginRight = 'auto';
+							
+							const titleBtn = createSettingsButton('⚙️ Title Layout', h2);
+							titleBtn.addEventListener('click', (e) => {
+								e.stopPropagation(); e.preventDefault();
+								openSectionSettingsModal(section, h2, 'Title');
+							});
+
+							// --- CONTENT CONTROLS ---
+							if (contentWrapper) {
+								const contentBtn = createSettingsButton('⚙️ Content Layout', contentWrapper);
+								contentBtn.addEventListener('click', (e) => {
+									e.stopPropagation(); e.preventDefault();
+									openSectionSettingsModal(section, contentWrapper, 'Content');
+								});
+							}
+						}
+					});
+				}
+
+				function createSettingsButton(text, targetElement) {
+					// Remove existing
+					const existing = targetElement.querySelector('.section-settings-btn');
+					if(existing) existing.remove();
+
+					// Avoid injecting into things that are too small?
+					
+					const btn = iframeDoc.createElement('button');
+					btn.className = 'section-settings-btn';
+					btn.innerHTML = text;
+					btn.style.cssText = `
+						position: absolute;
+						top: -20px;
+						left: 50%;
+						transform: translateX(-50%);
+						background: #111827;
+						color: white;
+						border: 1px solid rgba(255, 255, 255, 0.2);
+						padding: 6px 12px;
+						border-radius: 20px;
+						font-size: 11px;
+						font-weight: 600;
+						cursor: pointer;
+						z-index: 1000;
+						display: none;
+						box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+						white-space: nowrap;
+						pointer-events: auto;
+					`;
+					
+					targetElement.prepend(btn); // Prepend to ensure it's at start
+
+					// Hover logic
+					targetElement.addEventListener('mouseenter', () => { if(editMode) btn.style.display = 'block'; });
+					targetElement.addEventListener('mouseleave', (e) => { 
+						if(editMode && !btn.contains(e.relatedTarget)) btn.style.display = 'none'; 
+					});
+
+					return btn;
+				}
+
+				function openSectionSettingsModal(section, element, label) {
+					const existingModal = document.getElementById('section-settings-modal');
+					if (existingModal) existingModal.remove();
+
+					const modal = document.createElement('div');
+					modal.id = 'section-settings-modal';
+					modal.style.cssText = 'position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.75); z-index:100000; display:flex; align-items:center; justify-content:center;';
+
+					const content = document.createElement('div');
+					content.style.cssText = 'background:white; padding:24px; border-radius:12px; width:400px; max-width:90%; box-shadow:0 20px 60px rgba(0,0,0,0.3);';
+
+					// Get values
+					// Padding is usually on the section, but we might want margin on the element
+					let currentMaxWidth = 1200; 
+					if (element.style.maxWidth && element.style.maxWidth !== 'none') {
+						currentMaxWidth = parseInt(element.style.maxWidth);
+					} else if (element.tagName === 'H2' && !element.style.maxWidth) {
+                        // Inherit from parent if not set? Or default.
+                    }
+
+					let currentAlign = element.style.textAlign || 'center'; 
+					
+					// Vertical Spacing (Margin Top/Bottom) check
+					let currentMarginTop = parseInt(element.style.marginTop) || 0;
+					let currentMarginBottom = parseInt(element.style.marginBottom) || 0;
+
+					content.innerHTML = `
+						<h3 style="margin:0 0 20px 0; font-size:18px; font-weight:600;">${label} Layout</h3>
+						
+						<!-- Vertical Spacing (Margin) -->
+						<div style="margin-bottom:20px;">
+							<label style="display:block; font-size:13px; font-weight:600; margin-bottom:8px;">Vertical Spacing (Margin)</label>
+							<div style="display:flex; gap:10px;">
+                                <div style="flex:1;">
+                                    <span style="font-size:10px;">Top</span>
+                                    <input type="range" id="margin-top-slider" min="0" max="100" value="${currentMarginTop}" style="width:100%;">
+                                </div>
+                                <div style="flex:1;">
+                                    <span style="font-size:10px;">Bottom</span>
+                                    <input type="range" id="margin-bottom-slider" min="0" max="100" value="${currentMarginBottom}" style="width:100%;">
+                                </div>
+                            </div>
+						</div>
+
+						<!-- Alignment -->
+						<div style="margin-bottom:20px;">
+							<label style="display:block; font-size:13px; font-weight:600; margin-bottom:8px;">Alignment</label>
+							<div style="display:flex; gap:8px;">
+								<button class="align-btn" data-align="left" style="flex:1; padding:8px; border:1px solid #e5e7eb; background:${currentAlign === 'left' ? '#f3f4f6' : 'white'}; border-color:${currentAlign === 'left' ? '#667eea' : '#e5e7eb'}; border-radius:6px; cursor:pointer;">Left</button>
+								<button class="align-btn" data-align="center" style="flex:1; padding:8px; border:1px solid #e5e7eb; background:${currentAlign === 'center' ? '#f3f4f6' : 'white'}; border-color:${currentAlign === 'center' ? '#667eea' : '#e5e7eb'}; border-radius:6px; cursor:pointer;">Center</button>
+								<button class="align-btn" data-align="right" style="flex:1; padding:8px; border:1px solid #e5e7eb; background:${currentAlign === 'right' ? '#f3f4f6' : 'white'}; border-color:${currentAlign === 'right' ? '#667eea' : '#e5e7eb'}; border-radius:6px; cursor:pointer;">Right</button>
+							</div>
+						</div>
+
+						<!-- Width -->
+						<div style="margin-bottom:24px;">
+							<label style="display:block; font-size:13px; font-weight:600; margin-bottom:8px;">${label} Width</label>
+							<input type="range" id="width-slider" min="300" max="1400" value="${currentMaxWidth}" style="width:100%;">
+							<div style="display:flex; justify-content:space-between; font-size:11px; color:#6b7280; margin-top:4px;">
+								<span>Narrow</span>
+								<span>Full Width</span>
+							</div>
+						</div>
+						
+						${label === 'Content' ? `
+						<!-- Text Wrap Fix for Content -->
+						<div style="margin-bottom:24px; padding:12px; background:#fef2f2; border-radius:8px; border:1px solid #fee2e2;">
+							<div style="display:flex; align-items:center; justify-content:space-between;">
+								<span style="font-size:13px; font-weight:600; color:#991b1b;">Fix Text Wrapping</span>
+								<button id="fix-text-btn" style="padding:6px 12px; background:#ef4444; color:white; border:none; border-radius:6px; cursor:pointer; font-size:12px; font-weight:600;">Fix Layout</button>
+							</div>
+						</div>` : ''}
+
+						<button id="close-settings-modal" style="width:100%; padding:10px; background:#111827; color:white; border:none; border-radius:8px; cursor:pointer; font-weight:600;">Done</button>
+					`;
+
+					modal.appendChild(content);
+					document.body.appendChild(modal);
+
+					// Margin sliders
+					modal.querySelector('#margin-top-slider').addEventListener('input', (e) => {
+						const val = e.target.value + 'px';
+						element.style.marginTop = val;
+						changes['margin-top-' + Date.now()] = { type: 'style', element: element, property: 'marginTop', value: val };
+					});
+                    modal.querySelector('#margin-bottom-slider').addEventListener('input', (e) => {
+						const val = e.target.value + 'px';
+						element.style.marginBottom = val;
+						changes['margin-bottom-' + Date.now()] = { type: 'style', element: element, property: 'marginBottom', value: val };
+					});
+
+					// Width
+					const widthSlider = document.getElementById('width-slider');
+					widthSlider.addEventListener('input', (e) => {
+						const val = e.target.value + 'px';
+						element.style.maxWidth = val;
+						element.style.width = '100%';
+						changes['width-' + Date.now()] = { type: 'style', element: element, property: 'maxWidth', value: val };
+					});
+
+					// Alignment
+					const alignBtns = modal.querySelectorAll('.align-btn');
+					alignBtns.forEach(btn => {
+						btn.addEventListener('click', () => {
+							alignBtns.forEach(b => {
+								b.style.background = 'white';
+								b.style.borderColor = '#e5e7eb';
+							});
+							btn.style.background = '#f3f4f6';
+							btn.style.borderColor = '#667eea';
+
+							const align = btn.getAttribute('data-align');
+							element.style.textAlign = align;
+							
+							// Auto margin for block centering logic
+							if (align === 'center') {
+								element.style.marginLeft = 'auto';
+								element.style.marginRight = 'auto';
+							} else if (align === 'left') {
+								element.style.marginLeft = '0'; 
+								element.style.marginRight = 'auto'; // Keep block width restrained to left
+							} else if (align === 'right') {
+								element.style.marginLeft = 'auto';
+								element.style.marginRight = '0';
+							}
+
+							// Handle List if content
+							if (label === 'Content') {
+								// Recurse down just in case
+								const uls = element.querySelectorAll('ul');
+								uls.forEach(ul => {
+									ul.style.textAlign = align === 'center' ? 'left' : align;
+									ul.style.display = 'inline-block';
+									ul.style.width = 'auto';
+									// Reset margins based on align
+									if(align === 'center') ul.style.margin = '1em auto';
+									else if(align === 'left') ul.style.margin = '1em 0';
+									else ul.style.margin = '1em 0 1em auto';
+								});
+							}
+
+							changes['align-' + Date.now()] = { type: 'style', element: element, property: 'textAlign', value: align };
+						});
+					});
+
+					if (label === 'Content') {
+						document.getElementById('fix-text-btn').addEventListener('click', () => {
+							const elements = element.querySelectorAll('p, li, span');
+							elements.forEach(el => {
+								el.style.whiteSpace = 'normal';
+								el.style.whiteSpaceCollapse = 'collapse';
+								el.style.textWrapMode = 'wrap';
+								el.style.wordBreak = 'normal';
+								if(el.tagName !== 'SPAN') { el.style.maxWidth = 'none'; el.style.width = 'auto'; }
+							});
+							alert('Text layout fixed.');
+						});
+					}
+
+					document.getElementById('close-settings-modal').onclick = () => modal.remove();
+					modal.onclick = (e) => { if (e.target === modal) modal.remove(); };
+				}
 				function editIcon(element) {
 					// Remove existing modal
 					const existingModal = document.getElementById('icon-picker-modal');
@@ -5121,6 +5430,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'save_seo_to_html') {
 					tempDiv.querySelectorAll('.move-section-btn').forEach(el => el.remove());
 					tempDiv.querySelectorAll('.change-section-bg-btn').forEach(el => el.remove());
 					tempDiv.querySelectorAll('.hero-change-bg-btn').forEach(el => el.remove());
+					tempDiv.querySelectorAll('.section-settings-btn').forEach(el => el.remove());
 					tempDiv.querySelectorAll('.drag-handle').forEach(el => el.remove());
 					tempDiv.querySelectorAll('.drop-indicator').forEach(el => el.remove());
 					tempDiv.querySelectorAll('.hero-bg-indicator').forEach(el => el.remove());
