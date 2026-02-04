@@ -4473,10 +4473,212 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'save_seo_to_html') {
 					}
 				}
 				
+				// Setup Feature Grids Editing (for div-based grids like in Roaming Photo Booth)
+				function setupFeatureGridsEditing() {
+					// Find grids that look like feature grids (contain feature icons)
+					const probableGrids = Array.from(iframeDoc.querySelectorAll('.grid')).filter(grid => {
+						return grid.querySelector('.feature-icon') || grid.querySelector('svg.w-8.h-8');
+					});
+					
+					probableGrids.forEach(grid => {
+						// Check robustness like packages
+						const checkBtn = grid.parentNode.querySelector('.add-feature-grid-btn');
+						if (grid.hasAttribute('data-feature-grid-setup') && checkBtn) return;
+						grid.setAttribute('data-feature-grid-setup', 'true');
+						
+						// Add "Add Feature" button after the grid
+						let existingBtn = grid.parentNode.querySelector('.add-feature-grid-btn');
+						if (existingBtn) existingBtn.remove();
+
+						const addBtn = iframeDoc.createElement('button');
+						addBtn.className = 'add-feature-grid-btn';
+						addBtn.innerHTML = '➕ Add Feature Card';
+						addBtn.style.cssText = `
+							display: ${editMode ? 'block' : 'none'};
+							margin-top: 16px;
+							width: 100%;
+							padding: 12px;
+							border: 2px dashed #e5e7eb;
+							background: rgba(255, 255, 255, 0.1);
+							color: #18F1E1;
+							border-radius: 12px;
+							cursor: pointer;
+							font-size: 14px;
+							font-weight: 600;
+							transition: all 0.2s ease;
+							text-align: center;
+						`;
+						
+						addBtn.onmouseenter = function() {
+							this.style.background = 'rgba(24, 241, 225, 0.1)';
+							this.style.borderColor = '#18F1E1';
+						};
+						addBtn.onmouseleave = function() {
+							this.style.background = 'rgba(255, 255, 255, 0.1)';
+							this.style.borderColor = '#e5e7eb';
+						};
+						
+						// Insert after Grid
+						if (grid.nextSibling) {
+							grid.parentNode.insertBefore(addBtn, grid.nextSibling);
+						} else {
+							grid.parentNode.appendChild(addBtn);
+						}
+						
+						// Add listener
+						addBtn.addEventListener('click', function(e) {
+							if (!editMode) return;
+							e.preventDefault();
+							e.stopPropagation();
+							addFeatureGridItem(grid);
+						});
+						
+						// Setup existing items
+						const items = Array.from(grid.children);
+						items.forEach(div => setupFeatureGridItem(div));
+					});
+				}
+
+				function setupFeatureGridItem(div) {
+					try {
+						// Robustness check
+						const existingRemove = div.querySelector('.remove-feature-grid-btn');
+						if (div.hasAttribute('data-feature-grid-item-setup') && existingRemove) return;
+						div.setAttribute('data-feature-grid-item-setup', 'true');
+						
+						// Ensure relative positioning
+						const computedStyle = iframeDoc.defaultView.getComputedStyle(div);
+						if (computedStyle.position === 'static') {
+							div.style.position = 'relative';
+						}
+						
+						// Create remove button
+						const removeBtn = iframeDoc.createElement('button');
+						removeBtn.className = 'remove-feature-grid-btn';
+						removeBtn.innerHTML = '🗑️';
+						removeBtn.title = 'Delete Feature Card';
+						removeBtn.type = 'button';
+						removeBtn.setAttribute('contenteditable', 'false');
+						removeBtn.contentEditable = false;
+						removeBtn.setAttribute('data-non-editable', 'true');
+						removeBtn.style.cssText = `
+							display: none;
+							position: absolute;
+							top: -10px;
+							right: -10px;
+							background: #EF4444;
+							color: white;
+							border: 2px solid white;
+							border-radius: 50%;
+							width: 32px;
+							height: 32px;
+							font-size: 14px;
+							cursor: pointer;
+							z-index: 50;
+							align-items: center;
+							justify-content: center;
+							box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+							transition: all 0.2s;
+						`;
+						
+						div.appendChild(removeBtn);
+						
+						// Show/hide on hover (only in edit mode)
+						div.addEventListener('mouseenter', function() {
+							if (editMode) {
+								removeBtn.style.display = 'flex';
+							}
+						});
+						
+						div.addEventListener('mouseleave', function(e) {
+							if (e.relatedTarget === removeBtn || removeBtn.contains(e.relatedTarget)) return;
+							removeBtn.style.display = 'none';
+						});
+						
+						removeBtn.addEventListener('mouseleave', function(e) {
+							if (e.relatedTarget === div || div.contains(e.relatedTarget)) return;
+							removeBtn.style.display = 'none';
+						});
+						
+						// Remove functionality
+						removeBtn.addEventListener('click', function(e) {
+							e.preventDefault();
+							e.stopPropagation();
+							if (confirm('Delete this feature card?')) {
+								div.remove();
+								changes['feature-grid-update-' + Date.now()] = { type: 'feature-grid', action: 'remove' };
+							}
+						});
+						
+						// Ensure everything inside is editable
+						makeEditable(div);
+						
+					} catch(e) {
+						console.error('Error in setupFeatureGridItem:', e);
+					}
+				}
+
+				function addFeatureGridItem(grid) {
+					try {
+						// Clone the first item to keep styling
+						const firstItem = grid.children[0];
+						let newItem;
+						
+						if (firstItem) {
+							newItem = firstItem.cloneNode(true);
+							
+							// Clean up the clone
+							newItem.removeAttribute('data-feature-grid-item-setup');
+							newItem.removeAttribute('data-id');
+							
+							// Remove existing delete button from clone
+							const existingRemove = newItem.querySelector('.remove-feature-grid-btn');
+							if (existingRemove) existingRemove.remove();
+							
+							// Reset texts
+							const headings = newItem.querySelectorAll('h1, h2, h3, h4, h5, h6');
+							headings.forEach(h => h.textContent = 'New Feature Title');
+							
+							const paragraphs = newItem.querySelectorAll('p');
+							paragraphs.forEach(p => p.textContent = 'New feature description goes here.');
+							
+							// Clean up editable attributes
+							newItem.querySelectorAll('[data-id]').forEach(el => el.removeAttribute('data-id'));
+							newItem.classList.remove('editable-text', 'editable-highlight', 'icon-editable');
+							
+						} else {
+							// Fallback if grid is empty (unlikely but possible)
+							newItem = iframeDoc.createElement('div');
+							newItem.className = 'bg-gray-800 rounded-3xl p-8 shadow-xl border border-gray-700';
+							newItem.innerHTML = `
+								<div class="feature-icon">
+									<svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
+								</div>
+								<h4 class="text-xl font-normal mb-4" style="color: #18F1E1;">New Feature</h4>
+								<p class="text-gray-300 leading-relaxed">Description goes here.</p>
+							`;
+						}
+						
+						grid.appendChild(newItem);
+						setupFeatureGridItem(newItem);
+						
+						// Make content editable immediately
+						setTimeout(() => {
+							makeEditable(newItem);
+						}, 10);
+						
+						changes['feature-grid-update-' + Date.now()] = { type: 'feature-grid', action: 'add' };
+						
+					} catch(e) {
+						console.error('Error in addFeatureGridItem:', e);
+					}
+				}
+				
 				// Setup Booth Packages (and section drag drop)
 				if (editMode) {
 					setupSectionDragDrop();
 					setupPackagesEditing();
+					setupFeatureGridsEditing();
 				}
 				
 				// Add hover effects in edit mode
@@ -4586,6 +4788,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'save_seo_to_html') {
 				const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
 				const pkgButtons = iframeDoc.querySelectorAll('.add-package-item-btn');
 				pkgButtons.forEach(btn => btn.style.display = 'block');
+
+				const gridButtons = iframeDoc.querySelectorAll('.add-feature-grid-btn');
+				gridButtons.forEach(btn => btn.style.display = 'block');
 				
 				// Re-enable contentEditable for all editable text elements
 				const editableElements = iframeDoc.querySelectorAll('.editable-text, .editable-link');
@@ -4620,6 +4825,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'save_seo_to_html') {
 					
 					const pkgButtons = iframeDoc.querySelectorAll('.add-package-item-btn, .remove-package-item-btn');
 					pkgButtons.forEach(btn => btn.style.display = 'none');
+
+					const gridButtons = iframeDoc.querySelectorAll('.add-feature-grid-btn, .remove-feature-grid-btn');
+					gridButtons.forEach(btn => btn.style.display = 'none');
 					
 					// Disable drag and drop
 					const sections = iframeDoc.querySelectorAll('.draggable-section');
@@ -4918,6 +5126,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'save_seo_to_html') {
 					tempDiv.querySelectorAll('.hero-bg-indicator').forEach(el => el.remove());
 					tempDiv.querySelectorAll('.add-package-item-btn').forEach(el => el.remove());
 					tempDiv.querySelectorAll('.remove-package-item-btn').forEach(el => el.remove());
+					tempDiv.querySelectorAll('.add-feature-grid-btn').forEach(el => el.remove());
+					tempDiv.querySelectorAll('.remove-feature-grid-btn').forEach(el => el.remove());
 					
 					const editorElements = tempDiv.querySelectorAll('*');
 					editorElements.forEach(el => {
@@ -4938,6 +5148,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'save_seo_to_html') {
 						el.removeAttribute('draggable');
 						el.removeAttribute('data-package-list-setup');
 						el.removeAttribute('data-package-item-setup');
+						el.removeAttribute('data-feature-grid-setup');
+						el.removeAttribute('data-feature-grid-item-setup');
 						// Remove inline styles added by editor
 						if (el.hasAttribute('style')) {
 							let style = el.getAttribute('style');
