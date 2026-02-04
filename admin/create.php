@@ -15,7 +15,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $slug = trim($_POST['slug'] ?? '');
     $content = $_POST['content'] ?? '';
     $excerpt = trim($_POST['excerpt'] ?? '');
-    $category_id = !empty($_POST['category_id']) ? (int)$_POST['category_id'] : null;
+    $cat_input = $_POST['category_id'] ?? '';
+    $category_id = null;
+
+    if ($cat_input === 'create_blog_posting') {
+        // Auto-create "Blog Posting" category if it doesn't exist
+        $stmt = $db->prepare("SELECT id FROM categories WHERE name = ?");
+        $stmt->execute(['Blog Posting']);
+        if ($row = $stmt->fetch()) {
+            $category_id = $row['id'];
+        } else {
+            $catSlug = 'blog-posting';
+            // Ensure unique slug
+            $stmt = $db->prepare("SELECT id FROM categories WHERE slug = ?");
+            $stmt->execute([$catSlug]);
+            if ($stmt->fetch()) {
+                $catSlug .= '-' . time();
+            }
+            
+            $stmt = $db->prepare("INSERT INTO categories (name, slug) VALUES (?, ?)");
+            $stmt->execute(['Blog Posting', $catSlug]);
+            $category_id = $db->lastInsertId();
+        }
+    } elseif (!empty($cat_input)) {
+        $category_id = (int)$cat_input;
+    }
     $status = $_POST['status'] ?? 'draft';
     $published_at = ($status === 'published' && !empty($_POST['published_at'])) ? $_POST['published_at'] : null;
     
@@ -249,6 +273,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <label for="category_id">Category</label>
                     <select id="category_id" name="category_id">
                         <option value="">Select Category</option>
+                        
+                        <?php 
+                        $hasBlogPosting = false;
+                        foreach ($categories as $cat) {
+                            if (strcasecmp($cat['name'], 'Blog Posting') === 0) {
+                                $hasBlogPosting = true;
+                                break;
+                            }
+                        }
+                        if (!$hasBlogPosting): 
+                        ?>
+                        <option value="create_blog_posting" <?php echo (isset($_POST['category_id']) && $_POST['category_id'] === 'create_blog_posting') ? 'selected' : ''; ?>>Blog Posting</option>
+                        <?php endif; ?>
+
                         <?php foreach ($categories as $cat): ?>
                             <option value="<?php echo $cat['id']; ?>" <?php echo (isset($_POST['category_id']) && $_POST['category_id'] == $cat['id']) ? 'selected' : ''; ?>>
                                 <?php echo escape($cat['name']); ?>
