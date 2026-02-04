@@ -4240,7 +4240,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'save_seo_to_html') {
 					
 					packageLists.forEach(ul => {
 						// Check if we've already set up this list
-						if (ul.hasAttribute('data-package-list-setup')) return;
+						// Also check if the button actually exists (in case it was stripped but attribute remained)
+						const checkBtn = ul.parentNode.querySelector('.add-package-item-btn');
+						if (ul.hasAttribute('data-package-list-setup') && checkBtn) return;
 						ul.setAttribute('data-package-list-setup', 'true');
 						
 						// Add "Add Feature" button after the list
@@ -4301,7 +4303,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'save_seo_to_html') {
 
 				function setupPackageItem(li) {
 					try {
-						if (li.hasAttribute('data-package-item-setup')) return;
+						// Check if already setup AND button exists
+						const existingRemoveBtn = li.querySelector('.remove-package-item-btn');
+						if (li.hasAttribute('data-package-item-setup') && existingRemoveBtn) return;
 						li.setAttribute('data-package-item-setup', 'true');
 						
 						// Ensure relative positioning
@@ -4912,6 +4916,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'save_seo_to_html') {
 					tempDiv.querySelectorAll('.drag-handle').forEach(el => el.remove());
 					tempDiv.querySelectorAll('.drop-indicator').forEach(el => el.remove());
 					tempDiv.querySelectorAll('.hero-bg-indicator').forEach(el => el.remove());
+					tempDiv.querySelectorAll('.add-package-item-btn').forEach(el => el.remove());
+					tempDiv.querySelectorAll('.remove-package-item-btn').forEach(el => el.remove());
 					
 					const editorElements = tempDiv.querySelectorAll('*');
 					editorElements.forEach(el => {
@@ -4930,6 +4936,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'save_seo_to_html') {
 						el.removeAttribute('data-hero-id');
 						el.removeAttribute('data-non-editable');
 						el.removeAttribute('draggable');
+						el.removeAttribute('data-package-list-setup');
+						el.removeAttribute('data-package-item-setup');
 						// Remove inline styles added by editor
 						if (el.hasAttribute('style')) {
 							let style = el.getAttribute('style');
