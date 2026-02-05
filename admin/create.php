@@ -1,4 +1,11 @@
 <?php
+// Increase PHP limits for large content (works on GoDaddy and XAMPP)
+@ini_set('post_max_size', '1024M');
+@ini_set('upload_max_filesize', '1024M');
+@ini_set('max_execution_time', '600');
+@ini_set('max_input_time', '600');
+@ini_set('memory_limit', '1024M');
+
 require_once __DIR__ . '/../config/config.php';
 requireLogin();
 
@@ -645,6 +652,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 // Focus the editor
                 tinymce.get('content').focus();
                 return false;
+            }
+            
+            // Check content size and warn if too large
+            const contentSize = new Blob([content]).size;
+            const sizeMB = (contentSize / 1048576).toFixed(2);
+            
+            // Warn if content is over 100MB
+            if (contentSize > 100 * 1024 * 1024) {
+                const proceed = confirm(
+                    `⚠️ WARNING: Your content is very large (${sizeMB} MB).\n\n` +
+                    `This may cause issues when saving. Consider:\n` +
+                    `• Using external image URLs instead of embedding images\n` +
+                    `• Compressing images before uploading\n` +
+                    `• Splitting content into multiple posts\n\n` +
+                    `Do you want to continue anyway?`
+                );
+                
+                if (!proceed) {
+                    return false;
+                }
+            }
+            // Info message if content is moderately large (50-100MB)
+            else if (contentSize > 50 * 1024 * 1024) {
+                console.warn(`Content size: ${sizeMB} MB - Consider optimizing images if submission fails.`);
             }
             
             return true;
