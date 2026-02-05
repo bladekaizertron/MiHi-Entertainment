@@ -369,6 +369,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <div class="component-item" draggable="true" data-type="video">
                     <i class="fas fa-video text-[#18F1E1] w-5"></i> <span>Video Section</span>
                 </div>
+                <div class="component-item" draggable="true" data-type="gallery">
+                    <i class="fas fa-images text-green-400 w-5"></i> <span>Gallery</span>
+                </div>
             </div>
         </div>
 
@@ -867,6 +870,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </button>
         </div>
     </div>
+
+</section>
+    </script>
+    
+    <!-- Gallery Section Template -->
+    <script type="text/template" id="tpl-gallery">
+        <section data-editable class="py-20 px-6 bg-white">
+            <div class="max-w-6xl mx-auto">
+                <div class="text-center mb-12">
+                    <h2 contenteditable="true" class="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 outline-none" style="font-family: 'Azo Sans Uber', sans-serif; font-weight: 400; text-transform: uppercase; letter-spacing: 0.02em; color: #FF4F4F; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;">Image Gallery</h2>
+                    <p contenteditable="true" class="text-base md:text-lg leading-relaxed max-w-3xl mx-auto outline-none" style="font-family: 'Azo Sans', sans-serif; color: #1F1F1F;">Browse through our collection of stunning images.</p>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4" id="gallery-container">
+                    <!-- Gallery images will be added here -->
+                </div>
+            </div>
+        </section>
+    </script>
     
     <!-- Fullscreen Video Modal -->
     <div id="videoModal" class="fixed inset-0 bg-black/95 z-50 hidden flex items-center justify-center p-4" onclick="closeVideoModal(event)">
@@ -1166,7 +1187,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             cards: getTemplate('cards'),
             split: getTemplate('split'),
             cta: getTemplate('cta'),
-            video: getTemplate('video')
+            video: getTemplate('video'),
+            gallery: getTemplate('gallery')
         };
         
         // Verify templates loaded correctly
@@ -1240,6 +1262,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         const featureItem = btn.closest('.split-screen-feature-item');
                         if (featureItem && window.removeSplitScreenFeaturePoint) {
                             window.removeSplitScreenFeaturePoint(featureItem);
+                        }
+                        return;
+                    } else if (action === 'remove-gallery-image') {
+                        const galleryItem = btn.closest('.gallery-image-item');
+                        if (galleryItem && window.removeGalleryImage) {
+                            window.removeGalleryImage(galleryItem);
                         }
                         return;
                     }
@@ -1396,6 +1424,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 if (el.querySelector('h1')) typeLabel = "Hero Section";
                 else if (el.querySelector('[style*="#18F1E1"]')) typeLabel = "CTA Section";
                 else typeLabel = "Section";
+            } else if (el.querySelector('#gallery-container')) {
+                typeLabel = "Gallery";
             } else if (el.querySelector('.grid')) {
                 if (el.querySelector('video') || el.querySelector('[style*="#1F1F1F"]')) typeLabel = "Video Section";
                 else typeLabel = "Feature Cards";
@@ -1411,6 +1441,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 typeLabel = "Media Container";
             } else if (el.querySelector('h2') && el.classList.contains('max-w-4xl')) typeLabel = "Text Section";
             
+            // If selected element is inside a gallery section, show Gallery inspector
+            let gallerySection = null;
+            if (typeLabel === "Gallery") {
+                gallerySection = el;
+            } else if (el.closest('[data-editable]') && el.closest('[data-editable]').querySelector('#gallery-container')) {
+                gallerySection = el.closest('[data-editable]');
+                typeLabel = "Gallery";
+            }
+            
             // If selected element is inside a split screen section, show Split Screen inspector (so Add/Remove features are visible)
             let splitScreenSection = null;
             if (typeLabel === "Split Screen") {
@@ -1422,6 +1461,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             
             // Check if it's a text block section
             const isTextBlock = typeLabel === "Text Section";
+            
+            // Check if it's a gallery section
+            const isGallery = !!gallerySection;
             
             // Check if it's a split screen section
             const isSplitScreen = !!splitScreenSection;
@@ -1711,6 +1753,37 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         ${hasSplitScreenMedia ? `<button onclick="removeSplitScreenMedia()" class="w-full bg-red-600 hover:bg-red-700 text-white px-3 py-2 rounded text-xs transition-colors flex items-center justify-center gap-2"><i class="fas fa-trash"></i> Remove Media</button>` : ''}
                     </div>
                     <div class="text-xs text-zinc-500 mt-2">You can upload or use a link for media.</div>
+                </div>
+                `;
+                })() : ''}
+
+                ${isGallery && gallerySection ? (() => {
+                    const container = gallerySection.querySelector('#gallery-container');
+                    const galleryImages = container ? Array.from(container.querySelectorAll('.gallery-image-item')) : [];
+                    const escapeHtml = (s) => (s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+                    const imageListHtml = galleryImages.length ? galleryImages.map((item, i) => {
+                        const img = item.querySelector('img');
+                        const src = img ? img.src : '';
+                        const alt = img ? (img.alt || 'Image ' + (i + 1)) : 'Image ' + (i + 1);
+                        const label = escapeHtml(alt.substring(0, 25) + (alt.length > 25 ? '…' : ''));
+                        return `<div class="flex items-center justify-between gap-2 py-1.5 px-2 rounded bg-zinc-800/50 border border-zinc-700/50">
+                            <div class="flex items-center gap-2 flex-1 min-w-0">
+                                <img src="${escapeHtml(src)}" alt="${escapeHtml(alt)}" class="w-8 h-8 object-cover rounded flex-shrink-0">
+                                <span class="text-xs text-zinc-300 truncate" title="${escapeHtml(alt)}">${label}</span>
+                            </div>
+                            <button type="button" onclick="removeGalleryImageByIndex(${i})" class="flex-shrink-0 text-red-500 hover:text-red-400 p-1 rounded hover:bg-red-500/10" title="Remove image"><i class="fas fa-times text-xs"></i></button>
+                        </div>`;
+                    }).join('') : '<p class="text-xs text-zinc-500 py-2">No images yet. Add one below.</p>';
+                    
+                    return `
+                <div class="mb-4 border-t border-zinc-700 pt-4">
+                    <label class="block text-xs text-zinc-500 mb-2">Gallery Images (${galleryImages.length})</label>
+                    <div class="space-y-1.5 max-h-48 overflow-y-auto mb-2">${imageListHtml}</div>
+                    <button onclick="openGalleryImageModal()" class="w-full bg-zinc-700 hover:bg-zinc-600 text-white px-3 py-2 rounded text-xs transition-colors flex items-center justify-center gap-2">
+                        <i class="fas fa-plus"></i>
+                        <span>Add Image</span>
+                    </button>
+                    <div class="text-xs text-zinc-500 mt-2">Maximum file size: 10MB</div>
                 </div>
                 `;
                 })() : ''}
@@ -2199,6 +2272,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     const previewVideo = document.getElementById('mediaUploadPreviewVideo');
                     
                     if (file.type.startsWith('image/')) {
+                        // Check file size if it's for gallery (10MB max)
+                        if (currentMediaContext === 'gallery') {
+                            const maxSize = 10 * 1024 * 1024; // 10MB
+                            if (file.size > maxSize) {
+                                alert('File is too large. Maximum size is 10MB.');
+                                fileInput.value = '';
+                                return;
+                            }
+                        }
+                        
                         const reader = new FileReader();
                         reader.onload = function(e) {
                             previewImg.src = e.target.result;
@@ -2248,6 +2331,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         function closeMediaModal() {
             document.getElementById('mediaModal').classList.add('hidden');
             currentMediaTarget = null;
+            currentMediaContext = null;
         }
         
         function switchMediaTab(tab) {
@@ -2622,6 +2706,177 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             removeSplitScreenFeaturePoint(items[index]);
         }
         
+        // Gallery Image Functions
+        function openGalleryImageModal() {
+            // Set current media type to image and target to gallery
+            currentMediaType = 'image';
+            
+            // Find the gallery section
+            const doc = iframe.contentDocument;
+            let gallerySection = null;
+            if (selectedElement) {
+                if (selectedElement.querySelector('#gallery-container'))
+                    gallerySection = selectedElement;
+                else if (selectedElement.closest('[data-editable]')?.querySelector('#gallery-container'))
+                    gallerySection = selectedElement.closest('[data-editable]');
+            }
+            
+            if (!gallerySection) {
+                // Fallback: find first gallery section
+                const sections = doc.querySelectorAll('[data-editable]');
+                sections.forEach(sec => {
+                    if (sec.querySelector('#gallery-container')) gallerySection = sec;
+                });
+            }
+            
+            if (!gallerySection) {
+                alert('Could not find gallery section. Please make sure a gallery section is added to the page.');
+                return;
+            }
+            
+            currentMediaTarget = gallerySection;
+            currentMediaContext = 'gallery'; // Special context for gallery
+            
+            const modal = document.getElementById('mediaModal');
+            const title = document.getElementById('mediaModalTitle');
+            title.textContent = 'Add Image to Gallery';
+            
+            // Reset form
+            document.getElementById('mediaFileInput').value = '';
+            document.getElementById('mediaUrlInput').value = '';
+            document.getElementById('mediaEmbedInput').value = '';
+            document.getElementById('mediaUploadPreview').classList.add('hidden');
+            document.getElementById('mediaUrlPreview').classList.add('hidden');
+            
+            // Set file input to images only
+            const fileInput = document.getElementById('mediaFileInput');
+            fileInput.accept = 'image/*';
+            
+            // Show modal and default to upload tab
+            modal.classList.remove('hidden');
+            switchMediaTab('upload');
+            
+            // Preview file on selection
+            fileInput.onchange = function(e) {
+                if (e.target.files && e.target.files[0]) {
+                    const file = e.target.files[0];
+                    const preview = document.getElementById('mediaUploadPreview');
+                    const previewImg = document.getElementById('mediaUploadPreviewImg');
+                    const previewVideo = document.getElementById('mediaUploadPreviewVideo');
+                    
+                    if (file.type.startsWith('image/')) {
+                        // Check file size (10MB max for gallery)
+                        const maxSize = 10 * 1024 * 1024; // 10MB
+                        if (file.size > maxSize) {
+                            alert('File is too large. Maximum size is 10MB.');
+                            fileInput.value = '';
+                            return;
+                        }
+                        
+                        const reader = new FileReader();
+                        reader.onload = function(e) {
+                            previewImg.src = e.target.result;
+                            previewImg.classList.remove('hidden');
+                            previewVideo.classList.add('hidden');
+                            preview.classList.remove('hidden');
+                        };
+                        reader.readAsDataURL(file);
+                    }
+                }
+            };
+            
+            // Preview URL on input
+            const urlInput = document.getElementById('mediaUrlInput');
+            urlInput.oninput = function() {
+                const url = this.value.trim();
+                const preview = document.getElementById('mediaUrlPreview');
+                const previewImg = document.getElementById('mediaUrlPreviewImg');
+                const previewVideo = document.getElementById('mediaUrlPreviewVideo');
+                
+                if (url && (url.match(/\.(jpg|jpeg|png|gif|webp|svg)(\?|$)/i))) {
+                    previewImg.src = url;
+                    previewImg.classList.remove('hidden');
+                    previewVideo.classList.add('hidden');
+                    preview.classList.remove('hidden');
+                } else {
+                    preview.classList.add('hidden');
+                }
+            };
+        }
+        
+        function addGalleryImage(imageUrl) {
+            const doc = iframe.contentDocument;
+            if (!doc) return;
+            
+            // Find the gallery section
+            let gallerySection = null;
+            if (selectedElement) {
+                if (selectedElement.querySelector('#gallery-container'))
+                    gallerySection = selectedElement;
+                else if (selectedElement.closest('[data-editable]')?.querySelector('#gallery-container'))
+                    gallerySection = selectedElement.closest('[data-editable]');
+            }
+            
+            if (!gallerySection) {
+                const sections = doc.querySelectorAll('[data-editable]');
+                sections.forEach(sec => {
+                    if (sec.querySelector('#gallery-container')) gallerySection = sec;
+                });
+            }
+            
+            if (!gallerySection) {
+                alert('Could not find gallery section. Please make sure a gallery section is added to the page.');
+                return;
+            }
+            
+            const container = gallerySection.querySelector('#gallery-container');
+            if (!container) return;
+            
+            // Create new gallery image item
+            const newItem = doc.createElement('div');
+            newItem.className = 'gallery-image-item relative group aspect-square';
+            
+            newItem.innerHTML = `
+                <img src="${imageUrl}" alt="Gallery image" class="w-full h-full object-cover rounded-lg">
+                <button data-action="remove-gallery-image" class="absolute top-2 right-2 bg-red-600 hover:bg-red-700 text-white w-8 h-8 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-center justify-center shadow-lg z-10" title="Remove image">
+                    <i class="fas fa-times"></i>
+                </button>
+            `;
+            
+            container.appendChild(newItem);
+            
+            // Reselect to update the inspector panel
+            selectElement(gallerySection);
+        }
+        
+        function removeGalleryImage(itemElement) {
+            const doc = iframe.contentDocument;
+            if (!doc) return;
+            
+            // Find the container
+            const container = itemElement.closest('#gallery-container');
+            if (container) {
+                // Remove the item
+                itemElement.remove();
+                
+                // Find and reselect the gallery section
+                const gallerySection = container.closest('[data-editable]');
+                if (gallerySection) {
+                    selectElement(gallerySection);
+                }
+            }
+        }
+        
+        function removeGalleryImageByIndex(index) {
+            if (!selectedElement) return;
+            const section = selectedElement.querySelector('#gallery-container') ? selectedElement : selectedElement.closest('[data-editable]');
+            const container = section ? section.querySelector('#gallery-container') : null;
+            if (!container) return;
+            const items = container.querySelectorAll('.gallery-image-item');
+            if (index < 0 || index >= items.length) return;
+            removeGalleryImage(items[index]);
+        }
+        
         function updateSplitScreenFeatureNumbers(container) {
             const items = container.querySelectorAll('.split-screen-feature-item');
             items.forEach((item, index) => {
@@ -2806,11 +3061,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 // Feature card functions
                 iframe.contentWindow.addFeatureCard = addFeatureCard;
                 iframe.contentWindow.removeFeatureCard = removeFeatureCard;
+                // Gallery functions
+                iframe.contentWindow.removeGalleryImage = removeGalleryImage;
             }
         }
         
         function insertMediaElement(source, type) {
             const doc = iframe.contentDocument;
+            
+            // Check if we're inserting into a gallery
+            if (currentMediaContext === 'gallery' && type === 'image') {
+                addGalleryImage(source);
+                closeMediaModal();
+                return;
+            }
             
             // Check if we're inserting into a video card
             if (currentVideoCard) {
