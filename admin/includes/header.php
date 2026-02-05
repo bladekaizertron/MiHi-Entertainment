@@ -69,6 +69,11 @@ $email = $currentUser['email'] ?? 'admin@example.com';
                     <svg class="sidebar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="4" width="18" height="16" rx="2" ry="2" stroke-width="2"/><path d="M7 8h10M7 12h10M7 16h6" stroke-width="2" stroke-linecap="round"/></svg>
                     <span>Website Pages</span>
                 </a>
+                <?php $isActive = ($currentPath === 'navigation.php'); ?>
+                <a href="navigation.php" class="<?php echo $isActive ? 'active' : ''; ?>">
+                     <svg class="sidebar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 12h18M3 6h18M3 18h18" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    <span>Navigation Cms</span>
+                </a>
                 <?php $isActive = ($currentPath === 'flipbooks.php' || $currentPath === 'flipbook_create.php' || $currentPath === 'flipbook_edit.php'); ?>
                 <a href="flipbooks.php" class="<?php echo $isActive ? 'active' : ''; ?>">
                     <?php echo admin_nav_icon('flipbooks'); ?>
