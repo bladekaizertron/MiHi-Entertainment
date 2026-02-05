@@ -131,13 +131,25 @@
             }
 
             // Dropdown Logic
-            // Determine grid columns based on number of direct children
-            let widthClass = 'w-[56rem]';
-            let gridClass = 'grid-cols-3';
-            const childCount = item.children.length;
+            // Check if this is a "Mega Menu" (contains headers/columns) or a "Simple Dropdown"
+            const isMegaMenu = item.children.some(child => child.is_header || (child.children && child.children.length > 0));
 
-            if (childCount === 1) { widthClass = 'w-64'; gridClass = 'grid-cols-1'; }
-            if (childCount === 2) { widthClass = 'w-[40rem]'; gridClass = 'grid-cols-2'; }
+            let widthClass = 'w-64';
+            let gridClass = 'grid-cols-1';
+
+            if (isMegaMenu) {
+                // Mega Menu Logic
+                const childCount = item.children.length;
+                widthClass = 'w-[56rem]'; // Default wide
+                gridClass = 'grid-cols-3';
+
+                if (childCount === 1) { widthClass = 'w-72'; gridClass = 'grid-cols-1'; }
+                if (childCount === 2) { widthClass = 'w-[40rem]'; gridClass = 'grid-cols-2'; }
+            } else {
+                // Simple List Logic (Gallery, About Us)
+                widthClass = 'w-64';
+                gridClass = 'grid-cols-1';
+            }
 
             // Build Dropdown Content
             const dropdownContent = item.children.map(child => {
