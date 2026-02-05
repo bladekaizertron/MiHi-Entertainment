@@ -1411,16 +1411,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 typeLabel = "Media Container";
             } else if (el.querySelector('h2') && el.classList.contains('max-w-4xl')) typeLabel = "Text Section";
             
+            // If selected element is inside a split screen section, show Split Screen inspector (so Add/Remove features are visible)
+            let splitScreenSection = null;
+            if (typeLabel === "Split Screen") {
+                splitScreenSection = el;
+            } else if (el.closest('[data-editable]') && el.closest('[data-editable]').querySelector('.lg\\:grid-cols-2')) {
+                splitScreenSection = el.closest('[data-editable]');
+                typeLabel = "Split Screen";
+            }
+            
             // Check if it's a text block section
             const isTextBlock = typeLabel === "Text Section";
             
             // Check if it's a split screen section
-            const isSplitScreen = typeLabel === "Split Screen";
+            const isSplitScreen = !!splitScreenSection;
             
-            // Check if split screen has media
+            // Check if split screen has media (use section element for queries)
             let hasSplitScreenMedia = false;
-            if (isSplitScreen) {
-                const mediaContainer = el.querySelector('#split-screen-media-container');
+            if (isSplitScreen && splitScreenSection) {
+                const mediaContainer = splitScreenSection.querySelector('#split-screen-media-container');
                 if (mediaContainer) {
                     const image = mediaContainer.querySelector('#split-screen-image');
                     const video = mediaContainer.querySelector('#split-screen-video');
@@ -1655,14 +1664,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </div>
                 ` : ''}
 
-                ${isSplitScreen ? (() => {
+                ${isSplitScreen && splitScreenSection ? (() => {
                     // Check current position - if text is first child, media is on right (default)
-                    const grid = el.querySelector('#split-screen-grid');
-                    const textContent = el.querySelector('#split-screen-text-content');
-                    const mediaContent = el.querySelector('#split-screen-media-content');
+                    const grid = splitScreenSection.querySelector('#split-screen-grid');
+                    const textContent = splitScreenSection.querySelector('#split-screen-text-content');
+                    const mediaContent = splitScreenSection.querySelector('#split-screen-media-content');
                     const isMediaOnRight = grid && textContent && mediaContent && 
                                            grid.firstElementChild === textContent;
                     const positionLabel = isMediaOnRight ? 'Media on Right' : 'Media on Left';
+                    // Get current feature points for the list (use section, not selected el)
+                    const container = splitScreenSection.querySelector('#split-screen-feature-points');
+                    const featureItems = container ? Array.from(container.querySelectorAll('.split-screen-feature-item')) : [];
+                    const escapeHtml = (s) => (s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+                    const featureListHtml = featureItems.length ? featureItems.map((item, i) => {
+                        const titleEl = item.querySelector('.font-semibold');
+                        const rawLabel = (titleEl && titleEl.textContent.trim()) ? titleEl.textContent.trim().substring(0, 28) + (titleEl.textContent.length > 28 ? '…' : '') : 'Feature ' + (i + 1);
+                        const label = escapeHtml(rawLabel);
+                        const titleAttr = escapeHtml((titleEl && titleEl.textContent.trim()) ? titleEl.textContent.trim() : '');
+                        return `<div class="flex items-center justify-between gap-2 py-1.5 px-2 rounded bg-zinc-800/50 border border-zinc-700/50">
+                            <span class="text-xs text-zinc-300 truncate flex-1" title="${titleAttr}">${label}</span>
+                            <button type="button" onclick="removeSplitScreenFeaturePointByIndex(${i})" class="flex-shrink-0 text-red-500 hover:text-red-400 p-1 rounded hover:bg-red-500/10" title="Remove feature point"><i class="fas fa-times text-xs"></i></button>
+                        </div>`;
+                    }).join('') : '<p class="text-xs text-zinc-500 py-2">No feature points yet. Add one below.</p>';
                     
                     return `
                 <div class="mb-4 border-t border-zinc-700 pt-4">
@@ -1673,14 +1696,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     </button>
                 </div>
                 <div class="mb-4 border-t border-zinc-700 pt-4">
-                    <label class="block text-xs text-zinc-500 mb-2">Feature Points</label>
-                    <div class="space-y-2">
-                        <button onclick="addSplitScreenFeaturePoint()" class="w-full bg-zinc-700 hover:bg-zinc-600 text-white px-3 py-2 rounded text-xs transition-colors flex items-center justify-center gap-2">
-                            <i class="fas fa-plus"></i>
-                            <span>Add Feature Point</span>
-                        </button>
-                    </div>
-                    <div class="text-xs text-zinc-500 mt-2">Click to add more feature points. Hover over items to remove them.</div>
+                    <label class="block text-xs text-zinc-500 mb-2">Feature Points (${featureItems.length})</label>
+                    <div class="space-y-1.5 max-h-48 overflow-y-auto mb-2">${featureListHtml}</div>
+                    <button onclick="addSplitScreenFeaturePoint()" class="w-full bg-zinc-700 hover:bg-zinc-600 text-white px-3 py-2 rounded text-xs transition-colors flex items-center justify-center gap-2">
+                        <i class="fas fa-plus"></i>
+                        <span>Add Feature Point</span>
+                    </button>
                 </div>
                 <div class="mb-4 border-t border-zinc-700 pt-4">
                     <label class="block text-xs text-zinc-500 mb-2">Split Screen Media</label>
@@ -2497,14 +2518,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             const doc = iframe.contentDocument;
             if (!doc) return;
 
-            // Find the split screen section - search all sections for one with feature points
+            // Prefer the section that contains the currently selected element (so Add works when clicking inside split screen)
             let splitScreenSection = null;
-            const sections = doc.querySelectorAll('[data-editable]');
-            sections.forEach(sec => {
-                if (sec.querySelector('#split-screen-feature-points')) {
-                    splitScreenSection = sec;
-                }
-            });
+            if (selectedElement) {
+                if (selectedElement.querySelector('#split-screen-feature-points'))
+                    splitScreenSection = selectedElement;
+                else if (selectedElement.closest('[data-editable]')?.querySelector('#split-screen-feature-points'))
+                    splitScreenSection = selectedElement.closest('[data-editable]');
+            }
+            if (!splitScreenSection) {
+                const sections = doc.querySelectorAll('[data-editable]');
+                sections.forEach(sec => {
+                    if (sec.querySelector('#split-screen-feature-points')) splitScreenSection = sec;
+                });
+            }
 
             if (!splitScreenSection) {
                 alert('Could not find split screen section with feature points. Please make sure a split-screen section is added to the page.');
@@ -2583,6 +2610,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     selectElement(splitScreenSection);
                 }
             }
+        }
+        
+        function removeSplitScreenFeaturePointByIndex(index) {
+            if (!selectedElement) return;
+            const section = selectedElement.querySelector('#split-screen-feature-points') ? selectedElement : selectedElement.closest('[data-editable]');
+            const container = section ? section.querySelector('#split-screen-feature-points') : null;
+            if (!container) return;
+            const items = container.querySelectorAll('.split-screen-feature-item');
+            if (index < 0 || index >= items.length) return;
+            removeSplitScreenFeaturePoint(items[index]);
         }
         
         function updateSplitScreenFeatureNumbers(container) {
