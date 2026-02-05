@@ -61,9 +61,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $errors[] = 'Content is required';
     }
     
-    // Check content size (warn if very large - over 200MB)
+    // Check content size (warn if very large - over 500MB)
     $contentSize = strlen($content);
-    $maxRecommendedSize = 200 * 1024 * 1024; // 200MB
+    $maxRecommendedSize = 500 * 1024 * 1024; // 500MB
     if ($contentSize > $maxRecommendedSize) {
         $sizeMB = round($contentSize / 1048576, 2);
         $errors[] = 'Content is very large (' . $sizeMB . ' MB). Please reduce the content size, especially images embedded in the editor. Consider using external image URLs instead of embedding images directly.';
@@ -323,7 +323,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <input type="file" id="thumbnail_upload" accept="image/*" style="display: none;">
                     <button type="button" id="upload_thumbnail_btn" class="btn btn-secondary" style="white-space: nowrap;">Upload Image</button>
                 </div>
-                <small>Enter image URL or click "Upload Image" to upload directly. <strong>Note:</strong> Images are automatically resized and optimized to reduce file size.</small>
+                <small>Enter image URL or click "Upload Image" to upload directly (max 100MB). <strong>Note:</strong> Images are automatically resized and optimized to reduce file size.</small>
                 <div id="thumbnail_preview" style="margin-top: 10px;">
                     <?php if (!empty($_POST['featured_image'])): ?>
                         <img src="<?php echo escape($_POST['featured_image']); ?>" alt="Thumbnail preview" style="max-width: 300px; height: auto; border-radius: 8px; border: 2px solid #e2e8f0;">
@@ -562,9 +562,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 return;
             }
             
-            // Validate file size (5MB)
-            if (file.size > 5 * 1024 * 1024) {
-                alert('File is too large. Maximum size is 5MB.');
+            // Validate file size (100MB)
+            if (file.size > 100 * 1024 * 1024) {
+                alert('File is too large. Maximum size is 100MB.');
                 return;
             }
             
