@@ -3,10 +3,63 @@
 
 header('Content-Type: application/json');
 
+// Prevent any output buffering junk or warnings from breaking JSON
+error_reporting(0);
+ini_set('display_errors', 0);
+ob_start();
+
+// Helper to send JSON response
+function sendJson($data, $code = 200) {
+    http_response_code($code);
+    while (ob_get_level()) {
+        ob_end_clean();
+    }
+    echo json_encode($data);
+    exit;
+}
+
+// Catch fatal errors
+register_shutdown_function(function() {
+    $error = error_get_last();
+    if ($error && ($error['type'] === E_ERROR || $error['type'] === E_PARSE || $error['type'] === E_COMPILE_ERROR)) {
+        // Log the error
+        error_log("Fatal Error in upload_image.php: " . $error['message']);
+        
+        // Send JSON 500 response
+        if (!headers_sent()) {
+            header('Content-Type: application/json');
+            http_response_code(500);
+        }
+        
+        echo json_encode(['error' => ['message' => 'Server error: ' . $error['message']]]);
+    }
+});
+
 try {
     require_once __DIR__ . '/../config/config.php';
     require_once __DIR__ . '/../includes/image_resize.php';
-    requireLogin(); // Require login for security
+    
+    // Manual Auth Check to return JSON instead of redirecting
+    if (!function_exists('isLoggedIn')) {
+        // Should be loaded from config, but just in case
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+        function isLoggedIn() { return isset($_SESSION['user_id']); }
+    }
+    
+    if (!isLoggedIn()) {
+        sendJson(['error' => ['message' => 'Not logged in']], 401);
+    }
+    
+    // Debug logging
+    error_log("Upload image request received. Method: " . $_SERVER['REQUEST_METHOD']);
+    error_log("Request URI: " . $_SERVER['REQUEST_URI']);
+    error_log("Script Name: " . $_SERVER['SCRIPT_NAME']);
+    // Log headers to check for redirect indicators
+    if (function_exists('getallheaders')) {
+        error_log("Headers: " . print_r(getallheaders(), true));
+    }
     
     // Use config constants for upload directory
     $uploadDir = UPLOAD_DIR . 'images/';
@@ -41,20 +94,15 @@ try {
         error_log("PHP UID: " . getmyuid() . ", Directory UID: " . fileowner($uploadDir));
         // Try to fix permissions
         @chmod($uploadDir, 0777);
-        // Don't throw error yet - try to write anyway as is_writable() can be unreliable
     }
     
     // TinyMCE sends files with the key 'upload' (configured in your JS)
     if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-        http_response_code(405);
-        echo json_encode(['error' => ['message' => 'Method not allowed']]);
-        exit;
+        sendJson(['error' => ['message' => 'Method not allowed. Received: ' . $_SERVER['REQUEST_METHOD']]], 405);
     }
     
     if (!isset($_FILES['upload'])) {
-        http_response_code(400);
-        echo json_encode(['error' => ['message' => 'No file uploaded']]);
-        exit;
+        sendJson(['error' => ['message' => 'No file uploaded']], 400);
     }
     
     $file = $_FILES['upload'];
@@ -71,17 +119,13 @@ try {
             UPLOAD_ERR_EXTENSION => 'A PHP extension stopped the file upload'
         ];
         $errorMsg = $errorMessages[$file['error']] ?? 'Upload failed. Error code: ' . $file['error'];
-        http_response_code(500);
-        echo json_encode(['error' => ['message' => $errorMsg]]);
-        exit;
+        sendJson(['error' => ['message' => $errorMsg]], 500);
     }
     
     // Validate file size (10MB max)
     $maxSize = 10 * 1024 * 1024; // 10MB
     if ($file['size'] > $maxSize) {
-        http_response_code(400);
-        echo json_encode(['error' => ['message' => 'File is too large. Maximum size is 10MB.']]);
-        exit;
+        sendJson(['error' => ['message' => 'File is too large. Maximum size is 10MB.']], 400);
     }
     
     // Validate Type
@@ -110,15 +154,11 @@ try {
     // Also check extension
     $ext = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
     if (!in_array($ext, $allowedExt)) {
-        http_response_code(400);
-        echo json_encode(['error' => ['message' => 'Invalid file type. Only JPG, PNG, GIF, WEBP allowed.']]);
-        exit;
+        sendJson(['error' => ['message' => 'Invalid file type. Only JPG, PNG, GIF, WEBP allowed.']], 400);
     }
     
     if ($mime && !in_array($mime, $allowed)) {
-        http_response_code(400);
-        echo json_encode(['error' => ['message' => 'Invalid file type.']]);
-        exit;
+        sendJson(['error' => ['message' => 'Invalid file type.']], 400);
     }
     
     // Generate Filename
@@ -127,6 +167,7 @@ try {
     $tempDestination = $uploadDir . 'temp_' . $filename;
     
     // Move uploaded file to temp location first
+    // Use @ to suppress warning that might leak to output buffer
     if (!@move_uploaded_file($file['tmp_name'], $tempDestination)) {
         $lastError = error_get_last();
         $errorMsg = 'Failed to save file. Check directory permissions.';
@@ -134,13 +175,13 @@ try {
             $errorMsg .= ' Error: ' . $lastError['message'];
             error_log("move_uploaded_file failed: " . $lastError['message']);
         }
-        error_log("Upload directory: " . $uploadDir);
-        error_log("Directory exists: " . (is_dir($uploadDir) ? 'yes' : 'no'));
-        error_log("Directory writable: " . (is_writable($uploadDir) ? 'yes' : 'no'));
-        error_log("Directory permissions: " . (is_dir($uploadDir) ? substr(sprintf('%o', fileperms($uploadDir)), -4) : 'N/A'));
-        http_response_code(500);
-        echo json_encode(['error' => ['message' => $errorMsg]]);
-        exit;
+        
+        // Try to fix permissions if we can't write
+        if (!is_writable($uploadDir)) {
+             @chmod($uploadDir, 0777);
+        }
+        
+        sendJson(['error' => ['message' => $errorMsg]], 500);
     }
     
     // Get optimal settings for content images
@@ -160,9 +201,7 @@ try {
         // Copy temp file to final destination
         if (!copy($tempDestination, $destination)) {
             @unlink($tempDestination);
-            http_response_code(500);
-            echo json_encode(['error' => ['message' => 'Failed to process image.']]);
-            exit;
+            sendJson(['error' => ['message' => 'Failed to process image.']], 500);
         }
     }
     
@@ -170,13 +209,9 @@ try {
     @unlink($tempDestination);
     
     // Return strictly the JSON structure TinyMCE expects
-    echo json_encode([
-        'url' => $uploadUrl . $filename
-    ]);
+    sendJson(['url' => $uploadUrl . $filename]);
     
 } catch (Exception $e) {
-    http_response_code(500);
     error_log("Upload error: " . $e->getMessage());
-    echo json_encode(['error' => ['message' => 'Upload failed: ' . $e->getMessage()]]);
+    sendJson(['error' => ['message' => 'Upload failed: ' . $e->getMessage()]], 500);
 }
-?>

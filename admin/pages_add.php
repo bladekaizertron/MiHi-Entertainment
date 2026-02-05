@@ -14,6 +14,24 @@ if (!function_exists('escape')) {
     }
 }
 
+
+// Special handling for upload actions to ensure JSON response on auth failure
+$action = $_POST['action'] ?? '';
+if ($action === 'upload_video') {
+   // Check auth manually
+   if (!function_exists('isLoggedIn')) {
+       if (session_status() === PHP_SESSION_NONE) { session_start(); }
+       function isLoggedIn() { return isset($_SESSION['user_id']); }
+   }
+   
+   if (!isLoggedIn()) {
+       header('Content-Type: application/json');
+       http_response_code(401);
+       echo json_encode(['success' => false, 'message' => 'Session expired. Please refresh and log in.']);
+       exit;
+   }
+}
+
 requireLogin();
 $currentUser = getCurrentUser();
 if (!in_array(strtolower($currentUser['role'] ?? ''), ['admin','editor'], true)) {
@@ -46,9 +64,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'upload_video') {
             exit;
         }
         
-        if (!isset($_FILES['file']) || $_FILES['file']['error'] !== UPLOAD_ERR_OK) {
+        if (!isset($_FILES['file'])) {
+             // If $_FILES is empty but we expected a POST, it's likely post_max_size was exceeded
+            $message = 'No file uploaded. This usually means the file is larger than the server allows (post_max_size).';
+            if ($_SERVER['CONTENT_LENGTH'] > 0) {
+                 $message = 'File is too large for the server to handle (exceeds post_max_size).';
+            }
             http_response_code(400);
-            echo json_encode(['success' => false, 'message' => 'No file uploaded or upload error']);
+            echo json_encode(['success' => false, 'message' => $message]);
+            exit;
+        }
+        
+        if ($_FILES['file']['error'] !== UPLOAD_ERR_OK) {
+            $code = $_FILES['file']['error'];
+            $errorMessages = [
+                UPLOAD_ERR_INI_SIZE => 'File exceeds upload_max_filesize directive in php.ini',
+                UPLOAD_ERR_FORM_SIZE => 'File exceeds MAX_FILE_SIZE directive in HTML form',
+                UPLOAD_ERR_PARTIAL => 'File was only partially uploaded',
+                UPLOAD_ERR_NO_FILE => 'No file was uploaded',
+                UPLOAD_ERR_NO_TMP_DIR => 'Missing temporary folder',
+                UPLOAD_ERR_CANT_WRITE => 'Failed to write file to disk',
+                UPLOAD_ERR_EXTENSION => 'A PHP extension stopped the file upload'
+            ];
+            $message = $errorMessages[$code] ?? 'Unknown upload error';
+            
+            http_response_code(400);
+            echo json_encode(['success' => false, 'message' => 'Upload failed: ' . $message]);
             exit;
         }
         
@@ -91,8 +132,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'upload_video') {
         
         // Move uploaded file
         if (move_uploaded_file($file['tmp_name'], $destination)) {
-            // Use relative path from project root instead of SITE_URL
-            $url = '/MiHi-Entertainment/uploads/videos/' . $filename;
+            // Auto-detect base URL for uploads
+            $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http';
+            $host = $_SERVER['HTTP_HOST'] ?? 'localhost';
+            $requestUri = dirname($_SERVER['SCRIPT_NAME']); // Gets /admin
+            $basePath = dirname($requestUri); // Gets the root path, usually empty or /
+            // Ensure basePath doesn't end with slash unless it is just "/"
+            if ($basePath === '/' || $basePath === '\\') { $basePath = ''; }
+            
+            $url = $protocol . '://' . $host . $basePath . '/uploads/videos/' . $filename;
             echo json_encode(['success' => true, 'url' => $url, 'type' => 'video']);
         } else {
             http_response_code(500);
@@ -622,596 +670,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <!-- Hidden templates for page builder - avoids template literal issues on some servers -->
     
-    <!-- Hero Section Template -->
-    <script type="text/template" id="tpl-hero">
-<section data-editable class="relative text-white py-24 px-6 text-center overflow-hidden">
-    <!-- Background Image Container -->
-    <div class="absolute inset-0 hero-background-container">
-        <!-- Default gradient background -->
-        <div class="absolute inset-0 bg-gradient-to-br from-[#0f0a1a] via-[#1d1130] to-[#2a133d]"></div>
-        <!-- Background image (hidden by default) -->
-        <img src="" alt="" class="absolute inset-0 w-full h-full object-cover hidden hero-background-image">
-    </div>
+<?php include 'pages_elements/hero_section.php'; ?>
+
+<?php include 'pages_elements/text_block.php'; ?>
+
+<?php include 'pages_elements/feature_cards.php'; ?>
+
+<?php include 'pages_elements/split_screen.php'; ?>
+
+<?php include 'pages_elements/cta.php'; ?>
+
+<?php include 'pages_elements/video_section.php'; ?>
     
-    <!-- Gradient overlay for text readability -->
-    <div class="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/40"></div>
+<?php include 'pages_elements/gallery_section.php'; ?>
     
-    <div class="relative max-w-6xl mx-auto">
-        
-        <h1 contenteditable="true" class="text-5xl md:text-7xl font-bold mb-6 outline-none leading-tight" style="font-family: 'Azo Sans Uber', sans-serif; font-weight: 400; text-transform: uppercase; letter-spacing: 0.02em; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;">
-            <span class="block" style="color: #FF4F4F;">PHOTO BOOTH</span>
-            <span class="block" style="color: #18F1E1;">RENTALS</span>
-        </h1>
-        <p contenteditable="true" class="text-xl text-white/90 mb-8 max-w-3xl mx-auto outline-none leading-relaxed" style="font-family: 'Azo Sans', sans-serif;">Premium photo booth rentals and event entertainment services nationwide. From AI-powered photo booths to 360 video experiences.</p>
-        <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 md:gap-6 justify-center items-center px-2 sm:px-4 w-full max-w-md sm:max-w-none mx-auto">
-            <a href="#" class="group relative inline-flex items-center justify-center gap-2 sm:gap-3 text-white px-5 sm:px-8 md:px-10 py-3 sm:py-4 md:py-5 rounded-full text-sm sm:text-base md:text-lg font-medium shadow-2xl hover:shadow-[#FF4F4F]/50 transition-all duration-500 transform hover:scale-105 sm:hover:scale-110 hover:-translate-y-1 overflow-hidden w-full sm:w-auto min-w-[140px] sm:min-w-0 touch-manipulation" style="background: #FF4F4F;">
-                <span class="relative z-10">Get Your Quote</span>
-            </a>
-            <a href="#" class="group inline-flex items-center justify-center gap-2 sm:gap-3 px-5 sm:px-8 md:px-10 py-3 sm:py-4 md:py-5 rounded-full text-sm sm:text-base md:text-lg font-medium backdrop-blur-md bg-white/10 border-2 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:scale-105 sm:hover:scale-110 hover:-translate-y-1 text-white w-full sm:w-auto min-w-[140px] sm:min-w-0 cursor-pointer touch-manipulation" style="border-color: rgba(24, 241, 225, 0.5);" onmouseover="this.style.borderColor='rgba(24, 241, 225, 0.7)'; this.style.background='rgba(24, 241, 225, 0.2)';" onmouseout="this.style.borderColor='rgba(24, 241, 225, 0.5)'; this.style.background='rgba(255, 255, 255, 0.1)';">
-                <svg class="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498A1 1 0 0121 17.72V21a2 2 0 01-2 2h-1C9.716 23 3 16.284 3 8V7a2 2 0 012-2z"></path>
-                </svg>
-                <span>Call Us</span>
-            </a>
-        </div>
-    </div>
-</section>
-    </script>
-
-    <!-- Text Section Template -->
-    <script type="text/template" id="tpl-text">
-       <section data-editable class="w-full py-16 px-6 bg-white" style="color: #1F1F1F;">
-          <div class="max-w-4xl mx-auto text-center mb-12">
-           <h2 contenteditable="true" class="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 outline-none" style="font-family: 'Azo Sans Uber', sans-serif; font-weight: 400; text-transform: uppercase; letter-spacing: 0.02em; color: #FF4F4F; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;">Section Heading</h2>
-           <p contenteditable="true" class="text-base md:text-lg leading-relaxed outline-none" style="font-family: 'Azo Sans', sans-serif;">This is a paragraph. You can type directly here. We use contenteditable to make this feel like a real document editor.</p>
-         </div>
-      </section>
-    </script>
-
-    <!-- Cards Section Template -->
-    <script type="text/template" id="tpl-cards">
-        <section data-editable class="py-16 px-6 bg-white">
-            <div class="max-w-6xl mx-auto">
-                <div class="text-center mb-12">
-                    <h2 contenteditable="true" class="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 outline-none" style="font-family: 'Azo Sans Uber', sans-serif; font-weight: 400; text-transform: uppercase; letter-spacing: 0.02em; color: #FF4F4F; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;">Feature Cards</h2>
-                    <p contenteditable="true" class="text-base md:text-lg leading-relaxed max-w-3xl mx-auto outline-none" style="font-family: 'Azo Sans', sans-serif; color: #1F1F1F;">Discover the amazing features that make our service stand out from the rest.</p>
-                </div>
-                <div class="grid md:grid-cols-3 gap-8" id="feature-cards-container">
-                    <!-- Initial card 1 -->
-                    <div class="feature-card-item bg-white p-6 rounded-2xl shadow-lg border border-gray-100 hover:shadow-xl transition-shadow duration-300 relative group">
-                        <div class="w-12 h-12 bg-pink-500 rounded-xl flex items-center justify-center mb-4">
-                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
-                            </svg>
-                        </div>
-                        <h3 contenteditable="true" class="text-xl font-bold mb-2 outline-none" style="font-family: 'Azo Sans', sans-serif; color: #FF4F4F;">Feature One</h3>
-                        <p contenteditable="true" class="outline-none" style="font-family: 'Azo Sans', sans-serif; color: #1F1F1F;">Description of the feature.</p>
-                        
-                        <!-- Remove button overlay -->
-                        <button onclick="removeFeatureCard(this)" data-editor-only class="absolute top-2 right-2 bg-red-600 hover:bg-red-700 text-white w-8 h-8 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-center justify-center shadow-lg z-10" title="Remove card">
-                            <i class="fas fa-times"></i>
-                        </button>
-                    </div>
-                    
-                    <!-- Initial card 2 -->
-                    <div class="feature-card-item bg-white p-6 rounded-2xl shadow-lg border border-gray-100 hover:shadow-xl transition-shadow duration-300 relative group">
-                        <div class="w-12 h-12 bg-blue-500 rounded-xl flex items-center justify-center mb-4">
-                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
-                            </svg>
-                        </div>
-                        <h3 contenteditable="true" class="text-xl font-bold mb-2 outline-none" style="font-family: 'Azo Sans', sans-serif; color: #FF4F4F;">Feature Two</h3>
-                        <p contenteditable="true" class="outline-none" style="font-family: 'Azo Sans', sans-serif; color: #1F1F1F;">Description of the feature.</p>
-                        
-                        <!-- Remove button overlay -->
-                        <button onclick="removeFeatureCard(this)" data-editor-only class="absolute top-2 right-2 bg-red-600 hover:bg-red-700 text-white w-8 h-8 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-center justify-center shadow-lg z-10" title="Remove card">
-                            <i class="fas fa-times"></i>
-                        </button>
-                    </div>
-                    
-                    <!-- Initial card 3 -->
-                    <div class="feature-card-item bg-white p-6 rounded-2xl shadow-lg border border-gray-100 hover:shadow-xl transition-shadow duration-300 relative group">
-                        <div class="w-12 h-12 bg-purple-500 rounded-xl flex items-center justify-center mb-4">
-                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
-                            </svg>
-                        </div>
-                        <h3 contenteditable="true" class="text-xl font-bold mb-2 outline-none" style="font-family: 'Azo Sans', sans-serif; color: #FF4F4F;">Feature Three</h3>
-                        <p contenteditable="true" class="outline-none" style="font-family: 'Azo Sans', sans-serif; color: #1F1F1F;">Description of the feature.</p>
-                        
-                        <!-- Remove button overlay -->
-                        <button onclick="removeFeatureCard(this)" data-editor-only class="absolute top-2 right-2 bg-red-600 hover:bg-red-700 text-white w-8 h-8 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-center justify-center shadow-lg z-10" title="Remove card">
-                            <i class="fas fa-times"></i>
-                        </button>
-                    </div>
-                </div>
-                
-                <!-- Add Card Button -->
-                <div class="mt-8 text-center" data-editor-only>
-                    <button onclick="addFeatureCard(this)" class="inline-flex items-center gap-2 px-6 py-3 rounded-full border-2 border-dashed border-[#FF4F4F]/50 text-[#FF4F4F] hover:bg-[#FF4F4F]/10 hover:border-[#FF4F4F] transition-all duration-300">
-                        <i class="fas fa-plus-circle"></i>
-                        <span>Add Card</span>
-                    </button>
-                </div>
-            </div>
-        </section>
-    </script>
-
-    <!-- Split Screen Template -->
-    <script type="text/template" id="tpl-split">
-<section data-editable class="py-20 px-6 bg-white">
-    <div class="max-w-6xl mx-auto grid lg:grid-cols-2 gap-12 items-center" id="split-screen-grid">
-        <div id="split-screen-text-content">
-            <h2 contenteditable="true" class="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 outline-none" style="font-family: 'Azo Sans Uber', sans-serif; font-weight: 400; text-transform: uppercase; letter-spacing: 0.02em; color: #FF4F4F; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;">Split Screen Section</h2>
-            <p contenteditable="true" class="text-base md:text-lg leading-relaxed mb-8 outline-none" style="color: #1F1F1F;">This is a split screen layout with content on one side and an image placeholder on the other.</p>
-            <div class="space-y-4 mb-8" id="split-screen-feature-points">
-                <div class="flex gap-3 split-screen-feature-item group" data-feature-index="1">
-                    <div class="w-10 h-10 rounded-full bg-pink-500/10 flex items-center justify-center text-pink-600 font-bold flex-shrink-0 border border-pink-500/20 split-screen-feature-number">1</div>
-                    <div class="flex-1">
-                        <p contenteditable="true" class="font-semibold outline-none" style="color: #1F1F1F;">Feature Point One</p>
-                        <p contenteditable="true" class="text-sm outline-none" style="color: #1F1F1F;">Description of feature</p>
-                    </div>
-                    <button data-action="remove-feature" class="text-red-600 hover:text-red-700 opacity-0 group-hover:opacity-100 transition-opacity p-1" title="Remove feature point">
-                        <i class="fas fa-times"></i>
-                    </button>
-                </div>
-                <div class="flex gap-3 split-screen-feature-item group" data-feature-index="2">
-                    <div class="w-10 h-10 rounded-full bg-purple-500/10 flex items-center justify-center text-purple-600 font-bold flex-shrink-0 border border-purple-500/20 split-screen-feature-number">2</div>
-                    <div class="flex-1">
-                        <p contenteditable="true" class="font-semibold outline-none" style="color: #1F1F1F;">Feature Point Two</p>
-                        <p contenteditable="true" class="text-sm outline-none" style="color: #1F1F1F;">Description of feature</p>
-                    </div>
-                    <button data-action="remove-feature" class="text-red-600 hover:text-red-700 opacity-0 group-hover:opacity-100 transition-opacity p-1" title="Remove feature point">
-                        <i class="fas fa-times"></i>
-                    </button>
-                </div>
-                <div class="flex gap-3 split-screen-feature-item group" data-feature-index="3">
-                    <div class="w-10 h-10 rounded-full bg-red-500/10 flex items-center justify-center text-red-600 font-bold flex-shrink-0 border border-red-500/20 split-screen-feature-number">3</div>
-                    <div class="flex-1">
-                        <p contenteditable="true" class="font-semibold outline-none" style="color: #1F1F1F;">Feature Point Three</p>
-                        <p contenteditable="true" class="text-sm outline-none" style="color: #1F1F1F;">Description of feature</p>
-                    </div>
-                    <button data-action="remove-feature" class="text-red-600 hover:text-red-700 opacity-0 group-hover:opacity-100 transition-opacity p-1" title="Remove feature point">
-                        <i class="fas fa-times"></i>
-                    </button>
-                </div>
-            </div>
-            <div class="flex flex-col sm:flex-row gap-4">
-                <a href="#" class="inline-flex items-center justify-center px-8 py-4 rounded-full font-semibold text-lg bg-[#FF4F4F] hover:bg-[#FF3838] text-white transition-all duration-300 hover:-translate-y-1 hover:scale-105">Get Your Quote</a>
-                <a href="#" class="inline-flex items-center justify-center px-7 py-3 rounded-full font-semibold border-2 border-[#18F1E1] text-[#18F1E1] bg-white hover:bg-[#18F1E1] hover:text-black transition-all duration-300">Call Us</a>
-            </div>
-        </div>
-        <div class="relative" data-editable="true" id="split-screen-media-content">
-            <div class="relative bg-white border border-gray-200/50 rounded-[28px] overflow-hidden shadow-[0_24px_60px_-18px_rgba(0,0,0,0.12)] group">
-                <div class="w-full h-[500px] bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center relative" id="split-screen-media-container">
-                    <img src="" alt="" class="w-full h-full object-cover hidden" id="split-screen-image">
-                    <video src="" controls class="w-full h-full object-cover hidden" id="split-screen-video"></video>
-                    <span class="text-gray-400" id="split-screen-placeholder">Media Placeholder</span>
-                    
-                    <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-center justify-center z-10" id="split-screen-media-overlay">
-                        <div class="flex flex-col gap-3 px-4">
-                            <button data-action="change-media" data-type="photo" class="bg-white hover:bg-gray-100 text-gray-900 px-6 py-3 rounded-lg font-semibold text-sm flex items-center gap-2 transition-colors shadow-lg">
-                                <i class="fas fa-image"></i>
-                                <span>Change Photo</span>
-                            </button>
-                            <button data-action="change-media" data-type="video" class="bg-white hover:bg-gray-100 text-gray-900 px-6 py-3 rounded-lg font-semibold text-sm flex items-center gap-2 transition-colors shadow-lg">
-                                <i class="fas fa-video"></i>
-                                <span>Change Video</span>
-                            </button>
-                            <button data-action="remove-media" class="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-lg font-semibold text-sm flex items-center gap-2 transition-colors shadow-lg" id="split-screen-remove-btn" style="display: none;">
-                                <i class="fas fa-trash"></i>
-                                <span>Remove Media</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-    </script>
-
-    <!-- CTA Section Template -->
-    <script type="text/template" id="tpl-cta">
-        <section data-editable class="bg-gradient-to-r from-[#1F1F1F] via-[#1F1F1F] to-[#1F1F1F] py-20 px-6 text-center text-white relative overflow-hidden">
-           <div class="absolute inset-0 pointer-events-none">
-               <div class="absolute top-10 left-1/2 -translate-x-1/2 w-[90%] h-full bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.15),transparent_60%)]"></div>
-           </div>
-           <div class="relative max-w-4xl mx-auto">
-               <h2 contenteditable="true" class="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 outline-none" style="font-family: 'Azo Sans Uber', sans-serif; font-weight: 400; color: #18F1E1; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;">Ready to Begin?</h2>
-               <p contenteditable="true" class="text-base md:text-lg text-white/85 leading-relaxed mb-8 max-w-2xl mx-auto outline-none">Get started with our premium services today.</p>
-               <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                   <a href="#" class="inline-flex items-center justify-center px-8 py-4 rounded-full font-semibold text-lg bg-[#FF4F4F] hover:bg-[#FF3838] text-white transition-all duration-300 hover:-translate-y-1 hover:scale-105">Contact Us</a>
-                   <a href="#" class="inline-flex items-center justify-center px-7 py-3 rounded-full font-semibold border-2 border-[#18F1E1] text-[#18F1E1] bg-transparent hover:bg-[#18F1E1] hover:text-black transition-all duration-300">Call Us</a>
-                </div>
-           </div>
-       </section>
-    </script>
-
-    <!-- Video Section Template -->
-    <script type="text/template" id="tpl-video">
-<section data-editable class="relative overflow-hidden bg-gradient-to-r from-[#1F1F1F] via-[#1F1F1F] to-[#1F1F1F] text-white py-20 px-6" data-video-section>
-    <div class="absolute inset-0 pointer-events-none">
-        <div class="absolute top-10 left-1/2 -translate-x-1/2 w-[90%] h-full bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.15),transparent_60%)]"></div>
-    </div>
-    <div class="relative max-w-6xl mx-auto">
-        <div class="text-center mb-16">
-            <h2 contenteditable="true" class="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 outline-none" style="font-family: 'Azo Sans Uber', sans-serif; font-weight: 400; color: #18F1E1; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;">Video Showcase</h2>
-            <p contenteditable="true" class="text-base md:text-lg text-white/85 leading-relaxed max-w-3xl mx-auto outline-none">Create share-worthy videos that capture the energy and emotion of your event.</p>
-        </div>
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6" id="video-cards-container">
-            <!-- Initial video card -->
-            <div class="video-card-item bg-white/10 border border-white/15 rounded-3xl overflow-hidden backdrop-blur transition-all duration-300 hover:-translate-y-1 relative group">
-                <div class="aspect-video overflow-hidden bg-black/50 flex items-center justify-center relative video-player-container">
-                    <span class="text-white/50 video-placeholder">Video Placeholder</span>
-                    <video class="w-full h-full object-cover hidden video-element" controls></video>
-                    <div class="w-full h-full hidden iframe-wrapper absolute inset-0"></div>
-                    
-                    <!-- Hover overlay for changing/removing video -->
-                    <div class="absolute inset-0 bg-black/70 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-center justify-center gap-3 z-10">
-                        <button onclick="changeVideoInCard(this)" class="bg-[#18F1E1] hover:bg-[#15D9C9] text-black px-4 py-2 rounded-lg font-semibold text-sm flex items-center gap-2 transition-colors">
-                            <i class="fas fa-video"></i> Change Video
-                        </button>
-                        <button onclick="removeVideoCard(this)" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg font-semibold text-sm flex items-center gap-2 transition-colors">
-                            <i class="fas fa-trash"></i> Remove
-                        </button>
-                    </div>
-                </div>
-                <div class="p-6">
-                    <h4 contenteditable="true" class="text-xl font-semibold mb-2 outline-none" style="color: #18F1E1; font-family: 'Azo Sans', sans-serif;">Video Title</h4>
-                    <p contenteditable="true" class="text-sm text-white/70 mb-4 leading-relaxed outline-none">Video description goes here.</p>
-                    <a href="#" onclick="openVideoModal(event, this)" class="inline-flex items-center rounded-full bg-[#FF4F4F] px-5 py-2 text-white font-semibold hover:bg-[#FF3838] transition-colors">Watch Now</a>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Add Video Card Button -->
-        <div class="mt-8 text-center">
-            <button onclick="addVideoCard(this)" class="inline-flex items-center gap-2 px-6 py-3 rounded-full border-2 border-dashed border-[#18F1E1]/50 text-[#18F1E1] hover:bg-[#18F1E1]/10 hover:border-[#18F1E1] transition-all duration-300">
-                <i class="fas fa-plus-circle"></i>
-                <span>Add Video Card</span>
-            </button>
-        </div>
-    </div>
-
-</section>
-    </script>
-    
-    <!-- Gallery Section Template -->
-    <script type="text/template" id="tpl-gallery">
-        <section data-editable class="py-20 px-6 bg-white">
-            <div class="max-w-6xl mx-auto">
-                <div class="text-center mb-12">
-                    <h2 contenteditable="true" class="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 outline-none" style="font-family: 'Azo Sans Uber', sans-serif; font-weight: 400; text-transform: uppercase; letter-spacing: 0.02em; color: #FF4F4F; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;">Image Gallery</h2>
-                    <p contenteditable="true" class="text-base md:text-lg leading-relaxed max-w-3xl mx-auto outline-none" style="font-family: 'Azo Sans', sans-serif; color: #1F1F1F;">Browse through our collection of stunning images.</p>
-                </div>
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4" id="gallery-container">
-                    <!-- Gallery images will be added here -->
-                </div>
-            </div>
-        </section>
-    </script>
-    
-    <!-- Gallery Image Grid Template (LookBook Style) -->
-    <script type="text/template" id="tpl-gallery_grid">
-<section data-editable class="relative overflow-hidden section-padding" style="background-image: radial-gradient(#021027, #000000);">
-    <!-- Particle Effect Background -->
-    <div class="particle-container" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none;"></div>
-    
-    <style>
-        /* Lookbook Gallery Grid Styles - Modern Layout */
-        .lookbook-gallery {
-            width: 90vw;
-            max-width: 1400px;
-            margin: 4em auto 1em;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            grid-auto-rows: 60px;
-            grid-auto-flow: dense;
-            align-items: end;
-            align-content: start;
-            gap: 1.5rem;
-            padding: 0 1rem 0.5rem;
-            min-height: fit-content;
-            position: relative;
-            z-index: 1;
-        }
-
-        /* Ensure bottom row items align to bottom */
-        .lookbook-gallery::after {
-            content: '';
-            grid-column: 1 / -1;
-            height: 0;
-            display: block;
-        }
-
-        /* Force all items to align to bottom of their grid cells */
-        .lookbook-gallery .gallery-item {
-            align-self: end;
-        }
-
-        .lookbook-gallery .large,
-        .lookbook-gallery .medium,
-        .lookbook-gallery .small {
-            display: flex;
-            height: 100%;
-            width: 100%;
-            grid-column: auto / span 1;
-            position: relative;
-            overflow: hidden;
-            cursor: pointer;
-            border-radius: 16px;
-            background: #000;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15), 0 2px 8px rgba(0, 0, 0, 0.1);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            opacity: 1;
-            align-self: end;
-        }
-
-        .lookbook-gallery .gallery-item:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 12px 40px rgba(255, 79, 79, 0.25), 0 8px 16px rgba(0, 0, 0, 0.2);
-            border: 2px solid rgba(255, 79, 79, 0.3);
-        }
-
-        .gallery-item-title {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(to top, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.7) 60%, rgba(0, 0, 0, 0.3) 80%, transparent 100%);
-            color: white;
-            padding: 1.25rem 1rem 1rem;
-            font-size: 0.875rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            z-index: 1;
-            opacity: 1;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            backdrop-filter: blur(4px);
-        }
-
-        .gallery-item:hover .gallery-item-title {
-            background: linear-gradient(to top, rgba(255, 79, 79, 0.95) 0%, rgba(255, 79, 79, 0.75) 60%, rgba(255, 79, 79, 0.4) 80%, transparent 100%);
-            padding-bottom: 1.25rem;
-            transform: translateY(0);
-        }
-
-        @media (max-width: 768px) {
-            .lookbook-gallery {
-                width: 95vw;
-                gap: 1rem;
-                margin: 2em auto;
-            }
-
-            .gallery-item-title {
-                font-size: 0.75rem;
-                padding: 1rem 0.75rem 0.75rem;
-            }
-        }
-
-        .lookbook-gallery .large {
-            grid-row: span 5;
-            border-radius: 20px;
-        }
-
-        .lookbook-gallery .medium {
-            grid-row: span 4;
-        }
-
-        .lookbook-gallery .small {
-            grid-row: span 3;
-        }
-
-        .lookbook-gallery img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), filter 0.4s ease;
-        }
-
-        .lookbook-gallery .gallery-item:hover img {
-            transform: scale(1.08);
-            filter: brightness(0.8) contrast(1.1);
-        }
-
-        /* Gallery item controls */
-        .gallery-item-controls {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            display: flex;
-            gap: 0.5rem;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            z-index: 10;
-        }
-
-        .gallery-item:hover .gallery-item-controls {
-            opacity: 1;
-        }
-
-        .gallery-item-controls button {
-            background: white;
-            color: #1F1F1F;
-            border: none;
-            padding: 0.5rem 1rem;
-            border-radius: 0.5rem;
-            font-size: 0.875rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-        }
-
-        .gallery-item-controls button:hover {
-            transform: scale(1.05);
-        }
-
-        .gallery-item-controls button.remove-btn {
-            background: #FF4F4F;
-            color: white;
-        }
-
-        /* Particle Effect */
-        .circle-container {
-            position: absolute;
-            transform: translateY(-10vh);
-            animation-iteration-count: infinite;
-            animation-timing-function: linear;
-        }
-
-        .circle-container .circle {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            mix-blend-mode: screen;
-            background-image: radial-gradient(hsl(180, 100%, 80%), hsl(180, 100%, 80%) 10%, hsla(180, 100%, 80%, 0) 56%);
-            animation: fadein-frames 200ms infinite, scale-frames 2s infinite;
-        }
-
-        @keyframes fadein-frames {
-            0% { opacity: 1; }
-            50% { opacity: 0.7; }
-            100% { opacity: 1; }
-        }
-
-        @keyframes scale-frames {
-            0% { transform: scale3d(0.4, 0.4, 1); }
-            50% { transform: scale3d(2.2, 2.2, 1); }
-            100% { transform: scale3d(0.4, 0.4, 1); }
-        }
-
-        @media (max-width: 1024px) {
-            .lookbook-gallery {
-                width: 92vw;
-                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-                gap: 1.25rem;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .lookbook-gallery {
-                width: 95vw;
-                grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-                gap: 1rem;
-                margin: 2em auto;
-            }
-
-            .lookbook-gallery .large,
-            .lookbook-gallery .medium,
-            .lookbook-gallery .small {
-                border-radius: 12px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .lookbook-gallery {
-                grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-                gap: 0.75rem;
-            }
-        }
-    </style>
-    
-    <div class="container mx-auto px-4" style="position: relative; z-index: 1;">
-        <div class="max-w-4xl mx-auto text-center">
-            <!-- Main Heading -->
-            <h2 contenteditable="true" class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light leading-tight mb-6 outline-none" style="text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5), 0 0 20px rgba(0, 80, 255, 0.3); font-family: 'Azo Sans Uber', sans-serif;">
-                <span style="color: white;">A </span>
-                <span style="color: #FF4F4F; text-shadow: 0 0 20px rgba(0, 0, 0, 0.8), 0 0 40px rgba(255, 79, 79, 0.4);">LOOKBOOK</span>
-                <span style="color: white;"> THAT'S NEVER</span>
-                <br class="hidden sm:block">
-                <span style="color: white;">LOOKED </span>
-                <span style="color: #18F1E1; text-shadow: 0 0 20px rgba(2, 2, 2, 0.8), 0 0 40px rgba(77, 219, 255, 0.4);">QUITE THIS GOOD</span>
-            </h2>
-
-            <!-- Descriptive Paragraph -->
-            <p contenteditable="true" class="text-base md:text-lg max-w-2xl mx-auto mb-12 leading-relaxed outline-none" style="color: #e5e7eb; text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);">
-                If any booth catches your eye, just click on its image to explore its dedicated web page and learn more about the product.
-            </p>
-
-            <!-- Secondary Heading with Underline -->
-            <div>
-                <h3 contenteditable="true" class="text-xl sm:text-2xl md:text-3xl font-light mb-3 outline-none" style="color: #18F1E1; text-shadow: 0 0 15px rgba(77, 166, 255, 0.6), 0 2px 10px rgba(0, 0, 0, 0.5); font-family: 'Azo Sans Uber', sans-serif;">
-                    ALL ACTIVATIONS
-                </h3>
-                <div class="h-1 w-24 mx-auto" style="background: #18F1E1; box-shadow: 0 0 10px rgba(77, 166, 255, 0.6);"></div>
-            </div>
-        </div>
-
-        <!-- Lookbook Gallery Grid -->
-        <div class="lookbook-gallery" id="gallery-grid-container">
-            <!-- Initial gallery items -->
-            <div class="large gallery-item" data-size="large">
-                <img src="" alt="Gallery image" style="display: none;">
-                <div style="display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; font-size: 1.5rem;">Image Placeholder</div>
-                <div contenteditable="true" class="gallery-item-title outline-none">GALLERY TITLE</div>
-            </div>
-            
-            <div class="medium gallery-item" data-size="medium">
-                <img src="" alt="Gallery image" style="display: none;">
-                <div style="display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; font-size: 1.5rem;">Image Placeholder</div>
-                <div contenteditable="true" class="gallery-item-title outline-none">GALLERY TITLE</div>
-            </div>
-            
-            <div class="small gallery-item" data-size="small">
-                <img src="" alt="Gallery image" style="display: none;">
-                <div style="display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); color: white; font-size: 1.5rem;">Image Placeholder</div>
-                <div contenteditable="true" class="gallery-item-title outline-none">GALLERY TITLE</div>
-            </div>
-        </div>
-    </div>
-    
-    <script>
-        // Initialize particle effect
-        (function() {
-            const particleContainer = document.currentScript.closest('section').querySelector('.particle-container');
-            if (!particleContainer) return;
-            
-            function createParticle() {
-                const particle = document.createElement('div');
-                particle.className = 'circle-container';
-                const circle = document.createElement('div');
-                circle.className = 'circle';
-                particle.appendChild(circle);
-                
-                const size = Math.random() * 60 + 20;
-                const left = Math.random() * 100;
-                const duration = Math.random() * 20 + 15;
-                const delay = Math.random() * 5;
-                
-                particle.style.cssText = `
-                    width: ${size}px;
-                    height: ${size}px;
-                    left: ${left}%;
-                    animation: float-up ${duration}s ${delay}s infinite linear;
-                `;
-                
-                return particle;
-            }
-            
-            // Create particles
-            for (let i = 0; i < 15; i++) {
-                particleContainer.appendChild(createParticle());
-            }
-            
-            // Add float animation
-            const style = document.createElement('style');
-            style.textContent = `
-                @keyframes float-up {
-                    0% { transform: translateY(110vh); opacity: 0; }
-                    10% { opacity: 1; }
-                    90% { opacity: 1; }
-                    100% { transform: translateY(-10vh); opacity: 0; }
-                }
-            `;
-            document.head.appendChild(style);
-        })();
-    </script>
-</section>
-    </script>
+<?php include 'pages_elements/gallery_grid.php'; ?>
     
     <!-- Fullscreen Video Modal -->
     <div id="videoModal" class="fixed inset-0 bg-black/95 z-50 hidden flex items-center justify-center p-4" onclick="closeVideoModal(event)">
@@ -2614,6 +2087,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Media Modal Functions
         let currentMediaType = 'image'; // 'image', 'video', or 'embed'
         let currentMediaTarget = null; // The selected element where media will be inserted
+        let currentMediaContext = null; // To track if we're in specific context (like gallery)
         
         function openMediaModal(type) {
             currentMediaType = type;
@@ -2825,7 +2299,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Uploading...';
             
             // Use different endpoint based on file type
-            const uploadUrl = isVideo ? window.location.href : '/MiHi-Entertainment/admin/upload_image.php';
+            const uploadUrl = isVideo ? window.location.href : 'upload_image';
             
             fetch(uploadUrl, {
                 method: 'POST',
@@ -2834,11 +2308,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             })
             .then(response => response.json())
             .then(data => {
-                if (data.success && data.url) {
-                    insertMediaElement(data.url, isVideo ? 'video' : 'image');
+
+                // Normalize response
+                const url = data.url || (data.success ? data.url : null);
+                
+                if (url) {
+                    insertMediaElement(url, isVideo ? 'video' : 'image');
                     closeMediaModal();
                 } else {
-                    throw new Error(data.message || 'Upload failed');
+                    // Extract error message from various formats
+                    const errorMsg = data.message || 
+                                   (data.error && data.error.message) || 
+                                   (typeof data.error === 'string' ? data.error : 'Upload failed');
+                    throw new Error(errorMsg);
                 }
             })
             .catch(error => {
@@ -3757,9 +3239,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     }
                 } else {
                     // Direct video URL
+                    // Determine MIME type based on extension
+                    const ext = source.split('.').pop().toLowerCase();
+                    let mime = 'video/mp4'; 
+                    if (ext === 'webm') mime = 'video/webm';
+                    if (ext === 'ogg') mime = 'video/ogg';
+                    if (ext === 'mov') mime = 'video/quicktime';
+                    if (ext === 'avi') mime = 'video/x-msvideo';
+                    
                     videoHTML = `
                         <video class="w-full h-auto rounded-lg shadow-lg" controls style="max-width: 100%;">
-                            <source src="${source}" type="video/mp4">
+                            <source src="${source}" type="${mime}">
                             Your browser does not support the video tag.
                         </video>
                     `;
