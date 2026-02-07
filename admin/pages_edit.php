@@ -1032,6 +1032,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'save_seo_to_html') {
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title><?php echo $isEdit || $isFileEdit ? 'Edit Page' : 'New Page'; ?> - Admin</title>
 	<link rel="stylesheet" href="../assets/css/admin.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 	<!-- Live Preview Editor Styles -->
 	<style>
 		.admin-content { padding: 24px; }
@@ -1051,22 +1052,139 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'save_seo_to_html') {
 		.editor-toolbar button { padding: 8px 16px; border: 1px solid #e5e7eb; border-radius: 6px; background: #fff; cursor: pointer; font-size: 14px; transition: all 0.2s; }
 		.editor-toolbar button:hover { background: #f8fafc; border-color: #667eea; }
 		.editor-toolbar button.active { background: #667eea; color: #fff; border-color: #667eea; }
-		.preview-iframe { width: 100%; height: calc(100vh - 400px); min-height: 600px; border: none; background: #fff; }
+		.preview-iframe { width: 100%; height: 100%; border: none; background: #fff; transition: width 0.3s ease; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
 		.editor-overlay { position: absolute; top: 0; left: 0; right: 0; bottom: 0; pointer-events: none; z-index: 1000; }
 		.editable-highlight { outline: 2px dashed #667eea; outline-offset: 2px; background: rgba(102, 126, 234, 0.1) !important; cursor: text !important; }
-		/* Text Formatting Toolbar */
-		.text-format-toolbar { position: fixed; background: white; border: 1px solid #e5e7eb; border-radius: 8px; padding: 10px 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 100001; display: none; flex-wrap: wrap; gap: 8px; align-items: center; font-size: 12px; min-width: 400px; }
-		.text-format-toolbar.active { display: flex; }
-		.text-format-group { display: flex; align-items: center; gap: 6px; padding: 4px 8px; border-right: 1px solid #e5e7eb; }
-		.text-format-group:last-child { border-right: none; }
-		.text-format-label { font-weight: 600; color: #374151; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; white-space: nowrap; }
-		.text-format-color-container { display: flex; gap: 4px; }
-		.text-format-color-btn { width: 28px; height: 28px; border-radius: 4px; border: 2px solid #e5e7eb; cursor: pointer; transition: all 0.2s; flex-shrink: 0; }
-		.text-format-color-btn:hover { transform: scale(1.15); border-color: #667eea; box-shadow: 0 2px 4px rgba(0,0,0,0.2); }
-		.text-format-color-btn.active { border-color: #667eea; border-width: 3px; box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.2); }
-		.text-format-select, .text-format-input { padding: 4px 8px; border: 1px solid #cbd5e1; border-radius: 4px; font-size: 12px; background: white; cursor: pointer; }
-		.text-format-select:focus, .text-format-input:focus { outline: none; border-color: #667eea; box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1); }
-		.text-format-input { width: 70px; }
+		/* Sidebar Inspector Styles */
+		.editor-container { display: flex; align-items: stretch; height: calc(100vh - 300px); min-height: 600px; }
+		.editor-sidebar {
+			width: 300px;
+			background: #ffffff;
+			border-right: 1px solid #e5e7eb;
+			padding: 0;
+			overflow-y: auto;
+			display: flex;
+			flex-direction: column;
+			flex-shrink: 0;
+		}
+		.sidebar-header {
+			padding: 16px;
+			border-bottom: 1px solid #e5e7eb;
+			background: #f8fafc;
+		}
+		.sidebar-title {
+			margin: 0;
+			font-size: 14px;
+			font-weight: 600;
+			color: #111827;
+			text-transform: uppercase;
+			letter-spacing: 0.05em;
+		}
+		.sidebar-content {
+			padding: 16px;
+			flex: 1;
+			overflow-y: auto;
+		}
+		.sidebar-section {
+			margin-bottom: 24px;
+		}
+		.sidebar-section:last-child {
+			margin-bottom: 0;
+		}
+		.sidebar-section-title {
+			font-size: 12px;
+			font-weight: 600;
+			color: #6b7280;
+			text-transform: uppercase;
+			letter-spacing: 0.05em;
+			margin-bottom: 12px;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+		}
+		.sidebar-control-group {
+			margin-bottom: 12px;
+		}
+		.sidebar-label {
+			display: block;
+			font-size: 13px;
+			color: #374151;
+			margin-bottom: 6px;
+			font-weight: 500;
+		}
+		.sidebar-input, .sidebar-select {
+			width: 100%;
+			padding: 8px 10px;
+			border: 1px solid #cbd5e1;
+			border-radius: 6px;
+			font-size: 13px;
+			color: #111827;
+			background: #fff;
+			transition: all 0.2s;
+		}
+		.sidebar-input:focus, .sidebar-select:focus {
+			border-color: #667eea;
+			outline: none;
+			box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+		}
+		.sidebar-color-grid {
+			display: grid;
+			grid-template-columns: repeat(4, 1fr);
+			gap: 8px;
+		}
+		.sidebar-color-btn {
+			width: 100%;
+			aspect-ratio: 1;
+			border-radius: 6px;
+			border: 2px solid #e5e7eb;
+			cursor: pointer;
+			transition: all 0.2s;
+			position: relative;
+		}
+		.sidebar-color-btn:hover {
+			transform: scale(1.05);
+			border-color: #cbd5e1;
+		}
+		.sidebar-color-btn.active {
+			border-color: #667eea;
+			box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.2);
+		}
+		.sidebar-color-btn.active::after {
+			content: '✓';
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			color: white;
+			font-size: 12px;
+			text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+		}
+		.sidebar-empty-state {
+			text-align: center;
+			padding: 40px 20px;
+			color: #9ca3af;
+		}
+		.sidebar-empty-icon {
+			font-size: 32px;
+			margin-bottom: 12px;
+			display: block;
+			opacity: 0.5;
+		}
+		.preview-container {
+			flex: 1;
+			background: #f1f5f9;
+			display: flex;
+			flex-direction: column;
+			position: relative;
+			overflow: hidden;
+		}
+		.preview-iframe-wrapper {
+			flex: 1;
+			display: flex;
+			justify-content: center;
+			padding: 24px;
+			overflow: auto;
+		}
 		.media-editable { position: relative; }
 		.media-editable:hover::after { content: 'Click to change image/video'; position: absolute; top: 10px; left: 10px; background: #667eea; color: #fff; padding: 6px 12px; border-radius: 6px; font-size: 12px; z-index: 1001; pointer-events: none; }
 		.media-editable:hover { outline: 3px solid #667eea; cursor: pointer; }
@@ -1089,6 +1207,106 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'save_seo_to_html') {
 			font-weight:600; 
 			text-transform:uppercase; 
 			letter-spacing:0.5px;
+		}
+		.sidebar-btn-group {
+			display: flex;
+			background: #f3f4f6;
+			border-radius: 6px;
+			padding: 2px;
+			gap: 2px;
+		}
+		.sidebar-btn {
+			flex: 1;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			padding: 6px;
+			border: none;
+			background: transparent;
+			border-radius: 4px;
+			cursor: pointer;
+			color: #6b7280;
+			transition: all 0.2s;
+		}
+		.sidebar-btn:hover {
+			background: rgba(0,0,0,0.05);
+			color: #111827;
+		}
+		.sidebar-btn.active {
+			background: white;
+			color: #18F1E1;
+			box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+		}
+		.sidebar-range {
+			width: 100%;
+			height: 6px;
+			background: #e5e7eb;
+			border-radius: 3px;
+			outline: none;
+			-webkit-appearance: none;
+		}
+		.sidebar-range::-webkit-slider-thumb {
+			-webkit-appearance: none;
+			width: 16px;
+			height: 16px;
+			background: #667eea;
+			border-radius: 50%;
+			cursor: pointer;
+			transition: all 0.2s;
+		}
+		.sidebar-range::-webkit-slider-thumb:hover {
+			background: #5a67d8;
+			transform: scale(1.1);
+		}
+		.sidebar-btn-group {
+			display: flex;
+			background: #f3f4f6;
+			border-radius: 6px;
+			padding: 2px;
+			gap: 2px;
+		}
+		.sidebar-btn {
+			flex: 1;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			padding: 6px;
+			border: none;
+			background: transparent;
+			border-radius: 4px;
+			cursor: pointer;
+			color: #6b7280;
+			transition: all 0.2s;
+		}
+		.sidebar-btn:hover {
+			background: rgba(0,0,0,0.05);
+			color: #111827;
+		}
+		.sidebar-btn.active {
+			background: white;
+			color: #18F1E1;
+			box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+		}
+		.sidebar-range {
+			width: 100%;
+			height: 6px;
+			background: #e5e7eb;
+			border-radius: 3px;
+			outline: none;
+			-webkit-appearance: none;
+		}
+		.sidebar-range::-webkit-slider-thumb {
+			-webkit-appearance: none;
+			width: 16px;
+			height: 16px;
+			background: #667eea;
+			border-radius: 50%;
+			cursor: pointer;
+			transition: all 0.2s;
+		}
+		.sidebar-range::-webkit-slider-thumb:hover {
+			background: #5a67d8;
+			transform: scale(1.1);
 		}
 		.gjs-block-category:first-child { margin-top:0; }
 		.gjs-cv-canvas { background:#f8fafc; }
@@ -1182,6 +1400,183 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'save_seo_to_html') {
 		.notification-toast.error .icon { color:#ef4444; }
 		.notification-toast.info .icon { color:#3b82f6; }
 		@keyframes slideIn { from { opacity:0; transform:translateX(100px); } to { opacity:1; transform:translateX(0); } }
+	<style>
+		/* ... existing styles ... */
+		.sidebar-action-btn {
+			width: 100%;
+			padding: 10px 16px;
+			border: 1px solid #e5e7eb;
+			background: white;
+			border-radius: 8px;
+			color: #374151;
+			font-size: 13px;
+			font-weight: 600;
+			cursor: pointer;
+			transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			gap: 8px;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+		}
+		.sidebar-action-btn:hover:not(:disabled) {
+			background: #f9fafb;
+			border-color: #d1d5db;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+		}
+        .sidebar-action-btn:active:not(:disabled) {
+            transform: translateY(0);
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+        }
+		.sidebar-action-btn.delete-btn {
+			color: #b91c1c; /* Red 700 */
+			border-color: #fecaca; /* Red 200 */
+			background: #fef2f2; /* Red 50 */
+		}
+		.sidebar-action-btn.delete-btn:hover:not(:disabled) {
+			background: #fee2e2; /* Red 100 */
+			border-color: #fca5a5; /* Red 300 */
+            color: #991b1b; /* Red 800 */
+		}
+		.sidebar-action-btn:disabled {
+			opacity: 0.6;
+			cursor: not-allowed;
+			background: #f3f4f6;
+			border-color: #e5e7eb;
+			color: #9ca3af;
+	        box-shadow: none;
+            transform: none;
+		}
+		
+		/* Collapsible Sidebar Styles */
+		/* Collapsible Sidebar Styles */
+		.editor-sidebar {
+			width: 300px; /* Fixed width for smooth transition */
+			min-width: 300px; /* Prevent crushing */
+			flex-shrink: 0;
+			transition: margin-left 0.3s cubic-bezier(0.4, 0, 0.2, 1), width 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1), padding 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+			will-change: width, padding, opacity, margin-left;
+			overflow: hidden;
+            border-right: 1px solid #e5e7eb;
+		}
+		.editor-sidebar.collapsed {
+			width: 0 !important;
+			min-width: 0 !important; /* Override min-width to allow collapse */
+			padding: 0 !important;
+			border: none !important;
+			opacity: 0;
+			margin-left: 0; 
+		}
+
+    /* Right Sidebar: Elements (Dark Theme Port) */
+	.editor-sidebar-right {
+		width: 280px;
+		background: #27272a; /* Zinc 800 */
+		border-left: 1px solid #3f3f46; /* Zinc 700 */
+		display: flex;
+		flex-direction: column;
+		height: 100%;
+		overflow-y: auto;
+		transition: width 0.3s ease, padding 0.3s ease, opacity 0.3s ease;
+		flex-shrink: 0;
+        color: #e4e4e7; /* Zinc 200 */
+	}
+
+	.editor-sidebar-right.collapsed {
+		width: 0;
+		padding: 0;
+		border: none;
+		overflow: hidden;
+		opacity: 0;
+	}
+    
+    .editor-sidebar-right .sidebar-header {
+        background: #18181b; /* Zinc 900 */
+        border-bottom: 1px solid #3f3f46;
+        padding: 16px;
+    }
+    
+    .editor-sidebar-right .sidebar-title {
+        color: #e4e4e7;
+    }
+
+	.components-list {
+		padding: 16px;
+	}
+
+	.component-category {
+		margin-bottom: 24px;
+	}
+
+	.component-category h4 {
+		font-size: 11px;
+		text-transform: uppercase;
+		color: #a1a1aa; /* Zinc 400 */
+		font-weight: 600;
+		margin-bottom: 12px;
+		letter-spacing: 0.05em;
+	}
+
+	.component-grid {
+		display: flex;
+        flex-direction: column;
+		gap: 8px;
+	}
+
+	.component-item {
+		background: #3f3f46; /* Zinc 700 */
+		border: 1px solid transparent;
+		border-radius: 6px;
+		padding: 10px 12px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+		cursor: grab;
+		transition: all 0.2s ease;
+		user-select: none;
+	}
+
+	.component-item:hover {
+		background: #52525b; /* Zinc 600 */
+		border-color: #71717a;
+		transform: translateX(2px);
+	}
+
+	.component-item:active {
+		cursor: grabbing;
+        background: #27272a;
+	}
+
+	/*.component-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 24px;
+        height: 24px;
+	}*/
+    
+    .component-item i {
+        width: 20px;
+        text-align: center;
+        font-size: 14px;
+    }
+
+	.component-item span {
+		font-size: 13px;
+		color: #e4e4e7;
+		font-weight: 500;
+	}
+	
+	/* Specific icon colors matching pages_add.php */
+	.component-item[data-type="hero"] i { color: #FF4F4F; }
+	.component-item[data-type="text"] i { color: #3b82f6; }
+	.component-item[data-type="cards"] i { color: #8b5cf6; }
+	.component-item[data-type="split"] i { color: #10b981; }
+	.component-item[data-type="cta"] i { color: #f59e0b; }
+	.component-item[data-type="video"] i { color: #ef4444; }
+	.component-item[data-type="gallery"] i { color: #ec4899; }
+	.component-item[data-type="gallery_grid"] i { color: #d946ef; }
 	</style>
 </head>
 <body>
@@ -1255,41 +1650,239 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'save_seo_to_html') {
 				</p>
 			</div>
 			<div class="editor-container">
-				<div class="editor-toolbar">
-					<button type="button" id="edit-mode-btn" class="active">✏️ Edit Mode</button>
-					<button type="button" id="preview-mode-btn">👁️ Preview Mode</button>
-					<button type="button" id="toggle-gallery-btn" style="display: none; margin-left: 8px; border-color: #18F1E1; color: #1F1F1F; font-weight: 600;">🖼️ Add Gallery</button>
-					<div style="flex: 1;"></div>
-					<button type="button" id="mobile-preview-btn">📱 Mobile</button>
-					<button type="button" id="tablet-preview-btn">📱 Tablet</button>
-					<button type="button" id="desktop-preview-btn" class="active">🖥️ Desktop</button>
+				<!-- Sidebar Inspector -->
+				<div class="editor-sidebar" id="editor-sidebar">
+					<div class="sidebar-header">
+						<h3 class="sidebar-title">Inspector</h3>
+					</div>
+					<div class="sidebar-content" id="sidebar-content">
+						<div class="sidebar-empty-state" id="sidebar-empty-state">
+							<span class="sidebar-empty-icon">👆</span>
+							<p>Select an element to edit its properties</p>
+						</div>
+						<div class="sidebar-controls" id="sidebar-controls" style="display: none;">
+							<div class="sidebar-section">
+								<div class="sidebar-section-title">Typography</div>
+								
+								<div class="sidebar-control-group">
+									<label class="sidebar-label">Font Family</label>
+									<select class="sidebar-select" id="inspector-font-family">
+										<option value="Azo Sans">Azo Sans</option>
+										<option value="Azo Sans Uber">Azo Sans Uber</option>
+									</select>
+								</div>
+								
+								<div class="sidebar-control-group">
+									<label class="sidebar-label">Font Size</label>
+									<div style="display: flex; gap: 8px; align-items: center;">
+										<input type="number" class="sidebar-input" id="inspector-font-size" min="8" max="120" value="16" step="1">
+										<span style="font-size: 12px; color: #6b7280;">px</span>
+									</div>
+								</div>
+								
+								<div class="sidebar-control-group">
+									<label class="sidebar-label">Font Weight</label>
+									<select class="sidebar-select" id="inspector-font-weight">
+										<option value="300">Light (300)</option>
+										<option value="400" selected>Regular (400)</option>
+										<option value="500">Medium (500)</option>
+										<option value="600">Semi Bold (600)</option>
+										<option value="700">Bold (700)</option>
+										<option value="800">Extra Bold (800)</option>
+										<option value="900">Black (900)</option>
+									</select>
+								</div>
+								
+								<div class="sidebar-control-group">
+									<label class="sidebar-label">Font Style</label>
+									<select class="sidebar-select" id="inspector-font-style">
+										<option value="normal" selected>Normal</option>
+										<option value="italic">Italic</option>
+										<option value="oblique">Oblique</option>
+									</select>
+								</div>
+							</div>
+							
+							<!-- Layout (Shown for Text Blocks/Paragraphs) -->
+							<div class="sidebar-section" id="sidebar-section-layout" style="display: none;">
+								<div class="sidebar-section-title">Layout</div>
+								
+								<div class="sidebar-control-group">
+									<label class="sidebar-label">Alignment</label>
+									<div class="sidebar-btn-group">
+										<button type="button" class="sidebar-btn sidebar-align-btn" data-align="left" title="Left Align">
+											<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 10H3M21 6H3M21 14H3M17 18H3"/></svg>
+										</button>
+										<button type="button" class="sidebar-btn sidebar-align-btn" data-align="center" title="Center Align">
+											<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 10H6M21 6H3M21 14H3M18 18H6"/></svg>
+										</button>
+										<button type="button" class="sidebar-btn sidebar-align-btn" data-align="right" title="Right Align">
+											<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10H7M21 6H3M21 14H3M21 18H7"/></svg>
+										</button>
+									</div>
+								</div>
+
+								<div class="sidebar-control-group">
+									<div class="flex justify-between items-center mb-2">
+										<label class="sidebar-label mb-0">Max Width</label>
+										<span id="inspector-width-value" class="text-xs text-gray-500">100%</span>
+									</div>
+									<input type="range" class="sidebar-range" id="inspector-max-width" min="200" max="1400" value="1400" step="10">
+									<div class="flex justify-between mt-1 text-xs text-gray-400">
+										<span>Narrow</span>
+										<span>Wide</span>
+									</div>
+								</div>
+							</div>
+							
+
+
+							<div class="sidebar-section">
+								<div class="sidebar-section-title">Color</div>
+								<div class="sidebar-color-grid">
+									<button type="button" class="sidebar-color-btn" data-color="#1F1F1F" style="background-color: #1F1F1F;" title="Carbon Black"></button>
+									<button type="button" class="sidebar-color-btn" data-color="#FFFFFF" style="background-color: #FFFFFF; border-color: #e5e7eb;" title="Canvas White"></button>
+									<button type="button" class="sidebar-color-btn" data-color="#FF4F4F" style="background-color: #FF4F4F;" title="Vibrant Coral"></button>
+									<button type="button" class="sidebar-color-btn" data-color="#18F1E1" style="background-color: #18F1E1;" title="Electric Aqua"></button>
+								</div>
+							</div>
+					
+					<!-- Link Editor (Shown for CTA Buttons/Links) -->
+					<div class="sidebar-section" id="sidebar-section-link" style="display: none;">
+						<div class="sidebar-section-title">🔗 Link Settings</div>
+						
+						<div class="sidebar-control-group">
+							<label class="sidebar-label">Link URL</label>
+							<input type="text" class="sidebar-input" id="inspector-link-url" placeholder="https://example.com or /page.html">
+							<p style="font-size: 11px; color: #9ca3af; margin-top: 4px;">Enter the destination URL for this button/link</p>
+						</div>
+						
+						<div class="sidebar-control-group">
+							<label class="sidebar-label">Link Target</label>
+							<select class="sidebar-select" id="inspector-link-target">
+								<option value="_self">Same Window</option>
+								<option value="_blank">New Tab</option>
+							</select>
+						</div>
+						
+						<div class="sidebar-control-group">
+							<button type="button" id="inspector-save-link-btn" class="sidebar-action-btn" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; width: 100%; padding: 10px; border-radius: 6px; border: none; cursor: pointer; font-weight: 600;">
+								💾 Save Link
+							</button>
+						</div>
+					</div>
+					
+					<div class="sidebar-section" style="margin-top: auto; border-top: 1px solid #e5e7eb; padding-top: 20px;">
+								<div class="sidebar-section-title" style="color: #9ca3af; font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px;">Section Actions</div>
+								<div class="sidebar-control-group">
+									<button type="button" id="inspector-delete-section-btn" class="sidebar-action-btn delete-btn" disabled>
+										<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
+										Delete Section
+									</button>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
-				<div id="edit-mode-indicator" class="edit-mode-indicator" style="display: none;">✏️ Edit Mode Active - Click text to edit</div>
-				<iframe id="preview-iframe" class="preview-iframe" src="<?php 
-					if ($isFileEdit && !empty($originalFilePath)) {
-						// Use the original file path and ensure it's a proper relative URL
-						$iframePath = $originalFilePath;
-						// Remove leading slash if present, then add ../
-						$iframePath = ltrim($iframePath, '/');
-						$iframePath = '../' . $iframePath;
-						// Ensure .html extension is present
-						if (substr($iframePath, -5) !== '.html') {
-							$iframePath .= '.html';
-						}
-						$iframeUrl = htmlspecialchars($iframePath, ENT_QUOTES, 'UTF-8');
-						echo $iframeUrl . (strpos($iframeUrl, '?') !== false ? '&' : '?') . 'v=' . time();
-					} elseif ($isFileEdit) {
-						// Fallback: construct from current filePath
-						$iframePath = '../' . ltrim($filePath, '/');
-						if (substr($iframePath, -5) !== '.html') {
-							$iframePath .= '.html';
-						}
-						$iframeUrl = htmlspecialchars($iframePath, ENT_QUOTES, 'UTF-8');
-						echo $iframeUrl . (strpos($iframeUrl, '?') !== false ? '&' : '?') . 'v=' . time();
-					} else {
-						echo '../page.php?slug=' . urlencode($page['slug']) . '&v=' . time();
-					}
-				?>"></iframe>
+
+				<div class="preview-container" style="display:flex; flex-direction:column; flex:1; height:100%; overflow:hidden;">
+					<div class="editor-toolbar">
+						<button type="button" id="toggle-sidebar-btn" title="Toggle Inspector" style="margin-right: 8px;">⬅️</button>
+						<button type="button" id="edit-mode-btn" class="active">✏️ Edit Mode</button>
+						<button type="button" id="preview-mode-btn">👁️ Preview Mode</button>
+						<button type="button" id="toggle-gallery-btn" style="display: none; margin-left: 8px; border-color: #18F1E1; color: #1F1F1F; font-weight: 600;">🖼️ Add Gallery</button>
+						<div style="flex: 1;"></div>
+						<button type="button" id="mobile-preview-btn">📱 Mobile</button>
+						<button type="button" id="tablet-preview-btn">📱 Tablet</button>
+						<button type="button" id="desktop-preview-btn" class="active">🖥️ Desktop</button>
+                        <button type="button" id="toggle-right-sidebar-btn" title="Toggle Elements" style="margin-left: 8px;">➡️</button>
+					</div>
+					<div id="edit-mode-indicator" class="edit-mode-indicator" style="display: none;">✏️ Edit Mode Active - Click text to edit</div>
+					
+					<!-- Workspace (Iframe + Right Sidebar) -->
+                    <div class="workspace-wrapper" style="display:flex; flex:1; overflow:hidden; position:relative;">
+                        <div class="preview-iframe-wrapper" style="flex:1; height:100%; position:relative;">
+						<iframe id="preview-iframe" class="preview-iframe" src="<?php 
+							if ($isFileEdit && !empty($originalFilePath)) {
+								// Use the original file path and ensure it's a proper relative URL
+								$iframePath = $originalFilePath;
+								// Remove leading slash if present, then add ../
+								$iframePath = ltrim($iframePath, '/');
+								$iframePath = '../' . $iframePath;
+								// Ensure .html extension is present
+								if (substr($iframePath, -5) !== '.html') {
+									$iframePath .= '.html';
+								}
+								$iframeUrl = htmlspecialchars($iframePath, ENT_QUOTES, 'UTF-8');
+								echo $iframeUrl . (strpos($iframeUrl, '?') !== false ? '&' : '?') . 'v=' . time();
+							} elseif ($isFileEdit) {
+								// Fallback: construct from current filePath
+								$iframePath = '../' . ltrim($filePath, '/');
+								if (substr($iframePath, -5) !== '.html') {
+									$iframePath .= '.html';
+								}
+								$iframeUrl = htmlspecialchars($iframePath, ENT_QUOTES, 'UTF-8');
+								echo $iframeUrl . (strpos($iframeUrl, '?') !== false ? '&' : '?') . 'v=' . time();
+							} else {
+								echo '../page.php?slug=' . urlencode($page['slug']) . '&v=' . time();
+							}
+						?>"></iframe>
+					</div>
+                    
+                    <!-- Right Sidebar: Elements -->
+                    <div id="editor-sidebar-right" class="editor-sidebar-right">
+                        <div class="sidebar-header">
+                            <h3>Elements</h3>
+                        </div>
+                            <div class="components-list">
+                                <p class="text-xs text-zinc-500 mb-3" style="font-size: 12px; color: #a1a1aa; margin-bottom: 12px;">Drag these onto the canvas</p>
+                                
+                                <div class="component-category">
+                                    <h4>Structure</h4>
+                                    <div class="component-grid">
+                                        <div class="component-item" draggable="true" data-type="hero">
+                                            <i class="fas fa-star"></i>
+                                            <span>Hero Section</span>
+                                        </div>
+                                        <div class="component-item" draggable="true" data-type="split">
+                                            <i class="fas fa-columns"></i>
+                                            <span>Split Screen</span>
+                                        </div>
+                                        <div class="component-item" draggable="true" data-type="cards">
+                                            <i class="fas fa-th-large"></i>
+                                            <span>Feature Cards</span>
+                                        </div>
+                                        <div class="component-item" draggable="true" data-type="gallery">
+                                            <i class="fas fa-images"></i>
+                                            <span>Gallery</span>
+                                        </div>
+                                        <div class="component-item" draggable="true" data-type="gallery_grid">
+                                            <i class="fas fa-border-all"></i>
+                                            <span>Image Grid</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="component-category">
+                                    <h4>Content</h4>
+                                    <div class="component-grid">
+                                        <div class="component-item" draggable="true" data-type="text">
+                                            <i class="fas fa-align-left"></i>
+                                            <span>Text Block</span>
+                                        </div>
+                                        <div class="component-item" draggable="true" data-type="cta">
+                                            <i class="fas fa-bullhorn"></i>
+                                            <span>Call to Action</span>
+                                        </div>
+                                        <div class="component-item" draggable="true" data-type="video">
+                                            <i class="fas fa-play-circle"></i>
+                                            <span>Video Section</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+                    </div>
+				</div>
 			</div>
 			
 			<!-- Hidden inputs for form submission -->
@@ -2037,10 +2630,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'save_seo_to_html') {
 							selection.removeAllRanges();
 							selection.addRange(range);
 							
-							// Show formatting toolbar for headings
-							if (textFormatToolbar) {
-								showTextFormatToolbar(heading, null);
-							}
+							// Update inspector for headings
+							updateInspector(heading);
 						}, 10);
 					}
 				}, true); // Use capture phase
@@ -2210,119 +2801,387 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'save_seo_to_html') {
 					});
 				}
 				
-				// Setup text formatting toolbar
-				let textFormatToolbar = null;
-				let currentFormattedElement = null;
-				
-				function createTextFormatToolbar() {
-					if (textFormatToolbar) return textFormatToolbar;
-					
-					// Create toolbar in parent document (not iframe)
-					textFormatToolbar = document.createElement('div');
-					textFormatToolbar.className = 'text-format-toolbar';
-					textFormatToolbar.id = 'text-format-toolbar';
-					
-					// Color options
-					const colors = [
-						{ name: 'Carbon Black', value: '#1F1F1F' },
-						{ name: 'Canvas White', value: '#FFFFFF' },
-						{ name: 'Vibrant Coral', value: '#FF4F4F' },
-						{ name: 'Electric Aqua', value: '#18F1E1' }
-					];
-					
-					const colorButtons = colors.map(color => 
-						`<button class="text-format-color-btn" data-color="${color.value}" style="background:${color.value};" title="${color.name}"></button>`
-					).join('');
-					
-					textFormatToolbar.innerHTML = `
-						<div class="text-format-group">
-							<span class="text-format-label">Color</span>
-							<div class="text-format-color-container">
-								${colorButtons}
-							</div>
-						</div>
-						<div class="text-format-group">
-							<span class="text-format-label">Font</span>
-							<select class="text-format-select" id="text-format-font-family">
-								<option value="Azo Sans">Azo Sans</option>
-								<option value="Azo Sans Uber">Azo Sans Uber</option>
-							</select>
-						</div>
-						<div class="text-format-group">
-							<span class="text-format-label">Size</span>
-							<input type="number" class="text-format-input" id="text-format-font-size" min="8" max="120" value="16" step="1">
-						</div>
-						<div class="text-format-group">
-							<span class="text-format-label">Weight</span>
-							<select class="text-format-select" id="text-format-font-weight">
-								<option value="300">Light (300)</option>
-								<option value="400" selected>Regular (400)</option>
-								<option value="500">Medium (500)</option>
-								<option value="600">Semi Bold (600)</option>
-								<option value="700">Bold (700)</option>
-								<option value="800">Extra Bold (800)</option>
-								<option value="900">Black (900)</option>
-							</select>
-						</div>
-						<div class="text-format-group">
-							<span class="text-format-label">Style</span>
-							<select class="text-format-select" id="text-format-font-style">
-								<option value="normal" selected>Normal</option>
-								<option value="italic">Italic</option>
-								<option value="oblique">Oblique</option>
-							</select>
-						</div>
-					`;
-					
-					document.body.appendChild(textFormatToolbar);
-					
+                // Setup Section Controls for Reordering and Actions
+                function setupSectionControls() {
+                    // Inject CSS for controls
+                    const styleId = 'editor-ui-styles';
+                    if (!iframeDoc.getElementById(styleId)) {
+                        const style = iframeDoc.createElement('style');
+                        style.id = styleId;
+                        style.textContent = `
+                            .section-controls {
+                                position: absolute;
+                                top: 0;
+                                left: 0;
+                                right: 0;
+                                height: 0; /* visible on hover */
+                                z-index: 100;
+                                display: flex;
+                                justify-content: center;
+                                opacity: 0;
+                                transition: opacity 0.2s;
+                                pointer-events: none; /* Let clicks pass through when not interacting */
+                            }
+                            section:hover > .section-controls {
+                                opacity: 1;
+                                height: 30px;
+                                pointer-events: auto;
+                            }
+                            .section-controls-inner {
+                                background: #18F1E1;
+                                border-bottom-left-radius: 8px;
+                                border-bottom-right-radius: 8px;
+                                padding: 4px 12px;
+                                display: flex;
+                                gap: 8px;
+                                align-items: center;
+                                pointer-events: auto;
+                                box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+                            }
+                            .drag-handle {
+                                cursor: grab;
+                                color: #0f172a;
+                                font-weight: bold;
+                                font-size: 16px;
+                                padding: 0 4px;
+                                user-select: none;
+                            }
+                            .drag-handle:active {
+                                cursor: grabbing;
+                            }
+                            .section-btn {
+                                background: none;
+                                border: none;
+                                cursor: pointer;
+                                color: #0f172a;
+                                padding: 4px;
+                                font-size: 14px;
+                                border-radius: 4px;
+                                transition: background 0.1s;
+                            }
+                            .section-btn:hover {
+                                background: rgba(0,0,0,0.1);
+                            }
+                            .section-btn.delete-btn {
+                                color: #dc2626;
+                            }
+                            .section-btn.delete-btn:hover {
+                                background: rgba(220, 38, 38, 0.1);
+                            }
+                            .section-btn.toggle-media-btn {
+                                color: #ffffff;
+                                background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+                                font-size: 14px;
+                                padding: 8px 12px;
+                                margin-left: 8px;
+                                box-shadow: 0 2px 4px rgba(139, 92, 246, 0.3);
+                                min-width: 36px;
+                                display: inline-flex;
+                                align-items: center;
+                                justify-content: center;
+                                border-radius: 6px;
+                            }
+                            .section-btn.toggle-media-btn:hover {
+                                background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%);
+                                transform: scale(1.08);
+                                box-shadow: 0 4px 12px rgba(139, 92, 246, 0.5);
+                            }
+                            .section-btn.toggle-media-btn i {
+                                transform: rotate(90deg);
+                                display: inline-block;
+                                font-size: 14px;
+                            }
+                            .section-btn.toggle-media-btn::before {
+                                content: '⇄';
+                                font-size: 18px;
+                                font-weight: bold;
+                                line-height: 1;
+                            }
+                            .section-btn.toggle-media-btn i {
+                                display: none;
+                            }
+                            section {
+                                position: relative;
+                                border: 1px solid transparent;
+                            }
+                            section:hover {
+                                border-color: #18F1E1;
+                            }
+                        `;
+                        iframeDoc.head.appendChild(style);
+                    }
+
+                    const sections = iframeDoc.querySelectorAll('section');
+                    sections.forEach((section, index) => {
+                        // Skip if already has controls
+                        if (section.querySelector('.section-controls')) return;
+                        
+                        // Ignore hero if needed, but allowing reorder of hero might be intended. 
+                        // Usually Hero is first. Let's allow it but user handles logic.
+                        
+                        // Ensure section has identification
+                        if (!section.hasAttribute('data-id')) {
+                            section.setAttribute('data-id', 'section-' + index + '-' + Date.now());
+                        }
+                        section.setAttribute('data-editable', 'true'); // Marker for drop logic
+
+                        const controls = iframeDoc.createElement('div');
+                        controls.className = 'section-controls';
+                        controls.contentEditable = 'false';
+                        
+                        const inner = iframeDoc.createElement('div');
+                        inner.className = 'section-controls-inner';
+                        
+                        // Move Up Button
+                        const moveUpBtn = iframeDoc.createElement('button');
+                        moveUpBtn.className = 'section-btn move-up-btn';
+                        moveUpBtn.innerHTML = '<i class="fas fa-arrow-up"></i>';
+                        moveUpBtn.title = 'Move Up';
+                        moveUpBtn.onclick = function(e) {
+                            e.stopPropagation();
+                            const prevSection = section.previousElementSibling;
+                            if (prevSection && prevSection.tagName === 'SECTION') {
+                                section.parentNode.insertBefore(section, prevSection);
+                                section.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                            }
+                        };
+                        
+                        // Move Down Button
+                        const moveDownBtn = iframeDoc.createElement('button');
+                        moveDownBtn.className = 'section-btn move-down-btn';
+                        moveDownBtn.innerHTML = '<i class="fas fa-arrow-down"></i>';
+                        moveDownBtn.title = 'Move Down';
+                        moveDownBtn.onclick = function(e) {
+                            e.stopPropagation();
+                            const nextSection = section.nextElementSibling;
+                            if (nextSection && nextSection.tagName === 'SECTION') {
+                                section.parentNode.insertBefore(nextSection, section);
+                                section.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                            }
+                        };
+                        
+                        // Delete Button
+                        const deleteBtn = iframeDoc.createElement('button');
+                        deleteBtn.className = 'section-btn delete-btn';
+                        deleteBtn.innerHTML = '<i class="fas fa-trash"></i>';
+                        deleteBtn.title = 'Delete Section';
+                        deleteBtn.onclick = function(e) {
+                            e.stopPropagation();
+                            if (confirm('Delete this section?')) {
+                                section.remove();
+                            }
+                        };
+                        
+                        inner.appendChild(moveUpBtn);
+                        inner.appendChild(moveDownBtn);
+                        inner.appendChild(deleteBtn);
+                        
+                        // Check if this is a split screen section (has grid with 2 columns)
+                        // Look for grid containers with md:grid-cols-2 class
+                        const gridContainer = section.querySelector('[class*="grid-cols-2"]');
+                        if (gridContainer) {
+                            // Verify it has exactly 2 direct child divs
+                            const columns = gridContainer.querySelectorAll(':scope > div');
+                            if (columns.length === 2) {
+                                // Add media position toggle button
+                                const toggleMediaBtn = iframeDoc.createElement('button');
+                                toggleMediaBtn.className = 'section-btn toggle-media-btn';
+                                toggleMediaBtn.innerHTML = '<i class="fas fa-exchange-alt"></i>';
+                                toggleMediaBtn.title = 'Switch Media Position (Left ↔ Right)';
+                                toggleMediaBtn.onclick = function(e) {
+                                    e.stopPropagation();
+                                    // Add animation feedback
+                                    toggleMediaBtn.style.transform = 'scale(0.9)';
+                                    setTimeout(() => {
+                                        toggleMediaBtn.style.transform = '';
+                                    }, 150);
+                                    // Swap the order by moving the first column after the second
+                                    gridContainer.insertBefore(columns[1], columns[0]);
+                                };
+                                inner.appendChild(toggleMediaBtn);
+                            }
+                        }
+                        
+                        controls.appendChild(inner);
+                        
+                        section.appendChild(controls);
+                    });
+                }
+                
+                // Call it
+                setupSectionControls();
+                
+                // Observer to add controls to new sections
+                const sectionObserver = new MutationObserver(function(mutations) {
+                     let added = false;
+                     mutations.forEach(m => {
+                         if (m.addedNodes.length) added = true;
+                     });
+                     if (added) setupSectionControls();
+                });
+                if (iframeBody) {
+                    sectionObserver.observe(iframeBody, { childList: true, subtree: true });
+                }
+
+                // Setup Inspector Sidebar
+				const inspectorSidebar = document.getElementById('editor-sidebar');
+				const sidebarContent = document.getElementById('sidebar-content');
+				const sidebarEmptyState = document.getElementById('sidebar-empty-state');
+				const sidebarControls = document.getElementById('sidebar-controls');
+				window.currentFormattedElement = null;
+
+				function initInspector() {
 					// Color button handlers
-					textFormatToolbar.querySelectorAll('.text-format-color-btn').forEach(btn => {
+					document.querySelectorAll('.sidebar-color-btn').forEach(btn => {
 						btn.addEventListener('click', function() {
+							if (!window.currentFormattedElement) return;
 							const color = this.getAttribute('data-color');
 							applyTextFormatting('color', color);
 							// Update active state
-							textFormatToolbar.querySelectorAll('.text-format-color-btn').forEach(b => b.classList.remove('active'));
+							document.querySelectorAll('.sidebar-color-btn').forEach(b => b.classList.remove('active'));
 							this.classList.add('active');
 						});
 					});
-					
+
 					// Font family handler
-					const fontFamilySelect = textFormatToolbar.querySelector('#text-format-font-family');
+					const fontFamilySelect = document.getElementById('inspector-font-family');
 					fontFamilySelect.addEventListener('change', function() {
+						if (!window.currentFormattedElement) return;
 						applyTextFormatting('fontFamily', this.value);
 					});
-					
+
 					// Font size handler
-					const fontSizeInput = textFormatToolbar.querySelector('#text-format-font-size');
+					const fontSizeInput = document.getElementById('inspector-font-size');
 					fontSizeInput.addEventListener('change', function() {
+						if (!window.currentFormattedElement) return;
 						applyTextFormatting('fontSize', this.value + 'px');
 					});
-					
+
 					// Font weight handler
-					const fontWeightSelect = textFormatToolbar.querySelector('#text-format-font-weight');
+					const fontWeightSelect = document.getElementById('inspector-font-weight');
 					fontWeightSelect.addEventListener('change', function() {
+						if (!window.currentFormattedElement) return;
 						applyTextFormatting('fontWeight', this.value);
 					});
-					
+
 					// Font style handler
-					const fontStyleSelect = textFormatToolbar.querySelector('#text-format-font-style');
+					const fontStyleSelect = document.getElementById('inspector-font-style');
 					fontStyleSelect.addEventListener('change', function() {
+						if (!window.currentFormattedElement) return;
 						applyTextFormatting('fontStyle', this.value);
 					});
-					
-					// Keep toolbar visible when hovering over it
-					textFormatToolbar.addEventListener('mouseenter', function() {
-						// Keep it visible
+
+					// Alignment handlers
+					document.querySelectorAll('.sidebar-align-btn').forEach(btn => {
+						btn.addEventListener('click', function(e) {
+							e.preventDefault();
+							if (!window.currentFormattedElement) return;
+							const align = this.getAttribute('data-align');
+							applyTextFormatting('textAlign', align);
+							// Update active state
+							document.querySelectorAll('.sidebar-align-btn').forEach(b => b.classList.remove('active'));
+							this.classList.add('active');
+						});
 					});
-					textFormatToolbar.addEventListener('mouseleave', function() {
-						hideTextFormatToolbar();
-					});
+
+					// Max Width handler
+					const maxWidthInput = document.getElementById('inspector-max-width');
+					const maxWidthDisplay = document.getElementById('inspector-width-value');
 					
-					return textFormatToolbar;
+					maxWidthInput.addEventListener('input', function() {
+						if (!window.currentFormattedElement) return;
+						const val = this.value;
+						const displayVal = val >= 1400 ? '100% (None)' : val + 'px';
+						maxWidthDisplay.textContent = displayVal;
+						applyTextFormatting('maxWidth', val >= 1400 ? 'none' : val + 'px');
+					});
+
+					// Delete Section handler
+					const deleteSectionBtn = document.getElementById('inspector-delete-section-btn');
+					deleteSectionBtn.addEventListener('click', function() {
+						if (!window.currentFormattedElement) return;
+						const section = window.currentFormattedElement.closest('section');
+						if (section) {
+							if (confirm('Are you sure you want to delete this entire section? This cannot be undone.')) {
+								section.remove();
+								resetInspector();
+								// Record change (generic)
+								changes['section-delete-' + Date.now()] = { type: 'section-delete' };
+							}
+						}
+					});
+
+					// Link Editor handlers
+					window.currentLinkElement = null;
+					const linkUrlInput = document.getElementById('inspector-link-url');
+					const linkTargetSelect = document.getElementById('inspector-link-target');
+					const saveLinkBtn = document.getElementById('inspector-save-link-btn');
+					
+					saveLinkBtn.addEventListener('click', function() {
+						if (!window.currentLinkElement) return;
+						
+						const newUrl = linkUrlInput.value.trim();
+						const newTarget = linkTargetSelect.value;
+						
+						if (!newUrl) {
+							alert('Please enter a valid URL');
+							return;
+						}
+						
+						// Update the link
+						window.currentLinkElement.href = newUrl;
+						window.currentLinkElement.target = newTarget;
+						
+						// Show success feedback
+						saveLinkBtn.innerHTML = '✅ Saved!';
+						saveLinkBtn.style.background = 'linear-gradient(135deg, #10b981 0%, #059669 100%)';
+						
+						setTimeout(() => {
+							saveLinkBtn.innerHTML = '💾 Save Link';
+							saveLinkBtn.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+						}, 2000);
+						
+						// Record change
+						changes['link-' + Date.now()] = {
+							type: 'link',
+							url: newUrl,
+							target: newTarget
+						};
+					});
+
+					// Sidebar Toggle Logic
+					const toggleBtn = document.getElementById('toggle-sidebar-btn');
+					const sidebar = document.getElementById('editor-sidebar');
+					
+					// Load state
+					if (localStorage.getItem('inspectorCollapsed') === 'true') {
+						sidebar.classList.add('collapsed');
+						toggleBtn.innerHTML = '➡️';
+						toggleBtn.title = 'Show Inspector';
+					}
+
+					toggleBtn.addEventListener('click', function() {
+						sidebar.classList.toggle('collapsed');
+						const isCollapsed = sidebar.classList.contains('collapsed');
+						localStorage.setItem('inspectorCollapsed', isCollapsed);
+						
+						if (isCollapsed) {
+							this.innerHTML = '➡️';
+							this.title = 'Show Inspector';
+						} else {
+							this.innerHTML = '⬅️';
+							this.title = 'Hide Inspector';
+						}
+					});
+				}
+
+				// Initialize inspector listeners (only if not already initialized)
+				if (!window.inspectorInitialized) {
+					initInspector();
+					window.inspectorInitialized = true;
 				}
 				
-				function showTextFormatToolbar(element, event) {
+				function updateInspector(element) {
 					if (!editMode) return;
 					
 					// Skip if element is inside section controls or other non-editable areas
@@ -2378,15 +3237,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'save_seo_to_html') {
 						}
 					}
 					
-					if (!editableEl) return;
-					
-					currentFormattedElement = editableEl;
-					
-					// Create toolbar if it doesn't exist
-					if (!textFormatToolbar) {
-						createTextFormatToolbar();
+					if (!editableEl) {
+						resetInspector();
+						return;
 					}
 					
+					window.currentFormattedElement = editableEl;
+					
+					// Show controls, hide empty state
+					sidebarEmptyState.style.display = 'none';
+					sidebarControls.style.display = 'block';
+
 					// Get current formatting
 					const computedStyle = iframeDoc.defaultView.getComputedStyle(editableEl);
 					const currentColor = computedStyle.color;
@@ -2394,13 +3255,91 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'save_seo_to_html') {
 					const currentFontWeight = computedStyle.fontWeight;
 					const currentFontFamily = computedStyle.fontFamily;
 					const currentFontStyle = computedStyle.fontStyle;
+					const currentTextAlign = computedStyle.textAlign;
+					const currentMaxWidth = computedStyle.maxWidth;
 					
 					// Update toolbar with current values
-					const fontSizeInput = textFormatToolbar.querySelector('#text-format-font-size');
-					const fontWeightSelect = textFormatToolbar.querySelector('#text-format-font-weight');
-					const fontFamilySelect = textFormatToolbar.querySelector('#text-format-font-family');
-					const fontStyleSelect = textFormatToolbar.querySelector('#text-format-font-style');
+					const fontSizeInput = document.getElementById('inspector-font-size');
+					const fontWeightSelect = document.getElementById('inspector-font-weight');
+					const fontFamilySelect = document.getElementById('inspector-font-family');
+					const fontStyleSelect = document.getElementById('inspector-font-style');
+					const layoutSection = document.getElementById('sidebar-section-layout');
 					
+					// Show/Hide Layout section based on element type
+					if (['P', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6'].includes(editableEl.tagName)) {
+						layoutSection.style.display = 'block';
+						
+						// Update Alignment buttons
+						document.querySelectorAll('.sidebar-align-btn').forEach(btn => {
+							btn.classList.remove('active');
+							if (btn.getAttribute('data-align') === currentTextAlign) {
+								btn.classList.add('active');
+							}
+						});
+
+						// Update Max Width
+						const maxWidthInput = document.getElementById('inspector-max-width');
+						const maxWidthDisplay = document.getElementById('inspector-width-value');
+						
+						if (currentMaxWidth === 'none' || currentMaxWidth === '100%') {
+							maxWidthInput.value = 1400;
+							maxWidthDisplay.textContent = '100% (None)';
+						} else {
+							const widthVal = parseInt(currentMaxWidth);
+							if (!isNaN(widthVal)) {
+								maxWidthInput.value = widthVal;
+								maxWidthDisplay.textContent = widthVal + 'px';
+							} else {
+								maxWidthInput.value = 1400;
+								maxWidthDisplay.textContent = '100% (None)';
+							}
+						}
+					} else {
+						layoutSection.style.display = 'none';
+					}
+					
+					// Update Delete Section Button
+					const deleteSectionBtn = document.getElementById('inspector-delete-section-btn');
+					const parentSection = editableEl.closest('section');
+					if (parentSection) {
+						deleteSectionBtn.disabled = false;
+						deleteSectionBtn.title = 'Delete parent section';
+					} else {
+						deleteSectionBtn.disabled = true;
+						deleteSectionBtn.title = 'No parent section found';
+					}
+					
+					// Check if this is a link/button (CTA) and show link editor
+					const linkSection = document.getElementById('sidebar-section-link');
+					const linkUrlInput = document.getElementById('inspector-link-url');
+					const linkTargetSelect = document.getElementById('inspector-link-target');
+					
+					// Check if element is a link or contains a link
+					let linkElement = null;
+					if (editableEl.tagName === 'A') {
+						linkElement = editableEl;
+					} else if (editableEl.tagName === 'BUTTON') {
+						// Check if button has onclick with location.href or is wrapped in a link
+						linkElement = editableEl.closest('a');
+					} else {
+						// Check if element is inside a link
+						linkElement = editableEl.closest('a');
+					}
+					
+					if (linkElement) {
+						// Show link editor section
+						linkSection.style.display = 'block';
+						window.currentLinkElement = linkElement;
+						
+						// Populate current values
+						linkUrlInput.value = linkElement.href || '';
+						linkTargetSelect.value = linkElement.target || '_self';
+					} else {
+						// Hide link editor section
+						linkSection.style.display = 'none';
+						window.currentLinkElement = null;
+					}
+
 					// Extract numeric font size
 					const fontSizeNum = parseInt(currentFontSize);
 					if (!isNaN(fontSizeNum)) {
@@ -2412,6 +3351,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'save_seo_to_html') {
 					
 					// Set font style
 					fontStyleSelect.value = currentFontStyle || 'normal';
+
+					// Set font family (check if it contains Azo Sans Uber)
 					
 					// Set font family (check if it contains Azo Sans Uber)
 					if (currentFontFamily.includes('Azo Sans Uber') || currentFontFamily.includes('AzoSansUber')) {
@@ -2421,7 +3362,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'save_seo_to_html') {
 					}
 					
 					// Update active color button
-					textFormatToolbar.querySelectorAll('.text-format-color-btn').forEach(btn => {
+					document.querySelectorAll('.sidebar-color-btn').forEach(btn => {
 						btn.classList.remove('active');
 						const btnColor = btn.getAttribute('data-color');
 						// Convert current color to hex for comparison
@@ -2440,38 +3381,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'save_seo_to_html') {
 							btn.classList.add('active');
 						}
 					});
-					
-					// Position toolbar near the element
-					// Get element position relative to iframe
-					const rect = editableEl.getBoundingClientRect();
-					// Get iframe position relative to viewport
-					const iframeRect = iframe.getBoundingClientRect();
-					
-					// Calculate position relative to viewport (parent document)
-					const toolbarWidth = 450;
-					const toolbarX = iframeRect.left + rect.left + (rect.width / 2) - (toolbarWidth / 2);
-					const toolbarY = iframeRect.top + rect.top - 65; // Above the element
-					
-					// Ensure toolbar stays within viewport
-					const finalX = Math.max(10, Math.min(toolbarX, window.innerWidth - toolbarWidth - 10));
-					const finalY = Math.max(10, Math.min(toolbarY, window.innerHeight - 60));
-					
-					textFormatToolbar.style.left = finalX + 'px';
-					textFormatToolbar.style.top = finalY + 'px';
-					textFormatToolbar.classList.add('active');
 				}
 				
-				function hideTextFormatToolbar() {
-					if (textFormatToolbar) {
-						textFormatToolbar.classList.remove('active');
-						currentFormattedElement = null;
-					}
+				function resetInspector() {
+					window.currentFormattedElement = null;
+					sidebarEmptyState.style.display = 'block';
+					sidebarControls.style.display = 'none';
 				}
 				
 				function applyTextFormatting(property, value) {
-					if (!currentFormattedElement) return;
+					if (!window.currentFormattedElement) return;
 					
-					const element = currentFormattedElement;
+					const element = window.currentFormattedElement;
 					
 					// Apply formatting - use !important to override inline styles if needed
 					if (property === 'color') {
@@ -2488,6 +3409,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'save_seo_to_html') {
 						element.style.setProperty('font-weight', value, 'important');
 					} else if (property === 'fontStyle') {
 						element.style.setProperty('font-style', value, 'important');
+					} else if (property === 'textAlign') {
+						element.style.setProperty('text-align', value, 'important');
+					} else if (property === 'maxWidth') {
+						if (value === 'none') {
+							element.style.removeProperty('max-width');
+							element.style.removeProperty('margin-left');
+							element.style.removeProperty('margin-right');
+							element.style.removeProperty('width');
+						} else {
+							element.style.setProperty('max-width', value, 'important');
+							element.style.setProperty('width', '100%', 'important');
+							// Ensure centering for narrowed text blocks
+							element.style.setProperty('margin-left', 'auto', 'important');
+							element.style.setProperty('margin-right', 'auto', 'important');
+						}
 					}
 					
 					// Track changes
@@ -2500,114 +3436,44 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'save_seo_to_html') {
 					};
 				}
 				
-				// Add hover listeners for formatting toolbar
-				let hoverTimeout = null;
-				
-				iframeDoc.addEventListener('mouseover', function(e) {
+				// Click listener for inspector (Select an element)
+				iframeDoc.addEventListener('click', function(e) {
 					if (!editMode) return;
 					
-					// Clear any existing timeout
-					if (hoverTimeout) {
-						clearTimeout(hoverTimeout);
-					}
+					// If previously selected, clicking background should deselect? 
+					// Or just let it stay selected. Let's try to find an editable element first.
 					
-					// Skip if element is inside non-editable areas
-					if (e.target.closest('.section-controls') || 
-					    e.target.closest('.section-menu-dropdown') ||
-					    e.target.closest('.section-menu-toggle') ||
-					    e.target.closest('.hero-change-bg-btn') ||
-					    e.target.closest('.change-section-bg-btn') ||
-					    e.target.closest('.icon-editable') ||
-					    e.target.closest('.remove-item-btn') ||
-					    e.target.closest('.gallery-item-container') ||
-					    e.target.closest('svg') ||
-					    e.target.closest('.add-package-item-btn') ||
-					    e.target.closest('.remove-package-item-btn') ||
-					    e.target.classList.contains('remove-item-btn') ||
-					    e.target.classList.contains('gallery-item-container') ||
-					    e.target.classList.contains('section-menu-dropdown') ||
-					    e.target.classList.contains('section-menu-toggle') ||
-					    e.target.classList.contains('add-package-item-btn') ||
-					    e.target.classList.contains('remove-package-item-btn')) {
-						return;
-					}
+					// Skip if element is inside section controls
+					if (e.target.closest('.section-controls')) return;
+
+					// Try to find editable element
+					let targetEl = e.target.closest('.editable-text, .editable-link');
 					
-					// Check if element is editable text - be more lenient
-					let targetEl = e.target;
-					
-					// For h1-h6 elements, check the element itself first
-					if (['H1', 'H2', 'H3', 'H4', 'H5', 'H6'].includes(targetEl.tagName)) {
-						// If it's a heading, use it directly
-						if (!targetEl.classList.contains('editable-text') && !targetEl.classList.contains('editable-link')) {
-							// Make it editable if not already
-							targetEl.classList.add('editable-text');
-							if (!targetEl.hasAttribute('data-id')) {
-								targetEl.setAttribute('data-id', 'text-' + Date.now() + '-' + Math.random());
-							}
-							if (!targetEl.isContentEditable) {
-								targetEl.contentEditable = 'true';
-								if (!targetEl.hasAttribute('data-blur-handler')) {
-									targetEl.setAttribute('data-blur-handler', 'true');
-									targetEl.addEventListener('blur', function() {
-										const newText = this.textContent;
-										const oldText = this.getAttribute('data-original-text');
-										if (newText !== oldText) {
-											changes[this.getAttribute('data-id')] = {
-												old: oldText,
-												new: newText,
-												element: this
-											};
-										}
-									});
-									targetEl.setAttribute('data-original-text', targetEl.textContent);
-								}
-							}
+					// Also check for headings or other text elements that should be editable
+					if (!targetEl) {
+						if (['H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'P', 'SPAN', 'DIV', 'LI', 'TD', 'TH'].includes(e.target.tagName)) {
+							targetEl = e.target;
 						}
 					}
 					
-					const hasEditableClass = targetEl.classList.contains('editable-text') || 
-					                        targetEl.classList.contains('editable-link') ||
-					                        targetEl.closest('.editable-text') ||
-					                        targetEl.closest('.editable-link');
-					
-					// Also check if it's a text-containing element
-					const textElements = ['P', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'SPAN', 'DIV', 'A', 'BUTTON', 'LABEL', 'LI', 'TD', 'TH', 'STRONG', 'EM', 'B', 'I', 'SMALL', 'BIG', 'SUB', 'SUP', 'BLOCKQUOTE', 'PRE', 'CODE'];
-					const isTextElement = targetEl.tagName && textElements.includes(targetEl.tagName);
-					const hasText = targetEl.textContent && targetEl.textContent.trim().length > 0;
-					const isInNonEditable = targetEl.closest('header, footer, nav, script, style');
-					
-					const isEditable = hasEditableClass || (isTextElement && hasText && !isInNonEditable);
-					
-					if (isEditable) {
-						// Small delay to avoid flickering
-						hoverTimeout = setTimeout(() => {
-							showTextFormatToolbar(targetEl, e);
-						}, 200);
+					if (targetEl) {
+						updateInspector(targetEl);
+						
+						// Highlight helper
+						iframeDoc.querySelectorAll('.editable-highlight').forEach(el => el.classList.remove('editable-highlight'));
+						targetEl.classList.add('editable-highlight');
+					} else {
+						// Clicking background - maybe don't reset inspector to keep context?
+						// For now, let's keep it sticky logic
+						if (!currentFormattedElement) {
+							resetInspector(); 
+						}
 					}
 				});
 				
-				iframeDoc.addEventListener('mouseout', function(e) {
-					// Clear show timeout
-					if (hoverTimeout) {
-						clearTimeout(hoverTimeout);
-						hoverTimeout = null;
-					}
-					
-					// Hide toolbar when mouse leaves editable elements (unless moving to toolbar)
-					const relatedTarget = e.relatedTarget;
-					const isMovingToToolbar = textFormatToolbar && 
-					                         (relatedTarget === textFormatToolbar || 
-					                          (relatedTarget && textFormatToolbar.contains(relatedTarget)));
-					
-					if (!isMovingToToolbar) {
-						setTimeout(() => {
-							// Double check that mouse is not over toolbar
-							if (!textFormatToolbar || !textFormatToolbar.matches(':hover')) {
-								hideTextFormatToolbar();
-							}
-						}, 150);
-					}
-				});
+				// Remove highlighting on blur or other actions if needed
+				// For now let's just keep simple click-to-select logic
+
 				
 				
 				// Make hero backgrounds editable
@@ -3037,9 +3903,274 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'save_seo_to_html') {
 				
 				// Setup hero background editing
 				setupHeroBackgroundEditing();
+
+				// Setup theme grid editing
+				setupThemeGridEditing();
 				
 				// Setup generic text section editing
 				setupSectionSpecificEditing();
+
+				function setupThemeGridEditing() {
+					const grid = iframeDoc.getElementById('themes-grid');
+					if (!grid) return;
+					
+					const section = grid.closest('section');
+					if (!section) return;
+					
+					// Ensure relative positioning
+					const sectionStyle = iframeDoc.defaultView.getComputedStyle(section);
+					if (sectionStyle.position === 'static') {
+						section.style.position = 'relative';
+					}
+					
+					// Add "Add Theme" button if not present
+					let addBtn = section.querySelector('.add-feature-grid-btn');
+					if (!addBtn) {
+						addBtn = iframeDoc.createElement('button');
+						addBtn.className = 'add-feature-grid-btn';
+						addBtn.innerHTML = '➕ Add Theme';
+						addBtn.style.cssText = `
+							position: absolute;
+							top: 20px;
+							left: 20px;
+							background: #10b981;
+							color: white;
+							border: 2px solid white;
+							padding: 8px 16px;
+							border-radius: 8px;
+							font-size: 13px;
+							font-weight: 600;
+							cursor: pointer;
+							z-index: 40;
+							box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+							display: none;
+						`;
+						section.appendChild(addBtn);
+						
+						addBtn.onclick = (e) => {
+							e.preventDefault();
+							e.stopPropagation();
+							openAddThemeModal(grid);
+						};
+					}
+					
+					// Hover effects for section
+					section.addEventListener('mouseenter', () => {
+						if (editMode && addBtn) addBtn.style.display = 'block';
+					});
+					
+					section.addEventListener('mouseleave', (e) => {
+						if (editMode && addBtn && !addBtn.contains(e.relatedTarget)) {
+							addBtn.style.display = 'none';
+						}
+					});
+					
+					// Setup remove buttons for existing cards
+					const cards = grid.querySelectorAll('.theme-card');
+					cards.forEach(card => setupThemeCardEditing(card));
+					
+					// Observer for new cards
+					const observer = new MutationObserver((mutations) => {
+						mutations.forEach((mutation) => {
+							if (mutation.type === 'childList') {
+								mutation.addedNodes.forEach((node) => {
+									if (node.nodeType === 1 && node.classList.contains('theme-card')) {
+										setupThemeCardEditing(node);
+									}
+								});
+							}
+						});
+					});
+					observer.observe(grid, { childList: true });
+				}
+				
+				function setupThemeCardEditing(card) {
+					if (card.style.position !== 'relative') {
+						card.style.position = 'relative';
+					}
+					
+					if (card.querySelector('.remove-feature-grid-btn')) return;
+					
+					const removeBtn = iframeDoc.createElement('button');
+					removeBtn.className = 'remove-feature-grid-btn';
+					removeBtn.innerHTML = '×';
+					removeBtn.style.cssText = `
+						position: absolute;
+						top: -10px;
+						right: -10px;
+						width: 24px;
+						height: 24px;
+						background: #ef4444;
+						color: white;
+						border: 2px solid white;
+						border-radius: 50%;
+						font-size: 18px;
+						line-height: 1;
+						cursor: pointer;
+						z-index: 50;
+						display: none;
+						align-items: center;
+						justify-content: center;
+						padding: 0;
+					`;
+					
+					removeBtn.onclick = (e) => {
+						e.preventDefault();
+						e.stopPropagation();
+						if (confirm('Are you sure you want to remove this theme?')) {
+							card.remove();
+						}
+					};
+					
+					card.appendChild(removeBtn);
+					
+					card.addEventListener('mouseenter', () => {
+						if (editMode) {
+							removeBtn.style.display = 'flex';
+							card.style.outline = '2px solid #3b82f6';
+						}
+					});
+					
+					card.addEventListener('mouseleave', () => {
+						removeBtn.style.display = 'none';
+						card.style.outline = '';
+					});
+				}
+
+				function openAddThemeModal(gridContainer) {
+					const existing = document.getElementById('add-theme-modal');
+					if (existing) existing.remove();
+					
+					const modal = document.createElement('div');
+					modal.id = 'add-theme-modal';
+					modal.style.cssText = 'position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.75); z-index:100000; display:flex; align-items:center; justify-content:center;';
+					
+					const content = document.createElement('div');
+					content.style.cssText = 'background:white; padding:24px; border-radius:12px; width:500px; max-width:90%; box-shadow:0 20px 60px rgba(0,0,0,0.3);';
+					
+					content.innerHTML = `
+						<h3 style="margin:0 0 20px 0; font-size:18px; font-weight:600;">Add New Theme</h3>
+						
+						<div class="form-group" style="margin-bottom:12px;">
+							<label style="display:block; font-size:13px; font-weight:500; margin-bottom:4px; color:#374151;">Theme Name</label>
+							<input type="text" id="new-theme-name" style="width:100%; padding:8px; border:1px solid #d1d5db; border-radius:6px;" placeholder="e.g. 80s Disco">
+						</div>
+						
+						<div class="form-group" style="margin-bottom:12px;">
+							<label style="display:block; font-size:13px; font-weight:500; margin-bottom:4px; color:#374151;">Category Badge</label>
+							<input type="text" id="new-theme-category" style="width:100%; padding:8px; border:1px solid #d1d5db; border-radius:6px;" placeholder="e.g. VINTAGE">
+						</div>
+						
+						<div class="form-group" style="margin-bottom:12px;">
+							<label style="display:block; font-size:13px; font-weight:500; margin-bottom:4px; color:#374151;">Link URL</label>
+							<input type="text" id="new-theme-url" style="width:100%; padding:8px; border:1px solid #d1d5db; border-radius:6px;" placeholder="e.g. event-themes/page.html">
+						</div>
+						
+						<div class="form-group" style="margin-bottom:20px;">
+							<label style="display:block; font-size:13px; font-weight:500; margin-bottom:4px; color:#374151;">Card Image</label>
+							<input type="file" id="new-theme-image" accept="image/*" style="width:100%; padding:8px; border:1px solid #d1d5db; border-radius:6px;">
+						</div>
+						
+						<div style="display:flex; justify-content:flex-end; gap:12px;">
+							<button id="cancel-theme-btn" style="padding:8px 16px; border:1px solid #d1d5db; background:white; border-radius:6px; cursor:pointer;">Cancel</button>
+							<button id="save-theme-btn" style="padding:8px 16px; background:#3b82f6; color:white; border:none; border-radius:6px; cursor:pointer; font-weight:500;">Add Theme</button>
+						</div>
+					`;
+					
+					modal.appendChild(content);
+					document.body.appendChild(modal);
+					
+					document.getElementById('cancel-theme-btn').onclick = () => modal.remove();
+					
+					document.getElementById('save-theme-btn').onclick = async () => {
+						const name = document.getElementById('new-theme-name').value.trim();
+						const category = document.getElementById('new-theme-category').value.trim();
+						const url = document.getElementById('new-theme-url').value.trim() || '#';
+						const fileInput = document.getElementById('new-theme-image');
+						
+						if (!name) {
+							alert('Name is required');
+							return;
+						}
+						
+						let imageUrl = 'card1.jpg';
+						
+						if (fileInput.files.length > 0) {
+							const formData = new FormData();
+							formData.append('file', fileInput.files[0]);
+							formData.append('action', 'hero_background_upload'); 
+							formData.append('csrf_token', csrfToken);
+							
+							const saveBtn = document.getElementById('save-theme-btn');
+							const oldText = saveBtn.innerHTML;
+							saveBtn.innerHTML = 'Uploading...';
+							saveBtn.disabled = true;
+							
+							try {
+								const res = await fetch(window.location.href, { method: 'POST', body: formData });
+								const data = await res.json();
+								
+								saveBtn.innerHTML = oldText;
+								saveBtn.disabled = false;
+								
+								if (data.success) {
+									imageUrl = data.url;
+									// Fix for path issues: force relative path "../uploads/..."
+									// This matches how booth-themes.html accesses root assets (e.g. "../assets/...")
+									if (imageUrl.includes('uploads/')) {
+										const relativePath = imageUrl.substring(imageUrl.indexOf('uploads/'));
+										imageUrl = '../' + relativePath;
+									}
+								} else {
+									alert('Image upload failed: ' + data.message);
+									return;
+								}
+							} catch (e) {
+								console.error(e);
+								saveBtn.innerHTML = oldText;
+								saveBtn.disabled = false;
+								alert('Upload failed');
+								return;
+							}
+						}
+						
+						let finalImgSrc = imageUrl;
+						if (!finalImgSrc.includes('/') && !finalImgSrc.startsWith('http')) {
+							finalImgSrc = '../assets/images/galleries/ourthemes/' + finalImgSrc;
+						} else if (finalImgSrc.includes('uploads/')) {
+                             if(!finalImgSrc.startsWith('../') && !finalImgSrc.startsWith('http')) {
+                                 finalImgSrc = '../' + finalImgSrc;
+                             }
+                        }
+
+						const newCard = iframeDoc.createElement('div');
+						newCard.className = 'theme-card';
+						newCard.innerHTML = `
+							<a href="${url}" class="block h-full">
+								<div class="theme-card-image">
+									<img src="${finalImgSrc}" alt="${name}" loading="lazy">
+									<div class="theme-card-overlay"></div>
+									<div class="theme-card-badge">${category}</div>
+								</div>
+								<div class="theme-card-content">
+									<h3>${name}</h3>
+									<p>Transform your event with our stunning ${name.toLowerCase()} themed photo booth experience</p>
+									<div class="theme-card-button">
+										<span>
+											View Theme
+											<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+												<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+											</svg>
+										</span>
+									</div>
+								</div>
+							</a>
+						`;
+						
+						gridContainer.appendChild(newCard);
+						modal.remove();
+					};
+				}
 
 				function setupSectionSpecificEditing() {
 					const sections = iframeDoc.querySelectorAll('section');
@@ -3120,234 +4251,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'save_seo_to_html') {
 								}
 							}
 
-							// --- TITLE CONTROLS ---
-							// Ensure H2 behaves nicely
-							h2.style.display = 'block';
-							h2.style.position = 'relative';
-							if (!h2.style.marginLeft) h2.style.marginLeft = 'auto';
-							if (!h2.style.marginRight) h2.style.marginRight = 'auto';
-							
-							const titleBtn = createSettingsButton('⚙️ Title Layout', h2);
-							titleBtn.addEventListener('click', (e) => {
-								e.stopPropagation(); e.preventDefault();
-								openSectionSettingsModal(section, h2, 'Title');
-							});
-
-							// --- CONTENT CONTROLS ---
-							if (contentWrapper) {
-								const contentBtn = createSettingsButton('⚙️ Content Layout', contentWrapper);
-								contentBtn.addEventListener('click', (e) => {
-									e.stopPropagation(); e.preventDefault();
-									openSectionSettingsModal(section, contentWrapper, 'Content');
-								});
-							}
 						}
 					});
 				}
 
-				function createSettingsButton(text, targetElement) {
-					// Remove existing
-					const existing = targetElement.querySelector('.section-settings-btn');
-					if(existing) existing.remove();
 
-					// Avoid injecting into things that are too small?
-					
-					const btn = iframeDoc.createElement('button');
-					btn.className = 'section-settings-btn';
-					btn.innerHTML = text;
-					btn.style.cssText = `
-						position: absolute;
-						top: -20px;
-						left: 50%;
-						transform: translateX(-50%);
-						background: #111827;
-						color: white;
-						border: 1px solid rgba(255, 255, 255, 0.2);
-						padding: 6px 12px;
-						border-radius: 20px;
-						font-size: 11px;
-						font-weight: 600;
-						cursor: pointer;
-						z-index: 1000;
-						display: none;
-						box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-						white-space: nowrap;
-						pointer-events: auto;
-					`;
-					
-					targetElement.prepend(btn); // Prepend to ensure it's at start
-
-					// Hover logic
-					targetElement.addEventListener('mouseenter', () => { if(editMode) btn.style.display = 'block'; });
-					targetElement.addEventListener('mouseleave', (e) => { 
-						if(editMode && !btn.contains(e.relatedTarget)) btn.style.display = 'none'; 
-					});
-
-					return btn;
-				}
-
-				function openSectionSettingsModal(section, element, label) {
-					const existingModal = document.getElementById('section-settings-modal');
-					if (existingModal) existingModal.remove();
-
-					const modal = document.createElement('div');
-					modal.id = 'section-settings-modal';
-					modal.style.cssText = 'position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.75); z-index:100000; display:flex; align-items:center; justify-content:center;';
-
-					const content = document.createElement('div');
-					content.style.cssText = 'background:white; padding:24px; border-radius:12px; width:400px; max-width:90%; box-shadow:0 20px 60px rgba(0,0,0,0.3);';
-
-					// Get values
-					// Padding is usually on the section, but we might want margin on the element
-					let currentMaxWidth = 1200; 
-					if (element.style.maxWidth && element.style.maxWidth !== 'none') {
-						currentMaxWidth = parseInt(element.style.maxWidth);
-					} else if (element.tagName === 'H2' && !element.style.maxWidth) {
-                        // Inherit from parent if not set? Or default.
-                    }
-
-					let currentAlign = element.style.textAlign || 'center'; 
-					
-					// Vertical Spacing (Margin Top/Bottom) check
-					let currentMarginTop = parseInt(element.style.marginTop) || 0;
-					let currentMarginBottom = parseInt(element.style.marginBottom) || 0;
-
-					content.innerHTML = `
-						<h3 style="margin:0 0 20px 0; font-size:18px; font-weight:600;">${label} Layout</h3>
-						
-						<!-- Vertical Spacing (Margin) -->
-						<div style="margin-bottom:20px;">
-							<label style="display:block; font-size:13px; font-weight:600; margin-bottom:8px;">Vertical Spacing (Margin)</label>
-							<div style="display:flex; gap:10px;">
-                                <div style="flex:1;">
-                                    <span style="font-size:10px;">Top</span>
-                                    <input type="range" id="margin-top-slider" min="0" max="100" value="${currentMarginTop}" style="width:100%;">
-                                </div>
-                                <div style="flex:1;">
-                                    <span style="font-size:10px;">Bottom</span>
-                                    <input type="range" id="margin-bottom-slider" min="0" max="100" value="${currentMarginBottom}" style="width:100%;">
-                                </div>
-                            </div>
-						</div>
-
-						<!-- Alignment -->
-						<div style="margin-bottom:20px;">
-							<label style="display:block; font-size:13px; font-weight:600; margin-bottom:8px;">Alignment</label>
-							<div style="display:flex; gap:8px;">
-								<button class="align-btn" data-align="left" style="flex:1; padding:8px; border:1px solid #e5e7eb; background:${currentAlign === 'left' ? '#f3f4f6' : 'white'}; border-color:${currentAlign === 'left' ? '#667eea' : '#e5e7eb'}; border-radius:6px; cursor:pointer;">Left</button>
-								<button class="align-btn" data-align="center" style="flex:1; padding:8px; border:1px solid #e5e7eb; background:${currentAlign === 'center' ? '#f3f4f6' : 'white'}; border-color:${currentAlign === 'center' ? '#667eea' : '#e5e7eb'}; border-radius:6px; cursor:pointer;">Center</button>
-								<button class="align-btn" data-align="right" style="flex:1; padding:8px; border:1px solid #e5e7eb; background:${currentAlign === 'right' ? '#f3f4f6' : 'white'}; border-color:${currentAlign === 'right' ? '#667eea' : '#e5e7eb'}; border-radius:6px; cursor:pointer;">Right</button>
-							</div>
-						</div>
-
-						<!-- Width -->
-						<div style="margin-bottom:24px;">
-							<label style="display:block; font-size:13px; font-weight:600; margin-bottom:8px;">${label} Width</label>
-							<input type="range" id="width-slider" min="300" max="1400" value="${currentMaxWidth}" style="width:100%;">
-							<div style="display:flex; justify-content:space-between; font-size:11px; color:#6b7280; margin-top:4px;">
-								<span>Narrow</span>
-								<span>Full Width</span>
-							</div>
-						</div>
-						
-						${label === 'Content' ? `
-						<!-- Text Wrap Fix for Content -->
-						<div style="margin-bottom:24px; padding:12px; background:#fef2f2; border-radius:8px; border:1px solid #fee2e2;">
-							<div style="display:flex; align-items:center; justify-content:space-between;">
-								<span style="font-size:13px; font-weight:600; color:#991b1b;">Fix Text Wrapping</span>
-								<button id="fix-text-btn" style="padding:6px 12px; background:#ef4444; color:white; border:none; border-radius:6px; cursor:pointer; font-size:12px; font-weight:600;">Fix Layout</button>
-							</div>
-						</div>` : ''}
-
-						<button id="close-settings-modal" style="width:100%; padding:10px; background:#111827; color:white; border:none; border-radius:8px; cursor:pointer; font-weight:600;">Done</button>
-					`;
-
-					modal.appendChild(content);
-					document.body.appendChild(modal);
-
-					// Margin sliders
-					modal.querySelector('#margin-top-slider').addEventListener('input', (e) => {
-						const val = e.target.value + 'px';
-						element.style.marginTop = val;
-						changes['margin-top-' + Date.now()] = { type: 'style', element: element, property: 'marginTop', value: val };
-					});
-                    modal.querySelector('#margin-bottom-slider').addEventListener('input', (e) => {
-						const val = e.target.value + 'px';
-						element.style.marginBottom = val;
-						changes['margin-bottom-' + Date.now()] = { type: 'style', element: element, property: 'marginBottom', value: val };
-					});
-
-					// Width
-					const widthSlider = document.getElementById('width-slider');
-					widthSlider.addEventListener('input', (e) => {
-						const val = e.target.value + 'px';
-						element.style.maxWidth = val;
-						element.style.width = '100%';
-						changes['width-' + Date.now()] = { type: 'style', element: element, property: 'maxWidth', value: val };
-					});
-
-					// Alignment
-					const alignBtns = modal.querySelectorAll('.align-btn');
-					alignBtns.forEach(btn => {
-						btn.addEventListener('click', () => {
-							alignBtns.forEach(b => {
-								b.style.background = 'white';
-								b.style.borderColor = '#e5e7eb';
-							});
-							btn.style.background = '#f3f4f6';
-							btn.style.borderColor = '#667eea';
-
-							const align = btn.getAttribute('data-align');
-							element.style.textAlign = align;
-							
-							// Auto margin for block centering logic
-							if (align === 'center') {
-								element.style.marginLeft = 'auto';
-								element.style.marginRight = 'auto';
-							} else if (align === 'left') {
-								element.style.marginLeft = '0'; 
-								element.style.marginRight = 'auto'; // Keep block width restrained to left
-							} else if (align === 'right') {
-								element.style.marginLeft = 'auto';
-								element.style.marginRight = '0';
-							}
-
-							// Handle List if content
-							if (label === 'Content') {
-								// Recurse down just in case
-								const uls = element.querySelectorAll('ul');
-								uls.forEach(ul => {
-									ul.style.textAlign = align === 'center' ? 'left' : align;
-									ul.style.display = 'inline-block';
-									ul.style.width = 'auto';
-									// Reset margins based on align
-									if(align === 'center') ul.style.margin = '1em auto';
-									else if(align === 'left') ul.style.margin = '1em 0';
-									else ul.style.margin = '1em 0 1em auto';
-								});
-							}
-
-							changes['align-' + Date.now()] = { type: 'style', element: element, property: 'textAlign', value: align };
-						});
-					});
-
-					if (label === 'Content') {
-						document.getElementById('fix-text-btn').addEventListener('click', () => {
-							const elements = element.querySelectorAll('p, li, span');
-							elements.forEach(el => {
-								el.style.whiteSpace = 'normal';
-								el.style.whiteSpaceCollapse = 'collapse';
-								el.style.textWrapMode = 'wrap';
-								el.style.wordBreak = 'normal';
-								if(el.tagName !== 'SPAN') { el.style.maxWidth = 'none'; el.style.width = 'auto'; }
-							});
-							alert('Text layout fixed.');
-						});
-					}
-
-					document.getElementById('close-settings-modal').onclick = () => modal.remove();
-					modal.onclick = (e) => { if (e.target === modal) modal.remove(); };
-				}
 				function editIcon(element) {
 					// Remove existing modal
 					const existingModal = document.getElementById('icon-picker-modal');
@@ -5076,7 +5984,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'save_seo_to_html') {
 				
 				// Initialize formatting toolbar after a short delay
 				setTimeout(() => {
-					createTextFormatToolbar();
+					// Text format toolbar removed - now using Inspector sidebar
+
 				}, 500);
 				
 				console.log('Editor initialized');
@@ -6084,6 +6993,357 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'save_seo_to_html') {
 			alert('Export failed. Please try again.');
 		});
 	}
+	// Right Sidebar & Drag and Drop Logic
+    var templates = {};
+
+    function getTemplate(id) {
+        var el = document.getElementById('tpl-' + id);
+        return el ? el.innerHTML : '';
+    }
+
+    function initTemplates() {
+        templates = {
+            hero: getTemplate('hero'),
+            text: getTemplate('text'),
+            cards: getTemplate('cards'),
+            split: getTemplate('split'),
+            cta: getTemplate('cta'),
+            video: getTemplate('video'),
+            gallery: getTemplate('gallery'),
+            gallery_grid: getTemplate('gallery_grid')
+        };
+    }
+
+    function setupDragAndDrop() {
+        const iframe = document.getElementById('preview-iframe');
+        if (!iframe) return;
+
+        const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+        const root = iframeDoc.getElementById('canvas-root') || iframeDoc.body; // Fallback to body if canvas-root missing
+
+        // Sidebar Items (Draggables)
+        const draggables = document.querySelectorAll('.component-item');
+        draggables.forEach(item => {
+            // CLICK TO ADD (workaround for iframe drag-drop issues)
+            item.addEventListener('click', function() {
+                const componentType = this.getAttribute('data-type');
+                console.log('=== CLICK TO ADD ===');
+                console.log('Component type:', componentType);
+                console.log('Templates object:', templates);
+                console.log('Template exists?', !!templates[componentType]);
+                
+                if (templates[componentType]) {
+                    const tempDiv = iframeDoc.createElement('div');
+                    tempDiv.innerHTML = templates[componentType];
+                    const newEl = tempDiv.firstElementChild;
+                    
+                    if (newEl) {
+                        // Append to end of main/body
+                        const mainContent = iframeDoc.querySelector('main') || iframeDoc.body;
+                        console.log('Appending to:', mainContent.tagName);
+                        mainContent.appendChild(newEl);
+                        
+                        // Initialize
+                        if (!newEl.getAttribute('data-id')) {
+                            newEl.setAttribute('data-id', 'section-' + Date.now());
+                        }
+                        newEl.setAttribute('data-editable', 'true');
+                        
+                        // Re-run section controls
+                        setupSectionControls();
+                        
+                        // Scroll to view
+                        newEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        
+                        console.log('✅ Component added via CLICK!');
+                        alert('Element added! Scroll to bottom to see it.');
+                    } else {
+                        console.error('Failed to create element from template');
+                        alert('Error: Could not create element');
+                    }
+                } else {
+                    console.error('Template not found:', componentType);
+                    alert('Error: Template not found for ' + componentType);
+                }
+            });
+            
+            // Keep drag-and-drop for future use
+            item.addEventListener('dragstart', function(e) {
+                const componentType = this.getAttribute('data-type');
+                console.log('Drag Start:', componentType);
+                e.dataTransfer.setData('text/plain', 'component:' + componentType);
+                iframeDoc.body.classList.add('dragging-over'); // Optional visual cue
+            });
+            item.addEventListener('dragend', function() {
+                iframeDoc.body.classList.remove('dragging-over');
+            });
+        });
+
+        // Iframe Drop Zone - attach to BOTH document and body for better coverage
+        iframeDoc.addEventListener('dragover', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            e.dataTransfer.dropEffect = 'copy';
+            
+            // Check if dragging a component from sidebar (will have 'component:' prefix)
+            // We can't read data in dragover, so we just check if text/plain exists
+            // and distinguish in drop handler
+            console.log('Drag Over:', e.dataTransfer.types);
+            
+            // Note: We can't show drop indicators here because we can't read the data
+            // to determine if it's a component or section reorder in dragover event
+        });
+        
+        // Also add to body for better coverage
+        iframeDoc.body.addEventListener('dragover', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            e.dataTransfer.dropEffect = 'copy';
+        });
+
+        iframeDoc.addEventListener('dragleave', function(e) {
+             // Optional: remove indicator if leaving window
+        });
+
+        iframeDoc.addEventListener('drop', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            console.log('Drop Event Fired on DOCUMENT');
+            
+            // Cleanup indicators
+            iframeDoc.querySelectorAll('.drop-indicator').forEach(el => el.remove());
+
+            const dragData = e.dataTransfer.getData('text/plain');
+            console.log('Drop Data:', dragData);
+            console.log('Templates available:', Object.keys(templates));
+
+            // CASE 1: Adding New Component from Sidebar (has 'component:' prefix)
+            if (dragData && dragData.startsWith('component:')) {
+                const componentType = dragData.replace('component:', '');
+                console.log('Adding component:', componentType);
+                console.log('Template exists?', !!templates[componentType]);
+                console.log('Template content length:', templates[componentType] ? templates[componentType].length : 0);
+                
+                if (templates[componentType]) {
+                    // Create temporary container to parse HTML
+                    const tempDiv = iframeDoc.createElement('div');
+                    tempDiv.innerHTML = templates[componentType];
+                    console.log('Temp div children:', tempDiv.children.length);
+                    
+                    // Get the actual element (first child)
+                    const newEl = tempDiv.firstElementChild;
+                    if (!newEl) {
+                        console.error('No element created from template!');
+                        return;
+                    }
+                    console.log('New element created:', newEl.tagName);
+
+                    // Check where to drop
+                    let target = e.target.closest('[data-editable]');
+                    console.log('Drop target (editable):', target ? target.tagName : 'none');
+                    
+                    // If no editable target, try to find the nearest section or just append
+                    if (!target) {
+                        target = e.target.closest('section');
+                        console.log('Drop target (section):', target ? target.tagName : 'none');
+                    }
+                    
+                    if (target) {
+                         const rect = target.getBoundingClientRect();
+                         const offset = e.clientY - rect.top - (rect.height / 2);
+                         console.log('Inserting relative to target, offset:', offset);
+                         if (offset < 0) {
+                             console.log('Inserting BEFORE target');
+                             target.parentNode.insertBefore(newEl, target);
+                         } else {
+                             console.log('Inserting AFTER target');
+                             target.parentNode.insertBefore(newEl, target.nextSibling);
+                         }
+                    } else {
+                        // Append to main or body if no target
+                        const mainContent = iframeDoc.querySelector('main') || iframeDoc.body;
+                        console.log('Appending to:', mainContent.tagName);
+                        mainContent.appendChild(newEl);
+                    }
+                    
+                    // Initialize editing for the new element
+                    if (!newEl.getAttribute('data-id')) {
+                        newEl.setAttribute('data-id', 'section-' + Date.now());
+                    }
+                    newEl.setAttribute('data-editable', 'true');
+
+                    // Re-run section controls setup to add controls to new section
+                    setupSectionControls();
+
+                    // Auto-scroll to view
+                    newEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    
+                    console.log('Component added successfully');
+                    alert('Element added! Check the page.');
+                } else {
+                    console.error('Template not found for:', componentType);
+                }
+                return;
+            }
+
+            // CASE 2: Reordering Existing Section (plain section ID)
+            // CASE 2: Reordering Existing Section (plain section ID)
+            const draggingSectionId = dragData;
+            console.log('Checking for section reorder, dragData:', dragData);
+            console.log('Starts with component?', dragData.startsWith('component:'));
+            
+            if (draggingSectionId && !dragData.startsWith('component:')) {
+                console.log('=== SECTION REORDER ===');
+                console.log('Section ID:', draggingSectionId);
+                
+                const draggedElement = iframeDoc.querySelector(`[data-id="${draggingSectionId}"]`);
+                const target = e.target.closest('[data-editable]');
+                
+                console.log('Dragged element:', draggedElement);
+                console.log('Target element:', target);
+                
+                if (draggedElement && target && draggedElement !== target) {
+                    const rect = target.getBoundingClientRect();
+                    const offset = e.clientY - rect.top - (rect.height / 2);
+                    
+                    console.log('Offset:', offset);
+                    
+                    if (offset < 0) {
+                        console.log('Inserting BEFORE target');
+                        target.parentNode.insertBefore(draggedElement, target);
+                    } else {
+                        console.log('Inserting AFTER target');
+                        target.parentNode.insertBefore(draggedElement, target.nextSibling);
+                    }
+                    
+                    // Reselect
+                    setTimeout(() => selectElement(draggedElement), 100);
+                    
+                    // Scroll to view
+                    draggedElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    
+                    console.log('✅ Section reordered!');
+                } else {
+                    console.log('Cannot reorder - missing elements or same target');
+                }
+                return;
+            }
+
+        });
+        
+        // ALSO add drop listener to body as backup
+        iframeDoc.body.addEventListener('drop', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            console.log('Drop Event Fired on BODY');
+            
+            const dragData = e.dataTransfer.getData('text/plain');
+            console.log('Body drop data:', dragData);
+            
+            if (dragData && dragData.startsWith('component:')) {
+                const componentType = dragData.replace('component:', '');
+                console.log('Adding component from body drop:', componentType);
+                
+                if (templates[componentType]) {
+                    const tempDiv = iframeDoc.createElement('div');
+                    tempDiv.innerHTML = templates[componentType];
+                    const newEl = tempDiv.firstElementChild;
+                    
+                    if (newEl) {
+                        // Append to end of main/body
+                        const mainContent = iframeDoc.querySelector('main') || iframeDoc.body;
+                        mainContent.appendChild(newEl);
+                        
+                        // Initialize
+                        if (!newEl.getAttribute('data-id')) {
+                            newEl.setAttribute('data-id', 'section-' + Date.now());
+                        }
+                        newEl.setAttribute('data-editable', 'true');
+                        
+                        // Re-run section controls
+                        setupSectionControls();
+                        
+                        // Scroll to view
+                        newEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        
+                        console.log('Component added via body drop!');
+                    }
+                }
+            }
+        });
+        
+        // Add listeners for internal drag handles
+        iframeDoc.addEventListener('dragstart', function(e) {
+            if (e.target.classList.contains('drag-handle')) {
+                 const section = e.target.closest('[data-editable]');
+                 if (section) {
+                     e.dataTransfer.setData('text/plain', section.getAttribute('data-id'));
+                     e.dataTransfer.effectAllowed = 'move';
+                     // Add class for styling
+                     section.classList.add('dragging-section');
+                     setTimeout(() => section.style.opacity = '0.5', 0);
+                 }
+            }
+        });
+        
+        iframeDoc.addEventListener('dragend', function(e) {
+             const section = iframeDoc.querySelector('.dragging-section');
+             if (section) {
+                 section.classList.remove('dragging-section');
+                 section.style.opacity = '1';
+             }
+             iframeDoc.querySelectorAll('.drop-indicator').forEach(el => el.remove());
+        });
+    }
+
+    function setupRightSidebarToggle() {
+        const toggleBtn = document.getElementById('toggle-right-sidebar-btn');
+        const sidebar = document.getElementById('editor-sidebar-right');
+        
+        if (toggleBtn && sidebar) {
+            // Check stored state
+            const isCollapsed = localStorage.getItem('rightSidebarCollapsed') === 'true';
+            if (isCollapsed) {
+                sidebar.classList.add('collapsed');
+                toggleBtn.textContent = '⬅️';
+            }
+
+            toggleBtn.addEventListener('click', function() {
+                sidebar.classList.toggle('collapsed');
+                const collapsed = sidebar.classList.contains('collapsed');
+                localStorage.setItem('rightSidebarCollapsed', collapsed);
+                toggleBtn.textContent = collapsed ? '⬅️' : '➡️';
+            });
+        }
+    }
+
+    function initRightSidebar() {
+        initTemplates();
+        setupRightSidebarToggle();
+        setupDragAndDrop();
+    }
+
+    // Initialize on main page load
+    document.addEventListener('DOMContentLoaded', function() {
+        initRightSidebar();
+        
+        // Also re-init drag and drop when iframe reloads
+        const iframe = document.getElementById('preview-iframe');
+        if (iframe) {
+            iframe.addEventListener('load', function() {
+                setupDragAndDrop();
+            });
+        }
+    });
 	</script>
+    <!-- Element Templates -->
+    <?php include 'pages_elements/hero_section.php'; ?>
+    <?php include 'pages_elements/text_block.php'; ?>
+    <?php include 'pages_elements/feature_cards.php'; ?>
+    <?php include 'pages_elements/split_screen.php'; ?>
+    <?php include 'pages_elements/cta.php'; ?>
+    <?php include 'pages_elements/video_section.php'; ?>
+    <?php include 'pages_elements/gallery_section.php'; ?>
+    <?php include 'pages_elements/gallery_grid.php'; ?>
 </body>
 </html>
