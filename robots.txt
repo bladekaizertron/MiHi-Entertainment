@@ -1,0 +1,69 @@
+# robots.txt for MiHi Entertainment
+# https://mihientertainment.com
+
+# Allow all crawlers by default
+User-agent: *
+Allow: /
+
+# Disallow admin and sensitive areas
+Disallow: /admin/
+Disallow: /config/
+Disallow: /database/
+Disallow: /includes/
+Disallow: /uploads/private/
+
+# Disallow installation and configuration files
+Disallow: /install.php
+Disallow: /.htaccess
+Disallow: /.user.ini
+Disallow: /.git/
+Disallow: /__MACOSX/
+
+# Disallow SQL files
+Disallow: /*.sql$
+
+# Allow important pages
+Allow: /index.html
+Allow: /about.html
+Allow: /contact-us.html
+Allow: /our-services.html
+Allow: /our-booths.html
+Allow: /our-locations.html
+Allow: /blog.php
+Allow: /post/
+Allow: /product/
+Allow: /locations/
+
+# Allow assets and media
+Allow: /assets/
+Allow: /flipbook/
+
+# Sitemap location
+Sitemap: https://mihientertainment.com/sitemap.xml
+
+# Crawl-delay for polite crawling (optional)
+Crawl-delay: 1
+
+# Specific bot rules
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
