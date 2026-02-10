@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>March Madness Photo & Video Activation - MiHi Entertainment</title>
+    <link rel="icon" type="image/svg+xml" href="../assets/images/favicon.svg">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <style>
+        @font-face {
+            font-family: 'AzoSansUber';
+            src: url('../assets/fonts/AzoSansUber-Regular.woff2') format('woff2');
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'AzoSans';
+            src: url('../assets/fonts/AzoSans-Regular.woff2') format('woff2');
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        html,
+        body {
+            overflow-x: hidden;
+            width: 100%;
+            max-width: 100%;
+        }
+
+        body {
+            font-family: 'AzoSans', sans-serif;
+            color: #1a202c;
+            background: #1F1F1F;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: 'AzoSansUber', sans-serif;
+            text-transform: uppercase;
+        }
+
+        header {
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            right: 0 !important;
+            width: 100% !important;
+            z-index: 50 !important;
+        }
+
+        header .btn-primary,
+        header a.btn-primary {
+            text-transform: none !important;
+            padding: 0.75rem 1.5rem !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            font-size: inherit !important;
+            letter-spacing: normal !important;
+            border: none !important;
+            backdrop-filter: none !important;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05) !important;
+            position: static !important;
+            overflow: visible !important;
+        }
+
+        header .btn-primary::before {
+            display: none !important;
+        }
+
+        header .btn-primary:hover {
+            transform: none !important;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04) !important;
+        }
+
+        .section-padding {
+            padding: 6rem 0;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        .hero-section {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            max-width: 100%;
+        }
+
+        .hero-title {
+            font-family: 'AzoSansUber', sans-serif;
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 400;
+            color: #ffffff;
+            letter-spacing: -0.02em;
+            margin-bottom: 1rem;
+            line-height: 0.95;
+            text-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            width: 100%;
+        }
+
+        .hero-subtitle {
+            font-family: 'AzoSans', sans-serif;
+            font-size: clamp(0.75rem, 1.5vw, 1rem);
+            color: #ffffff;
+            background-color: #FF4F4F;
+            padding: 0.5rem 1.5rem;
+            border-radius: 9999px;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            margin-bottom: 2rem;
+            font-weight: 400;
+            text-align: center;
+            display: inline-block;
+            width: auto;
+        }
+
+        .hero-description {
+            font-family: 'AzoSans', sans-serif;
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            color: rgba(255, 255, 255, 0.9);
+            max-width: 600px;
+            margin: 0 auto 3rem;
+            line-height: 1.6;
+            font-weight: 300;
+            text-align: center;
+            width: 100%;
+        }
+
+        .modern-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.25rem 3rem;
+            font-size: 0.95rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: #ffffff;
+            background: #FF4F4F;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50px;
+            text-decoration: none;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3),
+                0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .modern-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .modern-btn:hover {
+            color: #1F1F1F;
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5),
+                0 0 0 1px rgba(255, 255, 255, 0.2) inset,
+                0 0 60px rgba(3, 3, 3, 0.4);
+            background: #18F1E1;
+        }
+
+        .modern-btn:hover::before {
+            left: 100%;
+        }
+
+        .modern-btn:active {
+            transform: translateY(-1px) scale(1);
+        }
+
+        .modern-btn-call {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            padding: 1.25rem 3rem;
+            font-size: 0.95rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: #ffffff;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50px;
+            text-decoration: none;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .modern-btn-call::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .modern-btn-call:hover {
+            transform: translateY(-3px) scale(1.02);
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.5);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3),
+                0 0 0 1px rgba(255, 255, 255, 0.2) inset;
+        }
+
+        .modern-btn-call:hover::before {
+            left: 100%;
+        }
+
+        .modern-btn-call:active {
+            transform: translateY(-1px) scale(1);
+        }
+
+        .modern-btn-call svg {
+            flex-shrink: 0;
+        }
+
+        .modern-section-light {
+            background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 50%, #ffffff 100%);
+        }
+
+        .section-title {
+            font-family: 'AzoSansUber', sans-serif;
+            font-size: clamp(2.5rem, 6vw, 5rem);
+            font-weight: 400;
+            color: #FF4F4F;
+            text-align: center;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+            line-height: 1.1;
+        }
+
+        .section-title-light {
+            color: #1F1F1F;
+        }
+
+        .section-subtitle {
+            font-family: 'AzoSans', sans-serif;
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            color: #1F1F1F;
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto 4rem;
+            line-height: 1.7;
+            font-weight: 300;
+        }
+
+        .section-subtitle-light {
+            color: #1F1F1F;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .feature-card {
+            background: #ffffff;
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 2.5rem;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #ffffff;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(0, 0, 0, 0.5);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2),
+                0 0 0 1px rgba(0, 0, 0, 0.1) inset;
+        }
+
+        .feature-card:hover::before {
+            opacity: 1;
+        }
+
+        .feature-card>* {
+            position: relative;
+            z-index: 1;
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: #18F1E1;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            border: #18F1E1 1px solid;
+            color: #1F1F1F;
+        }
+
+        .feature-icon svg {
+            color: #1F1F1F;
+            stroke: #1F1F1F;
+        }
+
+        .feature-card h3 {
+            font-family: 'AzoSansUber', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 400;
+            color: #FF4F4F;
+            margin-bottom: 1rem;
+            letter-spacing: -0.01em;
+            text-transform: uppercase;
+        }
+
+        .feature-card p {
+            font-family: 'AzoSans', sans-serif;
+            color: #1F1F1F;
+            line-height: 1.7;
+            font-size: 0.95rem;
+            font-weight: 300;
+        }
+
+        .content-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .content-text h2 {
+            font-family: 'AzoSansUber', sans-serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 400;
+            color: #FF4F4F;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.02em;
+            line-height: 1.1;
+            text-transform: uppercase;
+        }
+
+        .content-text p {
+            font-family: 'AzoSans', sans-serif;
+            color: #1F1F1F;
+            line-height: 1.8;
+            font-size: 1.05rem;
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+
+        .content-image {
+            position: relative;
+            border-radius: 24px;
+            overflow: hidden;
+            aspect-ratio: 4/3;
+        }
+
+        .content-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .content-image::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(220, 38, 38, 0.2) 0%, rgba(30, 64, 175, 0.2) 100%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: 1;
+        }
+
+        .content-image:hover img {
+            transform: scale(1.05);
+        }
+
+        .content-image:hover::before {
+            opacity: 1;
+        }
+
+        .carousel-container {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .carousel-container:hover::before {
+            opacity: 0;
+        }
+
+        .carousel-container:hover .carousel-slide img {
+            transform: none;
+        }
+
+        .carousel-slides {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .carousel-slide {
+            min-width: 100%;
+            width: 100%;
+            height: 100%;
+            flex-shrink: 0;
+        }
+
+        .carousel-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 10;
+            transition: all 0.3s ease;
+            color: #1a202c;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .carousel-btn:hover {
+            background: rgba(255, 255, 255, 1);
+            transform: translateY(-50%) scale(1.1);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .carousel-btn:active {
+            transform: translateY(-50%) scale(0.95);
+        }
+
+        .carousel-btn-prev {
+            left: 16px;
+        }
+
+        .carousel-btn-next {
+            right: 16px;
+        }
+
+        .carousel-indicators {
+            position: absolute;
+            bottom: 16px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+            z-index: 10;
+        }
+
+        .carousel-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            border: 2px solid rgba(255, 255, 255, 0.8);
+            background: transparent;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            padding: 0;
+        }
+
+        .carousel-indicator.active {
+            background: rgba(255, 255, 255, 0.9);
+            border-color: rgba(255, 255, 255, 1);
+        }
+
+        .carousel-indicator:hover {
+            background: rgba(255, 255, 255, 0.6);
+        }
+
+        .feature-list {
+            list-style: none;
+            padding: 0;
+            margin: 2rem 0;
+        }
+
+        .feature-item {
+            padding: 1.5rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: flex-start;
+            gap: 1.5rem;
+        }
+
+        .feature-item:last-child {
+            border-bottom: none;
+        }
+
+        .feature-item-icon {
+            width: 32px;
+            height: 32px;
+            background: #18F1E1;
+            border-radius: 50%;
+            flex-shrink: 0;
+            margin-top: 0.25rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: #18F1E1 2px solid;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+            position: relative;
+        }
+
+        .feature-item-icon::before {
+            content: '✓';
+            color: #1F1F1F;
+            font-size: 16px;
+            font-weight: bold;
+            line-height: 1;
+        }
+
+        .feature-item-content h4 {
+            font-family: 'AzoSansUber', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 400;
+            color: #FF4F4F;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.01em;
+            text-transform: uppercase;
+        }
+
+        .feature-item-content p {
+            font-family: 'AzoSans', sans-serif;
+            color: #ffffff;
+            line-height: 1.7;
+            font-size: 0.95rem;
+            margin: 0;
+            font-weight: 300;
+        }
+
+        @media (max-width: 1024px) {
+            .content-section {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .content-image {
+                order: -1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .section-padding {
+                padding: 4rem 0;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .modern-btn {
+                padding: 1rem 2.5rem;
+                font-size: 0.875rem;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-fade-in {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="nav-placeholder"></div>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="absolute inset-0 bg-cover bg-center"
+            style="background-image: url('../assets/images/marchmadness/marchmadness.png');"></div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1 class="hero-title animate-fade-in"><span style="color: #FF4F4F;">MARCH</span> <span
+                    style="color: #18F1E1;">MADNESS</span></h1>
+            <p class="hero-subtitle animate-fade-in" style="animation-delay: 0.2s; background-color: #FF4F4F;">Photo &
+                Video Activation</p>
+            <p class="hero-description animate-fade-in" style="animation-delay: 0.4s;">
+                Transform your March Madness viewing experience with championship-worthy photo and video activation.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 items-center justify-center animate-fade-in"
+                style="animation-delay: 0.6s;">
+                <a href="../contact-us.html" class="modern-btn">
+                    Get Your Quote
+                </a>
+                <button type="button" data-click-to-call data-call-text="Call Us" class="modern-btn-call">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                        <path
+                            d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z">
+                        </path>
+                    </svg>
+                    Call Us
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 1: Introduction -->
+    <section class="modern-section-light section-padding">
+        <div class="container mx-auto px-6">
+            <div class="max-w-7xl mx-auto">
+                <div class="content-section">
+                    <div class="content-text">
+                        <h2>Photo and Video Activation For March Madness Tournaments Nationwide</h2>
+                        <p>
+                            Transform your March Madness viewing experience with MiHi Entertainment's photo and video
+                            activation services. Whether hosting an intimate bracket party or coordinating corporate
+                            tournament events across multiple cities, our interactive photo booth technology captures
+                            every buzzer-beater and championship moment—turning tournament excitement into viral-worthy
+                            content.
+                        </p>
+                    </div>
+                    <div class="content-image carousel-container">
+                        <div class="carousel-slides" id="carousel1">
+                            <div class="carousel-slide">
+                                <img src="../assets/images/marchmadness/m1.png" alt="March Madness Photo Activation">
+                            </div>
+                            <div class="carousel-slide">
+                                <img src="../assets/images/marchmadness/m2.png"
+                                    alt="March Madness Tournament Entertainment">
+                            </div>
+                            <div class="carousel-slide">
+                                <img src="../assets/images/marchmadness/m3.png" alt="March Madness Video Booth">
+                            </div>
+                        </div>
+                        <button class="carousel-btn carousel-btn-prev" onclick="prevSlide('carousel1')">
+                            <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M15 19l-7-7 7-7" />
+                            </svg>
+                        </button>
+                        <button class="carousel-btn carousel-btn-next" onclick="nextSlide('carousel1')">
+                            <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 5l7 7-7 7" />
+                            </svg>
+                        </button>
+                        <div class="carousel-indicators" id="indicators1"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 2: What March Madness Activation Brings -->
+    <section class="section-padding" style="background-color: #1F1F1F;">
+        <div class="container mx-auto px-6">
+            <div class="max-w-7xl mx-auto">
+                <div class="content-section">
+                    <div class="content-image">
+                        <img src="../assets/images/marchmadness/m4.png" alt="March Madness Activation Benefits">
+                    </div>
+                    <div class="content-text">
+                        <h2 style="color: #18F1E1;">What March Madness Activation Brings to Your Event</h2>
+                        <p style="color: #ffffff;">
+                            March Madness photo and video activation combines cutting-edge photography with engaging
+                            content creation that maximizes guest participation and social media reach. Our activations
+                            keep guests entertained during timeouts and halftime while producing branded marketing
+                            content. Each moment becomes a digital asset extending your event's influence across
+                            Instagram, Facebook, Twitter, and TikTok.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 3: Nationwide Tournament Coverage -->
+    <section class="modern-section-light section-padding">
+        <div class="container mx-auto px-6">
+            <div class="max-w-7xl mx-auto text-center">
+                <h2 style="color: #FF4F4F;" class="section-title section-title-light">Nationwide Tournament Coverage
+                </h2>
+                <p class="section-subtitle section-subtitle-light">
+                    When hosting simultaneous March Madness viewing parties across multiple cities, MiHi Entertainment
+                    delivers comprehensive coverage with consistent quality and branding. We deploy synchronized
+                    experiences from New York to Los Angeles, ensuring every location provides identical guest
+                    experiences throughout the tournament.
+                </p>
+                <p class="section-subtitle section-subtitle-light">
+                    Our nationwide approach handles complete logistics: coordinated equipment deployment, certified
+                    local technicians, unified data systems, and comprehensive analytics consolidating metrics from all
+                    venues into digestible reports.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 4: Customization Options -->
+    <section class="modern-section-light section-padding">
+        <div class="container mx-auto px-6">
+            <div class="max-w-7xl mx-auto">
+                <h2 style="color: #FF4F4F;" class="section-title section-title-light">March Madness Customization
+                    Options
+                </h2>
+                <p class="section-subtitle section-subtitle-light">
+                    Our creative team develops visual identities with custom backdrops and environmental graphics
+                    incorporating your team colors, alma mater pride, or brand guidelines. Digital graphics include
+                    animated overlays, live bracket standings, real-time score integrations, and sponsor placements that
+                    update automatically as teams advance.
+                </p>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                            </svg>
+                        </div>
+                        <h3>Backdrops</h3>
+                        <p>
+                            With over 40 different backdrops to choose from, we can definitely find championship-worthy
+                            options that fit your March Madness theme perfectly! From team-specific designs to neutral
+                            tournament branding, we create backdrops that capture the intensity and excitement of
+                            college basketball's biggest event.
+                        </p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M14 10l-2 1m0 0l-2-1m2 1v2.5M20 7l-2 1m2-1l-2-1m2 1v2.5M14 4l-2-1-2 1M4 7l2-1M4 7l2 1M4 7v2.5M12 21l-2-1m2 1l2-1m-2 1v-2.5M6 18l-2-1v-2.5M18 18l2-1v-2.5" />
+                            </svg>
+                        </div>
+                        <h3>Props</h3>
+                        <p>
+                            Get game-ready with our selection of March Madness props! From foam basketballs to
+                            championship nets, team jerseys to oversized bracket boards, we've got all the accessories
+                            to make your guests celebrate like true tournament champions!
+                        </p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z" />
+                            </svg>
+                        </div>
+                        <h3>Custom Layouts</h3>
+                        <p>
+                            Create photo layouts with that authentic tournament atmosphere, featuring team colors,
+                            conference logos, bracket standings, and classic March Madness styling that brings the arena
+                            experience to your event.
+                        </p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                            </svg>
+                        </div>
+                        <h3>Add-Ons</h3>
+                        <p>
+                            Enhance your March Madness experience with additional tournament-focused touches and
+                            basketball-appropriate enhancements including real-time score overlays, animated mascots,
+                            victory confetti effects, and championship trophy graphics.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 5: Reserve Your Activation -->
+    <section class="section-padding" style="background-color: #1F1F1F;">
+        <div class="container mx-auto px-6">
+            <div class="max-w-7xl mx-auto text-center">
+                <h2 style="color: #18F1E1;" class="section-title">Reserve Your Activation</h2>
+                <div class="max-w-4xl mx-auto">
+                    <ul class="feature-list">
+                        <li class="feature-item">
+                            <div class="feature-item-icon"></div>
+                            <div class="feature-item-content">
+                                <p>
+                                    Early reservation guarantees availability and provides adequate lead time for custom
+                                    design development. Our team manages every detail from consultation through
+                                    execution and post-event analytics.
+                                </p>
+                            </div>
+                        </li>
+                        <li class="feature-item">
+                            <div class="feature-item-icon"></div>
+                            <div class="feature-item-content">
+                                <p>
+                                    Whether hosting an intimate bracket party or coordinating multi-city corporate
+                                    experiences, MiHi Entertainment transforms basketball watching into extraordinary
+                                    shareable experiences that generate lasting memories and measurable marketing
+                                    impact. Contact MiHi Entertainment today to design your customized March Madness
+                                    photo and video activation for locations nationwide.
+                                </p>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="mt-12">
+                        <a href="../contact-us.html" class="modern-btn">
+                            Book Your March Madness Activation
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="../assets/components/navigation.js"></script>
+    <script src="../assets/components/footer.js"></script>
+
+    <script>
+        // Carousel functionality
+        const carousels = {};
+
+        function initCarousel(carouselId) {
+            const carousel = document.getElementById(carouselId);
+            const slides = carousel.querySelectorAll('.carousel-slide');
+            const indicatorsContainer = document.getElementById('indicators' + carouselId.replace('carousel', ''));
+
+            carousels[carouselId] = {
+                currentSlide: 0,
+                totalSlides: slides.length,
+                carousel: carousel,
+                slides: slides
+            };
+
+            // Create indicators
+            for (let i = 0; i < slides.length; i++) {
+                const indicator = document.createElement('button');
+                indicator.className = 'carousel-indicator' + (i === 0 ? ' active' : '');
+                indicator.onclick = () => goToSlide(carouselId, i);
+                indicatorsContainer.appendChild(indicator);
+            }
+
+            updateCarousel(carouselId);
+        }
+
+        function updateCarousel(carouselId) {
+            const data = carousels[carouselId];
+            data.carousel.style.transform = `translateX(-${data.currentSlide * 100}%)`;
+
+            const indicators = document.querySelectorAll(`#indicators${carouselId.replace('carousel', '')} .carousel-indicator`);
+            indicators.forEach((indicator, index) => {
+                indicator.classList.toggle('active', index === data.currentSlide);
+            });
+        }
+
+        function nextSlide(carouselId) {
+            const data = carousels[carouselId];
+            data.currentSlide = (data.currentSlide + 1) % data.totalSlides;
+            updateCarousel(carouselId);
+        }
+
+        function prevSlide(carouselId) {
+            const data = carousels[carouselId];
+            data.currentSlide = (data.currentSlide - 1 + data.totalSlides) % data.totalSlides;
+            updateCarousel(carouselId);
+        }
+
+        function goToSlide(carouselId, slideIndex) {
+            const data = carousels[carouselId];
+            data.currentSlide = slideIndex;
+            updateCarousel(carouselId);
+        }
+
+        // Initialize all carousels
+        document.addEventListener('DOMContentLoaded', function () {
+            initCarousel('carousel1');
+
+            // Auto-advance carousels
+            setInterval(() => {
+                Object.keys(carousels).forEach(carouselId => {
+                    nextSlide(carouselId);
+                });
+            }, 5000);
+        });
+    </script>
+    <!-- Load Back to Top Component -->
+    <script src="../assets/components/back-to-top.js"></script>
+</body>
+
+</html>
