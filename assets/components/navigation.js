@@ -424,6 +424,10 @@
                                         <span class="font-semibold block mb-0.5 whitespace-nowrap">Case Studies</span>
                                         <span class="text-xs text-gray-500 leading-relaxed block whitespace-nowrap">Learn how our activations have helped create memorable events</span>
                                     </a>
+                                    <a href="${pathPrefix}teambuilding.html" class="block text-sm text-gray-700 hover:text-blue-600 transition py-1.5 hover:bg-blue-50 rounded-md px-3 -mx-3">
+                                        <span class="font-semibold block mb-0.5 whitespace-nowrap">Our Team</span>
+                                        <span class="text-xs text-gray-500 leading-relaxed block whitespace-nowrap">Meet the passionate professionals behind MiHi Entertainment</span>
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -654,6 +658,7 @@
                                         <a href="${pathPrefix}blog.php" class="block text-sm text-gray-700 hover:text-purple-700 hover:bg-purple-50/50 transition-all rounded-lg py-2.5 px-3 font-medium">Read Our Blogs</a>
                                         <a href="${pathPrefix}our-locations.html" class="block text-sm text-gray-700 hover:text-purple-700 hover:bg-purple-50/50 transition-all rounded-lg py-2.5 px-3 font-medium">Our Locations</a>
                                         <a href="${pathPrefix}case-studies.html" class="block text-sm text-gray-700 hover:text-purple-700 hover:bg-purple-50/50 transition-all rounded-lg py-2.5 px-3 font-medium">Case Studies</a>
+                                        <a href="${pathPrefix}teambuilding.html" class="block text-sm text-gray-700 hover:text-purple-700 hover:bg-purple-50/50 transition-all rounded-lg py-2.5 px-3 font-medium">Our Team</a>
                                     </div>
                                 </div>
                             </div>
