@@ -23,8 +23,8 @@ if ($pageId) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo $pageData ? 'Edit' : 'Add New'; ?> Page - WordPress Style</title>
     
-    <!-- TinyMCE Editor -->
-    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+    <!-- TinyMCE Editor (Free CDN - No API Key Required) -->
+    <script src="https://cdn.jsdelivr.net/npm/tinymce@6/tinymce.min.js" referrerpolicy="origin"></script>
     
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
@@ -431,137 +431,176 @@ if ($pageId) {
         const pageId = <?php echo $pageId ? $pageId : 'null'; ?>;
         const pageData = <?php echo $pageData ? json_encode($pageData) : 'null'; ?>;
         
-        // Initialize TinyMCE (WordPress-style editor)
-        tinymce.init({
-            selector: '#page-content',
-            height: 500,
-            menubar: true,
-            plugins: [
-                'advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 'preview',
-                'anchor', 'searchreplace', 'visualblocks', 'code', 'fullscreen',
-                'insertdatetime', 'media', 'table', 'help', 'wordcount'
-            ],
-            toolbar: 'undo redo | blocks | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | code',
-            content_style: 'body { font-family: Inter, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif; font-size: 16px; line-height: 1.6; }',
-            branding: false
-        });
-        
-        // Auto-generate slug from title
-        document.getElementById('page-title').addEventListener('input', function(e) {
-            if (!pageId) {
-                const slug = e.target.value
-                    .toLowerCase()
-                    .replace(/[^a-z0-9]+/g, '-')
-                    .replace(/^-+|-+$/g, '');
-                document.getElementById('permalink-display').textContent = slug || 'your-page-slug';
-            }
-        });
-        
-        // Edit slug
-        document.getElementById('edit-slug-btn').addEventListener('click', function() {
-            const currentSlug = document.getElementById('permalink-display').textContent;
-            const newSlug = prompt('Enter new slug:', currentSlug);
-            if (newSlug) {
-                document.getElementById('permalink-display').textContent = newSlug;
-            }
-        });
-        
-        // Featured image upload
-        document.getElementById('featured-image-box').addEventListener('click', function() {
-            document.getElementById('featured-image-input').click();
-        });
-        
-        document.getElementById('featured-image-input').addEventListener('change', function(e) {
-            const file = e.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    document.getElementById('featured-image-box').innerHTML = `
-                        <img src="${e.target.result}" alt="Featured image">
-                        <div class="wp-featured-image-text">Change image</div>
-                    `;
-                };
-                reader.readAsDataURL(file);
-            }
-        });
-        
-        // Save function
-        async function savePage(status = 'draft') {
-            const loading = document.getElementById('loading');
-            loading.classList.add('active');
+        // Function to initialize TinyMCE with retry logic
+        function initTinyMCE(retries = 10) {
+            console.log('Attempting to initialize TinyMCE... (attempt ' + (11 - retries) + '/10)');
             
-            try {
-                const title = document.getElementById('page-title').value;
-                const slug = document.getElementById('permalink-display').textContent;
-                const content = tinymce.get('page-content').getContent();
+            if (typeof tinymce !== 'undefined') {
+                console.log('TinyMCE library loaded successfully');
                 
-                if (!title || !slug) {
-                    alert('Title and slug are required!');
-                    loading.classList.remove('active');
-                    return;
-                }
-                
-                const formData = new FormData();
-                formData.append('id', pageId || '');
-                formData.append('title', title);
-                formData.append('slug', slug);
-                formData.append('html_content', content);
-                formData.append('css_content', '');
-                formData.append('components', '');
-                formData.append('styles', '');
-                formData.append('status', status);
-                formData.append('template', document.getElementById('page-template').value);
-                formData.append('meta_description', document.getElementById('meta-description').value);
-                formData.append('meta_keywords', document.getElementById('meta-keywords').value);
-                
-                const response = await fetch('save_page.php', {
-                    method: 'POST',
-                    body: formData
-                });
-                
-                const result = await response.json();
-                
-                if (result.success) {
-                    alert(status === 'published' ? 'Page published successfully!' : 'Draft saved successfully!');
-                    if (!pageId && result.id) {
-                        window.location.href = 'wp-builder.php?id=' + result.id;
+                tinymce.init({
+                    selector: '#page-content',
+                    height: 500,
+                    menubar: true,
+                    plugins: [
+                        'advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 'preview',
+                        'anchor', 'searchreplace', 'visualblocks', 'code', 'fullscreen',
+                        'insertdatetime', 'media', 'table', 'help', 'wordcount'
+                    ],
+                    toolbar: 'undo redo | blocks | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | code',
+                    content_style: 'body { font-family: Inter, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif; font-size: 16px; line-height: 1.6; }',
+                    branding: false,
+                    promotion: false,
+                    setup: function(editor) {
+                        editor.on('init', function() {
+                            console.log('✓ TinyMCE editor initialized successfully!');
+                        });
                     }
-                } else {
-                    alert('Error saving page: ' + result.message);
-                }
-            } catch (error) {
-                console.error('Save error:', error);
-                alert('Error saving page. Check console for details.');
-            } finally {
-                loading.classList.remove('active');
+                }).catch(function(error) {
+                    console.error('TinyMCE initialization error:', error);
+                });
+            } else if (retries > 0) {
+                console.log('TinyMCE not ready yet, retrying in 200ms...');
+                setTimeout(function() {
+                    initTinyMCE(retries - 1);
+                }, 200);
+            } else {
+                console.error('❌ TinyMCE failed to load after multiple attempts. Please check:');
+                console.error('1. Internet connection');
+                console.error('2. CDN availability');
+                console.error('3. Browser console for network errors');
+                alert('TinyMCE editor failed to load. Please refresh the page or check your internet connection.');
             }
         }
         
-        // Button handlers
-        document.getElementById('save-draft-btn').addEventListener('click', () => savePage('draft'));
-        document.getElementById('publish-btn').addEventListener('click', () => savePage('published'));
+        // Wait for DOM to be fully loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM loaded, initializing TinyMCE...');
+            initTinyMCE();
         
-        document.getElementById('preview-btn').addEventListener('click', () => {
-            const content = tinymce.get('page-content').getContent();
-            const previewWindow = window.open('', '_blank');
-            previewWindow.document.write(`
-                <!DOCTYPE html>
-                <html lang="en">
-                <head>
-                    <meta charset="UTF-8">
-                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                    <title>Preview</title>
-                    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-                    <style>
-                        body { font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; padding: 40px; max-width: 1200px; margin: 0 auto; }
-                    </style>
-                </head>
-                <body>
-                    ${content}
-                </body>
-                </html>
-            `);
-            previewWindow.document.close();
+            // Auto-generate slug from title
+            document.getElementById('page-title').addEventListener('input', function(e) {
+                if (!pageId) {
+                    const slug = e.target.value
+                        .toLowerCase()
+                        .replace(/[^a-z0-9]+/g, '-')
+                        .replace(/^-+|-+$/g, '');
+                    document.getElementById('permalink-display').textContent = slug || 'your-page-slug';
+                }
+            });
+            
+            // Edit slug
+            document.getElementById('edit-slug-btn').addEventListener('click', function() {
+                const currentSlug = document.getElementById('permalink-display').textContent;
+                const newSlug = prompt('Enter new slug:', currentSlug);
+                if (newSlug) {
+                    document.getElementById('permalink-display').textContent = newSlug;
+                }
+            });
+            
+            // Featured image upload
+            document.getElementById('featured-image-box').addEventListener('click', function() {
+                document.getElementById('featured-image-input').click();
+            });
+            
+            document.getElementById('featured-image-input').addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        document.getElementById('featured-image-box').innerHTML = `
+                            <img src="${e.target.result}" alt="Featured image">
+                            <div class="wp-featured-image-text">Change image</div>
+                        `;
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+            
+            // Save function
+            async function savePage(status = 'draft') {
+                const loading = document.getElementById('loading');
+                loading.classList.add('active');
+                
+                try {
+                    const title = document.getElementById('page-title').value;
+                    const slug = document.getElementById('permalink-display').textContent;
+                    const content = tinymce.get('page-content').getContent();
+                    
+                    if (!title || !slug) {
+                        alert('Title and slug are required!');
+                        loading.classList.remove('active');
+                        return;
+                    }
+                    
+                    const formData = new FormData();
+                    formData.append('id', pageId || '');
+                    formData.append('title', title);
+                    formData.append('slug', slug);
+                    formData.append('html_content', content);
+                    formData.append('css_content', '');
+                    formData.append('components', '');
+                    formData.append('styles', '');
+                    formData.append('status', status);
+                    formData.append('template', document.getElementById('page-template').value);
+                    formData.append('meta_description', document.getElementById('meta-description').value);
+                    formData.append('meta_keywords', document.getElementById('meta-keywords').value);
+                    
+                    const response = await fetch('save_page.php', {
+                        method: 'POST',
+                        body: formData
+                    });
+                    
+                    const result = await response.json();
+                    
+                    if (result.success) {
+                        alert(status === 'published' ? 'Page published successfully!' : 'Draft saved successfully!');
+                        if (!pageId && result.id) {
+                            window.location.href = 'wp-builder.php?id=' + result.id;
+                        }
+                    } else {
+                        alert('Error saving page: ' + result.message);
+                    }
+                } catch (error) {
+                    console.error('Save error:', error);
+                    alert('Error saving page. Check console for details.');
+                } finally {
+                    loading.classList.remove('active');
+                }
+            }
+            
+            // Button handlers
+            document.getElementById('save-draft-btn').addEventListener('click', () => savePage('draft'));
+            document.getElementById('publish-btn').addEventListener('click', () => savePage('published'));
+            
+            document.getElementById('preview-btn').addEventListener('click', () => {
+                const content = tinymce.get('page-content').getContent();
+                const previewWindow = window.open('', '_blank');
+                
+                const html = '<!DOCTYPE html>' +
+                    '<html lang="en">' +
+                    '<head>' +
+                    '<meta charset="UTF-8">' +
+                    '<meta name="viewport" content="width=device-width, initial-scale=1.0">' +
+                    '<title>Preview</title>' +
+                    '<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">' +
+                    '<style>' +
+                    'body { font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; margin: 0; padding: 0; }' +
+                    'main { padding: 40px; max-width: 1200px; margin: 0 auto; }' +
+                    '</style>' +
+                    '</head>' +
+                    '<body>' +
+                    '<main>' +
+                    content +
+                    '</main>' +
+                    '<script src="../assets/components/navigation.js"><\/script>' +
+                    '<script src="../assets/components/footer.js"><\/script>' +
+                    '</body>' +
+                    '</html>';
+                
+                previewWindow.document.write(html);
+                previewWindow.document.close();
+            });
         });
     </script>
 </body>

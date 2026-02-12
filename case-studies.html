@@ -4,9 +4,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Case Studies - MiHi Entertainment</title>
+    <title>Case Studies - MiHi Entertainment | Event Marketing Success Stories</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description"
+        content="Explore MiHi Entertainment's portfolio of successful experiential marketing campaigns. From Disney's Haunted Mansion at Essence Fest to Pure Storage and DHL activations, see how we create unforgettable brand experiences.">
+    <meta name="keywords"
+        content="case studies, experiential marketing, event marketing, brand activations, MiHi Entertainment, Disney Haunted Mansion, Pure Storage events, DHL marketing, event production, marketing summit">
+    <meta name="author" content="MiHi Entertainment">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="English">
+    <meta name="revisit-after" content="7 days">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://mihientertainment.com/case-studies.html">
+    <meta property="og:title" content="Case Studies - MiHi Entertainment | Event Marketing Success Stories">
+    <meta property="og:description"
+        content="Explore our portfolio of successful experiential marketing campaigns including Disney's Haunted Mansion, Pure Storage, and DHL brand activations.">
+    <meta property="og:image" content="https://mihientertainment.com/assets/images/about/casestudies/img1.jpg">
+    <meta property="og:site_name" content="MiHi Entertainment">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://mihientertainment.com/case-studies.html">
+    <meta name="twitter:title" content="Case Studies - MiHi Entertainment | Event Marketing Success Stories">
+    <meta name="twitter:description"
+        content="Explore our portfolio of successful experiential marketing campaigns including Disney's Haunted Mansion, Pure Storage, and DHL brand activations.">
+    <meta name="twitter:image" content="https://mihientertainment.com/assets/images/about/casestudies/img1.jpg">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://mihientertainment.com/case-studies.html">
+
     <link rel="icon" type="image/svg+xml" href="../assets/images/favicon.svg">
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        // Suppress Tailwind CDN production warning
+        tailwind.config = { corePlugins: { preflight: true } };
+    </script>
     <link
         href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Lora:wght@400;500;600;700&family=Open+Sans:wght@400;500;600;700;800;900&family=Heebo:wght@100;400;500;600;700;800;900&display=swap"
         rel="stylesheet">
@@ -594,7 +629,284 @@
         .slider__slide[data-slide="1"].slider__slide--active~.slider__indicators .slider__indicator[data-slide="1"] {
             background: rgba(255, 255, 255, 0.9);
         }
+
+        /* Navigation Arrows */
+        .slider__arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 10;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        .slider__arrow:hover {
+            background: rgba(255, 255, 255, 0.3);
+            border-color: rgba(255, 255, 255, 0.8);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .slider__arrow:active {
+            transform: translateY(-50%) scale(0.95);
+        }
+
+        .slider__arrow--prev {
+            left: 20px;
+        }
+
+        .slider__arrow--next {
+            right: 20px;
+        }
+
+        .slider__arrow svg {
+            width: 24px;
+            height: 24px;
+            fill: none;
+            stroke: white;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        /* Mobile Optimizations */
+        @media (max-width: 768px) {
+            .slider {
+                height: 80vh;
+            }
+
+            .slider__slide {
+                height: 80vh;
+            }
+
+            .slider__wrap {
+                height: 80vh;
+            }
+
+            .slider__content h1 {
+                font-size: calc(var(--base) * 3);
+                line-height: 1.1;
+            }
+
+            .slider__arrow {
+                width: 40px;
+                height: 40px;
+            }
+
+            .slider__arrow--prev {
+                left: 10px;
+            }
+
+            .slider__arrow--next {
+                right: 10px;
+            }
+
+            .slider__arrow svg {
+                width: 20px;
+                height: 20px;
+            }
+
+            .slider__indicators {
+                bottom: calc(var(--base) * 1.5);
+            }
+
+
+            .slider__indicator {
+                width: calc(var(--base) * 0.6);
+                height: calc(var(--base) * 0.6);
+            }
+
+            /* Fix content alignment on mobile */
+            .slider__inner {
+                padding: calc(var(--base) * 2) calc(var(--base) * 1.5);
+            }
+
+            .slider__content {
+                width: 100%;
+                max-width: 100%;
+                padding: 0 calc(var(--base) * 0.5);
+                align-items: center;
+                text-align: center;
+            }
+
+            .slider__content h1 {
+                width: 100%;
+                word-wrap: break-word;
+                overflow-wrap: break-word;
+                hyphens: auto;
+            }
+
+            /* Make button text smaller on mobile */
+            .slider__content .button-wrap button span,
+            .slider__content .button-wrap a.go-to-next span {
+                font-size: calc(var(--base) * 0.7);
+                padding-inline: 1.5em;
+                padding-block: 0.8em;
+            }
+
+            .slider__content .button-wrap {
+                margin-top: calc(var(--base) * 0.5);
+            }
+        }
+
+        /* Touch device optimizations */
+        @media (hover: none) and (pointer: coarse) {
+            .slider__arrow {
+                width: 45px;
+                height: 45px;
+                background: rgba(255, 255, 255, 0.25);
+            }
+
+            .slider__arrow:active {
+                background: rgba(255, 255, 255, 0.4);
+            }
+        }
+
+        /* Extra small mobile devices */
+        @media (max-width: 480px) {
+            .slider__content h1 {
+                font-size: calc(var(--base) * 2.2);
+                line-height: 1;
+            }
+
+            .slider__arrow {
+                width: 35px;
+                height: 35px;
+            }
+
+            .slider__arrow--prev {
+                left: 5px;
+            }
+
+            .slider__arrow--next {
+                right: 5px;
+            }
+
+            .slider__arrow svg {
+                width: 18px;
+                height: 18px;
+            }
+
+            .slider__inner {
+                padding: calc(var(--base) * 1.5) calc(var(--base) * 1);
+            }
+
+            .slider__content {
+                padding: 0 calc(var(--base) * 0.3);
+            }
+
+            .slider__content .button-wrap button span,
+            .slider__content .button-wrap a.go-to-next span {
+                font-size: calc(var(--base) * 0.6);
+                padding-inline: 1.2em;
+                padding-block: 0.7em;
+            }
+        }
     </style>
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "CollectionPage",
+        "name": "Case Studies - MiHi Entertainment",
+        "description": "Explore MiHi Entertainment's portfolio of successful experiential marketing campaigns and brand activations.",
+        "url": "https://mihientertainment.com/case-studies.html",
+        "publisher": {
+            "@type": "Organization",
+            "name": "MiHi Entertainment",
+            "url": "https://mihientertainment.com",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://mihientertainment.com/assets/images/logo.svg"
+            },
+            "sameAs": [
+                "https://www.facebook.com/mihientertainment",
+                "https://www.instagram.com/mihientertainment",
+                "https://www.linkedin.com/company/mihi-entertainment"
+            ]
+        },
+        "breadcrumb": {
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "Home",
+                    "item": "https://mihientertainment.com"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "Case Studies",
+                    "item": "https://mihientertainment.com/case-studies.html"
+                }
+            ]
+        },
+        "mainEntity": {
+            "@type": "ItemList",
+            "itemListElement": [
+                {
+                    "@type": "CreativeWork",
+                    "position": 1,
+                    "name": "Haunted Mansion at Essence Fest",
+                    "description": "Disney's Haunted Mansion experiential marketing activation at Essence Festival",
+                    "url": "https://mihientertainment.com/haunted-mansion-at-essence-fest.html",
+                    "image": "https://mihientertainment.com/assets/images/about/casestudies/img1.jpg",
+                    "creator": {
+                        "@type": "Organization",
+                        "name": "MiHi Entertainment"
+                    }
+                },
+                {
+                    "@type": "CreativeWork",
+                    "position": 2,
+                    "name": "Pure Storage",
+                    "description": "Pure Storage brand activation and event marketing campaign",
+                    "url": "https://mihientertainment.com/pure-storage.html",
+                    "image": "https://mihientertainment.com/assets/images/about/casestudies/img2.jpg",
+                    "creator": {
+                        "@type": "Organization",
+                        "name": "MiHi Entertainment"
+                    }
+                },
+                {
+                    "@type": "CreativeWork",
+                    "position": 3,
+                    "name": "DHL",
+                    "description": "DHL experiential marketing and brand activation campaign",
+                    "url": "https://mihientertainment.com/dhl.html",
+                    "image": "https://mihientertainment.com/assets/images/about/casestudies/img3.jpg",
+                    "creator": {
+                        "@type": "Organization",
+                        "name": "MiHi Entertainment"
+                    }
+                },
+                {
+                    "@type": "CreativeWork",
+                    "position": 4,
+                    "name": "Experiential Marketing Summit",
+                    "description": "Experiential Marketing Summit event production and activation",
+                    "url": "https://mihientertainment.com/experiential-marketing-summit.html",
+                    "image": "https://mihientertainment.com/assets/images/about/casestudies/img4.jpg",
+                    "creator": {
+                        "@type": "Organization",
+                        "name": "MiHi Entertainment"
+                    }
+                }
+            ]
+        }
+    }
+    </script>
 </head>
 
 <body>
@@ -606,8 +918,6 @@
             style="background-image: url('assets/images/about/casestudies/hero.jpg');"></div>
         <div class="absolute inset-0 bg-black/60"></div>
         <div class="relative z-10 text-center text-white px-6 max-w-5xl mx-auto py-20 pt-32 md:pt-40">
-            <p class="text-sm md:text-base uppercase tracking-[0.2em] font-light mb-4 opacity-90 inline-block px-6 py-2 rounded-full"
-                style="font-family: 'AzoSans', sans-serif; background-color: #FF4F4F;">VIEW OUR</p>
             <h1 class="text-6xl md:text-8xl lg:text-8xl font-light mb-6 md:mb-8 leading-tight"
                 style="font-family: 'AzoSansUber', sans-serif; text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5), 0 0 20px rgba(0, 0, 0, 0.3);">
                 <span style="color: #FF4F4F;">CASE</span> <span style="color: #18F1E1;">STUDIES</span>
@@ -617,21 +927,36 @@
                 Explore our case studies to see how MiHi Entertainment brings events to life with innovative photo booth
                 experiences and creative solutions.
             </p>
-            <p class="text-base md:text-lg mb-8 md:mb-10 opacity-90 inline-block px-6 py-2 rounded-full"
-                style="font-family: 'AzoSans', sans-serif; background-color: #18F1E1; color: #1F1F1F;">
-                Click on a Case Study below to learn more about it!
-            </p>
-            <br>
-            <a href="../index.html#contact"
-                class="inline-block bg-[#FF4F4F] hover:bg-[#FF4F4F] text-[#FFFFFF] font-semibold uppercase tracking-wide px-8 md:px-12 py-4 md:py-5 rounded-lg text-base md:text-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
-                style="font-family: 'AzoSans', sans-serif;">
-                CONTACT US
-            </a>
+            <!-- CTA Buttons -->
+            <div
+                class="flex flex-col sm:flex-row gap-3 sm:gap-4 md:gap-6 justify-center items-center px-2 sm:px-4 w-full max-w-md sm:max-w-none mx-auto">
+                <a href="../contact-us.html"
+                    class="group relative inline-flex items-center justify-center gap-2 sm:gap-3 text-white px-5 sm:px-8 md:px-10 py-3 sm:py-4 md:py-5 rounded-full text-sm sm:text-base md:text-lg font-medium shadow-2xl hover:shadow-[#FF4F4F]/50 transition-all duration-500 transform hover:scale-105 sm:hover:scale-110 hover:-translate-y-1 overflow-hidden w-full sm:w-auto min-w-[140px] sm:min-w-0 touch-manipulation"
+                    style="background: rgb(255, 79, 79);">
+                    <span class="relative z-10">Get Your Quote</span>
+                </a>
+                <button type="button" data-click-to-call="" data-call-text="Call Us"
+                    class="group inline-flex items-center justify-center gap-2 sm:gap-3 px-5 sm:px-8 md:px-10 py-3 sm:py-4 md:py-5 rounded-full text-sm sm:text-base md:text-lg font-medium backdrop-blur-md bg-white/10 border-2 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:scale-105 sm:hover:scale-110 hover:-translate-y-1 text-white w-full sm:w-auto min-w-[140px] sm:min-w-0 cursor-pointer touch-manipulation"
+                    style="border-color: rgba(24, 241, 225, 0.5); background: rgba(255, 255, 255, 0.1);"
+                    onmouseover="this.style.borderColor='rgba(24, 241, 225, 0.7)'; this.style.background='rgba(24, 241, 225, 0.2)';"
+                    onmouseout="this.style.borderColor='rgba(24, 241, 225, 0.5)'; this.style.background='rgba(255, 255, 255, 0.1)';"
+                    ontouchstart="this.style.borderColor='rgba(24, 241, 225, 0.7)'; this.style.background='rgba(24, 241, 225, 0.2)';"
+                    ontouchend="this.style.borderColor='rgba(24, 241, 225, 0.5)'; this.style.background='rgba(255, 255, 255, 0.1)';">
+                    <svg class="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0" fill="none" stroke="currentColor"
+                        viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498A1 1 0 0121 17.72V21a2 2 0 01-2 2h-1C9.716 23 3 16.284 3 8V7a2 2 0 012-2z">
+                        </path>
+                    </svg>
+                    <span>Call Us</span>
+                </button>
+            </div>
+
         </div>
     </section>
 
     <!-- Image Slider Section -->
-    <section class="slider">
+    <section class="slider" aria-label="Case Studies Carousel" role="region">
         <div class="slider__slide slider__slide--active" data-slide="1">
             <div class="slider__wrap">
                 <div class="slider__back"></div>
@@ -711,11 +1036,26 @@
                 </div>
             </div>
         </div>
+
+        <!-- Navigation Arrows -->
+        <div class="slider__arrow slider__arrow--prev" id="slider-prev" role="button" aria-label="Previous case study"
+            tabindex="0">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+                <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+        </div>
+        <div class="slider__arrow slider__arrow--next" id="slider-next" role="button" aria-label="Next case study"
+            tabindex="0">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+                <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+        </div>
+
         <div class="slider__indicators"></div>
     </section>
 
-    <script src="../assets/components/navigation.js"></script>
-    <script src="../assets/components/footer.js"></script>
+    <script src="assets/components/navigation.js"></script>
+    <script src="assets/components/footer.js"></script>
     <script>
         // Image Slider JavaScript
         document.addEventListener('DOMContentLoaded', function () {
@@ -778,6 +1118,24 @@
                 }
             }
 
+            // Previous slide function
+            function goToPrev() {
+                const activeSlide = document.querySelector('.slider__slide--active');
+                if (activeSlide) {
+                    const currentSlide = Number(activeSlide.getAttribute('data-slide'));
+                    const totalSlides = slides.length;
+                    let prevSlide = currentSlide - 1;
+                    if (prevSlide < 1) {
+                        prevSlide = totalSlides;
+                    }
+                    goToSlide(prevSlide);
+                }
+            }
+
+            // Arrow navigation event listeners (will be set up after auto-play functions are defined)
+            const prevArrow = document.getElementById('slider-prev');
+            const nextArrow = document.getElementById('slider-next');
+
             // Add click event to next buttons
             // Only prevent default for buttons, allow anchor tags to navigate
             const nextButtons = document.querySelectorAll('.go-to-next, .slider__next');
@@ -797,6 +1155,28 @@
             if (firstIndicator) {
                 firstIndicator.style.background = 'rgba(255, 255, 255, 0.9)';
             }
+
+            // Auto-play carousel - always runs every 5 seconds
+            let autoPlayInterval;
+
+            function startAutoPlay() {
+                // Clear any existing interval first to prevent multiple intervals
+                if (autoPlayInterval) {
+                    clearInterval(autoPlayInterval);
+                }
+
+                autoPlayInterval = setInterval(function () {
+                    goToNext();
+                }, 5000); // Change slide every 5 seconds
+
+                console.log('Auto-play started - slides every 5 seconds');
+            }
+
+            // Start auto-play immediately
+            startAutoPlay();
+
+            // Note: Arrow and indicator clicks still work, but don't pause auto-play
+            // The carousel will continue to auto-advance every 5 seconds
         });
     </script>
     <!-- Load Back to Top Component -->

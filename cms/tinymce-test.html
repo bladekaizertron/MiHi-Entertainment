@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TinyMCE Test</title>
+    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+</head>
+
+<body>
+    <h1>TinyMCE Test Page</h1>
+    <p>If TinyMCE loads correctly, you should see a rich text editor below:</p>
+
+    <textarea id="test-editor">Hello World! This is a test.</textarea>
+
+    <script>
+        console.log('Page loaded');
+        console.log('TinyMCE available?', typeof tinymce !== 'undefined');
+
+        function initEditor(retries = 10) {
+            console.log('Init attempt', 11 - retries);
+
+            if (typeof tinymce !== 'undefined') {
+                console.log('TinyMCE found! Initializing...');
+                tinymce.init({
+                    selector: '#test-editor',
+                    height: 300,
+                    menubar: true,
+                    plugins: ['advlist', 'autolink', 'lists', 'link', 'image', 'code'],
+                    toolbar: 'undo redo | bold italic | code',
+                    setup: function (editor) {
+                        editor.on('init', function () {
+                            console.log('✓ Editor initialized!');
+                        });
+                    }
+                });
+            } else if (retries > 0) {
+                console.log('Waiting for TinyMCE...');
+                setTimeout(() => initEditor(retries - 1), 200);
+            } else {
+                console.error('TinyMCE failed to load');
+                alert('TinyMCE failed to load. Check console.');
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            console.log('DOM ready');
+            initEditor();
+        });
+    </script>
+</body>
+
+</html>
