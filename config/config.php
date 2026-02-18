@@ -12,7 +12,7 @@ if (session_status() === PHP_SESSION_NONE) {
 require_once __DIR__ . '/database.php';
 
 // Site configuration
-define('SITE_URL', 'http://localhost/cms');
+define('SITE_URL', '/cms');
 define('ADMIN_URL', SITE_URL . '/admin');
 define('UPLOAD_DIR', __DIR__ . '/../uploads/');
 define('UPLOAD_URL', SITE_URL . '/uploads/');
@@ -37,15 +37,20 @@ function requireLogin() {
         $callingFile = $backtrace[0]['file'] ?? __FILE__;
         $callingDir = realpath(dirname($callingFile));
         $adminDir = realpath(__DIR__ . '/../admin');
+        $cmsDir = realpath(__DIR__ . '/../cms');
         
-        // Check if calling file is in admin directory
+        // Check if calling file is in admin or cms directory
         $isInAdmin = ($callingDir === $adminDir || strpos($callingDir, $adminDir . DIRECTORY_SEPARATOR) === 0);
+        $isInCms = ($callingDir === $cmsDir || strpos($callingDir, $cmsDir . DIRECTORY_SEPARATOR) === 0);
         
         if ($isInAdmin) {
             // Already in admin folder, use relative path
             $redirectPath = 'login.php';
+        } elseif ($isInCms) {
+            // Already in cms folder, use relative path
+            $redirectPath = 'login.php';
         } else {
-            // Not in admin folder, use absolute URL or calculate relative path
+            // Not in admin or cms folder, use absolute URL
             // Use the ADMIN_URL constant for absolute URL (more reliable)
             $redirectPath = ADMIN_URL . '/login.php';
         }

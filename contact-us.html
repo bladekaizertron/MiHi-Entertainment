@@ -288,6 +288,7 @@
                         footer * {
                             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif !important;
                         }
+
                         /* Honeypot field - completely hidden */
                         #website_url {
                             position: absolute !important;
@@ -307,8 +308,9 @@
                         <!-- Form Header -->
                         <div class="mb-8 text-center">
                             <h2 class="text-3xl md:text-4xl font-black text-gray-900 mb-2"
-                                style="font-weight: 400; font-family: 'Azo Sans Uber', sans-serif; text-transform: uppercase; letter-spacing: 0.02em;"><span
-                                    style="color: #FF4F4F;">GET A</span> <span style="color: #FF4F4F;">QUOTE</span></h2>
+                                style="font-weight: 400; font-family: 'Azo Sans Uber', sans-serif; text-transform: uppercase; letter-spacing: 0.02em;">
+                                <span style="color: #FF4F4F;">GET A</span> <span style="color: #FF4F4F;">QUOTE</span>
+                            </h2>
                             <p class="text-lg text-gray-600"
                                 style="font-family: 'Azo Sans', sans-serif; color: #1F1F1F;">Tell us about your event by
                                 filling out the form below, and
@@ -378,8 +380,8 @@
                                     <option value="2022">2022</option>
                                     <option value="2023">2023</option>
                                     <option value="2024">2024</option>
-                                    <option value="2025" selected>2025</option>
-                                    <option value="2026">2026</option>
+                                    <option value="2025">2025</option>
+                                    <option value="2026" selected>2026</option>
                                     <option value="2027">2027</option>
                                     <option value="2028">2028</option>
                                     <option value="2029">2029</option>
@@ -481,7 +483,7 @@
                             </select>
                         </div>
 
-               
+
 
                         <!-- Venue Name -->
                         <div class="mb-6">
@@ -504,7 +506,7 @@
                                 class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900 bg-white"
                                 required>
                         </div>
-                      <!-- Ideal Budget -->
+                        <!-- Ideal Budget -->
                         <div class="mb-6">
                             <input type="hidden" name="q7_mapto" value="custom_memo_field_2">
                             <label for="question_7" class="block text-sm font-semibold text-gray-700 mb-2">
@@ -584,7 +586,7 @@
                             </div>
                         </div>
 
-               
+
                         <!-- How did you hear about us? -->
                         <div class="mb-6">
                             <label for="req_source" class="block text-sm font-semibold text-gray-700 mb-2">
@@ -594,6 +596,7 @@
                                 class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900 bg-white">
                                 <option value="">Please select...</option>
                                 <option value="Google Search">Google Search</option>
+                                <option value="Google Ads">Google Ads</option>
                                 <option value="Facebook">Facebook</option>
                                 <option value="Instagram">Instagram</option>
                                 <option value="LinkedIn">LinkedIn</option>
@@ -601,7 +604,6 @@
                                 <option value="Previous Customer">Previous Customer</option>
                                 <option value="Website">Website</option>
                                 <option value="Event / Tradeshow">Event / Tradeshow</option>
-                                <option value="Advertisement">Advertisement</option>
                                 <option value="Yelp">Yelp</option>
                                 <option value="Wedding Wire / The Knot">Wedding Wire / The Knot</option>
                                 <option value="Other">Other</option>
@@ -635,7 +637,8 @@
 
                         <!-- Anti-Spam Protection -->
                         <!-- Honeypot field - hidden from users but visible to bots -->
-                        <div style="position: absolute; left: -9999px; opacity: 0; pointer-events: none;" aria-hidden="true">
+                        <div style="position: absolute; left: -9999px; opacity: 0; pointer-events: none;"
+                            aria-hidden="true">
                             <label for="website_url">Please leave this field blank</label>
                             <input type="text" id="website_url" name="website_url" tabindex="-1" autocomplete="off">
                         </div>
@@ -663,7 +666,7 @@
         <!-- Anti-Spam Script -->
         <script>
             // Set form timestamp when page loads
-            document.addEventListener('DOMContentLoaded', function() {
+            document.addEventListener('DOMContentLoaded', function () {
                 const form = document.getElementById('contactForm');
                 if (form) {
                     const timestampField = document.getElementById('form_timestamp');
@@ -689,7 +692,7 @@
                     const submitTime = Date.now();
                     const formLoadTime = parseInt(timestampField.value);
                     const timeDiff = (submitTime - formLoadTime) / 1000; // in seconds
-                    
+
                     if (timeDiff < 3) {
                         console.warn('Spam detected: Form submitted too quickly');
                         alert('Please take your time filling out the form.');
@@ -701,7 +704,7 @@
                 if (typeof submitIt === 'function') {
                     return submitIt(form);
                 }
-                
+
                 // If submitIt doesn't exist, allow normal submission
                 return true;
             }
