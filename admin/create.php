@@ -1,11 +1,4 @@
 <?php
-// Increase PHP limits for large content (works on GoDaddy and XAMPP)
-@ini_set('post_max_size', '1024M');
-@ini_set('upload_max_filesize', '1024M');
-@ini_set('max_execution_time', '600');
-@ini_set('max_input_time', '600');
-@ini_set('memory_limit', '1024M');
-
 require_once __DIR__ . '/../config/config.php';
 requireLogin();
 
@@ -49,6 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
     $status = $_POST['status'] ?? 'draft';
     $published_at = ($status === 'published' && !empty($_POST['published_at'])) ? $_POST['published_at'] : null;
+    $google_form_embed = trim($_POST['google_form_embed'] ?? '');
     
     // SEO fields
     $meta_title = trim($_POST['meta_title'] ?? '');
@@ -68,9 +62,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $errors[] = 'Content is required';
     }
     
-    // Check content size (warn if very large - over 500MB)
+    // Check content size (warn if very large - over 200MB)
     $contentSize = strlen($content);
-    $maxRecommendedSize = 500 * 1024 * 1024; // 500MB
+    $maxRecommendedSize = 200 * 1024 * 1024; // 200MB
     if ($contentSize > $maxRecommendedSize) {
         $sizeMB = round($contentSize / 1048576, 2);
         $errors[] = 'Content is very large (' . $sizeMB . ' MB). Please reduce the content size, especially images embedded in the editor. Consider using external image URLs instead of embedding images directly.';
@@ -148,7 +142,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $pageGenerationError = null;
             if ($status === 'published') {
             require_once __DIR__ . '/../includes/generate_post_page.php';
-            $pageGenerated = generatePostPage($post_id);
+            $pageGenerated = generatePostPage($post_id, $google_form_embed);
                 if (!$pageGenerated) {
                 // Error generating page for published post
                     $pageGenerationError = "Post created successfully, but failed to generate HTML page. ";
@@ -330,7 +324,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <input type="file" id="thumbnail_upload" accept="image/*" style="display: none;">
                     <button type="button" id="upload_thumbnail_btn" class="btn btn-secondary" style="white-space: nowrap;">Upload Image</button>
                 </div>
-                <small>Enter image URL or click "Upload Image" to upload directly (max 100MB). <strong>Note:</strong> Images are automatically resized and optimized to reduce file size.</small>
+                <small>Enter image URL or click "Upload Image" to upload directly. <strong>Note:</strong> Images are automatically resized and optimized to reduce file size.</small>
                 <div id="thumbnail_preview" style="margin-top: 10px;">
                     <?php if (!empty($_POST['featured_image'])): ?>
                         <img src="<?php echo escape($_POST['featured_image']); ?>" alt="Thumbnail preview" style="max-width: 300px; height: auto; border-radius: 8px; border: 2px solid #e2e8f0;">
@@ -341,6 +335,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="form-group">
                 <label for="content">Content *</label>
                 <textarea id="content" name="content"><?php echo isset($_POST['content']) ? htmlspecialchars($_POST['content'], ENT_QUOTES, 'UTF-8') : ''; ?></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label for="google_form_embed">Google Form Embed</label>
+                <textarea id="google_form_embed" name="google_form_embed" rows="3" placeholder="Paste the full &lt;iframe&gt; embed code from Google Forms, or just the form URL"><?php echo escape($_POST['google_form_embed'] ?? ''); ?></textarea>
+                <small>In Google Forms: click <strong>Send &rarr; &lt;&gt; Embed</strong>, then copy and paste the entire <code>&lt;iframe&gt;</code> code here. The form will appear at the bottom of the published blog post. Leave empty to omit.</small>
             </div>
             
             <div class="form-group">
@@ -569,9 +569,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 return;
             }
             
-            // Validate file size (100MB)
-            if (file.size > 100 * 1024 * 1024) {
-                alert('File is too large. Maximum size is 100MB.');
+            // Validate file size (5MB)
+            if (file.size > 5 * 1024 * 1024) {
+                alert('File is too large. Maximum size is 5MB.');
                 return;
             }
             
@@ -652,30 +652,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 // Focus the editor
                 tinymce.get('content').focus();
                 return false;
-            }
-            
-            // Check content size and warn if too large
-            const contentSize = new Blob([content]).size;
-            const sizeMB = (contentSize / 1048576).toFixed(2);
-            
-            // Warn if content is over 100MB
-            if (contentSize > 100 * 1024 * 1024) {
-                const proceed = confirm(
-                    `⚠️ WARNING: Your content is very large (${sizeMB} MB).\n\n` +
-                    `This may cause issues when saving. Consider:\n` +
-                    `• Using external image URLs instead of embedding images\n` +
-                    `• Compressing images before uploading\n` +
-                    `• Splitting content into multiple posts\n\n` +
-                    `Do you want to continue anyway?`
-                );
-                
-                if (!proceed) {
-                    return false;
-                }
-            }
-            // Info message if content is moderately large (50-100MB)
-            else if (contentSize > 50 * 1024 * 1024) {
-                console.warn(`Content size: ${sizeMB} MB - Consider optimizing images if submission fails.`);
             }
             
             return true;
