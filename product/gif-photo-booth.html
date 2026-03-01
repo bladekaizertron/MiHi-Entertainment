@@ -374,7 +374,7 @@
 
         /* CTA Section */
         .cta-section {
-            background-image: url('../../assets/images/photo-activations/photo-activations-boomerang.gif');
+            background-image: url('../../assets/images/gif/boomerang-2.gif');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -425,6 +425,54 @@
         .spec-value {
             color: #1f1f1f;
             font-size: 1rem;
+        }
+
+        /* Enhanced Gallery with Better Spacing */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        @media (min-width: 640px) {
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 2rem;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .gallery-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 2rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .gallery-grid {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 2rem;
+            }
+        }
+
+        /* Better Gallery Image Styling */
+        .gallery-item-container {
+            aspect-ratio: 1;
+            min-height: 200px;
+            overflow: hidden;
+            border-radius: 1rem;
+            position: relative;
+        }
+
+        .gallery-item-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-item-container:hover img {
+            transform: scale(1.1);
         }
     </style>
 </head>
@@ -508,7 +556,7 @@
                             </p>
                         </div>
                         <div class="relative rounded-2xl overflow-hidden shadow-xl">
-                            <img src="../../assets/images/photo-activations/photo-activations-boomerang.gif"
+                            <img src="../../assets/images/gif/boomerang-1.gif"
                                 alt="GIF Photo Booth creating animated Boomerang photos" width="600" height="400"
                                 class="w-full h-full object-cover" loading="lazy">
                         </div>
@@ -991,8 +1039,49 @@
             </div>
         </section>
 
+        <!-- Gallery Grid Section -->
+        <section id="gallery" class="pt-16 pb-0 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="max-w-7xl mx-auto">
+                    <div class="text-center mb-16">
+                        <h2 class="text-3xl sm:text-4xl md:text-5xl text-center mb-6">
+                            GIF/BOOMERANGS <span style="color: #18F1E1;">GALLERY</span>
+                        </h2>
+                    </div>
+
+                    <div class="gallery-grid" id="gallery-grid-container">
+                        <!-- CMS editable gallery items -->
+                        <div class="gallery-item-container">
+                            <img src="../../assets/video/gifs/gif-gallery1.gif" alt="GIF/Boomerang Sample 1">
+                        </div>
+                        <div class="gallery-item-container">
+                            <img src="../../assets/video/gifs/gif-gallery2.gif" alt="GIF/Boomerang Sample 2">
+                        </div>
+                        <div class="gallery-item-container">
+                            <img src="../../assets/video/gifs/gif-gallery3.gif" alt="GIF/Boomerang Sample 3">
+                        </div>
+                        <div class="gallery-item-container">
+                            <img src="../../assets/video/gifs/gif-gallery4.gif" alt="GIF/Boomerang Sample 4">
+                        </div>
+                        <div class="gallery-item-container">
+                            <img src="../../assets/video/gifs/gif-gallery5.gif" alt="GIF/Boomerang Sample 5">
+                        </div>
+                        <div class="gallery-item-container">
+                            <img src="../../assets/video/gifs/gif-gallery6.gif" alt="GIF/Boomerang Sample 6">
+                        </div>
+                        <div class="gallery-item-container">
+                            <img src="../../assets/video/gifs/gif-gallery7.gif" alt="GIF/Boomerang Sample 7">
+                        </div>
+                        <div class="gallery-item-container">
+                            <img src="../../assets/video/gifs/gif-gallery8.gif" alt="GIF/Boomerang Sample 8">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- Technical Specifications Section -->
-        <section class="section-padding bg-white">
+        <section class="pt-8 pb-16 bg-white">
             <div class="container mx-auto px-4 sm:px-6">
                 <div class="max-w-6xl mx-auto">
                     <div class="text-center mb-12">
