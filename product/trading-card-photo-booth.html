@@ -7,39 +7,79 @@
     <title>Trading Card Photo Booth Rental - MiHi Entertainment</title>
     <link rel="icon" type="image/svg+xml" href="../assets/images/favicon.svg">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap"
-        rel="stylesheet">
+    <!-- Brand Guide Typography: Azo Sans -->
+    <link rel="dns-prefetch" href="https://cdn.tailwindcss.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
     <style>
+        /* Azo Sans Font Face Declarations */
+        @font-face {
+            font-family: 'Azo Sans';
+            src: url('../assets/fonts/AzoSans-Regular.woff2') format('woff2'),
+                url('../assets/fonts/AzoSans-Regular.woff') format('woff');
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'Azo Sans Uber';
+            src: url('../assets/fonts/AzoSansUber-Regular.woff2') format('woff2'),
+                url('../assets/fonts/AzoSansUber-Regular.woff') format('woff');
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+
         html,
         body {
             overflow-x: hidden;
             width: 100%;
+            scroll-behavior: smooth;
         }
 
+        /* Brand Guide: Body Text - Azo Sans Regular */
         body {
-            font-family: 'Inter', sans-serif;
-            color: #1a202c;
+            font-family: 'Azo Sans', sans-serif;
+            color: #1F1F1F;
+            background: #ffffff;
         }
 
+        p {
+            font-family: 'Azo Sans', sans-serif;
+            color: #1F1F1F;
+        }
+
+        /* Brand Guide: Headers - Azo Sans Uber (Uppercase) */
         h1,
         h2,
         h3,
         h4,
         h5,
         h6 {
-            font-family: 'Playfair Display', serif;
+            font-family: 'Azo Sans Uber', sans-serif;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 0.02em;
+            line-height: 1.2;
+            color: #FF4F4F;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
         .btn-primary {
-            background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%);
+            background: #FF4F4F;
+            color: #ffffff;
             transition: all 0.3s ease;
         }
 
         .btn-primary:hover {
+            background: #e63939;
             transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(0, 80, 255, 0.4);
+            box-shadow: 0 20px 40px rgba(255, 79, 79, 0.4);
         }
+
 
         .section-padding {
             padding: 5rem 0;
@@ -333,7 +373,7 @@
             left: 0;
             right: 0;
             height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(0, 80, 255, 0.2), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255, 79, 79, 0.2), transparent);
         }
 
         @media (min-width: 768px) {
@@ -372,7 +412,7 @@
             margin-bottom: 0.5rem;
             font-size: 2rem;
             font-weight: 800;
-            background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%);
+            background: linear-gradient(135deg, #FF4F4F 0%, #e63939 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -390,7 +430,7 @@
             transform: translateX(-50%);
             width: 60px;
             height: 3px;
-            background: linear-gradient(90deg, transparent, #0050ff, transparent);
+            background: linear-gradient(90deg, transparent, #FF4F4F, transparent);
             border-radius: 2px;
         }
 
@@ -449,7 +489,7 @@
             border-radius: 16px;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06),
                 0 1px 3px rgba(0, 0, 0, 0.08);
-            border: 1px solid rgba(0, 80, 255, 0.08);
+            border: 1px solid rgba(255, 79, 79, 0.08);
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
             overflow: hidden;
@@ -462,7 +502,7 @@
             left: 0;
             right: 0;
             height: 3px;
-            background: linear-gradient(90deg, #0050ff, #0040d9);
+            background: linear-gradient(90deg, #FF4F4F, #e63939);
             transform: scaleX(0);
             transform-origin: left;
             transition: transform 0.4s ease;
@@ -474,9 +514,9 @@
 
         .gallery-card:hover {
             transform: translateY(-6px);
-            box-shadow: 0 12px 40px rgba(0, 80, 255, 0.15),
+            box-shadow: 0 12px 40px rgba(255, 79, 79, 0.15),
                 0 4px 12px rgba(0, 0, 0, 0.1);
-            border-color: rgba(0, 80, 255, 0.2);
+            border-color: rgba(255, 79, 79, 0.2);
         }
 
         @media (min-width: 768px) {
@@ -508,7 +548,7 @@
         .gallery-divider {
             width: 80px;
             height: 2px;
-            background: linear-gradient(90deg, transparent, rgba(0, 80, 255, 0.4), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255, 79, 79, 0.4), transparent);
             margin: 2rem auto;
             border-radius: 2px;
         }
@@ -526,7 +566,7 @@
             width: 200px;
             height: 200px;
             border-radius: 50%;
-            background: linear-gradient(135deg, rgba(0, 80, 255, 0.05), rgba(0, 80, 255, 0.02));
+            background: linear-gradient(135deg, rgba(255, 79, 79, 0.05), rgba(255, 79, 79, 0.02));
             filter: blur(60px);
             z-index: 0;
         }
@@ -562,7 +602,7 @@
             left: 0;
             right: 0;
             height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(0, 80, 255, 0.2), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255, 79, 79, 0.2), transparent);
         }
 
         .contact-form-wrapper {
@@ -581,7 +621,7 @@
         .contact-form-title {
             font-size: 2.5rem;
             font-weight: 900;
-            background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%);
+            background: linear-gradient(135deg, #FF4F4F 0%, #e63939 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -638,7 +678,7 @@
             right: -50%;
             width: 200%;
             height: 200%;
-            background: radial-gradient(circle, rgba(0, 80, 255, 0.1) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(255, 79, 79, 0.1) 0%, transparent 70%);
             animation: rotate 20s linear infinite;
         }
 
@@ -712,8 +752,8 @@
         .form-select:focus,
         .form-textarea:focus {
             outline: none;
-            border-color: #0050ff;
-            box-shadow: 0 0 0 4px rgba(0, 80, 255, 0.1);
+            border-color: #FF4F4F;
+            box-shadow: 0 0 0 4px rgba(255, 79, 79, 0.1);
             background: #ffffff;
         }
 
@@ -772,7 +812,7 @@
             height: 1.25rem;
             margin-right: 0.75rem;
             cursor: pointer;
-            accent-color: #0050ff;
+            accent-color: #FF4F4F;
         }
 
         .service-checkbox label {
@@ -796,7 +836,7 @@
             margin-right: 0.75rem;
             margin-top: 0.125rem;
             cursor: pointer;
-            accent-color: #0050ff;
+            accent-color: #FF4F4F;
         }
 
         .privacy-checkbox label {
@@ -822,14 +862,14 @@
             font-size: 1.125rem;
             font-weight: 700;
             color: #ffffff;
-            background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%);
+            background: linear-gradient(135deg, #FF4F4F 0%, #e63939 100%);
             border: none;
             border-radius: 12px;
             cursor: pointer;
             transition: all 0.3s ease;
             text-transform: uppercase;
             letter-spacing: 0.05em;
-            box-shadow: 0 10px 30px rgba(0, 80, 255, 0.3);
+            box-shadow: 0 10px 30px rgba(255, 79, 79, 0.3);
             position: relative;
             overflow: hidden;
         }
@@ -854,7 +894,7 @@
 
         .submit-button:hover {
             transform: translateY(-2px);
-            box-shadow: 0 15px 40px rgba(0, 80, 255, 0.4);
+            box-shadow: 0 15px 40px rgba(255, 79, 79, 0.4);
         }
 
         .submit-button:active {
@@ -1122,7 +1162,7 @@
             font-size: 2rem;
             font-weight: 900;
             line-height: 1.2;
-            background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%);
+            background: linear-gradient(135deg, #FF4F4F 0%, #e63939 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -1175,7 +1215,7 @@
             border-radius: 12px;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04),
                 0 1px 3px rgba(0, 0, 0, 0.06);
-            border: 1px solid rgba(0, 80, 255, 0.08);
+            border: 1px solid rgba(255, 79, 79, 0.08);
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
             overflow: hidden;
@@ -1188,7 +1228,7 @@
             top: 0;
             bottom: 0;
             width: 4px;
-            background: linear-gradient(180deg, #0050ff, #0040d9);
+            background: linear-gradient(180deg, #FF4F4F, #e63939);
             transform: scaleY(0);
             transform-origin: bottom;
             transition: transform 0.3s ease;
@@ -1196,9 +1236,9 @@
 
         .section-1-feature-item:hover {
             transform: translateX(4px);
-            box-shadow: 0 6px 20px rgba(0, 80, 255, 0.12),
+            box-shadow: 0 6px 20px rgba(255, 79, 79, 0.12),
                 0 3px 10px rgba(0, 0, 0, 0.08);
-            border-color: rgba(0, 80, 255, 0.2);
+            border-color: rgba(255, 79, 79, 0.2);
         }
 
         .section-1-feature-item:hover::before {
@@ -1211,7 +1251,7 @@
             min-width: 20px;
             margin-right: 0.75rem;
             margin-top: 0.125rem;
-            color: #0050ff;
+            color: #FF4F4F;
             flex-shrink: 0;
         }
 
@@ -1280,7 +1320,7 @@
             font-size: 1.75rem;
             font-weight: 900;
             line-height: 1.1;
-            background: linear-gradient(135deg, #0050ff 0%, #0040d9 100%);
+            background: linear-gradient(135deg, #FF4F4F 0%, #e63939 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -1331,7 +1371,7 @@
 
         .section-2-subheading {
             font-size: 1rem;
-            font-weight: 700;
+            font-weight: 500;
             color: #1f2937;
             margin-bottom: 1rem;
             text-align: right;
@@ -1364,15 +1404,15 @@
             border-radius: 10px;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04),
                 0 1px 3px rgba(0, 0, 0, 0.06);
-            border: 1px solid rgba(0, 80, 255, 0.08);
+            border: 1px solid rgba(255, 79, 79, 0.08);
             transition: all 0.3s ease;
         }
 
         .section-2-feature-item:hover {
             transform: translateY(-2px);
-            box-shadow: 0 4px 16px rgba(0, 80, 255, 0.1),
+            box-shadow: 0 4px 16px rgba(255, 79, 79, 0.1),
                 0 2px 8px rgba(0, 0, 0, 0.08);
-            border-color: rgba(0, 80, 255, 0.15);
+            border-color: rgba(255, 79, 79, 0.15);
         }
 
         .section-2-feature-icon {
@@ -1381,7 +1421,7 @@
             min-width: 16px;
             margin-right: 0.625rem;
             margin-top: 0.125rem;
-            color: #0050ff;
+            color: #FF4F4F;
             flex-shrink: 0;
         }
 
@@ -1429,6 +1469,105 @@
                 min-height: 100%;
             }
         }
+
+        /* Brand Guide: Glow Effects */
+        @keyframes pulse-glow {
+
+            0%,
+            100% {
+                box-shadow: 0 0 20px rgba(255, 79, 79, 0.4),
+                    0 0 40px rgba(255, 79, 79, 0.3),
+                    0 0 60px rgba(255, 79, 79, 0.2);
+            }
+
+            50% {
+                box-shadow: 0 0 30px rgba(255, 79, 79, 0.6),
+                    0 0 60px rgba(255, 79, 79, 0.5),
+                    0 0 90px rgba(255, 79, 79, 0.4);
+            }
+        }
+
+        /* Enhanced Blob Animation */
+        @keyframes blob {
+
+            0%,
+            100% {
+                transform: translate(0, 0) scale(1) rotate(0deg);
+            }
+
+            33% {
+                transform: translate(30px, -50px) scale(1.1) rotate(120deg);
+            }
+
+            66% {
+                transform: translate(-20px, 20px) scale(0.9) rotate(240deg);
+            }
+        }
+
+        .animate-blob {
+            animation: blob 7s ease-in-out infinite;
+        }
+
+        .animation-delay-2000 {
+            animation-delay: 2s;
+        }
+
+        .animation-delay-4000 {
+            animation-delay: 4s;
+        }
+
+        /* Sexy Card Hover */
+        .booth-card {
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+            transform-style: preserve-3d;
+            perspective: 1000px;
+        }
+
+        .booth-card:hover {
+            transform: translateY(-15px) scale(1.03) rotateX(5deg);
+            box-shadow: 0 25px 50px rgba(255, 79, 79, 0.3);
+        }
+
+        .sexy-btn {
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, #FF4F4F 0%, #e63939 100%);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            color: white;
+            font-weight: 700;
+        }
+
+        .sexy-btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 20px 40px rgba(255, 79, 79, 0.5);
+        }
+
+        /* Floating Particles */
+        @keyframes float-particle {
+
+            0%,
+            100% {
+                transform: translateY(0px) translateX(0px) rotate(0deg);
+                opacity: 0.7;
+            }
+
+            50% {
+                transform: translateY(-30px) translateX(20px) rotate(180deg);
+                opacity: 1;
+            }
+        }
+
+        .floating-particle {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: radial-gradient(circle, rgba(255, 79, 79, 0.8), transparent);
+            border-radius: 50%;
+            animation: float-particle 8s ease-in-out infinite;
+            pointer-events: none;
+        }
     </style>
 </head>
 
@@ -1437,27 +1576,36 @@
 
     <!-- Hero Section -->
     <section class="hero-section">
-        <div class="hero-background" style="background-image: url('../assets/images/trading/hero.jpg');"></div>
+        <div class="hero-background" style="background-image: url('../assets/images/trading/cards/1O4A8725.jpg');">
+        </div>
         <div class="absolute inset-0 hero-gradient"></div>
+
+        <!-- Brand Blobs -->
+        <div class="absolute top-20 left-10 w-64 h-64 bg-coral-400/20 rounded-full blur-3xl animate-blob z-[2]"></div>
+        <div
+            class="absolute bottom-20 right-10 w-64 h-64 bg-coral-300/20 rounded-full blur-3xl animate-blob animation-delay-2000 z-[2]">
+        </div>
+
         <div class="hero-content-wrapper">
             <h1 class="hero-title text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold mb-4 leading-tight animate-fade-in-up"
-                style="font-family: 'Inter', sans-serif; font-weight: 700;">
-                National Trading Card <br> Photo Booth Rentals
+                style="font-family: 'Azo Sans Uber', sans-serif;">
+                National Trading Card <br> <span style="color: #18F1E1;">Photo Booth Rentals</span>
             </h1>
             <div class="hero-divider animate-fade-in-up animate-delay-200"></div>
-            <p
-                class="hero-tagline text-lg sm:text-xl md:text-2xl lg:text-3xl mb-8 md:mb-10 text-white font-light leading-relaxed max-w-2xl mx-auto animate-fade-in-up animate-delay-200">
+            <p class="hero-tagline text-lg sm:text-xl md:text-2xl lg:text-3xl mb-8 md:mb-10 text-white font-light leading-relaxed max-w-2xl mx-auto animate-fade-in-up animate-delay-200"
+                style="font-family: 'Azo Sans', sans-serif;">
                 Transform fans into instant sports legends with an AI photo booth that creates professional-quality
                 custom trading cards in seconds.
             </p>
             <div class="animate-fade-in-up animate-delay-300">
                 <a href="contact-us.html"
-                    class="hero-button inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-10 md:py-5 md:px-12 rounded-lg text-base md:text-lg relative z-10">
+                    class="sexy-btn inline-block text-white px-10 py-5 rounded-full text-lg relative z-10">
                     <span class="relative z-10">CONTACT US</span>
                 </a>
             </div>
         </div>
     </section>
+
 
     <!-- Gallery Section -->
     <section class="gallery-section">
@@ -1473,7 +1621,7 @@
                 </p>
             </div>
             <div class="gallery-text-container">
-                <div class="gallery-card animate-fade-in-up animate-delay-300">
+                <div class="gallery-card booth-card animate-fade-in-up animate-delay-300">
                     <p class="gallery-paragraph">
                         Turn your guests into collectible stars with our Trading Card Photo Booth! Whether it’s a
                         sports-style player card, fantasy character, or custom brand design, this booth captures photos,
@@ -1481,7 +1629,7 @@
                         or printed keepsakes, making it the perfect interactive giveaway for any event.
                     </p>
                 </div>
-                <div class="gallery-card animate-fade-in-up animate-delay-400">
+                <div class="gallery-card booth-card animate-fade-in-up animate-delay-400">
                     <p class="gallery-paragraph">
                         Available nationwide, this unique activation is a hit at sports events, gaming conventions,
                         brand activations, and pop culture experiences. Custom branding allows businesses to feature
@@ -1489,6 +1637,7 @@
                     </p>
                 </div>
             </div>
+
             <div class="grid-wrapper">
                 <div class="wide">
                     <img src="../assets/images/trading/cards/2.png" alt="" />
@@ -1519,8 +1668,12 @@
     </section>
 
     <!-- Section 1 -->
-    <section class="section-1">
-        <div style="max-width: 1200px; margin: 0 auto; padding: 0 1.5rem;">
+    <section class="section-1 relative overflow-hidden">
+        <!-- Section Blobs -->
+        <div class="absolute top-40 right-0 w-48 h-48 bg-coral-400/10 rounded-full blur-3xl animate-blob z-[0]"></div>
+
+        <div style="max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; position: relative; z-index: 1;">
+
             <div>
                 <div class="section-1-column-1">
                     <img src="../assets/images/trading/section1/1.jpg" alt="Trading Card Photo Booth"
@@ -1535,7 +1688,7 @@
                         the energy of the game.
                     </p>
                     <div class="section-1-features">
-                        <div class="section-1-feature-item animate-fade-in-up animate-delay-300">
+                        <div class="section-1-feature-item booth-card animate-fade-in-up animate-delay-300">
                             <svg class="section-1-feature-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -1548,7 +1701,7 @@
                                     email, text, or social media platforms.</div>
                             </div>
                         </div>
-                        <div class="section-1-feature-item animate-fade-in-up animate-delay-400">
+                        <div class="section-1-feature-item booth-card animate-fade-in-up animate-delay-400">
                             <svg class="section-1-feature-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -1561,7 +1714,7 @@
                                     processes your photo and generates stats.</div>
                             </div>
                         </div>
-                        <div class="section-1-feature-item animate-fade-in-up animate-delay-500">
+                        <div class="section-1-feature-item booth-card animate-fade-in-up animate-delay-500">
                             <svg class="section-1-feature-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -1574,7 +1727,7 @@
                                     guests of all ages to create their cards.</div>
                             </div>
                         </div>
-                        <div class="section-1-feature-item animate-fade-in-up animate-delay-600">
+                        <div class="section-1-feature-item booth-card animate-fade-in-up animate-delay-600">
                             <svg class="section-1-feature-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -1587,7 +1740,7 @@
                                     high-gloss finish for collectible-quality cards.</div>
                             </div>
                         </div>
-                        <div class="section-1-feature-item animate-fade-in-up animate-delay-700">
+                        <div class="section-1-feature-item booth-card animate-fade-in-up animate-delay-700">
                             <svg class="section-1-feature-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -1607,8 +1760,14 @@
     </section>
 
     <!-- Section 2 -->
-    <section class="section-2">
-        <div style="max-width: 1200px; margin: 0 auto; padding: 0 1.5rem;">
+    <section class="section-2 relative overflow-hidden">
+        <!-- Section Blobs -->
+        <div
+            class="absolute bottom-0 left-0 w-64 h-64 bg-coral-300/10 rounded-full blur-3xl animate-blob animation-delay-4000 z-[0]">
+        </div>
+
+        <div style="max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; position: relative; z-index: 1;">
+
             <div>
                 <div class="section-2-column-1">
                     <h2 class="section-2-heading animate-fade-in-up">
@@ -1623,7 +1782,7 @@
                         Customize your Trading Card Photo Booth with:
                     </h3>
                     <div class="section-2-features">
-                        <div class="section-2-feature-item animate-fade-in-up animate-delay-400">
+                        <div class="section-2-feature-item booth-card animate-fade-in-up animate-delay-400">
                             <svg class="section-2-feature-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -1632,7 +1791,7 @@
                             </svg>
                             <span class="section-2-feature-text">Custom Sports Card Templates</span>
                         </div>
-                        <div class="section-2-feature-item animate-fade-in-up animate-delay-500">
+                        <div class="section-2-feature-item booth-card animate-fade-in-up animate-delay-500">
                             <svg class="section-2-feature-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -1641,7 +1800,7 @@
                             </svg>
                             <span class="section-2-feature-text">Branded Overlays And Logos</span>
                         </div>
-                        <div class="section-2-feature-item animate-fade-in-up animate-delay-600">
+                        <div class="section-2-feature-item booth-card animate-fade-in-up animate-delay-600">
                             <svg class="section-2-feature-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -1650,7 +1809,7 @@
                             </svg>
                             <span class="section-2-feature-text">Interactive Touchscreen Branding</span>
                         </div>
-                        <div class="section-2-feature-item animate-fade-in-up animate-delay-700">
+                        <div class="section-2-feature-item booth-card animate-fade-in-up animate-delay-700">
                             <svg class="section-2-feature-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -1720,10 +1879,11 @@
 
             <div class="animate-fade-in-up animate-delay-300" style="text-align: center; margin-top: 3rem;">
                 <a href="../contact-us.html"
-                    class="hero-button inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-10 md:py-5 md:px-12 rounded-lg text-base md:text-lg relative z-10">
+                    class="sexy-btn inline-block text-white px-10 py-5 rounded-full text-lg relative z-10">
                     <span class="relative z-10">CONTACT US</span>
                 </a>
             </div>
+
         </div>
     </section>
 

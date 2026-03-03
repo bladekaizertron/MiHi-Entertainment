@@ -1,11 +1,4 @@
 <?php
-// Increase PHP limits for large content (works on GoDaddy and XAMPP)
-@ini_set('post_max_size', '1024M');
-@ini_set('upload_max_filesize', '1024M');
-@ini_set('max_execution_time', '600');
-@ini_set('max_input_time', '600');
-@ini_set('memory_limit', '1024M');
-
 require_once __DIR__ . '/../config/config.php';
 requireLogin();
 
@@ -54,6 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $status = $_POST['status'] ?? 'draft';
     $published_at = ($status === 'published' && !empty($_POST['published_at'])) ? $_POST['published_at'] : null;
     $featured_image = trim($_POST['featured_image'] ?? '');
+    $google_form_embed = trim($_POST['google_form_embed'] ?? '');
 
     // SEO fields
     $meta_title = trim($_POST['meta_title'] ?? '');
@@ -157,7 +151,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $pageGenerationError = null;
             if ($status === 'published') {
             require_once __DIR__ . '/../includes/generate_post_page.php';
-                $pageGenerated = generatePostPage($post_id);
+                $pageGenerated = generatePostPage($post_id, $google_form_embed);
                 if (!$pageGenerated) {
                     // Error generating page
                     $pageGenerationError = "Post updated successfully, but failed to generate HTML page. ";
@@ -384,6 +378,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="form-group">
                 <label for="content">Content *</label>
                 <textarea id="content" name="content"><?php echo htmlspecialchars($post['content'], ENT_QUOTES, 'UTF-8'); ?></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label for="google_form_embed">Google Form Embed</label>
+                <textarea id="google_form_embed" name="google_form_embed" rows="3" placeholder="Paste the full &lt;iframe&gt; embed code from Google Forms, or just the form URL"></textarea>
+                <small>In Google Forms: click <strong>Send &rarr; &lt;&gt; Embed</strong>, then copy and paste the entire <code>&lt;iframe&gt;</code> code here. The form will appear at the bottom of the published blog post. Leave empty to omit. <em>Note: re-enter this each time you update and publish.</em></small>
             </div>
             
             <div class="form-group">
@@ -624,33 +624,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             tinymce.triggerSave();
             const content = document.getElementById('content').value.trim();
             if (!content) { alert('Please enter content'); tinymce.get('content').focus(); return false; }
-            
-            // Check content size and warn if too large
-            const contentSize = new Blob([content]).size;
-            const sizeMB = (contentSize / 1048576).toFixed(2);
-            
-            // Warn if content is over 100MB
-            if (contentSize > 100 * 1024 * 1024) {
-                const proceed = confirm(
-                    `⚠️ WARNING: Your content is very large (${sizeMB} MB).\n\n` +
-                    `This may cause issues when saving. Consider:\n` +
-                    `• Using external image URLs instead of embedding images\n` +
-                    `• Compressing images before uploading\n` +
-                    `• Splitting content into multiple posts\n\n` +
-                    `Do you want to continue anyway?`
-                );
-                
-                if (!proceed) {
-                    return false;
-                }
-            }
-            // Info message if content is moderately large (50-100MB)
-            else if (contentSize > 50 * 1024 * 1024) {
-                console.warn(`Content size: ${sizeMB} MB - Consider optimizing images if submission fails.`);
-            }
-            
             return true;
         }
+
+        // ── Google Form embed persistence (localStorage, per post) ──
+        (function () {
+            const postId   = <?php echo (int)$post_id; ?>;
+            const storageKey = 'gform_embed_post_' + postId;
+            const textarea = document.getElementById('google_form_embed');
+            if (!textarea) return;
+
+            // Restore saved value on page load
+            const saved = localStorage.getItem(storageKey);
+            if (saved && saved.trim()) {
+                textarea.value = saved;
+            }
+
+            // Save whenever the user types / pastes into the field
+            textarea.addEventListener('input', function () {
+                localStorage.setItem(storageKey, this.value);
+            });
+
+            // Also save on form submit (catches paste-then-submit without triggering input)
+            textarea.closest('form').addEventListener('submit', function () {
+                localStorage.setItem(storageKey, textarea.value);
+            });
+        })();
     </script>
 </body>
 </html>

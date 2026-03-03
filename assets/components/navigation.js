@@ -124,6 +124,10 @@
                                     <div class="mb-4 pb-3 border-b-2 border-blue-200">
                                         <h4 class="font-bold text-base text-blue-600 uppercase tracking-wider">Photo Booths</h4>
                                     </div>
+                                    <a href="${pathPrefix}products/enclosed-booth.html" class="block text-sm text-gray-700 hover:text-blue-600 transition py-1.5 hover:bg-blue-50 rounded-md px-2 -mx-2">
+                                        <span class="font-semibold block mb-0.5">Enclosed Booth</span>
+                                        <span class="text-xs text-gray-500 leading-relaxed">Classic privacy with modern tech</span>
+                                    </a>
                                     <a href="${pathPrefix}product/ai-photo-booth.html" class="block text-sm text-gray-700 hover:text-blue-600 transition py-1.5 hover:bg-blue-50 rounded-md px-2 -mx-2">
                                         <span class="font-semibold block mb-0.5">AI Photo Booth</span>
                                         <span class="text-xs text-gray-500 leading-relaxed">Custom AI-generated characters in seconds</span>
@@ -152,10 +156,7 @@
                                         <span class="font-semibold block mb-0.5">Virtual Photo Booth</span>
                                         <span class="text-xs text-gray-500 leading-relaxed">Snap, pose, and share—no app required, all online</span>
                                     </a>
-                                    <a href="${pathPrefix}products/enclosed-booth.html" class="block text-sm text-gray-700 hover:text-blue-600 transition py-1.5 hover:bg-blue-50 rounded-md px-2 -mx-2">
-                                        <span class="font-semibold block mb-0.5">Enclosed Booth</span>
-                                        <span class="text-xs text-gray-500 leading-relaxed">Classic privacy with modern tech</span>
-                                    </a>
+
                                     <a href="${pathPrefix}photo-booth-sets.html" class="block text-sm text-gray-700 hover:text-blue-600 transition py-1.5 hover:bg-blue-50 rounded-md px-2 -mx-2">
                                         <span class="font-semibold block mb-0.5">Custom Photo Booth</span>
                                         <span class="text-xs text-gray-500 leading-relaxed">Fully branded, immersive photo set designs made just for you</span>
@@ -492,6 +493,7 @@
                                                 <span class="text-xs font-bold text-blue-700 uppercase tracking-widest">Photo Booths</span>
                                             </div>
                                             <div class="space-y-1 pl-1">
+                                                <a href="${pathPrefix}products/enclosed-booth.html" class="block text-sm text-gray-700 hover:text-blue-700 hover:bg-blue-50/50 transition-all rounded-lg py-2.5 px-3 font-medium">Enclosed Booth</a>
                                                 <a href="${pathPrefix}product/ai-photo-booth.html" class="block text-sm text-gray-700 hover:text-blue-700 hover:bg-blue-50/50 transition-all rounded-lg py-2.5 px-3 font-medium">AI Photo Booth</a>
                                                 <a href="${pathPrefix}product/green-screen-photo-booth.html" class="block text-sm text-gray-700 hover:text-blue-700 hover:bg-blue-50/50 transition-all rounded-lg py-2.5 px-3 font-medium">Green Screen</a>
                                                 <a href="${pathPrefix}product/rosie-the-robot-photo-booth.html" class="block text-sm text-gray-700 hover:text-blue-700 hover:bg-blue-50/50 transition-all rounded-lg py-2.5 px-3 font-medium">Rosie the Robot</a>
