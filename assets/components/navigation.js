@@ -2,6 +2,45 @@
 // This script will load the same navigation on all pages
 
 (function () {
+    // =========================================================
+    // Google Tag Manager Injection
+    // =========================================================
+    function injectGTM() {
+        var GTM_ID = 'GTM-W2PZGJM';
+
+        // 1. Inject GTM <script> as high in <head> as possible
+        if (document.head && !document.getElementById('gtm-head-script')) {
+            var gtmScript = document.createElement('script');
+            gtmScript.id = 'gtm-head-script';
+            gtmScript.innerHTML = [
+                '(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({"gtm.start":',
+                'new Date().getTime(),event:"gtm.js"});var f=d.getElementsByTagName(s)[0],',
+                'j=d.createElement(s),dl=l!="dataLayer"?"&l="+l:"";j.async=true;j.src=',
+                '"https://www.googletagmanager.com/gtm.js?id="+i+dl;f.parentNode.insertBefore(j,f);',
+                '})(window,document,"script","dataLayer","' + GTM_ID + '");'
+            ].join('');
+            document.head.insertBefore(gtmScript, document.head.firstChild);
+        }
+
+        // 2. Inject GTM <noscript> immediately after <body> opens
+        if (document.body && !document.getElementById('gtm-body-noscript')) {
+            var gtmNoscript = document.createElement('noscript');
+            gtmNoscript.id = 'gtm-body-noscript';
+            var iframe = document.createElement('iframe');
+            iframe.src = 'https://www.googletagmanager.com/ns.html?id=' + GTM_ID;
+            iframe.height = '0';
+            iframe.width = '0';
+            iframe.style.display = 'none';
+            iframe.style.visibility = 'hidden';
+            gtmNoscript.appendChild(iframe);
+            document.body.insertBefore(gtmNoscript, document.body.firstChild);
+        }
+    }
+
+    // Inject GTM immediately
+    injectGTM();
+
+    // =========================================================
     // Function to initialize navigation
     function initNavigation() {
         // Determine the correct path prefix by finding the navigation script's location
@@ -124,10 +163,6 @@
                                     <div class="mb-4 pb-3 border-b-2 border-blue-200">
                                         <h4 class="font-bold text-base text-blue-600 uppercase tracking-wider">Photo Booths</h4>
                                     </div>
-                                    <a href="${pathPrefix}products/enclosed-booth.html" class="block text-sm text-gray-700 hover:text-blue-600 transition py-1.5 hover:bg-blue-50 rounded-md px-2 -mx-2">
-                                        <span class="font-semibold block mb-0.5">Enclosed Booth</span>
-                                        <span class="text-xs text-gray-500 leading-relaxed">Classic privacy with modern tech</span>
-                                    </a>
                                     <a href="${pathPrefix}product/ai-photo-booth.html" class="block text-sm text-gray-700 hover:text-blue-600 transition py-1.5 hover:bg-blue-50 rounded-md px-2 -mx-2">
                                         <span class="font-semibold block mb-0.5">AI Photo Booth</span>
                                         <span class="text-xs text-gray-500 leading-relaxed">Custom AI-generated characters in seconds</span>
@@ -156,7 +191,10 @@
                                         <span class="font-semibold block mb-0.5">Virtual Photo Booth</span>
                                         <span class="text-xs text-gray-500 leading-relaxed">Snap, pose, and share—no app required, all online</span>
                                     </a>
-
+                                    <a href="${pathPrefix}products/enclosed-booth.html" class="block text-sm text-gray-700 hover:text-blue-600 transition py-1.5 hover:bg-blue-50 rounded-md px-2 -mx-2">
+                                        <span class="font-semibold block mb-0.5">Enclosed Booth</span>
+                                        <span class="text-xs text-gray-500 leading-relaxed">Classic privacy with modern tech</span>
+                                    </a>
                                     <a href="${pathPrefix}photo-booth-sets.html" class="block text-sm text-gray-700 hover:text-blue-600 transition py-1.5 hover:bg-blue-50 rounded-md px-2 -mx-2">
                                         <span class="font-semibold block mb-0.5">Custom Photo Booth</span>
                                         <span class="text-xs text-gray-500 leading-relaxed">Fully branded, immersive photo set designs made just for you</span>
@@ -211,7 +249,7 @@
                                         <span class="text-xs text-gray-500 leading-relaxed">Immersive brand experiences and activations</span>
                                     </a>
                                     <a href="${pathPrefix}products/sketchbot-booth.html" class="block text-sm text-gray-700 hover:text-green-600 transition py-1.5 hover:bg-green-50 rounded-md px-2 -mx-2">
-                                        <span class="font-semibold block mb-0.5">SketchBot</span>
+                                        <span class="font-semibold block mb-0.5">Sketch Robot</span>
                                         <span class="text-xs text-gray-500 leading-relaxed">Live robot-drawn portraits</span>
                                     </a>
                                     <a href="${pathPrefix}products/cookie-printer.html" class="block text-sm text-gray-700 hover:text-green-600 transition py-1.5 hover:bg-green-50 rounded-md px-2 -mx-2">
@@ -493,7 +531,6 @@
                                                 <span class="text-xs font-bold text-blue-700 uppercase tracking-widest">Photo Booths</span>
                                             </div>
                                             <div class="space-y-1 pl-1">
-                                                <a href="${pathPrefix}products/enclosed-booth.html" class="block text-sm text-gray-700 hover:text-blue-700 hover:bg-blue-50/50 transition-all rounded-lg py-2.5 px-3 font-medium">Enclosed Booth</a>
                                                 <a href="${pathPrefix}product/ai-photo-booth.html" class="block text-sm text-gray-700 hover:text-blue-700 hover:bg-blue-50/50 transition-all rounded-lg py-2.5 px-3 font-medium">AI Photo Booth</a>
                                                 <a href="${pathPrefix}product/green-screen-photo-booth.html" class="block text-sm text-gray-700 hover:text-blue-700 hover:bg-blue-50/50 transition-all rounded-lg py-2.5 px-3 font-medium">Green Screen</a>
                                                 <a href="${pathPrefix}product/rosie-the-robot-photo-booth.html" class="block text-sm text-gray-700 hover:text-blue-700 hover:bg-blue-50/50 transition-all rounded-lg py-2.5 px-3 font-medium">Rosie the Robot</a>
@@ -531,7 +568,7 @@
                                             <div class="space-y-1 pl-1">
                                                 <a href="${pathPrefix}event-photography.html" class="block text-sm text-gray-700 hover:text-green-700 hover:bg-green-50/50 transition-all rounded-lg py-2.5 px-3 font-medium">Event Photography</a>
                                                 <a href="${pathPrefix}product/brand-activation.html" class="block text-sm text-gray-700 hover:text-green-700 hover:bg-green-50/50 transition-all rounded-lg py-2.5 px-3 font-medium">Brand Activation</a>
-                                                <a href="${pathPrefix}products/sketchbot-booth.html" class="block text-sm text-gray-700 hover:text-green-700 hover:bg-green-50/50 transition-all rounded-lg py-2.5 px-3 font-medium">SketchBot</a>
+                                                <a href="${pathPrefix}products/sketchbot-booth.html" class="block text-sm text-gray-700 hover:text-green-700 hover:bg-green-50/50 transition-all rounded-lg py-2.5 px-3 font-medium">Sketch Robot</a>
                                                 <a href="${pathPrefix}products/cookie-printer.html" class="block text-sm text-gray-700 hover:text-green-700 hover:bg-green-50/50 transition-all rounded-lg py-2.5 px-3 font-medium">Cookie Printer</a>
                                                 <a href="${pathPrefix}pose-flashcards.html" class="block text-sm text-gray-700 hover:text-green-700 hover:bg-green-50/50 transition-all rounded-lg py-2.5 px-3 font-medium">Pose Cards</a>
                                                 <a href="${pathPrefix}lux-photography.html" class="block text-sm text-gray-700 hover:text-green-700 hover:bg-green-50/50 transition-all rounded-lg py-2.5 px-3 font-medium">Lux Photography</a>
