@@ -40,6 +40,185 @@ if (empty($_SESSION['csrf_token'])) {
 }
 $csrf = $_SESSION['csrf_token'];
 
+// --- AJAX / Upload Handlers (Moved to top to prevent output interference) ---
+$action = $_POST['action'] ?? $_GET['action'] ?? '';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && in_array($action, ['gallery_upload', 'hero_background_upload', 'icon_upload', 'export_static'])) {
+    // Prevent any output buffering junk or warnings from breaking JSON
+    error_reporting(0);
+    ini_set('display_errors', 0);
+    while (ob_get_level()) {
+        ob_end_clean();
+    }
+    ob_start();
+    header('Content-Type: application/json');
+
+    $token = $_POST['csrf_token'] ?? '';
+    if (!hash_equals($csrf, $token)) {
+        http_response_code(400);
+        echo json_encode(['success' => false, 'message' => 'Invalid token']);
+        exit;
+    }
+
+    if ($action === 'gallery_upload') {
+        if (!isset($_FILES['file'])) {
+            http_response_code(400);
+            echo json_encode(['success' => false, 'message' => 'No file uploaded']);
+            exit;
+        }
+
+        $file = $_FILES['file'];
+        $maxSize = 50 * 1024 * 1024; // 50MB
+        if ($file['size'] > $maxSize) {
+            http_response_code(400);
+            echo json_encode(['success' => false, 'message' => 'File too large. Max 50MB.']);
+            exit;
+        }
+
+        $allowedImageExt = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
+        $allowedVideoExt = ['mp4', 'webm', 'ogg'];
+        $ext = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
+        
+        $type = '';
+        if (in_array($ext, $allowedImageExt)) {
+            $type = 'image';
+        } elseif (in_array($ext, $allowedVideoExt)) {
+            $type = 'video';
+        } else {
+            http_response_code(400);
+            echo json_encode(['success' => false, 'message' => 'Invalid file type.']);
+            exit;
+        }
+
+        $uploadDir = __DIR__ . '/../uploads/gallery/';
+        if (!file_exists($uploadDir)) {
+            @mkdir($uploadDir, 0777, true);
+        }
+
+        $filename = 'gal_' . uniqid() . '.' . $ext;
+        $destination = $uploadDir . $filename;
+
+        if (move_uploaded_file($file['tmp_name'], $destination)) {
+            $url = SITE_URL . '/uploads/gallery/' . $filename;
+            echo json_encode(['success' => true, 'url' => $url, 'type' => $type]);
+        } else {
+            http_response_code(500);
+            echo json_encode(['success' => false, 'message' => 'Failed to save file. Check directory permissions.']);
+        }
+        exit;
+    }
+
+    if ($action === 'hero_background_upload') {
+        if (!isset($_FILES['file'])) {
+            http_response_code(400);
+            echo json_encode(['success' => false, 'message' => 'No file uploaded']);
+            exit;
+        }
+
+        $file = $_FILES['file'];
+        $maxSize = 100 * 1024 * 1024; // 100MB for hero backgrounds (videos can be larger)
+        if ($file['size'] > $maxSize) {
+            http_response_code(400);
+            echo json_encode(['success' => false, 'message' => 'File too large. Max 100MB.']);
+            exit;
+        }
+
+        $allowedImageExt = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
+        $allowedVideoExt = ['mp4', 'webm', 'ogg'];
+        $ext = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
+        
+        $type = '';
+        if (in_array($ext, $allowedImageExt)) {
+            $type = 'image';
+        } elseif (in_array($ext, $allowedVideoExt)) {
+            $type = 'video';
+        } else {
+            http_response_code(400);
+            echo json_encode(['success' => false, 'message' => 'Invalid file type. Only images and videos allowed.']);
+            exit;
+        }
+
+        $uploadDir = __DIR__ . '/../uploads/hero/';
+        if (!file_exists($uploadDir)) {
+            @mkdir($uploadDir, 0777, true);
+        }
+
+        $filename = 'hero_' . uniqid() . '.' . $ext;
+        $destination = $uploadDir . $filename;
+
+        if (move_uploaded_file($file['tmp_name'], $destination)) {
+            $url = SITE_URL . '/uploads/hero/' . $filename;
+            echo json_encode(['success' => true, 'url' => $url, 'type' => $type]);
+        } else {
+            http_response_code(500);
+            echo json_encode(['success' => false, 'message' => 'Failed to save file. Check directory permissions.']);
+        }
+        exit;
+    }
+
+    if ($action === 'icon_upload') {
+        if (!isset($_FILES['file'])) {
+            http_response_code(400);
+            echo json_encode(['success' => false, 'message' => 'No file uploaded']);
+            exit;
+        }
+
+        $file = $_FILES['file'];
+        $maxSize = 2 * 1024 * 1024; // 2MB for icons
+        if ($file['size'] > $maxSize) {
+            http_response_code(400);
+            echo json_encode(['success' => false, 'message' => 'File too large. Max 2MB.']);
+            exit;
+        }
+
+        $allowedExt = ['svg', 'png', 'jpg', 'jpeg', 'webp'];
+        $ext = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
+        
+        if (!in_array($ext, $allowedExt)) {
+            http_response_code(400);
+            echo json_encode(['success' => false, 'message' => 'Invalid file type. Allowed: SVG, PNG, JPG, WEBP']);
+            exit;
+        }
+
+        $uploadDir = __DIR__ . '/../uploads/icons/';
+        if (!file_exists($uploadDir)) {
+            @mkdir($uploadDir, 0777, true);
+        }
+
+        $filename = 'icon_' . uniqid() . '.' . $ext;
+        $destination = $uploadDir . $filename;
+
+        if (move_uploaded_file($file['tmp_name'], $destination)) {
+            $url = SITE_URL . '/uploads/icons/' . $filename;
+            echo json_encode(['success' => true, 'url' => $url, 'type' => 'image']);
+        } else {
+            http_response_code(500);
+            echo json_encode(['success' => false, 'message' => 'Failed to save file. Check directory permissions.']);
+        }
+        exit;
+    }
+
+    if ($action === 'export_static') {
+        $pageId = (int)($_POST['page_id'] ?? 0);
+        if ($pageId <= 0) {
+            http_response_code(400);
+            echo json_encode(['success' => false, 'message' => 'Missing page id']);
+            exit;
+        }
+        $stmt = $db->prepare("SELECT title, slug, content_html, custom_css FROM pages WHERE id = ? LIMIT 1");
+        $stmt->execute([$pageId]);
+        $pageRow = $stmt->fetch();
+        if (!$pageRow) {
+            http_response_code(404);
+            echo json_encode(['success' => false, 'message' => 'Page not found']);
+            exit;
+        }
+        $html = renderStaticPageHtml($pageRow);
+        echo json_encode(['success' => true, 'html' => $html, 'slug' => $pageRow['slug']]);
+        exit;
+    }
+}
+
 // Load existing
 $page = [
 	'title' => '',
@@ -360,8 +539,7 @@ function deleteStaticPage($slug) {
 	}
 }
 
-	$action = $_POST['action'] ?? '';
-	if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action !== 'export_static') {
+	if ($_SERVER['REQUEST_METHOD'] === 'POST' && in_array($action, ['', 'save', 'update'])) {
 	$token = $_POST['csrf_token'] ?? '';
 	if (!hash_equals($csrf, $token)) {
 		$error = 'Security token invalid.';
@@ -612,191 +790,7 @@ function deleteStaticPage($slug) {
 		}
 	}
 }
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'gallery_upload') {
-	$token = $_POST['csrf_token'] ?? '';
-	if (!hash_equals($csrf, $token)) {
-		http_response_code(400);
-		echo json_encode(['success' => false, 'message' => 'Invalid token']);
-		exit;
-	}
 
-	if (!isset($_FILES['file'])) {
-		http_response_code(400);
-		echo json_encode(['success' => false, 'message' => 'No file uploaded']);
-		exit;
-	}
-
-	$file = $_FILES['file'];
-	$maxSize = 50 * 1024 * 1024; // 50MB
-	if ($file['size'] > $maxSize) {
-		http_response_code(400);
-		echo json_encode(['success' => false, 'message' => 'File too large. Max 50MB.']);
-		exit;
-	}
-
-	$allowedImageExt = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
-	$allowedVideoExt = ['mp4', 'webm', 'ogg'];
-	$ext = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
-	
-	$type = '';
-	if (in_array($ext, $allowedImageExt)) {
-		$type = 'image';
-	} elseif (in_array($ext, $allowedVideoExt)) {
-		$type = 'video';
-	} else {
-		http_response_code(400);
-		echo json_encode(['success' => false, 'message' => 'Invalid file type.']);
-		exit;
-	}
-
-	$uploadDir = __DIR__ . '/../uploads/gallery/';
-	if (!file_exists($uploadDir)) {
-		@mkdir($uploadDir, 0755, true);
-	}
-
-	$filename = 'gal_' . uniqid() . '.' . $ext;
-	$destination = $uploadDir . $filename;
-
-	if (move_uploaded_file($file['tmp_name'], $destination)) {
-		$url = SITE_URL . '/uploads/gallery/' . $filename;
-		echo json_encode(['success' => true, 'url' => $url, 'type' => $type]);
-	} else {
-		http_response_code(500);
-		echo json_encode(['success' => false, 'message' => 'Failed to save file.']);
-	}
-	exit;
-}
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'hero_background_upload') {
-	$token = $_POST['csrf_token'] ?? '';
-	if (!hash_equals($csrf, $token)) {
-		http_response_code(400);
-		echo json_encode(['success' => false, 'message' => 'Invalid token']);
-		exit;
-	}
-
-	if (!isset($_FILES['file'])) {
-		http_response_code(400);
-		echo json_encode(['success' => false, 'message' => 'No file uploaded']);
-		exit;
-	}
-
-	$file = $_FILES['file'];
-	$maxSize = 100 * 1024 * 1024; // 100MB for hero backgrounds (videos can be larger)
-	if ($file['size'] > $maxSize) {
-		http_response_code(400);
-		echo json_encode(['success' => false, 'message' => 'File too large. Max 100MB.']);
-		exit;
-	}
-
-	$allowedImageExt = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
-	$allowedVideoExt = ['mp4', 'webm', 'ogg'];
-	$ext = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
-	
-	$type = '';
-	if (in_array($ext, $allowedImageExt)) {
-		$type = 'image';
-	} elseif (in_array($ext, $allowedVideoExt)) {
-		$type = 'video';
-	} else {
-		http_response_code(400);
-		echo json_encode(['success' => false, 'message' => 'Invalid file type. Only images and videos allowed.']);
-		exit;
-	}
-
-	$uploadDir = __DIR__ . '/../uploads/hero/';
-	if (!file_exists($uploadDir)) {
-		@mkdir($uploadDir, 0755, true);
-	}
-
-	$filename = 'hero_' . uniqid() . '.' . $ext;
-	$destination = $uploadDir . $filename;
-
-	if (move_uploaded_file($file['tmp_name'], $destination)) {
-		$url = SITE_URL . '/uploads/hero/' . $filename;
-		echo json_encode(['success' => true, 'url' => $url, 'type' => $type]);
-	} else {
-		http_response_code(500);
-		echo json_encode(['success' => false, 'message' => 'Failed to save file.']);
-	}
-	exit;
-}
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'icon_upload') {
-	$token = $_POST['csrf_token'] ?? '';
-	if (!hash_equals($csrf, $token)) {
-		http_response_code(400);
-		echo json_encode(['success' => false, 'message' => 'Invalid token']);
-		exit;
-	}
-
-	if (!isset($_FILES['file'])) {
-		http_response_code(400);
-		echo json_encode(['success' => false, 'message' => 'No file uploaded']);
-		exit;
-	}
-
-	$file = $_FILES['file'];
-	$maxSize = 2 * 1024 * 1024; // 2MB for icons
-	if ($file['size'] > $maxSize) {
-		http_response_code(400);
-		echo json_encode(['success' => false, 'message' => 'File too large. Max 2MB.']);
-		exit;
-	}
-
-	$allowedExt = ['svg', 'png', 'jpg', 'jpeg', 'webp'];
-	$ext = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
-	
-	if (!in_array($ext, $allowedExt)) {
-		http_response_code(400);
-		echo json_encode(['success' => false, 'message' => 'Invalid file type. Allowed: SVG, PNG, JPG, WEBP']);
-		exit;
-	}
-
-	$uploadDir = __DIR__ . '/../uploads/icons/';
-	if (!file_exists($uploadDir)) {
-		@mkdir($uploadDir, 0755, true);
-	}
-
-	$filename = 'icon_' . uniqid() . '.' . $ext;
-	$destination = $uploadDir . $filename;
-
-	if (move_uploaded_file($file['tmp_name'], $destination)) {
-		$url = SITE_URL . '/uploads/icons/' . $filename;
-		echo json_encode(['success' => true, 'url' => $url, 'type' => 'image']);
-	} else {
-		http_response_code(500);
-		echo json_encode(['success' => false, 'message' => 'Failed to save file.']);
-	}
-	exit;
-}
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'export_static') {
-	$token = $_POST['csrf_token'] ?? '';
-	if (!hash_equals($csrf, $token)) {
-		http_response_code(400);
-		echo json_encode(['success' => false, 'message' => 'Invalid token']);
-		exit;
-	}
-	$pageId = (int)($_POST['page_id'] ?? 0);
-	if ($pageId <= 0) {
-		http_response_code(400);
-		echo json_encode(['success' => false, 'message' => 'Missing page id']);
-		exit;
-	}
-	$stmt = $db->prepare("SELECT title, slug, content_html, custom_css FROM pages WHERE id = ? LIMIT 1");
-	$stmt->execute([$pageId]);
-	$pageRow = $stmt->fetch();
-	if (!$pageRow) {
-		http_response_code(404);
-		echo json_encode(['success' => false, 'message' => 'Page not found']);
-		exit;
-	}
-	$html = renderStaticPageHtml($pageRow);
-	header('Content-Type: application/json');
-	echo json_encode(['success' => true, 'html' => $html, 'slug' => $pageRow['slug']]);
-	exit;
-}
 
 // Save SEO settings to HTML file
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'save_seo_to_html') {
@@ -3477,9 +3471,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'save_seo_to_html') {
 				
 				
 				// Make hero backgrounds editable
-				function setupHeroBackgroundEditing() {
-					// Find hero sections - look for sections with id="hero" or class containing "hero"
-					const heroSections = iframeDoc.querySelectorAll('section#hero, section[class*="hero"], .hero-section, .hero-video-container');
+					// Find hero sections - look for sections with id="hero" or class containing "hero", or containing hero elements
+					const heroSections = iframeDoc.querySelectorAll('section#hero, section[class*="hero"], .hero-section, .hero-video-container, section:has(.hero-background-container), section:has(.hero-background-image)');
 					
 					heroSections.forEach(heroSection => {
 						// Remove existing button if present (to allow re-initialization)
@@ -3818,7 +3811,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'save_seo_to_html') {
 						}
 						
 						// Check if video already exists
-						let videoEl = heroSection.querySelector('video.hero-video, video');
+						let videoEl = heroSection.querySelector('video.hero-video, video.section-bg-video, video');
 						if (!videoEl) {
 							// Create new video element
 							videoEl = iframeDoc.createElement('video');
@@ -3874,6 +3867,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'save_seo_to_html') {
 						}
 						
 						// Update background image
+						// First check if there's a specific hero background image element
+						const specificHeroImg = heroSection.querySelector('.hero-background-image');
+						if (specificHeroImg) {
+							specificHeroImg.src = finalUrl;
+							if (specificHeroImg.classList.contains('hidden')) {
+								specificHeroImg.classList.remove('hidden');
+							}
+							specificHeroImg.style.display = 'block';
+							
+							// If there's a default gradient or other background layers, we might want to ensure they don't interfere
+							const gradientBg = heroSection.querySelector('.bg-gradient-to-br');
+							if (gradientBg && specificHeroImg.complete) {
+								// Keep it for now, usually it's behind
+							}
+						}
+						
 						if (bgContainer.tagName === 'VIDEO') {
 							// Replace video with div (restore original structure)
 							const newDiv = iframeDoc.createElement('div');
@@ -5189,7 +5198,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $action === 'save_seo_to_html') {
 							const isHeroSection = section.id === 'hero' || 
 							                      section.classList.contains('hero-section') || 
 							                      section.classList.contains('hero-video-container') ||
-							                      section.className.includes('hero');
+							                      section.className.includes('hero') ||
+							                      section.querySelector('.hero-background-container') ||
+							                      section.querySelector('.hero-background-image');
 							
 							// Change Background button (skip for hero sections as they have their own button)
 							let changeBgBtn = null;
